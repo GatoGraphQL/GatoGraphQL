@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP;
+namespace PoPSchema\UserAvatarsWP;
 
 use PoP\Root\Component\AbstractComponent;
 

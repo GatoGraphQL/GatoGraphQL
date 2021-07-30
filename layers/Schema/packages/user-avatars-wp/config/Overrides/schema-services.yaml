@@ -4,7 +4,7 @@ services:
         autowire: true
 
     PoPSchema\UserAvatars\FieldResolvers\RootRolesFieldResolver:
-        class: \PoPSchema\UserRolesWP\Overrides\FieldResolvers\RootRolesFieldResolver
+        class: \PoPSchema\UserAvatarsWP\Overrides\FieldResolvers\RootRolesFieldResolver
 
     PoPSchema\UserAvatars\FieldResolvers\UserFieldResolver:
-        class: \PoPSchema\UserRolesWP\Overrides\FieldResolvers\UserFieldResolver
+        class: \PoPSchema\UserAvatarsWP\Overrides\FieldResolvers\UserFieldResolver

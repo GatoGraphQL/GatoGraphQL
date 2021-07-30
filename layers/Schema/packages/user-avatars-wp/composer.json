@@ -32,12 +32,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\UserRolesWP\\": "src"
+            "PoPSchema\\UserAvatarsWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\UserRolesWP\\": "tests"
+            "PoPSchema\\UserAvatarsWP\\": "tests"
         }
     },
     "scripts": {

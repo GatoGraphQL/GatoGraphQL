@@ -3,11 +3,11 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\UserRolesWP\FieldResolvers\:
+    PoPSchema\UserAvatarsWP\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPSchema\UserRolesWP\TypeResolvers\:
+    PoPSchema\UserAvatarsWP\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPSchema\UserRolesWP\TypeDataLoaders\:
+    PoPSchema\UserAvatarsWP\TypeDataLoaders\:
         resource: '../src/TypeDataLoaders/*'

@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPSchema\UserRolesWP;
+namespace PoPSchema\UserAvatarsWP;
 
 use PHPUnit\Framework\TestCase;
 

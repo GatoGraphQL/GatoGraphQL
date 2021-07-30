@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP\TypeDataResolvers;
+namespace PoPSchema\UserAvatarsWP\TypeDataResolvers;
 
-use PoPSchema\UserAvatars\TypeDataResolvers\AbstractUserRoleTypeDataResolver;
+use PoPSchema\UserAvatars\TypeDataResolvers\AbstractUserAvatarTypeDataResolver;
 use WP_User;
 
-class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
+class UserAvatarTypeDataResolver extends AbstractUserAvatarTypeDataResolver
 {
     public function getAdminRoleName(): string
     {
@@ -19,8 +19,8 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
      */
     public function getRoleNames(): array
     {
-        $userRoles = \wp_roles();
-        return array_keys($userRoles->roles);
+        $userAvatars = \wp_roles();
+        return array_keys($userAvatars->roles);
     }
 
     /**
@@ -47,7 +47,7 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
     /**
      * @return string[]
      */
-    public function getUserRoles(string | int | object $userObjectOrID): array
+    public function getUserAvatars(string | int | object $userObjectOrID): array
     {
         if (is_object($userObjectOrID)) {
             $user = $userObjectOrID;
@@ -66,7 +66,7 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
      */
     public function getUserCapabilities(string | int | object $userObjectOrID): array
     {
-        $roles = $this->getUserRoles($userObjectOrID);
+        $roles = $this->getUserAvatars($userObjectOrID);
         $capabilities = [];
         foreach ($roles as $roleName) {
             $role = \get_role($roleName);
@@ -81,9 +81,9 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
     /**
      * @return string|null `null` if the user is not found, its first role otherwise
      */
-    public function getTheUserRole(string | int | object $userObjectOrID): ?string
+    public function getTheUserAvatar(string | int | object $userObjectOrID): ?string
     {
-        $roles = $this->getUserRoles($userObjectOrID);
+        $roles = $this->getUserAvatars($userObjectOrID);
         return $roles[0] ?? null;
     }
 

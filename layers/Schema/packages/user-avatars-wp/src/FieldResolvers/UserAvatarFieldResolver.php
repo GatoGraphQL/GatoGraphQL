@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP\FieldResolvers;
+namespace PoPSchema\UserAvatarsWP\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractReflectionPropertyFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
+use PoPSchema\UserAvatarsWP\TypeResolvers\UserAvatarTypeResolver;
 
-class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
+class UserAvatarFieldResolver extends AbstractReflectionPropertyFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(UserRoleTypeResolver::class);
+        return array(UserAvatarTypeResolver::class);
     }
 
     protected function getTypeClass(): string

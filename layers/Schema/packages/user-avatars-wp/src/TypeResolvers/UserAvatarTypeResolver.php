@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP\TypeResolvers;
+namespace PoPSchema\UserAvatarsWP\TypeResolvers;
 
-use PoPSchema\UserRolesWP\TypeDataLoaders\UserRoleTypeDataLoader;
+use PoPSchema\UserAvatarsWP\TypeDataLoaders\UserAvatarTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
-class UserRoleTypeResolver extends AbstractTypeResolver
+class UserAvatarTypeResolver extends AbstractTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'UserRole';
+        return 'UserAvatar';
     }
 
     public function getSchemaTypeDescription(): ?string
@@ -27,6 +27,6 @@ class UserRoleTypeResolver extends AbstractTypeResolver
 
     public function getTypeDataLoaderClass(): string
     {
-        return UserRoleTypeDataLoader::class;
+        return UserAvatarTypeDataLoader::class;
     }
 }

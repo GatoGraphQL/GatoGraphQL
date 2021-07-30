@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP\Overrides\FieldResolvers;
+namespace PoPSchema\UserAvatarsWP\Overrides\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
+use PoPSchema\UserAvatarsWP\TypeResolvers\UserAvatarTypeResolver;
 
 trait RolesFieldResolverTrait
 {
@@ -23,7 +23,7 @@ trait RolesFieldResolverTrait
     {
         switch ($fieldName) {
             case 'roles':
-                return UserRoleTypeResolver::class;
+                return UserAvatarTypeResolver::class;
         }
 
         return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);

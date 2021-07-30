@@ -6,20 +6,20 @@ namespace PoPSchema\UserAvatars\TypeDataResolvers;
 
 use PoP\Hooks\HooksAPIInterface;
 
-abstract class AbstractUserRoleTypeDataResolver implements UserRoleTypeDataResolverInterface
+abstract class AbstractUserAvatarTypeDataResolver implements UserAvatarTypeDataResolverInterface
 {
     public function __construct(
         protected HooksAPIInterface $hooksAPI
     ) {
     }
 
-    public function getTheUserRole(string | int | object $userObjectOrID): ?string
+    public function getTheUserAvatar(string | int | object $userObjectOrID): ?string
     {
-        $roles = $this->getUserRoles($userObjectOrID);
+        $roles = $this->getUserAvatars($userObjectOrID);
         $role = $roles[0] ?? null;
         // Allow URE to override this function
         return $this->hooksAPI->applyFilters(
-            'getTheUserRole',
+            'getTheUserAvatar',
             $role,
             $userObjectOrID
         );
@@ -33,7 +33,7 @@ abstract class AbstractUserRoleTypeDataResolver implements UserRoleTypeDataResol
 
     public function hasRole(string | int | object $userObjectOrID, string $role): bool
     {
-        $roles = $this->getUserRoles($userObjectOrID);
+        $roles = $this->getUserAvatars($userObjectOrID);
         return in_array($role, $roles);
     }
 }
