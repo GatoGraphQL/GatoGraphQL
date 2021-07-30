@@ -116,7 +116,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             case 'avatar':
                 // Create the avatar, and store it in the dynamic registry
                 $avatarSize = $fieldArgs['size'] ?? 96;
-                $avatarSrc = $this->userAvatarTypeAPI->getUserAvatarSrc($avatarSize);
+                $avatarSrc = $this->userAvatarTypeAPI->getUserAvatarSrc($user, $avatarSize);
                 if ($avatarSrc === null) {
                     return null;
                 }
