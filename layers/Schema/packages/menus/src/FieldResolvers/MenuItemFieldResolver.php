@@ -144,8 +144,6 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
                 return $menuItemTypeAPI->getMenuItemTarget($menuItem);
 
             case 'description':
-                // Using the description, because WP does not give a field for extra attributes when creating a menu,
-                // and this is needed to add target="addons" for the Add ContentPost link
                 return $menuItemTypeAPI->getMenuItemDescription($menuItem);
 
             case 'objectID':
