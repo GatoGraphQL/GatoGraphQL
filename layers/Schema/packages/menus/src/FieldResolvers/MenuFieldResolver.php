@@ -121,13 +121,13 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'itemDataEntries':
                 $isFlat = $fieldArgs['flat'] ?? false;
-                $itemsData = $menuTypeAPI->getMenuItemsData($menu);
+                $menuItems = $menuTypeAPI->getMenuItems($menu);
                 $entries = array();
-                if ($itemsData) {
-                    foreach ($itemsData as $itemData) {
+                if ($menuItems) {
+                    foreach ($menuItems as $menuItem) {
                         // Convert object to array
                         // @see https://stackoverflow.com/a/18576902
-                        $item_value = json_decode(json_encode($itemData), true);
+                        $item_value = json_decode(json_encode($menuItem), true);
                         // Prepare array where to append the children items
                         if (!$isFlat) {
                             $item_value['children'] = [];
@@ -162,15 +162,15 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                 }
                 return $arrangedEntries;
             case 'items':
-                $itemsData = $menuTypeAPI->getMenuItemsData($menu);
+                $menuItems = $menuTypeAPI->getMenuItems($menu);
                 // Build the MenuItem objects from the data, and save them on the dynamic registry
                 $topLevelMenuItemIDs = [];
-                foreach ($itemsData as $menuItemData) {
+                foreach ($menuItems as $menuItem) {
                     // Top-level items are those with no parent
-                    if ($menuItemData->parentID === null) {
-                        $topLevelMenuItemIDs[] = $menuItemData->id;
+                    if ($menuItem->parentID === null) {
+                        $topLevelMenuItemIDs[] = $menuItem->id;
                     }
-                    $this->menuItemRuntimeRegistry->storeMenuItem($menuItemData);
+                    $this->menuItemRuntimeRegistry->storeMenuItem($menuItem);
                 }
 
                 // Return the IDs for the top-level items

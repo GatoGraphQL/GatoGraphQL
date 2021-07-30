@@ -20,7 +20,10 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         }
         return $object;
     }
-    public function getMenuItemsData(string | int | object $menuObjectOrID): array
+    /**
+     * @return MenuItem[]
+     */
+    public function getMenuItems(string | int | object $menuObjectOrID): array
     {
         $menuItems = wp_get_nav_menu_items($menuObjectOrID);
         if ($menuItems === false) {
