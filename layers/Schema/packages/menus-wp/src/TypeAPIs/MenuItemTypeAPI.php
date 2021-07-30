@@ -6,6 +6,14 @@ namespace PoPSchema\MenusWP\TypeAPIs;
 
 use PoPSchema\Menus\TypeAPIs\MenuItemTypeAPIInterface;
 
+/**
+ * This FieldResolver can handle objects of two types:
+ * 
+ * - Those returned by `getMenuItemsData` (`wp_get_nav_menu_items` in WordPress)
+ * - ObjectModels\MenuItem
+ * 
+ * For this reason, class `MenuItem` has the same properties as the CMS ones
+ */
 class MenuItemTypeAPI implements MenuItemTypeAPIInterface
 {
     public function getMenuItemID(object $menuItem): string | int

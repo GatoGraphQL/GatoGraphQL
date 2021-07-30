@@ -19,6 +19,14 @@ use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 
+/**
+ * This FieldResolver can handle objects of two types:
+ * 
+ * - Those returned by `getMenuItemsData` (`wp_get_nav_menu_items` in WordPress)
+ * - ObjectModels\MenuItem
+ * 
+ * For this reason, class `MenuItem` has the same properties as the CMS ones
+ */
 class MenuItemFieldResolver extends AbstractDBDataFieldResolver
 {
     public function __construct(
