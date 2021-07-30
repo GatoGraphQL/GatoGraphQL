@@ -17,6 +17,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
+use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
@@ -124,7 +125,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                 $entries = array();
                 if ($itemsData) {
                     // Load these item data-fields. If other set needed, create another $field
-                    $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'parentID', 'objectID', 'additionalAttrs');
+                    $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'parentID', 'objectID', 'description');
                     /**
                      * @var MenuItemTypeResolver
                      */
@@ -177,7 +178,9 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                     $resultItem,
                     $this->fieldQueryInterpreter->getField(
                         'itemDataEntries',
-                        $fieldArgs
+                        [
+                            'flat' => true,
+                        ]
                     ),
                     $variables,
                     $expressions,
@@ -186,10 +189,35 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                 if (GeneralUtils::isError($itemDataEntries)) {
                     return $itemDataEntries;
                 }
-                // Save the entries on the registry
+                // Build the MenuItem objects from the data, and save them on the dynamic registry
+                $topLevelMenuItemIDs = [];
+                foreach ($itemDataEntries as $menuItemData) {
+                    // ID = 0 => Top level (no parent)
+                    $menuItemParentID = $menuItemData['parentID'] ?? 0;
+                    if ($menuItemParentID === 0) {
+                        $topLevelMenuItemIDs[] = $menuItemParentID;
+                    }
+                    // Build the menuItem's ID as a combination of its parent and its ID
+                    $menuItemID = sprintf(
+                        '%s-%s',
+                        $menuItemParentID,
+                        $menuItemData['id']
+                    );
+                    $menuItem = new MenuItem(
+                        $menuItemData['id'],
+                        $menuItemData['objectID'],
+                        $menuItemData['parentID'],
+                        $menuItemData['title'],
+                        $menuItemData['url'],
+                        $menuItemData['description'],
+                        $menuItemData['classes'],
+                        $menuItemData['target'],
+                    );
+                    $this->menuItemRuntimeRegistry->storeMenuItem($menuItemID, $menuItem);
+                }
 
-                // Return the IDs for the 1st-level entries
-                return [];
+                // Return the IDs for the top-level items
+                return $topLevelMenuItemIDs;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
