@@ -4,6 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserAvatars\TypeDataResolvers\UserAvatarTypeDataResolverInterface:
-        class: \PoPSchema\UserAvatarsWP\TypeDataResolvers\UserAvatarTypeDataResolver
+    PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface:
+        class: \PoPSchema\UserAvatarsWP\TypeAPIs\UserAvatarTypeAPI
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserAvatars\TypeDataResolvers;
+namespace PoPSchema\UserAvatars\TypeAPIs;
 
-interface UserAvatarTypeDataResolverInterface
+interface UserAvatarTypeAPIInterface
 {
     /**
      * Admin role name

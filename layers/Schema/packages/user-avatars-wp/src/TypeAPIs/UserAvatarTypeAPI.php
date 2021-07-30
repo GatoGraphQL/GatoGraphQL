@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserAvatarsWP\TypeDataResolvers;
+namespace PoPSchema\UserAvatarsWP\TypeAPIs;
 
-use PoPSchema\UserAvatars\TypeDataResolvers\AbstractUserAvatarTypeDataResolver;
+use PoPSchema\UserAvatars\TypeAPIs\AbstractUserAvatarTypeAPI;
 use WP_User;
 
-class UserAvatarTypeDataResolver extends AbstractUserAvatarTypeDataResolver
+class UserAvatarTypeAPI extends AbstractUserAvatarTypeAPI
 {
     public function getAdminRoleName(): string
     {
