@@ -5,16 +5,45 @@ declare(strict_types=1);
 namespace PoPSchema\Menus\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
+use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
 
 class MenuFieldResolver extends AbstractDBDataFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+    
     public function getClassesToAttachTo(): array
     {
         return array(MenuTypeResolver::class);
@@ -157,6 +186,9 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                 if (GeneralUtils::isError($itemDataEntries)) {
                     return $itemDataEntries;
                 }
+                // Save the entries on the registry
+
+                // Return the IDs for the 1st-level entries
                 return [];
         }
 
