@@ -9,6 +9,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\UserAvatars\Facades\UserAvatarTypeAPIFacade;
+use PoPSchema\UserAvatars\TypeResolvers\UserAvatarTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class UserFieldResolver extends AbstractDBDataFieldResolver

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserAvatarsWP\TypeResolvers;
+namespace PoPSchema\UserAvatars\TypeResolvers;
 
-use PoPSchema\UserAvatarsWP\TypeDataLoaders\UserAvatarTypeDataLoader;
+use PoPSchema\UserAvatars\TypeDataLoaders\UserAvatarTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class UserAvatarTypeResolver extends AbstractTypeResolver
@@ -21,8 +21,8 @@ class UserAvatarTypeResolver extends AbstractTypeResolver
 
     public function getID(object $resultItem): string | int | null
     {
-        $role = $resultItem;
-        return $role->name;
+        $avatar = $resultItem;
+        return $avatar->src;
     }
 
     public function getTypeDataLoaderClass(): string

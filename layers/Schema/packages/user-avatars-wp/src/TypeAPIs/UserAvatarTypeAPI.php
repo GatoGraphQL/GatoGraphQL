@@ -5,90 +5,16 @@ declare(strict_types=1);
 namespace PoPSchema\UserAvatarsWP\TypeAPIs;
 
 use PoPSchema\UserAvatars\TypeAPIs\AbstractUserAvatarTypeAPI;
-use WP_User;
 
 class UserAvatarTypeAPI extends AbstractUserAvatarTypeAPI
 {
-    public function getAdminRoleName(): string
-    {
-        return 'administrator';
-    }
-
     /**
-     * @return string[]
+     * @return array<string,mixed>
      */
-    public function getRoleNames(): array
+    public function getUserAvatarData(string | int | object $userObjectOrID): array
     {
-        $userAvatars = \wp_roles();
-        return array_keys($userAvatars->roles);
-    }
-
-    /**
-     * All available capabilities
-     *
-     * @return string[]
-     */
-    public function getCapabilities(): array
-    {
-        /**
-         * Merge all capabilities from all roles
-         */
-        $capabilities = [];
-        $roles = \wp_roles();
-        foreach ($roles->roles as $role) {
-            $capabilities = array_merge(
-                $capabilities,
-                array_keys($role['capabilities'])
-            );
-        }
-        return array_values(array_unique($capabilities));
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getUserAvatars(string | int | object $userObjectOrID): array
-    {
-        if (is_object($userObjectOrID)) {
-            $user = $userObjectOrID;
-        } else {
-            $user = \get_user_by('id', $userObjectOrID);
-            if ($user === false) {
-                return [];
-            }
-        }
-        /** @var WP_User $user */
-        return $user->roles;
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getUserCapabilities(string | int | object $userObjectOrID): array
-    {
-        $roles = $this->getUserAvatars($userObjectOrID);
-        $capabilities = [];
-        foreach ($roles as $roleName) {
-            $role = \get_role($roleName);
-            $capabilities = array_merge(
-                $capabilities,
-                array_keys($role->capabilities ?? [])
-            );
-        }
-        return array_values(array_unique($capabilities));
-    }
-
-    /**
-     * @return string|null `null` if the user is not found, its first role otherwise
-     */
-    public function getTheUserAvatar(string | int | object $userObjectOrID): ?string
-    {
-        $roles = $this->getUserAvatars($userObjectOrID);
-        return $roles[0] ?? null;
-    }
-
-    public function userCan(string | int | object $userObjectOrID, string $capability): bool
-    {
-        return \user_can($userObjectOrID, $capability);
+        return [
+            'src' => '',
+        ];
     }
 }
