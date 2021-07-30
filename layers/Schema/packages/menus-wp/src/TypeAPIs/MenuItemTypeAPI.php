@@ -39,7 +39,7 @@ class MenuItemTypeAPI implements MenuItemTypeAPIInterface
      */
     public function getMenuItemClasses(object $menuItem): array
     {
-        return $menuItem->classes;
+        return array_filter($menuItem->classes);
     }
     public function getMenuItemParentID(object $menuItem): string | int | null
     {

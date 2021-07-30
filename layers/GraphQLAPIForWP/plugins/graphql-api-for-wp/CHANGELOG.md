@@ -8,7 +8,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Field `Root.menus`
+- Field:
+  - `Root.menus: [Menu]!`
+  - `Menu.items: [MenuItem]!`
+  - `MenuItem.children: [MenuItem]!`
 
 ## 0.8.1 - 21/07/2021
 
