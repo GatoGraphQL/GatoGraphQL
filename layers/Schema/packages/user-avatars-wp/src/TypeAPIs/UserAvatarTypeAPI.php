@@ -29,5 +29,18 @@ class UserAvatarTypeAPI extends AbstractUserAvatarTypeAPI
         $matches = array();
         preg_match('/ src=["|\']([^"|\']*)["|\']/i', $avatarHTML, $matches);
         return $matches[1] ?? null;
+
+        // // @see https://www.php.net/manual/en/domdocument.getelementsbytagname.php
+        // $doc = new DOMDocument();
+        // $doc->loadHTML($avatarHTML);
+        // $imageTags = $doc->getElementsByTagName('img');
+        // if ($imageTags->length === 0) { 
+        //     return null;
+        // }
+        // $imageTag = $imageTags->item(0);
+        // if ($imageTag === null) {
+        //     return null;
+        // }
+        // return $imageTag->getAttribute('src');
     }
 }
