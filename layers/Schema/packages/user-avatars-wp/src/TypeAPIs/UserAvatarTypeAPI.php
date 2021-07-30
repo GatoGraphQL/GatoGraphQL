@@ -8,9 +8,19 @@ use PoPSchema\UserAvatars\TypeAPIs\AbstractUserAvatarTypeAPI;
 
 class UserAvatarTypeAPI extends AbstractUserAvatarTypeAPI
 {
+    protected function getUserID(string | int | object $userObjectOrID): string | int
+    {
+        if (is_object($userObjectOrID)) {
+            /** @var WP_User */
+            $user = $userObjectOrID;
+            return $user->ID;
+        }
+        return $userObjectOrID;
+    }
+
     public function getUserAvatarSrc(string | int | object $userObjectOrID, int $size = 96): ?string
     {
-        $avatarHTML = \get_avatar($userObjectOrID, $size);
+        $avatarHTML = \get_avatar($this->getUserID($userObjectOrID), $size);
         if ($avatarHTML === false) {
             return null;
         }
