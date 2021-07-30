@@ -8,10 +8,15 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Field:
-  - `Root.menus: [Menu]!`
-  - `Menu.items: [MenuItem]!`
-  - `MenuItem.children: [MenuItem]!`
+- GraphQL schema upgrade:
+  - Menus:
+    - `Root.menus: [Menu]!`
+    - `Menu.items: [MenuItem]!`
+    - `MenuItem.children: [MenuItem]!`
+  - Added type `UserAvatar`, and fields:
+    - `User.avatar: [UserAvatar]`
+    - `UserAvatar.src: String!`
+    - `UserAvatar.size: Int!`
 
 ## 0.8.1 - 21/07/2021
 
