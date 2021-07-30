@@ -121,24 +121,13 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'itemDataEntries':
                 $isFlat = $fieldArgs['flat'] ?? false;
-                $itemsData = $menuTypeAPI->getMenuItemsData($menu);
+                $menuItems = $menuTypeAPI->getMenuItems($menu);
                 $entries = array();
-                if ($itemsData) {
-                    // Load these item data-fields. If other set needed, create another $field
-                    $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'parentID', 'objectID', 'description');
-                    /**
-                     * @var MenuItemTypeResolver
-                     */
-                    $menuItemTypeResolver = $this->instanceManager->getInstance(MenuItemTypeResolver::class);
-                    foreach ($itemsData as $itemData) {
-                        $item_value = array();
-                        foreach ($item_data_fields as $item_data_field) {
-                            $menuItemValue = $menuItemTypeResolver->resolveValue($itemData, $item_data_field, $variables, $expressions, $options);
-                            if (GeneralUtils::isError($menuItemValue)) {
-                                return $menuItemValue;
-                            }
-                            $item_value[$item_data_field] = $menuItemValue;
-                        }
+                if ($menuItems) {
+                    foreach ($menuItems as $menuItem) {
+                        // Convert object to array
+                        // @see https://stackoverflow.com/a/18576902
+                        $item_value = json_decode(json_encode($menuItem), true);
                         // Prepare array where to append the children items
                         if (!$isFlat) {
                             $item_value['children'] = [];
@@ -173,43 +162,21 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                 }
                 return $arrangedEntries;
             case 'items':
-                // Fetch the data for the items, and from it build the objects respecting their position in the menu
-                $itemDataEntries = $typeResolver->resolveValue(
-                    $resultItem,
-                    $this->fieldQueryInterpreter->getField(
-                        'itemDataEntries',
-                        [
-                            'flat' => true,
-                        ]
-                    ),
-                    $variables,
-                    $expressions,
-                    $options
-                );
-                if (GeneralUtils::isError($itemDataEntries)) {
-                    return $itemDataEntries;
-                }
-                // Build the MenuItem objects from the data, and save them on the dynamic registry
-                $topLevelMenuItemIDs = [];
-                foreach ($itemDataEntries as $menuItemData) {
-                    // Top-level items are those with no parent
-                    if ($menuItemData['parentID'] === null) {
-                        $topLevelMenuItemIDs[] = $menuItemData['id'];
-                    }
-                    $this->menuItemRuntimeRegistry->storeMenuItem(new MenuItem(
-                        $menuItemData['id'],
-                        $menuItemData['objectID'],
-                        $menuItemData['parentID'],
-                        $menuItemData['title'],
-                        $menuItemData['url'],
-                        $menuItemData['description'],
-                        $menuItemData['classes'],
-                        $menuItemData['target'],
-                    ));
+                $menuItems = $menuTypeAPI->getMenuItems($menu);
+
+                // Save the MenuItems on the dynamic registry
+                foreach ($menuItems as $menuItem) {
+                    $this->menuItemRuntimeRegistry->storeMenuItem($menuItem);
                 }
 
-                // Return the IDs for the top-level items
-                return $topLevelMenuItemIDs;
+                // Return the IDs for the top-level items (those with no parent)
+                return array_map(
+                    fn (MenuItem $menuItem) => $menuItem->id,
+                    array_filter(
+                        $menuItems,
+                        fn (MenuItem $menuItem) => $menuItem->parentID === null
+                    )
+                );
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

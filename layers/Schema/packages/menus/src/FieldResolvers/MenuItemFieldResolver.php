@@ -15,18 +15,10 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
+use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 
-/**
- * This FieldResolver can handle objects of two types:
- * 
- * - Those returned by `getMenuItemsData` (`wp_get_nav_menu_items` in WordPress)
- * - ObjectModels\MenuItem
- * 
- * For this reason, class `MenuItem` has the same properties as the CMS ones
- */
 class MenuItemFieldResolver extends AbstractDBDataFieldResolver
 {
     public function __construct(
@@ -62,7 +54,6 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'children',
             // All other fields are properties in the object
             'title',
-            'alt',
             'url',
             'classes',
             'target',
@@ -77,7 +68,6 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         $types = [
             'children' => SchemaDefinition::TYPE_ID,
             'title' => SchemaDefinition::TYPE_STRING,
-            'alt' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,
             'classes' => SchemaDefinition::TYPE_STRING,
             'target' => SchemaDefinition::TYPE_STRING,
@@ -103,7 +93,6 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         $descriptions = [
             'children' => $this->translationAPI->__('Menu item children items', 'menus'),
             'title' => $this->translationAPI->__('Menu item title', 'menus'),
-            'alt' => $this->translationAPI->__('Menu item alt', 'menus'),
             'url' => $this->translationAPI->__('Menu item URL', 'menus'),
             'classes' => $this->translationAPI->__('Menu item classes', 'menus'),
             'target' => $this->translationAPI->__('Menu item target', 'menus'),
@@ -129,32 +118,19 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();
+        /** @var MenuItem */
         $menuItem = $resultItem;
         switch ($fieldName) {
             case 'children':
                 return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren($typeResolver->getID($menuItem)));
             case 'title':
-            case 'alt':
-                return $menuItemTypeAPI->getMenuItemTitle($menuItem);
-
             case 'url':
-                return $menuItemTypeAPI->getMenuItemURL($menuItem);
-
             case 'classes':
-                return $menuItemTypeAPI->getMenuItemClasses($menuItem);
-
             case 'target':
-                return $menuItemTypeAPI->getMenuItemTarget($menuItem);
-
             case 'description':
-                return $menuItemTypeAPI->getMenuItemDescription($menuItem);
-
             case 'objectID':
-                return $menuItemTypeAPI->getMenuItemObjectID($menuItem);
-
             case 'parentID':
-                return $menuItemTypeAPI->getMenuItemParentID($menuItem);
+                return $menuItem->$fieldName;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
