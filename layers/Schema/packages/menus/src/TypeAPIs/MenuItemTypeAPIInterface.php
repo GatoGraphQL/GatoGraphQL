@@ -6,7 +6,6 @@ namespace PoPSchema\Menus\TypeAPIs;
 
 interface MenuItemTypeAPIInterface
 {
-    public function getMenuItem(string | int $id): ?object;
     public function getMenuItemID(object $menuItem): string | int;
     public function getMenuItemTitle(object $menuItem): string;
     public function getMenuItemObjectID(object $menuItem): string | int;
