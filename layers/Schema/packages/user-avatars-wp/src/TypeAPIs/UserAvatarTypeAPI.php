@@ -24,9 +24,10 @@ class UserAvatarTypeAPI extends AbstractUserAvatarTypeAPI
         if ($avatarHTML === false) {
             return null;
         }
-        // Extract the source from HTML <img> tag
+        // Extract attribute "src" from the <img> HTML tag
+        // It can be src="..." or src='...'
         $matches = array();
-        preg_match('/src="([^"]*)"/i', $avatarHTML , $matches);
+        preg_match('/ src=["|\']([^"|\']*)["|\']/i', $avatarHTML, $matches);
         return $matches[1] ?? null;
     }
 }
