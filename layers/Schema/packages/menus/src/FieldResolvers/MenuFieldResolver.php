@@ -163,18 +163,20 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                 return $arrangedEntries;
             case 'items':
                 $menuItems = $menuTypeAPI->getMenuItems($menu);
-                // Build the MenuItem objects from the data, and save them on the dynamic registry
-                $topLevelMenuItemIDs = [];
+
+                // Save the MenuItems on the dynamic registry
                 foreach ($menuItems as $menuItem) {
-                    // Top-level items are those with no parent
-                    if ($menuItem->parentID === null) {
-                        $topLevelMenuItemIDs[] = $menuItem->id;
-                    }
                     $this->menuItemRuntimeRegistry->storeMenuItem($menuItem);
                 }
 
-                // Return the IDs for the top-level items
-                return $topLevelMenuItemIDs;
+                // Return the IDs for the top-level items (those with no parent)
+                return array_map(
+                    fn (MenuItem $menuItem) => $menuItem->id,
+                    array_filter(
+                        $menuItems,
+                        fn (MenuItem $menuItem) => $menuItem->parentID === null
+                    )
+                );
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
