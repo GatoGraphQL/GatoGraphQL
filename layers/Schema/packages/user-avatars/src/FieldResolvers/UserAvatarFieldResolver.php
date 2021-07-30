@@ -5,39 +5,66 @@ declare(strict_types=1);
 namespace PoPSchema\UserAvatars\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\UserAvatars\Facades\UserAvatarTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
 
-class UserFieldResolver extends AbstractDBDataFieldResolver
+class UserAvatarFieldResolver extends AbstractDBDataFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected UserAvatarTypeAPIInterface $userAvatarTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getClassesToAttachTo(): array
     {
         return array(
-            UserTypeResolver::class,
+            UserAvatarTypeResolver::class,
         );
     }
 
     public function getFieldNamesToResolve(): array
     {
         return [
-            'avatar',
+            'src',
         ];
     }
 
     public function getAdminFieldNames(): array
     {
         return [
-            'avatar',
+            'src',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'avatar' => SchemaDefinition::TYPE_STRING,
+            'src' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -45,19 +72,15 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
-            'avatar'
-                => SchemaTypeModifiers::NON_NULLABLE
-                | SchemaTypeModifiers::IS_ARRAY
-                | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default
-                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+            'src' => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
-            'avatar' => $this->translationAPI->__('User avatar', 'user-avatars'),
+            'src' => $this->translationAPI->__('Avatar source URL', 'user-avatars'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -77,24 +100,13 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $userAvatarTypeAPI = UserAvatarTypeAPIFacade::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
-            case 'avatar':
-                $id = $userAvatarTypeAPI->getUserAvatarData($user);
-                return $id;
+            case 'src':
+                $data = $this->userAvatarTypeAPI->getUserAvatarData($user);
+                return $data['src'];
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'avatar':
-                return UserAvatarTypeResolver::class;
-        }
-
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
     }
 }
