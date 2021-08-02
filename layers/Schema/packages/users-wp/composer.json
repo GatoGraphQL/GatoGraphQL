@@ -16,11 +16,11 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/users": "^0.9",
-        "pop-schema/queriedobject-wp": "^0.9"
+        "pop-schema/users": "^0.8.2",
+        "pop-schema/queriedobject-wp": "^0.8.2"
     },
     "require-dev": {
-        "pop-schema/customposts-wp": "^0.9",
+        "pop-schema/customposts-wp": "^0.8.2",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.11",
         "squizlabs/php_codesniffer": "^3.0",
