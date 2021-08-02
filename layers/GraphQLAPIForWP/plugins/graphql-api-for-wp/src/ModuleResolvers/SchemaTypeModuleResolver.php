@@ -57,6 +57,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
+    public const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
 
     /**
      * Hooks
@@ -403,6 +404,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ],
                 ModuleSettingOptions::BEHAVIOR => Behaviors::ALLOWLIST,
             ],
+            self::SCHEMA_USER_AVATARS => [
+                self::OPTION_DEFAULT_AVATAR_SIZE => 96,
+            ],
         ];
         return $defaultValues[$module][$option] ?? null;
     }
@@ -715,6 +719,19 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Behaviors::ALLOWLIST => \__('Allow access', 'graphql-api'),
                     Behaviors::DENYLIST => \__('Deny access', 'graphql-api'),
                 ],
+            ];
+        } elseif ($module == self::SCHEMA_USER_AVATARS) {
+            $option = self::OPTION_DEFAULT_AVATAR_SIZE;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Default avatar size', 'graphql-api'),
+                Properties::DESCRIPTION => \__('When not providing argument "size" in field `User.avatar`, it will use this default value (in pixels)', 'graphql-api'),
+                Properties::TYPE => Properties::TYPE_INT,
+                Properties::MIN_NUMBER => 1,
             ];
         }
 
