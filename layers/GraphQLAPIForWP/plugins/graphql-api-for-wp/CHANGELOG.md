@@ -8,15 +8,22 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- GraphQL schema upgrade:
-  - Menus:
-    - `Root.menus: [Menu]!`
-    - `Menu.items: [MenuItem]!`
-    - `MenuItem.children: [MenuItem]!`
-  - Added type `UserAvatar`, and fields:
-    - `User.avatar: [UserAvatar]`
-    - `UserAvatar.src: String!`
-    - `UserAvatar.size: Int!`
+GraphQL schema upgrade:
+
+- Added fields for Menus:
+  - `Root.menus: [Menu]!`
+  - `Menu.items: [MenuItem]!`
+  - `MenuItem.children: [MenuItem]!`
+- Added type `UserAvatar`, and fields:
+  - `User.avatar: [UserAvatar]`
+  - `UserAvatar.src: String!`
+  - `UserAvatar.size: Int!`
+- Added field `urlPath` on several types:
+  - `Post.urlPath: String!`
+  - `Page.urlPath: String!`
+  - `PostTag.urlPath: String!`
+  - `PostCategory.urlPath: String!`
+  - `User.urlPath: String!`
 
 ## 0.8.1 - 21/07/2021
 

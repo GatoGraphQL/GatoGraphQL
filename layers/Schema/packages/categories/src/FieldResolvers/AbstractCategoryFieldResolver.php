@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
+use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 
 abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -25,6 +26,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
     {
         return [
             'url',
+            'urlPath',
             'name',
             'slug',
             'description',
@@ -37,6 +39,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'url' => SchemaDefinition::TYPE_URL,
+            'urlPath' => SchemaDefinition::TYPE_STRING,
             'name' => SchemaDefinition::TYPE_STRING,
             'slug' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
@@ -46,10 +49,25 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match ($fieldName) {
+            'url',
+            'urlPath',
+            'name',
+            'slug',
+            'count'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
+    }
+
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'url' => $this->translationAPI->__('Category URL', 'pop-categories'),
+            'urlPath' => $this->translationAPI->__('Category URL path', 'pop-categories'),
             'name' => $this->translationAPI->__('Category', 'pop-categories'),
             'slug' => $this->translationAPI->__('Category slug', 'pop-categories'),
             'description' => $this->translationAPI->__('Category description', 'pop-categories'),
@@ -79,6 +97,9 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'url':
                 return $categoryTypeAPI->getCategoryURL($typeResolver->getID($category));
+
+            case 'urlPath':
+                return $categoryTypeAPI->getCategoryURLPath($typeResolver->getID($category));
 
             case 'name':
                 return $categoryTypeAPI->getCategoryName($typeResolver->getID($category));

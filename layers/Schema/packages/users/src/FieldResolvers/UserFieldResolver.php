@@ -9,6 +9,7 @@ use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -63,6 +64,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'lastname',
             'email',
             'url',
+            'urlPath',
             'slug',
             'description',
             'websiteURL',
@@ -79,11 +81,27 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'lastname' => SchemaDefinition::TYPE_STRING,
             'email' => SchemaDefinition::TYPE_EMAIL,
             'url' => SchemaDefinition::TYPE_URL,
+            'urlPath' => SchemaDefinition::TYPE_STRING,
             'slug' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
             'websiteURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match ($fieldName) {
+            'username',
+            'name',
+            'displayName',
+            'url',
+            'urlPath',
+            'slug'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
@@ -96,6 +114,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'lastname' => $this->translationAPI->__('User\'s last name', 'pop-users'),
             'email' => $this->translationAPI->__('User\'s email', 'pop-users'),
             'url' => $this->translationAPI->__('URL of the user\'s profile in the website', 'pop-users'),
+            'urlPath' => $this->translationAPI->__('URL path of the user\'s profile in the website', 'pop-users'),
             'slug' => $this->translationAPI->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),
             'description' => $this->translationAPI->__('Description of the user', 'pop-users'),
             'websiteURL' => $this->translationAPI->__('User\'s own website\'s URL', 'pop-users'),
@@ -138,6 +157,9 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
 
             case 'url':
                 return $this->userTypeAPI->getUserURL($typeResolver->getID($user));
+
+            case 'urlPath':
+                return $this->userTypeAPI->getUserURLPath($typeResolver->getID($user));
 
             case 'slug':
                 return $this->userTypeAPI->getUserSlug($user);

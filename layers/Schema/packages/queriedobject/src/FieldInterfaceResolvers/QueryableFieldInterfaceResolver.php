@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\QueriedObject\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 
 class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
@@ -23,6 +24,7 @@ class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
     {
         return [
             'url',
+            'urlPath',
             'slug',
         ];
     }
@@ -31,15 +33,29 @@ class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
     {
         $types = [
             'url' => SchemaDefinition::TYPE_URL,
+            'urlPath' => SchemaDefinition::TYPE_URL,
             'slug' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    {
+        return match ($fieldName) {
+            'url',
+            'urlPath',
+            'slug'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getSchemaFieldTypeModifiers($fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
         $descriptions = [
             'url' => $this->translationAPI->__('URL to query the object', 'queriedobject'),
+            'urlPath' => $this->translationAPI->__('URL path to query the object', 'queriedobject'),
             'slug' => $this->translationAPI->__('URL\'s slug', 'queriedobject'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);

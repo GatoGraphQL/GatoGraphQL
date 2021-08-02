@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
 
@@ -25,6 +26,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
     {
         return [
             'url',
+            'urlPath',
             'name',
             'slug',
             'description',
@@ -36,6 +38,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'url' => SchemaDefinition::TYPE_URL,
+            'urlPath' => SchemaDefinition::TYPE_STRING,
             'name' => SchemaDefinition::TYPE_STRING,
             'slug' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
@@ -44,10 +47,25 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match ($fieldName) {
+            'url',
+            'urlPath',
+            'name',
+            'slug',
+            'count'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
+    }
+
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'url' => $this->translationAPI->__('Tag URL', 'pop-tags'),
+            'urlPath' => $this->translationAPI->__('Tag URL path', 'pop-tags'),
             'name' => $this->translationAPI->__('Tag', 'pop-tags'),
             'slug' => $this->translationAPI->__('Tag slug', 'pop-tags'),
             'description' => $this->translationAPI->__('Tag description', 'pop-tags'),
@@ -76,6 +94,9 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'url':
                 return $tagTypeAPI->getTagURL($typeResolver->getID($tag));
+
+            case 'urlPath':
+                return $tagTypeAPI->getTagURLPath($typeResolver->getID($tag));
 
             case 'name':
                 return $tagTypeAPI->getTagName($tag);

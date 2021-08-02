@@ -176,9 +176,14 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
             $options
         );
     }
-    public function getTagURL(string | int $tagID): string
+    public function getTagURL(string | int | object $tagObjectOrID): string
     {
-        return get_term_link($tagID, $this->getTagTaxonomyName());
+        return get_term_link($tagObjectOrID, $this->getTagTaxonomyName());
+    }
+
+    public function getTagURLPath(string | int | object $tagObjectOrID): string
+    {
+        return $this->queriedObjectHelperService->getURLPath($this->getTagURL($tagObjectOrID));
     }
 
     public function getTagSlug(string | int | object $tagObjectOrID): string
