@@ -22,7 +22,7 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
         
         // Remove the Home URL from the permalink
         return substr(
-            $customPostObjectOrID,
+            $permalink,
             strlen($this->cmsService->getHomeURL())
         );
     }
