@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPostsWP\TypeAPIs;
 use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\CustomPosts\ComponentConfiguration;
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIHelpers;
@@ -20,7 +20,7 @@ use function get_post_status;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class CustomPostTypeAPI implements CustomPostTypeAPIInterface
+class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
 {
     use InjectedFilterDataloadingModuleTypeAPITrait;
 
