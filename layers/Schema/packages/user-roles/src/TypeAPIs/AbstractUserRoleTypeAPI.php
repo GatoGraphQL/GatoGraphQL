@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles\TypeDataResolvers;
+namespace PoPSchema\UserRoles\TypeAPIs;
 
 use PoP\Hooks\HooksAPIInterface;
 
-abstract class AbstractUserRoleTypeDataResolver implements UserRoleTypeDataResolverInterface
+abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
 {
     public function __construct(
         protected HooksAPIInterface $hooksAPI

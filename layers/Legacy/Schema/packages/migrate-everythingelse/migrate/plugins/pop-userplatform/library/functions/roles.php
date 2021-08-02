@@ -3,7 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPSchema\Users\TypeDataLoaders\UserTypeDataLoader;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 define('GD_ROLE_PROFILE', 'profile');
 
@@ -41,8 +41,8 @@ function getUserRoleCombinationsProfileRole($user_role_combinations)
 
 function isProfile($user = null)
 {
-    $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-    return $userRoleTypeDataResolver->hasRole($user, GD_ROLE_PROFILE);
+    $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
+    return $userRoleTypeAPI->hasRole($user, GD_ROLE_PROFILE);
 }
 
 /**

@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 define('GD_DATALOAD_USER_ROLES', 'roles');
@@ -23,12 +23,12 @@ class PoP_UserCommunities_UserStance_Hooks
             $userID = $vars['global-userstate']['current-user-id'];
 
             // array_values so that it discards the indexes: if will transform an array into an object
-            $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
+            $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
             $user_roles = array_values(
                 array_values(
                     array_intersect(
                         gdRoles(),
-                        $userRoleTypeDataResolver->getUserRoles($userID)
+                        $userRoleTypeAPI->getUserRoles($userID)
                     )
                 )
             );

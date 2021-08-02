@@ -4,6 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\UserRoles\TypeDataResolvers\UserRoleTypeDataResolverInterface:
-        class: \PoPSchema\UserRolesWP\TypeDataResolvers\UserRoleTypeDataResolver
+    PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface:
+        class: \PoPSchema\UserRolesWP\TypeAPIs\UserRoleTypeAPI
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\TypeDataResolvers;
+namespace PoP\ComponentModel\TypeAPIs;
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-trait InjectedFilterDataloadingModuleTypeDataResolverTrait
+trait InjectedFilterDataloadingModuleTypeAPITrait
 {
     public function maybeFilterDataloadQueryArgs(array &$query, array $options = [])
     {

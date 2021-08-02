@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeDataResolvers\InjectedFilterDataloadingModuleTypeDataResolverTrait;
+use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
@@ -22,7 +22,7 @@ use function get_post_status;
  */
 class CustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
-    use InjectedFilterDataloadingModuleTypeDataResolverTrait;
+    use InjectedFilterDataloadingModuleTypeAPITrait;
 
     public function __construct(
         protected HooksAPIInterface $hooksAPI,

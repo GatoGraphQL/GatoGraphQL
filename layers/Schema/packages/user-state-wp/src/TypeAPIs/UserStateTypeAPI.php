@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateWP\TypeDataResolvers;
+namespace PoPSchema\UserStateWP\TypeAPIs;
 
-use PoPSchema\UserState\TypeDataResolvers\UserStateTypeDataResolverInterface;
+use PoPSchema\UserState\TypeAPIs\UserStateTypeAPIInterface;
 
-class UserStateTypeDataResolver implements UserStateTypeDataResolverInterface
+class UserStateTypeAPI implements UserStateTypeAPIInterface
 {
-
     public function isUserLoggedIn(): bool
     {
         return \is_user_logged_in();

@@ -9,7 +9,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Users\Routing\RouteNatures;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 class VarsHookSet extends AbstractHookSet
 {
@@ -35,9 +35,9 @@ class VarsHookSet extends AbstractHookSet
                     )
                 );
                 if (in_array(ModelInstanceComponentTypes::USER_ROLE, $component_types)) {
-                    $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
+                    $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
                     /** @var string */
-                    $userRole = $userRoleTypeDataResolver->getTheUserRole($user_id);
+                    $userRole = $userRoleTypeAPI->getTheUserRole($user_id);
                     $components[] = $this->translationAPI->__('user role:', 'pop-engine') . $userRole;
                 }
                 break;

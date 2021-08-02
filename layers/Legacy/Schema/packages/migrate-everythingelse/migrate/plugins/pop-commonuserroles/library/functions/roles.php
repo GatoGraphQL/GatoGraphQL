@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 const GD_URE_ROLE_INDIVIDUAL = 'individual';
 const GD_URE_ROLE_ORGANIZATION = 'organization';
@@ -55,12 +55,12 @@ function gdUreGetuserroleCommonroles($role, $user_id)
 
 function gdUreIsOrganization($user_id = null)
 {
-    $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-    return isProfile($user_id) && $userRoleTypeDataResolver->hasRole($user_id, GD_URE_ROLE_ORGANIZATION);
+    $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
+    return isProfile($user_id) && $userRoleTypeAPI->hasRole($user_id, GD_URE_ROLE_ORGANIZATION);
 }
 
 function gdUreIsIndividual($user_id = null)
 {
-    $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-    return isProfile($user_id) && $userRoleTypeDataResolver->hasRole($user_id, GD_URE_ROLE_INDIVIDUAL);
+    $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
+    return isProfile($user_id) && $userRoleTypeAPI->hasRole($user_id, GD_URE_ROLE_INDIVIDUAL);
 }
