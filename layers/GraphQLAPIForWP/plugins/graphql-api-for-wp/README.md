@@ -105,6 +105,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td>Schema Pages</td><td>Query pages, through type <code>Page</code> added to the schema</td></tr>
 <tr><td>Schema Users</td><td>Query users, through type <code>User</code> added to the schema</td></tr>
 <tr><td>Schema User Roles</td><td>Query user roles, through type <code>UserRole</code> added to the schema</td></tr>
+<tr><td>Schema User Avatars</td><td>Query user avatars, through type <code>UserAvatar</code> added to the schema</td></tr>
 <tr><td>Schema Comments</td><td>Query comments, through type <code>Comment</code> added to the schema</td></tr>
 <tr><td>Schema Tags</td><td>Base functionality for all tags</td></tr>
 <tr><td>Schema Post Tags</td><td>Query post tags, through type <code>PostTag</code> added to the schema</td></tr>
