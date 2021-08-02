@@ -16,6 +16,7 @@ interface CustomPostTypeAPIInterface
     public function getContent(string | int | object $customPostObjectOrID): ?string;
     public function getPlainTextContent(string | int | object $customPostObjectOrID): string;
     public function getPermalink(string | int | object $customPostObjectOrID): ?string;
+    public function getPermalinkPath(string | int | object $customPostObjectOrID): ?string;
     public function getSlug(string | int | object $customPostObjectOrID): ?string;
     public function getStatus(string | int | object $customPostObjectOrID): ?string;
     public function getPublishedDate(string | int | object $customPostObjectOrID): ?string;
