@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeAPIs;
 
-use PoP\Engine\CMS\CMSServiceInterface;
+use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 
 abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
     public function __construct(
-        protected CMSServiceInterface $cmsService
+        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService
     ) {
     }
 
@@ -23,7 +23,7 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
         // Remove the Home URL from the permalink
         return substr(
             $permalink,
-            strlen($this->cmsService->getHomeURL())
+            strlen($this->queriedObjectHelperService->getURLPath($permalink))
         );
     }
 }

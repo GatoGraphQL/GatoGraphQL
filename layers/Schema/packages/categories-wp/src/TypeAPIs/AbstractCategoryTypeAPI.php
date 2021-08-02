@@ -178,6 +178,11 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return \get_term_link($catObjectOrID, $this->getCategoryTaxonomyName());
     }
 
+    public function getCategoryURLPath(string | int | object $catObjectOrID): string
+    {
+        return $this->queriedObjectHelperService->getURLPath($this->getCategoryURL($catObjectOrID));
+    }
+
     public function getCategoryBase()
     {
         $cmsService = CMSServiceFacade::getInstance();

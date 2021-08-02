@@ -26,6 +26,7 @@ interface UserTypeAPIInterface
     public function getUserLogin(string | int | object $userObjectOrID): ?string;
     public function getUserDescription(string | int | object $userObjectOrID): ?string;
     public function getUserURL(string | int | object $userObjectOrID): ?string;
+    public function getUserURLPath(string | int | object $userObjectOrID): ?string;
     public function getUserWebsiteUrl(string | int | object $userObjectOrID): ?string;
     public function getUserSlug(string | int | object $userObjectOrID): ?string;
     public function getUserId(object $user): string | int;

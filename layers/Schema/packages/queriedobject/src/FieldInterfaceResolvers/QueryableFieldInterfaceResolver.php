@@ -23,6 +23,7 @@ class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
     {
         return [
             'url',
+            'urlPath',
             'slug',
         ];
     }
@@ -31,6 +32,7 @@ class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
     {
         $types = [
             'url' => SchemaDefinition::TYPE_URL,
+            'urlPath' => SchemaDefinition::TYPE_URL,
             'slug' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
@@ -40,6 +42,7 @@ class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
     {
         $descriptions = [
             'url' => $this->translationAPI->__('URL to query the object', 'queriedobject'),
+            'urlPath' => $this->translationAPI->__('URL path to query the object', 'queriedobject'),
             'slug' => $this->translationAPI->__('URL\'s slug', 'queriedobject'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);

@@ -25,6 +25,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
     {
         return [
             'url',
+            'urlPath',
             'name',
             'slug',
             'description',
@@ -36,6 +37,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'url' => SchemaDefinition::TYPE_URL,
+            'urlPath' => SchemaDefinition::TYPE_STRING,
             'name' => SchemaDefinition::TYPE_STRING,
             'slug' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
@@ -48,6 +50,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
     {
         $descriptions = [
             'url' => $this->translationAPI->__('Tag URL', 'pop-tags'),
+            'urlPath' => $this->translationAPI->__('Tag URL path', 'pop-tags'),
             'name' => $this->translationAPI->__('Tag', 'pop-tags'),
             'slug' => $this->translationAPI->__('Tag slug', 'pop-tags'),
             'description' => $this->translationAPI->__('Tag description', 'pop-tags'),
@@ -76,6 +79,9 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'url':
                 return $tagTypeAPI->getTagURL($typeResolver->getID($tag));
+
+            case 'urlPath':
+                return $tagTypeAPI->getTagURLPath($typeResolver->getID($tag));
 
             case 'name':
                 return $tagTypeAPI->getTagName($tag);

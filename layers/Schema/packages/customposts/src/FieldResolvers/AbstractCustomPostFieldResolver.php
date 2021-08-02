@@ -70,6 +70,9 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
             case 'url':
                 return $customPostTypeAPI->getPermalink($customPost);
 
+            case 'urlPath':
+                return $customPostTypeAPI->getPermalinkPath($customPost);
+
             case 'slug':
                 return $customPostTypeAPI->getSlug($customPost);
 

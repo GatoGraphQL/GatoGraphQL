@@ -13,4 +13,8 @@ interface QueriedObjectHelperServiceInterface
         ?int $limit,
         ?int $maxLimit/*, bool $addSchemaWarning = true*/
     ): ?int;
+    /**
+     * Remove the Home URL from the permalink
+     */
+    public function getURLPath(string $url): string;
 }

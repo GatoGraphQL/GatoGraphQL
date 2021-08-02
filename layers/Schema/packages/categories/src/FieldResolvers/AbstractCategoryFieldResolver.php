@@ -25,6 +25,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
     {
         return [
             'url',
+            'urlPath',
             'name',
             'slug',
             'description',
@@ -37,6 +38,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'url' => SchemaDefinition::TYPE_URL,
+            'urlPath' => SchemaDefinition::TYPE_STRING,
             'name' => SchemaDefinition::TYPE_STRING,
             'slug' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
@@ -50,6 +52,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
     {
         $descriptions = [
             'url' => $this->translationAPI->__('Category URL', 'pop-categories'),
+            'urlPath' => $this->translationAPI->__('Category URL path', 'pop-categories'),
             'name' => $this->translationAPI->__('Category', 'pop-categories'),
             'slug' => $this->translationAPI->__('Category slug', 'pop-categories'),
             'description' => $this->translationAPI->__('Category description', 'pop-categories'),
@@ -79,6 +82,9 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'url':
                 return $categoryTypeAPI->getCategoryURL($typeResolver->getID($category));
+
+            case 'urlPath':
+                return $categoryTypeAPI->getCategoryURLPath($typeResolver->getID($category));
 
             case 'name':
                 return $categoryTypeAPI->getCategoryName($typeResolver->getID($category));

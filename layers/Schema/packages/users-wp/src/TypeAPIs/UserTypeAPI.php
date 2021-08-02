@@ -5,26 +5,18 @@ declare(strict_types=1);
 namespace PoPSchema\UsersWP\TypeAPIs;
 
 use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
-use PoP\Hooks\HooksAPIInterface;
-use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\ComponentConfiguration;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPSchema\Users\TypeAPIs\AbstractUserTypeAPI;
 use WP_User;
 use WP_User_Query;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class UserTypeAPI implements UserTypeAPIInterface
+class UserTypeAPI extends AbstractUserTypeAPI
 {
     use InjectedFilterDataloadingModuleTypeAPITrait;
-
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
-    ) {
-    }
 
     /**
      * Indicates if the passed object is of type User
