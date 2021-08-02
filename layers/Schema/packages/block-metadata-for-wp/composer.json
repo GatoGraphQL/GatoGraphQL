@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/posts-wp": "^0.8.2"
+        "pop-schema/posts-wp": "^0.9"
     },
     "require-dev": {
         "wpackagist-plugin/block-metadata": "^1.0",

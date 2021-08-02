@@ -16,10 +16,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/custompostmedia-mutations": "^0.8.2",
-        "pop-schema/custompost-mutations-wp": "^0.8.2",
-        "pop-schema/media-wp": "^0.8.2",
-        "pop-schema/user-state-wp": "^0.8.2"
+        "pop-schema/custompostmedia-mutations": "^0.9",
+        "pop-schema/custompost-mutations-wp": "^0.9",
+        "pop-schema/media-wp": "^0.9",
+        "pop-schema/user-state-wp": "^0.9"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "getpop/routing": "^0.8.2",
-        "getpop/hooks-wp": "^0.8.2",
+        "getpop/routing": "^0.9",
+        "getpop/hooks-wp": "^0.9",
         "brain/cortex": "1.0.0-alpha.7"
     },
     "require-dev": {
