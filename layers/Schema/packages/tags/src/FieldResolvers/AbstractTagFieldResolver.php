@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
 
@@ -44,6 +45,20 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
             'count' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match ($fieldName) {
+            'url',
+            'urlPath',
+            'name',
+            'slug',
+            'count'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
+use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 
 abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -46,6 +47,20 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
             'count' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match ($fieldName) {
+            'url',
+            'urlPath',
+            'name',
+            'slug',
+            'count'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
