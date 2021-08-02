@@ -19,7 +19,7 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
         if ($permalink === null) {
             return null;
         }
-        
+
         return $this->queriedObjectHelperService->getURLPath($permalink);
     }
 }

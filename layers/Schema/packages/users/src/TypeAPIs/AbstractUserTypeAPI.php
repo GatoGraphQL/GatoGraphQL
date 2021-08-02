@@ -27,7 +27,7 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
         if ($userURL === null) {
             return null;
         }
-        
+
         return $this->queriedObjectHelperService->getURLPath($userURL);
     }
 }

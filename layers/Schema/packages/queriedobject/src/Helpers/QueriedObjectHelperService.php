@@ -16,7 +16,7 @@ class QueriedObjectHelperService implements QueriedObjectHelperServiceInterface
         protected CMSServiceInterface $cmsService
     ) {
     }
-    
+
     /**
      * Return the minimum number from between the request limit and the max limit.
      */
