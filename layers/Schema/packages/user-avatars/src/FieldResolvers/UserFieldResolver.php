@@ -15,6 +15,7 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\UserAvatars\ComponentConfiguration;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
@@ -87,7 +88,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
                             SchemaDefinition::ARGNAME_NAME => 'size',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INT,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Avatar size', 'user-avatars'),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => 96,
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => ComponentConfiguration::getUserAvatarDefaultSize(),
                         ],
                     ]
                 );
@@ -115,7 +116,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'avatar':
                 // Create the avatar, and store it in the dynamic registry
-                $avatarSize = $fieldArgs['size'] ?? 96;
+                $avatarSize = $fieldArgs['size'] ?? ComponentConfiguration::getUserAvatarDefaultSize();
                 $avatarSrc = $this->userAvatarTypeAPI->getUserAvatarSrc($user, $avatarSize);
                 if ($avatarSrc === null) {
                     return null;

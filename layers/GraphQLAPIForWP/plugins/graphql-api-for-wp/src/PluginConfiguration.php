@@ -62,6 +62,8 @@ use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
 use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Users\Environment as UsersEnvironment;
+use PoPSchema\UserAvatars\ComponentConfiguration as UserAvatarsComponentConfiguration;
+use PoPSchema\UserAvatars\Environment as UserAvatarsEnvironment;
 
 /**
  * Sets the configuration in all the PoP components from the main plugin.
@@ -400,6 +402,12 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
                 'option' => ModuleSettingOptions::BEHAVIOR,
             ],
+            [
+                'class' => UserAvatarsComponentConfiguration::class,
+                'envVariable' => UserAvatarsEnvironment::USER_AVATAR_DEFAULT_SIZE,
+                'module' => SchemaTypeModuleResolver::SCHEMA_USER_AVATARS,
+                'option' => SchemaTypeModuleResolver::OPTION_DEFAULT_AVATAR_SIZE,
+            ],
         ];
     }
 
@@ -615,6 +623,9 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_ROLES => [
                 \PoPSchema\UserRoles\Component::class,
+            ],
+            SchemaTypeModuleResolver::SCHEMA_USER_AVATARS => [
+                \PoPSchema\UserAvatars\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_PAGES => [
                 \PoPSchema\Pages\Component::class,
