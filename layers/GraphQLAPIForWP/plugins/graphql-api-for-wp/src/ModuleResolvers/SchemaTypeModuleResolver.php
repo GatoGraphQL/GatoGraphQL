@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -24,6 +24,7 @@ use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\UserAvatars\TypeResolvers\UserAvatarTypeResolver;
 use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
@@ -41,6 +42,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const SCHEMA_COMMENTS = Plugin::NAMESPACE . '\schema-comments';
     public const SCHEMA_USERS = Plugin::NAMESPACE . '\schema-users';
     public const SCHEMA_USER_ROLES = Plugin::NAMESPACE . '\schema-user-roles';
+    public const SCHEMA_USER_AVATARS = Plugin::NAMESPACE . '\schema-user-avatars';
     public const SCHEMA_PAGES = Plugin::NAMESPACE . '\schema-pages';
     public const SCHEMA_MEDIA = Plugin::NAMESPACE . '\schema-media';
     public const SCHEMA_TAGS = Plugin::NAMESPACE . '\schema-tags';
@@ -84,6 +86,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         protected ?MenuTypeResolver $menuTypeResolver,
         protected ?PostTypeResolver $postTypeResolver,
         protected ?UserRoleTypeResolver $userRoleTypeResolver,
+        protected ?UserAvatarTypeResolver $userAvatarTypeResolver,
         protected ?UserTypeResolver $userTypeResolver,
         protected ?CustomPostTypeRegistryInterface $customPostTypeRegistry
     ) {
@@ -107,6 +110,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_PAGES,
             self::SCHEMA_USERS,
             self::SCHEMA_USER_ROLES,
+            self::SCHEMA_USER_AVATARS,
             self::SCHEMA_COMMENTS,
             self::SCHEMA_TAGS,
             self::SCHEMA_POST_TAGS,
@@ -125,6 +129,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         switch ($module) {
             case self::SCHEMA_USER_ROLES:
+            case self::SCHEMA_USER_AVATARS:
                 return [
                     [
                         self::SCHEMA_USERS,
@@ -172,6 +177,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_COMMENTS => \__('Schema Comments', 'graphql-api'),
             self::SCHEMA_USERS => \__('Schema Users', 'graphql-api'),
             self::SCHEMA_USER_ROLES => \__('Schema User Roles', 'graphql-api'),
+            self::SCHEMA_USER_AVATARS => \__('Schema User Avatars', 'graphql-api'),
             self::SCHEMA_PAGES => \__('Schema Pages', 'graphql-api'),
             self::SCHEMA_MEDIA => \__('Schema Media', 'graphql-api'),
             self::SCHEMA_TAGS => \__('Schema Tags', 'graphql-api'),
@@ -209,6 +215,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $postTypeResolver = $this->postTypeResolver;
         /** @var UserRoleTypeResolver */
         $userRoleTypeResolver = $this->userRoleTypeResolver;
+        /** @var UserAvatarTypeResolver */
+        $userAvatarTypeResolver = $this->userAvatarTypeResolver;
         /** @var UserTypeResolver */
         $userTypeResolver = $this->userTypeResolver;
         switch ($module) {
@@ -236,6 +244,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('user roles', 'graphql-api'),
                     $userRoleTypeResolver->getTypeName()
+                );
+            case self::SCHEMA_USER_AVATARS:
+                return sprintf(
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
+                    \__('user avatars', 'graphql-api'),
+                    $userAvatarTypeResolver->getTypeName()
                 );
             case self::SCHEMA_PAGES:
                 return sprintf(
@@ -294,6 +308,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_PAGES:
             case self::SCHEMA_USERS:
             case self::SCHEMA_USER_ROLES:
+            case self::SCHEMA_USER_AVATARS:
             case self::SCHEMA_COMMENTS:
             case self::SCHEMA_TAGS:
             case self::SCHEMA_POST_TAGS:
