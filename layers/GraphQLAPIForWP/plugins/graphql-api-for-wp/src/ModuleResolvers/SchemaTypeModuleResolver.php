@@ -432,6 +432,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $postTypeResolver = $this->postTypeResolver;
         /** @var CustomPostTypeRegistryInterface */
         $customPostTypeRegistry = $this->customPostTypeRegistry;
+        /** @var UserTypeResolver */
+        $userTypeResolver = $this->userTypeResolver;
 
         $moduleSettings = parent::getSettings($module);
         // Common variables to set the limit on the schema types
@@ -729,7 +731,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => \__('Default avatar size', 'graphql-api'),
-                Properties::DESCRIPTION => \__('When not providing argument "size" in field `User.avatar`, it will use this default value (in pixels)', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Size of the avatar (in pixels) when not providing argument <code>"size"</code> in field <code>%s.avatar</code>', 'graphql-api'),
+                    $userTypeResolver->getTypeName()
+                ),
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => 1,
             ];
