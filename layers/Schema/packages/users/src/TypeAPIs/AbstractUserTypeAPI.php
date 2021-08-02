@@ -28,10 +28,6 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
             return null;
         }
         
-        // Remove the Home URL from the userURL
-        return substr(
-            $userURL,
-            strlen($this->queriedObjectHelperService->getURLPath($userURL))
-        );
+        return $this->queriedObjectHelperService->getURLPath($userURL);
     }
 }

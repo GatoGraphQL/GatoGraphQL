@@ -20,10 +20,6 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
             return null;
         }
         
-        // Remove the Home URL from the permalink
-        return substr(
-            $permalink,
-            strlen($this->queriedObjectHelperService->getURLPath($permalink))
-        );
+        return $this->queriedObjectHelperService->getURLPath($permalink);
     }
 }
