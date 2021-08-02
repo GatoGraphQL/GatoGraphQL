@@ -19,7 +19,7 @@ class UserAvatarTypeAPI extends AbstractUserAvatarTypeAPI
         return $userObjectOrID;
     }
 
-    public function getUserAvatarSrc(string | int | object $userObjectOrID, int $size = 96): ?string
+    public function getUserAvatarSrc(string | int | object $userObjectOrID, int $size = 150): ?string
     {
         $avatarHTML = \get_avatar($this->getUserID($userObjectOrID), $size);
         if ($avatarHTML === false) {
