@@ -6,7 +6,7 @@ namespace PoPSchema\UserRolesAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
 
@@ -26,9 +26,9 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         }
 
         $capabilities = $this->directiveArgsForSchema['capabilities'];
-        $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
+        $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
         $userID = $vars['global-userstate']['current-user-id'];
-        $userCapabilities = $userRoleTypeDataResolver->getUserCapabilities($userID);
+        $userCapabilities = $userRoleTypeAPI->getUserCapabilities($userID);
         return !empty(array_intersect($capabilities, $userCapabilities));
     }
 

@@ -11,7 +11,7 @@ use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 use PoPSchema\CustomPostMutations\Facades\CustomPostTypeMutationAPIFacade;
@@ -82,12 +82,12 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $nameResolver = NameResolverFacade::getInstance();
 
         // Validate user permission
-        $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
+        $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
         $userID = $vars['global-userstate']['current-user-id'];
         $editCustomPostsCapability = $nameResolver->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
         if (
-            !$userRoleTypeDataResolver->userCan(
+            !$userRoleTypeAPI->userCan(
                 $userID,
                 $editCustomPostsCapability
             )
@@ -100,7 +100,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         if (isset($form_data[MutationInputProperties::STATUS]) && $form_data[MutationInputProperties::STATUS] == Status::PUBLISHED) {
             $publishCustomPostsCapability = $nameResolver->getName(LooseContractSet::NAME_PUBLISH_CUSTOMPOSTS_CAPABILITY);
             if (
-                !$userRoleTypeDataResolver->userCan(
+                !$userRoleTypeAPI->userCan(
                     $userID,
                     $publishCustomPostsCapability
                 )

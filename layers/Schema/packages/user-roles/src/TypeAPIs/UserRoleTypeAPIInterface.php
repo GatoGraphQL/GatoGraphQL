@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles\TypeDataResolvers;
+namespace PoPSchema\UserRoles\TypeAPIs;
 
-interface UserRoleTypeDataResolverInterface
+interface UserRoleTypeAPIInterface
 {
     /**
      * Admin role name

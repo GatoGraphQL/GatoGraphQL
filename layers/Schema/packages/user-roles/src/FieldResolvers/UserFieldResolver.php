@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class UserFieldResolver extends AbstractDBDataFieldResolver
@@ -84,13 +84,13 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
+        $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
             case 'roles':
-                return $userRoleTypeDataResolver->getUserRoles($user);
+                return $userRoleTypeAPI->getUserRoles($user);
             case 'capabilities':
-                return $userRoleTypeDataResolver->getUserCapabilities($user);
+                return $userRoleTypeAPI->getUserCapabilities($user);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

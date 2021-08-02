@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 define('GD_URE_ROLE_COMMUNITY', 'community');
 
@@ -30,8 +30,8 @@ function getUserRoleCombinationsCommunityRole($user_role_combinations)
 
 function gdUreIsCommunity($user = null)
 {
-    $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-    return isProfile($user) && $userRoleTypeDataResolver->hasRole($user, GD_URE_ROLE_COMMUNITY);
+    $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
+    return isProfile($user) && $userRoleTypeAPI->hasRole($user, GD_URE_ROLE_COMMUNITY);
 }
 
 function gdUreGetuserrole($userID)
@@ -39,8 +39,8 @@ function gdUreGetuserrole($userID)
     if (isProfile($userID)) {
         $role = GD_ROLE_PROFILE;
     } else {
-        $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-        $roles = $userRoleTypeDataResolver->getUserRoles($userID);
+        $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
+        $roles = $userRoleTypeAPI->getUserRoles($userID);
         $role = $roles[0];
     }
 

@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace PoPSchema\UserState\Facades;
 
 use PoP\Root\Container\ContainerBuilderFactory;
-use PoPSchema\UserState\TypeDataResolvers\UserStateTypeDataResolverInterface;
+use PoPSchema\UserState\TypeAPIs\UserStateTypeAPIInterface;
 
-class UserStateTypeDataResolverFacade
+class UserStateTypeAPIFacade
 {
-    public static function getInstance(): UserStateTypeDataResolverInterface
+    public static function getInstance(): UserStateTypeAPIInterface
     {
         /**
-         * @var UserStateTypeDataResolverInterface
+         * @var UserStateTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserStateTypeDataResolverInterface::class);
+        $service = ContainerBuilderFactory::getInstance()->get(UserStateTypeAPIInterface::class);
         return $service;
     }
 }

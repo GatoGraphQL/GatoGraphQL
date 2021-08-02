@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\State;
 
-use PoPSchema\UserState\Facades\UserStateTypeDataResolverFacade;
+use PoPSchema\UserState\Facades\UserStateTypeAPIFacade;
 
 class ApplicationStateUtils
 {
@@ -16,11 +16,11 @@ class ApplicationStateUtils
     public static function setUserStateVars(array &$vars): void
     {
         $vars['global-userstate'] = [];
-        $userStateTypeDataResolver = UserStateTypeDataResolverFacade::getInstance();
-        if ($userStateTypeDataResolver->isUserLoggedIn()) {
+        $userStateTypeAPI = UserStateTypeAPIFacade::getInstance();
+        if ($userStateTypeAPI->isUserLoggedIn()) {
             $vars['global-userstate']['is-user-logged-in'] = true;
-            $vars['global-userstate']['current-user'] = $userStateTypeDataResolver->getCurrentUser();
-            $vars['global-userstate']['current-user-id'] = $userStateTypeDataResolver->getCurrentUserID();
+            $vars['global-userstate']['current-user'] = $userStateTypeAPI->getCurrentUser();
+            $vars['global-userstate']['current-user-id'] = $userStateTypeAPI->getCurrentUserID();
         } else {
             $vars['global-userstate']['is-user-logged-in'] = false;
             $vars['global-userstate']['current-user'] = null;

@@ -8,7 +8,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class FieldResolver_Users extends AbstractDBDataFieldResolver
@@ -93,11 +93,11 @@ class FieldResolver_Users extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
+        $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
             case 'role':
-                $user_roles = $userRoleTypeDataResolver->getUserRoles($typeResolver->getID($user));
+                $user_roles = $userRoleTypeAPI->getUserRoles($typeResolver->getID($user));
                 // Allow to hook for URE: Make sure we always get the most specific role
                 // Otherwise, users like Leo get role 'administrator'
                 return HooksAPIFacade::getInstance()->applyFilters(

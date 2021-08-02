@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP\TypeDataResolvers;
+namespace PoPSchema\UserRolesWP\TypeAPIs;
 
-use PoPSchema\UserRoles\TypeDataResolvers\AbstractUserRoleTypeDataResolver;
+use PoPSchema\UserRoles\TypeAPIs\AbstractUserRoleTypeAPI;
 use WP_User;
 
-class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
+class UserRoleTypeAPI extends AbstractUserRoleTypeAPI
 {
     public function getAdminRoleName(): string
     {

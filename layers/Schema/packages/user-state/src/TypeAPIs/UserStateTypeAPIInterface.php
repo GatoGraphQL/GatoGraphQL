@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserState\TypeDataResolvers;
+namespace PoPSchema\UserState\TypeAPIs;
 
-interface UserStateTypeDataResolverInterface
+interface UserStateTypeAPIInterface
 {
     public function isUserLoggedIn(): bool;
     public function getCurrentUser();

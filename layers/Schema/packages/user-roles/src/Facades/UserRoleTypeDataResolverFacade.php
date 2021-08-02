@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\Facades;
 
-use PoPSchema\UserRoles\TypeDataResolvers\UserRoleTypeDataResolverInterface;
+use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
-class UserRoleTypeDataResolverFacade
+class UserRoleTypeAPIFacade
 {
-    public static function getInstance(): UserRoleTypeDataResolverInterface
+    public static function getInstance(): UserRoleTypeAPIInterface
     {
         /**
-         * @var UserRoleTypeDataResolverInterface
+         * @var UserRoleTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get(UserRoleTypeDataResolverInterface::class);
+        $service = ContainerBuilderFactory::getInstance()->get(UserRoleTypeAPIInterface::class);
         return $service;
     }
 }

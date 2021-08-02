@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentsWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeDataResolvers\InjectedFilterDataloadingModuleTypeDataResolverTrait;
+use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
 use PoPSchema\Comments\Constants\Status;
@@ -17,7 +17,7 @@ use WP_Comment;
  */
 class CommentTypeAPI implements CommentTypeAPIInterface
 {
-    use InjectedFilterDataloadingModuleTypeDataResolverTrait;
+    use InjectedFilterDataloadingModuleTypeAPITrait;
 
     protected array $cmsToPoPCommentStatusConversion = [
         'approve' => Status::APPROVED,

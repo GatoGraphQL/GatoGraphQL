@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\ComponentModel\ErrorHandling\Error;
 
@@ -21,8 +21,8 @@ class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointPr
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR:
                 $user_id = $vars['global-userstate']['current-user-id'];
-                $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-                if (!$userRoleTypeDataResolver->hasRole($user_id, 'administrator')) {
+                $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
+                if (!$userRoleTypeAPI->hasRole($user_id, 'administrator')) {
                     return new Error('userisnotadmin');
                 }
                 break;

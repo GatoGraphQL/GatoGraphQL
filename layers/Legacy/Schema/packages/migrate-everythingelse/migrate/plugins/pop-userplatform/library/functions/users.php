@@ -2,7 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 function gdUserAttributes()
 {
@@ -23,8 +23,8 @@ function userHasAccess($capability, $user_id = null)
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
     }
-    $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-    return $userRoleTypeDataResolver->userCan($user_id, $capability);
+    $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
+    return $userRoleTypeAPI->userCan($user_id, $capability);
 }
 
 function userHasAdminAccess($user_id = null)
