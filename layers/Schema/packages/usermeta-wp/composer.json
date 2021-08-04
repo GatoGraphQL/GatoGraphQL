@@ -157,9 +157,9 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/metaquery-wp": "^0.9",
-        "pop-schema/usermeta": "^0.9",
-        "pop-schema/users-wp": "^0.9"
+        "pop-schema/metaquery-wp": "^0.8.3",
+        "pop-schema/usermeta": "^0.8.3",
+        "pop-schema/users-wp": "^0.8.3"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",

@@ -159,7 +159,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/translation": "^0.9"
+        "getpop/translation": "^0.8.3"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",

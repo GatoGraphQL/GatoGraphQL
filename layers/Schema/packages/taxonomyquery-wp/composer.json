@@ -158,8 +158,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/engine-wp": "^0.9",
-        "pop-schema/taxonomyquery": "^0.9"
+        "getpop/engine-wp": "^0.8.3",
+        "pop-schema/taxonomyquery": "^0.8.3"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
