@@ -37,7 +37,6 @@
         "getpop/translation": "<0.8.2",
         "getpop/mandatory-directives-by-configuration": "<0.8.2",
         "getpop/component-model": "<0.8.2",
-        "getpop/configurable-schema-feedback": "<0.8.2",
         "getpop/filestore": "<0.8.2",
         "getpop/guzzle-helpers": "<0.8.2",
         "getpop/routing-wp": "<0.8.2",
