@@ -56,7 +56,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         $pluginDir . '/vendor/michelf/php-markdown/test/*',
         // Ignore errors from classes we don't have in our environment,
         // or that come from referencing a class present in DEV, not PROD
-        $pluginDir . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',
+        // $pluginDir . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',
         $pluginDir . '/vendor/symfony/cache/DataCollector/CacheDataCollector.php',
         $pluginDir . '/vendor/symfony/cache/DoctrineProvider.php',
         $pluginDir . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
