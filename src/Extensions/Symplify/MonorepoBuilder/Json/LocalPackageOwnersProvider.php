@@ -7,11 +7,13 @@ namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 use Nette\Utils\Strings;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Package\CustomPackageProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\CustomPackage;
+use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 
-final class PackageOwnersProvider
+final class LocalPackageOwnersProvider
 {
     public function __construct(
         private CustomPackageProvider $customPackageProvider,
+        private ComposerJsonProvider $composerJsonProvider,
     ) {
     }
 
@@ -20,14 +22,25 @@ final class PackageOwnersProvider
      * @param string[] $fileListFilter
      * @return string[]
      */
-    public function providePackageOwners(): array
+    public function provideLocalPackageOwners(): array
     {
         $packages = $this->customPackageProvider->provide();
-        return array_values(array_unique(array_map(
+        $packageNames = array_map(
             function (CustomPackage $package): string {
-                return (string) Strings::before($package->getName(), '/');
+                return $package->getName();
             },
             $packages
+        );
+
+        // Include also the Root Composer!
+        $packageNames[] = $this->composerJsonProvider->getRootComposerJson()->getName();
+
+        // Extrac the owner, and return unique
+        return array_values(array_unique(array_map(
+            function (string $packageName): string {
+                return (string) Strings::before($packageName, '/');
+            },
+            $packageNames
         )));
     }
 }

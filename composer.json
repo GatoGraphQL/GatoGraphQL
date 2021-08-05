@@ -503,11 +503,12 @@
         "fix-style": "phpcbf -n src $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)",
         "analyse": "phpstan analyse --ansi",
         "preview-src-downgrade": "rector process $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src) --config=config/rector/downgrade/monorepo/rector.php --ansi --dry-run || true",
-        "preview-vendor-downgrade": "ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php --dry-run || true",
+        "preview-vendor-downgrade": "ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php --dry-run \"\" \"\" \"$(monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)\" || true",
         "preview-code-downgrade": [
             "@preview-src-downgrade",
             "@preview-vendor-downgrade"
         ],
+        "preview-graphql-api-downgrade": "bash -x ci/downgrade/downgrade_code.sh config/rector/downgrade/graphql-api/rector.php --dry-run layers/GraphQLAPIForWP/plugins/graphql-api-for-wp \"\" \"$(monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)\"",
         "ssh-server": "composer ssh-server -d webservers/graphql-api-for-wp",
         "build-server": "composer build-server -d webservers/graphql-api-for-wp",
         "init-server": "composer init-server -d webservers/graphql-api-for-wp",
