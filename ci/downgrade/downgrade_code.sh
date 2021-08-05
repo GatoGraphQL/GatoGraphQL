@@ -45,7 +45,7 @@ local_owners="$5"
 target_php_version="$6"
 
 default_composer_working_dir="."
-default_local_owners="leoloso getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
+default_local_owners="getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
 
 ########################################################################
 # Initialize defaults
