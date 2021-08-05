@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageOwnersProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\LocalPackageOwnersProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -18,7 +18,7 @@ final class PluginConfigEntriesJsonProvider
 
     public function __construct(
         ParameterProvider $parameterProvider,
-        private PackageOwnersProvider $packageOwnersProvider,
+        private LocalPackageOwnersProvider $packageOwnersProvider,
     ) {
         $this->pluginConfigEntries = $parameterProvider->provideArrayParameter(Option::PLUGIN_CONFIG_ENTRIES);
     }
@@ -28,7 +28,7 @@ final class PluginConfigEntriesJsonProvider
      */
     public function providePluginConfigEntries(bool $scopedOnly = false): array
     {
-        $localPackageOwners = $this->packageOwnersProvider->providePackageOwners();
+        $localPackageOwners = $this->packageOwnersProvider->provideLocalPackageOwners();
 
         /**
          * Validate that all required entries have been provided

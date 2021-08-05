@@ -9,7 +9,7 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Package\CustomPackageProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\CustomPackage;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 
-final class PackageOwnersProvider
+final class LocalPackageOwnersProvider
 {
     public function __construct(
         private CustomPackageProvider $customPackageProvider,
@@ -22,7 +22,7 @@ final class PackageOwnersProvider
      * @param string[] $fileListFilter
      * @return string[]
      */
-    public function providePackageOwners(): array
+    public function provideLocalPackageOwners(): array
     {
         $packages = $this->customPackageProvider->provide();
         $packageNames = array_map(
