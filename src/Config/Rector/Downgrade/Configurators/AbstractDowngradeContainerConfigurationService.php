@@ -33,8 +33,8 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
          *
          * @see https://github.com/leoloso/PoP/issues/715
          */
-        // $this->containerConfigurator->import(DowngradeSetList::PHP_72);
-        $this->containerConfigurator->import(CustomDowngradeSetList::PHP_72);
+        $this->containerConfigurator->import(DowngradeSetList::PHP_72);
+        // $this->containerConfigurator->import(CustomDowngradeSetList::PHP_72);
 
         /**
          * Hack to fix bug.
