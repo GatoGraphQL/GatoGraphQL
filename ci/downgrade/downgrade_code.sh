@@ -41,18 +41,16 @@ rector_config="$1"
 rector_options="$2"
 composer_working_dir="$3"
 additional_rector_configs="$4"
-local_owners="$5"
+local_package_owners="$5"
 target_php_version="$6"
 
 default_composer_working_dir="."
-default_local_owners="getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
 
 ########################################################################
 # Initialize defaults
 # ----------------------------------------------------------------------
 
 composer_working_dir=(${composer_working_dir:=$default_composer_working_dir})
-local_package_owners=(${local_owners:=$default_local_owners})
 
 ########################################################################
 # Validate inputs
