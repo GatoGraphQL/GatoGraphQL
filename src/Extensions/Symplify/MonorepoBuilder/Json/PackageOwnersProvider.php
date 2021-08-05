@@ -20,7 +20,8 @@ final class PackageOwnersProvider
      * @param string[] $fileListFilter
      * @return string[]
      */
-    public function providePackageOwners(): array {
+    public function providePackageOwners(): array
+    {
         $packages = $this->customPackageProvider->provide();
         return array_values(array_unique(array_map(
             function (CustomPackage $package): string {
