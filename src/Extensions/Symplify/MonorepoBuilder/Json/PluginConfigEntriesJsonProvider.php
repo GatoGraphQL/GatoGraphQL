@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageOwnersProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -16,7 +17,8 @@ final class PluginConfigEntriesJsonProvider
     private array $pluginConfigEntries = [];
 
     public function __construct(
-        ParameterProvider $parameterProvider
+        ParameterProvider $parameterProvider,
+        private PackageOwnersProvider $packageOwnersProvider,
     ) {
         $this->pluginConfigEntries = $parameterProvider->provideArrayParameter(Option::PLUGIN_CONFIG_ENTRIES);
     }
@@ -26,6 +28,8 @@ final class PluginConfigEntriesJsonProvider
      */
     public function providePluginConfigEntries(bool $scopedOnly = false): array
     {
+        $localPackageOwners = $this->packageOwnersProvider->providePackageOwners();
+
         /**
          * Validate that all required entries have been provided
          */
@@ -80,6 +84,9 @@ final class PluginConfigEntriesJsonProvider
 
             // If it doens't specify a branch, use "master" by default
             $entryConfig['dist_repo_branch'] ??= 'master';
+
+            // If it doesn't specify the local package owners, specify the default ones
+            $entryConfig['local_package_owners'] ??= implode(' ', $localPackageOwners);
 
             // Merge all rector configs as a string
             $entryConfig['additional_rector_configs'] = implode(' ', $entryConfig['additional_rector_configs'] ?? []);
