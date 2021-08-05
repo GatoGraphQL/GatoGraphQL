@@ -508,6 +508,7 @@
             "@preview-src-downgrade",
             "@preview-vendor-downgrade"
         ],
+        "preview-graphql-api-downgrade": "bash -x ci/downgrade/downgrade_code.sh config/rector/downgrade/graphql-api/rector.php --dry-run layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
         "ssh-server": "composer ssh-server -d webservers/graphql-api-for-wp",
         "build-server": "composer build-server -d webservers/graphql-api-for-wp",
         "init-server": "composer init-server -d webservers/graphql-api-for-wp",
