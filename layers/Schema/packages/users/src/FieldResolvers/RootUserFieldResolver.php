@@ -101,8 +101,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
                 $query = [];
                 if ($fieldName === 'user') {
                     $query['include'] = [$fieldArgs['id']];
-                } else
-                if ($fieldName === 'userByUsername') {
+                } else if ($fieldName === 'userByUsername') {
                     $query['username'] = $fieldArgs['username'];
                 }
                 $options = [
