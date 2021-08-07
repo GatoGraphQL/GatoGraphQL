@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Constants\ApplicationNature;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Environment;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
@@ -59,12 +58,12 @@ use PoPSchema\Tags\ComponentConfiguration as TagsComponentConfiguration;
 use PoPSchema\Tags\Environment as TagsEnvironment;
 use PoPSchema\TaxonomyMeta\ComponentConfiguration as TaxonomyMetaComponentConfiguration;
 use PoPSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
-use PoPSchema\UserAvatars\ComponentConfiguration as UserAvatarsComponentConfiguration;
-use PoPSchema\UserAvatars\Environment as UserAvatarsEnvironment;
 use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
 use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Users\Environment as UsersEnvironment;
+use PoPSchema\UserAvatars\ComponentConfiguration as UserAvatarsComponentConfiguration;
+use PoPSchema\UserAvatars\Environment as UserAvatarsEnvironment;
 
 /**
  * Sets the configuration in all the PoP components from the main plugin.
@@ -74,22 +73,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     protected function isCachingEnabled(): bool
     {
         return PluginEnvironment::isCachingEnabled();
-    }
-
-    /**
-     * Indicate if the application has been set "static" nature
-     */
-    public function isApplicationNatureStatic(): bool
-    {
-        return PluginEnvironment::getApplicationNature() === ApplicationNature::STATIC_;
-    }
-
-    /**
-     * Indicate if the application has "dynamic" nature (which is the default)
-     */
-    public function isApplicationNatureDynamic(): bool
-    {
-        return PluginEnvironment::getApplicationNature() === ApplicationNature::DYNAMIC;
     }
 
     /**
