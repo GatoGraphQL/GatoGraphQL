@@ -25,6 +25,9 @@ GraphQL schema upgrade:
 - Fetch a user by different means:
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)
+- Filter users by email:
+  - `Root.unrestrictedUsers: [User]!` ("admin" field)
+  - `Root.unrestrictedUserCount: Int!` ("admin" field)
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Menu.items: [MenuItem]!`

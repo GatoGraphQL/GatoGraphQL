@@ -17,6 +17,8 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     public const MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER = 'dataload-relationalfields-singleuser';
     public const MODULE_DATALOAD_RELATIONALFIELDS_USERLIST = 'dataload-relationalfields-userlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT = 'dataload-relationalfields-usercount';
+    public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST = 'dataload-relationalfields-adminuserlist';
+    public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT = 'dataload-relationalfields-adminusercount';
 
     public function getModulesToProcess(): array
     {
@@ -24,6 +26,8 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER],
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST],
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT],
+            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST],
+            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT],
         );
     }
 
@@ -42,6 +46,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
                 return UserTypeResolver::class;
         }
 
@@ -52,6 +57,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
                 return ListQueryInputOutputHandler::class;
         }
 
@@ -65,6 +71,10 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
                 return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_USERS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT:
                 return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_USERCOUNT];
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUSERS];
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT:
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUSERCOUNT];
         }
 
         return parent::getFilterSubmodule($module);

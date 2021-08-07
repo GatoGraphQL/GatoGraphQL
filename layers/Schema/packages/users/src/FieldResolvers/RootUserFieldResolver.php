@@ -32,9 +32,12 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
 
     public function getAdminFieldNames(): array
     {
-        return [
-            'userByEmail',
-        ];
+        return array_merge(
+            parent::getAdminFieldNames(),
+            [
+                'userByEmail',
+            ]
+        );
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
