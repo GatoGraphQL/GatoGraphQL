@@ -51,7 +51,7 @@ Code compiled for development, i.e. after running `npm start`, cannot be commite
 
 ### Building static sites
 
-The GraphQL API for WordPress by default provides safe defaults, which are needed for "live" sites:
+The GraphQL API for WordPress provides default values to make "live" sites secure:
 
 - The single endpoint is disabled
 - The settings and meta keys that can be queried are restricted
@@ -59,11 +59,11 @@ The GraphQL API for WordPress by default provides safe defaults, which are neede
 
 For building "static" sites, these safe defaults can be removed:
 
-- The single endpoint is enabled
+- Enable the single endpoint
 - All settings and meta keys can be queried
 - The number of max entities that can be queried (for posts, users, tags, etc) is unlimited
 
-To do so, execute:
+In development, to change the application's nature from "live" to "static", execute:
 
 ```bash
 composer set-static-app-nature
