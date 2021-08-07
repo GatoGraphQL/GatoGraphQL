@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPSchema\Taxonomies\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'
+
+    PoPSchema\Taxonomies\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
