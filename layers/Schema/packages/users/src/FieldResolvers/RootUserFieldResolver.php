@@ -25,8 +25,16 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
             [
                 'user',
                 'userByUsername',
+                'userByEmail',
             ]
         );
+    }
+
+    public function getAdminFieldNames(): array
+    {
+        return [
+            'userByEmail',
+        ];
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
@@ -34,6 +42,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         $descriptions = [
             'user' => $this->translationAPI->__('User with a specific ID', 'pop-users'),
             'userByUsername' => $this->translationAPI->__('User with a specific username', 'pop-users'),
+            'userByEmail' => $this->translationAPI->__('User with a specific email', 'pop-users'),
             'users' => $this->translationAPI->__('Users in the current site', 'pop-users'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
@@ -44,6 +53,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         $types = [
             'user' => SchemaDefinition::TYPE_ID,
             'userByUsername' => SchemaDefinition::TYPE_ID,
+            'userByEmail' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -76,6 +86,18 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
                         ],
                     ]
                 );
+            case 'userByEmail':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'email',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The user\'s username', 'pop-users'),
+                            SchemaDefinition::ARGNAME_MANDATORY => true,
+                        ],
+                    ]
+                );
         }
         return $schemaFieldArgs;
     }
@@ -98,11 +120,14 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         switch ($fieldName) {
             case 'user':
             case 'userByUsername':
+            case 'userByEmail':
                 $query = [];
                 if ($fieldName === 'user') {
                     $query['include'] = [$fieldArgs['id']];
-                } else if ($fieldName === 'userByUsername') {
+                } elseif ($fieldName === 'userByUsername') {
                     $query['username'] = $fieldArgs['username'];
+                } elseif ($fieldName === 'userByEmail') {
+                    $query['emails'] = [$fieldArgs['email']];
                 }
                 $options = [
                     'return-type' => ReturnTypes::IDS,
@@ -121,6 +146,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         switch ($fieldName) {
             case 'user':
             case 'userByUsername':
+            case 'userByEmail':
                 return UserTypeResolver::class;
         }
 
