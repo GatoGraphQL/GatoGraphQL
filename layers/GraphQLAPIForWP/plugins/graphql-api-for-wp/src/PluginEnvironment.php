@@ -65,11 +65,13 @@ class PluginEnvironment
         } elseif (PluginConfigurationHelper::isWPConfigConstantDefined(self::APPLICATION_NATURE)) {
             $definedNature = trim(PluginConfigurationHelper::getWPConfigConstantValue(self::APPLICATION_NATURE));
         }
-        
-        if (in_array($definedNature, [
+
+        if (
+            in_array($definedNature, [
             ApplicationNature::STATIC_,
             ApplicationNature::LIVE,
-        ])) {
+            ])
+        ) {
             return $definedNature;
         }
 
