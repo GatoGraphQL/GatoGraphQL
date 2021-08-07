@@ -122,29 +122,37 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
             case 'unrestrictedPost':
             case 'unrestrictedPostBySlug':
                 $query = [];
-                if (in_array($fieldName, [
+                if (
+                    in_array($fieldName, [
                     'post',
                     'unrestrictedPost',
-                ])) {
+                    ])
+                ) {
                     $query['include'] = [$fieldArgs['id']];
-                } elseif (in_array($fieldName, [
+                } elseif (
+                    in_array($fieldName, [
                     'postBySlug',
                     'unrestrictedPostBySlug',
-                ])) {
+                    ])
+                ) {
                     $query['slug'] = $fieldArgs['slug'];
                 }
 
-                if (in_array($fieldName, [
+                if (
+                    in_array($fieldName, [
                     'post',
                     'postBySlug',
-                ])) {
+                    ])
+                ) {
                     $query['status'] = [
                         Status::PUBLISHED,
                     ];
-                } elseif (in_array($fieldName, [
+                } elseif (
+                    in_array($fieldName, [
                     'unrestrictedPost',
                     'unrestrictedPostBySlug',
-                ])) {
+                    ])
+                ) {
                     $query['status'] = [
                         Status::PUBLISHED,
                         Status::DRAFT,
