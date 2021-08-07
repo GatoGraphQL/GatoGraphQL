@@ -32,6 +32,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     {
         return [
             'genericCustomPost',
+            'genericCustomPostBySlug',
             'genericCustomPosts',
             'genericCustomPostCount',
         ];
@@ -41,6 +42,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     {
         $descriptions = [
             'genericCustomPost' => $this->translationAPI->__('Custom post with a specific ID', 'generic-customposts'),
+            'genericCustomPostBySlug' => $this->translationAPI->__('Custom post with a specific slug', 'generic-customposts'),
             'genericCustomPosts' => $this->translationAPI->__('Custom posts', 'generic-customposts'),
             'genericCustomPostCount' => $this->translationAPI->__('Number of custom posts', 'generic-customposts'),
         ];
@@ -51,6 +53,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     {
         $types = [
             'genericCustomPost' => SchemaDefinition::TYPE_ID,
+            'genericCustomPostBySlug' => SchemaDefinition::TYPE_ID,
             'genericCustomPosts' => SchemaDefinition::TYPE_ID,
             'genericCustomPostCount' => SchemaDefinition::TYPE_INT,
         ];
@@ -77,7 +80,19 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The page ID', 'generic-customposts'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The generic custom post ID', 'generic-customposts'),
+                            SchemaDefinition::ARGNAME_MANDATORY => true,
+                        ],
+                    ]
+                );
+            case 'genericCustomPostBySlug':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'slug',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The generic custom post slug', 'generic-customposts'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -138,6 +153,13 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
                         'include' => [$fieldArgs['id']],
                     ]
                 );
+            case 'genericCustomPostBySlug':
+                return array_merge(
+                    $query,
+                    [
+                        'slug' => $fieldArgs['slug'],
+                    ]
+                );
             case 'genericCustomPosts':
                 return array_merge(
                     $query,
@@ -169,6 +191,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'genericCustomPost':
+            case 'genericCustomPostBySlug':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 $options = [
                     'return-type' => ReturnTypes::IDS,
@@ -198,6 +221,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'genericCustomPost':
+            case 'genericCustomPostBySlug':
             case 'genericCustomPosts':
                 return GenericCustomPostTypeResolver::class;
         }
