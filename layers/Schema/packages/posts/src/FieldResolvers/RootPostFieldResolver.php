@@ -131,7 +131,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
                     'postBySlug',
                     'unrestrictedPostBySlug',
                 ])) {
-                    // ...
+                    $query['slug'] = $fieldArgs['slug'];
                 }
                 
                 if (in_array($fieldName, [
@@ -141,7 +141,10 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
                     $query['status'] = [
                         Status::PUBLISHED,
                     ];
-                } else {
+                } elseif (in_array($fieldName, [
+                    'unrestrictedPost',
+                    'unrestrictedPostBySlug',
+                ])) {
                     $query['status'] = [
                         Status::PUBLISHED,
                         Status::DRAFT,
