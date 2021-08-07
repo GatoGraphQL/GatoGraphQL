@@ -19,12 +19,15 @@ The following fields will be added to the GraphQL schema:
 **Root:**
 
 - `unrestrictedPost`
+- `unrestrictedPostBySlug`
 - `unrestrictedPosts`
 - `unrestrictedPostCount`
 - `unrestrictedCustomPost`
+- `unrestrictedCustomPostBySlug`
 - `unrestrictedCustomPosts`
 - `unrestrictedCustomPostCount`
 - `unrestrictedPage`
+- `unrestrictedPageBySlug`
 - `unrestrictedPages`
 - `unrestrictedPageCount`
 - `roles`
