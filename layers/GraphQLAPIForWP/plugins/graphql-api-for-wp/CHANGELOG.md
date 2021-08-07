@@ -10,6 +10,18 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 GraphQL schema upgrade:
 
+- Fetch entities by slug:
+  - `Root.postBySlug: Post`
+  - `Root.unrestrictedPostBySlug: Post`
+  - `Root.customPostBySlug: CustomPostUnion`
+  - `Root.unrestrictedCustomPostBySlug: CustomPostUnion`
+  - `Root.genericCustomPostBySlug: GenericCustomPost`
+  - `Root.unrestrictedGenericCustomPostBySlug: GenericCustomPost`
+  - `Root.pageBySlug: Page`
+  - `Root.unrestrictedPageBySlug: Page`
+  - `Root.postCategoryBySlug: PostCategory`
+  - `Root.postTagBySlug: PostTag`
+  - `Root.mediaItemBySlug: MediaItem`
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Menu.items: [MenuItem]!`

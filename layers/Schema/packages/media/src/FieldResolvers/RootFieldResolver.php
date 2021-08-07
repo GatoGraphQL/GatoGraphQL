@@ -55,6 +55,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         return [
             'mediaItems',
             'mediaItem',
+            'mediaItemBySlug',
         ];
     }
 
@@ -63,6 +64,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         $descriptions = [
             'mediaItems' => $this->translationAPI->__('Get the media items', 'media'),
             'mediaItem' => $this->translationAPI->__('Get a media item', 'media'),
+            'mediaItemBySlug' => $this->translationAPI->__('Get a media item by slug', 'media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -72,6 +74,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         $types = [
             'mediaItems' => SchemaDefinition::TYPE_ID,
             'mediaItem' => SchemaDefinition::TYPE_ID,
+            'mediaItemBySlug' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -99,6 +102,18 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                 ];
+            case 'mediaItemBySlug':
+                return [
+                    [
+                        SchemaDefinition::ARGNAME_NAME => 'slug',
+                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                        SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
+                            $this->translationAPI->__('The slug of the media element, of type \'%s\'', 'media'),
+                            $this->customPostTypeResolver->getTypeName()
+                        ),
+                        SchemaDefinition::ARGNAME_MANDATORY => true,
+                    ],
+                ];
         }
         return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }
@@ -120,19 +135,23 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'mediaItems':
+                $options = [
+                    'return-type' => ReturnTypes::IDS,
+                ];
+                return $this->mediaTypeAPI->getMediaElements([], $options);
             case 'mediaItem':
+            case 'mediaItemBySlug':
                 $query = [];
                 if ($fieldName == 'mediaItem') {
                     $query['include'] = [$fieldArgs['id']];
+                } elseif ($fieldName == 'mediaItemBySlug') {
+                    $query['slug'] = $fieldArgs['slug'];
                 }
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
                 $mediaItems = $this->mediaTypeAPI->getMediaElements($query, $options);
-                if ($fieldName == 'mediaItem') {
-                    return count($mediaItems) > 0 ? $mediaItems[0] : null;
-                }
-                return $mediaItems;
+                return count($mediaItems) > 0 ? $mediaItems[0] : null;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -143,6 +162,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'mediaItems':
             case 'mediaItem':
+            case 'mediaItemBySlug':
                 return MediaTypeResolver::class;
         }
 

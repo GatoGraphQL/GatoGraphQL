@@ -22,21 +22,11 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         return array(RootTypeResolver::class);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
-    {
-        $descriptions = [
-            'postTag' => $this->translationAPI->__('Post tag with a specific ID', 'pop-post-tags'),
-            'postTags' => $this->translationAPI->__('Post tags', 'pop-post-tags'),
-            'postTagCount' => $this->translationAPI->__('Number of post tags', 'pop-post-tags'),
-            'postTagNames' => $this->translationAPI->__('Names of the post tags', 'pop-post-tags'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [
             'postTag',
+            'postTagBySlug',
             'postTags',
             'postTagCount',
             'postTagNames',
@@ -47,6 +37,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
     {
         $types = [
             'postTag' => SchemaDefinition::TYPE_ID,
+            'postTagBySlug' => SchemaDefinition::TYPE_ID,
             'postTags' => SchemaDefinition::TYPE_ID,
             'postTagCount' => SchemaDefinition::TYPE_INT,
             'postTagNames' => SchemaDefinition::TYPE_STRING,
@@ -67,6 +58,18 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
+    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    {
+        $descriptions = [
+            'postTag' => $this->translationAPI->__('Post tag with a specific ID', 'pop-post-tags'),
+            'postTagBySlug' => $this->translationAPI->__('Post tag with a specific slug', 'pop-post-tags'),
+            'postTags' => $this->translationAPI->__('Post tags', 'pop-post-tags'),
+            'postTagCount' => $this->translationAPI->__('Number of post tags', 'pop-post-tags'),
+            'postTagNames' => $this->translationAPI->__('Names of the post tags', 'pop-post-tags'),
+        ];
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+    }
+
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
@@ -79,6 +82,18 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tag ID', 'pop-post-tags'),
+                            SchemaDefinition::ARGNAME_MANDATORY => true,
+                        ],
+                    ]
+                );
+            case 'postTagBySlug':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'slug',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tag slug', 'pop-post-tags'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -134,9 +149,13 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'postTag':
-                $query = [
-                    'include' => [$fieldArgs['id']],
-                ];
+            case 'postTagBySlug':
+                $query = [];
+                if ($fieldName == 'postTag') {
+                    $query['include'] = [$fieldArgs['id']];
+                } elseif ($fieldName == 'postTagBySlug') {
+                    $query['slugs'] = [$fieldArgs['slug']];
+                }
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
@@ -167,6 +186,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'postTag':
+            case 'postTagBySlug':
             case 'postTags':
                 return PostTagTypeResolver::class;
         }

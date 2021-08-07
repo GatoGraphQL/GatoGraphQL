@@ -27,6 +27,8 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
             [
                 'post',
                 'unrestrictedPost',
+                'postBySlug',
+                'unrestrictedPostBySlug',
             ]
         );
     }
@@ -37,6 +39,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
             parent::getAdminFieldNames(),
             [
                 'unrestrictedPost',
+                'unrestrictedPostBySlug',
             ]
         );
     }
@@ -45,7 +48,9 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
     {
         $descriptions = [
             'post' => $this->translationAPI->__('Post with a specific ID', 'posts'),
+            'postBySlug' => $this->translationAPI->__('Post with a specific slug', 'posts'),
             'unrestrictedPost' => $this->translationAPI->__('[Unrestricted] Post with a specific ID', 'posts'),
+            'unrestrictedPostBySlug' => $this->translationAPI->__('[Unrestricted] Post with a specific slug', 'posts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -54,7 +59,9 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
     {
         $types = [
             'post' => SchemaDefinition::TYPE_ID,
+            'postBySlug' => SchemaDefinition::TYPE_ID,
             'unrestrictedPost' => SchemaDefinition::TYPE_ID,
+            'unrestrictedPostBySlug' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -72,6 +79,19 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The post ID', 'pop-posts'),
+                            SchemaDefinition::ARGNAME_MANDATORY => true,
+                        ],
+                    ]
+                );
+            case 'postBySlug':
+            case 'unrestrictedPostBySlug':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'slug',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The post slug', 'pop-posts'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -98,21 +118,48 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'post':
+            case 'postBySlug':
             case 'unrestrictedPost':
-                $query = [
-                    'include' => [$fieldArgs['id']],
-                    'status' => array_merge(
-                        [
-                            Status::PUBLISHED,
-                        ],
-                        $fieldName === 'unrestrictedPost' ?
-                            [
-                                Status::DRAFT,
-                                Status::PENDING,
-                                Status::TRASH,
-                            ] : []
-                    ),
-                ];
+            case 'unrestrictedPostBySlug':
+                $query = [];
+                if (
+                    in_array($fieldName, [
+                    'post',
+                    'unrestrictedPost',
+                    ])
+                ) {
+                    $query['include'] = [$fieldArgs['id']];
+                } elseif (
+                    in_array($fieldName, [
+                    'postBySlug',
+                    'unrestrictedPostBySlug',
+                    ])
+                ) {
+                    $query['slug'] = $fieldArgs['slug'];
+                }
+
+                if (
+                    in_array($fieldName, [
+                    'post',
+                    'postBySlug',
+                    ])
+                ) {
+                    $query['status'] = [
+                        Status::PUBLISHED,
+                    ];
+                } elseif (
+                    in_array($fieldName, [
+                    'unrestrictedPost',
+                    'unrestrictedPostBySlug',
+                    ])
+                ) {
+                    $query['status'] = [
+                        Status::PUBLISHED,
+                        Status::DRAFT,
+                        Status::PENDING,
+                        Status::TRASH,
+                    ];
+                }
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
@@ -130,6 +177,8 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         switch ($fieldName) {
             case 'post':
             case 'unrestrictedPost':
+            case 'postBySlug':
+            case 'unrestrictedPostBySlug':
                 return PostTypeResolver::class;
         }
 
