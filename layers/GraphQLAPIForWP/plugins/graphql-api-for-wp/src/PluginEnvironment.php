@@ -75,20 +75,4 @@ class PluginEnvironment
 
         return ApplicationNature::DYNAMIC;
     }
-
-    /**
-     * Indicate if the application has been set "static" nature
-     */
-    public static function isApplicationNatureStatic(): bool
-    {
-        return self::getApplicationNature() === ApplicationNature::STATIC_;
-    }
-
-    /**
-     * Indicate if the application has "dynamic" nature (which is the default)
-     */
-    public static function isApplicationNatureDynamic(): bool
-    {
-        return self::getApplicationNature() === ApplicationNature::DYNAMIC;
-    }
 }
