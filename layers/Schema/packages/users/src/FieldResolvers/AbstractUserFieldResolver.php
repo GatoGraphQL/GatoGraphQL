@@ -49,6 +49,16 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         return [
             'users',
             'userCount',
+            'unrestrictedUsers',
+            'unrestrictedUserCount',
+        ];
+    }
+
+    public function getAdminFieldNames(): array
+    {
+        return [
+            'unrestrictedUsers',
+            'unrestrictedUserCount',
         ];
     }
 
@@ -57,6 +67,8 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         $types = [
             'users' => SchemaDefinition::TYPE_ID,
             'userCount' => SchemaDefinition::TYPE_INT,
+            'unrestrictedUsers' => SchemaDefinition::TYPE_ID,
+            'unrestrictedUserCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -64,8 +76,12 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
-            'userCount' => SchemaTypeModifiers::NON_NULLABLE,
-            'users' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            'userCount',
+            'unrestrictedUserCount'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'users',
+            'unrestrictedUsers'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
     }
@@ -75,6 +91,8 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         $descriptions = [
             'users' => $this->translationAPI->__('Users', 'pop-users'),
             'userCount' => $this->translationAPI->__('Number of users', 'pop-users'),
+            'users' => $this->translationAPI->__('[Unrestricted] Users', 'pop-users'),
+            'userCount' => $this->translationAPI->__('[Unrestricted] Number of users', 'pop-users'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -85,6 +103,8 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'users':
             case 'userCount':
+            case 'unrestrictedUsers':
+            case 'unrestrictedUserCount':
                 return array_merge(
                     $schemaFieldArgs,
                     $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
@@ -98,6 +118,8 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'users':
             case 'userCount':
+            case 'unrestrictedUsers':
+            case 'unrestrictedUserCount':
                 return false;
         }
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
@@ -108,6 +130,10 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'userCount':
                 return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT];
+            case 'unrestrictedUsers':
+                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST];
+            case 'unrestrictedUserCount':
+                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }
@@ -129,6 +155,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'users':
+            case 'unrestrictedUsers':
                 $query = [
                     'limit' => ComponentConfiguration::getUserListDefaultLimit(),
                 ];
@@ -138,6 +165,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $this->userTypeAPI->getUsers($query, $options);
             case 'userCount':
+            case 'unrestrictedUserCount':
                 $options = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $this->userTypeAPI->getUserCount([], $options);
@@ -150,6 +178,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'users':
+            case 'unrestrictedUsers':
                 return UserTypeResolver::class;
         }
 
