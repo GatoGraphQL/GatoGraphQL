@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -39,16 +40,29 @@ trait FieldOrDirectiveResolverTrait
     {
         if ($missing = SchemaHelpers::getMissingFieldArgs($fieldOrDirectiveArgumentProperties, $fieldOrDirectiveArgs)) {
             $translationAPI = TranslationAPIFacade::getInstance();
+            $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
+            $errorMessage = count($missing) == 1 ?
+                sprintf(
+                    $translationAPI->__('Argument \'%1$s\' cannot be empty', 'component-model'),
+                    $missing[0]
+                ) :
+                sprintf(
+                    $translationAPI->__('Arguments \'%1$s\' cannot be empty', 'component-model'),
+                    implode($translationAPI->__('\', \''), $missing)
+                );
+            if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
+                return $errorMessage;
+            }
             return count($missing) == 1 ?
                 sprintf(
-                    $translationAPI->__('Argument \'%1$s\' cannot be empty, so %2$s \'%3$s\' has been ignored', 'component-model'),
-                    $missing[0],
+                    $translationAPI->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
+                    $errorMessage,
                     $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 ) :
                 sprintf(
-                    $translationAPI->__('Arguments \'%1$s\' cannot be empty, so %2$s \'%3$s\' has been ignored', 'component-model'),
-                    implode($translationAPI->__('\', \''), $missing),
+                    $translationAPI->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
+                    $errorMessage,
                     $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 );
