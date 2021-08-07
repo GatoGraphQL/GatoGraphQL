@@ -917,6 +917,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     }
                 }
 
+                /** @var Error[] */
+                $errorArgValues = [];
                 // Cast (or "coerce" in GraphQL terms) the value
                 if ($fieldOrDirectiveArgIsArrayOfArraysType) {
                     // If the value is an array of arrays, then cast each subelement to the item type
@@ -931,6 +933,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         ),
                         $argValue
                     );
+                    $errorArgValues = GeneralUtils::arrayFlatten(array_filter(
+                        $argValue,
+                        fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? false : array_filter(
+                            $arrayArgValueElem,
+                            fn (mixed $arrayOfArraysArgValueElem) => GeneralUtils::isError($arrayOfArraysArgValueElem)
+                        )
+                    ));
                 } elseif ($fieldOrDirectiveArgIsArrayType) {
                     // If the value is an array, then cast each element to the item type
                     $argValue = array_map(
@@ -940,16 +949,32 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         ),
                         $argValue
                     );
+                    $errorArgValues = array_filter(
+                        $argValue,
+                        fn (mixed $arrayArgValueElem) => GeneralUtils::isError($arrayArgValueElem)
+                    );
                 } else {
                     // Otherwise, simply cast the given value directly
                     $argValue = $argValue === null ? null : $this->typeCastingExecuter->cast($fieldOrDirectiveArgType, $argValue);
+                    if (GeneralUtils::isError($argValue)) {
+                        /** @var Error */
+                        $error = $argValue;
+                        $errorArgValues[] = $error;
+                    }
                 }
 
                 // If the response is an error, extract the error message and set value to null
-                if (GeneralUtils::isError($argValue)) {
-                    /** @var Error */
-                    $error = $argValue;
-                    $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $error->getMessageOrCode();
+                if ($errorArgValues) {
+                    $castingErrorMessage = count($errorArgValues) === 1 ?
+                        $errorArgValues[0]->getMessageOrCode()
+                        : implode(
+                            $this->translationAPI->__('; ', 'pop-component-model'),
+                            array_map(
+                                fn (Error $errorArgValueElem) => $errorArgValueElem->getMessageOrCode(),
+                                $errorArgValues
+                            )
+                        );                    
+                    $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $castingErrorMessage;
                     $fieldOrDirectiveArgs[$argName] = null;
                     continue;
                 }

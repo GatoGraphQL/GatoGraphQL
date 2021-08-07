@@ -104,6 +104,19 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 ];
                 $valid = filter_var($value, $filters[$type]);
                 if ($valid === false) {
+                    $elements = [
+                        SchemaDefinition::TYPE_URL => $this->translationAPI->__('URL', 'component-model'),
+                        SchemaDefinition::TYPE_EMAIL => $this->translationAPI->__('email', 'component-model'),
+                        SchemaDefinition::TYPE_IP => $this->translationAPI->__('IP', 'component-model'),
+                    ];
+                    return new Error(
+                        sprintf('%s-cast', $elements[$type]),
+                        sprintf(
+                            $this->translationAPI->__('The format for the %s \'%s\' is not right', 'component-model'),
+                            $elements[$type],
+                            $value
+                        )
+                    );
                     return null;
                 }
                 return $value;
@@ -120,7 +133,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 if (!is_string($value)) {
                     return new Error(
                         'date-cast',
-                        $this->translationAPI->__('Date must be provided as a string')
+                        $this->translationAPI->__('Date must be provided as a string', 'component-model')
                     );
                 }
                 // Validate that the format is 'Y-m-d'
@@ -130,7 +143,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                     return new Error(
                         'date-cast',
                         sprintf(
-                            $this->translationAPI->__('Date format must be \'%s\''),
+                            $this->translationAPI->__('Date format must be \'%s\'', 'component-model'),
                             'Y-m-d'
                         )
                     );
