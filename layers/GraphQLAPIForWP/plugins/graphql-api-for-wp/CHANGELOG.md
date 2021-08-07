@@ -12,9 +12,13 @@ GraphQL schema upgrade:
 
 - Fetch entities by slug:
   - `Root.postBySlug: Post`
+  - `Root.unrestrictedPostBySlug: Post`
   - `Root.customPostBySlug: CustomPostUnion`
+  - `Root.unrestrictedCustomPostBySlug: CustomPostUnion`
   - `Root.genericCustomPostBySlug: GenericCustomPost`
+  - `Root.unrestrictedGenericCustomPostBySlug: GenericCustomPost`
   - `Root.pageBySlug: Page`
+  - `Root.unrestrictedPageBySlug: Page`
   - `Root.postCategoryBySlug: PostCategory`
   - `Root.postTagBySlug: PostTag`
   - `Root.mediaItemBySlug: MediaItem`
