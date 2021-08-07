@@ -24,6 +24,7 @@ GraphQL schema upgrade:
   - `Root.mediaItemBySlug: MediaItem`
 - Fetch a user by different means:
   - `Root.userByUsername: User`
+  - `Root.userByEmail: User`
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Menu.items: [MenuItem]!`
