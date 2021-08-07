@@ -7,5 +7,5 @@ namespace GraphQLAPI\GraphQLAPI\Constants;
 class ApplicationNature
 {
     public const STATIC_ = 'static';
-    public const DYNAMIC = 'dynamic';
+    public const LIVE = 'live';
 }

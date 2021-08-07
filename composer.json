@@ -553,7 +553,7 @@
         "enable-caching": "Enable caching for the 'GraphQL API for WordPress' in DEV",
         "disable-caching": "Disable caching for the 'GraphQL API for WordPress' in DEV",
         "set-static-app-nature": "Set the application nature as 'static'",
-        "remove-static-app-nature": "Set the application nature as 'dynamic'",
+        "remove-static-app-nature": "Set the application nature as 'live'",
         "delete-settings": "Delete the plugin settings from the DB",
         "purge-cache": "Purge the cache for the 'GraphQL API for WordPress' in DEV",
         "validate-monorepo": "Validate that version constraints for dependencies are the same for all packages",

@@ -54,7 +54,7 @@ class PluginEnvironment
     }
 
     /**
-     * The nature is either "static" or "dynamic".
+     * The nature is either "static" or "live".
      * From it, we can provide the default settings, being either safer or looser
      */
     public static function getApplicationNature(): string
@@ -68,27 +68,19 @@ class PluginEnvironment
         
         if (in_array($definedNature, [
             ApplicationNature::STATIC_,
-            ApplicationNature::DYNAMIC,
+            ApplicationNature::LIVE,
         ])) {
             return $definedNature;
         }
 
-        return ApplicationNature::DYNAMIC;
+        return ApplicationNature::LIVE;
     }
 
     /**
-     * Indicate if the application has been set "static" nature
+     * Indicate if the application is intended for building "static" sites
      */
     public static function isApplicationNatureStatic(): bool
     {
         return self::getApplicationNature() === ApplicationNature::STATIC_;
-    }
-
-    /**
-     * Indicate if the application has "dynamic" nature (which is the default)
-     */
-    public static function isApplicationNatureDynamic(): bool
-    {
-        return self::getApplicationNature() === ApplicationNature::DYNAMIC;
     }
 }
