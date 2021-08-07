@@ -10,7 +10,6 @@ class PluginEnvironment
 {
     public const DISABLE_CACHING = 'DISABLE_CACHING';
     public const CACHE_DIR = 'CACHE_DIR';
-    public const REDEFINED_FIELD_ARGS_SYMBOLS = 'REDEFINED_FIELD_ARGS_SYMBOLS';
 
     /**
      * If the information is provided by either environment variable
