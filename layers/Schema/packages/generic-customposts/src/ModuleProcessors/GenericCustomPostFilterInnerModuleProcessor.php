@@ -52,7 +52,7 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcesso
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                     [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_GENERICPOSTTYPES],
                 ],
-            default => [],
+                default => [],
         };
         // "Admin" fields also have the "status" filter
         if (

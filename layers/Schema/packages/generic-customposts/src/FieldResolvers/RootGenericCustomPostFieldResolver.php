@@ -177,21 +177,25 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
                 Status::PUBLISHED,
             ],
         ];
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'genericCustomPost',
             'genericCustomPostBySlug',
             'genericCustomPosts',
             'genericCustomPostCount',
-        ])) {
+            ])
+        ) {
             $query['status'] = [
                 Status::PUBLISHED,
             ];
-        } elseif (in_array($fieldName, [
+        } elseif (
+            in_array($fieldName, [
             'unrestrictedGenericCustomPost',
             'unrestrictedGenericCustomPostBySlug',
             'unrestrictedGenericCustomPosts',
             'unrestrictedGenericCustomPostCount',
-        ])) {
+            ])
+        ) {
             $query['status'] = [
                 Status::PUBLISHED,
                 Status::DRAFT,

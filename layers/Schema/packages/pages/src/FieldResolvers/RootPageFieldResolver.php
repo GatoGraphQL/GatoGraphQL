@@ -189,29 +189,37 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             case 'unrestrictedPage':
             case 'unrestrictedPageBySlug':
                 $query = [];
-                if (in_array($fieldName, [
+                if (
+                    in_array($fieldName, [
                     'page',
                     'unrestrictedPage',
-                ])) {
+                    ])
+                ) {
                     $query['include'] = [$fieldArgs['id']];
-                } elseif (in_array($fieldName, [
+                } elseif (
+                    in_array($fieldName, [
                     'pageBySlug',
                     'unrestrictedPageBySlug',
-                ])) {
+                    ])
+                ) {
                     $query['slug'] = $fieldArgs['slug'];
                 }
-                
-                if (in_array($fieldName, [
+
+                if (
+                    in_array($fieldName, [
                     'page',
                     'pageBySlug',
-                ])) {
+                    ])
+                ) {
                     $query['status'] = [
                         Status::PUBLISHED,
                     ];
-                } elseif (in_array($fieldName, [
+                } elseif (
+                    in_array($fieldName, [
                     'unrestrictedPage',
                     'unrestrictedPageBySlug',
-                ])) {
+                    ])
+                ) {
                     $query['status'] = [
                         Status::PUBLISHED,
                         Status::DRAFT,
