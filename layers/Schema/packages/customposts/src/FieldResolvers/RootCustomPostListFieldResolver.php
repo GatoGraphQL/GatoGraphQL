@@ -129,37 +129,29 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
                 $query = [
                     'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
                 ];
-                if (
-                    in_array($fieldName, [
+                if (in_array($fieldName, [
                     'customPost',
                     'unrestrictedCustomPost',
-                    ])
-                ) {
+                ])) {
                     $query['include'] = [$fieldArgs['id']];
-                } elseif (
-                    in_array($fieldName, [
+                } elseif (in_array($fieldName, [
                     'customPostBySlug',
                     'unrestrictedCustomPostBySlug',
-                    ])
-                ) {
+                ])) {
                     $query['slug'] = $fieldArgs['slug'];
                 }
 
-                if (
-                    in_array($fieldName, [
+                if (in_array($fieldName, [
                     'customPost',
                     'customPostBySlug',
-                    ])
-                ) {
+                ])) {
                     $query['status'] = [
                         Status::PUBLISHED,
                     ];
-                } elseif (
-                    in_array($fieldName, [
+                } elseif (in_array($fieldName, [
                     'unrestrictedCustomPost',
                     'unrestrictedCustomPostBySlug',
-                    ])
-                ) {
+                ])) {
                     $query['status'] = [
                         Status::PUBLISHED,
                         Status::DRAFT,
