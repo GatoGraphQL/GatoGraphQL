@@ -48,9 +48,9 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
     {
         $descriptions = [
             'post' => $this->translationAPI->__('Post with a specific ID', 'posts'),
-            'post' => $this->translationAPI->__('Post with a specific slug', 'posts'),
+            'postBySlug' => $this->translationAPI->__('Post with a specific slug', 'posts'),
             'unrestrictedPost' => $this->translationAPI->__('[Unrestricted] Post with a specific ID', 'posts'),
-            'unrestrictedPost' => $this->translationAPI->__('[Unrestricted] Post with a specific slug', 'posts'),
+            'unrestrictedPostBySlug' => $this->translationAPI->__('[Unrestricted] Post with a specific slug', 'posts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
