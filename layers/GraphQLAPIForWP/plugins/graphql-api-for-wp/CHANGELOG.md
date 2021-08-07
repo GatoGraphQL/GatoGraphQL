@@ -22,6 +22,8 @@ GraphQL schema upgrade:
   - `Root.postCategoryBySlug: PostCategory`
   - `Root.postTagBySlug: PostTag`
   - `Root.mediaItemBySlug: MediaItem`
+- Fetch a user by different means:
+  - `Root.userByUsername: User`
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Menu.items: [MenuItem]!`

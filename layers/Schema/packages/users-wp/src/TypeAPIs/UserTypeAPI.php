@@ -157,6 +157,10 @@ class UserTypeAPI extends AbstractUserTypeAPI
             ];
             unset($query['name']);
         }
+        if (isset($query['username'])) {
+            $query['login'] = $query['username'];
+            unset($query['username']);
+        }
         if (isset($query['include'])) {
             // Transform from array to string
             $query['include'] = implode(',', $query['include']);
