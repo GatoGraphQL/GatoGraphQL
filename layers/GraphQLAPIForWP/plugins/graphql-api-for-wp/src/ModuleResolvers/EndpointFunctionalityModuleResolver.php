@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
 
 class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -92,7 +93,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     {
         switch ($module) {
             case self::SINGLE_ENDPOINT:
-                return false;
+                return PluginEnvironment::isApplicationNatureStatic();
         }
         return parent::isEnabledByDefault($module);
     }
