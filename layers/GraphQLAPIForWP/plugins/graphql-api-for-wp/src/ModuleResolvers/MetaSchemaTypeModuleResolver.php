@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
@@ -175,7 +176,9 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         $defaultMetaValues = [
             ModuleSettingOptions::ENTRIES => [],
-            ModuleSettingOptions::BEHAVIOR => Behaviors::ALLOWLIST,
+            ModuleSettingOptions::BEHAVIOR => PluginEnvironment::isApplicationNatureStatic() ?
+                Behaviors::DENYLIST
+                : Behaviors::ALLOWLIST,
         ];
         $defaultValues = [
             self::SCHEMA_CUSTOMPOST_META => $defaultMetaValues,

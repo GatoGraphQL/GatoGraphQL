@@ -72,6 +72,18 @@
             "lando wp config set GRAPHQL_API_DISABLE_CACHING true --raw --path=wordpress",
             "@purge-cache"
         ],
+        "set-static-app-nature": [
+            "lando wp config set GRAPHQL_API_APPLICATION_NATURE static --path=wordpress",
+            "@delete-settings"
+        ],
+        "remove-static-app-nature": [
+            "lando wp config delete GRAPHQL_API_APPLICATION_NATURE --path=wordpress",
+            "@delete-settings"
+        ],
+        "delete-settings": [
+            "lando wp option delete graphql-api-settings --path=wordpress",
+            "@purge-cache"
+        ],
         "purge-cache": "@php ../shared/composer-scripts/purge-cache.php \"wordpress/wp-content/graphql-api/cache\" || true"
     }
 }

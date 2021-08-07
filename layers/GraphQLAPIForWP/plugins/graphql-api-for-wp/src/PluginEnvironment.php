@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use GraphQLAPI\GraphQLAPI\Constants\ApplicationNature;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
 
 class PluginEnvironment
 {
     public const DISABLE_CACHING = 'DISABLE_CACHING';
     public const CACHE_DIR = 'CACHE_DIR';
+    public const APPLICATION_NATURE = 'APPLICATION_NATURE';
 
     /**
      * If the information is provided by either environment variable
@@ -49,5 +51,38 @@ class PluginEnvironment
 
         // This is under wp-content/plugins/graphql-api/cache
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
+    }
+
+    /**
+     * The nature is either "static" or "live".
+     * From it, we can provide the default settings, being either safer or looser
+     */
+    public static function getApplicationNature(): string
+    {
+        $definedNature = null;
+        if (getenv(self::APPLICATION_NATURE) !== false) {
+            $definedNature = trim(getenv(self::APPLICATION_NATURE));
+        } elseif (PluginConfigurationHelper::isWPConfigConstantDefined(self::APPLICATION_NATURE)) {
+            $definedNature = trim(PluginConfigurationHelper::getWPConfigConstantValue(self::APPLICATION_NATURE));
+        }
+
+        if (
+            in_array($definedNature, [
+            ApplicationNature::STATIC_,
+            ApplicationNature::LIVE,
+            ])
+        ) {
+            return $definedNature;
+        }
+
+        return ApplicationNature::LIVE;
+    }
+
+    /**
+     * Indicate if the application is intended for building "static" sites
+     */
+    public static function isApplicationNatureStatic(): bool
+    {
+        return self::getApplicationNature() === ApplicationNature::STATIC_;
     }
 }

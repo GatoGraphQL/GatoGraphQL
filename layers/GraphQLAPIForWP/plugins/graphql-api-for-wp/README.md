@@ -49,6 +49,34 @@ Compiled JavaScript code (such as all files under a block's `build/` folder) is 
 
 Code compiled for development, i.e. after running `npm start`, cannot be commited/pushed to the repo.
 
+### Building static sites
+
+The GraphQL API for WordPress provides default values to make "live" sites secure:
+
+- The single endpoint is disabled
+- The settings and meta keys that can be queried are restricted
+- The number of max entities that can be queried (for posts, users, tags, etc) is limited
+
+For building "static" sites, these safe defaults can be removed:
+
+- Enable the single endpoint
+- All settings and meta keys can be queried
+- The number of max entities that can be queried (for posts, users, tags, etc) is unlimited
+
+In development, to change the application's nature from "live" to "static", execute:
+
+```bash
+composer set-static-app-nature
+```
+
+On a site in production, set in `wp-config.php`:
+
+```php
+define( 'GRAPHQL_API_APPLICATION_NATURE', 'static' );
+```
+
+Or define this same key/value as an environment variable.
+
 <!-- ### CMS-agnosticism
 
 Even though this plugin is already the implementation for WordPress, it is recommended to develop components following the [CMS-agnostic method employed by GraphQL by PoP](https://graphql-by-pop.com/docs/architecture/cms-agnosticism.html), so that they can benefit from architectural optimizations and future developments.

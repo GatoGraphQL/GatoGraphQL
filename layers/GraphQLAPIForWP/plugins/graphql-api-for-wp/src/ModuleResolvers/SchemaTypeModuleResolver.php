@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
@@ -360,49 +361,47 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
+        // Lower the security constraints for the static app
+        $isStaticApp = PluginEnvironment::isApplicationNatureStatic();
         $defaultValues = [
             self::SCHEMA_ADMIN_SCHEMA => [
-                ModuleSettingOptions::ENABLE => false,
+                ModuleSettingOptions::ENABLE => $isStaticApp,
             ],
             self::SCHEMA_CUSTOMPOSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $isStaticApp ? -1 : 100,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
             ],
             self::SCHEMA_GENERIC_CUSTOMPOSTS => [
-                // ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                // ModuleSettingOptions::LIST_MAX_LIMIT => 100,
                 ModuleSettingOptions::CUSTOMPOST_TYPES => ['post'],
             ],
             self::SCHEMA_POSTS => [
-                // ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                // ModuleSettingOptions::LIST_MAX_LIMIT => 100,
                 self::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => true,
             ],
             self::SCHEMA_PAGES => [
-                // ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                // ModuleSettingOptions::LIST_MAX_LIMIT => 100,
                 self::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => false,
             ],
             self::SCHEMA_USERS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $isStaticApp ? -1 : 100,
             ],
             self::SCHEMA_TAGS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                ModuleSettingOptions::LIST_MAX_LIMIT => 200,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $isStaticApp ? -1 : 200,
             ],
             self::SCHEMA_CATEGORIES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                ModuleSettingOptions::LIST_MAX_LIMIT => 200,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $isStaticApp ? -1 : 200,
             ],
             self::SCHEMA_SETTINGS => [
-                ModuleSettingOptions::ENTRIES => [
+                ModuleSettingOptions::ENTRIES => $isStaticApp ? [] : [
                     'home',
                     'blogname',
                     'blogdescription',
                 ],
-                ModuleSettingOptions::BEHAVIOR => Behaviors::ALLOWLIST,
+                ModuleSettingOptions::BEHAVIOR => $isStaticApp ?
+                    Behaviors::DENYLIST
+                    : Behaviors::ALLOWLIST,
             ],
             self::SCHEMA_USER_AVATARS => [
                 self::OPTION_DEFAULT_AVATAR_SIZE => 96,
