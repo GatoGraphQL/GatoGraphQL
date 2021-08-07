@@ -117,7 +117,6 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                             $value
                         )
                     );
-                    return null;
                 }
                 return $value;
             case SchemaDefinition::TYPE_ENUM:

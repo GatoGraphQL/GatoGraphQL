@@ -91,8 +91,8 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         $descriptions = [
             'users' => $this->translationAPI->__('Users', 'pop-users'),
             'userCount' => $this->translationAPI->__('Number of users', 'pop-users'),
-            'users' => $this->translationAPI->__('[Unrestricted] Users', 'pop-users'),
-            'userCount' => $this->translationAPI->__('[Unrestricted] Number of users', 'pop-users'),
+            'unrestrictedUsers' => $this->translationAPI->__('[Unrestricted] Users', 'pop-users'),
+            'unrestrictedUserCount' => $this->translationAPI->__('[Unrestricted] Number of users', 'pop-users'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
