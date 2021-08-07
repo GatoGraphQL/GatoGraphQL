@@ -12,18 +12,19 @@ GraphQL schema upgrade:
 
 - Fetch entities by slug:
   - `Root.postBySlug: Post`
-  - `Root.unrestrictedPostBySlug: Post`
+  - `Root.unrestrictedPostBySlug: Post` ("admin" field)
   - `Root.customPostBySlug: CustomPostUnion`
-  - `Root.unrestrictedCustomPostBySlug: CustomPostUnion`
+  - `Root.unrestrictedCustomPostBySlug: CustomPostUnion` ("admin" field)
   - `Root.genericCustomPostBySlug: GenericCustomPost`
-  - `Root.unrestrictedGenericCustomPostBySlug: GenericCustomPost`
+  - `Root.unrestrictedGenericCustomPostBySlug: GenericCustomPost` ("admin" field)
   - `Root.pageBySlug: Page`
-  - `Root.unrestrictedPageBySlug: Page`
+  - `Root.unrestrictedPageBySlug: Page` ("admin" field)
   - `Root.postCategoryBySlug: PostCategory`
   - `Root.postTagBySlug: PostTag`
   - `Root.mediaItemBySlug: MediaItem`
 - Fetch a user by different means:
   - `Root.userByUsername: User`
+  - `Root.userByEmail: User` ("admin" field)
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Menu.items: [MenuItem]!`
