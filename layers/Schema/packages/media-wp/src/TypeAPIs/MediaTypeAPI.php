@@ -99,6 +99,11 @@ class MediaTypeAPI implements MediaTypeAPIInterface
             // This param can either be a string or an array. Eg:
             // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
         }
+        // Post slug
+        if (isset($query['slug'])) {
+            $query['name'] = $query['slug'];
+            unset($query['slug']);
+        }
         if (isset($query['search'])) {
             $query['is_search'] = true;
             $query['s'] = $query['search'];
