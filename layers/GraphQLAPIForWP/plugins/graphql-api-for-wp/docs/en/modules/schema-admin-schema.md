@@ -26,6 +26,8 @@ The following fields will be added to the GraphQL schema:
 - `unrestrictedCustomPostBySlug`
 - `unrestrictedCustomPosts`
 - `unrestrictedCustomPostCount`
+- `unrestrictedGenericCustomPost`
+- `unrestrictedGenericCustomPostBySlug`
 - `unrestrictedPage`
 - `unrestrictedPageBySlug`
 - `unrestrictedPages`
