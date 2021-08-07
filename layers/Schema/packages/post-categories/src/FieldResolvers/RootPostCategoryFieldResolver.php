@@ -22,17 +22,6 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         return array(RootTypeResolver::class);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
-    {
-        $descriptions = [
-            'postCategory' => $this->translationAPI->__('Post category with a specific ID', 'post-categories'),
-            'postCategories' => $this->translationAPI->__('Post categories', 'post-categories'),
-            'postCategoryCount' => $this->translationAPI->__('Number of post categories', 'post-categories'),
-            'postCategoryNames' => $this->translationAPI->__('Names of the post categories', 'post-categories'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -65,6 +54,17 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
             default
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
+    }
+
+    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    {
+        $descriptions = [
+            'postCategory' => $this->translationAPI->__('Post category with a specific ID', 'post-categories'),
+            'postCategories' => $this->translationAPI->__('Post categories', 'post-categories'),
+            'postCategoryCount' => $this->translationAPI->__('Number of post categories', 'post-categories'),
+            'postCategoryNames' => $this->translationAPI->__('Names of the post categories', 'post-categories'),
+        ];
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array

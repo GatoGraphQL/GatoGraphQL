@@ -22,17 +22,6 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         return array(RootTypeResolver::class);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
-    {
-        $descriptions = [
-            'postTag' => $this->translationAPI->__('Post tag with a specific ID', 'pop-post-tags'),
-            'postTags' => $this->translationAPI->__('Post tags', 'pop-post-tags'),
-            'postTagCount' => $this->translationAPI->__('Number of post tags', 'pop-post-tags'),
-            'postTagNames' => $this->translationAPI->__('Names of the post tags', 'pop-post-tags'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -65,6 +54,17 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
             default
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
+    }
+
+    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    {
+        $descriptions = [
+            'postTag' => $this->translationAPI->__('Post tag with a specific ID', 'pop-post-tags'),
+            'postTags' => $this->translationAPI->__('Post tags', 'pop-post-tags'),
+            'postTagCount' => $this->translationAPI->__('Number of post tags', 'pop-post-tags'),
+            'postTagNames' => $this->translationAPI->__('Names of the post tags', 'pop-post-tags'),
+        ];
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
