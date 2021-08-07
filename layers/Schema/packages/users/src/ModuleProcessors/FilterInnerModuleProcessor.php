@@ -48,10 +48,12 @@ class FilterInnerModuleProcessor extends AbstractModuleProcessor
             default => [],
         };
         // The "email" is a restricted arg
-        if (in_array($module[1], [
+        if (
+            in_array($module[1], [
             self::MODULE_FILTERINNER_ADMINUSERS,
             self::MODULE_FILTERINNER_ADMINUSERCOUNT,
-        ])) {
+            ])
+        ) {
             $inputmodules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EMAILS];
         }
         if (

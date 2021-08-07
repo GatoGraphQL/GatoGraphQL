@@ -973,7 +973,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                                 fn (Error $errorArgValueElem) => $errorArgValueElem->getMessageOrCode(),
                                 $errorArgValues
                             )
-                        );                    
+                        );
                     $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $castingErrorMessage;
                     $fieldOrDirectiveArgs[$argName] = null;
                     continue;
