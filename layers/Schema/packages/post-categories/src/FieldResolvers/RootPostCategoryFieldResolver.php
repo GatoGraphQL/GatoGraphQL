@@ -26,6 +26,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
     {
         return [
             'postCategory',
+            'postCategoryBySlug',
             'postCategories',
             'postCategoryCount',
             'postCategoryNames',
@@ -36,6 +37,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
     {
         $types = [
             'postCategory' => SchemaDefinition::TYPE_ID,
+            'postCategoryBySlug' => SchemaDefinition::TYPE_ID,
             'postCategories' => SchemaDefinition::TYPE_ID,
             'postCategoryCount' => SchemaDefinition::TYPE_INT,
             'postCategoryNames' => SchemaDefinition::TYPE_STRING,
@@ -60,6 +62,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
     {
         $descriptions = [
             'postCategory' => $this->translationAPI->__('Post category with a specific ID', 'post-categories'),
+            'postCategoryBySlug' => $this->translationAPI->__('Post category with a specific slug', 'post-categories'),
             'postCategories' => $this->translationAPI->__('Post categories', 'post-categories'),
             'postCategoryCount' => $this->translationAPI->__('Number of post categories', 'post-categories'),
             'postCategoryNames' => $this->translationAPI->__('Names of the post categories', 'post-categories'),
@@ -79,6 +82,18 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The category ID', 'post-categories'),
+                            SchemaDefinition::ARGNAME_MANDATORY => true,
+                        ],
+                    ]
+                );
+            case 'postCategoryBySlug':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'slug',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The category slug', 'post-categories'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -134,9 +149,13 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'postCategory':
-                $query = [
-                    'include' => [$fieldArgs['id']],
-                ];
+            case 'postCategoryBySlug':
+                $query = [];
+                if ($fieldName == 'postCategory') {
+                    $query['include'] = [$fieldArgs['id']];
+                } elseif ($fieldName == 'postCategoryBySlug') {
+                    $query['slugs'] = [$fieldArgs['slug']];
+                }
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
@@ -168,6 +187,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'postCategory':
+            case 'postCategoryBySlug':
             case 'postCategories':
                 return PostCategoryTypeResolver::class;
         }
