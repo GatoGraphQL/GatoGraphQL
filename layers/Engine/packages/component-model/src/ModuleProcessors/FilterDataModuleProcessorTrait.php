@@ -34,7 +34,7 @@ trait FilterDataModuleProcessorTrait
         }
     }
 
-    public function getActiveDataloadQueryArgsFilteringModules(array $module, array $source = null): array
+    protected function getActiveDataloadQueryArgsFilteringModules(array $module, array $source = null): array
     {
         // Search for cached result
         $cacheKey = json_encode($source ?? []);
