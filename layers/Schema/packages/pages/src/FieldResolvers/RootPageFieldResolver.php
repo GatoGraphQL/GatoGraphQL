@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostRelationalFieldDataloadModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInnerModuleProcessor;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
@@ -145,26 +145,26 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    protected function getFieldDefaultFilterDataloadingModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         switch ($fieldName) {
             case 'pageCount':
                 return [
-                    CustomPostRelationalFieldDataloadModuleProcessor::class,
-                    CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT
+                    CustomPostFilterInnerModuleProcessor::class,
+                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT
                 ];
             case 'unrestrictedPages':
                 return [
-                    CustomPostRelationalFieldDataloadModuleProcessor::class,
-                    CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST
+                    CustomPostFilterInnerModuleProcessor::class,
+                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST
                 ];
             case 'unrestrictedPageCount':
                 return [
-                    CustomPostRelationalFieldDataloadModuleProcessor::class,
-                    CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT
+                    CustomPostFilterInnerModuleProcessor::class,
+                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT
                 ];
         }
-        return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
+        return parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs);
     }
 
     /**

@@ -10,7 +10,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoPSchema\Comments\Constants\Params;
 use PoPSchema\Comments\Constants\Status;
-use PoPSchema\Comments\ModuleProcessors\CommentRelationalFieldDataloadModuleProcessor;
+use PoPSchema\Comments\ModuleProcessors\CommentFilterInnerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -29,9 +29,9 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
         );
     }
 
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
-        return [CommentRelationalFieldDataloadModuleProcessor::class, CommentRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS];
+        return [CommentFilterInnerModuleProcessor::class, CommentFilterInnerModuleProcessor::MODULE_FILTERINNER_COMMENTS];
     }
 
     public function getObjects(array $ids): array

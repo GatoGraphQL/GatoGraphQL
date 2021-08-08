@@ -6,8 +6,8 @@ namespace PoPSchema\PostCategories\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Categories\FieldResolvers\AbstractCustomPostQueryableFieldResolver;
+use PoPSchema\Categories\ModuleProcessors\FilterInnerModuleProcessor;
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
-use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolver
@@ -31,14 +31,14 @@ class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolve
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    protected function getFieldDefaultFilterDataloadingModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         switch ($fieldName) {
             case 'categoryCount':
-                return [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORYCOUNT];
             case 'categoryNames':
-                return [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORIES];
         }
-        return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
+        return parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs);
     }
 }

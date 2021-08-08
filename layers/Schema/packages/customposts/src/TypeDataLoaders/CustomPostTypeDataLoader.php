@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeDataLoaders;
 
 use PoPSchema\CustomPosts\TypeDataLoaders\AbstractCustomPostTypeDataLoader;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostRelationalFieldDataloadModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInnerModuleProcessor;
 
 class CustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
         return [
-            CustomPostRelationalFieldDataloadModuleProcessor::class,
-            CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST
+            CustomPostFilterInnerModuleProcessor::class,
+            CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST
         ];
     }
 }

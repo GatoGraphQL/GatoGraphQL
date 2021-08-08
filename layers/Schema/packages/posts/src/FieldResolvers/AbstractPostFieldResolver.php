@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
-use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -97,26 +97,17 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    protected function getFieldDefaultFilterDataloadingModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         switch ($fieldName) {
             case 'postCount':
-                return [
-                    FieldDataloadModuleProcessor::class,
-                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT
-                ];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_POSTCOUNT];
             case 'unrestrictedPosts':
-                return [
-                    FieldDataloadModuleProcessor::class,
-                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
-                ];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINPOSTS];
             case 'unrestrictedPostCount':
-                return [
-                    FieldDataloadModuleProcessor::class,
-                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT
-                ];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINPOSTCOUNT];
         }
-        return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
+        return parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs);
     }
 
     /**

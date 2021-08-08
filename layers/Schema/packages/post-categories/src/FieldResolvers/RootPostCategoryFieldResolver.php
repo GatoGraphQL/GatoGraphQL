@@ -10,8 +10,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\Categories\ComponentConfiguration;
+use PoPSchema\Categories\ModuleProcessors\FilterInnerModuleProcessor;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
-use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -120,15 +120,15 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    protected function getFieldDefaultFilterDataloadingModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         switch ($fieldName) {
             case 'postCategoryCount':
-                return [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORYCOUNT];
             case 'postCategoryNames':
-                return [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORIES];
         }
-        return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
+        return parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs);
     }
 
     /**

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
+class CustomPostFilterInnerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
     public const MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST = 'filterinner-unioncustompostlist';
     public const MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT = 'filterinner-unioncustompostcount';

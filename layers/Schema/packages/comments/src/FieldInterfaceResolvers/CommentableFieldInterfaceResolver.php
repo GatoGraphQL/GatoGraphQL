@@ -77,7 +77,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
                  * @var CommentTypeDataLoader
                  */
                 $commentTypeDataLoader = $this->instanceManager->getInstance(CommentTypeDataLoader::class);
-                if ($filterDataloadingModule = $commentTypeDataLoader->getFilterDataloadingModule()) {
+                if ($filterDataloadingModule = $commentTypeDataLoader->getDataFilteringModule()) {
                     // Retrieve all the schema definitions for the filter inputs
                     return array_merge(
                         $schemaFieldArgs,

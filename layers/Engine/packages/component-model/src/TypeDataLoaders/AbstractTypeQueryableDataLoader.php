@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeDataLoaders;
 
 use PoP\ComponentModel\Constants\Params;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader implements TypeQueryableDataLoaderInterface
 {
@@ -58,7 +59,9 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
         if ($filtering_modules = $data_properties[DataloadingConstants::QUERYARGSFILTERINGMODULES] ?? null) {
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             foreach ($filtering_modules as $module) {
-                $moduleprocessor_manager->getProcessor($module)->filterHeadmoduleDataloadQueryArgs($module, $query);
+                /** @var FilterDataModuleProcessorInterface */
+                $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($module);
+                $filterDataModuleProcessor->filterHeadmoduleDataloadQueryArgs($module, $query);
             }
         }
 
@@ -125,7 +128,7 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
         );
     }
 
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
         return null;
     }

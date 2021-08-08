@@ -7,13 +7,13 @@ namespace PoPSchema\Users\TypeDataLoaders;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Users\ModuleProcessors\FilterInnerModuleProcessor;
 
 class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
-        return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST];
+        return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_USERS];
     }
 
     public function getObjects(array $ids): array

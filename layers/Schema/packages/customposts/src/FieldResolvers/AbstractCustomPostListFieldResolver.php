@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostRelationalFieldDataloadModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInnerModuleProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
@@ -100,26 +100,26 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    protected function getFieldDefaultFilterDataloadingModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         switch ($fieldName) {
             case 'unrestrictedCustomPosts':
                 return [
-                    CustomPostRelationalFieldDataloadModuleProcessor::class,
-                    CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST
+                    CustomPostFilterInnerModuleProcessor::class,
+                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST
                 ];
             case 'customPostCount':
                 return [
-                    CustomPostRelationalFieldDataloadModuleProcessor::class,
-                    CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT
+                    CustomPostFilterInnerModuleProcessor::class,
+                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT
                 ];
             case 'unrestrictedCustomPostCount':
                 return [
-                    CustomPostRelationalFieldDataloadModuleProcessor::class,
-                    CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT
+                    CustomPostFilterInnerModuleProcessor::class,
+                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT
                 ];
         }
-        return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
+        return parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs);
     }
 
     /**

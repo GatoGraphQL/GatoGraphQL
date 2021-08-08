@@ -16,7 +16,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
     {
         $schemaDefinitions = parent::getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName, $fieldArgs);
 
-        if ($filterDataloadingModule = $this->getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs)) {
+        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs)) {
             $schemaDefinitions = array_merge(
                 $schemaDefinitions,
                 $this->getFilterSchemaDefinitionItems($filterDataloadingModule)
@@ -26,14 +26,14 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         return $schemaDefinitions;
     }
 
-    protected function getFieldDefaultFilterDataloadingModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         if ($fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($typeResolver, $fieldName)) {
             $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);
             $fieldTypeDataLoaderClass = $fieldTypeResolver->getTypeDataLoaderClass();
             $fieldTypeDataLoader = $this->instanceManager->getInstance((string)$fieldTypeDataLoaderClass);
             if ($fieldTypeDataLoader instanceof TypeQueryableDataLoaderInterface) {
-                return $fieldTypeDataLoader->getFilterDataloadingModule();
+                return $fieldTypeDataLoader->getDataFilteringModule();
             }
         }
         return null;
@@ -43,7 +43,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
     {
         $options['filter-dataload-query-args'] = [
             'source' => $fieldArgs,
-            'module' => $this->getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs),
+            'module' => $this->getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
         ];
     }
 }

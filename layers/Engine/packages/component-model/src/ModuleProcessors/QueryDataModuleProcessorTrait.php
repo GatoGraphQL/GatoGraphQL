@@ -6,9 +6,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -16,10 +14,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 trait QueryDataModuleProcessorTrait
 {
-    /**
-     * @var array<string, array<string[]>>
-     */
-    protected array $activeDataloadQueryArgsFilteringModules = [];
+    use FilterDataModuleProcessorTrait;
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
@@ -71,57 +66,6 @@ trait QueryDataModuleProcessorTrait
         // }
 
         return $ret;
-    }
-    public function filterHeadmoduleDataloadQueryArgs(array $module, array &$query, array $source = null): void
-    {
-        if ($active_filterqueryargs_modules = $this->getActiveDataloadQueryArgsFilteringModules($module, $source)) {
-            $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
-            $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
-            foreach ($active_filterqueryargs_modules as $submodule) {
-                $submodule_processor = $moduleProcessorManager->getProcessor($submodule);
-                $value = $submodule_processor->getValue($submodule, $source);
-                if ($filterInput = $submodule_processor->getFilterInput($submodule)) {
-                    $filterInputProcessorManager->getProcessor($filterInput)->filterDataloadQueryArgs($filterInput, $query, $value);
-                }
-            }
-        }
-    }
-
-    public function getActiveDataloadQueryArgsFilteringModules(array $module, array $source = null): array
-    {
-        // Search for cached result
-        $cacheKey = json_encode($source ?? []);
-        $this->activeDataloadQueryArgsFilteringModules[$cacheKey] = $this->activeDataloadQueryArgsFilteringModules[$cacheKey] ?? [];
-        if (!is_null($this->activeDataloadQueryArgsFilteringModules[$cacheKey][$module[1]] ?? null)) {
-            return $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$module[1]];
-        }
-
-        $modules = [];
-        $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
-        // Check if the module has any filtercomponent
-        if ($filterqueryargs_modules = $this->getDataloadQueryArgsFilteringModules($module)) {
-            // Check if if we're currently filtering by any filtercomponent
-            $modules = array_filter(
-                $filterqueryargs_modules,
-                function ($module) use ($moduleProcessorManager, $source) {
-                    return !is_null($moduleProcessorManager->getProcessor($module)->getValue($module, $source));
-                }
-            );
-        }
-
-        $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$module[1]] = $modules;
-        return $modules;
-    }
-
-    public function getDataloadQueryArgsFilteringModules(array $module): array
-    {
-        $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
-        return array_values(array_filter(
-            $this->getDatasetmoduletreeSectionFlattenedModules($module),
-            function ($module) use ($moduleProcessorManager) {
-                return $moduleProcessorManager->getProcessor($module) instanceof DataloadQueryArgsFilterInputModuleProcessorInterface;
-            }
-        ));
     }
 
     public function getMutableonrequestHeaddatasetmoduleDataProperties(array $module, array &$props): array

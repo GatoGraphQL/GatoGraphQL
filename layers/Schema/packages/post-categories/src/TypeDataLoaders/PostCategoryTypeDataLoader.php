@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\TypeDataLoaders;
 
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
+use PoPSchema\Categories\ModuleProcessors\FilterInnerModuleProcessor;
 use PoPSchema\Categories\TypeDataLoaders\AbstractCategoryTypeDataLoader;
-use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
 
 class PostCategoryTypeDataLoader extends AbstractCategoryTypeDataLoader
 {
     use PostCategoryAPISatisfiedContractTrait;
 
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
-        return [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST];
+        return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORIES];
     }
 }

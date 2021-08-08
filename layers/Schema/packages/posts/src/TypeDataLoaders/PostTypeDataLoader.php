@@ -6,7 +6,7 @@ namespace PoPSchema\Posts\TypeDataLoaders;
 
 use PoPSchema\CustomPosts\TypeDataLoaders\AbstractCustomPostTypeDataLoader;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
-use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor;
 
 class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
@@ -23,11 +23,8 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
         return $postTypeAPI->getPosts($query, $options);
     }
 
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
-        return [
-            FieldDataloadModuleProcessor::class,
-            FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST
-        ];
+        return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_POSTS];
     }
 }

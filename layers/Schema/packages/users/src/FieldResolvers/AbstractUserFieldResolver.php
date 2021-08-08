@@ -17,7 +17,7 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\ComponentConfiguration;
-use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Users\ModuleProcessors\FilterInnerModuleProcessor;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
@@ -125,17 +125,17 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    protected function getFieldDefaultFilterDataloadingModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         switch ($fieldName) {
             case 'userCount':
-                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_USERCOUNT];
             case 'unrestrictedUsers':
-                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUSERS];
             case 'unrestrictedUserCount':
-                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUSERCOUNT];
         }
-        return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
+        return parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs);
     }
 
     /**
