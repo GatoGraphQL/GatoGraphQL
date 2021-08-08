@@ -10,7 +10,6 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoPSchema\Comments\Constants\Params;
 use PoPSchema\Comments\Constants\Status;
-use PoPSchema\Comments\ModuleProcessors\CommentFilterInnerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -27,11 +26,6 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
             $instanceManager,
             $nameResolver,
         );
-    }
-
-    public function getDataFilteringModule(): ?array
-    {
-        return [CommentFilterInnerModuleProcessor::class, CommentFilterInnerModuleProcessor::MODULE_FILTERINNER_COMMENTS];
     }
 
     public function getObjects(array $ids): array

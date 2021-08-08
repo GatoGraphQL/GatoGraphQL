@@ -142,6 +142,11 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         switch ($fieldName) {
+            case 'genericCustomPosts':
+                return [
+                    GenericCustomPostFilterInnerModuleProcessor::class,
+                    GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST
+                ];
             case 'genericCustomPostCount':
                 return [
                     GenericCustomPostFilterInnerModuleProcessor::class,

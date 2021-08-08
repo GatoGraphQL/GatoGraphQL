@@ -34,6 +34,8 @@ class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolve
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         switch ($fieldName) {
+            case 'tags':
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_TAGS];
             case 'tagCount':
                 return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_TAGCOUNT];
             case 'tagNames':
