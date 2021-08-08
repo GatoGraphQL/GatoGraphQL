@@ -6,7 +6,6 @@ namespace PoPSchema\GenericCustomPosts\TypeDataLoaders;
 
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeDataLoaders\AbstractCustomPostTypeDataLoader;
-use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInnerModuleProcessor;
 
 class GenericCustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
@@ -21,12 +20,5 @@ class GenericCustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
                 'custompost-types' => ComponentConfiguration::getGenericCustomPostTypes(),
             ]
         );
-    }
-    public function getDataFilteringModule(): ?array
-    {
-        return [
-            GenericCustomPostFilterInnerModuleProcessor::class,
-            GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST
-        ];
     }
 }
