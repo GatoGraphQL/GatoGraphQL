@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\Users\ModuleProcessors\FilterInputModuleProcessor;
 
-class FilterInnerModuleProcessor extends AbstractModuleProcessor
+class FilterInnerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
     public const MODULE_FILTERINNER_USERS = 'filterinner-users';
     public const MODULE_FILTERINNER_USERCOUNT = 'filterinner-usercount';

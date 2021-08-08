@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\Taxonomies\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class FilterInnerModuleProcessor extends AbstractModuleProcessor
+class FilterInnerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
     public const MODULE_FILTERINNER_TAGS = 'filterinner-tags';
     public const MODULE_FILTERINNER_TAGCOUNT = 'filterinner-tagcount';

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
 
-class CommentFilterInnerModuleProcessor extends AbstractModuleProcessor
+class CommentFilterInnerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
     public const MODULE_FILTERINNER_COMMENTS = 'filterinner-comments';
 

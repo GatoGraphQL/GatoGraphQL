@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\Taxonomies\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class FilterInnerModuleProcessor extends AbstractModuleProcessor
+class FilterInnerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
     public const MODULE_FILTERINNER_CATEGORIES = 'filterinner-categories';
     public const MODULE_FILTERINNER_CATEGORYCOUNT = 'filterinner-categorycount';
