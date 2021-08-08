@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPosts\TypeDataLoaders;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostRelationalFieldDataloadModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInnerModuleProcessor;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDataLoader
@@ -15,8 +15,8 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDat
     public function getFilterDataloadingModule(): ?array
     {
         return [
-            CustomPostRelationalFieldDataloadModuleProcessor::class,
-            CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST
+            CustomPostFilterInnerModuleProcessor::class,
+            CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST
         ];
     }
 

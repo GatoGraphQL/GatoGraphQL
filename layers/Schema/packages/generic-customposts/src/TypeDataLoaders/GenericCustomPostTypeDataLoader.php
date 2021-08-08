@@ -6,7 +6,7 @@ namespace PoPSchema\GenericCustomPosts\TypeDataLoaders;
 
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeDataLoaders\AbstractCustomPostTypeDataLoader;
-use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostRelationalFieldDataloadModuleProcessor;
+use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInnerModuleProcessor;
 
 class GenericCustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
@@ -25,8 +25,8 @@ class GenericCustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
     public function getFilterDataloadingModule(): ?array
     {
         return [
-            GenericCustomPostRelationalFieldDataloadModuleProcessor::class,
-            GenericCustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST
+            GenericCustomPostFilterInnerModuleProcessor::class,
+            GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST
         ];
     }
 }
