@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\ModuleProcessors;
+namespace PoPSchema\Comments\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInnerModuleProcessor;
