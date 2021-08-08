@@ -7,5 +7,6 @@ namespace PoP\ComponentModel\ModuleProcessors;
 interface QueryDataModuleProcessorInterface
 {
     public function getDataloadQueryArgsFilteringModules(array $module): array;
+    public function getActiveDataloadQueryArgsFilteringModules(array $module, array $source = null): array;
     public function filterHeadmoduleDataloadQueryArgs(array $module, array &$query, array $source = null): void;
 }
