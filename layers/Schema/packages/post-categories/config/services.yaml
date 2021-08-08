@@ -4,8 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\PostCategories\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
-
     PoPSchema\PostCategories\Hooks\:
         resource: '../src/Hooks/*'
