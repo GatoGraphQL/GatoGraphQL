@@ -8,7 +8,7 @@ use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\Users\ModuleProcessors\FilterInnerModuleProcessor;
+use PoPSchema\Users\ModuleProcessors\FilterInputContainerModuleProcessor;
 
 class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
@@ -68,13 +68,13 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_USERS];
+                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_USERS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT:
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_USERCOUNT];
+                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_USERCOUNT];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUSERS];
+                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUSERS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT:
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUSERCOUNT];
+                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUSERCOUNT];
         }
 
         return parent::getFilterSubmodule($module);

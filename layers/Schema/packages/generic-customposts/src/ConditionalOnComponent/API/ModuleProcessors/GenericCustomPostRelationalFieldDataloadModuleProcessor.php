@@ -6,7 +6,7 @@ namespace PoPSchema\GenericCustomPosts\ConditionalOnComponent\API\ModuleProcesso
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInnerModuleProcessor;
+use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
@@ -56,23 +56,23 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
                 return [
-                    GenericCustomPostFilterInnerModuleProcessor::class,
-                    GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST
+                    GenericCustomPostFilterInputContainerModuleProcessor::class,
+                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT:
                 return [
-                    GenericCustomPostFilterInnerModuleProcessor::class,
-                    GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT
+                    GenericCustomPostFilterInputContainerModuleProcessor::class,
+                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
                 return [
-                    GenericCustomPostFilterInnerModuleProcessor::class,
-                    GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST
+                    GenericCustomPostFilterInputContainerModuleProcessor::class,
+                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT:
                 return [
-                    GenericCustomPostFilterInnerModuleProcessor::class,
-                    GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTCOUNT
+                    GenericCustomPostFilterInputContainerModuleProcessor::class,
+                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTCOUNT
                 ];
         }
 

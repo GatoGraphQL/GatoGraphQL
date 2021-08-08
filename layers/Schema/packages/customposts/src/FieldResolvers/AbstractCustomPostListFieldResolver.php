@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInnerModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
@@ -104,20 +104,20 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
     {
         return match ($fieldName) {
             'customPosts' => [
-                CustomPostFilterInnerModuleProcessor::class,
-                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST
+                CustomPostFilterInputContainerModuleProcessor::class,
+                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST
             ],
             'unrestrictedCustomPosts' => [
-                CustomPostFilterInnerModuleProcessor::class,
-                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST
+                CustomPostFilterInputContainerModuleProcessor::class,
+                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST
             ],
             'customPostCount' => [
-                CustomPostFilterInnerModuleProcessor::class,
-                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT
+                CustomPostFilterInputContainerModuleProcessor::class,
+                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT
             ],
             'unrestrictedCustomPostCount' => [
-                CustomPostFilterInnerModuleProcessor::class,
-                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT
+                CustomPostFilterInputContainerModuleProcessor::class,
+                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT
             ],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
         };

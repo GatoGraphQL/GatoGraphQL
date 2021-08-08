@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPosts\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInnerModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
@@ -81,43 +81,43 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
                 return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST
+                    CustomPostFilterInputContainerModuleProcessor::class,
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT:
                 return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT
+                    CustomPostFilterInputContainerModuleProcessor::class,
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
                 return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST
+                    CustomPostFilterInputContainerModuleProcessor::class,
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT:
                 return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT
+                    CustomPostFilterInputContainerModuleProcessor::class,
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
                 return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST
+                    CustomPostFilterInputContainerModuleProcessor::class,
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT:
                 return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT
+                    CustomPostFilterInputContainerModuleProcessor::class,
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
                 return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST
+                    CustomPostFilterInputContainerModuleProcessor::class,
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT:
                 return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT
+                    CustomPostFilterInputContainerModuleProcessor::class,
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT
                 ];
         }
 

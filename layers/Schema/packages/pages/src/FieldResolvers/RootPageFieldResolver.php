@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInnerModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
@@ -149,16 +149,16 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'pageCount' => [
-                CustomPostFilterInnerModuleProcessor::class,
-                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT
+                CustomPostFilterInputContainerModuleProcessor::class,
+                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT
             ],
             'unrestrictedPages' => [
-                CustomPostFilterInnerModuleProcessor::class,
-                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST
+                CustomPostFilterInputContainerModuleProcessor::class,
+                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST
             ],
             'unrestrictedPageCount' => [
-                CustomPostFilterInnerModuleProcessor::class,
-                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT
+                CustomPostFilterInputContainerModuleProcessor::class,
+                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT
             ],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
         };

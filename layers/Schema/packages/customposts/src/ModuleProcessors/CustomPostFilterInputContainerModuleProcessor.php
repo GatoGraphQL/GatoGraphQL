@@ -9,7 +9,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleP
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class CustomPostFilterInnerModuleProcessor extends AbstractFilterDataModuleProcessor
+class CustomPostFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
     public const MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST = 'filterinner-unioncustompostlist';
     public const MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT = 'filterinner-unioncustompostcount';
@@ -86,7 +86,7 @@ class CustomPostFilterInnerModuleProcessor extends AbstractFilterDataModuleProce
         }
         if (
             $modules = $this->hooksAPI->applyFilters(
-                'CustomPosts:FilterInnerModuleProcessor:inputmodules',
+                'CustomPosts:FilterInputContainerModuleProcessor:inputmodules',
                 $inputmodules,
                 $module
             )

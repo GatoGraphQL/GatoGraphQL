@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\PostMutations\ModuleProcessors;
 
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
-use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor as UpstreamFilterInnerModuleProcessor;
+use PoPSchema\Posts\ModuleProcessors\FilterInputContainerModuleProcessor as UpstreamFilterInputContainerModuleProcessor;
 
-class FilterInnerModuleProcessor extends UpstreamFilterInnerModuleProcessor
+class FilterInputContainerModuleProcessor extends UpstreamFilterInputContainerModuleProcessor
 {
     public const MODULE_FILTERINNER_MYPOSTS = 'filterinner-myposts';
     public const MODULE_FILTERINNER_MYPOSTCOUNT = 'filterinner-mypostcount';
@@ -36,7 +36,7 @@ class FilterInnerModuleProcessor extends UpstreamFilterInnerModuleProcessor
             ]
         );
         return $this->hooksAPI->applyFilters(
-            'PostMutations:FilterInnerModuleProcessor:inputmodules',
+            'PostMutations:FilterInputContainerModuleProcessor:inputmodules',
             $modules,
             $module
         );

@@ -6,7 +6,7 @@ namespace PoPSchema\PostMutations\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoPSchema\PostMutations\ModuleProcessors\FilterInnerModuleProcessor;
+use PoPSchema\PostMutations\ModuleProcessors\FilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
@@ -50,9 +50,9 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_MYPOSTS];
+                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_MYPOSTS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT:
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_MYPOSTCOUNT];
+                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_MYPOSTCOUNT];
         }
 
         return parent::getFilterSubmodule($module);
