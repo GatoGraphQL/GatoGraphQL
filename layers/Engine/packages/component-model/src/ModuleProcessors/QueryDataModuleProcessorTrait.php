@@ -9,7 +9,9 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -78,10 +80,13 @@ trait QueryDataModuleProcessorTrait
             $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
             $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
             foreach ($active_filterqueryargs_modules as $submodule) {
-                $submodule_processor = $moduleProcessorManager->getProcessor($submodule);
-                $value = $submodule_processor->getValue($submodule, $source);
-                if ($filterInput = $submodule_processor->getFilterInput($submodule)) {
-                    $filterInputProcessorManager->getProcessor($filterInput)->filterDataloadQueryArgs($filterInput, $query, $value);
+                /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
+                $dataloadQueryArgsFilterInputModuleProcessor = $moduleProcessorManager->getProcessor($submodule);
+                $value = $dataloadQueryArgsFilterInputModuleProcessor->getValue($submodule, $source);
+                if ($filterInput = $dataloadQueryArgsFilterInputModuleProcessor->getFilterInput($submodule)) {
+                    /** @var FilterInputProcessorInterface */
+                    $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
+                    $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $value);
                 }
             }
         }
