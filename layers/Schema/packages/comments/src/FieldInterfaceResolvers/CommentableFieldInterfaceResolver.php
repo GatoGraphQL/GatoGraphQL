@@ -67,6 +67,17 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }
 
+    protected function getFieldDataFilteringModule(string $fieldName): ?array
+    {
+        return match ($fieldName) {
+            'comments' => [
+                CommentFilterInnerModuleProcessor::class,
+                CommentFilterInnerModuleProcessor::MODULE_FILTERINNER_COMMENTS
+            ],
+            default => parent::getFieldDataFilteringModule($fieldName),
+        };
+    }
+
     public function getSchemaFieldArgs(string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
