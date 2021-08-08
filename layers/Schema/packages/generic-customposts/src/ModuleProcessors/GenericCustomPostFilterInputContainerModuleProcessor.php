@@ -9,7 +9,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleP
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class GenericCustomPostFilterInnerModuleProcessor extends AbstractFilterDataModuleProcessor
+class GenericCustomPostFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
     public const MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST = 'filterinner-genericcustompostlist';
     public const MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT = 'filterinner-genericcustompostcount';
@@ -65,7 +65,7 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractFilterDataModu
         }
         if (
             $modules = $this->hooksAPI->applyFilters(
-                'GenericCustomPosts:FilterInnerModuleProcessor:inputmodules',
+                'GenericCustomPosts:FilterInputContainerModuleProcessor:inputmodules',
                 $inputmodules,
                 $module
             )

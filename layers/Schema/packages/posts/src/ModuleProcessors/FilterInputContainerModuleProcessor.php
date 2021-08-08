@@ -9,7 +9,7 @@ use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
 
-class FilterInnerModuleProcessor extends AbstractFilterDataModuleProcessor
+class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
     public const MODULE_FILTERINNER_POSTS = 'filterinner-posts';
     public const MODULE_FILTERINNER_POSTCOUNT = 'filterinner-postcount';
@@ -60,7 +60,7 @@ class FilterInnerModuleProcessor extends AbstractFilterDataModuleProcessor
         ];
         if (
             $modules = $this->hooksAPI->applyFilters(
-                'Posts:FilterInnerModuleProcessor:inputmodules',
+                'Posts:FilterInputContainerModuleProcessor:inputmodules',
                 $inputmodules[$module[1]],
                 $module
             )

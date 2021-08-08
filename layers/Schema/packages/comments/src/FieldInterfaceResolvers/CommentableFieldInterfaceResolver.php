@@ -7,7 +7,7 @@ namespace PoPSchema\Comments\FieldInterfaceResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractQueryableSchemaFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoPSchema\Comments\ModuleProcessors\CommentFilterInnerModuleProcessor;
+use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 
 class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
 {
@@ -71,8 +71,8 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
     {
         return match ($fieldName) {
             'comments' => [
-                CommentFilterInnerModuleProcessor::class,
-                CommentFilterInnerModuleProcessor::MODULE_FILTERINNER_COMMENTS
+                CommentFilterInputContainerModuleProcessor::class,
+                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINNER_COMMENTS
             ],
             default => parent::getFieldDataFilteringModule($fieldName),
         };
@@ -85,8 +85,8 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
             case 'comments':
                 // Retrieve all the schema definitions for the filter inputs
                 $filterDataloadingModule = [
-                    CommentFilterInnerModuleProcessor::class,
-                    CommentFilterInnerModuleProcessor::MODULE_FILTERINNER_COMMENTS
+                    CommentFilterInputContainerModuleProcessor::class,
+                    CommentFilterInputContainerModuleProcessor::MODULE_FILTERINNER_COMMENTS
                 ];
                 return array_merge(
                     $schemaFieldArgs,

@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\ModuleProcessors;
+namespace PoPSchema\Categories\ModuleProcessors;
 
 use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
+use PoPSchema\Taxonomies\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class CommentFilterInnerModuleProcessor extends AbstractFilterDataModuleProcessor
+class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
-    public const MODULE_FILTERINNER_COMMENTS = 'filterinner-comments';
+    public const MODULE_FILTERINNER_CATEGORIES = 'filterinner-categories';
+    public const MODULE_FILTERINNER_CATEGORYCOUNT = 'filterinner-categorycount';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_COMMENTS],
+            [self::class, self::MODULE_FILTERINNER_CATEGORIES],
+            [self::class, self::MODULE_FILTERINNER_CATEGORYCOUNT],
         );
     }
 
@@ -24,19 +26,25 @@ class CommentFilterInnerModuleProcessor extends AbstractFilterDataModuleProcesso
         $ret = parent::getSubmodules($module);
 
         $inputmodules = [
-            self::MODULE_FILTERINNER_COMMENTS => [
+            self::MODULE_FILTERINNER_CATEGORIES => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
-                [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
+            ],
+            self::MODULE_FILTERINNER_CATEGORYCOUNT => [
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
             ],
         ];
         if (
             $modules = $this->hooksAPI->applyFilters(
-                'Comments:FilterInnerModuleProcessor:inputmodules',
+                'Categories:FilterInputContainerModuleProcessor:inputmodules',
                 $inputmodules[$module[1]],
                 $module
             )

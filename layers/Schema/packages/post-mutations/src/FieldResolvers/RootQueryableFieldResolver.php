@@ -11,7 +11,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\PostMutations\ModuleProcessors\FilterInnerModuleProcessor;
+use PoPSchema\PostMutations\ModuleProcessors\FilterInputContainerModuleProcessor;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
@@ -104,8 +104,8 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         return match ($fieldName) {
-            'myPosts' => [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_MYPOSTS],
-            'myPostCount' => [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_MYPOSTCOUNT],
+            'myPosts' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_MYPOSTS],
+            'myPostCount' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_MYPOSTCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
         };
     }

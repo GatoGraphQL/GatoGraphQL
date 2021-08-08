@@ -12,7 +12,7 @@ use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
-use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInnerModuleProcessor;
+use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -143,20 +143,20 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'genericCustomPosts' => [
-                GenericCustomPostFilterInnerModuleProcessor::class,
-                GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST
+                GenericCustomPostFilterInputContainerModuleProcessor::class,
+                GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST
             ],
             'genericCustomPostCount' => [
-                GenericCustomPostFilterInnerModuleProcessor::class,
-                GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT
+                GenericCustomPostFilterInputContainerModuleProcessor::class,
+                GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT
             ],
             'unrestrictedGenericCustomPosts' => [
-                GenericCustomPostFilterInnerModuleProcessor::class,
-                GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST
+                GenericCustomPostFilterInputContainerModuleProcessor::class,
+                GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST
             ],
             'unrestrictedGenericCustomPostCount' => [
-                GenericCustomPostFilterInnerModuleProcessor::class,
-                GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTCOUNT
+                GenericCustomPostFilterInputContainerModuleProcessor::class,
+                GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTCOUNT
             ],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
         };

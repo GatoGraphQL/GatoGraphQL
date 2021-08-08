@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
-use PoPSchema\Comments\ModuleProcessors\CommentFilterInnerModuleProcessor;
+use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 
@@ -44,7 +44,7 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS:
-                return [CommentFilterInnerModuleProcessor::class, CommentFilterInnerModuleProcessor::MODULE_FILTERINNER_COMMENTS];
+                return [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINNER_COMMENTS];
         }
 
         return parent::getFilterSubmodule($module);

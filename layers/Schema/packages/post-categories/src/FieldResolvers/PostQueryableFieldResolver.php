@@ -6,7 +6,7 @@ namespace PoPSchema\PostCategories\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Categories\FieldResolvers\AbstractCustomPostQueryableFieldResolver;
-use PoPSchema\Categories\ModuleProcessors\FilterInnerModuleProcessor;
+use PoPSchema\Categories\ModuleProcessors\FilterInputContainerModuleProcessor;
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
@@ -34,9 +34,9 @@ class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolve
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         return match ($fieldName) {
-            'categories' => [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORIES],
-            'categoryCount' => [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORYCOUNT],
-            'categoryNames' => [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORIES],
+            'categories' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_CATEGORIES],
+            'categoryCount' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_CATEGORYCOUNT],
+            'categoryNames' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_CATEGORIES],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
         };
     }
