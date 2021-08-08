@@ -6,9 +6,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 0.9.0 - DATE
 
-### Added
-
-GraphQL schema upgrade:
+### GraphQL schema upgrade
 
 - Fetch entities by slug:
   - `Root.postBySlug: Post`
@@ -42,6 +40,10 @@ GraphQL schema upgrade:
   - `PostTag.urlPath: String!`
   - `PostCategory.urlPath: String!`
   - `User.urlPath: String!`
+
+### Added
+
+- Static sites: Allow to use unsafe defaults
 
 ## 0.8.1 - 21/07/2021
 
