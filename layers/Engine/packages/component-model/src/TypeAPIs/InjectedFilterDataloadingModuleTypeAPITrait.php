@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeAPIs;
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\QueryDataModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
 
 trait InjectedFilterDataloadingModuleTypeAPITrait
 {
@@ -16,9 +16,9 @@ trait InjectedFilterDataloadingModuleTypeAPITrait
             $filterDataloadingModule = $filterDataloadQueryArgsParams['module'];
             if ($filterDataloadQueryArgsSource && $filterDataloadingModule) {
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-                /** @var QueryDataModuleProcessorInterface */
-                $queryDataModuleProcessor = $moduleprocessor_manager->getProcessor($filterDataloadingModule);
-                $queryDataModuleProcessor->filterHeadmoduleDataloadQueryArgs($filterDataloadingModule, $query, $filterDataloadQueryArgsSource);
+                /** @var FilterDataModuleProcessorInterface */
+                $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($filterDataloadingModule);
+                $filterDataModuleProcessor->filterHeadmoduleDataloadQueryArgs($filterDataloadingModule, $query, $filterDataloadQueryArgsSource);
             }
         }
     }
