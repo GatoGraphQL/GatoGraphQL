@@ -12,7 +12,7 @@ class PostCategoryTypeDataLoader extends AbstractCategoryTypeDataLoader
 {
     use PostCategoryAPISatisfiedContractTrait;
 
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
         return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORIES];
     }

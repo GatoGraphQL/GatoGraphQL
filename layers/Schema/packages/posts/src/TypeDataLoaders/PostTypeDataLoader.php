@@ -23,7 +23,7 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
         return $postTypeAPI->getPosts($query, $options);
     }
 
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
         return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_POSTS];
     }

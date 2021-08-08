@@ -11,7 +11,7 @@ use PoPSchema\Users\ModuleProcessors\FilterInnerModuleProcessor;
 
 class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
         return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_USERS];
     }

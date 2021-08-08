@@ -12,7 +12,7 @@ class PostTagTypeDataLoader extends AbstractTagTypeDataLoader
 {
     use PostTagAPISatisfiedContractTrait;
 
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
         return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_TAGS];
     }

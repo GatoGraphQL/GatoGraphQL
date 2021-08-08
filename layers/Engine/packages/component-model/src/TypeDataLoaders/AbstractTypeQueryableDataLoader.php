@@ -128,7 +128,7 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
         );
     }
 
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
         return null;
     }

@@ -9,7 +9,7 @@ use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInnerModuleProcessor;
 
 class CustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
         return [
             CustomPostFilterInnerModuleProcessor::class,

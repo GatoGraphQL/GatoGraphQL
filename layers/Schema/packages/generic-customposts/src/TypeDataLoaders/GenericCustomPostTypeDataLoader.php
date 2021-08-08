@@ -22,7 +22,7 @@ class GenericCustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
             ]
         );
     }
-    public function getFilterDataloadingModule(): ?array
+    public function getDataFilteringModule(): ?array
     {
         return [
             GenericCustomPostFilterInnerModuleProcessor::class,

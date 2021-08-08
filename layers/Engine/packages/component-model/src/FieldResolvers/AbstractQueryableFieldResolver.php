@@ -33,7 +33,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
             $fieldTypeDataLoaderClass = $fieldTypeResolver->getTypeDataLoaderClass();
             $fieldTypeDataLoader = $this->instanceManager->getInstance((string)$fieldTypeDataLoaderClass);
             if ($fieldTypeDataLoader instanceof TypeQueryableDataLoaderInterface) {
-                return $fieldTypeDataLoader->getFilterDataloadingModule();
+                return $fieldTypeDataLoader->getDataFilteringModule();
             }
         }
         return null;
