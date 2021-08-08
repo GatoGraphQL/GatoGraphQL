@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts;
 
 use PoP\Root\Component\AbstractComponent;
+use PoP\API\Component as APIComponent;
 
 /**
  * Initialize component
@@ -24,6 +25,17 @@ class Component extends AbstractComponent
     }
 
     /**
+     * All conditional component classes that this component depends upon, to initialize them
+     */
+    public static function getDependedConditionalComponentClasses(): array
+    {
+        return [
+            \PoP\API\Component::class,
+            \PoP\RESTAPI\Component::class,
+        ];
+    }
+
+    /**
      * Initialize services
      *
      * @param array<string, mixed> $configuration
@@ -37,5 +49,9 @@ class Component extends AbstractComponent
         ComponentConfiguration::setConfiguration($configuration);
         self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
+
+        if (class_exists(APIComponent::class) && APIComponent::isEnabled()) {
+            self::initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
+        }
     }
 }
