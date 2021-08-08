@@ -29,11 +29,6 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
         );
     }
 
-    public function getDataFilteringModule(): ?array
-    {
-        return [CommentFilterInnerModuleProcessor::class, CommentFilterInnerModuleProcessor::MODULE_FILTERINNER_COMMENTS];
-    }
-
     public function getObjects(array $ids): array
     {
         $query = [
