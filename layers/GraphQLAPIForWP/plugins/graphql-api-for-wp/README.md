@@ -51,17 +51,19 @@ Code compiled for development, i.e. after running `npm start`, cannot be commite
 
 ### Building static sites
 
-The GraphQL API for WordPress provides default values to make "live" sites secure:
+The GraphQL API for WordPress provides safe default settings, to make "live" sites secure:
 
 - The single endpoint is disabled
-- The settings and meta keys that can be queried are restricted
-- The number of max entities that can be queried (for posts, users, tags, etc) is limited
+- The "admin" fields (eg: to query posts with status "draft") are not added to the schema
+- Only a few of settings options and meta keys (for posts, users, etc) can be queried
+- The number of entities (for posts, users, etc) that can be queried at once is limited
 
-For building "static" sites, these safe defaults can be removed:
+These safe default settings are not needed when building "static" sites, where the WordPress site is not exposed to the Internet. These settings can be used instead:
 
-- Enable the single endpoint
-- All settings and meta keys can be queried
-- The number of max entities that can be queried (for posts, users, tags, etc) is unlimited
+- The single endpoint is enabled
+- The "admin" fields are added to the schema
+- All settings options and meta keys can be queried
+- The number of entities that can be queried at once is unlimited
 
 In development, to change the application's nature from "live" to "static", execute:
 
