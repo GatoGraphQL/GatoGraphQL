@@ -108,8 +108,10 @@ trait QueryDataModuleProcessorTrait
             // Check if if we're currently filtering by any filtercomponent
             $modules = array_filter(
                 $filterqueryargs_modules,
-                function ($module) use ($moduleProcessorManager, $source) {
-                    return !is_null($moduleProcessorManager->getProcessor($module)->getValue($module, $source));
+                function (array $module) use ($moduleProcessorManager, $source) {
+                    /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
+                    $dataloadQueryArgsFilterInputModuleProcessor = $moduleProcessorManager->getProcessor($module);
+                    return !is_null($dataloadQueryArgsFilterInputModuleProcessor->getValue($module, $source));
                 }
             );
         }
