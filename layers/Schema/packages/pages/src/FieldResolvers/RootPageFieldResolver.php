@@ -147,24 +147,21 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
 
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
-        switch ($fieldName) {
-            case 'pageCount':
-                return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT
-                ];
-            case 'unrestrictedPages':
-                return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST
-                ];
-            case 'unrestrictedPageCount':
-                return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT
-                ];
-        }
-        return parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs);
+        return match ($fieldName) {
+            'pageCount' => [
+                CustomPostFilterInnerModuleProcessor::class,
+                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT
+            ],
+            'unrestrictedPages' => [
+                CustomPostFilterInnerModuleProcessor::class,
+                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST
+            ],
+            'unrestrictedPageCount' => [
+                CustomPostFilterInnerModuleProcessor::class,
+                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT
+            ],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
+        };
     }
 
     /**

@@ -102,29 +102,25 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
 
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
-        switch ($fieldName) {
-            case 'customPosts':
-                return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST
-                ];
-            case 'unrestrictedCustomPosts':
-                return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST
-                ];
-            case 'customPostCount':
-                return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT
-                ];
-            case 'unrestrictedCustomPostCount':
-                return [
-                    CustomPostFilterInnerModuleProcessor::class,
-                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT
-                ];
-        }
-        return parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs);
+        return match ($fieldName) {
+            'customPosts' => [
+                CustomPostFilterInnerModuleProcessor::class,
+                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST
+            ],
+            'unrestrictedCustomPosts' => [
+                CustomPostFilterInnerModuleProcessor::class,
+                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST
+            ],
+            'customPostCount' => [
+                CustomPostFilterInnerModuleProcessor::class,
+                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT
+            ],
+            'unrestrictedCustomPostCount' => [
+                CustomPostFilterInnerModuleProcessor::class,
+                CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT
+            ],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
+        };
     }
 
     /**
