@@ -127,9 +127,4 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
             $query_args
         );
     }
-
-    public function getDataFilteringModule(): ?array
-    {
-        return null;
-    }
 }
