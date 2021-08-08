@@ -8,8 +8,8 @@ use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\API\Response\Schemes as APISchemes;
-use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPSchema\Users\ComponentConfiguration;
+use PoPSchema\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {

@@ -162,10 +162,14 @@
         "pop-schema/posts": "^0.9"
     },
     "require-dev": {
+        "getpop/api": "^0.9",
         "phpstan/phpstan": "^0.12.76",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.11",
         "squizlabs/php_codesniffer": "^3.0"
+    },
+    "suggest": {
+        "getpop/api": "Integrates well with API"
     },
     "autoload": {
         "psr-4": {

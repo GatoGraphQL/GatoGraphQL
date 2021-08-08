@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\ModuleProcessors;
+namespace PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
-use PoPSchema\Categories\ModuleProcessors\AbstractFieldDataloadModuleProcessor;
+use PoPSchema\Categories\ConditionalOnComponent\API\ModuleProcessors\AbstractFieldDataloadModuleProcessor;
 
 class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {

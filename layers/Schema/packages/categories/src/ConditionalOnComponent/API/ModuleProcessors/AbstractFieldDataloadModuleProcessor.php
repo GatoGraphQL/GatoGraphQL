@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Categories\ModuleProcessors;
+namespace PoPSchema\Categories\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
+use PoPSchema\Categories\ModuleProcessors\FilterInnerModuleProcessor;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor

@@ -24,6 +24,16 @@ class Component extends AbstractComponent
     }
 
     /**
+     * All conditional component classes that this component depends upon, to initialize them
+     */
+    public static function getDependedConditionalComponentClasses(): array
+    {
+        return [
+            \PoP\API\Component::class,
+        ];
+    }
+
+    /**
      * Initialize services
      *
      * @param array<string, mixed> $configuration

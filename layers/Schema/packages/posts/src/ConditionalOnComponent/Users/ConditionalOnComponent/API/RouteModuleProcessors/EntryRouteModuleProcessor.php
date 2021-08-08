@@ -7,7 +7,7 @@ namespace PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\AP
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoPSchema\Users\Routing\RouteNatures;
 use PoP\API\Response\Schemes as APISchemes;
-use PoPSchema\Posts\ConditionalOnComponent\Users\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPSchema\Posts\ComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor

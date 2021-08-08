@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\ModuleProcessors;
+namespace PoPSchema\CustomPosts\ConditionalOnComponent\API\ModuleProcessors;
 
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
+use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInnerModuleProcessor;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {

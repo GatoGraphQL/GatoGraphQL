@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTags\ModuleProcessors;
+namespace PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
-use PoPSchema\Tags\ModuleProcessors\AbstractFieldDataloadModuleProcessor;
+use PoPSchema\Tags\ConditionalOnComponent\API\ModuleProcessors\AbstractFieldDataloadModuleProcessor;
 
 class PostTagFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {

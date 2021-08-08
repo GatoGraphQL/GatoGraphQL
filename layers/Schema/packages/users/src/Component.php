@@ -67,6 +67,9 @@ class Component extends AbstractComponent
                 $skipSchema || in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses),
                 '/ConditionalOnComponent/CustomPosts'
             );
+            if (class_exists(APIComponent::class) && APIComponent::isEnabled()) {
+                self::initServices(dirname(__DIR__), '/ConditionalOnComponent/CustomPosts/ConditionalOnComponent/API');
+            }
             if (class_exists(RESTAPIComponent::class) && RESTAPIComponent::isEnabled()) {
                 self::initServices(dirname(__DIR__), '/ConditionalOnComponent/CustomPosts/ConditionalOnComponent/RESTAPI');
             }

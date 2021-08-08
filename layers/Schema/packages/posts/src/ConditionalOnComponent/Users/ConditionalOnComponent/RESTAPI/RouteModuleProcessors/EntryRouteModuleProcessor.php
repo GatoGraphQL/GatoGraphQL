@@ -8,7 +8,7 @@ use PoPSchema\Users\Routing\RouteNatures;
 use PoP\API\Response\Schemes as APISchemes;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\Posts\ConditionalOnComponent\Users\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnComponent\RESTAPI\Hooks\CustomPostHookSet;
 use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 
