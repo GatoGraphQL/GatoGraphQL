@@ -6,7 +6,7 @@ namespace PoPSchema\Users\ModuleProcessors;
 
 use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoPSchema\Users\ModuleProcessors\FilterInputModuleProcessor;
+use PoPSchema\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
