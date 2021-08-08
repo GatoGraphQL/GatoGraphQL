@@ -7,3 +7,6 @@ services:
     PoPSchema\Users\ConditionalOnComponent\API\RouteModuleProcessors\:
         resource: '../../../src/ConditionalOnComponent/API/RouteModuleProcessors/*'
 
+    PoPSchema\Users\ConditionalOnComponent\API\ModuleProcessors\:
+        resource: '../../../src/ConditionalOnComponent/API/ModuleProcessors/*'
+
