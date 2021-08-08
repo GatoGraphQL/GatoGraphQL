@@ -12,7 +12,7 @@ use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
-use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostRelationalFieldDataloadModuleProcessor;
+use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInnerModuleProcessor;
 use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -144,18 +144,18 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'genericCustomPostCount':
                 return [
-                    GenericCustomPostRelationalFieldDataloadModuleProcessor::class,
-                    GenericCustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT
+                    GenericCustomPostFilterInnerModuleProcessor::class,
+                    GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT
                 ];
             case 'unrestrictedGenericCustomPosts':
                 return [
-                    GenericCustomPostRelationalFieldDataloadModuleProcessor::class,
-                    GenericCustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST
+                    GenericCustomPostFilterInnerModuleProcessor::class,
+                    GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST
                 ];
             case 'unrestrictedGenericCustomPostCount':
                 return [
-                    GenericCustomPostRelationalFieldDataloadModuleProcessor::class,
-                    GenericCustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT
+                    GenericCustomPostFilterInnerModuleProcessor::class,
+                    GenericCustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTCOUNT
                 ];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);

@@ -6,8 +6,8 @@ namespace PoPSchema\PostCategories\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Categories\FieldResolvers\AbstractCustomPostQueryableFieldResolver;
+use PoPSchema\Categories\ModuleProcessors\FilterInnerModuleProcessor;
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
-use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolver
@@ -35,9 +35,9 @@ class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolve
     {
         switch ($fieldName) {
             case 'categoryCount':
-                return [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORYCOUNT];
             case 'categoryNames':
-                return [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORIES];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }

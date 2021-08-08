@@ -7,8 +7,8 @@ namespace PoPSchema\PostTags\FieldResolvers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
-use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
 use PoPSchema\Tags\FieldResolvers\AbstractCustomPostQueryableFieldResolver;
+use PoPSchema\Tags\ModuleProcessors\FilterInnerModuleProcessor;
 
 class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolver
 {
@@ -35,9 +35,9 @@ class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolve
     {
         switch ($fieldName) {
             case 'tagCount':
-                return [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_TAGCOUNT];
             case 'tagNames':
-                return [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_TAGS];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }

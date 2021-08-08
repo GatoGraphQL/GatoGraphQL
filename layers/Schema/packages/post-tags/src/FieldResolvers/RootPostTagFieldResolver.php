@@ -10,10 +10,10 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Tags\ComponentConfiguration;
+use PoPSchema\Tags\ModuleProcessors\FilterInnerModuleProcessor;
 
 class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -124,9 +124,9 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'postTagCount':
-                return [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_TAGCOUNT];
             case 'postTagNames':
-                return [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_TAGS];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }
