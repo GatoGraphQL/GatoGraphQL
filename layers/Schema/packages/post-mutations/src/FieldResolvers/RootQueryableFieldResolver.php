@@ -103,13 +103,11 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
 
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
-        switch ($fieldName) {
-            case 'myPosts':
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_MYPOSTS];
-            case 'myPostCount':
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_MYPOSTCOUNT];
-        }
-        return parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs);
+        return match ($fieldName) {
+            'myPosts' => [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_MYPOSTS],
+            'myPostCount' => [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_MYPOSTCOUNT],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
+        };
     }
 
     /**

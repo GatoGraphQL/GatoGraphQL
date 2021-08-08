@@ -127,17 +127,13 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
 
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
-        switch ($fieldName) {
-            case 'users':
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_USERS];
-            case 'userCount':
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_USERCOUNT];
-            case 'unrestrictedUsers':
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUSERS];
-            case 'unrestrictedUserCount':
-                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUSERCOUNT];
-        }
-        return parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs);
+        return match ($fieldName) {
+            'users' => [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_USERS],
+            'userCount' => [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_USERCOUNT],
+            'unrestrictedUsers' => [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUSERS],
+            'unrestrictedUserCount' => [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_ADMINUSERCOUNT],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
+        };
     }
 
     /**

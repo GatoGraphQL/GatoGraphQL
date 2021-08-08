@@ -79,11 +79,10 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
 
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
-        switch ($fieldName) {
-            case 'comments':
-                return [CommentFilterInnerModuleProcessor::class, CommentFilterInnerModuleProcessor::MODULE_FILTERINNER_COMMENTS];
-        }
-        return parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs);
+        return match ($fieldName) {
+            'comments' => [CommentFilterInnerModuleProcessor::class, CommentFilterInnerModuleProcessor::MODULE_FILTERINNER_COMMENTS],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
+        };
     }
 
     /**
