@@ -7,7 +7,7 @@ namespace PoPSchema\Comments\FieldInterfaceResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractQueryableSchemaFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoPSchema\Comments\TypeDataLoaders\CommentTypeDataLoader;
+use PoPSchema\Comments\ModuleProcessors\CommentFilterInnerModuleProcessor;
 
 class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
 {
@@ -72,19 +72,15 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
         switch ($fieldName) {
             case 'comments':
-                // Retrieve the module to filter for comments from the DataLoader
-                /**
-                 * @var CommentTypeDataLoader
-                 */
-                $commentTypeDataLoader = $this->instanceManager->getInstance(CommentTypeDataLoader::class);
-                if ($filterDataloadingModule = $commentTypeDataLoader->getDataFilteringModule()) {
-                    // Retrieve all the schema definitions for the filter inputs
-                    return array_merge(
-                        $schemaFieldArgs,
-                        $this->getFilterSchemaDefinitionItems($filterDataloadingModule)
-                    );
-                }
-                break;
+                // Retrieve all the schema definitions for the filter inputs
+                $filterDataloadingModule = [
+                    CommentFilterInnerModuleProcessor::class,
+                    CommentFilterInnerModuleProcessor::MODULE_FILTERINNER_COMMENTS
+                ];
+                return array_merge(
+                    $schemaFieldArgs,
+                    $this->getFilterSchemaDefinitionItems($filterDataloadingModule)
+                );
         }
         return $schemaFieldArgs;
     }
