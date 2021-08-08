@@ -7,19 +7,10 @@ namespace PoPSchema\CustomPosts\TypeDataLoaders;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInnerModuleProcessor;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
-    public function getDataFilteringModule(): ?array
-    {
-        return [
-            CustomPostFilterInnerModuleProcessor::class,
-            CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST
-        ];
-    }
-
     public function getObjectQuery(array $ids): array
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();

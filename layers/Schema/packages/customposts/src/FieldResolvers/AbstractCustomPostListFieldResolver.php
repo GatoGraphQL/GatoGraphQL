@@ -103,6 +103,11 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         switch ($fieldName) {
+            case 'customPosts':
+                return [
+                    CustomPostFilterInnerModuleProcessor::class,
+                    CustomPostFilterInnerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST
+                ];
             case 'unrestrictedCustomPosts':
                 return [
                     CustomPostFilterInnerModuleProcessor::class,
