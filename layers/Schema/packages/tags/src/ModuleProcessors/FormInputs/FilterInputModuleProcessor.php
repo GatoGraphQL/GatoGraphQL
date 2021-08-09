@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\ModuleProcessors\FormInputs;
 
-use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
@@ -18,11 +17,13 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_TAG_SLUGS = 'filterinput-tag-slugs';
+    public const MODULE_FILTERINPUT_TAG_IDS = 'filterinput-tag-ids';
 
     public function getModulesToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUT_TAG_SLUGS],
+            [self::class, self::MODULE_FILTERINPUT_TAG_IDS],
         );
     }
 
@@ -30,6 +31,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         $filterInputs = [
             self::MODULE_FILTERINPUT_TAG_SLUGS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_SLUGS],
+            self::MODULE_FILTERINPUT_TAG_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_IDS],
         ];
         return $filterInputs[$module[1]] ?? null;
     }
@@ -38,6 +40,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_TAG_SLUGS:
+            case self::MODULE_FILTERINPUT_TAG_IDS:
                 return FormMultipleInput::class;
         }
 
@@ -48,6 +51,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_TAG_SLUGS => 'tagSlugs',
+            self::MODULE_FILTERINPUT_TAG_IDS => 'tagIDs',
             default => parent::getName($module),
         };
     }
@@ -56,6 +60,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_TAG_SLUGS => SchemaDefinition::TYPE_STRING,
+            self::MODULE_FILTERINPUT_TAG_IDS => SchemaDefinition::TYPE_ID,
             default => $this->getDefaultSchemaFilterInputType(),
         };
     }
@@ -64,6 +69,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_TAG_SLUGS => true,
+            self::MODULE_FILTERINPUT_TAG_IDS => true,
             default => false,
         };
     }
@@ -72,6 +78,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_TAG_SLUGS => true,
+            self::MODULE_FILTERINPUT_TAG_IDS => true,
             default => false,
         };
     }
@@ -79,10 +86,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getSchemaFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_TAG_SLUGS => sprintf(
-                $this->translationAPI->__('Limit results to elements with the given tags', 'tags'),
-                Param::VALUE_SEPARATOR
-            ),
+            self::MODULE_FILTERINPUT_TAG_SLUGS => $this->translationAPI->__('Limit results to elements with the given tags', 'tags'),
+            self::MODULE_FILTERINPUT_TAG_IDS => $this->translationAPI->__('Limit results to elements with the given ids', 'tags'),
             default => null,
         };
     }

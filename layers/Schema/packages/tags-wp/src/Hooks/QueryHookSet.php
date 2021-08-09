@@ -24,6 +24,10 @@ class QueryHookSet extends AbstractHookSet
             $query['tag'] = implode(',', $query['tag-slugs']);
             unset($query['tag-slugs']);
         }
+        if (isset($query['tag-ids'])) {
+            $query['tag__in'] = $query['tag-ids'];
+            unset($query['tag-ids']);
+        }
         return $query;
     }
 }
