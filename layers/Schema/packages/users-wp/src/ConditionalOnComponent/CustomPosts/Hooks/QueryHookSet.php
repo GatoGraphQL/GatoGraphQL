@@ -10,7 +10,7 @@ class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->hooksAPI->addFilter(
             'CMSAPI:customposts:query',
             [$this, 'convertCustomPostsQuery'],
             10,
