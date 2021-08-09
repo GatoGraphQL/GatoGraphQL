@@ -6,13 +6,14 @@ namespace PoPSchema\UserMetaWP\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
+use PoPSchema\UsersWP\TypeAPIs\UserTypeAPI;
 
 class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
-            'CMSAPI:users:query',
+            UserTypeAPI::HOOK_QUERY,
             [MetaQueryHelpers::class, 'convertMetaQuery']
         );
     }
