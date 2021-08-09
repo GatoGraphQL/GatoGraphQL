@@ -8,7 +8,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleP
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\Taxonomies\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class FilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
+class TagFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
     

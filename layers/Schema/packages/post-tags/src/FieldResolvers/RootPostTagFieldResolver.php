@@ -13,7 +13,7 @@ use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Tags\ComponentConfiguration;
-use PoPSchema\Tags\ModuleProcessors\FilterInputContainerModuleProcessor;
+use PoPSchema\Tags\ModuleProcessors\TagFilterInputContainerModuleProcessor;
 
 class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -123,9 +123,9 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         return match ($fieldName) {
-            'postTags' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGS],
-            'postTagCount' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGCOUNT],
-            'postTagNames' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGS],
+            'postTags' => [TagFilterInputContainerModuleProcessor::class, TagFilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGS],
+            'postTagCount' => [TagFilterInputContainerModuleProcessor::class, TagFilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGCOUNT],
+            'postTagNames' => [TagFilterInputContainerModuleProcessor::class, TagFilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGS],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
         };
     }
