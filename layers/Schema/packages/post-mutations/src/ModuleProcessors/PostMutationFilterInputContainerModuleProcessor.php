@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\PostMutations\ModuleProcessors;
 
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
-use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
+use PoPSchema\Posts\ModuleProcessors\AbstractPostFilterInputContainerModuleProcessor;
 
-class PostMutationFilterInputContainerModuleProcessor extends PostFilterInputContainerModuleProcessor
+class PostMutationFilterInputContainerModuleProcessor extends AbstractPostFilterInputContainerModuleProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
