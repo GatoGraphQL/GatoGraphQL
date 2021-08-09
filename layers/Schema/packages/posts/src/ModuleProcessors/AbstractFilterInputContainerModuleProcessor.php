@@ -15,6 +15,16 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
     public const MODULE_FILTERINNER_POSTCOUNT = 'filterinner-postcount';
     public const MODULE_FILTERINNER_ADMINPOSTS = 'filterinner-adminposts';
     public const MODULE_FILTERINNER_ADMINPOSTCOUNT = 'filterinner-adminpostcount';
+    
+    public function getModulesToProcess(): array
+    {
+        return array(
+            [self::class, self::MODULE_FILTERINNER_POSTS],
+            [self::class, self::MODULE_FILTERINNER_POSTCOUNT],
+            [self::class, self::MODULE_FILTERINNER_ADMINPOSTS],
+            [self::class, self::MODULE_FILTERINNER_ADMINPOSTCOUNT],
+        );
+    }
 
     public function getSubmodules(array $module): array
     {
