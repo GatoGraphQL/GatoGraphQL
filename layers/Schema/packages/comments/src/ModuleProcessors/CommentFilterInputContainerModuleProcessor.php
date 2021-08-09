@@ -11,7 +11,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInpu
 class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
- 
+
     public const MODULE_FILTERINNER_COMMENTS = 'filterinner-comments';
 
     public function getModulesToProcess(): array

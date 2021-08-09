@@ -9,7 +9,7 @@ use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProc
 class PostCategoryFilterInputContainerModuleProcessor extends CategoryFilterInputContainerModuleProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
-    
+
     /**
      * @return string[]
      */

@@ -11,7 +11,7 @@ use PoPSchema\Taxonomies\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 class CategoryFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
-    
+
     public const MODULE_FILTERINNER_CATEGORIES = 'filterinner-categories';
     public const MODULE_FILTERINNER_CATEGORYCOUNT = 'filterinner-categorycount';
 

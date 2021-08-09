@@ -9,7 +9,7 @@ use PoPSchema\Tags\ModuleProcessors\TagFilterInputContainerModuleProcessor;
 class PostTagFilterInputContainerModuleProcessor extends TagFilterInputContainerModuleProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
-    
+
     /**
      * @return string[]
      */

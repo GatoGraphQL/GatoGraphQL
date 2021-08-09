@@ -12,7 +12,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInpu
 abstract class AbstractPostFilterInputContainerModuleProcessor extends AbstractCustomPostFilterInputContainerModuleProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
-    
+
     public const MODULE_FILTERINNER_POSTS = 'filterinner-posts';
     public const MODULE_FILTERINNER_POSTCOUNT = 'filterinner-postcount';
     public const MODULE_FILTERINNER_ADMINPOSTS = 'filterinner-adminposts';

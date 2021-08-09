@@ -9,7 +9,8 @@ use PoPSchema\CustomPosts\ModuleProcessors\AbstractCustomPostFilterInputContaine
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
-{    
+{
+
     protected function init(): void
     {
         $this->hooksAPI->addFilter(

@@ -11,7 +11,7 @@ use PoPSchema\Taxonomies\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 class TagFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
-    
+
     public const MODULE_FILTERINNER_TAGS = 'filterinner-tags';
     public const MODULE_FILTERINNER_TAGCOUNT = 'filterinner-tagcount';
 

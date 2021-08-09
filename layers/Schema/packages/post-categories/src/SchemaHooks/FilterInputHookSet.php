@@ -9,7 +9,8 @@ use PoPSchema\Posts\ModuleProcessors\AbstractPostFilterInputContainerModuleProce
 use PoPSchema\Categories\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
-{    
+{
+
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
