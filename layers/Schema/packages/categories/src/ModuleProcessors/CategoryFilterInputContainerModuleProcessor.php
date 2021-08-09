@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\ModuleProcessors;
 
-use PoPSchema\CustomPosts\ModuleProcessors\AbstractCustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessorTrait;
+use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\Taxonomies\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class CategoryFilterInputContainerModuleProcessor extends AbstractCustomPostFilterInputContainerModuleProcessor
+class CategoryFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
-    use CustomPostFilterInputContainerModuleProcessorTrait;
-    
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
     
     public const MODULE_FILTERINNER_CATEGORIES = 'filterinner-categories';
@@ -46,5 +43,16 @@ class CategoryFilterInputContainerModuleProcessor extends AbstractCustomPostFilt
             ],
             default => [],
         };
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getFilterInputHookNames(): array
+    {
+        return [
+            ...parent::getFilterInputHookNames(),
+            self::HOOK_FILTER_INPUTS,
+        ];
     }
 }
