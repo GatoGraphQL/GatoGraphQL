@@ -33,7 +33,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\API\Component::class,
-            \PoP\Users\Component::class,
+            \PoPSchema\Users\Component::class,
         ];
     }
 
