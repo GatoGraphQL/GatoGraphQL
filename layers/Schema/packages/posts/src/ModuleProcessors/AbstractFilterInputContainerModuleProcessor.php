@@ -30,7 +30,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
 
     public function getSubmodules(array $module): array
     {
-        $ret = parent::getSubmodules($module);
+        $submodules = parent::getSubmodules($module);
 
         $postListModules = [
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
@@ -48,7 +48,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
         ];
         $statusModule = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
-        $inputmodules = [
+        $filterInputModules = match ($module[1]) {
             self::MODULE_FILTERINNER_POSTS => $postListModules,
             self::MODULE_FILTERINNER_POSTCOUNT => $postCountModules,
             self::MODULE_FILTERINNER_ADMINPOSTS => [
@@ -59,19 +59,19 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
                 ...$postCountModules,
                 $statusModule,
             ],
-        ];
+            default => [],
+        };
         // Enable extensions to add more FilterInputs
-        $modules = $inputmodules[$module[1]] ?? [];
         foreach ($this->getFilterInputHookNames() as $filterInputHookName) {
-            $modules = $this->hooksAPI->applyFilters(
+            $filterInputModules = $this->hooksAPI->applyFilters(
                 $filterInputHookName,
-                $modules,
+                $filterInputModules,
                 $module
             );
         }
         return array_merge(
-            $ret,
-            $modules
+            $submodules,
+            $filterInputModules
         );
     }
 
