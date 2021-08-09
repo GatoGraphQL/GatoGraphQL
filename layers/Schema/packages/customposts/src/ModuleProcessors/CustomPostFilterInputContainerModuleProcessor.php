@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class CustomPostFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
+class CustomPostFilterInputContainerModuleProcessor extends AbstractCustomPostFilterInputContainerModuleProcessor
 {
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+
     public const MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST = 'filterinner-unioncustompostlist';
     public const MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT = 'filterinner-unioncustompostcount';
     public const MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST = 'filterinner-adminunioncustompostlist';
@@ -34,11 +35,9 @@ class CustomPostFilterInputContainerModuleProcessor extends AbstractFilterDataMo
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getFilterInputModules(array $module): array
     {
-        $ret = parent::getSubmodules($module);
-
-        $inputmodules = match ($module[1]) {
+        $filterInputModules = match ($module[1]) {
             self::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST,
             self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST,
             self::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST,
@@ -62,7 +61,7 @@ class CustomPostFilterInputContainerModuleProcessor extends AbstractFilterDataMo
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                 ],
-                default => []
+                default => [],
         };
         // Fields "customPosts" and "customPostCount" also have the "postTypes" filter
         if (
@@ -71,7 +70,7 @@ class CustomPostFilterInputContainerModuleProcessor extends AbstractFilterDataMo
                 self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT,
             ])
         ) {
-            $inputmodules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES];
+            $filterInputModules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES];
         }
         // "Admin" fields also have the "status" filter
         if (
@@ -82,20 +81,19 @@ class CustomPostFilterInputContainerModuleProcessor extends AbstractFilterDataMo
                 self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT,
             ])
         ) {
-            $inputmodules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
+            $filterInputModules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
         }
-        if (
-            $modules = $this->hooksAPI->applyFilters(
-                'CustomPosts:FilterInputContainerModuleProcessor:inputmodules',
-                $inputmodules,
-                $module
-            )
-        ) {
-            $ret = array_merge(
-                $ret,
-                $modules
-            );
-        }
-        return $ret;
+        return $filterInputModules;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getFilterInputHookNames(): array
+    {
+        return [
+            ...parent::getFilterInputHookNames(),
+            self::HOOK_FILTER_INPUTS,
+        ];
     }
 }

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\AbstractCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
 
-class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
+abstract class AbstractPostFilterInputContainerModuleProcessor extends AbstractCustomPostFilterInputContainerModuleProcessor
 {
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+
     public const MODULE_FILTERINNER_POSTS = 'filterinner-posts';
     public const MODULE_FILTERINNER_POSTCOUNT = 'filterinner-postcount';
     public const MODULE_FILTERINNER_ADMINPOSTS = 'filterinner-adminposts';
@@ -26,10 +28,8 @@ class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProces
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getFilterInputModules(array $module): array
     {
-        $ret = parent::getSubmodules($module);
-
         $postListModules = [
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
@@ -46,7 +46,7 @@ class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProces
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
         ];
         $statusModule = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
-        $inputmodules = [
+        return match ($module[1]) {
             self::MODULE_FILTERINNER_POSTS => $postListModules,
             self::MODULE_FILTERINNER_POSTCOUNT => $postCountModules,
             self::MODULE_FILTERINNER_ADMINPOSTS => [
@@ -57,19 +57,18 @@ class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProces
                 ...$postCountModules,
                 $statusModule,
             ],
+            default => [],
+        };
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getFilterInputHookNames(): array
+    {
+        return [
+            ...parent::getFilterInputHookNames(),
+            self::HOOK_FILTER_INPUTS,
         ];
-        if (
-            $modules = $this->hooksAPI->applyFilters(
-                'Posts:FilterInputContainerModuleProcessor:inputmodules',
-                $inputmodules[$module[1]],
-                $module
-            )
-        ) {
-            $ret = array_merge(
-                $ret,
-                $modules
-            );
-        }
-        return $ret;
     }
 }

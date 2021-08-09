@@ -33,9 +33,7 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
             $query['category__not_in'] = $query['category-not-in'];
             unset($query['category-not-in']);
         }
-
         if (isset($query['category-ids'])) {
-            // Watch out! In WordPress it is a string (either tag ID or comma-separated tag IDs), but in PoP it is an array of IDs!
             $query['category__in'] = $query['category-ids'];
             unset($query['category-ids']);
         }

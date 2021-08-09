@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
 use PoPSchema\Tags\FieldResolvers\AbstractCustomPostQueryableFieldResolver;
-use PoPSchema\Tags\ModuleProcessors\FilterInputContainerModuleProcessor;
+use PoPSchema\PostTags\ModuleProcessors\PostTagFilterInputContainerModuleProcessor;
 
 class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolver
 {
@@ -34,9 +34,9 @@ class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolve
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         return match ($fieldName) {
-            'tags' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGS],
-            'tagCount' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGCOUNT],
-            'tagNames' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGS],
+            'tags' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGS],
+            'tagCount' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGCOUNT],
+            'tagNames' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGS],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
         };
     }

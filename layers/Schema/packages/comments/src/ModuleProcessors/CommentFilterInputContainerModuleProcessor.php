@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
+use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
 
-class CommentFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
+class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+
     public const MODULE_FILTERINNER_COMMENTS = 'filterinner-comments';
 
     public function getModulesToProcess(): array
@@ -19,11 +21,9 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterDataModul
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getFilterInputModules(array $module): array
     {
-        $ret = parent::getSubmodules($module);
-
-        $inputmodules = [
+        return match ($module[1]) {
             self::MODULE_FILTERINNER_COMMENTS => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
@@ -33,19 +33,18 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterDataModul
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
             ],
+            default => [],
+        };
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getFilterInputHookNames(): array
+    {
+        return [
+            ...parent::getFilterInputHookNames(),
+            self::HOOK_FILTER_INPUTS,
         ];
-        if (
-            $modules = $this->hooksAPI->applyFilters(
-                'Comments:FilterInputContainerModuleProcessor:inputmodules',
-                $inputmodules[$module[1]],
-                $module
-            )
-        ) {
-            $ret = array_merge(
-                $ret,
-                $modules
-            );
-        }
-        return $ret;
     }
 }

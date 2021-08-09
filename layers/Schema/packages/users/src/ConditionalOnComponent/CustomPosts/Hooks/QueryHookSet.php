@@ -24,7 +24,6 @@ class QueryHookSet extends AbstractHookSet
             $query['author'] = implode(',', $query['authors']);
             unset($query['authors']);
         }
-
         return $query;
     }
 }

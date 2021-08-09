@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
+use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
+class UserFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+
     public const MODULE_FILTERINNER_USERS = 'filterinner-users';
     public const MODULE_FILTERINNER_USERCOUNT = 'filterinner-usercount';
     public const MODULE_FILTERINNER_ADMINUSERS = 'filterinner-adminusers';
@@ -25,11 +27,9 @@ class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProces
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getFilterInputModules(array $module): array
     {
-        $ret = parent::getSubmodules($module);
-
-        $inputmodules = match ($module[1]) {
+        $filterInputModules = match ($module[1]) {
             self::MODULE_FILTERINNER_USERS,
             self::MODULE_FILTERINNER_ADMINUSERS => [
                 [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_NAME],
@@ -54,20 +54,19 @@ class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProces
             self::MODULE_FILTERINNER_ADMINUSERCOUNT,
             ])
         ) {
-            $inputmodules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EMAILS];
+            $filterInputModules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EMAILS];
         }
-        if (
-            $modules = $this->hooksAPI->applyFilters(
-                'Users:FilterInputContainerModuleProcessor:inputmodules',
-                $inputmodules,
-                $module
-            )
-        ) {
-            $ret = array_merge(
-                $ret,
-                $modules
-            );
-        }
-        return $ret;
+        return $filterInputModules;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getFilterInputHookNames(): array
+    {
+        return [
+            ...parent::getFilterInputHookNames(),
+            self::HOOK_FILTER_INPUTS,
+        ];
     }
 }

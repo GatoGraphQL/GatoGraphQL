@@ -163,13 +163,15 @@
     },
     "require-dev": {
         "getpop/api": "^0.9",
+        "getpop/users": "^0.9",
         "phpstan/phpstan": "^0.12.76",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.11",
         "squizlabs/php_codesniffer": "^3.0"
     },
     "suggest": {
-        "getpop/api": "Integrates well with API"
+        "getpop/api": "Integrates well with API",
+        "getpop/users": "Integrates well with Users"
     },
     "autoload": {
         "psr-4": {

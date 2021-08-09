@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
+use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\Taxonomies\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
+class TagFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+
     public const MODULE_FILTERINNER_TAGS = 'filterinner-tags';
     public const MODULE_FILTERINNER_TAGCOUNT = 'filterinner-tagcount';
 
@@ -21,11 +23,9 @@ class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProces
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getFilterInputModules(array $module): array
     {
-        $ret = parent::getSubmodules($module);
-
-        $inputmodules = [
+        return match ($module[1]) {
             self::MODULE_FILTERINNER_TAGS => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
@@ -41,19 +41,18 @@ class FilterInputContainerModuleProcessor extends AbstractFilterDataModuleProces
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                 [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
             ],
+            default => [],
+        };
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getFilterInputHookNames(): array
+    {
+        return [
+            ...parent::getFilterInputHookNames(),
+            self::HOOK_FILTER_INPUTS,
         ];
-        if (
-            $modules = $this->hooksAPI->applyFilters(
-                'Tags:FilterInputContainerModuleProcessor:inputmodules',
-                $inputmodules[$module[1]],
-                $module
-            )
-        ) {
-            $ret = array_merge(
-                $ret,
-                $modules
-            );
-        }
-        return $ret;
     }
 }

@@ -12,3 +12,6 @@ services:
 
     PoPSchema\Tags\Hooks\:
         resource: '../src/Hooks/*'
+
+    PoPSchema\Tags\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'

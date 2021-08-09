@@ -8,7 +8,7 @@ use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\Users\ModuleProcessors\FilterInputContainerModuleProcessor;
+use PoPSchema\Users\ModuleProcessors\UserFilterInputContainerModuleProcessor;
 
 class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
@@ -68,13 +68,13 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
-                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_USERS];
+                return [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINNER_USERS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT:
-                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_USERCOUNT];
+                return [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINNER_USERCOUNT];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
-                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUSERS];
+                return [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUSERS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT:
-                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUSERCOUNT];
+                return [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUSERCOUNT];
         }
 
         return parent::getFilterSubmodule($module);
