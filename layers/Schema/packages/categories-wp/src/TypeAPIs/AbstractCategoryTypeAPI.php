@@ -21,6 +21,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 {
     use InjectedFilterDataloadingModuleTypeAPITrait;
 
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
@@ -164,7 +166,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return $this->hooksAPI->applyFilters(
             TaxonomyTypeAPI::HOOK_QUERY,
             $this->hooksAPI->applyFilters(
-                'CMSAPI:categories:query',
+                self::HOOK_QUERY,
                 $query,
                 $options
             ),
