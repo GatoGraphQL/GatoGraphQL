@@ -24,6 +24,8 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
 {
     use InjectedFilterDataloadingModuleTypeAPITrait;
 
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     public function __construct(
         QueriedObjectHelperServiceInterface $queriedObjectHelperService,
         protected HooksAPIInterface $hooksAPI,
@@ -217,7 +219,7 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
         }
 
         return $this->hooksAPI->applyFilters(
-            'CMSAPI:customposts:query',
+            self::HOOK_QUERY,
             $query,
             $options
         );
