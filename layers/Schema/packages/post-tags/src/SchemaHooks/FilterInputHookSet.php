@@ -14,14 +14,14 @@ class FilterInputHookSet extends AbstractHookSet
     {
         $this->hooksAPI->addFilter(
             AbstractPostFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
-            [$this, 'getFilterInputSubmodules']
+            [$this, 'getFilterInputModules']
         );
     }
 
-    public function getFilterInputSubmodules(array $filterInputSubmodules): array
+    public function getFilterInputModules(array $filterInputModules): array
     {
         return [
-            ...$filterInputSubmodules,
+            ...$filterInputModules,
             [
                 FilterInputModuleProcessor::class,
                 FilterInputModuleProcessor::MODULE_FILTERINPUT_TAG_SLUGS
