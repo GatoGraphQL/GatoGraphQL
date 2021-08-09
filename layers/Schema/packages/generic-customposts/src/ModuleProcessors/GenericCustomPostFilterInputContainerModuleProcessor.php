@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\GenericCustomPosts\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\AbstractCustomPostFilterInputContainerModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
-use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
-class GenericCustomPostFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
+class GenericCustomPostFilterInputContainerModuleProcessor extends AbstractCustomPostFilterInputContainerModuleProcessor
 {
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+
     public const MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST = 'filterinner-genericcustompostlist';
     public const MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT = 'filterinner-genericcustompostcount';
     public const MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST = 'filterinner-admingenericcustompostlist';
@@ -26,11 +28,9 @@ class GenericCustomPostFilterInputContainerModuleProcessor extends AbstractFilte
         );
     }
 
-    public function getSubmodules(array $module): array
+    public function getFilterInputModules(array $module): array
     {
-        $ret = parent::getSubmodules($module);
-
-        $inputmodules = match ($module[1]) {
+        $filterInputModules = match ($module[1]) {
             self::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST,
             self::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST
                 => [
@@ -61,20 +61,19 @@ class GenericCustomPostFilterInputContainerModuleProcessor extends AbstractFilte
                 self::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTCOUNT,
             ])
         ) {
-            $inputmodules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
+            $filterInputModules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
         }
-        if (
-            $modules = $this->hooksAPI->applyFilters(
-                'GenericCustomPosts:FilterInputContainerModuleProcessor:inputmodules',
-                $inputmodules,
-                $module
-            )
-        ) {
-            $ret = array_merge(
-                $ret,
-                $modules
-            );
-        }
-        return $ret;
+        return $filterInputModules;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getFilterInputHookNames(): array
+    {
+        return [
+            ...parent::getFilterInputHookNames(),
+            self::HOOK_FILTER_INPUTS,
+        ];
     }
 }
