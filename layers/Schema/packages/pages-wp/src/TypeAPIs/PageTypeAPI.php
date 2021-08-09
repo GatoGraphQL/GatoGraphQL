@@ -11,13 +11,14 @@ use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
 
 use function get_post;
-use function get_option;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
 class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
 {
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     /**
      * Add an extra hook just to modify pages
      *
@@ -29,7 +30,7 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
     {
         $query = parent::convertCustomPostsQuery($query, $options);
         return HooksAPIFacade::getInstance()->applyFilters(
-            'CMSAPI:pages:query',
+            self::HOOK_QUERY,
             $query,
             $options
         );

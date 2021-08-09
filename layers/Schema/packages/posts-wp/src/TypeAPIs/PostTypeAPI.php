@@ -17,6 +17,8 @@ use function get_post;
  */
 class PostTypeAPI extends CustomPostTypeAPI implements PostTypeAPIInterface
 {
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     /**
      * Add an extra hook just to modify posts
      *
@@ -28,7 +30,7 @@ class PostTypeAPI extends CustomPostTypeAPI implements PostTypeAPIInterface
     {
         $query = parent::convertCustomPostsQuery($query, $options);
         return HooksAPIFacade::getInstance()->applyFilters(
-            'CMSAPI:posts:query',
+            self::HOOK_QUERY,
             $query,
             $options
         );

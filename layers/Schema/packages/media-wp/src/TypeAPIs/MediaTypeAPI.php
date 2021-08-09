@@ -19,6 +19,8 @@ use function get_posts;
  */
 class MediaTypeAPI implements MediaTypeAPIInterface
 {
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
@@ -140,7 +142,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
         }
 
         return $this->hooksAPI->applyFilters(
-            'CMSAPI:media:query',
+            self::HOOK_QUERY,
             $query,
             $options
         );
