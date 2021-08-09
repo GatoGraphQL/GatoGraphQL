@@ -60,23 +60,28 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
                 $statusModule,
             ],
         ];
-        if (
+        // Enable extensions to add more FilterInputs
+        $modules = $inputmodules[$module[1]] ?? [];
+        foreach ($this->getFilterInputHookNames() as $filterInputHookName) {
             $modules = $this->hooksAPI->applyFilters(
-                $this->getFilterInputHookName(),
-                $inputmodules[$module[1]],
+                $filterInputHookName,
+                $modules,
                 $module
-            )
-        ) {
-            $ret = array_merge(
-                $ret,
-                $modules
             );
         }
-        return $ret;
+        return array_merge(
+            $ret,
+            $modules
+        );
     }
 
-    public function getFilterInputHookName(): string
+    /**
+     * @return string[]
+     */
+    public function getFilterInputHookNames(): array
     {
-        return static::HOOK_FILTER_INPUTS;
+        return [
+            static::HOOK_FILTER_INPUTS,
+        ];
     }
 }
