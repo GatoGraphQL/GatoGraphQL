@@ -19,6 +19,8 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 {
     use InjectedFilterDataloadingModuleTypeAPITrait;
 
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     protected array $cmsToPoPCommentStatusConversion = [
         'approve' => Status::APPROVED,
         'hold' => Status::ONHOLD,
@@ -142,7 +144,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         $query['type'] = 'comment';
 
         $query = $this->hooksAPI->applyFilters(
-            'CMSAPI:comments:query',
+            self::HOOK_QUERY,
             $query,
             $options
         );

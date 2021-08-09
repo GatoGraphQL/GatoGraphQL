@@ -20,6 +20,8 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
 {
     use InjectedFilterDataloadingModuleTypeAPITrait;
 
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
@@ -166,9 +168,9 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         }
 
         return $this->hooksAPI->applyFilters(
-            'CMSAPI:taxonomies:query',
+            TaxonomyTypeAPI::HOOK_QUERY,
             $this->hooksAPI->applyFilters(
-                'CMSAPI:tags:query',
+                self::HOOK_QUERY,
                 $query,
                 $options
             ),

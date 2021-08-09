@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace PoPSchema\UsersWP\ConditionalOnComponent\CustomPosts\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
+use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
 
 class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
-            'CMSAPI:customposts:query',
+        $this->hooksAPI->addFilter(
+            CustomPostTypeAPI::HOOK_QUERY,
             [$this, 'convertCustomPostsQuery'],
             10,
             2

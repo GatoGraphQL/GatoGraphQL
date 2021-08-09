@@ -14,6 +14,8 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 {
     use InjectedFilterDataloadingModuleTypeAPITrait;
 
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     protected function getTermObjectAndID(string | int | object $termObjectOrID): array
     {
         if (is_object($termObjectOrID)) {

@@ -18,6 +18,8 @@ class UserTypeAPI extends AbstractUserTypeAPI
 {
     use InjectedFilterDataloadingModuleTypeAPITrait;
 
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     /**
      * Indicates if the passed object is of type User
      */
@@ -197,7 +199,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         }
 
         return $this->hooksAPI->applyFilters(
-            'CMSAPI:users:query',
+            self::HOOK_QUERY,
             $query,
             $options
         );
