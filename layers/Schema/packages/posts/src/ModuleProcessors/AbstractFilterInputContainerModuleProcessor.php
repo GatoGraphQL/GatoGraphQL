@@ -11,11 +11,13 @@ use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInpu
 
 abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+
     public const MODULE_FILTERINNER_POSTS = 'filterinner-posts';
     public const MODULE_FILTERINNER_POSTCOUNT = 'filterinner-postcount';
     public const MODULE_FILTERINNER_ADMINPOSTS = 'filterinner-adminposts';
     public const MODULE_FILTERINNER_ADMINPOSTCOUNT = 'filterinner-adminpostcount';
-    
+
     public function getModulesToProcess(): array
     {
         return array(
@@ -60,7 +62,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         ];
         if (
             $modules = $this->hooksAPI->applyFilters(
-                'Posts:AbstractFilterInputContainerModuleProcessor:inputmodules',
+                $this->getFilterInputHookName(),
                 $inputmodules[$module[1]],
                 $module
             )
@@ -71,5 +73,10 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
             );
         }
         return $ret;
+    }
+
+    public function getFilterInputHookName(): string
+    {
+        return static::HOOK_FILTER_INPUTS;
     }
 }
