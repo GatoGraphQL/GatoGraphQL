@@ -21,9 +21,12 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
     public function convertCustomPostsQuery($query, array $options): array
     {
         if (isset($query['tag-ids'])) {
-            // Watch out! In WordPress it is a string (either tag ID or comma-separated tag IDs), but in PoP it is an array of IDs!
-            $query['tag_id'] = implode(',', $query['tag-ids']);
+            $query['tag__in'] = $query['tag-ids'];
             unset($query['tag-ids']);
+        }
+        if (isset($query['tag-slugs'])) {
+            $query['tag'] = implode(',', $query['tag-slugs']);
+            unset($query['tag-slugs']);
         }
         if (isset($query['tags'])) {
             // Watch out! In WordPress it is a string (either tag slug or comma-separated tag slugs), but in PoP it is an array of slugs!

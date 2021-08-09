@@ -11,3 +11,6 @@ services:
 
     PoPSchema\PostCategories\TypeDataLoaders\:
         resource: '../src/TypeDataLoaders/*'
+
+    PoPSchema\PostCategories\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'
