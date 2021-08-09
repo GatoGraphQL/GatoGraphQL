@@ -6,7 +6,7 @@ namespace PoPSchema\Posts\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoPSchema\Posts\ModuleProcessors\FilterInputContainerModuleProcessor;
+use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
@@ -70,13 +70,13 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
-                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_POSTS];
+                return [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_POSTS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT:
-                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_POSTCOUNT];
+                return [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_POSTCOUNT];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
-                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPOSTS];
+                return [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPOSTS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT:
-                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPOSTCOUNT];
+                return [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPOSTCOUNT];
         }
 
         return parent::getFilterSubmodule($module);

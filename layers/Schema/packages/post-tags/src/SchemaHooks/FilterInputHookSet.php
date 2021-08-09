@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\SchemaHooks;
 
 use PoP\Hooks\AbstractHookSet;
-use PoPSchema\Posts\ModuleProcessors\FilterInputContainerModuleProcessor;
+use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 use PoPSchema\Tags\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
@@ -13,7 +13,7 @@ class FilterInputHookSet extends AbstractHookSet
     protected function init(): void
     {
         $this->hooksAPI->addAction(
-            FilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
+            PostFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
             [$this, 'getFilterInputSubmodules']
         );
     }
