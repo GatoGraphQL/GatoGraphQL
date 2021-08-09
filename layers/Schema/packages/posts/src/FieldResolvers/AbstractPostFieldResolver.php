@@ -11,7 +11,6 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
-use PoPSchema\Posts\ModuleProcessors\FilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -95,17 +94,6 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
                 return false;
         }
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
-    {
-        return match ($fieldName) {
-            'posts' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_POSTS],
-            'postCount' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_POSTCOUNT],
-            'unrestrictedPosts' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPOSTS],
-            'unrestrictedPostCount' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPOSTCOUNT],
-            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
-        };
     }
 
     /**

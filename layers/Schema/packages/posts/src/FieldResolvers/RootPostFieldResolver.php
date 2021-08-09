@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\FieldResolvers;
 
-use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoPSchema\Posts\Facades\PostTypeAPIFacade;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\Posts\Facades\PostTypeAPIFacade;
+use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
+use PoPSchema\Posts\ModuleProcessors\FilterInputContainerModuleProcessor;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class RootPostFieldResolver extends AbstractPostFieldResolver
@@ -98,6 +99,17 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
                 );
         }
         return $schemaFieldArgs;
+    }
+
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    {
+        return match ($fieldName) {
+            'posts' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_POSTS],
+            'postCount' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_POSTCOUNT],
+            'unrestrictedPosts' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPOSTS],
+            'unrestrictedPostCount' => [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPOSTCOUNT],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
+        };
     }
 
     /**
