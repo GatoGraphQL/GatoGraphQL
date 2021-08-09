@@ -20,6 +20,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.postCategoryBySlug: PostCategory`
   - `Root.postTagBySlug: PostTag`
   - `Root.mediaItemBySlug: MediaItem`
+- Filter custom post fields (`Root.posts`, `User.posts`, etc) via new arguments:
+  - `tagIDs`
+  - `tagSlugs`
+  - `categoryIDs`
+  - `authorIDs`
 - Fetch a user by different means:
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)
