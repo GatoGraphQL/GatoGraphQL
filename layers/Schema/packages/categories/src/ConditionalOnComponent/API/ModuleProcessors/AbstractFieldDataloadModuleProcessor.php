@@ -6,7 +6,7 @@ namespace PoPSchema\Categories\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoPSchema\Categories\ModuleProcessors\FilterInputContainerModuleProcessor;
+use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
@@ -50,9 +50,9 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
-                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_CATEGORIES];
+                return [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINNER_CATEGORIES];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT:
-                return [FilterInputContainerModuleProcessor::class, FilterInputContainerModuleProcessor::MODULE_FILTERINNER_CATEGORYCOUNT];
+                return [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINNER_CATEGORYCOUNT];
         }
 
         return parent::getFilterSubmodule($module);
