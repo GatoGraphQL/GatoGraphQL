@@ -11,6 +11,7 @@ use PoP\Routing\RouteHookNames;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Posts\ModuleProcessors\FilterInputContainerModuleProcessor;
 use PoPSchema\PostTags\ComponentConfiguration;
+use PoPSchema\Tags\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
 {
@@ -39,7 +40,10 @@ class FilterInputHookSet extends AbstractHookSet
     {
         return [
             ...$filterInputSubmodules,
-            ComponentConfiguration::getPostTagsRoute(),
+            [
+                FilterInputModuleProcessor::class,
+                FilterInputModuleProcessor::MODULE_FILTERINPUT_TAG_SLUGS
+            ],
         ];
     }
 }
