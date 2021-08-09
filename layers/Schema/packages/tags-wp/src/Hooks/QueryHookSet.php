@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\Hooks;
+namespace PoPSchema\TagsWP\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 
@@ -20,9 +20,9 @@ class QueryHookSet extends AbstractHookSet
 
     public function convertCustomPostsQuery(array $query, array $options): array
     {
-        if (isset($query['authors'])) {
-            $query['author'] = implode(',', $query['authors']);
-            unset($query['authors']);
+        if (isset($query['tag-slugs'])) {
+            $query['tag'] = implode(',', $query['tag-slugs']);
+            unset($query['tag-slugs']);
         }
         return $query;
     }
