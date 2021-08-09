@@ -68,18 +68,22 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getSchemaFilterInputIsArrayType(array $module): bool
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_TAG_SLUGS => true,
-            self::MODULE_FILTERINPUT_TAG_IDS => true,
-            default => false,
+            self::MODULE_FILTERINPUT_TAG_SLUGS,
+            self::MODULE_FILTERINPUT_TAG_IDS
+                => true,
+            default
+                => false,
         };
     }
 
     public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_TAG_SLUGS => true,
-            self::MODULE_FILTERINPUT_TAG_IDS => true,
-            default => false,
+            self::MODULE_FILTERINPUT_TAG_SLUGS,
+            self::MODULE_FILTERINPUT_TAG_IDS
+                => true,
+            default
+                => false,
         };
     }
 

@@ -9,3 +9,6 @@ services:
 
     PoPSchema\UsersWP\ConditionalOnComponent\CustomPosts\LooseContracts\:
         resource: '../../../src/ConditionalOnComponent/CustomPosts/LooseContracts/*'
+
+    PoPSchema\UsersWP\ConditionalOnComponent\CustomPosts\Hooks\:
+        resource: '../../../src/ConditionalOnComponent/CustomPosts/Hooks/*'

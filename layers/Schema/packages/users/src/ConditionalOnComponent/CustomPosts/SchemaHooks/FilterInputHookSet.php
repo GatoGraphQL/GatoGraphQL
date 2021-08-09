@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks;
 
 use PoP\Hooks\AbstractHookSet;
-use PoPSchema\CustomPosts\ModuleProcessors\AbstractCustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
+use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
 {    
     protected function init(): void
     {
         $this->hooksAPI->addAction(
-            AbstractCustomPostFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
+            PostFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
             [$this, 'getFilterInputSubmodules']
         );
     }
@@ -22,10 +22,10 @@ class FilterInputHookSet extends AbstractHookSet
     {
         return [
             ...$filterInputSubmodules,
-            // [
-            //     FilterInputModuleProcessor::class,
-            //     FilterInputModuleProcessor::MODULE_FILTERINPUT_AUTHOR_IDS
-            // ],
+            [
+                FilterInputModuleProcessor::class,
+                FilterInputModuleProcessor::MODULE_FILTERINPUT_AUTHOR_IDS
+            ],
         ];
     }
 }
