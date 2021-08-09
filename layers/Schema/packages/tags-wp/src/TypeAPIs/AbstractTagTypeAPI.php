@@ -166,7 +166,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         }
 
         return $this->hooksAPI->applyFilters(
-            'CMSAPI:taxonomies:query',
+            TaxonomyTypeAPI::HOOK_QUERY,
             $this->hooksAPI->applyFilters(
                 'CMSAPI:tags:query',
                 $query,

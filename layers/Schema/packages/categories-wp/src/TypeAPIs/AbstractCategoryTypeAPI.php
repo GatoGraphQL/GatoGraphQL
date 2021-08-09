@@ -162,7 +162,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         }
 
         return $this->hooksAPI->applyFilters(
-            'CMSAPI:taxonomies:query',
+            TaxonomyTypeAPI::HOOK_QUERY,
             $this->hooksAPI->applyFilters(
                 'CMSAPI:categories:query',
                 $query,
