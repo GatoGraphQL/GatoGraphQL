@@ -7,11 +7,9 @@ namespace PoPSchema\CustomPosts\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
-use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 
 abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -23,7 +21,6 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
     public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [
-            QueryableFieldInterfaceResolver::class,
             IsCustomPostFieldInterfaceResolver::class,
         ];
     }
@@ -53,49 +50,15 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         $customPostTypeAPI = $this->getCustomPostTypeAPI();
         $customPost = $resultItem;
         switch ($fieldName) {
-            case 'content':
+            case 'datetime':
+                // If it is the current year, don't add the year. Otherwise, do
+                // 15 Jul, 21:47 or // 15 Jul 2018, 21:47
+                $date = $customPostTypeAPI->getPublishedDate($customPost);
                 $format = $fieldArgs['format'];
-                $value = '';
-                if ($format == CustomPostContentFormatEnum::HTML) {
-                    $value = $customPostTypeAPI->getContent($customPost);
-                } elseif ($format == CustomPostContentFormatEnum::PLAIN_TEXT) {
-                    $value = $customPostTypeAPI->getPlainTextContent($customPost);
+                if (!$format) {
+                    $format = ($dateFormatter->format('Y', $date) == date('Y')) ? 'j M, H:i' : 'j M Y, H:i';
                 }
-                return $this->hooksAPI->applyFilters(
-                    'pop_content',
-                    $value,
-                    $typeResolver->getID($customPost)
-                );
-
-            case 'url':
-                return $customPostTypeAPI->getPermalink($customPost);
-
-            case 'urlPath':
-                return $customPostTypeAPI->getPermalinkPath($customPost);
-
-            case 'slug':
-                return $customPostTypeAPI->getSlug($customPost);
-
-            case 'status':
-                return $customPostTypeAPI->getStatus($customPost);
-
-            case 'isStatus':
-                return $fieldArgs['status'] == $customPostTypeAPI->getStatus($customPost);
-
-            case 'date':
-                return $dateFormatter->format(
-                    $fieldArgs['format'],
-                    $customPostTypeAPI->getPublishedDate($customPost)
-                );
-
-            case 'title':
-                return $customPostTypeAPI->getTitle($customPost);
-
-            case 'excerpt':
-                return $customPostTypeAPI->getExcerpt($customPost);
-
-            case 'customPostType':
-                return $customPostTypeAPI->getCustomPostType($customPost);
+                return $dateFormatter->format($format, $date);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
