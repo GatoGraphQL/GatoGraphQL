@@ -47,7 +47,7 @@ trait FormInputModuleProcessorTrait
         return ModuleUtils::getModuleOutputName($module);
     }
 
-    public function getValue(array $module, ?array $source = null)
+    public function getValue(array $module, ?array $source = null): mixed
     {
         if ($input = $this->getInput($module)) {
             return $input->getValue($source);

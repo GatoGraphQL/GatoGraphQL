@@ -8,7 +8,7 @@ trait FormComponentModuleDelegatorTrait
     {
         return null;
     }
-    public function getValue(array $module, ?array $source = null)
+    public function getValue(array $module, ?array $source = null): mixed
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);
