@@ -62,6 +62,8 @@ use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
 use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Users\Environment as UsersEnvironment;
+use PoPSchema\Media\ComponentConfiguration as MediaComponentConfiguration;
+use PoPSchema\Media\Environment as MediaEnvironment;
 use PoPSchema\UserAvatars\ComponentConfiguration as UserAvatarsComponentConfiguration;
 use PoPSchema\UserAvatars\Environment as UserAvatarsEnvironment;
 
@@ -250,6 +252,19 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => UsersComponentConfiguration::class,
                 'envVariable' => UsersEnvironment::USER_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
+                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
+            ],
+            // Media default/max limits
+            [
+                'class' => MediaComponentConfiguration::class,
+                'envVariable' => MediaEnvironment::MEDIA_LIST_DEFAULT_LIMIT,
+                'module' => SchemaTypeModuleResolver::SCHEMA_MEDIA,
+                'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
+            ],
+            [
+                'class' => MediaComponentConfiguration::class,
+                'envVariable' => MediaEnvironment::MEDIA_LIST_MAX_LIMIT,
+                'module' => SchemaTypeModuleResolver::SCHEMA_MEDIA,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             // Tag default/max limits

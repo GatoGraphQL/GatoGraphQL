@@ -118,9 +118,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_POST_TAGS,
             self::SCHEMA_CATEGORIES,
             self::SCHEMA_POST_CATEGORIES,
+            self::SCHEMA_MEDIA,
             self::SCHEMA_MENUS,
             self::SCHEMA_SETTINGS,
-            self::SCHEMA_MEDIA,
         ];
     }
 
@@ -336,6 +336,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     // self::SCHEMA_GENERIC_CUSTOMPOSTS,
                     // self::SCHEMA_POSTS,
                     self::SCHEMA_USERS,
+                    self::SCHEMA_MEDIA,
                     self::SCHEMA_TAGS,
                     self::SCHEMA_CATEGORIES,
                     // self::SCHEMA_PAGES,
@@ -382,6 +383,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => false,
             ],
             self::SCHEMA_USERS => [
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $isStaticApp ? -1 : 100,
+            ],
+            self::SCHEMA_MEDIA => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $isStaticApp ? -1 : 100,
             ],
@@ -459,6 +464,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 // self::SCHEMA_GENERIC_CUSTOMPOSTS,
                 // self::SCHEMA_POSTS,
                 self::SCHEMA_USERS,
+                self::SCHEMA_MEDIA,
                 self::SCHEMA_TAGS,
                 self::SCHEMA_CATEGORIES,
                 // self::SCHEMA_PAGES,
@@ -476,6 +482,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 // ],
                 self::SCHEMA_USERS => [
                     'entities' => \__('users', 'graphql-api'),
+                ],
+                self::SCHEMA_MEDIA => [
+                    'entities' => \__('media items', 'graphql-api'),
                 ],
                 self::SCHEMA_TAGS => [
                     'entities' => \__('tags', 'graphql-api'),

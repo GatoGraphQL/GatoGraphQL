@@ -17,6 +17,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
+use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\Media\ModuleProcessors\MediaFilterInputContainerModuleProcessor;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
@@ -150,11 +151,14 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'mediaItems':
+                $query = [
+                    'limit' => ComponentConfiguration::getMediaListDefaultLimit(),
+                ];
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $this->mediaTypeAPI->getMediaElements([], $options);
+                return $this->mediaTypeAPI->getMediaElements($query, $options);
             case 'mediaItem':
             case 'mediaItemBySlug':
                 $query = [];
