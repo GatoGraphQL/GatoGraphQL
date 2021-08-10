@@ -45,7 +45,7 @@
         "pop-schema/user-state-mutations-wp": "^0.9",
         "pop-schema/user-state-wp": "^0.9",
         "pop-schema/usermeta-wp": "^0.9",
-        "pop-wp-schema/media-wp": "^0.9",
+        "pop-wp-schema/media": "^0.9",
         "pop-wp-schema/users": "^0.9"
     },
     "require-dev": {
