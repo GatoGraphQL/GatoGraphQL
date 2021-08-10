@@ -40,7 +40,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         return parent::isMandatory($module, $props);
     }
 
-    public function getInputOptions(array $module)
+    public function getInputOptions(array $module): array
     {
         $options = parent::getInputOptions($module);
 

@@ -35,7 +35,7 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
         return $filterInputs[$module[1]] ?? null;
     }
 
-    public function getInputOptions(array $module)
+    public function getInputOptions(array $module): array
     {
         $options = parent::getInputOptions($module);
 

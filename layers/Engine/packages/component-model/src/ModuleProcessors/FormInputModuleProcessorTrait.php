@@ -70,12 +70,10 @@ trait FormInputModuleProcessorTrait
         return $this->getInputDefaultValue($module, $props);
     }
 
-    public function getInputOptions(array $module)
+    public function getInputOptions(array $module): array
     {
-        $options = array(
+        return [
             'name' => $this->getName($module),
-        );
-
-        return $options;
+        ];
     }
 }
