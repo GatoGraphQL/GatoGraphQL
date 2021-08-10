@@ -43,7 +43,6 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                 'status',
                 'isStatus',
                 'date',
-                'datetime',
                 'title',
                 'excerpt',
                 'customPostType',
@@ -58,7 +57,6 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
             'status' => SchemaDefinition::TYPE_ENUM,
             'isStatus' => SchemaDefinition::TYPE_BOOL,
             'date' => SchemaDefinition::TYPE_DATE,
-            'datetime' => SchemaDefinition::TYPE_DATE,
             'title' => SchemaDefinition::TYPE_STRING,
             'excerpt' => SchemaDefinition::TYPE_STRING,
             'customPostType' => SchemaDefinition::TYPE_STRING,
@@ -77,7 +75,6 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
             case 'status':
             case 'isStatus':
             case 'date':
-            case 'datetime':
             case 'customPostType':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
@@ -91,7 +88,6 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
             'status' => $this->translationAPI->__('Custom post status', 'customposts'),
             'isStatus' => $this->translationAPI->__('Is the custom post in the given status?', 'customposts'),
             'date' => $this->translationAPI->__('Custom post published date', 'customposts'),
-            'datetime' => $this->translationAPI->__('Custom post published date and time', 'customposts'),
             'title' => $this->translationAPI->__('Custom post title', 'customposts'),
             'excerpt' => $this->translationAPI->__('Custom post excerpt', 'customposts'),
             'customPostType' => $this->translationAPI->__('Custom post type', 'customposts'),
@@ -114,23 +110,6 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                                 'https://www.php.net/manual/en/function.date.php'
                             ),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
-                        ],
-                    ]
-                );
-
-            case 'datetime':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'format',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $this->translationAPI->__('Date and time format, as defined in %s. Default value: \'%s\' (for current year date) or \'%s\' (otherwise)', 'customposts'),
-                                'https://www.php.net/manual/en/function.date.php',
-                                'j M, H:i',
-                                'j M Y, H:i'
-                            ),
                         ],
                     ]
                 );
