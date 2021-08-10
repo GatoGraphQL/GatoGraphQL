@@ -14,7 +14,7 @@ trait FormComponentModuleDelegatorTrait
         $formcomponent_module = $this->getFormcomponentModule($module);
         return $moduleprocessor_manager->getProcessor($formcomponent_module)->getValue($formcomponent_module, $source);
     }
-    public function getDefaultValue(array $module, array &$props)
+    public function getDefaultValue(array $module, array &$props): mixed
     {
         $moduleFullName = ModuleUtils::getModuleFullName($module);
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
