@@ -6,3 +6,6 @@ services:
 
     PoPSchema\Media\Enums\:
         resource: '../src/Enums/*'
+
+    PoPSchema\Media\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
