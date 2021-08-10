@@ -52,6 +52,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
     {
         return [
             'src',
+            'srcSet',
             'width',
             'height',
         ];
@@ -61,6 +62,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'src' => SchemaDefinition::TYPE_URL,
+            'srcSet' => SchemaDefinition::TYPE_STRING,
             'width' => SchemaDefinition::TYPE_INT,
             'height' => SchemaDefinition::TYPE_INT,
         ];
@@ -82,6 +84,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
     {
         $descriptions = [
             'src' => $this->translationAPI->__('Media element URL source', 'pop-media'),
+            'srcSet' => $this->translationAPI->__('Media element URL srcset', 'pop-media'),
             'width' => $this->translationAPI->__('Media element\'s width', 'pop-media'),
             'height' => $this->translationAPI->__('Media element\'s height', 'pop-media'),
         ];
@@ -111,6 +114,9 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
                 $size = $this->obtainImageSizeFromParameters($fieldArgs);
                 $properties = $this->mediaTypeAPI->getImageProperties($typeResolver->getID($media), $size);
                 return $properties[$fieldName];
+            case 'srcSet':
+                $size = $this->obtainImageSizeFromParameters($fieldArgs);
+                return $this->mediaTypeAPI->getImageSrcSet($typeResolver->getID($media), $size);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -157,6 +163,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
             case 'src':
+            case 'srcSet':
             case 'width':
             case 'height':
                 /**
