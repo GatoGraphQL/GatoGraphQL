@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\Constants\ApplicationNature;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
 
 class PluginEnvironment
