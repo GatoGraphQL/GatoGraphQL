@@ -26,7 +26,7 @@ trait FormMultipleInputModuleProcessorTrait
         return MultipleInputFormInput::class;
     }
 
-    // public function getInputName(array $module)
+    // public function getInputName(array $module): string
     // {
     //     $formInputHelperService = FormInputHelperServiceFacade::getInstance();
     //     // Allow for multiple names, for multiple inputs

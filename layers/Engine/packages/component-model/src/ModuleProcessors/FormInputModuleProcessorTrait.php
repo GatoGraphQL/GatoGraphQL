@@ -17,7 +17,7 @@ trait FormInputModuleProcessorTrait
         return false;
     }
 
-    public function getInputName(array $module)
+    public function getInputName(array $module): string
     {
         $name = $this->getName($module);
         return $name . ($this->isMultiple($module) ? '[]' : '');

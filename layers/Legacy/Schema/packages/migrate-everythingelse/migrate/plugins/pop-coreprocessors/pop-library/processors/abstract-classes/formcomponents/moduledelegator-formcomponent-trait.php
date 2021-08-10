@@ -27,7 +27,7 @@ trait FormComponentModuleDelegatorTrait
         $formcomponent_module = $this->getFormcomponentModule($module);
         return $moduleprocessor_manager->getProcessor($formcomponent_module)->getName($formcomponent_module);
     }
-    public function getInputName(array $module)
+    public function getInputName(array $module): string
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);
