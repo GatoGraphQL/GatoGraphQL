@@ -12,7 +12,6 @@ abstract class PoP_Module_Processor_FormComponentGroupsBase extends PoP_Module_P
 
     public function getComponentName(array $module)
     {
-
         // Because this class is a FormComponentModuleProcessorInterface, input_name is the inner components input_name
         return $this->getInputName($module);
     }
