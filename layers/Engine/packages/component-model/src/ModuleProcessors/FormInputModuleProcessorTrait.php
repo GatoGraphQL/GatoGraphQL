@@ -55,7 +55,7 @@ trait FormInputModuleProcessorTrait
         return null;
     }
 
-    public function getInputDefaultValue(array $module, array &$props)
+    public function getInputDefaultValue(array $module, array &$props): mixed
     {
         return null;
     }
