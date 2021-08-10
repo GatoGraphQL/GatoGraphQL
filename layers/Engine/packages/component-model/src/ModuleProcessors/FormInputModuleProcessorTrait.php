@@ -32,7 +32,7 @@ trait FormInputModuleProcessorTrait
         return FormInput::class;
     }
 
-    public function getInput(array $module)
+    final public function getInput(array $module): FormInput
     {
         $options = $this->getInputOptions($module);
         $input_class = $this->getInputClass($module);
