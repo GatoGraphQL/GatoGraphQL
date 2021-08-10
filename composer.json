@@ -137,6 +137,7 @@
             "PoPSitesWassup\\SystemMutations\\": "layers/Wassup/packages/system-mutations/src",
             "PoPSitesWassup\\UserStateMutations\\": "layers/Wassup/packages/user-state-mutations/src",
             "PoPSitesWassup\\VolunteerMutations\\": "layers/Wassup/packages/volunteer-mutations/src",
+            "PoPWPSchema\\Users\\": "layers/WPSchema/packages/users/src",
             "PoP\\APIClients\\": "layers/API/packages/api-clients/src",
             "PoP\\APIEndpointsForWP\\": "layers/API/packages/api-endpoints-for-wp/src",
             "PoP\\APIEndpoints\\": "layers/API/packages/api-endpoints/src",
@@ -284,6 +285,7 @@
             "PoPSitesWassup\\SystemMutations\\": "layers/Wassup/packages/system-mutations/tests",
             "PoPSitesWassup\\UserStateMutations\\": "layers/Wassup/packages/user-state-mutations/tests",
             "PoPSitesWassup\\VolunteerMutations\\": "layers/Wassup/packages/volunteer-mutations/tests",
+            "PoPWPSchema\\Users\\": "layers/WPSchema/packages/users/tests",
             "PoP\\APIClients\\": "layers/API/packages/api-clients/tests",
             "PoP\\APIEndpointsForWP\\": "layers/API/packages/api-endpoints-for-wp/tests",
             "PoP\\APIEndpoints\\": "layers/API/packages/api-endpoints/tests",
@@ -476,7 +478,8 @@
         "pop-sites-wassup/stance-mutations": "0.8.3",
         "pop-sites-wassup/system-mutations": "0.8.3",
         "pop-sites-wassup/user-state-mutations": "0.8.3",
-        "pop-sites-wassup/volunteer-mutations": "0.8.3"
+        "pop-sites-wassup/volunteer-mutations": "0.8.3",
+        "pop-wp-schema/users": "0.8.3"
     },
     "authors": [
         {
