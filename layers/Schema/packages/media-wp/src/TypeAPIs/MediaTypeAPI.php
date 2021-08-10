@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\MediaWP\TypeAPIs;
 
+use function get_posts;
+use function wp_get_attachment_image_src;
+
+use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
@@ -11,14 +15,13 @@ use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
 
-use function wp_get_attachment_image_src;
-use function get_posts;
-
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
 class MediaTypeAPI implements MediaTypeAPIInterface
 {
+    use InjectedFilterDataloadingModuleTypeAPITrait;
+
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     public function __construct(
@@ -58,6 +61,9 @@ class MediaTypeAPI implements MediaTypeAPIInterface
 
     public function getMediaElements(array $query, array $options = []): array
     {
+        // Accept field atts to filter the API fields
+        $this->maybeFilterDataloadQueryArgs($query, $options);
+
         // Convert the parameters
         $query = $this->convertMediaQuery($query, $options);
         return get_posts($query);

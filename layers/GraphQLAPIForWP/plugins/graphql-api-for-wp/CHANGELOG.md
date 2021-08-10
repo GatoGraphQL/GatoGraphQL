@@ -45,6 +45,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `PostTag.urlPath: String!`
   - `PostCategory.urlPath: String!`
   - `User.urlPath: String!`
+- Added field arguments to `Root.mediaItems` for filtering results
 
 ### Added
 
