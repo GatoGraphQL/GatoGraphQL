@@ -65,16 +65,16 @@ These safe default settings are not needed when building "static" sites, where t
 - All settings options and meta keys can be queried
 - The number of entities that can be queried at once is unlimited
 
-In development, to change the application's nature from "live" to "static", execute:
+In development, to enable unsafe defaults, execute:
 
 ```bash
-composer set-static-app-nature
+composer enable-unsafe-defaults
 ```
 
 On a site in production, set in `wp-config.php`:
 
 ```php
-define( 'GRAPHQL_API_APPLICATION_NATURE', 'static' );
+define( 'GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS', true );
 ```
 
 Or define this same key/value as an environment variable.

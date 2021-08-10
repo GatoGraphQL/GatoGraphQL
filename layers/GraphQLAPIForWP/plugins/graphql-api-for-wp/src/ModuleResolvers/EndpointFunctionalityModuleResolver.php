@@ -93,7 +93,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     {
         switch ($module) {
             case self::SINGLE_ENDPOINT:
-                return PluginEnvironment::isApplicationNatureStatic();
+                return PluginEnvironment::areUnsafeDefaultsEnabled();
         }
         return parent::isEnabledByDefault($module);
     }

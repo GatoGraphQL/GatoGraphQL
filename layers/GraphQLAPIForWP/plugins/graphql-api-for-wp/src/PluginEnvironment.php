@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\Constants\ApplicationNature;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
 
 class PluginEnvironment
 {
     public const DISABLE_CACHING = 'DISABLE_CACHING';
     public const CACHE_DIR = 'CACHE_DIR';
-    public const APPLICATION_NATURE = 'APPLICATION_NATURE';
+    public const ENABLE_UNSAFE_DEFAULTS = 'ENABLE_UNSAFE_DEFAULTS';
 
     /**
      * If the information is provided by either environment variable
@@ -53,36 +52,14 @@ class PluginEnvironment
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
     }
 
-    /**
-     * The nature is either "static" or "live".
-     * From it, we can provide the default settings, being either safer or looser
-     */
-    public static function getApplicationNature(): string
+    public static function areUnsafeDefaultsEnabled(): bool
     {
-        $definedNature = null;
-        if (getenv(self::APPLICATION_NATURE) !== false) {
-            $definedNature = trim(getenv(self::APPLICATION_NATURE));
-        } elseif (PluginConfigurationHelper::isWPConfigConstantDefined(self::APPLICATION_NATURE)) {
-            $definedNature = trim(PluginConfigurationHelper::getWPConfigConstantValue(self::APPLICATION_NATURE));
+        if (getenv(self::ENABLE_UNSAFE_DEFAULTS) !== false) {
+            return (bool)getenv(self::ENABLE_UNSAFE_DEFAULTS);
+        } elseif (PluginConfigurationHelper::isWPConfigConstantDefined(self::ENABLE_UNSAFE_DEFAULTS)) {
+            return (bool)PluginConfigurationHelper::getWPConfigConstantValue(self::ENABLE_UNSAFE_DEFAULTS);
         }
 
-        if (
-            in_array($definedNature, [
-            ApplicationNature::STATIC_,
-            ApplicationNature::LIVE,
-            ])
-        ) {
-            return $definedNature;
-        }
-
-        return ApplicationNature::LIVE;
-    }
-
-    /**
-     * Indicate if the application is intended for building "static" sites
-     */
-    public static function isApplicationNatureStatic(): bool
-    {
-        return self::getApplicationNature() === ApplicationNature::STATIC_;
+        return false;
     }
 }

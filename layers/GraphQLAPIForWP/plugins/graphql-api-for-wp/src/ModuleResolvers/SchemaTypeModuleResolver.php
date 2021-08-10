@@ -363,14 +363,14 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         // Lower the security constraints for the static app
-        $isStaticApp = PluginEnvironment::isApplicationNatureStatic();
+        $useUnsafe = PluginEnvironment::areUnsafeDefaultsEnabled();
         $defaultValues = [
             self::SCHEMA_ADMIN_SCHEMA => [
-                ModuleSettingOptions::ENABLE => $isStaticApp,
+                ModuleSettingOptions::ENABLE => $useUnsafe,
             ],
             self::SCHEMA_CUSTOMPOSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $isStaticApp ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
             ],
             self::SCHEMA_GENERIC_CUSTOMPOSTS => [
@@ -384,27 +384,27 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ],
             self::SCHEMA_USERS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $isStaticApp ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
             ],
             self::SCHEMA_MEDIA => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $isStaticApp ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
             ],
             self::SCHEMA_TAGS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $isStaticApp ? -1 : 200,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 200,
             ],
             self::SCHEMA_CATEGORIES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $isStaticApp ? -1 : 200,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 200,
             ],
             self::SCHEMA_SETTINGS => [
-                ModuleSettingOptions::ENTRIES => $isStaticApp ? [] : [
+                ModuleSettingOptions::ENTRIES => $useUnsafe ? [] : [
                     'home',
                     'blogname',
                     'blogdescription',
                 ],
-                ModuleSettingOptions::BEHAVIOR => $isStaticApp ?
+                ModuleSettingOptions::BEHAVIOR => $useUnsafe ?
                     Behaviors::DENYLIST
                     : Behaviors::ALLOWLIST,
             ],
