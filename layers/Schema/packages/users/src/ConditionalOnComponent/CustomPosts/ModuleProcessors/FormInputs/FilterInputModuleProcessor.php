@@ -32,7 +32,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return $filterInputs[$module[1]] ?? null;
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_AUTHOR_IDS => 'authorIDs',

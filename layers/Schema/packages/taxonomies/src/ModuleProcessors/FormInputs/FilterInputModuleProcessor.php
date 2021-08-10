@@ -34,7 +34,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return $filterInputs[$module[1]] ?? null;
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_SLUGS:
@@ -44,7 +44,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return parent::getInputClass($module);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         // Add a nice name, so that the URL params when filtering make sense
         $names = array(

@@ -50,7 +50,7 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH:

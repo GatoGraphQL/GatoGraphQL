@@ -53,7 +53,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         return parent::getLabelText($module, $props);
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_LINKCATEGORIES:
@@ -76,7 +76,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         return parent::getDbobjectField($module);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_LINKCATEGORIES:

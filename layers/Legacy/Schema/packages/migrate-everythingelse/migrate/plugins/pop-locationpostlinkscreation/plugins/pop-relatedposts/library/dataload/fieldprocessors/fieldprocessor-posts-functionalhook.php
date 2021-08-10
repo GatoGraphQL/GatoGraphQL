@@ -63,8 +63,6 @@ class PoP_LocationPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts exten
                 );
                 $route = $routes[$fieldName];
 
-                // $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-                // $name = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES])->getInputName([PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES]);
                 $name = POP_INPUTNAME_REFERENCES.'[]';
                 return GeneralUtils::addQueryArgs([
                     $name => $typeResolver->getID($post),

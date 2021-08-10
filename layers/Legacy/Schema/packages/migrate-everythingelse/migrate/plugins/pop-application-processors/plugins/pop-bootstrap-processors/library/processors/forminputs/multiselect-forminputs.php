@@ -27,7 +27,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
         return parent::getLabelText($module, $props);
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CATEGORIES:

@@ -35,7 +35,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
         return $filterInputs[$module[1]] ?? null;
     }
 
-    public function getInputOptions(array $module)
+    public function getInputOptions(array $module): array
     {
         $options = parent::getInputOptions($module);
 
@@ -48,7 +48,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
         return $options;
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         // Add a nice name, so that the URL params when filtering make sense
         $names = array(

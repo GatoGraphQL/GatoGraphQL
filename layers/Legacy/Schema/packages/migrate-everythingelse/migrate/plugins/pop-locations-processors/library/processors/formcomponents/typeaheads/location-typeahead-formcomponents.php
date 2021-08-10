@@ -40,7 +40,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
         return parent::getTriggerLayoutSubmodule($module);
     }
 
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:

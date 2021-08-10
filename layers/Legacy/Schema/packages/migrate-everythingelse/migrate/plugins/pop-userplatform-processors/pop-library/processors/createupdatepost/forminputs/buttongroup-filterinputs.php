@@ -45,7 +45,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
     //     return parent::isFiltercomponent($module);
     // }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -66,7 +66,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         return parent::getName($module);
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES:
@@ -82,7 +82,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         return parent::getInputClass($module);
     }
 
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES:

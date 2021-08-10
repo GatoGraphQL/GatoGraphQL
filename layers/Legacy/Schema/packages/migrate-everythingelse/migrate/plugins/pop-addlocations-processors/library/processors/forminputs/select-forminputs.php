@@ -22,7 +22,7 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
         return parent::getLabelText($module, $props);
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY:

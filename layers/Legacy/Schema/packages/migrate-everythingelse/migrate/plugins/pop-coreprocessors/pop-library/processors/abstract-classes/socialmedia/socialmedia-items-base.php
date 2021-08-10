@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_SOCIALMEDIA_ITEM];
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         return null;
     }

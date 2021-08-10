@@ -22,7 +22,7 @@ class GD_QT_Module_Processor_SelectFormInputs extends PoP_Module_Processor_Selec
         return parent::getLabelText($module, $props);
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_QT_FORMINPUT_LANGUAGE:

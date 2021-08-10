@@ -17,7 +17,7 @@ class PoP_Module_Processor_HiddenInputFormInputs extends PoP_Module_Processor_Hi
         );
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_HIDDENINPUT_LAYOUTPOST:

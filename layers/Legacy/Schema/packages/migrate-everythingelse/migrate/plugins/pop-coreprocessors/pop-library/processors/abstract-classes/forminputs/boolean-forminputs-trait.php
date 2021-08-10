@@ -10,7 +10,7 @@ trait PoP_Module_Processor_BooleanFormInputsTrait
         return POP_VALUEFORMAT_BOOLTOSTRING;
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         return BooleanFormInput::class;
     }

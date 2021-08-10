@@ -21,7 +21,7 @@ class GD_GF_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
         return parent::isHidden($module, $props);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             // Do not change the name of this input below!

@@ -13,7 +13,7 @@ class GD_Processor_SelectableLocationHiddenInputFormInputs extends PoP_Module_Pr
         );
     }
 
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTLOCATIONS:

@@ -36,7 +36,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return $filterInputs[$module[1]] ?? null;
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_TAG_SLUGS:
@@ -47,7 +47,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return parent::getInputClass($module);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_TAG_SLUGS => 'tagSlugs',

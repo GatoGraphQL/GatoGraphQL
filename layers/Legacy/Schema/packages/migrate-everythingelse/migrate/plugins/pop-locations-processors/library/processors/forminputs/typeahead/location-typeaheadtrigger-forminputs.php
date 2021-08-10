@@ -26,7 +26,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadAlertFormComponents extend
         return parent::getHiddeninputModule($module);
     }
 
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_LOCATIONS:

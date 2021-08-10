@@ -32,7 +32,7 @@ class PoP_Module_Processor_EditorFormInputs extends PoP_Module_Processor_EditorF
         return parent::isMandatory($module, $props);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         // Lowercase letters, no _ or - (http://codex.wordpress.org/Function_Reference/wp_editor)
         switch ($module[1]) {

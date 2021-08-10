@@ -22,7 +22,7 @@ class GenericForms_Module_Processor_CheckboxFormInputs extends PoP_Module_Proces
         return parent::getLabelText($module, $props);
     }
 
-    public function getInputDefaultValue(array $module, array &$props)
+    public function getInputDefaultValue(array $module, array &$props): mixed
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUP_NEWSLETTER:

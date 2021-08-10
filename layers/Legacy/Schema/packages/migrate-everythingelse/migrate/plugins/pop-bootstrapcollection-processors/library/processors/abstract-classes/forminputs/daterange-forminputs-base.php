@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
         return array('from', 'to', 'readable');
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         if ($this->useTime($module)) {
             return DateRangeTimeFormInput::class;

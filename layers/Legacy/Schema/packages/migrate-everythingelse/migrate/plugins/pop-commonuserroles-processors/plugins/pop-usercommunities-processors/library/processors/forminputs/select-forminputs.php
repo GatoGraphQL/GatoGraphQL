@@ -22,7 +22,7 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
         return parent::getLabelText($module, $props);
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY:
