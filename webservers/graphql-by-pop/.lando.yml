@@ -192,6 +192,7 @@ services:
           ../../layers/Schema/packages/usermeta:/app/vendor/pop-schema/usermeta
         - '../../layers/Schema/packages/users-wp:/app/vendor/pop-schema/users-wp'
         - '../../layers/Schema/packages/users:/app/vendor/pop-schema/users'
+        - '../../layers/WPSchema/packages/users:/app/vendor/pop-wp-schema/users'
     build_as_root:
       - a2enmod proxy proxy_http
     run:

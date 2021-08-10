@@ -222,6 +222,8 @@ services:
           ../../layers/Schema/packages/users-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/users-wp
         - >-
           ../../layers/Schema/packages/users:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/users
+        - >-
+          ../../layers/WPSchema/packages/users:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-wp-schema/users
     run:
       - SITE_NAME=graphql-api SITE_TITLE="GraphQL API" /bin/sh /app/setup/setup.sh        
 env_file:
