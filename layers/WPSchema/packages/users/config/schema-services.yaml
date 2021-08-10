@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchemaWP\Users\FieldResolvers\:
+    PoPWPSchema\Users\FieldResolvers\:
         resource: '../src/FieldResolvers/*'

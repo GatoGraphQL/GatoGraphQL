@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchemaWP\Users\FieldResolvers;
+namespace PoPWPSchema\Users\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
