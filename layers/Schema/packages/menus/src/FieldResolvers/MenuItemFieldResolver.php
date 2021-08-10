@@ -53,6 +53,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             // This field is special in that it is retrieved from the registry
             'children',
             // All other fields are properties in the object
+            'label',
             'title',
             'url',
             'classes',
@@ -68,6 +69,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'children' => SchemaDefinition::TYPE_ID,
+            'label' => SchemaDefinition::TYPE_STRING,
             'title' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,
             'classes' => SchemaDefinition::TYPE_STRING,
@@ -94,6 +96,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
     {
         $descriptions = [
             'children' => $this->translationAPI->__('Menu item children items', 'menus'),
+            'label' => $this->translationAPI->__('Menu item label', 'menus'),
             'title' => $this->translationAPI->__('Menu item title', 'menus'),
             'url' => $this->translationAPI->__('Menu item URL', 'menus'),
             'classes' => $this->translationAPI->__('Menu item classes', 'menus'),
@@ -126,6 +129,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'children':
                 return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren($typeResolver->getID($menuItem)));
+            case 'label':
             case 'title':
             case 'url':
             case 'classes':
