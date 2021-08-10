@@ -60,6 +60,7 @@ includes:
     - layers/WPSchema/packages/media/phpstan.neon.dist
     - layers/Schema/packages/media-wp/phpstan.neon.dist
     - layers/Schema/packages/menus/phpstan.neon.dist
+    - layers/WPSchema/packages/menus/phpstan.neon.dist
     - layers/Schema/packages/menus-wp/phpstan.neon.dist
     - layers/Schema/packages/meta/phpstan.neon.dist
     - layers/Schema/packages/metaquery-wp/phpstan.neon.dist
