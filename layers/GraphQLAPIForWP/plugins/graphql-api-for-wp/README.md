@@ -68,7 +68,7 @@ These safe default settings are not needed when building "static" sites, where t
 In development, to enable unsafe defaults, execute:
 
 ```bash
-composer set-static-app-nature
+composer enable-unsafe-defaults
 ```
 
 On a site in production, set in `wp-config.php`:

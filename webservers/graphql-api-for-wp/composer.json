@@ -72,11 +72,11 @@
             "lando wp config set GRAPHQL_API_DISABLE_CACHING true --raw --path=wordpress",
             "@purge-cache"
         ],
-        "set-static-app-nature": [
+        "enable-unsafe-defaults": [
             "lando wp config set GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS true --raw --path=wordpress",
             "@delete-settings"
         ],
-        "remove-static-app-nature": [
+        "disable-unsafe-defaults": [
             "lando wp config delete GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS --path=wordpress",
             "@delete-settings"
         ],
