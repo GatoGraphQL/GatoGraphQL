@@ -12,7 +12,7 @@ abstract class PoP_UserPlatform_Module_Processor_UserPreferencesCheckboxFormInpu
         return true;
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         return 'userPreferences';
     }

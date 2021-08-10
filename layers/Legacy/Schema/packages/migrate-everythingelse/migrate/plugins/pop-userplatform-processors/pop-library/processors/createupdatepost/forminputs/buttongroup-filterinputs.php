@@ -45,7 +45,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
     //     return parent::isFiltercomponent($module);
     // }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

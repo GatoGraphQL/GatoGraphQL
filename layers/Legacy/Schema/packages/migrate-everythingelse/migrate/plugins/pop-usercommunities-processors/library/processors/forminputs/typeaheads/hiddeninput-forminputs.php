@@ -24,7 +24,7 @@ class GD_URE_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Proces
         return parent::isMultiple($module);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITIES:

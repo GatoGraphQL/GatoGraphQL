@@ -56,7 +56,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
         return parent::getInputClass($module);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:

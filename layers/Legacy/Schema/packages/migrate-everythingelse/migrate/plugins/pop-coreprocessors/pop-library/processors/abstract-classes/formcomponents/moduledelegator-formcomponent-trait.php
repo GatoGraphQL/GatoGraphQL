@@ -21,7 +21,7 @@ trait FormComponentModuleDelegatorTrait
         $formcomponent_module = $this->getFormcomponentModule($module);
         return $moduleprocessor_manager->getProcessor($formcomponent_module)->getDefaultValue($formcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
     }
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);

@@ -44,7 +44,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return parent::getInputClass($module);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         // Add a nice name, so that the URL params when filtering make sense
         $names = array(

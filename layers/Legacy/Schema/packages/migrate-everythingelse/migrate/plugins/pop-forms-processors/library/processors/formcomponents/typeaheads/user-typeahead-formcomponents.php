@@ -83,7 +83,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
         return parent::getTriggerLayoutSubmodule($module);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:

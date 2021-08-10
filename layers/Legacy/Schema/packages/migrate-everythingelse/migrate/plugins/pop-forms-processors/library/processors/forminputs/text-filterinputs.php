@@ -62,7 +62,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         return parent::getLabelText($module, $props);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_SEARCH:

@@ -81,7 +81,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         return parent::getInputClass($module);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES:

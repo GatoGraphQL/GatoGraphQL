@@ -11,7 +11,7 @@ class GD_EM_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor
         );
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_URLPARAMTEXT_LOCATIONID:

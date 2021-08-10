@@ -52,7 +52,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
         return parent::getInputClass($module);
     }
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS:

@@ -80,7 +80,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
         return parent::getInputClass($module);
     }
 
-    public function getName(array $module)
+    public function getName(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_ORDERUSER:
