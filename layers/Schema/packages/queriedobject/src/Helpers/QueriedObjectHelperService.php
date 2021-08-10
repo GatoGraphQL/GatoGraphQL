@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\QueriedObject\Helpers;
 
-use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 
 // use PoP\ComponentModel\Feedback\Tokens;
@@ -15,7 +14,6 @@ class QueriedObjectHelperService implements QueriedObjectHelperServiceInterface
 {
     public function __construct(
         protected CMSServiceInterface $cmsService,
-        protected CMSHelperServiceInterface $CMSHelperService
     ) {
     }
 
@@ -58,10 +56,5 @@ class QueriedObjectHelperService implements QueriedObjectHelperServiceInterface
             $limit = $maxLimit;
         }
         return $limit;
-    }
-
-    public function getURLPath(string $url): string
-    {
-        return $this->CMSHelperService->getURLPath($url);
     }
 }
