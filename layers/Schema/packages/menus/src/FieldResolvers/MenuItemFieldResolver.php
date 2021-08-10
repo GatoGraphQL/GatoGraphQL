@@ -106,7 +106,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'description' => $this->translationAPI->__('Menu item additional attributes', 'menus'),
             'objectID' => $this->translationAPI->__('ID of the object linked to by the menu item ', 'menus'),
             'parentID' => $this->translationAPI->__('Menu item\'s parent ID', 'menus'),
-            'description' => $this->translationAPI->__('Link relationship (XFN)', 'menus'),
+            'linkRelationship' => $this->translationAPI->__('Link relationship (XFN)', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
