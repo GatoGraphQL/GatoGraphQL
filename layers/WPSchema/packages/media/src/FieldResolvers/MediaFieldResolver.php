@@ -68,6 +68,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'altText',
             'description',
             'date',
+            'mimeType',
         ];
     }
 
@@ -82,6 +83,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'altText' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
             'date' => SchemaDefinition::TYPE_DATE,
+            'mimeType' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -111,6 +113,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'altText' => $this->translationAPI->__('Media element alt text', 'pop-media'),
             'description' => $this->translationAPI->__('Media element description', 'pop-media'),
             'date' => $this->translationAPI->__('Media element\'s published date', 'pop-media'),
+            'mimeType' => $this->translationAPI->__('Media element\'s mime type', 'pop-media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -179,6 +182,8 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
                     $fieldArgs['format'],
                     $mediaItem->post_date
                 );
+            case 'mimeType':
+                return $mediaItem->post_mime_type;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
