@@ -33,6 +33,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.unrestrictedUserCount: Int!` ("admin" field)
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
+  - `Root.menuByLocation: Menu`
+  - `Root.menuBySlug: Menu`
+  - `Menu.name: String`
+  - `Menu.slug: String`
+  - `Menu.count: Int`
+  - `Menu.locations: [String]!`
   - `Menu.items: [MenuItem]!`
   - `MenuItem.children: [MenuItem]!`
 - Added type `UserAvatar`, and fields:
