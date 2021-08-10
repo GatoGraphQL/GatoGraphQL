@@ -19,6 +19,7 @@ class MenuItem
         /** @var string[] */
         public array $classes,
         public string $target,
+        public string $linkRelationship,
     ) {
     }
 }

@@ -60,6 +60,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'description',
             'objectID',
             'parentID',
+            'linkRelationship',
         ];
     }
 
@@ -74,6 +75,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'description' => SchemaDefinition::TYPE_STRING,
             'objectID' => SchemaDefinition::TYPE_ID,
             'parentID' => SchemaDefinition::TYPE_ID,
+            'linkRelationship' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -99,6 +101,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'description' => $this->translationAPI->__('Menu item additional attributes', 'menus'),
             'objectID' => $this->translationAPI->__('ID of the object linked to by the menu item ', 'menus'),
             'parentID' => $this->translationAPI->__('Menu item\'s parent ID', 'menus'),
+            'description' => $this->translationAPI->__('Link relationship (XFN)', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -130,6 +133,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             case 'description':
             case 'objectID':
             case 'parentID':
+            case 'linkRelationship':
                 return $menuItem->$fieldName;
         }
 
