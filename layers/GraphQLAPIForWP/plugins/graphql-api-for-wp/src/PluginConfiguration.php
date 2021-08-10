@@ -635,6 +635,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             SchemaTypeModuleResolver::SCHEMA_USERS => [
                 \PoPSchema\Users\Component::class,
                 \PoPSchema\UserState\Component::class,
+                \PoPWPSchema\Users\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_ROLES => [
                 \PoPSchema\UserRoles\Component::class,

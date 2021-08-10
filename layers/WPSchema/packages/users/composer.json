@@ -1,5 +1,28 @@
 {
-    "name": "pop-schema/post-mutations",
+    "name": "pop-wp-schema/users",
+    "type": "library",
+    "description": "WordPress-specific User data model",
+    "keywords": ["PoP", "users"],
+    "homepage": "https://github.com/PoPWPSchema/users",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "pop-schema/users-wp": "^0.9"
+    },
+    "require-dev": {
+        "johnpbloch/wordpress": ">=5.5",
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.11",
+        "squizlabs/php_codesniffer": "^3.0",
+        "szepeviktor/phpstan-wordpress": "^0.7"
+    },
     "conflict": {
         "getpop/modulerouting": "<0.8.2",
         "getpop/hooks-wp": "<0.8.2",
@@ -34,11 +57,12 @@
         "pop-schema/settings": "<0.8.2",
         "pop-schema/user-state-access-control": "<0.8.2",
         "pop-schema/comments": "<0.8.2",
-        "pop-schema/users-wp": "<0.8.2",
         "pop-schema/custompostmeta-wp": "<0.8.2",
+        "pop-schema/custompost-mutations": "<0.8.2",
         "pop-schema/post-tag-mutations-wp": "<0.8.2",
         "pop-schema/post-tag-mutations": "<0.8.2",
         "pop-schema/tags-wp": "<0.8.2",
+        "pop-schema/posts": "<0.8.2",
         "pop-schema/custompost-tags-wp": "<0.8.2",
         "pop-schema/taxonomymeta-wp": "<0.8.2",
         "pop-schema/custompost-category-mutations": "<0.8.2",
@@ -55,10 +79,10 @@
         "pop-schema/post-categories-wp": "<0.8.2",
         "pop-schema/user-roles-access-control": "<0.8.2",
         "pop-schema/custompostmedia": "<0.8.2",
+        "pop-schema/post-mutations": "<0.8.2",
         "pop-schema/user-state-mutations-wp": "<0.8.2",
         "pop-schema/user-roles": "<0.8.2",
         "pop-schema/usermeta": "<0.8.2",
-        "pop-schema/queriedobject-wp": "<0.8.2",
         "pop-schema/user-avatars-wp": "<0.8.2",
         "pop-schema/taxonomyquery-wp": "<0.8.2",
         "pop-schema/customposts": "<0.8.2",
@@ -72,7 +96,6 @@
         "pop-schema/post-tags-wp": "<0.8.2",
         "pop-schema/custompost-categories-wp": "<0.8.2",
         "pop-schema/settings-wp": "<0.8.2",
-        "pop-schema/users": "<0.8.2",
         "pop-schema/queriedobject": "<0.8.2",
         "pop-schema/customposts-wp": "<0.8.2",
         "pop-schema/taxonomies-wp": "<0.8.2",
@@ -144,43 +167,14 @@
         "pop-sites-wassup/system-mutations": "<0.8.2",
         "pop-sites-wassup/custompostlink-mutations": "<0.8.2"
     },
-    "type": "library",
-    "description": "Adds support for post mutations",
-    "keywords": ["PoP", "post-mutations"],
-    "homepage": "https://github.com/PoPSchema/post-mutations",
-    "license": "GPL-2.0-or-later",
-    "authors": [
-        {
-            "name": "Leonardo Losoviz",
-            "email": "leo@getpop.org",
-            "homepage": "https://getpop.org"
-        }
-    ],
-    "require": {
-        "php": "^8.0",
-        "pop-schema/custompost-mutations": "^0.9",
-        "pop-schema/posts": "^0.9"
-    },
-    "require-dev": {
-        "getpop/api": "^0.9",
-        "pop-schema/users": "^0.9",
-        "phpstan/phpstan": "^0.12.76",
-        "phpunit/phpunit": ">=9.3",
-        "rector/rector": "^0.11",
-        "squizlabs/php_codesniffer": "^3.0"
-    },
-    "suggest": {
-        "getpop/api": "Integrates well with API",
-        "pop-schema/users": "Integrates well with Users"
-    },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\PostMutations\\": "src"
+            "PoPWPSchema\\Users\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\PostMutations\\": "tests"
+            "PoPWPSchema\\Users\\": "tests"
         }
     },
     "scripts": {
@@ -190,6 +184,7 @@
         "analyse": "phpstan analyse"
     },
     "extra": {
+        "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
             "dev-master": "0.9-dev"
         }

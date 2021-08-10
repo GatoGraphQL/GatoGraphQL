@@ -53,6 +53,7 @@ class Component extends AbstractPluginComponent
             \PoPSchema\CustomPostMetaWP\Component::class,
             \PoPSchema\TaxonomyMetaWP\Component::class,
             \PoPSchema\UserMetaWP\Component::class,
+            \PoPWPSchema\Users\Component::class,
             \GraphQLByPoP\GraphQLClientsForWP\Component::class,
             \GraphQLByPoP\GraphQLEndpointForWP\Component::class,
             \GraphQLAPI\MarkdownConvertor\Component::class,

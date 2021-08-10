@@ -109,4 +109,5 @@ includes:
     - layers/Schema/packages/usermeta/phpstan.neon.dist
     - layers/Schema/packages/usermeta-wp/phpstan.neon.dist
     - layers/Schema/packages/users/phpstan.neon.dist
+    - layers/WPSchema/packages/users/phpstan.neon.dist
     - layers/Schema/packages/users-wp/phpstan.neon.dist

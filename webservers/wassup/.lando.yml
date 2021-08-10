@@ -199,8 +199,9 @@ services:
           ../../layers/Schema/packages/user-state-mutations-wp:/app/vendor/pop-schema/user-state-mutations-wp
         - >-
           ../../layers/Schema/packages/user-state-wp:/app/vendor/pop-schema/user-state-wp
-        - '../../layers/Schema/packages/users:/app/vendor/pop-schema/users'
         - '../../layers/Schema/packages/users-wp:/app/vendor/pop-schema/users-wp'
+        - '../../layers/Schema/packages/users:/app/vendor/pop-schema/users'
+        - '../../layers/WPSchema/packages/users:/app/vendor/pop-wp-schema/users'
         - >-
           ../../layers/Wassup/packages/comment-mutations:/app/vendor/pop-sites-wassup/comment-mutations
         - >-
