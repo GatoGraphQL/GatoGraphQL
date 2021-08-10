@@ -11,7 +11,7 @@ class UserStance_Module_Processor_ButtonGroupFormInputs extends PoP_Module_Proce
         );
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_BUTTONGROUP_STANCE:

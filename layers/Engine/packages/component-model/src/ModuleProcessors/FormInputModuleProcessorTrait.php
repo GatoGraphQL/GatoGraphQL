@@ -23,7 +23,7 @@ trait FormInputModuleProcessorTrait
         return $name . ($this->isMultiple($module) ? '[]' : '');
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         if ($this->isMultiple($module)) {
             return FormMultipleInput::class;

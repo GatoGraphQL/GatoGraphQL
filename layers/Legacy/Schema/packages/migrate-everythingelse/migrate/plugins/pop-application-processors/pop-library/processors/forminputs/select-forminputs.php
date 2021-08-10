@@ -22,7 +22,7 @@ class GD_Custom_Module_Processor_SelectFormInputs extends PoP_Module_Processor_B
         return parent::getLabelText($module, $props);
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT:

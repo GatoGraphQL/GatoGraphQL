@@ -21,7 +21,7 @@ trait FormMultipleInputModuleProcessorTrait
         return $options;
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         return MultipleInputFormInput::class;
     }

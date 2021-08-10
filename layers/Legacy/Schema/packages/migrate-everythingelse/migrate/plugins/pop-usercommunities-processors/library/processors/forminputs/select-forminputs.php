@@ -32,7 +32,7 @@ class GD_URE_Module_Processor_SelectFormInputs extends PoP_Module_Processor_Sele
         return parent::isMandatory($module, $props);
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_URE_FORMINPUT_MEMBERSTATUS:

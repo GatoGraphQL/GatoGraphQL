@@ -46,7 +46,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
         return parent::getLabelText($module, $props);
     }
 
-    public function getInputClass(array $module)
+    public function getInputClass(array $module): string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_STANCE_MULTISELECT:
