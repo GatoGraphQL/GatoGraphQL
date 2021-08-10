@@ -49,10 +49,7 @@ trait FormInputModuleProcessorTrait
 
     public function getValue(array $module, ?array $source = null): mixed
     {
-        if ($input = $this->getInput($module)) {
-            return $input->getValue($source);
-        }
-        return null;
+        return $this->getInput($module)->getValue($source);
     }
 
     public function getInputDefaultValue(array $module, array &$props): mixed
