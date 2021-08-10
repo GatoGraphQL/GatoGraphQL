@@ -12,7 +12,7 @@ trait FormInputModuleProcessorTrait
 {
     // This function CANNOT have $props, since multiple can change the value of the input (eg: from Select to MultiSelect => from '' to array())
     // Yet we do not always go through initModelProps to initialize it, then changing the multiple in the form through $props, and trying to retrieve the value in an actionexecuter will fail
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         return false;
     }

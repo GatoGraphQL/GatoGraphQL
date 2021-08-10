@@ -33,7 +33,7 @@ trait FormComponentModuleDelegatorTrait
         $formcomponent_module = $this->getFormcomponentModule($module);
         return $moduleprocessor_manager->getProcessor($formcomponent_module)->getInputName($formcomponent_module);
     }
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);

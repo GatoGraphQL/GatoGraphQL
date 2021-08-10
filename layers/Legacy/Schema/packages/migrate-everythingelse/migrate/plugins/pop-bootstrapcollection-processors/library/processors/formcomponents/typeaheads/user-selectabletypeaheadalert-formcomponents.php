@@ -51,7 +51,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
         return parent::getHiddeninputModule($module);
     }
 
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:

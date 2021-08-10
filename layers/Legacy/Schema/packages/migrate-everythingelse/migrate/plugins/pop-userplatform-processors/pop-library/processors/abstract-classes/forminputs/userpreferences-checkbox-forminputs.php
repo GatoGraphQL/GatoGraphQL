@@ -7,7 +7,7 @@ abstract class PoP_UserPlatform_Module_Processor_UserPreferencesCheckboxFormInpu
         return 'userPreferences';
     }
 
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         return true;
     }

@@ -21,7 +21,7 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
         );
     }
 
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES:

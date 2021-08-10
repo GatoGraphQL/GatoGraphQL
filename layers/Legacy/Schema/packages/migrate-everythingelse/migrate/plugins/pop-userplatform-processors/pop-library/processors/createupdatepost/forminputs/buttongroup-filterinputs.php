@@ -82,7 +82,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         return parent::getInputClass($module);
     }
 
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES:

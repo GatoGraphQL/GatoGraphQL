@@ -40,7 +40,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
         return parent::getInputClass($module);
     }
 
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTIONS:

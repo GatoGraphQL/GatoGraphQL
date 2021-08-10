@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_MultiSelectFormInputsBase extends PoP_Module_Processor_SelectFormInputsBase
 {
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         return true;
     }

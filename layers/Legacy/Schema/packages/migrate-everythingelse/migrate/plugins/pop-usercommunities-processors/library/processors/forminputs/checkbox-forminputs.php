@@ -61,7 +61,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
         return parent::getName($module);
     }
 
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_FILTERBYCOMMUNITY:

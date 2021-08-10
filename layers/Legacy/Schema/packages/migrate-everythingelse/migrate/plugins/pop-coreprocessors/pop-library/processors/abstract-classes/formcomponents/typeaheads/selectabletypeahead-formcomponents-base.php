@@ -14,7 +14,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
         return $this->getProp($module, $props, 'max-selected') === 1;
     }
 
-    public function isMultiple(array $module)
+    public function isMultiple(array $module): bool
     {
         return true;
     }
