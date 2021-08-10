@@ -18,6 +18,7 @@ class GraphQLAPIArrowFnUnionTypeChainedRuleContainerConfigurationService extends
             $this->pluginDir . '/vendor/pop-schema/menus/src/TypeDataLoaders/MenuItemTypeDataLoader.php',
             $this->pluginDir . '/vendor/pop-schema/menus/src/TypeDataLoaders/MenuTypeDataLoader.php',
             $this->pluginDir . '/vendor/pop-schema/user-avatars/src/TypeDataLoaders/UserAvatarTypeDataLoader.php',
+            $this->pluginDir . '/vendor/pop-wp-schema/menus/src/FieldResolvers/MenuFieldResolver.php',
         ];
     }
 }

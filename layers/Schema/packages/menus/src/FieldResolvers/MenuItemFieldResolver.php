@@ -52,7 +52,9 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         return [
             // This field is special in that it is retrieved from the registry
             'children',
+            'path',
             // All other fields are properties in the object
+            'label',
             'title',
             'url',
             'classes',
@@ -60,6 +62,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'description',
             'objectID',
             'parentID',
+            'linkRelationship',
         ];
     }
 
@@ -67,6 +70,8 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'children' => SchemaDefinition::TYPE_ID,
+            'path' => SchemaDefinition::TYPE_STRING,
+            'label' => SchemaDefinition::TYPE_STRING,
             'title' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,
             'classes' => SchemaDefinition::TYPE_STRING,
@@ -74,6 +79,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'description' => SchemaDefinition::TYPE_STRING,
             'objectID' => SchemaDefinition::TYPE_ID,
             'parentID' => SchemaDefinition::TYPE_ID,
+            'linkRelationship' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -92,6 +98,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
     {
         $descriptions = [
             'children' => $this->translationAPI->__('Menu item children items', 'menus'),
+            'label' => $this->translationAPI->__('Menu item label', 'menus'),
             'title' => $this->translationAPI->__('Menu item title', 'menus'),
             'url' => $this->translationAPI->__('Menu item URL', 'menus'),
             'classes' => $this->translationAPI->__('Menu item classes', 'menus'),
@@ -99,6 +106,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'description' => $this->translationAPI->__('Menu item additional attributes', 'menus'),
             'objectID' => $this->translationAPI->__('ID of the object linked to by the menu item ', 'menus'),
             'parentID' => $this->translationAPI->__('Menu item\'s parent ID', 'menus'),
+            'linkRelationship' => $this->translationAPI->__('Link relationship (XFN)', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -123,6 +131,19 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'children':
                 return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren($typeResolver->getID($menuItem)));
+            case 'path':
+                // The path applies only to local URLs
+                $url = $menuItem->url;
+                $homeURL = $this->cmsService->getHomeURL();
+                if (str_starts_with($url, $homeURL)) {
+                    return substr(
+                        $url,
+                        strlen($homeURL)
+                    );
+                }
+                return $url;
+            // These are all properties of MenuItem
+            case 'label':
             case 'title':
             case 'url':
             case 'classes':
@@ -130,6 +151,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             case 'description':
             case 'objectID':
             case 'parentID':
+            case 'linkRelationship':
                 return $menuItem->$fieldName;
         }
 
