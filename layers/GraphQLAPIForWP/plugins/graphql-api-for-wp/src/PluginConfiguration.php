@@ -665,6 +665,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             ],
             SchemaTypeModuleResolver::SCHEMA_MENUS => [
                 \PoPSchema\Menus\Component::class,
+                \PoPWPSchema\Menus\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_SETTINGS => [
                 \PoPSchema\Settings\Component::class,

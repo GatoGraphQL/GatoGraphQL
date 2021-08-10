@@ -28,7 +28,6 @@
         "pop-schema/custompostmedia-wp": "^0.9",
         "pop-schema/custompostmeta-wp": "^0.9",
         "pop-schema/generic-customposts": "^0.9",
-        "pop-schema/menus-wp": "^0.9",
         "pop-schema/pages-wp": "^0.9",
         "pop-schema/post-categories-wp": "^0.9",
         "pop-schema/post-category-mutations-wp": "^0.9",
@@ -46,6 +45,7 @@
         "pop-schema/user-state-wp": "^0.9",
         "pop-schema/usermeta-wp": "^0.9",
         "pop-wp-schema/media": "^0.9",
+        "pop-wp-schema/menus": "^0.9",
         "pop-wp-schema/users": "^0.9"
     },
     "require-dev": {
