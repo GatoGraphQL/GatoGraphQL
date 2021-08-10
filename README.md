@@ -36,7 +36,7 @@ Plugins can extend the GraphQL schema, to fetch their own data.
 - Source code:
   - [Engine](layers/Engine): The basic libraries.
   - [Schema](layers/Schema): Agnostic data entities (posts, users, comments, etc).
-  - [WP Schema](layers/WPSchema): WordPress-specific data elements.
+  - [WordPress Schema](layers/WPSchema): WordPress-specific data elements.
   - [API](layers/API): Packages to access the schema data through an API, including REST and GraphQL.
 
 ## Site Builder (WIP)
