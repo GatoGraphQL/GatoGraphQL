@@ -11,7 +11,7 @@ class PluginEnvironment
 {
     public const DISABLE_CACHING = 'DISABLE_CACHING';
     public const CACHE_DIR = 'CACHE_DIR';
-    public const APPLICATION_NATURE = 'APPLICATION_NATURE';
+    public const ENABLE_UNSAFE_DEFAULTS = 'ENABLE_UNSAFE_DEFAULTS';
 
     /**
      * If the information is provided by either environment variable
@@ -60,10 +60,10 @@ class PluginEnvironment
     public static function getApplicationNature(): string
     {
         $definedNature = null;
-        if (getenv(self::APPLICATION_NATURE) !== false) {
-            $definedNature = trim(getenv(self::APPLICATION_NATURE));
-        } elseif (PluginConfigurationHelper::isWPConfigConstantDefined(self::APPLICATION_NATURE)) {
-            $definedNature = trim(PluginConfigurationHelper::getWPConfigConstantValue(self::APPLICATION_NATURE));
+        if (getenv(self::ENABLE_UNSAFE_DEFAULTS) !== false) {
+            $definedNature = trim(getenv(self::ENABLE_UNSAFE_DEFAULTS));
+        } elseif (PluginConfigurationHelper::isWPConfigConstantDefined(self::ENABLE_UNSAFE_DEFAULTS)) {
+            $definedNature = trim(PluginConfigurationHelper::getWPConfigConstantValue(self::ENABLE_UNSAFE_DEFAULTS));
         }
 
         if (
