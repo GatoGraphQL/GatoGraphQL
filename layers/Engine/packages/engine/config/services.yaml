@@ -17,6 +17,9 @@ services:
     PoP\Engine\ObjectModels\Root:
         class: \PoP\Engine\ObjectModels\Root
 
+    PoP\Engine\CMS\CMSHelperServiceInterface:
+        class: \PoP\Engine\CMS\CMSHelperService
+
     PoP\Engine\Hooks\:
         resource: '../src/Hooks/*'
 
