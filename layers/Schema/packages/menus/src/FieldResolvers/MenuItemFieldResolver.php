@@ -52,6 +52,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         return [
             // This field is special in that it is retrieved from the registry
             'children',
+            'path',
             // All other fields are properties in the object
             'label',
             'title',
@@ -69,6 +70,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'children' => SchemaDefinition::TYPE_ID,
+            'path' => SchemaDefinition::TYPE_STRING,
             'label' => SchemaDefinition::TYPE_STRING,
             'title' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,
@@ -129,6 +131,18 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'children':
                 return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren($typeResolver->getID($menuItem)));
+            case 'path':
+                // The path applies only to local URLs
+                $url = $menuItem->url;
+                $homeURL = $this->cmsService->getHomeURL();
+                if (str_starts_with($url, $homeURL)) {
+                    return substr(
+                        $url,
+                        strlen($homeURL)
+                    );
+                }
+                return $url;
+            // These are all properties of MenuItem
             case 'label':
             case 'title':
             case 'url':
