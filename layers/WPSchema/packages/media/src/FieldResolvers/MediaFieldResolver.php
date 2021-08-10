@@ -64,6 +64,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'urlPath',
             'slug',
             'title',
+            'caption',
             'date',
         ];
     }
@@ -75,6 +76,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'urlPath' => SchemaDefinition::TYPE_STRING,
             'slug' => SchemaDefinition::TYPE_STRING,
             'title' => SchemaDefinition::TYPE_STRING,
+            'caption' => SchemaDefinition::TYPE_STRING,
             'date' => SchemaDefinition::TYPE_DATE,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -101,6 +103,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'urlPath' => $this->translationAPI->__('Media element URL path', 'pop-media'),
             'slug' => $this->translationAPI->__('Media element slug', 'pop-media'),
             'title' => $this->translationAPI->__('Media element title', 'pop-media'),
+            'caption' => $this->translationAPI->__('Media element caption', 'pop-media'),
             'date' => $this->translationAPI->__('Media element\'s published date', 'pop-media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
@@ -159,6 +162,8 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
                 return $mediaItem->post_name;
             case 'title':
                 return $mediaItem->post_title;
+            case 'caption':
+                return $mediaItem->post_excerpt;
             case 'date':
                 return $this->dateFormatter->format(
                     $fieldArgs['format'],
