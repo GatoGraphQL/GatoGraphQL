@@ -9,6 +9,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
+use WP_Term;
 
 class MenuFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -20,6 +21,9 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
+            'name',
+            'slug',
+            'count',
             'locations',
         ];
     }
@@ -27,14 +31,22 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'locations' => SchemaDefinition::TYPE_STRING,
-            default => parent::getSchemaFieldType($typeResolver, $fieldName),
+            'name',
+            'slug',
+            'locations'
+                => SchemaDefinition::TYPE_STRING,
+            'count'
+                => SchemaDefinition::TYPE_INT,
+            default
+                => parent::getSchemaFieldType($typeResolver, $fieldName),
         };
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
+            'count'
+                => SchemaTypeModifiers::NON_NULLABLE,
             'locations'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
@@ -45,7 +57,10 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'locations' => $this->translationAPI->__('Menu\'s locations', 'pop-menus'),
+            'name' => $this->translationAPI->__('Menu\'s name', 'pop-menus'),
+            'slug' => $this->translationAPI->__('Menu\'s slug', 'pop-menus'),
+            'count' => $this->translationAPI->__('Number of items contained in the menu', 'pop-menus'),
+            'locations' => $this->translationAPI->__('To which locations has the menu been assigned to', 'pop-menus'),
             default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
         };
     }
@@ -65,9 +80,16 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
+        /** @var WP_Term */
         $menu = $resultItem;
         $menuID = $typeResolver->getID($menu);
         switch ($fieldName) {
+            case 'name':
+                return $menu->name;
+            case 'slug':
+                return $menu->slug;
+            case 'count':
+                return $menu->count;
             case 'locations':
                 $locationMenuIDs = \get_nav_menu_locations();
                 return array_keys(
