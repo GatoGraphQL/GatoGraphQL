@@ -66,9 +66,16 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         array $options = []
     ): mixed {
         $menu = $resultItem;
+        $menuID = $typeResolver->getID($menu);
         switch ($fieldName) {
             case 'locations':
-                return $menu->locations;
+                $locationMenuIDs = \get_nav_menu_locations();
+                return array_keys(
+                    array_filter(
+                        $locationMenuIDs,
+                        fn (string | int $locationMenuID) => $locationMenuID === $menuID
+                    )
+                );
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
