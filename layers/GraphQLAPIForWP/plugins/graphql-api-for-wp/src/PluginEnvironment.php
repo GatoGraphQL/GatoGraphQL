@@ -53,36 +53,14 @@ class PluginEnvironment
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
     }
 
-    /**
-     * The nature is either "static" or "live".
-     * From it, we can provide the default settings, being either safer or looser
-     */
-    public static function getApplicationNature(): string
+    public static function areUnsafeDefaultsEnabled(): bool
     {
-        $definedNature = null;
         if (getenv(self::ENABLE_UNSAFE_DEFAULTS) !== false) {
-            $definedNature = trim(getenv(self::ENABLE_UNSAFE_DEFAULTS));
+            return (bool)getenv(self::ENABLE_UNSAFE_DEFAULTS);
         } elseif (PluginConfigurationHelper::isWPConfigConstantDefined(self::ENABLE_UNSAFE_DEFAULTS)) {
-            $definedNature = trim(PluginConfigurationHelper::getWPConfigConstantValue(self::ENABLE_UNSAFE_DEFAULTS));
+            return (bool)PluginConfigurationHelper::getWPConfigConstantValue(self::ENABLE_UNSAFE_DEFAULTS);
         }
 
-        if (
-            in_array($definedNature, [
-            ApplicationNature::STATIC_,
-            ApplicationNature::LIVE,
-            ])
-        ) {
-            return $definedNature;
-        }
-
-        return ApplicationNature::LIVE;
-    }
-
-    /**
-     * Indicate if the application is intended for building "static" sites
-     */
-    public static function isApplicationNatureStatic(): bool
-    {
-        return self::getApplicationNature() === ApplicationNature::STATIC_;
+        return false;
     }
 }

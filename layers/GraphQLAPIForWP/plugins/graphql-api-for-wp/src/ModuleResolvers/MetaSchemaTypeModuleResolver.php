@@ -176,7 +176,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         $defaultMetaValues = [
             ModuleSettingOptions::ENTRIES => [],
-            ModuleSettingOptions::BEHAVIOR => PluginEnvironment::isApplicationNatureStatic() ?
+            ModuleSettingOptions::BEHAVIOR => PluginEnvironment::areUnsafeDefaultsEnabled() ?
                 Behaviors::DENYLIST
                 : Behaviors::ALLOWLIST,
         ];

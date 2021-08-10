@@ -363,7 +363,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         // Lower the security constraints for the static app
-        $isStaticApp = PluginEnvironment::isApplicationNatureStatic();
+        $isStaticApp = PluginEnvironment::areUnsafeDefaultsEnabled();
         $defaultValues = [
             self::SCHEMA_ADMIN_SCHEMA => [
                 ModuleSettingOptions::ENABLE => $isStaticApp,
