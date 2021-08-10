@@ -1,4 +1,4 @@
-# WordPress-specific Users Data Model
+# Users
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-User data elements which are specific to WordPress, and as such do not belong in the CMS-agnostic `Schema` layer
+WordPress-specific Users Data Model
 
 ## Install
 
