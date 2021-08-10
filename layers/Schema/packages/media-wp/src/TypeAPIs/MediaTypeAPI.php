@@ -95,9 +95,10 @@ class MediaTypeAPI implements MediaTypeAPIInterface
             $query['include'] = implode(',', $query['include']);
         }
         $query['post_type'] = 'attachment';
-        if (isset($query['mime-type'])) {
-            $query['post_mime_type'] = $query['mime-type'];
-            unset($query['mime-type']);
+        if (isset($query['mime-types'])) {
+            // Transform from array to string
+            $query['post_mime_type'] = implode(',', $query['mime-types']);
+            unset($query['mime-types']);
         }
         if (isset($query['offset'])) {
             // Same param name, so do nothing

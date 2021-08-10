@@ -9,3 +9,6 @@ services:
 
     PoPSchema\Media\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
+
+    PoPSchema\Media\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'
