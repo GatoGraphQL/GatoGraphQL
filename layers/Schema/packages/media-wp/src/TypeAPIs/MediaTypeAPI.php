@@ -6,11 +6,11 @@ namespace PoPSchema\MediaWP\TypeAPIs;
 
 use function get_posts;
 use function wp_get_attachment_image_src;
+
 use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
@@ -21,7 +21,7 @@ use WP_Post;
 class MediaTypeAPI implements MediaTypeAPIInterface
 {
     use InjectedFilterDataloadingModuleTypeAPITrait;
-    
+
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     public function __construct(
