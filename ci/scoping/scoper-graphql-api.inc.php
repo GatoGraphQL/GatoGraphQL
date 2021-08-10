@@ -74,13 +74,13 @@ return [
     ],
     'whitelist' => array_values(array_unique([
         // Own namespaces
-        // Watch out! Do NOT alter the order of PoPSchema and PoP!
+        // Watch out! Do NOT alter the order of PoPSchema, PoPWPSchema and PoP!
         // If PoP comes first, then PoPSchema is still scoped!
         'PoPSchema\*',
+        'PoPWPSchema\*',
         'PoP\*',
         'GraphQLByPoP\*',
         'GraphQLAPI\*',
-        'PoPWPSchema\*',
         // Own container cache namespace
         // Watch out! This value is being hardcoded!
         // In the application, it can be overriden via code:
