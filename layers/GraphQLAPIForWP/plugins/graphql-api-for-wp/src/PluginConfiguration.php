@@ -649,6 +649,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             SchemaTypeModuleResolver::SCHEMA_MEDIA => [
                 \PoPSchema\CustomPostMedia\Component::class,
                 \PoPSchema\Media\Component::class,
+                \PoPSchemaWP\Media\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_TAGS => [
                 \PoPSchema\Tags\Component::class,
