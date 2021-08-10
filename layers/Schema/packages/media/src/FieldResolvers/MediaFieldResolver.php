@@ -107,15 +107,21 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
         array $options = []
     ): mixed {
         $media = $resultItem;
+        $size = $this->obtainImageSizeFromParameters($fieldArgs);
         switch ($fieldName) {
             case 'src':
+                // The media item may be an image, or a video or audio.
+                // If image, $imgSrc will have a value. Otherwise, get the URL
+                $imgSrc = $this->mediaTypeAPI->getImageSrc($typeResolver->getID($media), $size);
+                if ($imgSrc !== null) {
+                    return $imgSrc;
+                }
+                return $this->mediaTypeAPI->getMediaItemSrc($typeResolver->getID($media));
             case 'width':
             case 'height':
-                $size = $this->obtainImageSizeFromParameters($fieldArgs);
                 $properties = $this->mediaTypeAPI->getImageProperties($typeResolver->getID($media), $size);
                 return $properties[$fieldName];
             case 'srcSet':
-                $size = $this->obtainImageSizeFromParameters($fieldArgs);
                 return $this->mediaTypeAPI->getImageSrcSet($typeResolver->getID($media), $size);
         }
 

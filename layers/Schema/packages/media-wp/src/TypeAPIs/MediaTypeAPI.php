@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\MediaWP\TypeAPIs;
 
-use function get_posts;
-use function wp_get_attachment_image_src;
-
 use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Media\ComponentConfiguration;
@@ -14,6 +11,9 @@ use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
+
+use function get_posts;
+use function wp_get_attachment_image_src;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -35,6 +35,11 @@ class MediaTypeAPI implements MediaTypeAPIInterface
     public function isInstanceOfMediaType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == 'attachment';
+    }
+
+    public function getMediaItemSrc(string | int $media_id): ?string
+    {
+        return wp_get_attachment_url($media_id);
     }
 
     public function getImageSrc(string | int $image_id, ?string $size = null): ?string
@@ -90,7 +95,11 @@ class MediaTypeAPI implements MediaTypeAPIInterface
             $query['include'] = implode(',', $query['include']);
         }
         $query['post_type'] = 'attachment';
-        $query['post_mime_type'] = 'image';
+        if (isset($query['mime-types'])) {
+            // Transform from array to string
+            $query['post_mime_type'] = implode(',', $query['mime-types']);
+            unset($query['mime-types']);
+        }
         if (isset($query['offset'])) {
             // Same param name, so do nothing
         }
