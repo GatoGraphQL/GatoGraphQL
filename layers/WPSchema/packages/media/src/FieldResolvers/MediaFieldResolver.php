@@ -66,6 +66,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'title',
             'caption',
             'altText',
+            'description',
             'date',
         ];
     }
@@ -79,6 +80,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'title' => SchemaDefinition::TYPE_STRING,
             'caption' => SchemaDefinition::TYPE_STRING,
             'altText' => SchemaDefinition::TYPE_STRING,
+            'description' => SchemaDefinition::TYPE_STRING,
             'date' => SchemaDefinition::TYPE_DATE,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -107,6 +109,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'title' => $this->translationAPI->__('Media element title', 'pop-media'),
             'caption' => $this->translationAPI->__('Media element caption', 'pop-media'),
             'altText' => $this->translationAPI->__('Media element alt text', 'pop-media'),
+            'description' => $this->translationAPI->__('Media element description', 'pop-media'),
             'date' => $this->translationAPI->__('Media element\'s published date', 'pop-media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
@@ -169,6 +172,8 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
                 return $mediaItem->post_excerpt;
             case 'altText':
                 return get_post_meta($mediaItem->ID, '_wp_attachment_image_alt', true);
+            case 'description':
+                return $mediaItem->post_content;
             case 'date':
                 return $this->dateFormatter->format(
                     $fieldArgs['format'],
