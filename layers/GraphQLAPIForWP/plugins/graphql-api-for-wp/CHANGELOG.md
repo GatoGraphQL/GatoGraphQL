@@ -25,7 +25,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `tagSlugs`
   - `categoryIDs`
   - `authorIDs`
-- Fetch a page's children:
+- Fetch a page's parent and children:
+  `Page.parentPage: Page`
   `Page.childPages: [Page]!`
   `Page.childPageCount: Int!`
   `Page.unrestrictedChildPages: [Page]!`
