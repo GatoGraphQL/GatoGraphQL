@@ -52,7 +52,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         return [
             // This field is special in that it is retrieved from the registry
             'children',
-            'path',
+            'localURLPath',
             // All other fields are properties in the object
             'label',
             'title',
@@ -70,7 +70,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'children' => SchemaDefinition::TYPE_ID,
-            'path' => SchemaDefinition::TYPE_STRING,
+            'localURLPath' => SchemaDefinition::TYPE_STRING,
             'label' => SchemaDefinition::TYPE_STRING,
             'title' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,
@@ -100,6 +100,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'children' => $this->translationAPI->__('Menu item children items', 'menus'),
             'label' => $this->translationAPI->__('Menu item label', 'menus'),
             'title' => $this->translationAPI->__('Menu item title', 'menus'),
+            'localURLPath' => $this->translationAPI->__('Path of a local URL, or null if external URL', 'menus'),
             'url' => $this->translationAPI->__('Menu item URL', 'menus'),
             'classes' => $this->translationAPI->__('Menu item classes', 'menus'),
             'target' => $this->translationAPI->__('Menu item target', 'menus'),
@@ -131,7 +132,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'children':
                 return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren($typeResolver->getID($menuItem)));
-            case 'path':
+            case 'localURLPath':
                 // The path applies only to local URLs
                 $url = $menuItem->url;
                 $homeURL = $this->cmsService->getHomeURL();
@@ -141,7 +142,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
                         strlen($homeURL)
                     );
                 }
-                return $url;
+                return null;
             // These are all properties of MenuItem
             case 'label':
             case 'title':
