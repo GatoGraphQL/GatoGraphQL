@@ -13,7 +13,7 @@ use PoP\Engine\CMS\CMSServiceInterface;
 class QueriedObjectHelperService implements QueriedObjectHelperServiceInterface
 {
     public function __construct(
-        protected CMSServiceInterface $cmsService
+        protected CMSServiceInterface $cmsService,
     ) {
     }
 
@@ -56,13 +56,5 @@ class QueriedObjectHelperService implements QueriedObjectHelperServiceInterface
             $limit = $maxLimit;
         }
         return $limit;
-    }
-
-    public function getURLPath(string $url): string
-    {
-        return substr(
-            $url,
-            strlen($this->cmsService->getHomeURL())
-        );
     }
 }

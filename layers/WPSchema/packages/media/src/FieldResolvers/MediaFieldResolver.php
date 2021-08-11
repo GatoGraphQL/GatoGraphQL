@@ -11,6 +11,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Formatters\DateFormatterInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -18,7 +19,6 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
-use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use WP_Post;
 
 class MediaFieldResolver extends AbstractDBDataFieldResolver
@@ -31,7 +31,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
+        protected CMSHelperServiceInterface $cmsHelperService,
         protected DateFormatterInterface $dateFormatter
     ) {
         parent::__construct(
@@ -166,7 +166,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
                 if ($fieldName === 'url') {
                     return $url;
                 }
-                return $this->queriedObjectHelperService->getURLPath($url);
+                return $this->cmsHelperService->getURLPath($url);
             case 'slug':
                 return $mediaItem->post_name;
             case 'title':
