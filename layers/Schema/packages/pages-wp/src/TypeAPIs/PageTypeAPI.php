@@ -31,9 +31,13 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
         $query = parent::convertCustomPostsQuery($query, $options);
 
         // A page can have an ancestor
-        if (isset($query['parent-page-id'])) {
-            $query['post_parent'] = $query['parent-page-id'];
-            unset($query['parent-page-id']);
+        if (isset($query['parent-id'])) {
+            $query['post_parent'] = $query['parent-id'];
+            unset($query['parent-id']);
+        }
+        if (isset($query['parent-ids'])) {
+            $query['post_parent__in'] = $query['parent-ids'];
+            unset($query['parent-ids']);
         }
 
         return HooksAPIFacade::getInstance()->applyFilters(

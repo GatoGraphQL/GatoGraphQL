@@ -25,6 +25,8 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public const MODULE_FILTERINPUT_SEARCH = 'filterinput-search';
     public const MODULE_FILTERINPUT_IDS = 'filterinput-ids';
     public const MODULE_FILTERINPUT_ID = 'filterinput-id';
+    public const MODULE_FILTERINPUT_PARENT_IDS = 'filterinput-parent-ids';
+    public const MODULE_FILTERINPUT_PARENT_ID = 'filterinput-parent-id';
 
     public function getModulesToProcess(): array
     {
@@ -35,6 +37,8 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             [self::class, self::MODULE_FILTERINPUT_SEARCH],
             [self::class, self::MODULE_FILTERINPUT_IDS],
             [self::class, self::MODULE_FILTERINPUT_ID],
+            [self::class, self::MODULE_FILTERINPUT_PARENT_IDS],
+            [self::class, self::MODULE_FILTERINPUT_PARENT_ID],
         );
     }
 
@@ -47,6 +51,8 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SEARCH => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
             self::MODULE_FILTERINPUT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
             self::MODULE_FILTERINPUT_ID => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
+            self::MODULE_FILTERINPUT_PARENT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PARENT_IDS],
+            self::MODULE_FILTERINPUT_PARENT_ID => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PARENT_ID],
         ];
         return $filterInputs[$module[1]] ?? null;
     }
@@ -57,6 +63,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             case self::MODULE_FILTERINPUT_ORDER:
                 return OrderFormInput::class;
             case self::MODULE_FILTERINPUT_IDS:
+            case self::MODULE_FILTERINPUT_PARENT_IDS:
                 return FormMultipleInput::class;
             case self::MODULE_FILTERINPUT_ID:
                 return MultiValueFromStringFormInput::class;
@@ -75,6 +82,8 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SEARCH => 'searchfor',
             self::MODULE_FILTERINPUT_IDS => 'ids',
             self::MODULE_FILTERINPUT_ID => 'id',
+            self::MODULE_FILTERINPUT_PARENT_IDS => 'parentIDs',
+            self::MODULE_FILTERINPUT_PARENT_ID => 'parentID',
         );
         return $names[$module[1]] ?? parent::getName($module);
     }
@@ -88,6 +97,8 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SEARCH => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_IDS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_ID => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_PARENT_IDS => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_PARENT_ID => SchemaDefinition::TYPE_ID,
             default => $this->getDefaultSchemaFilterInputType(),
         };
     }
@@ -95,35 +106,40 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public function getSchemaFilterInputIsArrayType(array $module): bool
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_IDS => true,
-            default => false,
+            self::MODULE_FILTERINPUT_IDS,
+            self::MODULE_FILTERINPUT_PARENT_IDS
+                => true,
+            default
+                => false,
         };
     }
 
     public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_IDS => true,
-            default => false,
+            self::MODULE_FILTERINPUT_IDS,
+            self::MODULE_FILTERINPUT_PARENT_IDS
+                => true,
+            default
+                => false,
         };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
     {
-        $descriptions = [
-            self::MODULE_FILTERINPUT_ORDER => $this->translationAPI->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'pop-engine'),
-            self::MODULE_FILTERINPUT_LIMIT => $this->translationAPI->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'pop-engine'),
-            self::MODULE_FILTERINPUT_OFFSET => $this->translationAPI->__('Offset the results by how many places (required for pagination)', 'pop-engine'),
-            self::MODULE_FILTERINPUT_SEARCH => $this->translationAPI->__('Search for elements containing the given string', 'pop-engine'),
-            self::MODULE_FILTERINPUT_IDS => sprintf(
-                $this->translationAPI->__('Limit results to elements with the given IDs', 'pop-engine'),
-                Param::VALUE_SEPARATOR
-            ),
+        return match ($module[1]) {
+            self::MODULE_FILTERINPUT_ORDER => $this->translationAPI->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
+            self::MODULE_FILTERINPUT_LIMIT => $this->translationAPI->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
+            self::MODULE_FILTERINPUT_OFFSET => $this->translationAPI->__('Offset the results by how many places (required for pagination)', 'schema-commons'),
+            self::MODULE_FILTERINPUT_SEARCH => $this->translationAPI->__('Search for elements containing the given string', 'schema-commons'),
+            self::MODULE_FILTERINPUT_IDS => $this->translationAPI->__('Limit results to elements with the given IDs', 'schema-commons'),
             self::MODULE_FILTERINPUT_ID => sprintf(
-                $this->translationAPI->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'pop-engine'),
+                $this->translationAPI->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'schema-commons'),
                 Param::VALUE_SEPARATOR
             ),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            self::MODULE_FILTERINPUT_PARENT_IDS => $this->translationAPI->__('Limit results to elements with the given parent IDs', 'schema-commons'),
+            self::MODULE_FILTERINPUT_PARENT_ID => $this->translationAPI->__('Limit results to elements with the given parent ID', 'schema-commons'),
+            default => null,
+        };
     }
 }

@@ -21,16 +21,19 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.postTagBySlug: PostTag`
   - `Root.mediaItemBySlug: MediaItem`
 - Filter custom post fields (`Root.posts`, `User.posts`, etc) via new arguments:
-  - `tagIDs`
-  - `tagSlugs`
-  - `categoryIDs`
-  - `authorIDs`
+  - `tagIDs: [ID]`
+  - `tagSlugs: [String]`
+  - `categoryIDs: [ID]`
+  - `authorIDs: [ID]`
 - Fetch a page's parent and children:
   `Page.parentPage: Page`
   `Page.childPages: [Page]!`
   `Page.childPageCount: Int!`
   `Page.unrestrictedChildPages: [Page]!`
   `Page.unrestrictedChildPageCount: Int!`
+- Filter field `pages` via new arguments:
+  - `parentIDs: [ID]`
+  - `parentID: ID`
 - Fetch a user by different means:
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)
