@@ -25,12 +25,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `tagSlugs: [String]`
   - `categoryIDs: [ID]`
   - `authorIDs: [ID]`
-- Fetch a page's parent and children:
+- Fetch a page's parent and children, and the menu order:
   `Page.parentPage: Page`
   `Page.childPages: [Page]!`
   `Page.childPageCount: Int!`
   `Page.unrestrictedChildPages: [Page]!`
   `Page.unrestrictedChildPageCount: Int!`
+  `Page.menuOrder: Int!`
 - Filter field `pages` via new arguments:
   - `parentIDs: [ID]`
   - `parentID: ID`
