@@ -122,4 +122,10 @@ class GeneralUtils
     {
         return substr($url, strlen(self::getDomain($url)));
     }
+
+    public static function getPath(string $url): string
+    {
+        $parse = parse_url($url);
+        return $parse['path'];
+    }
 }
