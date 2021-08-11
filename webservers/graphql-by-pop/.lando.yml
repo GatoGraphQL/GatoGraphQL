@@ -194,6 +194,7 @@ services:
         - '../../layers/Schema/packages/users:/app/vendor/pop-schema/users'
         - '../../layers/WPSchema/packages/media:/app/vendor/pop-wp-schema/media'
         - '../../layers/WPSchema/packages/menus:/app/vendor/pop-wp-schema/menus'
+        - '../../layers/WPSchema/packages/pages:/app/vendor/pop-wp-schema/pages'
         - '../../layers/WPSchema/packages/users:/app/vendor/pop-wp-schema/users'
     build_as_root:
       - a2enmod proxy proxy_http
