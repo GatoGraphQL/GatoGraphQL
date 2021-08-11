@@ -13,19 +13,19 @@ class MediaFilterInputContainerModuleProcessor extends AbstractFilterInputContai
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINNER_MEDIAITEMS = 'filterinner-media-items';
+    public const MODULE_FILTERINPUTCONTAINER_MEDIAITEMS = 'filterinputcontainer-media-items';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_MEDIAITEMS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_MEDIAITEMS],
         );
     }
 
     public function getFilterInputModules(array $module): array
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINNER_MEDIAITEMS => [
+            self::MODULE_FILTERINPUTCONTAINER_MEDIAITEMS => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],

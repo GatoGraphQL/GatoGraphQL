@@ -150,19 +150,19 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         return match ($fieldName) {
             'pages' => [
                 PageFilterInputContainerModuleProcessor::class,
-                PageFilterInputContainerModuleProcessor::MODULE_FILTERINNER_PAGELISTLIST
+                PageFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_PAGELISTLIST
             ],
             'pageCount' => [
                 PageFilterInputContainerModuleProcessor::class,
-                PageFilterInputContainerModuleProcessor::MODULE_FILTERINNER_PAGELISTCOUNT
+                PageFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_PAGELISTCOUNT
             ],
             'unrestrictedPages' => [
                 PageFilterInputContainerModuleProcessor::class,
-                PageFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPAGELISTLIST
+                PageFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTLIST
             ],
             'unrestrictedPageCount' => [
                 PageFilterInputContainerModuleProcessor::class,
-                PageFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPAGELISTCOUNT
+                PageFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT
             ],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
         };

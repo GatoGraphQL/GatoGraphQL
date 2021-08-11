@@ -14,7 +14,7 @@ class GD_Custom_EM_Module_Processor_CustomFilters extends PoP_Module_Processor_F
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
-            self::MODULE_FILTER_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_CustomFilterInners::class, GD_Custom_EM_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_MYLOCATIONPOSTS],
+            self::MODULE_FILTER_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_CustomFilterInners::class, GD_Custom_EM_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYLOCATIONPOSTS],
         );
 
         if ($inner = $inners[$module[1]] ?? null) {

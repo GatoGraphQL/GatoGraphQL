@@ -11,18 +11,18 @@ class PageFilterInputContainerModuleProcessor extends CustomPostFilterInputConta
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINNER_PAGELISTLIST = 'filterinner-pagelist';
-    public const MODULE_FILTERINNER_PAGELISTCOUNT = 'filterinner-pagecount';
-    public const MODULE_FILTERINNER_ADMINPAGELISTLIST = 'filterinner-adminpagelist';
-    public const MODULE_FILTERINNER_ADMINPAGELISTCOUNT = 'filterinner-adminpagecount';
+    public const MODULE_FILTERINPUTCONTAINER_PAGELISTLIST = 'filterinputcontainer-pagelist';
+    public const MODULE_FILTERINPUTCONTAINER_PAGELISTCOUNT = 'filterinputcontainer-pagecount';
+    public const MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTLIST = 'filterinputcontainer-adminpagelist';
+    public const MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT = 'filterinputcontainer-adminpagecount';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_PAGELISTLIST],
-            [self::class, self::MODULE_FILTERINNER_PAGELISTCOUNT],
-            [self::class, self::MODULE_FILTERINNER_ADMINPAGELISTLIST],
-            [self::class, self::MODULE_FILTERINNER_ADMINPAGELISTCOUNT],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_PAGELISTLIST],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_PAGELISTCOUNT],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTLIST],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT],
         );
     }
 
@@ -30,10 +30,10 @@ class PageFilterInputContainerModuleProcessor extends CustomPostFilterInputConta
     {
         // Get the original config from above
         $targetModule = match ($module[1]) {
-            self::MODULE_FILTERINNER_PAGELISTLIST => [self::class, self::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST],
-            self::MODULE_FILTERINNER_PAGELISTCOUNT => [self::class, self::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT],
-            self::MODULE_FILTERINNER_ADMINPAGELISTLIST => [self::class, self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST],
-            self::MODULE_FILTERINNER_ADMINPAGELISTCOUNT => [self::class, self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT],
+            self::MODULE_FILTERINPUTCONTAINER_PAGELISTLIST => [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST],
+            self::MODULE_FILTERINPUTCONTAINER_PAGELISTCOUNT => [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTLIST => [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT => [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT],
             default => null,
         };
         $filterInputModules = parent::getFilterInputModules($targetModule);

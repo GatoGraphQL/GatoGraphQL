@@ -13,18 +13,18 @@ abstract class AbstractPostFilterInputContainerModuleProcessor extends AbstractC
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINNER_POSTS = 'filterinner-posts';
-    public const MODULE_FILTERINNER_POSTCOUNT = 'filterinner-postcount';
-    public const MODULE_FILTERINNER_ADMINPOSTS = 'filterinner-adminposts';
-    public const MODULE_FILTERINNER_ADMINPOSTCOUNT = 'filterinner-adminpostcount';
+    public const MODULE_FILTERINPUTCONTAINER_POSTS = 'filterinputcontainer-posts';
+    public const MODULE_FILTERINPUTCONTAINER_POSTCOUNT = 'filterinputcontainer-postcount';
+    public const MODULE_FILTERINPUTCONTAINER_ADMINPOSTS = 'filterinputcontainer-adminposts';
+    public const MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT = 'filterinputcontainer-adminpostcount';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_POSTS],
-            [self::class, self::MODULE_FILTERINNER_POSTCOUNT],
-            [self::class, self::MODULE_FILTERINNER_ADMINPOSTS],
-            [self::class, self::MODULE_FILTERINNER_ADMINPOSTCOUNT],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTCOUNT],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT],
         );
     }
 
@@ -47,13 +47,13 @@ abstract class AbstractPostFilterInputContainerModuleProcessor extends AbstractC
         ];
         $statusModule = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
         return match ($module[1]) {
-            self::MODULE_FILTERINNER_POSTS => $postListModules,
-            self::MODULE_FILTERINNER_POSTCOUNT => $postCountModules,
-            self::MODULE_FILTERINNER_ADMINPOSTS => [
+            self::MODULE_FILTERINPUTCONTAINER_POSTS => $postListModules,
+            self::MODULE_FILTERINPUTCONTAINER_POSTCOUNT => $postCountModules,
+            self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTS => [
                 ...$postListModules,
                 $statusModule,
             ],
-            self::MODULE_FILTERINNER_ADMINPOSTCOUNT => [
+            self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT => [
                 ...$postCountModules,
                 $statusModule,
             ],

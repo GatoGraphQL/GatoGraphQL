@@ -57,22 +57,22 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
                 return [
                     GenericCustomPostFilterInputContainerModuleProcessor::class,
-                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST
+                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT:
                 return [
                     GenericCustomPostFilterInputContainerModuleProcessor::class,
-                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT
+                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
                 return [
                     GenericCustomPostFilterInputContainerModuleProcessor::class,
-                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST
+                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT:
                 return [
                     GenericCustomPostFilterInputContainerModuleProcessor::class,
-                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTCOUNT
+                    GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT
                 ];
         }
 

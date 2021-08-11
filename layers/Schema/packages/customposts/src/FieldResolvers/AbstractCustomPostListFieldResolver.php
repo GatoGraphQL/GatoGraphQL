@@ -105,19 +105,19 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         return match ($fieldName) {
             'customPosts' => [
                 CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST
+                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST
             ],
             'unrestrictedCustomPosts' => [
                 CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST
+                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST
             ],
             'customPostCount' => [
                 CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT
+                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT
             ],
             'unrestrictedCustomPostCount' => [
                 CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT
+                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT
             ],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
         };

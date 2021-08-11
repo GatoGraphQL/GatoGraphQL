@@ -62,9 +62,9 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
-                return [TagFilterInputContainerModuleProcessor::class, TagFilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGS];
+                return [TagFilterInputContainerModuleProcessor::class, TagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT:
-                return [TagFilterInputContainerModuleProcessor::class, TagFilterInputContainerModuleProcessor::MODULE_FILTERINNER_TAGCOUNT];
+                return [TagFilterInputContainerModuleProcessor::class, TagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGCOUNT];
         }
 
         return parent::getFilterSubmodule($module);

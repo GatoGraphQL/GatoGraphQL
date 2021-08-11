@@ -18,9 +18,9 @@ class PoP_LocationPosts_Module_Processor_CustomDelegatorFilters extends PoP_Modu
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
-            self::MODULE_DELEGATORFILTER_AUTHORLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::class, PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_AUTHORLOCATIONPOSTS],
-            self::MODULE_DELEGATORFILTER_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::class, PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_LOCATIONPOSTS],
-            self::MODULE_DELEGATORFILTER_TAGLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::class, PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_TAGLOCATIONPOSTS],
+            self::MODULE_DELEGATORFILTER_AUTHORLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::class, PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS],
+            self::MODULE_DELEGATORFILTER_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::class, PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONPOSTS],
+            self::MODULE_DELEGATORFILTER_TAGLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::class, PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGLOCATIONPOSTS],
         );
 
         if ($inner = $inners[$module[1]] ?? null) {

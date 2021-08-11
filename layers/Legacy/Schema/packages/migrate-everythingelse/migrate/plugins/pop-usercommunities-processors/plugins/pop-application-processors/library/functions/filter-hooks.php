@@ -9,7 +9,7 @@ HooksAPIFacade::getInstance()->addFilter('Users:FilterInnerModuleProcessor:input
 function gdUreAddFiltercomponentCommunitiesUser($filterinputs, array $module)
 {
     if (in_array($module, [
-        [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_USERS],
+        [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_USERS],
     ])) {
         $pos = array_search(
             [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_NAME],
@@ -32,7 +32,7 @@ HooksAPIFacade::getInstance()->addFilter('SimpleFilterInners:inputmodules', 'gdU
 function gdUreAddSimpleFiltercomponentCommunitiesUser($filterinputs, array $module)
 {
     if (in_array($module, [
-        [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_USERS],
+        [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_USERS],
     ])) {
         $pos = array_search(
             [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_NAME],
@@ -96,7 +96,7 @@ HooksAPIFacade::getInstance()->addFilter('Blog:FilterInnerModuleProcessor:inputm
 function gdUreAddFiltercomponentCommunityusers($filterinputs, array $module)
 {
     if (in_array($module, [
-        [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_AUTHORCONTENT],
+        [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCONTENT],
     ])) {
         $vars = ApplicationState::getVars();
         $author = $vars['routing-state']['queried-object-id'];
@@ -125,7 +125,7 @@ HooksAPIFacade::getInstance()->addFilter('SimpleFilterInners:inputmodules', 'gdU
 function gdUreAddSimpleFiltercomponentCommunityusers($filterinputs, array $module)
 {
     if (in_array($module, [
-        [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_AUTHORCONTENT],
+        [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
     ])) {
         $vars = ApplicationState::getVars();
         $author = $vars['routing-state']['queried-object-id'];

@@ -21,9 +21,9 @@ class UserStance_DataLoad_FilterHooks
     public function filtercomponents($filterinputs, array $module)
     {
         if (in_array($module, [
-            [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_STANCES],
-            [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_AUTHORSTANCES],
-            [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_STANCES_STANCE],
+            [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES],
+            [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES],
+            [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES_STANCE],
         ])) {
             array_splice(
                 $filterinputs,
@@ -42,9 +42,9 @@ class UserStance_DataLoad_FilterHooks
     public function simplefiltercomponents($filterinputs, array $module)
     {
         if (in_array($module, [
-            [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_STANCES],
-            [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_AUTHORSTANCES],
-            [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_STANCES_STANCE],
+            [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES],
+            [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES],
+            [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_STANCES_STANCE],
         ])) {
             array_splice(
                 $filterinputs,

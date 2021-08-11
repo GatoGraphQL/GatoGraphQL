@@ -24,12 +24,12 @@ class PoP_Events_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
-            self::MODULE_FILTER_EVENTS => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_EVENTS],
-            self::MODULE_FILTER_AUTHOREVENTS => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_AUTHOREVENTS],
-            self::MODULE_FILTER_TAGEVENTS => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_TAGEVENTS],
-            self::MODULE_FILTER_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_EVENTSCALENDAR],
-            self::MODULE_FILTER_AUTHOREVENTSCALENDAR => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_AUTHOREVENTSCALENDAR],
-            self::MODULE_FILTER_TAGEVENTSCALENDAR => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_TAGEVENTSCALENDAR],
+            self::MODULE_FILTER_EVENTS => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_EVENTS],
+            self::MODULE_FILTER_AUTHOREVENTS => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHOREVENTS],
+            self::MODULE_FILTER_TAGEVENTS => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGEVENTS],
+            self::MODULE_FILTER_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_EVENTSCALENDAR],
+            self::MODULE_FILTER_AUTHOREVENTSCALENDAR => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR],
+            self::MODULE_FILTER_TAGEVENTSCALENDAR => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR],
         );
 
         if ($inner = $inners[$module[1]] ?? null) {

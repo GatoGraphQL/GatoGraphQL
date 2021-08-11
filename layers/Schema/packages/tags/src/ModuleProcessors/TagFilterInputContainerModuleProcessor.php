@@ -12,21 +12,21 @@ class TagFilterInputContainerModuleProcessor extends AbstractFilterInputContaine
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINNER_TAGS = 'filterinner-tags';
-    public const MODULE_FILTERINNER_TAGCOUNT = 'filterinner-tagcount';
+    public const MODULE_FILTERINPUTCONTAINER_TAGS = 'filterinputcontainer-tags';
+    public const MODULE_FILTERINPUTCONTAINER_TAGCOUNT = 'filterinputcontainer-tagcount';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_TAGS],
-            [self::class, self::MODULE_FILTERINNER_TAGCOUNT],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_TAGS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_TAGCOUNT],
         );
     }
 
     public function getFilterInputModules(array $module): array
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINNER_TAGS => [
+            self::MODULE_FILTERINPUTCONTAINER_TAGS => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
@@ -35,7 +35,7 @@ class TagFilterInputContainerModuleProcessor extends AbstractFilterInputContaine
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                 [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
             ],
-            self::MODULE_FILTERINNER_TAGCOUNT => [
+            self::MODULE_FILTERINPUTCONTAINER_TAGCOUNT => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],

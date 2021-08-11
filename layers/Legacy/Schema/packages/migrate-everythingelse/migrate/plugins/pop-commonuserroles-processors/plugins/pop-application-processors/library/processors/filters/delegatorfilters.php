@@ -16,8 +16,8 @@ class GD_URE_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processo
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
-            self::MODULE_DELEGATORFILTER_INDIVIDUALS => [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_INDIVIDUALS],
-            self::MODULE_DELEGATORFILTER_ORGANIZATIONS => [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_ORGANIZATIONS],
+            self::MODULE_DELEGATORFILTER_INDIVIDUALS => [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS],
+            self::MODULE_DELEGATORFILTER_ORGANIZATIONS => [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_ORGANIZATIONS],
         );
 
         if ($inner = $inners[$module[1]] ?? null) {

@@ -3,12 +3,12 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINNER_MYLINKS = 'filterinner-mylinks';
+    public const MODULE_FILTERINPUTCONTAINER_MYLINKS = 'filterinputcontainer-mylinks';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_MYLINKS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_MYLINKS],
         );
     }
 
@@ -17,7 +17,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
         $ret = parent::getInputSubmodules($module);
 
         $inputmodules = [
-            self::MODULE_FILTERINNER_MYLINKS => [
+            self::MODULE_FILTERINPUTCONTAINER_MYLINKS => [
                 GD_CreateUpdate_Utils::moderate() ?
                     [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS] :
                     [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS],
@@ -58,7 +58,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
     // public function getFilter(array $module)
     // {
     //     $filters = array(
-    //         self::MODULE_FILTERINNER_MYLINKS => POP_FILTER_MYLINKS,
+    //         self::MODULE_FILTERINPUTCONTAINER_MYLINKS => POP_FILTER_MYLINKS,
     //     );
     //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;

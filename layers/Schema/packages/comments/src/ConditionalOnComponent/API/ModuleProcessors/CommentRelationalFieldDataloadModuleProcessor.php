@@ -44,7 +44,7 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS:
-                return [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINNER_COMMENTS];
+                return [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS];
         }
 
         return parent::getFilterSubmodule($module);

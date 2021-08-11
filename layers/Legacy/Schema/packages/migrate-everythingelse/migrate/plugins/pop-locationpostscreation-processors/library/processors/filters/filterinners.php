@@ -3,12 +3,12 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_Custom_EM_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINNER_MYLOCATIONPOSTS = 'filterinner-mylocationposts';
+    public const MODULE_FILTERINPUTCONTAINER_MYLOCATIONPOSTS = 'filterinputcontainer-mylocationposts';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_MYLOCATIONPOSTS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_MYLOCATIONPOSTS],
         );
     }
 
@@ -17,7 +17,7 @@ class GD_Custom_EM_Module_Processor_CustomFilterInners extends PoP_Module_Proces
         $ret = parent::getInputSubmodules($module);
 
         $inputmodules = [
-            self::MODULE_FILTERINNER_MYLOCATIONPOSTS => [
+            self::MODULE_FILTERINPUTCONTAINER_MYLOCATIONPOSTS => [
                 GD_CreateUpdate_Utils::moderate() ?
                     [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS] :
                     [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS],
@@ -43,7 +43,7 @@ class GD_Custom_EM_Module_Processor_CustomFilterInners extends PoP_Module_Proces
     // public function getFilter(array $module)
     // {
     //     $filters = array(
-    //         self::MODULE_FILTERINNER_MYLOCATIONPOSTS => POP_FILTER_MYLOCATIONPOSTS,
+    //         self::MODULE_FILTERINPUTCONTAINER_MYLOCATIONPOSTS => POP_FILTER_MYLOCATIONPOSTS,
     //     );
     //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;

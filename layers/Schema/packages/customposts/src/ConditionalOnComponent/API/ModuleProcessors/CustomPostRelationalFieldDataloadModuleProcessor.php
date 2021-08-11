@@ -82,42 +82,42 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
                 return [
                     CustomPostFilterInputContainerModuleProcessor::class,
-                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT:
                 return [
                     CustomPostFilterInputContainerModuleProcessor::class,
-                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
                 return [
                     CustomPostFilterInputContainerModuleProcessor::class,
-                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT:
                 return [
                     CustomPostFilterInputContainerModuleProcessor::class,
-                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
                 return [
                     CustomPostFilterInputContainerModuleProcessor::class,
-                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT:
                 return [
                     CustomPostFilterInputContainerModuleProcessor::class,
-                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
                 return [
                     CustomPostFilterInputContainerModuleProcessor::class,
-                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST
                 ];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT:
                 return [
                     CustomPostFilterInputContainerModuleProcessor::class,
-                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT
+                    CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT
                 ];
         }
 

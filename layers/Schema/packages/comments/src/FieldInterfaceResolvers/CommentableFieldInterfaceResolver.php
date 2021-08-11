@@ -72,7 +72,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         return match ($fieldName) {
             'comments' => [
                 CommentFilterInputContainerModuleProcessor::class,
-                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINNER_COMMENTS
+                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS
             ],
             default => parent::getFieldDataFilteringModule($fieldName),
         };
@@ -86,7 +86,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
                 // Retrieve all the schema definitions for the filter inputs
                 $filterDataloadingModule = [
                     CommentFilterInputContainerModuleProcessor::class,
-                    CommentFilterInputContainerModuleProcessor::MODULE_FILTERINNER_COMMENTS
+                    CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS
                 ];
                 return array_merge(
                     $schemaFieldArgs,

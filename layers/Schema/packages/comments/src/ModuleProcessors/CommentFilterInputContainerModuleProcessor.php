@@ -12,19 +12,19 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINNER_COMMENTS = 'filterinner-comments';
+    public const MODULE_FILTERINPUTCONTAINER_COMMENTS = 'filterinputcontainer-comments';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_COMMENTS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTS],
         );
     }
 
     public function getFilterInputModules(array $module): array
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINNER_COMMENTS => [
+            self::MODULE_FILTERINPUTCONTAINER_COMMENTS => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],

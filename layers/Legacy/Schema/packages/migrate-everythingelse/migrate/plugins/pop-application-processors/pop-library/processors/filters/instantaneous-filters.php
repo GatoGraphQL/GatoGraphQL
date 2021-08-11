@@ -16,8 +16,8 @@ class PoP_Module_Processor_InstantaneousFilters extends PoP_Module_Processor_Ins
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
-            self::MODULE_INSTANTANEOUSFILTER_CONTENTSECTIONS => [PoP_Module_Processor_InstantaneousSimpleFilterInners::class, PoP_Module_Processor_InstantaneousSimpleFilterInners::MODULE_INSTANTANEOUSFILTERINNER_CONTENTSECTIONS],
-            self::MODULE_INSTANTANEOUSFILTER_POSTSECTIONS => [PoP_Module_Processor_InstantaneousSimpleFilterInners::class, PoP_Module_Processor_InstantaneousSimpleFilterInners::MODULE_INSTANTANEOUSFILTERINNER_POSTSECTIONS],
+            self::MODULE_INSTANTANEOUSFILTER_CONTENTSECTIONS => [PoP_Module_Processor_InstantaneousSimpleFilterInners::class, PoP_Module_Processor_InstantaneousSimpleFilterInners::MODULE_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS],
+            self::MODULE_INSTANTANEOUSFILTER_POSTSECTIONS => [PoP_Module_Processor_InstantaneousSimpleFilterInners::class, PoP_Module_Processor_InstantaneousSimpleFilterInners::MODULE_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS],
         );
 
         if ($inner = $inners[$module[1]] ?? null) {
