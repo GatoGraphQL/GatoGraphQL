@@ -14,7 +14,7 @@ class PoP_Locations_Module_Processor_CustomDelegatorFilters extends PoP_Module_P
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
-            self::MODULE_DELEGATORFILTER_LOCATIONS => [PoP_Locations_Module_Processor_CustomSimpleFilterInners::class, PoP_Locations_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_LOCATIONS],
+            self::MODULE_DELEGATORFILTER_LOCATIONS => [PoP_Locations_Module_Processor_CustomSimpleFilterInners::class, PoP_Locations_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONS],
         );
 
         if ($inner = $inners[$module[1]] ?? null) {

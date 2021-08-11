@@ -14,7 +14,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomDelegatorFilters exten
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
-            self::MODULE_DELEGATORFILTER_MYCONTENTPOSTLINKS => [PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners::class, PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_MYLINKS],
+            self::MODULE_DELEGATORFILTER_MYCONTENTPOSTLINKS => [PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners::class, PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_MYLINKS],
         );
 
         if ($inner = $inners[$module[1]] ?? null) {

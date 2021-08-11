@@ -3,12 +3,12 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public const MODULE_SIMPLEFILTERINNER_MYLOCATIONPOSTS = 'simplefilterinner-mylocationposts';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS = 'simplefilterinner-mylocationposts';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_SIMPLEFILTERINNER_MYLOCATIONPOSTS],
+            [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS],
         );
     }
 
@@ -17,7 +17,7 @@ class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proce
         $ret = parent::getInputSubmodules($module);
 
         $inputmodules = [
-            self::MODULE_SIMPLEFILTERINNER_MYLOCATIONPOSTS => [
+            self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS => [
                 GD_CreateUpdate_Utils::moderate() ?
                     [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS] :
                     [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS],
@@ -43,7 +43,7 @@ class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proce
     // public function getFilter(array $module)
     // {
     //     $filters = array(
-    //         self::MODULE_SIMPLEFILTERINNER_MYLOCATIONPOSTS => POP_FILTER_MYLOCATIONPOSTS,
+    //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS => POP_FILTER_MYLOCATIONPOSTS,
     //     );
     //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
