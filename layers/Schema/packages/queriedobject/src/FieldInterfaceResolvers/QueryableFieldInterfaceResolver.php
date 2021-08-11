@@ -33,7 +33,7 @@ class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
     {
         $types = [
             'url' => SchemaDefinition::TYPE_URL,
-            'urlPath' => SchemaDefinition::TYPE_URL,
+            'urlPath' => SchemaDefinition::TYPE_STRING,
             'slug' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
