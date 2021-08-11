@@ -23,6 +23,8 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
      * Get the page with provided ID or, if it doesn't exist, null
      */
     public function getPage(int | string $id): ?object;
+    public function getParentPage(int | string | object $pageObjectOrID): ?object;
+    public function getParentPageID(int | string | object $pageObjectOrID): int | string | null;
     /**
      * Get the list of pages
      */
