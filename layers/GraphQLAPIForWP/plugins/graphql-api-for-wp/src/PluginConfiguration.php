@@ -645,6 +645,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             ],
             SchemaTypeModuleResolver::SCHEMA_PAGES => [
                 \PoPSchema\Pages\Component::class,
+                \PoPWPSchema\Pages\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_MEDIA => [
                 \PoPSchema\CustomPostMedia\Component::class,
