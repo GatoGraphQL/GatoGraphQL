@@ -34,6 +34,7 @@ includes:
     - layers/Schema/packages/custompostmeta/phpstan.neon.dist
     - layers/Schema/packages/custompostmeta-wp/phpstan.neon.dist
     - layers/Schema/packages/customposts/phpstan.neon.dist
+    - layers/WPSchema/packages/customposts/phpstan.neon.dist
     - layers/Schema/packages/customposts-wp/phpstan.neon.dist
     - layers/Engine/packages/definitions/phpstan.neon.dist
     - layers/Engine/packages/engine/phpstan.neon.dist
