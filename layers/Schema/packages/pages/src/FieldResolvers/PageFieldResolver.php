@@ -144,16 +144,16 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
     ): mixed {
         $page = $resultItem;
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
+        $query = [
+            'status' => [
+                Status::PUBLISHED,
+            ],
+            'parent-page-id' => $typeResolver->getID($page),
+        ];
         switch ($fieldName) {
             case 'childPages':
             case 'unrestrictedChildPages':
-                $query = [
-                    'limit' => ComponentConfiguration::getPageListDefaultLimit(),
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
-                    'parent-page-id' => $typeResolver->getID($page),
-                ];
+                $query['limit'] = ComponentConfiguration::getPageListDefaultLimit();
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
@@ -161,12 +161,6 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
                 return $pageTypeAPI->getPages($query, $options);
             case 'childPageCount':
             case 'unrestrictedChildPageCount':
-                $query = [
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
-                    'parent-page-id' => $typeResolver->getID($page),
-                ];
                 $options = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $pageTypeAPI->getPageCount($query, $options);
