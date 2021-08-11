@@ -9,5 +9,5 @@ interface CMSHelperServiceInterface
     /**
      * Remove the Home URL from the permalink
      */
-    public function getURLPath(string $url): string;
+    public function getLocalURLPath(string $url): string;
 }

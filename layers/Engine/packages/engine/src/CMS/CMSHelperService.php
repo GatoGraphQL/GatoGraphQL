@@ -11,7 +11,7 @@ class CMSHelperService implements CMSHelperServiceInterface
     ) {
     }
 
-    public function getURLPath(string $url): string
+    public function getLocalURLPath(string $url): string
     {
         return substr(
             $url,
