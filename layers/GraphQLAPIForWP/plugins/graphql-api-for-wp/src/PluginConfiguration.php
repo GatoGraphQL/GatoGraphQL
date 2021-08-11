@@ -622,6 +622,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         return [
             SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS => [
                 \PoPSchema\CustomPostMedia\Component::class,
+                \PoPWPSchema\CustomPosts\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS => [
                 \PoPSchema\GenericCustomPosts\Component::class,
