@@ -13,26 +13,26 @@ class GenericCustomPostFilterInputContainerModuleProcessor extends AbstractCusto
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST = 'filterinner-genericcustompostlist';
-    public const MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT = 'filterinner-genericcustompostcount';
-    public const MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST = 'filterinner-admingenericcustompostlist';
-    public const MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTCOUNT = 'filterinner-admingenericcustompostcount';
+    public const MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST = 'filterinner-genericcustompostlist';
+    public const MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT = 'filterinner-genericcustompostcount';
+    public const MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST = 'filterinner-admingenericcustompostlist';
+    public const MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT = 'filterinner-admingenericcustompostcount';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST],
-            [self::class, self::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT],
-            [self::class, self::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST],
-            [self::class, self::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTCOUNT],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT],
         );
     }
 
     public function getFilterInputModules(array $module): array
     {
         $filterInputModules = match ($module[1]) {
-            self::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST,
-            self::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST
+            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST,
+            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST
                 => [
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
@@ -43,8 +43,8 @@ class GenericCustomPostFilterInputContainerModuleProcessor extends AbstractCusto
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                     [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_GENERICPOSTTYPES],
                 ],
-            self::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT,
-            self::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTCOUNT =>
+            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT,
+            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT =>
                 [
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                     [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
@@ -57,8 +57,8 @@ class GenericCustomPostFilterInputContainerModuleProcessor extends AbstractCusto
         // "Admin" fields also have the "status" filter
         if (
             in_array($module[1], [
-                self::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTLIST,
-                self::MODULE_FILTERINNER_ADMINGENERICCUSTOMPOSTCOUNT,
+                self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST,
+                self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT,
             ])
         ) {
             $filterInputModules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];

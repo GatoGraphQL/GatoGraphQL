@@ -16,8 +16,8 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilters extends PoP_Module_Pro
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
-            self::MODULE_FILTER_LINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_LINKS],
-            self::MODULE_FILTER_AUTHORLINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_AUTHORLINKS],
+            self::MODULE_FILTER_LINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_LINKS],
+            self::MODULE_FILTER_AUTHORLINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORLINKS],
         );
 
         if ($inner = $inners[$module[1]] ?? null) {

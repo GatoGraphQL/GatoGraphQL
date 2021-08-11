@@ -18,9 +18,9 @@ class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Proces
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
-            self::MODULE_FILTER_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_HIGHLIGHTS],
-            self::MODULE_FILTER_AUTHORHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_AUTHORHIGHLIGHTS],
-            self::MODULE_FILTER_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_MYHIGHLIGHTS],
+            self::MODULE_FILTER_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_HIGHLIGHTS],
+            self::MODULE_FILTER_AUTHORHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORHIGHLIGHTS],
+            self::MODULE_FILTER_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYHIGHLIGHTS],
         );
 
         if ($inner = $inners[$module[1]] ?? null) {

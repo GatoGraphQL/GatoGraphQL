@@ -16,8 +16,8 @@ class GD_URE_Module_Processor_CustomFilters extends PoP_Module_Processor_Filters
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
-            self::MODULE_FILTER_MYMEMBERS => [GD_URE_Module_Processor_CustomFilterInners::class, GD_URE_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_MYMEMBERS],
-            self::MODULE_FILTER_COMMUNITIES => [GD_URE_Module_Processor_CustomFilterInners::class, GD_URE_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_COMMUNITIES],
+            self::MODULE_FILTER_MYMEMBERS => [GD_URE_Module_Processor_CustomFilterInners::class, GD_URE_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYMEMBERS],
+            self::MODULE_FILTER_COMMUNITIES => [GD_URE_Module_Processor_CustomFilterInners::class, GD_URE_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_COMMUNITIES],
         );
 
         if ($inner = $inners[$module[1]] ?? null) {

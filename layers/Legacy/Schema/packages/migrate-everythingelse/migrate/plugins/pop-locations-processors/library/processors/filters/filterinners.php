@@ -3,12 +3,12 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Locations_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINNER_LOCATIONS = 'filterinner-locations';
+    public const MODULE_FILTERINPUTCONTAINER_LOCATIONS = 'filterinner-locations';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_LOCATIONS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_LOCATIONS],
         );
     }
 
@@ -17,7 +17,7 @@ class PoP_Locations_Module_Processor_CustomFilterInners extends PoP_Module_Proce
         $ret = parent::getInputSubmodules($module);
 
         $inputmodules = [
-            self::MODULE_FILTERINNER_LOCATIONS => [
+            self::MODULE_FILTERINPUTCONTAINER_LOCATIONS => [
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH],
             ],
         ];
@@ -37,7 +37,7 @@ class PoP_Locations_Module_Processor_CustomFilterInners extends PoP_Module_Proce
     // public function getFilter(array $module)
     // {
     //     $filters = array(
-    //         self::MODULE_FILTERINNER_LOCATIONS => POP_FILTER_LOCATIONS,
+    //         self::MODULE_FILTERINPUTCONTAINER_LOCATIONS => POP_FILTER_LOCATIONS,
     //     );
     //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;

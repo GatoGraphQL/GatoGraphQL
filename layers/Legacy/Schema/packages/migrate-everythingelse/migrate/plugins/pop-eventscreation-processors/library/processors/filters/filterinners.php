@@ -3,12 +3,12 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINNER_MYEVENTS = 'filterinner-myevents';
+    public const MODULE_FILTERINPUTCONTAINER_MYEVENTS = 'filterinner-myevents';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_MYEVENTS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_MYEVENTS],
         );
     }
 
@@ -17,7 +17,7 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
         $ret = parent::getInputSubmodules($module);
 
         $inputmodules = [
-            self::MODULE_FILTERINNER_MYEVENTS => [
+            self::MODULE_FILTERINPUTCONTAINER_MYEVENTS => [
                 // Events: cannot filter by categories, since em_get_events() has no support for meta_query
                 // Events: cannot filter by tags, since using arg "tag" searchs for its own post type for event tag, and not the standard post tag
                 GD_CreateUpdate_Utils::moderate() ?
@@ -45,7 +45,7 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
     // public function getFilter(array $module)
     // {
     //     $filters = array(
-    //         self::MODULE_FILTERINNER_MYEVENTS => POP_FILTER_MYEVENTS,
+    //         self::MODULE_FILTERINPUTCONTAINER_MYEVENTS => POP_FILTER_MYEVENTS,
     //     );
     //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
