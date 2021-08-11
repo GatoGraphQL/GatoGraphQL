@@ -142,6 +142,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
+        $page = $resultItem;
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'childPages':
@@ -151,6 +152,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
                     'status' => [
                         Status::PUBLISHED,
                     ],
+                    'parent-page-id' => $typeResolver->getID($page),
                 ];
                 $options = [
                     'return-type' => ReturnTypes::IDS,
@@ -163,6 +165,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
                     'status' => [
                         Status::PUBLISHED,
                     ],
+                    'parent-page-id' => $typeResolver->getID($page),
                 ];
                 $options = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
