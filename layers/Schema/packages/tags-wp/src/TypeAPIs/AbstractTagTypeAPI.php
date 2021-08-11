@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\TagsWP\TypeAPIs;
 
 use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
+use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -25,6 +26,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
+        protected CMSHelperServiceInterface $CMSHelperService,
     ) {
     }
 
@@ -185,7 +187,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
 
     public function getTagURLPath(string | int | object $tagObjectOrID): string
     {
-        return $this->queriedObjectHelperService->getURLPath($this->getTagURL($tagObjectOrID));
+        return $this->CMSHelperService->getURLPath($this->getTagURL($tagObjectOrID));
     }
 
     public function getTagSlug(string | int | object $tagObjectOrID): string

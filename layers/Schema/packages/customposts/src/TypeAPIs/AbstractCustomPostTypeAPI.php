@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeAPIs;
 
-use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
+use PoP\Engine\CMS\CMSHelperServiceInterface;
 
 abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
     public function __construct(
-        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService
+        protected CMSHelperServiceInterface $CMSHelperService,
     ) {
     }
 
@@ -20,6 +20,6 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
             return null;
         }
 
-        return $this->queriedObjectHelperService->getURLPath($permalink);
+        return $this->CMSHelperService->getURLPath($permalink);
     }
 }

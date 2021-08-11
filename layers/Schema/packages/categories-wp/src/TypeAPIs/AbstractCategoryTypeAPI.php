@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
 use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
+use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Categories\ComponentConfiguration;
@@ -26,6 +27,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
+        protected CMSHelperServiceInterface $CMSHelperService
     ) {
     }
 
@@ -182,7 +184,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     public function getCategoryURLPath(string | int | object $catObjectOrID): string
     {
-        return $this->queriedObjectHelperService->getURLPath($this->getCategoryURL($catObjectOrID));
+        return $this->CMSHelperService->getURLPath($this->getCategoryURL($catObjectOrID));
     }
 
     public function getCategoryBase()
