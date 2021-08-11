@@ -60,6 +60,20 @@ class MediaTypeAPI implements MediaTypeAPIInterface
         return $srcSet;
     }
 
+    public function getImageSizes(string | int $image_id, ?string $size = null): ?string
+    {
+        $imageProperties = $this->getImageProperties($image_id, $size);
+        if ($imageProperties === null) {
+            return null;
+        }
+        $imageSize = [$imageProperties['width'], $imageProperties['height']];
+        $sizes = \wp_calculate_image_sizes($imageSize, $imageProperties['src'], null, $image_id);
+        if ($sizes === false) {
+            return null;
+        }
+        return $sizes;
+    }
+
     public function getImageProperties(string | int $image_id, ?string $size = null): ?array
     {
         $img = wp_get_attachment_image_src($image_id, $size);

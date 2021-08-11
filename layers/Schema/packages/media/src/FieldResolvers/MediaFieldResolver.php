@@ -55,6 +55,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'srcSet',
             'width',
             'height',
+            'sizes',
         ];
     }
 
@@ -65,6 +66,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'srcSet' => SchemaDefinition::TYPE_STRING,
             'width' => SchemaDefinition::TYPE_INT,
             'height' => SchemaDefinition::TYPE_INT,
+            'sizes' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -87,8 +89,46 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'srcSet' => $this->translationAPI->__('Media element URL srcset', 'pop-media'),
             'width' => $this->translationAPI->__('Media element\'s width', 'pop-media'),
             'height' => $this->translationAPI->__('Media element\'s height', 'pop-media'),
+            'sizes' => $this->translationAPI->__('Media element\'s ‘sizes’ attribute value for an image', 'pop-media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        switch ($fieldName) {
+            case 'src':
+            case 'srcSet':
+            case 'width':
+            case 'height':
+            case 'sizes':
+                /**
+                 * @var MediaDeviceEnum
+                 */
+                $mediaDeviceEnum = $this->instanceManager->getInstance(MediaDeviceEnum::class);
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'size',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Size of the image', 'pop-media'),
+                        ],
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'device',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Device where to show the image', 'pop-media'),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $mediaDeviceEnum->getName(),
+                            SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                                $mediaDeviceEnum->getValues()
+                            ),
+                        ],
+                    ]
+                );
+        }
+
+        return $schemaFieldArgs;
     }
 
     /**
@@ -123,6 +163,8 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
                 return $properties[$fieldName];
             case 'srcSet':
                 return $this->mediaTypeAPI->getImageSrcSet($typeResolver->getID($media), $size);
+            case 'sizes':
+                return $this->mediaTypeAPI->getImageSizes($typeResolver->getID($media), $size);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -162,41 +204,5 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
         }
 
         return null;
-    }
-
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'src':
-            case 'srcSet':
-            case 'width':
-            case 'height':
-                /**
-                 * @var MediaDeviceEnum
-                 */
-                $mediaDeviceEnum = $this->instanceManager->getInstance(MediaDeviceEnum::class);
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'size',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Size of the image', 'pop-media'),
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'device',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Device where to show the image', 'pop-media'),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $mediaDeviceEnum->getName(),
-                            SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $mediaDeviceEnum->getValues()
-                            ),
-                        ],
-                    ]
-                );
-        }
-
-        return $schemaFieldArgs;
     }
 }

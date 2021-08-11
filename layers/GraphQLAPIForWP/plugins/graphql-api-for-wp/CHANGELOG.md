@@ -57,6 +57,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `PostCategory.urlPath: String!`
   - `User.urlPath: String!`
 - Added field arguments to `Root.mediaItems` for filtering results
+- Added field `Root.imageSizeNames: [String]!` to retrieve the list of the available intermediate image size names
 - Added fields in `Media`:
   - `srcSet`
   - `url`
@@ -68,6 +69,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `description`
   - `date`
   - `mimeType`
+  - `sizes`
 
 ### Added
 

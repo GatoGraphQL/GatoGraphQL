@@ -9,6 +9,7 @@ use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
@@ -51,6 +52,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         return [
             'mediaItemBySlug',
+            'imageSizeNames',
         ];
     }
 
@@ -58,21 +60,30 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         $descriptions = [
             'mediaItemBySlug' => $this->translationAPI->__('Get a media item by slug', 'media'),
+            'imageSizeNames' => $this->translationAPI->__('Gets the available intermediate image size names.', 'media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
-        $types = [
+        return match ($fieldName) {
             'mediaItemBySlug' => SchemaDefinition::TYPE_ID,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+            'imageSizeNames' => SchemaDefinition::TYPE_STRING,
+            default => parent::getSchemaFieldType($typeResolver, $fieldName),
+        };
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match ($fieldName) {
+            'imageSizeNames' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
             case 'mediaItemBySlug':
                 return [
@@ -112,6 +123,8 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 ];
                 $mediaItems = $this->mediaTypeAPI->getMediaElements($query, $options);
                 return count($mediaItems) > 0 ? $mediaItems[0] : null;
+            case 'imageSizeNames':
+                return \get_intermediate_image_sizes();
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
