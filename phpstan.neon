@@ -66,6 +66,7 @@ includes:
     - layers/Schema/packages/metaquery-wp/phpstan.neon.dist
     - layers/Engine/packages/modulerouting/phpstan.neon.dist
     - layers/Schema/packages/pages/phpstan.neon.dist
+    - layers/WPSchema/packages/pages/phpstan.neon.dist
     - layers/Schema/packages/pages-wp/phpstan.neon.dist
     - layers/Schema/packages/post-categories/phpstan.neon.dist
     - layers/Schema/packages/post-categories-wp/phpstan.neon.dist

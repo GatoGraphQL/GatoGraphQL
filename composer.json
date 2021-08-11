@@ -139,6 +139,7 @@
             "PoPSitesWassup\\VolunteerMutations\\": "layers/Wassup/packages/volunteer-mutations/src",
             "PoPWPSchema\\Media\\": "layers/WPSchema/packages/media/src",
             "PoPWPSchema\\Menus\\": "layers/WPSchema/packages/menus/src",
+            "PoPWPSchema\\Pages\\": "layers/WPSchema/packages/pages/src",
             "PoPWPSchema\\Users\\": "layers/WPSchema/packages/users/src",
             "PoP\\APIClients\\": "layers/API/packages/api-clients/src",
             "PoP\\APIEndpointsForWP\\": "layers/API/packages/api-endpoints-for-wp/src",
@@ -289,6 +290,7 @@
             "PoPSitesWassup\\VolunteerMutations\\": "layers/Wassup/packages/volunteer-mutations/tests",
             "PoPWPSchema\\Media\\": "layers/WPSchema/packages/media/tests",
             "PoPWPSchema\\Menus\\": "layers/WPSchema/packages/menus/tests",
+            "PoPWPSchema\\Pages\\": "layers/WPSchema/packages/pages/tests",
             "PoPWPSchema\\Users\\": "layers/WPSchema/packages/users/tests",
             "PoP\\APIClients\\": "layers/API/packages/api-clients/tests",
             "PoP\\APIEndpointsForWP\\": "layers/API/packages/api-endpoints-for-wp/tests",
@@ -485,6 +487,7 @@
         "pop-sites-wassup/volunteer-mutations": "0.8.3",
         "pop-wp-schema/media": "0.8.3",
         "pop-wp-schema/menus": "0.8.3",
+        "pop-wp-schema/pages": "0.8.3",
         "pop-wp-schema/users": "0.8.3"
     },
     "authors": [
