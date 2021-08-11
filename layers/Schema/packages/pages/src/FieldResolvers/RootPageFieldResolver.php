@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
+use PoPSchema\Pages\ModuleProcessors\PageFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
@@ -149,20 +149,20 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'pages' => [
-                CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST
+                PageFilterInputContainerModuleProcessor::class,
+                PageFilterInputContainerModuleProcessor::MODULE_FILTERINNER_PAGELISTLIST
             ],
             'pageCount' => [
-                CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT
+                PageFilterInputContainerModuleProcessor::class,
+                PageFilterInputContainerModuleProcessor::MODULE_FILTERINNER_PAGELISTCOUNT
             ],
             'unrestrictedPages' => [
-                CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST
+                PageFilterInputContainerModuleProcessor::class,
+                PageFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPAGELISTLIST
             ],
             'unrestrictedPageCount' => [
-                CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT
+                PageFilterInputContainerModuleProcessor::class,
+                PageFilterInputContainerModuleProcessor::MODULE_FILTERINNER_ADMINPAGELISTCOUNT
             ],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
         };
