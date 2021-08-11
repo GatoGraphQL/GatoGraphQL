@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### GraphQL schema upgrade
 
-- Fetch entities by slug:
+- Fetch entities by slug and path:
   - `Root.postBySlug: Post`
   - `Root.unrestrictedPostBySlug: Post` ("admin" field)
   - `Root.customPostBySlug: CustomPostUnion`
@@ -17,6 +17,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.unrestrictedGenericCustomPostBySlug: GenericCustomPost` ("admin" field)
   - `Root.pageBySlug: Page`
   - `Root.unrestrictedPageBySlug: Page` ("admin" field)
+  - `Root.pageByPath: Page`
+  - `Root.unrestrictedPageByPath: Page` ("admin" field)
   - `Root.postCategoryBySlug: PostCategory`
   - `Root.postTagBySlug: PostTag`
   - `Root.mediaItemBySlug: MediaItem`
