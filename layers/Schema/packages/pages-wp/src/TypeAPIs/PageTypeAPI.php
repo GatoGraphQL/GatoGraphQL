@@ -35,6 +35,10 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
             $query['post_parent'] = $query['parent-id'];
             unset($query['parent-id']);
         }
+        if (isset($query['parent-ids'])) {
+            $query['post_parent__in'] = $query['parent-ids'];
+            unset($query['parent-ids']);
+        }
 
         return HooksAPIFacade::getInstance()->applyFilters(
             self::HOOK_QUERY,
