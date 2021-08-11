@@ -4,19 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
-use function get_post_status;
 use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
-use PoP\Engine\CMS\CMSHelperServiceInterface;
-use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIHelpers;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
-
-use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+
+use function get_post_status;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -26,14 +23,6 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
     use InjectedFilterDataloadingModuleTypeAPITrait;
 
     public const HOOK_QUERY = __CLASS__ . ':query';
-
-    public function __construct(
-        CMSHelperServiceInterface $cmsHelperService,
-        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
-        protected HooksAPIInterface $hooksAPI,
-    ) {
-        parent::__construct($cmsHelperService);
-    }
 
     // public const NON_EXISTING_ID = "non-existing";
 

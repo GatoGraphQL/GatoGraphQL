@@ -26,8 +26,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
+        protected CMSHelperServiceInterface $cmsHelperService,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
-        protected CMSHelperServiceInterface $cmsHelperService
     ) {
     }
 

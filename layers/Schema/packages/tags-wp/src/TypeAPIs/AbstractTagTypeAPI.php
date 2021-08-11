@@ -25,8 +25,8 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
 
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
-        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
         protected CMSHelperServiceInterface $cmsHelperService,
+        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
     ) {
     }
 
