@@ -26,6 +26,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public const MODULE_FILTERINPUT_IDS = 'filterinput-ids';
     public const MODULE_FILTERINPUT_ID = 'filterinput-id';
     public const MODULE_FILTERINPUT_PARENT_IDS = 'filterinput-parent-ids';
+    public const MODULE_FILTERINPUT_PARENT_ID = 'filterinput-parent-id';
 
     public function getModulesToProcess(): array
     {
@@ -37,6 +38,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             [self::class, self::MODULE_FILTERINPUT_IDS],
             [self::class, self::MODULE_FILTERINPUT_ID],
             [self::class, self::MODULE_FILTERINPUT_PARENT_IDS],
+            [self::class, self::MODULE_FILTERINPUT_PARENT_ID],
         );
     }
 
@@ -50,6 +52,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
             self::MODULE_FILTERINPUT_ID => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
             self::MODULE_FILTERINPUT_PARENT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PARENT_IDS],
+            self::MODULE_FILTERINPUT_PARENT_ID => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PARENT_ID],
         ];
         return $filterInputs[$module[1]] ?? null;
     }
@@ -80,6 +83,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_IDS => 'ids',
             self::MODULE_FILTERINPUT_ID => 'id',
             self::MODULE_FILTERINPUT_PARENT_IDS => 'parentIDs',
+            self::MODULE_FILTERINPUT_PARENT_ID => 'parentID',
         );
         return $names[$module[1]] ?? parent::getName($module);
     }
@@ -94,6 +98,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_IDS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_ID => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_PARENT_IDS => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_PARENT_ID => SchemaDefinition::TYPE_ID,
             default => $this->getDefaultSchemaFilterInputType(),
         };
     }
@@ -133,6 +138,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
                 Param::VALUE_SEPARATOR
             ),
             self::MODULE_FILTERINPUT_PARENT_IDS => $this->translationAPI->__('Limit results to elements with the given parent IDs', 'schema-commons'),
+            self::MODULE_FILTERINPUT_PARENT_ID => $this->translationAPI->__('Limit results to elements with the given parent ID', 'schema-commons'),
             default => null,
         };
     }

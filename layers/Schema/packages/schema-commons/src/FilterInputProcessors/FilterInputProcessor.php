@@ -15,6 +15,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public const FILTERINPUT_DATES = 'filterinput-dates';
     public const FILTERINPUT_INCLUDE = 'filterinput-include';
     public const FILTERINPUT_PARENT_IDS = 'filterinput-parent-ids';
+    public const FILTERINPUT_PARENT_ID = 'filterinput-parent-id';
 
     public function getFilterInputsToProcess(): array
     {
@@ -26,6 +27,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
             [self::class, self::FILTERINPUT_DATES],
             [self::class, self::FILTERINPUT_INCLUDE],
             [self::class, self::FILTERINPUT_PARENT_IDS],
+            [self::class, self::FILTERINPUT_PARENT_ID],
         );
     }
 
@@ -54,6 +56,9 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 break;
             case self::FILTERINPUT_PARENT_IDS:
                 $query['parent-ids'] = $value;
+                break;
+            case self::FILTERINPUT_PARENT_ID:
+                $query['parent-id'] = $value;
                 break;
         }
     }
