@@ -25,6 +25,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `tagSlugs`
   - `categoryIDs`
   - `authorIDs`
+- Fetch a page's children:
+  `Page.childPages: [Page]!`
+  `Page.childPageCount: Int!`
+  `Page.unrestrictedChildPages: [Page]!`
+  `Page.unrestrictedChildPageCount: Int!`
 - Fetch a user by different means:
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)
