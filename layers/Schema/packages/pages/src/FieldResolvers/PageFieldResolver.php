@@ -151,7 +151,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
             'status' => [
                 Status::PUBLISHED,
             ],
-            'parent-page-id' => $typeResolver->getID($page),
+            'parent-id' => $typeResolver->getID($page),
         ];
         switch ($fieldName) {
             case 'parentPage':
