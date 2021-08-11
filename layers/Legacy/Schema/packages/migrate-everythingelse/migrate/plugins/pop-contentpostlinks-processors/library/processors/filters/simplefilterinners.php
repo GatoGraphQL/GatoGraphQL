@@ -3,9 +3,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_LINKS = 'simplefilterinner-links';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS = 'simplefilterinner-authorlinks';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGLINKS = 'simplefilterinner-taglinks';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_LINKS = 'simplefilterinputcontainer-links';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS = 'simplefilterinputcontainer-authorlinks';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGLINKS = 'simplefilterinputcontainer-taglinks';
 
     public function getModulesToProcess(): array
     {

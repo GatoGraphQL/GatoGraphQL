@@ -3,7 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS = 'simplefilterinner-mylocationposts';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS = 'simplefilterinputcontainer-mylocationposts';
 
     public function getModulesToProcess(): array
     {

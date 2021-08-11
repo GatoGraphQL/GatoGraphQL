@@ -3,7 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINPUTCONTAINER_MYEVENTS = 'filterinner-myevents';
+    public const MODULE_FILTERINPUTCONTAINER_MYEVENTS = 'filterinputcontainer-myevents';
 
     public function getModulesToProcess(): array
     {

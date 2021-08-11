@@ -3,8 +3,8 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS = 'simplefilterinner-individuals';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_ORGANIZATIONS = 'simplefilterinner-organizations';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS = 'simplefilterinputcontainer-individuals';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_ORGANIZATIONS = 'simplefilterinputcontainer-organizations';
 
     public function getModulesToProcess(): array
     {

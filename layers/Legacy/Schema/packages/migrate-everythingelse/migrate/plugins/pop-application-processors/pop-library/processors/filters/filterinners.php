@@ -3,21 +3,21 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINPUTCONTAINER_TAGS = 'filterinner-tags';
-    public const MODULE_FILTERINPUTCONTAINER_CONTENT = 'filterinner-content';
-    public const MODULE_FILTERINPUTCONTAINER_AUTHORCONTENT = 'filterinner-authorcontent';
-    public const MODULE_FILTERINPUTCONTAINER_TAGCONTENT = 'filterinner-tagcontent';
-    public const MODULE_FILTERINPUTCONTAINER_POSTS = 'filterinner-posts';
-    public const MODULE_FILTERINPUTCONTAINER_CATEGORYPOSTS = 'filterinner-categoryposts';
-    public const MODULE_FILTERINPUTCONTAINER_AUTHORPOSTS = 'filterinner-authorposts';
-    public const MODULE_FILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS = 'filterinner-authorcategoryposts';
-    public const MODULE_FILTERINPUTCONTAINER_TAGPOSTS = 'filterinner-tagposts';
-    public const MODULE_FILTERINPUTCONTAINER_TAGCATEGORYPOSTS = 'filterinner-tagcategoryposts';
-    public const MODULE_FILTERINPUTCONTAINER_USERS = 'filterinner-users';
-    public const MODULE_FILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS = 'filterinner-authorcommunitymembers';
-    public const MODULE_FILTERINPUTCONTAINER_MYCONTENT = 'filterinner-mycontent';
-    public const MODULE_FILTERINPUTCONTAINER_MYPOSTS = 'filterinner-myposts';
-    public const MODULE_FILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'filterinner-mycategoryposts';
+    public const MODULE_FILTERINPUTCONTAINER_TAGS = 'filterinputcontainer-tags';
+    public const MODULE_FILTERINPUTCONTAINER_CONTENT = 'filterinputcontainer-content';
+    public const MODULE_FILTERINPUTCONTAINER_AUTHORCONTENT = 'filterinputcontainer-authorcontent';
+    public const MODULE_FILTERINPUTCONTAINER_TAGCONTENT = 'filterinputcontainer-tagcontent';
+    public const MODULE_FILTERINPUTCONTAINER_POSTS = 'filterinputcontainer-posts';
+    public const MODULE_FILTERINPUTCONTAINER_CATEGORYPOSTS = 'filterinputcontainer-categoryposts';
+    public const MODULE_FILTERINPUTCONTAINER_AUTHORPOSTS = 'filterinputcontainer-authorposts';
+    public const MODULE_FILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS = 'filterinputcontainer-authorcategoryposts';
+    public const MODULE_FILTERINPUTCONTAINER_TAGPOSTS = 'filterinputcontainer-tagposts';
+    public const MODULE_FILTERINPUTCONTAINER_TAGCATEGORYPOSTS = 'filterinputcontainer-tagcategoryposts';
+    public const MODULE_FILTERINPUTCONTAINER_USERS = 'filterinputcontainer-users';
+    public const MODULE_FILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS = 'filterinputcontainer-authorcommunitymembers';
+    public const MODULE_FILTERINPUTCONTAINER_MYCONTENT = 'filterinputcontainer-mycontent';
+    public const MODULE_FILTERINPUTCONTAINER_MYPOSTS = 'filterinputcontainer-myposts';
+    public const MODULE_FILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'filterinputcontainer-mycategoryposts';
 
     public function getModulesToProcess(): array
     {

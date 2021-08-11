@@ -3,8 +3,8 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS = 'simplefilterinner-mymembers';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_COMMUNITIES = 'simplefilterinner-communities';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS = 'simplefilterinputcontainer-mymembers';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_COMMUNITIES = 'simplefilterinputcontainer-communities';
 
     public function getModulesToProcess(): array
     {

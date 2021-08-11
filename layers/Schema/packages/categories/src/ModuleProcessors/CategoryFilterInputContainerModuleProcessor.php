@@ -12,8 +12,8 @@ class CategoryFilterInputContainerModuleProcessor extends AbstractFilterInputCon
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_CATEGORIES = 'filterinner-categories';
-    public const MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT = 'filterinner-categorycount';
+    public const MODULE_FILTERINPUTCONTAINER_CATEGORIES = 'filterinputcontainer-categories';
+    public const MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT = 'filterinputcontainer-categorycount';
 
     public function getModulesToProcess(): array
     {

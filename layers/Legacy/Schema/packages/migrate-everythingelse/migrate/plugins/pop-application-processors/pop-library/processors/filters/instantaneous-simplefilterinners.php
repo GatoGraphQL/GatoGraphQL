@@ -3,8 +3,8 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Processor_InstantaneousSimpleFilterInnersBase
 {
-    public const MODULE_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS = 'instantaneousfilterinner-contentsections';
-    public const MODULE_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS = 'instantaneousfilterinner-postsections';
+    public const MODULE_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS = 'instantaneousfilterinputcontainer-contentsections';
+    public const MODULE_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS = 'instantaneousfilterinputcontainer-postsections';
 
     public function getModulesToProcess(): array
     {
@@ -58,7 +58,7 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
             case self::MODULE_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS:
             case self::MODULE_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS:
                 // Trigger when clicking on the labels inside the btn-group
-                return '.pop-filterinner-instantaneous > label > input';
+                return '.pop-filterinputcontainer-instantaneous > label > input';
         }
 
         return parent::getTriggerInternaltarget($module, $props);
@@ -76,7 +76,7 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
                 $btngroup = $btngroups[$module[1]];
 
                 // Add class so we can find the element to be clicked to submit the form
-                $this->appendProp($btngroup, $props, 'class', 'pop-filterinner-instantaneous');
+                $this->appendProp($btngroup, $props, 'class', 'pop-filterinputcontainer-instantaneous');
 
                 // Add justified style to the btn-group
                 $this->appendProp($btngroup, $props, 'class', 'btn-group-justified');

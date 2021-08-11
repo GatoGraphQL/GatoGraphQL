@@ -3,9 +3,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONPOSTS = 'simplefilterinner-locationposts';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS = 'simplefilterinner-authorlocationposts';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGLOCATIONPOSTS = 'simplefilterinner-taglocationposts';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_LOCATIONPOSTS = 'simplefilterinputcontainer-locationposts';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS = 'simplefilterinputcontainer-authorlocationposts';
+    public const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGLOCATIONPOSTS = 'simplefilterinputcontainer-taglocationposts';
 
     public function getModulesToProcess(): array
     {

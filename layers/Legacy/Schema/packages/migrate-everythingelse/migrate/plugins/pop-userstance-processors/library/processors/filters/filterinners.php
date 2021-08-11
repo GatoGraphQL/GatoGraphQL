@@ -3,13 +3,13 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINPUTCONTAINER_STANCES = 'filterinner-stances';
-    public const MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES = 'filterinner-authorstances';
-    public const MODULE_FILTERINPUTCONTAINER_MYSTANCES = 'filterinner-mystances';
-    public const MODULE_FILTERINPUTCONTAINER_STANCES_AUTHORROLE = 'filterinner-stances-authorrole';
-    public const MODULE_FILTERINPUTCONTAINER_STANCES_STANCE = 'filterinner-stances-stance';
-    public const MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES_STANCE = 'filterinner-authorstances-stance';
-    public const MODULE_FILTERINPUTCONTAINER_STANCES_GENERALSTANCE = 'filterinner-stances-generalstance';
+    public const MODULE_FILTERINPUTCONTAINER_STANCES = 'filterinputcontainer-stances';
+    public const MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES = 'filterinputcontainer-authorstances';
+    public const MODULE_FILTERINPUTCONTAINER_MYSTANCES = 'filterinputcontainer-mystances';
+    public const MODULE_FILTERINPUTCONTAINER_STANCES_AUTHORROLE = 'filterinputcontainer-stances-authorrole';
+    public const MODULE_FILTERINPUTCONTAINER_STANCES_STANCE = 'filterinputcontainer-stances-stance';
+    public const MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES_STANCE = 'filterinputcontainer-authorstances-stance';
+    public const MODULE_FILTERINPUTCONTAINER_STANCES_GENERALSTANCE = 'filterinputcontainer-stances-generalstance';
 
     public function getModulesToProcess(): array
     {

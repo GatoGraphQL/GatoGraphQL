@@ -3,9 +3,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINPUTCONTAINER_LOCATIONPOSTS = 'filterinner-locationposts';
-    public const MODULE_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS = 'filterinner-authorlocationposts';
-    public const MODULE_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS = 'filterinner-taglocationposts';
+    public const MODULE_FILTERINPUTCONTAINER_LOCATIONPOSTS = 'filterinputcontainer-locationposts';
+    public const MODULE_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS = 'filterinputcontainer-authorlocationposts';
+    public const MODULE_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS = 'filterinputcontainer-taglocationposts';
 
     public function getModulesToProcess(): array
     {

@@ -13,7 +13,7 @@ class MediaFilterInputContainerModuleProcessor extends AbstractFilterInputContai
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_MEDIAITEMS = 'filterinner-media-items';
+    public const MODULE_FILTERINPUTCONTAINER_MEDIAITEMS = 'filterinputcontainer-media-items';
 
     public function getModulesToProcess(): array
     {

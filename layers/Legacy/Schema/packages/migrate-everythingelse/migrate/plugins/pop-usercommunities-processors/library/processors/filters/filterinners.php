@@ -3,8 +3,8 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINPUTCONTAINER_MYMEMBERS = 'filterinner-mymembers';
-    public const MODULE_FILTERINPUTCONTAINER_COMMUNITIES = 'filterinner-communities';
+    public const MODULE_FILTERINPUTCONTAINER_MYMEMBERS = 'filterinputcontainer-mymembers';
+    public const MODULE_FILTERINPUTCONTAINER_COMMUNITIES = 'filterinputcontainer-communities';
 
     public function getModulesToProcess(): array
     {

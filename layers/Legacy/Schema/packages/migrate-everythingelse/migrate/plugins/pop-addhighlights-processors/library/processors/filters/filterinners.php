@@ -3,9 +3,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_AddHighlights_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINPUTCONTAINER_HIGHLIGHTS = 'filterinner-highlights';
-    public const MODULE_FILTERINPUTCONTAINER_AUTHORHIGHLIGHTS = 'filterinner-authorhighlights';
-    public const MODULE_FILTERINPUTCONTAINER_MYHIGHLIGHTS = 'filterinner-myhighlights';
+    public const MODULE_FILTERINPUTCONTAINER_HIGHLIGHTS = 'filterinputcontainer-highlights';
+    public const MODULE_FILTERINPUTCONTAINER_AUTHORHIGHLIGHTS = 'filterinputcontainer-authorhighlights';
+    public const MODULE_FILTERINPUTCONTAINER_MYHIGHLIGHTS = 'filterinputcontainer-myhighlights';
 
     public function getModulesToProcess(): array
     {
