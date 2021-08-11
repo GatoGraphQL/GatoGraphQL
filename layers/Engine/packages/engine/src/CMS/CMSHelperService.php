@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\CMS;
 
+use PoP\ComponentModel\Misc\GeneralUtils;
+
 class CMSHelperService implements CMSHelperServiceInterface
 {
     public function __construct(
@@ -11,11 +13,11 @@ class CMSHelperService implements CMSHelperServiceInterface
     ) {
     }
 
-    public function getURLPath(string $url): string
+    public function getLocalURLPath(string $url): string | false
     {
-        return substr(
-            $url,
-            strlen($this->cmsService->getHomeURL())
-        );
+        if (str_starts_with($url, $this->cmsService->getHomeURL())) {
+            return GeneralUtils::getPath($url);
+        }
+        return false;
     }
 }

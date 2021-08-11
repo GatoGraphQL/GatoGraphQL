@@ -25,6 +25,7 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
             return null;
         }
 
-        return $this->cmsHelperService->getURLPath($userURL);
+        /** @var string */
+        return $this->cmsHelperService->getLocalURLPath($userURL);
     }
 }

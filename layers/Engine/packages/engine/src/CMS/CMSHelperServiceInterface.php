@@ -7,7 +7,7 @@ namespace PoP\Engine\CMS;
 interface CMSHelperServiceInterface
 {
     /**
-     * Remove the Home URL from the permalink
+     * Get the path from the URL if it starts with the home URL, of `false` otherwise
      */
-    public function getURLPath(string $url): string;
+    public function getLocalURLPath(string $url): string | false;
 }
