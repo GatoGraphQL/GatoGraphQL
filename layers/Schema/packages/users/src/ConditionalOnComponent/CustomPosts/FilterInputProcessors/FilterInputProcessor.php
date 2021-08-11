@@ -9,11 +9,13 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_AUTHOR_IDS = 'filterinput-author-ids';
+    public const FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';
 
     public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_AUTHOR_IDS],
+            [self::class, self::FILTERINPUT_AUTHOR_SLUG],
         );
     }
 
@@ -22,6 +24,9 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
         switch ($filterInput[1]) {
             case self::FILTERINPUT_AUTHOR_IDS:
                 $query['author-ids'] = $value;
+                break;
+            case self::FILTERINPUT_AUTHOR_SLUG:
+                $query['author-slug'] = $value;
                 break;
         }
     }
