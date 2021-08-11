@@ -9,7 +9,7 @@ use PoP\Engine\CMS\CMSHelperServiceInterface;
 abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
     public function __construct(
-        protected CMSHelperServiceInterface $CMSHelperService,
+        protected CMSHelperServiceInterface $cmsHelperService,
     ) {
     }
 

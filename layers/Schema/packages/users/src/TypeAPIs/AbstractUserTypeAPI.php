@@ -12,7 +12,7 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
 {
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
-        protected CMSHelperServiceInterface $CMSHelperService,
+        protected CMSHelperServiceInterface $cmsHelperService,
     ) {
     }
 

@@ -31,7 +31,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected CMSHelperServiceInterface $CMSHelperService,
+        protected CMSHelperServiceInterface $cmsHelperService,
         protected DateFormatterInterface $dateFormatter
     ) {
         parent::__construct(
