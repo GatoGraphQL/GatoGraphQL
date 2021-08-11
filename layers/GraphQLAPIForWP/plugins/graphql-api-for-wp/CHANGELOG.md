@@ -27,6 +27,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `tagSlugs: [String]`
   - `categoryIDs: [ID]`
   - `authorIDs: [ID]`
+- Query properties for custom post fields:
+  - `modified: String`
+  - `isSticky: Bool!`
 - Fetch a page's parent and children, and the menu order:
   `Page.parentPage: Page`
   `Page.childPages: [Page]!`
