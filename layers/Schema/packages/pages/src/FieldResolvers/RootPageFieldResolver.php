@@ -28,10 +28,12 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         return [
             'page',
             'pageBySlug',
+            'pageByPath',
             'pages',
             'pageCount',
             'unrestrictedPage',
             'unrestrictedPageBySlug',
+            'unrestrictedPageByPath',
             'unrestrictedPages',
             'unrestrictedPageCount',
         ];
@@ -42,6 +44,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         return [
             'unrestrictedPage',
             'unrestrictedPageBySlug',
+            'unrestrictedPageByPath',
             'unrestrictedPages',
             'unrestrictedPageCount',
         ];
@@ -52,10 +55,12 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         $descriptions = [
             'page' => $this->translationAPI->__('Page with a specific ID', 'pages'),
             'pageBySlug' => $this->translationAPI->__('Page with a specific slug', 'pages'),
+            'pageByPath' => $this->translationAPI->__('Page with a specific URL path', 'pages'),
             'pages' => $this->translationAPI->__('Pages', 'pages'),
             'pageCount' => $this->translationAPI->__('Number of pages', 'pages'),
             'unrestrictedPage' => $this->translationAPI->__('[Unrestricted] Page with a specific ID', 'pages'),
             'unrestrictedPageBySlug' => $this->translationAPI->__('[Unrestricted] Page with a specific slug', 'pages'),
+            'unrestrictedPageByPath' => $this->translationAPI->__('[Unrestricted] Page with a specific URL path', 'pages'),
             'unrestrictedPages' => $this->translationAPI->__('[Unrestricted] Pages', 'pages'),
             'unrestrictedPageCount' => $this->translationAPI->__('[Unrestricted] Number of pages', 'pages'),
         ];
@@ -67,10 +72,12 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         $types = [
             'page' => SchemaDefinition::TYPE_ID,
             'pageBySlug' => SchemaDefinition::TYPE_ID,
+            'pageByPath' => SchemaDefinition::TYPE_ID,
             'pages' => SchemaDefinition::TYPE_ID,
             'pageCount' => SchemaDefinition::TYPE_INT,
             'unrestrictedPage' => SchemaDefinition::TYPE_ID,
             'unrestrictedPageBySlug' => SchemaDefinition::TYPE_ID,
+            'unrestrictedPageByPath' => SchemaDefinition::TYPE_ID,
             'unrestrictedPages' => SchemaDefinition::TYPE_ID,
             'unrestrictedPageCount' => SchemaDefinition::TYPE_INT,
         ];
@@ -117,6 +124,19 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                             SchemaDefinition::ARGNAME_NAME => 'slug',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The page slug', 'pages'),
+                            SchemaDefinition::ARGNAME_MANDATORY => true,
+                        ],
+                    ]
+                );
+            case 'pageByPath':
+            case 'unrestrictedPageByPath':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'path',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The page URL path', 'pages'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -187,8 +207,10 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'page':
             case 'pageBySlug':
+            case 'pageByPath':
             case 'unrestrictedPage':
             case 'unrestrictedPageBySlug':
+            case 'unrestrictedPageByPath':
                 $query = [];
                 if (
                     in_array($fieldName, [
@@ -204,12 +226,20 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                     ])
                 ) {
                     $query['slug'] = $fieldArgs['slug'];
+                } elseif (
+                    in_array($fieldName, [
+                    'pageByPath',
+                    'unrestrictedPageByPath',
+                    ])
+                ) {
+                    $query['path'] = $fieldArgs['path'];
                 }
 
                 if (
                     in_array($fieldName, [
                     'page',
                     'pageBySlug',
+                    'pageByPath',
                     ])
                 ) {
                     $query['status'] = [
@@ -219,6 +249,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                     in_array($fieldName, [
                     'unrestrictedPage',
                     'unrestrictedPageBySlug',
+                    'unrestrictedPageByPath',
                     ])
                 ) {
                     $query['status'] = [
@@ -268,9 +299,11 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'page':
             case 'pageBySlug':
+            case 'pageByPath':
             case 'pages':
             case 'unrestrictedPage':
             case 'unrestrictedPageBySlug':
+            case 'unrestrictedPageByPath':
             case 'unrestrictedPages':
                 return PageTypeResolver::class;
         }
