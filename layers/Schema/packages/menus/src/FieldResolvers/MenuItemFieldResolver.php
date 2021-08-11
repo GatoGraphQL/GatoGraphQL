@@ -136,7 +136,6 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
                 return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren($typeResolver->getID($menuItem)));
             case 'localURLPath':
                 $url = $menuItem->url;
-                /** @var string */
                 $pathURL = $this->cmsHelperService->getLocalURLPath($url);
                 if ($pathURL === false) {
                     return null;
