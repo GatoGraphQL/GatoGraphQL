@@ -184,6 +184,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     public function getCategoryURLPath(string | int | object $catObjectOrID): string
     {
+        /** @var string */
         return $this->cmsHelperService->getLocalURLPath($this->getCategoryURL($catObjectOrID));
     }
 

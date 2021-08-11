@@ -11,6 +11,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -30,6 +31,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
+        protected CMSHelperServiceInterface $cmsHelperService,
     ) {
         parent::__construct(
             $translationAPI,
@@ -133,16 +135,13 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             case 'children':
                 return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren($typeResolver->getID($menuItem)));
             case 'localURLPath':
-                // The path applies only to local URLs
                 $url = $menuItem->url;
-                $homeURL = $this->cmsService->getHomeURL();
-                if (str_starts_with($url, $homeURL)) {
-                    return substr(
-                        $url,
-                        strlen($homeURL)
-                    );
+                /** @var string */
+                $pathURL = $this->cmsHelperService->getLocalURLPath($url);
+                if ($pathURL === false) {
+                    return null;
                 }
-                return null;
+                return $pathURL;
             // These are all properties of MenuItem
             case 'label':
             case 'title':

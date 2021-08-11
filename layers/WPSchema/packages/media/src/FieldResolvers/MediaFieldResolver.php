@@ -166,6 +166,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
                 if ($fieldName === 'url') {
                     return $url;
                 }
+                /** @var string */
                 return $this->cmsHelperService->getLocalURLPath($url);
             case 'slug':
                 return $mediaItem->post_name;
