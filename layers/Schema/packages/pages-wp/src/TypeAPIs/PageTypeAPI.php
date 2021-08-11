@@ -63,6 +63,30 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
         return $page;
     }
 
+    public function getParentPage(int | string | object $pageObjectOrID): ?object
+    {
+        $pageParentID = $this->getParentPageID($pageObjectOrID);
+        if ($pageParentID === null) {
+            return null;
+        }
+        return $this->getPage($pageParentID);
+    }
+
+    public function getParentPageID(int | string | object $pageObjectOrID): int | string | null
+    {
+        /** @var WP_Post $page */
+        list(
+            $page,
+            $pageID,
+        ) = $this->getCustomPostObjectAndID($pageObjectOrID);
+
+        $pageParentID = $page->post_parent;
+        if ($pageParentID === 0) {
+            return null;
+        }
+        return $pageParentID;
+    }
+
     /**
      * Indicate if an page with provided ID exists
      */

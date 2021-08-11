@@ -25,6 +25,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
+            'parentPage',
             'childPages',
             'childPageCount',
             'unrestrictedChildPages',
@@ -43,6 +44,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
+            'parentPage' => $this->translationAPI->__('Parent page', 'pages'),
             'childPages' => $this->translationAPI->__('Child pages', 'pages'),
             'childPageCount' => $this->translationAPI->__('Number of child pages', 'pages'),
             'unrestrictedChildPages' => $this->translationAPI->__('[Unrestricted] Child pages', 'pages'),
@@ -54,6 +56,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
+            'parentPage' => SchemaDefinition::TYPE_ID,
             'childPages' => SchemaDefinition::TYPE_ID,
             'childPageCount' => SchemaDefinition::TYPE_INT,
             'unrestrictedChildPages' => SchemaDefinition::TYPE_ID,
@@ -151,6 +154,8 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
             'parent-page-id' => $typeResolver->getID($page),
         ];
         switch ($fieldName) {
+            case 'parentPage':
+                return $pageTypeAPI->getParentPageID($page);
             case 'childPages':
             case 'unrestrictedChildPages':
                 $query['limit'] = ComponentConfiguration::getPageListDefaultLimit();
@@ -172,6 +177,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
     public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
+            case 'parentPage':
             case 'childPages':
             case 'unrestrictedChildPages':
                 return PageTypeResolver::class;
