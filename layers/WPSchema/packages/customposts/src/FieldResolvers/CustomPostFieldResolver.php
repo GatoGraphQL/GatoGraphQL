@@ -109,7 +109,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                 if ($modifiedTime === false) {
                     return null;
                 }
-                return $modifiedTime;
+                return (string)$modifiedTime;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
