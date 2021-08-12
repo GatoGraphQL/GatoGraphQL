@@ -33,7 +33,6 @@
         "pop-schema/post-mutations": "^0.9",
         "pop-schema/post-tag-mutations-wp": "^0.9",
         "pop-schema/post-tags-wp": "^0.9",
-        "pop-schema/posts-wp": "^0.9",
         "pop-schema/settings-wp": "^0.9",
         "pop-schema/taxonomymeta-wp": "^0.9",
         "pop-schema/taxonomyquery-wp": "^0.9",
@@ -46,6 +45,7 @@
         "pop-wp-schema/media": "^0.9",
         "pop-wp-schema/menus": "^0.9",
         "pop-wp-schema/pages": "^0.9",
+        "pop-wp-schema/posts": "^0.9",
         "pop-wp-schema/users": "^0.9"
     },
     "require-dev": {
