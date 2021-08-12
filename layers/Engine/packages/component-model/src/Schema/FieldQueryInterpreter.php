@@ -957,9 +957,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     // Otherwise, simply cast the given value directly
                     $argValue = $argValue === null ? null : $this->typeCastingExecuter->cast($fieldOrDirectiveArgType, $argValue);
                     if (GeneralUtils::isError($argValue)) {
-                        /** @var Error */
-                        $error = $argValue;
-                        $errorArgValues[] = $error;
+                        /** @var Error $argValue */
+                        $errorArgValues[] = $argValue;
                     }
                 }
 
