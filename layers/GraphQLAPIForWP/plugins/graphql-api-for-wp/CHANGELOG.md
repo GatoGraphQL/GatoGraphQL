@@ -50,7 +50,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.unrestrictedUserCount: Int!` ("admin" field)
 - Query properties for users:
   - `User.nicename: String!`
-  - `User.nickname: String`
+  - `User.nickname: String!`
+  - `User.locale: String!`
 - Added fields for Categories:
   - `PostCategory.childCategories: [PostCategory]!`
   - `PostCategory.childCategoryNames: [String]!`
