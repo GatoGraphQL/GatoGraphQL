@@ -157,7 +157,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Maybe append the field/directive's version to its description, since this field is missing in GraphQL
-        $addVersionToSchemaFieldDescription = Environment::addVersionToSchemaFieldDescription();
+        $addVersionToSchemaFieldDescription = ComponentConfiguration::addVersionToSchemaFieldDescription();
         // When doing nested mutations, differentiate mutating fields by adding label "[Mutation]" in the description
         $addMutationLabelToSchemaFieldDescription = $enableNestedMutations;
         // Maybe add param "nestedUnder" on the schema for each directive

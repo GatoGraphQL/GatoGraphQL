@@ -23,11 +23,6 @@ class Environment
     public const ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM = 'ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM';
     public const ADD_GRAPHQL_INTROSPECTION_PERSISTED_QUERY = 'ADD_GRAPHQL_INTROSPECTION_PERSISTED_QUERY';
 
-    public static function addVersionToSchemaFieldDescription(): bool
-    {
-        return getenv('ADD_VERSION_TO_SCHEMA_FIELD_DESCRIPTION') !== false ? strtolower(getenv('ADD_VERSION_TO_SCHEMA_FIELD_DESCRIPTION')) == "true" : false;
-    }
-
     public static function enableSettingMutationSchemeByURLParam(): bool
     {
         return getenv('ENABLE_SETTING_MUTATION_SCHEME_BY_URL_PARAM') !== false ? strtolower(getenv('ENABLE_SETTING_MUTATION_SCHEME_BY_URL_PARAM')) == "true" : false;
