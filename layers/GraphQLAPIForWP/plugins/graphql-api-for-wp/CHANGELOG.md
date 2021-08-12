@@ -46,6 +46,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Filter users by email:
   - `Root.unrestrictedUsers: [User]!` ("admin" field)
   - `Root.unrestrictedUserCount: Int!` ("admin" field)
+- Added fields for Categories:
+  - `PostCategory.childCategories: [PostCategory]!`
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Root.menuByLocation: Menu`
