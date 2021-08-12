@@ -295,10 +295,14 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     /**
      * @return array<string|int>|null
      */
-    public function getCategoryChildIDs(string | int | object $catObjectOrID): array
+    public function getCategoryChildIDs(string | int | object $catObjectOrID): ?array
     {
         $categoryID = is_object($catObjectOrID) ? $this->getCategoryID($catObjectOrID) : $catObjectOrID;
-        return \get_term_children($catObjectOrID, $this->getCategoryTaxonomyName());
+        $childrenIDs = \get_term_children($categoryID, $this->getCategoryTaxonomyName());
+        if ($childrenIDs instanceof WP_Error) {
+            return null;
+        }
+        return $childrenIDs;
     }
 
     public function getCategoryDescription(string | int | object $catObjectOrID): string
