@@ -21,7 +21,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolver
 {
     use CustomPostFieldResolverTrait;
-    
+
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);

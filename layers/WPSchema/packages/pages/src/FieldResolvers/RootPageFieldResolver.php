@@ -17,7 +17,7 @@ use WP_Post;
 class RootPageFieldResolver extends AbstractQueryableFieldResolver
 {
     use CustomPostFieldResolverTrait;
-    
+
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
