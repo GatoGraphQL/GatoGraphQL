@@ -53,7 +53,7 @@ trait FilterDataModuleProcessorTrait
                 function (array $module) use ($moduleProcessorManager, $source) {
                     /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
                     $dataloadQueryArgsFilterInputModuleProcessor = $moduleProcessorManager->getProcessor($module);
-                    return !is_null($dataloadQueryArgsFilterInputModuleProcessor->getValue($module, $source));
+                    return $dataloadQueryArgsFilterInputModuleProcessor->isInputSetInSource($module, $source);
                 }
             );
         }
