@@ -1221,7 +1221,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $castedFieldArgs,
             fn (mixed $fieldArgValue) =>
                 (!is_array($fieldArgValue) && GeneralUtils::isError($fieldArgValue))
-                || (is_array($fieldArgValue) && $this->getFailedCastingFieldArgs($fieldArgValue))
+                || (is_array($fieldArgValue) && !empty($this->getFailedCastingFieldArgs($fieldArgValue)))
         );
     }
 
