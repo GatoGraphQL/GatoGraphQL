@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `graphql-api` will be documented in this file.
+All notable changes to `graphql-api-for-wp` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -31,6 +31,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Query properties for custom post fields:
   - `modified: String`
   - `isSticky: Bool!`
+- Query properties for posts:
+  - `Post.postFormat: String!`
 - Fetch a page's parent and children, and the menu order:
   `Page.parentPage: Page`
   `Page.childPages: [Page]!`
@@ -47,6 +49,21 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Filter users by email:
   - `Root.unrestrictedUsers: [User]!` ("admin" field)
   - `Root.unrestrictedUserCount: Int!` ("admin" field)
+- Query properties for users:
+  - `User.nicename: String!`
+  - `User.nickname: String!`
+  - `User.locale: String!`
+  - `User.registeredDate: String!`
+- Added utility fields to better operate with user roles:
+  - `User.roleNames: [String]!`
+  - `User.hasRole: Bool!`
+  - `User.hasAnyRole: Bool!`
+  - `User.hasCapability: Bool!`
+  - `User.hasAnyCapability: Bool!`
+- Fetch children from Categories:
+  - `PostCategory.childCategories: [PostCategory]!`
+  - `PostCategory.childCategoryNames: [String]!`
+  - `PostCategory.childCategoryCount: Int`
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Root.menuByLocation: Menu`
@@ -69,22 +86,22 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `User.urlPath: String!`
 - Added field arguments to `Root.mediaItems` for filtering results
 - Added field `Root.imageSizeNames: [String]!` to retrieve the list of the available intermediate image size names
-- Added fields in `Media`:
-  - `srcSet`
-  - `url`
-  - `urlPath`
-  - `slug`
-  - `title`
-  - `caption`
-  - `altText`
-  - `description`
-  - `date`
-  - `mimeType`
-  - `sizes`
+- Added fields for media items:
+  - `Media.srcSet: String`
+  - `Media.url: String!`
+  - `Media.localURLPath: String`
+  - `Media.slug: String!`
+  - `Media.title: String`
+  - `Media.caption: String`
+  - `Media.altText: String`
+  - `Media.description: String`
+  - `Media.date: String`
+  - `Media.mimeType: String`
+  - `Media.sizes: String`
 
 ### Added
 
-- Static sites: Allow to use unsafe defaults
+- Allow to use unsafe default settings
 
 ## 0.8.1 - 21/07/2021
 

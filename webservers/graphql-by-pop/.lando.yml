@@ -55,9 +55,9 @@ services:
         - >-
           ../../layers/Engine/packages/translation:/app/vendor/getpop/translation
         - >-
-          ../../layers/GraphQLByPoP/clients/graphiql:/app/vendor/graphql-by-pop/graphiql
+          ../../layers/GraphQLByPoP/clients/graphiql:/app/wordpress/graphiql
         - >-
-          ../../layers/GraphQLByPoP/clients/graphql-voyager:/app/vendor/graphql-by-pop/graphql-voyager
+          ../../layers/GraphQLByPoP/clients/graphql-voyager:/app/wordpress/graphql-interactive
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-parser:/app/vendor/graphql-by-pop/graphql-parser
         - >-
@@ -196,6 +196,7 @@ services:
         - '../../layers/WPSchema/packages/media:/app/vendor/pop-wp-schema/media'
         - '../../layers/WPSchema/packages/menus:/app/vendor/pop-wp-schema/menus'
         - '../../layers/WPSchema/packages/pages:/app/vendor/pop-wp-schema/pages'
+        - '../../layers/WPSchema/packages/posts:/app/vendor/pop-wp-schema/posts'
         - '../../layers/WPSchema/packages/users:/app/vendor/pop-wp-schema/users'
     build_as_root:
       - a2enmod proxy proxy_http

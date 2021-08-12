@@ -29,7 +29,6 @@ class Component extends AbstractPluginComponent
         return [
             \PoPSchema\GenericCustomPosts\Component::class,
             \GraphQLByPoP\GraphQLServer\Component::class,
-            \PoPSchema\PostsWP\Component::class,
             \PoPSchema\CustomPostMediaWP\Component::class,
             \PoPSchema\TaxonomyQueryWP\Component::class,
             \PoPSchema\PostTagsWP\Component::class,
@@ -53,6 +52,7 @@ class Component extends AbstractPluginComponent
             \PoPWPSchema\Media\Component::class,
             \PoPWPSchema\Menus\Component::class,
             \PoPWPSchema\Pages\Component::class,
+            \PoPWPSchema\Posts\Component::class,
             \PoPWPSchema\Users\Component::class,
             \GraphQLByPoP\GraphQLClientsForWP\Component::class,
             \GraphQLByPoP\GraphQLEndpointForWP\Component::class,

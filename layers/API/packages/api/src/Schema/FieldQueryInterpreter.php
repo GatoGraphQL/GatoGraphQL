@@ -29,12 +29,9 @@ class FieldQueryInterpreter extends \PoP\ComponentModel\Schema\FieldQueryInterpr
 
     protected function doExtractFieldArgumentValues(string $field): array
     {
-        // Extract the directives from the field
-        if ($fieldDirectives = $this->getFieldDirectives($field)) {
-            // Extract the args from the string into an array
-            if ($directiveArgsStr = $this->getFieldDirectiveArgs($fieldDirectives)) {
-                return $this->doExtractFieldOrDirectiveArgumentValues($directiveArgsStr);
-            }
+        // Extract the args from the string into an array
+        if ($fieldArgsStr = $this->getFieldDirectiveArgs($field)) {
+            return $this->doExtractFieldOrDirectiveArgumentValues($fieldArgsStr);
         }
 
         return [];
@@ -50,9 +47,12 @@ class FieldQueryInterpreter extends \PoP\ComponentModel\Schema\FieldQueryInterpr
 
     protected function doExtractDirectiveArgumentValues(string $field): array
     {
-        // Extract the args from the string into an array
-        if ($directiveArgsStr = $this->getFieldDirectiveArgs($field)) {
-            return $this->doExtractFieldOrDirectiveArgumentValues($directiveArgsStr);
+        // Extract the directives from the field
+        if ($fieldDirectives = $this->getFieldDirectives($field)) {
+            // Extract the args from the string into an array
+            if ($directiveArgsStr = $this->getFieldDirectiveArgs($fieldDirectives)) {
+                return $this->doExtractFieldOrDirectiveArgumentValues($directiveArgsStr);
+            }
         }
 
         return [];

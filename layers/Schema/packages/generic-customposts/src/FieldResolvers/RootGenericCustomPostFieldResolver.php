@@ -10,6 +10,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\FieldResolvers\CustomPostFieldResolverTrait;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputContainerModuleProcessor;
@@ -23,6 +24,8 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
  */
 class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
 {
+    use CustomPostFieldResolverTrait;
+
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
@@ -197,12 +200,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
             'unrestrictedGenericCustomPostCount',
             ])
         ) {
-            $query['status'] = [
-                Status::PUBLISHED,
-                Status::DRAFT,
-                Status::PENDING,
-                Status::TRASH,
-            ];
+            $query['status'] = $this->getUnrestrictedFieldCustomPostTypes();
         }
         switch ($fieldName) {
             case 'genericCustomPost':

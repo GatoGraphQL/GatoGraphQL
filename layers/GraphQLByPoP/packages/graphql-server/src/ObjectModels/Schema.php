@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\API\Schema\SchemaDefinition;
-use GraphQLByPoP\GraphQLServer\Environment;
 use PoP\ComponentModel\State\ApplicationState;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Directive;
@@ -70,7 +69,7 @@ class Schema
         }
 
         // Enable or not to add the global fields to the schema, since they may pollute the documentation
-        if (Environment::addGlobalFieldsToSchema()) {
+        if (ComponentConfiguration::addGlobalFieldsToSchema()) {
             // Add the fields in the registry
             // 1. Global fields
             SchemaDefinitionHelpers::initFieldsFromPath(

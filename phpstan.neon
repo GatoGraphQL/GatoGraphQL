@@ -79,6 +79,7 @@ includes:
     - layers/Schema/packages/post-tags/phpstan.neon.dist
     - layers/Schema/packages/post-tags-wp/phpstan.neon.dist
     - layers/Schema/packages/posts/phpstan.neon.dist
+    - layers/WPSchema/packages/posts/phpstan.neon.dist
     - layers/Schema/packages/posts-wp/phpstan.neon.dist
     - layers/Schema/packages/queriedobject/phpstan.neon.dist
     - layers/Schema/packages/queriedobject-wp/phpstan.neon.dist

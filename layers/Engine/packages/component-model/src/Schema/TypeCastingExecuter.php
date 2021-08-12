@@ -16,7 +16,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
     }
 
     /**
-     * Cast the value to the indicated type, or return null or Error (with a message) if it fails.
+     * Cast the value to the indicated type, or return Error (with a message) if it fails.
      *
      * An array is not a type. For instance, in `[String]`, the type is `String`,
      * and the array is a modifier.
@@ -24,58 +24,40 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
      */
     public function cast(string $type, mixed $value): mixed
     {
-        // Fail if passing an array for unsupporting types
-        switch ($type) {
-            case SchemaDefinition::TYPE_ANY_SCALAR:
-            case SchemaDefinition::TYPE_ID:
-            case SchemaDefinition::TYPE_ARRAY_KEY:
-            case SchemaDefinition::TYPE_STRING:
-            case SchemaDefinition::TYPE_URL:
-            case SchemaDefinition::TYPE_EMAIL:
-            case SchemaDefinition::TYPE_IP:
-            case SchemaDefinition::TYPE_ENUM:
-            case SchemaDefinition::TYPE_DATE:
-            case SchemaDefinition::TYPE_INT:
-            case SchemaDefinition::TYPE_FLOAT:
-            case SchemaDefinition::TYPE_BOOL:
-            case SchemaDefinition::TYPE_TIME:
-                if (is_array($value)) {
-                    return new Error(
-                        'array-cast',
-                        sprintf(
-                            $this->translationAPI->__('An array cannot be casted to type \'%s\'', 'component-model'),
-                            $type
-                        )
-                    );
-                }
-                break;
+        if ($value === null) {
+            return new Error(
+                'null-cast',
+                $this->translationAPI->__('Cannot cast null', 'component-model')
+            );
         }
 
-        // Fail if passing an object for unsupporting types
-        switch ($type) {
-            case SchemaDefinition::TYPE_ANY_SCALAR:
-            case SchemaDefinition::TYPE_ID:
-            case SchemaDefinition::TYPE_ARRAY_KEY:
-            case SchemaDefinition::TYPE_STRING:
-            case SchemaDefinition::TYPE_URL:
-            case SchemaDefinition::TYPE_EMAIL:
-            case SchemaDefinition::TYPE_IP:
-            case SchemaDefinition::TYPE_ENUM:
-            case SchemaDefinition::TYPE_DATE:
-            case SchemaDefinition::TYPE_INT:
-            case SchemaDefinition::TYPE_FLOAT:
-            case SchemaDefinition::TYPE_BOOL:
-            case SchemaDefinition::TYPE_TIME:
-                if (is_object($value)) {
-                    return new Error(
-                        'object-cast',
-                        sprintf(
-                            $this->translationAPI->__('An object cannot be casted to type \'%s\'', 'component-model'),
-                            $type
-                        )
-                    );
-                }
-                break;
+        // Fail if passing an array for unsupporting types
+        if (
+            (is_array($value) || is_object($value)) && in_array($type, [
+            SchemaDefinition::TYPE_ANY_SCALAR,
+            SchemaDefinition::TYPE_ID,
+            SchemaDefinition::TYPE_ARRAY_KEY,
+            SchemaDefinition::TYPE_STRING,
+            SchemaDefinition::TYPE_URL,
+            SchemaDefinition::TYPE_EMAIL,
+            SchemaDefinition::TYPE_IP,
+            SchemaDefinition::TYPE_ENUM,
+            SchemaDefinition::TYPE_DATE,
+            SchemaDefinition::TYPE_INT,
+            SchemaDefinition::TYPE_FLOAT,
+            SchemaDefinition::TYPE_BOOL,
+            SchemaDefinition::TYPE_TIME,
+            ])
+        ) {
+            $entity = is_array($value) ? 'array' : 'object';
+            return new Error(
+                sprintf('%s-cast', $entity),
+                sprintf(
+                    $this->translationAPI->__('An %s cannot be casted to type \'%s\'', 'component-model'),
+                    $entity,
+                    $type
+                )
+            );
         }
 
         switch ($type) {
@@ -88,7 +70,10 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 // Type ID in GraphQL spec: only String or Int allowed.
                 // @see https://spec.graphql.org/draft/#sec-ID.Input-Coercion
                 if (is_float($value) || is_bool($value)) {
-                    return null;
+                    return new Error(
+                        'id-cast',
+                        $this->translationAPI->__('Type ID in GraphQL spec: only String or Int allowed', 'component-model')
+                    );
                 }
                 return $value;
             case SchemaDefinition::TYPE_STRING:
@@ -125,7 +110,13 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             case SchemaDefinition::TYPE_OBJECT:
             case SchemaDefinition::TYPE_INPUT_OBJECT:
                 if (!(is_object($value) || is_array($value))) {
-                    return null;
+                    return new Error(
+                        'object-cast',
+                        sprintf(
+                            $this->translationAPI->__('An object cannot be casted from \'%s\'', 'component-model'),
+                            $value
+                        )
+                    );
                 }
                 return $value;
             case SchemaDefinition::TYPE_DATE:
@@ -162,10 +153,19 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             case SchemaDefinition::TYPE_TIME:
                 $converted = strtotime($value);
                 if ($converted === false) {
-                    return null;
+                    return new Error(
+                        'time-cast',
+                        sprintf(
+                            $this->translationAPI->__('Cannot cast time from \'%s\'', 'component-model'),
+                            $value
+                        )
+                    );
                 }
                 return $converted;
         }
-        return $value;
+        return new Error(
+            'unidentified-type-cast',
+            $this->translationAPI->__('The type of the value cannot be identified, and so cannot be casted', 'component-model')
+        );
     }
 }

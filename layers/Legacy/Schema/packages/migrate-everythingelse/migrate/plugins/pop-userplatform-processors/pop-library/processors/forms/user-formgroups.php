@@ -10,7 +10,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
     public const MODULE_FORMINPUTGROUP_CUU_NEWPASSWORD = 'forminputgroup-cuu-newpassword';
     public const MODULE_FORMINPUTGROUP_CUU_PASSWORDREPEAT = 'forminputgroup-cuu-passwordrepeat';
     public const MODULE_FORMINPUTGROUP_CUU_NEWPASSWORDREPEAT = 'forminputgroup-cuu-newpasswordrepeat';
-    public const MODULE_FORMINPUTGROUP_CUU_FIRSTNAME = 'forminputgroup-cuu-firstname';
+    public const MODULE_FORMINPUTGROUP_CUU_FIRSTNAME = 'forminputgroup-cuu-firstName';
     public const MODULE_FORMINPUTGROUP_CUU_USERWEBSITEURL = 'forminputgroup-cuu-userwebsiteurl';
     public const MODULE_FORMINPUTGROUP_CUU_DESCRIPTION = 'forminputgroup-cuu-description';
 

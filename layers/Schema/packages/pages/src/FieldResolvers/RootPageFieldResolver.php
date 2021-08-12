@@ -9,15 +9,18 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoPSchema\Pages\ModuleProcessors\PageFilterInputContainerModuleProcessor;
+use PoPSchema\CustomPosts\FieldResolvers\CustomPostFieldResolverTrait;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
+use PoPSchema\Pages\ModuleProcessors\PageFilterInputContainerModuleProcessor;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class RootPageFieldResolver extends AbstractQueryableFieldResolver
 {
+    use CustomPostFieldResolverTrait;
+
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
@@ -221,12 +224,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                     'unrestrictedPageBySlug',
                     ])
                 ) {
-                    $query['status'] = [
-                        Status::PUBLISHED,
-                        Status::DRAFT,
-                        Status::PENDING,
-                        Status::TRASH,
-                    ];
+                    $query['status'] = $this->getUnrestrictedFieldCustomPostTypes();
                 }
                 $options = [
                     'return-type' => ReturnTypes::IDS,

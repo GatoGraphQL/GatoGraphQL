@@ -25,6 +25,10 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         return [
             'roles',
             'capabilities',
+            'hasRole',
+            'hasAnyRole',
+            'hasCapability',
+            'hasAnyCapability',
         ];
     }
 
@@ -33,6 +37,10 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         return [
             'roles',
             'capabilities',
+            'hasRole',
+            'hasAnyRole',
+            'hasCapability',
+            'hasAnyCapability',
         ];
     }
 
@@ -41,6 +49,10 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         $types = [
             'roles' => SchemaDefinition::TYPE_STRING,
             'capabilities' => SchemaDefinition::TYPE_STRING,
+            'hasRole' => SchemaDefinition::TYPE_BOOL,
+            'hasAnyRole' => SchemaDefinition::TYPE_BOOL,
+            'hasCapability' => SchemaDefinition::TYPE_BOOL,
+            'hasAnyCapability' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -55,6 +67,11 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'capabilities'
                 => SchemaTypeModifiers::NON_NULLABLE
                 | SchemaTypeModifiers::IS_ARRAY,
+            'hasRole',
+            'hasAnyRole',
+            'hasCapability',
+            'hasAnyCapability'
+                => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
@@ -65,9 +82,75 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         $descriptions = [
             'roles' => $this->translationAPI->__('User roles', 'user-roles'),
             'capabilities' => $this->translationAPI->__('User capabilities', 'user-roles'),
+            'hasRole' => $this->translationAPI->__('Does the user have a specific role?', 'user-roles'),
+            'hasAnyRole' => $this->translationAPI->__('Does the user have any role from a provided list?', 'user-roles'),
+            'hasCapability' => $this->translationAPI->__('Does the user have a specific capability?', 'user-roles'),
+            'hasAnyCapability' => $this->translationAPI->__('Does the user have any capability from a provided list?', 'user-roles'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
+
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        switch ($fieldName) {
+            case 'hasRole':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'role',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('User role to check against', 'user-roles'),
+                            SchemaDefinition::ARGNAME_MANDATORY => true,
+                        ],
+                    ]
+                );
+            case 'hasAnyRole':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'roles',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('User roles to check against', 'user-roles'),
+                            SchemaDefinition::ARGNAME_MANDATORY => true,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
+                            SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY => true,
+                        ],
+                    ]
+                );
+            case 'hasCapability':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'capability',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('User capability to check against', 'user-roles'),
+                            SchemaDefinition::ARGNAME_MANDATORY => true,
+                        ],
+                    ]
+                );
+            case 'hasAnyCapability':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'capabilities',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('User capabilities to check against', 'user-roles'),
+                            SchemaDefinition::ARGNAME_MANDATORY => true,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
+                            SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY => true,
+                        ],
+                    ]
+                );
+        }
+
+        return $schemaFieldArgs;
+    }
+
 
     /**
      * @param array<string, mixed> $fieldArgs
@@ -91,6 +174,18 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
                 return $userRoleTypeAPI->getUserRoles($user);
             case 'capabilities':
                 return $userRoleTypeAPI->getUserCapabilities($user);
+            case 'hasRole':
+                $userRoles = $userRoleTypeAPI->getUserRoles($user);
+                return in_array($fieldArgs['role'], $userRoles);
+            case 'hasAnyRole':
+                $userRoles = $userRoleTypeAPI->getUserRoles($user);
+                return !empty(array_intersect($fieldArgs['roles'], $userRoles));
+            case 'hasCapability':
+                $userCapabilities = $userRoleTypeAPI->getUserCapabilities($user);
+                return in_array($fieldArgs['capability'], $userCapabilities);
+            case 'hasAnyCapability':
+                $userCapabilities = $userRoleTypeAPI->getUserCapabilities($user);
+                return !empty(array_intersect($fieldArgs['capabilities'], $userCapabilities));
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

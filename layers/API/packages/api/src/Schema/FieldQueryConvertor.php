@@ -351,7 +351,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                  * Use %1$s instead of %s to handle all instances
                  */
                 $fieldEmbeds = array_unique($matches[0]); // ["{{title}}"]
-                $fieldNames = array_unique($matches[2]); // ["title"]
+                $fieldNames = array_map('trim', array_unique($matches[2])); // ["title"]
                 $fieldCount = count($fieldEmbeds);
                 $fields = [];
                 $replacedFieldArgValue = $fieldOrDirectiveArgValue;
@@ -383,7 +383,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                             'values' => $fields
                         ]
                     );
-                $field = str_replace($fieldOrDirectiveArgValue, $replacedFieldArgValue, $field);
+                    $field = str_replace($fieldOrDirectiveArgValue, $replacedFieldArgValue, $field);
             }
         }
 

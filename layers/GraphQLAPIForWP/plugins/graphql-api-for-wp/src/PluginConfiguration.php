@@ -357,6 +357,13 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA,
                 'option' => ModuleSettingOptions::ENABLE,
             ],
+            // Add "self" fields to the schema?
+            [
+                'class' => GraphQLServerComponentConfiguration::class,
+                'envVariable' => GraphQLServerEnvironment::ADD_SELF_FIELD_TO_SCHEMA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA,
+                'option' => SchemaTypeModuleResolver::OPTION_ADD_SELF_FIELD_TO_SCHEMA,
+            ],
             // White/Blacklisted entries to CustomPost.meta
             [
                 'class' => CustomPostMetaComponentConfiguration::class,
@@ -630,6 +637,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             ],
             SchemaTypeModuleResolver::SCHEMA_POSTS => [
                 \PoPSchema\Posts\Component::class,
+                \PoPWPSchema\Posts\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_COMMENTS => [
                 \PoPSchema\Comments\Component::class,
