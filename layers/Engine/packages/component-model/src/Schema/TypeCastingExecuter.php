@@ -25,30 +25,28 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
     public function cast(string $type, mixed $value): mixed
     {
         // Fail if passing an array for unsupporting types
-        switch ($type) {
-            case SchemaDefinition::TYPE_ANY_SCALAR:
-            case SchemaDefinition::TYPE_ID:
-            case SchemaDefinition::TYPE_ARRAY_KEY:
-            case SchemaDefinition::TYPE_STRING:
-            case SchemaDefinition::TYPE_URL:
-            case SchemaDefinition::TYPE_EMAIL:
-            case SchemaDefinition::TYPE_IP:
-            case SchemaDefinition::TYPE_ENUM:
-            case SchemaDefinition::TYPE_DATE:
-            case SchemaDefinition::TYPE_INT:
-            case SchemaDefinition::TYPE_FLOAT:
-            case SchemaDefinition::TYPE_BOOL:
-            case SchemaDefinition::TYPE_TIME:
-                if (is_array($value)) {
-                    return new Error(
-                        'array-cast',
-                        sprintf(
-                            $this->translationAPI->__('An array cannot be casted to type \'%s\'', 'component-model'),
-                            $type
-                        )
-                    );
-                }
-                break;
+        if (is_array($value) && in_array($type, [
+            SchemaDefinition::TYPE_ANY_SCALAR,
+            SchemaDefinition::TYPE_ID,
+            SchemaDefinition::TYPE_ARRAY_KEY,
+            SchemaDefinition::TYPE_STRING,
+            SchemaDefinition::TYPE_URL,
+            SchemaDefinition::TYPE_EMAIL,
+            SchemaDefinition::TYPE_IP,
+            SchemaDefinition::TYPE_ENUM,
+            SchemaDefinition::TYPE_DATE,
+            SchemaDefinition::TYPE_INT,
+            SchemaDefinition::TYPE_FLOAT,
+            SchemaDefinition::TYPE_BOOL,
+            SchemaDefinition::TYPE_TIME,
+        ])) {                
+            return new Error(
+                'array-cast',
+                sprintf(
+                    $this->translationAPI->__('An array cannot be casted to type \'%s\'', 'component-model'),
+                    $type
+                )
+            );
         }
 
         // Fail if passing an object for unsupporting types
