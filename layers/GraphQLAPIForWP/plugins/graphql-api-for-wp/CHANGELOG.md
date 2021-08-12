@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `graphql-api` will be documented in this file.
+All notable changes to `graphql-api-for-wp` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -89,7 +89,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Static sites: Allow to use unsafe defaults
+- Allow to use unsafe default settings
 
 ## 0.8.1 - 21/07/2021
 
