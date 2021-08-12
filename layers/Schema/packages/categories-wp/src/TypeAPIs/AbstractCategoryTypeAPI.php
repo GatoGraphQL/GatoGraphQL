@@ -13,7 +13,9 @@ use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use WP_Error;
 use WP_Taxonomy;
+use WP_Term;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -164,6 +166,10 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             $query['slug'] = $query['slugs'];
             unset($query['slugs']);
         }
+        if (isset($query['parent-id'])) {
+            $query['parent'] = $query['parent-id'];
+            unset($query['parent-id']);
+        }
 
         return $this->hooksAPI->applyFilters(
             TaxonomyTypeAPI::HOOK_QUERY,
@@ -252,11 +258,16 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     //     return get_cat_name($cat_id);
     // }
 
-    protected function getCategoryFromObjectOrID(string | int | object $catObjectOrID): object
+    protected function getCategoryFromObjectOrID(string | int | object $catObjectOrID): ?WP_Term
     {
-        return is_object($catObjectOrID) ?
-            $catObjectOrID
-            : \get_term($catObjectOrID, $this->getCategoryTaxonomyName());
+        if (is_object($catObjectOrID)) {
+            return $catObjectOrID;
+        }
+        $catObject = \get_term($catObjectOrID, $this->getCategoryTaxonomyName());
+        if ($catObject === null || $catObject instanceof WP_Error) {
+            return null;
+        }
+        return $catObject;
     }
 
     public function getCategorySlug(string | int | object $catObjectOrID): string
@@ -279,6 +290,15 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             return $parent;
         }
         return null;
+    }
+
+    /**
+     * @return array<string|int>|null
+     */
+    public function getCategoryChildIDs(string | int | object $catObjectOrID): array
+    {
+        $categoryID = is_object($catObjectOrID) ? $this->getCategoryID($catObjectOrID) : $catObjectOrID;
+        return \get_term_children($catObjectOrID, $this->getCategoryTaxonomyName());
     }
 
     public function getCategoryDescription(string | int | object $catObjectOrID): string

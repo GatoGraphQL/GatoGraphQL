@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\FieldResolvers;
 
-use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -98,7 +97,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                     $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
                 );
                 // Assign a default value to "mimeTypes"
-                $filterInputName = $this->getMimeTypesFieldArgName();
+                $filterInputName = $this->getFilterInputName([
+                    FilterInputModuleProcessor::class,
+                    FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES
+                ]);
                 foreach ($schemaFieldArgs as &$schemaFieldArg) {
                     if ($schemaFieldArg['name'] !== $filterInputName) {
                         continue;
@@ -121,18 +123,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 ];
         }
         return parent::getSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
-    protected function getMimeTypesFieldArgName(): string
-    {
-        $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
-        $filterInput = [
-            FilterInputModuleProcessor::class,
-            FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES
-        ];
-        /** @var FilterInputModuleProcessor */
-        $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
-        return $filterInputProcessor->getName($filterInput);
     }
 
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
