@@ -23,6 +23,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         return [
             'nicename',
             'nickname',
+            'locale',
         ];
     }
 
@@ -31,6 +32,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         return match ($fieldName) {
             'nicename' => SchemaDefinition::TYPE_STRING,
             'nickname' => SchemaDefinition::TYPE_STRING,
+            'locale' => SchemaDefinition::TYPE_STRING,
             default => parent::getSchemaFieldType($typeResolver, $fieldName),
         };
     }
@@ -38,7 +40,9 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
-            'nicename'
+            'nicename',
+            'nickname',
+            'locale'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
@@ -50,6 +54,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         return match ($fieldName) {
             'nicename' => $this->translationAPI->__('User\'s nicename', 'pop-users'),
             'nickname' => $this->translationAPI->__('User\'s nickname', 'pop-users'),
+            'locale' => $this->translationAPI->__('Retrieves the locale of a user', 'pop-users'),
             default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
         };
     }
@@ -76,6 +81,8 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
                 return $user->user_nicename;
             case 'nickname':
                 return $user->nickname;
+            case 'locale':
+                return \get_user_locale($user);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
