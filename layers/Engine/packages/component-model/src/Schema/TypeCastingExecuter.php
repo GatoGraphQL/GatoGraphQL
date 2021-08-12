@@ -161,6 +161,9 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 }
                 return $converted;
         }
-        return $value;
+        return new Error(
+            'unidentified-type-cast',
+            $this->translationAPI->__('The type of the value cannot be identified, and so cannot be casted', 'component-model')
+        );
     }
 }
