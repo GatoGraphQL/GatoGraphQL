@@ -7,6 +7,7 @@ namespace PoPSchema\Posts\FieldResolvers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoPSchema\CustomPosts\FieldResolvers\CustomPostFieldResolverTrait;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
@@ -15,6 +16,8 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class RootPostFieldResolver extends AbstractPostFieldResolver
 {
+    use CustomPostFieldResolverTrait;
+
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
@@ -153,12 +156,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
                     'unrestrictedPostBySlug',
                     ])
                 ) {
-                    $query['status'] = [
-                        Status::PUBLISHED,
-                        Status::DRAFT,
-                        Status::PENDING,
-                        Status::TRASH,
-                    ];
+                    $query['status'] = $this->getUnrestrictedFieldCustomPostTypes();
                 }
                 $options = [
                     'return-type' => ReturnTypes::IDS,
