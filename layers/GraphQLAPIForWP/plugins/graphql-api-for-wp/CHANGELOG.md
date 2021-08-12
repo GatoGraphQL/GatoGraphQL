@@ -48,6 +48,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Filter users by email:
   - `Root.unrestrictedUsers: [User]!` ("admin" field)
   - `Root.unrestrictedUserCount: Int!` ("admin" field)
+- Query properties for users:
+  - `User.nicename: String!`
+  - `User.nickname: String`
 - Added fields for Categories:
   - `PostCategory.childCategories: [PostCategory]!`
   - `PostCategory.childCategoryNames: [String]!`

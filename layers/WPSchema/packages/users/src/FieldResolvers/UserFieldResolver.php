@@ -22,6 +22,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     {
         return [
             'nicename',
+            'nickname',
         ];
     }
 
@@ -29,6 +30,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     {
         return match ($fieldName) {
             'nicename' => SchemaDefinition::TYPE_STRING,
+            'nickname' => SchemaDefinition::TYPE_STRING,
             default => parent::getSchemaFieldType($typeResolver, $fieldName),
         };
     }
@@ -47,6 +49,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     {
         return match ($fieldName) {
             'nicename' => $this->translationAPI->__('User\'s nicename', 'pop-users'),
+            'nickname' => $this->translationAPI->__('User\'s nickname', 'pop-users'),
             default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
         };
     }
@@ -71,6 +74,8 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'nicename':
                 return $user->user_nicename;
+            case 'nickname':
+                return $user->nickname;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
