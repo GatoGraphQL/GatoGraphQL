@@ -675,7 +675,7 @@
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-ccl&#038;p=181</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/cache-control {"cacheControlMaxAge":20,"typeFields":["PoPSchema_Users_User.displayName","PoPSchema_Users_User.firstname","PoPSchema_Users_User.lastname","PoPSchema_Users_User.name","PoPSchema_Users_User.nicename","PoPSchema_Users_User.userNicename"]} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/cache-control {"cacheControlMaxAge":20,"typeFields":["PoPSchema_Users_User.displayName","PoPSchema_Users_User.firstName","PoPSchema_Users_User.lastname","PoPSchema_Users_User.name","PoPSchema_Users_User.nicename","PoPSchema_Users_User.userNicename"]} /-->
 
 <!-- wp:graphql-api/cache-control {"cacheControlMaxAge":12000,"typeFields":["PoPSchema_Users_User.username"]} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
