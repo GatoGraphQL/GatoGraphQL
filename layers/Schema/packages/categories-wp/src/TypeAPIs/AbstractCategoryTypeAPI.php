@@ -166,6 +166,10 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             $query['slug'] = $query['slugs'];
             unset($query['slugs']);
         }
+        if (isset($query['parent-id'])) {
+            $query['parent'] = $query['parent-id'];
+            unset($query['parent-id']);
+        }
 
         return $this->hooksAPI->applyFilters(
             TaxonomyTypeAPI::HOOK_QUERY,

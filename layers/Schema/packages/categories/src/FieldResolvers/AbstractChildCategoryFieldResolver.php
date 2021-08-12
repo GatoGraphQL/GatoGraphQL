@@ -118,9 +118,7 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
         switch ($fieldName) {
             case 'childCategories':
             case 'childCategoryNames':
-                $query = [
-                    'limit' => ComponentConfiguration::getCategoryListDefaultLimit(),
-                ];
+                $query['limit'] = ComponentConfiguration::getCategoryListDefaultLimit();
                 $options = [
                     'return-type' => $fieldName === 'childCategories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
                 ];
