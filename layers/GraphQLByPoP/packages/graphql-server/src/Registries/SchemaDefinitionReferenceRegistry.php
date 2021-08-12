@@ -149,7 +149,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 }
             }
         }
-        if (!Environment::addFullSchemaFieldToSchema()) {
+        if (!ComponentConfiguration::addFullSchemaFieldToSchema()) {
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_FIELDS]['fullSchema']);
             if (!$enableNestedMutations) {
                 unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_FIELDS]['fullSchema']);
