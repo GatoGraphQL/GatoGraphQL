@@ -134,7 +134,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Remove unneeded data
-        if (!Environment::addGlobalFieldsToSchema()) {
+        if (!ComponentConfiguration::addGlobalFieldsToSchema()) {
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_FIELDS]);
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_CONNECTIONS]);
         }
@@ -165,7 +165,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
         // Convert the field type from its internal representation (eg: "array:Post") to the GraphQL standard representation (eg: "[Post]")
         // 1. Global fields, connections and directives
-        if (Environment::addGlobalFieldsToSchema()) {
+        if (ComponentConfiguration::addGlobalFieldsToSchema()) {
             foreach (array_keys($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_FIELDS]) as $fieldName) {
                 $itemPath = [
                     SchemaDefinition::ARGNAME_GLOBAL_FIELDS,
