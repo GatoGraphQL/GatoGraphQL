@@ -1214,22 +1214,14 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     /**
-     * Any element that is null or error,
-     * or any array that contains an error
+     * Any element that is Error, or any array that contains an error
      */
-    protected function getFailedCastingFieldArgs(
-        array $castedFieldArgs,
-        bool $isNullValueFailing
-    ): array {
+    protected function getFailedCastingFieldArgs(array $castedFieldArgs): array {
         return array_filter(
             $castedFieldArgs,
             fn (mixed $fieldArgValue) =>
-                GeneralUtils::isError($fieldArgValue)
-                || ($isNullValueFailing && $fieldArgValue === null)
-                || (is_array($fieldArgValue) && $this->getFailedCastingFieldArgs(
-                    $fieldArgValue,
-                    false
-                ))
+                (!is_array($fieldArgValue) && GeneralUtils::isError($fieldArgValue))
+                || (is_array($fieldArgValue) && $this->getFailedCastingFieldArgs($fieldArgValue))
         );
     }
 
@@ -1243,12 +1235,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array &$schemaWarnings
     ): array {
         // If any casting can't be done, show an error
-        if (
-            $failedCastingFieldArgs = $this->getFailedCastingFieldArgs(
-                $castedFieldArgs,
-                true
-            )
-        ) {
+        if ($failedCastingFieldArgs = $this->getFailedCastingFieldArgs($castedFieldArgs)) {
             // $fieldOutputKey = $this->getFieldOutputKey($field);
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
