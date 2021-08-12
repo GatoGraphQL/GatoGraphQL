@@ -27,6 +27,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `tagSlugs: [String]`
   - `categoryIDs: [ID]`
   - `authorIDs: [ID]`
+  - `authorSlug: String`
 - Query properties for custom post fields:
   - `modified: String`
   - `isSticky: Bool!`

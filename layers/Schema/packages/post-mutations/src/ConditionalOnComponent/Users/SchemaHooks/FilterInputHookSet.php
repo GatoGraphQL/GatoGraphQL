@@ -20,17 +20,25 @@ class FilterInputHookSet extends AbstractHookSet
     }
 
     /**
-     * Remove argument "author-ids" from field "myPosts"
+     * Remove arguments "author-ids" and "author-slug" from field "myPosts"
      */
     public function getFilterInputModules(array $filterInputModules): array
     {
-        $module = [
-            FilterInputModuleProcessor::class,
-            FilterInputModuleProcessor::MODULE_FILTERINPUT_AUTHOR_IDS
+        $modules = [
+            [
+                FilterInputModuleProcessor::class,
+                FilterInputModuleProcessor::MODULE_FILTERINPUT_AUTHOR_IDS
+            ],
+            [
+                FilterInputModuleProcessor::class,
+                FilterInputModuleProcessor::MODULE_FILTERINPUT_AUTHOR_SLUG
+            ],
         ];
-        $pos = array_search($module, $filterInputModules);
-        if ($pos !== false) {
-            array_splice($filterInputModules, $pos, 1);
+        foreach ($modules as $module) {
+            $pos = array_search($module, $filterInputModules);
+            if ($pos !== false) {
+                array_splice($filterInputModules, $pos, 1);
+            }
         }
         return $filterInputModules;
     }
