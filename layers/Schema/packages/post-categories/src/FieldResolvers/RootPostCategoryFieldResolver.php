@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\FieldResolvers;
 
+use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\Categories\ComponentConfiguration;
-use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerModuleProcessor;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerModuleProcessor;
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -101,12 +103,34 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
             case 'postCategories':
             case 'postCategoryCount':
             case 'postCategoryNames':
-                return array_merge(
+                $schemaFieldArgs = array_merge(
                     $schemaFieldArgs,
                     $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
                 );
+                // By default fetch top-level categories: "parent-id" => 0
+                $filterInputName = $this->getParentIDFieldArgName();
+                foreach ($schemaFieldArgs as &$schemaFieldArg) {
+                    if ($schemaFieldArg['name'] !== $filterInputName) {
+                        continue;
+                    }
+                    $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = 0;
+                    break;
+                }
+                return $schemaFieldArgs;
         }
         return $schemaFieldArgs;
+    }
+
+    protected function getParentIDFieldArgName(): string
+    {
+        $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
+        $filterInput = [
+            CommonFilterInputModuleProcessor::class,
+            CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
+        ];
+        /** @var FilterInputModuleProcessor */
+        $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
+        return $filterInputProcessor->getName($filterInput);
     }
 
     public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
