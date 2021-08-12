@@ -234,7 +234,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array $fieldOrDirectiveArgElems,
         bool $orderedFieldOrDirectiveArgNamesEnabled,
         array $fieldOrDirectiveArgumentNameTypes,
-        array $fieldArgumentNameDefaultValues,
+        array $fieldOrDirectiveArgumentNameDefaultValues,
         ?array $variables,
         array &$schemaErrors,
         array &$schemaWarnings,
@@ -347,7 +347,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
         // Add the entries for all missing fieldArgs with default value
         $fieldOrDirectiveArgs = array_merge(
-            $fieldArgumentNameDefaultValues,
+            $fieldOrDirectiveArgumentNameDefaultValues,
             $fieldOrDirectiveArgs
         );
 
@@ -398,7 +398,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array &$schemaWarnings,
     ): array {
         // Iterate all the elements, and extract them into the array
-        $fieldArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($typeResolver, $field);
+        $fieldOrDirectiveArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($typeResolver, $field);
         if ($fieldArgElems = QueryHelpers::getFieldArgElements($this->getFieldArgs($field))) {
             $fieldArgumentNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
             $orderedFieldArgNamesEnabled = $typeResolver->enableOrderedSchemaFieldArgs($field);
@@ -407,7 +407,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $fieldArgElems,
                 $orderedFieldArgNamesEnabled,
                 $fieldArgumentNameTypes,
-                $fieldArgumentNameDefaultValues,
+                $fieldOrDirectiveArgumentNameDefaultValues,
                 $variables,
                 $schemaErrors,
                 $schemaWarnings,
@@ -415,7 +415,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             );
         }
 
-        return $fieldArgumentNameDefaultValues;
+        return $fieldOrDirectiveArgumentNameDefaultValues;
     }
 
     protected function filterFieldOrDirectiveArgs(array $fieldOrDirectiveArgs): array
