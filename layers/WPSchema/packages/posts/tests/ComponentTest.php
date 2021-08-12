@@ -1,6 +1,6 @@
 <?php
 
-namespace PoPWPSchema\CustomPosts;
+namespace PoPWPSchema\Posts;
 
 use PHPUnit\Framework\TestCase;
 
