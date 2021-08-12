@@ -53,6 +53,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `User.nickname: String!`
   - `User.locale: String!`
   - `User.registeredDate: String!`
+- Added utility fields to better operate with user roles:  
+  - `User.roleNames: [String]!`
   - `User.hasRole: Bool!`
   - `User.hasAnyRole: Bool!`
   - `User.hasCapability: Bool!`
