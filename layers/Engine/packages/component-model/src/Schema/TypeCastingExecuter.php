@@ -16,7 +16,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
     }
 
     /**
-     * Cast the value to the indicated type, or return null or Error (with a message) if it fails.
+     * Cast the value to the indicated type, or return Error (with a message) if it fails.
      *
      * An array is not a type. For instance, in `[String]`, the type is `String`,
      * and the array is a modifier.
@@ -88,7 +88,10 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 // Type ID in GraphQL spec: only String or Int allowed.
                 // @see https://spec.graphql.org/draft/#sec-ID.Input-Coercion
                 if (is_float($value) || is_bool($value)) {
-                    return null;
+                    return new Error(
+                        'id-cast',
+                        $this->translationAPI->__('Type ID in GraphQL spec: only String or Int allowed', 'component-model')
+                    );
                 }
                 return $value;
             case SchemaDefinition::TYPE_STRING:
@@ -125,7 +128,13 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             case SchemaDefinition::TYPE_OBJECT:
             case SchemaDefinition::TYPE_INPUT_OBJECT:
                 if (!(is_object($value) || is_array($value))) {
-                    return null;
+                    return new Error(
+                        'object-cast',
+                        sprintf(
+                            $this->translationAPI->__('An object cannot be casted from \'%s\'', 'component-model'),
+                            $value
+                        )
+                    );
                 }
                 return $value;
             case SchemaDefinition::TYPE_DATE:
@@ -162,7 +171,13 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             case SchemaDefinition::TYPE_TIME:
                 $converted = strtotime($value);
                 if ($converted === false) {
-                    return null;
+                    return new Error(
+                        'time-cast',
+                        sprintf(
+                            $this->translationAPI->__('Cannot cast time from \'%s\'', 'component-model'),
+                            $value
+                        )
+                    );
                 }
                 return $converted;
         }
