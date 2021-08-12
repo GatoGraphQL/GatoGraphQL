@@ -49,10 +49,12 @@ class CategoryFilterInputContainerModuleProcessor extends AbstractFilterInputCon
             ],
             default => [],
         };
-        if (in_array($module[1], [
+        if (
+            in_array($module[1], [
             self::MODULE_FILTERINPUTCONTAINER_CATEGORIES,
             self::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT,
-        ])) {
+            ])
+        ) {
             $filterInputModules[] = [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID];
         }
         return $filterInputModules;

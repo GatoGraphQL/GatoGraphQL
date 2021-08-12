@@ -418,23 +418,20 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgumentNameDefaultValues;
     }
 
-    protected function filterFieldOrDirectiveArgs(
-        array $fieldOrDirectiveArgs,
-        bool $allowNullValues = false
-    ): array {
-        // If there was an error, the value will be NULL. In this case, remove it
+    protected function filterFieldOrDirectiveArgs(array $fieldOrDirectiveArgs): array
+    {
+        // Remove all errors, allow null values
         return array_filter(
             $fieldOrDirectiveArgs,
-            function ($elem) use ($allowNullValues): bool {
+            function ($elem): bool {
                 // If the input is `[[String]]`, must then validate if any subitem is Error
                 if (is_array($elem)) {
                     // Filter elements in the array. If any is missing, filter the array out
-                    $filteredElem = $this->filterFieldOrDirectiveArgs($elem, true);
+                    $filteredElem = $this->filterFieldOrDirectiveArgs($elem);
                     return count($elem) === count($filteredElem);
                 }
-                // Remove only NULL values and Errors. Keep '', 0, false and []
-                return !GeneralUtils::isError($elem)
-                    && ($elem !== null || $allowNullValues);
+                // Remove only Errors. Keep NULL, '', 0, false and []
+                return !GeneralUtils::isError($elem);
             }
         );
     }
@@ -957,9 +954,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     // Otherwise, simply cast the given value directly
                     $argValue = $argValue === null ? null : $this->typeCastingExecuter->cast($fieldOrDirectiveArgType, $argValue);
                     if (GeneralUtils::isError($argValue)) {
-                        /** @var Error */
-                        $error = $argValue;
-                        $errorArgValues[] = $error;
+                        /** @var Error $argValue */
+                        $errorArgValues[] = $argValue;
                     }
                 }
 
@@ -1219,22 +1215,15 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     /**
-     * Any element that is null or error,
-     * or any array that contains an error
+     * Any element that is Error, or any array that contains an error
      */
-    protected function getFailedCastingFieldArgs(
-        array $castedFieldArgs,
-        bool $isNullValueFailing
-    ): array {
+    protected function getFailedCastingFieldArgs(array $castedFieldArgs): array
+    {
         return array_filter(
             $castedFieldArgs,
             fn (mixed $fieldArgValue) =>
-                GeneralUtils::isError($fieldArgValue)
-                || ($isNullValueFailing && $fieldArgValue === null)
-                || (is_array($fieldArgValue) && $this->getFailedCastingFieldArgs(
-                    $fieldArgValue,
-                    false
-                ))
+                (!is_array($fieldArgValue) && GeneralUtils::isError($fieldArgValue))
+                || (is_array($fieldArgValue) && !empty($this->getFailedCastingFieldArgs($fieldArgValue)))
         );
     }
 
@@ -1248,12 +1237,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array &$schemaWarnings
     ): array {
         // If any casting can't be done, show an error
-        if (
-            $failedCastingFieldArgs = $this->getFailedCastingFieldArgs(
-                $castedFieldArgs,
-                true
-            )
-        ) {
+        if ($failedCastingFieldArgs = $this->getFailedCastingFieldArgs($castedFieldArgs)) {
             // $fieldOutputKey = $this->getFieldOutputKey($field);
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
@@ -1447,12 +1431,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         }
         if (is_array($fieldArgValue)) {
             // Resolve each element the same way
-            // `null` values in the array are permitted
             return $this->filterFieldOrDirectiveArgs(
                 array_map(function ($arrayValueElem) use ($variables) {
                     return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
-                }, $fieldArgValue),
-                true
+                }, $fieldArgValue)
             );
         }
 

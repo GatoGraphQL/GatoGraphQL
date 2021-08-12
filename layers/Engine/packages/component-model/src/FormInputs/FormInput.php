@@ -34,7 +34,7 @@ class FormInput
     protected function getValueFromSource(array $source): mixed
     {
         // If not set, it will be NULL
-        $value =  $source[$this->getName()] ?? null;
+        $value = $source[$this->getName()] ?? null;
 
         // If it is multiple and the URL contains an empty value (eg: &searchfor[]=&), it will interpret it as array(''),
         // but instead it must be an empty array
@@ -42,8 +42,8 @@ class FormInput
 
         //     $value = array();
         // }
-        if ($this->isMultiple() && !is_null($value)) {
-            $value = array_filter($value);
+        if ($value !== null && $this->isMultiple()) {
+            return array_filter($value);
         }
 
         return $value;
@@ -64,15 +64,29 @@ class FormInput
             return $this->selected;
         }
 
-        // If no source is passed, then use the request
-        $source = $source ?? $_REQUEST;
-
-        $selected = $this->getValueFromSource($source);
-        if (!is_null($selected)) {
-            return $selected;
+        if (!$this->isInputSetInSource($source)) {
+            return $this->getDefaultValue();
         }
 
-        return $this->getDefaultValue();
+        return $this->getValueFromSource($this->getSource($source));
+    }
+
+    /**
+     * If no source is passed, then use the request
+     */
+    protected function getSource(?array $source = null): array
+    {
+        return $source ?? $_REQUEST;
+    }
+
+    /**
+     * It checks if the key with the input's name has been set.
+     * Setting `key=null` counts as `true`
+     */
+    public function isInputSetInSource(?array $source = null): bool
+    {
+        $source = $this->getSource($source);
+        return array_key_exists($this->getName(), $source);
     }
 
     /**
