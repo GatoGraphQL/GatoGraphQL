@@ -59,7 +59,7 @@ class Component extends AbstractComponent
         // - "standard" => Use QueryRoot and MutationRoot
         // - "nested" => Use Root, and nested mutations with redundant root fields
         // - "lean_nested" => Use Root, and nested mutations without redundant root fields
-        if (Environment::enableSettingMutationSchemeByURLParam()) {
+        if (ComponentConfiguration::enableSettingMutationSchemeByURLParam()) {
             if ($mutationScheme = Request::getMutationScheme()) {
                 $componentClassConfiguration[self::class][Environment::ENABLE_NESTED_MUTATIONS] = $mutationScheme != MutationSchemes::STANDARD;
                 $componentClassConfiguration[EngineComponent::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = $mutationScheme == MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS;
