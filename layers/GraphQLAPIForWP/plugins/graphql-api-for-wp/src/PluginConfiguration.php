@@ -637,6 +637,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             ],
             SchemaTypeModuleResolver::SCHEMA_POSTS => [
                 \PoPSchema\Posts\Component::class,
+                \PoPWPSchema\Posts\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_COMMENTS => [
                 \PoPSchema\Comments\Component::class,

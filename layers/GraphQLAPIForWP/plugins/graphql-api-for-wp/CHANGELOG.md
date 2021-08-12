@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `graphql-api` will be documented in this file.
+All notable changes to `graphql-api-for-wp` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -30,6 +30,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Query properties for custom post fields:
   - `modified: String`
   - `isSticky: Bool!`
+- Query properties for posts:
+  - `Post.postFormat: String!`
 - Fetch a page's parent and children, and the menu order:
   `Page.parentPage: Page`
   `Page.childPages: [Page]!`
@@ -87,7 +89,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Static sites: Allow to use unsafe defaults
+- Allow to use unsafe default settings
 
 ## 0.8.1 - 21/07/2021
 
