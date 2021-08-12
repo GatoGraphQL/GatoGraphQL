@@ -12,7 +12,7 @@ class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileM
     {
         $user_data = parent::getUpdateuserData($form_data);
 
-        $user_data['lastname'] = $form_data['last_name'];
+        $user_data['lastName'] = $form_data['last_name'];
 
         return $user_data;
     }

@@ -102,7 +102,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     {
         $user_data = array(
             'id' => $form_data['user_id'],
-            'firstname' => $form_data['first_name'],
+            'firstName' => $form_data['first_name'],
             'email' => $form_data['user_email'],
             'description' => $form_data['description'],
             'url' => $form_data['user_url']

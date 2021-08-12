@@ -10,7 +10,7 @@ class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Pro
     public const MODULE_FORMINPUT_CUU_NEWPASSWORD = 'forminput-cuu-newpassword';
     public const MODULE_FORMINPUT_CUU_PASSWORDREPEAT = 'forminput-cuu-passwordrepeat';
     public const MODULE_FORMINPUT_CUU_NEWPASSWORDREPEAT = 'forminput-cuu-newpasswordrepeat';
-    public const MODULE_FORMINPUT_CUU_FIRSTNAME = 'forminput-cuu-firstname';
+    public const MODULE_FORMINPUT_CUU_FIRSTNAME = 'forminput-cuu-firstName';
     public const MODULE_FORMINPUT_CUU_USERWEBSITEURL = 'forminput-cuu-userwebsiteurl';
 
     public function getModulesToProcess(): array
@@ -102,7 +102,7 @@ class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Pro
                 return 'email';
 
             case self::MODULE_FORMINPUT_CUU_FIRSTNAME:
-                return 'firstname';
+                return 'firstName';
 
             case self::MODULE_FORMINPUT_CUU_USERWEBSITEURL:
                 return 'websiteURL';
