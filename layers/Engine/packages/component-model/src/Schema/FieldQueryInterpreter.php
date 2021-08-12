@@ -418,23 +418,19 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgumentNameDefaultValues;
     }
 
-    protected function filterFieldOrDirectiveArgs(
-        array $fieldOrDirectiveArgs,
-        bool $allowNullValues = false
-    ): array {
-        // If there was an error, the value will be NULL. In this case, remove it
+    protected function filterFieldOrDirectiveArgs(array $fieldOrDirectiveArgs): array {
+        // Remove all errors, allow null values
         return array_filter(
             $fieldOrDirectiveArgs,
-            function ($elem) use ($allowNullValues): bool {
+            function ($elem): bool {
                 // If the input is `[[String]]`, must then validate if any subitem is Error
                 if (is_array($elem)) {
                     // Filter elements in the array. If any is missing, filter the array out
-                    $filteredElem = $this->filterFieldOrDirectiveArgs($elem, true);
+                    $filteredElem = $this->filterFieldOrDirectiveArgs($elem);
                     return count($elem) === count($filteredElem);
                 }
-                // Remove only NULL values and Errors. Keep '', 0, false and []
-                return !GeneralUtils::isError($elem)
-                    && ($elem !== null || $allowNullValues);
+                // Remove only Errors. Keep NULL, '', 0, false and []
+                return !GeneralUtils::isError($elem);
             }
         );
     }
@@ -1446,12 +1442,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         }
         if (is_array($fieldArgValue)) {
             // Resolve each element the same way
-            // `null` values in the array are permitted
             return $this->filterFieldOrDirectiveArgs(
                 array_map(function ($arrayValueElem) use ($variables) {
                     return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
-                }, $fieldArgValue),
-                true
+                }, $fieldArgValue)
             );
         }
 
