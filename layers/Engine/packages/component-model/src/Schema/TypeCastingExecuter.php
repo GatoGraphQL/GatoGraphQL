@@ -24,6 +24,13 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
      */
     public function cast(string $type, mixed $value): mixed
     {
+        if ($value === null) {                
+            return new Error(
+                'null-cast',
+                $this->translationAPI->__('Cannot cast null', 'component-model')
+            );
+        }
+
         // Fail if passing an array for unsupporting types
         if (is_array($value) && in_array($type, [
             SchemaDefinition::TYPE_ANY_SCALAR,
