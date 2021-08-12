@@ -24,7 +24,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
      */
     public function cast(string $type, mixed $value): mixed
     {
-        if ($value === null) {                
+        if ($value === null) {
             return new Error(
                 'null-cast',
                 $this->translationAPI->__('Cannot cast null', 'component-model')
@@ -32,7 +32,8 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
         }
 
         // Fail if passing an array for unsupporting types
-        if ((is_array($value) || is_object($value)) && in_array($type, [
+        if (
+            (is_array($value) || is_object($value)) && in_array($type, [
             SchemaDefinition::TYPE_ANY_SCALAR,
             SchemaDefinition::TYPE_ID,
             SchemaDefinition::TYPE_ARRAY_KEY,
@@ -46,7 +47,8 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             SchemaDefinition::TYPE_FLOAT,
             SchemaDefinition::TYPE_BOOL,
             SchemaDefinition::TYPE_TIME,
-        ])) {                
+            ])
+        ) {
             $entity = is_array($value) ? 'array' : 'object';
             return new Error(
                 sprintf('%s-cast', $entity),

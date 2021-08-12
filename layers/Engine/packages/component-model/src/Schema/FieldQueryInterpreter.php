@@ -418,7 +418,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgumentNameDefaultValues;
     }
 
-    protected function filterFieldOrDirectiveArgs(array $fieldOrDirectiveArgs): array {
+    protected function filterFieldOrDirectiveArgs(array $fieldOrDirectiveArgs): array
+    {
         // Remove all errors, allow null values
         return array_filter(
             $fieldOrDirectiveArgs,
@@ -1216,7 +1217,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     /**
      * Any element that is Error, or any array that contains an error
      */
-    protected function getFailedCastingFieldArgs(array $castedFieldArgs): array {
+    protected function getFailedCastingFieldArgs(array $castedFieldArgs): array
+    {
         return array_filter(
             $castedFieldArgs,
             fn (mixed $fieldArgValue) =>
