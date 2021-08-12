@@ -52,6 +52,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `User.nicename: String!`
   - `User.nickname: String!`
   - `User.locale: String!`
+  - `User.registeredDate: String!`
 - Added fields for Categories:
   - `PostCategory.childCategories: [PostCategory]!`
   - `PostCategory.childCategoryNames: [String]!`
