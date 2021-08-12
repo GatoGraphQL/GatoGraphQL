@@ -23,11 +23,6 @@ class Environment
     public const ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM = 'ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM';
     public const ADD_GRAPHQL_INTROSPECTION_PERSISTED_QUERY = 'ADD_GRAPHQL_INTROSPECTION_PERSISTED_QUERY';
 
-    public static function enableEnablingGraphQLIntrospectionByURLParam(): bool
-    {
-        return getenv('ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM') !== false ? strtolower(getenv('ENABLE_ENABLING_GRAPHQL_INTROSPECTION_BY_URL_PARAM')) == "true" : false;
-    }
-
     public static function addGraphQLIntrospectionPersistedQuery(): bool
     {
         return getenv('ADD_GRAPHQL_INTROSPECTION_PERSISTED_QUERY') !== false ? strtolower(getenv('ADD_GRAPHQL_INTROSPECTION_PERSISTED_QUERY')) == "true" : false;

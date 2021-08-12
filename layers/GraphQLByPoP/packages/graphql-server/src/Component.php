@@ -66,7 +66,7 @@ class Component extends AbstractComponent
             }
         }
         // Enable GraphQL Introspection for PQL by doing ?enable_graphql_introspection=1
-        if (Environment::enableEnablingGraphQLIntrospectionByURLParam()) {
+        if (ComponentConfiguration::enableEnablingGraphQLIntrospectionByURLParam()) {
             $enableGraphQLIntrospection = Request::enableGraphQLIntrospection();
             if ($enableGraphQLIntrospection !== null) {
                 $componentClassConfiguration[self::class][Environment::ENABLE_GRAPHQL_INTROSPECTION] = $enableGraphQLIntrospection;
