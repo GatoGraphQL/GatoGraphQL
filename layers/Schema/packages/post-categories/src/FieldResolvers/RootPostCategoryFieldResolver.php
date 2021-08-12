@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\FieldResolvers;
 
-use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -108,7 +107,10 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                     $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
                 );
                 // By default fetch top-level categories: "parent-id" => 0
-                $filterInputName = $this->getParentIDFieldArgName();
+                $filterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
+                ]);
                 foreach ($schemaFieldArgs as &$schemaFieldArg) {
                     if ($schemaFieldArg['name'] !== $filterInputName) {
                         continue;
@@ -119,18 +121,6 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                 return $schemaFieldArgs;
         }
         return $schemaFieldArgs;
-    }
-
-    protected function getParentIDFieldArgName(): string
-    {
-        $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
-        $filterInput = [
-            CommonFilterInputModuleProcessor::class,
-            CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
-        ];
-        /** @var FilterInputModuleProcessor */
-        $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
-        return $filterInputProcessor->getName($filterInput);
     }
 
     public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
