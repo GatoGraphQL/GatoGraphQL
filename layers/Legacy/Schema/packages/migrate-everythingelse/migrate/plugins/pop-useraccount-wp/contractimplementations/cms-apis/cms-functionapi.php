@@ -39,10 +39,10 @@ class FunctionAPI extends \PoP\UserAccount\FunctionAPI_Base
             $query['first_name'] = $query['firstName'];
             unset($query['firstName']);
         }
-        if (isset($query['lastname'])) {
+        if (isset($query['lastName'])) {
 
-            $query['last_name'] = $query['lastname'];
-            unset($query['lastname']);
+            $query['last_name'] = $query['lastName'];
+            unset($query['lastName']);
         }
         if (isset($query['email'])) {
 

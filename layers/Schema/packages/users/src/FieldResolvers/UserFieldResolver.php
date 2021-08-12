@@ -61,7 +61,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'name',
             'displayName',
             'firstName',
-            'lastname',
+            'lastName',
             'email',
             'url',
             'urlPath',
@@ -78,7 +78,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'name' => SchemaDefinition::TYPE_STRING,
             'displayName' => SchemaDefinition::TYPE_STRING,
             'firstName' => SchemaDefinition::TYPE_STRING,
-            'lastname' => SchemaDefinition::TYPE_STRING,
+            'lastName' => SchemaDefinition::TYPE_STRING,
             'email' => SchemaDefinition::TYPE_EMAIL,
             'url' => SchemaDefinition::TYPE_URL,
             'urlPath' => SchemaDefinition::TYPE_STRING,
@@ -111,7 +111,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'name' => $this->translationAPI->__('Name of the user', 'pop-users'),
             'displayName' => $this->translationAPI->__('Name of the user as displayed on the website', 'pop-users'),
             'firstName' => $this->translationAPI->__('User\'s first name', 'pop-users'),
-            'lastname' => $this->translationAPI->__('User\'s last name', 'pop-users'),
+            'lastName' => $this->translationAPI->__('User\'s last name', 'pop-users'),
             'email' => $this->translationAPI->__('User\'s email', 'pop-users'),
             'url' => $this->translationAPI->__('URL of the user\'s profile in the website', 'pop-users'),
             'urlPath' => $this->translationAPI->__('URL path of the user\'s profile in the website', 'pop-users'),
@@ -149,7 +149,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             case 'firstName':
                 return $this->userTypeAPI->getUserFirstname($user);
 
-            case 'lastname':
+            case 'lastName':
                 return $this->userTypeAPI->getUserLastname($user);
 
             case 'email':

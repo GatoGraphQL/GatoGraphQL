@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
 {
     public const MODULE_URE_FORMINPUT_CUP_CONTACTPERSON = 'forminput-ure-cup-contactperson';
     public const MODULE_URE_FORMINPUT_CUP_CONTACTNUMBER = 'forminput-ure-cup-contactnumber';
-    public const MODULE_URE_FORMINPUT_CUP_LASTNAME = 'forminput-ure-cup-lastname';
+    public const MODULE_URE_FORMINPUT_CUP_LASTNAME = 'forminput-ure-cup-lastName';
 
     public function getModulesToProcess(): array
     {
@@ -51,7 +51,7 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
     {
         switch ($module[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_LASTNAME:
-                return 'lastname';
+                return 'lastName';
 
             case self::MODULE_URE_FORMINPUT_CUP_CONTACTPERSON:
                 return 'contactPerson';
