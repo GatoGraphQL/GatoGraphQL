@@ -30,8 +30,8 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
             'name',
             'slug',
             'description',
-            'parent',
             'count',
+            'parentCategory',
         ];
     }
 
@@ -43,7 +43,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
             'name' => SchemaDefinition::TYPE_STRING,
             'slug' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
-            'parent' => SchemaDefinition::TYPE_ID,
+            'parentCategory' => SchemaDefinition::TYPE_ID,
             'count' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -71,7 +71,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
             'name' => $this->translationAPI->__('Category', 'pop-categories'),
             'slug' => $this->translationAPI->__('Category slug', 'pop-categories'),
             'description' => $this->translationAPI->__('Category description', 'pop-categories'),
-            'parent' => $this->translationAPI->__('Parent category (if this category is a child of another one)', 'pop-categories'),
+            'parentCategory' => $this->translationAPI->__('Parent category (if this category is a child of another one)', 'pop-categories'),
             'count' => $this->translationAPI->__('Number of custom posts containing this category', 'pop-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
@@ -110,7 +110,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
             case 'description':
                 return $categoryTypeAPI->getCategoryDescription($category);
 
-            case 'parent':
+            case 'parentCategory':
                 return $categoryTypeAPI->getCategoryParentID($typeResolver->getID($category));
 
             case 'count':
@@ -123,7 +123,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
     public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
-            case 'parent':
+            case 'parentCategory':
                 return $this->getTypeResolverClass();
         }
 
