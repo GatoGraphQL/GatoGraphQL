@@ -59,6 +59,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
     public const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
+    public const OPTION_ADD_SELF_FIELD_TO_SCHEMA = 'add-self-field-to-schema';
 
     /**
      * Hooks
@@ -367,6 +368,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $defaultValues = [
             self::SCHEMA_ADMIN_SCHEMA => [
                 ModuleSettingOptions::ENABLE => $useUnsafe,
+                self::OPTION_ADD_SELF_FIELD_TO_SCHEMA => $useUnsafe,
             ],
             self::SCHEMA_CUSTOMPOSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -455,7 +457,18 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => \__('Add admin fields to schema?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Add "unrestricted" fields to the GraphQL schema (such as <code>Root.unrestrictedPosts</code>, <code>Root.roles</code>, and others), to be used by the admin only.<hr/><strong>Watch out: Enable only if needed!</strong><br/>These fields can expose sensitive information, so they should be enabled only when the API is not publicly exposed (such as when using a local WordPress instance, to build a static site).<br/><br/><strong>Heads up!</strong><br/>If you need some fields but not others, then click the checkbox to enable all the "admin" fields, and then remove the unneeded fields via an Access Control List.', 'graphql-api'),
+                Properties::DESCRIPTION => \__('Add "unrestricted" fields to the GraphQL schema (such as <code>Root.unrestrictedPosts</code>, <code>Root.roles</code>, and others), to be used by the admin only.<hr/><strong>Watch out: Enable only if needed!</strong><br/>These fields can expose sensitive information, so they should be enabled only when the API is not publicly exposed (such as when using a local WordPress instance, to build a static site).', 'graphql-api'),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+            $option = self::OPTION_ADD_SELF_FIELD_TO_SCHEMA;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Add a <code>self</code> field to all types in the schema?', 'graphql-api'),
+                Properties::DESCRIPTION => \__('The <code>self</code> field returns an instance of the same object, which can help adapt a GraphQL query from a different GraphQL server (and avoid modifying all other application code).', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif (
