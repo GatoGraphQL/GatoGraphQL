@@ -166,8 +166,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             $query['slug'] = $query['slugs'];
             unset($query['slugs']);
         }
-        // Watch out: "parent-id" can also be null!
-        if (isset($query['parent-id'])) {
+        // Watch out: "parent-id" can also be null
+        if (array_key_exists('parent-id', $query)) {
             $query['parent'] = $query['parent-id'];
             unset($query['parent-id']);
         }
