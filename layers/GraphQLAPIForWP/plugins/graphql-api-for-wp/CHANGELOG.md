@@ -53,7 +53,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `User.nickname: String!`
   - `User.locale: String!`
   - `User.registeredDate: String!`
-- Added fields for Categories:
+- Added utility fields to better operate with user roles:
+  - `User.roleNames: [String]!`
+  - `User.hasRole: Bool!`
+  - `User.hasAnyRole: Bool!`
+  - `User.hasCapability: Bool!`
+  - `User.hasAnyCapability: Bool!`
+- Fetch children from Categories:
   - `PostCategory.childCategories: [PostCategory]!`
   - `PostCategory.childCategoryNames: [String]!`
   - `PostCategory.childCategoryCount: Int`
@@ -79,18 +85,18 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `User.urlPath: String!`
 - Added field arguments to `Root.mediaItems` for filtering results
 - Added field `Root.imageSizeNames: [String]!` to retrieve the list of the available intermediate image size names
-- Added fields in `Media`:
-  - `srcSet`
-  - `url`
-  - `urlPath`
-  - `slug`
-  - `title`
-  - `caption`
-  - `altText`
-  - `description`
-  - `date`
-  - `mimeType`
-  - `sizes`
+- Added fields for media items:
+  - `Media.srcSet: String`
+  - `Media.url: String!`
+  - `Media.localURLPath: String`
+  - `Media.slug: String!`
+  - `Media.title: String`
+  - `Media.caption: String`
+  - `Media.altText: String`
+  - `Media.description: String`
+  - `Media.date: String`
+  - `Media.mimeType: String`
+  - `Media.sizes: String`
 
 ### Added
 
