@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
 use Exception;
-use GraphQLByPoP\GraphQLServer\Environment;
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 
 class SchemaDefinitionHelpers
 {
@@ -85,7 +85,7 @@ class SchemaDefinitionHelpers
     }
     public static function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath, array $interfaceNames = []): array
     {
-        $addVersionToSchemaFieldDescription = Environment::addVersionToSchemaFieldDescription();
+        $addVersionToSchemaFieldDescription = ComponentConfiguration::addVersionToSchemaFieldDescription();
         // $fieldInterfaces = self::getFieldInterfaces($fullSchemaDefinition, $interfaceNames);
         $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
         $fields = [];

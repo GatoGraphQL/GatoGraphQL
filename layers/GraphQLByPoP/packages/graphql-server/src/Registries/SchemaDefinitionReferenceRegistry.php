@@ -134,11 +134,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Remove unneeded data
-        if (!Environment::addGlobalFieldsToSchema()) {
+        if (!ComponentConfiguration::addGlobalFieldsToSchema()) {
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_FIELDS]);
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_CONNECTIONS]);
         }
-        if (!Environment::addSelfFieldToSchema()) {
+        if (!ComponentConfiguration::addSelfFieldToSchema()) {
             /**
              * Check if to remove the "self" field everywhere, or if to keep it just for the Root type
              */
@@ -149,7 +149,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 }
             }
         }
-        if (!Environment::addFullSchemaFieldToSchema()) {
+        if (!ComponentConfiguration::addFullSchemaFieldToSchema()) {
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_FIELDS]['fullSchema']);
             if (!$enableNestedMutations) {
                 unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_FIELDS]['fullSchema']);
@@ -157,7 +157,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Maybe append the field/directive's version to its description, since this field is missing in GraphQL
-        $addVersionToSchemaFieldDescription = Environment::addVersionToSchemaFieldDescription();
+        $addVersionToSchemaFieldDescription = ComponentConfiguration::addVersionToSchemaFieldDescription();
         // When doing nested mutations, differentiate mutating fields by adding label "[Mutation]" in the description
         $addMutationLabelToSchemaFieldDescription = $enableNestedMutations;
         // Maybe add param "nestedUnder" on the schema for each directive
@@ -165,7 +165,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
         // Convert the field type from its internal representation (eg: "array:Post") to the GraphQL standard representation (eg: "[Post]")
         // 1. Global fields, connections and directives
-        if (Environment::addGlobalFieldsToSchema()) {
+        if (ComponentConfiguration::addGlobalFieldsToSchema()) {
             foreach (array_keys($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_FIELDS]) as $fieldName) {
                 $itemPath = [
                     SchemaDefinition::ARGNAME_GLOBAL_FIELDS,

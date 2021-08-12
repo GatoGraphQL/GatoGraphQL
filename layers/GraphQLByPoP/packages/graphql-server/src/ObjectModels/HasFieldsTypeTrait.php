@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use GraphQLByPoP\GraphQLServer\Environment;
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
-use PoP\API\Schema\SchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use PoP\API\Schema\SchemaDefinition;
 
 trait HasFieldsTypeTrait
 {
@@ -47,7 +47,7 @@ trait HasFieldsTypeTrait
             ),
             $interfaceNames
         );
-        if (Environment::addGlobalFieldsToSchema()) {
+        if (ComponentConfiguration::addGlobalFieldsToSchema()) {
             // Global fields and connections have already been initialized, simply get the reference to the existing objects from the registryMap
             // 1. Global fields
             $this->retrieveFieldsFromPath(
