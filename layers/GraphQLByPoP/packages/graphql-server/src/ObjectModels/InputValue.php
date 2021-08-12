@@ -24,9 +24,6 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
     {
         return $this->schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] ?? null;
     }
-    /**
-     * Undocumented function
-     */
     public function getDefaultValue(): ?string
     {
         // The default value must be returned as a JSON encoded string
