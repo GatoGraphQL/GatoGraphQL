@@ -48,6 +48,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.unrestrictedUserCount: Int!` ("admin" field)
 - Added fields for Categories:
   - `PostCategory.childCategories: [PostCategory]!`
+  - `PostCategory.childCategoryNames: [String]!`
+  - `PostCategory.childCategoryCount: Int`
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Root.menuByLocation: Menu`
