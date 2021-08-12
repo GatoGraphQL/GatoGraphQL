@@ -10,7 +10,10 @@ use PoP\ComponentModel\FormInputs\FormMultipleInput;
 
 trait FormInputModuleProcessorTrait
 {
-    private ?FormInput $formInput = null;
+    /**
+     * @var array<string,FormInput>
+     */
+    private array $formInputs = [];
 
     // This function CANNOT have $props, since multiple can change the value of the input (eg: from Select to MultiSelect => from '' to array())
     // Yet we do not always go through initModelProps to initialize it, then changing the multiple in the form through $props, and trying to retrieve the value in an actionexecuter will fail
@@ -36,12 +39,13 @@ trait FormInputModuleProcessorTrait
 
     final public function getInput(array $module): FormInput
     {
-        if ($this->formInput === null) {
+        $inputName = $this->getName($module);
+        if (!isset($this->formInputs[$inputName])) {
             $options = $this->getInputOptions($module);
             $input_class = $this->getInputClass($module);
-            $this->formInput = new $input_class($options);
+            $this->formInputs[$inputName] = new $input_class($options);
         }
-        return $this->formInput;
+        return $this->formInputs[$inputName];
     }
 
     // This function CANNOT have $props, since we do not always go through initModelProps to set the name of the input
