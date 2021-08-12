@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers;
 
-use PoPSchema\CustomPosts\Types\Status;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 /**
@@ -20,6 +20,8 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
  */
 class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolver
 {
+    use CustomPostFieldResolverTrait;
+
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
@@ -160,12 +162,7 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
                     'unrestrictedCustomPostBySlug',
                     ])
                 ) {
-                    $query['status'] = [
-                        Status::PUBLISHED,
-                        Status::DRAFT,
-                        Status::PENDING,
-                        Status::TRASH,
-                    ];
+                    $query['status'] = $this->getUnrestrictedFieldCustomPostTypes();
                 }
                 $options = [
                     'return-type' => ReturnTypes::IDS,
