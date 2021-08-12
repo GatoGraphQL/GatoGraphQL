@@ -40,7 +40,9 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
-            'nicename'
+            'nicename',
+            'nickname',
+            'locale'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
