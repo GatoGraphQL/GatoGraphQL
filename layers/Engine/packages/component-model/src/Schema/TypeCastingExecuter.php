@@ -32,7 +32,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
         }
 
         // Fail if passing an array for unsupporting types
-        if (is_array($value) && in_array($type, [
+        if ((is_array($value) || is_object($value)) && in_array($type, [
             SchemaDefinition::TYPE_ANY_SCALAR,
             SchemaDefinition::TYPE_ID,
             SchemaDefinition::TYPE_ARRAY_KEY,
@@ -47,40 +47,15 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             SchemaDefinition::TYPE_BOOL,
             SchemaDefinition::TYPE_TIME,
         ])) {                
+            $entity = is_array($value) ? 'array' : 'object';
             return new Error(
-                'array-cast',
+                sprintf('%s-cast', $entity),
                 sprintf(
-                    $this->translationAPI->__('An array cannot be casted to type \'%s\'', 'component-model'),
+                    $this->translationAPI->__('An %s cannot be casted to type \'%s\'', 'component-model'),
+                    $entity,
                     $type
                 )
             );
-        }
-
-        // Fail if passing an object for unsupporting types
-        switch ($type) {
-            case SchemaDefinition::TYPE_ANY_SCALAR:
-            case SchemaDefinition::TYPE_ID:
-            case SchemaDefinition::TYPE_ARRAY_KEY:
-            case SchemaDefinition::TYPE_STRING:
-            case SchemaDefinition::TYPE_URL:
-            case SchemaDefinition::TYPE_EMAIL:
-            case SchemaDefinition::TYPE_IP:
-            case SchemaDefinition::TYPE_ENUM:
-            case SchemaDefinition::TYPE_DATE:
-            case SchemaDefinition::TYPE_INT:
-            case SchemaDefinition::TYPE_FLOAT:
-            case SchemaDefinition::TYPE_BOOL:
-            case SchemaDefinition::TYPE_TIME:
-                if (is_object($value)) {
-                    return new Error(
-                        'object-cast',
-                        sprintf(
-                            $this->translationAPI->__('An object cannot be casted to type \'%s\'', 'component-model'),
-                            $type
-                        )
-                    );
-                }
-                break;
         }
 
         switch ($type) {
