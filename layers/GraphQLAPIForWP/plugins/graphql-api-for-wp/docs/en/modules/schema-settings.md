@@ -6,9 +6,15 @@ For security reasons, which options can be queried must be explicitly configured
 
 By default, only the following options can be queried:
 
+- `"siteurl"`
 - `"home"`
 - `"blogname"`
 - `"blogdescription"`
+- `"WPLANG"`
+- `"posts_per_page"`
+- `"date_format"`
+- `"time_format"`
+- `"blog_charset"`
 
 ## How to use
 
