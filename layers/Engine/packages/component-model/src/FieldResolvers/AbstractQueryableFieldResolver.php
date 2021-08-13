@@ -54,4 +54,13 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
         return $filterInputProcessor->getName($filterInput);
     }
+
+    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        // If there is a filter, there will be many filterInputs, so by default we'd rather not enable ordering
+        if ($this->getFieldDataFilteringModule($typeResolver, $fieldName) !== null) {
+            return false;
+        }
+        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
+    }
 }
