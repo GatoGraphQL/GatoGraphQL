@@ -15,7 +15,7 @@ class DataToAppendAndRemoveDataSource
         return [
             'require-dev' => [
                 // 'symplify/monorepo-builder' => '^9.0',
-                'symplify/monorepo-builder' => 'dev-original',
+                'symplify/monorepo-builder' => '9.4.28',
             ],
             'autoload' => [
                 'psr-4' => [
