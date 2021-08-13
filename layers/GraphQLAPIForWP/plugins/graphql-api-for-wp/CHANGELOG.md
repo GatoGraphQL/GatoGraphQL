@@ -44,6 +44,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Filter field `pages` via new arguments:
   - `parentIDs: [ID]`
   - `parentID: ID`
+- Filter field `Post.comments` via new arguments:
+  - `authorIDs: [ID!]`
 - Fetch a user by different means:
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)
