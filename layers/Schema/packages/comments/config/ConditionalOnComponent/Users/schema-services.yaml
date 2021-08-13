@@ -5,3 +5,6 @@ services:
 
     PoPSchema\Comments\ConditionalOnComponent\Users\FieldResolvers\:
         resource: '../../../src/ConditionalOnComponent/Users/FieldResolvers/*'
+
+    PoPSchema\Comments\ConditionalOnComponent\Users\SchemaHooks\:
+        resource: '../../../src/ConditionalOnComponent/Users/SchemaHooks/*'
