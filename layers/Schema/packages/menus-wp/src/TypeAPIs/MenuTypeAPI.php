@@ -22,7 +22,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         protected HooksAPIInterface $hooksAPI,
     ) {
     }
-    
+
     public function getMenu(string | int $menuID): ?object
     {
         $object = wp_get_nav_menu_object($menuID);
