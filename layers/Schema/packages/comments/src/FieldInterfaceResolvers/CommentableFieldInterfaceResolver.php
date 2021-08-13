@@ -81,30 +81,4 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
             default => parent::getFieldDataFilteringModule($fieldName),
         };
     }
-
-    public function getSchemaFieldArgs(string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
-        switch ($fieldName) {
-            case 'comments':
-            case 'commentCount':
-                // Retrieve all the schema definitions for the filter inputs
-                $filterDataloadingModule = match ($fieldName) {
-                    'comments' => [
-                        CommentFilterInputContainerModuleProcessor::class,
-                        CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS
-                    ],
-                    'commentCount' => [
-                        CommentFilterInputContainerModuleProcessor::class,
-                        CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT
-                    ],
-                    default => null,
-                };
-                return array_merge(
-                    $schemaFieldArgs,
-                    $this->getFilterSchemaDefinitionItems($filterDataloadingModule)
-                );
-        }
-        return $schemaFieldArgs;
-    }
 }

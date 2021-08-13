@@ -17,16 +17,19 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSch
 
     public function getSchemaFieldArgs(string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
+        // Get the Schema Field Args from the FilterInput modules
+        return array_merge(
+            parent::getSchemaFieldArgs($fieldName),
+            $this->getFieldArgumentsSchemaDefinitions($fieldName)
+        );
+    }
 
-        // Retrieve all the schema definitions for the filter inputs
+    protected function getFieldArgumentsSchemaDefinitions(string $fieldName): array
+    {
         if ($filterDataloadingModule = $this->getFieldDataFilteringModule($fieldName)) {
-            return array_merge(
-                $schemaFieldArgs,
-                $this->getFilterSchemaDefinitionItems($filterDataloadingModule)
-            );
+            return $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
         }
 
-        return $schemaFieldArgs;
+        return [];
     }
 }
