@@ -402,9 +402,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ],
             self::SCHEMA_SETTINGS => [
                 ModuleSettingOptions::ENTRIES => $useUnsafe ? [] : [
+                    'siteurl',
                     'home',
                     'blogname',
                     'blogdescription',
+                    'WPLANG',
+                    'posts_per_page',
+                    'date_format',
+                    'time_format',
+                    'blog_charset',
                 ],
                 ModuleSettingOptions::BEHAVIOR => $useUnsafe ?
                     Behaviors::DENYLIST
