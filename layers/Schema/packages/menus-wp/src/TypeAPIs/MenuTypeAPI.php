@@ -22,7 +22,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         protected HooksAPIInterface $hooksAPI,
     ) {
     }
-    
+
     public function getMenu(string | int $menuID): ?object
     {
         $object = wp_get_nav_menu_object($menuID);
@@ -109,6 +109,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         unset($query['offset']);
 
         // Execute query and return count
+        /** @var int */
         $count = \wp_get_nav_menus($query);
         if (!is_numeric($count)) {
             // An error happened
@@ -142,6 +143,10 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         if (isset($query['include'])) {
             // Transform from array to string
             $query['include'] = implode(',', $query['include']);
+        }
+        if (isset($query['exclude-ids'])) {
+            $query['exclude'] = $query['exclude-ids'];
+            unset($query['exclude-ids']);
         }
         if (isset($query['order'])) {
             // Same param name, so do nothing

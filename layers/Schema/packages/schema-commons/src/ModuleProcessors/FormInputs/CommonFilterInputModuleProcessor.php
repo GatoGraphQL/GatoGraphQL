@@ -25,6 +25,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public const MODULE_FILTERINPUT_SEARCH = 'filterinput-search';
     public const MODULE_FILTERINPUT_IDS = 'filterinput-ids';
     public const MODULE_FILTERINPUT_ID = 'filterinput-id';
+    public const MODULE_FILTERINPUT_EXCLUDE_IDS = 'filterinput-exclude-ids';
     public const MODULE_FILTERINPUT_PARENT_IDS = 'filterinput-parent-ids';
     public const MODULE_FILTERINPUT_PARENT_ID = 'filterinput-parent-id';
 
@@ -37,6 +38,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             [self::class, self::MODULE_FILTERINPUT_SEARCH],
             [self::class, self::MODULE_FILTERINPUT_IDS],
             [self::class, self::MODULE_FILTERINPUT_ID],
+            [self::class, self::MODULE_FILTERINPUT_EXCLUDE_IDS],
             [self::class, self::MODULE_FILTERINPUT_PARENT_IDS],
             [self::class, self::MODULE_FILTERINPUT_PARENT_ID],
         );
@@ -51,6 +53,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SEARCH => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
             self::MODULE_FILTERINPUT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
             self::MODULE_FILTERINPUT_ID => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
+            self::MODULE_FILTERINPUT_EXCLUDE_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_IDS],
             self::MODULE_FILTERINPUT_PARENT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PARENT_IDS],
             self::MODULE_FILTERINPUT_PARENT_ID => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PARENT_ID],
         ];
@@ -63,6 +66,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             case self::MODULE_FILTERINPUT_ORDER:
                 return OrderFormInput::class;
             case self::MODULE_FILTERINPUT_IDS:
+            case self::MODULE_FILTERINPUT_EXCLUDE_IDS:
             case self::MODULE_FILTERINPUT_PARENT_IDS:
                 return FormMultipleInput::class;
             case self::MODULE_FILTERINPUT_ID:
@@ -82,6 +86,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SEARCH => 'searchfor',
             self::MODULE_FILTERINPUT_IDS => 'ids',
             self::MODULE_FILTERINPUT_ID => 'id',
+            self::MODULE_FILTERINPUT_EXCLUDE_IDS => 'excludeIDs',
             self::MODULE_FILTERINPUT_PARENT_IDS => 'parentIDs',
             self::MODULE_FILTERINPUT_PARENT_ID => 'parentID',
         );
@@ -97,6 +102,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SEARCH => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_IDS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_ID => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_EXCLUDE_IDS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_PARENT_IDS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_PARENT_ID => SchemaDefinition::TYPE_ID,
             default => $this->getDefaultSchemaFilterInputType(),
@@ -107,6 +113,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_IDS,
+            self::MODULE_FILTERINPUT_EXCLUDE_IDS,
             self::MODULE_FILTERINPUT_PARENT_IDS
                 => true,
             default
@@ -118,6 +125,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_IDS,
+            self::MODULE_FILTERINPUT_EXCLUDE_IDS,
             self::MODULE_FILTERINPUT_PARENT_IDS
                 => true,
             default
@@ -137,6 +145,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
                 $this->translationAPI->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'schema-commons'),
                 Param::VALUE_SEPARATOR
             ),
+            self::MODULE_FILTERINPUT_EXCLUDE_IDS => $this->translationAPI->__('Exclude elements with the given IDs', 'schema-commons'),
             self::MODULE_FILTERINPUT_PARENT_IDS => $this->translationAPI->__('Limit results to elements with the given parent IDs', 'schema-commons'),
             self::MODULE_FILTERINPUT_PARENT_ID => $this->translationAPI->__('Limit results to elements with the given parent ID', 'schema-commons'),
             default => null,

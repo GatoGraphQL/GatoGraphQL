@@ -111,6 +111,10 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
                 $query['post_status'] = CustomPostTypeAPIUtils::getCMSPostStatuses();
             }
         }
+        if (isset($query['exclude-ids'])) {
+            $query['post__not_in'] = $query['exclude-ids'];
+            unset($query['exclude-ids']);
+        }
         // If querying "customPostCount(postTypes:[])" it would reset the list to only "post"
         // So check that postTypes is not empty
         if (isset($query['custompost-types']) && !empty($query['custompost-types'])) {

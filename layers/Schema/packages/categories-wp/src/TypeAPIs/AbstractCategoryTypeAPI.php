@@ -94,16 +94,14 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         unset($query['offset']);
 
         // Execute query and return count
+        /** @var int[] */
         $count = \get_categories($query);
         // For some reason, the count is returned as an array of 1 element!
-        if (is_array($count) && count($count) === 1) {
+        if (is_array($count) && count($count) === 1 && is_int($count[0])) {
             return (int) $count[0];
         }
-        if (is_array($count)) {
-            // An error happened
-            return -1;
-        }
-        return (int)$count;
+        // An error happened
+        return -1;
     }
     public function getCategories(array $query, array $options = []): array
     {
@@ -138,6 +136,10 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         if (isset($query['include'])) {
             // Transform from array to string
             $query['include'] = implode(',', $query['include']);
+        }
+        if (isset($query['exclude-ids'])) {
+            $query['exclude'] = $query['exclude-ids'];
+            unset($query['exclude-ids']);
         }
         if (isset($query['order'])) {
             // Same param name, so do nothing

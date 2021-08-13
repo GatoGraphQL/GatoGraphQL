@@ -28,6 +28,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `categoryIDs: [ID]`
   - `authorIDs: [ID]`
   - `authorSlug: String`
+- Exclude results via field arg `excludeIDs`
 - Query properties for custom post fields:
   - `modified: String`
   - `isSticky: Bool!`

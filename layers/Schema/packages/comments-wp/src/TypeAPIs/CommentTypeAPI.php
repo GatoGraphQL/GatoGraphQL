@@ -73,6 +73,10 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             $query['comment__in'] = $query['include'];
             unset($query['include']);
         }
+        if (isset($query['exclude-ids'])) {
+            $query['comment__not_in'] = $query['exclude-ids'];
+            unset($query['exclude-ids']);
+        }
         if (isset($query['customPostID'])) {
             $query['post_id'] = $query['customPostID'];
             unset($query['customPostID']);

@@ -24,7 +24,7 @@ class PoP_UserPlatform_UserPreferencesUtils
         if ($include) {
             $query['include'] = $include;
         } elseif ($exclude) {
-            $query['exclude'] = $exclude;
+            $query['exclude-ids'] = $exclude;
         }
 
         $userTypeAPI = UserTypeAPIFacade::getInstance();
