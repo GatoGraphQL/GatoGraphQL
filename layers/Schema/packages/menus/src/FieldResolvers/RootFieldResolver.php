@@ -10,6 +10,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
+use PoPSchema\Menus\ModuleProcessors\MenuFilterInputContainerModuleProcessor;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -70,6 +71,14 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }
 
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    {
+        return match ($fieldName) {
+            'menus' => [MenuFilterInputContainerModuleProcessor::class, MenuFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MENUS],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+        };
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -95,9 +104,13 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 }
                 return null;
             case 'menus':
-                return $menuTypeAPI->getMenus([
-                    'return-type' => ReturnTypes::IDS,
-                ]);
+                $options = array_merge(
+                    [
+                        'return-type' => ReturnTypes::IDS,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
+                return $menuTypeAPI->getMenus([], $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

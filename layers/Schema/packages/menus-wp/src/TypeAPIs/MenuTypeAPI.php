@@ -4,13 +4,25 @@ declare(strict_types=1);
 
 namespace PoPSchema\MenusWP\TypeAPIs;
 
+use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
+use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use WP_Term;
 
 class MenuTypeAPI implements MenuTypeAPIInterface
 {
+    use InjectedFilterDataloadingModuleTypeAPITrait;
+
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
+    public function __construct(
+        protected HooksAPIInterface $hooksAPI,
+    ) {
+    }
+
     public function getMenu(string | int $menuID): ?object
     {
         $object = wp_get_nav_menu_object($menuID);
@@ -75,14 +87,74 @@ class MenuTypeAPI implements MenuTypeAPIInterface
      * @param array<string, mixed> $options
      * @return array<string|int|object>
      */
-    public function getMenus(array $options = []): array
+    public function getMenus(array $query, array $options = []): array
     {
-        $args = [];
-        $return_type = $options['return-type'] ?? null;
-        if ($return_type == ReturnTypes::IDS) {
-            // @see https://developer.wordpress.org/reference/classes/wp_term_query/get_terms/#description
-            $args['fields'] = 'ids';
+        $query = $this->convertMenusQuery($query, $options);
+        return \wp_get_nav_menus($query);
+    }
+
+    public function convertMenusQuery(array $query, array $options = []): array
+    {
+        if ($return_type = $options['return-type'] ?? null) {
+            if ($return_type == ReturnTypes::IDS) {
+                $query['fields'] = 'ids';
+            } elseif ($return_type == ReturnTypes::NAMES) {
+                $query['fields'] = 'names';
+            }
         }
-        return \wp_get_nav_menus($args);
+
+        // Accept field atts to filter the API fields
+        $this->maybeFilterDataloadQueryArgs($query, $options);
+
+        if (isset($query['hide-empty'])) {
+            $query['hide_empty'] = $query['hide-empty'];
+            unset($query['hide-empty']);
+        } else {
+            // By default: do not hide empty categories
+            $query['hide_empty'] = false;
+        }
+
+        // Convert the parameters
+        if (isset($query['include'])) {
+            // Transform from array to string
+            $query['include'] = implode(',', $query['include']);
+        }
+        if (isset($query['order'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['orderby'])) {
+            // Same param name, so do nothing
+            // This param can either be a string or an array. Eg:
+            // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
+        }
+        if (isset($query['offset'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['limit'])) {
+            $limit = (int) $query['limit'];
+
+            // Assign the limit as the required attribute
+            // To bring all results, get_categories needs "number => 0" instead of -1
+            $query['number'] = ($limit == -1) ? 0 : $limit;
+            unset($query['limit']);
+        }
+        if (isset($query['search'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['slugs'])) {
+            $query['slug'] = $query['slugs'];
+            unset($query['slugs']);
+        }
+
+        return $this->hooksAPI->applyFilters(
+            TaxonomyTypeAPI::HOOK_QUERY,
+            $this->hooksAPI->applyFilters(
+                self::HOOK_QUERY,
+                $query,
+                $options
+            ),
+            $query,
+            $options
+        );
     }
 }
