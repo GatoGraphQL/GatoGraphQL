@@ -496,11 +496,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         return $warnings;
     }
 
-    protected function getFieldArgumentsSchemaDefinitions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
-    {
-        return [];
-    }
-
     /**
      * @param array<string, mixed> $fieldArgs
      */

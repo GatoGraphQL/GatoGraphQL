@@ -13,18 +13,25 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
 {
     use QueryableFieldResolverTrait;
 
+    /**
+     * @return array<string, mixed>
+     */
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        // Get the Schema Field Args from the FilterInput modules
+        return array_merge(
+            parent::getSchemaFieldArgs($typeResolver, $fieldName),
+            $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
+        );
+    }
+
     protected function getFieldArgumentsSchemaDefinitions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
-        $schemaDefinitions = parent::getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName, $fieldArgs);
-
         if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs)) {
-            $schemaDefinitions = array_merge(
-                $schemaDefinitions,
-                $this->getFilterSchemaDefinitionItems($filterDataloadingModule)
-            );
+            return $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
         }
 
-        return $schemaDefinitions;
+        return [];
     }
 
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
@@ -46,23 +53,5 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         /** @var FormComponentModuleProcessorInterface */
         $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
         return $filterInputProcessor->getName($filterInput);
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-
-        // Get the Schema Field Args from the FilterInput modules
-        if ($fieldArgumentsSchemaDefinitions = $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)) {
-            return array_merge(
-                $schemaFieldArgs,
-                $fieldArgumentsSchemaDefinitions
-            );
-        }
-
-        return $schemaFieldArgs;
     }
 }
