@@ -56,6 +56,11 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     }
     public function getComments(array $query, array $options = []): array
     {
+        $query = $this->convertCommentsQuery($query, $options);
+        return (array) \get_comments($query);
+    }
+    protected function convertCommentsQuery(array $query, array $options): array
+    {
         if ($return_type = $options['return-type'] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
@@ -141,7 +146,17 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             $query,
             $options
         );
-        return (array) \get_comments($query);
+        return $query;
+    }
+    public function getCommentCount(array $query, array $options = []): int
+    {
+        $query = $this->convertCommentsQuery($query, $options);
+        $query['number'] = 0;
+        unset($query['offset']);
+        $query['count'] = true;
+        /** @var int */
+        $count = \get_comments($query);
+        return $count;
     }
     public function getComment(string | int $comment_id): ?object
     {

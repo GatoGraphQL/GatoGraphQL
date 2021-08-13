@@ -46,6 +46,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `parentID: ID`
 - Filter field `Post.comments` via new arguments:
   - `authorIDs: [ID!]`
+- Filter field `Post.commentCount` via new arguments:
+  - `authorIDs: [ID!]`
+  - `date_from: Date`
+  - `date_to: Date`
+  - `excludeIDs: [ID!]`
+  - `id: ID`
+  - `ids: [ID!]`
+  - `searchfor: String`
 - Fetch a user by different means:
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)

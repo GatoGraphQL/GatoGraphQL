@@ -81,6 +81,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'comments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS],
+            'commentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
@@ -105,14 +106,21 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
             case 'areCommentsOpen':
                 return $this->commentTypeAPI->areCommentsOpen($typeResolver->getID($post));
 
-            case 'commentCount':
-                return $this->commentTypeAPI->getCommentNumber($typeResolver->getID($post));
-
             case 'hasComments':
                 return $typeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
 
+            case 'commentCount':
+                $query = [
+                    'status' => Status::APPROVED,
+                    // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
+                    'customPostID' => $typeResolver->getID($post),
+                    'parentID' => 0, // Bring 1st layer of comments, those added to the custom post
+                ];
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+                return $this->commentTypeAPI->getCommentCount($query, $options);
+
             case 'comments':
-                $query = array(
+                $query = [
                     'status' => Status::APPROVED,
                     // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                     'customPostID' => $typeResolver->getID($post),
@@ -120,7 +128,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                     'order' =>  'ASC',
                     'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
                     'parentID' => 0, // Bring 1st layer of comments, those added to the custom post
-                );
+                ];
                 $options = array_merge(
                     [
                         'return-type' => ReturnTypes::IDS,
