@@ -109,6 +109,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         unset($query['offset']);
 
         // Execute query and return count
+        /** @var int */
         $count = \wp_get_nav_menus($query);
         if (!is_numeric($count)) {
             // An error happened
