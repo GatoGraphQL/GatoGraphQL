@@ -72,18 +72,6 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        switch ($fieldName) {
-            case 'customPosts':
-            case 'customPostCount':
-            case 'unrestrictedCustomPosts':
-            case 'unrestrictedCustomPostCount':
-                return false;
-        }
-        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {

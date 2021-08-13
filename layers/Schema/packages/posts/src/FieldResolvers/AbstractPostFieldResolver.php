@@ -71,16 +71,6 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        switch ($fieldName) {
-            case 'unrestrictedPosts':
-            case 'unrestrictedPostCount':
-                return false;
-        }
-        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {

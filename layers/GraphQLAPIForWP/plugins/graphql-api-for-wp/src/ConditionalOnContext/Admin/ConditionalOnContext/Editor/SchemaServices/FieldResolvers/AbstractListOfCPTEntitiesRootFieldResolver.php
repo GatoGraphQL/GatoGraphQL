@@ -60,11 +60,6 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
         return $schemaFieldArgs;
     }
 
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        return false;
-    }
-
     /**
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>

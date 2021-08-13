@@ -102,17 +102,6 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         return $schemaFieldArgs;
     }
 
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        switch ($fieldName) {
-            case 'postCategories':
-            case 'postCategoryCount':
-            case 'postCategoryNames':
-                return false;
-        }
-        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {

@@ -128,18 +128,6 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         return $schemaFieldArgs;
     }
 
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        switch ($fieldName) {
-            case 'pages':
-            case 'pageCount':
-            case 'unrestrictedPages':
-            case 'unrestrictedPageCount':
-                return false;
-        }
-        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {

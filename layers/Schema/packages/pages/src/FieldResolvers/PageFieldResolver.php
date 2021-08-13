@@ -79,18 +79,6 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        switch ($fieldName) {
-            case 'childPages':
-            case 'childPageCount':
-            case 'unrestrictedChildPages':
-            case 'unrestrictedChildPageCount':
-                return false;
-        }
-        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {

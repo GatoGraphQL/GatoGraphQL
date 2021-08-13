@@ -122,18 +122,6 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
         return $schemaFieldArgs;
     }
 
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        switch ($fieldName) {
-            case 'genericCustomPosts':
-            case 'genericCustomPostCount':
-            case 'unrestrictedGenericCustomPosts':
-            case 'unrestrictedGenericCustomPostCount':
-                return false;
-        }
-        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {

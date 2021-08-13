@@ -58,17 +58,6 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        switch ($fieldName) {
-            case 'tags':
-            case 'tagCount':
-            case 'tagNames':
-                return false;
-        }
-        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
