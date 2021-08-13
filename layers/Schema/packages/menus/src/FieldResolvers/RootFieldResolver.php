@@ -95,9 +95,13 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 }
                 return null;
             case 'menus':
-                return $menuTypeAPI->getMenus([
-                    'return-type' => ReturnTypes::IDS,
-                ]);
+                $options = array_merge(
+                    [
+                        'return-type' => ReturnTypes::IDS,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
+                return $menuTypeAPI->getMenus([], $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
