@@ -88,17 +88,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             unset($query['parentID']);
         }
 
-        if (CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()) {
-            if (isset($query['userID'])) {
-                $query['user_id'] = $query['userID'];
-                unset($query['userID']);
-            }
-            if (isset($query['authors'])) {
-                // Only 1 author is accepted
-                $query['user_id'] = $query['authors'][0];
-                unset($query['authors']);
-            }
-        }
         if (isset($query['order'])) {
             // Same param name, so do nothing
         }
