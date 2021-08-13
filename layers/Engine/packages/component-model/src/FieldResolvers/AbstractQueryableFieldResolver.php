@@ -22,7 +22,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         );
     }
 
-    protected function getFieldArgumentsSchemaDefinitions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
+    protected function getFieldArgumentsSchemaDefinitions(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName)) {
             return $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
