@@ -66,6 +66,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `PostCategory.childCategoryCount: Int`
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
+  - `Root.menuCount: Int!`
   - `Root.menuByLocation: Menu`
   - `Root.menuBySlug: Menu`
   - `Menu.name: String`
