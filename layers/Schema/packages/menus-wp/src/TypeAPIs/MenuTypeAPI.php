@@ -22,7 +22,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         protected HooksAPIInterface $hooksAPI,
     ) {
     }
-
+    
     public function getMenu(string | int $menuID): ?object
     {
         $object = wp_get_nav_menu_object($menuID);
@@ -91,6 +91,28 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     {
         $query = $this->convertMenusQuery($query, $options);
         return \wp_get_nav_menus($query);
+    }
+    /**
+     * @param array<string, mixed> $query
+     * @param array<string, mixed> $options
+     */
+    public function getMenuCount(array $query, array $options = []): int
+    {
+        // Convert parameters
+        $query = $this->convertMenusQuery($query, $options);
+        $query['count'] = true;
+        $query['fields'] = 'count';
+
+        // All results, no offset
+        $query['number'] = 0;
+        unset($query['offset']);
+
+        // Execute query and count results
+        $count = \wp_get_nav_menus($query);
+        if (!is_numeric($count)) {
+            return -1;
+        }
+        return (int)$count;
     }
 
     public function convertMenusQuery(array $query, array $options = []): array

@@ -26,6 +26,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         return [
             'menu',
             'menus',
+            'menuCount',
         ];
     }
 
@@ -34,6 +35,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         $descriptions = [
             'menu' => $this->translationAPI->__('Get a menu', 'menus'),
             'menus' => $this->translationAPI->__('Get all menus', 'menus'),
+            'menuCount' => $this->translationAPI->__('Count the number of menus', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -43,6 +45,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         $types = [
             'menu' => SchemaDefinition::TYPE_ID,
             'menus' => SchemaDefinition::TYPE_ID,
+            'menuCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -51,6 +54,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'menus' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            'menuCount' => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
     }
@@ -75,6 +79,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'menus' => [MenuFilterInputContainerModuleProcessor::class, MenuFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MENUS],
+            'menuCount' => [MenuFilterInputContainerModuleProcessor::class, MenuFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MENUCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
@@ -111,6 +116,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                     $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
                 );
                 return $menuTypeAPI->getMenus([], $options);
+            case 'menuCount':
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+                return $menuTypeAPI->getMenuCount([], $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
