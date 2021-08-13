@@ -106,14 +106,14 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
             case 'areCommentsOpen':
                 return $this->commentTypeAPI->areCommentsOpen($typeResolver->getID($post));
 
-            case 'commentCount':
-                return $this->commentTypeAPI->getCommentNumber($typeResolver->getID($post));
-
             case 'hasComments':
                 return $typeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
 
+            case 'commentCount':
+                return $this->commentTypeAPI->getCommentNumber($typeResolver->getID($post));
+
             case 'comments':
-                $query = array(
+                $query = [
                     'status' => Status::APPROVED,
                     // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                     'customPostID' => $typeResolver->getID($post),
@@ -121,7 +121,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                     'order' =>  'ASC',
                     'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
                     'parentID' => 0, // Bring 1st layer of comments, those added to the custom post
-                );
+                ];
                 $options = array_merge(
                     [
                         'return-type' => ReturnTypes::IDS,
