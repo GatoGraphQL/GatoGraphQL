@@ -102,6 +102,7 @@
         ],
         "log-server-errors": "lando logs -t -f | grep \"php:error\"",
         "log-server-warnings": "lando logs -t -f | grep \"php:warn\"",
-        "purge-cache": "@php ../shared/composer-scripts/purge-cache.php \"wordpress/wp-content/graphql-by-pop/cache\" || true"
+        "purge-cache": "@php ../shared/composer-scripts/purge-cache.php \"wordpress/wp-content/graphql-by-pop/cache\" || true",
+        "server-info": "lando info"
     }
 }

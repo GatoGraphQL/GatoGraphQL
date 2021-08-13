@@ -84,6 +84,7 @@
             "lando wp option delete graphql-api-settings --path=wordpress",
             "@purge-cache"
         ],
-        "purge-cache": "@php ../shared/composer-scripts/purge-cache.php \"wordpress/wp-content/graphql-api/cache\" || true"
+        "purge-cache": "@php ../shared/composer-scripts/purge-cache.php \"wordpress/wp-content/graphql-api/cache\" || true",
+        "server-info": "lando info"
     }
 }
