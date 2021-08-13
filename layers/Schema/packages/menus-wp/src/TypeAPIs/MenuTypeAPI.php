@@ -98,8 +98,9 @@ class MenuTypeAPI implements MenuTypeAPIInterface
      */
     public function getMenuCount(array $query, array $options = []): int
     {
-        // Convert parameters
         $query = $this->convertMenusQuery($query, $options);
+
+        // Indicate to return the count
         $query['count'] = true;
         $query['fields'] = 'count';
 
@@ -107,9 +108,10 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         $query['number'] = 0;
         unset($query['offset']);
 
-        // Execute query and count results
+        // Execute query and return count
         $count = \wp_get_nav_menus($query);
         if (!is_numeric($count)) {
+            // An error happened
             return -1;
         }
         return (int)$count;
