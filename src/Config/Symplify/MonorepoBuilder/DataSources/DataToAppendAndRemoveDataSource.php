@@ -14,12 +14,19 @@ class DataToAppendAndRemoveDataSource
         // Install also the monorepo-builder! So it can be used in CI
         return [
             'require-dev' => [
-                'symplify/monorepo-builder' => '^9.0',
+                // 'symplify/monorepo-builder' => '^9.0',
+                'symplify/monorepo-builder' => 'dev-original',
             ],
             'autoload' => [
                 'psr-4' => [
                     'PoP\\PoP\\' => 'src',
                 ],
+            ],
+            'repositories' => [
+                [
+                    'type' => 'vcs',
+                    'url' => 'https://github.com/leoloso/monorepo-builder.git',
+                ]
             ],
             // 'extra' => [
             //     'installer-paths' => [
