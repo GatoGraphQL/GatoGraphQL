@@ -67,7 +67,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
                 return OrderFormInput::class;
             case self::MODULE_FILTERINPUT_IDS:
             case self::MODULE_FILTERINPUT_EXCLUDE_IDS:
-                case self::MODULE_FILTERINPUT_PARENT_IDS:
+            case self::MODULE_FILTERINPUT_PARENT_IDS:
                 return FormMultipleInput::class;
             case self::MODULE_FILTERINPUT_ID:
                 return MultiValueFromStringFormInput::class;
