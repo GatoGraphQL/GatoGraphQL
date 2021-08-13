@@ -79,7 +79,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'menus' => [MenuFilterInputContainerModuleProcessor::class, MenuFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MENUS],
-            // 'menuCount' => [MenuFilterInputContainerModuleProcessor::class, MenuFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MENUCOUNT],
+            'menuCount' => [MenuFilterInputContainerModuleProcessor::class, MenuFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MENUCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }

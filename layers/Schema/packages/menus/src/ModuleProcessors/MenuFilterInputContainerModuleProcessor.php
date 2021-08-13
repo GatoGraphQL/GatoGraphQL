@@ -13,11 +13,13 @@ class MenuFilterInputContainerModuleProcessor extends AbstractFilterInputContain
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     public const MODULE_FILTERINPUTCONTAINER_MENUS = 'filterinputcontainer-menus';
+    public const MODULE_FILTERINPUTCONTAINER_MENUCOUNT = 'filterinputcontainer-menucount';
 
     public function getModulesToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_MENUS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_MENUCOUNT],
         );
     }
 
@@ -29,6 +31,12 @@ class MenuFilterInputContainerModuleProcessor extends AbstractFilterInputContain
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_MENUCOUNT => [
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                 [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
