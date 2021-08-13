@@ -6,3 +6,6 @@ services:
 
     PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface:
         class: \PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistry
+
+    PoPSchema\Menus\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
