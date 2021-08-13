@@ -23,5 +23,5 @@ interface MenuTypeAPIInterface
      * @param array<string, mixed> $options
      * @return array<string|int|object>
      */
-    public function getMenus(array $query = [], array $options = []): array;
+    public function getMenus(array $query, array $options = []): array;
 }
