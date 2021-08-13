@@ -94,6 +94,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         unset($query['offset']);
 
         // Execute query and return count
+        /** @var int[] */
         $count = \get_categories($query);
         // For some reason, the count is returned as an array of 1 element!
         if (is_array($count) && count($count) === 1 && is_int($count[0])) {
