@@ -75,14 +75,13 @@ class MenuTypeAPI implements MenuTypeAPIInterface
      * @param array<string, mixed> $options
      * @return array<string|int|object>
      */
-    public function getMenus(array $options = []): array
+    public function getMenus(array $query = [], array $options = []): array
     {
-        $args = [];
         $return_type = $options['return-type'] ?? null;
         if ($return_type == ReturnTypes::IDS) {
             // @see https://developer.wordpress.org/reference/classes/wp_term_query/get_terms/#description
-            $args['fields'] = 'ids';
+            $query['fields'] = 'ids';
         }
-        return \wp_get_nav_menus($args);
+        return \wp_get_nav_menus($query);
     }
 }
