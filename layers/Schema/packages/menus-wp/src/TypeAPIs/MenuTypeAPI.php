@@ -101,13 +101,18 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         // Convert parameters
         $query = $this->convertMenusQuery($query, $options);
         $query['count'] = true;
+        $query['fields'] = 'count';
 
         // All results, no offset
         $query['number'] = 0;
         unset($query['offset']);
 
         // Execute query and count results
-        return \wp_get_nav_menus($query);
+        $count = \wp_get_nav_menus($query);
+        if (!is_numeric($count)) {
+            return -1;
+        }
+        return (int)$count;
     }
 
     public function convertMenusQuery(array $query, array $options = []): array
