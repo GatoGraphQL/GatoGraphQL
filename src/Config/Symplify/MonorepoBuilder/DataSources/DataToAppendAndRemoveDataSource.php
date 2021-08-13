@@ -21,6 +21,12 @@ class DataToAppendAndRemoveDataSource
                     'PoP\\PoP\\' => 'src',
                 ],
             ],
+            'repositories' => [
+                [
+                    'type' => 'vcs',
+                    'url' => 'https://github.com/leoloso/monorepo-builder.git',
+                ]
+            ],
             // 'extra' => [
             //     'installer-paths' => [
             //         'wordpress/wp-content/plugins/{$name}/' => [
