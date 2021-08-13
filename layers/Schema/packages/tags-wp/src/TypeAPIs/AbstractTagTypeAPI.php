@@ -85,20 +85,27 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     }
     public function getTagCount(array $query = [], array $options = []): int
     {
-        // There is no direct way to calculate the total
-        // (Documentation mentions to pass arg "count" => `true` to `get_tags`,
-        // but it doesn't work)
-        // So execute a normal `get_tags` retrieving all the IDs, and count them
-        $options['return-type'] = ReturnTypes::IDS;
         $query = $this->convertTagsQuery($query, $options);
+
+        // Indicate to return the count
+        $query['count'] = true;
+        $query['fields'] = 'count';
 
         // All results, no offset
         $query['number'] = 0;
         unset($query['offset']);
 
-        // Resolve and count
-        $tags = get_tags($query);
-        return count($tags);
+        // Execute query and return count
+        $count = \get_tags($query);
+        // For some reason, the count is returned as an array of 1 element!
+        if (is_array($count) && count($count) === 1) {
+            return (int) $count[0];
+        }
+        if (is_array($count)) {
+            // An error happened
+            return -1;
+        }
+        return (int)$count;
     }
     public function getTags(array $query, array $options = []): array
     {
