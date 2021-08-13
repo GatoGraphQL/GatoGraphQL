@@ -110,7 +110,14 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                 return $typeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
 
             case 'commentCount':
-                return $this->commentTypeAPI->getCommentNumber($typeResolver->getID($post));
+                $query = [
+                    'status' => Status::APPROVED,
+                    // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
+                    'customPostID' => $typeResolver->getID($post),
+                    'parentID' => 0, // Bring 1st layer of comments, those added to the custom post
+                ];
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+                return $this->commentTypeAPI->getCommentCount($query, $options);
 
             case 'comments':
                 $query = [
