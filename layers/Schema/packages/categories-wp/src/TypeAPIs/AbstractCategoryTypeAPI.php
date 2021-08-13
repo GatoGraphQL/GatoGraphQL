@@ -99,11 +99,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         if (is_array($count) && count($count) === 1) {
             return (int) $count[0];
         }
-        if (is_array($count)) {
-            // An error happened
-            return -1;
-        }
-        return (int)$count;
+        // An error happened
+        return -1;
     }
     public function getCategories(array $query, array $options = []): array
     {

@@ -101,11 +101,8 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         if (is_array($count) && count($count) === 1) {
             return (int) $count[0];
         }
-        if (is_array($count)) {
-            // An error happened
-            return -1;
-        }
-        return (int)$count;
+        // An error happened
+        return -1;
     }
     public function getTags(array $query, array $options = []): array
     {
