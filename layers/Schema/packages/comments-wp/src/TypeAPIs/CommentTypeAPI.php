@@ -94,8 +94,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
                 unset($query['userID']);
             }
             if (isset($query['authors'])) {
-                // Only 1 author is accepted
-                $query['user_id'] = $query['authors'][0];
+                $query['author__in'] = $query['authors'];
                 unset($query['authors']);
             }
         }
