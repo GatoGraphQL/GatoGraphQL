@@ -47,4 +47,22 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
         return $filterInputProcessor->getName($filterInput);
     }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+
+        // Get the Schema Field Args from the FilterInput modules
+        if ($fieldArgumentsSchemaDefinitions = $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)) {
+            return array_merge(
+                $schemaFieldArgs,
+                $fieldArgumentsSchemaDefinitions
+            );
+        }
+
+        return $schemaFieldArgs;
+    }
 }
