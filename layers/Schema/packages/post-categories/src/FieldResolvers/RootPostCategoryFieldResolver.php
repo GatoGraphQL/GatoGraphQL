@@ -98,13 +98,6 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                         ],
                     ]
                 );
-            case 'postCategories':
-            case 'postCategoryCount':
-            case 'postCategoryNames':
-                return array_merge(
-                    $schemaFieldArgs,
-                    $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
-                );
         }
         return $schemaFieldArgs;
     }

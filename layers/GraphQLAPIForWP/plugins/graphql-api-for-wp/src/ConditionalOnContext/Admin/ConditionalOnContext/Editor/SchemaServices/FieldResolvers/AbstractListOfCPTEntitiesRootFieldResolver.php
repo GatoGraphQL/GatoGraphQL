@@ -51,11 +51,6 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
 
-        $schemaFieldArgs = array_merge(
-            $schemaFieldArgs,
-            $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
-        );
-
         // Remove the "customPostTypes" field argument
         $schemaFieldArgs = array_filter(
             $schemaFieldArgs,

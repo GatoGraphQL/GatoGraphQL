@@ -118,14 +118,6 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
                         ],
                     ]
                 );
-            case 'genericCustomPosts':
-            case 'genericCustomPostCount':
-            case 'unrestrictedGenericCustomPosts':
-            case 'unrestrictedGenericCustomPostCount':
-                return array_merge(
-                    $schemaFieldArgs,
-                    $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
-                );
         }
         return $schemaFieldArgs;
     }

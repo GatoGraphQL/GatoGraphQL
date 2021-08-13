@@ -124,14 +124,6 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                         ],
                     ]
                 );
-            case 'pages':
-            case 'pageCount':
-            case 'unrestrictedPages':
-            case 'unrestrictedPageCount':
-                return array_merge(
-                    $schemaFieldArgs,
-                    $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
-                );
         }
         return $schemaFieldArgs;
     }

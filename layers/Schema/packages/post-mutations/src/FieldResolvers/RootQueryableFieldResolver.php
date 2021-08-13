@@ -69,12 +69,6 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
-            case 'myPosts':
-            case 'myPostCount':
-                return array_merge(
-                    $schemaFieldArgs,
-                    $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
-                );
             case 'myPost':
                 return array_merge(
                     $schemaFieldArgs,

@@ -92,10 +92,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
             case 'mediaItems':
-                $schemaFieldArgs = array_merge(
-                    $schemaFieldArgs,
-                    $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
-                );
                 // Assign a default value to "mimeTypes"
                 $filterInputName = $this->getFilterInputName([
                     FilterInputModuleProcessor::class,

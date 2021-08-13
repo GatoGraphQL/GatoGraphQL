@@ -98,13 +98,6 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
                         ],
                     ]
                 );
-            case 'postTags':
-            case 'postTagCount':
-            case 'postTagNames':
-                return array_merge(
-                    $schemaFieldArgs,
-                    $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
-                );
         }
         return $schemaFieldArgs;
     }
