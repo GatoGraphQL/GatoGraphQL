@@ -27,14 +27,14 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
 
     protected function getFieldArgumentsSchemaDefinitions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs)) {
+        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName)) {
             return $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
         }
 
         return [];
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return null;
     }
@@ -43,7 +43,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
     {
         $options['filter-dataload-query-args'] = [
             'source' => $fieldArgs,
-            'module' => $this->getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
+            'module' => $this->getFieldDataFilteringModule($typeResolver, $fieldName),
         ];
     }
 
