@@ -93,14 +93,15 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
             case 'childCategories':
             case 'childCategoryNames':
                 $query['limit'] = ComponentConfiguration::getCategoryListDefaultLimit();
-                $options = [
-                    'return-type' => $fieldName === 'childCategories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
-                ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = array_merge(
+                    [
+                        'return-type' => $fieldName === 'childCategories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
                 return $categoryTypeAPI->getCategories($query, $options);
             case 'childCategoryCount':
-                $options = [];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $categoryTypeAPI->getCategoryCount($query, $options);
         }
 

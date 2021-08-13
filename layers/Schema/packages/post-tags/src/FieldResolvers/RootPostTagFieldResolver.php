@@ -149,14 +149,15 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
                 $query = [
                     'limit' => ComponentConfiguration::getTagListDefaultLimit(),
                 ];
-                $options = [
-                    'return-type' => $fieldName === 'postTags' ? ReturnTypes::IDS : ReturnTypes::NAMES,
-                ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = array_merge(
+                    [
+                        'return-type' => $fieldName === 'postTags' ? ReturnTypes::IDS : ReturnTypes::NAMES,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
                 return $postTagTypeAPI->getTags($query, $options);
             case 'postTagCount':
-                $options = [];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $postTagTypeAPI->getTagCount([], $options);
         }
 

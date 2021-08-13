@@ -221,10 +221,12 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                         Status::PUBLISHED,
                     ],
                 ];
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = array_merge(
+                    [
+                        'return-type' => ReturnTypes::IDS,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
                 return $pageTypeAPI->getPages($query, $options);
             case 'pageCount':
             case 'unrestrictedPageCount':
@@ -233,8 +235,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                         Status::PUBLISHED,
                     ],
                 ];
-                $options = [];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $pageTypeAPI->getPageCount($query, $options);
         }
 

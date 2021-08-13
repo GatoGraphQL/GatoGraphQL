@@ -102,14 +102,16 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
         $query['custompost-types'] = [
             $this->getFieldCustomPostType($fieldName),
         ];
-        $options = [
-            'return-type' => ReturnTypes::IDS,
-            // Do not use the limit set in the settings for custom posts
-            'skip-max-limit' => true,
-            // With this flag, the hook will not remove the private CPTs
-            self::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS => true,
-        ];
-        $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+        $options = array_merge(
+            [
+                'return-type' => ReturnTypes::IDS,
+                // Do not use the limit set in the settings for custom posts
+                'skip-max-limit' => true,
+                // With this flag, the hook will not remove the private CPTs
+                self::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS => true,
+            ],
+            $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+        );
         return $customPostTypeAPI->getCustomPosts($query, $options);
     }
 

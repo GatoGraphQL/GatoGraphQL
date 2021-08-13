@@ -131,15 +131,16 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
             case 'childPages':
             case 'unrestrictedChildPages':
                 $query['limit'] = ComponentConfiguration::getPageListDefaultLimit();
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = array_merge(
+                    [
+                        'return-type' => ReturnTypes::IDS,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
                 return $pageTypeAPI->getPages($query, $options);
             case 'childPageCount':
             case 'unrestrictedChildPageCount':
-                $options = [];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $pageTypeAPI->getPageCount($query, $options);
         }
 

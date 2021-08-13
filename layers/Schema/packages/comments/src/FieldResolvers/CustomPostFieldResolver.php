@@ -121,10 +121,12 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                     'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
                     'parentID' => 0, // Bring 1st layer of comments, those added to the custom post
                 );
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = array_merge(
+                    [
+                        'return-type' => ReturnTypes::IDS,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
                 return $this->commentTypeAPI->getComments($query, $options);
         }
 

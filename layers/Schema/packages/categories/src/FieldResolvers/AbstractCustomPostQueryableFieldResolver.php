@@ -81,19 +81,20 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
                 $query = [
                     'limit' => ComponentConfiguration::getCategoryListDefaultLimit(),
                 ];
-                $options = [
-                    'return-type' => $fieldName === 'categories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
-                ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = array_merge(
+                    [
+                        'return-type' => $fieldName === 'categories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
                 return $categoryTypeAPI->getCustomPostCategories(
                     $typeResolver->getID($post),
                     $query,
                     $options
                 );
             case 'categoryCount':
-                $options = [];
                 $query = [];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $categoryTypeAPI->getCustomPostCategoryCount(
                     $typeResolver->getID($post),
                     $query,

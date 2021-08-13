@@ -171,17 +171,19 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                 );
 
             case 'responses':
-                $query = array(
+                $query = [
                     'status' => Status::APPROVED,
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
                     'order' =>  'ASC',
                     'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
                     'parentID' => $typeResolver->getID($comment),
-                );
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
                 ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = array_merge(
+                    [
+                        'return-type' => ReturnTypes::IDS,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
                 return $this->commentTypeAPI->getComments($query, $options);
         }
 

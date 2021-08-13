@@ -39,11 +39,16 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         return null;
     }
 
-    protected function addFilterDataloadQueryArgs(array &$options, TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = [])
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getFilterDataloadQueryArgsOptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
-        $options['filter-dataload-query-args'] = [
-            'source' => $fieldArgs,
-            'module' => $this->getFieldDataFilteringModule($typeResolver, $fieldName),
+        return [
+            'filter-dataload-query-args' => [
+                'source' => $fieldArgs,
+                'module' => $this->getFieldDataFilteringModule($typeResolver, $fieldName),
+            ],
         ];
     }
 

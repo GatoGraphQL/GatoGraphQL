@@ -81,18 +81,19 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
                 $query = [
                     'limit' => ComponentConfiguration::getTagListDefaultLimit(),
                 ];
-                $options = [
-                    'return-type' => $fieldName === 'tags' ? ReturnTypes::IDS : ReturnTypes::NAMES,
-                ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = array_merge(
+                    [
+                        'return-type' => $fieldName === 'tags' ? ReturnTypes::IDS : ReturnTypes::NAMES,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
                 return $tagTypeAPI->getCustomPostTags(
                     $typeResolver->getID($customPost),
                     $query,
                     $options
                 );
             case 'tagCount':
-                $options = [];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $tagTypeAPI->getCustomPostTagCount(
                     $typeResolver->getID($customPost),
                     [],
