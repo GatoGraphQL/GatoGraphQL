@@ -13,9 +13,6 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
 {
     use QueryableFieldResolverTrait;
 
-    /**
-     * @return array<string, mixed>
-     */
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         // Get the Schema Field Args from the FilterInput modules
