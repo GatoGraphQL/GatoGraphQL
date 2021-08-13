@@ -71,40 +71,14 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'posts':
-            case 'postCount':
-            case 'unrestrictedPosts':
-            case 'unrestrictedPostCount':
-                return array_merge(
-                    $schemaFieldArgs,
-                    $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
-                );
-        }
-        return $schemaFieldArgs;
-    }
-
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        switch ($fieldName) {
-            case 'unrestrictedPosts':
-            case 'unrestrictedPostCount':
-                return false;
-        }
-        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'posts' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_POSTS],
             'postCount' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_POSTCOUNT],
             'unrestrictedPosts' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPOSTS],
             'unrestrictedPostCount' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT],
-            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
 
@@ -158,16 +132,17 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
             case 'posts':
             case 'unrestrictedPosts':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = array_merge(
+                    [
+                        'return-type' => ReturnTypes::IDS,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
                 return $postTypeAPI->getPosts($query, $options);
             case 'postCount':
             case 'unrestrictedPostCount':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-                $options = [];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $postTypeAPI->getPostCount($query, $options);
         }
 

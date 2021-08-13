@@ -118,31 +118,11 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
                         ],
                     ]
                 );
-            case 'genericCustomPosts':
-            case 'genericCustomPostCount':
-            case 'unrestrictedGenericCustomPosts':
-            case 'unrestrictedGenericCustomPostCount':
-                return array_merge(
-                    $schemaFieldArgs,
-                    $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
-                );
         }
         return $schemaFieldArgs;
     }
 
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        switch ($fieldName) {
-            case 'genericCustomPosts':
-            case 'genericCustomPostCount':
-            case 'unrestrictedGenericCustomPosts':
-            case 'unrestrictedGenericCustomPostCount':
-                return false;
-        }
-        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'genericCustomPosts' => [
@@ -161,7 +141,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
                 GenericCustomPostFilterInputContainerModuleProcessor::class,
                 GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT
             ],
-            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
 
@@ -266,16 +246,17 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
             case 'genericCustomPosts':
             case 'unrestrictedGenericCustomPosts':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = array_merge(
+                    [
+                        'return-type' => ReturnTypes::IDS,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
                 return $customPostTypeAPI->getCustomPosts($query, $options);
             case 'genericCustomPostCount':
             case 'unrestrictedGenericCustomPostCount':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-                $options = [];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $customPostTypeAPI->getCustomPostCount($query, $options);
         }
 

@@ -13,30 +13,39 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
 {
     use QueryableFieldResolverTrait;
 
-    protected function getFieldArgumentsSchemaDefinitions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $schemaDefinitions = parent::getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName, $fieldArgs);
-
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs)) {
-            $schemaDefinitions = array_merge(
-                $schemaDefinitions,
-                $this->getFilterSchemaDefinitionItems($filterDataloadingModule)
-            );
-        }
-
-        return $schemaDefinitions;
+        // Get the Schema Field Args from the FilterInput modules
+        return array_merge(
+            parent::getSchemaFieldArgs($typeResolver, $fieldName),
+            $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
+        );
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    protected function getFieldArgumentsSchemaDefinitions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
+    {
+        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName)) {
+            return $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
+        }
+
+        return [];
+    }
+
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return null;
     }
 
-    protected function addFilterDataloadQueryArgs(array &$options, TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = [])
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getFilterDataloadQueryArgsOptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
-        $options['filter-dataload-query-args'] = [
-            'source' => $fieldArgs,
-            'module' => $this->getFieldDataFilteringModule($typeResolver, $fieldName, $fieldArgs),
+        return [
+            'filter-dataload-query-args' => [
+                'source' => $fieldArgs,
+                'module' => $this->getFieldDataFilteringModule($typeResolver, $fieldName),
+            ],
         ];
     }
 
@@ -46,5 +55,14 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         /** @var FormComponentModuleProcessorInterface */
         $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
         return $filterInputProcessor->getName($filterInput);
+    }
+
+    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        // If there is a filter, there will be many filterInputs, so by default we'd rather not enable ordering
+        if ($this->getFieldDataFilteringModule($typeResolver, $fieldName) !== null) {
+            return false;
+        }
+        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
     }
 }

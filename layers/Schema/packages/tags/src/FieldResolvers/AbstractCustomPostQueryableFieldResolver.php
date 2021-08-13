@@ -58,32 +58,6 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'tags':
-            case 'tagCount':
-            case 'tagNames':
-                return array_merge(
-                    $schemaFieldArgs,
-                    $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
-                );
-        }
-        return $schemaFieldArgs;
-    }
-
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        switch ($fieldName) {
-            case 'tags':
-            case 'tagCount':
-            case 'tagNames':
-                return false;
-        }
-        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -107,18 +81,19 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
                 $query = [
                     'limit' => ComponentConfiguration::getTagListDefaultLimit(),
                 ];
-                $options = [
-                    'return-type' => $fieldName === 'tags' ? ReturnTypes::IDS : ReturnTypes::NAMES,
-                ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = array_merge(
+                    [
+                        'return-type' => $fieldName === 'tags' ? ReturnTypes::IDS : ReturnTypes::NAMES,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
                 return $tagTypeAPI->getCustomPostTags(
                     $typeResolver->getID($customPost),
                     $query,
                     $options
                 );
             case 'tagCount':
-                $options = [];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $tagTypeAPI->getCustomPostTagCount(
                     $typeResolver->getID($customPost),
                     [],
