@@ -139,6 +139,10 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             // Transform from array to string
             $query['include'] = implode(',', $query['include']);
         }
+        if (isset($query['exclude-ids'])) {
+            $query['exclude'] = $query['exclude-ids'];
+            unset($query['exclude-ids']);
+        }
         if (isset($query['order'])) {
             // Same param name, so do nothing
         }

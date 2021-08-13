@@ -108,6 +108,10 @@ class MediaTypeAPI implements MediaTypeAPIInterface
             // Transform from array to string
             $query['include'] = implode(',', $query['include']);
         }
+        if (isset($query['exclude-ids'])) {
+            $query['post__not_in'] = $query['exclude-ids'];
+            unset($query['exclude-ids']);
+        }
         $query['post_type'] = 'attachment';
         if (isset($query['mime-types'])) {
             // Transform from array to string
