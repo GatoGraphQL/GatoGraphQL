@@ -4,9 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\Media\Enums\:
-        resource: '../src/Enums/*'
-
     PoPSchema\Media\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
