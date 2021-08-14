@@ -10,7 +10,6 @@ use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\FormInpu
 
 class FilterInputHookSet extends AbstractHookSet
 {
-
     protected function init(): void
     {
         $this->hooksAPI->addFilter(

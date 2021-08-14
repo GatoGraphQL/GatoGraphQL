@@ -10,7 +10,6 @@ use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcess
 
 class FilterInputHookSet extends AbstractHookSet
 {
-
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
