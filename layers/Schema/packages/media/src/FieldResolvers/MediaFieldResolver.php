@@ -101,16 +101,14 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             case 'width':
             case 'height':
             case 'sizes':
-                return array_merge(
-                    $schemaFieldArgs,
+                return [
+                    ...$schemaFieldArgs,
                     [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'size',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Size of the image', 'pop-media'),
-                        ],
-                    ]
-                );
+                        SchemaDefinition::ARGNAME_NAME => 'size',
+                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Size of the image', 'pop-media'),
+                    ],
+                ];
         }
 
         return $schemaFieldArgs;
