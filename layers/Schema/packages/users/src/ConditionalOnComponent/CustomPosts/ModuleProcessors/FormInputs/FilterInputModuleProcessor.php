@@ -17,6 +17,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public const MODULE_FILTERINPUT_AUTHOR_IDS = 'filterinput-author-ids';
     public const MODULE_FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';
+    public const MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS = 'filterinput-exclude-author-ids';
 
     public function getModulesToProcess(): array
     {
@@ -31,6 +32,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         $filterInputs = [
             self::MODULE_FILTERINPUT_AUTHOR_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_AUTHOR_IDS],
             self::MODULE_FILTERINPUT_AUTHOR_SLUG => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_AUTHOR_SLUG],
+            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_AUTHOR_IDS],
         ];
         return $filterInputs[$module[1]] ?? null;
     }
@@ -40,6 +42,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_AUTHOR_IDS => 'authorIDs',
             self::MODULE_FILTERINPUT_AUTHOR_SLUG => 'authorSlug',
+            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => 'excludeAuthorIDs',
             default => parent::getName($module),
         };
     }
@@ -49,6 +52,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_AUTHOR_IDS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_AUTHOR_SLUG => SchemaDefinition::TYPE_STRING,
+            self::MODULE_FILTERINPUT_AUTHOR_IDS => SchemaDefinition::TYPE_ID,
             default => $this->getDefaultSchemaFilterInputType(),
         };
     }
@@ -57,6 +61,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_AUTHOR_IDS => true,
+            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => true,
             default => false,
         };
     }
@@ -65,6 +70,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_AUTHOR_IDS => true,
+            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => true,
             default => false,
         };
     }
@@ -74,6 +80,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         $descriptions = [
             self::MODULE_FILTERINPUT_AUTHOR_IDS => $this->translationAPI->__('Search custom posts from the authors with given IDs', 'pop-users'),
             self::MODULE_FILTERINPUT_AUTHOR_SLUG => $this->translationAPI->__('Search custom posts from the authors with given slug', 'pop-users'),
+            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->translationAPI->__('Search custom posts excluding the ones from authors with given IDs', 'pop-users'),
         ];
         return $descriptions[$module[1]] ?? null;
     }
