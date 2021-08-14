@@ -13,4 +13,4 @@ jobs:
       - name: Update diagram
         uses: githubocto/repo-visualizer@main
         with:
-          excluded_paths: "ignore,.github,layers/Legacy"
+          excluded_paths: "ignore,.github,Legacy"
