@@ -29,6 +29,10 @@ class QueryHookSet extends AbstractHookSet
             $query['author_name'] = $query['author-slug'];
             unset($query['author-slug']);
         }
+        if (isset($query['exclude-author-ids'])) {
+            $query['author__not_in'] = $query['exclude-author-ids'];
+            unset($query['exclude-author-ids']);
+        }
         return $query;
     }
 }
