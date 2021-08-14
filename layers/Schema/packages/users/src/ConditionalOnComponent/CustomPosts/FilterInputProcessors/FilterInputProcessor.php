@@ -30,7 +30,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
             case self::FILTERINPUT_AUTHOR_SLUG:
                 $query['author-slug'] = $value;
                 break;
-            case self::FILTERINPUT_AUTHOR_IDS:
+            case self::FILTERINPUT_EXCLUDE_AUTHOR_IDS:
                 $query['exclude-author-ids'] = $value;
                 break;
         }
