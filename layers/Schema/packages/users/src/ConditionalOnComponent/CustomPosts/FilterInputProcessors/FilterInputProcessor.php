@@ -10,12 +10,14 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_AUTHOR_IDS = 'filterinput-author-ids';
     public const FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';
+    public const FILTERINPUT_EXCLUDE_AUTHOR_IDS = 'filterinput-exclude-author-ids';
 
     public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_AUTHOR_IDS],
             [self::class, self::FILTERINPUT_AUTHOR_SLUG],
+            [self::class, self::FILTERINPUT_EXCLUDE_AUTHOR_IDS],
         );
     }
 
@@ -27,6 +29,9 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 break;
             case self::FILTERINPUT_AUTHOR_SLUG:
                 $query['author-slug'] = $value;
+                break;
+            case self::FILTERINPUT_EXCLUDE_AUTHOR_IDS:
+                $query['exclude-author-ids'] = $value;
                 break;
         }
     }

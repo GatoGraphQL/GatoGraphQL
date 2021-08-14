@@ -28,6 +28,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `categoryIDs: [ID]`
   - `authorIDs: [ID]`
   - `authorSlug: String`
+  - `excludeAuthorIDs: [ID]`
 - Exclude results via field arg `excludeIDs`
 - Query properties for custom post fields:
   - `modified: String`
@@ -46,6 +47,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `parentID: ID`
 - Filter field `Post.comments` via new arguments:
   - `authorIDs: [ID!]`
+  - `excludeAuthorIDs: [ID]`
 - Filter field `Post.commentCount` via new arguments:
   - `authorIDs: [ID!]`
   - `date_from: Date`
