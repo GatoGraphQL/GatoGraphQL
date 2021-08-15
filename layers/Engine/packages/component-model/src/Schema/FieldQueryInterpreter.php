@@ -80,6 +80,15 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      */
     private array $directiveSchemaDefinitionArgsCache = [];
 
+    /**
+     * @var array<string,array<string,string>>
+     */
+    private array $fieldOutputKeysByTypeAndField = [];
+    /**
+     * @var array<string,array<string,string>>
+     */
+    private array $fieldsByTypeAndFieldOutputKey = [];
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         UpstreamFeedbackMessageStoreInterface $feedbackMessageStore,
@@ -120,8 +129,25 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      */
     public function getUniqueFieldOutputKeyByTypeOutputName(string $typeOutputName, string $field): string
     {
+        // If a fieldOutputKey has already been created for this field, retrieve it
+        if ($fieldOutputKey = $this->fieldOutputKeysByTypeAndField[$typeOutputName][$field] ?? null) {
+            return $fieldOutputKey;
+        }
         $fieldOutputKey = $this->getFieldOutputKey($field);
-
+        if (!isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputName][$fieldOutputKey])) {
+            $this->fieldsByTypeAndFieldOutputKey[$typeOutputName][$fieldOutputKey] = $field;
+            $this->fieldOutputKeysByTypeAndField[$typeOutputName][$field] = $fieldOutputKey;
+            return $fieldOutputKey;
+        }
+        // This fieldOutputKey already exists for a different field,
+        // then create a counter and iterate until it doesn't exist anymore
+        $counter = 0;
+        while (isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputName][$fieldOutputKey . '-' . $counter])) {
+            $counter++;
+        }
+        $fieldOutputKey = $fieldOutputKey . '-' . $counter;
+        $this->fieldsByTypeAndFieldOutputKey[$typeOutputName][$fieldOutputKey] = $field;
+        $this->fieldOutputKeysByTypeAndField[$typeOutputName][$field] = $fieldOutputKey;
         return $fieldOutputKey;
     }
 
