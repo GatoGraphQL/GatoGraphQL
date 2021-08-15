@@ -9,6 +9,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -93,7 +94,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         TranslationAPIInterface $translationAPI,
         UpstreamFeedbackMessageStoreInterface $feedbackMessageStore,
         protected TypeCastingExecuterInterface $typeCastingExecuter,
-        QueryParserInterface $queryParser
+        protected InstanceManagerInterface $instanceManager,
+        QueryParserInterface $queryParser,
     ) {
         parent::__construct($translationAPI, $feedbackMessageStore, $queryParser);
     }
@@ -102,6 +104,18 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     {
         return $this->getUniqueFieldOutputKeyByTypeOutputName(
             $typeResolver->getTypeOutputName(),
+            $field
+        );
+    }
+
+    final public function getUniqueFieldOutputKeyByTypeResolverClass(string $typeResolverClass, string $field): string
+    {
+        /**
+         * @var TypeResolverInterface
+         */
+        $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
+        return $this->getUniqueFieldOutputKey(
+            $typeResolver,
             $field
         );
     }

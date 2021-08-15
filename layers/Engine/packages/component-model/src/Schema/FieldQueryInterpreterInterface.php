@@ -20,6 +20,7 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
      * since they both have fieldOutputKey "title"
      */
     public function getUniqueFieldOutputKey(TypeResolverInterface $typeResolver, string $field): string;
+    public function getUniqueFieldOutputKeyByTypeResolverClass(string $typeResolverClass, string $field): string;
     public function getUniqueFieldOutputKeyByTypeOutputName(string $dbKey, string $field): string;
     /**
      * Extract field args without using the schema. It is needed to find out which fieldResolver will process a field, where we can't depend on the schema since this one needs to know who the fieldResolver is, creating an infitine loop
