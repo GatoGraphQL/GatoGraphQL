@@ -55,7 +55,10 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
         $ret[GD_JS_TITLES]['share'] = $title;
         $ret[GD_JS_FONTAWESOME] = $this->getFontawesome($module, $props);
         
-        $ret['shareurl-field'] = FieldQueryInterpreterFacade::getInstance()->getFieldOutputKey($this->getShareurlField($module, $props));
+        $ret['shareurl-field'] = FieldQueryInterpreterFacade::getInstance()->getUniqueFieldOutputKeyByTypeResolverClass(
+            $this->getProp($module, $props, 'succeeding-typeResolver'),
+            $this->getShareurlField($module, $props)
+        );
 
         if ($provider = $this->getProvider($module)) {
             $ret['provider'] = $provider;

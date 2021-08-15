@@ -34,7 +34,10 @@ abstract class PoP_Module_Processor_UserMentionComponentLayoutsBase extends PoPE
             $avatar_field = PoP_AvatarFoundationManagerFactory::getInstance()->getAvatarField($avatar_size);
 
             $ret['avatar'] = array(
-                'name' => FieldQueryInterpreterFacade::getInstance()->getFieldOutputKey($avatar_field),
+                'name' => FieldQueryInterpreterFacade::getInstance()->getUniqueFieldOutputKeyByTypeResolverClass(
+                    $this->getProp($module, $props, 'succeeding-typeResolver'),
+                    $avatar_field
+                ),
                 'size' => $avatar_size
             );
         }
