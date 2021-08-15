@@ -89,7 +89,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         parent::__construct($translationAPI, $feedbackMessageStore, $queryParser);
     }
 
-    public function getUniqueFieldOutputKey(TypeResolverInterface $typeResolver, string $field): string
+    final public function getUniqueFieldOutputKey(TypeResolverInterface $typeResolver, string $field): string
     {
         return $this->getUniqueFieldOutputKeyByTypeName(
             $typeResolver->getTypeOutputName(),
