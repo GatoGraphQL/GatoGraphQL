@@ -96,12 +96,33 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $field
         );
     }
+    
     /**
-     * @todo IMPLEMENT!
+     * Obtain a unique fieldOutputKey for the field, for the type.
+     * This is to avoid overriding a previous value with the same alias,
+     * but placed on a different iteration:
+     * 
+     *   ```graphql
+     *   {
+     *     posts {
+     *       title
+     *       self {
+     *         title: excerpt
+     *       }
+     *     }
+     *   ```
+     * 
+     * In this query, the field "excerpt" has alias "title", and would override
+     * the title value from the previous iteration.
+     * 
+     * By keeping a registry of fields to fieldOutputNames, we can always provide
+     * a unique name, and avoid overriding the value.
      */
     public function getUniqueFieldOutputKeyByTypeOutputName(string $typeOutputName, string $field): string
     {
-        return $this->getFieldOutputKey($field);
+        $fieldOutputKey = $this->getFieldOutputKey($field);
+
+        return $fieldOutputKey;
     }
 
     /**
