@@ -119,12 +119,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $field
         );
     }
-    
+
     /**
      * Obtain a unique fieldOutputKey for the field, for the type.
      * This is to avoid overriding a previous value with the same alias,
      * but placed on a different iteration:
-     * 
+     *
      *   ```graphql
      *   {
      *     posts {
@@ -134,10 +134,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      *       }
      *     }
      *   ```
-     * 
+     *
      * In this query, the field "excerpt" has alias "title", and would override
      * the title value from the previous iteration.
-     * 
+     *
      * By keeping a registry of fields to fieldOutputNames, we can always provide
      * a unique name, and avoid overriding the value.
      */
