@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\Overrides\TypeResolvers;
 
-class CustomPostUnionTypeResolver extends \PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver as UpstreamCustomPostUnionTypeResolver;
+
+class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
 {
     /**
      * Overriding function to provide optimization:
@@ -26,5 +28,10 @@ class CustomPostUnionTypeResolver extends \PoPSchema\CustomPosts\TypeResolvers\C
             }
         }
         return $resultItemIDTargetTypeResolvers;
+    }
+
+    public function getIdFieldTypeResolverClass(): string
+    {
+        return UpstreamCustomPostUnionTypeResolver::class;
     }
 }
