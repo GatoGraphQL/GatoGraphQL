@@ -91,6 +91,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
             );
             if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
                 $this->setIDsDataFieldsAsNull(
+                    $typeResolver,
                     $idsDataFieldsToRemove,
                     $dbItems
                 );

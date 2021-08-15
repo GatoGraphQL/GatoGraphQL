@@ -9,6 +9,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -80,13 +81,88 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      */
     private array $directiveSchemaDefinitionArgsCache = [];
 
+    /**
+     * @var array<string,array<string,string>>
+     */
+    private array $fieldOutputKeysByTypeAndField = [];
+    /**
+     * @var array<string,array<string,string>>
+     */
+    private array $fieldsByTypeAndFieldOutputKey = [];
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         UpstreamFeedbackMessageStoreInterface $feedbackMessageStore,
         protected TypeCastingExecuterInterface $typeCastingExecuter,
-        QueryParserInterface $queryParser
+        protected InstanceManagerInterface $instanceManager,
+        QueryParserInterface $queryParser,
     ) {
         parent::__construct($translationAPI, $feedbackMessageStore, $queryParser);
+    }
+
+    final public function getUniqueFieldOutputKey(TypeResolverInterface $typeResolver, string $field): string
+    {
+        return $this->getUniqueFieldOutputKeyByTypeOutputName(
+            $typeResolver->getTypeOutputName(),
+            $field
+        );
+    }
+
+    final public function getUniqueFieldOutputKeyByTypeResolverClass(string $typeResolverClass, string $field): string
+    {
+        /**
+         * @var TypeResolverInterface
+         */
+        $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
+        return $this->getUniqueFieldOutputKey(
+            $typeResolver,
+            $field
+        );
+    }
+
+    /**
+     * Obtain a unique fieldOutputKey for the field, for the type.
+     * This is to avoid overriding a previous value with the same alias,
+     * but placed on a different iteration:
+     *
+     *   ```graphql
+     *   {
+     *     posts {
+     *       title
+     *       self {
+     *         title: excerpt
+     *       }
+     *     }
+     *   ```
+     *
+     * In this query, the field "excerpt" has alias "title", and would override
+     * the title value from the previous iteration.
+     *
+     * By keeping a registry of fields to fieldOutputNames, we can always provide
+     * a unique name, and avoid overriding the value.
+     */
+    public function getUniqueFieldOutputKeyByTypeOutputName(string $typeOutputName, string $field): string
+    {
+        // If a fieldOutputKey has already been created for this field, retrieve it
+        if ($fieldOutputKey = $this->fieldOutputKeysByTypeAndField[$typeOutputName][$field] ?? null) {
+            return $fieldOutputKey;
+        }
+        $fieldOutputKey = $this->getFieldOutputKey($field);
+        if (!isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputName][$fieldOutputKey])) {
+            $this->fieldsByTypeAndFieldOutputKey[$typeOutputName][$fieldOutputKey] = $field;
+            $this->fieldOutputKeysByTypeAndField[$typeOutputName][$field] = $fieldOutputKey;
+            return $fieldOutputKey;
+        }
+        // This fieldOutputKey already exists for a different field,
+        // then create a counter and iterate until it doesn't exist anymore
+        $counter = 0;
+        while (isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputName][$fieldOutputKey . '-' . $counter])) {
+            $counter++;
+        }
+        $fieldOutputKey = $fieldOutputKey . '-' . $counter;
+        $this->fieldsByTypeAndFieldOutputKey[$typeOutputName][$fieldOutputKey] = $field;
+        $this->fieldOutputKeysByTypeAndField[$typeOutputName][$field] = $fieldOutputKey;
+        return $fieldOutputKey;
     }
 
     /**
@@ -243,7 +319,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         if ($orderedFieldOrDirectiveArgNamesEnabled) {
             $orderedFieldOrDirectiveArgNames = array_keys($fieldOrDirectiveArgumentNameTypes);
         }
-        // $fieldOrDirectiveOutputKey = $this->getFieldOutputKey($fieldOrDirective);
         $fieldOrDirectiveArgs = [];
         $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
         $setFailingFieldResponseAsNull = ComponentConfiguration::setFailingFieldResponseAsNull();
@@ -1238,7 +1313,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     ): array {
         // If any casting can't be done, show an error
         if ($failedCastingFieldArgs = $this->getFailedCastingFieldArgs($castedFieldArgs)) {
-            // $fieldOutputKey = $this->getFieldOutputKey($field);
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
             $fieldArgNameSchemaDefinition = $this->getFieldSchemaDefinitionArgs($typeResolver, $field);

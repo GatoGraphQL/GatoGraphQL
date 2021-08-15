@@ -94,7 +94,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             foreach (array_filter($idsDataFields[$id]['conditional']) as $conditionDataField => $conditionalDataFields) {
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $dbItems
-                $conditionFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($conditionDataField);
+                $conditionFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $conditionDataField);
                 if (isset($dbItems[$id]) && array_key_exists($conditionFieldOutputKey, $dbItems[$id])) {
                     $conditionSatisfied = (bool)$dbItems[$id][$conditionFieldOutputKey];
                 } else {
@@ -217,12 +217,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
             // For GraphQL, set the response for the failing field as null
             if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
                 $dbItems[(string)$id][$fieldOutputKey] = null;
             }
         } else {
             // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-            $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+            $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
             $dbItems[(string)$id][$fieldOutputKey] = $value;
         }
     }

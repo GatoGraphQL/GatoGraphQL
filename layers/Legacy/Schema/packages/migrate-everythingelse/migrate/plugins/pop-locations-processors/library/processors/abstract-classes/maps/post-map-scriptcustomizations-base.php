@@ -85,7 +85,9 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         $ret['thumb'] = array(
-            'name' => FieldQueryInterpreterFacade::getInstance()->getFieldOutputKey($this->getThumbField($module, $props)),
+            'name' => FieldQueryInterpreterFacade::getInstance()->getUniqueFieldOutputKeyByTypeResolverClass(
+                $this->getProp($module, $props, 'succeeding-typeResolver'),
+                $this->getThumbField($module, $props)),
         );
 
         if ($authors_module = $this->getAuthorsModule($module)) {

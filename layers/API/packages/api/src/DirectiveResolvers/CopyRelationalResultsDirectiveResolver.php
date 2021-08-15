@@ -139,7 +139,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
             foreach ($idsDataFields as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $relationalField) {
                     // The data is stored under the field's output key
-                    $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
+                    $relationalFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $relationalField);
                     // Validate that the current object has `relationalField` property set
                     // Since we are fetching from a relational object (placed one level below in the iteration stack), the value could've been set only in a previous iteration
                     // Then it must be in $previousDBItems (it can't be in $dbItems unless set by chance, because the same IDs were involved for a possibly different query)

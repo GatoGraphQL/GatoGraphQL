@@ -43,7 +43,10 @@ abstract class PoP_Module_Processor_PostCardLayoutsBase extends PoPEngine_QueryD
         $ret = parent::getImmutableConfiguration($module, $props);
 
         $ret['thumb'] = array(
-            'name' => FieldQueryInterpreterFacade::getInstance()->getFieldOutputKey($this->getThumbField($module, $props)),
+            'name' => FieldQueryInterpreterFacade::getInstance()->getUniqueFieldOutputKeyByTypeResolverClass(
+                $this->getProp($module, $props, 'succeeding-typeResolver'),
+                $this->getThumbField($module, $props)
+            ),
         );
 
         return $ret;

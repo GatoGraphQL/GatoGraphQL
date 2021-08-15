@@ -750,6 +750,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $e->getMessage()
                 );
                 $this->processFailure(
+                    $typeResolver,
                     $failureMessage,
                     [],
                     $idsDataFields,
@@ -790,6 +791,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * or show an error and remove the fields from the directive pipeline for further execution
      */
     protected function processFailure(
+        TypeResolverInterface $typeResolver,
         string $failureMessage,
         array $failedFields,
         array &$idsDataFields,
@@ -831,6 +833,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $setFailingFieldResponseAsNull = ComponentConfiguration::setFailingFieldResponseAsNull();
         if ($setFailingFieldResponseAsNull) {
             $this->setIDsDataFieldsAsNull(
+                $typeResolver,
                 $idsDataFieldsToRemove,
                 $dbItems
             );

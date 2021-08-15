@@ -1630,7 +1630,7 @@ class Engine implements EngineInterface
                 $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($targetTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponent_typeResolver_class) {
-                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
+                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $subcomponent_data_field);
                 // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
                 $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
                 $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];

@@ -153,37 +153,39 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         foreach ($propertyFields as $propertyField) {
             // Only if the property has been set (in case of dbError it is not set)
             $propertyFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($propertyField);
-            if (array_key_exists($propertyFieldOutputKey, $dbObject)) {
-                $dbObjectRet[$propertyFieldOutputKey] = $dbObject[$propertyFieldOutputKey];
+            $uniquePropertyFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByTypeOutputName($dbKey, $propertyField);
+            if (array_key_exists($uniquePropertyFieldOutputKey, $dbObject)) {
+                $dbObjectRet[$propertyFieldOutputKey] = $dbObject[$uniquePropertyFieldOutputKey];
             }
         }
 
         // Add the nested levels
         foreach ($nestedFields as $nestedField => $nestedPropertyFields) {
             $nestedFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($nestedField);
+            $uniqueNestedFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByTypeOutputName($dbKey, $nestedField);
             // If the key doesn't exist, then do nothing. This supports the "skip output if null" behaviour: if it is to be skipped, there will be no value (which is different than a null)
-            if (array_key_exists($nestedFieldOutputKey, $dbObject)) {
+            if (array_key_exists($uniqueNestedFieldOutputKey, $dbObject)) {
                 // If it's null, directly assign the null to the result
-                if (is_null($dbObject[$nestedFieldOutputKey])) {
+                if (is_null($dbObject[$uniqueNestedFieldOutputKey])) {
                     $dbObjectRet[$nestedFieldOutputKey] = null;
                 } else {
                     // Watch out! If the property has already been loaded from a previous iteration, in some cases it can create trouble!
                     // But make sure that there truly are subproperties! It could also be a schemaError.
                     // Eg: ?query=posts.title.id, then no need to transform "title" from string to {"id" => ...}
                     if ($this->feedbackMessageStore->getSchemaErrorsForField($dbKey, $nestedField)) {
-                        $dbObjectRet[$nestedFieldOutputKey] = $dbObject[$nestedFieldOutputKey];
+                        $dbObjectRet[$nestedFieldOutputKey] = $dbObject[$uniqueNestedFieldOutputKey];
                     } else {
                         // The first field, "id", needs not be concatenated. All the others do need
-                        $nextField = ($concatenateField ? $dbObjectKeyPath . '.' : '') . $nestedFieldOutputKey;
+                        $nextField = ($concatenateField ? $dbObjectKeyPath . '.' : '') . $uniqueNestedFieldOutputKey;
 
                         // The type with ID may be stored under $unionDBKeyIDs
-                        $unionDBKeyID = $unionDBKeyIDs[$dbKey][$dbObjectID][$nestedFieldOutputKey] ?? null;
+                        $unionDBKeyID = $unionDBKeyIDs[$dbKey][$dbObjectID][$uniqueNestedFieldOutputKey] ?? null;
 
                         // Add a new subarray for the nested property
                         $dbObjectNestedPropertyRet = &$dbObjectRet[$nestedFieldOutputKey];
 
                         // If it is an empty array, then directly add an empty array as the result
-                        if (is_array($dbObject[$nestedFieldOutputKey]) && empty($dbObject[$nestedFieldOutputKey])) {
+                        if (is_array($dbObject[$uniqueNestedFieldOutputKey]) && empty($dbObject[$uniqueNestedFieldOutputKey])) {
                             $dbObjectRet[$nestedFieldOutputKey] = [];
                         } else {
                             if (!empty($dbObjectNestedPropertyRet)) {
@@ -203,7 +205,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                                     }
                                 }
                             }
-                            $this->addData($dbObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionDBKeyIDs, $unionDBKeyID ?? $dbObject[$nestedFieldOutputKey], $nextField, $dbKeyPaths);
+                            $this->addData($dbObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionDBKeyIDs, $unionDBKeyID ?? $dbObject[$uniqueNestedFieldOutputKey], $nextField, $dbKeyPaths);
                         }
                     }
                 }

@@ -25,7 +25,9 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentLayoutsBase extends Po
 
         $thumb = $this->getThumbField($module, $props);
         $ret['thumb'] = array(
-            'name' => FieldQueryInterpreterFacade::getInstance()->getFieldOutputKey($thumb),
+            'name' => FieldQueryInterpreterFacade::getInstance()->getUniqueFieldOutputKeyByTypeResolverClass(
+                $this->getProp($module, $props, 'succeeding-typeResolver'),
+                $thumb),
         );
         
         return $ret;
