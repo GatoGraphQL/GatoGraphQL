@@ -13,6 +13,7 @@ jobs:
       - name: Update diagram
         uses: githubocto/repo-visualizer@main
         with:
+          output_file: assets/img/diagram.svg
           excluded_paths: "ignore,.github,Legacy,Wassup"
           root_path: ./layers/
           max_depth: 3

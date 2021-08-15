@@ -74,26 +74,21 @@ $ composer install
 ## Table of Contents
 
 1. [Setting-up the development environment](docs/development-environment.md)
-2. [Layer dependency graph](docs/layer-dependency-graph.md)
-3. [Supported PHP features](docs/supported-php-features.md)
-4. [How is the GraphQL server CMS-agnostic](docs/cms-agnosticism.md)
-5. [Why are there so many packages in the repo](docs/splitting-packages.md)
-6. [Why a monorepo](docs/why-monorepo.md)
-7. [How transpiling works](docs/how-transpiling-works.md)
-8. [How scoping works](docs/how-scoping-works.md)
-9. [Installing the GraphQL API for WordPress plugin](docs/installing-graphql-api-for-wordpress.md)
+2. [Repo visualization](docs/repo-visualization.md)
+3. [Layer dependency graph](docs/layer-dependency-graph.md)
+4. [Supported PHP features](docs/supported-php-features.md)
+5. [How is the GraphQL server CMS-agnostic](docs/cms-agnosticism.md)
+6. [Why are there so many packages in the repo](docs/splitting-packages.md)
+7. [Why a monorepo](docs/why-monorepo.md)
+8. [How transpiling works](docs/how-transpiling-works.md)
+9. [How scoping works](docs/how-scoping-works.md)
+10. [Installing the GraphQL API for WordPress plugin](docs/installing-graphql-api-for-wordpress.md)
 
 <!-- ## Resources
 
 - [GraphQL API for WordPress demo](https://youtu.be/LnyNyT2RwwI)
 - [Comparing the GraphQL API for WordPress vs WPGraphQL](https://graphql-api.com/blog/graphql-api-vs-wpgraphql-the-fight/)
 - [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/) -->
-
-## Repo visualization
-
-This is the structure of all files and folders in the repo
-
-![Visualization of this repo](./diagram.svg)
 
 ## Standards
 
