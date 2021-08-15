@@ -89,6 +89,21 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         parent::__construct($translationAPI, $feedbackMessageStore, $queryParser);
     }
 
+    public function getUniqueFieldOutputKey(TypeResolverInterface $typeResolver, string $field): string
+    {
+        return $this->getUniqueFieldOutputKeyFromDBKey(
+            $typeResolver->getTypeOutputName(),
+            $field
+        );
+    }
+    /**
+     * @todo IMPLEMENT!
+     */
+    public function getUniqueFieldOutputKeyFromDBKey(string $dbKey, string $field): string
+    {
+        return $this->getFieldOutputKey($field);
+    }
+
     /**
      * Extract field args without using the schema.
      * It is needed to find out which fieldResolver will process a field,
