@@ -16,3 +16,4 @@ jobs:
           excluded_paths: "ignore,.github,Legacy,Wassup"
           root_path: ./layers/
           max_dept: 4
+          commit_message: Updating diagram [skip ci]
