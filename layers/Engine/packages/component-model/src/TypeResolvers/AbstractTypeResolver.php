@@ -1041,7 +1041,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             $schemaErrorFailingFields
                         );
                         foreach ($failingFields as $field) {
-                            $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                            $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($this, $field);
                             $dbItems[(string)$id][$fieldOutputKey] = null;
                         }
                     }
@@ -1249,7 +1249,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $schemaWarnings,
             ) = $this->dissectFieldForSchema($field);
             if ($maybeWarnings = $fieldResolvers[0]->resolveSchemaValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
-                // $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 foreach ($maybeWarnings as $warning) {
                     $schemaWarnings[] = [
                         Tokens::PATH => [$field],
@@ -1277,7 +1276,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             ) = $this->dissectFieldForSchema($field);
             $fieldSchemaDefinition = $fieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
             if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? null) {
-                // $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 $schemaDeprecations[] = [
                     Tokens::PATH => [$field],
                     Tokens::MESSAGE => $fieldSchemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION],

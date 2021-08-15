@@ -258,7 +258,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         if ($orderedFieldOrDirectiveArgNamesEnabled) {
             $orderedFieldOrDirectiveArgNames = array_keys($fieldOrDirectiveArgumentNameTypes);
         }
-        // $fieldOrDirectiveOutputKey = $this->getFieldOutputKey($fieldOrDirective);
         $fieldOrDirectiveArgs = [];
         $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
         $setFailingFieldResponseAsNull = ComponentConfiguration::setFailingFieldResponseAsNull();
@@ -1253,7 +1252,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     ): array {
         // If any casting can't be done, show an error
         if ($failedCastingFieldArgs = $this->getFailedCastingFieldArgs($castedFieldArgs)) {
-            // $fieldOutputKey = $this->getFieldOutputKey($field);
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
             $fieldArgNameSchemaDefinition = $this->getFieldSchemaDefinitionArgs($typeResolver, $field);
