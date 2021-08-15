@@ -15,5 +15,5 @@ jobs:
         with:
           excluded_paths: "ignore,.github,Legacy,Wassup"
           root_path: ./layers/
-          max_depth: 5
+          max_depth: 3
           commit_message: (bot) Updated diagram [skip ci]
