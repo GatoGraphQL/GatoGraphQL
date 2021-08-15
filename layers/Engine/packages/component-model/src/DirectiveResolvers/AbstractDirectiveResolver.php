@@ -831,6 +831,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $setFailingFieldResponseAsNull = ComponentConfiguration::setFailingFieldResponseAsNull();
         if ($setFailingFieldResponseAsNull) {
             $this->setIDsDataFieldsAsNull(
+                $typeResolver,
                 $idsDataFieldsToRemove,
                 $dbItems
             );
