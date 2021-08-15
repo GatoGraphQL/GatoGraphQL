@@ -91,7 +91,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     final public function getUniqueFieldOutputKey(TypeResolverInterface $typeResolver, string $field): string
     {
-        return $this->getUniqueFieldOutputKeyByTypeName(
+        return $this->getUniqueFieldOutputKeyByTypeOutputName(
             $typeResolver->getTypeOutputName(),
             $field
         );
@@ -99,7 +99,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     /**
      * @todo IMPLEMENT!
      */
-    public function getUniqueFieldOutputKeyByTypeName(string $typeOutputName, string $field): string
+    public function getUniqueFieldOutputKeyByTypeOutputName(string $typeOutputName, string $field): string
     {
         return $this->getFieldOutputKey($field);
     }
