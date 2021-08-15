@@ -515,7 +515,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 if ($subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
                     $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponent_typeResolver_class);
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-                    $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($subcomponent_typeResolver, $subcomponent_data_field);
+                    $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $subcomponent_data_field);
                     $ret[$subcomponent_data_field_outputkey] = $subcomponent_typeResolver->getTypeOutputName();
                 }
             }
@@ -525,7 +525,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                     if ($subcomponentTypeResolverClass = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $conditionalDataField)) {
                         $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponentTypeResolverClass);
                         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-                        $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($subcomponent_typeResolver, $conditionalDataField);
+                        $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $conditionalDataField);
                         $ret[$subcomponent_data_field_outputkey] = $subcomponent_typeResolver->getTypeOutputName();
                     }
                 }
@@ -561,10 +561,16 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected function addToDatasetDatabaseKeys(array $module, array &$props, $path, &$ret)
     {
         // Add the current module's dbkeys
-        $dbkeys = $this->getDatabaseKeys($module, $props);
-        foreach ($dbkeys as $field => $dbkey) {
-            $field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByTypeOutputName($dbkey, $field);
-            $ret[implode('.', array_merge($path, [$field_outputkey]))] = $dbkey;
+        if ($typeResolver_class = $this->getTypeResolverClass($module)) {
+            /**
+             * @var TypeResolverInterface
+             */
+            $typeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
+            $dbkeys = $this->getDatabaseKeys($module, $props);
+            foreach ($dbkeys as $field => $dbkey) {
+                $field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
+                $ret[implode('.', array_merge($path, [$field_outputkey]))] = $dbkey;
+            }
         }
 
         // Propagate to all submodules which have no typeResolver
@@ -578,30 +584,24 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
             $this->moduleFilterManager->prepareForPropagation($module, $props);
             foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
-                if ($subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
-                    $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponent_typeResolver_class);
-                    $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($subcomponent_typeResolver, $subcomponent_data_field);
+                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $subcomponent_data_field);
+                // Only modules which do not load data
+                $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) {
+                    return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
+                });
+                foreach ($subcomponent_modules as $subcomponent_module) {
+                    $this->moduleProcessorManager->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                }
+            }
+            foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
+                foreach ($dataFieldTypeResolverOptionsConditionalSubmodules as $conditionalDataField => $subcomponent_modules) {
+                    $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $conditionalDataField);
                     // Only modules which do not load data
                     $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) {
                         return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
                     });
                     foreach ($subcomponent_modules as $subcomponent_module) {
                         $this->moduleProcessorManager->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
-                    }
-                }
-            }
-            foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
-                foreach ($dataFieldTypeResolverOptionsConditionalSubmodules as $conditionalDataField => $subcomponent_modules) {
-                    if ($subcomponentTypeResolverClass = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $conditionalDataField)) {
-                        $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponentTypeResolverClass);
-                        $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($subcomponent_typeResolver, $conditionalDataField);
-                        // Only modules which do not load data
-                        $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) {
-                            return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
-                        });
-                        foreach ($subcomponent_modules as $subcomponent_module) {
-                            $this->moduleProcessorManager->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
-                        }
                     }
                 }
             }
