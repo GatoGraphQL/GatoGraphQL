@@ -77,7 +77,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
         );
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
                 unset($dbItems[(string)$id][$fieldOutputKey]);
             }
         }

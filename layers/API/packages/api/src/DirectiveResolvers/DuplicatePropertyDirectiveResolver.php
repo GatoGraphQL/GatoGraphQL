@@ -78,7 +78,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         $copyTo = $this->directiveArgsForSchema['to'];
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
                 if (!array_key_exists($fieldOutputKey, $dbItems[(string)$id])) {
                     $dbWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],

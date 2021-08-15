@@ -112,7 +112,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         // Get the value from the object
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
 
                 // Validate that the property exists
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
@@ -260,7 +260,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaWarnings,
         array &$schemaDeprecations
     ): void {
-        $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
         $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
         $dbKey = $typeResolver->getTypeOutputName();
         $value = $isValueInDBItems ?
