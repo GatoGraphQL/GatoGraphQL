@@ -16,6 +16,7 @@ use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Constants\Status;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
@@ -156,6 +157,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
             case 'comments':
                 $query = [
+                    'limit' => ComponentConfiguration::getRootCommentListDefaultLimit(),
                     'status' => Status::APPROVED,
                     // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                 ];
