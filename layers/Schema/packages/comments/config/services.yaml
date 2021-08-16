@@ -12,3 +12,6 @@ services:
 
     PoPSchema\Comments\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
+
+    PoPSchema\Comments\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'
