@@ -14,8 +14,8 @@ class ComponentConfiguration
 
     private static ?int $getRootCommentListDefaultLimit = 100;
     private static ?int $getRootCommentListMaxLimit = 10;
-    private static ?int $getCustomPostCommentListDefaultLimit = -1;
-    private static ?int $getCustomPostCommentListMaxLimit = -1;
+    private static ?int $getCustomPostCommentOrCommentResponseListDefaultLimit = -1;
+    private static ?int $getCustomPostCommentOrCommentResponseListMaxLimit = -1;
     private static bool $mustUserBeLoggedInToAddComment = true;
 
     public static function getRootCommentListDefaultLimit(): ?int
@@ -54,11 +54,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getCustomPostCommentListDefaultLimit(): ?int
+    public static function getCustomPostCommentOrCommentResponseListDefaultLimit(): ?int
     {
         // Define properties
-        $envVariable = Environment::CUSTOMPOST_COMMENT_LIST_DEFAULT_LIMIT;
-        $selfProperty = &self::$getCustomPostCommentListDefaultLimit;
+        $envVariable = Environment::CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT;
+        $selfProperty = &self::$getCustomPostCommentOrCommentResponseListDefaultLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
@@ -72,11 +72,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getCustomPostCommentListMaxLimit(): ?int
+    public static function getCustomPostCommentOrCommentResponseListMaxLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::CUSTOMPOST_COMMENT_LIST_MAX_LIMIT;
-        $selfProperty = &self::$getCustomPostCommentListMaxLimit;
+        $selfProperty = &self::$getCustomPostCommentOrCommentResponseListMaxLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 

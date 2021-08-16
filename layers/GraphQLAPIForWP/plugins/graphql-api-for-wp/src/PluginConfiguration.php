@@ -271,9 +271,9 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             ],
             [
                 'class' => CommentsComponentConfiguration::class,
-                'envVariable' => CommentsEnvironment::CUSTOMPOST_COMMENT_LIST_DEFAULT_LIMIT,
+                'envVariable' => CommentsEnvironment::CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
-                'option' => SchemaTypeModuleResolver::OPTION_CUSTOMPOST_COMMENT_LIST_DEFAULT_LIMIT,
+                'option' => SchemaTypeModuleResolver::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => CommentsComponentConfiguration::class,

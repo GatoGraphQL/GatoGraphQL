@@ -62,7 +62,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const OPTION_ADD_SELF_FIELD_TO_SCHEMA = 'add-self-field-to-schema';
     public const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
     public const OPTION_ROOT_COMMENT_LIST_MAX_LIMIT = 'root-comment-list-max-limit';
-    public const OPTION_CUSTOMPOST_COMMENT_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
+    public const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
     public const OPTION_CUSTOMPOST_COMMENT_LIST_MAX_LIMIT = 'custompost-comment-list-max-limit';
 
     /**
@@ -361,7 +361,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     [
                         self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT,
                         self::OPTION_ROOT_COMMENT_LIST_MAX_LIMIT,
-                        self::OPTION_CUSTOMPOST_COMMENT_LIST_DEFAULT_LIMIT,
+                        self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
                         self::OPTION_CUSTOMPOST_COMMENT_LIST_MAX_LIMIT,
                     ]
                 )
@@ -439,7 +439,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_COMMENTS => [
                 self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT => 10,
                 self::OPTION_ROOT_COMMENT_LIST_MAX_LIMIT => -1,
-                self::OPTION_CUSTOMPOST_COMMENT_LIST_DEFAULT_LIMIT => -1,
+                self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT => -1,
                 self::OPTION_CUSTOMPOST_COMMENT_LIST_MAX_LIMIT => -1,
             ],
         ];
@@ -641,7 +641,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::MIN_NUMBER => -1,
             ];
 
-            $option = self::OPTION_CUSTOMPOST_COMMENT_LIST_DEFAULT_LIMIT;
+            $option = self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
