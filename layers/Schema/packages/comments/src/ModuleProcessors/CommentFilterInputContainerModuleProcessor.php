@@ -14,6 +14,8 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
 
     public const MODULE_FILTERINPUTCONTAINER_COMMENTS = 'filterinputcontainer-comments';
     public const MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT = 'filterinputcontainer-commentcount';
+    public const MODULE_FILTERINPUTCONTAINER_RESPONSES = 'filterinputcontainer-responses';
+    public const MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT = 'filterinputcontainer-responsecount';
 
     public function getModulesToProcess(): array
     {
@@ -33,12 +35,22 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS],
             [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
         ];
+        $responseFilterInputModules = [
+            ...$this->getIDFilterInputModules(),
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
+            [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
+        ];
         return match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_COMMENTS => [
                 ...$commentFilterInputModules,
                 ...$this->getPaginationFilterInputModules(),
             ],
             self::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT => $commentFilterInputModules,
+            self::MODULE_FILTERINPUTCONTAINER_RESPONSES => [
+                ...$responseFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputModules,
             default => [],
         };
     }
