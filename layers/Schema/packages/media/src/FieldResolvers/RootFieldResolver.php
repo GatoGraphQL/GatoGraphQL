@@ -56,16 +56,18 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
-            'mediaItems',
             'mediaItem',
+            'mediaItems',
+            'mediaItemCount',
         ];
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
-            'mediaItems' => $this->translationAPI->__('Get the media items', 'media'),
             'mediaItem' => $this->translationAPI->__('Get a media item', 'media'),
+            'mediaItems' => $this->translationAPI->__('Get the media items', 'media'),
+            'mediaItemCount' => $this->translationAPI->__('Number of media items', 'media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -73,8 +75,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'mediaItems' => SchemaDefinition::TYPE_ID,
             'mediaItem' => SchemaDefinition::TYPE_ID,
+            'mediaItems' => SchemaDefinition::TYPE_ID,
+            'mediaItemCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -83,6 +86,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'mediaItems' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            'mediaItemCount' => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
     }
@@ -92,6 +96,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
             case 'mediaItems':
+            case 'mediaItemCount':
                 // Assign a default value to "mimeTypes"
                 $filterInputName = $this->getFilterInputName([
                     FilterInputModuleProcessor::class,
@@ -125,6 +130,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'mediaItems' => [MediaFilterInputContainerModuleProcessor::class, MediaFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MEDIAITEMS],
+            'mediaItemCount' => [MediaFilterInputContainerModuleProcessor::class, MediaFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MEDIAITEMCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
@@ -155,7 +161,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                     ],
                     $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
                 );
-                return $this->mediaTypeAPI->getMediaElements($query, $options);
+                return $this->mediaTypeAPI->getMediaItems($query, $options);
+            case 'mediaItemCount':
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+                return $this->mediaTypeAPI->getMediaItemCount([], $options);
             case 'mediaItem':
                 $query = [
                     'include' => [$fieldArgs['id']],
@@ -163,7 +172,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
-                $mediaItems = $this->mediaTypeAPI->getMediaElements($query, $options);
+                $mediaItems = $this->mediaTypeAPI->getMediaItems($query, $options);
                 return count($mediaItems) > 0 ? $mediaItems[0] : null;
         }
 

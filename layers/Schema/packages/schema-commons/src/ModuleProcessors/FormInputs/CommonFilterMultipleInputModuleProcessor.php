@@ -35,17 +35,13 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
         return $filterInputs[$module[1]] ?? null;
     }
 
-    public function getInputOptions(array $module): array
+    public function getInputSubnames(array $module): array
     {
-        $options = parent::getInputOptions($module);
-
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_DATES:
-                $options['subnames'] = ['from', 'to'];
-                break;
+                return ['from', 'to'];
         }
-
-        return $options;
+        return [];
     }
 
     public function getName(array $module): string
@@ -64,7 +60,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_DATES:
                 $name = $this->getName($module);
-                $subnames = $this->getInputOptions($module)['subnames'];
+                $subnames = $this->getInputSubnames($module);
                 $dateFormat = 'Y-m-d';
                 // Save documentation as template, and remove it
                 $schemaDefinition = $schemaDefinitionItems[0];

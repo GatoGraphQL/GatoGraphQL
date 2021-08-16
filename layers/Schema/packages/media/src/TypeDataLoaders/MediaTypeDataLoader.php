@@ -33,7 +33,7 @@ class MediaTypeDataLoader extends AbstractTypeQueryableDataLoader
         $query = array(
             'include' => $ids,
         );
-        return $this->mediaTypeAPI->getMediaElements($query);
+        return $this->mediaTypeAPI->getMediaItems($query);
     }
 
     public function getDataFromIdsQuery(array $ids): array
@@ -50,7 +50,7 @@ class MediaTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = [])
     {
-        return $this->mediaTypeAPI->getMediaElements($query, $options);
+        return $this->mediaTypeAPI->getMediaItems($query, $options);
     }
 
     public function executeQueryIds($query): array

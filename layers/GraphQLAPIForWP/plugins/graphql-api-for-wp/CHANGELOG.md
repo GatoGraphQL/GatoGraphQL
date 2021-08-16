@@ -101,7 +101,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `PostCategory.urlPath: String!`
   - `User.urlPath: String!`
 - Added field arguments to `Root.mediaItems` for filtering results
-- Added field `Root.imageSizeNames: [String]!` to retrieve the list of the available intermediate image size names
+- Added media field:
+  - `Root.imageSizeNames: [String]!` to retrieve the list of the available intermediate image size names
+  - `Root.mediaItemCount: Int!` to count the number of media items
 - Added fields for media items:
   - `Media.srcSet: String`
   - `Media.url: String!`

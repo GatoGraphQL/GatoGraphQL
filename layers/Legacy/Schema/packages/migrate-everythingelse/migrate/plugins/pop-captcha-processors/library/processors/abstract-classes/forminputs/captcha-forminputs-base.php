@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_CaptchaFormInputsBase extends PoP_Module_Pro
         parent::initModelProps($module, $props);
     }
 
-    public function getInputSubnames(array $module)
+    public function getInputSubnames(array $module): array
     {
         return array('input', 'encoded', 'random');
     }

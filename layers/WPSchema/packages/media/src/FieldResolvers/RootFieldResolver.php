@@ -121,7 +121,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
-                $mediaItems = $this->mediaTypeAPI->getMediaElements($query, $options);
+                $mediaItems = $this->mediaTypeAPI->getMediaItems($query, $options);
                 return count($mediaItems) > 0 ? $mediaItems[0] : null;
             case 'imageSizeNames':
                 return \get_intermediate_image_sizes();

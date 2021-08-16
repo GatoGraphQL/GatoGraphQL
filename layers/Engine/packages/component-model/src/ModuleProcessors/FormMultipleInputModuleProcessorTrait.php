@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
 use PoP\Engine\FormInputs\MultipleInputFormInput;
 
 trait FormMultipleInputModuleProcessorTrait
 {
-    public function getInputSubnames(array $module)
+    /**
+     * @return string[]
+     */
+    public function getInputSubnames(array $module): array
     {
-        return array();
+        return [];
     }
 
     public function getInputOptions(array $module): array

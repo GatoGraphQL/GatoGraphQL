@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
         return $ret;
     }
 
-    public function getInputSubnames(array $module)
+    public function getInputSubnames(array $module): array
     {
         if ($this->useTime($module)) {
             return array('from', 'to', 'fromtime', 'totime', 'readable');

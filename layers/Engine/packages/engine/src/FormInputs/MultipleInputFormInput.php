@@ -27,9 +27,9 @@ class MultipleInputFormInput extends MultipleSelectFormInput
         $name = $this->getName();
         $value = array();
         foreach ($this->getSubnames() as $subname) {
-            $fullsubname = $formInputHelperService->getMultipleInputName($name, $subname);
-            if (isset($source[$fullsubname])) {
-                $value[$subname] = $source[$fullsubname];
+            $fullSubname = $formInputHelperService->getMultipleInputName($name, $subname);
+            if (isset($source[$fullSubname])) {
+                $value[$subname] = $source[$fullSubname];
             }
         }
 
@@ -38,5 +38,20 @@ class MultipleInputFormInput extends MultipleSelectFormInput
             return $value;
         }
         return null;
+    }
+
+    public function isInputSetInSource(?array $source = null): bool
+    {
+        $source = $this->getSource($source);
+
+        $formInputHelperService = FormInputHelperServiceFacade::getInstance();
+        $name = $this->getName();
+        foreach ($this->getSubnames() as $subname) {
+            $fullSubname = $formInputHelperService->getMultipleInputName($name, $subname);
+            if (array_key_exists($fullSubname, $source)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

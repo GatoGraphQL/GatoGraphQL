@@ -37,8 +37,12 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_ORDER:
-                $query['orderby'] = $value['orderby'];
-                $query['order'] = $value['order'];
+                if (isset($value['orderby'])) {
+                    $query['orderby'] = $value['orderby'];
+                }
+                if (isset($value['order'])) {
+                    $query['order'] = $value['order'];
+                }
                 break;
             case self::FILTERINPUT_LIMIT:
                 $query['limit'] = $value;
@@ -50,8 +54,12 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 $query['search'] = $value;
                 break;
             case self::FILTERINPUT_DATES:
-                $query['date-from'] = $value['from'];
-                $query['date-to'] = $value['to'];
+                if (isset($value['from'])) {
+                    $query['date-from'] = $value['from'];
+                }
+                if (isset($value['to'])) {
+                    $query['date-to'] = $value['to'];
+                }
                 break;
             case self::FILTERINPUT_INCLUDE:
                 $query['include'] = $value;
