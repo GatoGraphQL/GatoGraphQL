@@ -22,7 +22,7 @@ use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
-class CustomPostFieldResolver extends AbstractQueryableFieldResolver
+class RootFieldResolver extends AbstractQueryableFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,
