@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 
 abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
@@ -27,9 +28,31 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSch
     protected function getFieldArgumentsSchemaDefinitions(string $fieldName): array
     {
         if ($filterDataloadingModule = $this->getFieldDataFilteringModule($fieldName)) {
-            return $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
+            $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
+            // In the FilterInputModule we do not define default values, since different fields
+            // using the same FilterInput may need a different default value.
+            // Then, allow to override these values now.
+            foreach ($this->getFieldDataFilteringDefaultValues($$fieldName) as $filterInputName => $defaultValue) {
+                foreach ($schemaFieldArgs as &$schemaFieldArg) {
+                    if ($schemaFieldArg[SchemaDefinition::ARGNAME_NAME] !== $filterInputName) {
+                        continue;
+                    }
+                    $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $defaultValue;
+                    break;
+                }
+            }
+            return $schemaFieldArgs;
         }
 
+        return [];
+    }
+
+    /**
+     * Provide default values for modules in the FilterInputContainer
+     * @return array<string,mixed> A list of filterInputName as key, and its value
+     */
+    protected function getFieldDataFilteringDefaultValues(string $fieldName): array
+    {
         return [];
     }
 }
