@@ -32,15 +32,10 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
         ];
-        $paginationFilterInputModules = [
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
-        ];
         return match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_COMMENTS => [
                 ...$commentFilterInputModules,
-                ...$paginationFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
             ],
             self::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT => $commentFilterInputModules,
             default => [],
