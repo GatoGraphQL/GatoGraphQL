@@ -12,7 +12,83 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
+    private static ?int $getRootCommentListDefaultLimit = -1;
+    private static ?int $getRootCommentListMaxLimit = -1;
+    private static ?int $getCustomPostCommentListDefaultLimit = -1;
+    private static ?int $getCustomPostCommentListMaxLimit = -1;
     private static bool $mustUserBeLoggedInToAddComment = true;
+
+    public static function getRootCommentListDefaultLimit(): ?int
+    {
+        // Define properties
+        $envVariable = Environment::ROOT_COMMENT_LIST_DEFAULT_LIMIT;
+        $selfProperty = &self::$getRootCommentListDefaultLimit;
+        $defaultValue = -1;
+        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function getRootCommentListMaxLimit(): ?int
+    {
+        // Define properties
+        $envVariable = Environment::ROOT_COMMENT_LIST_MAX_LIMIT;
+        $selfProperty = &self::$getRootCommentListMaxLimit;
+        $defaultValue = -1; // Unlimited
+        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function getCustomPostCommentListDefaultLimit(): ?int
+    {
+        // Define properties
+        $envVariable = Environment::CUSTOMPOST_COMMENT_LIST_DEFAULT_LIMIT;
+        $selfProperty = &self::$getCustomPostCommentListDefaultLimit;
+        $defaultValue = -1;
+        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function getCustomPostCommentListMaxLimit(): ?int
+    {
+        // Define properties
+        $envVariable = Environment::CUSTOMPOST_COMMENT_LIST_MAX_LIMIT;
+        $selfProperty = &self::$getCustomPostCommentListMaxLimit;
+        $defaultValue = -1; // Unlimited
+        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
 
     public static function mustUserBeLoggedInToAddComment(): bool
     {
