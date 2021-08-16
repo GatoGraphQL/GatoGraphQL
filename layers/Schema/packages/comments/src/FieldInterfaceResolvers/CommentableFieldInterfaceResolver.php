@@ -8,6 +8,7 @@ use PoP\ComponentModel\FieldInterfaceResolvers\AbstractQueryableSchemaFieldInter
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
+use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
@@ -102,7 +103,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
                     // By default retrieve the top level comments (with ID => 0)
                     $parentIDFilterInputName => 0,
                     // Order by descending date
-                    $orderFilterInputName => $orderBy . '|' . $order,
+                    $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
                 ];
         }
         return parent::getFieldDataFilteringDefaultValues($fieldName);
