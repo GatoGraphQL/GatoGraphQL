@@ -37,32 +37,25 @@ class CustomPostFilterInputContainerModuleProcessor extends AbstractCustomPostFi
 
     public function getFilterInputModules(array $module): array
     {
+        $customPostFilterInputModules = [
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
+            [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
+        ];
         $filterInputModules = match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST,
             self::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST,
             self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST,
-            self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST =>
-                [
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
-                    [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST => [
+                    ...$customPostFilterInputModules,
+                    ...$this->getPaginationFilterInputModules(),
                 ],
                 self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT,
                 self::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT,
                 self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT,
-                self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT =>
-                [
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-                    [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
-                ],
+                self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT => $customPostFilterInputModules,
                 default => [],
         };
         // Fields "customPosts" and "customPostCount" also have the "postTypes" filter

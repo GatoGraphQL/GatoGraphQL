@@ -29,24 +29,20 @@ class UserFilterInputContainerModuleProcessor extends AbstractFilterInputContain
 
     public function getFilterInputModules(array $module): array
     {
+        $userFilterInputModules = [
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_NAME],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
+        ];
         $filterInputModules = match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_USERS,
             self::MODULE_FILTERINPUTCONTAINER_ADMINUSERS => [
-                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_NAME],
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
+                ...$userFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
             ],
             self::MODULE_FILTERINPUTCONTAINER_USERCOUNT,
-            self::MODULE_FILTERINPUTCONTAINER_ADMINUSERCOUNT => [
-                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_NAME],
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
-            ],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINUSERCOUNT => $userFilterInputModules,
             default => [],
         };
         // The "email" is a restricted arg
