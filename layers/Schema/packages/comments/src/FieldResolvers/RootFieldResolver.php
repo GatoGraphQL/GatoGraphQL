@@ -22,6 +22,7 @@ use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcess
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
@@ -96,7 +97,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
                 $order = 'DESC';
                 return [
-                    $orderFilterInputName => $orderBy . '|' . $order,
+                    $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
                 ];
         }
         return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
