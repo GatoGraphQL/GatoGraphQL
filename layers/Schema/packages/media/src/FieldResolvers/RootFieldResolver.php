@@ -161,10 +161,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                     ],
                     $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
                 );
-                return $this->mediaTypeAPI->getMediaElements($query, $options);
+                return $this->mediaTypeAPI->getMediaItems($query, $options);
             case 'mediaItemCount':
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-                return $this->mediaTypeAPI->getMediaElementCount([], $options);
+                return $this->mediaTypeAPI->getMediaItemCount([], $options);
             case 'mediaItem':
                 $query = [
                     'include' => [$fieldArgs['id']],
@@ -172,7 +172,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
-                $mediaItems = $this->mediaTypeAPI->getMediaElements($query, $options);
+                $mediaItems = $this->mediaTypeAPI->getMediaItems($query, $options);
                 return count($mediaItems) > 0 ? $mediaItems[0] : null;
         }
 

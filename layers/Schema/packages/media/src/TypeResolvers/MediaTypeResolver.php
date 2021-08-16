@@ -51,7 +51,7 @@ class MediaTypeResolver extends AbstractTypeResolver
     public function getID(object $resultItem): string | int | null
     {
         $media = $resultItem;
-        return $this->mediaTypeAPI->getMediaElementId($media);
+        return $this->mediaTypeAPI->getMediaItemId($media);
     }
 
     public function getTypeDataLoaderClass(): string

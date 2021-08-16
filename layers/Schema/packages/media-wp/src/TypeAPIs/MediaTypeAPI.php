@@ -87,13 +87,13 @@ class MediaTypeAPI implements MediaTypeAPIInterface
         ];
     }
 
-    public function getMediaElements(array $query, array $options = []): array
+    public function getMediaItems(array $query, array $options = []): array
     {
         // Convert the parameters
         $query = $this->convertMediaQuery($query, $options);
         return get_posts($query);
     }
-    public function getMediaElementCount(array $query, array $options = []): int
+    public function getMediaItemCount(array $query, array $options = []): int
     {
         // Convert parameters
         $options['return-type'] = ReturnTypes::IDS;
@@ -205,7 +205,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
         );
     }
 
-    public function getMediaElementId(object $media): string | int
+    public function getMediaItemId(object $media): string | int
     {
         return $media->ID;
     }
