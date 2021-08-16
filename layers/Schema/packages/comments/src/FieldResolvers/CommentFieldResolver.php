@@ -23,6 +23,7 @@ use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class CommentFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -178,9 +179,6 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             case 'responses':
                 $query = [
                     'status' => Status::APPROVED,
-                    // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
-                    'order' =>  'ASC',
-                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
                     'parent-id' => $typeResolver->getID($comment),
                 ];
                 $options = array_merge(
@@ -194,9 +192,6 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             case 'responseCount':
                 $query = [
                     'status' => Status::APPROVED,
-                    // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
-                    'order' =>  'ASC',
-                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
                     'parent-id' => $typeResolver->getID($comment),
                 ];
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
@@ -225,6 +220,21 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                         ],
                     ]
                 );
+            case 'responses':
+            case 'responseCount':
+                $orderFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
+                ]);
+                foreach ($schemaFieldArgs as &$schemaFieldArg) {
+                    if ($schemaFieldArg['name'] === $orderFilterInputName) {
+                        // Order by descending date
+                        $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                        $order = 'DESC';
+                        $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $orderBy . '|' . $order;
+                    }
+                }
+                return $schemaFieldArgs;
         }
 
         return $schemaFieldArgs;

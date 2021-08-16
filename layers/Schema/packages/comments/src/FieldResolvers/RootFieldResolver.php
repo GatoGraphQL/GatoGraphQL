@@ -88,18 +88,24 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'comments':
             case 'commentCount':
-                // By default retrieve the top level comments
-                $filterInputName = $this->getFilterInputName([
+                $parentIDFilterInputName = $this->getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
                 ]);
+                $orderFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
+                ]);
                 foreach ($schemaFieldArgs as &$schemaFieldArg) {
-                    if ($schemaFieldArg['name'] !== $filterInputName) {
-                        continue;
+                    if ($schemaFieldArg['name'] === $parentIDFilterInputName) {
+                        // By default retrieve the top level comments (with ID => 0)
+                        $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = 0;
+                    } elseif ($schemaFieldArg['name'] === $orderFilterInputName) {
+                        // Order by descending date
+                        $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                        $order = 'DESC';
+                        $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $orderBy . '|' . $order;
                     }
-                    // ID = 0 => top level comment
-                    $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = 0;
-                    break;
                 }
                 return $schemaFieldArgs;
         }
@@ -152,9 +158,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 $query = [
                     'status' => Status::APPROVED,
                     // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
-                    // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
-                    'order' =>  'ASC',
-                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
                 ];
                 $options = array_merge(
                     [
