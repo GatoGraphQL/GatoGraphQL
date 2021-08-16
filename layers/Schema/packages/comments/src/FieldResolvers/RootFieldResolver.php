@@ -5,24 +5,25 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\Constants\Status;
-use PoPSchema\Comments\FieldInterfaceResolvers\CommentableFieldInterfaceResolver;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
-class CustomPostFieldResolver extends AbstractQueryableFieldResolver
+class RootFieldResolver extends AbstractQueryableFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -48,40 +49,77 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
     public function getClassesToAttachTo(): array
     {
         return [
-            IsCustomPostFieldInterfaceResolver::class,
-        ];
-    }
-
-    public function getImplementedFieldInterfaceResolverClasses(): array
-    {
-        return [
-            CommentableFieldInterfaceResolver::class,
+            RootTypeResolver::class,
         ];
     }
 
     public function getFieldNamesToResolve(): array
     {
         return [
-            'areCommentsOpen',
             'commentCount',
-            'hasComments',
             'comments',
         ];
     }
 
-    /**
-     * By returning `null`, the schema definition comes from the interface
-     */
-    public function getSchemaDefinitionResolver(TypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
-        return null;
+        return match ($fieldName) {
+            'comments' => SchemaDefinition::TYPE_ID,
+            'commentCount' => SchemaDefinition::TYPE_INT,
+            default => parent::getSchemaFieldType($typeResolver, $fieldName),
+        };
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match ($fieldName) {
+            'commentCount'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'comments'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
+    }
+
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        switch ($fieldName) {
+            case 'comments':
+            case 'commentCount':
+                // By default retrieve the top level comments
+                $filterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
+                ]);
+                foreach ($schemaFieldArgs as &$schemaFieldArg) {
+                    if ($schemaFieldArg['name'] !== $filterInputName) {
+                        continue;
+                    }
+                    // ID = 0 => top level comment
+                    $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = 0;
+                    break;
+                }
+                return $schemaFieldArgs;
+        }
+        return $schemaFieldArgs;
+    }
+
+    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    {
+        return match ($fieldName) {
+            'commentCount' => $this->translationAPI->__('Number of comments on the site', 'pop-comments'),
+            'comments' => $this->translationAPI->__('Comments on the site', 'pop-comments'),
+            default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
+        };
     }
 
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'comments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTS],
-            'commentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT],
+            'comments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS],
+            'commentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
@@ -101,20 +139,11 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $post = $resultItem;
         switch ($fieldName) {
-            case 'areCommentsOpen':
-                return $this->commentTypeAPI->areCommentsOpen($typeResolver->getID($post));
-
-            case 'hasComments':
-                return $typeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
-
             case 'commentCount':
                 $query = [
                     'status' => Status::APPROVED,
                     // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
-                    'customPostID' => $typeResolver->getID($post),
-                    'parent-id' => 0, // Bring 1st layer of comments, those added to the custom post
                 ];
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $this->commentTypeAPI->getCommentCount($query, $options);
@@ -123,11 +152,9 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                 $query = [
                     'status' => Status::APPROVED,
                     // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
-                    'customPostID' => $typeResolver->getID($post),
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
                     'order' =>  'ASC',
                     'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
-                    'parent-id' => 0, // Bring 1st layer of comments, those added to the custom post
                 ];
                 $options = array_merge(
                     [

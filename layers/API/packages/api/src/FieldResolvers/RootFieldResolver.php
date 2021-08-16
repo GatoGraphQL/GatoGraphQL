@@ -35,27 +35,26 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
-        $types = [
+        return match ($fieldName) {
             'fullSchema' => SchemaDefinition::TYPE_OBJECT,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+            default => parent::getSchemaFieldType($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        switch ($fieldName) {
-            case 'fullSchema':
-                return SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return match ($fieldName) {
+            'fullSchema' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $descriptions = [
-            'fullSchema' => $this->translationAPI->__('The whole API schema, exposing what fields can be queried', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return match ($fieldName) {
+            'fullSchema' => $this->translationAPI->__('The whole API schema, exposing what fields can be queried', 'api'),
+            default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
@@ -73,14 +72,14 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'deep',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Make a deep introspection of the fields, for all nested objects', ''),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Make a deep introspection of the fields, for all nested objects', 'api'),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'shape',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $this->translationAPI->__('How to shape the schema output: \'%s\', in which case all types are listed together, or \'%s\', in which the types are listed following where they appear in the graph', ''),
+                                $this->translationAPI->__('How to shape the schema output: \'%s\', in which case all types are listed together, or \'%s\', in which the types are listed following where they appear in the graph', 'api'),
                                 SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
                                 SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED
                             ),
@@ -93,14 +92,14 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'compressed',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Output each resolver\'s schema data only once to compress the output. Valid only when field \'deep\' is `true`', ''),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Output each resolver\'s schema data only once to compress the output. Valid only when field \'deep\' is `true`', 'api'),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'useTypeName',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
                             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $this->translationAPI->__('Replace type \'%s\' with the actual type name (such as \'Post\')', ''),
+                                $this->translationAPI->__('Replace type \'%s\' with the actual type name (such as \'Post\')', 'api'),
                                 SchemaDefinition::TYPE_ID
                             ),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => true,

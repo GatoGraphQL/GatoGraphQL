@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
-use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
@@ -47,14 +45,6 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
                 'module' => $this->getFieldDataFilteringModule($typeResolver, $fieldName),
             ],
         ];
-    }
-
-    protected function getFilterInputName(array $filterInput): string
-    {
-        $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
-        /** @var FormComponentModuleProcessorInterface */
-        $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
-        return $filterInputProcessor->getName($filterInput);
     }
 
     public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool

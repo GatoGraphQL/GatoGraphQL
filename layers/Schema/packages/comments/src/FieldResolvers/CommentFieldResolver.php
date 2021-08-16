@@ -181,7 +181,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
                     'order' =>  'ASC',
                     'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
-                    'parentID' => $typeResolver->getID($comment),
+                    'parent-id' => $typeResolver->getID($comment),
                 ];
                 $options = array_merge(
                     [
@@ -197,7 +197,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
                     'order' =>  'ASC',
                     'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
-                    'parentID' => $typeResolver->getID($comment),
+                    'parent-id' => $typeResolver->getID($comment),
                 ];
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $this->commentTypeAPI->getCommentCount($query, $options);
@@ -233,8 +233,8 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'responses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS],
-            'responseCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
+            'responses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSES],
+            'responseCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }

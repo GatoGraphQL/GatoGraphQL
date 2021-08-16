@@ -86,11 +86,27 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             $query['post_id'] = $query['customPostID'];
             unset($query['customPostID']);
         }
+        if (isset($query['customPostIDs'])) {
+            $query['post__in'] = $query['customPostIDs'];
+            unset($query['customPostIDs']);
+        }
+        if (isset($query['exclude-customPostIDs'])) {
+            $query['post__not_in'] = $query['customPostIDs'];
+            unset($query['customPostIDs']);
+        }
         // Comment parent ID
         // Pass "0" to retrieve 1st layer of comments added to the post
-        if (isset($query['parentID'])) {
-            $query['parent'] = $query['parentID'];
-            unset($query['parentID']);
+        if (isset($query['parent-id'])) {
+            $query['parent'] = $query['parent-id'];
+            unset($query['parent-id']);
+        }
+        if (isset($query['parent-ids'])) {
+            $query['parent__in'] = $query['parent-ids'];
+            unset($query['parent-ids']);
+        }
+        if (isset($query['exclude-parent-ids'])) {
+            $query['parent__not_in'] = $query['exclude-parent-ids'];
+            unset($query['exclude-parent-ids']);
         }
 
         if (isset($query['order'])) {
