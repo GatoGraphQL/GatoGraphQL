@@ -35,10 +35,10 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
-        $types = [
+        return match ($fieldName) {
             'fullSchema' => SchemaDefinition::TYPE_OBJECT,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+            default => parent::getSchemaFieldType($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
