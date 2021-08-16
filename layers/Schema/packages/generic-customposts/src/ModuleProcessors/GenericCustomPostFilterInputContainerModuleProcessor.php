@@ -30,42 +30,32 @@ class GenericCustomPostFilterInputContainerModuleProcessor extends AbstractCusto
 
     public function getFilterInputModules(array $module): array
     {
-        $filterInputModules = match ($module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST,
-            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST
-                => [
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
-                    [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
-                    [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_GENERICPOSTTYPES],
+        $genericCustomPostFilterInputModules = [
+            ...$this->getIDFilterInputModules(),
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
+            [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_GENERICPOSTTYPES],
+        ];
+        $adminGenericCustomPostFilterInputModules = [
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
+        ];
+        return match ($module[1]) {
+            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST=> [
+                ...$genericCustomPostFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST => [
+                    ...$genericCustomPostFilterInputModules,
+                    ...$adminGenericCustomPostFilterInputModules,
+                    ...$this->getPaginationFilterInputModules(),
                 ],
-            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT,
-            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT =>
-                [
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-                    [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
-                    [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_GENERICPOSTTYPES],
-                ],
-                default => [],
+            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT => $genericCustomPostFilterInputModules,
+            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT => [
+                ...$genericCustomPostFilterInputModules,
+                ...$adminGenericCustomPostFilterInputModules,
+            ],
+            default => [],
         };
-        // "Admin" fields also have the "status" filter
-        if (
-            in_array($module[1], [
-                self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST,
-                self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT,
-            ])
-        ) {
-            $filterInputModules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
-        }
-        return $filterInputModules;
     }
 
     /**

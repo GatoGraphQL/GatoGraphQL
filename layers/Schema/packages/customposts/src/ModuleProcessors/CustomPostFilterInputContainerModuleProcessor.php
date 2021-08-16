@@ -37,55 +37,54 @@ class CustomPostFilterInputContainerModuleProcessor extends AbstractCustomPostFi
 
     public function getFilterInputModules(array $module): array
     {
-        $filterInputModules = match ($module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST,
-            self::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST,
-            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST,
-            self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST =>
-                [
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
-                    [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
-                ],
-                self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT,
-                self::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT,
-                self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT,
-                self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT =>
-                [
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-                    [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
-                ],
-                default => [],
+        $customPostFilterInputModules = [
+            ...$this->getIDFilterInputModules(),
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
+            [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
+        ];
+        $unionCustomPostFilterInputModules = [
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES],
+        ];
+        $adminCustomPostFilterInputModules = [
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
+        ];
+        return match ($module[1]) {
+            self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST => [
+                ...$customPostFilterInputModules,
+                ...$unionCustomPostFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST => [
+                ...$customPostFilterInputModules,
+                ...$unionCustomPostFilterInputModules,
+                ...$adminCustomPostFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST => [
+                ...$customPostFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST => [
+                ...$customPostFilterInputModules,
+                ...$adminCustomPostFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT => [
+                ...$customPostFilterInputModules,
+                ...$unionCustomPostFilterInputModules,
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT => [
+                ...$customPostFilterInputModules,
+                ...$adminCustomPostFilterInputModules,
+                ...$unionCustomPostFilterInputModules,
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT => $customPostFilterInputModules,
+            self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT => [
+                ...$customPostFilterInputModules,
+                ...$adminCustomPostFilterInputModules,
+            ],
+            default => [],
         };
-        // Fields "customPosts" and "customPostCount" also have the "postTypes" filter
-        if (
-            in_array($module[1], [
-                self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST,
-                self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT,
-            ])
-        ) {
-            $filterInputModules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES];
-        }
-        // "Admin" fields also have the "status" filter
-        if (
-            in_array($module[1], [
-                self::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST,
-                self::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT,
-                self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST,
-                self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT,
-            ])
-        ) {
-            $filterInputModules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
-        }
-        return $filterInputModules;
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\ModuleProcessors;
 
 use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
 {
@@ -39,6 +40,30 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
     {
         return [
             self::HOOK_FILTER_INPUTS,
+        ];
+    }
+
+    /**
+     * @return array<array<mixed>>
+     */
+    protected function getPaginationFilterInputModules(): array
+    {
+        return [
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
+        ];
+    }
+
+    /**
+     * @return array<array<mixed>>
+     */
+    protected function getIDFilterInputModules(): array
+    {
+        return [
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
         ];
     }
 }

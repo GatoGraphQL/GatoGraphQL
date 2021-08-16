@@ -30,34 +30,28 @@ abstract class AbstractPostFilterInputContainerModuleProcessor extends AbstractC
 
     public function getFilterInputModules(array $module): array
     {
-        $postListModules = [
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
-            [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
-        ];
-        $postCountModules = [
+        $postFilterInputModules = [
+            ...$this->getIDFilterInputModules(),
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
             [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
         ];
-        $statusModule = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
+        $statusFilterInputModules = [
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
+        ];
         return match ($module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_POSTS => $postListModules,
-            self::MODULE_FILTERINPUTCONTAINER_POSTCOUNT => $postCountModules,
+            self::MODULE_FILTERINPUTCONTAINER_POSTS => [
+                ...$postFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_POSTCOUNT => $postFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTS => [
-                ...$postListModules,
-                $statusModule,
+                ...$postFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+                ...$statusFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT => [
-                ...$postCountModules,
-                $statusModule,
+                ...$postFilterInputModules,
+                ...$statusFilterInputModules,
             ],
             default => [],
         };
