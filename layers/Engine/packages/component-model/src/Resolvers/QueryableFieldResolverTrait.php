@@ -8,6 +8,8 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
+use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 
 trait QueryableFieldResolverTrait
 {
@@ -27,5 +29,13 @@ trait QueryableFieldResolverTrait
                 $filterqueryargs_modules
             )
         );
+    }
+
+    protected function getFilterInputName(array $filterInput): string
+    {
+        $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
+        /** @var FormComponentModuleProcessorInterface */
+        $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
+        return $filterInputProcessor->getName($filterInput);
     }
 }
