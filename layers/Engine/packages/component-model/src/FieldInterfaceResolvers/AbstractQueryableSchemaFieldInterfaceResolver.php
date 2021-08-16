@@ -32,7 +32,7 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSch
             // In the FilterInputModule we do not define default values, since different fields
             // using the same FilterInput may need a different default value.
             // Then, allow to override these values now.
-            foreach ($this->getFieldDataFilteringDefaultValues($$fieldName) as $filterInputName => $defaultValue) {
+            foreach ($this->getFieldDataFilteringDefaultValues($fieldName) as $filterInputName => $defaultValue) {
                 foreach ($schemaFieldArgs as &$schemaFieldArg) {
                     if ($schemaFieldArg[SchemaDefinition::ARGNAME_NAME] !== $filterInputName) {
                         continue;
