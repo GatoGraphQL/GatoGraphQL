@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver
@@ -23,7 +24,11 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
     protected function getFieldArgumentsSchemaDefinitions(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName)) {
-            return $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
+            $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
+            return $this->getSchemaFieldArgsWithFilterInputDefaultValues(
+                $schemaFieldArgs,
+                $this->getFieldDataFilteringDefaultValues($typeResolver, $fieldName)
+            );
         }
 
         return [];
@@ -32,6 +37,15 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return null;
+    }
+
+    /**
+     * Provide default values for modules in the FilterInputContainer
+     * @return array<string,mixed> A list of filterInputName as key, and its value
+     */
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        return [];
     }
 
     /**

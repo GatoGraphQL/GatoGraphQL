@@ -93,23 +93,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
-            case 'mediaItems':
-            case 'mediaItemCount':
-                // Assign a default value to "mimeTypes"
-                $filterInputName = $this->getFilterInputName([
-                    FilterInputModuleProcessor::class,
-                    FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES
-                ]);
-                foreach ($schemaFieldArgs as &$schemaFieldArg) {
-                    if ($schemaFieldArg['name'] !== $filterInputName) {
-                        continue;
-                    }
-                    $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = ['image'];
-                    break;
-                }
-                return $schemaFieldArgs;
             case 'mediaItem':
                 return [
                     [
@@ -133,6 +117,23 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             'mediaItemCount' => [MediaFilterInputContainerModuleProcessor::class, MediaFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MEDIAITEMCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
+    }
+
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'mediaItems':
+            case 'mediaItemCount':
+                // Assign a default value to "mimeTypes"
+                $mimeTypeFilterInputName = $this->getFilterInputName([
+                    FilterInputModuleProcessor::class,
+                    FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES
+                ]);
+                return [
+                    $mimeTypeFilterInputName => ['image'],
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
     }
 
     /**
