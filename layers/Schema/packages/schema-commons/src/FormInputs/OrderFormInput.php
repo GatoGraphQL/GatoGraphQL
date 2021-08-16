@@ -8,11 +8,13 @@ use PoP\Engine\FormInputs\SelectFormInput;
 
 class OrderFormInput extends SelectFormInput
 {
+    public const SEPARATOR = '|';
+
     public function getValue(?array $source = null): mixed
     {
         if ($value = parent::getValue($source)) {
             // There must be exactly 2 elements: orderby|order
-            $elems = explode('|', $value);
+            $elems = explode(self::SEPARATOR, $value);
             if (count($elems) >= 2) {
                 return array('orderby' => $elems[0], 'order' => $elems[1]);
             }
