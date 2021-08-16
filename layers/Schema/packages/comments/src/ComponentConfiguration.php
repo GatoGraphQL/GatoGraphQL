@@ -13,9 +13,8 @@ class ComponentConfiguration
     use ComponentConfigurationTrait;
 
     private static ?int $getRootCommentListDefaultLimit = 100;
-    private static ?int $getRootCommentListMaxLimit = 10;
     private static ?int $getCustomPostCommentOrCommentResponseListDefaultLimit = -1;
-    private static ?int $getCustomPostCommentOrCommentResponseListMaxLimit = -1;
+    private static ?int $getCommentListMaxLimit = 10;
     private static bool $mustUserBeLoggedInToAddComment = true;
 
     public static function getRootCommentListDefaultLimit(): ?int
@@ -24,24 +23,6 @@ class ComponentConfiguration
         $envVariable = Environment::ROOT_COMMENT_LIST_DEFAULT_LIMIT;
         $selfProperty = &self::$getRootCommentListDefaultLimit;
         $defaultValue = 100;
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
-
-        // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
-            $envVariable,
-            $selfProperty,
-            $defaultValue,
-            $callback
-        );
-        return $selfProperty;
-    }
-
-    public static function getRootCommentListMaxLimit(): ?int
-    {
-        // Define properties
-        $envVariable = Environment::ROOT_COMMENT_LIST_MAX_LIMIT;
-        $selfProperty = &self::$getRootCommentListMaxLimit;
-        $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
@@ -72,12 +53,12 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getCustomPostCommentOrCommentResponseListMaxLimit(): ?int
+    public static function getCommentListMaxLimit(): ?int
     {
         // Define properties
-        $envVariable = Environment::CUSTOMPOST_COMMENT_LIST_MAX_LIMIT;
-        $selfProperty = &self::$getCustomPostCommentOrCommentResponseListMaxLimit;
-        $defaultValue = -1; // Unlimited
+        $envVariable = Environment::COMMENT_LIST_MAX_LIMIT;
+        $selfProperty = &self::$getCommentListMaxLimit;
+        $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook

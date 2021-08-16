@@ -265,21 +265,15 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             ],
             [
                 'class' => CommentsComponentConfiguration::class,
-                'envVariable' => CommentsEnvironment::ROOT_COMMENT_LIST_MAX_LIMIT,
-                'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
-                'option' => SchemaTypeModuleResolver::OPTION_ROOT_COMMENT_LIST_MAX_LIMIT,
-            ],
-            [
-                'class' => CommentsComponentConfiguration::class,
                 'envVariable' => CommentsEnvironment::CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => SchemaTypeModuleResolver::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => CommentsComponentConfiguration::class,
-                'envVariable' => CommentsEnvironment::CUSTOMPOST_COMMENT_LIST_MAX_LIMIT,
+                'envVariable' => CommentsEnvironment::COMMENT_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
-                'option' => SchemaTypeModuleResolver::OPTION_CUSTOMPOST_COMMENT_LIST_MAX_LIMIT,
+                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             // Media default/max limits
             [

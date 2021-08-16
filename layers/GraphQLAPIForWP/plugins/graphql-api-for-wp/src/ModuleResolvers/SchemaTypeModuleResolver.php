@@ -61,9 +61,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
     public const OPTION_ADD_SELF_FIELD_TO_SCHEMA = 'add-self-field-to-schema';
     public const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
-    public const OPTION_ROOT_COMMENT_LIST_MAX_LIMIT = 'root-comment-list-max-limit';
     public const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
-    public const OPTION_CUSTOMPOST_COMMENT_LIST_MAX_LIMIT = 'custompost-comment-list-max-limit';
 
     /**
      * Hooks
@@ -360,9 +358,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $option,
                     [
                         self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT,
-                        self::OPTION_ROOT_COMMENT_LIST_MAX_LIMIT,
                         self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
-                        self::OPTION_CUSTOMPOST_COMMENT_LIST_MAX_LIMIT,
+                        ModuleSettingOptions::LIST_MAX_LIMIT,
                     ]
                 )
             )
@@ -438,9 +435,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ],
             self::SCHEMA_COMMENTS => [
                 self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT => 10,
-                self::OPTION_ROOT_COMMENT_LIST_MAX_LIMIT => -1,
                 self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT => -1,
-                self::OPTION_CUSTOMPOST_COMMENT_LIST_MAX_LIMIT => -1,
+                ModuleSettingOptions::LIST_MAX_LIMIT => -1,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -624,23 +620,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::MIN_NUMBER => -1,
             ];
 
-            $option = self::OPTION_ROOT_COMMENT_LIST_MAX_LIMIT;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Max limit for querying comments in the Root', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    $maxLimitMessagePlaceholder,
-                    '<code>Root.comments</code>',
-                    $unlimitedValue
-                ),
-                Properties::TYPE => Properties::TYPE_INT,
-                Properties::MIN_NUMBER => -1,
-            ];
-
             $option = self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -663,21 +642,17 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::MIN_NUMBER => -1,
             ];
 
-            $option = self::OPTION_CUSTOMPOST_COMMENT_LIST_MAX_LIMIT;
+            $option = ModuleSettingOptions::LIST_MAX_LIMIT;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Max limit for querying comments under a custom post or comment', 'graphql-api'),
+                Properties::TITLE => \__('Max limit for querying comments', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
-                    sprintf(
-                        \__('%s and %s', 'graphql-api'),
-                        '<code>CustomPost.comments</code>',
-                        '<code>Comment.responses</code>'
-                    ),
+                    \__('comments', 'graphql-api'),
                     $unlimitedValue
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
