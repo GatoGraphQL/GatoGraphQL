@@ -35,7 +35,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
         return $filterInputs[$module[1]] ?? null;
     }
 
-    public function getInputSubnames(array $module)
+    public function getInputSubnames(array $module): array
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_DATES:

@@ -8,7 +8,10 @@ use PoP\Engine\FormInputs\MultipleInputFormInput;
 
 trait FormMultipleInputModuleProcessorTrait
 {
-    public function getInputSubnames(array $module)
+    /**
+     * @return string[]
+     */
+    public function getInputSubnames(array $module): array
     {
         return [];
     }
