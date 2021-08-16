@@ -83,10 +83,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         };
     }
     
-    /**
-     * Provide default values for modules in the FilterInputContainer
-     * @return array<string,mixed> A list of filterInputName as key, and its value
-     */
     protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
