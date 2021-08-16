@@ -34,25 +34,26 @@ class CategoryFilterInputContainerModuleProcessor extends AbstractFilterInputCon
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
         ];
-        $filterInputModules = match ($module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_CATEGORIES,
+        $topLevelCategoryFilterInputModules = [
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID],
+        ];
+        return match ($module[1]) {
+            self::MODULE_FILTERINPUTCONTAINER_CATEGORIES => [
+                ...$categoryFilterInputModules,
+                ...$topLevelCategoryFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+            ],
             self::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES => [
                 ...$categoryFilterInputModules,
                 ...$this->getPaginationFilterInputModules(),
             ],
-            self::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT,
+            self::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT => [
+                ...$categoryFilterInputModules,
+                ...$topLevelCategoryFilterInputModules,
+            ],
             self::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT => $categoryFilterInputModules,
             default => [],
         };
-        if (
-            in_array($module[1], [
-            self::MODULE_FILTERINPUTCONTAINER_CATEGORIES,
-            self::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT,
-            ])
-        ) {
-            $filterInputModules[] = [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID];
-        }
-        return $filterInputModules;
     }
 
     /**

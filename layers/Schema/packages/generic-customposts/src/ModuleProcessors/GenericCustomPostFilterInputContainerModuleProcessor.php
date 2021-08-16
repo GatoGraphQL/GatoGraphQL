@@ -36,29 +36,26 @@ class GenericCustomPostFilterInputContainerModuleProcessor extends AbstractCusto
             [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_GENERICPOSTTYPES],
         ];
-        $filterInputModules = match ($module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST,
-            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST
-                => [
+        $adminGenericCustomPostFilterInputModules = [
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
+        ];
+        return match ($module[1]) {
+            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST=> [
+                ...$genericCustomPostFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST => [
                     ...$genericCustomPostFilterInputModules,
+                    ...$adminGenericCustomPostFilterInputModules,
                     ...$this->getPaginationFilterInputModules(),
                 ],
-            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT,
-            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT
-                => $genericCustomPostFilterInputModules,
-            default
-                => [],
+            self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT => $genericCustomPostFilterInputModules,
+            self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT => [
+                ...$genericCustomPostFilterInputModules,
+                ...$adminGenericCustomPostFilterInputModules,
+            ],
+            default => [],
         };
-        // "Admin" fields also have the "status" filter
-        if (
-            in_array($module[1], [
-                self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST,
-                self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT,
-            ])
-        ) {
-            $filterInputModules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
-        }
-        return $filterInputModules;
     }
 
     /**
