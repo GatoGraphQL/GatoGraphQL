@@ -72,11 +72,11 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         return match ($fieldName) {
             'comments' => [
                 CommentFilterInputContainerModuleProcessor::class,
-                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS
+                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTS
             ],
             'commentCount' => [
                 CommentFilterInputContainerModuleProcessor::class,
-                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT
+                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT
             ],
             default => parent::getFieldDataFilteringModule($fieldName),
         };
