@@ -99,7 +99,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         /** @var int[] */
         $count = \get_tags($query);
         // For some reason, the count is returned as an array of 1 element!
-        if (is_array($count) && count($count) === 1 && is_int($count[0])) {
+        if (is_array($count) && count($count) === 1 && is_numeric($count[0])) {
             return (int) $count[0];
         }
         // An error happened
