@@ -100,7 +100,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
 
     public function getSchemaFilterInputType(array $module): string
     {
-        return match ($module[1]) {
+        return match ((string)$module[1]) {
             self::MODULE_FILTERINPUT_ORDER => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_LIMIT => SchemaDefinition::TYPE_INT,
             self::MODULE_FILTERINPUT_OFFSET => SchemaDefinition::TYPE_INT,
@@ -135,7 +135,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_EXCLUDE_IDS,
             self::MODULE_FILTERINPUT_PARENT_IDS,
             self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS
-            => true,
+                => true,
             default
                 => false,
         };
@@ -143,7 +143,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
 
     public function getSchemaFilterInputDescription(array $module): ?string
     {
-        return match ($module[1]) {
+        return match ((string)$module[1]) {
             self::MODULE_FILTERINPUT_ORDER => $this->translationAPI->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
             self::MODULE_FILTERINPUT_LIMIT => $this->translationAPI->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
             self::MODULE_FILTERINPUT_OFFSET => $this->translationAPI->__('Offset the results by how many places (required for pagination)', 'schema-commons'),
