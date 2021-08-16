@@ -8,7 +8,6 @@ use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentCon
 use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\Environment;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractDynamicType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
