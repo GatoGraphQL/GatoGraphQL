@@ -147,24 +147,32 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                         ],
                     ]
                 );
+        }
+
+        return $schemaFieldArgs;
+    }
+
+    /**
+     * Provide default values for modules in the FilterInputContainer
+     * @return array<string,mixed> A list of filterInputName as key, and its value
+     */
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
             case 'responses':
             case 'responseCount':
+                // Order by descending date
                 $orderFilterInputName = $this->getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);
-                foreach ($schemaFieldArgs as &$schemaFieldArg) {
-                    if ($schemaFieldArg['name'] === $orderFilterInputName) {
-                        // Order by descending date
-                        $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
-                        $order = 'DESC';
-                        $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $orderBy . '|' . $order;
-                    }
-                }
-                return $schemaFieldArgs;
+                $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                $order = 'DESC';
+                return [
+                    $orderFilterInputName => $orderBy . '|' . $order,
+                ];
         }
-
-        return $schemaFieldArgs;
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
     }
 
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array

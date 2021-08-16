@@ -82,10 +82,13 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
     }
-
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    
+    /**
+     * Provide default values for modules in the FilterInputContainer
+     * @return array<string,mixed> A list of filterInputName as key, and its value
+     */
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
             case 'comments':
             case 'commentCount':
@@ -97,20 +100,16 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);
-                foreach ($schemaFieldArgs as &$schemaFieldArg) {
-                    if ($schemaFieldArg['name'] === $parentIDFilterInputName) {
-                        // By default retrieve the top level comments (with ID => 0)
-                        $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = 0;
-                    } elseif ($schemaFieldArg['name'] === $orderFilterInputName) {
-                        // Order by descending date
-                        $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
-                        $order = 'DESC';
-                        $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $orderBy . '|' . $order;
-                    }
-                }
-                return $schemaFieldArgs;
+                $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                $order = 'DESC';
+                return [
+                    // By default retrieve the top level comments (with ID => 0)
+                    $parentIDFilterInputName => 0,
+                    // Order by descending date
+                    $orderFilterInputName => $orderBy . '|' . $order,
+                ];
         }
-        return $schemaFieldArgs;
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
