@@ -45,19 +45,27 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Filter field `pages` via new arguments:
   - `parentIDs: [ID]`
   - `parentID: ID`
-- Filter field `Post.comments` via new arguments:
+- Added fields to retrieve comments and their number:
+  - `Root.comments: [Comment]!`
+  - `Root.commentCount: Int!`
+  - `CustomPost.commentCount: Int!`
+  - `Comment.responseCount: Int!`
+- Added field arguments to filter `comments`:
   - `authorIDs: [ID!]`
+  - `customPostID: ID!`
+  - `customPostIDs: [ID!]`
+  - `excludeCustomPostIDs: [ID]`
+  - `dateFrom: Date`
+  - `dateTo: Date`
   - `excludeAuthorIDs: [ID]`
-- Filter field `Post.commentCount` via new arguments:
-  - `authorIDs: [ID!]`
-  - `date_from: Date`
-  - `date_to: Date`
   - `excludeIDs: [ID!]`
   - `id: ID`
   - `ids: [ID!]`
+  - `parentID: ID!`
+  - `parentIDs: [ID!]`
+  - `excludeParentIDs: [ID]`
+  - `excludeIDs: [ID!]`
   - `searchfor: String`
-- Added fields to comments:
-  - `Comment.responseCount: Int!`
 - Fetch a user by different means:
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)
