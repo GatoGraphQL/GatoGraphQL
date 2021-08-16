@@ -90,7 +90,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 }
                 return $schemaFieldArgs;
         }
-        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        return $schemaFieldArgs;
     }
 
     /**

@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldInterfaceResolvers\AbstractQueryableSchemaFieldInter
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
-
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
 {
     public function getInterfaceName(): string
@@ -80,5 +80,29 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
             ],
             default => parent::getFieldDataFilteringModule($fieldName),
         };
+    }
+
+    public function getSchemaFieldArgs(string $fieldName): array
+    {
+        $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
+        switch ($fieldName) {
+            case 'comments':
+            case 'commentCount':
+                // By default retrieve the top level comments
+                $filterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
+                ]);
+                foreach ($schemaFieldArgs as &$schemaFieldArg) {
+                    if ($schemaFieldArg['name'] !== $filterInputName) {
+                        continue;
+                    }
+                    // ID = 0 => top level comment
+                    $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = 0;
+                    break;
+                }
+                return $schemaFieldArgs;
+        }
+        return $schemaFieldArgs;
     }
 }
