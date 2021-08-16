@@ -124,9 +124,6 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                     'status' => Status::APPROVED,
                     // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                     'customPostID' => $typeResolver->getID($post),
-                    // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
-                    'order' =>  'ASC',
-                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
                     'parent-id' => 0, // Bring 1st layer of comments, those added to the custom post
                 ];
                 $options = array_merge(
