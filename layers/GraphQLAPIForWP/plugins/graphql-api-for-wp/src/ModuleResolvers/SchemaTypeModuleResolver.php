@@ -371,7 +371,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         }
         return parent::isValidValue($module, $option, $value);
     }
-    
+
     /**
      * Default value for an option set by the module
      */
