@@ -20,5 +20,6 @@ interface MediaTypeAPIInterface
     public function getImageSizes(string | int $image_id, ?string $size = null): ?string;
     public function getImageProperties(string | int $image_id, ?string $size = null): ?array;
     public function getMediaElements(array $query, array $options = []): array;
+    public function getMediaElementCount(array $query, array $options = []): int;
     public function getMediaElementId(object $media): string | int;
 }

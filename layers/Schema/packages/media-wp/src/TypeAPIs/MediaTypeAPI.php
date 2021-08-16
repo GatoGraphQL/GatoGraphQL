@@ -89,12 +89,23 @@ class MediaTypeAPI implements MediaTypeAPIInterface
 
     public function getMediaElements(array $query, array $options = []): array
     {
-        // Accept field atts to filter the API fields
-        $this->maybeFilterDataloadQueryArgs($query, $options);
-
         // Convert the parameters
         $query = $this->convertMediaQuery($query, $options);
         return get_posts($query);
+    }
+    public function getMediaElementCount(array $query, array $options = []): int
+    {
+        // Convert parameters
+        $options['return-type'] = ReturnTypes::IDS;
+        $query = $this->convertMediaQuery($query, $options);
+
+        // All results, no offset
+        $query['posts_per_page'] = -1;
+        unset($query['offset']);
+
+        // Execute query and count results
+        $posts = \get_posts($query);
+        return count($posts);
     }
     protected function convertMediaQuery($query, array $options = [])
     {
@@ -103,6 +114,9 @@ class MediaTypeAPI implements MediaTypeAPIInterface
                 $query['fields'] = 'ids';
             }
         }
+
+        // Accept field atts to filter the API fields
+        $this->maybeFilterDataloadQueryArgs($query, $options);
 
         if (isset($query['include'])) {
             // Transform from array to string

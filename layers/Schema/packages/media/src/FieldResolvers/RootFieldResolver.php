@@ -164,7 +164,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 return $this->mediaTypeAPI->getMediaElements($query, $options);
             case 'mediaItemCount':
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-                return $this->mediaTypeAPI->getMediaElements([], $options);
+                return $this->mediaTypeAPI->getMediaElementCount([], $options);
             case 'mediaItem':
                 $query = [
                     'include' => [$fieldArgs['id']],
