@@ -88,9 +88,9 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         }
         // Comment parent ID
         // Pass "0" to retrieve 1st layer of comments added to the post
-        if (isset($query['parentID'])) {
-            $query['parent'] = $query['parentID'];
-            unset($query['parentID']);
+        if (isset($query['parent-id'])) {
+            $query['parent'] = $query['parent-id'];
+            unset($query['parent-id']);
         }
 
         if (isset($query['order'])) {
