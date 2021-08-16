@@ -92,6 +92,14 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             $query['parent'] = $query['parent-id'];
             unset($query['parent-id']);
         }
+        if (isset($query['parent-ids'])) {
+            $query['parent__in'] = $query['parent-ids'];
+            unset($query['parent-ids']);
+        }
+        if (isset($query['exclude-parent-ids'])) {
+            $query['parent__not_in'] = $query['exclude-parent-ids'];
+            unset($query['exclude-parent-ids']);
+        }
 
         if (isset($query['order'])) {
             // Same param name, so do nothing
