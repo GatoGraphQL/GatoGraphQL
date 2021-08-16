@@ -56,6 +56,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `id: ID`
   - `ids: [ID!]`
   - `searchfor: String`
+- Added fields to comments:
+  - `Comment.responseCount: Int!`
 - Fetch a user by different means:
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)
