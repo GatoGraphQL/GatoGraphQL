@@ -25,11 +25,9 @@ class MediaFilterInputContainerModuleProcessor extends AbstractFilterInputContai
     public function getFilterInputModules(array $module): array
     {
         $mediaFilterInputModules = [
+            ...$this->getIDFilterInputModules(),
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
             [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES],
         ];
         return match ($module[1]) {

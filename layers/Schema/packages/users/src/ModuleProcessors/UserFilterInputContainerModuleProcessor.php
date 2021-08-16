@@ -30,10 +30,8 @@ class UserFilterInputContainerModuleProcessor extends AbstractFilterInputContain
     public function getFilterInputModules(array $module): array
     {
         $userFilterInputModules = [
+            ...$this->getIDFilterInputModules(),
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_NAME],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
         ];
         $filterInputModules = match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_USERS,

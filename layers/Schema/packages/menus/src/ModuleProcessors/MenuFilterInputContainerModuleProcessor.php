@@ -26,10 +26,8 @@ class MenuFilterInputContainerModuleProcessor extends AbstractFilterInputContain
     public function getFilterInputModules(array $module): array
     {
         $menuFilterInputModules = [
+            ...$this->getIDFilterInputModules(),
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
         ];
         return match ($module[1]) {

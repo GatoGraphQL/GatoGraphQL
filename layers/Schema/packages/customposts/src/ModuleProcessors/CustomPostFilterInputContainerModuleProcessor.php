@@ -38,11 +38,9 @@ class CustomPostFilterInputContainerModuleProcessor extends AbstractCustomPostFi
     public function getFilterInputModules(array $module): array
     {
         $customPostFilterInputModules = [
+            ...$this->getIDFilterInputModules(),
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
             [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
         ];
         $filterInputModules = match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST,

@@ -54,4 +54,16 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
         ];
     }
+
+    /**
+     * @return array<array<mixed>>
+     */
+    protected function getIDFilterInputModules(): array
+    {
+        return [
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
+        ];
+    }
 }
