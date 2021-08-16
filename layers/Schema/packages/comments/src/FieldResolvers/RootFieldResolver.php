@@ -92,10 +92,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'comments':
             case 'commentCount':
-                $parentIDFilterInputName = $this->getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
-                ]);
                 $orderFilterInputName = $this->getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
@@ -103,8 +99,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
                 $order = 'DESC';
                 return [
-                    // By default retrieve the top level comments (with ID => 0)
-                    $parentIDFilterInputName => 0,
                     // Order by descending date
                     $orderFilterInputName => $orderBy . '|' . $order,
                 ];
