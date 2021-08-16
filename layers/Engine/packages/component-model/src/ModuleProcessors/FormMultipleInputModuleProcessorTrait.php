@@ -10,7 +10,7 @@ trait FormMultipleInputModuleProcessorTrait
 {
     public function getInputSubnames(array $module)
     {
-        return array();
+        return [];
     }
 
     public function getInputOptions(array $module): array
