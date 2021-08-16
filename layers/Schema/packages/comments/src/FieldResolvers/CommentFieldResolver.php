@@ -17,6 +17,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\Constants\Status;
+use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
@@ -65,6 +66,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'parent',
             'date',
             'responses',
+            'responseCount',
         ];
     }
 
@@ -82,6 +84,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'parent' => SchemaDefinition::TYPE_ID,
             'date' => SchemaDefinition::TYPE_DATE,
             'responses' => SchemaDefinition::TYPE_ID,
+            'responseCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -94,7 +97,8 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'customPostID',
             'approved',
             'type',
-            'date'
+            'date',
+            'responseCount'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'responses'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
@@ -117,6 +121,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'parent' => $this->translationAPI->__('Parent comment (if this comment is a response to another one)', 'pop-comments'),
             'date' => $this->translationAPI->__('Date when the comment was added', 'pop-comments'),
             'responses' => $this->translationAPI->__('Responses to the comment', 'pop-comments'),
+            'responseCount' => $this->translationAPI->__('Number of responses to the comment', 'pop-comments'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -185,6 +190,17 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                     $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
                 );
                 return $this->commentTypeAPI->getComments($query, $options);
+
+            case 'responseCount':
+                $query = [
+                    'status' => Status::APPROVED,
+                    // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
+                    'order' =>  'ASC',
+                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
+                    'parentID' => $typeResolver->getID($comment),
+                ];
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+                return $this->commentTypeAPI->getCommentCount($query, $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -212,6 +228,15 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         }
 
         return $schemaFieldArgs;
+    }
+
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    {
+        return match ($fieldName) {
+            'responses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS],
+            'responseCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+        };
     }
 
     public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
