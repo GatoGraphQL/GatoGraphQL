@@ -25,13 +25,13 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_CUSTOMPOST_IDS:
-                $query['custompost-ids'] = $value;
+                $query['customPostIDs'] = $value;
                 break;
             case self::FILTERINPUT_CUSTOMPOST_ID:
-                $query['custompost-id'] = $value;
+                $query['customPostID'] = $value;
                 break;
             case self::FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS:
-                $query['exclude-custompost-ids'] = $value;
+                $query['exclude-customPostIDs'] = $value;
                 break;
         }
     }
