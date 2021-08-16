@@ -14,6 +14,7 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Constants\Status;
 use PoPSchema\Comments\FieldInterfaceResolvers\CommentableFieldInterfaceResolver;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
@@ -121,6 +122,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
 
             case 'comments':
                 $query = [
+                    'limit' => ComponentConfiguration::getCustomPostCommentOrCommentResponseListDefaultLimit(),
                     'status' => Status::APPROVED,
                     // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                     'customPostID' => $typeResolver->getID($post),

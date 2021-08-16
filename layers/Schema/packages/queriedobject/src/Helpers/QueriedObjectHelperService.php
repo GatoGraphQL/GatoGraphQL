@@ -20,7 +20,7 @@ class QueriedObjectHelperService implements QueriedObjectHelperServiceInterface
     /**
      * Return the minimum number from between the request limit and the max limit.
      */
-    public static function getLimitOrMaxLimit(
+    public function getLimitOrMaxLimit(
         ?int $limit,
         ?int $maxLimit/*, bool $addSchemaWarning = true*/
     ): ?int {

@@ -16,6 +16,7 @@ use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Constants\Status;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
@@ -127,6 +128,54 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        switch ($fieldName) {
+            case 'date':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'format',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
+                                $this->translationAPI->__('Date format, as defined in %s', 'pop-comments'),
+                                'https://www.php.net/manual/en/function.date.php'
+                            ),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
+                        ],
+                    ]
+                );
+            case 'responses':
+            case 'responseCount':
+                $orderFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
+                ]);
+                foreach ($schemaFieldArgs as &$schemaFieldArg) {
+                    if ($schemaFieldArg['name'] === $orderFilterInputName) {
+                        // Order by descending date
+                        $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                        $order = 'DESC';
+                        $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $orderBy . '|' . $order;
+                    }
+                }
+                return $schemaFieldArgs;
+        }
+
+        return $schemaFieldArgs;
+    }
+
+    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    {
+        return match ($fieldName) {
+            'responses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSES],
+            'responseCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+        };
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -178,6 +227,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
 
             case 'responses':
                 $query = [
+                    'limit' => ComponentConfiguration::getCustomPostCommentOrCommentResponseListDefaultLimit(),
                     'status' => Status::APPROVED,
                     'parent-id' => $typeResolver->getID($comment),
                 ];
@@ -199,54 +249,6 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'date':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'format',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $this->translationAPI->__('Date format, as defined in %s', 'pop-comments'),
-                                'https://www.php.net/manual/en/function.date.php'
-                            ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
-                        ],
-                    ]
-                );
-            case 'responses':
-            case 'responseCount':
-                $orderFilterInputName = $this->getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
-                ]);
-                foreach ($schemaFieldArgs as &$schemaFieldArg) {
-                    if ($schemaFieldArg['name'] === $orderFilterInputName) {
-                        // Order by descending date
-                        $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
-                        $order = 'DESC';
-                        $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $orderBy . '|' . $order;
-                    }
-                }
-                return $schemaFieldArgs;
-        }
-
-        return $schemaFieldArgs;
-    }
-
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
-    {
-        return match ($fieldName) {
-            'responses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSES],
-            'responseCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT],
-            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
-        };
     }
 
     public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string

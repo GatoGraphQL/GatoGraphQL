@@ -6,9 +6,10 @@ namespace PoPSchema\CommentsWP\TypeAPIs;
 
 use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Hooks\HooksAPIInterface;
-use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
+use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Constants\Status;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Comment;
 
@@ -32,6 +33,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
+        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
     ) {
         $this->popToCMSCommentStatusConversion = array_flip($this->cmsToPoPCommentStatusConversion);
     }
@@ -119,7 +121,17 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         }
         // For the comments, if there's no limit then it brings all results
         if (isset($query['limit'])) {
-            $query['number'] = (int) $query['limit'];
+            // Maybe restrict the limit, if higher than the max limit
+            // Allow to not limit by max when querying from within the application
+            $limit = (int) $query['limit'];
+            if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
+                $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
+                    $limit,
+                    ComponentConfiguration::getCommentListMaxLimit()
+                );
+            }
+            // To bring all results, must use "number => 0" instead of -1
+            $query['number'] = ($limit == -1) ? 0 : $limit;
             unset($query['limit']);
         }
         if (isset($query['search'])) {

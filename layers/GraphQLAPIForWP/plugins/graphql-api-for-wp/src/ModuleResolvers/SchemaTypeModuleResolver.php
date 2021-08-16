@@ -60,6 +60,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
     public const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
     public const OPTION_ADD_SELF_FIELD_TO_SCHEMA = 'add-self-field-to-schema';
+    public const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
+    public const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
 
     /**
      * Hooks
@@ -330,24 +332,36 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function isValidValue(string $module, string $option, mixed $value): bool
     {
         if (
-            in_array(
-                $module,
-                [
-                    self::SCHEMA_CUSTOMPOSTS,
-                    // self::SCHEMA_GENERIC_CUSTOMPOSTS,
-                    // self::SCHEMA_POSTS,
-                    self::SCHEMA_USERS,
-                    self::SCHEMA_MEDIA,
-                    self::SCHEMA_TAGS,
-                    self::SCHEMA_CATEGORIES,
-                    // self::SCHEMA_PAGES,
-                ]
-            ) && in_array(
-                $option,
-                [
-                    ModuleSettingOptions::LIST_DEFAULT_LIMIT,
-                    ModuleSettingOptions::LIST_MAX_LIMIT,
-                ]
+            (
+                in_array(
+                    $module,
+                    [
+                        self::SCHEMA_CUSTOMPOSTS,
+                        // self::SCHEMA_GENERIC_CUSTOMPOSTS,
+                        // self::SCHEMA_POSTS,
+                        self::SCHEMA_USERS,
+                        self::SCHEMA_MEDIA,
+                        self::SCHEMA_TAGS,
+                        self::SCHEMA_CATEGORIES,
+                        // self::SCHEMA_PAGES,
+                    ]
+                ) && in_array(
+                    $option,
+                    [
+                        ModuleSettingOptions::LIST_DEFAULT_LIMIT,
+                        ModuleSettingOptions::LIST_MAX_LIMIT,
+                    ]
+                )
+            ) || (
+                $module === self::SCHEMA_COMMENTS
+                && in_array(
+                    $option,
+                    [
+                        self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT,
+                        self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
+                        ModuleSettingOptions::LIST_MAX_LIMIT,
+                    ]
+                )
             )
         ) {
             // It can't be less than -1, or 0
@@ -418,6 +432,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ],
             self::SCHEMA_USER_AVATARS => [
                 self::OPTION_DEFAULT_AVATAR_SIZE => 96,
+            ],
+            self::SCHEMA_COMMENTS => [
+                self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT => 10,
+                self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT => -1,
+                ModuleSettingOptions::LIST_MAX_LIMIT => -1,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -582,6 +601,63 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
+        } elseif ($module === self::SCHEMA_COMMENTS) {
+            $option = self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Default limit for querying comments in the Root', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    $defaultLimitMessagePlaceholder,
+                    '<code>Root.comments</code>',
+                    $limitArg,
+                    $unlimitedValue
+                ),
+                Properties::TYPE => Properties::TYPE_INT,
+                Properties::MIN_NUMBER => -1,
+            ];
+
+            $option = self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Default limit for querying comments under a custom post or comment', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    $defaultLimitMessagePlaceholder,
+                    sprintf(
+                        \__('%s and %s', 'graphql-api'),
+                        '<code>CustomPost.comments</code>',
+                        '<code>Comment.responses</code>'
+                    ),
+                    $limitArg,
+                    $unlimitedValue
+                ),
+                Properties::TYPE => Properties::TYPE_INT,
+                Properties::MIN_NUMBER => -1,
+            ];
+
+            $option = ModuleSettingOptions::LIST_MAX_LIMIT;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Max limit for querying comments', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    $maxLimitMessagePlaceholder,
+                    \__('comments', 'graphql-api'),
+                    $unlimitedValue
+                ),
+                Properties::TYPE => Properties::TYPE_INT,
+                Properties::MIN_NUMBER => -1,
+            ];
         } elseif (
             in_array($module, [
                 self::SCHEMA_POSTS,

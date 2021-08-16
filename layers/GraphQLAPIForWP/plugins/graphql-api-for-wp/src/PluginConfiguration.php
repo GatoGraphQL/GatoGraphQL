@@ -62,6 +62,8 @@ use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
 use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Users\Environment as UsersEnvironment;
+use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
+use PoPSchema\Comments\Environment as CommentsEnvironment;
 use PoPSchema\Media\ComponentConfiguration as MediaComponentConfiguration;
 use PoPSchema\Media\Environment as MediaEnvironment;
 use PoPSchema\UserAvatars\ComponentConfiguration as UserAvatarsComponentConfiguration;
@@ -252,6 +254,25 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => UsersComponentConfiguration::class,
                 'envVariable' => UsersEnvironment::USER_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
+                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
+            ],
+            // Comment default/max limits
+            [
+                'class' => CommentsComponentConfiguration::class,
+                'envVariable' => CommentsEnvironment::ROOT_COMMENT_LIST_DEFAULT_LIMIT,
+                'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
+                'option' => SchemaTypeModuleResolver::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT,
+            ],
+            [
+                'class' => CommentsComponentConfiguration::class,
+                'envVariable' => CommentsEnvironment::CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
+                'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
+                'option' => SchemaTypeModuleResolver::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
+            ],
+            [
+                'class' => CommentsComponentConfiguration::class,
+                'envVariable' => CommentsEnvironment::COMMENT_LIST_MAX_LIMIT,
+                'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             // Media default/max limits
