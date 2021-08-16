@@ -106,6 +106,15 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         return $schemaFieldArgs;
     }
 
+    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    {
+        return match ($fieldName) {
+            'commentCount' => $this->translationAPI->__('Number of comments on the site', 'pop-comments'),
+            'comments' => $this->translationAPI->__('Comments on the site', 'pop-comments'),
+            default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
+        };
+    }
+
     protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
