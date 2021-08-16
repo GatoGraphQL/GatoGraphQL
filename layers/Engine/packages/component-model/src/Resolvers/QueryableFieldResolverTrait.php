@@ -44,7 +44,7 @@ trait QueryableFieldResolverTrait
      * In the FilterInputModule we do not define default values, since different fields
      * using the same FilterInput may need a different default value.
      * Then, allow to override these values now.
-     * 
+     *
      * @param array<string,mixed> $filterInputNameDefaultValues A list of filterInputName as key, and its value
      */
     protected function getSchemaFieldArgsWithFilterInputDefaultValues(array $schemaFieldArgs, array $filterInputNameDefaultValues): array

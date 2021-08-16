@@ -118,7 +118,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
-    
+
     protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
