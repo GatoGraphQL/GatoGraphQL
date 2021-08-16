@@ -9,6 +9,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+
 class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
 {
     public function getInterfaceName(): string

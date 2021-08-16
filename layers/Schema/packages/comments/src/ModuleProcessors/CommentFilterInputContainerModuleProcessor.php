@@ -45,7 +45,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
         $rootCommentFilterInputModules = [
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOST_ID],
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOST_IDS],
-            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS],            
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS],
         ];
         $responseFilterInputModules = [
             ...$this->getIDFilterInputModules(),
