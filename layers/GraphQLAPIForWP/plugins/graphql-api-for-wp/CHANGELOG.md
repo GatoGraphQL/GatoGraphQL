@@ -118,6 +118,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - Allow to use unsafe default settings
+- Sort fields and connections together, alphabetically
 
 ## 0.8.1 - 21/07/2021
 

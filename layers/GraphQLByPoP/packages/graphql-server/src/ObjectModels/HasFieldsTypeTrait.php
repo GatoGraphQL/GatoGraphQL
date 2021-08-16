@@ -66,6 +66,13 @@ trait HasFieldsTypeTrait
                 );
             }
         }
+
+        // Maybe sort fields and connections all together
+        if (ComponentConfiguration::sortSchemaAlphabetically()) {
+            uasort($this->fields, function (Field $a, Field $b): int {
+                return $a->getName() <=> $b->getName();
+            });
+        }
     }
     protected function getInterfaceNames()
     {
