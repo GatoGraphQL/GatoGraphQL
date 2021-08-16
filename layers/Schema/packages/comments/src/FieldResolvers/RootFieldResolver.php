@@ -65,7 +65,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'comments' => SchemaDefinition::TYPE_ID,
-            'commentCount' => SchemaDefinition::TYPE_ID,
+            'commentCount' => SchemaDefinition::TYPE_INT,
             default => parent::getSchemaFieldType($typeResolver, $fieldName),
         };
     }
