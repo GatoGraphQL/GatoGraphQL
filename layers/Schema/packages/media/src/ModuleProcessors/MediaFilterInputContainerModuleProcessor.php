@@ -14,11 +14,13 @@ class MediaFilterInputContainerModuleProcessor extends AbstractFilterInputContai
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     public const MODULE_FILTERINPUTCONTAINER_MEDIAITEMS = 'filterinputcontainer-media-items';
+    public const MODULE_FILTERINPUTCONTAINER_MEDIAITEMCOUNT = 'filterinputcontainer-media-item-count';
 
     public function getModulesToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_MEDIAITEMS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_MEDIAITEMCOUNT],
         );
     }
 
@@ -34,6 +36,9 @@ class MediaFilterInputContainerModuleProcessor extends AbstractFilterInputContai
             self::MODULE_FILTERINPUTCONTAINER_MEDIAITEMS => [
                 ...$mediaFilterInputModules,
                 ...$this->getPaginationFilterInputModules(),
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_MEDIAITEMCOUNT => [
+                ...$mediaFilterInputModules,
             ],
             default => [],
         };
