@@ -88,7 +88,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'comments':
-            case 'commentCount':
                 // Order by descending date
                 $orderFilterInputName = $this->getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
