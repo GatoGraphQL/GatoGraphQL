@@ -88,6 +88,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'comments':
+                $limitFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
                 // Order by descending date
                 $orderFilterInputName = $this->getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
@@ -97,6 +101,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 $order = 'DESC';
                 return [
                     $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
+                    $limitFilterInputName => ComponentConfiguration::getRootCommentListDefaultLimit(),
                 ];
         }
         return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
@@ -146,7 +151,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
             case 'comments':
                 $query = [
-                    'limit' => ComponentConfiguration::getRootCommentListDefaultLimit(),
                     'status' => Status::APPROVED,
                     // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                 ];
