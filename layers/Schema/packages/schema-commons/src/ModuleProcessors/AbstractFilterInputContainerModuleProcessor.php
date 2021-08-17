@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterDataModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractQueryableDataModuleProcessor;
+use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
-abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor
+abstract class AbstractFilterInputContainerModuleProcessor extends AbstractQueryableDataModuleProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
@@ -65,5 +67,30 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
         ];
+    }
+    protected function getFilterInputName(array $filterInput): string
+    {
+        $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
+        /** @var FormComponentModuleProcessorInterface */
+        $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
+        return $filterInputProcessor->getName($filterInput);
+    }
+    
+    /**
+     * Provide default values for modules in the FilterInputContainer
+     * @return array<string,mixed> A list of filterInputName as key, and its value
+     */
+    public function getFieldDataFilteringDefaultValues(array $module): array
+    {
+        return [];
+    }
+
+    /**
+     * Provide the names of the args which are mandatory in the FilterInput
+     * @return string[]
+     */
+    public function getFieldDataFilteringMandatoryArgs(array $module): array
+    {
+        return [];
     }
 }

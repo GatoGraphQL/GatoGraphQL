@@ -37,6 +37,22 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
         };
     }
 
+    public function getFieldDataFilteringMandatoryArgs(array $module): array
+    {
+        switch ($module[1]) {
+            case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID:
+            case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS:
+                $idFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
+                ]);
+                return [
+                    $idFilterInputName,
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($module);
+    }
+
     /**
      * @return string[]
      */

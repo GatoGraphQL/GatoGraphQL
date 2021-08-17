@@ -91,21 +91,6 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
         return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
     }
 
-    protected function getFieldDataFilteringMandatoryArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        switch ($fieldName) {
-            case 'myPost':
-                $idFilterInputName = $this->getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
-                ]);
-                return [
-                    $idFilterInputName,
-                ];
-        }
-        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
-    }
-
     /**
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
@@ -116,15 +101,14 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $vars = ApplicationState::getVars();
-        $query = [
-            'authors' => [$vars['global-userstate']['current-user-id']],
-        ];
         switch ($fieldName) {
             case 'myPost':
             case 'myPosts':
             case 'myPostCount':
-                return $query;
+                $vars = ApplicationState::getVars();
+                return [
+                    'authors' => [$vars['global-userstate']['current-user-id']],
+                ];
         }
         return [];
     }
