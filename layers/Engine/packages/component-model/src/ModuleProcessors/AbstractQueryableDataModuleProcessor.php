@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 
-abstract class AbstractQueryableDataModuleProcessor extends AbstractFilterDataModuleProcessor implements QueryDataModuleProcessorInterface
+abstract class AbstractQueryableDataModuleProcessor extends AbstractFilterDataModuleProcessor implements QueryableDataModuleProcessorInterface
 {
     protected function getFilterInputName(array $filterInput): string
     {
