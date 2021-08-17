@@ -87,20 +87,16 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
 
     protected function getFieldDataFilteringDefaultValues(string $fieldName): array
     {
+        $parentIDFilterInputName = $this->getFilterInputName([
+            CommonFilterInputModuleProcessor::class,
+            CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
+        ]);
+        $filterInputNameDefaultValues = [
+            // By default retrieve the top level comments (with ID => 0)
+            $parentIDFilterInputName => 0,
+        ];
         switch ($fieldName) {
             case 'comments':
-            case 'commentCount':
-                $parentIDFilterInputName = $this->getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
-                ]);
-                $filterInputNameDefaultValues = [
-                    // By default retrieve the top level comments (with ID => 0)
-                    $parentIDFilterInputName => 0,
-                ];
-                if ($fieldName === 'commentCount') {
-                    return $filterInputNameDefaultValues;
-                }
                 $limitFilterInputName = $this->getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -119,6 +115,8 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
                         $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
                     ]
                 );
+            case 'commentCount':
+                return $filterInputNameDefaultValues;
         }
         return parent::getFieldDataFilteringDefaultValues($fieldName);
     }
