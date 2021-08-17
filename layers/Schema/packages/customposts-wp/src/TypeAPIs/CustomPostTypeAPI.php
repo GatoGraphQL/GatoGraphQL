@@ -122,11 +122,6 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
         if ($query['include'] ?? null) {
             // Transform from array to string
             $query['include'] = implode(',', $query['include']);
-
-            // Make sure the post can also be draft or pending
-            if (!isset($query['post_status'])) {
-                $query['post_status'] = CustomPostTypeAPIUtils::getCMSPostStatuses();
-            }
         }
         if (isset($query['exclude-ids'])) {
             $query['post__not_in'] = $query['exclude-ids'];
