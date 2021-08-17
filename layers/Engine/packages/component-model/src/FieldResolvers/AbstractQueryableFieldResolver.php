@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver
@@ -34,7 +34,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         return [];
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return null;
     }
@@ -43,7 +43,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
      * Provide default values for modules in the FilterInputContainer
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
-    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         return [];
     }
@@ -53,12 +53,22 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
      */
     protected function getFilterDataloadQueryArgsOptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
-        return [
-            'filter-dataload-query-args' => [
-                'source' => $fieldArgs,
-                'module' => $this->getFieldDataFilteringModule($typeResolver, $fieldName),
-            ],
-        ];
+        /** @var QueryableInterfaceSchemaDefinitionResolverAdapter|null */
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($typeResolver, $fieldName);
+        if ($schemaDefinitionResolver !== null) {
+            return [
+                'filter-dataload-query-args' => [
+                    'source' => $fieldArgs,
+                    'module' => $schemaDefinitionResolver->getFieldDataFilteringModule($typeResolver, $fieldName),
+                ],
+            ];
+        }
+        return [];
+    }
+
+    protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
+    {
+        return QueryableInterfaceSchemaDefinitionResolverAdapter::class;
     }
 
     public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
