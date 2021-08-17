@@ -16,6 +16,7 @@ use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 /**
  * Add fields to the Root for querying for generic custom posts
@@ -145,6 +146,22 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
+    public function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'genericCustomPosts':
+            case 'unrestrictedGenericCustomPosts':
+                $limitFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
+                return [
+                    $limitFilterInputName => ComponentConfiguration::getGenericCustomPostListDefaultLimit(),
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
@@ -201,12 +218,6 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
                 );
             case 'genericCustomPosts':
             case 'unrestrictedGenericCustomPosts':
-                return array_merge(
-                    $query,
-                    [
-                        'limit' => ComponentConfiguration::getGenericCustomPostListDefaultLimit(),
-                    ]
-                );
             case 'genericCustomPostCount':
             case 'unrestrictedGenericCustomPostCount':
                 return $query;
