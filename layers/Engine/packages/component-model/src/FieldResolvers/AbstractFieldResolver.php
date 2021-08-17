@@ -45,6 +45,10 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * @var array<string, array>
      */
     protected array $schemaDefinitionForFieldCache = [];
+    /**
+     * @var array<string, FieldSchemaDefinitionResolverInterface|null>
+     */
+    protected array $schemaDefinitionResolverForFieldCache = [];
 
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
@@ -290,131 +294,158 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     /**
      * Get the "schema" properties as for the fieldName
      */
-    public function getSchemaDefinitionForField(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
+    final public function getSchemaDefinitionForField(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
         // First check if the value was cached
         $key = $typeResolver->getNamespacedTypeName() . '|' . $fieldName . '|' . json_encode($fieldArgs);
-        $schemaDefinitionResolver = null;
         if (!isset($this->schemaDefinitionForFieldCache[$key])) {
-            $schemaDefinition = [
-                SchemaDefinition::ARGNAME_NAME => $fieldName,
-            ];
-            // Find which is the $schemaDefinitionResolver that will satisfy this schema definition
-            // First try the one declared by the fieldResolver
-            $maybeSchemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver);
-            if (
-                $maybeSchemaDefinitionResolver !== null
-                && in_array($fieldName, $maybeSchemaDefinitionResolver->getFieldNamesToResolve())
-            ) {
-                $schemaDefinitionResolver = $maybeSchemaDefinitionResolver;
-            } else {
-                // Otherwise, try through all of its interfaces
-                foreach ($this->getFieldInterfaceResolvers() as $fieldInterfaceResolver) {
-                    if (in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement())) {
-                        // Interfaces do not receive the typeResolver, so we must bridge it
-                        $schemaDefinitionResolver = new InterfaceSchemaDefinitionResolverAdapter(
-                            $fieldInterfaceResolver
-                        );
-                        break;
-                    }
-                }
-            }
-
-            // If we found a resolver for this fieldName, get all its properties from it
-            if ($schemaDefinitionResolver !== null) {
-                $type = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName);
-                $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
-                // Use bitwise operators to extract the applied modifiers
-                // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
-                $schemaTypeModifiers = $schemaDefinitionResolver->getSchemaFieldTypeModifiers($typeResolver, $fieldName);
-                if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
-                }
-                // If setting the "array of arrays" flag, there's no need to set the "array" flag
-                $isArrayOfArrays = $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-                if (
-                    $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY
-                    || $isArrayOfArrays
-                ) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
-                    if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
-                        $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
-                    }
-                    if ($isArrayOfArrays) {
-                        $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
-                        if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
-                            $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
-                        }
-                    }
-                }
-                if ($description = $schemaDefinitionResolver->getSchemaFieldDescription($typeResolver, $fieldName)) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
-                }
-                if ($deprecationDescription = $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($typeResolver, $fieldName, $fieldArgs)) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
-                    $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
-                }
-                if ($args = $schemaDefinitionResolver->getSchemaFieldArgs($typeResolver, $fieldName)) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaFieldArgs(
-                        $typeResolver,
-                        $fieldName,
-                        $args
-                    );
-                }
-                $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $typeResolver, $fieldName);
-            }
-            /**
-             * Please notice: the version always comes from the fieldResolver, and not from the schemaDefinitionResolver
-             * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
-             * If the interface changes, the implementer will need to change, so the version will be upgraded
-             * But it could also be that the contract doesn't change, but the implementation changes
-             * In particular, Interfaces are schemaDefinitionResolver, but they must not indicate the version...
-             * it's really not their responsibility
-             */
-            if (Environment::enableSemanticVersionConstraints()) {
-                if ($version = $this->getSchemaFieldVersion($typeResolver, $fieldName)) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
-                }
-            }
-            if (!is_null($this->resolveFieldTypeResolverClass($typeResolver, $fieldName))) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
-            }
-            if (!is_null($this->resolveFieldMutationResolverClass($typeResolver, $fieldName))) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_FIELD_IS_MUTATION] = true;
-            }
-
-            // Hook to override the values, eg: by the Field Deprecation List
-            // 1. Applied on the type
-            $hookName = HookHelpers::getSchemaDefinitionForFieldHookName(
-                get_class($typeResolver),
-                $fieldName
-            );
-            $schemaDefinition = $this->hooksAPI->applyFilters(
-                $hookName,
-                $schemaDefinition,
-                $typeResolver,
-                $fieldName,
-                $fieldArgs
-            );
-            // 2. Applied on each of the implemented interfaces
-            foreach ($this->getFieldInterfaceResolvers() as $fieldInterfaceResolver) {
-                if (in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement())) {
-                    $hookName = HookHelpers::getSchemaDefinitionForFieldHookName(
-                        get_class($fieldInterfaceResolver),
-                        $fieldName
-                    );
-                    $schemaDefinition = $this->hooksAPI->applyFilters(
-                        $hookName,
-                        $schemaDefinition,
-                        $typeResolver,
-                        $fieldName,
-                        $fieldArgs
-                    );
-                }
-            }
-            $this->schemaDefinitionForFieldCache[$key] = $schemaDefinition;
+            $this->schemaDefinitionForFieldCache[$key] = $this->doGetSchemaDefinitionForField($typeResolver, $fieldName, $fieldArgs);
         }
         return $this->schemaDefinitionForFieldCache[$key];
+    }
+
+    /**
+     * Get the "schema" properties as for the fieldName
+     */
+    final public function doGetSchemaDefinitionForField(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
+    {
+        $schemaDefinition = [
+            SchemaDefinition::ARGNAME_NAME => $fieldName,
+        ];
+
+        // If we found a resolver for this fieldName, get all its properties from it
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($typeResolver, $fieldName);
+        if ($schemaDefinitionResolver !== null) {
+            $type = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName);
+            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
+            // Use bitwise operators to extract the applied modifiers
+            // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
+            $schemaTypeModifiers = $schemaDefinitionResolver->getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
+            }
+            // If setting the "array of arrays" flag, there's no need to set the "array" flag
+            $isArrayOfArrays = $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+            if (
+                $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY
+                || $isArrayOfArrays
+            ) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
+                if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
+                }
+                if ($isArrayOfArrays) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
+                    if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
+                        $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
+                    }
+                }
+            }
+            if ($description = $schemaDefinitionResolver->getSchemaFieldDescription($typeResolver, $fieldName)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
+            }
+            if ($deprecationDescription = $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($typeResolver, $fieldName, $fieldArgs)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
+                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
+            }
+            if ($args = $schemaDefinitionResolver->getSchemaFieldArgs($typeResolver, $fieldName)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaFieldArgs(
+                    $typeResolver,
+                    $fieldName,
+                    $args
+                );
+            }
+            $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $typeResolver, $fieldName);
+        }
+        /**
+         * Please notice: the version always comes from the fieldResolver, and not from the schemaDefinitionResolver
+         * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
+         * If the interface changes, the implementer will need to change, so the version will be upgraded
+         * But it could also be that the contract doesn't change, but the implementation changes
+         * In particular, Interfaces are schemaDefinitionResolver, but they must not indicate the version...
+         * it's really not their responsibility
+         */
+        if (Environment::enableSemanticVersionConstraints()) {
+            if ($version = $this->getSchemaFieldVersion($typeResolver, $fieldName)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
+            }
+        }
+        if (!is_null($this->resolveFieldTypeResolverClass($typeResolver, $fieldName))) {
+            $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
+        }
+        if (!is_null($this->resolveFieldMutationResolverClass($typeResolver, $fieldName))) {
+            $schemaDefinition[SchemaDefinition::ARGNAME_FIELD_IS_MUTATION] = true;
+        }
+
+        // Hook to override the values, eg: by the Field Deprecation List
+        // 1. Applied on the type
+        $hookName = HookHelpers::getSchemaDefinitionForFieldHookName(
+            get_class($typeResolver),
+            $fieldName
+        );
+        $schemaDefinition = $this->hooksAPI->applyFilters(
+            $hookName,
+            $schemaDefinition,
+            $typeResolver,
+            $fieldName,
+            $fieldArgs
+        );
+        // 2. Applied on each of the implemented interfaces
+        foreach ($this->getFieldInterfaceResolvers() as $fieldInterfaceResolver) {
+            if (in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement())) {
+                $hookName = HookHelpers::getSchemaDefinitionForFieldHookName(
+                    get_class($fieldInterfaceResolver),
+                    $fieldName
+                );
+                $schemaDefinition = $this->hooksAPI->applyFilters(
+                    $hookName,
+                    $schemaDefinition,
+                    $typeResolver,
+                    $fieldName,
+                    $fieldArgs
+                );
+            }
+        }
+        return $schemaDefinition;
+    }
+
+    final public function getSchemaDefinitionResolverForField(TypeResolverInterface $typeResolver, string $fieldName): ?FieldSchemaDefinitionResolverInterface
+    {
+        // First check if the value was cached
+        $key = $typeResolver->getNamespacedTypeName() . '|' . $fieldName;
+        if (!isset($this->schemaDefinitionResolverForFieldCache[$key])) {
+            $this->schemaDefinitionResolverForFieldCache[$key] = $this->doGetSchemaDefinitionResolverForField($typeResolver, $fieldName);
+        }
+        return $this->schemaDefinitionResolverForFieldCache[$key];
+    }
+
+    final public function doGetSchemaDefinitionResolverForField(TypeResolverInterface $typeResolver, string $fieldName): ?FieldSchemaDefinitionResolverInterface
+    {
+        // Find which is the $schemaDefinitionResolver that will satisfy this schema definition
+        // First try the one declared by the fieldResolver
+        $maybeSchemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver);
+        if (
+            $maybeSchemaDefinitionResolver !== null
+            && in_array($fieldName, $maybeSchemaDefinitionResolver->getFieldNamesToResolve())
+        ) {
+            return $maybeSchemaDefinitionResolver;
+        } else {
+            // Otherwise, try through all of its interfaces
+            foreach ($this->getFieldInterfaceResolvers() as $fieldInterfaceResolver) {
+                if (in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement())) {
+                    // Interfaces do not receive the typeResolver, so we must bridge it
+                    $interfaceSchemaDefinitionResolverAdapterClass = $this->getInterfaceSchemaDefinitionResolverAdapterClass();
+                    return new $interfaceSchemaDefinitionResolverAdapterClass($fieldInterfaceResolver);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
+    {
+        return InterfaceSchemaDefinitionResolverAdapter::class;
     }
 
     /**
