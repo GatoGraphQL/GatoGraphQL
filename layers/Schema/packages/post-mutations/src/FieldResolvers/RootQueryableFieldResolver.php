@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\PostMutations\ModuleProcessors\PostMutationFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
@@ -66,29 +66,10 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'myPost':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'id',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The post ID', 'post-mutations'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-        }
-        return $schemaFieldArgs;
-    }
-
     public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
+            'myPost' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS],
             'myPosts' => [PostMutationFilterInputContainerModuleProcessor::class, PostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTS],
             'myPostCount' => [PostMutationFilterInputContainerModuleProcessor::class, PostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
@@ -110,6 +91,21 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
         return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
     }
 
+    protected function getFieldDataFilteringMandatoryArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'myPost':
+                $idFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
+                ]);
+                return [
+                    $idFilterInputName,
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
@@ -125,16 +121,10 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
             'authors' => [$vars['global-userstate']['current-user-id']],
         ];
         switch ($fieldName) {
+            case 'myPost':
             case 'myPosts':
             case 'myPostCount':
                 return $query;
-            case 'myPost':
-                return array_merge(
-                    $query,
-                    [
-                        'include' => [$fieldArgs['id']],
-                    ]
-                );
         }
         return [];
     }
@@ -155,25 +145,18 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'myPosts':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-                $options = array_merge(
-                    [
-                        'return-type' => ReturnTypes::IDS,
-                    ],
-                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-                );
+                $options['return-type'] = ReturnTypes::IDS;
                 return $postTypeAPI->getPosts($query, $options);
             case 'myPostCount':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $postTypeAPI->getPostCount($query, $options);
             case 'myPost':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
+                $options['return-type'] = ReturnTypes::IDS;
                 if ($posts = $postTypeAPI->getPosts($query, $options)) {
                     return $posts[0];
                 }
