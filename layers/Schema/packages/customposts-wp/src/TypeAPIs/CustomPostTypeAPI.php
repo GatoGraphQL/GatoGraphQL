@@ -41,6 +41,20 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
     }
 
     /**
+     * If the "status" is not passed, then it's always "publish"
+     *
+     * @return array<string, mixed>
+     */
+    public function getCustomPostQueryDefaults(): array
+    {
+        return [
+            'status' => [
+                Status::PUBLISHED,
+            ],
+        ];
+    }
+
+    /**
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options
      * @return object[]
@@ -84,6 +98,9 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
                 $query['fields'] = 'ids';
             }
         }
+
+        // If param "status" in $query is not passed, it defaults to "publish"
+        $query = array_merge($this->getCustomPostQueryDefaults(), $query);
 
         // Accept field atts to filter the API fields
         $this->maybeFilterDataloadQueryArgs($query, $options);
