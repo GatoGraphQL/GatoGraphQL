@@ -15,7 +15,7 @@ use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoP\ComponentModel\FilterInput\FilterInputHelpers;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -101,7 +101,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         switch ($fieldName) {
             case 'customPosts':
             case 'unrestrictedCustomPosts':
-                $limitFilterInputName = FilterInputHelpers::getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);

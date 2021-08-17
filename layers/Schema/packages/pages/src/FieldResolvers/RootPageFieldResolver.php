@@ -17,7 +17,7 @@ use PoPSchema\Pages\ModuleProcessors\PageFilterInputContainerModuleProcessor;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoP\ComponentModel\FilterInput\FilterInputHelpers;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 class RootPageFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -158,7 +158,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'pages':
             case 'unrestrictedPages':
-                $limitFilterInputName = FilterInputHelpers::getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);

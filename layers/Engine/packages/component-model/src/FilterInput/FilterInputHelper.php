@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FilterInput;
 use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 
-class FilterInputHelpers
+class FilterInputHelper
 {
     public static function getFilterInputName(array $filterInput): string
     {

@@ -15,7 +15,7 @@ use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\Tags\ComponentConfiguration;
-use PoP\ComponentModel\FilterInput\FilterInputHelpers;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -119,7 +119,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'postTags':
             case 'postTagNames':
-                $limitFilterInputName = FilterInputHelpers::getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);

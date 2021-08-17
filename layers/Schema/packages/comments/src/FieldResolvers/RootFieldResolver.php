@@ -24,7 +24,7 @@ use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoP\ComponentModel\FilterInput\FilterInputHelpers;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -89,12 +89,12 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'comments':
-                $limitFilterInputName = FilterInputHelpers::getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
                 // Order by descending date
-                $orderFilterInputName = FilterInputHelpers::getFilterInputName([
+                $orderFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);

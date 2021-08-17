@@ -11,7 +11,7 @@ use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoP\ComponentModel\FilterInput\FilterInputHelpers;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
 {
@@ -88,7 +88,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
 
     protected function getFieldDataFilteringDefaultValues(string $fieldName): array
     {
-        $parentIDFilterInputName = FilterInputHelpers::getFilterInputName([
+        $parentIDFilterInputName = FilterInputHelper::getFilterInputName([
             CommonFilterInputModuleProcessor::class,
             CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
         ]);
@@ -98,11 +98,11 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         ];
         switch ($fieldName) {
             case 'comments':
-                $limitFilterInputName = FilterInputHelpers::getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
-                $orderFilterInputName = FilterInputHelpers::getFilterInputName([
+                $orderFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);

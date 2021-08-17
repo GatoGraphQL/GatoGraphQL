@@ -15,7 +15,7 @@ use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerMo
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoP\ComponentModel\FilterInput\FilterInputHelpers;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -119,7 +119,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'postCategories':
             case 'postCategoryNames':
-                $limitFilterInputName = FilterInputHelpers::getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);

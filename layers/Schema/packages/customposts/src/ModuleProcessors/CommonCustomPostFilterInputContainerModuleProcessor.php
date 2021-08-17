@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPosts\ModuleProcessors;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoP\ComponentModel\FilterInput\FilterInputHelpers;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
@@ -43,7 +43,7 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID:
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS:
-                $idFilterInputName = FilterInputHelpers::getFilterInputName([
+                $idFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
                 ]);
