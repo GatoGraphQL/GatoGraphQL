@@ -14,19 +14,18 @@ abstract class AbstractTagTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function getObjects(array $ids): array
     {
-        $query = array(
-            'include' => $ids
-        );
+        $query = [
+            'include' => $ids,
+        ];
         $tagTypeAPI = $this->getTypeAPI();
         return $tagTypeAPI->getTags($query);
     }
 
     public function getDataFromIdsQuery(array $ids): array
     {
-        $query = array(
-            'include' => $ids
-        );
-        return $query;
+        return [
+            'include' => $ids,
+        ];
     }
 
     protected function getOrderbyDefault()

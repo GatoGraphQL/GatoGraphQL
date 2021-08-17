@@ -38,14 +38,10 @@ class MediaTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function getDataFromIdsQuery(array $ids): array
     {
-        $query = array();
-        $query['include'] = $ids;
-        // $query['status'] = [
-        //     Status::PUBLISHED,
-        // ];
-        $query['custompost-types'] = 'attachment';
-
-        return $query;
+        return [
+            'include' => $ids,
+            'custompost-types' => 'attachment',
+        ];
     }
 
     public function executeQuery($query, array $options = [])
