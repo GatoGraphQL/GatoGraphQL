@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 
 abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
     use QueryableFieldResolverTrait;
 
-    protected function getFieldDataFilteringModule(string $fieldName): ?array
+    public function getFieldDataFilteringModule(string $fieldName): ?array
     {
         return null;
     }
@@ -42,7 +41,7 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSch
      * Provide default values for modules in the FilterInputContainer
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
-    protected function getFieldDataFilteringDefaultValues(string $fieldName): array
+    public function getFieldDataFilteringDefaultValues(string $fieldName): array
     {
         return [];
     }
