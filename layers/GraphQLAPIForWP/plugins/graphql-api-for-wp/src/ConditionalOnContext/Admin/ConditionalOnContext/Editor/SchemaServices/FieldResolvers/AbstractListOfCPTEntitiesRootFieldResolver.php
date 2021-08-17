@@ -11,7 +11,6 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
-use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 /**
@@ -45,40 +44,6 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
     }
 
     /**
-     * @return array<string, mixed>
-     */
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-
-        // Remove the "customPostTypes" field argument
-        $schemaFieldArgs = array_filter(
-            $schemaFieldArgs,
-            fn ($schemaFieldArg) => $schemaFieldArg[SchemaDefinition::ARGNAME_NAME] != 'customPostTypes'
-        );
-
-        return $schemaFieldArgs;
-    }
-
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @return array<string, mixed>
-     */
-    protected function getQuery(
-        TypeResolverInterface $typeResolver,
-        object $resultItem,
-        string $fieldName,
-        array $fieldArgs = []
-    ): array {
-        return [
-            'limit' => -1,
-            'status' => [
-                Status::PUBLISHED,
-            ],
-        ];
-    }
-
-    /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
@@ -94,24 +59,20 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
         array $options = []
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-
-        // Remove the "customPostTypes" field argument
-        unset($fieldArgs['customPostTypes']);
-        $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-        // Execute for the corresponding field name
-        $query['custompost-types'] = [
-            $this->getFieldCustomPostType($fieldName),
-        ];
-        $options = array_merge(
-            [
-                'return-type' => ReturnTypes::IDS,
-                // Do not use the limit set in the settings for custom posts
-                'skip-max-limit' => true,
-                // With this flag, the hook will not remove the private CPTs
-                self::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS => true,
+        $query = [
+            'limit' => -1,
+            // Execute for the corresponding field name
+            'custompost-types' => [
+                $this->getFieldCustomPostType($fieldName),
             ],
-            $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-        );
+        ];
+        $options = [
+            'return-type' => ReturnTypes::IDS,
+            // Do not use the limit set in the settings for custom posts
+            'skip-max-limit' => true,
+            // With this flag, the hook will not remove the private CPTs
+            self::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS => true,
+        ];
         return $customPostTypeAPI->getCustomPosts($query, $options);
     }
 
