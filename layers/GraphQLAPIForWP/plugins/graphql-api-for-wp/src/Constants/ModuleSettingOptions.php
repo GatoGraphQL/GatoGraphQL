@@ -13,4 +13,5 @@ class ModuleSettingOptions
     public const ENTRIES = 'entries';
     public const BEHAVIOR = 'behavior';
     public const PATH = 'path';
+    public const ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
 }

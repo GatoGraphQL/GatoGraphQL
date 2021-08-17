@@ -241,7 +241,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => PostsComponentConfiguration::class,
                 'envVariable' => PostsEnvironment::ADD_POST_TYPE_TO_CUSTOMPOST_UNION_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
+                'option' => ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
             ],
             // User default/max limits
             [
@@ -333,7 +333,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => PagesComponentConfiguration::class,
                 'envVariable' => PagesEnvironment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
-                'option' => SchemaTypeModuleResolver::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
+                'option' => ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
             ],
             // Custom post default/max limits
             [

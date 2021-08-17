@@ -15,6 +15,7 @@ use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -72,7 +73,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'customPosts' => [
@@ -95,6 +96,22 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         };
     }
 
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'customPosts':
+            case 'unrestrictedCustomPosts':
+                $limitFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
+                return [
+                    $limitFilterInputName => ComponentConfiguration::getCustomPostListDefaultLimit(),
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
@@ -105,24 +122,17 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $sharedQuery = [
-            'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
-            'status' => [
-                Status::PUBLISHED,
-            ],
-        ];
         switch ($fieldName) {
             case 'customPosts':
             case 'unrestrictedCustomPosts':
-                return array_merge(
-                    $sharedQuery,
-                    [
-                        'limit' => ComponentConfiguration::getCustomPostListDefaultLimit(),
-                    ]
-                );
             case 'customPostCount':
             case 'unrestrictedCustomPostCount':
-                return $sharedQuery;
+                return [
+                    'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
+                    'status' => [
+                        Status::PUBLISHED,
+                    ],
+                ];
         }
         return [];
     }

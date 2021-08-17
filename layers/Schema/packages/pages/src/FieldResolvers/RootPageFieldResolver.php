@@ -16,6 +16,7 @@ use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\Pages\ModuleProcessors\PageFilterInputContainerModuleProcessor;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class RootPageFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -128,7 +129,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         return $schemaFieldArgs;
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'pages' => [
@@ -149,6 +150,22 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             ],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
+    }
+
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'pages':
+            case 'unrestrictedPages':
+                $limitFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
+                return [
+                    $limitFilterInputName => ComponentConfiguration::getPageListDefaultLimit(),
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
     }
 
     /**
@@ -216,7 +233,6 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             case 'pages':
             case 'unrestrictedPages':
                 $query = [
-                    'limit' => ComponentConfiguration::getPageListDefaultLimit(),
                     'status' => [
                         Status::PUBLISHED,
                     ],

@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 
-abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
+abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver implements QueryableSchemaFieldInterfaceResolverInterface
 {
     use QueryableFieldResolverTrait;
 
-    protected function getFieldDataFilteringModule(string $fieldName): ?array
+    public function getFieldDataFilteringModule(string $fieldName): ?array
     {
         return null;
     }

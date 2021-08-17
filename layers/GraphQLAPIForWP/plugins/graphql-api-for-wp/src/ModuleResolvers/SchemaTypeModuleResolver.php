@@ -56,7 +56,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     /**
      * Setting options
      */
-    public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
     public const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
     public const OPTION_ADD_SELF_FIELD_TO_SCHEMA = 'add-self-field-to-schema';
@@ -393,10 +392,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::CUSTOMPOST_TYPES => ['post'],
             ],
             self::SCHEMA_POSTS => [
-                self::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => true,
+                ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => true,
             ],
             self::SCHEMA_PAGES => [
-                self::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => false,
+                ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => false,
             ],
             self::SCHEMA_USERS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -695,7 +694,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $pageTypeResolver->getTypeName()
                 ),
             ];
-            $option = self::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE;
+            $option = ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

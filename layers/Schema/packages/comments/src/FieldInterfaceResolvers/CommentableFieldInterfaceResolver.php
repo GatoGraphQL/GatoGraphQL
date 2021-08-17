@@ -7,6 +7,7 @@ namespace PoPSchema\Comments\FieldInterfaceResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractQueryableSchemaFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
@@ -69,7 +70,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }
 
-    protected function getFieldDataFilteringModule(string $fieldName): ?array
+    public function getFieldDataFilteringModule(string $fieldName): ?array
     {
         return match ($fieldName) {
             'comments' => [
@@ -86,25 +87,36 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
 
     protected function getFieldDataFilteringDefaultValues(string $fieldName): array
     {
+        $parentIDFilterInputName = $this->getFilterInputName([
+            CommonFilterInputModuleProcessor::class,
+            CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
+        ]);
+        $filterInputNameDefaultValues = [
+            // By default retrieve the top level comments (with ID => 0)
+            $parentIDFilterInputName => 0,
+        ];
         switch ($fieldName) {
             case 'comments':
-            case 'commentCount':
-                $parentIDFilterInputName = $this->getFilterInputName([
+                $limitFilterInputName = $this->getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
                 $orderFilterInputName = $this->getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);
+                // Order by descending date
                 $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
                 $order = 'DESC';
-                return [
-                    // By default retrieve the top level comments (with ID => 0)
-                    $parentIDFilterInputName => 0,
-                    // Order by descending date
-                    $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
-                ];
+                return array_merge(
+                    $filterInputNameDefaultValues,
+                    [
+                        $limitFilterInputName => ComponentConfiguration::getCustomPostCommentOrCommentResponseListDefaultLimit(),
+                        $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
+                    ]
+                );
+            case 'commentCount':
+                return $filterInputNameDefaultValues;
         }
         return parent::getFieldDataFilteringDefaultValues($fieldName);
     }

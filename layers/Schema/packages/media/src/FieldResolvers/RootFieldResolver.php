@@ -23,6 +23,7 @@ use PoPSchema\Media\ModuleProcessors\MediaFilterInputContainerModuleProcessor;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -110,7 +111,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'mediaItems' => [MediaFilterInputContainerModuleProcessor::class, MediaFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MEDIAITEMS],
@@ -121,17 +122,28 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
+        // Assign a default value to "mimeTypes"
+        $mimeTypeFilterInputName = $this->getFilterInputName([
+            FilterInputModuleProcessor::class,
+            FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES
+        ]);
+        $filterInputNameDefaultValues = [
+            $mimeTypeFilterInputName => ['image'],
+        ];
         switch ($fieldName) {
             case 'mediaItems':
-            case 'mediaItemCount':
-                // Assign a default value to "mimeTypes"
-                $mimeTypeFilterInputName = $this->getFilterInputName([
-                    FilterInputModuleProcessor::class,
-                    FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES
+                $limitFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
-                return [
-                    $mimeTypeFilterInputName => ['image'],
-                ];
+                return array_merge(
+                    $filterInputNameDefaultValues,
+                    [
+                        $limitFilterInputName => ComponentConfiguration::getMediaListDefaultLimit(),
+                    ]
+                );
+            case 'mediaItemCount':
+                return $filterInputNameDefaultValues;
         }
         return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
     }
@@ -153,16 +165,13 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'mediaItems':
-                $query = [
-                    'limit' => ComponentConfiguration::getMediaListDefaultLimit(),
-                ];
                 $options = array_merge(
                     [
                         'return-type' => ReturnTypes::IDS,
                     ],
                     $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
                 );
-                return $this->mediaTypeAPI->getMediaItems($query, $options);
+                return $this->mediaTypeAPI->getMediaItems([], $options);
             case 'mediaItemCount':
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $this->mediaTypeAPI->getMediaItemCount([], $options);
