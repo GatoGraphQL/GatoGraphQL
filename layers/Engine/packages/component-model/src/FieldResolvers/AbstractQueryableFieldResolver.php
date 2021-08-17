@@ -27,7 +27,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
     {
         if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName)) {
             $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
-            return $this->getSchemaFieldArgsWithFilterInputDefaultValues(
+            return $this->getSchemaFieldArgsWithCustomFilterInputData(
                 $schemaFieldArgs,
                 $this->getFieldDataFilteringDefaultValues($typeResolver, $fieldName)
             );

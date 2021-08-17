@@ -28,7 +28,7 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSch
     {
         if ($filterDataloadingModule = $this->getFieldDataFilteringModule($fieldName)) {
             $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
-            return $this->getSchemaFieldArgsWithFilterInputDefaultValues(
+            return $this->getSchemaFieldArgsWithCustomFilterInputData(
                 $schemaFieldArgs,
                 $this->getFieldDataFilteringDefaultValues($fieldName)
             );

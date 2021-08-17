@@ -47,8 +47,10 @@ trait QueryableFieldResolverTrait
      *
      * @param array<string,mixed> $filterInputNameDefaultValues A list of filterInputName as key, and its value
      */
-    protected function getSchemaFieldArgsWithFilterInputDefaultValues(array $schemaFieldArgs, array $filterInputNameDefaultValues): array
-    {
+    protected function getSchemaFieldArgsWithCustomFilterInputData(
+        array $schemaFieldArgs,
+        array $filterInputNameDefaultValues
+    ): array {
         foreach ($filterInputNameDefaultValues as $filterInputName => $defaultValue) {
             foreach ($schemaFieldArgs as &$schemaFieldArg) {
                 if ($schemaFieldArg[SchemaDefinition::ARGNAME_NAME] !== $filterInputName) {
