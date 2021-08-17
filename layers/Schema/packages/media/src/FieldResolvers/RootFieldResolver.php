@@ -24,6 +24,7 @@ use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoP\ComponentModel\FilterInput\FilterInputHelpers;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -123,7 +124,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         // Assign a default value to "mimeTypes"
-        $mimeTypeFilterInputName = $this->getFilterInputName([
+        $mimeTypeFilterInputName = FilterInputHelpers::getFilterInputName([
             FilterInputModuleProcessor::class,
             FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES
         ]);
@@ -132,7 +133,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         ];
         switch ($fieldName) {
             case 'mediaItems':
-                $limitFilterInputName = $this->getFilterInputName([
+                $limitFilterInputName = FilterInputHelpers::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);

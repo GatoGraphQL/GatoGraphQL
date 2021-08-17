@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
-
 abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor implements FilterInputContainerModuleProcessorInterface
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
@@ -41,14 +38,6 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         return [
             self::HOOK_FILTER_INPUTS,
         ];
-    }
-
-    protected function getFilterInputName(array $filterInput): string
-    {
-        $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
-        /** @var FormComponentModuleProcessorInterface */
-        $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
-        return $filterInputProcessor->getName($filterInput);
     }
     
     /**

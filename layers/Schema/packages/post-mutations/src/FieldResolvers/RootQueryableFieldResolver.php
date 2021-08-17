@@ -18,6 +18,7 @@ use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\UserState\FieldResolvers\UserStateFieldResolverTrait;
+use PoP\ComponentModel\FilterInput\FilterInputHelpers;
 
 class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -80,7 +81,7 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'myPosts':
-                $limitFilterInputName = $this->getFilterInputName([
+                $limitFilterInputName = FilterInputHelpers::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);

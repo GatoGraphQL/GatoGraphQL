@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\ModuleProcessors;
 
 use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputContainerModuleProcessor as UpstreamAbstractFilterInputContainerModuleProcessor;
-use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 abstract class AbstractFilterInputContainerModuleProcessor extends UpstreamAbstractFilterInputContainerModuleProcessor
@@ -46,13 +44,6 @@ abstract class AbstractFilterInputContainerModuleProcessor extends UpstreamAbstr
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
         ];
-    }
-    protected function getFilterInputName(array $filterInput): string
-    {
-        $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
-        /** @var FormComponentModuleProcessorInterface */
-        $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
-        return $filterInputProcessor->getName($filterInput);
     }
     
     /**

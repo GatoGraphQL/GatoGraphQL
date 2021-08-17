@@ -21,6 +21,7 @@ use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\ModuleProcessors\UserFilterInputContainerModuleProcessor;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\FilterInput\FilterInputHelpers;
 
 abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -114,7 +115,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'users':
             case 'unrestrictedUsers':
-                $limitFilterInputName = $this->getFilterInputName([
+                $limitFilterInputName = FilterInputHelpers::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);

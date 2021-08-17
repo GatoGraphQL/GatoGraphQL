@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
-use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
 trait QueryableFieldResolverTrait
@@ -35,14 +33,6 @@ trait QueryableFieldResolverTrait
             $filterDataModuleProcessor->getFieldDataFilteringDefaultValues($filterDataloadingModule),
             $filterDataModuleProcessor->getFieldDataFilteringMandatoryArgs($filterDataloadingModule)
         );
-    }
-
-    protected function getFilterInputName(array $filterInput): string
-    {
-        $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
-        /** @var FormComponentModuleProcessorInterface */
-        $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
-        return $filterInputProcessor->getName($filterInput);
     }
 
     /**
