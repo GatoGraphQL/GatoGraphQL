@@ -14,6 +14,7 @@ use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerModuleProcessor;
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -112,6 +113,22 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'postCategories':
+            case 'postCategoryNames':
+                $limitFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
+                return [
+                    $limitFilterInputName => ComponentConfiguration::getCategoryListDefaultLimit(),
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -146,20 +163,16 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                 return null;
             case 'postCategories':
             case 'postCategoryNames':
-                $query = [
-                    'limit' => ComponentConfiguration::getCategoryListDefaultLimit(),
-                ];
                 $options = array_merge(
                     [
                         'return-type' => $fieldName === 'postCategories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
                     ],
                     $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
                 );
-                return $postCategoryTypeAPI->getCategories($query, $options);
+                return $postCategoryTypeAPI->getCategories([], $options);
             case 'postCategoryCount':
-                $query = [];
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-                return $postCategoryTypeAPI->getCategoryCount($query, $options);
+                return $postCategoryTypeAPI->getCategoryCount([], $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

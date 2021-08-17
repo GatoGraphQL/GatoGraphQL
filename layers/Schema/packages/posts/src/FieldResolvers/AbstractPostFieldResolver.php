@@ -14,6 +14,7 @@ use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -82,6 +83,22 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'posts':
+            case 'unrestrictedPosts':
+                $limitFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
+                return [
+                    $limitFilterInputName => ComponentConfiguration::getPostListDefaultLimit(),
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
@@ -95,12 +112,6 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'posts':
             case 'unrestrictedPosts':
-                return [
-                    'limit' => ComponentConfiguration::getPostListDefaultLimit(),
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
-                ];
             case 'postCount':
             case 'unrestrictedPostCount':
                 return [

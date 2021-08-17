@@ -16,6 +16,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\ModuleProcessors\UserFilterInputContainerModuleProcessor;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -108,6 +109,22 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'users':
+            case 'unrestrictedUsers':
+                $limitFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
+                return [
+                    $limitFilterInputName => ComponentConfiguration::getUserListDefaultLimit(),
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -126,16 +143,13 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'users':
             case 'unrestrictedUsers':
-                $query = [
-                    'limit' => ComponentConfiguration::getUserListDefaultLimit(),
-                ];
                 $options = array_merge(
                     [
                         'return-type' => ReturnTypes::IDS,
                     ],
                     $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
                 );
-                return $this->userTypeAPI->getUsers($query, $options);
+                return $this->userTypeAPI->getUsers([], $options);
             case 'userCount':
             case 'unrestrictedUserCount':
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);

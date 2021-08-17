@@ -16,6 +16,7 @@ use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\UserState\FieldResolvers\UserStateFieldResolverTrait;
 
 class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
@@ -94,6 +95,21 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'myPosts':
+                $limitFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
+                return [
+                    $limitFilterInputName => ComponentConfiguration::getPostListDefaultLimit(),
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
@@ -115,12 +131,6 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
         ];
         switch ($fieldName) {
             case 'myPosts':
-                return array_merge(
-                    $query,
-                    [
-                        'limit' => ComponentConfiguration::getPostListDefaultLimit(),
-                    ]
-                );
             case 'myPostCount':
                 return $query;
             case 'myPost':
