@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
+use PoP\ComponentModel\FieldResolvers\SelfQueryableFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -11,6 +12,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver
 {
     use QueryableFieldResolverTrait;
+    use SelfQueryableFieldSchemaDefinitionResolverTrait;
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
@@ -32,11 +34,6 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         }
 
         return [];
-    }
-
-    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
-    {
-        return null;
     }
 
     /**
