@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractQueryableDataModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputContainerModuleProcessor as UpstreamAbstractFilterInputContainerModuleProcessor;
 use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
-abstract class AbstractFilterInputContainerModuleProcessor extends AbstractQueryableDataModuleProcessor
+abstract class AbstractFilterInputContainerModuleProcessor extends UpstreamAbstractFilterInputContainerModuleProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
