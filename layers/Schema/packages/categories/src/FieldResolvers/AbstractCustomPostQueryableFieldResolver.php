@@ -12,6 +12,7 @@ use PoPSchema\Categories\ComponentConfiguration;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -69,6 +70,22 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         };
     }
 
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'categories':
+            case 'categoryNames':
+                $limitFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
+                return [
+                    $limitFilterInputName => ComponentConfiguration::getCategoryListDefaultLimit(),
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -89,9 +106,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         switch ($fieldName) {
             case 'categories':
             case 'categoryNames':
-                $query = [
-                    'limit' => ComponentConfiguration::getCategoryListDefaultLimit(),
-                ];
+                $query = [];
                 $options = array_merge(
                     [
                         'return-type' => $fieldName === 'categories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
