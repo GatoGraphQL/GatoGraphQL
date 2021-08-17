@@ -17,7 +17,7 @@ use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
  */
 class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionResolverInterface
 {
-    public function __construct(private FieldInterfaceResolverInterface $fieldInterfaceResolver)
+    public function __construct(protected FieldInterfaceResolverInterface $fieldInterfaceResolver)
     {
     }
 
