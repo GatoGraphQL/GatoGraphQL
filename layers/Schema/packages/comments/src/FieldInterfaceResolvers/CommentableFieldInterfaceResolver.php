@@ -85,7 +85,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         };
     }
 
-    public function getFieldDataFilteringDefaultValues(string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(string $fieldName): array
     {
         switch ($fieldName) {
             case 'comments':

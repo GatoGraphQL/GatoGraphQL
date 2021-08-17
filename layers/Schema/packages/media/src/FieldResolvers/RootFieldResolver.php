@@ -120,7 +120,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
-    public function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         // Assign a default value to "mimeTypes"
         $mimeTypeFilterInputName = $this->getFilterInputName([

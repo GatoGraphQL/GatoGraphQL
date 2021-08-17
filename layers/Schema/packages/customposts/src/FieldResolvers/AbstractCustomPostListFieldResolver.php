@@ -96,7 +96,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         };
     }
 
-    public function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'customPosts':

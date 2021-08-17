@@ -70,7 +70,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         };
     }
 
-    public function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'categories':
