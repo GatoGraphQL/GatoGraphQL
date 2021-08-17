@@ -157,6 +157,10 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'responses':
+                $limitFilterInputName = $this->getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
                 // Order by descending date
                 $orderFilterInputName = $this->getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
@@ -165,6 +169,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                 $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
                 $order = 'DESC';
                 return [
+                    $limitFilterInputName => ComponentConfiguration::getCustomPostCommentOrCommentResponseListDefaultLimit(),
                     $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
                 ];
         }
@@ -231,7 +236,6 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
 
             case 'responses':
                 $query = [
-                    'limit' => ComponentConfiguration::getCustomPostCommentOrCommentResponseListDefaultLimit(),
                     'status' => Status::APPROVED,
                     'parent-id' => $typeResolver->getID($comment),
                 ];
