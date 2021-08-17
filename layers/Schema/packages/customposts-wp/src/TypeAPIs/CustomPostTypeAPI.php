@@ -119,8 +119,8 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
             }
             unset($query['status']);
         }
-        if ($query['include'] ?? null) {
-            // Transform from array to string
+        if (isset($query['include']) && is_array($query['include'])) {
+            // It can be an array or a string
             $query['include'] = implode(',', $query['include']);
         }
         if (isset($query['exclude-ids'])) {
