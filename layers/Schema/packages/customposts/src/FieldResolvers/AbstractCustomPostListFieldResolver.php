@@ -114,31 +114,6 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @return array<string, mixed>
-     */
-    protected function getQuery(
-        TypeResolverInterface $typeResolver,
-        object $resultItem,
-        string $fieldName,
-        array $fieldArgs = []
-    ): array {
-        switch ($fieldName) {
-            case 'customPosts':
-            case 'unrestrictedCustomPosts':
-            case 'customPostCount':
-            case 'unrestrictedCustomPostCount':
-                return [
-                    'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
-                ];
-        }
-        return [];
-    }
-
-    /**
-     * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
@@ -153,10 +128,12 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         array $options = []
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        $query = [
+            'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
+        ];
         switch ($fieldName) {
             case 'customPosts':
             case 'unrestrictedCustomPosts':
-                $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 $options = array_merge(
                     [
                         'return-type' => ReturnTypes::IDS,
@@ -166,7 +143,6 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
                 return $customPostTypeAPI->getCustomPosts($query, $options);
             case 'customPostCount':
             case 'unrestrictedCustomPostCount':
-                $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $customPostTypeAPI->getCustomPostCount($query, $options);
         }

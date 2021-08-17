@@ -101,30 +101,6 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @return array<string, mixed>
-     */
-    protected function getQuery(
-        TypeResolverInterface $typeResolver,
-        object $resultItem,
-        string $fieldName,
-        array $fieldArgs = []
-    ): array {
-        switch ($fieldName) {
-            case 'posts':
-            case 'unrestrictedPosts':
-            case 'postCount':
-            case 'unrestrictedPostCount':
-                return [
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
-                ];
-        }
-        return [];
-    }
-
-    /**
-     * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
@@ -142,19 +118,17 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'posts':
             case 'unrestrictedPosts':
-                $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 $options = array_merge(
                     [
                         'return-type' => ReturnTypes::IDS,
                     ],
                     $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
                 );
-                return $postTypeAPI->getPosts($query, $options);
+                return $postTypeAPI->getPosts([], $options);
             case 'postCount':
             case 'unrestrictedPostCount':
-                $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-                return $postTypeAPI->getPostCount($query, $options);
+                return $postTypeAPI->getPostCount([], $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

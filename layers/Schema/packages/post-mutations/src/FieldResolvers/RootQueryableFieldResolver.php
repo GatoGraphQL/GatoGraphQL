@@ -122,11 +122,6 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
     ): array {
         $vars = ApplicationState::getVars();
         $query = [
-            'status' => [
-                Status::PUBLISHED,
-                Status::PENDING,
-                Status::DRAFT,
-            ],
             'authors' => [$vars['global-userstate']['current-user-id']],
         ];
         switch ($fieldName) {
@@ -134,7 +129,6 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
             case 'myPostCount':
                 return $query;
             case 'myPost':
-                $query['status'][] = Status::TRASH;
                 return array_merge(
                     $query,
                     [

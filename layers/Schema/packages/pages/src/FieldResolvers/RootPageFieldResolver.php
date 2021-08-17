@@ -232,27 +232,17 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                 return null;
             case 'pages':
             case 'unrestrictedPages':
-                $query = [
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
-                ];
                 $options = array_merge(
                     [
                         'return-type' => ReturnTypes::IDS,
                     ],
                     $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
                 );
-                return $pageTypeAPI->getPages($query, $options);
+                return $pageTypeAPI->getPages([], $options);
             case 'pageCount':
             case 'unrestrictedPageCount':
-                $query = [
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
-                ];
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-                return $pageTypeAPI->getPageCount($query, $options);
+                return $pageTypeAPI->getPageCount([], $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

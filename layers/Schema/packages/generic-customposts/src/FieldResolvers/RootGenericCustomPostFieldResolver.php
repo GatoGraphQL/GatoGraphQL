@@ -174,31 +174,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     ): array {
         $query = [
             'custompost-types' => ComponentConfiguration::getGenericCustomPostTypes(),
-            'status' => [
-                Status::PUBLISHED,
-            ],
         ];
-        if (
-            in_array($fieldName, [
-            'genericCustomPost',
-            'genericCustomPostBySlug',
-            'genericCustomPosts',
-            'genericCustomPostCount',
-            ])
-        ) {
-            $query['status'] = [
-                Status::PUBLISHED,
-            ];
-        } elseif (
-            in_array($fieldName, [
-            'unrestrictedGenericCustomPost',
-            'unrestrictedGenericCustomPostBySlug',
-            'unrestrictedGenericCustomPosts',
-            'unrestrictedGenericCustomPostCount',
-            ])
-        ) {
-            $query['status'] = $this->getUnrestrictedFieldCustomPostTypes();
-        }
         switch ($fieldName) {
             case 'genericCustomPost':
             case 'unrestrictedGenericCustomPost':

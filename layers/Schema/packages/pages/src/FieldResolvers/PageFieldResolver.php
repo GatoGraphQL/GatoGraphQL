@@ -120,9 +120,6 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
         $page = $resultItem;
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
         $query = [
-            'status' => [
-                Status::PUBLISHED,
-            ],
             'parent-id' => $typeResolver->getID($page),
         ];
         switch ($fieldName) {
