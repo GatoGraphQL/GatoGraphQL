@@ -24,11 +24,13 @@ interface PostTypeAPIInterface extends CustomPostTypeAPIInterface
      */
     public function getPost(int | string $id): ?object;
     /**
-     * Get the list of posts
+     * Get the list of posts.
+     * If param "status" in $query is not passed, it defaults to "publish"
      */
     public function getPosts(array $query, array $options = []): array;
     /**
-     * Get the number of posts
+     * Get the number of posts.
+     * If param "status" in $query is not passed, it defaults to "publish"
      */
     public function getPostCount(array $query = [], array $options = []): int;
     /**
