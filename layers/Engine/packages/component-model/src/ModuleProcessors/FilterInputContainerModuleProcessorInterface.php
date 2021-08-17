@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-interface QueryableDataModuleProcessorInterface extends FilterDataModuleProcessorInterface
+interface FilterInputContainerModuleProcessorInterface extends FilterDataModuleProcessorInterface
 {
     /**
      * Provide default values for modules in the FilterInputContainer

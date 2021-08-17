@@ -8,7 +8,7 @@ use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManager
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\QueryableDataModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
@@ -17,7 +17,7 @@ trait QueryableFieldResolverTrait
     protected function getFilterSchemaDefinitionItems(array $filterDataloadingModule): array
     {
         $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
-        /** @var QueryableDataModuleProcessorInterface */
+        /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $moduleProcessorManager->getProcessor($filterDataloadingModule);
         $filterQueryArgsModules = $filterDataModuleProcessor->getDataloadQueryArgsFilteringModules($filterDataloadingModule);
         $schemaFieldArgs = GeneralUtils::arrayFlatten(
