@@ -46,18 +46,26 @@ trait QueryableFieldResolverTrait
      * Then, allow to override these values now.
      *
      * @param array<string,mixed> $filterInputNameDefaultValues A list of filterInputName as key, and its value
+     * @param string[] $filterInputNameMandatoryArgs
      */
     protected function getSchemaFieldArgsWithCustomFilterInputData(
         array $schemaFieldArgs,
-        array $filterInputNameDefaultValues
+        array $filterInputNameDefaultValues,
+        array $filterInputNameMandatoryArgs,
     ): array {
-        foreach ($filterInputNameDefaultValues as $filterInputName => $defaultValue) {
-            foreach ($schemaFieldArgs as &$schemaFieldArg) {
+        foreach ($schemaFieldArgs as &$schemaFieldArg) {
+            foreach ($filterInputNameDefaultValues as $filterInputName => $defaultValue) {
                 if ($schemaFieldArg[SchemaDefinition::ARGNAME_NAME] !== $filterInputName) {
                     continue;
                 }
                 $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $defaultValue;
                 break;
+            }
+            if (in_array(
+                $schemaFieldArg[SchemaDefinition::ARGNAME_NAME],
+                $filterInputNameMandatoryArgs
+            )) {
+                $schemaFieldArg[SchemaDefinition::ARGNAME_MANDATORY] = true;
             }
         }
         return $schemaFieldArgs;
