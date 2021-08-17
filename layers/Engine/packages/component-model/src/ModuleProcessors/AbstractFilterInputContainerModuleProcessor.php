@@ -9,6 +9,40 @@ use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 
 abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor implements QueryableDataModuleProcessorInterface
 {
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+
+    final public function getSubmodules(array $module): array
+    {
+        $filterInputModules = $this->getFilterInputModules($module);
+
+        // Enable extensions to add more FilterInputs
+        foreach ($this->getFilterInputHookNames() as $filterInputHookName) {
+            $filterInputModules = $this->hooksAPI->applyFilters(
+                $filterInputHookName,
+                $filterInputModules,
+                $module
+            );
+        }
+
+        // Add the filterInputs to whatever came from the parent (if anything)
+        return array_merge(
+            parent::getSubmodules($module),
+            $filterInputModules
+        );
+    }
+
+    abstract public function getFilterInputModules(array $module): array;
+
+    /**
+     * @return string[]
+     */
+    protected function getFilterInputHookNames(): array
+    {
+        return [
+            self::HOOK_FILTER_INPUTS,
+        ];
+    }
+
     protected function getFilterInputName(array $filterInput): string
     {
         $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
