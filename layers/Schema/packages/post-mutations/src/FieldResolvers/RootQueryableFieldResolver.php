@@ -85,7 +85,7 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
         return $schemaFieldArgs;
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'myPosts' => [PostMutationFilterInputContainerModuleProcessor::class, PostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTS],

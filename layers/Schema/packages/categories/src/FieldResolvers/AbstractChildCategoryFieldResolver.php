@@ -59,7 +59,7 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'childCategories' => [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES],

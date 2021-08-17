@@ -79,7 +79,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'childPages' => [

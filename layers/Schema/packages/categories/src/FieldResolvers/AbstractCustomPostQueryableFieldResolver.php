@@ -60,7 +60,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'categories' => [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES],
@@ -70,7 +70,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         };
     }
 
-    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'categories':

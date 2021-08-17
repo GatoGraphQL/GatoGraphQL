@@ -128,7 +128,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         return $schemaFieldArgs;
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'pages' => [

@@ -153,7 +153,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         return $schemaFieldArgs;
     }
 
-    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'responses':
@@ -176,7 +176,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
     }
 
-    protected function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'responses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSES],
