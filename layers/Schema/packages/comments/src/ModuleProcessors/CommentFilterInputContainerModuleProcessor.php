@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ModuleProcessors;
 
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoPSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
@@ -13,6 +14,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
+    public const MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_AND_STATUS = 'filterinputcontainer-comment-by-id-and-status';
     public const MODULE_FILTERINPUTCONTAINER_COMMENTS = 'filterinputcontainer-comments';
     public const MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT = 'filterinputcontainer-commentcount';
     public const MODULE_FILTERINPUTCONTAINER_RESPONSES = 'filterinputcontainer-responses';
@@ -29,6 +31,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
     public function getModulesToProcess(): array
     {
         return array(
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_AND_STATUS],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTS],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_RESPONSES],
@@ -68,6 +71,10 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
         ];
         return match ((string)$module[1]) {
+            self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_AND_STATUS => [
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
+            ],
             self::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_RESPONSES => [
                 ...$responseFilterInputModules,
@@ -112,6 +119,21 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             ],
             default => [],
         };
+    }
+
+    public function getFieldDataFilteringMandatoryArgs(array $module): array
+    {
+        switch ($module[1]) {
+            case self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_AND_STATUS:
+                $idFilterInputName = FilterInputHelper::getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
+                ]);
+                return [
+                    $idFilterInputName,
+                ];
+        }
+        return parent::getFieldDataFilteringMandatoryArgs($module);
     }
 
     /**

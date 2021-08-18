@@ -18,6 +18,7 @@ use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor as UpstreamCommentFilterInputContainerModuleProcessor;
 use PoPSchema\CommentMutations\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
@@ -62,6 +63,7 @@ class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
+            'myComment',
             'myCommentCount',
             'myComments',
         ];
@@ -70,6 +72,7 @@ class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         return match ($fieldName) {
+            'myComment' => SchemaDefinition::TYPE_ID,
             'myComments' => SchemaDefinition::TYPE_ID,
             'myCommentCount' => SchemaDefinition::TYPE_INT,
             default => parent::getSchemaFieldType($typeResolver, $fieldName),
@@ -114,6 +117,7 @@ class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
+            'myComment' => $this->translationAPI->__('Comment by the logged-in user on the site with a specific ID', 'pop-comments'),
             'myCommentCount' => $this->translationAPI->__('Number of comments by the logged-in user on the site', 'pop-comments'),
             'myComments' => $this->translationAPI->__('Comments by the logged-in user on the site', 'pop-comments'),
             default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
@@ -123,6 +127,7 @@ class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
     public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
+            'myComment' => [UpstreamCommentFilterInputContainerModuleProcessor::class, UpstreamCommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_AND_STATUS],
             'myComments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYCOMMENTS],
             'myCommentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYCOMMENTCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
@@ -145,22 +150,22 @@ class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $vars = ApplicationState::getVars();
+        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
         $query = [
             'authors' => [$vars['global-userstate']['current-user-id']],
         ];
         switch ($fieldName) {
             case 'myCommentCount':
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $this->commentTypeAPI->getCommentCount($query, $options);
-
             case 'myComments':
-                $options = array_merge(
-                    [
-                        'return-type' => ReturnTypes::IDS,
-                    ],
-                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-                );
+                $options['return-type'] = ReturnTypes::IDS;
                 return $this->commentTypeAPI->getComments($query, $options);
+            case 'myComment':
+                $options['return-type'] = ReturnTypes::IDS;
+                if ($comments = $this->commentTypeAPI->getComments($query, $options)) {
+                    return $comments[0];
+                }
+                return null;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -170,6 +175,7 @@ class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'myComments':
+            case 'myComment':
                 return CommentTypeResolver::class;
         }
 
