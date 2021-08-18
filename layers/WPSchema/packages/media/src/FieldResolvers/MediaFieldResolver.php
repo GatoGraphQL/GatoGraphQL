@@ -171,12 +171,12 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
             case 'date':
                 return $this->dateFormatter->format(
                     $fieldArgs['format'],
-                    $mediaItem->post_date
+                    $fieldArgs['gmt'] ? $mediaItem->post_date_gmt : $mediaItem->post_date
                 );
             case 'modified':
                 return $this->dateFormatter->format(
                     $fieldArgs['format'],
-                    $mediaItem->post_modified
+                    $fieldArgs['gmt'] ? $mediaItem->post_modified_gmt : $mediaItem->post_modified
                 );
             case 'mimeType':
                 return $mediaItem->post_mime_type;

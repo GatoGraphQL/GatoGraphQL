@@ -362,16 +362,22 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
         return strip_tags($ret);
     }
 
-    public function getPublishedDate(string | int | object $customPostObjectOrID): ?string
+    public function getPublishedDate(string | int | object $customPostObjectOrID, bool $gmt = false): ?string
     {
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
-        return $customPost?->post_date;
+        if ($customPost === null) {
+            return null;
+        }
+        return $gmt ? $customPost->post_date_gmt : $customPost->post_date;
     }
 
-    public function getModifiedDate(string | int | object $customPostObjectOrID): ?string
+    public function getModifiedDate(string | int | object $customPostObjectOrID, bool $gmt = false): ?string
     {
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
-        return $customPost?->post_modified;
+        if ($customPost === null) {
+            return null;
+        }
+        return $gmt ? $customPost->post_modified_gmt : $customPost->post_modified;
     }
     public function getCustomPostType(string | int | object $customPostObjectOrID): string
     {
