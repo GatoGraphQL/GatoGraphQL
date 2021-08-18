@@ -21,8 +21,6 @@ use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModulePro
  */
 class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolver
 {
-    use CustomPostFieldResolverTrait;
-
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);

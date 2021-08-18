@@ -8,16 +8,12 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoPSchema\CustomPosts\FieldResolvers\CustomPostFieldResolverTrait;
-use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use WP_Post;
 
 class RootPageFieldResolver extends AbstractQueryableFieldResolver
 {
-    use CustomPostFieldResolverTrait;
-
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
@@ -101,14 +97,10 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                 if ($page === null) {
                     return null;
                 }
-                $restrictedStatus = [
-                    Status::PUBLISHED,
-                ];
-                $unrestrictedStatus = $this->getUnrestrictedFieldCustomPostTypes();
                 // Check the status is allowed
-                if ($fieldName === 'pageByPath' && !in_array($page->post_status, $restrictedStatus)) {
+                if ($fieldName === 'pageByPath' && $page->post_status !== "publish") {
                     return null;
-                } elseif ($fieldName === 'unrestrictedPageByPath' && !in_array($page->post_status, $unrestrictedStatus)) {
+                } elseif ($fieldName === 'unrestrictedPageByPath') {
                     return null;
                 }
                 return $page->ID;

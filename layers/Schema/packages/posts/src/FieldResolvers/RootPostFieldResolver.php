@@ -7,9 +7,7 @@ namespace PoPSchema\Posts\FieldResolvers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoPSchema\CustomPosts\FieldResolvers\CustomPostFieldResolverTrait;
 use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
@@ -18,8 +16,6 @@ use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModulePro
 
 class RootPostFieldResolver extends AbstractPostFieldResolver
 {
-    use CustomPostFieldResolverTrait;
-
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
