@@ -77,7 +77,11 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         if (isset($query['status'])) {
             $query['status'] = $this->convertCommentStatusFromPoPToCMS($query['status']);
         }
-        if (!isset($query['type'])) {
+        if (isset($query['types'])) {
+            $query['type__in'] = $query['types'];
+            unset($query['types']);
+        }
+        if (!isset($query['type']) && !isset($query['type__in'])) {
             // Only comments, no trackbacks or pingbacks
             $query['type'] = CommentTypes::COMMENT;
         }
