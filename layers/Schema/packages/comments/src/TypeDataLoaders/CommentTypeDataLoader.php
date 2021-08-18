@@ -45,10 +45,7 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
     public function getQuery($query_args): array
     {
         $query = parent::getQuery($query_args);
-
         $query['status'] = Status::APPROVED;
-        $query['customPostID'] = $query_args[Params::COMMENT_POST_ID];
-
         return $query;
     }
     public function getDataFromIdsQuery(array $ids): array
