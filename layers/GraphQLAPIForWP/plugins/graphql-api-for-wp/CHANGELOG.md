@@ -45,7 +45,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Filter field `pages` via new arguments:
   - `parentIDs: [ID]`
   - `parentID: ID`
-- Added fields to retrieve comments and their number:
+- Added fields to retrieve comments and their number (and also their "unrestricted" versions):
   - `Root.comments: [Comment]!`
   - `Root.commentCount: Int!`
   - `CustomPost.commentCount: Int!`

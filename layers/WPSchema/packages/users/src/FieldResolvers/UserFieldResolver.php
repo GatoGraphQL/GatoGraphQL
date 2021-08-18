@@ -58,13 +58,6 @@ class UserFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getAdminFieldNames(): array
-    {
-        return [
-            'registeredDate',
-        ];
-    }
-
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         return match ($fieldName) {

@@ -11,7 +11,9 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
+use PoPSchema\Comments\Enums\CommentStatusEnum;
 use PoPSchema\Comments\Enums\CommentTypeEnum;
 use PoPSchema\Comments\FilterInputProcessors\FilterInputProcessor;
 
@@ -23,6 +25,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_CUSTOMPOST_ID = 'filterinput-custompost-id';
     public const MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS = 'filterinput-exclude-custompost-ids';
     public const MODULE_FILTERINPUT_COMMENT_TYPES = 'filterinput-comment-types';
+    public const MODULE_FILTERINPUT_COMMENT_STATUS = 'filterinput-comment-status';
 
     public function getModulesToProcess(): array
     {
@@ -31,6 +34,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             [self::class, self::MODULE_FILTERINPUT_CUSTOMPOST_ID],
             [self::class, self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS],
             [self::class, self::MODULE_FILTERINPUT_COMMENT_TYPES],
+            [self::class, self::MODULE_FILTERINPUT_COMMENT_STATUS],
         );
     }
 
@@ -41,6 +45,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_CUSTOMPOST_ID => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOST_ID],
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS],
             self::MODULE_FILTERINPUT_COMMENT_TYPES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_COMMENT_TYPES],
+            self::MODULE_FILTERINPUT_COMMENT_STATUS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_COMMENT_STATUS],
         ];
         return $filterInputs[$module[1]] ?? null;
     }
@@ -51,6 +56,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             case self::MODULE_FILTERINPUT_CUSTOMPOST_IDS:
             case self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS:
             case self::MODULE_FILTERINPUT_COMMENT_TYPES:
+            case self::MODULE_FILTERINPUT_COMMENT_STATUS:
                 return FormMultipleInput::class;
         }
 
@@ -65,6 +71,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_CUSTOMPOST_ID => 'customPostID',
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => 'excludeCustomPostIDs',
             self::MODULE_FILTERINPUT_COMMENT_TYPES => 'types',
+            self::MODULE_FILTERINPUT_COMMENT_STATUS => 'status',
         );
         return $names[$module[1]] ?? parent::getName($module);
     }
@@ -76,6 +83,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_CUSTOMPOST_ID => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_COMMENT_TYPES => SchemaDefinition::TYPE_ENUM,
+            self::MODULE_FILTERINPUT_COMMENT_STATUS => SchemaDefinition::TYPE_ENUM,
             default => $this->getDefaultSchemaFilterInputType(),
         };
     }
@@ -85,7 +93,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS,
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS,
-            self::MODULE_FILTERINPUT_COMMENT_TYPES
+            self::MODULE_FILTERINPUT_COMMENT_TYPES,
+            self::MODULE_FILTERINPUT_COMMENT_STATUS
                 => true,
             default
                 => false,
@@ -97,7 +106,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS,
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS,
-            self::MODULE_FILTERINPUT_COMMENT_TYPES
+            self::MODULE_FILTERINPUT_COMMENT_TYPES,
+            self::MODULE_FILTERINPUT_COMMENT_STATUS
                 => true,
             default
                 => false,
@@ -110,6 +120,9 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_COMMENT_TYPES => [
                 CommentTypes::COMMENT,
             ],
+            self::MODULE_FILTERINPUT_COMMENT_STATUS => [
+                CommentStatus::APPROVE,
+            ],
             default => null,
         };
     }
@@ -121,6 +134,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->translationAPI->__('Limit results to elements with the given custom post ID', 'comments'),
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->translationAPI->__('Exclude elements with the given custom post IDs', 'comments'),
             self::MODULE_FILTERINPUT_COMMENT_TYPES => $this->translationAPI->__('Types of comment', 'comments'),
+            self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->translationAPI->__('Status of the comment', 'comments'),
             default => null,
         };
     }
@@ -136,6 +150,16 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $commentTypeEnum->getName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     $commentTypeEnum->getValues()
+                );
+                break;
+            case self::MODULE_FILTERINPUT_COMMENT_STATUS:
+                /**
+                 * @var CommentStatusEnum
+                 */
+                $commentStatusEnum = $this->instanceManager->getInstance(CommentStatusEnum::class);
+                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $commentStatusEnum->getName();
+                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                    $commentStatusEnum->getValues()
                 );
                 break;
         }

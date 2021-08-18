@@ -32,6 +32,8 @@ The following fields will be added to the GraphQL schema:
 - `unrestrictedPageBySlug`
 - `unrestrictedPages`
 - `unrestrictedPageCount`
+- `unrestrictedComments`
+- `unrestrictedCommentCount`
 - `roles`
 - `capabilities`
 
@@ -53,6 +55,16 @@ The following fields will be added to the GraphQL schema:
 
 - `unrestrictedPosts`
 - `unrestrictedPostCount`
+
+**Custom Posts:**
+
+- `unrestrictedComments`
+- `unrestrictedCommentCount`
+
+**Comments:**
+
+- `unrestrictedResponses`
+- `unrestrictedResponseCount`
 
 ---
 

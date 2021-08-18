@@ -8,9 +8,8 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
+use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
-use PoPSchema\Comments\Constants\Params;
-use PoPSchema\Comments\Constants\Status;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -38,16 +37,16 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
                 CommentTypes::TRACKBACK,
                 CommentTypes::PINGBACK,
             ],
+            'status' => [
+                CommentStatus::APPROVE,
+                CommentStatus::HOLD,
+                CommentStatus::SPAM,
+                CommentStatus::TRASH,
+            ],
         ];
         return $this->commentTypeAPI->getComments($query);
     }
 
-    public function getQuery($query_args): array
-    {
-        $query = parent::getQuery($query_args);
-        $query['status'] = Status::APPROVED;
-        return $query;
-    }
     public function getDataFromIdsQuery(array $ids): array
     {
         return [
@@ -56,6 +55,12 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
                 CommentTypes::COMMENT,
                 CommentTypes::TRACKBACK,
                 CommentTypes::PINGBACK,
+            ],
+            'status' => [
+                CommentStatus::APPROVE,
+                CommentStatus::HOLD,
+                CommentStatus::SPAM,
+                CommentStatus::TRASH,
             ],
         ];
     }

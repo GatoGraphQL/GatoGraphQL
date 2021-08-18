@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\Constants;
 
-class Status
+class CommentStatus
 {
-    public const APPROVED = 'approved';
-    public const ONHOLD = 'onhold';
+    public const APPROVE = 'approve';
+    public const HOLD = 'hold';
     public const SPAM = 'spam';
     public const TRASH = 'trash';
 }

@@ -19,6 +19,12 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
     public const MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT = 'filterinputcontainer-responsecount';
     public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTS = 'filterinputcontainer-custompost-comments';
     public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT = 'filterinputcontainer-custompost-commentcount';
+    public const MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTS = 'filterinputcontainer-admincomments';
+    public const MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT = 'filterinputcontainer-admincommentcount';
+    public const MODULE_FILTERINPUTCONTAINER_ADMINRESPONSES = 'filterinputcontainer-adminresponses';
+    public const MODULE_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT = 'filterinputcontainer-adminresponsecount';
+    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS = 'filterinputcontainer-custompost-admincomments';
+    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT = 'filterinputcontainer-custompost-admincommentcount';
 
     public function getModulesToProcess(): array
     {
@@ -29,6 +35,12 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             [self::class, self::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTS],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSES],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT],
         );
     }
 
@@ -52,7 +64,10 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOST_IDS],
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS],
         ];
-        return match ($module[1]) {
+        $adminCommentFilterInputModules = [
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
+        ];
+        return match ((string)$module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_RESPONSES => [
                 ...$responseFilterInputModules,
@@ -67,6 +82,33 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             self::MODULE_FILTERINPUTCONTAINER_COMMENTS => [
                 ...$rootCommentFilterInputModules,
                 ...$this->getPaginationFilterInputModules(),
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT => [
+                ...$responseFilterInputModules,
+                ...$adminCommentFilterInputModules,
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSES => [
+                ...$responseFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+                ...$adminCommentFilterInputModules,
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT => [
+                ...$customPostCommentFilterInputModules,
+                ...$adminCommentFilterInputModules,
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS => [
+                ...$customPostCommentFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+                ...$adminCommentFilterInputModules,
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT => [
+                ...$rootCommentFilterInputModules,
+                ...$adminCommentFilterInputModules,
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTS => [
+                ...$rootCommentFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+                ...$adminCommentFilterInputModules,
             ],
             default => [],
         };
