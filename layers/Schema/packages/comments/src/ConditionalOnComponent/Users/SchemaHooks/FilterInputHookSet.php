@@ -7,6 +7,7 @@ namespace PoPSchema\Comments\ConditionalOnComponent\Users\SchemaHooks;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
+use PoPSchema\Comments\ConditionalOnComponent\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor as UserFilterInputModuleProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
 {
@@ -23,6 +24,7 @@ class FilterInputHookSet extends AbstractHookSet
         return [
             ...$filterInputModules,
             ...$this->getAuthorFilterInputModules(),
+            ...$this->getCustomPostAuthorFilterInputModules(),
         ];
     }
 
@@ -36,6 +38,20 @@ class FilterInputHookSet extends AbstractHookSet
             [
                 FilterInputModuleProcessor::class,
                 FilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS
+            ],
+        ];
+    }
+
+    public function getCustomPostAuthorFilterInputModules(): array
+    {
+        return [
+            [
+                UserFilterInputModuleProcessor::class,
+                UserFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS
+            ],
+            [
+                UserFilterInputModuleProcessor::class,
+                UserFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS
             ],
         ];
     }
