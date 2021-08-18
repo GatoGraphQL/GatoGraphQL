@@ -46,8 +46,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `parentIDs: [ID]`
   - `parentID: ID`
 - Added fields to retrieve comments and their number (and also their "unrestricted" versions):
+  - `Root.comment: Comment`
   - `Root.comments: [Comment]!`
   - `Root.commentCount: Int!`
+  - `Root.myComment: Comment`
   - `Root.myComments: [Comment]!`
   - `Root.myCommentCount: Int!`
   - `CustomPost.commentCount: Int!`
