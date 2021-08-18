@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\QueryableSchemaFieldInterfaceResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\QueryableFieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\QueryableFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
@@ -12,7 +12,7 @@ class QueryableInterfaceSchemaDefinitionResolverAdapter extends InterfaceSchemaD
 {
     public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
-        /** @var QueryableSchemaFieldInterfaceResolverInterface */
+        /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface */
         $fieldInterfaceResolver = $this->fieldInterfaceResolver;
         return $fieldInterfaceResolver->getFieldDataFilteringModule($fieldName);
     }

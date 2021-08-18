@@ -20,6 +20,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public const FILTERINPUT_EXCLUDE_PARENT_IDS = 'filterinput-exclude-parent-ids';
     public const FILTERINPUT_SLUGS = 'filterinput-slugs';
     public const FILTERINPUT_SLUG = 'filterinput-slug';
+    public const FILTERINPUT_DATEFORMAT = 'filterinput-date-format';
 
     public function getFilterInputsToProcess(): array
     {
@@ -36,6 +37,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
             [self::class, self::FILTERINPUT_EXCLUDE_PARENT_IDS],
             [self::class, self::FILTERINPUT_SLUGS],
             [self::class, self::FILTERINPUT_SLUG],
+            [self::class, self::FILTERINPUT_DATEFORMAT],
         );
     }
 
@@ -87,6 +89,9 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 break;
             case self::FILTERINPUT_SLUG:
                 $query['slug'] = $value;
+                break;
+            case self::FILTERINPUT_DATEFORMAT:
+                $query['format'] = $value;
                 break;
         }
     }

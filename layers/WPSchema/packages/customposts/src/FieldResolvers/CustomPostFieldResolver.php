@@ -9,6 +9,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use WP_Post;
 
 class CustomPostFieldResolver extends AbstractQueryableFieldResolver
@@ -63,15 +64,6 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                     $schemaFieldArgs,
                     [
                         [
-                            SchemaDefinition::ARGNAME_NAME => 'format',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $this->translationAPI->__('Date format, as defined in %s', 'customposts'),
-                                'https://www.php.net/manual/en/function.date.php'
-                            ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
-                        ],
-                        [
                             SchemaDefinition::ARGNAME_NAME => 'gmt',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Whether to retrieve the GMT time', 'customposts'),
@@ -82,6 +74,14 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         }
 
         return $schemaFieldArgs;
+    }
+
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    {
+        return match ($fieldName) {
+            'modified' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+        };
     }
 
     /**

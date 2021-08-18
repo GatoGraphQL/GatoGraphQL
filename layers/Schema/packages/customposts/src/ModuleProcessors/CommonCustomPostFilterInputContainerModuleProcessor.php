@@ -59,7 +59,7 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
                     $slugFilterInputName,
                 ];
         }
-        return parent::getFieldDataFilteringDefaultValues($module);
+        return parent::getFieldDataFilteringMandatoryArgs($module);
     }
 
     /**

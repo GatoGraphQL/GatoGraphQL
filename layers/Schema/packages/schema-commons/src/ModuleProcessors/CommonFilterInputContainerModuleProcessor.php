@@ -14,12 +14,14 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
 
     public const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID = 'filterinputcontainer-entity-by-id';
     public const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG = 'filterinputcontainer-entity-by-slug';
+    public const MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING = 'filterinputcontainer-date-as-string';
 
     public function getModulesToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING],
         );
     }
 
@@ -31,6 +33,9 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
             ],
             self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUG],
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING => [
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT],
             ],
             default => [],
         };
@@ -56,7 +61,25 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
                     $slugFilterInputName,
                 ];
         }
-        return parent::getFieldDataFilteringDefaultValues($module);
+        return parent::getFieldDataFilteringMandatoryArgs($module);
+    }
+
+    /**
+     * @return array<string,mixed> A list of filterInputName as key, and its value
+     */
+    public function getFieldDataFilteringDefaultValues(array $module): array
+    {
+        switch ($module[1]) {
+            case self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING:
+                $formatFilterInputName = FilterInputHelper::getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT
+                ]);
+                return [
+                    $formatFilterInputName => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
+                ];
+        }
+        return parent::getFieldDataFilteringMandatoryArgs($module);
     }
 
     /**
