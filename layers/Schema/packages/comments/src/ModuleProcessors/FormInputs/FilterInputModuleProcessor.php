@@ -56,6 +56,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             case self::MODULE_FILTERINPUT_CUSTOMPOST_IDS:
             case self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS:
             case self::MODULE_FILTERINPUT_COMMENT_TYPES:
+            case self::MODULE_FILTERINPUT_COMMENT_STATUS:
                 return FormMultipleInput::class;
         }
 
@@ -92,7 +93,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS,
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS,
-            self::MODULE_FILTERINPUT_COMMENT_TYPES
+            self::MODULE_FILTERINPUT_COMMENT_TYPES,
+            self::MODULE_FILTERINPUT_COMMENT_STATUS
                 => true,
             default
                 => false,
@@ -104,7 +106,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS,
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS,
-            self::MODULE_FILTERINPUT_COMMENT_TYPES
+            self::MODULE_FILTERINPUT_COMMENT_TYPES,
+            self::MODULE_FILTERINPUT_COMMENT_STATUS
                 => true,
             default
                 => false,
@@ -117,7 +120,9 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_COMMENT_TYPES => [
                 CommentTypes::COMMENT,
             ],
-            self::MODULE_FILTERINPUT_COMMENT_STATUS => CommentStatus::APPROVE,
+            self::MODULE_FILTERINPUT_COMMENT_STATUS => [
+                CommentStatus::APPROVE,
+            ],
             default => null,
         };
     }
