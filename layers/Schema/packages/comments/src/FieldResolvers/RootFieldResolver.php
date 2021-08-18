@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -22,8 +23,8 @@ use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -58,8 +59,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
+            'comment',
             'commentCount',
             'comments',
+            'unrestrictedComment',
             'unrestrictedCommentCount',
             'unrestrictedComments',
         ];
@@ -68,8 +71,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         return match ($fieldName) {
+            'comment' => SchemaDefinition::TYPE_ID,
             'comments' => SchemaDefinition::TYPE_ID,
             'commentCount' => SchemaDefinition::TYPE_INT,
+            'unrestrictedComment' => SchemaDefinition::TYPE_ID,
             'unrestrictedComments' => SchemaDefinition::TYPE_ID,
             'unrestrictedCommentCount' => SchemaDefinition::TYPE_INT,
             default => parent::getSchemaFieldType($typeResolver, $fieldName),
@@ -117,8 +122,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
+            'comment' => $this->translationAPI->__('Comment with a specific ID', 'pop-comments'),
             'commentCount' => $this->translationAPI->__('Number of comments on the site', 'pop-comments'),
             'comments' => $this->translationAPI->__('Comments on the site', 'pop-comments'),
+            'unrestrictedComment' => $this->translationAPI->__('[Unrestricted] Comment with a specific ID', 'pop-comments'),
             'unrestrictedCommentCount' => $this->translationAPI->__('[Unrestricted] Number of comments on the site', 'pop-comments'),
             'unrestrictedComments' => $this->translationAPI->__('[Unrestricted] Comments on the site', 'pop-comments'),
             default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
@@ -128,8 +135,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
+            'comment' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
             'comments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS],
             'commentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
+            'unrestrictedComment' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_AND_STATUS],
             'unrestrictedComments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTS],
             'unrestrictedCommentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
@@ -156,7 +165,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             case 'unrestrictedCommentCount':
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $this->commentTypeAPI->getCommentCount([], $options);
-
             case 'comments':
             case 'unrestrictedComments':
                 $options = array_merge(
@@ -166,6 +174,18 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                     $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
                 );
                 return $this->commentTypeAPI->getComments([], $options);
+            case 'comment':
+            case 'unrestrictedComment':
+                $options = array_merge(
+                    [
+                        'return-type' => ReturnTypes::IDS,
+                    ],
+                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
+                );
+                if ($comments = $this->commentTypeAPI->getComments([], $options)) {
+                    return $comments[0];
+                }
+                return null;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -174,7 +194,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
+            case 'comment':
             case 'comments':
+            case 'unrestrictedComment':
             case 'unrestrictedComments':
                 return CommentTypeResolver::class;
         }
