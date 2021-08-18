@@ -32,6 +32,8 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
             'hasComments',
             'commentCount',
             'comments',
+            'unrestrictedCommentCount',
+            'unrestrictedComments',
         ];
     }
 
@@ -42,6 +44,8 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
             'hasComments' => SchemaDefinition::TYPE_BOOL,
             'commentCount' => SchemaDefinition::TYPE_INT,
             'comments' => SchemaDefinition::TYPE_ID,
+            'unrestrictedCommentCount' => SchemaDefinition::TYPE_INT,
+            'unrestrictedComments' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
@@ -51,9 +55,11 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         return match ($fieldName) {
             'areCommentsOpen',
             'hasComments',
-            'commentCount'
+            'commentCount',
+            'unrestrictedCommentCount'
                 => SchemaTypeModifiers::NON_NULLABLE,
-            'comments'
+            'comments',
+            'unrestrictedComments'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getSchemaFieldTypeModifiers($fieldName),
@@ -67,6 +73,8 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
             'hasComments' => $this->translationAPI->__('Does the custom post have comments?', 'pop-comments'),
             'commentCount' => $this->translationAPI->__('Number of comments added to the custom post', 'pop-comments'),
             'comments' => $this->translationAPI->__('Comments added to the custom post', 'pop-comments'),
+            'unrestrictedCommentCount' => $this->translationAPI->__('[Unrestricted] Number of comments added to the custom post', 'pop-comments'),
+            'unrestrictedComments' => $this->translationAPI->__('[Unrestricted] Comments added to the custom post', 'pop-comments'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }
@@ -81,6 +89,14 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
             'commentCount' => [
                 CommentFilterInputContainerModuleProcessor::class,
                 CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT
+            ],
+            'unrestrictedComments' => [
+                CommentFilterInputContainerModuleProcessor::class,
+                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS
+            ],
+            'unrestrictedCommentCount' => [
+                CommentFilterInputContainerModuleProcessor::class,
+                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT
             ],
             default => parent::getFieldDataFilteringModule($fieldName),
         };
@@ -98,6 +114,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         ];
         switch ($fieldName) {
             case 'comments':
+            case 'unrestrictedComments':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -117,6 +134,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
                     ]
                 );
             case 'commentCount':
+            case 'unrestrictedCommentCount':
                 return $filterInputNameDefaultValues;
         }
         return parent::getFieldDataFilteringDefaultValues($fieldName);
