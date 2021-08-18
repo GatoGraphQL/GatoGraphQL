@@ -59,6 +59,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `customPostID: ID!`
   - `customPostIDs: [ID!]`
   - `excludeCustomPostIDs: [ID]`
+  - `customPostAuthorIDs: [ID!]`
+  - `excludeCustomPostAuthorIDs: [ID]`
   - `dateFrom: Date`
   - `dateTo: Date`
   - `excludeAuthorIDs: [ID]`
