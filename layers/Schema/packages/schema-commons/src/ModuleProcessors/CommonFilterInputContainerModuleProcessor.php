@@ -36,6 +36,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
             ],
             self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_GMT],
             ],
             default => [],
         };

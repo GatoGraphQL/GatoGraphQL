@@ -88,6 +88,12 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                     $customPostTypeAPI->getPublishedDate($customPost)
                 );
 
+            case 'modified':
+                return $dateFormatter->format(
+                    $fieldArgs['format'],
+                    $customPostTypeAPI->getModifiedDate($customPost)
+                );
+
             case 'title':
                 return $customPostTypeAPI->getTitle($customPost);
 
