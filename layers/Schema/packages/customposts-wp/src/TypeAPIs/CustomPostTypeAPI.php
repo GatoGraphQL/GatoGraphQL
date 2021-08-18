@@ -12,6 +12,7 @@ use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIHelpers;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use WP_Post;
 
 use function get_post_status;
 
@@ -294,6 +295,24 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
         return CustomPostTypeAPIHelpers::getCustomPostObjectAndID($customPostObjectOrID);
     }
 
+    protected function getCustomPostObject(string | int | object $customPostObjectOrID): ?WP_Post
+    {
+        list(
+            $customPost,
+            $customPostID,
+        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        return $customPost;
+    }
+
+    protected function getCustomPostID(string | int | object $customPostObjectOrID): ?int
+    {
+        list(
+            $customPost,
+            $customPostID,
+        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        return $customPostID;
+    }
+
     public function getTitle(string | int | object $customPostObjectOrID): ?string
     {
         list(
@@ -334,28 +353,19 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
 
     public function getPublishedDate(string | int | object $customPostObjectOrID): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return $customPost->post_date;
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        return $customPost?->post_date;
     }
 
     public function getModifiedDate(string | int | object $customPostObjectOrID): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return $customPost->post_modified;
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        return $customPost?->post_modified;
     }
     public function getCustomPostType(string | int | object $customPostObjectOrID): string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return $customPost->post_type;
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        return $customPost?->post_type;
     }
 
     /**
