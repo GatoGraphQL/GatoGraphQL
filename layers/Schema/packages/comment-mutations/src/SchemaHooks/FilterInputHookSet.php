@@ -8,7 +8,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
+use PoPSchema\CommentMutations\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\ConditionalOnComponent\Users\SchemaHooks\FilterInputHookSet as UserCustomPostFilterInputHookSet;
 
 class FilterInputHookSet extends AbstractHookSet
