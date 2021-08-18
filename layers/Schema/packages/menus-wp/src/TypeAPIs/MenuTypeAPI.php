@@ -174,6 +174,9 @@ class MenuTypeAPI implements MenuTypeAPIInterface
             $query['slug'] = $query['slugs'];
             unset($query['slugs']);
         }
+        if (isset($query['slug'])) {
+            // Same param name, so do nothing
+        }
 
         return $this->hooksAPI->applyFilters(
             TaxonomyTypeAPI::HOOK_QUERY,
