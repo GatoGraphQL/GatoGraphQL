@@ -17,7 +17,6 @@ class PoP_CDN_Thumbprint_Comment extends PoP_CDN_ThumbprintBase
         return array(
             // 'fields' => 'ids',
             'limit' => 1,
-            'status' => \PoPSchema\Comments\Constants\Status::APPROVED,
             'order' =>  'DESC',
             'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:comments:date'),
         );
