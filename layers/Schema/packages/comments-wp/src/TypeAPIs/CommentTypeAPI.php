@@ -75,7 +75,14 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
         // Convert the parameters
         if (isset($query['status'])) {
-            $query['status'] = $this->convertCommentStatusFromPoPToCMS($query['status']);
+            if (is_array($query['status'])) {
+                $query['status'] = array_map(
+                    [$this, 'convertCommentStatusFromPoPToCMS'],
+                    $query['status']
+                );
+            } else {
+                $query['status'] = $this->convertCommentStatusFromPoPToCMS($query['status']);
+            }
         }
         if (isset($query['types'])) {
             $query['type__in'] = $query['types'];
