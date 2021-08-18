@@ -12,7 +12,7 @@ class PoP_Module_Processor_ReferencesFilterInputProcessor extends AbstractFilter
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value): void
+    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
     {
         switch ($filterInput[1]) {
 

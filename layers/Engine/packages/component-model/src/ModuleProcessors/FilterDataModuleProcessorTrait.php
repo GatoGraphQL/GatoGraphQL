@@ -18,10 +18,10 @@ trait FilterDataModuleProcessorTrait
 
     public function filterHeadmoduleDataloadQueryArgs(array $module, array &$query, array $source = null): void
     {
-        if ($active_filterqueryargs_modules = $this->getActiveDataloadQueryArgsFilteringModules($module, $source)) {
+        if ($activeDataloadQueryArgsFilteringModules = $this->getActiveDataloadQueryArgsFilteringModules($module, $source)) {
             $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
             $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
-            foreach ($active_filterqueryargs_modules as $submodule) {
+            foreach ($activeDataloadQueryArgsFilteringModules as $submodule) {
                 /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
                 $dataloadQueryArgsFilterInputModuleProcessor = $moduleProcessorManager->getProcessor($submodule);
                 $value = $dataloadQueryArgsFilterInputModuleProcessor->getValue($submodule, $source);
@@ -46,10 +46,10 @@ trait FilterDataModuleProcessorTrait
         $modules = [];
         $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
         // Check if the module has any filtercomponent
-        if ($filterqueryargs_modules = $this->getDataloadQueryArgsFilteringModules($module)) {
+        if ($dataloadQueryArgsFilteringModules = $this->getDataloadQueryArgsFilteringModules($module)) {
             // Check if if we're currently filtering by any filtercomponent
             $modules = array_filter(
-                $filterqueryargs_modules,
+                $dataloadQueryArgsFilteringModules,
                 function (array $module) use ($moduleProcessorManager, $source) {
                     /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
                     $dataloadQueryArgsFilterInputModuleProcessor = $moduleProcessorManager->getProcessor($module);

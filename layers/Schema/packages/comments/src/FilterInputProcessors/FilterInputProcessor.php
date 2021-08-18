@@ -21,7 +21,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value): void
+    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_CUSTOMPOST_IDS:

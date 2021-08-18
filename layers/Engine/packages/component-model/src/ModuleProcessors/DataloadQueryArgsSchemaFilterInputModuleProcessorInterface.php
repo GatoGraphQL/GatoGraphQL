@@ -14,5 +14,6 @@ interface DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
     public function getSchemaFilterInputIsArrayOfArraysType(array $module): bool;
     public function getSchemaFilterInputIsNonNullableItemsInArrayOfArraysType(array $module): bool;
     public function getSchemaFilterInputMandatory(array $module): bool;
+    public function getSchemaFilterInputDefaultValue(array $module): mixed;
     public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void;
 }

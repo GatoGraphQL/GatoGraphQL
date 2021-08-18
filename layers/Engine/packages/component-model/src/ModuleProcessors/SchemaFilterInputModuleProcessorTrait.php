@@ -45,6 +45,10 @@ trait SchemaFilterInputModuleProcessorTrait
     {
         return false;
     }
+    public function getSchemaFilterInputDefaultValue(array $module): mixed
+    {
+        return null;
+    }
     public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void
     {
         // Override

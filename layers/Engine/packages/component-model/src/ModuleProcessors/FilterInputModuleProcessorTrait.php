@@ -63,6 +63,10 @@ trait FilterInputModuleProcessorTrait
                     }
                 }
             }
+            $defaultValue = $filterSchemaDefinitionResolver->getSchemaFilterInputDefaultValue($module);
+            if ($defaultValue !== null) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $defaultValue;
+            }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputMandatory($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] = true;
             }
