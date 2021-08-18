@@ -61,6 +61,10 @@ class Component extends AbstractComponent
         }
 
         if (class_exists(UsersComponent::class)) {
+            self::initServices(
+                dirname(__DIR__),
+                '/ConditionalOnComponent/Users'
+            );
             self::initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
