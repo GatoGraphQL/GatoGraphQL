@@ -141,7 +141,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
             case 'parentPage':
                 return $pageTypeAPI->getParentPageID($page);
         }
-        
+
         $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
         $query = [
             'parent-id' => $typeResolver->getID($page),

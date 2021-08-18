@@ -30,7 +30,7 @@ interface CustomPostTypeAPIInterface
     public function getCustomPostType(string | int | object $objectOrID): string;
     /**
      * If param "status" in $query is not passed, it defaults to "publish"
-     * 
+     *
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options
      * @return object[]

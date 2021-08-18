@@ -56,10 +56,12 @@ trait QueryableFieldResolverTrait
                 $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $defaultValue;
                 break;
             }
-            if (in_array(
-                $schemaFieldArg[SchemaDefinition::ARGNAME_NAME],
-                $filterInputNameMandatoryArgs
-            )) {
+            if (
+                in_array(
+                    $schemaFieldArg[SchemaDefinition::ARGNAME_NAME],
+                    $filterInputNameMandatoryArgs
+                )
+            ) {
                 $schemaFieldArg[SchemaDefinition::ARGNAME_MANDATORY] = true;
             }
         }

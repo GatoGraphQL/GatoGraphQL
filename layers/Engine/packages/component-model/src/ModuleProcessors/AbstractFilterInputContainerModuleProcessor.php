@@ -39,7 +39,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
             self::HOOK_FILTER_INPUTS,
         ];
     }
-    
+
     /**
      * Provide default values for modules in the FilterInputContainer
      * @return array<string,mixed> A list of filterInputName as key, and its value
