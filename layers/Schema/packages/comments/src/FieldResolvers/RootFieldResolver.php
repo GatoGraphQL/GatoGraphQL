@@ -145,7 +145,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             case 'commentCount':
                 $query = [
                     'status' => Status::APPROVED,
-                    // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                 ];
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $this->commentTypeAPI->getCommentCount($query, $options);
@@ -153,7 +152,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             case 'comments':
                 $query = [
                     'status' => Status::APPROVED,
-                    // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                 ];
                 $options = array_merge(
                     [
