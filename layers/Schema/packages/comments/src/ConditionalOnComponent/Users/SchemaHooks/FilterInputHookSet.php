@@ -22,6 +22,13 @@ class FilterInputHookSet extends AbstractHookSet
     {
         return [
             ...$filterInputModules,
+            ...$this->getAuthorFilterInputModules(),
+        ];
+    }
+
+    public function getAuthorFilterInputModules(): array
+    {
+        return [
             [
                 FilterInputModuleProcessor::class,
                 FilterInputModuleProcessor::MODULE_FILTERINPUT_AUTHOR_IDS

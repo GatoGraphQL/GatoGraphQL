@@ -48,6 +48,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added fields to retrieve comments and their number (and also their "unrestricted" versions):
   - `Root.comments: [Comment]!`
   - `Root.commentCount: Int!`
+  - `Root.myComments: [Comment]!`
+  - `Root.myCommentCount: Int!`
   - `CustomPost.commentCount: Int!`
   - `Comment.responseCount: Int!`
 - Added field arguments to filter `comments`:
