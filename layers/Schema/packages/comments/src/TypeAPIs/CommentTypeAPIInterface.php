@@ -26,7 +26,7 @@ interface CommentTypeAPIInterface
     public function isCommentApproved(object $comment): bool;
     public function getCommentType(object $comment): string;
     public function getCommentParent(object $comment): int | string | null;
-    public function getCommentDateGmt(object $comment): string;
+    public function getCommentDate(object $comment, bool $gmt = false): string;
     public function getCommentId(object $comment): string | int;
     public function getCommentAuthorName(object $comment): string;
     public function getCommentAuthorEmail(object $comment): string;

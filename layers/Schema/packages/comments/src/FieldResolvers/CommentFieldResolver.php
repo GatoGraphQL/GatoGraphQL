@@ -210,7 +210,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                 $dateFormatter = DateFormatterFacade::getInstance();
                 return $dateFormatter->format(
                     $fieldArgs['format'],
-                    $this->commentTypeAPI->getCommentDateGmt($comment)
+                    $this->commentTypeAPI->getCommentDate($comment, $fieldArgs['gmt'])
                 );
 
             case 'responses':

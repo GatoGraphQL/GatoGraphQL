@@ -76,8 +76,13 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT
                 ]);
+                $gmtFilterInputName = FilterInputHelper::getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_GMT
+                ]);
                 return [
                     $formatFilterInputName => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
+                    $gmtFilterInputName => false,
                 ];
         }
         return parent::getFieldDataFilteringMandatoryArgs($module);
