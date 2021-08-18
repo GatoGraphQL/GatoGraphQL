@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Media\FieldResolvers;
 
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -19,9 +19,10 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use WP_Post;
 
-class MediaFieldResolver extends AbstractDBDataFieldResolver
+class MediaFieldResolver extends AbstractQueryableFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -118,28 +119,12 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'date':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'format',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $this->translationAPI->__('Date format, as defined in %s', 'media'),
-                                'https://www.php.net/manual/en/function.date.php'
-                            ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
-                        ],
-                    ]
-                );
-        }
-
-        return $schemaFieldArgs;
+        return match ($fieldName) {
+            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+        };
     }
 
     /**
