@@ -5,18 +5,20 @@ declare(strict_types=1);
 namespace PoPSchema\GenericCustomPosts\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldResolvers\CustomPostFieldResolverTrait;
+use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 /**
  * Add fields to the Root for querying for generic custom posts
@@ -89,40 +91,6 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'genericCustomPost':
-            case 'unrestrictedGenericCustomPost':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'id',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The generic custom post ID', 'generic-customposts'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-            case 'genericCustomPostBySlug':
-            case 'unrestrictedGenericCustomPostBySlug':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'slug',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The generic custom post slug', 'generic-customposts'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-        }
-        return $schemaFieldArgs;
-    }
-
     public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
@@ -141,6 +109,22 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
             'unrestrictedGenericCustomPostCount' => [
                 GenericCustomPostFilterInputContainerModuleProcessor::class,
                 GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT
+            ],
+            'genericCustomPost' => [
+                CommonFilterInputContainerModuleProcessor::class,
+                CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID
+            ],
+            'unrestrictedGenericCustomPost' => [
+                CommonCustomPostFilterInputContainerModuleProcessor::class,
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS
+            ],
+            'genericCustomPostBySlug' => [
+                CommonFilterInputContainerModuleProcessor::class,
+                CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG
+            ],
+            'unrestrictedGenericCustomPostBySlug' => [
+                CommonCustomPostFilterInputContainerModuleProcessor::class,
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_AND_STATUS
             ],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
@@ -172,31 +156,18 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $query = [
-            'custompost-types' => ComponentConfiguration::getGenericCustomPostTypes(),
-        ];
         switch ($fieldName) {
             case 'genericCustomPost':
             case 'unrestrictedGenericCustomPost':
-                return array_merge(
-                    $query,
-                    [
-                        'include' => [$fieldArgs['id']],
-                    ]
-                );
             case 'genericCustomPostBySlug':
             case 'unrestrictedGenericCustomPostBySlug':
-                return array_merge(
-                    $query,
-                    [
-                        'slug' => $fieldArgs['slug'],
-                    ]
-                );
             case 'genericCustomPosts':
             case 'unrestrictedGenericCustomPosts':
             case 'genericCustomPostCount':
             case 'unrestrictedGenericCustomPostCount':
-                return $query;
+                return [
+                    'custompost-types' => ComponentConfiguration::getGenericCustomPostTypes(),
+                ];
         }
         return [];
     }
@@ -217,33 +188,24 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'genericCustomPost':
             case 'genericCustomPostBySlug':
             case 'unrestrictedGenericCustomPost':
             case 'unrestrictedGenericCustomPostBySlug':
-                $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
+                $options['return-type'] = ReturnTypes::IDS;
                 if ($customPosts = $customPostTypeAPI->getCustomPosts($query, $options)) {
                     return $customPosts[0];
                 }
                 return null;
             case 'genericCustomPosts':
             case 'unrestrictedGenericCustomPosts':
-                $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-                $options = array_merge(
-                    [
-                        'return-type' => ReturnTypes::IDS,
-                    ],
-                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-                );
+                $options['return-type'] = ReturnTypes::IDS;
                 return $customPostTypeAPI->getCustomPosts($query, $options);
             case 'genericCustomPostCount':
             case 'unrestrictedGenericCustomPostCount':
-                $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $customPostTypeAPI->getCustomPostCount($query, $options);
         }
 
