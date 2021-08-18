@@ -67,6 +67,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'customPostID',
             'approved',
             'type',
+            'status',
             'parent',
             'date',
             'responses',
@@ -87,6 +88,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'customPostID' => SchemaDefinition::TYPE_ID,
             'approved' => SchemaDefinition::TYPE_BOOL,
             'type' => SchemaDefinition::TYPE_STRING,
+            'status' => SchemaDefinition::TYPE_STRING,
             'parent' => SchemaDefinition::TYPE_ID,
             'date' => SchemaDefinition::TYPE_DATE,
             'responses' => SchemaDefinition::TYPE_ID,
@@ -105,6 +107,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'customPostID',
             'approved',
             'type',
+            'status',
             'date',
             'responseCount',
             'unrestrictedResponseCount'
@@ -128,6 +131,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'customPostID' => $this->translationAPI->__('ID of the custom post to which the comment was added', 'pop-comments'),
             'approved' => $this->translationAPI->__('Is the comment approved?', 'pop-comments'),
             'type' => $this->translationAPI->__('Type of comment', 'pop-comments'),
+            'status' => $this->translationAPI->__('Status of the comment', 'pop-comments'),
             'parent' => $this->translationAPI->__('Parent comment (if this comment is a response to another one)', 'pop-comments'),
             'date' => $this->translationAPI->__('Date when the comment was added', 'pop-comments'),
             'responses' => $this->translationAPI->__('Responses to the comment', 'pop-comments'),
@@ -212,6 +216,9 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
 
             case 'type':
                 return $this->commentTypeAPI->getCommentType($comment);
+
+            case 'status':
+                return $this->commentTypeAPI->getCommentStatus($comment);
 
             case 'parent':
                 return $this->commentTypeAPI->getCommentParent($comment);

@@ -245,6 +245,19 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         $comment = $comment;
         return $comment->comment_type;
     }
+    public function getCommentStatus(object $comment): string
+    {
+        /** @var WP_Comment */
+        $comment = $comment;
+        if ($comment->comment_approved == "1") {
+            return CommentStatus::APPROVE;
+        } elseif ($comment->comment_approved == "spam") {
+            return CommentStatus::SPAM;
+        } elseif ($comment->comment_approved == "trash") {
+            return CommentStatus::TRASH;
+        };
+        return CommentStatus::HOLD;
+    }
     public function getCommentParent(object $comment): string | int | null
     {
         /** @var WP_Comment */
