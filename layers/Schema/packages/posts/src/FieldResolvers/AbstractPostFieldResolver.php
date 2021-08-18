@@ -8,13 +8,13 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -88,7 +88,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'posts':
             case 'unrestrictedPosts':
-                $limitFilterInputName = $this->getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
@@ -109,17 +109,6 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        switch ($fieldName) {
-            case 'posts':
-            case 'unrestrictedPosts':
-            case 'postCount':
-            case 'unrestrictedPostCount':
-                return [
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
-                ];
-        }
         return [];
     }
 

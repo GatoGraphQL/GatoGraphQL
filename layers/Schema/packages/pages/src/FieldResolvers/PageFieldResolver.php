@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Pages\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -14,6 +15,7 @@ use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class PageFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -102,6 +104,22 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'childPages':
+            case 'unrestrictedChildPages':
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
+                return [
+                    $limitFilterInputName => ComponentConfiguration::getPageListDefaultLimit(),
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -119,28 +137,22 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
     ): mixed {
         $page = $resultItem;
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        $query = [
-            'status' => [
-                Status::PUBLISHED,
-            ],
-            'parent-id' => $typeResolver->getID($page),
-        ];
         switch ($fieldName) {
             case 'parentPage':
                 return $pageTypeAPI->getParentPageID($page);
+        }
+
+        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = [
+            'parent-id' => $typeResolver->getID($page),
+        ];
+        switch ($fieldName) {
             case 'childPages':
             case 'unrestrictedChildPages':
-                $query['limit'] = ComponentConfiguration::getPageListDefaultLimit();
-                $options = array_merge(
-                    [
-                        'return-type' => ReturnTypes::IDS,
-                    ],
-                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-                );
+                $options['return-type'] = ReturnTypes::IDS;
                 return $pageTypeAPI->getPages($query, $options);
             case 'childPageCount':
             case 'unrestrictedChildPageCount':
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $pageTypeAPI->getPageCount($query, $options);
         }
 

@@ -29,11 +29,16 @@ interface CustomPostTypeAPIInterface
     public function getCustomPost(int | string $id): ?object;
     public function getCustomPostType(string | int | object $objectOrID): string;
     /**
+     * If param "status" in $query is not passed, it defaults to "publish"
+     *
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options
      * @return object[]
      */
     public function getCustomPosts(array $query, array $options = []): array;
+    /**
+     * If param "status" in $query is not passed, it defaults to "publish"
+     */
     public function getCustomPostCount(array $query = [], array $options = []): int;
     public function getCustomPostTypes(array $query = array()): array;
 }

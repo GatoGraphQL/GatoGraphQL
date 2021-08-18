@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeDataLoaders;
 
-use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDataLoader
@@ -16,6 +16,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDat
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         return array(
             'include' => $ids,
+            'status' => CustomPostTypeAPIUtils::getPostStatuses(),
             // If not adding the post types, WordPress only uses "post", so querying by CPT would fail loading data
             // This should be considered for the CMS-agnostic case if it makes sense
             'custompost-types' => $customPostTypeAPI->getCustomPostTypes([
@@ -33,15 +34,10 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDat
 
     public function getDataFromIdsQuery(array $ids): array
     {
-        $query = array();
-        $query['include'] = $ids;
-        $query['status'] = [
-            Status::PUBLISHED,
-            Status::DRAFT,
-            Status::PENDING,
-        ]; // Status can also be 'pending', so don't limit it here, just select by ID
-
-        return $query;
+        return [
+            'include' => $ids,
+            'status' => CustomPostTypeAPIUtils::getPostStatuses(),
+        ];
     }
 
     public function executeQuery($query, array $options = [])

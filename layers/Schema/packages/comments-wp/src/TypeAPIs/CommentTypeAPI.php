@@ -77,7 +77,8 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             $query['status'] = $this->convertCommentStatusFromPoPToCMS($query['status']);
         }
         if (isset($query['include'])) {
-            $query['comment__in'] = $query['include'];
+            // It can be an array or a string
+            $query['comment__in'] = is_array($query['include']) ? $query['include'] : [$query['include']];
             unset($query['include']);
         }
         if (isset($query['exclude-ids'])) {

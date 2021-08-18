@@ -13,9 +13,9 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -101,7 +101,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         switch ($fieldName) {
             case 'customPosts':
             case 'unrestrictedCustomPosts':
-                $limitFilterInputName = $this->getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
@@ -129,9 +129,6 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
             case 'unrestrictedCustomPostCount':
                 return [
                     'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
                 ];
         }
         return [];

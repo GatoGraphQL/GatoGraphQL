@@ -134,8 +134,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         }
 
         // Convert the parameters
-        if (isset($query['include'])) {
-            // Transform from array to string
+        if (isset($query['include']) && is_array($query['include'])) {
+            // It can be an array or a string
             $query['include'] = implode(',', $query['include']);
         }
         if (isset($query['exclude-ids'])) {
@@ -175,6 +175,9 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         if (isset($query['slugs'])) {
             $query['slug'] = $query['slugs'];
             unset($query['slugs']);
+        }
+        if (isset($query['slug'])) {
+            // Same param name, so do nothing
         }
         if (isset($query['parent-id'])) {
             $query['parent'] = $query['parent-id'];

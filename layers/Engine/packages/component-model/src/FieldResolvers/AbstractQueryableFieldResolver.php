@@ -27,9 +27,10 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
     {
         if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName)) {
             $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
-            return $this->getSchemaFieldArgsWithFilterInputDefaultValues(
+            return $this->getSchemaFieldArgsWithCustomFilterInputData(
                 $schemaFieldArgs,
-                $this->getFieldDataFilteringDefaultValues($typeResolver, $fieldName)
+                $this->getFieldDataFilteringDefaultValues($typeResolver, $fieldName),
+                $this->getFieldDataFilteringMandatoryArgs($typeResolver, $fieldName)
             );
         }
 
@@ -41,6 +42,15 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
     protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        return [];
+    }
+
+    /**
+     * Provide the names of the args which are mandatory in the FilterInput
+     * @return string[]
+     */
+    protected function getFieldDataFilteringMandatoryArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         return [];
     }

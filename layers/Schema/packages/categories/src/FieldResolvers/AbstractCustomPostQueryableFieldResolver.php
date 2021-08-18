@@ -13,6 +13,7 @@ use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -75,7 +76,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         switch ($fieldName) {
             case 'categories':
             case 'categoryNames':
-                $limitFilterInputName = $this->getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);

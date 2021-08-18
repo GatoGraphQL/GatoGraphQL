@@ -22,18 +22,4 @@ class Component extends AbstractComponent
             \PoPSchema\CustomPosts\Component::class,
         ];
     }
-
-    /**
-     * Initialize services
-     *
-     * @param array<string, mixed> $configuration
-     * @param string[] $skipSchemaComponentClasses
-     */
-    protected static function initializeContainerServices(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
-    ): void {
-        self::initServices(dirname(__DIR__));
-    }
 }

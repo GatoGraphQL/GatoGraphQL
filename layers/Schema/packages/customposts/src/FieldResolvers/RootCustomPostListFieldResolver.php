@@ -8,10 +8,11 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 
 /**
  * Add the Custom Post fields to the Root
@@ -73,38 +74,15 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'customPost':
-            case 'unrestrictedCustomPost':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'id',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The custom post ID', 'customposts'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-            case 'customPostBySlug':
-            case 'unrestrictedCustomPostBySlug':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'slug',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The custom post slug', 'customposts'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-        }
-        return $schemaFieldArgs;
+        return match ($fieldName) {
+            'customPost' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
+            'unrestrictedCustomPost' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS],
+            'customPostBySlug' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG],
+            'unrestrictedCustomPostBySlug' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_AND_STATUS],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+        };
     }
 
     /**
@@ -131,42 +109,8 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
                 $query = [
                     'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
                 ];
-                if (
-                    in_array($fieldName, [
-                    'customPost',
-                    'unrestrictedCustomPost',
-                    ])
-                ) {
-                    $query['include'] = [$fieldArgs['id']];
-                } elseif (
-                    in_array($fieldName, [
-                    'customPostBySlug',
-                    'unrestrictedCustomPostBySlug',
-                    ])
-                ) {
-                    $query['slug'] = $fieldArgs['slug'];
-                }
-
-                if (
-                    in_array($fieldName, [
-                    'customPost',
-                    'customPostBySlug',
-                    ])
-                ) {
-                    $query['status'] = [
-                        Status::PUBLISHED,
-                    ];
-                } elseif (
-                    in_array($fieldName, [
-                    'unrestrictedCustomPost',
-                    'unrestrictedCustomPostBySlug',
-                    ])
-                ) {
-                    $query['status'] = $this->getUnrestrictedFieldCustomPostTypes();
-                }
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+                $options['return-type'] = ReturnTypes::IDS;
                 if ($posts = $customPostTypeAPI->getCustomPosts($query, $options)) {
                     return $posts[0];
                 }

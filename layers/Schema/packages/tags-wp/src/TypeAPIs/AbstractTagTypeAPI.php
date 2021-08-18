@@ -135,8 +135,8 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         }
 
         // Convert the parameters
-        if (isset($query['include'])) {
-            // Transform from array to string
+        if (isset($query['include']) && is_array($query['include'])) {
+            // It can be an array or a string
             $query['include'] = implode(',', $query['include']);
         }
         if (isset($query['exclude-ids'])) {
@@ -176,6 +176,9 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         if (isset($query['slugs'])) {
             $query['slug'] = $query['slugs'];
             unset($query['slugs']);
+        }
+        if (isset($query['slug'])) {
+            // Same param name, so do nothing
         }
 
         return $this->hooksAPI->applyFilters(

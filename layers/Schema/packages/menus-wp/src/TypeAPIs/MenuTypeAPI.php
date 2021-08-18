@@ -140,8 +140,8 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         }
 
         // Convert the parameters
-        if (isset($query['include'])) {
-            // Transform from array to string
+        if (isset($query['include']) && is_array($query['include'])) {
+            // It can be an array or a string
             $query['include'] = implode(',', $query['include']);
         }
         if (isset($query['exclude-ids'])) {
@@ -173,6 +173,9 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         if (isset($query['slugs'])) {
             $query['slug'] = $query['slugs'];
             unset($query['slugs']);
+        }
+        if (isset($query['slug'])) {
+            // Same param name, so do nothing
         }
 
         return $this->hooksAPI->applyFilters(

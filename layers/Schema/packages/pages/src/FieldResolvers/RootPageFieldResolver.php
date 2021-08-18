@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace PoPSchema\Pages\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\FieldResolvers\CustomPostFieldResolverTrait;
+use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\Pages\ModuleProcessors\PageFilterInputContainerModuleProcessor;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class RootPageFieldResolver extends AbstractQueryableFieldResolver
@@ -95,40 +98,6 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'page':
-            case 'unrestrictedPage':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'id',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The page ID', 'pages'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-            case 'pageBySlug':
-            case 'unrestrictedPageBySlug':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'slug',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The page slug', 'pages'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-        }
-        return $schemaFieldArgs;
-    }
-
     public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
@@ -148,6 +117,22 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                 PageFilterInputContainerModuleProcessor::class,
                 PageFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT
             ],
+            'page' => [
+                CommonFilterInputContainerModuleProcessor::class,
+                CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID
+            ],
+            'unrestrictedPage' => [
+                CommonCustomPostFilterInputContainerModuleProcessor::class,
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS
+            ],
+            'pageBySlug' => [
+                CommonFilterInputContainerModuleProcessor::class,
+                CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG
+            ],
+            'unrestrictedPageBySlug' => [
+                CommonCustomPostFilterInputContainerModuleProcessor::class,
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_AND_STATUS
+            ],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
@@ -157,7 +142,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'pages':
             case 'unrestrictedPages':
-                $limitFilterInputName = $this->getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
@@ -184,75 +169,24 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
+        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'page':
             case 'pageBySlug':
             case 'unrestrictedPage':
             case 'unrestrictedPageBySlug':
-                $query = [];
-                if (
-                    in_array($fieldName, [
-                    'page',
-                    'unrestrictedPage',
-                    ])
-                ) {
-                    $query['include'] = [$fieldArgs['id']];
-                } elseif (
-                    in_array($fieldName, [
-                    'pageBySlug',
-                    'unrestrictedPageBySlug',
-                    ])
-                ) {
-                    $query['slug'] = $fieldArgs['slug'];
-                }
-
-                if (
-                    in_array($fieldName, [
-                    'page',
-                    'pageBySlug',
-                    ])
-                ) {
-                    $query['status'] = [
-                        Status::PUBLISHED,
-                    ];
-                } elseif (
-                    in_array($fieldName, [
-                    'unrestrictedPage',
-                    'unrestrictedPageBySlug',
-                    ])
-                ) {
-                    $query['status'] = $this->getUnrestrictedFieldCustomPostTypes();
-                }
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                if ($pages = $pageTypeAPI->getPages($query, $options)) {
+                $options['return-type'] = ReturnTypes::IDS;
+                if ($pages = $pageTypeAPI->getPages([], $options)) {
                     return $pages[0];
                 }
                 return null;
             case 'pages':
             case 'unrestrictedPages':
-                $query = [
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
-                ];
-                $options = array_merge(
-                    [
-                        'return-type' => ReturnTypes::IDS,
-                    ],
-                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-                );
-                return $pageTypeAPI->getPages($query, $options);
+                $options['return-type'] = ReturnTypes::IDS;
+                return $pageTypeAPI->getPages([], $options);
             case 'pageCount':
             case 'unrestrictedPageCount':
-                $query = [
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
-                ];
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-                return $pageTypeAPI->getPageCount($query, $options);
+                return $pageTypeAPI->getPageCount([], $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

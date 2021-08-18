@@ -22,10 +22,9 @@ class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function getDataFromIdsQuery(array $ids): array
     {
-        $query = array(
-            'include' => $ids
-        );
-        return $query;
+        return [
+            'include' => $ids,
+        ];
     }
 
     protected function getOrderbyDefault()

@@ -26,6 +26,7 @@ use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 
 class CommentFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -157,12 +158,12 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'responses':
-                $limitFilterInputName = $this->getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
                 // Order by descending date
-                $orderFilterInputName = $this->getFilterInputName([
+                $orderFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);

@@ -6,7 +6,6 @@ namespace PoPSchema\Tags\ModuleProcessors;
 
 use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoPSchema\Taxonomies\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class TagFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
@@ -28,7 +27,7 @@ class TagFilterInputContainerModuleProcessor extends AbstractFilterInputContaine
         $tagFilterInputModules = [
             ...$this->getIDFilterInputModules(),
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
         ];
         return match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_TAGS => [

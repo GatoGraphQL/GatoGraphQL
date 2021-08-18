@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -14,6 +15,7 @@ use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerModuleProcessor;
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
@@ -71,44 +73,14 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'postCategory':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'id',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The category ID', 'post-categories'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-            case 'postCategoryBySlug':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'slug',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The category slug', 'post-categories'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-        }
-        return $schemaFieldArgs;
-    }
-
     public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'postCategories' => [PostCategoryFilterInputContainerModuleProcessor::class, PostCategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES],
             'postCategoryCount' => [PostCategoryFilterInputContainerModuleProcessor::class, PostCategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT],
             'postCategoryNames' => [PostCategoryFilterInputContainerModuleProcessor::class, PostCategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES],
+            'postCategory' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
+            'postCategoryBySlug' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
@@ -118,7 +90,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'postCategories':
             case 'postCategoryNames':
-                $limitFilterInputName = $this->getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
@@ -145,33 +117,20 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
+        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'postCategory':
             case 'postCategoryBySlug':
-                $query = [];
-                if ($fieldName == 'postCategory') {
-                    $query['include'] = [$fieldArgs['id']];
-                } elseif ($fieldName == 'postCategoryBySlug') {
-                    $query['slugs'] = [$fieldArgs['slug']];
-                }
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                if ($categories = $postCategoryTypeAPI->getCategories($query, $options)) {
+                $options['return-type'] = ReturnTypes::IDS;
+                if ($categories = $postCategoryTypeAPI->getCategories([], $options)) {
                     return $categories[0];
                 }
                 return null;
             case 'postCategories':
             case 'postCategoryNames':
-                $options = array_merge(
-                    [
-                        'return-type' => $fieldName === 'postCategories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
-                    ],
-                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-                );
+                $options['return-type'] = $fieldName === 'postCategoryNames' ? ReturnTypes::NAMES : ReturnTypes::IDS;
                 return $postCategoryTypeAPI->getCategories([], $options);
             case 'postCategoryCount':
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $postCategoryTypeAPI->getCategoryCount([], $options);
         }
 

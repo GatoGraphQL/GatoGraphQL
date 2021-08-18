@@ -41,6 +41,20 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
     }
 
     /**
+     * If the "status" is not passed, then it's always "publish"
+     *
+     * @return array<string, mixed>
+     */
+    public function getCustomPostQueryDefaults(): array
+    {
+        return [
+            'status' => [
+                Status::PUBLISHED,
+            ],
+        ];
+    }
+
+    /**
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options
      * @return object[]
@@ -85,6 +99,9 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
             }
         }
 
+        // If param "status" in $query is not passed, it defaults to "publish"
+        $query = array_merge($this->getCustomPostQueryDefaults(), $query);
+
         // Accept field atts to filter the API fields
         $this->maybeFilterDataloadQueryArgs($query, $options);
 
@@ -102,14 +119,9 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
             }
             unset($query['status']);
         }
-        if ($query['include'] ?? null) {
-            // Transform from array to string
+        if (isset($query['include']) && is_array($query['include'])) {
+            // It can be an array or a string
             $query['include'] = implode(',', $query['include']);
-
-            // Make sure the post can also be draft or pending
-            if (!isset($query['post_status'])) {
-                $query['post_status'] = CustomPostTypeAPIUtils::getCMSPostStatuses();
-            }
         }
         if (isset($query['exclude-ids'])) {
             $query['post__not_in'] = $query['exclude-ids'];

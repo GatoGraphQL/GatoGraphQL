@@ -8,11 +8,13 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\FieldResolvers\CustomPostFieldResolverTrait;
+use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 
 class RootPostFieldResolver extends AbstractPostFieldResolver
 {
@@ -69,38 +71,27 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'post':
-            case 'unrestrictedPost':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'id',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The post ID', 'pop-posts'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-            case 'postBySlug':
-            case 'unrestrictedPostBySlug':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'slug',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The post slug', 'pop-posts'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-        }
-        return $schemaFieldArgs;
+        return match ($fieldName) {
+            'post' => [
+                CommonFilterInputContainerModuleProcessor::class,
+                CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID
+            ],
+            'unrestrictedPost' => [
+                CommonCustomPostFilterInputContainerModuleProcessor::class,
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS
+            ],
+            'postBySlug' => [
+                CommonFilterInputContainerModuleProcessor::class,
+                CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG
+            ],
+            'unrestrictedPostBySlug' => [
+                CommonCustomPostFilterInputContainerModuleProcessor::class,
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_AND_STATUS
+            ],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+        };
     }
 
     /**
@@ -119,49 +110,14 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         array $options = []
     ): mixed {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'post':
             case 'postBySlug':
             case 'unrestrictedPost':
             case 'unrestrictedPostBySlug':
-                $query = [];
-                if (
-                    in_array($fieldName, [
-                    'post',
-                    'unrestrictedPost',
-                    ])
-                ) {
-                    $query['include'] = [$fieldArgs['id']];
-                } elseif (
-                    in_array($fieldName, [
-                    'postBySlug',
-                    'unrestrictedPostBySlug',
-                    ])
-                ) {
-                    $query['slug'] = $fieldArgs['slug'];
-                }
-
-                if (
-                    in_array($fieldName, [
-                    'post',
-                    'postBySlug',
-                    ])
-                ) {
-                    $query['status'] = [
-                        Status::PUBLISHED,
-                    ];
-                } elseif (
-                    in_array($fieldName, [
-                    'unrestrictedPost',
-                    'unrestrictedPostBySlug',
-                    ])
-                ) {
-                    $query['status'] = $this->getUnrestrictedFieldCustomPostTypes();
-                }
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                if ($posts = $postTypeAPI->getPosts($query, $options)) {
+                $options['return-type'] = ReturnTypes::IDS;
+                if ($posts = $postTypeAPI->getPosts([], $options)) {
                     return $posts[0];
                 }
                 return null;

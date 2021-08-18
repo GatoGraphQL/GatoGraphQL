@@ -19,6 +19,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -82,20 +83,15 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
-        switch ($fieldName) {
-            case 'mediaItemBySlug':
-                return [
-                    [
-                        SchemaDefinition::ARGNAME_NAME => 'slug',
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The slug of the media element, of type \'%s\'', 'media'),
-                        SchemaDefinition::ARGNAME_MANDATORY => true,
-                    ],
-                ];
-        }
-        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        return match ($fieldName) {
+            'mediaItemBySlug' => [
+                CommonFilterInputContainerModuleProcessor::class,
+                CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG
+            ],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+        };
     }
 
     /**
@@ -115,13 +111,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'mediaItemBySlug':
-                $query = [
-                    'slug' => $fieldArgs['slug'],
-                ];
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                $mediaItems = $this->mediaTypeAPI->getMediaItems($query, $options);
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+                $options['return-type'] = ReturnTypes::IDS;
+                $mediaItems = $this->mediaTypeAPI->getMediaItems([], $options);
                 return count($mediaItems) > 0 ? $mediaItems[0] : null;
             case 'imageSizeNames':
                 return \get_intermediate_image_sizes();

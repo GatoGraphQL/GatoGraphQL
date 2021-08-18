@@ -28,9 +28,10 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSch
     {
         if ($filterDataloadingModule = $this->getFieldDataFilteringModule($fieldName)) {
             $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
-            return $this->getSchemaFieldArgsWithFilterInputDefaultValues(
+            return $this->getSchemaFieldArgsWithCustomFilterInputData(
                 $schemaFieldArgs,
-                $this->getFieldDataFilteringDefaultValues($fieldName)
+                $this->getFieldDataFilteringDefaultValues($fieldName),
+                $this->getFieldDataFilteringMandatoryArgs($fieldName)
             );
         }
 
@@ -42,6 +43,15 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSch
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
     protected function getFieldDataFilteringDefaultValues(string $fieldName): array
+    {
+        return [];
+    }
+
+    /**
+     * Provide the names of the args which are mandatory in the FilterInput
+     * @return string[]
+     */
+    protected function getFieldDataFilteringMandatoryArgs(string $fieldName): array
     {
         return [];
     }

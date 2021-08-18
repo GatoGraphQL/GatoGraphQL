@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Media\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -23,6 +24,7 @@ use PoPSchema\Media\ModuleProcessors\MediaFilterInputContainerModuleProcessor;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
@@ -92,30 +94,12 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        switch ($fieldName) {
-            case 'mediaItem':
-                return [
-                    [
-                        SchemaDefinition::ARGNAME_NAME => 'id',
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $this->translationAPI->__('The ID of the media element, of type \'%s\'', 'media'),
-                            $this->customPostTypeResolver->getTypeName()
-                        ),
-                        SchemaDefinition::ARGNAME_MANDATORY => true,
-                    ],
-                ];
-        }
-        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
     public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'mediaItems' => [MediaFilterInputContainerModuleProcessor::class, MediaFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MEDIAITEMS],
             'mediaItemCount' => [MediaFilterInputContainerModuleProcessor::class, MediaFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MEDIAITEMCOUNT],
+            'mediaItem' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
@@ -123,7 +107,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         // Assign a default value to "mimeTypes"
-        $mimeTypeFilterInputName = $this->getFilterInputName([
+        $mimeTypeFilterInputName = FilterInputHelper::getFilterInputName([
             FilterInputModuleProcessor::class,
             FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES
         ]);
@@ -132,7 +116,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         ];
         switch ($fieldName) {
             case 'mediaItems':
-                $limitFilterInputName = $this->getFilterInputName([
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
@@ -163,26 +147,16 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
+        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'mediaItems':
-                $options = array_merge(
-                    [
-                        'return-type' => ReturnTypes::IDS,
-                    ],
-                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-                );
+                $options['return-type'] = ReturnTypes::IDS;
                 return $this->mediaTypeAPI->getMediaItems([], $options);
             case 'mediaItemCount':
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $this->mediaTypeAPI->getMediaItemCount([], $options);
             case 'mediaItem':
-                $query = [
-                    'include' => [$fieldArgs['id']],
-                ];
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                $mediaItems = $this->mediaTypeAPI->getMediaItems($query, $options);
+                $options['return-type'] = ReturnTypes::IDS;
+                $mediaItems = $this->mediaTypeAPI->getMediaItems([], $options);
                 return count($mediaItems) > 0 ? $mediaItems[0] : null;
         }
 
