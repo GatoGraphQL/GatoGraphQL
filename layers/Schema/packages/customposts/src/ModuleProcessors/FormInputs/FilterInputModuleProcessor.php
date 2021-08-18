@@ -13,6 +13,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\CustomPosts\Types\Status;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -97,6 +98,16 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_GENERICPOSTTYPES => true,
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => true,
             default => false,
+        };
+    }
+
+    public function getSchemaFilterInputDefaultValue(array $module): mixed
+    {
+        return match ($module[1]) {
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => [
+                Status::PUBLISHED,
+            ],
+            default => null,
         };
     }
 
