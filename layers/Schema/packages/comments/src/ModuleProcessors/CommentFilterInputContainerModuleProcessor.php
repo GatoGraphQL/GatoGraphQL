@@ -34,44 +34,39 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
 
     public function getFilterInputModules(array $module): array
     {
-        $customPostCommentFilterInputModules = [
-            ...$this->getIDFilterInputModules(),
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-            [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_IDS],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS],
-        ];
-        $rootCommentFilterInputModules = [
-            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOST_ID],
-            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOST_IDS],
-            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS],
-        ];
         $responseFilterInputModules = [
             ...$this->getIDFilterInputModules(),
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
             [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
         ];
+        $customPostCommentFilterInputModules = [
+            ...$responseFilterInputModules,
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_IDS],
+            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS],
+        ];
+        $rootCommentFilterInputModules = [
+            ...$customPostCommentFilterInputModules,
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOST_ID],
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOST_IDS],
+            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS],
+        ];
         return match ($module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_COMMENTS => [
-                ...$customPostCommentFilterInputModules,
-                ...$rootCommentFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
-            ],
-            self::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT => [
-                ...$customPostCommentFilterInputModules,
-                ...$rootCommentFilterInputModules,
-            ],
-            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTS => [
-                ...$customPostCommentFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
-            ],
-            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT => $customPostCommentFilterInputModules,
+            self::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_RESPONSES => [
                 ...$responseFilterInputModules,
                 ...$this->getPaginationFilterInputModules(),
             ],
-            self::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputModules,
+            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT => $customPostCommentFilterInputModules,
+            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTS => [
+                ...$customPostCommentFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT => $rootCommentFilterInputModules,
+            self::MODULE_FILTERINPUTCONTAINER_COMMENTS => [
+                ...$rootCommentFilterInputModules,
+                ...$this->getPaginationFilterInputModules(),
+            ],
             default => [],
         };
     }
