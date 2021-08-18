@@ -29,8 +29,8 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
     {
         return [
             'areCommentsOpen',
-            'commentCount',
             'hasComments',
+            'commentCount',
             'comments',
         ];
     }
@@ -39,8 +39,8 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
     {
         $types = [
             'areCommentsOpen' => SchemaDefinition::TYPE_BOOL,
-            'commentCount' => SchemaDefinition::TYPE_INT,
             'hasComments' => SchemaDefinition::TYPE_BOOL,
+            'commentCount' => SchemaDefinition::TYPE_INT,
             'comments' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
@@ -50,8 +50,8 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
     {
         return match ($fieldName) {
             'areCommentsOpen',
-            'commentCount',
-            'hasComments'
+            'hasComments',
+            'commentCount'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'comments'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
@@ -64,8 +64,8 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
     {
         $descriptions = [
             'areCommentsOpen' => $this->translationAPI->__('Are comments open to be added to the custom post', 'pop-comments'),
-            'commentCount' => $this->translationAPI->__('Number of comments added to the custom post', 'pop-comments'),
             'hasComments' => $this->translationAPI->__('Does the custom post have comments?', 'pop-comments'),
+            'commentCount' => $this->translationAPI->__('Number of comments added to the custom post', 'pop-comments'),
             'comments' => $this->translationAPI->__('Comments added to the custom post', 'pop-comments'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
