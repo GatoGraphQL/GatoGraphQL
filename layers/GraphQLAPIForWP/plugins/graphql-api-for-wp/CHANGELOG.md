@@ -66,6 +66,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `excludeParentIDs: [ID]`
   - `excludeIDs: [ID!]`
   - `searchfor: String`
+  - `types: [String!]`
 - Fetch a user by different means:
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)
