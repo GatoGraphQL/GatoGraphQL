@@ -26,7 +26,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
-class RootFieldResolver extends AbstractQueryableFieldResolver
+class QueryRootFieldResolver extends AbstractQueryableFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,
