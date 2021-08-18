@@ -39,7 +39,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS => 'customPostAuthorIDs',
-            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS => 'excludecustomPostAuthorIDs',
+            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS => 'excludeCustomPostAuthorIDs',
             default => parent::getName($module),
         };
     }
