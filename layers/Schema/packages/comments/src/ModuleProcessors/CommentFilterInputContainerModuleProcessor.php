@@ -67,7 +67,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
         $adminCommentFilterInputModules = [
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
         ];
-        return match ($module[1]) {
+        return match ((string)$module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_RESPONSES => [
                 ...$responseFilterInputModules,
