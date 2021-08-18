@@ -154,6 +154,15 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         return $schemaFieldArgs;
     }
 
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    {
+        return match ($fieldName) {
+            'responses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSES],
+            'responseCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+        };
+    }
+
     protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
@@ -175,15 +184,6 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                 ];
         }
         return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
-    }
-
-    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
-    {
-        return match ($fieldName) {
-            'responses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSES],
-            'responseCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT],
-            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
-        };
     }
 
     /**
