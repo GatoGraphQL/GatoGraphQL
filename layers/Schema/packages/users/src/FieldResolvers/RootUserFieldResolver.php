@@ -8,6 +8,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\Users\FieldResolvers\AbstractUserFieldResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
@@ -65,18 +66,6 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
-            case 'user':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'id',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The user ID', 'pop-users'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
             case 'userByUsername':
                 return array_merge(
                     $schemaFieldArgs,
@@ -105,6 +94,14 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         return $schemaFieldArgs;
     }
 
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    {
+        return match ($fieldName) {
+            'user' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+        };
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -122,12 +119,16 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'user':
+                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+                $options['return-type'] = ReturnTypes::IDS;
+                if ($users = $this->userTypeAPI->getUsers([], $options)) {
+                    return $users[0];
+                }
+                return null;
             case 'userByUsername':
             case 'userByEmail':
                 $query = [];
-                if ($fieldName === 'user') {
-                    $query['include'] = [$fieldArgs['id']];
-                } elseif ($fieldName === 'userByUsername') {
+                if ($fieldName === 'userByUsername') {
                     $query['username'] = $fieldArgs['username'];
                 } elseif ($fieldName === 'userByEmail') {
                     $query['emails'] = [$fieldArgs['email']];
