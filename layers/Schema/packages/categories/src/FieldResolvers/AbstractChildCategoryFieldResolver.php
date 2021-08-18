@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Categories\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -12,6 +13,7 @@ use PoPSchema\Categories\ComponentConfiguration;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -69,6 +71,22 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
         };
     }
 
+    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'childCategories':
+            case 'childCategoryNames':
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
+                return [
+                    $limitFilterInputName => ComponentConfiguration::getCategoryListDefaultLimit(),
+                ];
+        }
+        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -86,22 +104,16 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
     ): mixed {
         $category = $resultItem;
         $categoryTypeAPI = $this->getTypeAPI();
+        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
         $query = [
             'parent-id' => $typeResolver->getID($category),
         ];
         switch ($fieldName) {
             case 'childCategories':
             case 'childCategoryNames':
-                $query['limit'] = ComponentConfiguration::getCategoryListDefaultLimit();
-                $options = array_merge(
-                    [
-                        'return-type' => $fieldName === 'childCategories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
-                    ],
-                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-                );
+                $options['return-type'] = $fieldName === 'childCategoryNames' ? ReturnTypes::NAMES : ReturnTypes::IDS;
                 return $categoryTypeAPI->getCategories($query, $options);
             case 'childCategoryCount':
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $categoryTypeAPI->getCategoryCount($query, $options);
         }
 
