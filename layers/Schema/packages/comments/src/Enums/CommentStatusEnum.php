@@ -16,9 +16,10 @@ class CommentStatusEnum extends AbstractEnum
     public function getValues(): array
     {
         return [
-            CommentStatus::ALL,
             CommentStatus::APPROVE,
             CommentStatus::HOLD,
+            CommentStatus::SPAM,
+            CommentStatus::TRASH,
         ];
     }
 }

@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Constants\CommentTypes;
-use PoPSchema\Comments\Constants\Status;
+use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -24,10 +24,10 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     protected array $cmsToPoPCommentStatusConversion = [
-        'approve' => Status::APPROVED,
-        'hold' => Status::ONHOLD,
-        'spam' => Status::SPAM,
-        'trash' => Status::TRASH,
+        'approve' => CommentStatus::APPROVE,
+        'hold' => CommentStatus::HOLD,
+        'spam' => CommentStatus::SPAM,
+        'trash' => CommentStatus::TRASH,
     ];
 
     protected array $popToCMSCommentStatusConversion;
