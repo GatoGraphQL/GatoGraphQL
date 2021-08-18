@@ -32,6 +32,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public const MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS = 'filterinput-exclude-parent-ids';
     public const MODULE_FILTERINPUT_SLUGS = 'filterinput-slugs';
     public const MODULE_FILTERINPUT_SLUG = 'filterinput-slug';
+    public const MODULE_FILTERINPUT_DATEFORMAT = 'filterinput-date-format';
 
     public function getModulesToProcess(): array
     {
@@ -49,6 +50,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             [self::class, self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS],
             [self::class, self::MODULE_FILTERINPUT_SLUGS],
             [self::class, self::MODULE_FILTERINPUT_SLUG],
+            [self::class, self::MODULE_FILTERINPUT_DATEFORMAT],
         );
     }
 
@@ -68,6 +70,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_PARENT_IDS],
             self::MODULE_FILTERINPUT_SLUGS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SLUGS],
             self::MODULE_FILTERINPUT_SLUG => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SLUG],
+            self::MODULE_FILTERINPUT_DATEFORMAT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_DATEFORMAT],
         ];
         return $filterInputs[$module[1]] ?? null;
     }
@@ -107,6 +110,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => 'excludeParentIDs',
             self::MODULE_FILTERINPUT_SLUGS => 'slugs',
             self::MODULE_FILTERINPUT_SLUG => 'slug',
+            self::MODULE_FILTERINPUT_DATEFORMAT => 'format',
         );
         return $names[$module[1]] ?? parent::getName($module);
     }
@@ -127,6 +131,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_SLUGS => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_SLUG => SchemaDefinition::TYPE_STRING,
+            self::MODULE_FILTERINPUT_DATEFORMAT => SchemaDefinition::TYPE_STRING,
             default => $this->getDefaultSchemaFilterInputType(),
         };
     }
@@ -178,6 +183,10 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->translationAPI->__('Exclude elements with the given parent IDs', 'schema-commons'),
             self::MODULE_FILTERINPUT_SLUGS => $this->translationAPI->__('Limit results to elements with the given slug', 'schema-commons'),
             self::MODULE_FILTERINPUT_SLUGS => $this->translationAPI->__('Limit results to elements with the given slug', 'schema-commons'),
+            self::MODULE_FILTERINPUT_DATEFORMAT => sprintf(
+                $this->translationAPI->__('Date format, as defined in %s', 'schema-commons'),
+                'https://www.php.net/manual/en/function.date.php'
+            ),
             default => null,
         };
     }
