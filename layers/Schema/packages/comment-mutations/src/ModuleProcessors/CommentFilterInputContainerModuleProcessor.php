@@ -25,8 +25,8 @@ class CommentFilterInputContainerModuleProcessor extends UpstreamCommentFilterIn
     {
         // Get the original config from above
         $targetModule = match ($module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_MYCOMMENTS => [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTS],
-            self::MODULE_FILTERINPUTCONTAINER_MYCOMMENTCOUNT => [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
+            self::MODULE_FILTERINPUTCONTAINER_MYCOMMENTS => [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTS],
+            self::MODULE_FILTERINPUTCONTAINER_MYCOMMENTCOUNT => [self::class, self::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT],
             default => null,
         };
         return parent::getFilterInputModules($targetModule);
