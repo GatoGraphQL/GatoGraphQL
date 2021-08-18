@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
-use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Tokens\Param;
+use PoP\Engine\FormInputs\BooleanFormInput;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
-use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -33,6 +34,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public const MODULE_FILTERINPUT_SLUGS = 'filterinput-slugs';
     public const MODULE_FILTERINPUT_SLUG = 'filterinput-slug';
     public const MODULE_FILTERINPUT_DATEFORMAT = 'filterinput-date-format';
+    public const MODULE_FILTERINPUT_GMT = 'filterinput-date-gmt';
 
     public function getModulesToProcess(): array
     {
@@ -51,6 +53,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             [self::class, self::MODULE_FILTERINPUT_SLUGS],
             [self::class, self::MODULE_FILTERINPUT_SLUG],
             [self::class, self::MODULE_FILTERINPUT_DATEFORMAT],
+            [self::class, self::MODULE_FILTERINPUT_GMT],
         );
     }
 
@@ -71,6 +74,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SLUGS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SLUGS],
             self::MODULE_FILTERINPUT_SLUG => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SLUG],
             self::MODULE_FILTERINPUT_DATEFORMAT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_DATEFORMAT],
+            self::MODULE_FILTERINPUT_GMT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_GMT],
         ];
         return $filterInputs[$module[1]] ?? null;
     }
@@ -88,6 +92,8 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
                 return FormMultipleInput::class;
             case self::MODULE_FILTERINPUT_COMMASEPARATED_IDS:
                 return MultiValueFromStringFormInput::class;
+            case self::MODULE_FILTERINPUT_GMT:
+                return BooleanFormInput::class;
         }
 
         return parent::getInputClass($module);
@@ -111,6 +117,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SLUGS => 'slugs',
             self::MODULE_FILTERINPUT_SLUG => 'slug',
             self::MODULE_FILTERINPUT_DATEFORMAT => 'format',
+            self::MODULE_FILTERINPUT_GMT => 'gmt',
         );
         return $names[$module[1]] ?? parent::getName($module);
     }
@@ -132,6 +139,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SLUGS => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_SLUG => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_DATEFORMAT => SchemaDefinition::TYPE_STRING,
+            self::MODULE_FILTERINPUT_GMT => SchemaDefinition::TYPE_BOOL,
             default => $this->getDefaultSchemaFilterInputType(),
         };
     }
@@ -187,6 +195,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
                 $this->translationAPI->__('Date format, as defined in %s', 'schema-commons'),
                 'https://www.php.net/manual/en/function.date.php'
             ),
+            self::MODULE_FILTERINPUT_GMT => $this->translationAPI->__('Whether to retrieve the date as UTC or GMT timezone', 'schema-commons'),
             default => null,
         };
     }

@@ -12,6 +12,7 @@ use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIHelpers;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use WP_Post;
 
 use function get_post_status;
 
@@ -252,10 +253,10 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
 
     public function getPermalink(string | int | object $customPostObjectOrID): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
+        if ($customPostID === null) {
+            return null;
+        }
         if ($this->getStatus($customPostObjectOrID) == Status::PUBLISHED) {
             return \get_permalink($customPostID);
         }
@@ -274,7 +275,11 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
             $customPost,
             $customPostID,
         ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        if ($this->getStatus($customPostObjectOrID) == Status::PUBLISHED) {
+        if ($customPost === null) {
+            return null;
+        }
+        /** @var WP_Post $customPost */
+        if ($this->getStatus($customPostObjectOrID) === Status::PUBLISHED) {
             return $customPost->post_name;
         }
 
@@ -289,9 +294,30 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
     {
         return \get_the_excerpt($customPostObjectOrID);
     }
+    /**
+     * @return mixed[]
+     */
     protected function getCustomPostObjectAndID(string | int | object $customPostObjectOrID): array
     {
         return CustomPostTypeAPIHelpers::getCustomPostObjectAndID($customPostObjectOrID);
+    }
+
+    protected function getCustomPostObject(string | int | object $customPostObjectOrID): ?WP_Post
+    {
+        list(
+            $customPost,
+            $customPostID,
+        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        return $customPost;
+    }
+
+    protected function getCustomPostID(string | int | object $customPostObjectOrID): ?int
+    {
+        list(
+            $customPost,
+            $customPostID,
+        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        return $customPostID;
     }
 
     public function getTitle(string | int | object $customPostObjectOrID): ?string
@@ -300,24 +326,28 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
             $customPost,
             $customPostID,
         ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
+        /** @var WP_Post $customPost */
         return $this->hooksAPI->applyFilters('the_title', $customPost->post_title, $customPostID);
     }
 
     public function getContent(string | int | object $customPostObjectOrID): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
         return $this->hooksAPI->applyFilters('the_content', $customPost->post_content);
     }
 
-    public function getPlainTextContent(string | int | object $customPostObjectOrID): string
+    public function getPlainTextContent(string | int | object $customPostObjectOrID): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
 
         // Basic content: remove embeds, shortcodes, and tags
         // Remove the embed functionality, and then add again
@@ -332,30 +362,27 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
         return strip_tags($ret);
     }
 
-    public function getPublishedDate(string | int | object $customPostObjectOrID): ?string
+    public function getPublishedDate(string | int | object $customPostObjectOrID, bool $gmt = false): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return $customPost->post_date;
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
+        return $gmt ? $customPost->post_date_gmt : $customPost->post_date;
     }
 
-    public function getModifiedDate(string | int | object $customPostObjectOrID): ?string
+    public function getModifiedDate(string | int | object $customPostObjectOrID, bool $gmt = false): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return $customPost->post_modified;
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
+        return $gmt ? $customPost->post_modified_gmt : $customPost->post_modified;
     }
     public function getCustomPostType(string | int | object $customPostObjectOrID): string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return $customPost->post_type;
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        return $customPost?->post_type;
     }
 
     /**

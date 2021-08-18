@@ -15,6 +15,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
     public const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID = 'filterinputcontainer-entity-by-id';
     public const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG = 'filterinputcontainer-entity-by-slug';
     public const MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING = 'filterinputcontainer-date-as-string';
+    public const MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING = 'filterinputcontainer-utcdate-as-string';
 
     public function getModulesToProcess(): array
     {
@@ -22,6 +23,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
             [self::class, self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
         );
     }
 
@@ -36,6 +38,10 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
             ],
             self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT],
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING => [
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_GMT],
             ],
             default => [],
         };
@@ -71,13 +77,23 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING:
+            case self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
                 $formatFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT
                 ]);
-                return [
+                $filterInputNameDefaultValues = [
                     $formatFilterInputName => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
                 ];
+                if ($module[1] === self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING) {
+                    return $filterInputNameDefaultValues;
+                }
+                $gmtFilterInputName = FilterInputHelper::getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_GMT
+                ]);
+                $filterInputNameDefaultValues[$gmtFilterInputName] = false;
+                return $filterInputNameDefaultValues;
         }
         return parent::getFieldDataFilteringMandatoryArgs($module);
     }

@@ -44,6 +44,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                 'status',
                 'isStatus',
                 'date',
+                'modified',
                 'title',
                 'excerpt',
                 'customPostType',
@@ -58,6 +59,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
             'status' => SchemaDefinition::TYPE_ENUM,
             'isStatus' => SchemaDefinition::TYPE_BOOL,
             'date' => SchemaDefinition::TYPE_DATE,
+            'modified' => SchemaDefinition::TYPE_DATE,
             'title' => SchemaDefinition::TYPE_STRING,
             'excerpt' => SchemaDefinition::TYPE_STRING,
             'customPostType' => SchemaDefinition::TYPE_STRING,
@@ -76,6 +78,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
             case 'status':
             case 'isStatus':
             case 'date':
+            case 'modified':
             case 'customPostType':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
@@ -89,6 +92,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
             'status' => $this->translationAPI->__('Custom post status', 'customposts'),
             'isStatus' => $this->translationAPI->__('Is the custom post in the given status?', 'customposts'),
             'date' => $this->translationAPI->__('Custom post published date', 'customposts'),
+            'modified' => $this->translationAPI->__('Custom post modified date', 'customposts'),
             'title' => $this->translationAPI->__('Custom post title', 'customposts'),
             'excerpt' => $this->translationAPI->__('Custom post excerpt', 'customposts'),
             'customPostType' => $this->translationAPI->__('Custom post type', 'customposts'),
@@ -171,7 +175,8 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
     public function getFieldDataFilteringModule(string $fieldName): ?array
     {
         return match ($fieldName) {
-            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING],
+            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            'modified' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
             default => parent::getFieldDataFilteringModule($fieldName),
         };
     }

@@ -241,11 +241,10 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         }
         return null;
     }
-    public function getCommentDateGmt(object $comment): string
+    public function getCommentDate(object $comment, bool $gmt = false): string
     {
-        /** @var WP_Comment */
-        $comment = $comment;
-        return $comment->comment_date_gmt;
+        /** @var WP_Comment $comment*/
+        return $gmt ? $comment->comment_date_gmt : $comment->comment_date;
     }
     public function getCommentId(object $comment): string | int
     {
