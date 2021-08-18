@@ -8,3 +8,6 @@ services:
 
     PoPSchema\CommentMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
+
+    PoPSchema\CommentMutations\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'
