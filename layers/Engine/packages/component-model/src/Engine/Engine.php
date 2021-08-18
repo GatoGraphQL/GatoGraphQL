@@ -1521,13 +1521,15 @@ class Engine implements EngineInterface
                         // If the type data resolver is union, the dbKey where the value is stored
                         // is contained in the ID itself, with format dbKey/ID.
                         // We must extract this information: assign the dbKey to $database_key,
-                        // and remove the dbKey from the ID
+                        // and remove the dbKey from the ID.
+                        // If the Dataloader failed loading the object, the original ID as int
+                        // may have been stored, so cast it always to string
                         $typeResolver_ids = array_map(
                             function ($composedID) {
                                 list(
                                     $database_key,
                                     $id
-                                ) = UnionTypeHelpers::extractDBObjectTypeAndID($composedID);
+                                ) = UnionTypeHelpers::extractDBObjectTypeAndID((string)$composedID);
                                 return $id;
                             },
                             $typeResolver_ids
