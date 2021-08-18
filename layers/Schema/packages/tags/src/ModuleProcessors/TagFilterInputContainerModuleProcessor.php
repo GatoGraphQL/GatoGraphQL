@@ -6,7 +6,7 @@ namespace PoPSchema\Tags\ModuleProcessors;
 
 use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoPSchema\Taxonomies\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class TagFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
