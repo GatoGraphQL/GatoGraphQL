@@ -12,6 +12,7 @@ use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 
 class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 {
@@ -98,22 +99,6 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
         switch ($fieldName) {
-            case 'date':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'format',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $this->translationAPI->__('Date format, as defined in %s', 'customposts'),
-                                'https://www.php.net/manual/en/function.date.php'
-                            ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
-                        ],
-                    ]
-                );
-
             case 'isStatus':
                 /**
                  * @var CustomPostStatusEnum
@@ -181,6 +166,14 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
         }
 
         return $schemaFieldArgs;
+    }
+
+    public function getFieldDataFilteringModule(string $fieldName): ?array
+    {
+        return match ($fieldName) {
+            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING],
+            default => parent::getFieldDataFilteringModule($fieldName),
+        };
     }
 
     public function getDefaultContentFormatValue(): string
