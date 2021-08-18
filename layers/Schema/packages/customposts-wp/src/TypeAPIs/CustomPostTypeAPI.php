@@ -253,10 +253,10 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
 
     public function getPermalink(string | int | object $customPostObjectOrID): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
+        if ($customPostID === null) {
+            return null;
+        }
         if ($this->getStatus($customPostObjectOrID) == Status::PUBLISHED) {
             return \get_permalink($customPostID);
         }
@@ -275,7 +275,11 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
             $customPost,
             $customPostID,
         ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        if ($this->getStatus($customPostObjectOrID) == Status::PUBLISHED) {
+        if ($customPost === null) {
+            return null;
+        }
+        /** @var WP_Post $customPost */
+        if ($this->getStatus($customPostObjectOrID) === Status::PUBLISHED) {
             return $customPost->post_name;
         }
 
@@ -290,6 +294,9 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
     {
         return \get_the_excerpt($customPostObjectOrID);
     }
+    /**
+     * @return mixed[]
+     */
     protected function getCustomPostObjectAndID(string | int | object $customPostObjectOrID): array
     {
         return CustomPostTypeAPIHelpers::getCustomPostObjectAndID($customPostObjectOrID);
@@ -319,24 +326,28 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
             $customPost,
             $customPostID,
         ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
+        /** @var WP_Post $customPost */
         return $this->hooksAPI->applyFilters('the_title', $customPost->post_title, $customPostID);
     }
 
     public function getContent(string | int | object $customPostObjectOrID): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
         return $this->hooksAPI->applyFilters('the_content', $customPost->post_content);
     }
 
-    public function getPlainTextContent(string | int | object $customPostObjectOrID): string
+    public function getPlainTextContent(string | int | object $customPostObjectOrID): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
 
         // Basic content: remove embeds, shortcodes, and tags
         // Remove the embed functionality, and then add again
