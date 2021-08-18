@@ -11,6 +11,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public const FILTERINPUT_CUSTOMPOST_IDS = 'filterinput-custompost-ids';
     public const FILTERINPUT_CUSTOMPOST_ID = 'filterinput-custompost-id';
     public const FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS = 'filterinput-exclude-custompost-ids';
+    public const FILTERINPUT_COMMENT_TYPES = 'filterinput-comment-types';
 
     public function getFilterInputsToProcess(): array
     {
@@ -18,6 +19,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
             [self::class, self::FILTERINPUT_CUSTOMPOST_IDS],
             [self::class, self::FILTERINPUT_CUSTOMPOST_ID],
             [self::class, self::FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS],
+            [self::class, self::FILTERINPUT_COMMENT_TYPES],
         );
     }
 
@@ -32,6 +34,9 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 break;
             case self::FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS:
                 $query['exclude-customPostIDs'] = $value;
+                break;
+            case self::FILTERINPUT_COMMENT_TYPES:
+                $query['types'] = $value;
                 break;
         }
     }

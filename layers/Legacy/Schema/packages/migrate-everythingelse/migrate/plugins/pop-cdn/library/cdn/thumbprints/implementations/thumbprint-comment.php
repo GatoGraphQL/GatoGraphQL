@@ -18,7 +18,6 @@ class PoP_CDN_Thumbprint_Comment extends PoP_CDN_ThumbprintBase
             // 'fields' => 'ids',
             'limit' => 1,
             'status' => \PoPSchema\Comments\Constants\Status::APPROVED,
-            // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
             'order' =>  'DESC',
             'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:comments:date'),
         );

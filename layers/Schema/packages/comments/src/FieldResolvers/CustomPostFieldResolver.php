@@ -102,7 +102,6 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
             case 'commentCount':
                 $query = [
                     'status' => Status::APPROVED,
-                    // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                     'customPostID' => $typeResolver->getID($post),
                 ];
                 $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
@@ -111,7 +110,6 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
             case 'comments':
                 $query = [
                     'status' => Status::APPROVED,
-                    // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                     'customPostID' => $typeResolver->getID($post),
                 ];
                 $options = array_merge(

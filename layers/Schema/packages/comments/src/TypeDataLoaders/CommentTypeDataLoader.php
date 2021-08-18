@@ -8,6 +8,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
+use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\Constants\Params;
 use PoPSchema\Comments\Constants\Status;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
@@ -32,6 +33,11 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
     {
         $query = [
             'include' => $ids,
+            'type' => [
+                CommentTypes::COMMENT,
+                CommentTypes::TRACKBACK,
+                CommentTypes::PINGBACK,
+            ],
         ];
         return $this->commentTypeAPI->getComments($query);
     }
@@ -39,18 +45,19 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
     public function getQuery($query_args): array
     {
         $query = parent::getQuery($query_args);
-
         $query['status'] = Status::APPROVED;
-        // $query['type'] = 'comment'; // Only comments, no trackbacks or pingbacks
-        $query['customPostID'] = $query_args[Params::COMMENT_POST_ID];
-
         return $query;
     }
     public function getDataFromIdsQuery(array $ids): array
     {
-        $query = array();
-        $query['include'] = $ids;
-        return $query;
+        return [
+            'include' => $ids,
+            'type' => [
+                CommentTypes::COMMENT,
+                CommentTypes::TRACKBACK,
+                CommentTypes::PINGBACK,
+            ],
+        ];
     }
 
     public function executeQuery($query, array $options = [])
