@@ -61,6 +61,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `excludeCustomPostIDs: [ID]`
   - `customPostAuthorIDs: [ID!]`
   - `excludeCustomPostAuthorIDs: [ID]`
+  - `customPostTypes: [String!]`
   - `dateFrom: Date`
   - `dateTo: Date`
   - `excludeAuthorIDs: [ID]`
