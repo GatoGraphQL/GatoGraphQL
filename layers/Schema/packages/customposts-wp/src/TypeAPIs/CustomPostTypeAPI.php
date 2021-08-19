@@ -296,7 +296,7 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
         return CustomPostTypeAPIHelpers::getCustomPostObjectAndID($customPostObjectOrID);
     }
 
-    protected function getCustomPostObject(string | int | object $customPostObjectOrID): ?WP_Post
+    protected function getCustomPostObject(string | int | object $customPostObjectOrID): ?object
     {
         list(
             $customPost,
