@@ -16,21 +16,18 @@ use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
-    public const MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
     public const MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
 
     public function getModulesToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
-            [self::class, self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES],
             [self::class, self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES],
         );
     }
@@ -39,7 +36,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         $filterInputs = [
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOSTSTATUS],
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_GENERICCUSTOMPOSTTYPES],
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_UNIONCUSTOMPOSTTYPES],
         ];
         return $filterInputs[$module[1]] ?? null;
@@ -49,7 +45,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS:
-            case self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES:
             case self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES:
                 return FormMultipleInput::class;
         }
@@ -60,12 +55,10 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS:
-            case self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES:
             case self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES:
                 // Add a nice name, so that the URL params when filtering make sense
                 $names = array(
                     self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => 'status',
-                    self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => 'customPostTypes',
                     self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => 'customPostTypes',
                 );
                 return $names[$module[1]];
@@ -78,7 +71,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => SchemaDefinition::TYPE_STRING,
             default => $this->getDefaultSchemaFilterInputType(),
         };
@@ -88,7 +80,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => true,
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => true,
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => true,
             default => false,
         };
@@ -98,7 +89,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => true,
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => true,
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => true,
             default => false,
         };
@@ -110,7 +100,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => [
                 Status::PUBLISHED,
             ],
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => ComponentConfiguration::getGenericCustomPostTypes(),
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
                 CustomPostUnionTypeResolver::class
             ),
@@ -138,7 +127,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         $descriptions = [
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->translationAPI->__('Custom Post Status', 'customposts'),
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->translationAPI->__('Return results from Custom Post Types', 'customposts'),
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->translationAPI->__('Return results from Union of the Custom Post Types', 'customposts'),
         ];
         return $descriptions[$module[1]] ?? null;
