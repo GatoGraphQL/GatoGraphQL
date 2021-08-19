@@ -110,6 +110,15 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
      */
     protected function getRequestedQuery(): ?string
     {
-        return $_REQUEST[QueryInputs::QUERY] ?? null;
+        $query = $_REQUEST[QueryInputs::QUERY] ?? null;
+        if (!$query) {
+            return null;
+        }
+        // All the '"' are encoded as '\"', replace back
+        return str_replace(
+            '\"',
+            '"',
+            $query
+        );
     }
 }
