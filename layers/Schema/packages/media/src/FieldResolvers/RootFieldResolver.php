@@ -17,7 +17,6 @@ use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\Media\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\Media\ModuleProcessors\MediaFilterInputContainerModuleProcessor;
@@ -37,7 +36,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected CustomPostTypeResolver $customPostTypeResolver,
         protected MediaTypeAPIInterface $mediaTypeAPI,
     ) {
         parent::__construct(

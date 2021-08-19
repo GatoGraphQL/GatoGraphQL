@@ -6,3 +6,6 @@ services:
 
     PoPSchema\GenericCustomPosts\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
+
+    PoPSchema\GenericCustomPosts\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'
