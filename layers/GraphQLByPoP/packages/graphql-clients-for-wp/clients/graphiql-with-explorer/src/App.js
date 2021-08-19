@@ -224,6 +224,8 @@ const DEFAULT_QUERY = `# Welcome to GraphiQL
 #
 `
 
+// If passing the requested query via PHP, we can avoid the issue of the encoded query not properly handled in JS
+var requestedQuery = window.graphiQLWithExplorerClientForWP ? window.graphiQLWithExplorerClientForWP.requestedQuery : null;
 var defaultQuery = (window.graphiQLWithExplorerClientForWP && window.graphiQLWithExplorerClientForWP.defaultQuery) ? window.graphiQLWithExplorerClientForWP.defaultQuery : DEFAULT_QUERY;
 // Watch out! Use `decodeURIComponent` because the wp-admin encodes the query,
 // as in: https://graphql-api.lndo.site/wp-admin/admin.php?page=graphql_api&operationName=MyQuery&query=query+MyQuery+%7B++me%7D
@@ -233,7 +235,7 @@ var queryDecodeURIComponent = (window.graphiQLWithExplorerClientForWP && window.
 function formURLDecodeComponent(s) {
     return decodeURIComponent((s + '').replace(/\+/g, ' '));
 }
-var query = (queryDecodeURIComponent ? formURLDecodeComponent(parameters.query || "") : parameters.query) || defaultQuery;
+var query = requestedQuery || (queryDecodeURIComponent ? formURLDecodeComponent(parameters.query || "") : parameters.query) || defaultQuery;
 
 class App extends Component<{}, State> {
   _graphiql: GraphiQL;
