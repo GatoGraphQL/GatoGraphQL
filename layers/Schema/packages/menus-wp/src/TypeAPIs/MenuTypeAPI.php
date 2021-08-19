@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\MenusWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
@@ -14,8 +13,6 @@ use WP_Term;
 
 class MenuTypeAPI implements MenuTypeAPIInterface
 {
-    use InjectedFilterDataloadingModuleTypeAPITrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     public function __construct(
@@ -127,9 +124,6 @@ class MenuTypeAPI implements MenuTypeAPIInterface
                 $query['fields'] = 'names';
             }
         }
-
-        // Accept field atts to filter the API fields
-        $this->maybeFilterDataloadQueryArgs($query, $options);
 
         if (isset($query['hide-empty'])) {
             $query['hide_empty'] = $query['hide-empty'];
