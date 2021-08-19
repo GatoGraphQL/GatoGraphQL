@@ -182,7 +182,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                  * Only from the mapped CPTs, otherwise we may get an error when
                  * the custom post to which the comment was added, is not accesible
                  * via field `Comment.customPost`:
-                 * 
+                 *
                  *   ```
                  *   comments {
                  *     customPost {
