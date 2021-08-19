@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentsWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Constants\CommentTypes;
@@ -19,8 +18,6 @@ use WP_Comment;
  */
 class CommentTypeAPI implements CommentTypeAPIInterface
 {
-    use InjectedFilterDataloadingModuleTypeAPITrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     protected array $cmsToPoPCommentStatusConversion = [
@@ -69,9 +66,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
                 $query['fields'] = 'ids';
             }
         }
-
-        // Accept field atts to filter the API fields
-        $this->maybeFilterDataloadQueryArgs($query, $options);
 
         // Convert the parameters
         if (isset($query['status'])) {

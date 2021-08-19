@@ -104,17 +104,19 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
     ): mixed {
         $category = $resultItem;
         $categoryTypeAPI = $this->getTypeAPI();
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-        $query = [
-            'parent-id' => $typeResolver->getID($category),
-        ];
+        $query = array_merge(
+            $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
+            [
+                'parent-id' => $typeResolver->getID($category),
+            ]
+        );
         switch ($fieldName) {
             case 'childCategories':
+                return $categoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::IDS]);
             case 'childCategoryNames':
-                $options['return-type'] = $fieldName === 'childCategoryNames' ? ReturnTypes::NAMES : ReturnTypes::IDS;
-                return $categoryTypeAPI->getCategories($query, $options);
+                return $categoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::NAMES]);
             case 'childCategoryCount':
-                return $categoryTypeAPI->getCategoryCount($query, $options);
+                return $categoryTypeAPI->getCategoryCount($query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -103,12 +103,13 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
             case 'customPostBySlug':
             case 'unrestrictedCustomPost':
             case 'unrestrictedCustomPostBySlug':
-                $query = [
-                    'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
-                ];
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-                $options['return-type'] = ReturnTypes::IDS;
-                if ($posts = $customPostTypeAPI->getCustomPosts($query, $options)) {
+                $query = array_merge(
+                    $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
+                    [
+                        'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
+                    ]
+                );
+                if ($posts = $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
                 return null;

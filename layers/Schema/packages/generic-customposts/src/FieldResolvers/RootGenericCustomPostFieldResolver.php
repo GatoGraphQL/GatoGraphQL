@@ -184,25 +184,25 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-        $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
+        $query = array_merge(
+            $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
+            $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs)
+        );
         switch ($fieldName) {
             case 'genericCustomPost':
             case 'genericCustomPostBySlug':
             case 'unrestrictedGenericCustomPost':
             case 'unrestrictedGenericCustomPostBySlug':
-                $options['return-type'] = ReturnTypes::IDS;
-                if ($customPosts = $customPostTypeAPI->getCustomPosts($query, $options)) {
+                if ($customPosts = $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS])) {
                     return $customPosts[0];
                 }
                 return null;
             case 'genericCustomPosts':
             case 'unrestrictedGenericCustomPosts':
-                $options['return-type'] = ReturnTypes::IDS;
-                return $customPostTypeAPI->getCustomPosts($query, $options);
+                return $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS]);
             case 'genericCustomPostCount':
             case 'unrestrictedGenericCustomPostCount':
-                return $customPostTypeAPI->getCustomPostCount($query, $options);
+                return $customPostTypeAPI->getCustomPostCount($query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

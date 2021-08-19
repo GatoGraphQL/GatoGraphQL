@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
@@ -21,8 +20,6 @@ use function get_post_status;
  */
 class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
 {
-    use InjectedFilterDataloadingModuleTypeAPITrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     // public const NON_EXISTING_ID = "non-existing";
@@ -102,9 +99,6 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
 
         // If param "status" in $query is not passed, it defaults to "publish"
         $query = array_merge($this->getCustomPostQueryDefaults(), $query);
-
-        // Accept field atts to filter the API fields
-        $this->maybeFilterDataloadQueryArgs($query, $options);
 
         // Convert the parameters
         if (isset($query['status'])) {
@@ -302,7 +296,7 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
         return CustomPostTypeAPIHelpers::getCustomPostObjectAndID($customPostObjectOrID);
     }
 
-    protected function getCustomPostObject(string | int | object $customPostObjectOrID): ?WP_Post
+    protected function getCustomPostObject(string | int | object $customPostObjectOrID): ?object
     {
         list(
             $customPost,

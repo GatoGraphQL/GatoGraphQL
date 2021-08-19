@@ -117,21 +117,20 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'postCategory':
             case 'postCategoryBySlug':
-                $options['return-type'] = ReturnTypes::IDS;
-                if ($categories = $postCategoryTypeAPI->getCategories([], $options)) {
+                if ($categories = $postCategoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::IDS])) {
                     return $categories[0];
                 }
                 return null;
             case 'postCategories':
+                return $postCategoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::IDS]);
             case 'postCategoryNames':
-                $options['return-type'] = $fieldName === 'postCategoryNames' ? ReturnTypes::NAMES : ReturnTypes::IDS;
-                return $postCategoryTypeAPI->getCategories([], $options);
+                return $postCategoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::NAMES]);
             case 'postCategoryCount':
-                return $postCategoryTypeAPI->getCategoryCount([], $options);
+                return $postCategoryTypeAPI->getCategoryCount($query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

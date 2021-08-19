@@ -142,18 +142,19 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
                 return $pageTypeAPI->getParentPageID($page);
         }
 
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-        $query = [
-            'parent-id' => $typeResolver->getID($page),
-        ];
+        $query = array_merge(
+            $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
+            [
+                'parent-id' => $typeResolver->getID($page),
+            ]
+        );
         switch ($fieldName) {
             case 'childPages':
             case 'unrestrictedChildPages':
-                $options['return-type'] = ReturnTypes::IDS;
-                return $pageTypeAPI->getPages($query, $options);
+                return $pageTypeAPI->getPages($query, ['return-type' => ReturnTypes::IDS]);
             case 'childPageCount':
             case 'unrestrictedChildPageCount':
-                return $pageTypeAPI->getPageCount($query, $options);
+                return $pageTypeAPI->getPageCount($query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

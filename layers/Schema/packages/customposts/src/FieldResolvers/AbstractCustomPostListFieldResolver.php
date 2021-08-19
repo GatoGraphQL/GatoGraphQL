@@ -150,17 +150,18 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         array $options = []
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = array_merge(
+            $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
+            $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs)
+        );
         switch ($fieldName) {
             case 'customPosts':
             case 'unrestrictedCustomPosts':
-                $options['return-type'] = ReturnTypes::IDS;
-                return $customPostTypeAPI->getCustomPosts($query, $options);
-                
+                return $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS]);
+
             case 'customPostCount':
             case 'unrestrictedCustomPostCount':
-                return $customPostTypeAPI->getCustomPostCount($query, $options);
+                return $customPostTypeAPI->getCustomPostCount($query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

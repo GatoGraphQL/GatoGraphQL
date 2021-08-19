@@ -130,19 +130,19 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = array_merge(
+            $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
+            $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs)
+        );
         switch ($fieldName) {
             case 'myPostCount':
-                return $postTypeAPI->getPostCount($query, $options);
+                return $postTypeAPI->getPostCount($query);
 
             case 'myPosts':
-                $options['return-type'] = ReturnTypes::IDS;
-                return $postTypeAPI->getPosts($query, $options);
-                
+                return $postTypeAPI->getPosts($query, ['return-type' => ReturnTypes::IDS]);
+
             case 'myPost':
-                $options['return-type'] = ReturnTypes::IDS;
-                if ($posts = $postTypeAPI->getPosts($query, $options)) {
+                if ($posts = $postTypeAPI->getPosts($query, ['return-type' => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
                 return null;

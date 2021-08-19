@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\HooksAPIInterface;
@@ -22,8 +21,6 @@ use WP_Term;
  */
 abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterface
 {
-    use InjectedFilterDataloadingModuleTypeAPITrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     public function __construct(
@@ -121,9 +118,6 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
                 $query['fields'] = 'names';
             }
         }
-
-        // Accept field atts to filter the API fields
-        $this->maybeFilterDataloadQueryArgs($query, $options);
 
         if (isset($query['hide-empty'])) {
             $query['hide_empty'] = $query['hide-empty'];

@@ -117,21 +117,20 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'postTag':
             case 'postTagBySlug':
-                $options['return-type'] = ReturnTypes::IDS;
-                if ($tags = $postTagTypeAPI->getTags([], $options)) {
+                if ($tags = $postTagTypeAPI->getTags($query, ['return-type' => ReturnTypes::IDS])) {
                     return $tags[0];
                 }
                 return null;
             case 'postTags':
+                return $postTagTypeAPI->getTags($query, ['return-type' => ReturnTypes::IDS]);
             case 'postTagNames':
-                $options['return-type'] = $fieldName === 'postTagNames' ? ReturnTypes::NAMES : ReturnTypes::IDS;
-                return $postTagTypeAPI->getTags([], $options);
+                return $postTagTypeAPI->getTags($query, ['return-type' => ReturnTypes::NAMES]);
             case 'postTagCount':
-                return $postTagTypeAPI->getTagCount([], $options);
+                return $postTagTypeAPI->getTagCount($query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

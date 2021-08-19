@@ -141,16 +141,15 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'users':
             case 'unrestrictedUsers':
-                $options['return-type'] = ReturnTypes::IDS;
-                return $this->userTypeAPI->getUsers([], $options);
-                
+                return $this->userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+
             case 'userCount':
             case 'unrestrictedUserCount':
-                return $this->userTypeAPI->getUserCount([], $options);
+                return $this->userTypeAPI->getUserCount($query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
