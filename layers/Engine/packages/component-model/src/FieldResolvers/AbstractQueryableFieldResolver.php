@@ -88,7 +88,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    protected function convertFieldArgsToQueryArgs(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
+    protected function convertFieldArgsToFilteringQueryArgs(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $filteringQueryArgs = [];
         if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName)) {
