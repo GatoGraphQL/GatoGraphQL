@@ -165,24 +165,22 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'page':
             case 'pageBySlug':
             case 'unrestrictedPage':
             case 'unrestrictedPageBySlug':
-                $options['return-type'] = ReturnTypes::IDS;
-                if ($pages = $pageTypeAPI->getPages([], $options)) {
+                if ($pages = $pageTypeAPI->getPages($query, ['return-type' => ReturnTypes::IDS])) {
                     return $pages[0];
                 }
                 return null;
             case 'pages':
             case 'unrestrictedPages':
-                $options['return-type'] = ReturnTypes::IDS;
-                return $pageTypeAPI->getPages([], $options);
+                return $pageTypeAPI->getPages($query, ['return-type' => ReturnTypes::IDS]);
             case 'pageCount':
             case 'unrestrictedPageCount':
-                return $pageTypeAPI->getPageCount([], $options);
+                return $pageTypeAPI->getPageCount($query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
