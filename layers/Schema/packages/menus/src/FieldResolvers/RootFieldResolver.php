@@ -114,7 +114,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'menus':
                 return $menuTypeAPI->getMenus($query, ['return-type' => ReturnTypes::IDS]);
-                
+
             case 'menuCount':
                 return $menuTypeAPI->getMenuCount($query);
         }

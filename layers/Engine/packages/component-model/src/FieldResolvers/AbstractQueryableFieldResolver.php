@@ -73,12 +73,12 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
     /**
      * The names of the inputs supplied in the fieldArgs are not necessarily the same
      * input names expected by the function to retrieve entities in the Type API.
-     * 
+     *
      * For instance, input with name "searchfor" is translated as query arg "search"
      * when executing `PostTypeAPI->getPosts($query)`.
-     * 
+     *
      * This function transforms between the 2 states:
-     * 
+     *
      * - For each FilterInput defined via `getFieldDataFilteringModule`:
      * - Check if the entry with that name exists in fieldArgs, and if so:
      * - Execute `filterDataloadQueryArgs` on the FilterInput to place the value

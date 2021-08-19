@@ -136,7 +136,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
             case 'posts':
             case 'unrestrictedPosts':
                 return $postTypeAPI->getPosts($query, ['return-type' => ReturnTypes::IDS]);
-                
+
             case 'postCount':
             case 'unrestrictedPostCount':
                 return $postTypeAPI->getPostCount($query);

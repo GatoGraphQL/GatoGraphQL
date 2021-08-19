@@ -146,7 +146,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
             case 'users':
             case 'unrestrictedUsers':
                 return $this->userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
-                
+
             case 'userCount':
             case 'unrestrictedUserCount':
                 return $this->userTypeAPI->getUserCount($query);

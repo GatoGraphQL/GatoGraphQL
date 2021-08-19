@@ -109,7 +109,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
             case 'commentCount':
             case 'unrestrictedCommentCount':
                 return $this->commentTypeAPI->getCommentCount($query);
-                
+
             case 'comments':
             case 'unrestrictedComments':
                 return $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS]);
