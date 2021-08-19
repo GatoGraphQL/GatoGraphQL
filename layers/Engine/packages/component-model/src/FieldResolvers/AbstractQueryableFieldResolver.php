@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\FieldResolvers\SelfQueryableFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
@@ -85,5 +86,17 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
             return false;
         }
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
+    }
+
+    protected function convertFieldArgsToQueryArgs(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
+    {
+        $filteringQueryArgs = [];
+        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName)) {
+            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            /** @var FilterDataModuleProcessorInterface */
+            $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($filterDataloadingModule);
+            $filterDataModuleProcessor->filterHeadmoduleDataloadQueryArgs($filterDataloadingModule, $filteringQueryArgs, $fieldArgs);
+        }
+        return $filteringQueryArgs;
     }
 }
