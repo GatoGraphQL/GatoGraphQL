@@ -21,6 +21,8 @@ use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
@@ -176,13 +178,31 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 return $this->commentTypeAPI->getComments([], $options);
             case 'comment':
             case 'unrestrictedComment':
+                /**
+                 * Only from the mapped CPTs, otherwise we may get an error when
+                 * the custom post to which the comment was added, is not accesible
+                 * via field `Comment.customPost`:
+                 * 
+                 *   ```
+                 *   comments {
+                 *     customPost {
+                 *       id
+                 *     }
+                 *   }
+                 *   ```
+                 */
+                $query = [
+                    'custompost-types' => CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
+                        CustomPostUnionTypeResolver::class
+                    ),
+                ];
                 $options = array_merge(
                     [
                         'return-type' => ReturnTypes::IDS,
                     ],
                     $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
                 );
-                if ($comments = $this->commentTypeAPI->getComments([], $options)) {
+                if ($comments = $this->commentTypeAPI->getComments($query, $options)) {
                     return $comments[0];
                 }
                 return null;
