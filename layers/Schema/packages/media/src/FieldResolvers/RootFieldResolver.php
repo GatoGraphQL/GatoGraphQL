@@ -145,17 +145,17 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
-            case 'mediaItems':
-                $options['return-type'] = ReturnTypes::IDS;
-                return $this->mediaTypeAPI->getMediaItems([], $options);
             case 'mediaItemCount':
-                return $this->mediaTypeAPI->getMediaItemCount([], $options);
+                return $this->mediaTypeAPI->getMediaItemCount($query);
+            case 'mediaItems':
+                return $this->mediaTypeAPI->getMediaItems($query, ['return-type' => ReturnTypes::IDS]);
             case 'mediaItem':
-                $options['return-type'] = ReturnTypes::IDS;
-                $mediaItems = $this->mediaTypeAPI->getMediaItems([], $options);
-                return count($mediaItems) > 0 ? $mediaItems[0] : null;
+                if ($mediaItems = $this->mediaTypeAPI->getMediaItems($query, ['return-type' => ReturnTypes::IDS])) {
+                    return $mediaItems[0];
+                }
+                return null;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

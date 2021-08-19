@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\MediaWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
@@ -20,8 +19,6 @@ use function wp_get_attachment_image_src;
  */
 class MediaTypeAPI implements MediaTypeAPIInterface
 {
-    use InjectedFilterDataloadingModuleTypeAPITrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     public function __construct(
@@ -114,9 +111,6 @@ class MediaTypeAPI implements MediaTypeAPIInterface
                 $query['fields'] = 'ids';
             }
         }
-
-        // Accept field atts to filter the API fields
-        $this->maybeFilterDataloadQueryArgs($query, $options);
 
         if (isset($query['include']) && is_array($query['include'])) {
             // It can be an array or a string
