@@ -104,29 +104,14 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
     ): mixed {
         $categoryTypeAPI = $this->getTypeAPI();
         $post = $resultItem;
+        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'categories':
+                return $categoryTypeAPI->getCustomPostCategories($typeResolver->getID($post), $query, ['return-type' => ReturnTypes::IDS]);
             case 'categoryNames':
-                $query = [];
-                $options = array_merge(
-                    [
-                        'return-type' => $fieldName === 'categories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
-                    ],
-                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-                );
-                return $categoryTypeAPI->getCustomPostCategories(
-                    $typeResolver->getID($post),
-                    $query,
-                    $options
-                );
+                return $categoryTypeAPI->getCustomPostCategories($typeResolver->getID($post), $query, ['return-type' => ReturnTypes::NAMES]);
             case 'categoryCount':
-                $query = [];
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-                return $categoryTypeAPI->getCustomPostCategoryCount(
-                    $typeResolver->getID($post),
-                    $query,
-                    $options
-                );
+                return $categoryTypeAPI->getCustomPostCategoryCount($typeResolver->getID($post), $query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
