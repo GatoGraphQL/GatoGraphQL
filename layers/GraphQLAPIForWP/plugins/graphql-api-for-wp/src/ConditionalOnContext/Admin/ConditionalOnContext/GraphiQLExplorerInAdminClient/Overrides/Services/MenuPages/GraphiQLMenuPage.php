@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\Clients\AdminGraphiQLWithExplorerClient;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage as UpstreamGraphiQLMenuPage;
+use PoP\API\Schema\QueryInputs;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
@@ -52,6 +53,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
         $scriptSettings = array(
             'nonce' => \wp_create_nonce('wp_rest'),
             'response' => $this->getResponse(),
+            'requestedQuery' => $this->getRequestedQuery(),
             'queryDecodeURIComponent' => true,
         );
 
@@ -99,5 +101,15 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
             'graphiQLWithExplorerClientForWP',
             $scriptSettings
         );
+    }
+
+    /**
+     * By providing the initial query via PHP, we avoid the issue
+     * of it not properly decoded in JS (happening in the GraphiQL with Explorer
+     * only), where the newlines are removed
+     */
+    protected function getRequestedQuery(): ?string
+    {
+        return $_REQUEST[QueryInputs::QUERY] ?? null;
     }
 }
