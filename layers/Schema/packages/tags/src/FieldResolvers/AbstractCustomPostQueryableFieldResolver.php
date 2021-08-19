@@ -93,27 +93,14 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
     ): mixed {
         $tagTypeAPI = $this->getTypeAPI();
         $customPost = $resultItem;
+        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'tags':
+                return $tagTypeAPI->getCustomPostTags($typeResolver->getID($customPost), $query, ['return-type' => ReturnTypes::IDS]);
             case 'tagNames':
-                $options = array_merge(
-                    [
-                        'return-type' => $fieldName === 'tags' ? ReturnTypes::IDS : ReturnTypes::NAMES,
-                    ],
-                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-                );
-                return $tagTypeAPI->getCustomPostTags(
-                    $typeResolver->getID($customPost),
-                    [],
-                    $options
-                );
+                return $tagTypeAPI->getCustomPostTags($typeResolver->getID($customPost), $query, ['return-type' => ReturnTypes::NAMES]);
             case 'tagCount':
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-                return $tagTypeAPI->getCustomPostTagCount(
-                    $typeResolver->getID($customPost),
-                    [],
-                    $options
-                );
+                return $tagTypeAPI->getCustomPostTagCount($typeResolver->getID($customPost), $query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

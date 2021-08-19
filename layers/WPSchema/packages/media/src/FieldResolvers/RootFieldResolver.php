@@ -110,13 +110,17 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         switch ($fieldName) {
-            case 'mediaItemBySlug':
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-                $options['return-type'] = ReturnTypes::IDS;
-                $mediaItems = $this->mediaTypeAPI->getMediaItems([], $options);
-                return count($mediaItems) > 0 ? $mediaItems[0] : null;
             case 'imageSizeNames':
                 return \get_intermediate_image_sizes();
+        }
+
+        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
+        switch ($fieldName) {
+            case 'mediaItemBySlug':
+                if ($mediaItems = $this->mediaTypeAPI->getMediaItems($query, ['return-type' => ReturnTypes::IDS])) {
+                    return $mediaItems[0];
+                }
+                return null;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

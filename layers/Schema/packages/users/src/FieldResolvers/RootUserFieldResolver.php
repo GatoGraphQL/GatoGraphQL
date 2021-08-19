@@ -118,13 +118,6 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         array $options = []
     ): mixed {
         switch ($fieldName) {
-            case 'user':
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-                $options['return-type'] = ReturnTypes::IDS;
-                if ($users = $this->userTypeAPI->getUsers([], $options)) {
-                    return $users[0];
-                }
-                return null;
             case 'userByUsername':
             case 'userByEmail':
                 $query = [];
@@ -133,10 +126,16 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
                 } elseif ($fieldName === 'userByEmail') {
                     $query['emails'] = [$fieldArgs['email']];
                 }
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                if ($users = $this->userTypeAPI->getUsers($query, $options)) {
+                if ($users = $this->userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS])) {
+                    return $users[0];
+                }
+                return null;
+        }
+
+        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
+        switch ($fieldName) {
+            case 'user':
+                if ($users = $this->userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS])) {
                     return $users[0];
                 }
                 return null;

@@ -106,14 +106,13 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         array $options = []
     ): mixed {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'post':
             case 'postBySlug':
             case 'unrestrictedPost':
             case 'unrestrictedPostBySlug':
-                $options['return-type'] = ReturnTypes::IDS;
-                if ($posts = $postTypeAPI->getPosts([], $options)) {
+                if ($posts = $postTypeAPI->getPosts($query, ['return-type' => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
                 return null;

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\TagsWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
@@ -19,8 +18,6 @@ use WP_Taxonomy;
  */
 abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
 {
-    use InjectedFilterDataloadingModuleTypeAPITrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     public function __construct(
@@ -122,9 +119,6 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
                 $query['fields'] = 'names';
             }
         }
-
-        // Accept field atts to filter the API fields
-        $this->maybeFilterDataloadQueryArgs($query, $options);
 
         if (isset($query['hide-empty'])) {
             $query['hide_empty'] = $query['hide-empty'];

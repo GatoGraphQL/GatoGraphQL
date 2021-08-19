@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\UsersWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeAPIs\InjectedFilterDataloadingModuleTypeAPITrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\TypeAPIs\AbstractUserTypeAPI;
@@ -16,8 +15,6 @@ use WP_User_Query;
  */
 class UserTypeAPI extends AbstractUserTypeAPI
 {
-    use InjectedFilterDataloadingModuleTypeAPITrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     /**
@@ -146,9 +143,6 @@ class UserTypeAPI extends AbstractUserTypeAPI
                 $query['fields'] = 'ID';
             }
         }
-
-        // Accept field atts to filter the API fields
-        $this->maybeFilterDataloadQueryArgs($query, $options);
 
         // Convert parameters
         if (isset($query['name'])) {
