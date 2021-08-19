@@ -97,26 +97,20 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
 
             case 'hasComments':
                 return $typeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
+        }
 
+        $query = [
+            'customPostID' => $typeResolver->getID($post),
+        ];
+        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        switch ($fieldName) {
             case 'commentCount':
             case 'unrestrictedCommentCount':
-                $query = [
-                    'customPostID' => $typeResolver->getID($post),
-                ];
-                $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
                 return $this->commentTypeAPI->getCommentCount($query, $options);
-
+                
             case 'comments':
             case 'unrestrictedComments':
-                $query = [
-                    'customPostID' => $typeResolver->getID($post),
-                ];
-                $options = array_merge(
-                    [
-                        'return-type' => ReturnTypes::IDS,
-                    ],
-                    $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs)
-                );
+                $options['return-type'] = ReturnTypes::IDS;
                 return $this->commentTypeAPI->getComments($query, $options);
         }
 
