@@ -40,6 +40,7 @@ class PageFilterInputContainerModuleProcessor extends CustomPostFilterInputConta
         // Add the parentIDs and parentID filterInputs
         $filterInputModules[] = [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_IDS];
         $filterInputModules[] = [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID];
+        $filterInputModules[] = [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS];
         return $filterInputModules;
     }
 
