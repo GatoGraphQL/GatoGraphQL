@@ -56,24 +56,6 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         return [];
     }
 
-    /**
-     * @return array<string,mixed>
-     */
-    protected function getFilterDataloadQueryArgsOptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
-    {
-        /** @var QueryableInterfaceSchemaDefinitionResolverAdapter|null */
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($typeResolver, $fieldName);
-        if ($schemaDefinitionResolver !== null) {
-            return [
-                'filter-dataload-query-args' => [
-                    'source' => $fieldArgs,
-                    'module' => $schemaDefinitionResolver->getFieldDataFilteringModule($typeResolver, $fieldName),
-                ],
-            ];
-        }
-        return [];
-    }
-
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
     {
         return QueryableInterfaceSchemaDefinitionResolverAdapter::class;
