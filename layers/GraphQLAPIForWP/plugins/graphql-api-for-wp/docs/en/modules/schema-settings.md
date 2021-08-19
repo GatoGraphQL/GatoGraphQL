@@ -12,6 +12,7 @@ By default, only the following options can be queried:
 - `"blogdescription"`
 - `"WPLANG"`
 - `"posts_per_page"`
+- `"comments_per_page"`
 - `"date_format"`
 - `"time_format"`
 - `"blog_charset"`
