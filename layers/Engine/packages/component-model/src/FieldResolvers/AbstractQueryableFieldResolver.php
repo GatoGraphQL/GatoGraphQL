@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\FieldResolvers\SelfQueryableFieldSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
