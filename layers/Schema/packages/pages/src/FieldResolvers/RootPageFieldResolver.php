@@ -127,7 +127,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             ],
             'unrestrictedPageBySlug' => [
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
-                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_AND_STATUS
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS
             ],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
