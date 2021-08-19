@@ -8,7 +8,6 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
@@ -17,7 +16,6 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public const FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
     public const FILTERINPUT_CUSTOMPOSTTYPES = 'filterinput-customposttypes';
     public const FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
-    public const FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
     public const FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
 
     public function getFilterInputsToProcess(): array
@@ -26,7 +24,6 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
             [self::class, self::FILTERINPUT_CUSTOMPOSTDATES],
             [self::class, self::FILTERINPUT_CUSTOMPOSTTYPES],
             [self::class, self::FILTERINPUT_CUSTOMPOSTSTATUS],
-            [self::class, self::FILTERINPUT_GENERICCUSTOMPOSTTYPES],
             [self::class, self::FILTERINPUT_UNIONCUSTOMPOSTTYPES],
         );
     }
@@ -57,18 +54,6 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                         $query['status'] = $value;
                     }
                 }
-                break;
-            case self::FILTERINPUT_GENERICCUSTOMPOSTTYPES:
-                // Make sure the provided postTypes have been whitelisted
-                // Otherwise do not produce their IDs in first place
-                if ($value) {
-                    $value = array_intersect(
-                        $value,
-                        ComponentConfiguration::getGenericCustomPostTypes()
-                    );
-                    $value = $this->maybeGetNonExistingCustomPostTypes($value);
-                }
-                $query['custompost-types'] = $value;
                 break;
             case self::FILTERINPUT_UNIONCUSTOMPOSTTYPES:
                 // Make sure the provided postTypes are part of the UnionTypeResolver
