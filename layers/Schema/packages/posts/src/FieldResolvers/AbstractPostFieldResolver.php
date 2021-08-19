@@ -129,15 +129,15 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
     ): mixed {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'posts':
             case 'unrestrictedPosts':
-                $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 $options['return-type'] = ReturnTypes::IDS;
                 return $postTypeAPI->getPosts($query, $options);
+                
             case 'postCount':
             case 'unrestrictedPostCount':
-                $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 return $postTypeAPI->getPostCount($query, $options);
         }
 
