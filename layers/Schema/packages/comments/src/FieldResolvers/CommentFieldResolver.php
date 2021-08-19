@@ -231,19 +231,20 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                 );
         }
 
-        $query = [
-            'parent-id' => $typeResolver->getID($comment),
-        ];
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = array_merge(
+            $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
+            [
+                'parent-id' => $typeResolver->getID($comment),
+            ]
+        );
         switch ($fieldName) {
             case 'responses':
             case 'unrestrictedResponses':
-                $options['return-type'] = ReturnTypes::IDS;
-                return $this->commentTypeAPI->getComments($query, $options);
+                return $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS]);
 
             case 'responseCount':
             case 'unrestrictedResponseCount':
-                return $this->commentTypeAPI->getCommentCount($query, $options);
+                return $this->commentTypeAPI->getCommentCount($query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -162,16 +162,15 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'commentCount':
             case 'unrestrictedCommentCount':
-                return $this->commentTypeAPI->getCommentCount([], $options);
+                return $this->commentTypeAPI->getCommentCount($query);
 
             case 'comments':
             case 'unrestrictedComments':
-                $options['return-type'] = ReturnTypes::IDS;
-                return $this->commentTypeAPI->getComments([], $options);
+                return $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS]);
 
             case 'comment':
             case 'unrestrictedComment':
@@ -188,13 +187,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                  *   }
                  *   ```
                  */
-                $query = [
-                    'custompost-types' => CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
-                        CustomPostUnionTypeResolver::class
-                    ),
-                ];
-                $options['return-type'] = ReturnTypes::IDS;
-                if ($comments = $this->commentTypeAPI->getComments($query, $options)) {
+                $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
+                    CustomPostUnionTypeResolver::class
+                );
+                if ($comments = $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS])) {
                     return $comments[0];
                 }
                 return null;

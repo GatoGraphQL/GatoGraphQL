@@ -150,19 +150,19 @@ class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $vars = ApplicationState::getVars();
-        $options = $this->getFilterDataloadQueryArgsOptions($typeResolver, $fieldName, $fieldArgs);
-        $query = [
-            'authors' => [$vars['global-userstate']['current-user-id']],
-        ];
+        $query = array_merge(
+            $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
+            [
+                'authors' => [$vars['global-userstate']['current-user-id']],
+            ]
+        );
         switch ($fieldName) {
             case 'myCommentCount':
-                return $this->commentTypeAPI->getCommentCount($query, $options);
+                return $this->commentTypeAPI->getCommentCount($query);
             case 'myComments':
-                $options['return-type'] = ReturnTypes::IDS;
-                return $this->commentTypeAPI->getComments($query, $options);
+                return $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS]);
             case 'myComment':
-                $options['return-type'] = ReturnTypes::IDS;
-                if ($comments = $this->commentTypeAPI->getComments($query, $options)) {
+                if ($comments = $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS])) {
                     return $comments[0];
                 }
                 return null;
