@@ -88,6 +88,23 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
     }
 
+    /**
+     * The names of the inputs supplied in the fieldArgs are not necessarily the same
+     * input names expected by the function to retrieve entities in the Type API.
+     * 
+     * For instance, input with name "searchfor" is translated as query arg "search"
+     * when executing `PostTypeAPI->getPosts($query)`.
+     * 
+     * This function transforms between the 2 states:
+     * 
+     * - For each FilterInput defined via `getFieldDataFilteringModule`:
+     * - Check if the entry with that name exists in fieldArgs, and if so:
+     * - Execute `filterDataloadQueryArgs` on the FilterInput to place the value
+     *   under the expected input name
+     *
+     * @param array<string, mixed> $fieldArgs
+     * @return array<string, mixed>
+     */
     protected function convertFieldArgsToFilteringQueryArgs(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $filteringQueryArgs = [];
