@@ -113,7 +113,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
             ],
             'unrestrictedGenericCustomPost' => [
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
-                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS
             ],
             'genericCustomPostBySlug' => [
                 CommonFilterInputContainerModuleProcessor::class,

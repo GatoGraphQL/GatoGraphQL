@@ -119,7 +119,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             ],
             'unrestrictedPage' => [
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
-                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS
             ],
             'pageBySlug' => [
                 CommonFilterInputContainerModuleProcessor::class,
