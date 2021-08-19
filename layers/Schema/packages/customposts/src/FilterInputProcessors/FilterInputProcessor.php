@@ -6,13 +6,12 @@ namespace PoPSchema\CustomPosts\FilterInputProcessors;
 
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
+use PoPSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const NON_EXISTING_CUSTOM_POST_TYPE = 'non-existing-customp-post-type';
-
     public const FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
     public const FILTERINPUT_CUSTOMPOSTTYPES = 'filterinput-customposttypes';
     public const FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
@@ -67,27 +66,10 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                             CustomPostUnionTypeResolver::class
                         )
                     );
-                    $value = $this->maybeGetNonExistingCustomPostTypes($value);
+                    $value = FilterInputHelper::maybeGetNonExistingCustomPostTypes($value);
                 }
                 $query['custompost-types'] = $value;
                 break;
         }
-    }
-
-    /**
-     * If there are no valid postTypes, then force the query to
-     * return no results.
-     * Otherwise, the query would return the results for post type "post"
-     * (the default when postTypes is empty)
-     */
-    protected function maybeGetNonExistingCustomPostTypes(array $value): array
-    {
-        if (!$value) {
-            // Array of non-existing IDs
-            return [
-                self::NON_EXISTING_CUSTOM_POST_TYPE,
-            ];
-        }
-        return $value;
     }
 }

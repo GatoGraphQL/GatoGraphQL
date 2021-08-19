@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\GenericCustomPosts\FilterInputProcessors;
 
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoPSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
@@ -29,7 +30,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                         $value,
                         ComponentConfiguration::getGenericCustomPostTypes()
                     );
-                    $value = $this->maybeGetNonExistingCustomPostTypes($value);
+                    $value = FilterInputHelper::maybeGetNonExistingCustomPostTypes($value);
                 }
                 $query['custompost-types'] = $value;
                 break;
