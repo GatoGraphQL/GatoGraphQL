@@ -10,12 +10,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProces
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
-use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\GenericCustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
@@ -52,7 +47,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES:
-                // Add a nice name, so that the URL params when filtering make sense
                 $names = array(
                     self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => 'customPostTypes',
                 );
