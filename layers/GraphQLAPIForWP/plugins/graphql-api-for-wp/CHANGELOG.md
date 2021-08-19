@@ -137,6 +137,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Allow to use unsafe default settings
 - Sort fields and connections together, alphabetically
 
+### Fixed
+
+- Fixed newlines removed from GraphQL query after refreshing browser ([#972](https://github.com/leoloso/PoP/pull/972))
+
 ## 0.8.1 - 21/07/2021
 
 ### Fixed
