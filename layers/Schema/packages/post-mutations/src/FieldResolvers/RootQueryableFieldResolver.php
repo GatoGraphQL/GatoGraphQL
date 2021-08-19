@@ -70,7 +70,7 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
     public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'myPost' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS],
+            'myPost' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS],
             'myPosts' => [PostMutationFilterInputContainerModuleProcessor::class, PostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTS],
             'myPostCount' => [PostMutationFilterInputContainerModuleProcessor::class, PostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),

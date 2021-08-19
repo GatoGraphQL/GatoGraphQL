@@ -13,25 +13,25 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS = 'filterinputcontainer-custompost-by-id-and-status';
-    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_AND_STATUS = 'filterinputcontainer-custompost-by-slug-and-status';
+    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS = 'filterinputcontainer-custompost-by-id-status';
+    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS = 'filterinputcontainer-custompost-by-slug-status';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS],
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_AND_STATUS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS],
         );
     }
 
     public function getFilterInputModules(array $module): array
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS => [
+            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                 [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
             ],
-            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_AND_STATUS => [
+            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUG],
                 [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
             ],
@@ -42,7 +42,7 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
     public function getFieldDataFilteringMandatoryArgs(array $module): array
     {
         switch ($module[1]) {
-            case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_AND_STATUS:
+            case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
@@ -50,7 +50,7 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
                 return [
                     $idFilterInputName,
                 ];
-            case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_AND_STATUS:
+            case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS:
                 $slugFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUG
