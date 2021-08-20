@@ -85,31 +85,6 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @return array<string, mixed>
-     */
-    protected function getQuery(
-        TypeResolverInterface $typeResolver,
-        object $resultItem,
-        string $fieldName,
-        array $fieldArgs = []
-    ): array {
-        $query = parent::getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
-
-        switch ($fieldName) {
-            case 'customPost':
-            case 'customPostBySlug':
-            case 'unrestrictedCustomPost':
-            case 'unrestrictedCustomPostBySlug':
-                $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
-                    CustomPostUnionTypeResolver::class
-                );
-                break;
-        }
-        return $query;
-    }
-
-    /**
-     * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
