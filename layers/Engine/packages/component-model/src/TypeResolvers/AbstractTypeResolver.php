@@ -1190,6 +1190,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $fieldArgs,
             $schemaErrors,
         ) = $this->dissectFieldForSchema($field);
+        // Dissecting the field may already fail, then already return the error
+        if ($schemaErrors) {
+            return $schemaErrors;
+        }
         if ($fieldResolvers = $this->getFieldResolversForField($field)) {
             if ($maybeErrors = $fieldResolvers[0]->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeErrors as $error) {
