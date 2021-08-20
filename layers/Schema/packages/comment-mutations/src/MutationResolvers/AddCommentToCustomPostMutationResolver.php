@@ -77,8 +77,8 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             'author-IP' => $_SERVER['REMOTE_ADDR'],
             'agent' => $_SERVER['HTTP_USER_AGENT'],
             'content' => $form_data[MutationInputProperties::COMMENT],
-            'parent' => $form_data[MutationInputProperties::PARENT_COMMENT_ID],
-            'customPostID' => $form_data[MutationInputProperties::CUSTOMPOST_ID]
+            'parent' => $form_data[MutationInputProperties::PARENT_COMMENT_ID] ?? null,
+            'customPostID' => $form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null,
         ];
         /**
          * If the user is logged in, take his/her properties. This is independent
