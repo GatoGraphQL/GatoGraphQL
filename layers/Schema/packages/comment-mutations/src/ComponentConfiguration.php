@@ -13,6 +13,7 @@ class ComponentConfiguration
     use ComponentConfigurationTrait;
 
     private static bool $mustUserBeLoggedInToAddComment = true;
+    private static bool $requireCommenterNameAndEmail = true;
 
     public static function mustUserBeLoggedInToAddComment(): bool
     {
@@ -24,6 +25,24 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT;
         $selfProperty = &self::$mustUserBeLoggedInToAddComment;
+        $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function requireCommenterNameAndEmail(): bool
+    {
+        // Define properties
+        $envVariable = Environment::REQUIRE_COMMENTER_NAME_AND_EMAIL;
+        $selfProperty = &self::$requireCommenterNameAndEmail;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
