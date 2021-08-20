@@ -48,19 +48,19 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             }
         } else {
             // Commenter's name and email are mandatory
-            if (!isset($form_data[MutationInputProperties::AUTHOR_NAME])) {
+            if (!($form_data[MutationInputProperties::AUTHOR_NAME] ?? null)) {
                 $errors[] = $this->translationAPI->__('The comment author\'s name is missing', 'comment-mutations');
             }
-            if (!isset($form_data[MutationInputProperties::AUTHOR_EMAIL])) {
+            if (!($form_data[MutationInputProperties::AUTHOR_EMAIL] ?? null)) {
                 $errors[] = $this->translationAPI->__('The comment author\'s email is missing', 'comment-mutations');
             }
         }
 
         // Either provide the customPostID, or retrieve it from the parent comment
-        if ((!isset($form_data[MutationInputProperties::CUSTOMPOST_ID]) || !$form_data[MutationInputProperties::CUSTOMPOST_ID]) && (!isset($form_data[MutationInputProperties::PARENT_COMMENT_ID]) || !$form_data[MutationInputProperties::PARENT_COMMENT_ID])) {
+        if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null) && !($form_data[MutationInputProperties::PARENT_COMMENT_ID] ?? null)) {
             $errors[] = $this->translationAPI->__('The custom post ID is missing.', 'comment-mutations');
         }
-        if (!isset($form_data[MutationInputProperties::COMMENT]) || !$form_data[MutationInputProperties::COMMENT]) {
+        if (!($form_data[MutationInputProperties::COMMENT] ?? null)) {
             $errors[] = $this->translationAPI->__('The comment is empty.', 'comment-mutations');
         }
         return $errors;
