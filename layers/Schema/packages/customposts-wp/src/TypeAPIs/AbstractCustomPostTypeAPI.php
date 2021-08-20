@@ -6,7 +6,6 @@ namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIHelpers;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
@@ -138,14 +137,9 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if (isset($query['custompost-types']) && !empty($query['custompost-types'])) {
             $query['post_type'] = $query['custompost-types'];
             unset($query['custompost-types']);
-        } elseif ($unionTypeResolverClass = $query['types-from-union-resolver-class'] ?? null) {
-            $query['post_type'] = CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
-                $unionTypeResolverClass
-            );
-            unset($query['types-from-union-resolver-class']);
         }
         // Querying "attachment" doesn't work in an array!
-        if (isset($query['post_type']) && is_array($query['post_type'])) {
+        if (isset($query['post_type']) && is_array($query['post_type']) && count($query['post_type']) === 1) {
             $query['post_type'] = $query['post_type'][0];
         }
         if (isset($query['offset'])) {
