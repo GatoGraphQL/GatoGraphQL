@@ -113,9 +113,9 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
         );
         switch ($fieldName) {
             case 'childCategories':
-                return $categoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::IDS]);
+                return $categoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childCategoryNames':
-                return $categoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::NAMES]);
+                return $categoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'childCategoryCount':
                 return $categoryTypeAPI->getCategoryCount($query);
         }

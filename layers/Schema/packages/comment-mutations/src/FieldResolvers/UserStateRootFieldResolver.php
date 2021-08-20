@@ -161,9 +161,9 @@ class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
             case 'myCommentCount':
                 return $this->commentTypeAPI->getCommentCount($query);
             case 'myComments':
-                return $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS]);
+                return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'myComment':
-                if ($comments = $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($comments = $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $comments[0];
                 }
                 return null;

@@ -29,6 +29,6 @@ class URE_CommunityUtils
         self::addDataloadqueryargsCommunitymembers($query, $community_id);
 
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        return $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+        return $userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 }

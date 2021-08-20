@@ -41,7 +41,7 @@ function gdUreGetActivecontributingcontentcommunitymembers($community)
         ]
     );
 
-    return $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+    return $userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 }
 
 function gdUreGetCommunityMetavalueContributecontent($user_id)

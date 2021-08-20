@@ -30,7 +30,7 @@ class PoP_CDN_Thumbprint_User extends PoP_CDN_ThumbprintBase
     public function executeQuery($query, array $options = [])
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         return $userTypeAPI->getUsers($query, $options);
     }
 

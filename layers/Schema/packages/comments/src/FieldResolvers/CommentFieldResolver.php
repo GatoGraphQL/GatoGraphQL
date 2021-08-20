@@ -241,7 +241,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'responses':
             case 'unrestrictedResponses':
-                return $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS]);
+                return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'responseCount':
             case 'unrestrictedResponseCount':

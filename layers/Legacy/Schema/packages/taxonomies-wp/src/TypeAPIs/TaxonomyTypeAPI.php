@@ -27,7 +27,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         $query = [
             'taxonomy' => $taxonomy,
         ];
-        $return_type = $options['return-type'] ?? null;
+        $return_type = $options[QueryOptions::RETURN_TYPE] ?? null;
         if ($return_type == ReturnTypes::IDS) {
             $query['fields'] = 'ids';
         }
@@ -36,7 +36,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     public function getCustomPostTaxonomyTerms($post_id, $taxonomy, $options = [])
     {
         if ($terms = get_the_terms($post_id, $taxonomy)) {
-            if ($return_type = $options['return-type'] ?? null) {
+            if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
                 if ($return_type == ReturnTypes::IDS) {
                     return array_map(
                         function ($term_object) {

@@ -49,7 +49,7 @@ abstract class AbstractTagTypeDataLoader extends AbstractTypeQueryableDataLoader
     {
         // $query['fields'] = 'ids';
         $options = [
-            'return-type' => ReturnTypes::IDS,
+            QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
         return (array)$this->executeQuery($query, $options);
     }

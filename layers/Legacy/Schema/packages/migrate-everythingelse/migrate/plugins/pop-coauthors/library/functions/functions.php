@@ -10,5 +10,5 @@ HooksAPIFacade::getInstance()->addFilter('gdGetPostauthors', 'gdGdGetPostauthors
 function gdGdGetPostauthors($authors, $post_id)
 {
     $pluginapi = PoP_Coauthors_APIFactory::getInstance();
-    return $pluginapi->getCoauthors($post_id, ['return-type' => ReturnTypes::IDS]);
+    return $pluginapi->getCoauthors($post_id, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 }

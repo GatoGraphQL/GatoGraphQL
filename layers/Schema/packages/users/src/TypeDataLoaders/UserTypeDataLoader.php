@@ -54,7 +54,7 @@ class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
     {
         // $query['fields'] = 'ID';
         $options = [
-            'return-type' => ReturnTypes::IDS,
+            QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
         return (array)$this->executeQuery($query, $options);
     }

@@ -140,10 +140,10 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
                 return $postTypeAPI->getPostCount($query);
 
             case 'myPosts':
-                return $postTypeAPI->getPosts($query, ['return-type' => ReturnTypes::IDS]);
+                return $postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'myPost':
-                if ($posts = $postTypeAPI->getPosts($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($posts = $postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
                 return null;

@@ -70,7 +70,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_tags`,
         // but it doesn't work)
         // So execute a normal `wp_get_post_tags` retrieving all the IDs, and count them
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertTagsQuery($query, $options);
 
         // All results, no offset
@@ -113,7 +113,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     {
         $query['taxonomy'] = $this->getTagTaxonomyName();
 
-        if ($return_type = $options['return-type'] ?? null) {
+        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
             } elseif ($return_type == ReturnTypes::NAMES) {

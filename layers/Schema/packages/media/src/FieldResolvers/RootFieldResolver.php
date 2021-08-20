@@ -151,9 +151,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             case 'mediaItemCount':
                 return $this->mediaTypeAPI->getMediaItemCount($query);
             case 'mediaItems':
-                return $this->mediaTypeAPI->getMediaItems($query, ['return-type' => ReturnTypes::IDS]);
+                return $this->mediaTypeAPI->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'mediaItem':
-                if ($mediaItems = $this->mediaTypeAPI->getMediaItems($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($mediaItems = $this->mediaTypeAPI->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $mediaItems[0];
                 }
                 return null;

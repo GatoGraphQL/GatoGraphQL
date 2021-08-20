@@ -59,7 +59,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputPr
                                     ]
                                 ]
                             ],
-                            ['return-type' => ReturnTypes::IDS]
+                            [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]
                         )
                     );
                 }

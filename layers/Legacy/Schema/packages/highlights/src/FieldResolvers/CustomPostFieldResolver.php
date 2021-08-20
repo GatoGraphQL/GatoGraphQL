@@ -99,7 +99,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                     'order' => 'ASC',
                 );
 
-                return $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS]);
+                return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'hasHighlights':
                 $referencedbyCount = $typeResolver->resolveValue($resultItem, 'highlightsCount', $variables, $expressions, $options);

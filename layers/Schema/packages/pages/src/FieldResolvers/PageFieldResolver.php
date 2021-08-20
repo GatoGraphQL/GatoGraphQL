@@ -151,7 +151,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'childPages':
             case 'unrestrictedChildPages':
-                return $pageTypeAPI->getPages($query, ['return-type' => ReturnTypes::IDS]);
+                return $pageTypeAPI->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childPageCount':
             case 'unrestrictedChildPageCount':
                 return $pageTypeAPI->getPageCount($query);

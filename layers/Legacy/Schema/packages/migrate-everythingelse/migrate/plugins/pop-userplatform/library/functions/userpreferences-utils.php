@@ -29,7 +29,7 @@ class PoP_UserPlatform_UserPreferencesUtils
         }
 
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        $users = $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+        $users = $userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
         // Exclude users?
         if ($include && $exclude) {

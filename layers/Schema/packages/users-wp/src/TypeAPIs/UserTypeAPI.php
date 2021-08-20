@@ -53,7 +53,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
     public function getUserCount(array $query = [], array $options = []): int
     {
         // Convert the parameters
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertUsersQuery($query, $options);
 
         // All results, no offset
@@ -139,7 +139,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
     protected function convertUsersQuery(array $query, array $options = []): array
     {
-        if ($return_type = $options['return-type'] ?? null) {
+        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ID';
             }

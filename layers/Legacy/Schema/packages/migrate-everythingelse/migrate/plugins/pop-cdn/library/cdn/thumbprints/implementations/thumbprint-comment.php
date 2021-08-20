@@ -26,7 +26,7 @@ class PoP_CDN_Thumbprint_Comment extends PoP_CDN_ThumbprintBase
     public function executeQuery($query, array $options = [])
     {
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         return $commentTypeAPI->getComments($query, $options);
     }
 

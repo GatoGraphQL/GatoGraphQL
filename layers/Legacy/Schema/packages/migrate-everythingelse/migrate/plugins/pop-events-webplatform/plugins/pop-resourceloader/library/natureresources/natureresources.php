@@ -48,7 +48,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
                     'category' => '-'.implode(',-', $independent_cats)
                 ) : array()
             ),
-            ['return-type' => ReturnTypes::IDS]
+            [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]
         )
         ) {
             // $make_future = true;
@@ -74,7 +74,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
                         'category' => $independent_cat,
                     )
                 ),
-                ['return-type' => ReturnTypes::IDS]
+                [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]
             )
             ) {
                 // $make_future = true;

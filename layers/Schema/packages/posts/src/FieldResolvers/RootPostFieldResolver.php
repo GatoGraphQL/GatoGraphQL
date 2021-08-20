@@ -113,7 +113,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
             case 'postBySlug':
             case 'unrestrictedPost':
             case 'unrestrictedPostBySlug':
-                if ($posts = $postTypeAPI->getPosts($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($posts = $postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
                 return null;

@@ -64,7 +64,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     public function getCustomPostCount(array $query = [], array $options = []): int
     {
         // Convert parameters
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertCustomPostsQuery($query, $options);
 
         // All results, no offset
@@ -90,7 +90,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
-        if ($return_type = $options['return-type'] ?? null) {
+        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
             }

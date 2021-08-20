@@ -48,7 +48,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
     protected function executeThumbprint($query)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        return $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+        return $userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 
     protected function getPendingMsg(array $module)

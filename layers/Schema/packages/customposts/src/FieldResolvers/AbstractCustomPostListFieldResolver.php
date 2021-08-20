@@ -158,7 +158,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         switch ($fieldName) {
             case 'customPosts':
             case 'unrestrictedCustomPosts':
-                return $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS]);
+                return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'customPostCount':
             case 'unrestrictedCustomPostCount':

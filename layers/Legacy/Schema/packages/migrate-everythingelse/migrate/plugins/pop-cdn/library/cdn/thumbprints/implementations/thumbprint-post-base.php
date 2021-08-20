@@ -21,7 +21,7 @@ class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
     public function executeQuery($query, array $options = [])
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         return $customPostTypeAPI->getCustomPosts($query, $options);
     }
 

@@ -94,7 +94,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
     public function getMediaItemCount(array $query, array $options = []): int
     {
         // Convert parameters
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertMediaQuery($query, $options);
 
         // All results, no offset
@@ -107,7 +107,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
     }
     protected function convertMediaQuery($query, array $options = [])
     {
-        if ($return_type = $options['return-type'] ?? null) {
+        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
             }

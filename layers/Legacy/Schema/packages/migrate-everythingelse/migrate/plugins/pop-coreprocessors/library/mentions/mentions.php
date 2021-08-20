@@ -143,7 +143,7 @@ class PoP_Mentions
                     // 'fields' => 'ids',
                     'slugs' => $tags,
                 ),
-                ['return-type' => ReturnTypes::IDS]
+                [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]
             );
             \PoPSchema\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGS, $tag_ids);
         }

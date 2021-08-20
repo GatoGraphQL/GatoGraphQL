@@ -127,7 +127,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
                 } elseif ($fieldName === 'userByEmail') {
                     $query['emails'] = [$fieldArgs['email']];
                 }
-                if ($users = $this->userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($users = $this->userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $users[0];
                 }
                 return null;
@@ -136,7 +136,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'user':
-                if ($users = $this->userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($users = $this->userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $users[0];
                 }
                 return null;

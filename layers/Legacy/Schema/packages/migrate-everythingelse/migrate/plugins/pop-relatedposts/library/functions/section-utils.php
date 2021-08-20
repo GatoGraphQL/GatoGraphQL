@@ -34,6 +34,6 @@ class PoP_RelatedPosts_SectionUtils
         self::addDataloadqueryargsReferences($query, $post_id);
 
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        return $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS]);
+        return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 }

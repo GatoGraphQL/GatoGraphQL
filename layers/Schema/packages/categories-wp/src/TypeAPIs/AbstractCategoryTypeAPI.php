@@ -68,7 +68,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_categories`,
         // but it doesn't work)
         // So execute a normal `wp_get_post_categories` retrieving all the IDs, and count them
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertCategoriesQuery($query, $options);
 
         // All results, no offset
@@ -112,7 +112,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     {
         $query['taxonomy'] = $this->getCategoryTaxonomyName();
 
-        if ($return_type = $options['return-type'] ?? null) {
+        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
             } elseif ($return_type == ReturnTypes::NAMES) {
@@ -215,7 +215,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     // protected function returnCategoryObjectsOrIDs($categories, $options = []): array
     // {
-    //     $return_type = $options['return-type'] ?? null;
+    //     $return_type = $options[QueryOptions::RETURN_TYPE] ?? null;
     //     if ($return_type == ReturnTypes::IDS) {
     //         return array_map(
     //             function ($category) {
@@ -230,7 +230,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     // public function getCategoryCount($query, $options = []): int
     // {
-    //     $options['return-type'] = ReturnTypes::IDS;
+    //     $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
 
     //     // All results, no offset
     //     $query['number'] = 0;
@@ -242,7 +242,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     // public function getCustomPostCategories($post_id, array $options = []): array
     // {
     //     $query = [];
-    //     if ($return_type = $options['return-type'] ?? null) {
+    //     if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
     //         if ($return_type == ReturnTypes::IDS) {
     //             $query['fields'] = 'ids';
     //         } elseif ($return_type == ReturnTypes::SLUGS) {
@@ -253,7 +253,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     // }
     // public function getCustomPostCategoryCount($query, $options = []): int
     // {
-    //     $options['return-type'] = ReturnTypes::IDS;
+    //     $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
 
     //     // All results, no offset
     //     $query['number'] = 0;

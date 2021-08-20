@@ -60,7 +60,7 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
     protected function executeThumbprint($query)
     {
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        return $postTagTypeAPI->getTags($query, ['return-type' => ReturnTypes::IDS]);
+        return $postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 
     protected function getPendingMsg(array $module)

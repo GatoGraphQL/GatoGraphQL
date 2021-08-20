@@ -74,7 +74,7 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
     public function executeQueryIds($query): array
     {
         $options = [
-            'return-type' => ReturnTypes::IDS,
+            QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
         return (array)$this->executeQuery($query, $options);
     }

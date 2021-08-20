@@ -110,7 +110,7 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
                         'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
                     ]
                 );
-                if ($posts = $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($posts = $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
                 return null;
