@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\PostsWP\TypeAPIs;
 
 use WP_Post;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
@@ -28,14 +27,25 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
-        $query = parent::convertCustomPostsQuery($query, $options);
-
-        $query['custompost-types'] = ['post'];
-
         return $this->hooksAPI->applyFilters(
             self::HOOK_QUERY,
-            $query,
+            parent::convertCustomPostsQuery($query, $options),
             $options
+        );
+    }
+
+    /**
+     * Query args that must always be in the query
+     *
+     * @return array<string, mixed>
+     */
+    public function getCustomPostQueryRequiredArgs(): array
+    {
+        return array_merge(
+            parent::getCustomPostQueryRequiredArgs(),
+            [
+                'custompost-types' => ['post'],
+            ]
         );
     }
 
