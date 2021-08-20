@@ -984,7 +984,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
                     if ($errorMessage !== null) {
                         $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $errorMessage;
-                        $fieldOrDirectiveArgs[$argName] = null;
+                        unset($fieldOrDirectiveArgs[$argName]);
                         continue;
                     }
                 }
@@ -1046,7 +1046,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                             )
                         );
                     $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $castingErrorMessage;
-                    $fieldOrDirectiveArgs[$argName] = null;
+                    unset($fieldOrDirectiveArgs[$argName]);
                     continue;
                 }
                 $fieldOrDirectiveArgs[$argName] = $argValue;
@@ -1224,16 +1224,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     protected function castAndValidateDirectiveArguments(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrorMessages, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings): array
     {
         // If any casting can't be done, show an error
-        if (
-            $failedCastingDirectiveArgs = array_filter($castedDirectiveArgs, function ($directiveArgValue) {
-                return $directiveArgValue === null;
-            })
-        ) {
+        if ($failedCastingDirectiveArgErrorMessages) {
             $directiveName = $this->getFieldDirectiveName($fieldDirective);
             $directiveArgNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver);
             $directiveArgNameSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $typeResolver);
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
-            foreach (array_keys($failedCastingDirectiveArgs) as $failedCastingDirectiveArgName) {
+            foreach (array_keys($failedCastingDirectiveArgErrorMessages) as $failedCastingDirectiveArgName) {
                 // If it is Error, also show the error message
                 $directiveArgIsArrayType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 $directiveArgIsArrayOfArraysType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
@@ -1312,12 +1308,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array &$schemaWarnings
     ): array {
         // If any casting can't be done, show an error
-        if ($failedCastingFieldArgs = $this->getFailedCastingFieldArgs($castedFieldArgs)) {
+        if ($failedCastingFieldArgErrorMessages) {
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
             $fieldArgNameSchemaDefinition = $this->getFieldSchemaDefinitionArgs($typeResolver, $field);
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
-            foreach (array_keys($failedCastingFieldArgs) as $failedCastingFieldArgName) {
+            foreach (array_keys($failedCastingFieldArgErrorMessages) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
                 $fieldArgIsArrayType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 $fieldArgIsArrayOfArraysType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
