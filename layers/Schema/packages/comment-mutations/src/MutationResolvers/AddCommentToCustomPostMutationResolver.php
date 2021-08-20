@@ -81,31 +81,20 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             'customPostID' => $form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null,
         ];
         /**
-         * If the user is logged in, take his/her properties. This is independent
-         * from `CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()`
+         * Override with the user's properties
          */
-        $vars = ApplicationState::getVars();
-        if ($vars['global-userstate']['is-user-logged-in']) {
+        if (ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
+            $vars = ApplicationState::getVars();
             $userID = $vars['global-userstate']['current-user-id'];
             $comment_data['userID'] = $userID;
             $comment_data['author'] = $this->userTypeAPI->getUserDisplayName($userID);
             $comment_data['authorEmail'] = $this->userTypeAPI->getUserEmail($userID);
             $comment_data['authorURL'] = $this->userTypeAPI->getUserURL($userID);
+        } else {
+            $comment_data['author'] = $form_data[MutationInputProperties::AUTHOR_NAME] ?? null;
+            $comment_data['authorEmail'] = $form_data[MutationInputProperties::AUTHOR_EMAIL] ?? null;
+            $comment_data['authorURL'] = $form_data[MutationInputProperties::AUTHOR_URL] ?? null;
         }
-        /**
-         * Then, if these specific fields were provided via the form, either because the
-         * user is not logged-in or can still add custom info, override the properties.
-         */
-        if ($authorName = $form_data[MutationInputProperties::AUTHOR_NAME]) {
-            $comment_data['author'] = $authorName;
-        }
-        if ($authorEmail = $form_data[MutationInputProperties::AUTHOR_EMAIL]) {
-            $comment_data['authorEmail'] = $authorEmail;
-        }
-        if ($authorURL = $form_data[MutationInputProperties::AUTHOR_URL]) {
-            $comment_data['authorURL'] = $authorURL;
-        }
-
 
         // If the parent comment is provided and the custom post is not,
         // then retrieve it from there
