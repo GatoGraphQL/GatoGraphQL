@@ -22,8 +22,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    // public const NON_EXISTING_ID = "non-existing";
-
     /**
      * Return the post's ID
      */
@@ -126,19 +124,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         // So check that postTypes is not empty
         if (isset($query['custompost-types']) && !empty($query['custompost-types'])) {
             $query['post_type'] = $query['custompost-types'];
-            // // Make sure they are public, to avoid an external query requesting forbidden data
-            // $postTypes = array_intersect(
-            //     $query['custompost-types'],
-            //     $this->getCustomPostTypes(['public' => true])
-            // );
-            // // If there are no valid postTypes, then return no results
-            // // By not adding the post type, WordPress will fetch a "post"
-            // // Then, include a non-existing ID
-            // if ($postTypes) {
-            //     $query['post_type'] = $postTypes;
-            // } else {
-            //     $query['include'] = self::NON_EXISTING_ID; // Non-existing ID
-            // }
             unset($query['custompost-types']);
         } elseif ($unionTypeResolverClass = $query['types-from-union-resolver-class'] ?? null) {
             $query['post_type'] = CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
@@ -146,10 +131,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             );
             unset($query['types-from-union-resolver-class']);
         }
-        // else {
-        //     // Default value: only get POST, no CPTs
-        //     $query['post_type'] = ['post'];
-        // }
         if (isset($query['offset'])) {
             // Same param name, so do nothing
         }
@@ -173,8 +154,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         }
         if (isset($query['orderby'])) {
             // Same param name, so do nothing
-            // This param can either be a string or an array. Eg:
-            // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
         }
         // Post slug
         if (isset($query['slug'])) {
@@ -237,11 +216,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $query['publicly_queryable'] = $query['publicly-queryable'];
             unset($query['publicly-queryable']);
         }
-        // Same key, so no need to convert
-        // if (isset($query['public'])) {
-        //     $query['public'] = $query['public'];
-        //     unset($query['public']);
-        // }
         return \get_post_types($query);
     }
 
