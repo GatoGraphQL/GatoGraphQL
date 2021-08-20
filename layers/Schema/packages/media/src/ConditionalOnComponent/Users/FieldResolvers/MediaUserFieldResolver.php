@@ -14,7 +14,7 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\MediaTypeAPIInterface;
+use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
@@ -28,7 +28,7 @@ class MediaUserFieldResolver extends AbstractDBDataFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected MediaTypeAPIInterface $mediaTypeAPI,
+        protected UserMediaTypeAPIInterface $userMediaTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -87,7 +87,7 @@ class MediaUserFieldResolver extends AbstractDBDataFieldResolver
         $media = $resultItem;
         switch ($fieldName) {
             case 'author':
-                return $this->mediaTypeAPI->getMediaAuthorId($media);
+                return $this->userMediaTypeAPI->getMediaAuthorId($media);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
