@@ -53,11 +53,13 @@ class SchemaDefinitionHelpers
                     SchemaDefinition::ARGNAME_NAME => MutationInputProperties::AUTHOR_NAME,
                     SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
                     SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The comment author\'s name', 'comment-mutations'),
+                    SchemaDefinition::ARGNAME_MANDATORY => true,
                 ];
                 $schemaFieldArgs[] = [
                     SchemaDefinition::ARGNAME_NAME => MutationInputProperties::AUTHOR_EMAIL,
                     SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_EMAIL,
                     SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The comment author\'s email', 'comment-mutations'),
+                    SchemaDefinition::ARGNAME_MANDATORY => true,
                 ];
                 $schemaFieldArgs[] = [
                     SchemaDefinition::ARGNAME_NAME => MutationInputProperties::AUTHOR_URL,
