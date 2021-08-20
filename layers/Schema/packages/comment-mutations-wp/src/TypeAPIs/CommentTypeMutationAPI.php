@@ -31,13 +31,13 @@ class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
             $comment_data['comment_author_email'] = $comment_data['authorEmail'];
             unset($comment_data['authorEmail']);
         }
-        if (isset($comment_data['author-URL'])) {
-            $comment_data['comment_author_url'] = $comment_data['author-URL'];
-            unset($comment_data['author-URL']);
+        if (isset($comment_data['authorURL'])) {
+            $comment_data['comment_author_url'] = $comment_data['authorURL'];
+            unset($comment_data['authorURL']);
         }
-        if (isset($comment_data['author-IP'])) {
-            $comment_data['comment_author_IP'] = $comment_data['author-IP'];
-            unset($comment_data['author-IP']);
+        if (isset($comment_data['authorIP'])) {
+            $comment_data['comment_author_IP'] = $comment_data['authorIP'];
+            unset($comment_data['authorIP']);
         }
         if (isset($comment_data['agent'])) {
             $comment_data['comment_agent'] = $comment_data['agent'];

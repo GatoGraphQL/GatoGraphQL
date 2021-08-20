@@ -74,8 +74,8 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     protected function getCommentData(array $form_data): array
     {
         $comment_data = [
-            'author-IP' => $_SERVER['REMOTE_ADDR'],
-            'agent' => $_SERVER['HTTP_USER_AGENT'],
+            'authorIP' => $_SERVER['REMOTE_ADDR'] ?? null,
+            'agent' => $_SERVER['HTTP_USER_AGENT'] ?? null,
             'content' => $form_data[MutationInputProperties::COMMENT],
             'parent' => $form_data[MutationInputProperties::PARENT_COMMENT_ID] ?? null,
             'customPostID' => $form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null,
@@ -90,7 +90,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             $comment_data['userID'] = $userID;
             $comment_data['author'] = $this->userTypeAPI->getUserDisplayName($userID);
             $comment_data['authorEmail'] = $this->userTypeAPI->getUserEmail($userID);
-            $comment_data['author-URL'] = $this->userTypeAPI->getUserURL($userID);
+            $comment_data['authorURL'] = $this->userTypeAPI->getUserURL($userID);
         }
         /**
          * Then, if these specific fields were provided via the form, either because the
@@ -103,7 +103,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             $comment_data['authorEmail'] = $authorEmail;
         }
         if ($authorURL = $form_data[MutationInputProperties::AUTHOR_URL]) {
-            $comment_data['author-URL'] = $authorURL;
+            $comment_data['authorURL'] = $authorURL;
         }
 
 
