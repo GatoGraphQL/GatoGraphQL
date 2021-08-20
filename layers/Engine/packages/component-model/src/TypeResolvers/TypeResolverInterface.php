@@ -64,7 +64,10 @@ interface TypeResolverInterface
     public function resolveSchemaValidationErrorDescriptions(string $field, array &$variables = null): array;
     public function resolveSchemaValidationWarningDescriptions(string $field, array &$variables = null): array;
     public function resolveSchemaDeprecationDescriptions(string $field, array &$variables = null): array;
-    public function getSchemaFieldArgs(string $field): array;
+    /**
+     * @return array<string,mixed>|null `null` if there are no fieldResolvers for the field
+     */
+    public function getSchemaFieldArgs(string $field): ?array;
     public function enableOrderedSchemaFieldArgs(string $field): bool;
     public function resolveFieldTypeResolverClass(string $field): ?string;
     /**

@@ -1300,7 +1300,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return [];
     }
 
-    public function getSchemaFieldArgs(string $field): array
+    /**
+     * @return array<string,mixed>|null `null` if there are no fieldResolvers for the field
+     */
+    public function getSchemaFieldArgs(string $field): ?array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($fieldResolvers = $this->getFieldResolversForField($field)) {
@@ -1310,7 +1313,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             return $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? [];
         }
 
-        return [];
+        return null;
     }
 
     public function enableOrderedSchemaFieldArgs(string $field): bool
