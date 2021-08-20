@@ -8,14 +8,14 @@ use WP_Post;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
+use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 
 use function get_post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class PostTypeAPI extends CustomPostTypeAPI implements PostTypeAPIInterface
+class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
