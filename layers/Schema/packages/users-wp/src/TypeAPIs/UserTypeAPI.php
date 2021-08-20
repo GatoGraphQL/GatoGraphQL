@@ -139,10 +139,8 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
     protected function convertUsersQuery(array $query, array $options = []): array
     {
-        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-            if ($return_type == ReturnTypes::IDS) {
-                $query['fields'] = 'ID';
-            }
+        if (($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {
+            $query['fields'] = 'ID';
         }
 
         // Convert parameters
