@@ -66,7 +66,7 @@ class QueryHookSet extends AbstractHookSet
              */
             $customPostTypeServices = $this->customPostTypeRegistry->getCustomPostTypes();
             $query['post_type'] = array_diff(
-                $query['post_type'],
+                is_array($query['post_type']) ? $query['post_type'] : [$query['post_type']],
                 array_map(
                     fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
                     $customPostTypeServices
