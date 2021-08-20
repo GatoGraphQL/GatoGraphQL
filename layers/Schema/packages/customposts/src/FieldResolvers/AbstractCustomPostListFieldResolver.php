@@ -129,7 +129,9 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
             case 'customPostCount':
             case 'unrestrictedCustomPostCount':
                 return [
-                    'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
+                    'custompost-types' => CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
+                        CustomPostUnionTypeResolver::class
+                    ),
                 ];
         }
         return [];

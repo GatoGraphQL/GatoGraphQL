@@ -85,6 +85,30 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
 
     /**
      * @param array<string, mixed> $fieldArgs
+     * @return array<string, mixed>
+     */
+    protected function getQuery(
+        TypeResolverInterface $typeResolver,
+        object $resultItem,
+        string $fieldName,
+        array $fieldArgs = []
+    ): array {
+        switch ($fieldName) {
+            case 'customPost':
+            case 'customPostBySlug':
+            case 'unrestrictedCustomPost':
+            case 'unrestrictedCustomPostBySlug':
+                return [
+                    'custompost-types' => CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
+                        CustomPostUnionTypeResolver::class
+                    ),
+                ];
+        }
+        return [];
+    }
+
+    /**
+     * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
@@ -106,9 +130,7 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
             case 'unrestrictedCustomPostBySlug':
                 $query = array_merge(
                     $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
-                    [
-                        'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
-                    ]
+                    $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs)
                 );
                 if ($posts = $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
