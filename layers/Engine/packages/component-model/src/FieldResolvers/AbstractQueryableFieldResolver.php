@@ -92,8 +92,8 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
     protected function convertFieldArgsToFilteringQueryArgs(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $filteringQueryArgs = [];
-        /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface|null */
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($typeResolver, $fieldName)) {
+            /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface $schemaDefinitionResolver */
             if ($filterDataloadingModule = $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName)) {
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                 /** @var FilterDataModuleProcessorInterface */
