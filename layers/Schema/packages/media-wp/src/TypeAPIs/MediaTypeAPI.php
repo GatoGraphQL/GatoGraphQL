@@ -212,7 +212,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         /** @var WP_Post $mediaItem */
         return $gmt ? $mediaItem->post_modified_gmt : $mediaItem->post_modified;
     }
-    
+
     public function getMimeType(string | int | object $mediaObjectOrID): ?string
     {
         $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
