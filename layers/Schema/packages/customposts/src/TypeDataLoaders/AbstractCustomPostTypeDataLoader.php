@@ -8,6 +8,7 @@ use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
@@ -59,7 +60,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDat
     public function executeQueryIds($query): array
     {
         $options = [
-            'return-type' => ReturnTypes::IDS,
+            QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
         return (array)$this->executeQuery($query, $options);
     }

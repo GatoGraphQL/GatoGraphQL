@@ -13,6 +13,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\Highlights\TypeResolvers\HighlightTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -98,7 +99,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                     'order' => 'ASC',
                 );
 
-                return $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS]);
+                return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'hasHighlights':
                 $referencedbyCount = $typeResolver->resolveValue($resultItem, 'highlightsCount', $variables, $expressions, $options);

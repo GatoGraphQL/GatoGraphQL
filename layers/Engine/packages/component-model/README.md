@@ -1564,7 +1564,7 @@ function getQuery($query_args) {
 function executeQueryIds($query) {
     
   $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-  return $cmsapi->getPosts($query, ['return-type' => ReturnTypes::IDS]);
+  return $cmsapi->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 }  
 ```
 

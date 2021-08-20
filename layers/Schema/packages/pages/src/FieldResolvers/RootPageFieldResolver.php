@@ -18,6 +18,7 @@ use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootPageFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -171,13 +172,13 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             case 'pageBySlug':
             case 'unrestrictedPage':
             case 'unrestrictedPageBySlug':
-                if ($pages = $pageTypeAPI->getPages($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($pages = $pageTypeAPI->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $pages[0];
                 }
                 return null;
             case 'pages':
             case 'unrestrictedPages':
-                return $pageTypeAPI->getPages($query, ['return-type' => ReturnTypes::IDS]);
+                return $pageTypeAPI->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'pageCount':
             case 'unrestrictedPageCount':
                 return $pageTypeAPI->getPageCount($query);

@@ -6,6 +6,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\AbstractRenderableFileFragment
 {
@@ -36,7 +37,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         $configuration['$domain'] = $cmsService->getSiteURL();
 
         // Get the list of all categories, and then their paths
-        $categories = $postCategoryTypeAPI->getCategories(['hide-empty' => false], ['return-type' => ReturnTypes::IDS]);
+        $categories = $postCategoryTypeAPI->getCategories(['hide-empty' => false], [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         $single_paths = array_map(array($postCategoryTypeAPI, 'getCategoryPath'), $categories);
 
         // Allow EM to add their own paths

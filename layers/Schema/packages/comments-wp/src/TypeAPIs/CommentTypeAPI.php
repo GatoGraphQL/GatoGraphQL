@@ -11,6 +11,7 @@ use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Comment;
 
 /**
@@ -61,7 +62,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     }
     protected function convertCommentsQuery(array $query, array $options): array
     {
-        if ($return_type = $options['return-type'] ?? null) {
+        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
             }
@@ -139,7 +140,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             // Maybe restrict the limit, if higher than the max limit
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
-            if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
+            if (!isset($options[QueryOptions::SKIP_MAX_LIMIT]) || !$options[QueryOptions::SKIP_MAX_LIMIT]) {
                 $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     ComponentConfiguration::getCommentListMaxLimit()

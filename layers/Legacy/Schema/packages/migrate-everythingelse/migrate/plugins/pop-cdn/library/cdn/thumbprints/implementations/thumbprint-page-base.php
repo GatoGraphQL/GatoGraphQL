@@ -3,6 +3,7 @@ use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
 {
@@ -19,7 +20,7 @@ class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
     public function executeQuery($query, array $options = [])
     {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         return $pageTypeAPI->getPages($query, $options);
     }
 

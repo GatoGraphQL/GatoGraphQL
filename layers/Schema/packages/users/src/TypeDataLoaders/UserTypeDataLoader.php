@@ -7,6 +7,7 @@ namespace PoPSchema\Users\TypeDataLoaders;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
@@ -53,7 +54,7 @@ class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
     {
         // $query['fields'] = 'ID';
         $options = [
-            'return-type' => ReturnTypes::IDS,
+            QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
         return (array)$this->executeQuery($query, $options);
     }

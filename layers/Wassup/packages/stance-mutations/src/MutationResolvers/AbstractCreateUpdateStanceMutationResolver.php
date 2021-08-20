@@ -9,6 +9,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
@@ -76,7 +77,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
 
         // Stances are unique, just 1 per person/article.
         // Check if there is a Stance for the given post. If there is, it's an error, can't create a second Stance.
-        if ($stances = $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS])) {
+        if ($stances = $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
             $stance_id = $stances[0];
             $error = sprintf(
                 $this->translationAPI->__('You have already added your %s', 'pop-userstance'),

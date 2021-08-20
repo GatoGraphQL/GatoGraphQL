@@ -11,6 +11,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class TagsCustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -71,7 +72,7 @@ class TagsCustomPostFieldResolver extends AbstractDBDataFieldResolver
         $post = $resultItem;
         switch ($fieldName) {
             case 'tagNames':
-                return $postTagTypeAPI->getCustomPostTags($typeResolver->getID($post), [], ['return-type' => ReturnTypes::NAMES]);
+                return $postTagTypeAPI->getCustomPostTags($typeResolver->getID($post), [], [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

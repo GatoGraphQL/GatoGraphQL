@@ -11,6 +11,7 @@ use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIHelpers;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Post;
 
 use function get_post_status;
@@ -63,7 +64,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     public function getCustomPostCount(array $query = [], array $options = []): int
     {
         // Convert parameters
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertCustomPostsQuery($query, $options);
 
         // All results, no offset
@@ -89,7 +90,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
-        if ($return_type = $options['return-type'] ?? null) {
+        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
             }
@@ -138,7 +139,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             // Maybe restrict the limit, if higher than the max limit
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
-            if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
+            if (!isset($options[QueryOptions::SKIP_MAX_LIMIT]) || !$options[QueryOptions::SKIP_MAX_LIMIT]) {
                 $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     $this->getCustomPostListMaxLimit()

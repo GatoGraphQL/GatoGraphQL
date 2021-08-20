@@ -14,6 +14,7 @@ use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProc
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -107,9 +108,9 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'categories':
-                return $categoryTypeAPI->getCustomPostCategories($typeResolver->getID($post), $query, ['return-type' => ReturnTypes::IDS]);
+                return $categoryTypeAPI->getCustomPostCategories($typeResolver->getID($post), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'categoryNames':
-                return $categoryTypeAPI->getCustomPostCategories($typeResolver->getID($post), $query, ['return-type' => ReturnTypes::NAMES]);
+                return $categoryTypeAPI->getCustomPostCategories($typeResolver->getID($post), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'categoryCount':
                 return $categoryTypeAPI->getCustomPostCategoryCount($typeResolver->getID($post), $query);
         }

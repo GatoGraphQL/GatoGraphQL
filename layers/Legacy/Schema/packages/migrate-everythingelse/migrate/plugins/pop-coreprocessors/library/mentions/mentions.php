@@ -7,10 +7,10 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 /**
  * Copied from plugin `hashtagger` (https://wordpress.org/plugins/hashtagger/)
@@ -143,7 +143,7 @@ class PoP_Mentions
                     // 'fields' => 'ids',
                     'slugs' => $tags,
                 ),
-                ['return-type' => ReturnTypes::IDS]
+                [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]
             );
             \PoPSchema\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGS, $tag_ids);
         }

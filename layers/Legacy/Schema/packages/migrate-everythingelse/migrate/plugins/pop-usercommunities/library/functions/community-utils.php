@@ -1,6 +1,7 @@
 <?php
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class URE_CommunityUtils
 {
@@ -28,6 +29,6 @@ class URE_CommunityUtils
         self::addDataloadqueryargsCommunitymembers($query, $community_id);
 
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        return $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+        return $userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 }

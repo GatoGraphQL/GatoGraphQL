@@ -5,6 +5,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class PoP_ContentPostLinks_Utils
 {
@@ -106,7 +107,7 @@ class PoP_ContentPostLinks_Utils
         $link_cats = self::getLinkCategories();
         // $post_cats = gdGetCategories($post_id);
         // return !empty(array_intersect($link_cats, $post_cats));
-        return !empty(array_intersect($link_cats, $postCategoryTypeAPI->getCustomPostCategories($post_id, ['return-type' => ReturnTypes::IDS])));
+        return !empty(array_intersect($link_cats, $postCategoryTypeAPI->getCustomPostCategories($post_id, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])));
     }
 
     public static function getLinkUrl($post)

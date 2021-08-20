@@ -17,6 +17,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\Tags\ComponentConfiguration;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -121,14 +122,14 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'postTag':
             case 'postTagBySlug':
-                if ($tags = $postTagTypeAPI->getTags($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($tags = $postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $tags[0];
                 }
                 return null;
             case 'postTags':
-                return $postTagTypeAPI->getTags($query, ['return-type' => ReturnTypes::IDS]);
+                return $postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'postTagNames':
-                return $postTagTypeAPI->getTags($query, ['return-type' => ReturnTypes::NAMES]);
+                return $postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'postTagCount':
                 return $postTagTypeAPI->getTagCount($query);
         }

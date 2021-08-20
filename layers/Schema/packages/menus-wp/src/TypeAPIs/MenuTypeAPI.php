@@ -9,6 +9,7 @@ use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Term;
 
 class MenuTypeAPI implements MenuTypeAPIInterface
@@ -117,7 +118,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 
     public function convertMenusQuery(array $query, array $options = []): array
     {
-        if ($return_type = $options['return-type'] ?? null) {
+        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
             } elseif ($return_type == ReturnTypes::NAMES) {

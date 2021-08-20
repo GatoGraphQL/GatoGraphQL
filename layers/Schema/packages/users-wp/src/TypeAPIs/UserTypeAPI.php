@@ -7,6 +7,7 @@ namespace PoPSchema\UsersWP\TypeAPIs;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\TypeAPIs\AbstractUserTypeAPI;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_User;
 use WP_User_Query;
 
@@ -52,7 +53,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
     public function getUserCount(array $query = [], array $options = []): int
     {
         // Convert the parameters
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertUsersQuery($query, $options);
 
         // All results, no offset
@@ -138,7 +139,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
     protected function convertUsersQuery(array $query, array $options = []): array
     {
-        if ($return_type = $options['return-type'] ?? null) {
+        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ID';
             }
@@ -180,7 +181,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
             // Maybe restrict the limit, if higher than the max limit
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
-            if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
+            if (!isset($options[QueryOptions::SKIP_MAX_LIMIT]) || !$options[QueryOptions::SKIP_MAX_LIMIT]) {
                 $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     ComponentConfiguration::getUserListMaxLimit()

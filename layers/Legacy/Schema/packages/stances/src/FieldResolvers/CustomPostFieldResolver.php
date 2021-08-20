@@ -13,6 +13,7 @@ use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceReso
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Stances\ComponentConfiguration;
 use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -99,7 +100,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                 );
                 \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($customPost));
 
-                return $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS]);
+                return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'hasStances':
                 $referencedby = $typeResolver->resolveValue($resultItem, 'stances', $variables, $expressions, $options);

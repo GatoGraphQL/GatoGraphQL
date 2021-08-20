@@ -8,6 +8,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSitesWassup\StanceMutations\MutationResolverBridges\CreateStanceMutationResolverBridge;
 use PoPSitesWassup\StanceMutations\MutationResolverBridges\UpdateStanceMutationResolverBridge;
 use PoPSitesWassup\StanceMutations\MutationResolverBridges\CreateOrUpdateStanceMutationResolverBridge;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
@@ -152,7 +153,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                 // Stances are unique, just 1 per person/article.
                 // Check if there is a Stance for the given post.
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-                if ($stances = $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($stances = $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return array($stances[0]);
                 }
                 return [];

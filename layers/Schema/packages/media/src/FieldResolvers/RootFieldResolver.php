@@ -25,6 +25,7 @@ use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -150,9 +151,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             case 'mediaItemCount':
                 return $this->mediaTypeAPI->getMediaItemCount($query);
             case 'mediaItems':
-                return $this->mediaTypeAPI->getMediaItems($query, ['return-type' => ReturnTypes::IDS]);
+                return $this->mediaTypeAPI->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'mediaItem':
-                if ($mediaItems = $this->mediaTypeAPI->getMediaItems($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($mediaItems = $this->mediaTypeAPI->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $mediaItems[0];
                 }
                 return null;

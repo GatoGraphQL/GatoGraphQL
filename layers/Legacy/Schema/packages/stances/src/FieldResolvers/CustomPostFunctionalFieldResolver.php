@@ -15,6 +15,7 @@ use PoP\Engine\Route\RouteUtils;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
@@ -133,7 +134,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 );
                 \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($post));
 
-                return $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS]);
+                return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'hasLoggedInUserStances':
                 $referencedby = $typeResolver->resolveValue($resultItem, 'loggedInUserStances', $variables, $expressions, $options);

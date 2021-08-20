@@ -13,6 +13,7 @@ use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\ModuleProcessors\MenuFilterInputContainerModuleProcessor;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -113,7 +114,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'menus':
-                return $menuTypeAPI->getMenus($query, ['return-type' => ReturnTypes::IDS]);
+                return $menuTypeAPI->getMenus($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'menuCount':
                 return $menuTypeAPI->getMenuCount($query);

@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class PoP_Module_Processor_PostTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {
@@ -31,7 +32,7 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentFormInputsBase extends
     protected function executeThumbprint($query)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        return $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS]);
+        return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 
     protected function getPendingMsg(array $module)

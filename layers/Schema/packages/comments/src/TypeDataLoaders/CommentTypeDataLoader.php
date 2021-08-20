@@ -12,6 +12,7 @@ use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
@@ -73,7 +74,7 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
     public function executeQueryIds($query): array
     {
         $options = [
-            'return-type' => ReturnTypes::IDS,
+            QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
         return (array)$this->executeQuery($query, $options);
     }

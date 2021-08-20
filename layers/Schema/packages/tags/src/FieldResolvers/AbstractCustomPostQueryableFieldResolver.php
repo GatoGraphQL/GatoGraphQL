@@ -13,6 +13,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleP
 use PoPSchema\Tags\ComponentConfiguration;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -96,9 +97,9 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'tags':
-                return $tagTypeAPI->getCustomPostTags($typeResolver->getID($customPost), $query, ['return-type' => ReturnTypes::IDS]);
+                return $tagTypeAPI->getCustomPostTags($typeResolver->getID($customPost), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'tagNames':
-                return $tagTypeAPI->getCustomPostTags($typeResolver->getID($customPost), $query, ['return-type' => ReturnTypes::NAMES]);
+                return $tagTypeAPI->getCustomPostTags($typeResolver->getID($customPost), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'tagCount':
                 return $tagTypeAPI->getCustomPostTagCount($typeResolver->getID($customPost), $query);
         }

@@ -17,6 +17,7 @@ use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputCo
 use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 /**
  * Add fields to the Root for querying for generic custom posts
@@ -193,13 +194,13 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
             case 'genericCustomPostBySlug':
             case 'unrestrictedGenericCustomPost':
             case 'unrestrictedGenericCustomPostBySlug':
-                if ($customPosts = $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($customPosts = $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $customPosts[0];
                 }
                 return null;
             case 'genericCustomPosts':
             case 'unrestrictedGenericCustomPosts':
-                return $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS]);
+                return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'genericCustomPostCount':
             case 'unrestrictedGenericCustomPostCount':
                 return $customPostTypeAPI->getCustomPostCount($query);

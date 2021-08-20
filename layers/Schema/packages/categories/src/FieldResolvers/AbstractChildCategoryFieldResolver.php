@@ -14,6 +14,7 @@ use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -112,9 +113,9 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
         );
         switch ($fieldName) {
             case 'childCategories':
-                return $categoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::IDS]);
+                return $categoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childCategoryNames':
-                return $categoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::NAMES]);
+                return $categoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'childCategoryCount':
                 return $categoryTypeAPI->getCategoryCount($query);
         }

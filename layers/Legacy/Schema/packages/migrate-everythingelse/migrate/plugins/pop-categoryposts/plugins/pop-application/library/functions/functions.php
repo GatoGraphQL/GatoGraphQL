@@ -4,6 +4,7 @@ use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 HooksAPIFacade::getInstance()->addFilter('gd_postname', 'blogPostname', 10, 3);
 function blogPostname($name, $post_id, $format)
@@ -13,7 +14,7 @@ function blogPostname($name, $post_id, $format)
     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
         $cats = PoP_CategoryPosts_Utils::getCats();
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
-        $post_cats = $postCategoryTypeAPI->getCustomPostCategories($post_id, ['return-type' => ReturnTypes::IDS]);
+        $post_cats = $postCategoryTypeAPI->getCustomPostCategories($post_id, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         if ($intersected = array_values(array_intersect($cats, $post_cats))) {
             return gdGetCategoryname($intersected[0], $format);
         }
@@ -31,7 +32,7 @@ function blogPosticon($icon, $post_id)
     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
         $cats = PoP_CategoryPosts_Utils::getCats();
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
-        $post_cats = $postCategoryTypeAPI->getCustomPostCategories($post_id, ['return-type' => ReturnTypes::IDS]);
+        $post_cats = $postCategoryTypeAPI->getCustomPostCategories($post_id, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         if ($intersected = array_values(array_intersect($cats, $post_cats))) {
             $cat_routes = PoP_CategoryPosts_Utils::getCatRoutes();
             return getRouteIcon($cat_routes[$intersected[0]], false);

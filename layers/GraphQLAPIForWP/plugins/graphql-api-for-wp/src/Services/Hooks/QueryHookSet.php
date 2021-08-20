@@ -13,6 +13,8 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
+use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
 
 class QueryHookSet extends AbstractHookSet
 {
@@ -54,8 +56,8 @@ class QueryHookSet extends AbstractHookSet
         // and not when resolving IDs into object, since there we don't have `$options`
         if (
             isset($query['post_type'])
-            && (!isset($options[AbstractListOfCPTEntitiesRootFieldResolver::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS]) || !$options[AbstractListOfCPTEntitiesRootFieldResolver::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS])
-            && isset($options['return-type']) && $options['return-type'] == ReturnTypes::IDS
+            && (!isset($options[QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS]) || !$options[QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS])
+            && isset($options[SchemaCommonsQueryOptions::RETURN_TYPE]) && $options[SchemaCommonsQueryOptions::RETURN_TYPE] == ReturnTypes::IDS
         ) {
             /**
              * All CPTs from the GraphQL API plugin and its extensions

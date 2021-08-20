@@ -5,6 +5,7 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 function gdUreGetCommunities($user_id): array
 {
@@ -40,7 +41,7 @@ function gdUreGetActivecontributingcontentcommunitymembers($community)
         ]
     );
 
-    return $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+    return $userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 }
 
 function gdUreGetCommunityMetavalueContributecontent($user_id)

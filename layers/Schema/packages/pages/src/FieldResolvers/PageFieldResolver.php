@@ -10,12 +10,12 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class PageFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -151,7 +151,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'childPages':
             case 'unrestrictedChildPages':
-                return $pageTypeAPI->getPages($query, ['return-type' => ReturnTypes::IDS]);
+                return $pageTypeAPI->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childPageCount':
             case 'unrestrictedChildPageCount':
                 return $pageTypeAPI->getPageCount($query);

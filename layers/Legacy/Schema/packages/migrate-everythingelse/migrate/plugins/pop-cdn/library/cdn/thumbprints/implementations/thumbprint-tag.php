@@ -2,6 +2,7 @@
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 define('POP_CDN_THUMBPRINT_TAG', 'tag');
 
@@ -25,7 +26,7 @@ class PoP_CDN_Thumbprint_Tag extends PoP_CDN_ThumbprintBase
     public function executeQuery($query, array $options = [])
     {
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         return $postTagTypeAPI->getTags($query, $options);
     }
 

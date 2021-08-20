@@ -22,6 +22,7 @@ use PoPSchema\Users\ModuleProcessors\UserFilterInputContainerModuleProcessor;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -145,7 +146,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'users':
             case 'unrestrictedUsers':
-                return $this->userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+                return $this->userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'userCount':
             case 'unrestrictedUserCount':

@@ -15,6 +15,7 @@ use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -135,7 +136,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'posts':
             case 'unrestrictedPosts':
-                return $postTypeAPI->getPosts($query, ['return-type' => ReturnTypes::IDS]);
+                return $postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'postCount':
             case 'unrestrictedPostCount':

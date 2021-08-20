@@ -12,17 +12,14 @@ use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
+use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
 
 /**
  * FieldResolver for the Custom Post Types from this plugin
  */
 abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQueryableFieldResolver
 {
-    /**
-     * Option to tell the hook to not remove the private CPTs when querying
-     */
-    public const QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS = 'allow-querying-private-cpts';
-
     /**
      * @return string[]
      */
@@ -67,11 +64,11 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
             ],
         ];
         $options = [
-            'return-type' => ReturnTypes::IDS,
+            SchemaCommonsQueryOptions::RETURN_TYPE => ReturnTypes::IDS,
             // Do not use the limit set in the settings for custom posts
-            'skip-max-limit' => true,
+            SchemaCommonsQueryOptions::SKIP_MAX_LIMIT => true,
             // With this flag, the hook will not remove the private CPTs
-            self::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS => true,
+            QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS => true,
         ];
         return $customPostTypeAPI->getCustomPosts($query, $options);
     }

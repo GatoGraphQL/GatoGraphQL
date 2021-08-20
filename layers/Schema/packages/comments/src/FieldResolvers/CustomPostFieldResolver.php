@@ -19,6 +19,7 @@ use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class CustomPostFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -112,7 +113,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
 
             case 'comments':
             case 'unrestrictedComments':
-                return $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS]);
+                return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

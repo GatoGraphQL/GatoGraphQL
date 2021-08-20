@@ -9,6 +9,7 @@ use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Post;
 
 use function get_posts;
@@ -93,7 +94,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
     public function getMediaItemCount(array $query, array $options = []): int
     {
         // Convert parameters
-        $options['return-type'] = ReturnTypes::IDS;
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertMediaQuery($query, $options);
 
         // All results, no offset
@@ -106,7 +107,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
     }
     protected function convertMediaQuery($query, array $options = [])
     {
-        if ($return_type = $options['return-type'] ?? null) {
+        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
             }
@@ -133,7 +134,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
             // Maybe restrict the limit, if higher than the max limit
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
-            if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
+            if (!isset($options[QueryOptions::SKIP_MAX_LIMIT]) || !$options[QueryOptions::SKIP_MAX_LIMIT]) {
                 $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     ComponentConfiguration::getMediaListMaxLimit()

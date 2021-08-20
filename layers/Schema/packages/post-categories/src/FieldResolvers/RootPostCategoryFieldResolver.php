@@ -17,6 +17,7 @@ use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -121,14 +122,14 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'postCategory':
             case 'postCategoryBySlug':
-                if ($categories = $postCategoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($categories = $postCategoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $categories[0];
                 }
                 return null;
             case 'postCategories':
-                return $postCategoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::IDS]);
+                return $postCategoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'postCategoryNames':
-                return $postCategoryTypeAPI->getCategories($query, ['return-type' => ReturnTypes::NAMES]);
+                return $postCategoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'postCategoryCount':
                 return $postCategoryTypeAPI->getCategoryCount($query);
         }

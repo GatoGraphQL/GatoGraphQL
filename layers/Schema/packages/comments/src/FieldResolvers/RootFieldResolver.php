@@ -27,6 +27,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -170,7 +171,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
             case 'comments':
             case 'unrestrictedComments':
-                return $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS]);
+                return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'comment':
             case 'unrestrictedComment':
@@ -190,7 +191,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
                     CustomPostUnionTypeResolver::class
                 );
-                if ($comments = $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS])) {
+                if ($comments = $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $comments[0];
                 }
                 return null;

@@ -12,6 +12,7 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');
@@ -75,7 +76,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // 'fields' => 'ids',
         );
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        if ($ids = $postTagTypeAPI->getTags($query, ['return-type' => ReturnTypes::IDS])) {
+        if ($ids = $postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
             $nature = TagRouteNatures::TAG;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 
@@ -99,7 +100,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         $roles = gdRoles();
         if (empty($roles)) {
             // Being here, GD_ROLE_PROFILE is not defined. Then, simply get any random user from the DB, and use its corresponding configuration (the default layouts for all non-profile users (eg: "subscriber") will be used)
-            $user_ids = $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+            $user_ids = $userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
             /** @var string */
             $role = $userRoleTypeAPI->getTheUserRole($user_ids[0]);
@@ -121,7 +122,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
                             $user_role_combination
                         ),
                     ),
-                    ['return-type' => ReturnTypes::IDS]
+                    [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]
                 )
             )
             ) {
@@ -152,7 +153,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         );
         if (defined('POP_TAXONOMIES_INITIALIZED')) {
             $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
-            $all_categories = $postCategoryTypeAPI->getCategories([], ['return-type' => ReturnTypes::IDS]);
+            $all_categories = $postCategoryTypeAPI->getCategories([], [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             // Allow to filter the categories.
             // This is needed so that Articles/Announcements/etc similar-configuration categories
@@ -169,7 +170,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
                             array(
                                 'categories' => [$category],
                             ),
-                            ['return-type' => ReturnTypes::IDS]
+                            [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]
                         )
                     )
                 ) {
@@ -195,7 +196,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         } else {
             $ids = $customPostTypeAPI->getCustomPosts(
                 $query,
-                ['return-type' => ReturnTypes::IDS]
+                [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]
             );
         }
 

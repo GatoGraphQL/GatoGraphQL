@@ -27,6 +27,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class CommentFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -240,7 +241,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'responses':
             case 'unrestrictedResponses':
-                return $this->commentTypeAPI->getComments($query, ['return-type' => ReturnTypes::IDS]);
+                return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'responseCount':
             case 'unrestrictedResponseCount':
