@@ -74,6 +74,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `excludeIDs: [ID!]`
   - `searchfor: String`
   - `types: [String!]`
+- Comment mutations: support creating comments by non logged-in users
 - Fetch a user by different means:
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)

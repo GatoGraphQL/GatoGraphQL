@@ -11,14 +11,13 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
-use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
+use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 /**
- * Add a comment to a custom post. Currently, the user must be logged-in.
- * @todo: Support non-logged-in users to add comments (check `CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()`)
+ * Add a comment to a custom post. The user may be logged-in or not
  */
 class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 {
@@ -42,19 +41,34 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         $errors = [];
 
         // Check that the user is logged-in
-        $this->validateUserIsLoggedIn($errors);
-        if ($errors) {
-            return $errors;
+        if (ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
+            $this->validateUserIsLoggedIn($errors);
+            if ($errors) {
+                return $errors;
+            }
+        } elseif (ComponentConfiguration::requireCommenterNameAndEmail()) {
+            // Validate if the commenter's name and email are mandatory
+            if (!($form_data[MutationInputProperties::AUTHOR_NAME] ?? null)) {
+                $errors[] = $this->translationAPI->__('The comment author\'s name is missing', 'comment-mutations');
+            }
+            if (!($form_data[MutationInputProperties::AUTHOR_EMAIL] ?? null)) {
+                $errors[] = $this->translationAPI->__('The comment author\'s email is missing', 'comment-mutations');
+            }
         }
 
         // Either provide the customPostID, or retrieve it from the parent comment
-        if ((!isset($form_data[MutationInputProperties::CUSTOMPOST_ID]) || !$form_data[MutationInputProperties::CUSTOMPOST_ID]) && (!isset($form_data[MutationInputProperties::PARENT_COMMENT_ID]) || !$form_data[MutationInputProperties::PARENT_COMMENT_ID])) {
+        if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null) && !($form_data[MutationInputProperties::PARENT_COMMENT_ID] ?? null)) {
             $errors[] = $this->translationAPI->__('The custom post ID is missing.', 'comment-mutations');
         }
-        if (!isset($form_data[MutationInputProperties::COMMENT]) || !$form_data[MutationInputProperties::COMMENT]) {
+        if (!($form_data[MutationInputProperties::COMMENT] ?? null)) {
             $errors[] = $this->translationAPI->__('The comment is empty.', 'comment-mutations');
         }
         return $errors;
+    }
+
+    protected function getUserNotLoggedInErrorMessage(): string
+    {
+        return $this->translationAPI->__('You must be logged in to add comments', 'comment-mutations');
     }
 
     protected function additionals(string | int $comment_id, array $form_data): void
@@ -65,29 +79,31 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     protected function getCommentData(array $form_data): array
     {
         $comment_data = [
-            'author-IP' => $_SERVER['REMOTE_ADDR'],
-            'agent' => $_SERVER['HTTP_USER_AGENT'],
+            'authorIP' => $_SERVER['REMOTE_ADDR'] ?? null,
+            'agent' => $_SERVER['HTTP_USER_AGENT'] ?? null,
             'content' => $form_data[MutationInputProperties::COMMENT],
-            'parent' => $form_data[MutationInputProperties::PARENT_COMMENT_ID],
-            'customPostID' => $form_data[MutationInputProperties::CUSTOMPOST_ID]
+            'parent' => $form_data[MutationInputProperties::PARENT_COMMENT_ID] ?? null,
+            'customPostID' => $form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null,
         ];
-        if (CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()) {
+        /**
+         * Override with the user's properties
+         */
+        if (ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
             $vars = ApplicationState::getVars();
-            $user_id = $vars['global-userstate']['current-user-id'];
-            $comment_data['userID'] = $user_id;
-            $comment_data['author'] = $this->userTypeAPI->getUserDisplayName($user_id);
-            $comment_data['authorEmail'] = $this->userTypeAPI->getUserEmail($user_id);
-            $comment_data['author-URL'] = $this->userTypeAPI->getUserURL($user_id);
-            ;
+            $userID = $vars['global-userstate']['current-user-id'];
+            $comment_data['userID'] = $userID;
+            $comment_data['author'] = $this->userTypeAPI->getUserDisplayName($userID);
+            $comment_data['authorEmail'] = $this->userTypeAPI->getUserEmail($userID);
+            $comment_data['authorURL'] = $this->userTypeAPI->getUserWebsiteUrl($userID);
         } else {
-            // @todo Implement!
-            // $comment_data['author'] = $form_data[MutationInputProperties::AUTHOR_NAME];
-            // $comment_data['authorEmail'] = $form_data[MutationInputProperties::AUTHOR_EMAIL];
+            $comment_data['author'] = $form_data[MutationInputProperties::AUTHOR_NAME] ?? null;
+            $comment_data['authorEmail'] = $form_data[MutationInputProperties::AUTHOR_EMAIL] ?? null;
+            $comment_data['authorURL'] = $form_data[MutationInputProperties::AUTHOR_URL] ?? null;
         }
 
         // If the parent comment is provided and the custom post is not,
         // then retrieve it from there
-        if (isset($comment_data['parent']) && !isset($comment_data['customPostID'])) {
+        if ($comment_data['parent'] && !$comment_data['customPostID']) {
             $parentComment = $this->commentTypeAPI->getComment($comment_data['parent']);
             $comment_data['customPostID'] = $this->commentTypeAPI->getCommentPostId($parentComment);
         }

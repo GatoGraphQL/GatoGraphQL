@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\CommentMutations\Schema;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
+use PoPSchema\CommentMutations\ComponentConfiguration;
 
 class SchemaDefinitionHelpers
 {
@@ -23,32 +24,51 @@ class SchemaDefinitionHelpers
         $key = get_class($typeResolver) . '-' . $fieldName;
         if (!isset(self::$schemaFieldArgsCache[$key])) {
             $translationAPI = TranslationAPIFacade::getInstance();
-            self::$schemaFieldArgsCache[$key] = array_merge(
-                $addCustomPostID ? [
-                    [
-                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CUSTOMPOST_ID,
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The ID of the custom post to add a comment to', 'comment-mutations'),
-                        SchemaDefinition::ARGNAME_MANDATORY => true,
-                    ],
-                ] : [],
+            $schemaFieldArgs = [
                 [
-                    [
-                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::COMMENT,
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The comment to add', 'comment-mutations'),
-                        SchemaDefinition::ARGNAME_MANDATORY => true,
-                    ],
+                    SchemaDefinition::ARGNAME_NAME => MutationInputProperties::COMMENT,
+                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                    SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The comment to add', 'comment-mutations'),
+                    SchemaDefinition::ARGNAME_MANDATORY => true,
                 ],
-                $addParentCommentID ? [
-                    [
-                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::PARENT_COMMENT_ID,
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The ID of the parent comment', 'comment-mutations'),
-                        SchemaDefinition::ARGNAME_MANDATORY => $isParentCommentMandatory,
-                    ],
-                ] : []
-            );
+            ];
+            if ($addParentCommentID) {
+                $schemaFieldArgs[] = [
+                    SchemaDefinition::ARGNAME_NAME => MutationInputProperties::PARENT_COMMENT_ID,
+                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
+                    SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The ID of the parent comment', 'comment-mutations'),
+                    SchemaDefinition::ARGNAME_MANDATORY => $isParentCommentMandatory,
+                ];
+            }
+            if ($addCustomPostID) {
+                $schemaFieldArgs[] = [
+                    SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CUSTOMPOST_ID,
+                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
+                    SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The ID of the custom post to add a comment to', 'comment-mutations'),
+                    SchemaDefinition::ARGNAME_MANDATORY => true,
+                ];
+            }
+            if (!ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
+                $areFieldsMandatory = ComponentConfiguration::requireCommenterNameAndEmail();
+                $schemaFieldArgs[] = [
+                    SchemaDefinition::ARGNAME_NAME => MutationInputProperties::AUTHOR_NAME,
+                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                    SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The comment author\'s name', 'comment-mutations'),
+                    SchemaDefinition::ARGNAME_MANDATORY => $areFieldsMandatory,
+                ];
+                $schemaFieldArgs[] = [
+                    SchemaDefinition::ARGNAME_NAME => MutationInputProperties::AUTHOR_EMAIL,
+                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_EMAIL,
+                    SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The comment author\'s email', 'comment-mutations'),
+                    SchemaDefinition::ARGNAME_MANDATORY => $areFieldsMandatory,
+                ];
+                $schemaFieldArgs[] = [
+                    SchemaDefinition::ARGNAME_NAME => MutationInputProperties::AUTHOR_URL,
+                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_URL,
+                    SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The comment author\'s site URL', 'comment-mutations'),
+                ];
+            }
+            self::$schemaFieldArgsCache[$key] = $schemaFieldArgs;
         }
         return self::$schemaFieldArgsCache[$key];
     }

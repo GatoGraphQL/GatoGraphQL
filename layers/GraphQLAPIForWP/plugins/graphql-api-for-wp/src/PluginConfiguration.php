@@ -461,9 +461,14 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     {
         return [
             [
-                'class' => \PoPSchema\Comments\ComponentConfiguration::class,
-                'envVariable' => \PoPSchema\Comments\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT,
+                'class' => \PoPSchema\CommentMutations\ComponentConfiguration::class,
+                'envVariable' => \PoPSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT,
                 'callback' => fn () => \get_option('comment_registration') === '1',
+            ],
+            [
+                'class' => \PoPSchema\CommentMutations\ComponentConfiguration::class,
+                'envVariable' => \PoPSchema\CommentMutations\Environment::REQUIRE_COMMENTER_NAME_AND_EMAIL,
+                'callback' => fn () => \get_option('require_name_email') === '1',
             ],
         ];
     }
