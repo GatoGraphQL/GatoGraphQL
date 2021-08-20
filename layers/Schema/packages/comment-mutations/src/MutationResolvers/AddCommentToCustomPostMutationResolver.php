@@ -11,7 +11,6 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
-use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
@@ -76,11 +75,11 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
          */
         $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['is-user-logged-in']) {
-            $user_id = $vars['global-userstate']['current-user-id'];
-            $comment_data['userID'] = $user_id;
-            $comment_data['author'] = $this->userTypeAPI->getUserDisplayName($user_id);
-            $comment_data['authorEmail'] = $this->userTypeAPI->getUserEmail($user_id);
-            $comment_data['author-URL'] = $this->userTypeAPI->getUserURL($user_id);
+            $userID = $vars['global-userstate']['current-user-id'];
+            $comment_data['userID'] = $userID;
+            $comment_data['author'] = $this->userTypeAPI->getUserDisplayName($userID);
+            $comment_data['authorEmail'] = $this->userTypeAPI->getUserEmail($userID);
+            $comment_data['author-URL'] = $this->userTypeAPI->getUserURL($userID);
         }
         /**
          * Then, if these specific fields were provided via the form, either because the
