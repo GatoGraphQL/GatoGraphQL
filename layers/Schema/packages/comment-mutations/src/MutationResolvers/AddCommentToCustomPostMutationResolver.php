@@ -11,6 +11,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
+use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
@@ -40,9 +41,19 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         $errors = [];
 
         // Check that the user is logged-in
-        $this->validateUserIsLoggedIn($errors);
-        if ($errors) {
-            return $errors;
+        if (ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
+            $this->validateUserIsLoggedIn($errors);
+            if ($errors) {
+                return $errors;
+            }
+        } else {
+            // Commenter's name and email are mandatory
+            if (!isset($form_data[MutationInputProperties::AUTHOR_NAME])) {
+                $errors[] = $this->translationAPI->__('The comment author\'s name is missing', 'comment-mutations');
+            }
+            if (!isset($form_data[MutationInputProperties::AUTHOR_EMAIL])) {
+                $errors[] = $this->translationAPI->__('The comment author\'s email is missing', 'comment-mutations');
+            }
         }
 
         // Either provide the customPostID, or retrieve it from the parent comment
