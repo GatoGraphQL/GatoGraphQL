@@ -93,18 +93,19 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
         string $fieldName,
         array $fieldArgs = []
     ): array {
+        $query = parent::getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
+
         switch ($fieldName) {
             case 'customPost':
             case 'customPostBySlug':
             case 'unrestrictedCustomPost':
             case 'unrestrictedCustomPostBySlug':
-                return [
-                    'custompost-types' => CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
-                        CustomPostUnionTypeResolver::class
-                    ),
-                ];
+                $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
+                    CustomPostUnionTypeResolver::class
+                );
+                break;
         }
-        return [];
+        return $query;
     }
 
     /**
