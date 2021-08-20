@@ -70,7 +70,7 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
             // Do not use the limit set in the settings for custom posts
-            'skip-max-limit' => true,
+            QueryOptions::SKIP_MAX_LIMIT => true,
             // With this flag, the hook will not remove the private CPTs
             self::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS => true,
         ];
