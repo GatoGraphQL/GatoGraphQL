@@ -8,14 +8,14 @@ use WP_Post;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
+use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 
 use function get_post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class PostTypeAPI extends CustomPostTypeAPI implements PostTypeAPIInterface
+class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
@@ -29,7 +29,10 @@ class PostTypeAPI extends CustomPostTypeAPI implements PostTypeAPIInterface
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
         $query = parent::convertCustomPostsQuery($query, $options);
-        return HooksAPIFacade::getInstance()->applyFilters(
+
+        $query['custompost-types'] = ['post'];
+
+        return $this->hooksAPI->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
@@ -75,12 +78,10 @@ class PostTypeAPI extends CustomPostTypeAPI implements PostTypeAPIInterface
 
     public function getPosts(array $query, array $options = []): array
     {
-        $query['custompost-types'] = ['post'];
         return $this->getCustomPosts($query, $options);
     }
     public function getPostCount(array $query = [], array $options = []): int
     {
-        $query['custompost-types'] = ['post'];
         return $this->getCustomPostCount($query, $options);
     }
     public function getPostCustomPostType(): string

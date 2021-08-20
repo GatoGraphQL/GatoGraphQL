@@ -8,14 +8,14 @@ use WP_Post;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
+use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 
 use function get_post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
+class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
@@ -29,6 +29,8 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
         $query = parent::convertCustomPostsQuery($query, $options);
+
+        $query['custompost-types'] = ['page'];
 
         // A page can have an ancestor
         if (isset($query['parent-id'])) {
@@ -44,7 +46,7 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
             unset($query['exclude-parent-ids']);
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
@@ -114,12 +116,10 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
 
     public function getPages(array $query, array $options = []): array
     {
-        $query['custompost-types'] = ['page'];
         return $this->getCustomPosts($query, $options);
     }
     public function getPageCount(array $query = [], array $options = []): int
     {
-        $query['custompost-types'] = ['page'];
         return $this->getCustomPostCount($query, $options);
     }
     public function getPageCustomPostType(): string
