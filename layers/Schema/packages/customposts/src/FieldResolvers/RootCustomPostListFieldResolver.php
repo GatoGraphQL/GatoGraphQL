@@ -12,6 +12,7 @@ use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerM
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 /**
  * Add the Custom Post fields to the Root

@@ -27,6 +27,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\UserState\FieldResolvers\UserStateFieldResolverTrait;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
 {

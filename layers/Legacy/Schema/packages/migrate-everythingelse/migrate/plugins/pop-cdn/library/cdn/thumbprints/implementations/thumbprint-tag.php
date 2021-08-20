@@ -2,6 +2,7 @@
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 define('POP_CDN_THUMBPRINT_TAG', 'tag');
 

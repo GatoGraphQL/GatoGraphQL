@@ -13,6 +13,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleP
 use PoPSchema\Tags\ComponentConfiguration;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
 {

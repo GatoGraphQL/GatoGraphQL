@@ -12,6 +12,7 @@ use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 /**
  * FieldResolver for the Custom Post Types from this plugin

@@ -15,6 +15,7 @@ use PoP\Engine\Route\RouteUtils;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {

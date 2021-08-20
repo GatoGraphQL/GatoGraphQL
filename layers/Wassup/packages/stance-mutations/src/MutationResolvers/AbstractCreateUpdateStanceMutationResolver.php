@@ -9,6 +9,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {

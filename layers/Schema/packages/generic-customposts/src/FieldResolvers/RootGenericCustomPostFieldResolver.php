@@ -17,6 +17,7 @@ use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputCo
 use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 /**
  * Add fields to the Root for querying for generic custom posts

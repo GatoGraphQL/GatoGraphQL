@@ -11,6 +11,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\Users\FieldResolvers\AbstractUserFieldResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootUserFieldResolver extends AbstractUserFieldResolver
 {

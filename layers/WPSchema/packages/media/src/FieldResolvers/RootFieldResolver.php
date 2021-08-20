@@ -20,6 +20,7 @@ use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {

@@ -10,8 +10,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-
-// use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class MediaTypeDataLoader extends AbstractTypeQueryableDataLoader
 {

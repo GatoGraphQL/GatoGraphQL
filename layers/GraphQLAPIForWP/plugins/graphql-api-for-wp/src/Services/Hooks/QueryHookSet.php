@@ -13,6 +13,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class QueryHookSet extends AbstractHookSet
 {

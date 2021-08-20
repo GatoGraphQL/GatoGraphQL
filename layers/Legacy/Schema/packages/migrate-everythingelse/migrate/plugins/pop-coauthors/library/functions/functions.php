@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 /**
  * Override function to get the authors of a post

@@ -12,6 +12,7 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');

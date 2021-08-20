@@ -1,6 +1,7 @@
 <?php
 
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class CAP_PoP_Coauthors_API extends PoP_Coauthors_API_Base implements PoP_Coauthors_API
 {

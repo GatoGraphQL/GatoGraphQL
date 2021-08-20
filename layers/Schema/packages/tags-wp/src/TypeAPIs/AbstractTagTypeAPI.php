@@ -11,6 +11,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Tags\ComponentConfiguration;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Taxonomy;
 
 /**

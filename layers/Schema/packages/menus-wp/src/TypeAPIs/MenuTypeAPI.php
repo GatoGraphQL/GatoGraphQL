@@ -9,6 +9,7 @@ use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Term;
 
 class MenuTypeAPI implements MenuTypeAPIInterface

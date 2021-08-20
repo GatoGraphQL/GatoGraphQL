@@ -13,6 +13,7 @@ use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootPostFieldResolver extends AbstractPostFieldResolver
 {

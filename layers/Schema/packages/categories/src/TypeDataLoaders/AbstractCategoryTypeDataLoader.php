@@ -7,6 +7,7 @@ namespace PoPSchema\Categories\TypeDataLoaders;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCategoryTypeDataLoader extends AbstractTypeQueryableDataLoader
 {

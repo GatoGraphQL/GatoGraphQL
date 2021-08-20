@@ -17,6 +17,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\Tags\ComponentConfiguration;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
 {

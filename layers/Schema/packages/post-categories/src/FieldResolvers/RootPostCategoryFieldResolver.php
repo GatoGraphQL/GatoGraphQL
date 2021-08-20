@@ -17,6 +17,7 @@ use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
 {

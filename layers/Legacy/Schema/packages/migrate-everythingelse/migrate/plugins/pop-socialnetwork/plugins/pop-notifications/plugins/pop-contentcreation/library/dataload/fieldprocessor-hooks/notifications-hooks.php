@@ -4,6 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class PoP_ContentCreation_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
 {

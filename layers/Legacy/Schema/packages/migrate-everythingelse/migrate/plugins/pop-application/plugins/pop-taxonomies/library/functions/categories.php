@@ -4,6 +4,7 @@ use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 function getTheMainCategories()
 {

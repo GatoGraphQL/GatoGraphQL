@@ -11,6 +11,7 @@ use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIHelpers;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Post;
 
 use function get_post_status;

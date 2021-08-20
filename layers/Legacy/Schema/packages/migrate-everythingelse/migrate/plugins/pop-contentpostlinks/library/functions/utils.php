@@ -5,6 +5,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class PoP_ContentPostLinks_Utils
 {

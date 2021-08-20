@@ -8,6 +8,7 @@ use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDataLoader
 {

@@ -14,6 +14,7 @@ use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableFieldResolver
 {

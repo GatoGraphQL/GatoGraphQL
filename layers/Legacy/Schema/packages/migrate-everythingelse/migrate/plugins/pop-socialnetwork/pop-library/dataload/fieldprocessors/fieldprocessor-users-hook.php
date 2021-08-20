@@ -10,6 +10,7 @@ use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
 {

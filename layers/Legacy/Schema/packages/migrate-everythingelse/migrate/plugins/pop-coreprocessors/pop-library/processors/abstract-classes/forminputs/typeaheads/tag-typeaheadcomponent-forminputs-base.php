@@ -4,6 +4,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {

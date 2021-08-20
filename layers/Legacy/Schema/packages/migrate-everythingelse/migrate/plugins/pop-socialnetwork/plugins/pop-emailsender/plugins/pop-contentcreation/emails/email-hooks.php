@@ -11,6 +11,7 @@ use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');

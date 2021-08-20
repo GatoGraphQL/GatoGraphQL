@@ -22,6 +22,7 @@ use PoPSchema\Users\ModuleProcessors\UserFilterInputContainerModuleProcessor;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
 {

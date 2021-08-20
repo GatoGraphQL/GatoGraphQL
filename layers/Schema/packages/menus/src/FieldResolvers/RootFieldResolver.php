@@ -13,6 +13,7 @@ use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\ModuleProcessors\MenuFilterInputContainerModuleProcessor;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {

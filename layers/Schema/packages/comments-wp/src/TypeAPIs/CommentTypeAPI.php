@@ -11,6 +11,7 @@ use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Comment;
 
 /**

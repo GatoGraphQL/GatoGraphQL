@@ -3,6 +3,7 @@ use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
 {

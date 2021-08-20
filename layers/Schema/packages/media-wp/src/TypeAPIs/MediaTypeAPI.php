@@ -9,6 +9,7 @@ use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Post;
 
 use function get_posts;

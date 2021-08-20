@@ -12,6 +12,7 @@ use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
 {

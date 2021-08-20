@@ -12,6 +12,7 @@ use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Error;
 use WP_Taxonomy;
 use WP_Term;

@@ -6,6 +6,7 @@ namespace EverythingElse\PoPSchema\TaxonomiesWP\TypeAPIs;
 
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
