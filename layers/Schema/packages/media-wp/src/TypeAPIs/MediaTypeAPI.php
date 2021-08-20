@@ -149,7 +149,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         return $query;
     }
 
-    public function getMediaItemId(object $media): string | int
+    public function getMediaItemID(object $media): string | int
     {
         return $media->ID;
     }
