@@ -70,19 +70,32 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             'parent' => $form_data[MutationInputProperties::PARENT_COMMENT_ID],
             'customPostID' => $form_data[MutationInputProperties::CUSTOMPOST_ID]
         ];
-        if (CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()) {
-            $vars = ApplicationState::getVars();
+        /**
+         * If the user is logged in, take his/her properties. This is independent
+         * from `CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()`
+         */
+        $vars = ApplicationState::getVars();
+        if ($vars['global-userstate']['is-user-logged-in']) {
             $user_id = $vars['global-userstate']['current-user-id'];
             $comment_data['userID'] = $user_id;
             $comment_data['author'] = $this->userTypeAPI->getUserDisplayName($user_id);
             $comment_data['authorEmail'] = $this->userTypeAPI->getUserEmail($user_id);
             $comment_data['author-URL'] = $this->userTypeAPI->getUserURL($user_id);
-            ;
-        } else {
-            // @todo Implement!
-            // $comment_data['author'] = $form_data[MutationInputProperties::AUTHOR_NAME];
-            // $comment_data['authorEmail'] = $form_data[MutationInputProperties::AUTHOR_EMAIL];
         }
+        /**
+         * Then, if these specific fields were provided via the form, either because the
+         * user is not logged-in or can still add custom info, override the properties.
+         */
+        if ($authorName = $form_data[MutationInputProperties::AUTHOR_NAME]) {
+            $comment_data['author'] = $authorName;
+        }
+        if ($authorEmail = $form_data[MutationInputProperties::AUTHOR_EMAIL]) {
+            $comment_data['authorEmail'] = $authorEmail;
+        }
+        if ($authorURL = $form_data[MutationInputProperties::AUTHOR_URL]) {
+            $comment_data['author-URL'] = $authorURL;
+        }
+
 
         // If the parent comment is provided and the custom post is not,
         // then retrieve it from there
