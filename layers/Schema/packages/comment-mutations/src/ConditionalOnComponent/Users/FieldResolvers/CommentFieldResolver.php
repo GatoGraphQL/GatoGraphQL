@@ -109,7 +109,7 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
                 return $this->userTypeAPI->getUserDisplayName($commentUserID);
 
             case 'authorURL':
-                return $this->userTypeAPI->getUserURL($commentUserID);
+                return $this->userTypeAPI->getUserWebsiteURL($commentUserID);
 
             case 'authorEmail':
                 return $this->userTypeAPI->getUserEmail($commentUserID);
