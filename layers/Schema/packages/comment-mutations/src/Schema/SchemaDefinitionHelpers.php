@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\CommentMutations\Schema;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\Comments\ComponentConfiguration;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class SchemaDefinitionHelpers
 {
