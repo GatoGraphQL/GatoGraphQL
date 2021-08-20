@@ -1190,6 +1190,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $fieldArgs,
             $schemaErrors,
         ) = $this->dissectFieldForSchema($field);
+        // Dissecting the field may already fail, then already return the error
+        if ($schemaErrors) {
+            return $schemaErrors;
+        }
         if ($fieldResolvers = $this->getFieldResolversForField($field)) {
             if ($maybeErrors = $fieldResolvers[0]->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeErrors as $error) {
@@ -1296,7 +1300,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return [];
     }
 
-    public function getSchemaFieldArgs(string $field): array
+    /**
+     * @return array<string,mixed>|null `null` if there are no fieldResolvers for the field
+     */
+    public function getSchemaFieldArgs(string $field): ?array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($fieldResolvers = $this->getFieldResolversForField($field)) {
@@ -1306,7 +1313,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             return $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? [];
         }
 
-        return [];
+        return null;
     }
 
     public function enableOrderedSchemaFieldArgs(string $field): bool
@@ -1380,7 +1387,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 ($options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? null) ||
                 FieldQueryUtils::isAnyFieldArgumentValueDynamic(
                     array_values(
-                        $this->fieldQueryInterpreter->extractFieldArguments($this, $field)
+                        $this->fieldQueryInterpreter->extractFieldArguments($this, $field) ?? []
                     )
                 );
 
