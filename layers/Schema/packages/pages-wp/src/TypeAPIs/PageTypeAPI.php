@@ -30,6 +30,8 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     {
         $query = parent::convertCustomPostsQuery($query, $options);
 
+        $query['custompost-types'] = ['page'];
+
         // A page can have an ancestor
         if (isset($query['parent-id'])) {
             $query['post_parent'] = $query['parent-id'];
@@ -114,12 +116,10 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
 
     public function getPages(array $query, array $options = []): array
     {
-        $query['custompost-types'] = ['page'];
         return $this->getCustomPosts($query, $options);
     }
     public function getPageCount(array $query = [], array $options = []): int
     {
-        $query['custompost-types'] = ['page'];
         return $this->getCustomPostCount($query, $options);
     }
     public function getPageCustomPostType(): string

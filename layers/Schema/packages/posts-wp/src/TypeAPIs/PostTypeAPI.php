@@ -29,6 +29,9 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
         $query = parent::convertCustomPostsQuery($query, $options);
+
+        $query['custompost-types'] = ['post'];
+        
         return $this->hooksAPI->applyFilters(
             self::HOOK_QUERY,
             $query,
@@ -75,12 +78,10 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
 
     public function getPosts(array $query, array $options = []): array
     {
-        $query['custompost-types'] = ['post'];
         return $this->getCustomPosts($query, $options);
     }
     public function getPostCount(array $query = [], array $options = []): int
     {
-        $query['custompost-types'] = ['post'];
         return $this->getCustomPostCount($query, $options);
     }
     public function getPostCustomPostType(): string
