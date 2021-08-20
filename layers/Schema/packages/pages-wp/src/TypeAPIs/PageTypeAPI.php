@@ -27,7 +27,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
         $query = parent::convertCustomPostsQuery($query, $options);
-        
+
         $query = $this->convertPagesQuery($query, $options);
 
         return $this->hooksAPI->applyFilters(

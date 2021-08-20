@@ -137,7 +137,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     {
         return $this->getCustomPostCount($query, $options);
     }
-    
+
     protected function convertMediaQuery($query, array $options = [])
     {
         if (isset($query['mime-types'])) {
