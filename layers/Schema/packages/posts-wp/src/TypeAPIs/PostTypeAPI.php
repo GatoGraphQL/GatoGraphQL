@@ -31,7 +31,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
         $query = parent::convertCustomPostsQuery($query, $options);
 
         $query['custompost-types'] = ['post'];
-        
+
         return $this->hooksAPI->applyFilters(
             self::HOOK_QUERY,
             $query,
