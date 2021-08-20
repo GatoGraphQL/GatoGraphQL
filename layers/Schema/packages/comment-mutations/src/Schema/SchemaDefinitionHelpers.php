@@ -8,7 +8,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\Comments\ComponentConfiguration;
+use PoPSchema\CommentMutations\ComponentConfiguration;
 
 class SchemaDefinitionHelpers
 {

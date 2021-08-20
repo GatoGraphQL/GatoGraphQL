@@ -6,7 +6,6 @@ namespace PoPSchema\Comments;
 
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
-use PoPSchema\Users\Component as UsersComponent;
 
 class ComponentConfiguration
 {
@@ -15,7 +14,6 @@ class ComponentConfiguration
     private static ?int $getRootCommentListDefaultLimit = 100;
     private static ?int $getCustomPostCommentOrCommentResponseListDefaultLimit = -1;
     private static ?int $getCommentListMaxLimit = 10;
-    private static bool $mustUserBeLoggedInToAddComment = true;
 
     public static function getRootCommentListDefaultLimit(): ?int
     {
@@ -60,29 +58,6 @@ class ComponentConfiguration
         $selfProperty = &self::$getCommentListMaxLimit;
         $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
-
-        // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
-            $envVariable,
-            $selfProperty,
-            $defaultValue,
-            $callback
-        );
-        return $selfProperty;
-    }
-
-    public static function mustUserBeLoggedInToAddComment(): bool
-    {
-        // The Users package must be active
-        if (!class_exists(UsersComponent::class)) {
-            return false;
-        }
-
-        // Define properties
-        $envVariable = Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT;
-        $selfProperty = &self::$mustUserBeLoggedInToAddComment;
-        $defaultValue = true;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         self::maybeInitializeConfigurationValue(

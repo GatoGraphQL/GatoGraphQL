@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\ConditionalOnComponent\Users\FieldResolvers;
+namespace PoPSchema\CommentMutations\ConditionalOnComponent\Users\FieldResolvers;
 
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -12,7 +12,7 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Comments\ComponentConfiguration;
+use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface as UserCommentTypeAPIInterface;
 use PoPSchema\Comments\FieldResolvers\CommentFieldResolver as UpstreamCommentFieldResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
