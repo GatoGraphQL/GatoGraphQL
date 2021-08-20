@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\FieldResolvers;
 
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -12,13 +12,15 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\Formatters\DateFormatterInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
+use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 
-class MediaFieldResolver extends AbstractDBDataFieldResolver
+class MediaFieldResolver extends AbstractQueryableFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -29,6 +31,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected MediaTypeAPIInterface $mediaTypeAPI,
+        protected DateFormatterInterface $dateFormatter,
     ) {
         parent::__construct(
             $translationAPI,
@@ -54,6 +57,13 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'width',
             'height',
             'sizes',
+            'title',
+            'caption',
+            'altText',
+            'description',
+            'date',
+            'modified',
+            'mimeType',
         ];
     }
 
@@ -65,6 +75,13 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'width' => SchemaDefinition::TYPE_INT,
             'height' => SchemaDefinition::TYPE_INT,
             'sizes' => SchemaDefinition::TYPE_STRING,
+            'title' => SchemaDefinition::TYPE_STRING,
+            'caption' => SchemaDefinition::TYPE_STRING,
+            'altText' => SchemaDefinition::TYPE_STRING,
+            'description' => SchemaDefinition::TYPE_STRING,
+            'date' => SchemaDefinition::TYPE_DATE,
+            'modified' => SchemaDefinition::TYPE_DATE,
+            'mimeType' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -73,6 +90,8 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
     {
         $nonNullableFieldNames = [
             'src',
+            'date',
+            'modified',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
@@ -88,6 +107,13 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             'width' => $this->translationAPI->__('Media element\'s width', 'pop-media'),
             'height' => $this->translationAPI->__('Media element\'s height', 'pop-media'),
             'sizes' => $this->translationAPI->__('Media element\'s ‘sizes’ attribute value for an image', 'pop-media'),
+            'title' => $this->translationAPI->__('Media element title', 'pop-media'),
+            'caption' => $this->translationAPI->__('Media element caption', 'pop-media'),
+            'altText' => $this->translationAPI->__('Media element alt text', 'pop-media'),
+            'description' => $this->translationAPI->__('Media element description', 'pop-media'),
+            'date' => $this->translationAPI->__('Media element\'s published date', 'pop-media'),
+            'modified' => $this->translationAPI->__('Media element\'s modified date', 'pop-media'),
+            'mimeType' => $this->translationAPI->__('Media element\'s mime type', 'pop-media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -112,6 +138,15 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
         }
 
         return $schemaFieldArgs;
+    }
+
+    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    {
+        return match ($fieldName) {
+            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            'modified' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+        };
     }
 
     /**
@@ -148,6 +183,26 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
                 return $this->mediaTypeAPI->getImageSrcSet($typeResolver->getID($media), $size);
             case 'sizes':
                 return $this->mediaTypeAPI->getImageSizes($typeResolver->getID($media), $size);
+            case 'title':
+                return $this->mediaTypeAPI->getTitle($media);
+            case 'caption':
+                return $this->mediaTypeAPI->getCaption($media);
+            case 'altText':
+                return $this->mediaTypeAPI->getAltText($media);
+            case 'description':
+                return $this->mediaTypeAPI->getDescription($media);
+            case 'date':
+                return $this->dateFormatter->format(
+                    $fieldArgs['format'],
+                    $this->mediaTypeAPI->getDate($media, $fieldArgs['gmt'])
+                );
+            case 'modified':
+                return $this->dateFormatter->format(
+                    $fieldArgs['format'],
+                    $this->mediaTypeAPI->getModified($media, $fieldArgs['gmt'])
+                );
+            case 'mimeType':
+                return $this->mediaTypeAPI->getMimeType($media);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
