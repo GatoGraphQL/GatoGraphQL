@@ -66,6 +66,11 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
+    protected function getUserNotLoggedInErrorMessage(): string
+    {
+        return $this->translationAPI->__('You must be logged in to add comments', 'comment-mutations');
+    }
+
     protected function additionals(string | int $comment_id, array $form_data): void
     {
         $this->hooksAPI->doAction('gd_addcomment', $comment_id, $form_data);
