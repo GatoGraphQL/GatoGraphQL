@@ -52,6 +52,16 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     }
 
     /**
+     * Query args that must always be in the query
+     *
+     * @return array<string, mixed>
+     */
+    public function getCustomPostQueryRequiredArgs(): array
+    {
+        return [];
+    }
+
+    /**
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options
      * @return object[]
@@ -90,14 +100,16 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
-        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-            if ($return_type == ReturnTypes::IDS) {
-                $query['fields'] = 'ids';
-            }
+        if (($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {
+            $query['fields'] = 'ids';
         }
 
-        // If param "status" in $query is not passed, it defaults to "publish"
-        $query = array_merge($this->getCustomPostQueryDefaults(), $query);
+        // The query overrides the defaults, and is overriden by the required args
+        $query = array_merge(
+            $this->getCustomPostQueryDefaults(),
+            $query,
+            $this->getCustomPostQueryRequiredArgs(),
+        );
 
         // Convert the parameters
         if (isset($query['status'])) {
@@ -131,6 +143,10 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
                 $unionTypeResolverClass
             );
             unset($query['types-from-union-resolver-class']);
+        }
+        // Querying "attachment" doesn't work in an array!
+        if (isset($query['post_type']) && is_array($query['post_type'])) {
+            $query['post_type'] = $query['post_type'][0];
         }
         if (isset($query['offset'])) {
             // Same param name, so do nothing

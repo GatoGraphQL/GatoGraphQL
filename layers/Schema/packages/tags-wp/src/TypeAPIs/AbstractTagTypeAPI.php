@@ -114,9 +114,9 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         $query['taxonomy'] = $this->getTagTaxonomyName();
 
         if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-            if ($return_type == ReturnTypes::IDS) {
+            if ($return_type === ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
-            } elseif ($return_type == ReturnTypes::NAMES) {
+            } elseif ($return_type === ReturnTypes::NAMES) {
                 $query['fields'] = 'names';
             }
         }

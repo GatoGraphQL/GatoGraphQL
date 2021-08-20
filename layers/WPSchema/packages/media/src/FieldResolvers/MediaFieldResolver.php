@@ -19,7 +19,6 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
-use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use WP_Post;
 
 class MediaFieldResolver extends AbstractQueryableFieldResolver
@@ -64,13 +63,6 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
             'url',
             'urlPath',
             'slug',
-            'title',
-            'caption',
-            'altText',
-            'description',
-            'date',
-            'modified',
-            'mimeType',
         ];
     }
 
@@ -80,13 +72,6 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
             'url' => SchemaDefinition::TYPE_URL,
             'urlPath' => SchemaDefinition::TYPE_STRING,
             'slug' => SchemaDefinition::TYPE_STRING,
-            'title' => SchemaDefinition::TYPE_STRING,
-            'caption' => SchemaDefinition::TYPE_STRING,
-            'altText' => SchemaDefinition::TYPE_STRING,
-            'description' => SchemaDefinition::TYPE_STRING,
-            'date' => SchemaDefinition::TYPE_DATE,
-            'modified' => SchemaDefinition::TYPE_DATE,
-            'mimeType' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -97,8 +82,6 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
             'url',
             'urlPath',
             'slug',
-            'date',
-            'modified',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
@@ -112,24 +95,8 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
             'url' => $this->translationAPI->__('Media element URL', 'pop-media'),
             'urlPath' => $this->translationAPI->__('Media element URL path', 'pop-media'),
             'slug' => $this->translationAPI->__('Media element slug', 'pop-media'),
-            'title' => $this->translationAPI->__('Media element title', 'pop-media'),
-            'caption' => $this->translationAPI->__('Media element caption', 'pop-media'),
-            'altText' => $this->translationAPI->__('Media element alt text', 'pop-media'),
-            'description' => $this->translationAPI->__('Media element description', 'pop-media'),
-            'date' => $this->translationAPI->__('Media element\'s published date', 'pop-media'),
-            'modified' => $this->translationAPI->__('Media element\'s modified date', 'pop-media'),
-            'mimeType' => $this->translationAPI->__('Media element\'s mime type', 'pop-media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
-    }
-
-    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
-    {
-        return match ($fieldName) {
-            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
-            'modified' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
-            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
-        };
     }
 
     /**
@@ -160,26 +127,6 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
                 return $this->cmsHelperService->getLocalURLPath($url);
             case 'slug':
                 return $mediaItem->post_name;
-            case 'title':
-                return $mediaItem->post_title;
-            case 'caption':
-                return $mediaItem->post_excerpt;
-            case 'altText':
-                return get_post_meta($mediaItem->ID, '_wp_attachment_image_alt', true);
-            case 'description':
-                return $mediaItem->post_content;
-            case 'date':
-                return $this->dateFormatter->format(
-                    $fieldArgs['format'],
-                    $fieldArgs['gmt'] ? $mediaItem->post_date_gmt : $mediaItem->post_date
-                );
-            case 'modified':
-                return $this->dateFormatter->format(
-                    $fieldArgs['format'],
-                    $fieldArgs['gmt'] ? $mediaItem->post_modified_gmt : $mediaItem->post_modified
-                );
-            case 'mimeType':
-                return $mediaItem->post_mime_type;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -119,9 +119,9 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     public function convertMenusQuery(array $query, array $options = []): array
     {
         if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-            if ($return_type == ReturnTypes::IDS) {
+            if ($return_type === ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
-            } elseif ($return_type == ReturnTypes::NAMES) {
+            } elseif ($return_type === ReturnTypes::NAMES) {
                 $query['fields'] = 'names';
             }
         }

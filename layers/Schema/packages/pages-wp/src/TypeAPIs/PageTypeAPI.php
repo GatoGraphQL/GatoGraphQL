@@ -20,8 +20,6 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     /**
-     * Add an extra hook just to modify pages
-     *
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options
      * @return array<string, mixed>
@@ -30,8 +28,37 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     {
         $query = parent::convertCustomPostsQuery($query, $options);
 
-        $query['custompost-types'] = ['page'];
+        $query = $this->convertPagesQuery($query, $options);
 
+        return $this->hooksAPI->applyFilters(
+            self::HOOK_QUERY,
+            $query,
+            $options
+        );
+    }
+
+    /**
+     * Query args that must always be in the query
+     *
+     * @return array<string, mixed>
+     */
+    public function getCustomPostQueryRequiredArgs(): array
+    {
+        return array_merge(
+            parent::getCustomPostQueryRequiredArgs(),
+            [
+                'custompost-types' => ['page'],
+            ]
+        );
+    }
+
+    /**
+     * @param array<string, mixed> $query
+     * @param array<string, mixed> $options
+     * @return array<string, mixed>
+     */
+    protected function convertPagesQuery(array $query, array $options = []): array
+    {
         // A page can have an ancestor
         if (isset($query['parent-id'])) {
             $query['post_parent'] = $query['parent-id'];
@@ -46,11 +73,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
             unset($query['exclude-parent-ids']);
         }
 
-        return $this->hooksAPI->applyFilters(
-            self::HOOK_QUERY,
-            $query,
-            $options
-        );
+        return $query;
     }
 
     /**

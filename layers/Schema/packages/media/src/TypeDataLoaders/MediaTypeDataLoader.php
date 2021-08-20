@@ -39,7 +39,6 @@ class MediaTypeDataLoader extends AbstractTypeQueryableDataLoader
     {
         return [
             'include' => $ids,
-            'custompost-types' => 'attachment',
         ];
     }
 

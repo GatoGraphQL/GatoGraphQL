@@ -4,29 +4,20 @@ declare(strict_types=1);
 
 namespace PoPSchema\MediaWP\TypeAPIs;
 
-use PoP\Hooks\HooksAPIInterface;
+use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Post;
 
-use function get_posts;
 use function wp_get_attachment_image_src;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class MediaTypeAPI implements MediaTypeAPIInterface
+class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
-    ) {
-    }
     /**
      * Indicates if the passed object is of type Media
      */
@@ -37,7 +28,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
 
     public function getMediaItemSrc(string | int $media_id): ?string
     {
-        return wp_get_attachment_url($media_id);
+        return \wp_get_attachment_url($media_id);
     }
 
     public function getImageSrc(string | int $image_id, ?string $size = null): ?string
@@ -51,7 +42,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
 
     public function getImageSrcSet(string | int $image_id, ?string $size = null): ?string
     {
-        $srcSet = wp_get_attachment_image_srcset($image_id, $size);
+        $srcSet = \wp_get_attachment_image_srcset($image_id, $size);
         if ($srcSet === false) {
             return null;
         }
@@ -85,113 +76,16 @@ class MediaTypeAPI implements MediaTypeAPIInterface
         ];
     }
 
-    public function getMediaItems(array $query, array $options = []): array
+    /**
+     * @param array<string, mixed> $query
+     * @param array<string, mixed> $options
+     * @return array<string, mixed>
+     */
+    protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
-        // Convert the parameters
+        $query = parent::convertCustomPostsQuery($query, $options);
+
         $query = $this->convertMediaQuery($query, $options);
-        return get_posts($query);
-    }
-    public function getMediaItemCount(array $query, array $options = []): int
-    {
-        // Convert parameters
-        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
-        $query = $this->convertMediaQuery($query, $options);
-
-        // All results, no offset
-        $query['posts_per_page'] = -1;
-        unset($query['offset']);
-
-        // Execute query and count results
-        $posts = \get_posts($query);
-        return count($posts);
-    }
-    protected function convertMediaQuery($query, array $options = [])
-    {
-        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-            if ($return_type == ReturnTypes::IDS) {
-                $query['fields'] = 'ids';
-            }
-        }
-
-        if (isset($query['include']) && is_array($query['include'])) {
-            // It can be an array or a string
-            $query['include'] = implode(',', $query['include']);
-        }
-        if (isset($query['exclude-ids'])) {
-            $query['post__not_in'] = $query['exclude-ids'];
-            unset($query['exclude-ids']);
-        }
-        $query['post_type'] = 'attachment';
-        if (isset($query['mime-types'])) {
-            // Transform from array to string
-            $query['post_mime_type'] = implode(',', $query['mime-types']);
-            unset($query['mime-types']);
-        }
-        if (isset($query['offset'])) {
-            // Same param name, so do nothing
-        }
-        if (isset($query['limit'])) {
-            // Maybe restrict the limit, if higher than the max limit
-            // Allow to not limit by max when querying from within the application
-            $limit = (int) $query['limit'];
-            if (!isset($options[QueryOptions::SKIP_MAX_LIMIT]) || !$options[QueryOptions::SKIP_MAX_LIMIT]) {
-                $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
-                    $limit,
-                    ComponentConfiguration::getMediaListMaxLimit()
-                );
-            }
-
-            // Assign the limit as the required attribute
-            $query['posts_per_page'] = $limit;
-            unset($query['limit']);
-        }
-        if (isset($query['order'])) {
-            // Same param name, so do nothing
-        }
-        if (isset($query['orderby'])) {
-            // Same param name, so do nothing
-            // This param can either be a string or an array. Eg:
-            // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
-        }
-        // Post slug
-        if (isset($query['slug'])) {
-            $query['name'] = $query['slug'];
-            unset($query['slug']);
-        }
-        if (isset($query['search'])) {
-            $query['is_search'] = true;
-            $query['s'] = $query['search'];
-            unset($query['search']);
-        }
-        // Filtering by date: Instead of operating on the query, it does it through filter 'posts_where'
-        if (isset($query['date-from'])) {
-            $query['date_query'][] = [
-                'after' => $query['date-from'],
-                'inclusive' => false,
-            ];
-            unset($query['date-from']);
-        }
-        if (isset($query['date-from-inclusive'])) {
-            $query['date_query'][] = [
-                'after' => $query['date-from-inclusive'],
-                'inclusive' => true,
-            ];
-            unset($query['date-from-inclusive']);
-        }
-        if (isset($query['date-to'])) {
-            $query['date_query'][] = [
-                'before' => $query['date-to'],
-                'inclusive' => false,
-            ];
-            unset($query['date-to']);
-        }
-        if (isset($query['date-to-inclusive'])) {
-            $query['date_query'][] = [
-                'before' => $query['date-to-inclusive'],
-                'inclusive' => true,
-            ];
-            unset($query['date-to-inclusive']);
-        }
 
         return $this->hooksAPI->applyFilters(
             self::HOOK_QUERY,
@@ -200,8 +94,132 @@ class MediaTypeAPI implements MediaTypeAPIInterface
         );
     }
 
-    public function getMediaItemId(object $media): string | int
+    /**
+     * @return array<string, mixed>
+     */
+    public function getCustomPostQueryDefaults(): array
+    {
+        // For media, must remove the status or the query doesn't work
+        $queryDefaults = parent::getCustomPostQueryDefaults();
+        unset($queryDefaults['status']);
+        return $queryDefaults;
+    }
+
+    /**
+     * Query args that must always be in the query
+     *
+     * @return array<string, mixed>
+     */
+    public function getCustomPostQueryRequiredArgs(): array
+    {
+        return array_merge(
+            parent::getCustomPostQueryRequiredArgs(),
+            [
+                'custompost-types' => ['attachment'],
+            ]
+        );
+    }
+
+    /**
+     * Limit of how many custom posts can be retrieved in the query.
+     * Override this value for specific custom post types
+     */
+    protected function getCustomPostListMaxLimit(): int
+    {
+        return ComponentConfiguration::getMediaListMaxLimit();
+    }
+
+    public function getMediaItems(array $query, array $options = []): array
+    {
+        return $this->getCustomPosts($query, $options);
+    }
+    public function getMediaItemCount(array $query = [], array $options = []): int
+    {
+        return $this->getCustomPostCount($query, $options);
+    }
+
+    protected function convertMediaQuery($query, array $options = [])
+    {
+        if (isset($query['mime-types'])) {
+            // Transform from array to string
+            $query['post_mime_type'] = implode(',', $query['mime-types']);
+            unset($query['mime-types']);
+        }
+
+        return $query;
+    }
+
+    public function getMediaItemID(object $media): string | int
     {
         return $media->ID;
+    }
+
+    public function getTitle(string | int | object $mediaObjectOrID): ?string
+    {
+        $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
+        if ($mediaItem === null) {
+            return null;
+        }
+        /** @var WP_Post $mediaItem */
+        return $mediaItem->post_title;
+    }
+
+    public function getCaption(string | int | object $mediaObjectOrID): ?string
+    {
+        $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
+        if ($mediaItem === null) {
+            return null;
+        }
+        /** @var WP_Post $mediaItem */
+        return $mediaItem->post_excerpt;
+    }
+
+    public function getAltText(string | int | object $mediaObjectOrID): ?string
+    {
+        $mediaItemID = $this->getCustomPostID($mediaObjectOrID);
+        if ($mediaItemID === null) {
+            return null;
+        }
+        return get_post_meta($mediaItemID, '_wp_attachment_image_alt', true);
+    }
+
+    public function getDescription(string | int | object $mediaObjectOrID): ?string
+    {
+        $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
+        if ($mediaItem === null) {
+            return null;
+        }
+        /** @var WP_Post $mediaItem */
+        return $mediaItem->post_content;
+    }
+
+    public function getDate(string | int | object $mediaObjectOrID, bool $gmt = false): ?string
+    {
+        $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
+        if ($mediaItem === null) {
+            return null;
+        }
+        /** @var WP_Post $mediaItem */
+        return $gmt ? $mediaItem->post_date_gmt : $mediaItem->post_date;
+    }
+
+    public function getModified(string | int | object $mediaObjectOrID, bool $gmt = false): ?string
+    {
+        $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
+        if ($mediaItem === null) {
+            return null;
+        }
+        /** @var WP_Post $mediaItem */
+        return $gmt ? $mediaItem->post_modified_gmt : $mediaItem->post_modified;
+    }
+    
+    public function getMimeType(string | int | object $mediaObjectOrID): ?string
+    {
+        $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
+        if ($mediaItem === null) {
+            return null;
+        }
+        /** @var WP_Post $mediaItem */
+        return $mediaItem->post_mime_type;
     }
 }

@@ -62,10 +62,8 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     }
     protected function convertCommentsQuery(array $query, array $options): array
     {
-        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-            if ($return_type == ReturnTypes::IDS) {
-                $query['fields'] = 'ids';
-            }
+        if (($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {
+            $query['fields'] = 'ids';
         }
 
         // Convert the parameters
