@@ -1387,7 +1387,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 ($options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? null) ||
                 FieldQueryUtils::isAnyFieldArgumentValueDynamic(
                     array_values(
-                        $this->fieldQueryInterpreter->extractFieldArguments($this, $field)
+                        $this->fieldQueryInterpreter->extractFieldArguments($this, $field) ?? []
                     )
                 );
 

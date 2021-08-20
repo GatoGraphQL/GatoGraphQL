@@ -102,7 +102,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         if ($addArguments) {
             $functionName = $this->fieldQueryInterpreter->getFieldName($function);
             $functionArgElems = array_merge(
-                $this->fieldQueryInterpreter->extractFieldArguments($typeResolver, $function),
+                $this->fieldQueryInterpreter->extractFieldArguments($typeResolver, $function) ?? [],
                 $addArguments
             );
             $function = $this->fieldQueryInterpreter->getField($functionName, $functionArgElems);

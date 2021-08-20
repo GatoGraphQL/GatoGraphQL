@@ -429,15 +429,18 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldOrDirectiveArgs;
     }
 
+    /**
+     * Return `null` if there is no resolver for the field
+     */
     public function extractFieldArguments(
         TypeResolverInterface $typeResolver,
         string $field,
         ?array $variables = null,
         ?array &$schemaErrors = null,
         ?array &$schemaWarnings = null,
-    ): array {
+    ): ?array {
         $variablesHash = $this->getVariablesHash($variables);
-        if (!isset($this->extractedFieldArgumentsCache[get_class($typeResolver)][$field][$variablesHash])) {
+        if (!array_key_exists($variablesHash, $this->extractedFieldArgumentsCache[get_class($typeResolver)][$field] ?? [])) {
             $fieldSchemaErrors = $fieldSchemaWarnings = [];
             $this->extractedFieldArgumentsCache[get_class($typeResolver)][$field][$variablesHash] = $this->doExtractFieldArguments(
                 $typeResolver,
@@ -471,9 +474,20 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         ?array $variables,
         array &$schemaErrors,
         array &$schemaWarnings,
-    ): array {
+    ): ?array {
         // Iterate all the elements, and extract them into the array
         $fieldOrDirectiveArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($typeResolver, $field);
+        if ($fieldOrDirectiveArgumentNameDefaultValues === null) {
+            $schemaErrors[] = [
+                Tokens::PATH => [$field],
+                Tokens::MESSAGE => sprintf(
+                    $this->translationAPI->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
+                    $this->getFieldName($field),
+                    $typeResolver->getMaybeNamespacedTypeName()
+                )
+            ];
+            return null;
+        }
         if ($fieldArgElems = QueryHelpers::getFieldArgElements($this->getFieldArgs($field))) {
             $fieldArgumentNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
             $orderedFieldArgNamesEnabled = $typeResolver->enableOrderedSchemaFieldArgs($field);
@@ -528,6 +542,17 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $schemaErrors,
             $schemaWarnings,
         );
+        // If there is no resolver for the field, we will already have an error by now
+        if ($schemaErrors) {
+            return [
+                null,
+                $fieldName,
+                $fieldArgs ?? [],
+                $schemaErrors,
+                $schemaWarnings,
+                $schemaDeprecations,
+            ];
+        }
         $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($typeResolver, $field, $fieldArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         if ($fieldArgs = $this->castAndValidateFieldArgumentsForSchema($typeResolver, $field, $fieldArgs, $schemaErrors, $schemaWarnings)) {
@@ -1138,7 +1163,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     protected function getFieldSchemaDefinitionArgs(TypeResolverInterface $typeResolver, string $field): ?array
     {
-        if (!isset($this->fieldSchemaDefinitionArgsCache[get_class($typeResolver)][$field])) {
+        if (!array_key_exists($field, $this->fieldSchemaDefinitionArgsCache[get_class($typeResolver)] ?? [])) {
             $this->fieldSchemaDefinitionArgsCache[get_class($typeResolver)][$field] = $typeResolver->getSchemaFieldArgs($field);
         }
         return $this->fieldSchemaDefinitionArgsCache[get_class($typeResolver)][$field];
@@ -1174,28 +1199,30 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgNameTypes;
     }
 
-    protected function getFieldArgumentNameDefaultValues(TypeResolverInterface $typeResolver, string $field): array
+    protected function getFieldArgumentNameDefaultValues(TypeResolverInterface $typeResolver, string $field): ?array
     {
-        if (!isset($this->fieldArgumentNameDefaultValuesCache[get_class($typeResolver)][$field])) {
+        if (!array_key_exists($field, $this->fieldArgumentNameDefaultValuesCache[get_class($typeResolver)] ?? [])) {
             $this->fieldArgumentNameDefaultValuesCache[get_class($typeResolver)][$field] = $this->doGetFieldArgumentNameDefaultValues($typeResolver, $field);
         }
         return $this->fieldArgumentNameDefaultValuesCache[get_class($typeResolver)][$field];
     }
 
-    protected function doGetFieldArgumentNameDefaultValues(TypeResolverInterface $typeResolver, string $field): array
+    protected function doGetFieldArgumentNameDefaultValues(TypeResolverInterface $typeResolver, string $field): ?array
     {
         // Get the field arguments which have a default value
+        $fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($typeResolver, $field);
+        if ($fieldSchemaDefinitionArgs === null) {
+            return null;
+        }
         $fieldArgNameDefaultValues = [];
-        if ($fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($typeResolver, $field)) {
-            $fieldSchemaDefinitionArgsWithDefaultValue = array_filter(
-                $fieldSchemaDefinitionArgs,
-                function (array $fieldSchemaDefinitionArg): bool {
-                    return \array_key_exists(SchemaDefinition::ARGNAME_DEFAULT_VALUE, $fieldSchemaDefinitionArg);
-                }
-            );
-            foreach ($fieldSchemaDefinitionArgsWithDefaultValue as $fieldSchemaDefinitionArg) {
-                $fieldArgNameDefaultValues[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE];
+        $fieldSchemaDefinitionArgsWithDefaultValue = array_filter(
+            $fieldSchemaDefinitionArgs,
+            function (array $fieldSchemaDefinitionArg): bool {
+                return \array_key_exists(SchemaDefinition::ARGNAME_DEFAULT_VALUE, $fieldSchemaDefinitionArg);
             }
+        );
+        foreach ($fieldSchemaDefinitionArgsWithDefaultValue as $fieldSchemaDefinitionArg) {
+            $fieldArgNameDefaultValues[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE];
         }
         return $fieldArgNameDefaultValues;
     }
