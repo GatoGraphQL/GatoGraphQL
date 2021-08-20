@@ -123,15 +123,6 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        switch ($fieldName) {
-            case 'customPosts':
-            case 'unrestrictedCustomPosts':
-            case 'customPostCount':
-            case 'unrestrictedCustomPostCount':
-                return [
-                    'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
-                ];
-        }
         return [];
     }
 
