@@ -17,8 +17,7 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 /**
- * Add a comment to a custom post. Currently, the user must be logged-in.
- * @todo: Support non-logged-in users to add comments (check `CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()`)
+ * Add a comment to a custom post. The user may be logged-in or not
  */
 class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 {
