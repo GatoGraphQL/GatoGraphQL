@@ -21,7 +21,17 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\Media\Component::class,
-            \PoP\EngineWP\Component::class,
+            \PoPSchema\CustomPostsWP\Component::class,
+        ];
+    }
+
+    /**
+     * All conditional component classes that this component depends upon, to initialize them
+     */
+    public static function getDependedConditionalComponentClasses(): array
+    {
+        return [
+            \PoPSchema\UsersWP\Component::class,
         ];
     }
 
