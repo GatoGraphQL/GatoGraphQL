@@ -51,35 +51,20 @@ class SchemaDefinitionHelpers
                 ];
             }
             if (!ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
-                $vars = ApplicationState::getVars();
-                $defaultAuthorName = null;
-                $defaultAuthorEmail = null;
-                $defaultAuthorURL = null;
-                // If the user is logged-in, take his/her properties to set as default
-                if ($vars['global-userstate']['is-user-logged-in']) {
-                    $userTypeAPI = UserTypeAPIFacade::getInstance();
-                    $userID = $vars['global-userstate']['current-user-id'];
-                    $defaultAuthorName = $userTypeAPI->getUserDisplayName($userID);
-                    $defaultAuthorEmail = $userTypeAPI->getUserEmail($userID);
-                    $defaultAuthorURL = $userTypeAPI->getUserURL($userID);
-                }
                 $schemaFieldArgs[] = [
                     SchemaDefinition::ARGNAME_NAME => MutationInputProperties::AUTHOR_NAME,
                     SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
                     SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The comment author\'s name', 'comment-mutations'),
-                    SchemaDefinition::ARGNAME_DEFAULT_VALUE => $defaultAuthorName,
                 ];
                 $schemaFieldArgs[] = [
                     SchemaDefinition::ARGNAME_NAME => MutationInputProperties::AUTHOR_EMAIL,
                     SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
                     SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The comment author\'s email', 'comment-mutations'),
-                    SchemaDefinition::ARGNAME_DEFAULT_VALUE => $defaultAuthorEmail,
                 ];
                 $schemaFieldArgs[] = [
                     SchemaDefinition::ARGNAME_NAME => MutationInputProperties::AUTHOR_URL,
                     SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
                     SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The comment author\'s site URL', 'comment-mutations'),
-                    SchemaDefinition::ARGNAME_DEFAULT_VALUE => $defaultAuthorURL,
                 ];
             }
             self::$schemaFieldArgsCache[$key] = $schemaFieldArgs;
