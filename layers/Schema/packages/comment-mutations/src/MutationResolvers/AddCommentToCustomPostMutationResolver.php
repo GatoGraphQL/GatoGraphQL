@@ -46,8 +46,8 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             if ($errors) {
                 return $errors;
             }
-        } else {
-            // Commenter's name and email are mandatory
+        } elseif (ComponentConfiguration::requireCommenterNameAndEmail()) {
+            // Validate if the commenter's name and email are mandatory
             if (!($form_data[MutationInputProperties::AUTHOR_NAME] ?? null)) {
                 $errors[] = $this->translationAPI->__('The comment author\'s name is missing', 'comment-mutations');
             }
