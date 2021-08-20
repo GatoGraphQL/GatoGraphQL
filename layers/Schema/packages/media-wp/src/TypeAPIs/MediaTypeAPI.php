@@ -163,6 +163,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         /** @var WP_Post $mediaItem */
         return $mediaItem->post_title;
     }
+
     public function getCaption(string | int | object $mediaObjectOrID): ?string
     {
         $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
@@ -172,6 +173,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         /** @var WP_Post $mediaItem */
         return $mediaItem->post_excerpt;
     }
+
     public function getAltText(string | int | object $mediaObjectOrID): ?string
     {
         $mediaItemID = $this->getCustomPostID($mediaObjectOrID);
@@ -180,6 +182,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         }
         return get_post_meta($mediaItemID, '_wp_attachment_image_alt', true);
     }
+
     public function getDescription(string | int | object $mediaObjectOrID): ?string
     {
         $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
@@ -189,6 +192,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         /** @var WP_Post $mediaItem */
         return $mediaItem->post_content;
     }
+
     public function getDate(string | int | object $mediaObjectOrID, bool $gmt = false): ?string
     {
         $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
@@ -198,6 +202,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         /** @var WP_Post $mediaItem */
         return $gmt ? $mediaItem->post_date_gmt : $mediaItem->post_date;
     }
+
     public function getModified(string | int | object $mediaObjectOrID, bool $gmt = false): ?string
     {
         $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
@@ -207,6 +212,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         /** @var WP_Post $mediaItem */
         return $gmt ? $mediaItem->post_modified_gmt : $mediaItem->post_modified;
     }
+    
     public function getMimeType(string | int | object $mediaObjectOrID): ?string
     {
         $mediaItem = $this->getCustomPostObject($mediaObjectOrID);
