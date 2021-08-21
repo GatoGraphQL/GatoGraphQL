@@ -489,7 +489,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             return null;
         }
         if ($fieldArgElems = QueryHelpers::getFieldArgElements($this->getFieldArgs($field))) {
-            $fieldArgumentNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
+            $fieldArgumentNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field) ?? [];
             $orderedFieldArgNamesEnabled = $typeResolver->enableOrderedSchemaFieldArgs($field);
             return $this->extractAndValidateFielOrDirectiveArguments(
                 $field,
@@ -1179,22 +1179,24 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->directiveSchemaDefinitionArgsCache[get_class($directiveResolver)][get_class($typeResolver)];
     }
 
-    protected function getFieldArgumentNameTypes(TypeResolverInterface $typeResolver, string $field): array
+    protected function getFieldArgumentNameTypes(TypeResolverInterface $typeResolver, string $field): ?array
     {
-        if (!isset($this->fieldArgumentNameTypesCache[get_class($typeResolver)][$field])) {
+        if (!array_key_exists($field, $this->fieldArgumentNameTypesCache[get_class($typeResolver)])) {
             $this->fieldArgumentNameTypesCache[get_class($typeResolver)][$field] = $this->doGetFieldArgumentNameTypes($typeResolver, $field);
         }
         return $this->fieldArgumentNameTypesCache[get_class($typeResolver)][$field];
     }
 
-    protected function doGetFieldArgumentNameTypes(TypeResolverInterface $typeResolver, string $field): array
+    protected function doGetFieldArgumentNameTypes(TypeResolverInterface $typeResolver, string $field): ?array
     {
         // Get the field argument types, to know to what type it will cast the value
+        $fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($typeResolver, $field);
+        if ($fieldSchemaDefinitionArgs === null) {
+            return null;
+        }
         $fieldArgNameTypes = [];
-        if ($fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($typeResolver, $field)) {
-            foreach ($fieldSchemaDefinitionArgs as $fieldSchemaDefinitionArg) {
-                $fieldArgNameTypes[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE];
-            }
+        foreach ($fieldSchemaDefinitionArgs as $fieldSchemaDefinitionArg) {
+            $fieldArgNameTypes[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE];
         }
         return $fieldArgNameTypes;
     }
@@ -1366,8 +1368,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         // If any casting can't be done, show an error
         if ($failedCastingFieldArgErrorMessages) {
             $fieldName = $this->getFieldName($field);
-            $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
-            $fieldArgNameSchemaDefinition = $this->getFieldSchemaDefinitionArgs($typeResolver, $field);
+            $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field) ?? [];
+            $fieldArgNameSchemaDefinition = $this->getFieldSchemaDefinitionArgs($typeResolver, $field) ?? [];
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingFieldArgErrorMessages) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
