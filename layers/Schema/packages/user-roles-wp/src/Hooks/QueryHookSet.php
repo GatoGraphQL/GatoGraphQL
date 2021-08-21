@@ -21,9 +21,9 @@ class QueryHookSet extends AbstractHookSet
 
     public function convertUsersQuery(array $query, array $options): array
     {
-        if (isset($query['author-roles'])) {
-            $query['role__in'] = $query['author-roles'];
-            unset($query['author-roles']);
+        if (isset($query['user-roles'])) {
+            $query['role__in'] = $query['user-roles'];
+            unset($query['user-roles']);
         }
         return $query;
     }
