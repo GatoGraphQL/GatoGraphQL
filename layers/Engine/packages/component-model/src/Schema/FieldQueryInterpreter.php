@@ -480,11 +480,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         if ($fieldOrDirectiveArgumentNameDefaultValues === null) {
             $schemaErrors[] = [
                 Tokens::PATH => [$field],
-                Tokens::MESSAGE => sprintf(
-                    $this->translationAPI->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
-                    $this->getFieldName($field),
-                    $typeResolver->getMaybeNamespacedTypeName()
-                )
+                Tokens::MESSAGE => $this->getNoFieldErrorMessage($typeResolver, $field),
             ];
             return null;
         }
@@ -505,6 +501,15 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         }
 
         return $fieldOrDirectiveArgumentNameDefaultValues;
+    }
+
+    protected function getNoFieldErrorMessage(TypeResolverInterface $typeResolver, string $field): string
+    {
+        return sprintf(
+            $this->translationAPI->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
+            $this->getFieldName($field),
+            $typeResolver->getMaybeNamespacedTypeName()
+        );
     }
 
     protected function filterFieldOrDirectiveArgs(array $fieldOrDirectiveArgs): array
@@ -851,11 +856,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         if ($fieldArgSchemaDefinition === null) {
             $schemaOrDBErrors[] = [
                 Tokens::PATH => [$field],
-                Tokens::MESSAGE => sprintf(
-                    $this->translationAPI->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
-                    $this->getFieldName($field),
-                    $typeResolver->getMaybeNamespacedTypeName()
-                )
+                Tokens::MESSAGE => $this->getNoFieldErrorMessage($typeResolver, $field),
             ];
             return null;
         }
