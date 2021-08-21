@@ -1210,20 +1210,19 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         /**
          * If the error happened from requesting a version that doesn't exist, show an appropriate error message
          */
-        if (Environment::enableSemanticVersionConstraints()) {
-            if ($versionConstraint = $fieldArgs[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] ?? null) {
-                $errorMessage = sprintf(
-                    $this->translationAPI->__(
-                        'There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'',
-                        'pop-component-model'
-                    ),
-                    $fieldName,
-                    $this->getMaybeNamespacedTypeName(),
-                    $versionConstraint,
-                );
-            }
-        }
-        if (!isset($errorMessage)) {
+        if (Environment::enableSemanticVersionConstraints()
+            && ($versionConstraint = $fieldArgs[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] ?? null)
+        ) {
+            $errorMessage = sprintf(
+                $this->translationAPI->__(
+                    'There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'',
+                    'pop-component-model'
+                ),
+                $fieldName,
+                $this->getMaybeNamespacedTypeName(),
+                $versionConstraint,
+            );
+        } else {
             $errorMessage = sprintf(
                 $this->translationAPI->__(
                     'There is no field \'%s\' on type \'%s\'',
