@@ -7,3 +7,6 @@ services:
     PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface:
         class: \PoPSchema\UserRolesWP\TypeAPIs\UserRoleTypeAPI
 
+    PoPSchema\UserRolesWP\Hooks\:
+        resource: '../src/Hooks/*'
+

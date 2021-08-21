@@ -92,6 +92,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `User.hasAnyRole: Bool!`
   - `User.hasCapability: Bool!`
   - `User.hasAnyCapability: Bool!`
+- Added arguments `roles` and `excludeRoles` in field `Root.usersForAdmin` to filter by user roles
 - Fetch children from Categories:
   - `PostCategory.childCategories: [PostCategory]!`
   - `PostCategory.childCategoryNames: [String]!`

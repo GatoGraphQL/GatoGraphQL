@@ -5,3 +5,6 @@ services:
 
     PoPSchema\UserRoles\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PoPSchema\UserRoles\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'
