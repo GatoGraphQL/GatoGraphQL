@@ -225,7 +225,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $userTypeResolver = $this->userTypeResolver;
         switch ($module) {
             case self::SCHEMA_ADMIN_SCHEMA:
-                return \__('Add "unrestricted" admin fields to the schema', 'graphql-api');
+                return \__('Add "admin" fields to the schema', 'graphql-api');
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
                 return sprintf(
                     \__('Query any custom post type (added to the schema or not), through a generic type <code>%1$s</code>', 'graphql-api'),

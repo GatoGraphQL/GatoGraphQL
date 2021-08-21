@@ -38,7 +38,7 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
         // admin/non-admin screens have different services enabled
         $suffix = \is_admin() ?
             // The WordPress editor can access the full GraphQL schema,
-            // including "unrestricted" admin fields, so cache it individually
+            // including "admin" fields, so cache it individually
             'a' . ($this->endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint() ? 'u' : 'c')
             : 'c';
         $timestamp .= '_' . $suffix;

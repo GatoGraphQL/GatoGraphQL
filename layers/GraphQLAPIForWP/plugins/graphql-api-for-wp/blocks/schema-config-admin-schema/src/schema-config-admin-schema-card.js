@@ -32,7 +32,7 @@ const SchemaConfigAdminSchemaCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_DEFAULT,
 		},
 		{
-			label: __('Add "unrestricted" admin fields to the schema', 'graphql-api'),
+			label: __('Add "admin" fields to the schema', 'graphql-api'),
 			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
@@ -61,10 +61,10 @@ const SchemaConfigAdminSchemaCard = ( props ) => {
 									<span>🟡 { __('Default', 'graphql-api') }</span>
 								}
 								{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
-									<span>✅ { __('Add "unrestricted" admin fields', 'graphql-api') }</span>
+									<span>✅ { __('Add "admin" fields', 'graphql-api') }</span>
 								}
 								{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-									<span>❌ { __('Do not add fields', 'graphql-api') }</span>
+									<span>❌ { __('Do not add admin fields', 'graphql-api') }</span>
 								}
 							</>
 						) }

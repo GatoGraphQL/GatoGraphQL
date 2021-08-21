@@ -108,7 +108,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
                  * for Gutenberg blocks which require some field that must necessarily be enabled.
                  * This GraphQL schema is not modified by user preferences:
                  * - All types/directives are always in the schema
-                 * - The "unrestricted" admin fields are in the schema
+                 * - The "admin" fields are in the schema
                  * - Nested mutations enabled, without removing the redundant fields in the Root
                  * - No namespacing
                  */

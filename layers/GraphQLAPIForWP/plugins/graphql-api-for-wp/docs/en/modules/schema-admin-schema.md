@@ -1,6 +1,6 @@
 # Schema for the Admin
 
-Add "unrestricted" admin fields to the GraphQL schema, which may expose private data.
+Add "admin" fields to the GraphQL schema, which may expose private data.
 
 The GraphQL schema must strike a balance between public and private fields, as to avoid exposing private information in a public API.
 
@@ -10,7 +10,7 @@ For instance, to access post data, we have field:
 
 With this module, we can also access post data via field:
 
-- `Root.postsForAdmin`: exposes public and private data, by allowing us to fetch posts with any status (`"publish"`, `"draft"`, `"pending"`, `"trash"`).
+- `Root.postsForAdmin`: exposes public and private data, by allowing us to fetch posts with any status (`"publish"`, `"draft"`, `"pending"`, `"trash"`) via the field argument `status`.
 
 ## List of admin fields
 
