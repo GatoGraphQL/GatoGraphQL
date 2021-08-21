@@ -149,7 +149,17 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 if ($value == '') {
                     return false;
                 }
-                return (bool) CastToType::_bool($value);
+                $converted = CastToType::_bool($value);
+                if ($converted === null) {
+                    return new Error(
+                        'bool-cast',
+                        sprintf(
+                            $this->translationAPI->__('Cannot cast bool from \'%s\'', 'component-model'),
+                            $value
+                        )
+                    );
+                }
+                return $converted;
             case SchemaDefinition::TYPE_TIME:
                 $converted = strtotime($value);
                 if ($converted === false) {
