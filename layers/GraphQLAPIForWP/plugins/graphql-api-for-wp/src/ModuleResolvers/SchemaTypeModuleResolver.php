@@ -482,7 +482,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => \__('Add admin fields to schema?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Add "admin" fields to the GraphQL schema (such as <code>Root.postsForAdmin</code>, <code>Root.roles</code>, and others), to be used by the admin only.<hr/><strong>Watch out: Enable only if needed!</strong><br/>These fields can expose sensitive information, so they should be enabled only when the API is not publicly exposed (such as when using a local WordPress instance, to build a static site).', 'graphql-api'),
+                Properties::DESCRIPTION => \__('Add "admin" fields to the GraphQL schema (such as <code>Root.postsForAdmin</code>, <code>Root.roles</code>, and others), which expose private data.<hr/><strong>Watch out: Enable only if needed!</strong><br/>These fields can expose sensitive information, so they should be enabled only when the API is not publicly exposed (such as when using a local WordPress instance, to build a static site).', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
             $option = self::OPTION_ADD_SELF_FIELD_TO_SCHEMA;
