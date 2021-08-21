@@ -108,11 +108,11 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         );
         switch ($fieldName) {
             case 'commentCount':
-            case 'unrestrictedCommentCount':
+            case 'commentCountForAdmin':
                 return $this->commentTypeAPI->getCommentCount($query);
 
             case 'comments':
-            case 'unrestrictedComments':
+            case 'commentsForAdmin':
                 return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         }
 
@@ -123,7 +123,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'comments':
-            case 'unrestrictedComments':
+            case 'commentsForAdmin':
                 return CommentTypeResolver::class;
         }
 

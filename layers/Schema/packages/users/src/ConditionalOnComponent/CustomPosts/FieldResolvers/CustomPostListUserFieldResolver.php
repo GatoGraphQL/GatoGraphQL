@@ -20,8 +20,8 @@ class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolve
         $descriptions = [
             'customPosts' => $this->translationAPI->__('Custom posts by the user', 'pop-users'),
             'customPostCount' => $this->translationAPI->__('Number of custom posts by the user', 'pop-users'),
-            'unrestrictedCustomPosts' => $this->translationAPI->__('[Unrestricted] Custom posts by the user', 'pop-users'),
-            'unrestrictedCustomPostCount' => $this->translationAPI->__('[Unrestricted] Number of custom posts by the user', 'pop-users'),
+            'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts by the user', 'pop-users'),
+            'customPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts by the user', 'pop-users'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -42,8 +42,8 @@ class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolve
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostCount':
-            case 'unrestrictedCustomPosts':
-            case 'unrestrictedCustomPostCount':
+            case 'customPostsForAdmin':
+            case 'customPostCountForAdmin':
                 $query['authors'] = [$typeResolver->getID($user)];
                 break;
         }

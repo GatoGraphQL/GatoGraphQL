@@ -30,16 +30,16 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
             'parentPage',
             'childPages',
             'childPageCount',
-            'unrestrictedChildPages',
-            'unrestrictedChildPageCount',
+            'childPagesForAdmin',
+            'childPageCountForAdmin',
         ];
     }
 
     public function getAdminFieldNames(): array
     {
         return [
-            'unrestrictedChildPages',
-            'unrestrictedChildPageCount',
+            'childPagesForAdmin',
+            'childPageCountForAdmin',
         ];
     }
 
@@ -49,8 +49,8 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
             'parentPage' => $this->translationAPI->__('Parent page', 'pages'),
             'childPages' => $this->translationAPI->__('Child pages', 'pages'),
             'childPageCount' => $this->translationAPI->__('Number of child pages', 'pages'),
-            'unrestrictedChildPages' => $this->translationAPI->__('[Unrestricted] Child pages', 'pages'),
-            'unrestrictedChildPageCount' => $this->translationAPI->__('[Unrestricted] Number of child pages', 'pages'),
+            'childPagesForAdmin' => $this->translationAPI->__('[Unrestricted] Child pages', 'pages'),
+            'childPageCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of child pages', 'pages'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -61,8 +61,8 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
             'parentPage' => SchemaDefinition::TYPE_ID,
             'childPages' => SchemaDefinition::TYPE_ID,
             'childPageCount' => SchemaDefinition::TYPE_INT,
-            'unrestrictedChildPages' => SchemaDefinition::TYPE_ID,
-            'unrestrictedChildPageCount' => SchemaDefinition::TYPE_INT,
+            'childPagesForAdmin' => SchemaDefinition::TYPE_ID,
+            'childPageCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -71,10 +71,10 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'childPageCount',
-            'unrestrictedChildPageCount'
+            'childPageCountForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'childPages',
-            'unrestrictedChildPages'
+            'childPagesForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
@@ -92,11 +92,11 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
                 CustomPostFilterInputContainerModuleProcessor::class,
                 CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT
             ],
-            'unrestrictedChildPages' => [
+            'childPagesForAdmin' => [
                 CustomPostFilterInputContainerModuleProcessor::class,
                 CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST
             ],
-            'unrestrictedChildPageCount' => [
+            'childPageCountForAdmin' => [
                 CustomPostFilterInputContainerModuleProcessor::class,
                 CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT
             ],
@@ -108,7 +108,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'childPages':
-            case 'unrestrictedChildPages':
+            case 'childPagesForAdmin':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -150,10 +150,10 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
         );
         switch ($fieldName) {
             case 'childPages':
-            case 'unrestrictedChildPages':
+            case 'childPagesForAdmin':
                 return $pageTypeAPI->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childPageCount':
-            case 'unrestrictedChildPageCount':
+            case 'childPageCountForAdmin':
                 return $pageTypeAPI->getPageCount($query);
         }
 
@@ -165,7 +165,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'parentPage':
             case 'childPages':
-            case 'unrestrictedChildPages':
+            case 'childPagesForAdmin':
                 return PageTypeResolver::class;
         }
 

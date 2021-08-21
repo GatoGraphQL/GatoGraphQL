@@ -585,7 +585,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
-            // Enable the "unrestricted" admin fields
+            // Enable the "admin" fields
             $componentClassConfiguration[\PoP\ComponentModel\Component::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
             // Enable Nested mutations
             $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;

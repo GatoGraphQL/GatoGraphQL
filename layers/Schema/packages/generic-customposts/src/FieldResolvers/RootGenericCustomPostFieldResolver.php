@@ -38,10 +38,10 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
             'genericCustomPostBySlug',
             'genericCustomPosts',
             'genericCustomPostCount',
-            'unrestrictedGenericCustomPost',
-            'unrestrictedGenericCustomPostBySlug',
-            'unrestrictedGenericCustomPosts',
-            'unrestrictedGenericCustomPostCount',
+            'genericCustomPostForAdmin',
+            'genericCustomPostBySlugForAdmin',
+            'genericCustomPostsForAdmin',
+            'genericCustomPostCountForAdmin',
         ];
     }
 
@@ -52,10 +52,10 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
             'genericCustomPostBySlug' => $this->translationAPI->__('Custom post with a specific slug', 'generic-customposts'),
             'genericCustomPosts' => $this->translationAPI->__('Custom posts', 'generic-customposts'),
             'genericCustomPostCount' => $this->translationAPI->__('Number of custom posts', 'generic-customposts'),
-            'unrestrictedGenericCustomPost' => $this->translationAPI->__('[Unrestricted] Custom post with a specific ID', 'generic-customposts'),
-            'unrestrictedGenericCustomPostBySlug' => $this->translationAPI->__('[Unrestricted] Custom post with a specific slug', 'generic-customposts'),
-            'unrestrictedGenericCustomPosts' => $this->translationAPI->__('[Unrestricted] Custom posts', 'generic-customposts'),
-            'unrestrictedGenericCustomPostCount' => $this->translationAPI->__('[Unrestricted] Number of custom posts', 'generic-customposts'),
+            'genericCustomPostForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific ID', 'generic-customposts'),
+            'genericCustomPostBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific slug', 'generic-customposts'),
+            'genericCustomPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts', 'generic-customposts'),
+            'genericCustomPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts', 'generic-customposts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -67,10 +67,10 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
             'genericCustomPostBySlug' => SchemaDefinition::TYPE_ID,
             'genericCustomPosts' => SchemaDefinition::TYPE_ID,
             'genericCustomPostCount' => SchemaDefinition::TYPE_INT,
-            'unrestrictedGenericCustomPost' => SchemaDefinition::TYPE_ID,
-            'unrestrictedGenericCustomPostBySlug' => SchemaDefinition::TYPE_ID,
-            'unrestrictedGenericCustomPosts' => SchemaDefinition::TYPE_ID,
-            'unrestrictedGenericCustomPostCount' => SchemaDefinition::TYPE_INT,
+            'genericCustomPostForAdmin' => SchemaDefinition::TYPE_ID,
+            'genericCustomPostBySlugForAdmin' => SchemaDefinition::TYPE_ID,
+            'genericCustomPostsForAdmin' => SchemaDefinition::TYPE_ID,
+            'genericCustomPostCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -79,10 +79,10 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'genericCustomPostCount',
-            'unrestrictedGenericCustomPostCount'
+            'genericCustomPostCountForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'genericCustomPosts',
-            'unrestrictedGenericCustomPosts'
+            'genericCustomPostsForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
@@ -99,11 +99,11 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
                 GenericCustomPostFilterInputContainerModuleProcessor::class,
                 GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT
             ],
-            'unrestrictedGenericCustomPosts' => [
+            'genericCustomPostsForAdmin' => [
                 GenericCustomPostFilterInputContainerModuleProcessor::class,
                 GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST
             ],
-            'unrestrictedGenericCustomPostCount' => [
+            'genericCustomPostCountForAdmin' => [
                 GenericCustomPostFilterInputContainerModuleProcessor::class,
                 GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT
             ],
@@ -111,7 +111,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
                 CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_GENERICTYPE
             ],
-            'unrestrictedGenericCustomPost' => [
+            'genericCustomPostForAdmin' => [
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
                 CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_GENERICTYPE
             ],
@@ -119,7 +119,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
                 CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_GENERICTYPE
             ],
-            'unrestrictedGenericCustomPostBySlug' => [
+            'genericCustomPostBySlugForAdmin' => [
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
                 CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS_GENERICTYPE
             ],
@@ -131,7 +131,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'genericCustomPosts':
-            case 'unrestrictedGenericCustomPosts':
+            case 'genericCustomPostsForAdmin':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -155,13 +155,13 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     ): array {
         switch ($fieldName) {
             case 'genericCustomPost':
-            case 'unrestrictedGenericCustomPost':
+            case 'genericCustomPostForAdmin':
             case 'genericCustomPostBySlug':
-            case 'unrestrictedGenericCustomPostBySlug':
+            case 'genericCustomPostBySlugForAdmin':
             case 'genericCustomPosts':
-            case 'unrestrictedGenericCustomPosts':
+            case 'genericCustomPostsForAdmin':
             case 'genericCustomPostCount':
-            case 'unrestrictedGenericCustomPostCount':
+            case 'genericCustomPostCountForAdmin':
                 return [
                     'custompost-types' => ComponentConfiguration::getGenericCustomPostTypes(),
                 ];
@@ -192,17 +192,17 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'genericCustomPost':
             case 'genericCustomPostBySlug':
-            case 'unrestrictedGenericCustomPost':
-            case 'unrestrictedGenericCustomPostBySlug':
+            case 'genericCustomPostForAdmin':
+            case 'genericCustomPostBySlugForAdmin':
                 if ($customPosts = $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $customPosts[0];
                 }
                 return null;
             case 'genericCustomPosts':
-            case 'unrestrictedGenericCustomPosts':
+            case 'genericCustomPostsForAdmin':
                 return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'genericCustomPostCount':
-            case 'unrestrictedGenericCustomPostCount':
+            case 'genericCustomPostCountForAdmin':
                 return $customPostTypeAPI->getCustomPostCount($query);
         }
 
@@ -215,9 +215,9 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
             case 'genericCustomPost':
             case 'genericCustomPostBySlug':
             case 'genericCustomPosts':
-            case 'unrestrictedGenericCustomPost':
-            case 'unrestrictedGenericCustomPostBySlug':
-            case 'unrestrictedGenericCustomPosts':
+            case 'genericCustomPostForAdmin':
+            case 'genericCustomPostBySlugForAdmin':
+            case 'genericCustomPostsForAdmin':
                 return GenericCustomPostTypeResolver::class;
         }
 

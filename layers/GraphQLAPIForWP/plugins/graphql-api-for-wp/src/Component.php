@@ -112,7 +112,7 @@ class Component extends AbstractPluginComponent
             self::initServices(dirname(__DIR__), '/ConditionalOnContext/Admin');
 
             // The WordPress editor can access the full GraphQL schema,
-            // including "unrestricted" admin fields, so cache it individually.
+            // including "admin" fields, so cache it individually.
             // Retrieve this service from the SystemContainer
             $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
             /** @var EndpointHelpers */

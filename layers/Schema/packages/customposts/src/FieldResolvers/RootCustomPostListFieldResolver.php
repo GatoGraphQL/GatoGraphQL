@@ -33,8 +33,8 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
             [
                 'customPost',
                 'customPostBySlug',
-                'unrestrictedCustomPost',
-                'unrestrictedCustomPostBySlug',
+                'customPostForAdmin',
+                'customPostBySlugForAdmin',
             ]
         );
     }
@@ -44,8 +44,8 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
         return array_merge(
             parent::getAdminFieldNames(),
             [
-                'unrestrictedCustomPost',
-                'unrestrictedCustomPostBySlug',
+                'customPostForAdmin',
+                'customPostBySlugForAdmin',
             ]
         );
     }
@@ -55,8 +55,8 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
         $descriptions = [
             'customPost' => $this->translationAPI->__('Custom post with a specific ID', 'customposts'),
             'customPostBySlug' => $this->translationAPI->__('Custom post with a specific slug', 'customposts'),
-            'unrestrictedCustomPost' => $this->translationAPI->__('[Unrestricted] Custom post with a specific ID', 'customposts'),
-            'unrestrictedCustomPostBySlug' => $this->translationAPI->__('[Unrestricted] Custom post with a specific slug', 'customposts'),
+            'customPostForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific ID', 'customposts'),
+            'customPostBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific slug', 'customposts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -66,8 +66,8 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
         $types = [
             'customPost' => SchemaDefinition::TYPE_ID,
             'customPostBySlug' => SchemaDefinition::TYPE_ID,
-            'unrestrictedCustomPost' => SchemaDefinition::TYPE_ID,
-            'unrestrictedCustomPostBySlug' => SchemaDefinition::TYPE_ID,
+            'customPostForAdmin' => SchemaDefinition::TYPE_ID,
+            'customPostBySlugForAdmin' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -76,9 +76,9 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
     {
         return match ($fieldName) {
             'customPost' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_UNIONTYPE],
-            'unrestrictedCustomPost' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_UNIONTYPE],
+            'customPostForAdmin' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_UNIONTYPE],
             'customPostBySlug' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_UNIONTYPE],
-            'unrestrictedCustomPostBySlug' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS_UNIONTYPE],
+            'customPostBySlugForAdmin' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS_UNIONTYPE],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
@@ -102,8 +102,8 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
         switch ($fieldName) {
             case 'customPost':
             case 'customPostBySlug':
-            case 'unrestrictedCustomPost':
-            case 'unrestrictedCustomPostBySlug':
+            case 'customPostForAdmin':
+            case 'customPostBySlugForAdmin':
                 $query = array_merge(
                     $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
                     $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs)
@@ -122,8 +122,8 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
         switch ($fieldName) {
             case 'customPost':
             case 'customPostBySlug':
-            case 'unrestrictedCustomPost':
-            case 'unrestrictedCustomPostBySlug':
+            case 'customPostForAdmin':
+            case 'customPostBySlugForAdmin':
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 

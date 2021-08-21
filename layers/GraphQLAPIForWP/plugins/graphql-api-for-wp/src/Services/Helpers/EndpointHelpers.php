@@ -81,7 +81,7 @@ class EndpointHelpers
 
     /**
      * GraphQL endpoint to be used in the WordPress editor.
-     * It has the full schema, including "unrestricted" admin fields.
+     * It has the full schema, including "admin" fields.
      */
     public function getAdminFixedSchemaGraphQLEndpoint(): string
     {

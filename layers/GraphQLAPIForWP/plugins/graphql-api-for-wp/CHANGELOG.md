@@ -10,15 +10,15 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Fetch entities by slug and path:
   - `Root.postBySlug: Post`
-  - `Root.unrestrictedPostBySlug: Post` ("admin" field)
+  - `Root.postBySlugForAdmin: Post` ("admin" field)
   - `Root.customPostBySlug: CustomPostUnion`
-  - `Root.unrestrictedCustomPostBySlug: CustomPostUnion` ("admin" field)
+  - `Root.customPostBySlugForAdmin: CustomPostUnion` ("admin" field)
   - `Root.genericCustomPostBySlug: GenericCustomPost`
-  - `Root.unrestrictedGenericCustomPostBySlug: GenericCustomPost` ("admin" field)
+  - `Root.genericCustomPostBySlugForAdmin: GenericCustomPost` ("admin" field)
   - `Root.pageBySlug: Page`
-  - `Root.unrestrictedPageBySlug: Page` ("admin" field)
+  - `Root.pageBySlugForAdmin: Page` ("admin" field)
   - `Root.pageByPath: Page`
-  - `Root.unrestrictedPageByPath: Page` ("admin" field)
+  - `Root.pageByPathForAdmin: Page` ("admin" field)
   - `Root.postCategoryBySlug: PostCategory`
   - `Root.postTagBySlug: PostTag`
   - `Root.mediaItemBySlug: MediaItem`
@@ -39,13 +39,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   `Page.parentPage: Page`
   `Page.childPages: [Page]!`
   `Page.childPageCount: Int!`
-  `Page.unrestrictedChildPages: [Page]!`
-  `Page.unrestrictedChildPageCount: Int!`
+  `Page.childPagesForAdmin: [Page]!`
+  `Page.childPageCountForAdmin: Int!`
   `Page.menuOrder: Int!`
 - Filter field `pages` via new arguments:
   - `parentIDs: [ID]`
   - `parentID: ID`
-- Added fields to retrieve comments and their number (and also their "unrestricted" versions):
+- Added fields to retrieve comments and their number (and also their "admin" versions):
   - `Root.comment: Comment`
   - `Root.comments: [Comment]!`
   - `Root.commentCount: Int!`
@@ -79,8 +79,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)
 - Filter users by email:
-  - `Root.unrestrictedUsers: [User]!` ("admin" field)
-  - `Root.unrestrictedUserCount: Int!` ("admin" field)
+  - `Root.usersForAdmin: [User]!` ("admin" field)
+  - `Root.userCountForAdmin: Int!` ("admin" field)
 - Query properties for users:
   - `User.nicename: String!`
   - `User.nickname: String!`
@@ -142,6 +142,39 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Fixed newlines removed from GraphQL query after refreshing browser ([#972](https://github.com/leoloso/PoP/pull/972))
+
+### Breaking changes
+
+Renamed all the "admin" fields. Instead of prepending them with "unrestricted", now they are appended "ForAdmin":
+
+Root:
+
+- `unrestrictedPost` => `postForAdmin`
+- `unrestrictedPosts` => `postsForAdmin`
+- `unrestrictedPostCount` => `postCountForAdmin`
+- `unrestrictedCustomPost` => `customPostForAdmin`
+- `unrestrictedCustomPosts` => `customPostsForAdmin`
+- `unrestrictedCustomPostCount` => `customPostCountForAdmin`
+- `unrestrictedPage` => `pageForAdmin`
+- `unrestrictedPages` => `pagesForAdmin`
+- `unrestrictedPageCount` => `pageCountForAdmin`
+
+User:
+
+- `unrestrictedPosts` => `postsForAdmin`
+- `unrestrictedPostCount` => `postCountForAdmin`
+- `unrestrictedCustomPosts` => `customPostsForAdmin`
+- `unrestrictedCustomPostCount` => `customPostCountForAdmin`
+
+PostCategory:
+
+- `unrestrictedPosts` => `postsForAdmin`
+- `unrestrictedPostCount` => `postCountForAdmin`
+
+PostTag:
+
+- `unrestrictedPosts` => `postsForAdmin`
+- `unrestrictedPostCount` => `postCountForAdmin`
 
 ## 0.8.1 - 21/07/2021
 
