@@ -65,9 +65,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             'comment',
             'commentCount',
             'comments',
-            'unrestrictedComment',
-            'unrestrictedCommentCount',
-            'unrestrictedComments',
+            'commentForAdmin',
+            'commentCountForAdmin',
+            'commentsForAdmin',
         ];
     }
 
@@ -77,9 +77,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             'comment' => SchemaDefinition::TYPE_ID,
             'comments' => SchemaDefinition::TYPE_ID,
             'commentCount' => SchemaDefinition::TYPE_INT,
-            'unrestrictedComment' => SchemaDefinition::TYPE_ID,
-            'unrestrictedComments' => SchemaDefinition::TYPE_ID,
-            'unrestrictedCommentCount' => SchemaDefinition::TYPE_INT,
+            'commentForAdmin' => SchemaDefinition::TYPE_ID,
+            'commentsForAdmin' => SchemaDefinition::TYPE_ID,
+            'commentCountForAdmin' => SchemaDefinition::TYPE_INT,
             default => parent::getSchemaFieldType($typeResolver, $fieldName),
         };
     }
@@ -88,10 +88,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         return match ($fieldName) {
             'commentCount',
-            'unrestrictedCommentCount'
+            'commentCountForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'comments',
-            'unrestrictedComments'
+            'commentsForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
@@ -102,7 +102,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'comments':
-            case 'unrestrictedComments':
+            case 'commentsForAdmin':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -128,9 +128,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             'comment' => $this->translationAPI->__('Comment with a specific ID', 'pop-comments'),
             'commentCount' => $this->translationAPI->__('Number of comments on the site', 'pop-comments'),
             'comments' => $this->translationAPI->__('Comments on the site', 'pop-comments'),
-            'unrestrictedComment' => $this->translationAPI->__('[Unrestricted] Comment with a specific ID', 'pop-comments'),
-            'unrestrictedCommentCount' => $this->translationAPI->__('[Unrestricted] Number of comments on the site', 'pop-comments'),
-            'unrestrictedComments' => $this->translationAPI->__('[Unrestricted] Comments on the site', 'pop-comments'),
+            'commentForAdmin' => $this->translationAPI->__('[Unrestricted] Comment with a specific ID', 'pop-comments'),
+            'commentCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of comments on the site', 'pop-comments'),
+            'commentsForAdmin' => $this->translationAPI->__('[Unrestricted] Comments on the site', 'pop-comments'),
             default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
         };
     }
@@ -141,9 +141,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             'comment' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
             'comments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS],
             'commentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
-            'unrestrictedComment' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS],
-            'unrestrictedComments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTS],
-            'unrestrictedCommentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT],
+            'commentForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS],
+            'commentsForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTS],
+            'commentCountForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
     }
@@ -166,15 +166,15 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'commentCount':
-            case 'unrestrictedCommentCount':
+            case 'commentCountForAdmin':
                 return $this->commentTypeAPI->getCommentCount($query);
 
             case 'comments':
-            case 'unrestrictedComments':
+            case 'commentsForAdmin':
                 return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'comment':
-            case 'unrestrictedComment':
+            case 'commentForAdmin':
                 /**
                  * Only from the mapped CPTs, otherwise we may get an error when
                  * the custom post to which the comment was added, is not accesible
@@ -205,8 +205,8 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'comment':
             case 'comments':
-            case 'unrestrictedComment':
-            case 'unrestrictedComments':
+            case 'commentForAdmin':
+            case 'commentsForAdmin':
                 return CommentTypeResolver::class;
         }
 

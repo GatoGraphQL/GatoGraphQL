@@ -28,9 +28,9 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
             parent::getFieldNamesToResolve(),
             [
                 'post',
-                'unrestrictedPost',
+                'postForAdmin',
                 'postBySlug',
-                'unrestrictedPostBySlug',
+                'postBySlugForAdmin',
             ]
         );
     }
@@ -40,8 +40,8 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         return array_merge(
             parent::getAdminFieldNames(),
             [
-                'unrestrictedPost',
-                'unrestrictedPostBySlug',
+                'postForAdmin',
+                'postBySlugForAdmin',
             ]
         );
     }
@@ -51,8 +51,8 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         $descriptions = [
             'post' => $this->translationAPI->__('Post with a specific ID', 'posts'),
             'postBySlug' => $this->translationAPI->__('Post with a specific slug', 'posts'),
-            'unrestrictedPost' => $this->translationAPI->__('[Unrestricted] Post with a specific ID', 'posts'),
-            'unrestrictedPostBySlug' => $this->translationAPI->__('[Unrestricted] Post with a specific slug', 'posts'),
+            'postForAdmin' => $this->translationAPI->__('[Unrestricted] Post with a specific ID', 'posts'),
+            'postBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Post with a specific slug', 'posts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -62,8 +62,8 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         $types = [
             'post' => SchemaDefinition::TYPE_ID,
             'postBySlug' => SchemaDefinition::TYPE_ID,
-            'unrestrictedPost' => SchemaDefinition::TYPE_ID,
-            'unrestrictedPostBySlug' => SchemaDefinition::TYPE_ID,
+            'postForAdmin' => SchemaDefinition::TYPE_ID,
+            'postBySlugForAdmin' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -75,7 +75,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
                 CommonFilterInputContainerModuleProcessor::class,
                 CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID
             ],
-            'unrestrictedPost' => [
+            'postForAdmin' => [
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
                 CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS
             ],
@@ -83,7 +83,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
                 CommonFilterInputContainerModuleProcessor::class,
                 CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG
             ],
-            'unrestrictedPostBySlug' => [
+            'postBySlugForAdmin' => [
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
                 CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS
             ],
@@ -111,8 +111,8 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         switch ($fieldName) {
             case 'post':
             case 'postBySlug':
-            case 'unrestrictedPost':
-            case 'unrestrictedPostBySlug':
+            case 'postForAdmin':
+            case 'postBySlugForAdmin':
                 if ($posts = $postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
@@ -126,9 +126,9 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
     {
         switch ($fieldName) {
             case 'post':
-            case 'unrestrictedPost':
+            case 'postForAdmin':
             case 'postBySlug':
-            case 'unrestrictedPostBySlug':
+            case 'postBySlugForAdmin':
                 return PostTypeResolver::class;
         }
 

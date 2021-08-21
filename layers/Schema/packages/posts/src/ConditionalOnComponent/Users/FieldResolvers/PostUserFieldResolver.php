@@ -20,8 +20,8 @@ class PostUserFieldResolver extends AbstractPostFieldResolver
         $descriptions = [
             'posts' => $this->translationAPI->__('Posts by the user', 'users'),
             'postCount' => $this->translationAPI->__('Number of posts by the user', 'users'),
-            'unrestrictedPosts' => $this->translationAPI->__('[Unrestricted] Posts by the user', 'users'),
-            'unrestrictedPostCount' => $this->translationAPI->__('[Unrestricted] Number of posts by the user', 'users'),
+            'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts by the user', 'users'),
+            'postCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of posts by the user', 'users'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -42,8 +42,8 @@ class PostUserFieldResolver extends AbstractPostFieldResolver
         switch ($fieldName) {
             case 'posts':
             case 'postCount':
-            case 'unrestrictedPosts':
-            case 'unrestrictedPostCount':
+            case 'postsForAdmin':
+            case 'postCountForAdmin':
                 $query['authors'] = [$typeResolver->getID($user)];
                 break;
         }

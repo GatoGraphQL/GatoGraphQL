@@ -10,7 +10,7 @@ For instance, to access post data, we have field:
 
 With this module, we can also access post data via field:
 
-- `Root.unrestrictedPosts`: exposes public and private data, by fetching posts with any status (`"publish"`, `"draft"`, `"pending"`, `"trash"`).
+- `Root.postsForAdmin`: exposes public and private data, by allowing us to fetch posts with any status (`"publish"`, `"draft"`, `"pending"`, `"trash"`).
 
 ## List of admin fields
 
@@ -18,59 +18,59 @@ The following fields will be added to the GraphQL schema:
 
 **Root:**
 
-- `unrestrictedPost`
-- `unrestrictedPostBySlug`
-- `unrestrictedPosts`
-- `unrestrictedPostCount`
-- `unrestrictedCustomPost`
-- `unrestrictedCustomPostBySlug`
-- `unrestrictedCustomPosts`
-- `unrestrictedCustomPostCount`
-- `unrestrictedGenericCustomPost`
-- `unrestrictedGenericCustomPostBySlug`
-- `unrestrictedPage`
-- `unrestrictedPageBySlug`
-- `unrestrictedPages`
-- `unrestrictedPageCount`
-- `unrestrictedComments`
-- `unrestrictedCommentCount`
+- `postForAdmin`
+- `postBySlugForAdmin`
+- `postsForAdmin`
+- `postCountForAdmin`
+- `customPostForAdmin`
+- `customPostBySlugForAdmin`
+- `customPostsForAdmin`
+- `customPostCountForAdmin`
+- `genericCustomPostForAdmin`
+- `genericCustomPostBySlugForAdmin`
+- `pageForAdmin`
+- `pageBySlugForAdmin`
+- `pagesForAdmin`
+- `pageCountForAdmin`
+- `commentsForAdmin`
+- `commentCountForAdmin`
 - `roles`
 - `capabilities`
 
 **User:**
 
-- `unrestrictedPosts`
-- `unrestrictedPostCount`
-- `unrestrictedCustomPosts`
-- `unrestrictedCustomPostCount`
+- `postsForAdmin`
+- `postCountForAdmin`
+- `customPostsForAdmin`
+- `customPostCountForAdmin`
 - `roles`
 - `capabilities`
 
 **PostCategory:**
 
-- `unrestrictedPosts`
-- `unrestrictedPostCount`
+- `postsForAdmin`
+- `postCountForAdmin`
 
 **PostTag:**
 
-- `unrestrictedPosts`
-- `unrestrictedPostCount`
+- `postsForAdmin`
+- `postCountForAdmin`
 
 **Custom Posts:**
 
-- `unrestrictedComments`
-- `unrestrictedCommentCount`
+- `commentsForAdmin`
+- `commentCountForAdmin`
 
 **Comments:**
 
-- `unrestrictedResponses`
-- `unrestrictedResponseCount`
+- `responsesForAdmin`
+- `responseCountForAdmin`
 
 ---
 
 Please notice the naming convention:
 
-- If the field exposes public + private data, then the field name starts with `"unrestricted"`, such as `Root.posts` and `Root.unrestrictedPosts`
+- If the field exposes public + private data, then the field name starts with `"unrestricted"`, such as `Root.posts` and `Root.postsForAdmin`
 - If the field only exposes private data, then it doesn't need start with `"unrestricted"`, such as `User.roles`
 
 ## How to use

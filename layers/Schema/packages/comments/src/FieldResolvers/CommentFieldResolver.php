@@ -73,8 +73,8 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'date',
             'responses',
             'responseCount',
-            'unrestrictedResponses',
-            'unrestrictedResponseCount',
+            'responsesForAdmin',
+            'responseCountForAdmin',
         ];
     }
 
@@ -94,8 +94,8 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'date' => SchemaDefinition::TYPE_DATE,
             'responses' => SchemaDefinition::TYPE_ID,
             'responseCount' => SchemaDefinition::TYPE_INT,
-            'unrestrictedResponses' => SchemaDefinition::TYPE_ID,
-            'unrestrictedResponseCount' => SchemaDefinition::TYPE_INT,
+            'responsesForAdmin' => SchemaDefinition::TYPE_ID,
+            'responseCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -111,10 +111,10 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'status',
             'date',
             'responseCount',
-            'unrestrictedResponseCount'
+            'responseCountForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'responses',
-            'unrestrictedResponses'
+            'responsesForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
@@ -137,8 +137,8 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'date' => $this->translationAPI->__('Date when the comment was added', 'pop-comments'),
             'responses' => $this->translationAPI->__('Responses to the comment', 'pop-comments'),
             'responseCount' => $this->translationAPI->__('Number of responses to the comment', 'pop-comments'),
-            'unrestrictedResponses' => $this->translationAPI->__('[Unrestricted] Responses to the comment', 'pop-comments'),
-            'unrestrictedResponseCount' => $this->translationAPI->__('[Unrestricted] Number of responses to the comment', 'pop-comments'),
+            'responsesForAdmin' => $this->translationAPI->__('[Unrestricted] Responses to the comment', 'pop-comments'),
+            'responseCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of responses to the comment', 'pop-comments'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -148,8 +148,8 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         return match ($fieldName) {
             'responses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSES],
             'responseCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT],
-            'unrestrictedResponses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSES],
-            'unrestrictedResponseCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT],
+            'responsesForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSES],
+            'responseCountForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT],
             'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
         };
@@ -159,7 +159,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'responses':
-            case 'unrestrictedResponses':
+            case 'responsesForAdmin':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -240,11 +240,11 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         );
         switch ($fieldName) {
             case 'responses':
-            case 'unrestrictedResponses':
+            case 'responsesForAdmin':
                 return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'responseCount':
-            case 'unrestrictedResponseCount':
+            case 'responseCountForAdmin':
                 return $this->commentTypeAPI->getCommentCount($query);
         }
 
@@ -259,7 +259,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
 
             case 'parent':
             case 'responses':
-            case 'unrestrictedResponses':
+            case 'responsesForAdmin':
                 return CommentTypeResolver::class;
         }
 

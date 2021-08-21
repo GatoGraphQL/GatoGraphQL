@@ -23,14 +23,14 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
     {
         return [
             'pageByPath',
-            'unrestrictedPageByPath',
+            'pageByPathForAdmin',
         ];
     }
 
     public function getAdminFieldNames(): array
     {
         return [
-            'unrestrictedPageByPath',
+            'pageByPathForAdmin',
         ];
     }
 
@@ -38,7 +38,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
     {
         $descriptions = [
             'pageByPath' => $this->translationAPI->__('Page with a specific URL path', 'pages'),
-            'unrestrictedPageByPath' => $this->translationAPI->__('[Unrestricted] Page with a specific URL path', 'pages'),
+            'pageByPathForAdmin' => $this->translationAPI->__('[Unrestricted] Page with a specific URL path', 'pages'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -47,7 +47,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
     {
         $types = [
             'pageByPath' => SchemaDefinition::TYPE_ID,
-            'unrestrictedPageByPath' => SchemaDefinition::TYPE_ID,
+            'pageByPathForAdmin' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -57,7 +57,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
             case 'pageByPath':
-            case 'unrestrictedPageByPath':
+            case 'pageByPathForAdmin':
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -91,7 +91,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'pageByPath':
-            case 'unrestrictedPageByPath':
+            case 'pageByPathForAdmin':
                 /** @var WP_Post|null */
                 $page = \get_page_by_path($fieldArgs['path']);
                 if ($page === null) {
@@ -100,7 +100,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                 // Check the status is allowed
                 if ($fieldName === 'pageByPath' && $page->post_status !== "publish") {
                     return null;
-                } elseif ($fieldName === 'unrestrictedPageByPath') {
+                } elseif ($fieldName === 'pageByPathForAdmin') {
                     return null;
                 }
                 return $page->ID;
@@ -113,7 +113,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'pageByPath':
-            case 'unrestrictedPageByPath':
+            case 'pageByPathForAdmin':
                 return PageTypeResolver::class;
         }
 

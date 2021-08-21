@@ -10,15 +10,15 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Fetch entities by slug and path:
   - `Root.postBySlug: Post`
-  - `Root.unrestrictedPostBySlug: Post` ("admin" field)
+  - `Root.postBySlugForAdmin: Post` ("admin" field)
   - `Root.customPostBySlug: CustomPostUnion`
-  - `Root.unrestrictedCustomPostBySlug: CustomPostUnion` ("admin" field)
+  - `Root.customPostBySlugForAdmin: CustomPostUnion` ("admin" field)
   - `Root.genericCustomPostBySlug: GenericCustomPost`
-  - `Root.unrestrictedGenericCustomPostBySlug: GenericCustomPost` ("admin" field)
+  - `Root.genericCustomPostBySlugForAdmin: GenericCustomPost` ("admin" field)
   - `Root.pageBySlug: Page`
-  - `Root.unrestrictedPageBySlug: Page` ("admin" field)
+  - `Root.pageBySlugForAdmin: Page` ("admin" field)
   - `Root.pageByPath: Page`
-  - `Root.unrestrictedPageByPath: Page` ("admin" field)
+  - `Root.pageByPathForAdmin: Page` ("admin" field)
   - `Root.postCategoryBySlug: PostCategory`
   - `Root.postTagBySlug: PostTag`
   - `Root.mediaItemBySlug: MediaItem`
@@ -39,8 +39,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   `Page.parentPage: Page`
   `Page.childPages: [Page]!`
   `Page.childPageCount: Int!`
-  `Page.unrestrictedChildPages: [Page]!`
-  `Page.unrestrictedChildPageCount: Int!`
+  `Page.childPagesForAdmin: [Page]!`
+  `Page.childPageCountForAdmin: Int!`
   `Page.menuOrder: Int!`
 - Filter field `pages` via new arguments:
   - `parentIDs: [ID]`
@@ -79,8 +79,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)
 - Filter users by email:
-  - `Root.unrestrictedUsers: [User]!` ("admin" field)
-  - `Root.unrestrictedUserCount: Int!` ("admin" field)
+  - `Root.usersForAdmin: [User]!` ("admin" field)
+  - `Root.userCountForAdmin: Int!` ("admin" field)
 - Query properties for users:
   - `User.nicename: String!`
   - `User.nickname: String!`
