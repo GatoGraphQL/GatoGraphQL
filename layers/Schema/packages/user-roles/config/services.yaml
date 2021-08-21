@@ -6,3 +6,9 @@ services:
 
     PoPSchema\UserRoles\Hooks\:
         resource: '../src/Hooks/*'
+
+    PoPSchema\UserRoles\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
+
+    PoPSchema\UserRoles\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'

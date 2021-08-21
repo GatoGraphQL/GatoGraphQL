@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\UserRoles\FilterInputProcessors;
+
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+
+class FilterInputProcessor extends AbstractFilterInputProcessor
+{
+    public const FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
+
+    public function getFilterInputsToProcess(): array
+    {
+        return array(
+            [self::class, self::FILTERINPUT_USER_ROLES],
+        );
+    }
+
+    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    {
+        switch ($filterInput[1]) {
+            case self::FILTERINPUT_USER_ROLES:
+                $query['user-roles'] = $value;
+                break;
+        }
+    }
+}
