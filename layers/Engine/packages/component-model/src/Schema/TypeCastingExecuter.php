@@ -140,7 +140,17 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 }
                 return $value;
             case SchemaDefinition::TYPE_INT:
-                return (int) CastToType::_int($value);
+                $converted = CastToType::_int($value);
+                if ($converted === null) {
+                    return new Error(
+                        'int-cast',
+                        sprintf(
+                            $this->translationAPI->__('Cannot cast int from \'%s\'', 'component-model'),
+                            $value
+                        )
+                    );
+                }
+                return $converted;
             case SchemaDefinition::TYPE_FLOAT:
                 return (float) CastToType::_float($value);
             case SchemaDefinition::TYPE_BOOL:
