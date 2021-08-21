@@ -70,8 +70,8 @@ The following fields will be added to the GraphQL schema:
 
 Please notice the naming convention:
 
-- If the field exposes public + private data, then the field name starts with `"unrestricted"`, such as `Root.posts` and `Root.postsForAdmin`
-- If the field only exposes private data, then it doesn't need start with `"unrestricted"`, such as `User.roles`
+- If the field exposes public + private data, then the field name ends with `"ForAdmin"`, such as `Root.posts` and `Root.postsForAdmin`
+- If the field only exposes private data, then it doesn't need end with `"ForAdmin"`, such as `User.roles`
 
 ## How to use
 
