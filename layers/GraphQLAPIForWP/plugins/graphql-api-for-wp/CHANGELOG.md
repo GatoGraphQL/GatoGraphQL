@@ -45,7 +45,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Filter field `pages` via new arguments:
   - `parentIDs: [ID]`
   - `parentID: ID`
-- Added fields to retrieve comments and their number (and also their "unrestricted" versions):
+- Added fields to retrieve comments and their number (and also their "admin" versions):
   - `Root.comment: Comment`
   - `Root.comments: [Comment]!`
   - `Root.commentCount: Int!`
@@ -142,6 +142,39 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Fixed newlines removed from GraphQL query after refreshing browser ([#972](https://github.com/leoloso/PoP/pull/972))
+
+### Breaking changes
+
+Renamed all the "admin" fields. Instead of prepending them with "unrestricted", now they are appended "ForAdmin":
+
+Root:
+
+- `unrestrictedPost` => `postForAdmin`
+- `unrestrictedPosts` => `postsForAdmin`
+- `unrestrictedPostCount` => `postCountForAdmin`
+- `unrestrictedCustomPost` => `customPostForAdmin`
+- `unrestrictedCustomPosts` => `customPostsForAdmin`
+- `unrestrictedCustomPostCount` => `customPostCountForAdmin`
+- `unrestrictedPage` => `pageForAdmin`
+- `unrestrictedPages` => `pagesForAdmin`
+- `unrestrictedPageCount` => `pageCountForAdmin`
+
+User:
+
+- `unrestrictedPosts` => `postsForAdmin`
+- `unrestrictedPostCount` => `postCountForAdmin`
+- `unrestrictedCustomPosts` => `customPostsForAdmin`
+- `unrestrictedCustomPostCount` => `customPostCountForAdmin`
+
+PostCategory:
+
+- `unrestrictedPosts` => `postsForAdmin`
+- `unrestrictedPostCount` => `postCountForAdmin`
+
+PostTag:
+
+- `unrestrictedPosts` => `postsForAdmin`
+- `unrestrictedPostCount` => `postCountForAdmin`
 
 ## 0.8.1 - 21/07/2021
 
