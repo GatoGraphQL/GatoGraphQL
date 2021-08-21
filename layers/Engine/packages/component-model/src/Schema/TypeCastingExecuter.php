@@ -150,9 +150,19 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                         )
                     );
                 }
-                return $converted;
+                return (int) $converted;
             case SchemaDefinition::TYPE_FLOAT:
-                return (float) CastToType::_float($value);
+                $converted = CastToType::_float($value);
+                if ($converted === null) {
+                    return new Error(
+                        'float-cast',
+                        sprintf(
+                            $this->translationAPI->__('Cannot cast float from \'%s\'', 'component-model'),
+                            $value
+                        )
+                    );
+                }
+                return (float) $converted;
             case SchemaDefinition::TYPE_BOOL:
                 // Watch out! In Library CastToType, an empty string is not false, but it's NULL
                 // But for us it must be false, since calling query ?query=and([true,false]) gets transformed to the $field string "[1,]"
@@ -169,7 +179,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                         )
                     );
                 }
-                return $converted;
+                return (bool) $converted;
             case SchemaDefinition::TYPE_TIME:
                 $converted = strtotime($value);
                 if ($converted === false) {
