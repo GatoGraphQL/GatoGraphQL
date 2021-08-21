@@ -1181,7 +1181,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     protected function getFieldArgumentNameTypes(TypeResolverInterface $typeResolver, string $field): ?array
     {
-        if (!array_key_exists($field, $this->fieldArgumentNameTypesCache[get_class($typeResolver)])) {
+        if (!array_key_exists($field, $this->fieldArgumentNameTypesCache[get_class($typeResolver)] ?? [])) {
             $this->fieldArgumentNameTypesCache[get_class($typeResolver)][$field] = $this->doGetFieldArgumentNameTypes($typeResolver, $field);
         }
         return $this->fieldArgumentNameTypesCache[get_class($typeResolver)][$field];
