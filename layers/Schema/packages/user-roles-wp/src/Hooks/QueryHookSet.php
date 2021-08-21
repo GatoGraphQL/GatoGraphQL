@@ -25,6 +25,10 @@ class QueryHookSet extends AbstractHookSet
             $query['role__in'] = $query['user-roles'];
             unset($query['user-roles']);
         }
+        if (isset($query['exclude-user-roles'])) {
+            $query['role__not_in'] = $query['exclude-user-roles'];
+            unset($query['exclude-user-roles']);
+        }
         return $query;
     }
 }

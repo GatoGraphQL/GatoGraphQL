@@ -9,11 +9,13 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
+    public const FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';
 
     public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_USER_ROLES],
+            [self::class, self::FILTERINPUT_EXCLUDE_USER_ROLES],
         );
     }
 
@@ -22,6 +24,9 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
         switch ($filterInput[1]) {
             case self::FILTERINPUT_USER_ROLES:
                 $query['user-roles'] = $value;
+                break;
+            case self::FILTERINPUT_EXCLUDE_USER_ROLES:
+                $query['exclude-user-roles'] = $value;
                 break;
         }
     }

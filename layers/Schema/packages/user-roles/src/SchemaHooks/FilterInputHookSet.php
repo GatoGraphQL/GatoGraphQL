@@ -42,6 +42,10 @@ class FilterInputHookSet extends AbstractHookSet
                 FilterInputModuleProcessor::class,
                 FilterInputModuleProcessor::MODULE_FILTERINPUT_USER_ROLES
             ],
+            [
+                FilterInputModuleProcessor::class,
+                FilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES
+            ],
         ];
     }
 }
