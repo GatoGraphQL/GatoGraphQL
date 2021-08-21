@@ -1210,7 +1210,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         /**
          * If the error happened from requesting a version that doesn't exist, show an appropriate error message
          */
-        if (Environment::enableSemanticVersionConstraints()
+        if (
+            Environment::enableSemanticVersionConstraints()
             && ($versionConstraint = $fieldArgs[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] ?? null)
         ) {
             $errorMessage = sprintf(
