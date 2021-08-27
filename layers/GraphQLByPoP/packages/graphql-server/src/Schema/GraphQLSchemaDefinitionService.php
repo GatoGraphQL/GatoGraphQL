@@ -6,8 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\Schema;
 
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Schema\SchemaDefinitionService;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\QueryRootTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\MutationRootTypeResolver;
@@ -17,10 +15,8 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
 {
     public function getQueryRootTypeSchemaKey(): string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $queryTypeResolverClass = $this->getQueryRootTypeResolverClass();
-        $queryTypeResolver = $instanceManager->getInstance($queryTypeResolverClass);
-        return $this->getTypeSchemaKey($queryTypeResolver);
+        return $this->getTypeResolverTypeSchemaKey($queryTypeResolverClass);
     }
 
     /**
@@ -30,18 +26,15 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     public function getQueryRootTypeResolverClass(): string
     {
         $vars = ApplicationState::getVars();
-        if ($vars['nested-mutations-enabled']) {
-            return $this->getRootTypeResolverClass();
-        }
-        return QueryRootTypeResolver::class;
+        return $vars['nested-mutations-enabled'] ?
+            $this->getRootTypeResolverClass()
+            : QueryRootTypeResolver::class;
     }
 
     public function getMutationRootTypeSchemaKey(): ?string
     {
         if ($mutationTypeResolverClass = $this->getMutationRootTypeResolverClass()) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            $mutationTypeResolver = $instanceManager->getInstance($mutationTypeResolverClass);
-            return $this->getTypeSchemaKey($mutationTypeResolver);
+            return $this->getTypeResolverTypeSchemaKey($mutationTypeResolverClass);
         }
         return null;
     }
@@ -56,24 +49,21 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
             return null;
         }
         $vars = ApplicationState::getVars();
-        if ($vars['nested-mutations-enabled']) {
-            return $this->getRootTypeResolverClass();
-        }
-        return MutationRootTypeResolver::class;
+        return $vars['nested-mutations-enabled'] ?
+            $this->getRootTypeResolverClass()
+            : MutationRootTypeResolver::class;
     }
 
     public function getSubscriptionRootTypeSchemaKey(): ?string
     {
         if ($subscriptionTypeResolverClass = $this->getSubscriptionRootTypeResolverClass()) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            $subscriptionTypeResolver = $instanceManager->getInstance($subscriptionTypeResolverClass);
-            return $this->getTypeSchemaKey($subscriptionTypeResolver);
+            return $this->getTypeResolverTypeSchemaKey($subscriptionTypeResolverClass);
         }
         return null;
     }
 
     /**
-     * Not yet implemented
+     * @todo Implement
      */
     public function getSubscriptionRootTypeResolverClass(): ?string
     {

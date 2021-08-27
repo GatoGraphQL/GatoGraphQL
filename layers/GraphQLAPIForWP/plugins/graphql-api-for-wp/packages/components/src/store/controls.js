@@ -9,13 +9,13 @@ import { fetchGraphQLQuery } from '@graphqlapi/api-fetch';
 const controls = {
 	RECEIVE_TYPE_FIELDS( action ) {
 		return fetchGraphQLQuery(
-			GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT,
+			GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT,
 			action.query
 		);
 	},
 	RECEIVE_DIRECTIVES( action ) {
 		return fetchGraphQLQuery(
-			GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT,
+			GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT,
 			action.query
 		);
 	},

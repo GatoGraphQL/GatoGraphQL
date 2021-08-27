@@ -139,6 +139,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Allow to use unsafe default settings
 - Sort fields and connections together, alphabetically
+- In the ACLs and CCLs, display fields for both the `Root` type, and the `QueryRoot`+`MutationRoot` types ([#989](https://github.com/leoloso/PoP/pull/989))
 
 ### Fixed
 

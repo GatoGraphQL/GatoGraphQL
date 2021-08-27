@@ -18,6 +18,7 @@ function MultiSelectControlGroup( {
 	instanceId,
 	group,
 	groupKind = '',
+	groupDescription = '',
 	items,
 	selectedItems,
 	setAttributes,
@@ -66,6 +67,7 @@ function MultiSelectControlGroup( {
 				className="multi-select-control__category-title"
 				aria-checked={ ariaChecked }
 				label={ <span id={ titleId }>{ group }</span> }
+				help={ groupDescription }
 			/>
 			<MultiSelectControlGroupChecklist
 				items={ items }

@@ -15,6 +15,7 @@ use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInter
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\QueryRootTypeResolver;
 use PoP\API\Cache\CacheUtils;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Facades\SchemaDefinitionRegistryFacade;
@@ -116,6 +117,13 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $queryRootTypeSchemaKey = null;
         if (!$enableNestedMutations) {
             $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
+        } elseif (ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
+            // Additionally append the QueryRoot and MutationRoot to the schema
+            $queryRootTypeResolverClass = QueryRootTypeResolver::class;
+            $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getTypeResolverTypeSchemaKey($queryRootTypeResolverClass);
+            // Remove the fields connecting from Root to QueryRoot and MutationRoot
+            unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['queryRoot']);
+            unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['mutationRoot']);
         }
 
         // Remove the introspection fields that must not be added to the schema
@@ -127,7 +135,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // "These fields are implicit and do not appear in the fields list in the root type of the query operation."
         unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
         unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
-        if (!$enableNestedMutations) {
+        if ($queryRootTypeSchemaKey !== null) {
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
         }
@@ -150,7 +158,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
         if (!ComponentConfiguration::addFullSchemaFieldToSchema()) {
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_FIELDS]['fullSchema']);
-            if (!$enableNestedMutations) {
+            if ($queryRootTypeSchemaKey !== null) {
                 unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_FIELDS]['fullSchema']);
             }
         }
@@ -215,8 +223,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES,
                 $directiveName
             ];
-            $fieldOrDirectiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $itemPath);
-
             $this->introduceSDLNotationToFieldOrDirectiveArgs($itemPath);
             if ($enableComposableDirectives) {
                 $this->addNestedDirectiveDataToSchemaDirectiveArgs($itemPath);
