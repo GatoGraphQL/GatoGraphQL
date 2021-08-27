@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -26,12 +27,13 @@ class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataField
 
     /**
      * Register the fields for the Standard GraphQL server only,
-     * and when nested mutations are disabled
+     * and when nested mutations are disabled, and when not additionally
+     * appending the QueryRoot and Mutation Root to the schema
      */
     public function getFieldNamesToResolve(): array
     {
         $vars = ApplicationState::getVars();
-        if ($vars['nested-mutations-enabled']) {
+        if ($vars['nested-mutations-enabled'] && !ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
             return [];
         }
         return array_merge(
