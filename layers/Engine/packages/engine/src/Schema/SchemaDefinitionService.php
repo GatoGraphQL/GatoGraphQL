@@ -11,9 +11,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class SchemaDefinitionService extends ComponentModelSchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
     public function __construct(protected InstanceManagerInterface $instanceManager)
-    {        
+    {
     }
-    
+
     public function getTypeResolverTypeSchemaKey(string $typeResolverClass): string
     {
         $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
