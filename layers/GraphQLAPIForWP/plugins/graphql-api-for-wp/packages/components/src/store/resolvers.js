@@ -32,6 +32,7 @@ export const FETCH_TYPE_FIELDS_GRAPHQL_QUERY = `
 					name
 				}
 				kind
+				description
 			}
 		}
 	}
@@ -123,6 +124,7 @@ export default {
 			typeName: element.name,
 			typeNamespacedName: element.namespacedName,
 			typeKind: element.kind,
+			typeDescription: element.description,
 			fields: element.fields == null ? null : element.fields.map(subelement => subelement.name),
 		})) || [];
 		return setTypeFields( typeFields );

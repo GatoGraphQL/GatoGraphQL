@@ -30,6 +30,7 @@ const FieldMultiSelectControl = compose( [
 				return [{
 					group: typeItem.typeName,
 					groupKind: typeItem.typeKind.toLowerCase(),
+					groupDescription: typeItem.typeDescription,
 					title: field,
 					value: `${ typeItem.typeNamespacedName }${ TYPE_FIELD_SEPARATOR_FOR_DB }${ field }`,
 				}]

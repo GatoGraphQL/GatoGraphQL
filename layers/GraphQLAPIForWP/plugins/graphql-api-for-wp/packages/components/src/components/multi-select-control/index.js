@@ -42,7 +42,10 @@ function MultiSelectControl( props ) {
 	 */
 	let uniqueFilteredItems = {};
 	filteredItems.forEach(function( item ) {
-		uniqueFilteredItems[ item.group ] = item.groupKind || '';
+		uniqueFilteredItems[ item.group ] = {
+			kind: item.groupKind || '',
+			description: item.groupDescription || ''
+		}			
 	} );
 	return (
 		<div className="multi-select-control__content">
@@ -90,7 +93,8 @@ function MultiSelectControl( props ) {
 						{ ...props }
 						key={ group }
 						group={ group }
-						groupKind={ uniqueFilteredItems[group] }
+						groupKind={ uniqueFilteredItems[group].kind }
+						groupDescription={ uniqueFilteredItems[group].description }
 						items={ filter( filteredItems, {
 							group: group,
 						} ) }
