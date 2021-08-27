@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
+use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Hooks\AbstractHookSet;
 
 class NestedMutationHookSet extends AbstractHookSet
 {
@@ -20,6 +21,19 @@ class NestedMutationHookSet extends AbstractHookSet
             array($this, 'maybeFilterFieldName'),
             10,
             5
+        );
+
+        $this->hooksAPI->addFilter(
+            RootTypeResolver::HOOK_DESCRIPTION,
+            array($this, 'getRootTypeDescription')
+        );
+    }
+
+    public function getRootTypeDescription(string $description): string
+    {
+        return sprintf(
+            $this->translationAPI->__('%s. Available when \'nested mutations\' is enabled', 'graphql-server'),
+            $description
         );
     }
 

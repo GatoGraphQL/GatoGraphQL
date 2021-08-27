@@ -14,6 +14,8 @@ class RootTypeResolver extends AbstractTypeResolver
 {
     use ReservedNameTypeResolverTrait;
 
+    public const HOOK_DESCRIPTION = __CLASS__ . ':description';
+
     public function getTypeName(): string
     {
         return 'Root';
@@ -21,7 +23,10 @@ class RootTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Root type, starting from which the query is executed', 'api');
+        return $this->hooksAPI->applyFilters(
+            self::HOOK_DESCRIPTION,
+            $this->translationAPI->__('Root type, starting from which the query is executed', 'api')
+        );
     }
 
     public function getID(object $resultItem): string | int | null
