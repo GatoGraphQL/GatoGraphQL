@@ -8,6 +8,7 @@ use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface as ComponentModel
 
 interface SchemaDefinitionServiceInterface extends ComponentModelSchemaDefinitionServiceInterface
 {
+    public function getTypeResolverTypeSchemaKey(string $typeResolverClass): string;
     public function getRootTypeSchemaKey(): string;
     public function getRootTypeResolverClass(): string;
 }

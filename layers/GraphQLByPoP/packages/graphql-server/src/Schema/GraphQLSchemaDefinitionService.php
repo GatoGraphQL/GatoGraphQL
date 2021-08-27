@@ -10,19 +10,9 @@ use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\QueryRootTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\MutationRootTypeResolver;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements GraphQLSchemaDefinitionServiceInterface
 {
-    public function __construct(protected InstanceManagerInterface $instanceManager)
-    {        
-    }
-    protected function getTypeResolverTypeSchemaKey(string $typeResolverClass): string
-    {
-        $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
-        return $this->getTypeSchemaKey($typeResolver);
-    }
-
     public function getRootOrQueryRootTypeSchemaKey(): string
     {
         $queryTypeResolverClass = $this->getRootOrQueryRootTypeResolverClass();
