@@ -27,7 +27,7 @@ class ComponentConfiguration
     private static bool $enableSettingMutationSchemeByURLParam = false;
     private static bool $enableEnablingGraphQLIntrospectionByURLParam = false;
     private static bool $addGraphQLIntrospectionPersistedQuery = false;
-    private static bool $addConnectionFromRootToQueryrootAndMutationroot = false;
+    private static bool $addConnectionFromRootToQueryRootAndMutationRoot = false;
 
     public static function addSelfFieldForRootTypeToSchema(): bool
     {
@@ -317,11 +317,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function addConnectionFromRootToQueryrootAndMutationroot(): bool
+    public static function addConnectionFromRootToQueryRootAndMutationRoot(): bool
     {
         // Define properties
         $envVariable = Environment::ADD_CONNECTION_FROM_ROOT_TO_QUERYROOT_AND_MUTATIONROOT;
-        $selfProperty = &self::$addConnectionFromRootToQueryrootAndMutationroot;
+        $selfProperty = &self::$addConnectionFromRootToQueryRootAndMutationRoot;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
