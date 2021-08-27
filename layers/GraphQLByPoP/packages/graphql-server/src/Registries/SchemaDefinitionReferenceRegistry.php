@@ -15,6 +15,7 @@ use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInter
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\QueryRootTypeResolver;
 use PoP\API\Cache\CacheUtils;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Facades\SchemaDefinitionRegistryFacade;
@@ -115,10 +116,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $rootTypeSchemaKey = $graphQLSchemaDefinitionService->getRootTypeSchemaKey();
         $queryRootTypeSchemaKey = null;
         if (!$enableNestedMutations) {
-            $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getRootOrQueryRootTypeSchemaKey();
+            $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
         } elseif (ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
             // Additionally append the QueryRoot and MutationRoot to the schema
-            $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
+            $queryRootTypeResolverClass = QueryRootTypeResolver::class;
+            $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getTypeResolverTypeSchemaKey($queryRootTypeResolverClass);
         }
 
         // Remove the introspection fields that must not be added to the schema

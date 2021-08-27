@@ -38,9 +38,9 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT:
-                return $graphQLSchemaDefinitionService->getRootOrQueryRootTypeResolverClass();
+                return $graphQLSchemaDefinitionService->getQueryRootTypeResolverClass();
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
-                return $graphQLSchemaDefinitionService->getRootOrMutationRootTypeResolverClass();
+                return $graphQLSchemaDefinitionService->getMutationRootTypeResolverClass();
         }
 
         return parent::getTypeResolverClass($module);
