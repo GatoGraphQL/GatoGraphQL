@@ -121,6 +121,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             // Additionally append the QueryRoot and MutationRoot to the schema
             $queryRootTypeResolverClass = QueryRootTypeResolver::class;
             $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getTypeResolverTypeSchemaKey($queryRootTypeResolverClass);
+            // Remove the fields connecting from Root to QueryRoot and MutationRoot
+            unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['queryRoot']);
+            unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['mutationRoot']);
         }
 
         // Remove the introspection fields that must not be added to the schema
