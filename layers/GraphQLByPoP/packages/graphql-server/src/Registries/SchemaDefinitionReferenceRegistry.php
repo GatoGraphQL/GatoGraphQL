@@ -115,6 +115,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $rootTypeSchemaKey = $graphQLSchemaDefinitionService->getRootTypeSchemaKey();
         $queryRootTypeSchemaKey = null;
         if (!$enableNestedMutations) {
+            $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getRootOrQueryRootTypeSchemaKey();
+        } elseif (ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
+            // Additionally append the QueryRoot and MutationRoot to the schema
             $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
         }
 
@@ -127,7 +130,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // "These fields are implicit and do not appear in the fields list in the root type of the query operation."
         unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
         unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
-        if (!$enableNestedMutations) {
+        if ($queryRootTypeSchemaKey !== null) {
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
         }
@@ -150,7 +153,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
         if (!ComponentConfiguration::addFullSchemaFieldToSchema()) {
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_FIELDS]['fullSchema']);
-            if (!$enableNestedMutations) {
+            if ($queryRootTypeSchemaKey !== null) {
                 unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_FIELDS]['fullSchema']);
             }
         }

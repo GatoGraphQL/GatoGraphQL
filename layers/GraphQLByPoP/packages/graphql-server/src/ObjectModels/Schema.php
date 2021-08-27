@@ -121,7 +121,7 @@ class Schema
 
         // Initialize the different types
         // 1. queryType
-        $queryTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
+        $queryTypeSchemaKey = $graphQLSchemaDefinitionService->getRootOrQueryRootTypeSchemaKey();
         $queryTypeSchemaDefinitionPath = [
             SchemaDefinition::ARGNAME_TYPES,
             $queryTypeSchemaKey,
@@ -129,7 +129,7 @@ class Schema
         $this->queryType = $this->getTypeInstance($fullSchemaDefinition, $queryTypeSchemaDefinitionPath);
 
         // 2. mutationType
-        if ($mutationTypeSchemaKey = $graphQLSchemaDefinitionService->getMutationRootTypeSchemaKey()) {
+        if ($mutationTypeSchemaKey = $graphQLSchemaDefinitionService->getRootOrMutationRootTypeSchemaKey()) {
             $mutationTypeSchemaDefinitionPath = [
                 SchemaDefinition::ARGNAME_TYPES,
                 $mutationTypeSchemaKey,
