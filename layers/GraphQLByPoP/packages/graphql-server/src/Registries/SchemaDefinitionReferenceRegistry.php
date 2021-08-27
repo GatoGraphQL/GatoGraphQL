@@ -223,8 +223,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES,
                 $directiveName
             ];
-            $fieldOrDirectiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $itemPath);
-
             $this->introduceSDLNotationToFieldOrDirectiveArgs($itemPath);
             if ($enableComposableDirectives) {
                 $this->addNestedDirectiveDataToSchemaDirectiveArgs($itemPath);
