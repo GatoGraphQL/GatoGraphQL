@@ -34,6 +34,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractCompilerPass
     {
        return [
             \PoPSchema\CustomPosts\Component::class,
+            \PoPSchema\CustomPostsWP\Component::class,
             \PoPSchema\CustomPostMedia\Component::class,
             \PoPWPSchema\CustomPosts\Component::class,
             \PoPSchema\GenericCustomPosts\Component::class,
@@ -44,6 +45,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractCompilerPass
             \PoPSchema\UserState\Component::class,
             \PoPWPSchema\Users\Component::class,
             \PoPSchema\UserRoles\Component::class,
+            \PoPSchema\UserRolesWP\Component::class,
             \PoPSchema\UserAvatars\Component::class,
             \PoPSchema\Pages\Component::class,
             \PoPWPSchema\Pages\Component::class,

@@ -658,6 +658,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         return [
             SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS => [
                 \PoPSchema\CustomPosts\Component::class,
+                \PoPSchema\CustomPostsWP\Component::class,
                 \PoPSchema\CustomPostMedia\Component::class,
                 \PoPWPSchema\CustomPosts\Component::class,
             ],
@@ -678,6 +679,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_ROLES => [
                 \PoPSchema\UserRoles\Component::class,
+                \PoPSchema\UserRolesWP\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_AVATARS => [
                 \PoPSchema\UserAvatars\Component::class,
