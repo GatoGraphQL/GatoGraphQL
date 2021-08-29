@@ -25,6 +25,7 @@ use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\FieldHelpers;
@@ -112,17 +113,18 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected ErrorProviderInterface $errorProvider,
         protected SchemaDefinitionServiceInterface $schemaDefinitionService,
+        protected SchemaNamespacingServiceInterface $schemaNamespacingService,
     ) {
     }
 
     public function getNamespace(): string
     {
-        return SchemaHelpers::getSchemaNamespace(get_called_class());
+        return $this->schemaNamespacingService->getSchemaNamespace(get_called_class());
     }
 
     final public function getNamespacedTypeName(): string
     {
-        return SchemaHelpers::getSchemaNamespacedName(
+        return $this->schemaNamespacingService->getSchemaNamespacedName(
             $this->getNamespace(),
             $this->getTypeName()
         );

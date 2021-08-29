@@ -9,6 +9,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\AbstractCustomPostTypeResolver;
@@ -25,6 +26,7 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
         protected PageTypeAPIInterface $pageTypeAPI,
     ) {
         parent::__construct(
@@ -35,6 +37,7 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
             $fieldQueryInterpreter,
             $errorProvider,
             $schemaDefinitionService,
+            $schemaNamespacingService,
         );
     }
 
