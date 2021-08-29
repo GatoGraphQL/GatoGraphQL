@@ -158,8 +158,10 @@ class SchemaHelpers
                 // Remove everything else
                 return substr($class, 0, $secondSlashPos);
             }
+            // Return up to the Owner only
+            return substr($class, 0, $firstSlashPos);
         }
-        return $class;
+        return '';
     }
 
     protected static function convertNamespace(string $namespace): string
