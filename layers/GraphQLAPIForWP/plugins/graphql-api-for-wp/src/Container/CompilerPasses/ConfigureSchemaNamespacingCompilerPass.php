@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
-use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
 
 class ConfigureSchemaNamespacingCompilerPass extends AbstractCompilerPass
 {
@@ -18,7 +15,24 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractCompilerPass
         $schemaNamespacingServiceDefinition = $containerBuilderWrapper->getDefinition(SchemaNamespacingServiceInterface::class);
         // The entities from the WordPress data model (Post, User, Comment, etc)
         // are considered the canonical source, so they do not need to be namespaced.
-        $componentClasses = [
+        foreach ($this->getComponentClasses() as $componentClass) {
+            $componentClassNamespace = substr($componentClass, strrpos($componentClass, '\\') + 1);
+            $schemaNamespacingServiceDefinition->addMethodCall(
+                'addSchemaNamespaceForClassOwnerAndProjectNamespace',
+                [
+                    $componentClassNamespace,
+                    '' // Empty namespace
+                ]
+            );
+        }
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getComponentClasses(): array
+    {
+       return [
             \PoPSchema\CustomPosts\Component::class,
             \PoPSchema\CustomPostMedia\Component::class,
             \PoPWPSchema\CustomPosts\Component::class,
@@ -54,15 +68,5 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractCompilerPass
             \PoPSchema\CommentMeta\Component::class,
             \PoPSchema\TaxonomyMeta\Component::class,
         ];
-        foreach ($componentClasses as $componentClass) {
-            $componentClassNamespace = substr($componentClass, strrpos($componentClass, '\\') + 1);
-            $schemaNamespacingServiceDefinition->addMethodCall(
-                'addSchemaNamespaceForClassOwnerAndProjectNamespace',
-                [
-                    $componentClassNamespace,
-                    '' // Empty namespace
-                ]
-            );
-        }
     }
 }
