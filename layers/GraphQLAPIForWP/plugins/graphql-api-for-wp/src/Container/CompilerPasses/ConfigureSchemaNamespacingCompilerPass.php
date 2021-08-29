@@ -4,27 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
-use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
-use PoP\Root\Container\ContainerBuilderWrapperInterface;
-
-class ConfigureSchemaNamespacingCompilerPass extends AbstractCompilerPass
+class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaNamespacingCompilerPass
 {
-    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
+    /**
+     * The entities from the WordPress data model (Post, User, Comment, etc)
+     * are considered the canonical source, so they do not need to be namespaced.
+     *
+     * @return string
+     */
+    protected function getSchemaNamespace(): string
     {
-        $schemaNamespacingServiceDefinition = $containerBuilderWrapper->getDefinition(SchemaNamespacingServiceInterface::class);
-        // The entities from the WordPress data model (Post, User, Comment, etc)
-        // are considered the canonical source, so they do not need to be namespaced.
-        foreach ($this->getComponentClasses() as $componentClass) {
-            $componentClassNamespace = substr($componentClass, 0, strrpos($componentClass, '\\'));
-            $schemaNamespacingServiceDefinition->addMethodCall(
-                'addSchemaNamespaceForClassOwnerAndProjectNamespace',
-                [
-                    $componentClassNamespace,
-                    '' // Empty namespace
-                ]
-            );
-        }
+        return ''; // Empty namespace
     }
 
     /**
