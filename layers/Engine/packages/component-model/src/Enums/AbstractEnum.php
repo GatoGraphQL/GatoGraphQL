@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Enums;
 
 use Exception;
-use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
 
 abstract class AbstractEnum implements EnumInterface
@@ -14,8 +14,9 @@ abstract class AbstractEnum implements EnumInterface
      * Validate that, if the enum provides core values,
      * these have the same number of elements as the values
      */
-    public function __construct()
-    {
+    public function __construct(
+        protected SchemaNamespacingServiceInterface $schemaNamespacingService,
+    ) {
         if (!is_null($this->getCoreValues()) && count($this->getCoreValues()) != count($this->getValues())) {
             throw new Exception(
                 sprintf(
@@ -32,11 +33,11 @@ abstract class AbstractEnum implements EnumInterface
     }
     public function getNamespace(): string
     {
-        return SchemaHelpers::getSchemaNamespace(get_called_class());
+        return $this->schemaNamespacingService->getSchemaNamespace(get_called_class());
     }
     final public function getNamespacedName(): string
     {
-        return SchemaHelpers::getSchemaNamespacedName(
+        return $this->schemaNamespacingService->getSchemaNamespacedName(
             $this->getNamespace(),
             $this->getEnumName()
         );

@@ -126,6 +126,9 @@ services:
     PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:
         class: \PoP\ComponentModel\Schema\SchemaDefinitionService
 
+    PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface:
+        class: \PoP\ComponentModel\Schema\SchemaNamespacingService
+
     PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface:
         class: \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManager
 

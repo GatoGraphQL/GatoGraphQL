@@ -9,6 +9,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -25,6 +26,7 @@ class CommentTypeResolver extends AbstractTypeResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
         protected CommentTypeAPIInterface $commentTypeAPI,
     ) {
         parent::__construct(
@@ -35,6 +37,7 @@ class CommentTypeResolver extends AbstractTypeResolver
             $fieldQueryInterpreter,
             $errorProvider,
             $schemaDefinitionService,
+            $schemaNamespacingService,
         );
     }
 
