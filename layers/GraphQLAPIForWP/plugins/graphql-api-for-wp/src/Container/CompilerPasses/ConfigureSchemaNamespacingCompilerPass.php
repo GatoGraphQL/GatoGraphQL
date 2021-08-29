@@ -16,7 +16,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractCompilerPass
         // The entities from the WordPress data model (Post, User, Comment, etc)
         // are considered the canonical source, so they do not need to be namespaced.
         foreach ($this->getComponentClasses() as $componentClass) {
-            $componentClassNamespace = substr($componentClass, strrpos($componentClass, '\\') + 1);
+            $componentClassNamespace = substr($componentClass, 0, strrpos($componentClass, '\\'));
             $schemaNamespacingServiceDefinition->addMethodCall(
                 'addSchemaNamespaceForClassOwnerAndProjectNamespace',
                 [
