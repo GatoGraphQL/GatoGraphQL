@@ -33,6 +33,11 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractCompilerPass
     protected function getComponentClasses(): array
     {
        return [
+            \PoP\ComponentModel\Component::class,
+            \PoP\Engine\Component::class,
+            \GraphQLByPoP\GraphQLServer\Component::class,
+            \PoPSchema\Meta\Component::class,
+            \PoPSchema\QueriedObject\Component::class,
             \PoPSchema\CustomPosts\Component::class,
             \PoPSchema\CustomPostsWP\Component::class,
             \PoPSchema\CustomPostMedia\Component::class,
