@@ -30,6 +30,14 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
         ];
     }
 
+    /**
+     * Do not show in the schema
+     */
+    public function skipAddingToSchemaDefinition(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        return true;
+    }
+
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         return SchemaDefinition::TYPE_ID;
