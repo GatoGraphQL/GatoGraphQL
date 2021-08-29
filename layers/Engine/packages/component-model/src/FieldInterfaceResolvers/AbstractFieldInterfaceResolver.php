@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverInterface
 {
@@ -23,6 +24,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
         protected InstanceManagerInterface $instanceManager,
         protected NameResolverInterface $nameResolver,
         protected CMSServiceInterface $cmsService,
+        protected SchemaNamespacingServiceInterface $schemaNamespacingService,
     ) {
     }
 
@@ -38,12 +40,12 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
 
     public function getNamespace(): string
     {
-        return SchemaHelpers::getSchemaNamespace(get_called_class());
+        return $this->schemaNamespacingService->getSchemaNamespace(get_called_class());
     }
 
     final public function getNamespacedInterfaceName(): string
     {
-        return SchemaHelpers::getSchemaNamespacedName(
+        return $this->schemaNamespacingService->getSchemaNamespacedName(
             $this->getNamespace(),
             $this->getInterfaceName()
         );
