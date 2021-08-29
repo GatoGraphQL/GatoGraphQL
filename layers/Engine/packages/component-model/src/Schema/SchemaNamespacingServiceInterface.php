@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Schema;
 
 interface SchemaNamespacingServiceInterface
 {
+    public function addSchemaNamespaceForClassOwnerAndProjectNamespace(string $classOwnerAndProjectNamespace, $schemaNamespace): void;
     public function getSchemaNamespace(string $class): string;
     public function getSchemaNamespacedName(string $schemaNamespace, string $name): string;
 }
