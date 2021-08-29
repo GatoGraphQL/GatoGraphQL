@@ -6,11 +6,24 @@ namespace PoP\ComponentModel\Schema;
 
 class SchemaNamespacingService implements SchemaNamespacingServiceInterface
 {
+    /**
+     * @var array<string,string>
+     */
+    protected array $ownerAndProjectSchemaNamespaces = [];
+
+    public function addSchemaNamespaceForOwnerAndProject(string $ownerAndProject, $schemaNamespace): void
+    {
+        $this->ownerAndProjectSchemaNamespaces[$ownerAndProject] = $schemaNamespace;
+    }
+
     public function getSchemaNamespace(string $class): string
     {
-        $classOwnerAndProject = $this->getOwnerAndProjectFromClass($class);
-        $namespace = $this->convertNamespace($classOwnerAndProject);
-        return $namespace;
+        $ownerAndProject = $this->getOwnerAndProjectFromClass($class);
+        // Check if an entry for this combination of Owner + class has been provided
+        if (isset($this->ownerAndProjectSchemaNamespaces[$ownerAndProject])) {
+            return $this->ownerAndProjectSchemaNamespaces[$ownerAndProject];
+        }
+        return $this->convertNamespace($ownerAndProject);
     }
 
     /**
