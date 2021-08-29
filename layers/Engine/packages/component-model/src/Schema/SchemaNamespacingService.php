@@ -8,16 +8,16 @@ class SchemaNamespacingService implements SchemaNamespacingServiceInterface
 {
     public function getSchemaNamespace(string $class): string
     {
-        return $this->convertNamespace(
-            $this->getOwnerAndProjectFromNamespace($class)
-        );
+        $classOwnerAndProject = $this->getOwnerAndProjectFromClass($class);
+        $namespace = $this->convertNamespace($classOwnerAndProject);
+        return $namespace;
     }
 
     /**
      * Following PSR-4, namespaces must contain the owner (eg: "PoP") and project name (eg: "ComponentModel")
      * Extract these 2 elements to namespace the types/interfaces
      */
-    protected function getOwnerAndProjectFromNamespace(string $class): string
+    protected function getOwnerAndProjectFromClass(string $class): string
     {
         // First slash: between owner and project name
         $firstSlashPos = strpos($class, '\\');
