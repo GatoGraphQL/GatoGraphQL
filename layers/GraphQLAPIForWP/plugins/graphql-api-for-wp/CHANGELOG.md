@@ -140,6 +140,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Allow to use unsafe default settings
 - Sort fields and connections together, alphabetically
 - In the ACLs and CCLs, display fields for both the `Root` type, and the `QueryRoot`+`MutationRoot` types ([#989](https://github.com/leoloso/PoP/pull/989))
+- The entities from the WordPress data model are not namespaced anymore ([#990](https://github.com/leoloso/PoP/pull/990))
 
 ### Fixed
 
@@ -147,36 +148,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Breaking changes
 
-Renamed all the "admin" fields. Instead of prepending them with "unrestricted", now they are appended "ForAdmin":
-
-Root:
-
-- `unrestrictedPost` => `postForAdmin`
-- `unrestrictedPosts` => `postsForAdmin`
-- `unrestrictedPostCount` => `postCountForAdmin`
-- `unrestrictedCustomPost` => `customPostForAdmin`
-- `unrestrictedCustomPosts` => `customPostsForAdmin`
-- `unrestrictedCustomPostCount` => `customPostCountForAdmin`
-- `unrestrictedPage` => `pageForAdmin`
-- `unrestrictedPages` => `pagesForAdmin`
-- `unrestrictedPageCount` => `pageCountForAdmin`
-
-User:
-
-- `unrestrictedPosts` => `postsForAdmin`
-- `unrestrictedPostCount` => `postCountForAdmin`
-- `unrestrictedCustomPosts` => `customPostsForAdmin`
-- `unrestrictedCustomPostCount` => `customPostCountForAdmin`
-
-PostCategory:
-
-- `unrestrictedPosts` => `postsForAdmin`
-- `unrestrictedPostCount` => `postCountForAdmin`
-
-PostTag:
-
-- `unrestrictedPosts` => `postsForAdmin`
-- `unrestrictedPostCount` => `postCountForAdmin`
+- Renamed all the "admin" fields: instead of prepending them with "unrestricted", now they are appended "ForAdmin"
+- The Access Control and Cache Control configuration lists will be broken: all fields for all non-root types broken will appear under "(Undefined entries)". These lists must be recreated
 
 ## 0.8.1 - 21/07/2021
 
