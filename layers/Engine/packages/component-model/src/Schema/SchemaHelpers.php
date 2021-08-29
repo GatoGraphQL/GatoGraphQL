@@ -136,10 +136,10 @@ class SchemaHelpers
         return $type;
     }
 
-    public static function getSchemaNamespace(string $namespace): string
+    public static function getSchemaNamespace(string $class): string
     {
         return self::convertNamespace(
-            self::getOwnerAndProjectFromNamespace($namespace)
+            self::getOwnerAndProjectFromNamespace($class)
         );
     }
 
@@ -147,19 +147,19 @@ class SchemaHelpers
      * Following PSR-4, namespaces must contain the owner (eg: "PoP") and project name (eg: "ComponentModel")
      * Extract these 2 elements to namespace the types/interfaces
      */
-    protected static function getOwnerAndProjectFromNamespace(string $namespace): string
+    protected static function getOwnerAndProjectFromNamespace(string $class): string
     {
         // First slash: between owner and project name
-        $firstSlashPos = strpos($namespace, '\\');
+        $firstSlashPos = strpos($class, '\\');
         if ($firstSlashPos !== false) {
             // Second slash: between project name and everything else
-            $secondSlashPos = strpos($namespace, '\\', $firstSlashPos + strlen('\\'));
+            $secondSlashPos = strpos($class, '\\', $firstSlashPos + strlen('\\'));
             if ($secondSlashPos !== false) {
                 // Remove everything else
-                return substr($namespace, 0, $secondSlashPos);
+                return substr($class, 0, $secondSlashPos);
             }
         }
-        return $namespace;
+        return $class;
     }
 
     protected static function convertNamespace(string $namespace): string
