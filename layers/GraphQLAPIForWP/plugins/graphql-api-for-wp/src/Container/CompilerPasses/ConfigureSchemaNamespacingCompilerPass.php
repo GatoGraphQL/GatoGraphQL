@@ -22,7 +22,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
      */
     protected function getComponentClasses(): array
     {
-       return [
+        return [
             \GraphQLByPoP\GraphQLServer\Component::class,
             \PoP\ComponentModel\Component::class,
             \PoP\Engine\Component::class,
