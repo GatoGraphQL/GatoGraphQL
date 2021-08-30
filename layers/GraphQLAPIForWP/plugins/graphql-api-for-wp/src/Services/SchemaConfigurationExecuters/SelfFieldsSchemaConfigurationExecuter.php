@@ -28,6 +28,6 @@ class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisable
 
     public function getHookEnvironmentClass(): string
     {
-        return GraphQLServerEnvironment::ADD_SELF_FIELD_TO_SCHEMA;
+        return GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_SCHEMA;
     }
 }
