@@ -525,7 +525,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => sprintf(
-                    \__('Add self fields to all types in the schema? %s', 'graphql-api'),
+                    \__('Expose the self fields to all types in the schema? %s', 'graphql-api'),
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
@@ -541,9 +541,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Add self fields for the Admin?', 'graphql-api'),
+                Properties::TITLE => \__('Expose self fields for the Admin?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Add self fields in the wp-admin? %s', 'graphql-api'),
+                    \__('Expose self fields in the wp-admin? %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
