@@ -500,7 +500,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => \__('Add a <code>self</code> field to all types in the schema?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('The <code>self</code> field returns an instance of the same object, which can help adapt a GraphQL query from a different GraphQL server or REST API.', 'graphql-api'),
+                Properties::DESCRIPTION => \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response, to that from a different GraphQL server or REST API.', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif (
