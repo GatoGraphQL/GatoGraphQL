@@ -170,6 +170,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                 ContentParserOptions::SUPPORT_MARKDOWN_LINKS => true,
                 ContentParserOptions::ADD_CLASSES => true,
                 ContentParserOptions::EMBED_VIDEOS => true,
+                ContentParserOptions::PRETTIFY_CODE => true,
                 ContentParserOptions::TAB_CONTENT => false,
             ],
             $options
@@ -197,6 +198,12 @@ abstract class AbstractContentParser implements ContentParserInterface
         // Append video embeds
         if ($options[ContentParserOptions::EMBED_VIDEOS] ?? null) {
             $htmlContent = $this->embedVideos($htmlContent);
+        }
+        // Prettify code
+        if ($options[ContentParserOptions::PRETTIFY_CODE] ?? null) {
+            $htmlContent = $this->prettifyCode($htmlContent);
+            $htmlContent .= '<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/google/code-prettify/master/styles/desert.css">';
+            $htmlContent .= '<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>';
         }
         // Convert the <h2> into tabs
         if ($options[ContentParserOptions::TAB_CONTENT] ?? null) {
@@ -372,6 +379,18 @@ abstract class AbstractContentParser implements ContentParserInterface
                     $matches[0]
                     . '<div class="video-responsive-container">' . $videoHTML . '</div>';
             },
+            $htmlContent
+        );
+    }
+
+    /**
+     * Use Google's code-prettify to add styles to <pre><code>
+     */
+    protected function prettifyCode(string $htmlContent): string
+    {
+        return str_replace(
+            '<pre><code class="',
+            '<pre class="prettyprint"><code class="language-',
             $htmlContent
         );
     }
