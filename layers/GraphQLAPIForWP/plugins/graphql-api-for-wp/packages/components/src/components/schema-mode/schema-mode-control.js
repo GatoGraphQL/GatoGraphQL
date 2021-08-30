@@ -29,7 +29,7 @@ const SchemaModeControl = ( props ) => {
 	const schemaMode = attributes[ attributeName ] || defaultValue;
 	const options = [
 		{
-			label: defaultLabel,
+			label: __('Default', 'graphql-api'),
 			value: DEFAULT_SCHEMA_MODE,
 		},
 		{
