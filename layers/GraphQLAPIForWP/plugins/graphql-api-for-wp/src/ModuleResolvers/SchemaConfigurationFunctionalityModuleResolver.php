@@ -30,7 +30,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      */
     public const OPTION_MODE = 'mode';
     public const OPTION_ENABLE_GRANULAR = 'granular';
-    public const OPTION_SCHEME = 'scheme';
 
     /**
      * @return string[]
@@ -115,7 +114,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 self::OPTION_ENABLE_GRANULAR => true,
             ],
             self::NESTED_MUTATIONS => [
-                self::OPTION_SCHEME => MutationSchemes::STANDARD,
+                ModuleSettingOptions::DEFAULT_VALUE => MutationSchemes::STANDARD,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -260,14 +259,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module == self::NESTED_MUTATIONS) {
-            $option = self::OPTION_SCHEME;
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Default Mutation Scheme', 'graphql-api'),
+                Properties::TITLE => \__('Default Mutation Scheme for the Schema Configuration', 'graphql-api'),
                 Properties::DESCRIPTION => \__('With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [

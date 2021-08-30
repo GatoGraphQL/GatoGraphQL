@@ -189,7 +189,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => GraphQLServerComponentConfiguration::class,
                 'envVariable' => GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_SCHEME,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value != MutationSchemes::STANDARD,
             ],
             // Disable redundant mutation fields in the root type?
@@ -197,7 +197,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => EngineComponentConfiguration::class,
                 'envVariable' => EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_SCHEME,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value == MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
             ],
             // Cache-Control default max-age
