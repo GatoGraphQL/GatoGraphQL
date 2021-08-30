@@ -383,7 +383,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => GraphQLServerComponentConfiguration::class,
                 'envVariable' => GraphQLServerEnvironment::ADD_SELF_FIELD_TO_SCHEMA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_FIELDS,
-                'option' => SchemaTypeModuleResolver::OPTION_ADD_SELF_FIELD_TO_SCHEMA,
+                'option' => ModuleSettingOptions::ENABLE,
             ],
             // White/Blacklisted entries to CustomPost.meta
             [
