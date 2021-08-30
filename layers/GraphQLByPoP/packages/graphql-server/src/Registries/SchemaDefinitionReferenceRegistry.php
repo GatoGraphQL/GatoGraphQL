@@ -111,7 +111,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         $vars = ApplicationState::getVars();
         $enableNestedMutations = $vars['nested-mutations-enabled'];
-        $exposeIntrospectionFieldsInSchema = ComponentConfiguration::exposeIntrospectionFieldsInSchema();
+        $exposeSchemaIntrospectionFieldInSchema = ComponentConfiguration::exposeSchemaIntrospectionFieldInSchema();
 
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
         $rootTypeSchemaKey = $graphQLSchemaDefinitionService->getRootTypeSchemaKey();
@@ -138,12 +138,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // @see http://spec.graphql.org/draft/#sel-FAJXHABcBlB6rF
         // But allow to enable "__schema" to disable introspection via ACL
         unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
-        if (!$exposeIntrospectionFieldsInSchema) {
+        if (!$exposeSchemaIntrospectionFieldInSchema) {
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
         }
         if ($queryRootTypeSchemaKey !== null) {
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
-            if (!$exposeIntrospectionFieldsInSchema) {
+            if (!$exposeSchemaIntrospectionFieldInSchema) {
                 unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
             }
         }
