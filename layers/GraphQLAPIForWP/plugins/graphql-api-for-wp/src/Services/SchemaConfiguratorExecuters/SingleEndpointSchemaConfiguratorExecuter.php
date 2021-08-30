@@ -39,7 +39,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         }
         return $this->getUserSettingSchemaConfigurationID();
     }
-    
+
     /**
      * Return the stored Schema Configuration ID
      */
