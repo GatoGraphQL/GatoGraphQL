@@ -33,6 +33,6 @@ class SchemaConfigAdminSchemaBlock extends AbstractDefaultEnableDisableFunctiona
 
     protected function getBlockTitle(): string
     {
-        return \__('Schema for the Admin', 'graphql-api');
+        return \__('Schema Admin Fields', 'graphql-api');
     }
 }

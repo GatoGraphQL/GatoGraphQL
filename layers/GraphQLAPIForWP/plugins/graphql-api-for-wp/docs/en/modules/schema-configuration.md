@@ -61,7 +61,7 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
     <td>(If module <code>Cache Control</code> is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query</td>
 </tr>
 <tr>
-    <td><strong>Schema for the Admin</strong></td>
+    <td><strong>Schema Admin Fields</strong></td>
     <td>Add "admin" fields to the GraphQL schema (such as <code>Root.postsForAdmin</code>, <code>User.roles</code>, and others), which expose private data. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 <tr>
