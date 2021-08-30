@@ -1,6 +1,6 @@
 # Interactive Schema for Single Endpoint
 
-A public Interactive schema client, with unrestrained access, can be made available to query the single GraphQL endpoint, by default available under `/schema/` (the path can be configured through the Settings):
+A public Interactive schema client can be made available to query the single GraphQL endpoint, by default available under `/schema/` (the path can be configured through the Settings):
 
 <a href="../../images/single-endpoint-interactive-schema.png" target="_blank">![Single endpoint's Interactive schema client](../../images/single-endpoint-interactive-schema.png "Single endpoint's Interactive schema client")</a>
 
