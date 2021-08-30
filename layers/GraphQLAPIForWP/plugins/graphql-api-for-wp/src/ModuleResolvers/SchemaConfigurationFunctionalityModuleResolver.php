@@ -204,7 +204,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Default "use namespacing" for Schema Configuration?', 'graphql-api'),
+                Properties::TITLE => \__('Namespace the schema? Default value for the Schema Configuration', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Namespace types and interfaces in the GraphQL schema? %s', 'graphql-api'),
                     $defaultValueDesc
@@ -218,7 +218,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Use namespacing for Admin?', 'graphql-api'),
+                Properties::TITLE => \__('Namespace the schema for the Admin?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Namespace the schema in the wp-admin? %s', 'graphql-api'),
                     $adminClientsDesc
@@ -273,15 +273,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, keeping all mutation fields in the root', 'graphql-api'),
                 MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, removing the redundant mutation fields from the root', 'graphql-api'),
             ];
-            $moduleSettings[] = [
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    'intro'
-                ),
-                Properties::TITLE => \__('Info: Redundant fields', 'graphql-api'),
-                Properties::DESCRIPTION => \__('With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
-                Properties::TYPE => Properties::TYPE_NULL,
-            ];
             $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -289,7 +280,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Default Mutation Scheme for the Schema Configuration', 'graphql-api'),
+                Properties::TITLE => \__('Mutation Scheme: Default value for the Schema Configuration', 'graphql-api'),
                 Properties::DESCRIPTION => $defaultValueDesc,
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
@@ -301,13 +292,22 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Mutation Scheme for Admin', 'graphql-api'),
+                Properties::TITLE => \__('Mutation Scheme for the Admin', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Select the mutation scheme to use in the wp-admin. %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
+            ];
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'intro'
+                ),
+                Properties::TITLE => \__('Info: Redundant fields', 'graphql-api'),
+                Properties::DESCRIPTION => \__('With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
+                Properties::TYPE => Properties::TYPE_NULL,
             ];
         }
         return $moduleSettings;
