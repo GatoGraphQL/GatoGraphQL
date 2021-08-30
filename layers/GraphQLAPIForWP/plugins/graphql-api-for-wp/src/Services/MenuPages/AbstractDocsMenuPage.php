@@ -14,6 +14,7 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
 {
     use OpenInModalMenuPageTrait;
     use UseTabpanelMenuPageTrait;
+    use PrettyprintCodePageTrait;
     use MarkdownContentRetrieverTrait;
 
     public function print(): void
@@ -53,6 +54,11 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
         return false;
     }
 
+    protected function prettyprintCode(): bool
+    {
+        return true;
+    }
+
     /**
      * Enqueue the required assets and initialize the localized scripts
      */
@@ -72,6 +78,13 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
          */
         if ($this->useTabpanelForContent()) {
             $this->enqueueTabpanelAssets();
+        }
+
+        /**
+         * Add styles/scripts to use a tabpanel
+         */
+        if ($this->prettyprintCode()) {
+            $this->enqueuePrettyprintAssets();
         }
     }
 }

@@ -142,6 +142,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Sort fields and connections together, alphabetically
 - In the ACLs and CCLs, display fields for both the `Root` type, and the `QueryRoot`+`MutationRoot` types ([#989](https://github.com/leoloso/PoP/pull/989))
 - The entities from the WordPress data model are not namespaced anymore ([#990](https://github.com/leoloso/PoP/pull/990))
+- Prettyprint GraphQL queries in the module docs
 
 ### Fixed
 
