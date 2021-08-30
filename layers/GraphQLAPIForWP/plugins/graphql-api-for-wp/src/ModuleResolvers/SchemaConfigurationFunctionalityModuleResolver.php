@@ -130,6 +130,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         $moduleSettings = parent::getSettings($module);
         $adminClientsDesc = \__('It will be applied on the GraphiQL and Interactive Schema clients, configuration in Access/Cache Control Lists, others', 'graphql-api');
+        $defaultValueDesc = \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_CONFIGURATION) {
             $whereModules = [];
@@ -204,7 +205,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $option
                 ),
                 Properties::TITLE => \__('Default "use namespacing" for Schema Configuration?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Namespace types and interfaces in the GraphQL schema? This value will be used when option <code>"Default"</code> is selected in the Schema Configuration', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Namespace types and interfaces in the GraphQL schema? %s', 'graphql-api'),
+                    $defaultValueDesc
+                ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
             $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
@@ -286,7 +290,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $option
                 ),
                 Properties::TITLE => \__('Default Mutation Scheme for the Schema Configuration', 'graphql-api'),
-                Properties::DESCRIPTION => \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration', 'graphql-api'),
+                Properties::DESCRIPTION => $defaultValueDesc,
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
             ];
