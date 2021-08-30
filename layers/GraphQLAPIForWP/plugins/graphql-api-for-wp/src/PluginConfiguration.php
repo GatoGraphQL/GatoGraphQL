@@ -385,14 +385,14 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentModelComponentConfiguration::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_FIELDS,
-                'option' => ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Add "self" fields to the schema?
             [
                 'class' => GraphQLServerComponentConfiguration::class,
                 'envVariable' => GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_SCHEMA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SELF_FIELDS,
-                'option' => ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // White/Blacklisted entries to CustomPost.meta
             [
