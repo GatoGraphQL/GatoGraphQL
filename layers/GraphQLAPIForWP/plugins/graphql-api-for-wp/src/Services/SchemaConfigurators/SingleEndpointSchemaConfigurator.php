@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractEndpointSchemaConfigurator;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
-class EndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
+class SingleEndpointSchemaConfigurator extends AbstractSchemaConfigurationEndpointSchemaConfigurator
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -21,6 +21,15 @@ class EndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
             $instanceManager,
             $moduleRegistry,
         );
+    }
+
+    /**
+     * Only enable the service, if the corresponding module is also enabled
+     */
+    public function isServiceEnabled(): bool
+    {
+        return $this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)
+            && parent::isServiceEnabled();
     }
 
     protected function getSchemaConfigurationExecuterRegistry(): SchemaConfigurationExecuterRegistryInterface

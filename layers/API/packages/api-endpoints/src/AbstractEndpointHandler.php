@@ -53,7 +53,7 @@ abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiated
     /**
      * Indicate if the endpoint has been requested
      */
-    protected function isEndpointRequested(): bool
+    public function isEndpointRequested(): bool
     {
         /**
          * For static analysis

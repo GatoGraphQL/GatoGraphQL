@@ -139,6 +139,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Allow to use unsafe default settings
 - Module "Schema Self Fields"
+- Schema Configuration for the Single Endpoint
 - Sort fields and connections together, alphabetically
 - In the ACLs and CCLs, display fields for both the `Root` type, and the `QueryRoot`+`MutationRoot` types ([#989](https://github.com/leoloso/PoP/pull/989))
 - The entities from the WordPress data model are not namespaced anymore ([#990](https://github.com/leoloso/PoP/pull/990))

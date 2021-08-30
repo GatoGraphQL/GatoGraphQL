@@ -14,4 +14,6 @@ class ModuleSettingOptions
     public const BEHAVIOR = 'behavior';
     public const PATH = 'path';
     public const ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
+    public const DEFAULT_VALUE = 'default-value';
+    public const VALUE_FOR_SINGLE_ENDPOINT = 'value-for-single-endpoint';
 }

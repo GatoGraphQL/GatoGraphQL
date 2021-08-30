@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -26,16 +28,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     /**
      * Setting options
      */
-    public const OPTION_SCHEMA_CONFIGURATION_ID = 'schema-configuration-id';
     public const OPTION_USE_NAMESPACING = 'use-namespacing';
     public const OPTION_MODE = 'mode';
     public const OPTION_ENABLE_GRANULAR = 'granular';
     public const OPTION_SCHEME = 'scheme';
-
-    /**
-     * Setting option values
-     */
-    public const OPTION_VALUE_NO_VALUE_ID = 0;
 
     /**
      * @return string[]
@@ -108,7 +104,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         $defaultValues = [
             self::SCHEMA_CONFIGURATION => [
-                self::OPTION_SCHEMA_CONFIGURATION_ID => self::OPTION_VALUE_NO_VALUE_ID,
+                ModuleSettingOptions::DEFAULT_VALUE => ModuleSettingOptionValues::NO_VALUE_ID,
+                ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
             self::SCHEMA_NAMESPACING => [
                 self::OPTION_USE_NAMESPACING => false,
@@ -146,7 +143,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             }
             // Build all the possible values by fetching all the Schema Configuration posts
             $possibleValues = [
-                self::OPTION_VALUE_NO_VALUE_ID => \__('None', 'graphql-api'),
+                ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'graphql-api'),
             ];
             /** @var GraphQLSchemaConfigurationCustomPostType */
             $customPostTypeService = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
@@ -163,7 +160,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $possibleValues[$customPost->ID] = $customPost->post_title;
                 }
             }
-            $option = self::OPTION_SCHEMA_CONFIGURATION_ID;
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -172,7 +169,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Default Schema Configuration', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Schema Configuration to use when option <code>"Default"</code> is selected (in %s)', 'graphql-api'),
+                    \__('Schema Configuration to use in %s when option <code>"Default"</code> is selected', 'graphql-api'),
                     implode(
                         \__(', ', 'graphql-api'),
                         $whereModules
@@ -182,6 +179,21 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 // Fetch all Schema Configurations from the DB
                 Properties::POSSIBLE_VALUES => $possibleValues,
             ];
+            if ($this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)) {
+                $option = ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Schema Configuration for the Single Endpoint', 'graphql-api'),
+                    Properties::DESCRIPTION => \__('Schema Configuration to use in the Single Endpoint', 'graphql-api'),
+                    Properties::TYPE => Properties::TYPE_INT,
+                    // Fetch all Schema Configurations from the DB
+                    Properties::POSSIBLE_VALUES => $possibleValues,
+                ];
+            }
         } elseif ($module == self::SCHEMA_NAMESPACING) {
             $option = self::OPTION_USE_NAMESPACING;
             $moduleSettings[] = [
