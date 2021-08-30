@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\EndpointSchemaConfigurato
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
-class EndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
+class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
