@@ -32,7 +32,8 @@ trait PrettyprintCodePageTrait
             'graphql-api-prettyprint',
             $mainPluginURL . 'assets/js/vendors/code-prettify/run_prettify.js',
             array(),
-            $mainPluginVersion
+            $mainPluginVersion,
+            true
         );
     }
 }
