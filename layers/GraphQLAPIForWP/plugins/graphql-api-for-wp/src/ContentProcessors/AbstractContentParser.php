@@ -202,8 +202,6 @@ abstract class AbstractContentParser implements ContentParserInterface
         // Prettify code
         if ($options[ContentParserOptions::PRETTIFY_CODE] ?? null) {
             $htmlContent = $this->prettifyCode($htmlContent);
-            $htmlContent .= '<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/google/code-prettify/master/styles/desert.css">';
-            $htmlContent .= '<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>';
         }
         // Convert the <h2> into tabs
         if ($options[ContentParserOptions::TAB_CONTENT] ?? null) {
