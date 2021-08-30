@@ -264,6 +264,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module == self::NESTED_MUTATIONS) {
+            $possibleValues = [
+                MutationSchemes::STANDARD => \__('Do not enable nested mutations', 'graphql-api'),
+                MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, keeping all mutation fields in the root', 'graphql-api'),
+                MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, removing the redundant mutation fields from the root', 'graphql-api'),
+            ];
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
@@ -272,11 +277,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TITLE => \__('Info: Redundant fields', 'graphql-api'),
                 Properties::DESCRIPTION => \__('With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_NULL,
-            ];
-            $possibleValues = [
-                MutationSchemes::STANDARD => \__('Do not enable nested mutations', 'graphql-api'),
-                MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, keeping all mutation fields in the root', 'graphql-api'),
-                MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, removing the redundant mutation fields from the root', 'graphql-api'),
             ];
             $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
