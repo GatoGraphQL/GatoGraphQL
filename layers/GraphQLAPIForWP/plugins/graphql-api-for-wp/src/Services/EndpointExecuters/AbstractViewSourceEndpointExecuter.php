@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use PoP\ComponentModel\State\ApplicationState;
 use WP_Post;
 
@@ -43,10 +44,16 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractEndpointExecut
      */
     protected function getGraphQLQuerySourceContent(string $content, WP_Post $graphQLQueryPost): string
     {
+        // $scriptSrc = 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js'
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $scriptSrc = $mainPluginURL . 'assets/js/vendors/code-prettify/run_prettify.js';
         /**
          * Prettyprint the code
          */
-        $content .= '<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>';
+        $content .= sprintf(
+            '<script src="%s"></script>',
+            $scriptSrc
+        );
         return $content;
     }
 }
