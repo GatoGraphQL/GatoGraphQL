@@ -28,7 +28,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     /**
      * Setting options
      */
-    public const OPTION_USE_NAMESPACING = 'use-namespacing';
     public const OPTION_MODE = 'mode';
     public const OPTION_ENABLE_GRANULAR = 'granular';
     public const OPTION_SCHEME = 'scheme';
@@ -108,7 +107,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
             self::SCHEMA_NAMESPACING => [
-                self::OPTION_USE_NAMESPACING => false,
+                ModuleSettingOptions::DEFAULT_VALUE => false,
             ],
             self::PUBLIC_PRIVATE_SCHEMA => [
                 self::OPTION_MODE => SchemaModes::PUBLIC_SCHEMA_MODE,
@@ -195,7 +194,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ];
             }
         } elseif ($module == self::SCHEMA_NAMESPACING) {
-            $option = self::OPTION_USE_NAMESPACING;
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

@@ -176,7 +176,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentModelComponentConfiguration::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING,
-                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_NAMESPACING,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Enable nested mutations?
             [
