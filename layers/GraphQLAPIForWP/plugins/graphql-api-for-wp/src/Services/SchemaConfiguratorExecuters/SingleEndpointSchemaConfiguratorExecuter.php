@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\CustomEndpointSchemaConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SingleEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -12,7 +12,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        protected CustomEndpointSchemaConfigurator $endpointSchemaConfigurator
+        protected SingleEndpointSchemaConfigurator $endpointSchemaConfigurator
     ) {
         parent::__construct(
             $instanceManager,
