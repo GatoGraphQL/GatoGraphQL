@@ -109,6 +109,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                     $this->printTextareaField($module, $itemSetting);
                                 } elseif ($type == Properties::TYPE_BOOL) {
                                     $this->printCheckboxField($module, $itemSetting);
+                                } elseif ($type == Properties::TYPE_NULL) {
+                                    $this->printLabelField($module, $itemSetting);
                                 } else {
                                     $this->printInputField($module, $itemSetting);
                                 }
@@ -373,6 +375,20 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 <input type="checkbox" name="<?php echo self::SETTINGS_FIELD . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="1" <?php checked(1, $value); ?> />
                 <?php echo $itemSetting[Properties::DESCRIPTION] ?? ''; ?>
             </label>
+        <?php
+    }
+
+    /**
+     * Display a label
+     *
+     * @param array<string, mixed> $itemSetting
+     */
+    protected function printLabelField(string $module, array $itemSetting): void
+    {
+        ?>
+            <p>
+                <?php echo $itemSetting[Properties::DESCRIPTION] ?? ''; ?>
+            </p>
         <?php
     }
 
