@@ -29,7 +29,7 @@ const SchemaModeControl = ( props ) => {
 	const schemaMode = attributes[ attributeName ] || defaultValue;
 	const options = [
 		{
-			label: __('Default', 'graphql-api'),
+			label: defaultLabel,
 			value: DEFAULT_SCHEMA_MODE,
 		},
 		{
@@ -59,7 +59,7 @@ const SchemaModeControl = ( props ) => {
 			{ !isSelected && (
 				<div className={ className+'__read'}>
 					{ (schemaMode == DEFAULT_SCHEMA_MODE || !optionValues.includes(schemaMode) ) &&
-						<span>🟡 { defaultLabel }</span>
+						<span>🟡 { __('Default', 'graphql-api') }</span>
 					}
 					{ (schemaMode == PUBLIC_SCHEMA_MODE) &&
 						<span>⚪️ { __('Public', 'graphql-api') }</span>
