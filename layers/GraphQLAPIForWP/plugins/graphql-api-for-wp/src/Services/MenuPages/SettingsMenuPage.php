@@ -160,12 +160,16 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $module = $item['module'];
             $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
             foreach ($item['settings'] as $itemSetting) {
+                $option = $itemSetting[Properties::INPUT] ?? null;
+                // No option => it is a label
+                if ($option === null) {
+                    continue;
+                }
                 $type = $itemSetting[Properties::TYPE] ?? null;
                 /**
                  * Cast type so PHPStan doesn't throw error
                  */
                 $name = (string)$itemSetting[Properties::NAME];
-                $option = $itemSetting[Properties::INPUT];
                 $canBeEmpty = $itemSetting[Properties::CAN_BE_EMPTY] ?? false;
                 /**
                  * If the input is empty, replace with the default
