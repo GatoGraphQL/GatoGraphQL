@@ -129,6 +129,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
+        $defaultValueLabel = $this->getDefaultValueLabel();
         $defaultValueDesc = $this->getDefaultValueDescription();
         $adminClientsDesc = $this->getAdminClientDescription();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
@@ -204,7 +205,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Namespace the schema? Default value for the Schema Configuration', 'graphql-api'),
+                Properties::TITLE => sprintf(
+                    \__('Namespace the schema? %s', 'graphql-api'),
+                    $defaultValueLabel
+                ),
                 Properties::DESCRIPTION => sprintf(
                     \__('Namespace types and interfaces in the GraphQL schema? %s', 'graphql-api'),
                     $defaultValueDesc
@@ -280,7 +284,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Mutation Scheme: Default value for the Schema Configuration', 'graphql-api'),
+                Properties::TITLE => sprintf(
+                    \__('Mutation Scheme: %s', 'graphql-api'),
+                    $defaultValueLabel
+                ),
                 Properties::DESCRIPTION => $defaultValueDesc,
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
