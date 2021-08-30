@@ -129,8 +129,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        $adminClientsDesc = $this->getAdminClientDescription();
         $defaultValueDesc = $this->getDefaultValueDescription();
+        $adminClientsDesc = $this->getAdminClientDescription();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_CONFIGURATION) {
             $whereModules = [];
