@@ -172,7 +172,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Default Schema Configuration', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Schema Configuration to use when option <code>"Default"</code> is selected (in %s)', 'graphql-api'),
+                    \__('Schema Configuration to use in %s when option <code>"Default"</code> is selected', 'graphql-api'),
                     implode(
                         \__(', ', 'graphql-api'),
                         $whereModules
