@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SingleEndpointSchemaConfigurator;
+use GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers\GraphQLEndpointHandler;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
@@ -29,7 +30,9 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     protected function getCustomPostID(): ?int
     {
         // Only enable it when executing a query against the single endpoint
-        if (true) {
+        /** @var GraphQLEndpointHandler */
+        $graphQLEndpointHandler = $this->instanceManager->getInstance(GraphQLEndpointHandler::class);
+        if (!$graphQLEndpointHandler->isEndpointRequested()) {
             return null;
         }
         return $this->getUserSettingSchemaConfigurationID();
