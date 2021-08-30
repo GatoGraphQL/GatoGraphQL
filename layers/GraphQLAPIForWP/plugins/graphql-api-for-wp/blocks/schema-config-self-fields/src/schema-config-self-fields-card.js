@@ -52,7 +52,7 @@ const SchemaConfigSelfFieldsCard = ( props ) => {
 						<em>{ __('Add self fields to the schema?', 'graphql-api') }</em>
 						<InfoTooltip
 							{ ...props }
-							text={ __('Add "self" fields to the GraphQL schema (such as "Post.self" and "User.self"), which help give shape to the GraphQL response', 'graphql-api') }
+							text={ __('Add "self" fields to the GraphQL schema (such as "Post.self" and "User.self"), which can help give a particular shape to the GraphQL response', 'graphql-api') }
 						/>
 						{ !isSelected && (
 							<>

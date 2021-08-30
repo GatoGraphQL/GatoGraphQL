@@ -1,6 +1,6 @@
 # Schema Self Fields
 
-Add "self" fields to the GraphQL schema, which help give a particular shape to the GraphQL response.
+Add "self" fields to the GraphQL schema, which can help give a particular shape to the GraphQL response.
 
 ## How it works
 
