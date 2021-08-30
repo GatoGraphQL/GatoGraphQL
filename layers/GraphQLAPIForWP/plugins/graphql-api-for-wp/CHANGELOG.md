@@ -138,6 +138,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - Allow to use unsafe default settings
+- Schema Configuration for the Single Endpoint
 - Module "Schema Self Fields"
 - Sort fields and connections together, alphabetically
 - In the ACLs and CCLs, display fields for both the `Root` type, and the `QueryRoot`+`MutationRoot` types ([#989](https://github.com/leoloso/PoP/pull/989))
