@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -108,7 +109,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         $defaultValues = [
             self::SCHEMA_CONFIGURATION => [
-                self::OPTION_SCHEMA_CONFIGURATION_ID => self::OPTION_VALUE_NO_VALUE_ID,
+                ModuleSettingOptions::DEFAULT_VALUE => self::OPTION_VALUE_NO_VALUE_ID,
             ],
             self::SCHEMA_NAMESPACING => [
                 self::OPTION_USE_NAMESPACING => false,
@@ -163,7 +164,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $possibleValues[$customPost->ID] = $customPost->post_title;
                 }
             }
-            $option = self::OPTION_SCHEMA_CONFIGURATION_ID;
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
@@ -60,7 +61,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
         // (eg: because parent post was trashed)
         return $schemaConfiguration;
     }
-    
+
     /**
      * Return the stored Schema Configuration ID
      */
@@ -69,7 +70,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $schemaConfigurationID = $userSettingsManager->getSetting(
             SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-            SchemaConfigurationFunctionalityModuleResolver::OPTION_SCHEMA_CONFIGURATION_ID
+            ModuleSettingOptions::DEFAULT_VALUE
         );
         // `null` is stored as OPTION_VALUE_NO_VALUE_ID
         if ($schemaConfigurationID == SchemaConfigurationFunctionalityModuleResolver::OPTION_VALUE_NO_VALUE_ID) {
