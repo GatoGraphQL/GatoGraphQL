@@ -108,6 +108,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             ],
             self::SCHEMA_NAMESPACING => [
                 ModuleSettingOptions::DEFAULT_VALUE => false,
+                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => false,
             ],
             self::PUBLIC_PRIVATE_SCHEMA => [
                 self::OPTION_MODE => SchemaModes::PUBLIC_SCHEMA_MODE,
@@ -201,8 +202,19 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Use namespacing?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Automatically namespace types and interfaces in the schema', 'graphql-api'),
+                Properties::TITLE => \__('Default use namespacing?', 'graphql-api'),
+                Properties::DESCRIPTION => \__('Namespace types and interfaces in the schema? This value will be used when option <code>"Default"</code> is selected in the Schema Configuration', 'graphql-api'),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Use namespacing in Admin clients?', 'graphql-api'),
+                Properties::DESCRIPTION => \__('Apply namespacing in the GraphiQL and Interactive Schema clients in the wp-admin?', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module == self::PUBLIC_PRIVATE_SCHEMA) {
