@@ -37,6 +37,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     use SchemaTypeModuleResolverTrait;
 
     public const SCHEMA_ADMIN_FIELDS = Plugin::NAMESPACE . '\schema-admin-fields';
+    public const SCHEMA_SELF_FIELDS = Plugin::NAMESPACE . '\schema-self-fields';
     public const SCHEMA_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-customposts';
     public const SCHEMA_GENERIC_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-generic-customposts';
     public const SCHEMA_POSTS = Plugin::NAMESPACE . '\schema-posts';
@@ -58,7 +59,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
     public const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
-    public const OPTION_ADD_SELF_FIELD_TO_SCHEMA = 'add-self-field-to-schema';
     public const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
     public const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
 
@@ -108,6 +108,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return [
             self::SCHEMA_ADMIN_FIELDS,
+            self::SCHEMA_SELF_FIELDS,
             self::SCHEMA_CUSTOMPOSTS,
             self::SCHEMA_GENERIC_CUSTOMPOSTS,
             self::SCHEMA_POSTS,
@@ -176,6 +177,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return match ($module) {
             self::SCHEMA_ADMIN_FIELDS => \__('Schema Admin Fields', 'graphql-api'),
+            self::SCHEMA_SELF_FIELDS => \__('Schema Self Fields', 'graphql-api'),
             self::SCHEMA_GENERIC_CUSTOMPOSTS => \__('Schema Generic Custom Posts', 'graphql-api'),
             self::SCHEMA_POSTS => \__('Schema Posts', 'graphql-api'),
             self::SCHEMA_COMMENTS => \__('Schema Comments', 'graphql-api'),
@@ -226,6 +228,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         switch ($module) {
             case self::SCHEMA_ADMIN_FIELDS:
                 return \__('Add "admin" fields to the schema', 'graphql-api');
+            case self::SCHEMA_SELF_FIELDS:
+                return \__('Add "self" fields to the schema', 'graphql-api');
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
                 return sprintf(
                     \__('Query any custom post type (added to the schema or not), through a generic type <code>%1$s</code>', 'graphql-api'),
@@ -381,7 +385,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $defaultValues = [
             self::SCHEMA_ADMIN_FIELDS => [
                 ModuleSettingOptions::ENABLE => $useUnsafe,
-                self::OPTION_ADD_SELF_FIELD_TO_SCHEMA => $useUnsafe,
+            ],
+            self::SCHEMA_SELF_FIELDS => [
+                ModuleSettingOptions::ENABLE => $useUnsafe,
             ],
             self::SCHEMA_CUSTOMPOSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -485,7 +491,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::DESCRIPTION => \__('Add "admin" fields to the GraphQL schema (such as <code>Root.postsForAdmin</code>, <code>Root.roles</code>, and others), which expose private data.<hr/><strong>Watch out: Enable only if needed!</strong><br/>These fields can expose sensitive information, so they should be enabled only when the API is not publicly exposed (such as when using a local WordPress instance, to build a static site).', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-            $option = self::OPTION_ADD_SELF_FIELD_TO_SCHEMA;
+        } elseif ($module == self::SCHEMA_SELF_FIELDS) {
+            $option = ModuleSettingOptions::ENABLE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -493,7 +500,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => \__('Add a <code>self</code> field to all types in the schema?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('The <code>self</code> field returns an instance of the same object, which can help adapt a GraphQL query from a different GraphQL server (and avoid modifying all other application code).', 'graphql-api'),
+                Properties::DESCRIPTION => \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response, to that from a different GraphQL server or REST API.', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif (

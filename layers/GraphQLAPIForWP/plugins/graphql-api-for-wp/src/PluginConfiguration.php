@@ -382,8 +382,8 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             [
                 'class' => GraphQLServerComponentConfiguration::class,
                 'envVariable' => GraphQLServerEnvironment::ADD_SELF_FIELD_TO_SCHEMA,
-                'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_FIELDS,
-                'option' => SchemaTypeModuleResolver::OPTION_ADD_SELF_FIELD_TO_SCHEMA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_SELF_FIELDS,
+                'option' => ModuleSettingOptions::ENABLE,
             ],
             // White/Blacklisted entries to CustomPost.meta
             [
@@ -587,6 +587,8 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
             // Enable the "admin" fields
             $componentClassConfiguration[\PoP\ComponentModel\Component::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
+            // Enable the "self" fields
+            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::ADD_SELF_FIELD_TO_SCHEMA] = true;
             // Enable Nested mutations
             $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
             // Do not disable redundant mutation fields in the root type
