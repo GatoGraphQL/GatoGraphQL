@@ -6,11 +6,11 @@ The GraphQL schema must strike a balance between public and private fields, as t
 
 For instance, to access post data, we have field:
 
-- `Root.posts`: exposes public data only, by fetching published posts only.
+- `Root.posts`: exposes public data only, by fetching published posts.
 
 With this module, we can also access post data via field:
 
-- `Root.postsForAdmin`: exposes public and private data, by allowing us to fetch posts with any status (`"publish"`, `"draft"`, `"pending"`, `"trash"`) via the field argument `status`.
+- `Root.postsForAdmin`: exposes public and private data, by allowing us to fetch non-published posts via the field argument `status`.
 
 ## List of admin fields
 
