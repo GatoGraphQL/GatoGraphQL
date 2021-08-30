@@ -1,7 +1,7 @@
 {
 	"name": "schema-config-admin-schema",
 	"version": "0.1.0",
-	"description": "Configure the 'Schema for the Admin' module in the Schema Configuration",
+	"description": "Configure the 'Schema Admin Fields' module in the Schema Configuration",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",
 	"main": "build/index.js",

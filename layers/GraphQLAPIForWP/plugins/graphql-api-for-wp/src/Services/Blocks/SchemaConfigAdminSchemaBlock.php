@@ -23,7 +23,7 @@ class SchemaConfigAdminSchemaBlock extends AbstractDefaultEnableDisableFunctiona
 
     public function getEnablingModule(): ?string
     {
-        return SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA;
+        return SchemaTypeModuleResolver::SCHEMA_ADMIN_FIELDS;
     }
 
     protected function getBlockLabel(): string
@@ -33,6 +33,6 @@ class SchemaConfigAdminSchemaBlock extends AbstractDefaultEnableDisableFunctiona
 
     protected function getBlockTitle(): string
     {
-        return \__('Schema for the Admin', 'graphql-api');
+        return \__('Schema Admin Fields', 'graphql-api');
     }
 }

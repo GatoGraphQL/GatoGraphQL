@@ -36,7 +36,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     use SchemaTypeModuleResolverTrait;
 
-    public const SCHEMA_ADMIN_SCHEMA = Plugin::NAMESPACE . '\schema-admin-schema';
+    public const SCHEMA_ADMIN_FIELDS = Plugin::NAMESPACE . '\schema-admin-fields';
     public const SCHEMA_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-customposts';
     public const SCHEMA_GENERIC_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-generic-customposts';
     public const SCHEMA_POSTS = Plugin::NAMESPACE . '\schema-posts';
@@ -107,7 +107,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getModulesToResolve(): array
     {
         return [
-            self::SCHEMA_ADMIN_SCHEMA,
+            self::SCHEMA_ADMIN_FIELDS,
             self::SCHEMA_CUSTOMPOSTS,
             self::SCHEMA_GENERIC_CUSTOMPOSTS,
             self::SCHEMA_POSTS,
@@ -175,7 +175,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_ADMIN_SCHEMA => \__('Schema for the Admin', 'graphql-api'),
+            self::SCHEMA_ADMIN_FIELDS => \__('Schema Admin Fields', 'graphql-api'),
             self::SCHEMA_GENERIC_CUSTOMPOSTS => \__('Schema Generic Custom Posts', 'graphql-api'),
             self::SCHEMA_POSTS => \__('Schema Posts', 'graphql-api'),
             self::SCHEMA_COMMENTS => \__('Schema Comments', 'graphql-api'),
@@ -224,7 +224,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         /** @var UserTypeResolver */
         $userTypeResolver = $this->userTypeResolver;
         switch ($module) {
-            case self::SCHEMA_ADMIN_SCHEMA:
+            case self::SCHEMA_ADMIN_FIELDS:
                 return \__('Add "admin" fields to the schema', 'graphql-api');
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
                 return sprintf(
@@ -379,7 +379,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         // Lower the security constraints for the static app
         $useUnsafe = PluginEnvironment::areUnsafeDefaultsEnabled();
         $defaultValues = [
-            self::SCHEMA_ADMIN_SCHEMA => [
+            self::SCHEMA_ADMIN_FIELDS => [
                 ModuleSettingOptions::ENABLE => $useUnsafe,
                 self::OPTION_ADD_SELF_FIELD_TO_SCHEMA => $useUnsafe,
             ],
@@ -473,7 +473,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $defaultLimitMessagePlaceholder = \__('Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited', 'graphql-api');
         $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
-        if ($module == self::SCHEMA_ADMIN_SCHEMA) {
+        if ($module == self::SCHEMA_ADMIN_FIELDS) {
             $option = ModuleSettingOptions::ENABLE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,

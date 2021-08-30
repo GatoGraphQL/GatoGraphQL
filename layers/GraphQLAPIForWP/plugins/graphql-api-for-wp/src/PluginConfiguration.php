@@ -375,14 +375,14 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             [
                 'class' => ComponentModelComponentConfiguration::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
-                'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_FIELDS,
                 'option' => ModuleSettingOptions::ENABLE,
             ],
             // Add "self" fields to the schema?
             [
                 'class' => GraphQLServerComponentConfiguration::class,
                 'envVariable' => GraphQLServerEnvironment::ADD_SELF_FIELD_TO_SCHEMA,
-                'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_FIELDS,
                 'option' => SchemaTypeModuleResolver::OPTION_ADD_SELF_FIELD_TO_SCHEMA,
             ],
             // White/Blacklisted entries to CustomPost.meta
