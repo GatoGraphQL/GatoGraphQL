@@ -6,8 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSelfFieldsBlock;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 
 class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
@@ -23,11 +23,11 @@ class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisable
 
     public function getHookComponentConfigurationClass(): string
     {
-        return ComponentModelComponentConfiguration::class;
+        return GraphQLServerComponentConfiguration::class;
     }
 
     public function getHookEnvironmentClass(): string
     {
-        return ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA;
+        return GraphQLServerEnvironment::ADD_SELF_FIELD_TO_SCHEMA;
     }
 }
