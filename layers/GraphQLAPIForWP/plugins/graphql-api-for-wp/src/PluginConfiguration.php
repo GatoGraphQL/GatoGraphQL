@@ -88,14 +88,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        $isRequestingAdminConfigurableSchemaGraphQLEndpoint = $endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint();
-        $isRequestingAdminFixedSchemaGraphQLEndpoint = $endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint();
-        $isRequestingAdminPersistedQueryGraphQLEndpoint = $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint();
         // Get the possible states of wp-admin clients requesting the endpoint:
         // 1. Only GraphiQL and Voyager clients
-        $isExecutingGraphQLEndpointForAdminClient = $isRequestingAdminConfigurableSchemaGraphQLEndpoint && !$isRequestingAdminFixedSchemaGraphQLEndpoint && !$isRequestingAdminPersistedQueryGraphQLEndpoint;
+        $isRequestingGraphQLEndpointForAdminClientOnly = $endpointHelpers->isRequestingGraphQLEndpointForAdminClientOnly();
         // 2. GraphiQL and Voyager clients + ACL/CCL configurations
-        $isExecutingGraphQLEndpointForAdminClientOrConfiguration = $isRequestingAdminConfigurableSchemaGraphQLEndpoint && !$isRequestingAdminPersistedQueryGraphQLEndpoint;
+        $isRequestingGraphQLEndpointForAdminClientOrConfiguration = $endpointHelpers->isRequestingGraphQLEndpointForAdminClientOrConfiguration();
         return [
             // GraphQL single endpoint slug
             [
@@ -187,7 +184,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentModelComponentConfiguration::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING,
-                'option' => $isExecutingGraphQLEndpointForAdminClientOrConfiguration ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Enable nested mutations?
             // Only assign for Admin clients. For configuration it is assigned always, via the Fixed endpoint
@@ -195,7 +192,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => GraphQLServerComponentConfiguration::class,
                 'envVariable' => GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => $isExecutingGraphQLEndpointForAdminClient ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value != MutationSchemes::STANDARD,
             ],
             // Disable redundant mutation fields in the root type?
@@ -203,7 +200,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => EngineComponentConfiguration::class,
                 'envVariable' => EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => $isExecutingGraphQLEndpointForAdminClient ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value == MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
             ],
             // Cache-Control default max-age

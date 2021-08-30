@@ -54,6 +54,27 @@ class EndpointHelpers
     }
 
     /**
+     * Indicate if we are requesting in the wp-admin:
+     * Only GraphiQL and Voyager clients
+     */
+    public function isRequestingGraphQLEndpointForAdminClientOnly(): bool
+    {
+        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+            && !$this->isRequestingAdminFixedSchemaGraphQLEndpoint()
+            && !$this->isRequestingAdminPersistedQueryGraphQLEndpoint();
+    }
+
+    /**
+     * Indicate if we are requesting in the wp-admin:
+     * GraphiQL and Voyager clients + ACL/CCL configurations
+     */
+    public function isRequestingGraphQLEndpointForAdminClientOrConfiguration(): bool
+    {
+        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+            && !$this->isRequestingAdminPersistedQueryGraphQLEndpoint();
+    }
+
+    /**
      * GraphQL single endpoint to be used in wp-admin
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
