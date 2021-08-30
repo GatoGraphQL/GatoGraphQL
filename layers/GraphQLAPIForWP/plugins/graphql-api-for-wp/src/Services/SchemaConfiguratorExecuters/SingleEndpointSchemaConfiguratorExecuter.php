@@ -48,7 +48,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $schemaConfigurationID = $userSettingsManager->getSetting(
             SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-            SchemaConfigurationFunctionalityModuleResolver::OPTION_SINGLE_ENDPOINT_SCHEMA_CONFIGURATION_ID
+            ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT
         );
         // `null` is stored as OPTION_VALUE_NO_VALUE_ID
         if ($schemaConfigurationID == ModuleSettingOptionValues::NO_VALUE_ID) {

@@ -28,7 +28,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     /**
      * Setting options
      */
-    public const OPTION_SINGLE_ENDPOINT_SCHEMA_CONFIGURATION_ID = 'single-endpoint-schema-configuration-id';
     public const OPTION_USE_NAMESPACING = 'use-namespacing';
     public const OPTION_MODE = 'mode';
     public const OPTION_ENABLE_GRANULAR = 'granular';
@@ -106,7 +105,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         $defaultValues = [
             self::SCHEMA_CONFIGURATION => [
                 ModuleSettingOptions::DEFAULT_VALUE => ModuleSettingOptionValues::NO_VALUE_ID,
-                self::OPTION_SINGLE_ENDPOINT_SCHEMA_CONFIGURATION_ID => ModuleSettingOptionValues::NO_VALUE_ID,
+                ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
             self::SCHEMA_NAMESPACING => [
                 self::OPTION_USE_NAMESPACING => false,
@@ -181,7 +180,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::POSSIBLE_VALUES => $possibleValues,
             ];
             if ($this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)) {
-                $option = self::OPTION_SINGLE_ENDPOINT_SCHEMA_CONFIGURATION_ID;
+                $option = ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
                     Properties::NAME => $this->getSettingOptionName(
