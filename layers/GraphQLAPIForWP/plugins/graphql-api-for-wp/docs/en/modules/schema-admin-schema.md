@@ -30,10 +30,14 @@ The following fields will be added to the GraphQL schema:
 - `genericCustomPostBySlugForAdmin`
 - `pageForAdmin`
 - `pageBySlugForAdmin`
+- `pageByPathForAdmin`
 - `pagesForAdmin`
 - `pageCountForAdmin`
+- `commentForAdmin`
 - `commentsForAdmin`
 - `commentCountForAdmin`
+- `usersForAdmin`
+- `userCountForAdmin`
 - `roles`
 - `capabilities`
 
