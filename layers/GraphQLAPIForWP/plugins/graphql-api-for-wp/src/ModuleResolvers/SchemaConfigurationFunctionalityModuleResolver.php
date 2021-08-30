@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -32,11 +33,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public const OPTION_MODE = 'mode';
     public const OPTION_ENABLE_GRANULAR = 'granular';
     public const OPTION_SCHEME = 'scheme';
-
-    /**
-     * Setting option values
-     */
-    public const OPTION_VALUE_NO_VALUE_ID = 0;
 
     /**
      * @return string[]
@@ -109,7 +105,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         $defaultValues = [
             self::SCHEMA_CONFIGURATION => [
-                ModuleSettingOptions::DEFAULT_VALUE => self::OPTION_VALUE_NO_VALUE_ID,
+                ModuleSettingOptions::DEFAULT_VALUE => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
             self::SCHEMA_NAMESPACING => [
                 self::OPTION_USE_NAMESPACING => false,
@@ -147,7 +143,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             }
             // Build all the possible values by fetching all the Schema Configuration posts
             $possibleValues = [
-                self::OPTION_VALUE_NO_VALUE_ID => \__('None', 'graphql-api'),
+                ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'graphql-api'),
             ];
             /** @var GraphQLSchemaConfigurationCustomPostType */
             $customPostTypeService = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
