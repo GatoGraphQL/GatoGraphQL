@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
-class EndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaConfigurator
+class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaConfigurator
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
