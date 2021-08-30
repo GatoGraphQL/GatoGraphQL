@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\APIEndpointsForWP\EndpointHandlers;
 
-abstract class AbstractEndpointHandler extends \PoP\APIEndpoints\AbstractEndpointHandler
+use PoP\APIEndpoints\AbstractEndpointHandler as UpstreamAbstractEndpointHandler;
+
+abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
 {
     /**
      * Initialize the client
