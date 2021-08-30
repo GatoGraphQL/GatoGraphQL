@@ -228,7 +228,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         switch ($module) {
             case self::SCHEMA_ADMIN_FIELDS:
                 return \__('Add "admin" fields to the schema', 'graphql-api');
-            case self::SCHEMA_ADMIN_FIELDS:
+            case self::SCHEMA_SELF_FIELDS:
                 return \__('Add "self" fields to the schema', 'graphql-api');
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
                 return sprintf(
