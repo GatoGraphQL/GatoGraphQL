@@ -23,7 +23,7 @@ class SchemaConfigAdminSchemaBlock extends AbstractDefaultEnableDisableFunctiona
 
     public function getEnablingModule(): ?string
     {
-        return SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA;
+        return SchemaTypeModuleResolver::SCHEMA_ADMIN_FIELDS;
     }
 
     protected function getBlockLabel(): string
