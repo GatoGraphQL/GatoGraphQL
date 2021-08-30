@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SingleEndpointSchemaConfigurator;
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SingleEndpointSchemaConfigurator;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
@@ -19,9 +21,29 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         );
     }
 
+    /**
+     * This is the Schema Configuration ID
+     */
     protected function getCustomPostID(): ?int
     {
-        return 1;
+        return $this->getUserSettingSchemaConfigurationID();
+    }
+    
+    /**
+     * Return the stored Schema Configuration ID
+     */
+    protected function getUserSettingSchemaConfigurationID(): ?int
+    {
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $schemaConfigurationID = $userSettingsManager->getSetting(
+            SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
+            SchemaConfigurationFunctionalityModuleResolver::OPTION_SCHEMA_CONFIGURATION_ID
+        );
+        // `null` is stored as OPTION_VALUE_NO_VALUE_ID
+        if ($schemaConfigurationID == SchemaConfigurationFunctionalityModuleResolver::OPTION_VALUE_NO_VALUE_ID) {
+            return null;
+        }
+        return $schemaConfigurationID;
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
