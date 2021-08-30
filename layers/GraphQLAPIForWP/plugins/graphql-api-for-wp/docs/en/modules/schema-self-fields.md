@@ -74,15 +74,13 @@ The `self` field allows to append extra levels to the query without leaving the 
 
 ## How to use
 
-Use `self` to artificially append the extra levels needed for the response:
+Use `self` to artificially append the extra levels needed for the response, and field aliases to rename those levels appropriately:
 
 ```graphql
 {
   categories: self {
     edges: postCategories {
       node: self {
-        categoryId: id
-        description
         name
         slug
       }
