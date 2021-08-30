@@ -111,6 +111,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         $vars = ApplicationState::getVars();
         $enableNestedMutations = $vars['nested-mutations-enabled'];
+        $exposeSchemaIntrospectionFieldInSchema = ComponentConfiguration::exposeSchemaIntrospectionFieldInSchema();
 
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
         $rootTypeSchemaKey = $graphQLSchemaDefinitionService->getRootTypeSchemaKey();
@@ -127,17 +128,24 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Remove the introspection fields that must not be added to the schema
-        // Field "__typename" from all types (GraphQL spec @ https://graphql.github.io/graphql-spec/draft/#sel-FAJZHABFBKjrL):
+        // [GraphQL spec] Field "__typename" from all types:
         // "This field is implicit and does not appear in the fields list in any defined type."
+        // @see http://spec.graphql.org/draft/#sel-FAJVHCBvBBhC4iC
         unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_FIELDS]['__typename']);
 
-        // Fields "__schema" and "__type" from the query type (GraphQL spec @ https://graphql.github.io/graphql-spec/draft/#sel-FAJbHABABnD9ub):
+        // [GraphQL spec] Fields "__schema" and "__type" from the query type:
         // "These fields are implicit and do not appear in the fields list in the root type of the query operation."
+        // @see http://spec.graphql.org/draft/#sel-FAJXHABcBlB6rF
+        // But allow to enable "__schema" to disable introspection via ACL
         unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
-        unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
+        if (!$exposeSchemaIntrospectionFieldInSchema) {
+            unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
+        }
         if ($queryRootTypeSchemaKey !== null) {
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
-            unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
+            if (!$exposeSchemaIntrospectionFieldInSchema) {
+                unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
+            }
         }
 
         // Remove unneeded data

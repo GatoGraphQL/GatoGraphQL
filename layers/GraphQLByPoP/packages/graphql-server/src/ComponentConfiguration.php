@@ -28,6 +28,7 @@ class ComponentConfiguration
     private static bool $enableEnablingGraphQLIntrospectionByURLParam = false;
     private static bool $addGraphQLIntrospectionPersistedQuery = false;
     private static bool $addConnectionFromRootToQueryRootAndMutationRoot = false;
+    private static bool $exposeSchemaIntrospectionFieldInSchema = false;
 
     public static function addSelfFieldForRootTypeToSchema(): bool
     {
@@ -322,6 +323,24 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::ADD_CONNECTION_FROM_ROOT_TO_QUERYROOT_AND_MUTATIONROOT;
         $selfProperty = &self::$addConnectionFromRootToQueryRootAndMutationRoot;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function exposeSchemaIntrospectionFieldInSchema(): bool
+    {
+        // Define properties
+        $envVariable = Environment::EXPOSE_SCHEMA_INTROSPECTION_FIELD_IN_SCHEMA;
+        $selfProperty = &self::$exposeSchemaIntrospectionFieldInSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

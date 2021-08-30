@@ -596,6 +596,8 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             // Print the full schema, including all fields for Root, QueryRoot and MutationRoot
             // This is needed for the Field(/Directive) Printout, so that ACLs still work after toggling Nested mutations
             $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::ADD_CONNECTION_FROM_ROOT_TO_QUERYROOT_AND_MUTATIONROOT] = true;
+            // Allow disabling introspection via Access Control on field "__schema"
+            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::EXPOSE_SCHEMA_INTROSPECTION_FIELD_IN_SCHEMA] = true;
             // Allow access to all entries for Root.option
             $componentClassConfiguration[\PoPSchema\Settings\Component::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
             $componentClassConfiguration[\PoPSchema\Settings\Component::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENYLIST;
