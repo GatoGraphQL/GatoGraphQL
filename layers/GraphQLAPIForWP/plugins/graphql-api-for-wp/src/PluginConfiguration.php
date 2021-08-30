@@ -85,6 +85,12 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        $isAdminClientGraphQLQueryExecution =
+            $endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+            && !$endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint();
         return [
             // GraphQL single endpoint slug
             [
@@ -176,7 +182,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentModelComponentConfiguration::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING,
-                'option' => ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => $isAdminClientGraphQLQueryExecution ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Enable nested mutations?
             [
