@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
@@ -29,10 +28,6 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
      */
     protected function getCustomPostID(): ?int
     {
-        // Check the Single Endpoint module is enabled
-        if (!$this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)) {
-            return null;
-        }
         // Only enable it when executing a query against the single endpoint
         if (true) {
             return null;
