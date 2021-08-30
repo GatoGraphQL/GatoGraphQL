@@ -1,13 +1,13 @@
 /**
  * Application imports
  */
-import SchemaConfigAdminSchemaCard from './schema-config-admin-schema-card';
+import SchemaConfigAdminFieldsCard from './schema-config-admin-fields-card';
 
 const EditBlock = ( props ) => {
 	const { className } = props;
 	return (
 		<div class={ className }>
-			<SchemaConfigAdminSchemaCard
+			<SchemaConfigAdminFieldsCard
 				{ ...props }
 			/>
 		</div>

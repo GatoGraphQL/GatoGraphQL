@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAdminSchemaBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAdminFieldsBlock;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
@@ -18,7 +18,7 @@ class AdminSchemaSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
 
     protected function getBlockClass(): string
     {
-        return SchemaConfigAdminSchemaBlock::class;
+        return SchemaConfigAdminFieldsBlock::class;
     }
 
     public function getHookComponentConfigurationClass(): string

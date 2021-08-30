@@ -25,7 +25,7 @@ import {
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api/schema-config-admin-schema', {
+registerBlockType( 'graphql-api/schema-config-admin-fields', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
@@ -37,7 +37,7 @@ registerBlockType( 'graphql-api/schema-config-admin-schema', {
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Enable "unrestrained" fields in the Schema Configuration',
+		'Enable "admin" fields in the Schema Configuration',
 		'graphql-api'
 	),
 
