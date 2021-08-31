@@ -37,14 +37,15 @@ class PostMutationFilterInputContainerModuleProcessor extends AbstractPostFilter
             self::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT => [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTCOUNT],
             default => null,
         };
-        /** @var FilterInputContainerModuleProcessorInterface */
-        $targetModuleProcessor = $this->moduleProcessorManager->getProcessor($targetModule);
-        return array_merge(
-            $targetModuleProcessor->getFilterInputModules($targetModule),
-            [
-                [CustomPostFilterInputModuleProcessor::class, CustomPostFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
-            ]
-        );
+        if ($targetModule[0] === self::class) {
+            $filterInputModules = parent::getFilterInputModules($targetModule);
+        } else {
+            /** @var FilterInputContainerModuleProcessorInterface */
+            $targetModuleProcessor = $this->moduleProcessorManager->getProcessor($targetModule);
+            $filterInputModules = $targetModuleProcessor->getFilterInputModules($targetModule);
+        }
+        $filterInputModules[] = [CustomPostFilterInputModuleProcessor::class, CustomPostFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
+        return $filterInputModules;
     }
 
     /**

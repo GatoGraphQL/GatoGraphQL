@@ -33,8 +33,8 @@ class CustomPostMutationFilterInputContainerModuleProcessor extends CustomPostFi
     {
         $targetModule = match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOST => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
-            self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS => [self::class, self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST],
-            self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT => [self::class, self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT],
+            self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST],
+            self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT],
             default => null,
         };
         /** @var FilterInputContainerModuleProcessorInterface */
