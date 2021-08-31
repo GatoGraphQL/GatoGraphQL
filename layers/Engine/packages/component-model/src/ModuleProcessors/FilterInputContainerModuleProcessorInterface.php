@@ -17,4 +17,6 @@ interface FilterInputContainerModuleProcessorInterface extends FilterDataModuleP
      * @return string[]
      */
     public function getFieldDataFilteringMandatoryArgs(array $module): array;
+
+    public function getFilterInputModules(array $module): array;
 }

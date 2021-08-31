@@ -28,8 +28,6 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         );
     }
 
-    abstract public function getFilterInputModules(array $module): array;
-
     /**
      * @return string[]
      */
