@@ -39,7 +39,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                 $typeResolver->getTypeOutputName(),
                 $subcomponent_data_field_outputkey,
                 sprintf(
-                    $this->translationAPI->__('No “typeResolver” has been set for field \'%s\' to load relational data', 'pop-component-model'),
+                    $this->translationAPI->__('Field \'%s\' is not a connection', 'pop-component-model'),
                     $subcomponent_data_field_outputkey
                 )
             );
