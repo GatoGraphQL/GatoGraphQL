@@ -214,12 +214,11 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'status':
-                return [
-                    CommentStatus::APPROVE => $this->translationAPI->__('Approved comment', 'comments'),
-                    CommentStatus::HOLD => $this->translationAPI->__('Onhold comment', 'comments'),
-                    CommentStatus::SPAM => $this->translationAPI->__('Spam comment', 'comments'),
-                    CommentStatus::TRASH => $this->translationAPI->__('Trashed comment', 'comments'),
-                ];
+                /**
+                 * @var CommentStatusEnum
+                 */
+                $commentStatusEnum = $this->instanceManager->getInstance(CommentStatusEnum::class);
+                return $commentStatusEnum->getDescriptions();
         }
         return null;
     }

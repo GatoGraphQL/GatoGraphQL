@@ -159,7 +159,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
                 $commentStatusEnum = $this->instanceManager->getInstance(CommentStatusEnum::class);
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $commentStatusEnum->getName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $commentStatusEnum->getValues()
+                    $commentStatusEnum->getValues(),
+                    $commentStatusEnum->getDescriptions()
                 );
                 break;
         }

@@ -14,4 +14,5 @@ interface EnumInterface
     public function getMaybeNamespacedName(): string;
     public function getCoreValues(): ?array;
     public function getCoreValue(string $enumValue): ?string;
+    public function getDescriptions(): array;
 }
