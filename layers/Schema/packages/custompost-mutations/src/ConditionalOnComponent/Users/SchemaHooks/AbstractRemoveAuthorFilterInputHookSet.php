@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostMutations\ConditionalOnComponent\Users\SchemaHooks;
+namespace PoPSchema\CustomPostMutations\ConditionalOnComponent\Users\SchemaHooks;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\PostMutations\ModuleProcessors\PostMutationFilterInputContainerModuleProcessor;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks\FilterInputHookSet as UserCustomPostFilterInputHookSet;
 
-class FilterInputHookSet extends AbstractHookSet
+abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 {
     public function __construct(
         HooksAPIInterface $hooksAPI,
@@ -29,13 +28,15 @@ class FilterInputHookSet extends AbstractHookSet
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
-            PostMutationFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
+            $this->getHookNameToRemoveFilterInput(),
             [$this, 'getFilterInputModules']
         );
     }
 
+    abstract protected function getHookNameToRemoveFilterInput(): string;
+
     /**
-     * Remove author fieldArgs from field "myPosts"
+     * Remove author fieldArgs from field "myCustomPosts"
      */
     public function getFilterInputModules(array $filterInputModules): array
     {
