@@ -21,4 +21,5 @@ class Properties
     public const TYPE_BOOL = 'bool';
     public const TYPE_INT = 'int';
     public const TYPE_ARRAY = 'array';
+    public const TYPE_NULL = 'null';
 }

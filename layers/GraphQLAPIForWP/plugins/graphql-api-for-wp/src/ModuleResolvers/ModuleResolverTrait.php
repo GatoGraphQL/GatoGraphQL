@@ -11,4 +11,5 @@ trait ModuleResolverTrait
 {
     use HasMarkdownDocumentationModuleResolverTrait;
     use PluginMarkdownContentRetrieverTrait;
+    use CommonModuleResolverTrait;
 }

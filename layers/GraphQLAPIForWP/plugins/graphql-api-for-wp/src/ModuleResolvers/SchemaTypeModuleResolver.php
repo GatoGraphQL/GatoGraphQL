@@ -384,10 +384,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $useUnsafe = PluginEnvironment::areUnsafeDefaultsEnabled();
         $defaultValues = [
             self::SCHEMA_ADMIN_FIELDS => [
-                ModuleSettingOptions::ENABLE => $useUnsafe,
+                ModuleSettingOptions::DEFAULT_VALUE => $useUnsafe,
+                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
             ],
             self::SCHEMA_SELF_FIELDS => [
-                ModuleSettingOptions::ENABLE => $useUnsafe,
+                ModuleSettingOptions::DEFAULT_VALUE => false,
+                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => false,
             ],
             self::SCHEMA_CUSTOMPOSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -478,29 +480,72 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $unlimitedValue = -1;
         $defaultLimitMessagePlaceholder = \__('Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited', 'graphql-api');
         $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited', 'graphql-api');
+        $defaultValueLabel = $this->getDefaultValueLabel();
+        $defaultValueDesc = $this->getDefaultValueDescription();
+        $adminClientsDesc = $this->getAdminClientDescription();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_ADMIN_FIELDS) {
-            $option = ModuleSettingOptions::ENABLE;
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Add admin fields to schema?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Add "admin" fields to the GraphQL schema (such as <code>Root.postsForAdmin</code>, <code>Root.roles</code>, and others), which expose private data.<hr/><strong>Watch out: Enable only if needed!</strong><br/>These fields can expose sensitive information, so they should be enabled only when the API is not publicly exposed (such as when using a local WordPress instance, to build a static site).', 'graphql-api'),
+                Properties::TITLE => sprintf(
+                    \__('Add admin fields to schema? %s', 'graphql-api'),
+                    $defaultValueLabel
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Add "admin" fields to the GraphQL schema (such as <code>Root.postsForAdmin</code>, <code>Root.roles</code>, and others), which expose private data. %s', 'graphql-api'),
+                    $defaultValueDesc
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Add admin fields for the Admin?', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Add "admin" fields in the wp-admin? %s', 'graphql-api'),
+                    $adminClientsDesc
+                ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module == self::SCHEMA_SELF_FIELDS) {
-            $option = ModuleSettingOptions::ENABLE;
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Add a <code>self</code> field to all types in the schema?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response, to that from a different GraphQL server or REST API.', 'graphql-api'),
+                Properties::TITLE => sprintf(
+                    \__('Expose the self fields to all types in the schema? %s', 'graphql-api'),
+                    $defaultValueLabel
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response, to that from a different GraphQL server or REST API. %s', 'graphql-api'),
+                    $defaultValueDesc
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Expose self fields for the Admin?', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Expose self fields in the wp-admin? %s', 'graphql-api'),
+                    $adminClientsDesc
+                ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif (

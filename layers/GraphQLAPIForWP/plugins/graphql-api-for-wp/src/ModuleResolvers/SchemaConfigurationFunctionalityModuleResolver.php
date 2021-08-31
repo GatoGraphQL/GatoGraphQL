@@ -28,10 +28,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     /**
      * Setting options
      */
-    public const OPTION_USE_NAMESPACING = 'use-namespacing';
     public const OPTION_MODE = 'mode';
     public const OPTION_ENABLE_GRANULAR = 'granular';
-    public const OPTION_SCHEME = 'scheme';
 
     /**
      * @return string[]
@@ -108,14 +106,16 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
             self::SCHEMA_NAMESPACING => [
-                self::OPTION_USE_NAMESPACING => false,
+                ModuleSettingOptions::DEFAULT_VALUE => false,
+                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => false,
             ],
             self::PUBLIC_PRIVATE_SCHEMA => [
                 self::OPTION_MODE => SchemaModes::PUBLIC_SCHEMA_MODE,
                 self::OPTION_ENABLE_GRANULAR => true,
             ],
             self::NESTED_MUTATIONS => [
-                self::OPTION_SCHEME => MutationSchemes::STANDARD,
+                ModuleSettingOptions::DEFAULT_VALUE => MutationSchemes::STANDARD,
+                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => MutationSchemes::STANDARD,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -129,6 +129,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
+        $defaultValueLabel = $this->getDefaultValueLabel();
+        $defaultValueDesc = $this->getDefaultValueDescription();
+        $adminClientsDesc = $this->getAdminClientDescription();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_CONFIGURATION) {
             $whereModules = [];
@@ -195,15 +198,35 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ];
             }
         } elseif ($module == self::SCHEMA_NAMESPACING) {
-            $option = self::OPTION_USE_NAMESPACING;
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Use namespacing?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Automatically namespace types and interfaces in the schema', 'graphql-api'),
+                Properties::TITLE => sprintf(
+                    \__('Namespace the schema? %s', 'graphql-api'),
+                    $defaultValueLabel
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Namespace types and interfaces in the GraphQL schema? %s', 'graphql-api'),
+                    $defaultValueDesc
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Namespace the schema for the Admin?', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Namespace the schema in the wp-admin? %s', 'graphql-api'),
+                    $adminClientsDesc
+                ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module == self::PUBLIC_PRIVATE_SCHEMA) {
@@ -249,21 +272,49 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module == self::NESTED_MUTATIONS) {
-            $option = self::OPTION_SCHEME;
+            $possibleValues = [
+                MutationSchemes::STANDARD => \__('Do not enable nested mutations', 'graphql-api'),
+                MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, keeping all mutation fields in the root', 'graphql-api'),
+                MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, removing the redundant mutation fields from the root', 'graphql-api'),
+            ];
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Default Mutation Scheme', 'graphql-api'),
-                Properties::DESCRIPTION => \__('With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
+                Properties::TITLE => sprintf(
+                    \__('Mutation Scheme: %s', 'graphql-api'),
+                    $defaultValueLabel
+                ),
+                Properties::DESCRIPTION => $defaultValueDesc,
                 Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => [
-                    MutationSchemes::STANDARD => \__('Do not enable nested mutations', 'graphql-api'),
-                    MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, keeping all mutation fields in the root', 'graphql-api'),
-                    MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, removing the redundant mutation fields from the root', 'graphql-api'),
-                ],
+                Properties::POSSIBLE_VALUES => $possibleValues,
+            ];
+            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Mutation Scheme for the Admin', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Select the mutation scheme to use in the wp-admin. %s', 'graphql-api'),
+                    $adminClientsDesc
+                ),
+                Properties::TYPE => Properties::TYPE_STRING,
+                Properties::POSSIBLE_VALUES => $possibleValues,
+            ];
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'intro'
+                ),
+                Properties::TITLE => \__('Info: Redundant fields', 'graphql-api'),
+                Properties::DESCRIPTION => \__('With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
+                Properties::TYPE => Properties::TYPE_NULL,
             ];
         }
         return $moduleSettings;

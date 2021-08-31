@@ -85,6 +85,14 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        // Get the possible states of wp-admin clients requesting the endpoint:
+        // 1. Only GraphiQL and Voyager clients
+        $isRequestingGraphQLEndpointForAdminClientOnly = $endpointHelpers->isRequestingGraphQLEndpointForAdminClientOnly();
+        // 2. GraphiQL and Voyager clients + ACL/CCL configurations
+        $isRequestingGraphQLEndpointForAdminClientOrConfiguration = $endpointHelpers->isRequestingGraphQLEndpointForAdminClientOrConfiguration();
         return [
             // GraphQL single endpoint slug
             [
@@ -176,14 +184,15 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentModelComponentConfiguration::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING,
-                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_NAMESPACING,
+                'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Enable nested mutations?
+            // Only assign for Admin clients. For configuration it is assigned always, via the Fixed endpoint
             [
                 'class' => GraphQLServerComponentConfiguration::class,
                 'envVariable' => GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_SCHEME,
+                'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value != MutationSchemes::STANDARD,
             ],
             // Disable redundant mutation fields in the root type?
@@ -191,7 +200,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => EngineComponentConfiguration::class,
                 'envVariable' => EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_SCHEME,
+                'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value == MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
             ],
             // Cache-Control default max-age
@@ -376,14 +385,14 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentModelComponentConfiguration::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_FIELDS,
-                'option' => ModuleSettingOptions::ENABLE,
+                'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Add "self" fields to the schema?
             [
                 'class' => GraphQLServerComponentConfiguration::class,
                 'envVariable' => GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_SCHEMA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SELF_FIELDS,
-                'option' => ModuleSettingOptions::ENABLE,
+                'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // White/Blacklisted entries to CustomPost.meta
             [
