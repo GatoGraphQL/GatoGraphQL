@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 trait EnumTypeSchemaDefinitionResolverTrait
 {

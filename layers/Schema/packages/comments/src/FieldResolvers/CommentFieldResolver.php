@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -18,19 +19,23 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\ComponentConfiguration;
+use PoPSchema\Comments\Constants\CommentStatus;
+use PoPSchema\Comments\Enums\CommentStatusEnum;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class CommentFieldResolver extends AbstractQueryableFieldResolver
 {
+    use EnumTypeFieldSchemaDefinitionResolverTrait;
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -89,7 +94,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'customPostID' => SchemaDefinition::TYPE_ID,
             'approved' => SchemaDefinition::TYPE_BOOL,
             'type' => SchemaDefinition::TYPE_STRING,
-            'status' => SchemaDefinition::TYPE_STRING,
+            'status' => SchemaDefinition::TYPE_ENUM,
             'parent' => SchemaDefinition::TYPE_ID,
             'date' => SchemaDefinition::TYPE_DATE,
             'responses' => SchemaDefinition::TYPE_ID,
@@ -177,6 +182,46 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                 ];
         }
         return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
+    protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    {
+        switch ($fieldName) {
+            case 'status':
+                /**
+                 * @var CommentStatusEnum
+                 */
+                $commentStatusEnum = $this->instanceManager->getInstance(CommentStatusEnum::class);
+                return $commentStatusEnum->getName();
+        }
+        return null;
+    }
+
+    protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    {
+        switch ($fieldName) {
+            case 'status':
+                /**
+                 * @var CommentStatusEnum
+                 */
+                $commentStatusEnum = $this->instanceManager->getInstance(CommentStatusEnum::class);
+                return $commentStatusEnum->getValues();
+        }
+        return null;
+    }
+
+    protected function getSchemaDefinitionEnumValueDescriptions(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    {
+        switch ($fieldName) {
+            case 'status':
+                return [
+                    CommentStatus::APPROVE => $this->translationAPI->__('Approved comment', 'comments'),
+                    CommentStatus::HOLD => $this->translationAPI->__('Onhold comment', 'comments'),
+                    CommentStatus::SPAM => $this->translationAPI->__('Spam comment', 'comments'),
+                    CommentStatus::TRASH => $this->translationAPI->__('Trashed comment', 'comments'),
+                ];
+        }
+        return null;
     }
 
     /**
