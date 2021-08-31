@@ -6,3 +6,6 @@ services:
 
     PoPSchema\CustomPostMutations\LooseContracts\:
         resource: '../src/LooseContracts/*'
+
+    PoPSchema\CustomPostMutations\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'

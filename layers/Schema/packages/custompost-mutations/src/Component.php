@@ -37,5 +37,6 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         self::initServices(dirname(__DIR__));
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }
