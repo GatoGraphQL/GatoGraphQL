@@ -12,27 +12,17 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
-    public function getObjectQuery(array $ids): array
-    {
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        return array(
-            'include' => $ids,
-            'status' => CustomPostTypeAPIUtils::getPostStatuses(),
-        );
-    }
-
-    public function getObjects(array $ids): array
-    {
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $query = $this->getObjectQuery($ids);
-        return $customPostTypeAPI->getCustomPosts($query);
-    }
-
     public function getDataFromIdsQuery(array $ids): array
     {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         return [
             'include' => $ids,
             'status' => CustomPostTypeAPIUtils::getPostStatuses(),
+            // If not adding the post types, WordPress only uses "post", so querying by CPT would fail loading data
+            // This should be considered for the CMS-agnostic case if it makes sense
+            'custompost-types' => $customPostTypeAPI->getCustomPostTypes([
+                'publicly-queryable' => true,
+            ])
         ];
     }
 
