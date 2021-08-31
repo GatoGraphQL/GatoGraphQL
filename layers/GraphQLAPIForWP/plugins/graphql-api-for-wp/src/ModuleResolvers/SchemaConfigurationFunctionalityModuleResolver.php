@@ -132,6 +132,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         $defaultValueLabel = $this->getDefaultValueLabel();
         $defaultValueDesc = $this->getDefaultValueDescription();
         $adminClientsDesc = $this->getAdminClientDescription();
+        $adminClientAndConfigDesc = $this->getAdminClientAndConfigurationDescription();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_CONFIGURATION) {
             $whereModules = [];
@@ -225,7 +226,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TITLE => \__('Namespace the schema for the Admin?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Namespace the schema in the wp-admin? %s', 'graphql-api'),
-                    $adminClientsDesc
+                    $adminClientAndConfigDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
