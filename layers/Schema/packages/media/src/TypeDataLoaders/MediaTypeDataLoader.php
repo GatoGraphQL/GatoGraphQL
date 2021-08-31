@@ -27,31 +27,23 @@ class MediaTypeDataLoader extends AbstractTypeQueryableDataLoader
         );
     }
 
-    public function getObjects(array $ids): array
-    {
-        $query = array(
-            'include' => $ids,
-        );
-        return $this->mediaTypeAPI->getMediaItems($query);
-    }
-
-    public function getDataFromIdsQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
             'include' => $ids,
         ];
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         return $this->mediaTypeAPI->getMediaItems($query, $options);
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
-        return (array)$this->executeQuery($query, $options);
+        return $this->executeQuery($query, $options);
     }
 }

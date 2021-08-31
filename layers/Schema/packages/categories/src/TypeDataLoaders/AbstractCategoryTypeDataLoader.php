@@ -13,21 +13,11 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractTypeQueryableDataL
 {
     use CategoryAPIRequestedContractTrait;
 
-    public function getObjects(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
-        $query = array(
-            'include' => $ids
-        );
-        $categoryTypeAPI = $this->getTypeAPI();
-        return $categoryTypeAPI->getCategories($query);
-    }
-
-    public function getDataFromIdsQuery(array $ids): array
-    {
-        $query = array(
-            'include' => $ids
-        );
-        return $query;
+        return [
+            'include' => $ids,
+        ];
     }
 
     protected function getOrderbyDefault()
@@ -40,18 +30,17 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractTypeQueryableDataL
         return 'DESC';
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         $categoryTypeAPI = $this->getTypeAPI();
         return $categoryTypeAPI->getCategories($query, $options);
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
-        // $query['fields'] = 'ids';
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
-        return (array)$this->executeQuery($query, $options);
+        return $this->executeQuery($query, $options);
     }
 }

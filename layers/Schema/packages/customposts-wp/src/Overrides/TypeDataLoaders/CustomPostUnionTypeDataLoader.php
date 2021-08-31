@@ -16,19 +16,9 @@ use PoPSchema\CustomPostsWP\TypeResolverPickers\CustomPostTypeResolverPickerInte
  */
 class CustomPostUnionTypeDataLoader extends CustomPostTypeDataLoader
 {
-    public function getObjectQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
-        $query = parent::getObjectQuery($ids);
-
-        // From all post types from the member typeResolvers
-        $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(CustomPostUnionTypeResolver::class);
-
-        return $query;
-    }
-
-    public function getDataFromIdsQuery(array $ids): array
-    {
-        $query = parent::getDataFromIdsQuery($ids);
+        $query = parent::getQueryToRetrieveObjectsForIDs($ids);
 
         // From all post types from the member typeResolvers
         $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(CustomPostUnionTypeResolver::class);

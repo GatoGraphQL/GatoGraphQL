@@ -12,28 +12,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
-    public function getObjectQuery(array $ids): array
-    {
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        return array(
-            'include' => $ids,
-            'status' => CustomPostTypeAPIUtils::getPostStatuses(),
-            // If not adding the post types, WordPress only uses "post", so querying by CPT would fail loading data
-            // This should be considered for the CMS-agnostic case if it makes sense
-            'custompost-types' => $customPostTypeAPI->getCustomPostTypes([
-                'publicly-queryable' => true,
-            ])
-        );
-    }
-
-    public function getObjects(array $ids): array
-    {
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $query = $this->getObjectQuery($ids);
-        return $customPostTypeAPI->getCustomPosts($query);
-    }
-
-    public function getDataFromIdsQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
             'include' => $ids,
@@ -41,7 +20,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDat
         ];
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         return $customPostTypeAPI->getCustomPosts($query, $options);
@@ -57,12 +36,12 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDat
         return 'DESC';
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
-        return (array)$this->executeQuery($query, $options);
+        return $this->executeQuery($query, $options);
     }
 
     protected function getLimitParam($query_args)

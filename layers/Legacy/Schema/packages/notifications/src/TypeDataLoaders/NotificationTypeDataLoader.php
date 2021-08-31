@@ -51,14 +51,14 @@ class NotificationTypeDataLoader extends AbstractTypeQueryableDataLoader
         return 'Dataloader_NotificationList:query';
     }
 
-    public function getDataFromIdsQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return array(
             'include' => $ids,
         );
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
         $query['array'] = true;
         $query['fields'] = array('histid');
@@ -71,7 +71,7 @@ class NotificationTypeDataLoader extends AbstractTypeQueryableDataLoader
             $query['joinstatus'] = false;
         }
 
-        $results = (array)$this->executeQuery($query);
+        $results = $this->executeQuery($query);
 
         $ret = array();
         if ($results) {
@@ -83,7 +83,7 @@ class NotificationTypeDataLoader extends AbstractTypeQueryableDataLoader
         return $ret;
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         return PoP_Notifications_API::getNotifications($query);
     }

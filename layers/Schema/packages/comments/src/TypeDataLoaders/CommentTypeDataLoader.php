@@ -29,26 +29,7 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
         );
     }
 
-    public function getObjects(array $ids): array
-    {
-        $query = [
-            'include' => $ids,
-            'type' => [
-                CommentTypes::COMMENT,
-                CommentTypes::TRACKBACK,
-                CommentTypes::PINGBACK,
-            ],
-            'status' => [
-                CommentStatus::APPROVE,
-                CommentStatus::HOLD,
-                CommentStatus::SPAM,
-                CommentStatus::TRASH,
-            ],
-        ];
-        return $this->commentTypeAPI->getComments($query);
-    }
-
-    public function getDataFromIdsQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
             'include' => $ids,
@@ -66,16 +47,16 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
         ];
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         return $this->commentTypeAPI->getComments($query, $options);
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
-        return (array)$this->executeQuery($query, $options);
+        return $this->executeQuery($query, $options);
     }
 }

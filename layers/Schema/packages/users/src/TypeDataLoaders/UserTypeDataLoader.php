@@ -11,17 +11,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
-    public function getObjects(array $ids): array
-    {
-        $userTypeAPI = UserTypeAPIFacade::getInstance();
-        $ret = array();
-        foreach ($ids as $user_id) {
-            $ret[] = $userTypeAPI->getUserById($user_id);
-        }
-        return $ret;
-    }
-
-    public function getDataFromIdsQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
             'include' => $ids,
@@ -44,18 +34,17 @@ class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
         return 'UserTypeDataLoader:query';
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         return $userTypeAPI->getUsers($query, $options);
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
-        // $query['fields'] = 'ID';
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
-        return (array)$this->executeQuery($query, $options);
+        return $this->executeQuery($query, $options);
     }
 }

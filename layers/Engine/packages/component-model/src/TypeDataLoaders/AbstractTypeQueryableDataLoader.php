@@ -13,16 +13,13 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader implements TypeQueryableDataLoaderInterface
 {
     /**
-     * Function to override
+     * @return mixed[]
      */
-    public function executeQuery($query, array $options = [])
-    {
-        return array();
-    }
+    abstract public function executeQuery($query, array $options = []): array;
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
-        return (array)$this->executeQuery($query);
+        return $this->executeQuery($query);
     }
 
     protected function getPagenumberParam($query_args)
@@ -66,7 +63,7 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
         }
 
         // Execute the query, get ids
-        $ids = $this->executeQueryIds($query);
+        $ids = $this->executeQueryIDs($query);
 
         return $ids;
     }
@@ -74,15 +71,15 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
     /**
      * Function to override
      */
-    public function getDataFromIdsQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return array();
     }
 
     public function getObjects(array $ids): array
     {
-        $query = $this->getDataFromIdsQuery($ids);
-        return (array)$this->executeQuery($query);
+        $query = $this->getQueryToRetrieveObjectsForIDs($ids);
+        return $this->executeQuery($query);
     }
 
     protected function getOrderbyDefault()

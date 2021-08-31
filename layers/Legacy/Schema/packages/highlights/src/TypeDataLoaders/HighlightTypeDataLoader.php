@@ -8,9 +8,9 @@ use PoPSchema\CustomPosts\TypeDataLoaders\AbstractCustomPostTypeDataLoader;
 
 class HighlightTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
-    public function getDataFromIdsQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
-        $query = parent::getDataFromIdsQuery($ids);
+        $query = parent::getQueryToRetrieveObjectsForIDs($ids);
         $query['custompost-types'] = array(POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT);
         return $query;
     }

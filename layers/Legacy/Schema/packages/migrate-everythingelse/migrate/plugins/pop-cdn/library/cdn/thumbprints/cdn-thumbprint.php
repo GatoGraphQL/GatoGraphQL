@@ -18,9 +18,12 @@ class PoP_CDN_ThumbprintBase
         return array();
     }
 
-    public function executeQuery($query, array $options = [])
+    /**
+     * @return mixed[]
+     */
+    public function executeQuery($query, array $options = []): array
     {
-        return '';
+        return array();
     }
     
     public function getTimestamp($object_id)
