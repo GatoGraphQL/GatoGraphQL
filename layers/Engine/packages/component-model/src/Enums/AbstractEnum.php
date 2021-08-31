@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\Enums;
 use Exception;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractEnum implements EnumInterface
 {
@@ -16,11 +17,12 @@ abstract class AbstractEnum implements EnumInterface
      */
     public function __construct(
         protected SchemaNamespacingServiceInterface $schemaNamespacingService,
+        protected TranslationAPIInterface $translationAPI,
     ) {
         if (!is_null($this->getCoreValues()) && count($this->getCoreValues()) != count($this->getValues())) {
             throw new Exception(
                 sprintf(
-                    'Enum \'%s\' (in class \'%s\') must return the same number of elements in function `getCoreValues()` as in `getValues()`',
+                    $this->translationAPI->__('Enum \'%s\' (in class \'%s\') must return the same number of elements in function `getCoreValues()` as in `getValues()`', 'component-model'),
                     $this->getName(),
                     get_called_class()
                 )
@@ -86,5 +88,10 @@ abstract class AbstractEnum implements EnumInterface
         }
         // The core value and the value are at the same position in the array
         return $coreValues[$pos];
+    }
+
+    public function getDescriptions(): array
+    {
+        return [];
     }
 }
