@@ -29,25 +29,6 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
         );
     }
 
-    public function getObjects(array $ids): array
-    {
-        $query = [
-            'include' => $ids,
-            'type' => [
-                CommentTypes::COMMENT,
-                CommentTypes::TRACKBACK,
-                CommentTypes::PINGBACK,
-            ],
-            'status' => [
-                CommentStatus::APPROVE,
-                CommentStatus::HOLD,
-                CommentStatus::SPAM,
-                CommentStatus::TRASH,
-            ],
-        ];
-        return $this->commentTypeAPI->getComments($query);
-    }
-
     public function getDataFromIdsQuery(array $ids): array
     {
         return [

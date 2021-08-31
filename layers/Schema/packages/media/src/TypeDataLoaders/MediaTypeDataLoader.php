@@ -27,14 +27,6 @@ class MediaTypeDataLoader extends AbstractTypeQueryableDataLoader
         );
     }
 
-    public function getObjects(array $ids): array
-    {
-        $query = array(
-            'include' => $ids,
-        );
-        return $this->mediaTypeAPI->getMediaItems($query);
-    }
-
     public function getDataFromIdsQuery(array $ids): array
     {
         return [

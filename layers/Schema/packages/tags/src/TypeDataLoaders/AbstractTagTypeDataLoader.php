@@ -13,15 +13,6 @@ abstract class AbstractTagTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
     use TagAPIRequestedContractTrait;
 
-    public function getObjects(array $ids): array
-    {
-        $query = [
-            'include' => $ids,
-        ];
-        $tagTypeAPI = $this->getTypeAPI();
-        return $tagTypeAPI->getTags($query);
-    }
-
     public function getDataFromIdsQuery(array $ids): array
     {
         return [
@@ -47,7 +38,6 @@ abstract class AbstractTagTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function executeQueryIds($query): array
     {
-        // $query['fields'] = 'ids';
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
