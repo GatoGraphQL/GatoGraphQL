@@ -434,7 +434,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $schemaErrors[] = [
                     Tokens::PATH => [$fieldDirective],
                     Tokens::MESSAGE => sprintf(
-                        $this->translationAPI->__('No DirectiveResolver resolves directive with name \'%s\'', 'pop-component-model'),
+                        $this->translationAPI->__('There is no directive with name \'%s\'', 'pop-component-model'),
                         $directiveName
                     ),
                 ];
