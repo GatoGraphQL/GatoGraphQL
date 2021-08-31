@@ -529,7 +529,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response, to that from a different GraphQL server or REST API. %s', 'graphql-api'),
+                    \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response. %s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
