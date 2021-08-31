@@ -15,7 +15,7 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
     /**
      * Function to override
      */
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         return array();
     }

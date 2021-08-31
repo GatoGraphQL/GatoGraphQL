@@ -16,7 +16,7 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
         return $postTypeAPI->getPosts($query);
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         return $postTypeAPI->getPosts($query, $options);

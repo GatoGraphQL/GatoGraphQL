@@ -41,7 +41,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDat
         ];
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         return $customPostTypeAPI->getCustomPosts($query, $options);

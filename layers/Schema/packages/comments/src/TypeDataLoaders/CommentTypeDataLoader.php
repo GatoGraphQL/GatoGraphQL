@@ -66,7 +66,7 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
         ];
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         return $this->commentTypeAPI->getComments($query, $options);
     }

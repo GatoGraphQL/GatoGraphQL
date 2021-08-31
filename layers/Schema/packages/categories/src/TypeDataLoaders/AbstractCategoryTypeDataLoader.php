@@ -40,7 +40,7 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractTypeQueryableDataL
         return 'DESC';
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         $categoryTypeAPI = $this->getTypeAPI();
         return $categoryTypeAPI->getCategories($query, $options);

@@ -83,7 +83,7 @@ class NotificationTypeDataLoader extends AbstractTypeQueryableDataLoader
         return $ret;
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         return PoP_Notifications_API::getNotifications($query);
     }

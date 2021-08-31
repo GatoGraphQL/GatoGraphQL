@@ -44,7 +44,7 @@ class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
         return 'UserTypeDataLoader:query';
     }
 
-    public function executeQuery($query, array $options = [])
+    public function executeQuery($query, array $options = []): array
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         return $userTypeAPI->getUsers($query, $options);
