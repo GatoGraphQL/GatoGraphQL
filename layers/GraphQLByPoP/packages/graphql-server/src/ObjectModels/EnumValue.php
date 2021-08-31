@@ -9,7 +9,6 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObj
 
 class EnumValue extends AbstractSchemaDefinitionReferenceObject
 {
-
     public function getName(): string
     {
         return (string)$this->getValue();
