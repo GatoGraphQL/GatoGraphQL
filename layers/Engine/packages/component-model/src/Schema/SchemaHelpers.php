@@ -55,8 +55,10 @@ class SchemaHelpers
         ));
     }
 
-    public static function convertToSchemaFieldArgEnumValueDefinitions(array $enumValues)
-    {
+    public static function convertToSchemaFieldArgEnumValueDefinitions(
+        array $enumValues,
+        array $enumDescriptions = [],
+    ): array {
         $enumValueDefinitions = [];
         // Create an array representing the enumValue definition
         // Since only the enumValues were defined, these have no description/deprecated data, so no need to add these either
@@ -64,6 +66,9 @@ class SchemaHelpers
             $enumValueDefinitions[$enumValue] = [
                 SchemaDefinition::ARGNAME_NAME => $enumValue,
             ];
+            if ($description = $enumDescriptions[$enumValue] ?? null) {
+                $enumValueDefinitions[$enumValue][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
+            }
         }
         return $enumValueDefinitions;
     }

@@ -22,4 +22,13 @@ class CommentStatusEnum extends AbstractEnum
             CommentStatus::TRASH,
         ];
     }
+    public function getDescriptions(): array
+    {
+        return [
+            CommentStatus::APPROVE => $this->translationAPI->__('Approved comment', 'comments'),
+            CommentStatus::HOLD => $this->translationAPI->__('Onhold comment', 'comments'),
+            CommentStatus::SPAM => $this->translationAPI->__('Spam comment', 'comments'),
+            CommentStatus::TRASH => $this->translationAPI->__('Trashed comment', 'comments'),
+        ];
+    }
 }
