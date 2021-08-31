@@ -19,7 +19,7 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
 
     public function executeQueryIds($query): array
     {
-        return (array)$this->executeQuery($query);
+        return $this->executeQuery($query);
     }
 
     protected function getPagenumberParam($query_args)
@@ -79,7 +79,7 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
     public function getObjects(array $ids): array
     {
         $query = $this->getDataFromIdsQuery($ids);
-        return (array)$this->executeQuery($query);
+        return $this->executeQuery($query);
     }
 
     protected function getOrderbyDefault()

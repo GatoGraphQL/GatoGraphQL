@@ -62,7 +62,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDat
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
-        return (array)$this->executeQuery($query, $options);
+        return $this->executeQuery($query, $options);
     }
 
     protected function getLimitParam($query_args)

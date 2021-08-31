@@ -71,7 +71,7 @@ class NotificationTypeDataLoader extends AbstractTypeQueryableDataLoader
             $query['joinstatus'] = false;
         }
 
-        $results = (array)$this->executeQuery($query);
+        $results = $this->executeQuery($query);
 
         $ret = array();
         if ($results) {
