@@ -12,10 +12,10 @@ class GenericCustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
     /**
      * Override the custompost-types from the parent
      */
-    public function getDataFromIdsQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return array_merge(
-            parent::getDataFromIdsQuery($ids),
+            parent::getQueryToRetrieveObjectsForIDs($ids),
             [
                 'custompost-types' => ComponentConfiguration::getGenericCustomPostTypes(),
             ]

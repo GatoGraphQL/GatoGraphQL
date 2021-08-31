@@ -51,7 +51,7 @@ class NotificationTypeDataLoader extends AbstractTypeQueryableDataLoader
         return 'Dataloader_NotificationList:query';
     }
 
-    public function getDataFromIdsQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return array(
             'include' => $ids,

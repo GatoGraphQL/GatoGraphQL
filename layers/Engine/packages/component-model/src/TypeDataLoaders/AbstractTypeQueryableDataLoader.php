@@ -71,14 +71,14 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
     /**
      * Function to override
      */
-    public function getDataFromIdsQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return array();
     }
 
     public function getObjects(array $ids): array
     {
-        $query = $this->getDataFromIdsQuery($ids);
+        $query = $this->getQueryToRetrieveObjectsForIDs($ids);
         return $this->executeQuery($query);
     }
 

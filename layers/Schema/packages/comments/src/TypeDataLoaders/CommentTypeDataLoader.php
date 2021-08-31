@@ -29,7 +29,7 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
         );
     }
 
-    public function getDataFromIdsQuery(array $ids): array
+    public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
             'include' => $ids,
