@@ -30,6 +30,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `authorSlug: String`
   - `excludeAuthorIDs: [ID]`
 - Exclude results via field arg `excludeIDs`
+- Added fields to retrieve the logged-in user's custom posts:
+  - `Root.myCustomPost: CustomPostUnion`
+  - `Root.myCustomPosts: [CustomPostUnion]!`
+  - `Root.myCustomPostCount: Int!`
 - Query properties for custom post fields:
   - `modified: String`
   - `isSticky: Bool!`
