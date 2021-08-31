@@ -13,12 +13,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader implements TypeQueryableDataLoaderInterface
 {
     /**
-     * Function to override
+     * @return mixed[]
      */
-    public function executeQuery($query, array $options = []): array
-    {
-        return array();
-    }
+    abstract public function executeQuery($query, array $options = []): array;
 
     public function executeQueryIds($query): array
     {
