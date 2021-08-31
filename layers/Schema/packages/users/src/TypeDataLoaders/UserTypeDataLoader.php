@@ -11,16 +11,6 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
-    public function getObjects(array $ids): array
-    {
-        $userTypeAPI = UserTypeAPIFacade::getInstance();
-        $ret = array();
-        foreach ($ids as $user_id) {
-            $ret[] = $userTypeAPI->getUserById($user_id);
-        }
-        return $ret;
-    }
-
     public function getDataFromIdsQuery(array $ids): array
     {
         return [
@@ -52,7 +42,6 @@ class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function executeQueryIds($query): array
     {
-        // $query['fields'] = 'ID';
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
         ];
