@@ -18,7 +18,6 @@ use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor as UpstreamCommentFilterInputContainerModuleProcessor;
 use PoPSchema\CommentMutations\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
@@ -128,7 +127,7 @@ class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
     public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'myComment' => [UpstreamCommentFilterInputContainerModuleProcessor::class, UpstreamCommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS],
+            'myComment' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYCOMMENT],
             'myComments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYCOMMENTS],
             'myCommentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYCOMMENTCOUNT],
             default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
