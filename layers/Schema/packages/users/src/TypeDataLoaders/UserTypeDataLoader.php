@@ -40,7 +40,7 @@ class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
         return $userTypeAPI->getUsers($query, $options);
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,

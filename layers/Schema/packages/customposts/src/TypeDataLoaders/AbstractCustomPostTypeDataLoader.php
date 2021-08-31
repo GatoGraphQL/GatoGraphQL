@@ -36,7 +36,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDat
         return 'DESC';
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,

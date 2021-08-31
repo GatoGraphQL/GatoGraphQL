@@ -36,7 +36,7 @@ abstract class AbstractTagTypeDataLoader extends AbstractTypeQueryableDataLoader
         return $tagTypeAPI->getTags($query, $options);
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,

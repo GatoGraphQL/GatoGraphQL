@@ -36,7 +36,7 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractTypeQueryableDataL
         return $categoryTypeAPI->getCategories($query, $options);
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,

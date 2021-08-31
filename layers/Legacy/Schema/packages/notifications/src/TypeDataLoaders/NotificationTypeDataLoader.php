@@ -58,7 +58,7 @@ class NotificationTypeDataLoader extends AbstractTypeQueryableDataLoader
         );
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
         $query['array'] = true;
         $query['fields'] = array('histid');

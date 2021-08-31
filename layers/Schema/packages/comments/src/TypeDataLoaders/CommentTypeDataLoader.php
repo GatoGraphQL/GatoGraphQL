@@ -52,7 +52,7 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
         return $this->commentTypeAPI->getComments($query, $options);
     }
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,

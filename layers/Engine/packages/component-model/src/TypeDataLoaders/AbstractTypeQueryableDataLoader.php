@@ -17,7 +17,7 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
      */
     abstract public function executeQuery($query, array $options = []): array;
 
-    public function executeQueryIds($query): array
+    public function executeQueryIDs($query): array
     {
         return $this->executeQuery($query);
     }
@@ -63,7 +63,7 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
         }
 
         // Execute the query, get ids
-        $ids = $this->executeQueryIds($query);
+        $ids = $this->executeQueryIDs($query);
 
         return $ids;
     }

@@ -1529,7 +1529,7 @@ function getDbobjectIds($data_properties) {
 }
 ```
 
-Dataloaders fetching lists of results (eg: a list of posts, a list of users, etc) will need to execute a query and filter the results. This logic has been implemented in trait `Dataloader_ListTrait`, which requires to implement functions `getQuery` to generate the query from the `$query_args` provided through [Data Properties](#data-properties), and `executeQueryIds` to, given the generated `$query`, return the list of object IDs:
+Dataloaders fetching lists of results (eg: a list of posts, a list of users, etc) will need to execute a query and filter the results. This logic has been implemented in trait `Dataloader_ListTrait`, which requires to implement functions `getQuery` to generate the query from the `$query_args` provided through [Data Properties](#data-properties), and `executeQueryIDs` to, given the generated `$query`, return the list of object IDs:
 
 ```php
 function getQuery($query_args) 
@@ -1542,7 +1542,7 @@ function getQuery($query_args)
   return $query;
 }
 
-function executeQueryIds($query) {
+function executeQueryIDs($query) {
     
   $ids = array();
 
@@ -1561,7 +1561,7 @@ function getQuery($query_args) {
   return $query_args;
 }
 
-function executeQueryIds($query) {
+function executeQueryIDs($query) {
     
   $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
   return $cmsapi->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
