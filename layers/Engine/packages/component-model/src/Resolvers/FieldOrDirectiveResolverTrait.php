@@ -19,11 +19,15 @@ trait FieldOrDirectiveResolverTrait
      */
     protected array $enumValueArgumentValidationCache = [];
 
-    protected function maybeValidateNotMissingFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?string
-    {
+    protected function validateNotMissingFieldOrDirectiveArguments(
+        array $fieldOrDirectiveArgsSchemaDefinition,
+        string $fieldOrDirectiveName,
+        array $fieldOrDirectiveArgs,
+        string $type
+    ): ?string {
         if ($mandatoryArgs = SchemaHelpers::getSchemaMandatoryFieldOrDirectiveArgs($fieldOrDirectiveArgsSchemaDefinition)) {
             if (
-                $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+                $maybeError = $this->doValidateNotMissingFieldOrDirectiveArguments(
                     SchemaHelpers::getSchemaFieldArgNames($mandatoryArgs),
                     $fieldOrDirectiveName,
                     $fieldOrDirectiveArgs,
@@ -36,8 +40,12 @@ trait FieldOrDirectiveResolverTrait
         return null;
     }
 
-    protected function validateNotMissingFieldOrDirectiveArguments(array $fieldOrDirectiveArgumentProperties, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, string $type): ?string
-    {
+    protected function doValidateNotMissingFieldOrDirectiveArguments(
+        array $fieldOrDirectiveArgumentProperties,
+        string $fieldOrDirectiveName,
+        array $fieldOrDirectiveArgs,
+        string $type
+    ): ?string {
         if ($missing = SchemaHelpers::getMissingFieldArgs($fieldOrDirectiveArgumentProperties, $fieldOrDirectiveArgs)) {
             $translationAPI = TranslationAPIFacade::getInstance();
             $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
@@ -84,21 +92,6 @@ trait FieldOrDirectiveResolverTrait
     protected function canValidateFieldOrDirectiveArgumentsWithValuesForSchema(array $fieldOrDirectiveArgs): bool
     {
         return !FieldQueryUtils::isAnyFieldArgumentValueAFieldOrExpression($fieldOrDirectiveArgs);
-    }
-
-    protected function maybeValidateArrayTypeFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?string
-    {
-        if (
-            $maybeError = $this->validateArrayTypeFieldOrDirectiveArguments(
-                $fieldOrDirectiveArgsSchemaDefinition,
-                $fieldOrDirectiveName,
-                $fieldOrDirectiveArgs,
-                $type
-            )
-        ) {
-            return $maybeError;
-        }
-        return null;
     }
 
     protected function validateArrayTypeFieldOrDirectiveArguments(
@@ -235,11 +228,15 @@ trait FieldOrDirectiveResolverTrait
         return null;
     }
 
-    protected function maybeValidateEnumFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?array
-    {
+    protected function validateEnumFieldOrDirectiveArguments(
+        array $fieldOrDirectiveArgsSchemaDefinition,
+        string $fieldOrDirectiveName,
+        array $fieldOrDirectiveArgs,
+        string $type
+    ): ?array {
         // Iterate all the enum types and check that the provided values is one of them, or throw an error
         if ($enumTypeFieldOrDirectiveArgsSchemaDefinition = SchemaHelpers::getEnumTypeFieldOrDirectiveArgsSchemaDefinition($fieldOrDirectiveArgsSchemaDefinition)) {
-            return $this->validateEnumFieldOrDirectiveArguments(
+            return $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
                 $enumTypeFieldOrDirectiveArgsSchemaDefinition,
                 $fieldOrDirectiveName,
                 $fieldOrDirectiveArgs,
@@ -249,8 +246,12 @@ trait FieldOrDirectiveResolverTrait
         return null;
     }
 
-    protected function validateEnumFieldOrDirectiveArguments(array $enumTypeFieldOrDirectiveArgsSchemaDefinition, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, string $type): ?array
-    {
+    protected function doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
+        array $enumTypeFieldOrDirectiveArgsSchemaDefinition,
+        string $fieldOrDirectiveName,
+        array $fieldOrDirectiveArgs,
+        string $type
+    ): ?array {
         $key = serialize($enumTypeFieldOrDirectiveArgsSchemaDefinition) . '|' . $fieldOrDirectiveName . serialize($fieldOrDirectiveArgs);
         if (!isset($this->enumValueArgumentValidationCache[$key])) {
             $this->enumValueArgumentValidationCache[$key] = $this->doValidateEnumFieldOrDirectiveArguments($enumTypeFieldOrDirectiveArgsSchemaDefinition, $fieldOrDirectiveName, $fieldOrDirectiveArgs, $type);

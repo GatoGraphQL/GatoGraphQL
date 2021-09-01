@@ -393,11 +393,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
              * Validate mandatory values
              */
             if (
-                $maybeError = $this->maybeValidateNotMissingFieldOrDirectiveArguments(
-                    $typeResolver,
+                $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+                    $directiveArgsSchemaDefinition,
                     $directiveName,
                     $directiveArgs,
-                    $directiveArgsSchemaDefinition,
                     ResolverTypes::DIRECTIVE
                 )
             ) {
@@ -409,11 +408,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                  * Validate array types are provided as arrays
                  */
                 if (
-                    $maybeError = $this->maybeValidateArrayTypeFieldOrDirectiveArguments(
-                        $typeResolver,
+                    $maybeError = $this->validateArrayTypeFieldOrDirectiveArguments(
+                        $directiveArgsSchemaDefinition,
                         $directiveName,
                         $directiveArgs,
-                        $directiveArgsSchemaDefinition,
                         ResolverTypes::DIRECTIVE
                     )
                 ) {
@@ -425,11 +423,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                  */
                 list(
                     $maybeError
-                ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
-                    $typeResolver,
+                ) = $this->validateEnumFieldOrDirectiveArguments(
+                    $directiveArgsSchemaDefinition,
                     $directiveName,
                     $directiveArgs,
-                    $directiveArgsSchemaDefinition,
                     ResolverTypes::DIRECTIVE
                 );
                 if ($maybeError) {
@@ -586,11 +583,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             list(
                 $maybeError,
                 $maybeDeprecation
-            ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
-                $typeResolver,
+            ) = $this->validateEnumFieldOrDirectiveArguments(
+                $directiveArgsSchemaDefinition,
                 $directiveName,
                 $directiveArgs,
-                $directiveArgsSchemaDefinition,
                 ResolverTypes::DIRECTIVE
             );
             if ($maybeDeprecation) {

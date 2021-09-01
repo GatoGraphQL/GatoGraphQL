@@ -185,11 +185,10 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
              * Validate mandatory values
              */
             if (
-                $maybeError = $this->maybeValidateNotMissingFieldOrDirectiveArguments(
-                    $typeResolver,
+                $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+                    $fieldArgsSchemaDefinition,
                     $fieldName,
                     $fieldArgs,
-                    $fieldArgsSchemaDefinition,
                     ResolverTypes::FIELD
                 )
             ) {
@@ -201,11 +200,10 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                  * Validate array types are provided as arrays
                  */
                 if (
-                    $maybeError = $this->maybeValidateArrayTypeFieldOrDirectiveArguments(
-                        $typeResolver,
+                    $maybeError = $this->validateArrayTypeFieldOrDirectiveArguments(
+                        $fieldArgsSchemaDefinition,
                         $fieldName,
                         $fieldArgs,
-                        $fieldArgsSchemaDefinition,
                         ResolverTypes::FIELD
                     )
                 ) {
@@ -217,11 +215,10 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                  */
                 list(
                     $maybeError
-                ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
-                    $typeResolver,
+                ) = $this->validateEnumFieldOrDirectiveArguments(
+                    $fieldArgsSchemaDefinition,
                     $fieldName,
                     $fieldArgs,
-                    $fieldArgsSchemaDefinition,
                     ResolverTypes::FIELD
                 );
                 if ($maybeError) {
@@ -265,11 +262,10 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             list(
                 $maybeError,
                 $maybeDeprecation
-            ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
-                $typeResolver,
+            ) = $this->validateEnumFieldOrDirectiveArguments(
+                $fieldArgsSchemaDefinition,
                 $fieldName,
                 $fieldArgs,
-                $fieldArgsSchemaDefinition,
                 ResolverTypes::FIELD
             );
             if ($maybeDeprecation) {

@@ -20,7 +20,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     const CACHETYPE_IMMUTABLESETTINGS = 'static-settings';
     const CACHETYPE_STATEFULSETTINGS = 'stateful-settings';
 
-    protected function processAndGenerateData()
+    protected function processAndGenerateData(): void
     {
         parent::processAndGenerateData();
 

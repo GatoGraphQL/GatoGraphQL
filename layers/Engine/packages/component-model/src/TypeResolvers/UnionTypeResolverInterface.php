@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\TypeResolverPickers\TypeResolverPickerInterface;
 
-interface UnionTypeResolverInterface
+interface UnionTypeResolverInterface extends TypeResolverInterface
 {
     // public function addTypeToID(string | int $resultItemID): string;
     public function getTypeResolverClassForResultItem(string | int $resultItemID);

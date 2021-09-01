@@ -116,7 +116,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         return $ret;
     }
 
-    protected function processAndGenerateData()
+    protected function processAndGenerateData(): void
     {
         // Initialize/Reset the JS module data
         $this->immutable_modulejsdata = $this->mutableonmodel_modulejsdata = $this->mutableonrequest_modulejsdata = array();
@@ -171,8 +171,16 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         return $ret;
     }
 
-    protected function processAndAddModuleData($module_path, array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDs)
-    {
+    protected function processAndAddModuleData(
+        array $module_path,
+        array $module,
+        array &$props,
+        array $data_properties,
+        $dataaccess_checkpoint_validation,
+        $mutation_checkpoint_validation,
+        $executed,
+        $dbObjectIDs
+    ): void {
         parent::processAndAddModuleData($module_path, $module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDs);
 
         // Validate that the strata includes the required stratum
@@ -269,7 +277,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     }
 
     // Allow PoPWebPlatform_Engine to override this function
-    protected function getEncodedDataObject($data)
+    protected function getEncodedDataObject(array $data): array
     {
         $data = parent::getEncodedDataObject($data);
 
