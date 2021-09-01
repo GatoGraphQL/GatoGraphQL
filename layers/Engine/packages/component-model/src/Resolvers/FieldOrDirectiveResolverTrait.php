@@ -233,16 +233,16 @@ trait FieldOrDirectiveResolverTrait
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
-    ): ?string {
+    ): ?array {
         // Iterate all the enum types and check that the provided values is one of them, or throw an error
         if ($enumTypeFieldOrDirectiveArgsSchemaDefinition = SchemaHelpers::getEnumTypeFieldOrDirectiveArgsSchemaDefinition($fieldOrDirectiveArgsSchemaDefinition)) {
-            [$maybeError] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
+            [$maybeErrors] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
                 $enumTypeFieldOrDirectiveArgsSchemaDefinition,
                 $fieldOrDirectiveName,
                 $fieldOrDirectiveArgs,
                 $type
             );
-            return $maybeError;
+            return $maybeErrors;
         }
         return null;
     }
@@ -252,22 +252,22 @@ trait FieldOrDirectiveResolverTrait
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
-    ): ?string {
+    ): array {
         // Iterate all the enum types and check that the provided values is one of them, or throw an error
         if ($enumTypeFieldOrDirectiveArgsSchemaDefinition = SchemaHelpers::getEnumTypeFieldOrDirectiveArgsSchemaDefinition($fieldOrDirectiveArgsSchemaDefinition)) {
-            [$maybeError, $maybeDeprecation] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
+            [$maybeErrors, $maybeDeprecations] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
                 $enumTypeFieldOrDirectiveArgsSchemaDefinition,
                 $fieldOrDirectiveName,
                 $fieldOrDirectiveArgs,
                 $type
             );
-            return $maybeDeprecation;
+            return $maybeDeprecations;
         }
-        return null;
+        return [];
     }
 
     /**
-     * @return string[] 2 items: [0]: errors, [1]: deprecations
+     * @return array[] 2 items: [0]: array of errors, [1]: array of deprecations
      */
     private function doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
         array $enumTypeFieldOrDirectiveArgsSchemaDefinition,
@@ -283,7 +283,7 @@ trait FieldOrDirectiveResolverTrait
     }
 
     /**
-     * @return string[] 2 items: [0]: errors, [1]: deprecations
+     * @return array[] 2 items: [0]: array of errors, [1]: array of deprecations
      */
     private function doValidateEnumFieldOrDirectiveArguments(
         array $enumTypeFieldOrDirectiveArgsSchemaDefinition,
@@ -449,17 +449,8 @@ trait FieldOrDirectiveResolverTrait
                 );
             }
         }
-        // if ($errors) {
-        //     return implode($translationAPI->__('. '), $errors);
-        // }
         // Array of 2 items: errors and deprecations
-        if ($errors || $deprecations) {
-            return [
-                $errors ? implode($translationAPI->__('. '), $errors) : null,
-                $deprecations ? implode($translationAPI->__('. '), $deprecations) : null,
-            ];
-        }
-        return [null, null];
+        return [$errors, $deprecations];
     }
 
     private function doValidateEnumFieldOrDirectiveArgumentsItem(
