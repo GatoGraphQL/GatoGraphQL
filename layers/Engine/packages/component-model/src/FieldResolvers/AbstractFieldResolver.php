@@ -185,11 +185,10 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
              * Validate mandatory values
              */
             if (
-                $maybeError = $this->maybeValidateNotMissingFieldOrDirectiveArguments(
-                    $typeResolver,
+                $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+                    $fieldArgsSchemaDefinition,
                     $fieldName,
                     $fieldArgs,
-                    $fieldArgsSchemaDefinition,
                     ResolverTypes::FIELD
                 )
             ) {

@@ -393,11 +393,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
              * Validate mandatory values
              */
             if (
-                $maybeError = $this->maybeValidateNotMissingFieldOrDirectiveArguments(
-                    $typeResolver,
+                $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+                    $directiveArgsSchemaDefinition,
                     $directiveName,
                     $directiveArgs,
-                    $directiveArgsSchemaDefinition,
                     ResolverTypes::DIRECTIVE
                 )
             ) {

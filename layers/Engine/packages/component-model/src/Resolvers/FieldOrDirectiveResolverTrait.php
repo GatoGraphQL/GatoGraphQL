@@ -19,11 +19,15 @@ trait FieldOrDirectiveResolverTrait
      */
     protected array $enumValueArgumentValidationCache = [];
 
-    protected function maybeValidateNotMissingFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?string
-    {
+    protected function validateNotMissingFieldOrDirectiveArguments(
+        array $fieldOrDirectiveArgsSchemaDefinition,
+        string $fieldOrDirectiveName,
+        array $fieldOrDirectiveArgs,
+        string $type
+    ): ?string {
         if ($mandatoryArgs = SchemaHelpers::getSchemaMandatoryFieldOrDirectiveArgs($fieldOrDirectiveArgsSchemaDefinition)) {
             if (
-                $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+                $maybeError = $this->doValidateNotMissingFieldOrDirectiveArguments(
                     SchemaHelpers::getSchemaFieldArgNames($mandatoryArgs),
                     $fieldOrDirectiveName,
                     $fieldOrDirectiveArgs,
@@ -36,7 +40,7 @@ trait FieldOrDirectiveResolverTrait
         return null;
     }
 
-    protected function validateNotMissingFieldOrDirectiveArguments(array $fieldOrDirectiveArgumentProperties, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, string $type): ?string
+    protected function doValidateNotMissingFieldOrDirectiveArguments(array $fieldOrDirectiveArgumentProperties, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, string $type): ?string
     {
         if ($missing = SchemaHelpers::getMissingFieldArgs($fieldOrDirectiveArgumentProperties, $fieldOrDirectiveArgs)) {
             $translationAPI = TranslationAPIFacade::getInstance();
