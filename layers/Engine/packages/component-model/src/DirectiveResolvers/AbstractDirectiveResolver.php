@@ -421,12 +421,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 /**
                  * Validate enums
                  */
-                if ($maybeErrors = $this->validateEnumFieldOrDirectiveArguments(
-                    $directiveArgsSchemaDefinition,
-                    $directiveName,
-                    $directiveArgs,
-                    ResolverTypes::DIRECTIVE
-                )) {
+                if (
+                    $maybeErrors = $this->validateEnumFieldOrDirectiveArguments(
+                        $directiveArgsSchemaDefinition,
+                        $directiveName,
+                        $directiveArgs,
+                        ResolverTypes::DIRECTIVE
+                    )
+                ) {
                     return $maybeErrors;
                 }
             }
@@ -577,12 +579,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     {
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($typeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
-            if ($maybeDeprecations = $this->getEnumFieldOrDirectiveArgumentDeprecations(
-                $directiveArgsSchemaDefinition,
-                $directiveName,
-                $directiveArgs,
-                ResolverTypes::DIRECTIVE
-            )) {
+            if (
+                $maybeDeprecations = $this->getEnumFieldOrDirectiveArgumentDeprecations(
+                    $directiveArgsSchemaDefinition,
+                    $directiveName,
+                    $directiveArgs,
+                    ResolverTypes::DIRECTIVE
+                )
+            ) {
                 return implode($this->translationAPI->__('. '), $maybeDeprecations);
             }
         }
