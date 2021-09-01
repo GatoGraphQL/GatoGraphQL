@@ -200,14 +200,14 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                  * Validate array types are provided as arrays
                  */
                 if (
-                    $maybeError = $this->validateArrayTypeFieldOrDirectiveArguments(
+                    $maybeErrors = $this->validateArrayTypeFieldOrDirectiveArguments(
                         $fieldArgsSchemaDefinition,
                         $fieldName,
                         $fieldArgs,
                         ResolverTypes::FIELD
                     )
                 ) {
-                    return [$maybeError];
+                    return $maybeErrors;
                 }
 
                 /**
