@@ -615,8 +615,8 @@ class Engine implements EngineInterface
     }
 
     private function doAddDatasetToDatabase(
-        array &$database, 
-        string $database_key, 
+        array &$database,
+        string $database_key,
         array $dataitems
     ): void {
         // Save in the database under the corresponding database-key (this way, different dataloaders, like 'list-users' and 'author',
