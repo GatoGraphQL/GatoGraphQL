@@ -40,7 +40,7 @@ trait FieldOrDirectiveResolverTrait
         return null;
     }
 
-    protected function doValidateNotMissingFieldOrDirectiveArguments(
+    private function doValidateNotMissingFieldOrDirectiveArguments(
         array $fieldOrDirectiveArgumentProperties,
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
@@ -246,7 +246,7 @@ trait FieldOrDirectiveResolverTrait
         return null;
     }
 
-    protected function doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
+    private function doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
         array $enumTypeFieldOrDirectiveArgsSchemaDefinition,
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
@@ -258,7 +258,7 @@ trait FieldOrDirectiveResolverTrait
         }
         return $this->enumValueArgumentValidationCache[$key];
     }
-    protected function doValidateEnumFieldOrDirectiveArguments(
+    private function doValidateEnumFieldOrDirectiveArguments(
         array $enumTypeFieldOrDirectiveArgsSchemaDefinition,
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
@@ -435,7 +435,7 @@ trait FieldOrDirectiveResolverTrait
         return null;
     }
 
-    protected function doValidateEnumFieldOrDirectiveArgumentsItem(
+    private function doValidateEnumFieldOrDirectiveArgumentsItem(
         array &$errors,
         array &$deprecations,
         array $schemaFieldOrDirectiveArgumentEnumValues,
