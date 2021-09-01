@@ -1422,6 +1422,7 @@ class Engine implements EngineInterface
                 // If the type is union, then add the type corresponding to each object on its ID
                 $dbItems = $this->moveEntriesUnderDBName($iterationDBItems, true, $typeResolver);
                 foreach ($dbItems as $dbname => $entries) {
+                    $databases[$dbname] ??= [];
                     $this->addDatasetToDatabase($databases[$dbname], $typeResolver, $database_key, $entries, $resultIDItems);
 
                     // Populate the $previousDBItems, pointing to the newly fetched dbItems (but without the dbname!)
