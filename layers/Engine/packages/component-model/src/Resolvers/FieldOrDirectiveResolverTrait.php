@@ -99,7 +99,7 @@ trait FieldOrDirectiveResolverTrait
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
-    ): ?string {
+    ): ?array {
         $translationAPI = TranslationAPIFacade::getInstance();
         $errors = [];
         $fieldOrDirectiveArgumentNames = SchemaHelpers::getSchemaFieldArgNames($fieldOrDirectiveArgsSchemaDefinition);
@@ -222,10 +222,7 @@ trait FieldOrDirectiveResolverTrait
                 }
             }
         }
-        if ($errors) {
-            return implode($translationAPI->__('. '), $errors);
-        }
-        return null;
+        return $errors;
     }
 
     protected function validateEnumFieldOrDirectiveArguments(
