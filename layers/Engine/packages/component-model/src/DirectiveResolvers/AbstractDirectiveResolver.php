@@ -421,16 +421,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 /**
                  * Validate enums
                  */
-                list(
-                    $maybeError
-                ) = $this->validateEnumFieldOrDirectiveArguments(
-                    $directiveArgsSchemaDefinition,
-                    $directiveName,
-                    $directiveArgs,
-                    ResolverTypes::DIRECTIVE
-                );
-                if ($maybeError) {
-                    return [$maybeError];
+                if (
+                    $maybeErrors = $this->validateEnumFieldOrDirectiveArguments(
+                        $directiveArgsSchemaDefinition,
+                        $directiveName,
+                        $directiveArgs,
+                        ResolverTypes::DIRECTIVE
+                    )
+                ) {
+                    return $maybeErrors;
                 }
             }
         }
@@ -580,17 +579,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     {
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($typeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
-            list(
-                $maybeError,
-                $maybeDeprecation
-            ) = $this->validateEnumFieldOrDirectiveArguments(
-                $directiveArgsSchemaDefinition,
-                $directiveName,
-                $directiveArgs,
-                ResolverTypes::DIRECTIVE
-            );
-            if ($maybeDeprecation) {
-                return $maybeDeprecation;
+            if (
+                $maybeDeprecations = $this->getEnumFieldOrDirectiveArgumentDeprecations(
+                    $directiveArgsSchemaDefinition,
+                    $directiveName,
+                    $directiveArgs,
+                    ResolverTypes::DIRECTIVE
+                )
+            ) {
+                return implode($this->translationAPI->__('. '), $maybeDeprecations);
             }
         }
         return null;
