@@ -263,7 +263,7 @@ class Engine implements EngineInterface
         $this->sendEtagHeader();
     }
 
-    protected function formatData()
+    protected function formatData(): void
     {
         $formatter = $this->dataStructureManager->getDataStructureFormatter();
         $this->data = $formatter->getFormattedData($this->data);
@@ -275,7 +275,7 @@ class Engine implements EngineInterface
     }
 
     // Allow PoPWebPlatform_Engine to override this function
-    protected function getEncodedDataObject($data)
+    protected function getEncodedDataObject(array $data): array
     {
         // Comment Leo 14/09/2018: Re-enable here:
         // if (true) {
@@ -324,7 +324,7 @@ class Engine implements EngineInterface
         return $props;
     }
 
-    protected function processAndGenerateData()
+    protected function processAndGenerateData(): void
     {
         $vars = ApplicationState::getVars();
 
@@ -432,7 +432,7 @@ class Engine implements EngineInterface
         );
     }
 
-    protected function addSharedMeta()
+    protected function addSharedMeta(): void
     {
         $vars = ApplicationState::getVars();
 
@@ -588,8 +588,13 @@ class Engine implements EngineInterface
         );
     }
 
-    private function combineIdsDatafields(&$typeResolver_ids_data_fields, $typeResolver_class, $ids, $data_fields, $conditional_data_fields = [])
-    {
+    private function combineIdsDatafields(
+        &$typeResolver_ids_data_fields,
+        $typeResolver_class,
+        $ids,
+        $data_fields,
+        $conditional_data_fields = []
+    ) {
         $typeResolver_ids_data_fields[$typeResolver_class] = $typeResolver_ids_data_fields[$typeResolver_class] ?? array();
         foreach ($ids as $id) {
             // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
@@ -1752,9 +1757,8 @@ class Engine implements EngineInterface
         }
     }
 
-    protected function maybeCombineAndAddDatabaseEntries(&$ret, $name, $entries)
+    protected function maybeCombineAndAddDatabaseEntries(&$ret, $name, $entries): void
     {
-
         // Do not add the "database", "userstatedatabase" entries unless there are values in them
         // Otherwise, it messes up integrating the current databases in the webplatform with those from the response when deep merging them
         if ($entries) {
@@ -1787,9 +1791,8 @@ class Engine implements EngineInterface
         }
     }
 
-    protected function maybeCombineAndAddSchemaEntries(&$ret, $name, $entries)
+    protected function maybeCombineAndAddSchemaEntries(&$ret, $name, $entries): void
     {
-
         if ($entries) {
             $vars = ApplicationState::getVars();
             $dboutputmode = $vars['dboutputmode'];

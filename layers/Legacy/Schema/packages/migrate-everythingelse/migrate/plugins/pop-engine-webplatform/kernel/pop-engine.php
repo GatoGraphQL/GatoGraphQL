@@ -116,7 +116,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         return $ret;
     }
 
-    protected function processAndGenerateData()
+    protected function processAndGenerateData(): void
     {
         // Initialize/Reset the JS module data
         $this->immutable_modulejsdata = $this->mutableonmodel_modulejsdata = $this->mutableonrequest_modulejsdata = array();
@@ -269,7 +269,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     }
 
     // Allow PoPWebPlatform_Engine to override this function
-    protected function getEncodedDataObject($data)
+    protected function getEncodedDataObject(array $data): array
     {
         $data = parent::getEncodedDataObject($data);
 

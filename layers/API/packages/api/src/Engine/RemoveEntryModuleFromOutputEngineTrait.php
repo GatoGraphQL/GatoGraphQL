@@ -12,8 +12,7 @@ use PoP\API\Response\Schemes as APISchemes;
 
 trait RemoveEntryModuleFromOutputEngineTrait
 {
-
-    protected function getEncodedDataObject($data)
+    protected function getEncodedDataObject(array $data): array
     {
         $data = parent::getEncodedDataObject($data);
 
