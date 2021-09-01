@@ -409,11 +409,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                  * Validate array types are provided as arrays
                  */
                 if (
-                    $maybeError = $this->maybeValidateArrayTypeFieldOrDirectiveArguments(
-                        $typeResolver,
+                    $maybeError = $this->validateArrayTypeFieldOrDirectiveArguments(
+                        $directiveArgsSchemaDefinition,
                         $directiveName,
                         $directiveArgs,
-                        $directiveArgsSchemaDefinition,
                         ResolverTypes::DIRECTIVE
                     )
                 ) {

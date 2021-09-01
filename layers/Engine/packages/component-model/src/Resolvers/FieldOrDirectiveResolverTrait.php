@@ -86,21 +86,6 @@ trait FieldOrDirectiveResolverTrait
         return !FieldQueryUtils::isAnyFieldArgumentValueAFieldOrExpression($fieldOrDirectiveArgs);
     }
 
-    protected function maybeValidateArrayTypeFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?string
-    {
-        if (
-            $maybeError = $this->validateArrayTypeFieldOrDirectiveArguments(
-                $fieldOrDirectiveArgsSchemaDefinition,
-                $fieldOrDirectiveName,
-                $fieldOrDirectiveArgs,
-                $type
-            )
-        ) {
-            return $maybeError;
-        }
-        return null;
-    }
-
     protected function validateArrayTypeFieldOrDirectiveArguments(
         array $fieldOrDirectiveArgsSchemaDefinition,
         string $fieldOrDirectiveName,
