@@ -421,15 +421,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 /**
                  * Validate enums
                  */
-                list(
-                    $maybeError
-                ) = $this->validateEnumFieldOrDirectiveArguments(
+                if ($maybeError = $this->validateEnumFieldOrDirectiveArguments(
                     $directiveArgsSchemaDefinition,
                     $directiveName,
                     $directiveArgs,
                     ResolverTypes::DIRECTIVE
-                );
-                if ($maybeError) {
+                )) {
                     return [$maybeError];
                 }
             }
@@ -580,18 +577,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     {
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($typeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
-            list(
-                $maybeError,
-                $maybeDeprecation
-            ) = $this->validateEnumFieldOrDirectiveArguments(
+            return $this->getEnumFieldOrDirectiveArgumentDeprecations(
                 $directiveArgsSchemaDefinition,
                 $directiveName,
                 $directiveArgs,
                 ResolverTypes::DIRECTIVE
             );
-            if ($maybeDeprecation) {
-                return $maybeDeprecation;
-            }
         }
         return null;
     }

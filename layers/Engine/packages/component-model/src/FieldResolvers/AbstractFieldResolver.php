@@ -213,15 +213,12 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 /**
                  * Validate enums
                  */
-                list(
-                    $maybeError
-                ) = $this->validateEnumFieldOrDirectiveArguments(
+                if ($maybeError = $this->validateEnumFieldOrDirectiveArguments(
                     $fieldArgsSchemaDefinition,
                     $fieldName,
                     $fieldArgs,
                     ResolverTypes::FIELD
-                );
-                if ($maybeError) {
+                )) {
                     return [$maybeError];
                 }
             }
@@ -259,16 +256,12 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     {
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($typeResolver, $fieldName, $fieldArgs);
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
-            list(
-                $maybeError,
-                $maybeDeprecation
-            ) = $this->validateEnumFieldOrDirectiveArguments(
+            if ($maybeDeprecation = $this->validateEnumFieldOrDirectiveArguments(
                 $fieldArgsSchemaDefinition,
                 $fieldName,
                 $fieldArgs,
                 ResolverTypes::FIELD
-            );
-            if ($maybeDeprecation) {
+            )) {
                 return [
                     $maybeDeprecation
                 ];
