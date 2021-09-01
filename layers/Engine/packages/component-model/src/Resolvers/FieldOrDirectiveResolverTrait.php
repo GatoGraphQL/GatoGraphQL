@@ -228,16 +228,15 @@ trait FieldOrDirectiveResolverTrait
         return null;
     }
 
-    protected function maybeValidateEnumFieldOrDirectiveArguments(
-        TypeResolverInterface $typeResolver,
+    protected function validateEnumFieldOrDirectiveArguments(
+        array $fieldOrDirectiveArgsSchemaDefinition,
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
-        array $fieldOrDirectiveArgsSchemaDefinition,
         string $type
     ): ?array {
         // Iterate all the enum types and check that the provided values is one of them, or throw an error
         if ($enumTypeFieldOrDirectiveArgsSchemaDefinition = SchemaHelpers::getEnumTypeFieldOrDirectiveArgsSchemaDefinition($fieldOrDirectiveArgsSchemaDefinition)) {
-            return $this->validateEnumFieldOrDirectiveArguments(
+            return $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
                 $enumTypeFieldOrDirectiveArgsSchemaDefinition,
                 $fieldOrDirectiveName,
                 $fieldOrDirectiveArgs,
@@ -247,7 +246,7 @@ trait FieldOrDirectiveResolverTrait
         return null;
     }
 
-    protected function validateEnumFieldOrDirectiveArguments(
+    protected function doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
         array $enumTypeFieldOrDirectiveArgsSchemaDefinition,
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,

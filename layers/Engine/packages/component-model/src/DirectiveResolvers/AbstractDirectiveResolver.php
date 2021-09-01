@@ -423,11 +423,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                  */
                 list(
                     $maybeError
-                ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
-                    $typeResolver,
+                ) = $this->validateEnumFieldOrDirectiveArguments(
+                    $directiveArgsSchemaDefinition,
                     $directiveName,
                     $directiveArgs,
-                    $directiveArgsSchemaDefinition,
                     ResolverTypes::DIRECTIVE
                 );
                 if ($maybeError) {
@@ -584,11 +583,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             list(
                 $maybeError,
                 $maybeDeprecation
-            ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
-                $typeResolver,
+            ) = $this->validateEnumFieldOrDirectiveArguments(
+                $directiveArgsSchemaDefinition,
                 $directiveName,
                 $directiveArgs,
-                $directiveArgsSchemaDefinition,
                 ResolverTypes::DIRECTIVE
             );
             if ($maybeDeprecation) {
