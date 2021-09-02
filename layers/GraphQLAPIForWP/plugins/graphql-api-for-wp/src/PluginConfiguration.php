@@ -218,13 +218,13 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
-            // [
-            //     'class' => GenericCustomPostsComponentConfiguration::class,
-            //     'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_MAX_LIMIT,
-            //     'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
-            //     'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-            //     'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
-            // ],
+            [
+                'class' => GenericCustomPostsComponentConfiguration::class,
+                'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_MAX_LIMIT,
+                'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
+                'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
+            ],
             [
                 'class' => GenericCustomPostsComponentConfiguration::class,
                 'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_TYPES,

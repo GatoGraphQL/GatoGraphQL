@@ -147,6 +147,41 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     }
 
     /**
+     * Validate the constraints for a field argument
+     *
+     * @return string[] Error messages
+     */
+    public function validateFieldArgument(
+        TypeResolverInterface $typeResolver,
+        string $fieldName,
+        string $fieldArgName,
+        mixed $fieldArgValue
+    ): array {
+        $errors = parent::validateFieldArgument(
+            $typeResolver,
+            $fieldName,
+            $fieldArgName,
+            $fieldArgValue,
+        );
+        
+        // Check the "limit" fieldArg
+        switch ($fieldName) {
+            case 'genericCustomPosts':
+            case 'genericCustomPostsForAdmin':
+                if ($maybeError = $this->maybeValidateLimitFieldArgument(
+                    ComponentConfiguration::getGenericCustomPostListMaxLimit(),
+                    $fieldName,
+                    $fieldArgName,
+                    $fieldArgValue
+                )) {
+                    $errors[] = $maybeError;
+                }
+                break;
+        }
+        return $errors;
+    }
+
+    /**
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
      */
