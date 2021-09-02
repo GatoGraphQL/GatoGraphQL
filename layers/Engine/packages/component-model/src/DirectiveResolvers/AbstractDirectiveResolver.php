@@ -291,22 +291,43 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForResultItem($this, $typeResolver, $resultItem, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
-        $this->directiveArgsForResultItems[$typeResolver->getID($resultItem)] = $directiveArgs;
+        $resultItemID = $typeResolver->getID($resultItem);
+        $this->directiveArgsForResultItems[$resultItemID] = $directiveArgs;
 
-        if ($nestedDBWarnings || $nestedDBErrors) {
-            foreach ($nestedDBErrors as $id => $fieldOutputKeyErrorMessages) {
-                $dbErrors[$id] = array_merge(
-                    $dbErrors[$id] ?? [],
-                    $fieldOutputKeyErrorMessages
-                );
-            }
-            foreach ($nestedDBWarnings as $id => $fieldOutputKeyWarningMessages) {
-                $dbWarnings[$id] = array_merge(
-                    $dbWarnings[$id] ?? [],
-                    $fieldOutputKeyWarningMessages
-                );
+        // Store errors (if any)
+        foreach ($nestedDBErrors as $id => $fieldOutputKeyErrorMessages) {
+            $dbErrors[$id] = array_merge(
+                $dbErrors[$id] ?? [],
+                $fieldOutputKeyErrorMessages
+            );
+        }
+        foreach ($nestedDBWarnings as $id => $fieldOutputKeyWarningMessages) {
+            $dbWarnings[$id] = array_merge(
+                $dbWarnings[$id] ?? [],
+                $fieldOutputKeyWarningMessages
+            );
+        }
+
+        /**
+         * Validate directive argument constraints, only if there are no previous errors
+         */
+        if (!$nestedDBErrors) {
+            if (
+                $maybeErrors = $this->resolveDirectiveArgumentErrors(
+                    $typeResolver,
+                    $directiveName,
+                    $directiveArgs
+                )
+            ) {
+                foreach ($maybeErrors as $errorMessage) {
+                    $dbErrors[$resultItemID][] = [
+                        Tokens::PATH => [$this->directive],
+                        Tokens::MESSAGE => $errorMessage,
+                    ];
+                }
             }
         }
+        
         return [
             $validDirective,
             $directiveName,
