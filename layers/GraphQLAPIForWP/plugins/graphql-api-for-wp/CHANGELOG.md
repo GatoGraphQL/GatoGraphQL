@@ -153,6 +153,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Nested mutations
   - Admin fields
 - Validate constraints for field and directive arguments
+- Added options "default limit" and "max limit" for Posts and Pages
 - Prettyprint GraphQL queries in the module docs
 
 ### Fixed
