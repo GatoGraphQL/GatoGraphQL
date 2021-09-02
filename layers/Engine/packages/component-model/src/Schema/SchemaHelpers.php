@@ -16,12 +16,12 @@ class SchemaHelpers
      *
      * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
      */
-    public static function getMissingFieldArgs(array $fieldArgProps, array $fieldArgs): array
+    public static function getMissingFieldArgs(array $fieldArgNames, array $fieldArgs): array
     {
         return array_values(array_filter(
-            $fieldArgProps,
-            function ($fieldArgProp) use ($fieldArgs) {
-                return !array_key_exists($fieldArgProp, $fieldArgs);
+            $fieldArgNames,
+            function ($fieldArgName) use ($fieldArgs) {
+                return !array_key_exists($fieldArgName, $fieldArgs);
             }
         ));
     }
