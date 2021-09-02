@@ -327,7 +327,7 @@ trait FieldOrDirectiveResolverTrait
             $enumTypeFieldOrDirectiveArgNonNullArrayItems = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
             $enumTypeFieldOrDirectiveArgNonNullArrayOfArraysItems = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
             // Each fieldArgumentEnumValue is an array with item "name" for sure, and maybe also "description", "deprecated" and "deprecationDescription"
-            $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName];
+            $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName] ?? [];
             if (!$enumTypeFieldOrDirectiveArgMayBeArray) {
                 if (
                     !$enumTypeFieldOrDirectiveArgIsArray
