@@ -103,8 +103,7 @@ trait FieldOrDirectiveResolverTrait
         $translationAPI = TranslationAPIFacade::getInstance();
         $errors = [];
         $fieldOrDirectiveArgumentNames = array_keys($fieldOrDirectiveArgsSchemaDefinition);
-        for ($i = 0; $i < count($fieldOrDirectiveArgumentNames); $i++) {
-            $fieldOrDirectiveArgumentName = $fieldOrDirectiveArgumentNames[$i];
+        foreach ($fieldOrDirectiveArgumentNames as $fieldOrDirectiveArgumentName) {
             $fieldOrDirectiveArgumentValue = $fieldOrDirectiveArgs[$fieldOrDirectiveArgumentName] ?? null;
             if ($fieldOrDirectiveArgumentValue !== null) {
                 // Check if it's an array or not from the schema definition
@@ -292,8 +291,7 @@ trait FieldOrDirectiveResolverTrait
         $errors = $deprecations = [];
         $fieldOrDirectiveArgumentNames = array_keys($enumTypeFieldOrDirectiveArgsSchemaDefinition);
         $schemaFieldArgumentEnumValueDefinitions = SchemaHelpers::getSchemaFieldArgEnumValueDefinitions($enumTypeFieldOrDirectiveArgsSchemaDefinition);
-        for ($i = 0; $i < count($fieldOrDirectiveArgumentNames); $i++) {
-            $fieldOrDirectiveArgumentName = $fieldOrDirectiveArgumentNames[$i];
+        foreach ($fieldOrDirectiveArgumentNames as $fieldOrDirectiveArgumentName) {
             $fieldOrDirectiveArgumentValue = $fieldOrDirectiveArgs[$fieldOrDirectiveArgumentName] ?? null;
             if ($fieldOrDirectiveArgumentValue !== null) {
                 // Check if it's an array or not from the schema definition
