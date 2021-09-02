@@ -101,6 +101,51 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
     }
 
     /**
+     * Validate the constraints for a field argument
+     */
+    protected function validateFieldArgument(
+        TypeResolverInterface $typeResolver,
+        array $fieldArgSchemaDefinition,
+        string $fieldName,
+        string $fieldArgName,
+        mixed $fieldArgValue
+    ): ?array {
+        $errors = parent::validateFieldArgument(
+            $typeResolver,
+            $fieldArgSchemaDefinition,
+            $fieldName,
+            $fieldArgName,
+            $fieldArgValue,
+        );
+        
+        // Check the limit is not above the max limit
+        $postListMaxLimit = ComponentConfiguration::getPostListMaxLimit();
+        if ($postListMaxLimit === -1) {
+            return $errors;
+        }
+        switch ($fieldName) {
+            case 'posts':
+            case 'postsForAdmin':
+                $limitFilterInputName = FilterInputHelper::getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                ]);
+                if ($fieldArgName !== $limitFilterInputName) {
+                    break;
+                }
+                if ($fieldArgValue > $postListMaxLimit) {
+                    $errors[] = sprintf(
+                        $this->translationAPI->__('The max limit for field \'%s\' is \'%s\'', 'posts'),
+                        $fieldName,
+                        $postListMaxLimit
+                    );
+                }
+                break;
+        }
+        return $errors;
+    }
+
+    /**
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
      */
