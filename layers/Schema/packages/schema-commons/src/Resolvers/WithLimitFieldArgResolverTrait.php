@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\SchemaCommons\FieldResolvers;
+namespace PoPSchema\SchemaCommons\Resolvers;
 
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-trait WithLimitFieldArgFieldResolverTrait
+trait WithLimitFieldArgResolverTrait
 {
     private ?string $limitFilterInputName = null;
 

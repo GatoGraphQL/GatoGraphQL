@@ -62,6 +62,22 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
         return null;
     }
 
+    /**
+     * Validate the constraints for a field argument
+     *
+     * @return string[] Error messages
+     */
+    public function validateFieldArgument(
+        string $fieldName,
+        string $fieldArgName,
+        mixed $fieldArgValue
+    ): array {
+        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
+            return $schemaDefinitionResolver->validateFieldArgument($fieldName, $fieldArgName, $fieldArgValue);
+        }
+        return [];
+    }
+
     public function addSchemaDefinitionForField(array &$schemaDefinition, string $fieldName): void
     {
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {

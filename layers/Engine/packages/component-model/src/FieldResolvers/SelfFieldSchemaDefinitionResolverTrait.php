@@ -50,6 +50,15 @@ trait SelfFieldSchemaDefinitionResolverTrait
         return null;
     }
 
+    public function validateFieldArgument(
+        TypeResolverInterface $typeResolver,
+        string $fieldName,
+        string $fieldArgName,
+        mixed $fieldArgValue
+    ): array {
+        return [];
+    }
+
     public function addSchemaDefinitionForField(array &$schemaDefinition, TypeResolverInterface $typeResolver, string $fieldName): void
     {
     }

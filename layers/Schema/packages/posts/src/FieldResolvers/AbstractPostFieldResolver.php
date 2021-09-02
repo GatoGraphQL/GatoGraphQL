@@ -15,12 +15,12 @@ use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\FieldResolvers\WithLimitFieldArgFieldResolverTrait;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
 abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
 {
-    use WithLimitFieldArgFieldResolverTrait;
+    use WithLimitFieldArgResolverTrait;
     
     public function getFieldNamesToResolve(): array
     {
@@ -108,7 +108,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
      *
      * @return string[] Error messages
      */
-    protected function validateFieldArgument(
+    public function validateFieldArgument(
         TypeResolverInterface $typeResolver,
         string $fieldName,
         string $fieldArgName,

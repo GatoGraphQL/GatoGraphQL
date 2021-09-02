@@ -64,6 +64,15 @@ class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionR
         return $this->fieldInterfaceResolver->getSchemaFieldDeprecationDescription($fieldName, $fieldArgs);
     }
 
+    public function validateFieldArgument(
+        TypeResolverInterface $typeResolver,
+        string $fieldName,
+        string $fieldArgName,
+        mixed $fieldArgValue
+    ): array {
+        return $this->fieldInterfaceResolver->validateFieldArgument($fieldName, $fieldArgName, $fieldArgValue);
+    }
+
     public function addSchemaDefinitionForField(array &$schemaDefinition, TypeResolverInterface $typeResolver, string $fieldName): void
     {
         $this->fieldInterfaceResolver->addSchemaDefinitionForField($schemaDefinition, $fieldName);

@@ -278,17 +278,20 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         array $fieldArgs = []
     ): array {
         $errors = [];
-        foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
-            if ($maybeErrors = $this->validateFieldArgument(
-                 $typeResolver,
-                 $fieldName,
-                 $fieldArgName,
-                 $fieldArgValue
-            )) {
-                $errors = array_merge(
-                    $errors,
-                    $maybeErrors
-                );
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($typeResolver, $fieldName);
+        if ($schemaDefinitionResolver !== null) {
+            foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
+                if ($maybeErrors = $schemaDefinitionResolver->validateFieldArgument(
+                    $typeResolver,
+                    $fieldName,
+                    $fieldArgName,
+                    $fieldArgValue
+                )) {
+                    $errors = array_merge(
+                        $errors,
+                        $maybeErrors
+                    );
+                }
             }
         }
         return $errors;
@@ -299,7 +302,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      *
      * @return string[] Error messages
      */
-    protected function validateFieldArgument(
+    public function validateFieldArgument(
         TypeResolverInterface $typeResolver,
         string $fieldName,
         string $fieldArgName,
