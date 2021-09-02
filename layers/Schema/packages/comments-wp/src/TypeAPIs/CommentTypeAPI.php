@@ -135,15 +135,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         }
         // For the comments, if there's no limit then it brings all results
         if (isset($query['limit'])) {
-            // Maybe restrict the limit, if higher than the max limit
-            // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
-            if (!isset($options[QueryOptions::SKIP_MAX_LIMIT]) || !$options[QueryOptions::SKIP_MAX_LIMIT]) {
-                $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
-                    $limit,
-                    ComponentConfiguration::getCommentListMaxLimit()
-                );
-            }
             // To bring all results, must use "number => 0" instead of -1
             $query['number'] = ($limit == -1) ? 0 : $limit;
             unset($query['limit']);

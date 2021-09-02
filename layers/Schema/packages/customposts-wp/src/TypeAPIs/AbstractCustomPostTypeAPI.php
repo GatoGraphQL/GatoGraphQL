@@ -151,17 +151,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             // Same param name, so do nothing
         }
         if (isset($query['limit'])) {
-            // Maybe restrict the limit, if higher than the max limit
-            // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
-            if (!isset($options[QueryOptions::SKIP_MAX_LIMIT]) || !$options[QueryOptions::SKIP_MAX_LIMIT]) {
-                $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
-                    $limit,
-                    $this->getCustomPostListMaxLimit()
-                );
-            }
-
-            // Assign the limit as the required attribute
             $query['posts_per_page'] = $limit;
             unset($query['limit']);
         }
