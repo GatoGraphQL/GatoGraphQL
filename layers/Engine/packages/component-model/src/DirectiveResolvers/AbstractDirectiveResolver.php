@@ -390,7 +390,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($typeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             /**
-             * Validate mandatory values
+             * Validate mandatory values. If it produces errors, return immediately
              */
             if (
                 $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
@@ -405,7 +405,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
             if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
                 /**
-                 * Validate array types are provided as arrays
+                 * Validate array types are provided as arrays. If it produces errors, return immediately
                  */
                 if (
                     $maybeErrors = $this->validateArrayTypeFieldOrDirectiveArguments(
@@ -418,6 +418,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     return $maybeErrors;
                 }
 
+                // The errors below can be accumulated
+                $errors = [];
+                
                 /**
                  * Validate enums
                  */
@@ -429,7 +432,31 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                         ResolverTypes::DIRECTIVE
                     )
                 ) {
-                    return $maybeErrors;
+                    $errors = array_merge(
+                        $errors,
+                        $maybeErrors
+                    );
+                }
+
+                /**
+                 * Validate directive argument constraints
+                 */
+                if (
+                    $maybeErrors = $this->resolveDirectiveArgumentErrors(
+                        $typeResolver,
+                        $directiveArgsSchemaDefinition,
+                        $directiveName,
+                        $directiveArgs
+                    )
+                ) {
+                    $errors = array_merge(
+                        $errors,
+                        $maybeErrors
+                    );
+                }
+
+                if ($errors) {
+                    return $errors;
                 }
             }
         }
@@ -440,6 +467,31 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $directiveName,
             $directiveArgs,
         );
+    }
+
+    /**
+     * Validate the constraints for the directive arguments
+     */
+    final protected function resolveDirectiveArgumentErrors(
+        TypeResolverInterface $typeResolver,
+        array $directiveArgsSchemaDefinition,
+        string $directiveName,
+        array $directiveArgs = []
+    ): ?array {
+        return null;
+    }
+
+    /**
+     * Validate the constraints for a directive argument
+     */
+    protected function validateDirectiveArgument(
+        TypeResolverInterface $typeResolver,
+        array $directiveArgSchemaDefinition,
+        string $directiveName,
+        string $directiveArgName,
+        mixed $directiveArgValue
+    ): ?array {
+        return null;
     }
 
     /**

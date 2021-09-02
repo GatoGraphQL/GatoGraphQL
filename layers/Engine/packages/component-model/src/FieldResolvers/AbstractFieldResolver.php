@@ -182,7 +182,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($typeResolver, $fieldName, $fieldArgs);
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             /**
-             * Validate mandatory values
+             * Validate mandatory values. If it produces errors, return immediately
              */
             if (
                 $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
@@ -197,7 +197,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
             if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs)) {
                 /**
-                 * Validate array types are provided as arrays
+                 * Validate array types are provided as arrays. If it produces errors, return immediately
                  */
                 if (
                     $maybeErrors = $this->validateArrayTypeFieldOrDirectiveArguments(
@@ -210,6 +210,9 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                     return $maybeErrors;
                 }
 
+                // The errors below can be accumulated
+                $errors = [];
+
                 /**
                  * Validate enums
                  */
@@ -221,7 +224,31 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                         ResolverTypes::FIELD
                     )
                 ) {
-                    return $maybeErrors;
+                    $errors = array_merge(
+                        $errors,
+                        $maybeErrors
+                    );
+                }
+
+                /**
+                 * Validate field argument constraints
+                 */
+                if (
+                    $maybeErrors = $this->resolveFieldArgumentErrors(
+                        $typeResolver,
+                        $fieldArgsSchemaDefinition,
+                        $fieldName,
+                        $fieldArgs
+                    )
+                ) {
+                    $errors = array_merge(
+                        $errors,
+                        $maybeErrors
+                    );
+                }
+
+                if ($errors) {
+                    return $errors;
                 }
             }
         }
@@ -241,6 +268,31 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             $fieldName,
             $fieldArgs,
         );
+    }
+
+    /**
+     * Validate the constraints for the field arguments
+     */
+    final protected function resolveFieldArgumentErrors(
+        TypeResolverInterface $typeResolver,
+        array $fieldArgsSchemaDefinition,
+        string $fieldName,
+        array $fieldArgs = []
+    ): ?array {
+        return null;
+    }
+
+    /**
+     * Validate the constraints for a field argument
+     */
+    protected function validateFieldArgument(
+        TypeResolverInterface $typeResolver,
+        array $fieldArgSchemaDefinition,
+        string $fieldName,
+        string $fieldArgName,
+        mixed $fieldArgValue
+    ): ?array {
+        return null;
     }
 
     /**
