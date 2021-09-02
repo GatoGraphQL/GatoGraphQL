@@ -501,8 +501,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         string $directiveName,
         string $directiveArgName,
         mixed $directiveArgValue
-    ): ?array {
-        return null;
+    ): array {
+        return [];
     }
 
     /**
