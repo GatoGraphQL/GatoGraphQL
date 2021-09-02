@@ -11,13 +11,14 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\GenericCustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
+use PoPSchema\GenericCustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
 /**
  * Add fields to the Root for querying for generic custom posts
@@ -26,6 +27,8 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
  */
 class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
 {
+    use WithLimitFieldArgResolverTrait;
+    
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
