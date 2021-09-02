@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Cache;
+namespace PoP\Engine\Cache;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;

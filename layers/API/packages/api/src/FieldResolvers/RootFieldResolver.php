@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\FieldResolvers;
 
 use PoP\API\Cache\CacheTypes;
-use PoP\API\Cache\CacheUtils;
+use PoP\Engine\Cache\CacheUtils;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Enums\SchemaFieldShapeEnum;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
