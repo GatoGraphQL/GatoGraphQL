@@ -31,7 +31,7 @@ class SchemaHelpers
         return array_filter(
             $fieldOrDirectiveArgsSchemaDefinition,
             function ($fieldOrDirectiveArgSchemaDefinition) {
-                return isset($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY]) && $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY];
+                return $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? false;
             }
         );
     }
