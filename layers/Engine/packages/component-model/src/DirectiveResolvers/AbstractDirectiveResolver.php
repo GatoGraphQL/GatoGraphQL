@@ -477,8 +477,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array $directiveArgsSchemaDefinition,
         string $directiveName,
         array $directiveArgs = []
-    ): ?array {
-        return null;
+    ): array {
+        $errors = [];
+        return $errors;
     }
 
     /**

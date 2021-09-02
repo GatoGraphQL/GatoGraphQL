@@ -278,8 +278,9 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         array $fieldArgsSchemaDefinition,
         string $fieldName,
         array $fieldArgs = []
-    ): ?array {
-        return null;
+    ): array {
+        $errors = [];
+        return $errors;
     }
 
     /**
