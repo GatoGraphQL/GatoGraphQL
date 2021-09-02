@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Posts\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -12,13 +13,15 @@ use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\FieldResolvers\WithLimitFieldArgFieldResolverTrait;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
 {
+    use WithLimitFieldArgFieldResolverTrait;
+    
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -118,27 +121,17 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
             $fieldArgValue,
         );
         
-        // Check the limit is not above the max limit
-        $postListMaxLimit = ComponentConfiguration::getPostListMaxLimit();
-        if ($postListMaxLimit === -1) {
-            return $errors;
-        }
+        // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'posts':
             case 'postsForAdmin':
-                $limitFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
-                ]);
-                if ($fieldArgName !== $limitFilterInputName) {
-                    break;
-                }
-                if ($fieldArgValue > $postListMaxLimit) {
-                    $errors[] = sprintf(
-                        $this->translationAPI->__('The max limit for field \'%s\' is \'%s\'', 'posts'),
-                        $fieldName,
-                        $postListMaxLimit
-                    );
+                if ($maybeError = $this->maybeValidateLimitFieldArgument(
+                    ComponentConfiguration::getPostListMaxLimit(),
+                    $fieldName,
+                    $fieldArgName,
+                    $fieldArgValue
+                )) {
+                    $errors[] = $maybeError;
                 }
                 break;
         }
