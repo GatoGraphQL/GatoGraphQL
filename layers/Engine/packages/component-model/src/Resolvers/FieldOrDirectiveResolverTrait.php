@@ -28,7 +28,7 @@ trait FieldOrDirectiveResolverTrait
         if ($mandatoryArgs = SchemaHelpers::getSchemaMandatoryFieldOrDirectiveArgs($fieldOrDirectiveArgsSchemaDefinition)) {
             if (
                 $maybeError = $this->doValidateNotMissingFieldOrDirectiveArguments(
-                    SchemaHelpers::getSchemaFieldArgNames($mandatoryArgs),
+                    array_keys($mandatoryArgs),
                     $fieldOrDirectiveName,
                     $fieldOrDirectiveArgs,
                     $type
@@ -41,12 +41,12 @@ trait FieldOrDirectiveResolverTrait
     }
 
     private function doValidateNotMissingFieldOrDirectiveArguments(
-        array $fieldOrDirectiveArgumentProperties,
+        array $mandatoryFieldOrDirectiveArgNames,
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
     ): ?string {
-        if ($missing = SchemaHelpers::getMissingFieldArgs($fieldOrDirectiveArgumentProperties, $fieldOrDirectiveArgs)) {
+        if ($missing = SchemaHelpers::getMissingFieldArgs($mandatoryFieldOrDirectiveArgNames, $fieldOrDirectiveArgs)) {
             $translationAPI = TranslationAPIFacade::getInstance();
             $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
             $errorMessage = count($missing) == 1 ?
@@ -102,124 +102,124 @@ trait FieldOrDirectiveResolverTrait
     ): ?array {
         $translationAPI = TranslationAPIFacade::getInstance();
         $errors = [];
-        $fieldOrDirectiveArgumentNames = SchemaHelpers::getSchemaFieldArgNames($fieldOrDirectiveArgsSchemaDefinition);
-        for ($i = 0; $i < count($fieldOrDirectiveArgumentNames); $i++) {
-            $fieldOrDirectiveArgumentName = $fieldOrDirectiveArgumentNames[$i];
+        $fieldOrDirectiveArgumentNames = array_keys($fieldOrDirectiveArgsSchemaDefinition);
+        foreach ($fieldOrDirectiveArgumentNames as $fieldOrDirectiveArgumentName) {
             $fieldOrDirectiveArgumentValue = $fieldOrDirectiveArgs[$fieldOrDirectiveArgumentName] ?? null;
-            if ($fieldOrDirectiveArgumentValue !== null) {
-                // Check if it's an array or not from the schema definition
-                $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
-                /**
-                 * This value will not be used with GraphQL, but can be used by PoP.
-                 *
-                 * While GraphQL has a strong type system, PoP takes a more lenient approach,
-                 * enabling fields to maybe be an array, maybe not.
-                 *
-                 * Eg: `echo(object: ...)` will print back whatever provided,
-                 * whether `String` or `[String]`. Its input is `Mixed`, which can comprise
-                 * an `Object`, so it could be provided as an array, or also `String`, which
-                 * will not be an array.
-                 *
-                 * Whenever the value may be an array, the server will skip those validations
-                 * to check if an input is array or not (and throw an error).
-                 */
-                $fieldOrDirectiveArgType = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
-                $fieldOrDirectiveArgMayBeArray = in_array($fieldOrDirectiveArgType, [
-                    SchemaDefinition::TYPE_INPUT_OBJECT,
-                    SchemaDefinition::TYPE_OBJECT,
-                    SchemaDefinition::TYPE_MIXED,
-                ]);
-                // If the value may be array, may be not, then there's nothing to validate
-                if ($fieldOrDirectiveArgMayBeArray) {
-                    continue;
-                }
-                $fieldOrDirectiveArgIsArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                $fieldOrDirectiveArgNonNullArrayItems = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-                $fieldOrDirectiveArgIsArrayOfArrays = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
-                $fieldOrDirectiveArgNonNullArrayOfArraysItems = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-                if (
-                    !$fieldOrDirectiveArgIsArray
-                    && is_array($fieldOrDirectiveArgumentValue)
-                ) {
-                    $errors[] = sprintf(
-                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
-                        $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                        $fieldOrDirectiveName
-                    );
-                } elseif (
-                    $fieldOrDirectiveArgIsArray
-                    && !is_array($fieldOrDirectiveArgumentValue)
-                ) {
-                    $errors[] = sprintf(
-                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
-                        $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                        $fieldOrDirectiveName
-                    );
-                } elseif (
-                    $fieldOrDirectiveArgNonNullArrayItems
-                    && is_array($fieldOrDirectiveArgumentValue)
-                    && array_filter(
-                        $fieldOrDirectiveArgumentValue,
-                        fn ($arrayItem) => $arrayItem === null
-                    )
-                ) {
-                    $errors[] = sprintf(
-                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
-                        $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                        $fieldOrDirectiveName
-                    );
-                } elseif (
-                    !$fieldOrDirectiveArgIsArrayOfArrays
-                    && is_array($fieldOrDirectiveArgumentValue)
-                    // Check if any element is an array
-                    && array_filter(
-                        $fieldOrDirectiveArgumentValue,
-                        fn (mixed $arrayItem) => is_array($arrayItem)
-                    )
-                ) {
-                    $errors[] = sprintf(
-                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' must not contain arrays', 'component-model'),
-                        $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                        $fieldOrDirectiveName
-                    );
-                } elseif (
-                    $fieldOrDirectiveArgIsArrayOfArrays
-                    && is_array($fieldOrDirectiveArgumentValue)
-                    // Check if any element is not an array
-                    && array_filter(
-                        $fieldOrDirectiveArgumentValue,
-                        // `null` could be accepted as an array! (Validation against null comes next)
-                        fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
-                    )
-                ) {
-                    $errors[] = sprintf(
-                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array of arrays', 'component-model'),
-                        $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                        $fieldOrDirectiveName
-                    );
-                } elseif (
-                    $fieldOrDirectiveArgNonNullArrayOfArraysItems
-                    && is_array($fieldOrDirectiveArgumentValue)
-                    && array_filter(
-                        $fieldOrDirectiveArgumentValue,
-                        fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
-                            $arrayItem,
-                            fn ($arrayItemItem) => $arrayItemItem === null
-                        ) !== [],
-                    )
-                ) {
-                    $errors[] = sprintf(
-                        $translationAPI->__('The array of arrays for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
-                        $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                        $fieldOrDirectiveName
-                    );
-                }
+            if ($fieldOrDirectiveArgumentValue === null) {
+                continue;
+            }
+            // Check if it's an array or not from the schema definition
+            $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
+            /**
+             * This value will not be used with GraphQL, but can be used by PoP.
+             *
+             * While GraphQL has a strong type system, PoP takes a more lenient approach,
+             * enabling fields to maybe be an array, maybe not.
+             *
+             * Eg: `echo(object: ...)` will print back whatever provided,
+             * whether `String` or `[String]`. Its input is `Mixed`, which can comprise
+             * an `Object`, so it could be provided as an array, or also `String`, which
+             * will not be an array.
+             *
+             * Whenever the value may be an array, the server will skip those validations
+             * to check if an input is array or not (and throw an error).
+             */
+            $fieldOrDirectiveArgType = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+            $fieldOrDirectiveArgMayBeArray = in_array($fieldOrDirectiveArgType, [
+                SchemaDefinition::TYPE_INPUT_OBJECT,
+                SchemaDefinition::TYPE_OBJECT,
+                SchemaDefinition::TYPE_MIXED,
+            ]);
+            // If the value may be array, may be not, then there's nothing to validate
+            if ($fieldOrDirectiveArgMayBeArray) {
+                continue;
+            }
+            $fieldOrDirectiveArgIsArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+            $fieldOrDirectiveArgNonNullArrayItems = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
+            $fieldOrDirectiveArgIsArrayOfArrays = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
+            $fieldOrDirectiveArgNonNullArrayOfArraysItems = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
+            if (
+                !$fieldOrDirectiveArgIsArray
+                && is_array($fieldOrDirectiveArgumentValue)
+            ) {
+                $errors[] = sprintf(
+                    $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName
+                );
+            } elseif (
+                $fieldOrDirectiveArgIsArray
+                && !is_array($fieldOrDirectiveArgumentValue)
+            ) {
+                $errors[] = sprintf(
+                    $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName
+                );
+            } elseif (
+                $fieldOrDirectiveArgNonNullArrayItems
+                && is_array($fieldOrDirectiveArgumentValue)
+                && array_filter(
+                    $fieldOrDirectiveArgumentValue,
+                    fn ($arrayItem) => $arrayItem === null
+                )
+            ) {
+                $errors[] = sprintf(
+                    $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName
+                );
+            } elseif (
+                !$fieldOrDirectiveArgIsArrayOfArrays
+                && is_array($fieldOrDirectiveArgumentValue)
+                // Check if any element is an array
+                && array_filter(
+                    $fieldOrDirectiveArgumentValue,
+                    fn (mixed $arrayItem) => is_array($arrayItem)
+                )
+            ) {
+                $errors[] = sprintf(
+                    $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' must not contain arrays', 'component-model'),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName
+                );
+            } elseif (
+                $fieldOrDirectiveArgIsArrayOfArrays
+                && is_array($fieldOrDirectiveArgumentValue)
+                // Check if any element is not an array
+                && array_filter(
+                    $fieldOrDirectiveArgumentValue,
+                    // `null` could be accepted as an array! (Validation against null comes next)
+                    fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
+                )
+            ) {
+                $errors[] = sprintf(
+                    $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array of arrays', 'component-model'),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName
+                );
+            } elseif (
+                $fieldOrDirectiveArgNonNullArrayOfArraysItems
+                && is_array($fieldOrDirectiveArgumentValue)
+                && array_filter(
+                    $fieldOrDirectiveArgumentValue,
+                    fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
+                        $arrayItem,
+                        fn ($arrayItemItem) => $arrayItemItem === null
+                    ) !== [],
+                )
+            ) {
+                $errors[] = sprintf(
+                    $translationAPI->__('The array of arrays for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName
+                );
             }
         }
         return $errors;
@@ -290,161 +290,161 @@ trait FieldOrDirectiveResolverTrait
     ): array {
         $translationAPI = TranslationAPIFacade::getInstance();
         $errors = $deprecations = [];
-        $fieldOrDirectiveArgumentNames = SchemaHelpers::getSchemaFieldArgNames($enumTypeFieldOrDirectiveArgsSchemaDefinition);
+        $fieldOrDirectiveArgumentNames = array_keys($enumTypeFieldOrDirectiveArgsSchemaDefinition);
         $schemaFieldArgumentEnumValueDefinitions = SchemaHelpers::getSchemaFieldArgEnumValueDefinitions($enumTypeFieldOrDirectiveArgsSchemaDefinition);
-        for ($i = 0; $i < count($fieldOrDirectiveArgumentNames); $i++) {
-            $fieldOrDirectiveArgumentName = $fieldOrDirectiveArgumentNames[$i];
+        foreach ($fieldOrDirectiveArgumentNames as $fieldOrDirectiveArgumentName) {
             $fieldOrDirectiveArgumentValue = $fieldOrDirectiveArgs[$fieldOrDirectiveArgumentName] ?? null;
-            if ($fieldOrDirectiveArgumentValue !== null) {
-                // Check if it's an array or not from the schema definition
-                $enumTypeFieldOrDirectiveArgSchemaDefinition = $enumTypeFieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
-                // If the value may be array, may be not, then there's nothing to validate
-                /**
-                 * This value will not be used with GraphQL, but can be used by PoP.
-                 *
-                 * While GraphQL has a strong type system, PoP takes a more lenient approach,
-                 * enabling fields to maybe be an array, maybe not.
-                 *
-                 * Eg: `echo(value: ...)` will print back whatever provided,
-                 * whether `String` or `[String]`. Its input is `Mixed`, which can comprise
-                 * an `Object`, so it could be provided as an array, or also `String`, which
-                 * will not be an array.
-                 *
-                 * Whenever the value may be an array, the server will skip those validations
-                 * to check if an input is array or not (and throw an error).
-                 */
-                $enumTypeFieldOrDirectiveArgType = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
-                $enumTypeFieldOrDirectiveArgMayBeArray = in_array($enumTypeFieldOrDirectiveArgType, [
-                    SchemaDefinition::TYPE_INPUT_OBJECT,
-                    SchemaDefinition::TYPE_OBJECT,
-                    SchemaDefinition::TYPE_MIXED,
-                ]);
-                // If setting the "array of arrays" flag, there's no need to set the "array" flag
-                $enumTypeFieldOrDirectiveArgIsArrayOfArrays = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
-                $enumTypeFieldOrDirectiveArgIsArray = ($enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false)
-                    || $enumTypeFieldOrDirectiveArgIsArrayOfArrays;
-                $enumTypeFieldOrDirectiveArgNonNullArrayItems = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-                $enumTypeFieldOrDirectiveArgNonNullArrayOfArraysItems = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-                // Each fieldArgumentEnumValue is an array with item "name" for sure, and maybe also "description", "deprecated" and "deprecationDescription"
-                $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName];
-                if (!$enumTypeFieldOrDirectiveArgMayBeArray) {
-                    if (
-                        !$enumTypeFieldOrDirectiveArgIsArray
-                        && is_array($fieldOrDirectiveArgumentValue)
-                    ) {
-                        $errors[] = sprintf(
-                            $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
-                            $fieldOrDirectiveArgumentName,
-                            $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                            $fieldOrDirectiveName
-                        );
-                        continue;
-                    }
-                    if (
-                        $enumTypeFieldOrDirectiveArgIsArray
-                        && !is_array($fieldOrDirectiveArgumentValue)
-                    ) {
-                        $errors[] = sprintf(
-                            $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
-                            $fieldOrDirectiveArgumentName,
-                            $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                            $fieldOrDirectiveName
-                        );
-                        continue;
-                    }
-                    if (
-                        $enumTypeFieldOrDirectiveArgIsArray
-                        && is_array($fieldOrDirectiveArgumentValue)
-                        && $enumTypeFieldOrDirectiveArgNonNullArrayItems
-                        && array_filter(
-                            $fieldOrDirectiveArgumentValue,
-                            fn ($arrayItem) => $arrayItem === null
-                        )
-                    ) {
-                        $errors[] = sprintf(
-                            $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
-                            $fieldOrDirectiveArgumentName,
-                            $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                            $fieldOrDirectiveName
-                        );
-                        continue;
-                    }
-                    if (
-                        !$enumTypeFieldOrDirectiveArgIsArrayOfArrays
-                        && is_array($fieldOrDirectiveArgumentValue)
-                        && array_filter(
-                            $fieldOrDirectiveArgumentValue,
-                            fn (mixed $arrayItem) => is_array($arrayItem)
-                        )
-                    ) {
-                        $errors[] = sprintf(
-                            $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' must not contain arrays', 'component-model'),
-                            $fieldOrDirectiveArgumentName,
-                            $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                            $fieldOrDirectiveName
-                        );
-                        continue;
-                    }
-                    if (
-                        $enumTypeFieldOrDirectiveArgIsArrayOfArrays
-                        && is_array($fieldOrDirectiveArgumentValue)
-                        && array_filter(
-                            $fieldOrDirectiveArgumentValue,
-                            // `null` could be accepted as an array! (Validation against null comes next)
-                            fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
-                        )
-                    ) {
-                        $errors[] = sprintf(
-                            $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array of arrays', 'component-model'),
-                            $fieldOrDirectiveArgumentName,
-                            $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                            $fieldOrDirectiveName
-                        );
-                        continue;
-                    }
-                    if (
-                        $enumTypeFieldOrDirectiveArgIsArrayOfArrays
-                        && is_array($fieldOrDirectiveArgumentValue)
-                        && $enumTypeFieldOrDirectiveArgNonNullArrayOfArraysItems
-                        && array_filter(
-                            $fieldOrDirectiveArgumentValue,
-                            fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
-                                $arrayItem,
-                                fn ($arrayItemItem) => $arrayItemItem === null
-                            ) !== [],
-                        )
-                    ) {
-                        $errors[] = sprintf(
-                            $translationAPI->__('The array of arrays for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
-                            $fieldOrDirectiveArgumentName,
-                            $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                            $fieldOrDirectiveName
-                        );
-                        continue;
-                    }
-                }
-                // Pass all the enum values to be validated, as a list.
-                // Possibilities:
-                //   1. Single item => [item]
-                //   2. Array => Array
-                //   3. Array of arrays => flatten into array
-                if ($enumTypeFieldOrDirectiveArgIsArrayOfArrays) {
-                    $fieldOrDirectiveArgumentValueEnums = array_unique(GeneralUtils::arrayFlatten($fieldOrDirectiveArgumentValue));
-                } elseif ($enumTypeFieldOrDirectiveArgIsArray) {
-                    $fieldOrDirectiveArgumentValueEnums = $fieldOrDirectiveArgumentValue;
-                } else {
-                    $fieldOrDirectiveArgumentValueEnums = [$fieldOrDirectiveArgumentValue];
-                }
-                $this->doValidateEnumFieldOrDirectiveArgumentsItem(
-                    $errors,
-                    $deprecations,
-                    $schemaFieldOrDirectiveArgumentEnumValues,
-                    $fieldOrDirectiveArgumentValueEnums,
-                    $fieldOrDirectiveArgumentName,
-                    $fieldOrDirectiveName,
-                    $type,
-                );
+            if ($fieldOrDirectiveArgumentValue === null) {
+                continue;
             }
+            // Check if it's an array or not from the schema definition
+            $enumTypeFieldOrDirectiveArgSchemaDefinition = $enumTypeFieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
+            // If the value may be array, may be not, then there's nothing to validate
+            /**
+             * This value will not be used with GraphQL, but can be used by PoP.
+             *
+             * While GraphQL has a strong type system, PoP takes a more lenient approach,
+             * enabling fields to maybe be an array, maybe not.
+             *
+             * Eg: `echo(value: ...)` will print back whatever provided,
+             * whether `String` or `[String]`. Its input is `Mixed`, which can comprise
+             * an `Object`, so it could be provided as an array, or also `String`, which
+             * will not be an array.
+             *
+             * Whenever the value may be an array, the server will skip those validations
+             * to check if an input is array or not (and throw an error).
+             */
+            $enumTypeFieldOrDirectiveArgType = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+            $enumTypeFieldOrDirectiveArgMayBeArray = in_array($enumTypeFieldOrDirectiveArgType, [
+                SchemaDefinition::TYPE_INPUT_OBJECT,
+                SchemaDefinition::TYPE_OBJECT,
+                SchemaDefinition::TYPE_MIXED,
+            ]);
+            // If setting the "array of arrays" flag, there's no need to set the "array" flag
+            $enumTypeFieldOrDirectiveArgIsArrayOfArrays = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
+            $enumTypeFieldOrDirectiveArgIsArray = ($enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false)
+                || $enumTypeFieldOrDirectiveArgIsArrayOfArrays;
+            $enumTypeFieldOrDirectiveArgNonNullArrayItems = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
+            $enumTypeFieldOrDirectiveArgNonNullArrayOfArraysItems = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
+            // Each fieldArgumentEnumValue is an array with item "name" for sure, and maybe also "description", "deprecated" and "deprecationDescription"
+            $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName] ?? [];
+            if (!$enumTypeFieldOrDirectiveArgMayBeArray) {
+                if (
+                    !$enumTypeFieldOrDirectiveArgIsArray
+                    && is_array($fieldOrDirectiveArgumentValue)
+                ) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                    continue;
+                }
+                if (
+                    $enumTypeFieldOrDirectiveArgIsArray
+                    && !is_array($fieldOrDirectiveArgumentValue)
+                ) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                    continue;
+                }
+                if (
+                    $enumTypeFieldOrDirectiveArgIsArray
+                    && is_array($fieldOrDirectiveArgumentValue)
+                    && $enumTypeFieldOrDirectiveArgNonNullArrayItems
+                    && array_filter(
+                        $fieldOrDirectiveArgumentValue,
+                        fn ($arrayItem) => $arrayItem === null
+                    )
+                ) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                    continue;
+                }
+                if (
+                    !$enumTypeFieldOrDirectiveArgIsArrayOfArrays
+                    && is_array($fieldOrDirectiveArgumentValue)
+                    && array_filter(
+                        $fieldOrDirectiveArgumentValue,
+                        fn (mixed $arrayItem) => is_array($arrayItem)
+                    )
+                ) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' must not contain arrays', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                    continue;
+                }
+                if (
+                    $enumTypeFieldOrDirectiveArgIsArrayOfArrays
+                    && is_array($fieldOrDirectiveArgumentValue)
+                    && array_filter(
+                        $fieldOrDirectiveArgumentValue,
+                        // `null` could be accepted as an array! (Validation against null comes next)
+                        fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
+                    )
+                ) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array of arrays', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                    continue;
+                }
+                if (
+                    $enumTypeFieldOrDirectiveArgIsArrayOfArrays
+                    && is_array($fieldOrDirectiveArgumentValue)
+                    && $enumTypeFieldOrDirectiveArgNonNullArrayOfArraysItems
+                    && array_filter(
+                        $fieldOrDirectiveArgumentValue,
+                        fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
+                            $arrayItem,
+                            fn ($arrayItemItem) => $arrayItemItem === null
+                        ) !== [],
+                    )
+                ) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The array of arrays for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                    continue;
+                }
+            }
+            // Pass all the enum values to be validated, as a list.
+            // Possibilities:
+            //   1. Single item => [item]
+            //   2. Array => Array
+            //   3. Array of arrays => flatten into array
+            if ($enumTypeFieldOrDirectiveArgIsArrayOfArrays) {
+                $fieldOrDirectiveArgumentValueEnums = array_unique(GeneralUtils::arrayFlatten($fieldOrDirectiveArgumentValue));
+            } elseif ($enumTypeFieldOrDirectiveArgIsArray) {
+                $fieldOrDirectiveArgumentValueEnums = $fieldOrDirectiveArgumentValue;
+            } else {
+                $fieldOrDirectiveArgumentValueEnums = [$fieldOrDirectiveArgumentValue];
+            }
+            $this->doValidateEnumFieldOrDirectiveArgumentsItem(
+                $errors,
+                $deprecations,
+                $schemaFieldOrDirectiveArgumentEnumValues,
+                $fieldOrDirectiveArgumentValueEnums,
+                $fieldOrDirectiveArgumentName,
+                $fieldOrDirectiveName,
+                $type,
+            );
         }
         // Array of 2 items: errors and deprecations
         return [$errors, $deprecations];

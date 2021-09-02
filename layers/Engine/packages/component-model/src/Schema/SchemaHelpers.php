@@ -16,12 +16,12 @@ class SchemaHelpers
      *
      * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
      */
-    public static function getMissingFieldArgs(array $fieldArgProps, array $fieldArgs): array
+    public static function getMissingFieldArgs(array $fieldArgNames, array $fieldArgs): array
     {
         return array_values(array_filter(
-            $fieldArgProps,
-            function ($fieldArgProp) use ($fieldArgs) {
-                return !array_key_exists($fieldArgProp, $fieldArgs);
+            $fieldArgNames,
+            function ($fieldArgName) use ($fieldArgs) {
+                return !array_key_exists($fieldArgName, $fieldArgs);
             }
         ));
     }
@@ -42,17 +42,6 @@ class SchemaHelpers
             $fieldOrDirectiveArgsSchemaDefinition,
             fn ($fieldOrDirectiveArgSchemaDefinition) => $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] == SchemaDefinition::TYPE_ENUM
         );
-    }
-
-    public static function getSchemaFieldArgNames(array $schemaFieldArgs)
-    {
-        // $schemaFieldArgs contains the name also as the key, keep only the values
-        return array_values(array_map(
-            function ($schemaFieldArg) {
-                return $schemaFieldArg[SchemaDefinition::ARGNAME_NAME];
-            },
-            $schemaFieldArgs
-        ));
     }
 
     public static function convertToSchemaFieldArgEnumValueDefinitions(
