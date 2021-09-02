@@ -102,7 +102,7 @@ trait FieldOrDirectiveResolverTrait
     ): ?array {
         $translationAPI = TranslationAPIFacade::getInstance();
         $errors = [];
-        $fieldOrDirectiveArgumentNames = SchemaHelpers::getSchemaFieldArgNames($fieldOrDirectiveArgsSchemaDefinition);
+        $fieldOrDirectiveArgumentNames = array_keys($fieldOrDirectiveArgsSchemaDefinition);
         for ($i = 0; $i < count($fieldOrDirectiveArgumentNames); $i++) {
             $fieldOrDirectiveArgumentName = $fieldOrDirectiveArgumentNames[$i];
             $fieldOrDirectiveArgumentValue = $fieldOrDirectiveArgs[$fieldOrDirectiveArgumentName] ?? null;
@@ -290,7 +290,7 @@ trait FieldOrDirectiveResolverTrait
     ): array {
         $translationAPI = TranslationAPIFacade::getInstance();
         $errors = $deprecations = [];
-        $fieldOrDirectiveArgumentNames = SchemaHelpers::getSchemaFieldArgNames($enumTypeFieldOrDirectiveArgsSchemaDefinition);
+        $fieldOrDirectiveArgumentNames = array_keys($enumTypeFieldOrDirectiveArgsSchemaDefinition);
         $schemaFieldArgumentEnumValueDefinitions = SchemaHelpers::getSchemaFieldArgEnumValueDefinitions($enumTypeFieldOrDirectiveArgsSchemaDefinition);
         for ($i = 0; $i < count($fieldOrDirectiveArgumentNames); $i++) {
             $fieldOrDirectiveArgumentName = $fieldOrDirectiveArgumentNames[$i];
