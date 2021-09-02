@@ -261,7 +261,7 @@ trait AliasSchemaFieldResolverTrait
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
-    ): ?array {
+    ): array {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->validateFieldArgument(
             $typeResolver,
