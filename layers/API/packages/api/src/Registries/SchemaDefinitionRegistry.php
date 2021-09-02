@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\Registries;
 
 use PoP\API\Cache\CacheTypes;
-use PoP\API\Cache\CacheUtils;
+use PoP\Engine\Cache\CacheUtils;
 use PoP\API\ComponentConfiguration;
 use PoP\Engine\ObjectFacades\RootObjectFacade;
 use PoP\Engine\TypeResolvers\RootTypeResolver;

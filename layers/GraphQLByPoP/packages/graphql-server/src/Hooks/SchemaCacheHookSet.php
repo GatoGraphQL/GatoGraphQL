@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
-use PoP\API\Cache\CacheUtils;
+use PoP\Engine\Cache\CacheUtils;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\State\ApplicationState;
 
