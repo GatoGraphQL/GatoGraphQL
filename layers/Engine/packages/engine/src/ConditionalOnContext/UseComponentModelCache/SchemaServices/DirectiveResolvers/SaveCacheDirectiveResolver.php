@@ -127,7 +127,6 @@ class SaveCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
             $directiveArgValue,
         );
         
-        // Check the "limit" directiveArg
         switch ($directiveArgName) {
             case 'time':
                 if ($directiveArgValue < 0) {

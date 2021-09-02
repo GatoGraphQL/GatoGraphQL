@@ -82,7 +82,6 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
             $directiveArgValue,
         );
         
-        // Check the "limit" directiveArg
         switch ($directiveArgName) {
             case 'maxAge':
                 if ($directiveArgValue < 0) {
