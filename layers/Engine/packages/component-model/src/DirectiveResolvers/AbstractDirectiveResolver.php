@@ -479,6 +479,20 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array $directiveArgs = []
     ): array {
         $errors = [];
+        foreach ($directiveArgsSchemaDefinition as $directiveArgName => $directiveArgSchemaDefinition) {
+            if ($maybeErrors = $this->validateDirectiveArgument(
+                 $typeResolver,
+                 $directiveArgSchemaDefinition,
+                 $directiveName,
+                 $directiveArgName,
+                 $directiveArgs[$directiveArgName] ?? null
+            )) {
+                $errors = array_merge(
+                    $errors,
+                    $maybeErrors
+                );
+            }
+        }
         return $errors;
     }
 

@@ -280,6 +280,20 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         array $fieldArgs = []
     ): array {
         $errors = [];
+        foreach ($fieldArgsSchemaDefinition as $fieldArgName => $fieldArgSchemaDefinition) {
+            if ($maybeErrors = $this->validateFieldArgument(
+                 $typeResolver,
+                 $fieldArgSchemaDefinition,
+                 $fieldName,
+                 $fieldArgName,
+                 $fieldArgs[$fieldArgName] ?? null
+            )) {
+                $errors = array_merge(
+                    $errors,
+                    $maybeErrors
+                );
+            }
+        }
         return $errors;
     }
 
