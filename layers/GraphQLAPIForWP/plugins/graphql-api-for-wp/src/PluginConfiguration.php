@@ -236,14 +236,14 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => PostsComponentConfiguration::class,
                 'envVariable' => PostsEnvironment::POST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
-                'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'optionModule' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => PostsComponentConfiguration::class,
                 'envVariable' => PostsEnvironment::POST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
-                'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'optionModule' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
@@ -328,14 +328,14 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => PagesComponentConfiguration::class,
                 'envVariable' => PagesEnvironment::PAGE_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
-                'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'optionModule' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => PagesComponentConfiguration::class,
                 'envVariable' => PagesEnvironment::PAGE_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
-                'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'optionModule' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
