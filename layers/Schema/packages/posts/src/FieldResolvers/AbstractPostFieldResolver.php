@@ -110,14 +110,12 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
      */
     protected function validateFieldArgument(
         TypeResolverInterface $typeResolver,
-        array $fieldArgSchemaDefinition,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
         $errors = parent::validateFieldArgument(
             $typeResolver,
-            $fieldArgSchemaDefinition,
             $fieldName,
             $fieldArgName,
             $fieldArgValue,

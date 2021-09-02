@@ -444,7 +444,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 if (
                     $maybeErrors = $this->resolveDirectiveArgumentErrors(
                         $typeResolver,
-                        $directiveArgsSchemaDefinition,
                         $directiveName,
                         $directiveArgs
                     )
@@ -474,18 +473,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      */
     final protected function resolveDirectiveArgumentErrors(
         TypeResolverInterface $typeResolver,
-        array $directiveArgsSchemaDefinition,
         string $directiveName,
         array $directiveArgs = []
     ): array {
         $errors = [];
-        foreach ($directiveArgsSchemaDefinition as $directiveArgName => $directiveArgSchemaDefinition) {
+        foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
             if ($maybeErrors = $this->validateDirectiveArgument(
                  $typeResolver,
-                 $directiveArgSchemaDefinition,
                  $directiveName,
                  $directiveArgName,
-                 $directiveArgs[$directiveArgName] ?? null
+                 $directiveArgValue
             )) {
                 $errors = array_merge(
                     $errors,
@@ -501,7 +498,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      */
     protected function validateDirectiveArgument(
         TypeResolverInterface $typeResolver,
-        array $directiveArgSchemaDefinition,
         string $directiveName,
         string $directiveArgName,
         mixed $directiveArgValue
