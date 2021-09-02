@@ -150,17 +150,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
             // Same param name, so do nothing
         }
         if (isset($query['limit'])) {
-            // Maybe restrict the limit, if higher than the max limit
-            // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
-            if (!isset($options[QueryOptions::SKIP_MAX_LIMIT]) || !$options[QueryOptions::SKIP_MAX_LIMIT]) {
-                $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
-                    $limit,
-                    ComponentConfiguration::getTagListMaxLimit()
-                );
-            }
-
-            // Assign the limit as the required attribute
             // To bring all results, get_tags needs "number => 0" instead of -1
             $query['number'] = ($limit == -1) ? 0 : $limit;
             unset($query['limit']);
