@@ -33,7 +33,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
-    
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -142,17 +142,19 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             $fieldArgName,
             $fieldArgValue,
         );
-        
+
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'comments':
             case 'commentsForAdmin':
-                if ($maybeError = $this->maybeValidateLimitFieldArgument(
-                    ComponentConfiguration::getCommentListMaxLimit(),
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )) {
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getCommentListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
                     $errors[] = $maybeError;
                 }
                 break;

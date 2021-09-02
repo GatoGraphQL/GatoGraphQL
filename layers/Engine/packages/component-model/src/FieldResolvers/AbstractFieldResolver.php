@@ -281,12 +281,14 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($typeResolver, $fieldName);
         if ($schemaDefinitionResolver !== null) {
             foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
-                if ($maybeErrors = $schemaDefinitionResolver->validateFieldArgument(
-                    $typeResolver,
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )) {
+                if (
+                    $maybeErrors = $schemaDefinitionResolver->validateFieldArgument(
+                        $typeResolver,
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
                     $errors = array_merge(
                         $errors,
                         $maybeErrors

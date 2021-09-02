@@ -107,17 +107,19 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
             $fieldArgName,
             $fieldArgValue,
         );
-        
+
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'childCategories':
             case 'childCategoryNames':
-                if ($maybeError = $this->maybeValidateLimitFieldArgument(
-                    ComponentConfiguration::getCategoryListMaxLimit(),
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )) {
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getCategoryListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
                     $errors[] = $maybeError;
                 }
                 break;

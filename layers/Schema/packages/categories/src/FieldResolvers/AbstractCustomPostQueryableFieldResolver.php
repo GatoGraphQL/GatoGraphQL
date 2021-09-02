@@ -107,17 +107,19 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
             $fieldArgName,
             $fieldArgValue,
         );
-        
+
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'categories':
             case 'categoryNames':
-                if ($maybeError = $this->maybeValidateLimitFieldArgument(
-                    ComponentConfiguration::getCategoryListMaxLimit(),
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )) {
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getCategoryListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
                     $errors[] = $maybeError;
                 }
                 break;

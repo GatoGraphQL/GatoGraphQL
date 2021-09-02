@@ -23,7 +23,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
-    
+
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
@@ -122,17 +122,19 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
             $fieldArgName,
             $fieldArgValue,
         );
-        
+
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'postCategories':
             case 'postCategoryNames':
-                if ($maybeError = $this->maybeValidateLimitFieldArgument(
-                    ComponentConfiguration::getCategoryListMaxLimit(),
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )) {
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getCategoryListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
                     $errors[] = $maybeError;
                 }
                 break;

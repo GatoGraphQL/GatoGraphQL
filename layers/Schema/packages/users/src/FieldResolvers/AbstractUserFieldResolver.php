@@ -28,7 +28,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
-    
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -147,17 +147,19 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
             $fieldArgName,
             $fieldArgValue,
         );
-        
+
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'users':
             case 'usersForAdmin':
-                if ($maybeError = $this->maybeValidateLimitFieldArgument(
-                    ComponentConfiguration::getUserListMaxLimit(),
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )) {
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getUserListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
                     $errors[] = $maybeError;
                 }
                 break;

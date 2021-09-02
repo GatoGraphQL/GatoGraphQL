@@ -17,7 +17,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
 {
     use WithLimitFieldArgResolverTrait;
-    
+
     public function getInterfaceName(): string
     {
         return 'Commentable';
@@ -158,17 +158,19 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
             $fieldArgName,
             $fieldArgValue,
         );
-        
+
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'comments':
             case 'commentsForAdmin':
-                if ($maybeError = $this->maybeValidateLimitFieldArgument(
-                    ComponentConfiguration::getCommentListMaxLimit(),
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )) {
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getCommentListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
                     $errors[] = $maybeError;
                 }
                 break;

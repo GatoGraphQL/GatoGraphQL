@@ -20,7 +20,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
 {
     use TagAPIRequestedContractTrait;
     use WithLimitFieldArgResolverTrait;
-    
+
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -96,17 +96,19 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
             $fieldArgName,
             $fieldArgValue,
         );
-        
+
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'tags':
             case 'tagNames':
-                if ($maybeError = $this->maybeValidateLimitFieldArgument(
-                    ComponentConfiguration::getTagListMaxLimit(),
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )) {
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getTagListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
                     $errors[] = $maybeError;
                 }
                 break;

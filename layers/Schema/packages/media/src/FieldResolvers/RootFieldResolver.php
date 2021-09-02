@@ -31,7 +31,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
-    
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -151,16 +151,18 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             $fieldArgName,
             $fieldArgValue,
         );
-        
+
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'mediaItems':
-                if ($maybeError = $this->maybeValidateLimitFieldArgument(
-                    ComponentConfiguration::getMediaListMaxLimit(),
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )) {
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getMediaListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
                     $errors[] = $maybeError;
                 }
                 break;

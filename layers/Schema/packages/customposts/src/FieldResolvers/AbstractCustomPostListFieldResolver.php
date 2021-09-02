@@ -22,7 +22,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
- 
+
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -133,17 +133,19 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
             $fieldArgName,
             $fieldArgValue,
         );
-        
+
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostsForAdmin':
-                if ($maybeError = $this->maybeValidateLimitFieldArgument(
-                    ComponentConfiguration::getCustomPostListMaxLimit(),
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )) {
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getCustomPostListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
                     $errors[] = $maybeError;
                 }
                 break;

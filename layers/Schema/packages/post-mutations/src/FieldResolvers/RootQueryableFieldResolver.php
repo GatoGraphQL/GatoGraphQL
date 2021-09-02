@@ -25,7 +25,7 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
 {
     use UserStateFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;
-    
+
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
@@ -111,16 +111,18 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
             $fieldArgName,
             $fieldArgValue,
         );
-        
+
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'myPosts':
-                if ($maybeError = $this->maybeValidateLimitFieldArgument(
-                    ComponentConfiguration::getPostListMaxLimit(),
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )) {
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getPostListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
                     $errors[] = $maybeError;
                 }
                 break;

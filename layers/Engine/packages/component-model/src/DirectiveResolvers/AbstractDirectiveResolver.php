@@ -327,7 +327,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 }
             }
         }
-        
+
         return [
             $validDirective,
             $directiveName,
@@ -441,7 +441,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
                 // The errors below can be accumulated
                 $errors = [];
-                
+
                 /**
                  * Validate enums
                  */
@@ -499,12 +499,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     ): array {
         $errors = [];
         foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
-            if ($maybeErrors = $this->validateDirectiveArgument(
-                 $typeResolver,
-                 $directiveName,
-                 $directiveArgName,
-                 $directiveArgValue
-            )) {
+            if (
+                $maybeErrors = $this->validateDirectiveArgument(
+                    $typeResolver,
+                    $directiveName,
+                    $directiveArgName,
+                    $directiveArgValue
+                )
+            ) {
                 $errors = array_merge(
                     $errors,
                     $maybeErrors
