@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Engine;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 /**
  * Initialize component
@@ -48,9 +47,6 @@ class Component extends AbstractComponent
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
         if (!Environment::disableGuzzleOperators()) {
             self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/Guzzle');
-        }
-        if (ComponentModelComponentConfiguration::useComponentModelCache()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/UseComponentModelCache');
         }
     }
 }
