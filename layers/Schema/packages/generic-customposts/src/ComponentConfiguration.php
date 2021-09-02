@@ -12,7 +12,7 @@ class ComponentConfiguration
     use ComponentConfigurationTrait;
 
     private static ?int $getGenericCustomPostListDefaultLimit = 10;
-    // private static ?int $getGenericCustomPostListMaxLimit = -1;
+    private static ?int $getGenericCustomPostListMaxLimit = -1;
     private static array $getGenericCustomPostTypes = ['post'];
 
     public static function getGenericCustomPostListDefaultLimit(): ?int
@@ -33,23 +33,23 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    // public static function getGenericCustomPostListMaxLimit(): ?int
-    // {
-    //     // Define properties
-    //     $envVariable = Environment::GENERIC_CUSTOMPOST_LIST_MAX_LIMIT;
-    //     $selfProperty = &self::$getGenericCustomPostListMaxLimit;
-    //     $defaultValue = -1; // Unlimited
-    //     $callback = [EnvironmentValueHelpers::class, 'toInt'];
+    public static function getGenericCustomPostListMaxLimit(): ?int
+    {
+        // Define properties
+        $envVariable = Environment::GENERIC_CUSTOMPOST_LIST_MAX_LIMIT;
+        $selfProperty = &self::$getGenericCustomPostListMaxLimit;
+        $defaultValue = -1; // Unlimited
+        $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
-    //     // Initialize property from the environment/hook
-    //     self::maybeInitializeConfigurationValue(
-    //         $envVariable,
-    //         $selfProperty,
-    //         $defaultValue,
-    //         $callback
-    //     );
-    //     return $selfProperty;
-    // }
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
 
     public static function getGenericCustomPostTypes(): array
     {

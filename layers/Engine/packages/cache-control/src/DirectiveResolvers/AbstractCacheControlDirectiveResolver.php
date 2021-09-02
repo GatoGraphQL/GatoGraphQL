@@ -64,6 +64,34 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         ];
     }
 
+    /**
+     * Validate the constraints for a directive argument
+     *
+     * @return string[] Error messages
+     */
+    protected function validateDirectiveArgument(
+        TypeResolverInterface $typeResolver,
+        string $directiveName,
+        string $directiveArgName,
+        mixed $directiveArgValue
+    ): array {
+        $errors = parent::validateDirectiveArgument(
+            $typeResolver,
+            $directiveName,
+            $directiveArgName,
+            $directiveArgValue,
+        );
+
+        switch ($directiveArgName) {
+            case 'maxAge':
+                if ($directiveArgValue < 0) {
+                    $errors[] = $this->translationAPI->__('The value for \'maxAge\' must either be a positive number, or \'0\' to avoid caching');
+                }
+                break;
+        }
+        return $errors;
+    }
+
     // protected function addSchemaDefinitionForDirective(array &$schemaDefinition)
     // {
     //     // Further add for which providers it works

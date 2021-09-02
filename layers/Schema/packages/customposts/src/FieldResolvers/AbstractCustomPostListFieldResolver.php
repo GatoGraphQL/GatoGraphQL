@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -13,13 +14,15 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
 abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFieldResolver
 {
+    use WithLimitFieldArgResolverTrait;
+
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -111,6 +114,43 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
                 ];
         }
         return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
+    /**
+     * Validate the constraints for a field argument
+     *
+     * @return string[] Error messages
+     */
+    public function validateFieldArgument(
+        TypeResolverInterface $typeResolver,
+        string $fieldName,
+        string $fieldArgName,
+        mixed $fieldArgValue
+    ): array {
+        $errors = parent::validateFieldArgument(
+            $typeResolver,
+            $fieldName,
+            $fieldArgName,
+            $fieldArgValue,
+        );
+
+        // Check the "limit" fieldArg
+        switch ($fieldName) {
+            case 'customPosts':
+            case 'customPostsForAdmin':
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getCustomPostListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
+                    $errors[] = $maybeError;
+                }
+                break;
+        }
+        return $errors;
     }
 
     /**

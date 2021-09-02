@@ -256,6 +256,25 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
+    public function validateFieldArgument(
+        TypeResolverInterface $typeResolver,
+        string $fieldName,
+        string $fieldArgName,
+        mixed $fieldArgValue
+    ): array {
+        $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
+        return $aliasedFieldResolver->validateFieldArgument(
+            $typeResolver,
+            $this->getAliasedFieldName($fieldName),
+            $fieldArgName,
+            $fieldArgValue
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased FieldResolver,
+     * for the aliased $fieldName
+     */
     public function addSchemaDefinitionForField(array &$schemaDefinition, TypeResolverInterface $typeResolver, string $fieldName): void
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();

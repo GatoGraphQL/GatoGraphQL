@@ -15,5 +15,16 @@ interface FieldSchemaDefinitionResolverInterface
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string;
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array;
     public function getSchemaFieldDeprecationDescription(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string;
+    /**
+     * Validate the constraints for a field argument
+     *
+     * @return string[] Error messages
+     */
+    public function validateFieldArgument(
+        TypeResolverInterface $typeResolver,
+        string $fieldName,
+        string $fieldArgName,
+        mixed $fieldArgValue
+    ): array;
     public function addSchemaDefinitionForField(array &$schemaDefinition, TypeResolverInterface $typeResolver, string $fieldName): void;
 }

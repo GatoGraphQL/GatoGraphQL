@@ -23,14 +23,17 @@ use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
+    use WithLimitFieldArgResolverTrait;
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -120,6 +123,43 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 ];
         }
         return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
+    /**
+     * Validate the constraints for a field argument
+     *
+     * @return string[] Error messages
+     */
+    public function validateFieldArgument(
+        TypeResolverInterface $typeResolver,
+        string $fieldName,
+        string $fieldArgName,
+        mixed $fieldArgValue
+    ): array {
+        $errors = parent::validateFieldArgument(
+            $typeResolver,
+            $fieldName,
+            $fieldArgName,
+            $fieldArgValue,
+        );
+
+        // Check the "limit" fieldArg
+        switch ($fieldName) {
+            case 'comments':
+            case 'commentsForAdmin':
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getCommentListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
+                    $errors[] = $maybeError;
+                }
+                break;
+        }
+        return $errors;
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

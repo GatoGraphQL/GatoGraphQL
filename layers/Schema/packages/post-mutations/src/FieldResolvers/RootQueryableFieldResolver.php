@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostMutations\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
@@ -14,15 +15,16 @@ use PoPSchema\PostMutations\ModuleProcessors\PostMutationFilterInputContainerMod
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\UserState\FieldResolvers\UserStateFieldResolverTrait;
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
 {
     use UserStateFieldResolverTrait;
+    use WithLimitFieldArgResolverTrait;
 
     public function getClassesToAttachTo(): array
     {
@@ -90,6 +92,42 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
                 ];
         }
         return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+    }
+
+    /**
+     * Validate the constraints for a field argument
+     *
+     * @return string[] Error messages
+     */
+    public function validateFieldArgument(
+        TypeResolverInterface $typeResolver,
+        string $fieldName,
+        string $fieldArgName,
+        mixed $fieldArgValue
+    ): array {
+        $errors = parent::validateFieldArgument(
+            $typeResolver,
+            $fieldName,
+            $fieldArgName,
+            $fieldArgValue,
+        );
+
+        // Check the "limit" fieldArg
+        switch ($fieldName) {
+            case 'myPosts':
+                if (
+                    $maybeError = $this->maybeValidateLimitFieldArgument(
+                        ComponentConfiguration::getPostListMaxLimit(),
+                        $fieldName,
+                        $fieldArgName,
+                        $fieldArgValue
+                    )
+                ) {
+                    $errors[] = $maybeError;
+                }
+                break;
+        }
+        return $errors;
     }
 
     /**

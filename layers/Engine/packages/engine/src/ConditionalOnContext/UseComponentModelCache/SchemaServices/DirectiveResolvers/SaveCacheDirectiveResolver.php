@@ -108,4 +108,32 @@ class SaveCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
             ],
         ];
     }
+
+    /**
+     * Validate the constraints for a directive argument
+     *
+     * @return string[] Error messages
+     */
+    protected function validateDirectiveArgument(
+        TypeResolverInterface $typeResolver,
+        string $directiveName,
+        string $directiveArgName,
+        mixed $directiveArgValue
+    ): array {
+        $errors = parent::validateDirectiveArgument(
+            $typeResolver,
+            $directiveName,
+            $directiveArgName,
+            $directiveArgValue,
+        );
+
+        switch ($directiveArgName) {
+            case 'time':
+                if ($directiveArgValue < 0) {
+                    $errors[] = $this->translationAPI->__('The value for \'time\' must be above \'0\'');
+                }
+                break;
+        }
+        return $errors;
+    }
 }

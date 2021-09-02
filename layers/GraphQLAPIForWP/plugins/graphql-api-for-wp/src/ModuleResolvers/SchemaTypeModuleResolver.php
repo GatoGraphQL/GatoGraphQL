@@ -341,12 +341,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     [
                         self::SCHEMA_CUSTOMPOSTS,
                         // self::SCHEMA_GENERIC_CUSTOMPOSTS,
-                        // self::SCHEMA_POSTS,
+                        self::SCHEMA_POSTS,
                         self::SCHEMA_USERS,
                         self::SCHEMA_MEDIA,
                         self::SCHEMA_TAGS,
                         self::SCHEMA_CATEGORIES,
-                        // self::SCHEMA_PAGES,
+                        self::SCHEMA_PAGES,
                     ]
                 ) && in_array(
                     $option,
@@ -400,9 +400,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::CUSTOMPOST_TYPES => ['post'],
             ],
             self::SCHEMA_POSTS => [
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
                 ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => true,
             ],
             self::SCHEMA_PAGES => [
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
                 ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => false,
             ],
             self::SCHEMA_USERS => [
@@ -552,12 +556,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             in_array($module, [
                 self::SCHEMA_CUSTOMPOSTS,
                 // self::SCHEMA_GENERIC_CUSTOMPOSTS,
-                // self::SCHEMA_POSTS,
+                self::SCHEMA_POSTS,
                 self::SCHEMA_USERS,
                 self::SCHEMA_MEDIA,
                 self::SCHEMA_TAGS,
                 self::SCHEMA_CATEGORIES,
-                // self::SCHEMA_PAGES,
+                self::SCHEMA_PAGES,
             ])
         ) {
             $moduleEntries = [
@@ -567,9 +571,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 // self::SCHEMA_GENERIC_CUSTOMPOSTS => [
                 //     'genericCustomPosts' => null,
                 // ],
-                // self::SCHEMA_POSTS => [
-                //     'posts' => null,
-                // ],
+                self::SCHEMA_POSTS => [
+                    'entities' => \__('posts', 'graphql-api'),
+                ],
                 self::SCHEMA_USERS => [
                     'entities' => \__('users', 'graphql-api'),
                 ],
@@ -582,9 +586,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_CATEGORIES => [
                     'entities' => \__('categories', 'graphql-api'),
                 ],
-                // self::SCHEMA_PAGES => [
-                //     'pages' => null,
-                // ],
+                self::SCHEMA_PAGES => [
+                    'entities' => \__('pages', 'graphql-api'),
+                ],
             ];
             $moduleEntry = $moduleEntries[$module];
             // If the options is not provided, use the default one
@@ -652,6 +656,54 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
+            } elseif (
+                in_array($module, [
+                    self::SCHEMA_POSTS,
+                    self::SCHEMA_PAGES,
+                ])
+            ) {
+                $titlePlaceholder = sprintf(
+                    \__('Include type <code>%1$s</code> in <code>%2$s</code>?', 'graphql-api'),
+                    '%1$s',
+                    $customPostUnionTypeResolver->getTypeName()
+                );
+                $moduleTitles = [
+                    self::SCHEMA_POSTS => sprintf(
+                        $titlePlaceholder,
+                        $postTypeResolver->getTypeName()
+                    ),
+                    self::SCHEMA_PAGES => sprintf(
+                        $titlePlaceholder,
+                        $pageTypeResolver->getTypeName()
+                    ),
+                ];
+                $descriptionPlaceholder = sprintf(
+                    \__('Results of type <code>%1$s</code> will be included when querying a field of type <code>%2$s</code> (such as <code>%3$s</code>)', 'graphql-api'),
+                    '%1$s',
+                    $customPostUnionTypeResolver->getTypeName(),
+                    'customPosts'
+                );
+                $moduleDescriptions = [
+                    self::SCHEMA_POSTS => sprintf(
+                        $descriptionPlaceholder,
+                        $postTypeResolver->getTypeName()
+                    ),
+                    self::SCHEMA_PAGES => sprintf(
+                        $descriptionPlaceholder,
+                        $pageTypeResolver->getTypeName()
+                    ),
+                ];
+                $option = ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => $moduleTitles[$module],
+                    Properties::DESCRIPTION => $moduleDescriptions[$module],
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
             }
         } elseif ($module === self::SCHEMA_COMMENTS) {
             $option = self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT;
@@ -709,54 +761,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => -1,
-            ];
-        } elseif (
-            in_array($module, [
-                self::SCHEMA_POSTS,
-                self::SCHEMA_PAGES,
-            ])
-        ) {
-            $titlePlaceholder = sprintf(
-                \__('Include type <code>%1$s</code> in <code>%2$s</code>?', 'graphql-api'),
-                '%1$s',
-                $customPostUnionTypeResolver->getTypeName()
-            );
-            $moduleTitles = [
-                self::SCHEMA_POSTS => sprintf(
-                    $titlePlaceholder,
-                    $postTypeResolver->getTypeName()
-                ),
-                self::SCHEMA_PAGES => sprintf(
-                    $titlePlaceholder,
-                    $pageTypeResolver->getTypeName()
-                ),
-            ];
-            $descriptionPlaceholder = sprintf(
-                \__('Results of type <code>%1$s</code> will be included when querying a field of type <code>%2$s</code> (such as <code>%3$s</code>)', 'graphql-api'),
-                '%1$s',
-                $customPostUnionTypeResolver->getTypeName(),
-                'customPosts'
-            );
-            $moduleDescriptions = [
-                self::SCHEMA_POSTS => sprintf(
-                    $descriptionPlaceholder,
-                    $postTypeResolver->getTypeName()
-                ),
-                self::SCHEMA_PAGES => sprintf(
-                    $descriptionPlaceholder,
-                    $pageTypeResolver->getTypeName()
-                ),
-            ];
-            $option = ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => $moduleTitles[$module],
-                Properties::DESCRIPTION => $moduleDescriptions[$module],
-                Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module == self::SCHEMA_GENERIC_CUSTOMPOSTS) {
             // Get the list of custom post types from the system

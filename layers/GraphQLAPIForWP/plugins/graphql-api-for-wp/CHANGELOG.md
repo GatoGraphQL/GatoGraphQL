@@ -152,6 +152,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Namespacing
   - Nested mutations
   - Admin fields
+- Validate constraints for field and directive arguments
 - Prettyprint GraphQL queries in the module docs
 
 ### Fixed

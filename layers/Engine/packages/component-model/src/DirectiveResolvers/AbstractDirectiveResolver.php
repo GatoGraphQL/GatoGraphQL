@@ -291,22 +291,43 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForResultItem($this, $typeResolver, $resultItem, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
-        $this->directiveArgsForResultItems[$typeResolver->getID($resultItem)] = $directiveArgs;
+        $resultItemID = $typeResolver->getID($resultItem);
+        $this->directiveArgsForResultItems[$resultItemID] = $directiveArgs;
 
-        if ($nestedDBWarnings || $nestedDBErrors) {
-            foreach ($nestedDBErrors as $id => $fieldOutputKeyErrorMessages) {
-                $dbErrors[$id] = array_merge(
-                    $dbErrors[$id] ?? [],
-                    $fieldOutputKeyErrorMessages
-                );
-            }
-            foreach ($nestedDBWarnings as $id => $fieldOutputKeyWarningMessages) {
-                $dbWarnings[$id] = array_merge(
-                    $dbWarnings[$id] ?? [],
-                    $fieldOutputKeyWarningMessages
-                );
+        // Store errors (if any)
+        foreach ($nestedDBErrors as $id => $fieldOutputKeyErrorMessages) {
+            $dbErrors[$id] = array_merge(
+                $dbErrors[$id] ?? [],
+                $fieldOutputKeyErrorMessages
+            );
+        }
+        foreach ($nestedDBWarnings as $id => $fieldOutputKeyWarningMessages) {
+            $dbWarnings[$id] = array_merge(
+                $dbWarnings[$id] ?? [],
+                $fieldOutputKeyWarningMessages
+            );
+        }
+
+        /**
+         * Validate directive argument constraints, only if there are no previous errors
+         */
+        if (!$nestedDBErrors) {
+            if (
+                $maybeErrors = $this->resolveDirectiveArgumentErrors(
+                    $typeResolver,
+                    $directiveName,
+                    $directiveArgs
+                )
+            ) {
+                foreach ($maybeErrors as $errorMessage) {
+                    $dbErrors[$resultItemID][] = [
+                        Tokens::PATH => [$this->directive],
+                        Tokens::MESSAGE => $errorMessage,
+                    ];
+                }
             }
         }
+
         return [
             $validDirective,
             $directiveName,
@@ -390,7 +411,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($typeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             /**
-             * Validate mandatory values
+             * Validate mandatory values. If it produces errors, return immediately
              */
             if (
                 $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
@@ -405,7 +426,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
             if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
                 /**
-                 * Validate array types are provided as arrays
+                 * Validate array types are provided as arrays. If it produces errors, return immediately
                  */
                 if (
                     $maybeErrors = $this->validateArrayTypeFieldOrDirectiveArguments(
@@ -418,6 +439,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     return $maybeErrors;
                 }
 
+                // The errors below can be accumulated
+                $errors = [];
+
                 /**
                  * Validate enums
                  */
@@ -429,7 +453,30 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                         ResolverTypes::DIRECTIVE
                     )
                 ) {
-                    return $maybeErrors;
+                    $errors = array_merge(
+                        $errors,
+                        $maybeErrors
+                    );
+                }
+
+                /**
+                 * Validate directive argument constraints
+                 */
+                if (
+                    $maybeErrors = $this->resolveDirectiveArgumentErrors(
+                        $typeResolver,
+                        $directiveName,
+                        $directiveArgs
+                    )
+                ) {
+                    $errors = array_merge(
+                        $errors,
+                        $maybeErrors
+                    );
+                }
+
+                if ($errors) {
+                    return $errors;
                 }
             }
         }
@@ -440,6 +487,45 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $directiveName,
             $directiveArgs,
         );
+    }
+
+    /**
+     * Validate the constraints for the directive arguments
+     */
+    final protected function resolveDirectiveArgumentErrors(
+        TypeResolverInterface $typeResolver,
+        string $directiveName,
+        array $directiveArgs = []
+    ): array {
+        $errors = [];
+        foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
+            if (
+                $maybeErrors = $this->validateDirectiveArgument(
+                    $typeResolver,
+                    $directiveName,
+                    $directiveArgName,
+                    $directiveArgValue
+                )
+            ) {
+                $errors = array_merge(
+                    $errors,
+                    $maybeErrors
+                );
+            }
+        }
+        return $errors;
+    }
+
+    /**
+     * Validate the constraints for a directive argument
+     */
+    protected function validateDirectiveArgument(
+        TypeResolverInterface $typeResolver,
+        string $directiveName,
+        string $directiveArgName,
+        mixed $directiveArgValue
+    ): array {
+        return [];
     }
 
     /**
