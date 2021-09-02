@@ -299,6 +299,8 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     /**
      * Validate the constraints for a field argument
+     *
+     * @return string[] Error messages
      */
     protected function validateFieldArgument(
         TypeResolverInterface $typeResolver,
@@ -306,8 +308,8 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
-    ): ?array {
-        return null;
+    ): array {
+        return [];
     }
 
     /**

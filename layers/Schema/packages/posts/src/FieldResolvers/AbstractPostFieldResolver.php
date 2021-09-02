@@ -105,6 +105,8 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
 
     /**
      * Validate the constraints for a field argument
+     *
+     * @return string[] Error messages
      */
     protected function validateFieldArgument(
         TypeResolverInterface $typeResolver,
@@ -112,7 +114,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
-    ): ?array {
+    ): array {
         $errors = parent::validateFieldArgument(
             $typeResolver,
             $fieldArgSchemaDefinition,
