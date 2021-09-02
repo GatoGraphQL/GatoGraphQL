@@ -28,7 +28,7 @@ trait FieldOrDirectiveResolverTrait
         if ($mandatoryArgs = SchemaHelpers::getSchemaMandatoryFieldOrDirectiveArgs($fieldOrDirectiveArgsSchemaDefinition)) {
             if (
                 $maybeError = $this->doValidateNotMissingFieldOrDirectiveArguments(
-                    SchemaHelpers::getSchemaFieldArgNames($mandatoryArgs),
+                    array_keys($mandatoryArgs),
                     $fieldOrDirectiveName,
                     $fieldOrDirectiveArgs,
                     $type
@@ -41,12 +41,12 @@ trait FieldOrDirectiveResolverTrait
     }
 
     private function doValidateNotMissingFieldOrDirectiveArguments(
-        array $fieldOrDirectiveArgumentProperties,
+        array $mandatoryFieldOrDirectiveArgNames,
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
     ): ?string {
-        if ($missing = SchemaHelpers::getMissingFieldArgs($fieldOrDirectiveArgumentProperties, $fieldOrDirectiveArgs)) {
+        if ($missing = SchemaHelpers::getMissingFieldArgs($mandatoryFieldOrDirectiveArgNames, $fieldOrDirectiveArgs)) {
             $translationAPI = TranslationAPIFacade::getInstance();
             $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
             $errorMessage = count($missing) == 1 ?
