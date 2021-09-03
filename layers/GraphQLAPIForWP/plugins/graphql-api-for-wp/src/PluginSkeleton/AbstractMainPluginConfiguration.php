@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use GraphQLAPI\GraphQLAPI\Facades\CacheConfigurationManagerFacade;
+use GraphQLAPI\GraphQLAPI\Facades\ContainerCacheConfigurationManagerFacade;
 use GraphQLAPI\GraphQLAPI\GetterSetterObjects\ContainerCacheConfiguration;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 /**
  * Base class to set the configuration for all the PoP components in the main plugin.
@@ -26,11 +25,10 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
         if ($this->containerCacheConfigurationCache === null) {
             $containerConfigurationCacheNamespace = null;
             $containerConfigurationCacheDirectory = null;
-            $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
             if ($cacheContainerConfiguration = $this->isCachingEnabled()) {
-                $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
-                $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
-                $containerConfigurationCacheDirectory = $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'service-containers';
+                $containerCacheConfigurationManager = ContainerCacheConfigurationManagerFacade::getInstance();
+                $containerConfigurationCacheNamespace = $containerCacheConfigurationManager->getNamespace();
+                $containerConfigurationCacheDirectory = $containerCacheConfigurationManager->getDirectory();
             }
             $this->containerCacheConfigurationCache = new ContainerCacheConfiguration(
                 $cacheContainerConfiguration,

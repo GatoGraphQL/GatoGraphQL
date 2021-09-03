@@ -74,7 +74,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
                 // Update the timestamp
                 $userSettingsManager = UserSettingsManagerFacade::getInstance();
-                $userSettingsManager->storeTimestamp();
+                $userSettingsManager->storeContainerTimestamp();
             }
         );
 

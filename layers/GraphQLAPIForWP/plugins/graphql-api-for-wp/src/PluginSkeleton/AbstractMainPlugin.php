@@ -79,7 +79,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             [
                 /**
                  * Where to store the config cache,
-                 * for both /service-containers and /config-via-symfony-cache
+                 * for both /container and /operational
                  * (config persistent cache: component model configuration + schema)
                  */
                 'cache-dir' => PluginEnvironment::getCacheDir(),
@@ -97,7 +97,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      */
     public function handleAnyPluginActivatedOrDeactivated(): void
     {
-        $this->invalidateCache();
+        $this->purgeContainer();
     }
 
 
@@ -105,13 +105,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * Remove the cached folders (service container and config),
      * and regenerate the timestamp
      */
-    protected function invalidateCache(): void
+    protected function purgeContainer(): void
     {
         $this->removeCachedFolders();
 
         // Regenerate the timestamp
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->storeTimestamp();
+        $userSettingsManager->storeContainerTimestamp();
     }
 
     /**
@@ -136,17 +136,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     {
         parent::deactivate();
 
-        // Remove the timestamp
-        $this->removeTimestamp();
+        // Remove the timestamps
+        $this->removeTimestamps();
     }
 
     /**
-     * Regenerate the timestamp
+     * Regenerate the timestamps
      */
-    protected function removeTimestamp(): void
+    protected function removeTimestamps(): void
     {
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->removeTimestamp();
+        $userSettingsManager->removeTimestamps();
     }
 
     /**
@@ -297,7 +297,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 \flush_rewrite_rules();
 
                 // Regenerate the timestamp, to generate the service container
-                $this->invalidateCache();
+                $this->purgeContainer();
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );

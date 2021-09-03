@@ -163,7 +163,7 @@ class ModuleListTableAction extends AbstractListTableAction
 
                 // Update the timestamp
                 $userSettingsManager = UserSettingsManagerFacade::getInstance();
-                $userSettingsManager->storeTimestamp();
+                $userSettingsManager->storeContainerTimestamp();
             },
             PHP_INT_MAX
         );

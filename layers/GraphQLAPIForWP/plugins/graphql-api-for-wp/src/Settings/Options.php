@@ -18,8 +18,8 @@ class Options
      */
     public const MODULES = 'graphql-api-modules';
     /**
-     * Option name under which to store the timestamp from the last
+     * Option name under which to store the timestamps from the last
      * settings/modules write to the DB
      */
-    public const TIMESTAMP = 'graphql-api-timestamp';
+    public const TIMESTAMPS = 'graphql-api-timestamps';
 }

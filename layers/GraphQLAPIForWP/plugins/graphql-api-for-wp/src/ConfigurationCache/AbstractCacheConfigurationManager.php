@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache;
+namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
@@ -14,7 +13,7 @@ use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
  *
  * @author Leonardo Losoviz <leo@getpop.org>
  */
-class CacheConfigurationManager implements CacheConfigurationManagerInterface
+abstract class AbstractCacheConfigurationManager implements CacheConfigurationManagerInterface
 {
     public function __construct(private EndpointHelpers $endpointHelpers)
     {
@@ -33,8 +32,7 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
         // (Needed for development) Don't share cache among plugin versions
         $timestamp = '_v' . $mainPluginVersion;
         // The timestamp from when last saving settings/modules to the DB
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $timestamp .= '_' . $userSettingsManager->getTimestamp();
+        $timestamp .= '_' . $this->getTimestamp();
         // admin/non-admin screens have different services enabled
         $suffix = \is_admin() ?
             // The WordPress editor can access the full GraphQL schema,
@@ -46,11 +44,21 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
     }
 
     /**
+     * The timestamp from when last saving settings/modules to the DB
+     */
+    abstract protected function getTimestamp(): int;
+
+    /**
      * Cache under the plugin's cache/ subfolder
      */
     public function getDirectory(): ?string
     {
         $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
-        return $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'config-via-symfony-cache';
+        return $mainPluginCacheDir . \DIRECTORY_SEPARATOR . $this->getDirectoryName();
     }
+
+    /**
+     * Cache under the plugin's cache/ subfolder
+     */
+    abstract protected function getDirectoryName(): string;
 }

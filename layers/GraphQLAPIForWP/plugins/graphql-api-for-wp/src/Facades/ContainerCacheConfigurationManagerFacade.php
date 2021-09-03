@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades;
 
-use GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache\CacheConfigurationManager;
+use GraphQLAPI\GraphQLAPI\ConfigurationCache\ContainerCacheConfigurationManager;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry;
 use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistry;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
@@ -15,13 +15,13 @@ use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManager;
 
 /**
- * Obtain an instance of the CacheConfigurationManager.
+ * Obtain an instance of the ContainerCacheConfigurationManager.
  * Manage the instance internally instead of using the ContainerBuilder,
  * because it is required for setting configuration values before components
  * are initialized, so the ContainerBuilder (for both Sytem/Application)
  * is still unavailable.
  */
-class CacheConfigurationManagerFacade
+class ContainerCacheConfigurationManagerFacade
 {
     private static ?CacheConfigurationManagerInterface $instance = null;
 
@@ -43,7 +43,7 @@ class CacheConfigurationManagerFacade
                 $userAuthorization,
             );
             $endpointHelpers = new EndpointHelpers($menu, $moduleRegistry);
-            self::$instance = new CacheConfigurationManager($endpointHelpers);
+            self::$instance = new ContainerCacheConfigurationManager($endpointHelpers);
         }
         return self::$instance;
     }

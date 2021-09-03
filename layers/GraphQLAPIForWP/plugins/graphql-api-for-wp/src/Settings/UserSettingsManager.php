@@ -9,6 +9,9 @@ use GraphQLAPI\GraphQLAPI\Settings\Options;
 
 class UserSettingsManager implements UserSettingsManagerInterface
 {
+    private const TIMESTAMP_CONTAINER = 'container';
+    private const TIMESTAMP_OPERATIONAL = 'operational';
+
     /**
      * Cache the values in memory
      *
@@ -36,26 +39,64 @@ class UserSettingsManager implements UserSettingsManagerInterface
      *
      * By providing `time()`, the cached service container is always
      * a one-time-use before accessing the wp-admin and
-     * having a new timestamp generated via `invalidateCache`.
+     * having a new timestamp generated via `purgeContainer`.
      */
-    public function getTimestamp(): int
+    protected function getTimestamp(string $key): int
     {
-        return (int) \get_option(Options::TIMESTAMP, time());
+        $timestamps = \get_option(Options::TIMESTAMPS, [$key => time()]);
+        return (int) $timestamps[$key];
+    }
+    /**
+     * Static timestamp, reflecting when the service container has been regenerated.
+     * Should change not so often
+     */
+    public function getContainerTimestamp(): int
+    {
+        return $this->getTimestamp(self::TIMESTAMP_CONTAINER);
+    }
+    /**
+     * Dynamic timestamp, reflecting when new entities modifying the schema are
+     * added to the DB. Can change often
+     */
+    public function getOperationalTimestamp(): int
+    {
+        return $this->getTimestamp(self::TIMESTAMP_OPERATIONAL);
     }
     /**
      * Store the current time to indicate the latest executed write to DB,
-     * concerning plugin activation, module enabled/disabled, user settings updated
+     * concerning plugin activation, module enabled/disabled, user settings updated,
+     * to refresh the Service Container.
+     *
+     * When this value is updated, the "operational" timestamp is also updated.
      */
-    public function storeTimestamp(): void
+    public function storeContainerTimestamp(): void
     {
-        \update_option(Options::TIMESTAMP, time());
+        $time = time();
+        $timestamps = [
+            self::TIMESTAMP_CONTAINER => $time,
+            self::TIMESTAMP_OPERATIONAL => $time,
+        ];
+        \update_option(Options::TIMESTAMPS, $timestamps);
+    }
+    /**
+     * Store the current time to indicate the latest executed write to DB,
+     * concerning CPT entity created or modified (such as Schema Configuration,
+     * ACL, etc), to refresh the GraphQL schema
+     */
+    public function storeOperationalTimestamp(): void
+    {
+        $timestamps = [
+            self::TIMESTAMP_CONTAINER => $this->getContainerTimestamp(),
+            self::TIMESTAMP_OPERATIONAL => time(),
+        ];
+        \update_option(Options::TIMESTAMPS, $timestamps);
     }
     /**
      * Remove the timestamp
      */
-    public function removeTimestamp(): void
+    public function removeTimestamps(): void
     {
-        \delete_option(Options::TIMESTAMP);
+        \delete_option(Options::TIMESTAMPS);
     }
 
     public function hasSetting(string $item): bool
@@ -93,7 +134,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
         $this->storeItem(Options::MODULES, $moduleID, $isEnabled);
 
         // Update the timestamp
-        $this->storeTimestamp();
+        $this->storeContainerTimestamp();
     }
 
     /**
@@ -104,7 +145,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
         $this->storeItems(Options::MODULES, $moduleIDValues);
 
         // Update the timestamp
-        $this->storeTimestamp();
+        $this->storeContainerTimestamp();
     }
 
     /**

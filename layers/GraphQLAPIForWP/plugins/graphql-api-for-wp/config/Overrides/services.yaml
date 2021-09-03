@@ -13,4 +13,4 @@ services:
 
     # Override to configure the cache with dynamic values
     PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
-        class: '\GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache\CacheConfigurationManager'
+        class: '\GraphQLAPI\GraphQLAPI\Overrides\ConfigurationCache\OperationalCacheConfigurationManager'
