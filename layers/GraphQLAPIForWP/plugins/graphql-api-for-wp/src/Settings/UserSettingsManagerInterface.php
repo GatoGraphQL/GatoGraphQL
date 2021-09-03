@@ -10,7 +10,12 @@ interface UserSettingsManagerInterface
      * Timestamp of latest executed write to DB, concerning plugin activation,
      * module enabled/disabled, user settings updated
      */
-    public function getTimestamp(): int;
+    public function getServiceContainerTimestamp(): int;
+    /**
+     * Timestamp of latest executed write to DB, concerning CPT entity created
+     * or modified (such as Schema Configuration, ACL, etc)
+     */
+    public function getSchemaTimestamp(): int;
     /**
      * Store the current time to indicate the latest executed write to DB,
      * concerning plugin activation, module enabled/disabled, user settings updated

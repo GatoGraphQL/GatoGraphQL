@@ -9,6 +9,9 @@ use GraphQLAPI\GraphQLAPI\Settings\Options;
 
 class UserSettingsManager implements UserSettingsManagerInterface
 {
+    private const TIMESTAMP_SERVICECONTAINER = 'service-container';
+    private const TIMESTAMP_SCHEMA = 'schema';
+
     /**
      * Cache the values in memory
      *
@@ -38,9 +41,18 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * a one-time-use before accessing the wp-admin and
      * having a new timestamp generated via `invalidateCache`.
      */
-    public function getTimestamp(): int
+    protected function getTimestamp(string $key): int
     {
-        return (int) \get_option(Options::TIMESTAMPS, time());
+        $timestamps = \get_option(Options::TIMESTAMPS, [$key => time()]);
+        return (int) $timestamps[$key];
+    }
+    public function getServiceContainerTimestamp(): int
+    {
+        return $this->getTimestamp(self::TIMESTAMP_SERVICECONTAINER);
+    }
+    public function getSchemaTimestamp(): int
+    {
+        return $this->getTimestamp(self::TIMESTAMP_SCHEMA);
     }
     /**
      * Store the current time to indicate the latest executed write to DB,
