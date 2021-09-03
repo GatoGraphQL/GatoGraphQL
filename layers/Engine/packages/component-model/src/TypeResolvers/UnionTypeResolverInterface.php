@@ -22,5 +22,5 @@ interface UnionTypeResolverInterface extends RelationalTypeResolverInterface
     /**
      * @return TypeResolverPickerInterface[]
      */
-    public function getTypeResolverPickers(): array;
+    public function getObjectTypeResolverPickers(): array;
 }

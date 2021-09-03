@@ -23,7 +23,7 @@ class CustomPostUnionTypeHelpers
         $customPostTypes = [];
         $instanceManager = InstanceManagerFacade::getInstance();
         $unionTypeResolver = $instanceManager->getInstance($unionTypeResolverClass);
-        $typeResolverPickers = $unionTypeResolver->getTypeResolverPickers();
+        $typeResolverPickers = $unionTypeResolver->getObjectTypeResolverPickers();
         foreach ($typeResolverPickers as $typeResolverPicker) {
             // The picker should implement interface CustomPostTypeResolverPickerInterface
             if ($typeResolverPicker instanceof CustomPostTypeResolverPickerInterface) {

@@ -215,7 +215,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     public function getTargetObjectTypeResolverClasses(): array
     {
-        $typeResolverPickers = $this->getTypeResolverPickers();
+        $typeResolverPickers = $this->getObjectTypeResolverPickers();
         return $this->getObjectTypeResolverClassesFromPickers($typeResolverPickers);
     }
 
@@ -230,7 +230,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     /**
      * @return TypeResolverPickerInterface[]
      */
-    public function getTypeResolverPickers(): array
+    public function getObjectTypeResolverPickers(): array
     {
         if (is_null($this->typeResolverPickers)) {
             $this->typeResolverPickers = $this->calculateTypeResolverPickers();
@@ -321,7 +321,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // Then, more specific implementations (eg: Organizations) must be queried before more general ones (eg: Communities)
         // This is not a problem by making the corresponding field processors inherit from each other, so that the more specific object also handles
         // the fields for the more general ones (eg: TypeResolver_OrganizationUsers extends TypeResolver_CommunityUsers, and TypeResolver_CommunityUsers extends UserTypeResolver)
-        foreach ($this->getTypeResolverPickers() as $maybePicker) {
+        foreach ($this->getObjectTypeResolverPickers() as $maybePicker) {
             if ($maybePicker->isIDOfType($resultItemID)) {
                 // Found it!
                 $typeResolverPicker = $maybePicker;
@@ -340,7 +340,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // Then, more specific implementations (eg: Organizations) must be queried before more general ones (eg: Communities)
         // This is not a problem by making the corresponding field processors inherit from each other, so that the more specific object also handles
         // the fields for the more general ones (eg: TypeResolver_OrganizationUsers extends TypeResolver_CommunityUsers, and TypeResolver_CommunityUsers extends UserTypeResolver)
-        foreach ($this->getTypeResolverPickers() as $maybePicker) {
+        foreach ($this->getObjectTypeResolverPickers() as $maybePicker) {
             if ($maybePicker->isInstanceOfType($resultItem)) {
                 // Found it!
                 return $maybePicker;
@@ -428,7 +428,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         }
 
         // Iterate through the typeResolvers from all the pickers and get their schema definitions
-        foreach ($this->getTypeResolverPickers() as $picker) {
+        foreach ($this->getObjectTypeResolverPickers() as $picker) {
             $pickerTypeResolver = $this->instanceManager->getInstance($picker->getObjectTypeResolverClass());
             $pickerTypeSchemaDefinition = $pickerTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
             $pickerTypeName = $pickerTypeResolver->getMaybeNamespacedTypeName();
