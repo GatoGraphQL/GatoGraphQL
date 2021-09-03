@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\Multisite\TypeResolvers;
 
 use PoP\Multisite\TypeDataLoaders\SiteTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 
-class SiteTypeResolver extends AbstractTypeResolver
+class SiteTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {

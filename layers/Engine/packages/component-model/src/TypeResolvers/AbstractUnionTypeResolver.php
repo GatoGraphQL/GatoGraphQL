@@ -14,7 +14,7 @@ use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\TypeResolverPickers\TypeResolverPickerInterface;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 
-abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements UnionTypeResolverInterface
+abstract class AbstractUnionTypeResolver extends AbstractObjectTypeResolver implements UnionTypeResolverInterface
 {
     /**
      * @var TypeResolverPickerInterface[]
@@ -137,7 +137,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     // }
 
     /**
-     * Watch out! This function overrides the implementation from the for the AbstractTypeResolver
+     * Watch out! This function overrides the implementation from the for the AbstractObjectTypeResolver
      *
      * Collect all directives for all fields, and then build a single directive pipeline for all fields,
      * including all directives, even if they don't apply to all fields

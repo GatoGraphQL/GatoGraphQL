@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 trait GlobalDirectiveResolverTrait
@@ -13,7 +13,7 @@ trait GlobalDirectiveResolverTrait
     {
         // Be attached to all typeResolvers
         return [
-            AbstractTypeResolver::class,
+            AbstractObjectTypeResolver::class,
         ];
     }
 

@@ -16,7 +16,7 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\FieldQuery\FeedbackMessageStoreInterface as UpstreamFeedbackMessageStoreInterface;
 use PoP\FieldQuery\QueryHelpers;
@@ -1614,7 +1614,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             // It is important to force the validation, because if a needed argument is provided with an error, it needs to be validated, casted and filtered out,
             // and if this wrong param is not "dynamic", then the validation would not take place
             $options = [
-                AbstractTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
+                AbstractObjectTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
             ];
             $resolvedValue = $typeResolver->resolveValue($resultItem, (string)$fieldArgValue, $variables, $expressions, $options);
             if (GeneralUtils::isError($resolvedValue)) {

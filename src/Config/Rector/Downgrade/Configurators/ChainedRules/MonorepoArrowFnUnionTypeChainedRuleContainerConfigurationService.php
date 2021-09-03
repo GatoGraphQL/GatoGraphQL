@@ -9,7 +9,7 @@ class MonorepoArrowFnUnionTypeChainedRuleContainerConfigurationService extends A
     protected function getPaths(): array
     {
         return [
-            $this->rootDirectory . '/layers/Engine/packages/component-model/src/TypeResolvers/AbstractTypeResolver.php',
+            $this->rootDirectory . '/layers/Engine/packages/component-model/src/TypeResolvers/AbstractObjectTypeResolver.php',
             $this->rootDirectory . '/layers/Engine/packages/engine/src/DirectiveResolvers/FilterIDsSatisfyingConditionDirectiveResolverTrait.php',
             $this->rootDirectory . '/layers/Schema/packages/menus/src/TypeDataLoaders/MenuItemTypeDataLoader.php',
             $this->rootDirectory . '/layers/Schema/packages/menus/src/TypeDataLoaders/MenuTypeDataLoader.php',

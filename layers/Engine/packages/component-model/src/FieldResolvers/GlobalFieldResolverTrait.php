@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 trait GlobalFieldResolverTrait
@@ -12,7 +12,7 @@ trait GlobalFieldResolverTrait
     public function getClassesToAttachTo(): array
     {
         return [
-            AbstractTypeResolver::class,
+            AbstractObjectTypeResolver::class,
         ];
     }
 

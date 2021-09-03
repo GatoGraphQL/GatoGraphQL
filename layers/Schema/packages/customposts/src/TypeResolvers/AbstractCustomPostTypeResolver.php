@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeResolvers;
 
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 
-abstract class AbstractCustomPostTypeResolver extends AbstractTypeResolver
+abstract class AbstractCustomPostTypeResolver extends AbstractObjectTypeResolver
 {
     public function getSchemaTypeDescription(): ?string
     {

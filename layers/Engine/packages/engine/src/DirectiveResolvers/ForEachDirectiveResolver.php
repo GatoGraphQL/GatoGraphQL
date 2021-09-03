@@ -10,7 +10,7 @@ use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 
@@ -64,7 +64,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
             // We must add each item in the array as expression `%value%`, over which the if function can be evaluated
             if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($if)) {
                 $options = [
-                    AbstractTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
+                    AbstractObjectTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
                 ];
                 $arrayItems = [];
                 foreach ($array as $key => $value) {

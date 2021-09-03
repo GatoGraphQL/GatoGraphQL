@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\TypeResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\TypeDataLoaders\MenuItemTypeDataLoader;
 
-class MenuItemTypeResolver extends AbstractTypeResolver
+class MenuItemTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {

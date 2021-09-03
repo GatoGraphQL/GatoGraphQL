@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers;
 
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 
-abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractTypeResolver
+abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObjectTypeResolver
 {
     protected function getTypeResolverClassToCalculateSchema(): string
     {

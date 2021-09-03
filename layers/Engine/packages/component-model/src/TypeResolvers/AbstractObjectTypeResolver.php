@@ -37,7 +37,7 @@ use PoP\FieldQuery\QueryUtils;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractTypeResolver implements TypeResolverInterface
+abstract class AbstractObjectTypeResolver implements TypeResolverInterface
 {
     public const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnResultItem';
 

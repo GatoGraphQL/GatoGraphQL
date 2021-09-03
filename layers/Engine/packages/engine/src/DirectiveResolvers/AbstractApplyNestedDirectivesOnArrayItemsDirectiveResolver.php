@@ -9,7 +9,7 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
@@ -409,7 +409,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
             $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
 
             $options = [
-                AbstractTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
+                AbstractObjectTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
             ];
             foreach ($addExpressions as $key => $value) {
                 // Evaluate the $value, since it may be a function

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\TypeResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoPSchema\Notifications\TypeDataLoaders\NotificationTypeDataLoader;
 
-class NotificationTypeResolver extends AbstractTypeResolver
+class NotificationTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {

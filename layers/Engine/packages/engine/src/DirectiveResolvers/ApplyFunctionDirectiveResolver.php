@@ -11,7 +11,7 @@ use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
@@ -202,7 +202,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 // Execute the function
                 // Because the function was dynamically created, we must indicate to validate the schema when doing ->resolveValue
                 $options = [
-                    AbstractTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
+                    AbstractObjectTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
                 ];
                 $functionValue = $typeResolver->resolveValue($resultIDItems[(string)$id], $validFunction, $variables, $expressions, $options);
                 // Merge the dbWarnings, if any

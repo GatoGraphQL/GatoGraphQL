@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldInterfaceResolvers\ElementalFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class ElementalFieldResolver extends AbstractDBDataFieldResolver
@@ -16,7 +16,7 @@ class ElementalFieldResolver extends AbstractDBDataFieldResolver
     public function getClassesToAttachTo(): array
     {
         return [
-            AbstractTypeResolver::class,
+            AbstractObjectTypeResolver::class,
         ];
     }
 
