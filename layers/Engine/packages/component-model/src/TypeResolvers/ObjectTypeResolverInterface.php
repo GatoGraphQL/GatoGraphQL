@@ -34,7 +34,6 @@ interface ObjectTypeResolverInterface extends TypeResolverInterface
     /**
      * @return array<string,DirectiveResolverInterface[]>
      */
-    public function getDirectiveNameResolvers(): array;
     public function validateFieldArgumentsForSchema(string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array;
     public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void;
     public function fillResultItems(

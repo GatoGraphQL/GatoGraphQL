@@ -125,7 +125,7 @@ abstract class AbstractObjectTypeResolver extends AbstractTypeResolver implement
     /**
      * @return array<string,DirectiveResolverInterface[]>
      */
-    public function getDirectiveNameResolvers(): array
+    protected function getDirectiveNameResolvers(): array
     {
         if (is_null($this->directiveNameResolvers)) {
             $this->directiveNameResolvers = $this->calculateFieldDirectiveNameResolvers();
