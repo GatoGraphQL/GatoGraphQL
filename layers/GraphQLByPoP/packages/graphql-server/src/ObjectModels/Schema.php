@@ -10,7 +10,7 @@ use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Directive;
 use GraphQLByPoP\GraphQLServer\ObjectModels\ScalarType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractType;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Facades\Schema\SchemaDefinitionServiceFacade;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -192,7 +192,7 @@ class Schema
             $instanceManager = InstanceManagerFacade::getInstance();
             $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
             $rootTypeResolverClass = $schemaDefinitionService->getRootTypeResolverClass();
-            /** @var RelationalTypeResolverInterface */
+            /** @var TypeResolverInterface */
             $rootTypeResolver = $instanceManager->getInstance($rootTypeResolverClass);
             $resolvableTypes = array_filter(
                 $resolvableTypes,

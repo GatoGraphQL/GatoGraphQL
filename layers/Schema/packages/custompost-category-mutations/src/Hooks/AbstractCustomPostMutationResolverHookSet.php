@@ -6,12 +6,13 @@ namespace PoPSchema\CustomPostCategoryMutations\Hooks;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
+use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
+use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
@@ -42,7 +43,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             return $fieldArgs;
         }
         $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
-        /** @var RelationalTypeResolverInterface */
+        /** @var TypeResolverInterface */
         $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
         $fieldArgs[] = [
             SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,

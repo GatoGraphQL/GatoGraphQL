@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
@@ -56,7 +57,7 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case $this->getSetCategoriesFieldName():
                 $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
-                /** @var RelationalTypeResolverInterface */
+                /** @var TypeResolverInterface */
                 $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
                 return [
                     [

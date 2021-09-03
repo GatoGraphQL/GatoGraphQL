@@ -8,6 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolver
@@ -63,7 +64,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         switch ($fieldName) {
             case 'setCategories':
                 $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
-                /** @var RelationalTypeResolverInterface */
+                /** @var TypeResolverInterface */
                 $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
                 return [
                     [
