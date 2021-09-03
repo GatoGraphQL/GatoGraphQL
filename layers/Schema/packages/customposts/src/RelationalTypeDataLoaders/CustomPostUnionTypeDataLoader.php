@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\RelationalTypeDataLoaders;
 
-use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractUnionTypeDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\Union\AbstractUnionTypeDataLoader;
 use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 
 class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader

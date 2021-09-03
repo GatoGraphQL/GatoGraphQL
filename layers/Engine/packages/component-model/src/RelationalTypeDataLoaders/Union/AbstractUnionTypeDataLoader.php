@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\RelationalTypeDataLoaders;
+namespace PoP\ComponentModel\RelationalTypeDataLoaders\Union;
 
 abstract class AbstractUnionTypeDataLoader extends AbstractRelationalTypeDataLoader
 {
