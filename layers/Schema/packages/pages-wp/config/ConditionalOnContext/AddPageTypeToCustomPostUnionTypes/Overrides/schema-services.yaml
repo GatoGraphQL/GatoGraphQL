@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Pages\ConditionalOnContext\AddPageTypeToCustomPostUnionTypes\SchemaServices\TypeResolverPickers\PageCustomPostTypeResolverPicker:
-        class: '\PoPSchema\PagesWP\ConditionalOnContext\AddPageTypeToCustomPostUnionTypes\Overrides\SchemaServices\TypeResolverPickers\PageCustomPostTypeResolverPicker'
+    PoPSchema\Pages\ConditionalOnContext\AddPageTypeToCustomPostUnionTypes\SchemaServices\ObjectTypeResolverPickers\PageCustomPostTypeResolverPicker:
+        class: '\PoPSchema\PagesWP\ConditionalOnContext\AddPageTypeToCustomPostUnionTypes\Overrides\SchemaServices\ObjectTypeResolverPickers\PageCustomPostTypeResolverPicker'

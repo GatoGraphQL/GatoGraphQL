@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Stances\ConditionalOnContext\AddStanceTypeToCustomPostUnionTypes\SchemaServices\TypeResolverPickers\StanceCustomPostTypeResolverPicker:
-        class: '\PoPSchema\StancesWP\ConditionalOnContext\AddStanceTypeToCustomPostUnionTypes\Overrides\SchemaServices\TypeResolverPickers\StanceCustomPostTypeResolverPicker'
+    PoPSchema\Stances\ConditionalOnContext\AddStanceTypeToCustomPostUnionTypes\SchemaServices\ObjectTypeResolverPickers\StanceCustomPostTypeResolverPicker:
+        class: '\PoPSchema\StancesWP\ConditionalOnContext\AddStanceTypeToCustomPostUnionTypes\Overrides\SchemaServices\ObjectTypeResolverPickers\StanceCustomPostTypeResolverPicker'
