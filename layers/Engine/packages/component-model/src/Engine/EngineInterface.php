@@ -25,6 +25,6 @@ interface EngineInterface
     public function getSiteMeta(): array;
     public function validateCheckpoints(array $checkpoints): bool | Error;
     public function getModuleData(array $root_module, array $root_model_props, array $root_props): array;
-    public function moveEntriesUnderDBName(array $entries, bool $entryHasId, RelationalTypeResolverInterface $typeResolver): array;
+    public function moveEntriesUnderDBName(array $entries, bool $entryHasId, RelationalTypeResolverInterface $relationalTypeResolver): array;
     public function getDatabases(): array;
 }

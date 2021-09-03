@@ -26,9 +26,9 @@ trait WithTypeFieldControlBlockTrait
         // For each class, obtain its namespacedTypeName
         $typeResolvers = $typeRegistry->getTypeResolvers();
         $namespacedTypeNameNames = [];
-        foreach ($typeResolvers as $typeResolver) {
-            $typeResolverNamespacedName = $typeResolver->getNamespacedTypeName();
-            $namespacedTypeNameNames[$typeResolverNamespacedName] = $typeResolver->getMaybeNamespacedTypeName();
+        foreach ($typeResolvers as $relationalTypeResolver) {
+            $typeResolverNamespacedName = $relationalTypeResolver->getNamespacedTypeName();
+            $namespacedTypeNameNames[$typeResolverNamespacedName] = $relationalTypeResolver->getMaybeNamespacedTypeName();
         }
         // For each interface, obtain its namespacedInterfaceName
         $fieldInterfaceResolvers = $fieldInterfaceRegistry->getFieldInterfaceResolvers();

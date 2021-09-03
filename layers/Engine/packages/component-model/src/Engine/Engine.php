@@ -641,7 +641,7 @@ class Engine implements EngineInterface
 
     private function addDatasetToDatabase(
         array &$database,
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $dbKey,
         array $dataitems,
         array $resultIDItems,
@@ -652,10 +652,10 @@ class Engine implements EngineInterface
             return;
         }
 
-        $isUnionTypeResolver = $typeResolver instanceof UnionTypeResolverInterface;
+        $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
         if ($isUnionTypeResolver) {
             /** @var UnionTypeResolverInterface */
-            $typeResolver = $typeResolver;
+            $relationalTypeResolver = $relationalTypeResolver;
             // Get the actual type for each entity, and add the entry there
             $convertedTypeResolverClassDataItems = $convertedTypeResolverClassDBKeys = [];
             $noTypeResolverDataItems = [];
@@ -663,7 +663,7 @@ class Engine implements EngineInterface
                 // Obtain the type of the object
                 $exists = false;
                 if ($resultItem = $resultIDItems[$resultItemID] ?? null) {
-                    $targetTypeResolver = $typeResolver->getTargetTypeResolver($resultItem);
+                    $targetTypeResolver = $relationalTypeResolver->getTargetTypeResolver($resultItem);
                     if (!is_null($targetTypeResolver)) {
                         $exists = true;
                         // The ID will contain the type. Remove it
@@ -1024,8 +1024,8 @@ class Engine implements EngineInterface
                 if ($load_data) {
                     $typeResolver_class = $processor->getTypeResolverClass($module);
                     /** @var RelationalTypeResolverInterface */
-                    $typeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
-                    $isUnionTypeResolver = $typeResolver instanceof UnionTypeResolverInterface;
+                    $relationalTypeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
+                    $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
                     // ------------------------------------------
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
@@ -1034,7 +1034,7 @@ class Engine implements EngineInterface
                     // If the type is union, we must add the type to each object
                     if (!is_null($dbObjectIDOrIDs)) {
                         if ($isUnionTypeResolver) {
-                            $typeDBObjectIDOrIDs = $typeResolver->getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs);
+                            $typeDBObjectIDOrIDs = $relationalTypeResolver->getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs);
                         } else {
                             $typeDBObjectIDOrIDs = $dbObjectIDOrIDs;
                         }
@@ -1276,7 +1276,7 @@ class Engine implements EngineInterface
     public function moveEntriesUnderDBName(
         array $entries,
         bool $entryHasId,
-        RelationalTypeResolverInterface $typeResolver
+        RelationalTypeResolverInterface $relationalTypeResolver
     ): array {
         $dbname_entries = [];
         if ($entries) {
@@ -1288,7 +1288,7 @@ class Engine implements EngineInterface
             $dbname_datafields = $this->hooksAPI->applyFilters(
                 'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
                 [],
-                $typeResolver
+                $relationalTypeResolver
             );
             foreach ($dbname_datafields as $dbname => $data_fields) {
                 // Move these data fields under "meta" DB name
@@ -1367,13 +1367,13 @@ class Engine implements EngineInterface
             }
 
             /** @var RelationalTypeResolverInterface */
-            $typeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
-            $database_key = $typeResolver->getTypeOutputName();
+            $relationalTypeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
+            $database_key = $relationalTypeResolver->getTypeOutputName();
 
             // Execute the typeResolver for all combined ids
             $iterationDBItems = $iterationDBErrors = $iterationDBWarnings = $iterationDBDeprecations = $iterationDBNotices = $iterationDBTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
-            $isUnionTypeResolver = $typeResolver instanceof UnionTypeResolverInterface;
-            $resultIDItems = $typeResolver->fillResultItems(
+            $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
+            $resultIDItems = $relationalTypeResolver->fillResultItems(
                 $ids_data_fields,
                 $combinedUnionDBKeyIDs,
                 $iterationDBItems,
@@ -1420,10 +1420,10 @@ class Engine implements EngineInterface
                 }
 
                 // If the type is union, then add the type corresponding to each object on its ID
-                $dbItems = $this->moveEntriesUnderDBName($iterationDBItems, true, $typeResolver);
+                $dbItems = $this->moveEntriesUnderDBName($iterationDBItems, true, $relationalTypeResolver);
                 foreach ($dbItems as $dbname => $entries) {
                     $databases[$dbname] ??= [];
-                    $this->addDatasetToDatabase($databases[$dbname], $typeResolver, $database_key, $entries, $resultIDItems);
+                    $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems);
 
                     // Populate the $previousDBItems, pointing to the newly fetched dbItems (but without the dbname!)
                     // Save the reference to the values, instead of the values, to save memory
@@ -1437,51 +1437,51 @@ class Engine implements EngineInterface
                 }
             }
             if ($iterationDBErrors) {
-                $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationDBErrors, true, $typeResolver);
+                $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationDBErrors, true, $relationalTypeResolver);
                 foreach ($dbNameErrorEntries as $dbname => $entries) {
                     $dbErrors[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbErrors[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
+                    $this->addDatasetToDatabase($dbErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBWarnings) {
-                $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationDBWarnings, true, $typeResolver);
+                $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationDBWarnings, true, $relationalTypeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $entries) {
                     $dbWarnings[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbWarnings[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
+                    $this->addDatasetToDatabase($dbWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBDeprecations) {
-                $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationDBDeprecations, true, $typeResolver);
+                $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationDBDeprecations, true, $relationalTypeResolver);
                 foreach ($dbNameDeprecationEntries as $dbname => $entries) {
                     $dbDeprecations[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbDeprecations[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
+                    $this->addDatasetToDatabase($dbDeprecations[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBNotices) {
-                $dbNameNoticeEntries = $this->moveEntriesUnderDBName($iterationDBNotices, true, $typeResolver);
+                $dbNameNoticeEntries = $this->moveEntriesUnderDBName($iterationDBNotices, true, $relationalTypeResolver);
                 foreach ($dbNameNoticeEntries as $dbname => $entries) {
                     $dbNotices[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbNotices[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
+                    $this->addDatasetToDatabase($dbNotices[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBTraces) {
-                $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationDBTraces, true, $typeResolver);
+                $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationDBTraces, true, $relationalTypeResolver);
                 foreach ($dbNameTraceEntries as $dbname => $entries) {
                     $dbTraces[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbTraces[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
+                    $this->addDatasetToDatabase($dbTraces[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
 
             $storeSchemaErrors = $this->feedbackMessageStore->retrieveAndClearSchemaErrors();
             if (!empty($iterationSchemaErrors) || !empty($storeSchemaErrors)) {
-                $dbNameSchemaErrorEntries = $this->moveEntriesUnderDBName($iterationSchemaErrors, false, $typeResolver);
+                $dbNameSchemaErrorEntries = $this->moveEntriesUnderDBName($iterationSchemaErrors, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaErrorEntries as $dbname => $entries) {
                     $schemaErrors[$dbname][$database_key] = array_merge(
                         $schemaErrors[$dbname][$database_key] ?? [],
                         $entries
                     );
                 }
-                $dbNameStoreSchemaErrors = $this->moveEntriesUnderDBName($storeSchemaErrors, false, $typeResolver);
+                $dbNameStoreSchemaErrors = $this->moveEntriesUnderDBName($storeSchemaErrors, false, $relationalTypeResolver);
                 $schemaErrors = array_merge_recursive(
                     $schemaErrors,
                     $dbNameStoreSchemaErrors
@@ -1495,7 +1495,7 @@ class Engine implements EngineInterface
             }
             if ($iterationSchemaWarnings) {
                 $iterationSchemaWarnings = array_intersect_key($iterationSchemaWarnings, array_unique(array_map('serialize', $iterationSchemaWarnings)));
-                $dbNameSchemaWarningEntries = $this->moveEntriesUnderDBName($iterationSchemaWarnings, false, $typeResolver);
+                $dbNameSchemaWarningEntries = $this->moveEntriesUnderDBName($iterationSchemaWarnings, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaWarningEntries as $dbname => $entries) {
                     $schemaWarnings[$dbname][$database_key] = array_merge(
                         $schemaWarnings[$dbname][$database_key] ?? [],
@@ -1505,7 +1505,7 @@ class Engine implements EngineInterface
             }
             if ($iterationSchemaDeprecations) {
                 $iterationSchemaDeprecations = array_intersect_key($iterationSchemaDeprecations, array_unique(array_map('serialize', $iterationSchemaDeprecations)));
-                $dbNameSchemaDeprecationEntries = $this->moveEntriesUnderDBName($iterationSchemaDeprecations, false, $typeResolver);
+                $dbNameSchemaDeprecationEntries = $this->moveEntriesUnderDBName($iterationSchemaDeprecations, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaDeprecationEntries as $dbname => $entries) {
                     $schemaDeprecations[$dbname][$database_key] = array_merge(
                         $schemaDeprecations[$dbname][$database_key] ?? [],
@@ -1515,7 +1515,7 @@ class Engine implements EngineInterface
             }
             if ($iterationSchemaNotices) {
                 $iterationSchemaNotices = array_intersect_key($iterationSchemaNotices, array_unique(array_map('serialize', $iterationSchemaNotices)));
-                $dbNameSchemaNoticeEntries = $this->moveEntriesUnderDBName($iterationSchemaNotices, false, $typeResolver);
+                $dbNameSchemaNoticeEntries = $this->moveEntriesUnderDBName($iterationSchemaNotices, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaNoticeEntries as $dbname => $entries) {
                     $schemaNotices[$dbname][$database_key] = array_merge(
                         $schemaNotices[$dbname][$database_key] ?? [],
@@ -1525,7 +1525,7 @@ class Engine implements EngineInterface
             }
             if ($iterationSchemaTraces) {
                 $iterationSchemaTraces = array_intersect_key($iterationSchemaTraces, array_unique(array_map('serialize', $iterationSchemaTraces)));
-                $dbNameSchemaTraceEntries = $this->moveEntriesUnderDBName($iterationSchemaTraces, false, $typeResolver);
+                $dbNameSchemaTraceEntries = $this->moveEntriesUnderDBName($iterationSchemaTraces, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaTraceEntries as $dbname => $entries) {
                     $schemaTraces[$dbname][$database_key] = array_merge(
                         $schemaTraces[$dbname][$database_key] ?? [],
@@ -1569,8 +1569,8 @@ class Engine implements EngineInterface
                         // If it's a unionTypeResolver, get the typeResolver for each resultItem
                         // to obtain the subcomponent typeResolver
                         /** @var UnionTypeResolverInterface */
-                        $typeResolver = $typeResolver;
-                        $resultItemTypeResolvers = $typeResolver->getResultItemIDTargetTypeResolvers($typeResolver_ids);
+                        $relationalTypeResolver = $relationalTypeResolver;
+                        $resultItemTypeResolvers = $relationalTypeResolver->getResultItemIDTargetTypeResolvers($typeResolver_ids);
                         $iterationTypeResolverIDs = [];
                         foreach ($typeResolver_ids as $id) {
                             // If there's no resolver, it's an error: the ID can't be processed by anyone
@@ -1581,10 +1581,10 @@ class Engine implements EngineInterface
                         }
                         foreach ($iterationTypeResolverIDs as $targetTypeResolverClass => $targetIDs) {
                             $targetTypeResolver = $this->instanceManager->getInstance($targetTypeResolverClass);
-                            $this->processSubcomponentData($typeResolver, $targetTypeResolver, $targetIDs, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
+                            $this->processSubcomponentData($relationalTypeResolver, $targetTypeResolver, $targetIDs, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
                         }
                     } else {
-                        $this->processSubcomponentData($typeResolver, $typeResolver, $typeResolver_ids, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolver_ids, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
                     }
                 }
             }
@@ -1650,7 +1650,7 @@ class Engine implements EngineInterface
     }
 
     protected function processSubcomponentData(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         RelationalTypeResolverInterface $targetTypeResolver,
         array $typeResolver_ids,
         string $module_path_key,
@@ -1667,12 +1667,12 @@ class Engine implements EngineInterface
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
             // However, for the targetTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
-            $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field);
-            if (!$subcomponent_typeResolver_class && $typeResolver != $targetTypeResolver) {
+            $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field);
+            if (!$subcomponent_typeResolver_class && $relationalTypeResolver != $targetTypeResolver) {
                 $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($targetTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponent_typeResolver_class) {
-                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $subcomponent_data_field);
+                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field);
                 // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
                 $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
                 $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];

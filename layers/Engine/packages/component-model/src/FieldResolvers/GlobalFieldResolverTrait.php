@@ -16,7 +16,7 @@ trait GlobalFieldResolverTrait
         ];
     }
 
-    public function isGlobal(RelationalTypeResolverInterface $typeResolver, string $fieldName): bool
+    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool
     {
         return true;
     }

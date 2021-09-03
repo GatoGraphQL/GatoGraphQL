@@ -26,7 +26,7 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
     /**
      * Allow to disable the functionality
      */
-    public function enabled(RelationalTypeResolverInterface $typeResolver): bool
+    public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return true;
     }
@@ -34,7 +34,7 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
     /**
      * Return an array of fieldNames as keys, and, for each fieldName, an array of directives (including directive arguments) to be applied always on the field
      */
-    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $typeResolver): array
+    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [];
     }
@@ -43,7 +43,7 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
      * Return an array of directiveName as keys, and, for each directiveName,
      * an array of directives (including directive arguments) to be applied before
      */
-    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $typeResolver): array
+    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [];
     }
@@ -52,7 +52,7 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
      * Return an array of directiveName as keys, and, for each directiveName,
      * an array of directives (including directive arguments) to be applied after
      */
-    public function getSucceedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $typeResolver): array
+    public function getSucceedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [];
     }

@@ -33,12 +33,12 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         return true;
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Duplicate a property in the current object', 'component-model');
     }
 
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             [
@@ -54,7 +54,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
      * Duplicate a property from the current object
      */
     public function resolveDirective(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -78,7 +78,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         $copyTo = $this->directiveArgsForSchema['to'];
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
                 if (!array_key_exists($fieldOutputKey, $dbItems[(string)$id])) {
                     $dbWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],

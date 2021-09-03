@@ -41,7 +41,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'editUserMembershipURL' => SchemaDefinition::TYPE_URL,
@@ -56,10 +56,10 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
             'url' => SchemaDefinition::TYPE_URL,
             'message' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'memberstatus',
@@ -70,11 +70,11 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
             'memberTagsByName'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -90,10 +90,10 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
             'url' => $translationAPI->__('', ''),
             'message' => $translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    protected function getSchemaDefinitionEnumName(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
+    protected function getSchemaDefinitionEnumName(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
@@ -111,7 +111,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         return null;
     }
 
-    protected function getSchemaDefinitionEnumValues(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?array
+    protected function getSchemaDefinitionEnumValues(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
@@ -133,7 +133,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessResultItem(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -163,7 +163,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -194,7 +194,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                 return gdUreCommunityMembershipstatusFilterbycommunity($status, $notification->user_id);
 
             case 'memberStatusByName':
-                $selected = $typeResolver->resolveValue($notification, 'memberstatus', $variables, $expressions, $options);
+                $selected = $relationalTypeResolver->resolveValue($notification, 'memberstatus', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -208,7 +208,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                 return gdUreCommunityMembershipstatusFilterbycommunity($privileges, $notification->user_id);
 
             case 'memberPrivilegesByName':
-                $selected = $typeResolver->resolveValue($notification, 'memberprivileges', $variables, $expressions, $options);
+                $selected = $relationalTypeResolver->resolveValue($notification, 'memberprivileges', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -222,7 +222,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                 return gdUreCommunityMembershipstatusFilterbycommunity($tags, $notification->user_id);
 
             case 'memberTagsByName':
-                $selected = $typeResolver->resolveValue($notification, 'membertags', $variables, $expressions, $options);
+                $selected = $relationalTypeResolver->resolveValue($notification, 'membertags', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -284,7 +284,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                 return null;
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

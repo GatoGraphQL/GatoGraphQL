@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface DataloadHelperServiceInterface
 {
-    public function getTypeResolverClassFromSubcomponentDataField(RelationalTypeResolverInterface $typeResolver, string $subcomponent_data_field): ?string;
+    public function getTypeResolverClassFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, string $subcomponent_data_field): ?string;
 
     /**
      * @param array<array<string, mixed>> $moduleValues

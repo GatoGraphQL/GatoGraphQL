@@ -12,7 +12,7 @@ abstract class AbstractCustomPostListTagFieldResolver extends AbstractCustomPost
 {
     use TagAPIRequestedContractTrait;
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'customPosts' => $this->translationAPI->__('Custom posts which contain this tag', 'pop-tags'),
@@ -20,7 +20,7 @@ abstract class AbstractCustomPostListTagFieldResolver extends AbstractCustomPost
             'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts which contain this tag', 'pop-tags'),
             'customPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts which contain this tag', 'pop-tags'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     abstract protected function getQueryProperty(): string;
@@ -30,12 +30,12 @@ abstract class AbstractCustomPostListTagFieldResolver extends AbstractCustomPost
      * @return array<string, mixed>
      */
     protected function getQuery(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $query = parent::getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
+        $query = parent::getQuery($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs);
 
         $tag = $resultItem;
         switch ($fieldName) {
@@ -43,7 +43,7 @@ abstract class AbstractCustomPostListTagFieldResolver extends AbstractCustomPost
             case 'customPostCount':
             case 'customPostsForAdmin':
             case 'customPostCountForAdmin':
-                $query[$this->getQueryProperty()] = [$typeResolver->getID($tag)];
+                $query[$this->getQueryProperty()] = [$relationalTypeResolver->getID($tag)];
                 break;
         }
 

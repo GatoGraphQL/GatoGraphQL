@@ -13,9 +13,9 @@ class TypeRegistry implements TypeRegistryInterface
      */
     protected array $typeResolvers = [];
 
-    public function addTypeResolver(RelationalTypeResolverInterface $typeResolver): void
+    public function addTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): void
     {
-        $this->typeResolvers[] = $typeResolver;
+        $this->typeResolvers[] = $relationalTypeResolver;
     }
     /**
      * @return RelationalTypeResolverInterface[]

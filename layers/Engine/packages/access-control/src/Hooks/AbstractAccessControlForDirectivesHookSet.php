@@ -69,14 +69,14 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
         return true;
     }
 
-    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $typeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
+    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $relationalTypeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {
         // Because there may be several hooks chained, if any of them has already rejected the field, then already return that response
         if (!$include) {
             return false;
         }
         // Check if to remove the directive
-        return !$this->removeDirective($typeResolver, $directiveResolver, $directiveName);
+        return !$this->removeDirective($relationalTypeResolver, $directiveResolver, $directiveName);
     }
     /**
      * Affected directives
@@ -96,7 +96,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
     /**
      * Decide if to remove the directiveNames
      */
-    protected function removeDirective(RelationalTypeResolverInterface $typeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
+    protected function removeDirective(RelationalTypeResolverInterface $relationalTypeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {
         return true;
     }

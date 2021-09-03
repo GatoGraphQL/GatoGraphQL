@@ -17,7 +17,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         return 'validateDoesLoggedInUserHaveAnyCapability';
     }
 
-    protected function validateCondition(RelationalTypeResolverInterface $typeResolver): bool
+    protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $vars = ApplicationState::getVars();
         // If the user is not logged-in, then do nothing: directive `@validateIsUserLoggedIn` will already fail
@@ -32,7 +32,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         return !empty(array_intersect($capabilities, $userCapabilities));
     }
 
-    protected function getValidationFailedMessage(RelationalTypeResolverInterface $typeResolver, array $failedDataFields): string
+    protected function getValidationFailedMessage(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): string
     {
         $capabilities = $this->directiveArgsForSchema['capabilities'];
         $isValidatingDirective = $this->isValidatingDirective();
@@ -55,15 +55,15 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
                 $this->translationAPI->__('\', \''),
                 $failedDataFields
             ),
-            $typeResolver->getMaybeNamespacedTypeName()
+            $relationalTypeResolver->getMaybeNamespacedTypeName()
         );
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('It validates if the user has any capability provided through directive argument \'capabilities\'', 'component-model');
     }
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             [

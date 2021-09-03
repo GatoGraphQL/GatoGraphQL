@@ -49,7 +49,7 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
 
     public function getSchemaFieldArgs(
         array $fieldArgs,
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): array {
         $fieldArgs[] = [

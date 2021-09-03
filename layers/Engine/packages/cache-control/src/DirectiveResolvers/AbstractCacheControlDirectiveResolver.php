@@ -49,11 +49,11 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         return true;
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('HTTP caching (https://tools.ietf.org/html/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding \'no-store\' value is sent, indicating to not cache the response', 'cache-control');
     }
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             [
@@ -70,13 +70,13 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
      * @return string[] Error messages
      */
     protected function validateDirectiveArgument(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         string $directiveArgName,
         mixed $directiveArgValue
     ): array {
         $errors = parent::validateDirectiveArgument(
-            $typeResolver,
+            $relationalTypeResolver,
             $directiveName,
             $directiveArgName,
             $directiveArgValue,
@@ -113,7 +113,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
      * Get the cache control for this field, and set it on the Engine
      */
     public function resolveDirective(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,

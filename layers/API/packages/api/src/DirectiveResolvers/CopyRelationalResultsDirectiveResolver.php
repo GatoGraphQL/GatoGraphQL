@@ -34,12 +34,12 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
         return true;
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Copy the data from a relational object (which is one level below) to the current object', 'component-model');
     }
 
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             [
@@ -67,9 +67,9 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
     /**
      * Validate that the number of elements in the fields `copyToFields` and `copyFromFields` match one another
      */
-    public function validateDirectiveArgumentsForSchema(RelationalTypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
+    public function validateDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
-        $directiveArgs = parent::validateDirectiveArgumentsForSchema($typeResolver, $directiveName, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $directiveArgs = parent::validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
         if (isset($directiveArgs['copyToFields'])) {
             $copyToFields = $directiveArgs['copyToFields'];
@@ -104,7 +104,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
      * Copy the data under the relational object into the current object
      */
     public function resolveDirective(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -130,7 +130,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
         $keepRelationalIDs = $this->directiveArgsForSchema['keepRelationalIDs'];
 
         // From the typeResolver, obtain under what type the data for the current object is stored
-        $dbKey = $typeResolver->getTypeOutputName();
+        $dbKey = $relationalTypeResolver->getTypeOutputName();
 
         // Copy the data from each of the relational object fields to the current object
         for ($i = 0; $i < count($copyFromFields); $i++) {
@@ -139,7 +139,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
             foreach ($idsDataFields as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $relationalField) {
                     // The data is stored under the field's output key
-                    $relationalFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $relationalField);
+                    $relationalFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $relationalField);
                     // Validate that the current object has `relationalField` property set
                     // Since we are fetching from a relational object (placed one level below in the iteration stack), the value could've been set only in a previous iteration
                     // Then it must be in $previousDBItems (it can't be in $dbItems unless set by chance, because the same IDs were involved for a possibly different query)
@@ -186,7 +186,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                     $dbItems[(string)$id][$copyToField] = [];
 
                     // Obtain the DBKey under which the relationalField is stored in the database
-                    $relationalFieldTypeResolverClass = $typeResolver->resolveFieldTypeResolverClass($relationalField);
+                    $relationalFieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($relationalField);
                     $relationalFieldTypeResolver = $this->instanceManager->getInstance((string)$relationalFieldTypeResolverClass);
                     $relationalFieldDBKey = $relationalFieldTypeResolver->getTypeOutputName();
                     $isUnionRelationalFieldDBKey = UnionTypeHelpers::isUnionType($relationalFieldDBKey);

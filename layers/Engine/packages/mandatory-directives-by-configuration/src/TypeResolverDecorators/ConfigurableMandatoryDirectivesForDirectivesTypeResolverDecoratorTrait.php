@@ -15,7 +15,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTypeResolverDecoratorTrait
 
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
-    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $typeResolver): array
+    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         $mandatoryDirectivesForDirectives = [];

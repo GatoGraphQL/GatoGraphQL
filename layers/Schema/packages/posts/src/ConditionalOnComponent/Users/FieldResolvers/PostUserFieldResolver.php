@@ -15,7 +15,7 @@ class PostUserFieldResolver extends AbstractPostFieldResolver
         return array(UserTypeResolver::class);
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'posts' => $this->translationAPI->__('Posts by the user', 'users'),
@@ -23,7 +23,7 @@ class PostUserFieldResolver extends AbstractPostFieldResolver
             'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts by the user', 'users'),
             'postCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of posts by the user', 'users'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -31,12 +31,12 @@ class PostUserFieldResolver extends AbstractPostFieldResolver
      * @return array<string, mixed>
      */
     protected function getQuery(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $query = parent::getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
+        $query = parent::getQuery($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs);
 
         $user = $resultItem;
         switch ($fieldName) {
@@ -44,7 +44,7 @@ class PostUserFieldResolver extends AbstractPostFieldResolver
             case 'postCount':
             case 'postsForAdmin':
             case 'postCountForAdmin':
-                $query['authors'] = [$typeResolver->getID($user)];
+                $query['authors'] = [$relationalTypeResolver->getID($user)];
                 break;
         }
 

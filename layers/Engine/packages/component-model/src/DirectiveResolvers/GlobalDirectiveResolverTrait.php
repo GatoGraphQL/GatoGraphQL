@@ -17,7 +17,7 @@ trait GlobalDirectiveResolverTrait
         ];
     }
 
-    public function isGlobal(RelationalTypeResolverInterface $typeResolver): bool
+    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return true;
     }

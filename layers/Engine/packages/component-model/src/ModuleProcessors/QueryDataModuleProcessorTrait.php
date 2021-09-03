@@ -123,8 +123,8 @@ trait QueryDataModuleProcessorTrait
         /**
          * @var RelationalTypeResolverInterface
          */
-        $typeResolver = $instanceManager->getInstance($typeResolverClass);
-        $typeDataLoaderClass = $typeResolver->getTypeDataLoaderClass();
+        $relationalTypeResolver = $instanceManager->getInstance($typeResolverClass);
+        $typeDataLoaderClass = $relationalTypeResolver->getTypeDataLoaderClass();
         $typeDataLoader = $instanceManager->getInstance($typeDataLoaderClass);
         return $typeDataLoader->findIDs($data_properties);
     }

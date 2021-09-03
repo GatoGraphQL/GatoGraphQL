@@ -115,14 +115,14 @@ class SchemaHelpers
      */
     public static function convertTypeIDToTypeName(
         string $type,
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): string {
         // If the type is an ID, replace it with the actual type the ID references
         if ($type == SchemaDefinition::TYPE_ID) {
             $instanceManager = InstanceManagerFacade::getInstance();
             // The type may not be implemented yet (eg: Category), then skip
-            if ($fieldTypeResolverClass = $typeResolver->resolveFieldTypeResolverClass($fieldName)) {
+            if ($fieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($fieldName)) {
                 $fieldTypeResolver = $instanceManager->getInstance((string)$fieldTypeResolverClass);
                 $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             }

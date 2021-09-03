@@ -14,10 +14,10 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
         // By default, use the type name
         return $interfaceResolver->getMaybeNamespacedInterfaceName();
     }
-    public function getTypeSchemaKey(RelationalTypeResolverInterface $typeResolver): string
+    public function getTypeSchemaKey(RelationalTypeResolverInterface $relationalTypeResolver): string
     {
         // By default, use the type name
-        return $typeResolver->getMaybeNamespacedTypeName();
+        return $relationalTypeResolver->getMaybeNamespacedTypeName();
     }
     /**
      * The `mixed` type is a wildcard type,

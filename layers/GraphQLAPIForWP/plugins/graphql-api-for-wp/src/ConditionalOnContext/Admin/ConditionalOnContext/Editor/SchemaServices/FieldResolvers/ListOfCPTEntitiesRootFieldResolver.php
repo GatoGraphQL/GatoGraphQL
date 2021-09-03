@@ -26,13 +26,13 @@ class ListOfCPTEntitiesRootFieldResolver extends AbstractListOfCPTEntitiesRootFi
         ];
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'accessControlLists' => $this->translationAPI->__('Access Control Lists', 'graphql-api'),
             'cacheControlLists' => $this->translationAPI->__('Cache Control Lists', 'graphql-api'),
             'schemaConfigurations' => $this->translationAPI->__('Schema Configurations', 'graphql-api'),
-            default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
+            default => parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName),
         };
     }
 

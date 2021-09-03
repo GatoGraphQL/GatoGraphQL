@@ -16,12 +16,12 @@ class PoP_PostCategoryLayouts_LayoutDataloadHooks
         );
     }
 
-    public function addMultilayoutKeys($keys, $post_id, $typeResolver)
+    public function addMultilayoutKeys($keys, $post_id, $relationalTypeResolver)
     {
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         if (in_array(POP_POSTCATEGORYLAYOUTS_CATEGORIES_LAYOUTFEATUREIMAGE, $postCategoryTypeAPI->getCustomPostCategories($post_id, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]))) {
             // Priority: place it before the 'postType' layout key
-            array_unshift($keys, strtolower($typeResolver->getTypeName()).'-featureimage');
+            array_unshift($keys, strtolower($relationalTypeResolver->getTypeName()).'-featureimage');
         }
 
         return $keys;

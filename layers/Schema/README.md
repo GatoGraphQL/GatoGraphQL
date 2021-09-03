@@ -87,7 +87,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
   }
 
   public function getSchemaFieldDescription(
-    RelationalTypeResolverInterface $typeResolver,
+    RelationalTypeResolverInterface $relationalTypeResolver,
     string $fieldName
   ): ?string {
     $descriptions = [
@@ -99,7 +99,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
   }
 
   public function getSchemaFieldType(
-    RelationalTypeResolverInterface $typeResolver,
+    RelationalTypeResolverInterface $relationalTypeResolver,
     string $fieldName
   ): ?string {
     $types = [
@@ -111,7 +111,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
   }
 
   public function resolveValue(
-    RelationalTypeResolverInterface $typeResolver,
+    RelationalTypeResolverInterface $relationalTypeResolver,
     object $user,
     string $fieldName,
     array $fieldArgs = []

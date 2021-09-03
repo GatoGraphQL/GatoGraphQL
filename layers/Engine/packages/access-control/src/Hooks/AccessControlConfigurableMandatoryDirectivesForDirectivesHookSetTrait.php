@@ -10,13 +10,13 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 trait AccessControlConfigurableMandatoryDirectivesForDirectivesHookSetTrait
 {
-    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $typeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
+    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $relationalTypeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {
         /**
          * If not enabling individual control, then the parent case already deals with the general case
          */
         if (!ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode()) {
-            return parent::maybeFilterDirectiveName($include, $typeResolver, $directiveResolver, $directiveName);
+            return parent::maybeFilterDirectiveName($include, $relationalTypeResolver, $directiveResolver, $directiveName);
         }
 
         /**
@@ -36,7 +36,7 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesHookSetTrait
              * If there is any entry for this directive, then continue the normal execution: that of the parent
              */
             if (in_array($entry[0], $ancestorDirectiveResolverClasses)) {
-                return parent::maybeFilterDirectiveName($include, $typeResolver, $directiveResolver, $directiveName);
+                return parent::maybeFilterDirectiveName($include, $relationalTypeResolver, $directiveResolver, $directiveName);
             }
         }
         /**

@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class QueryableInterfaceSchemaDefinitionResolverAdapter extends InterfaceSchemaDefinitionResolverAdapter implements QueryableFieldSchemaDefinitionResolverInterface
 {
-    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
     {
         /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface */
         $fieldInterfaceResolver = $this->fieldInterfaceResolver;

@@ -77,7 +77,7 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
      * Check there is an author. Otherwise, let the upstream resolve it
      */
     public function resolveCanProcessResultItem(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -94,7 +94,7 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -115,6 +115,6 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
                 return $this->userTypeAPI->getUserEmail($commentUserID);
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

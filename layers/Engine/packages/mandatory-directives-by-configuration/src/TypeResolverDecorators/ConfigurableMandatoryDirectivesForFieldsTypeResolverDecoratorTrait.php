@@ -29,11 +29,11 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
 
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
-    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $typeResolver): array
+    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         $mandatoryDirectivesForFields = [];
-        $fieldInterfaceResolverClasses = $typeResolver->getAllImplementedInterfaceClasses();
+        $fieldInterfaceResolverClasses = $relationalTypeResolver->getAllImplementedInterfaceClasses();
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
             // Calculate all the interfaces that define this fieldName
@@ -47,7 +47,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
             ));
             foreach (
                 $this->getEntries(
-                    $typeResolver,
+                    $relationalTypeResolver,
                     $fieldInterfaceResolverClassesForField,
                     $fieldName
                 ) as $entry

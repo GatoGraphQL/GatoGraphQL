@@ -14,7 +14,7 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolv
     /**
      * Verify that the user is logged in before checking the roles/capabilities
      */
-    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $typeResolver): array
+    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $mandatoryDirectivesForDirectives = [];
         /** @var DirectiveResolverInterface */

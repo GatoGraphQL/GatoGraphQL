@@ -33,9 +33,9 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     /**
      * Validate a custom condition
      */
-    protected function validateFields(RelationalTypeResolverInterface $typeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void
+    protected function validateFields(RelationalTypeResolverInterface $relationalTypeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void
     {
-        if (!$this->validateCondition($typeResolver)) {
+        if (!$this->validateCondition($relationalTypeResolver)) {
             // All fields failed
             $failedDataFields = array_merge(
                 $failedDataFields,
@@ -43,7 +43,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
             );
             $schemaErrors[] = [
                 Tokens::PATH => $dataFields,
-                Tokens::MESSAGE => $this->getValidationFailedMessage($typeResolver, $dataFields),
+                Tokens::MESSAGE => $this->getValidationFailedMessage($relationalTypeResolver, $dataFields),
             ];
         }
     }
@@ -51,7 +51,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     /**
      * Condition to validate. Return `true` for success, `false` for failure
      */
-    abstract protected function validateCondition(RelationalTypeResolverInterface $typeResolver): bool;
+    abstract protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool;
 
     /**
      * Show a different error message depending on if we are validating the whole field, or a directive
@@ -62,7 +62,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
         return false;
     }
 
-    protected function getValidationFailedMessage(RelationalTypeResolverInterface $typeResolver, array $failedDataFields): string
+    protected function getValidationFailedMessage(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): string
     {
         $errorMessage = $this->isValidatingDirective() ?
             $this->translationAPI->__('Validation failed for directives in fields \'%s\'', 'component-model') :

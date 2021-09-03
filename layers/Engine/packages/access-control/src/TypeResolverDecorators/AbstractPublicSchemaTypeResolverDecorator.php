@@ -14,7 +14,7 @@ abstract class AbstractPublicSchemaTypeResolverDecorator extends AbstractTypeRes
     /**
      * Enable only for public schema
      */
-    public function enabled(RelationalTypeResolverInterface $typeResolver): bool
+    public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return
             ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode() ||

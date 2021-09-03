@@ -15,13 +15,13 @@ class SchemaDefinitionHelpers
     private static array $schemaFieldArgsCache = [];
 
     public static function getAddCommentToCustomPostSchemaFieldArgs(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,
         bool $addCustomPostID,
         bool $addParentCommentID,
         bool $isParentCommentMandatory = false
     ): array {
-        $key = get_class($typeResolver) . '-' . $fieldName;
+        $key = get_class($relationalTypeResolver) . '-' . $fieldName;
         if (!isset(self::$schemaFieldArgsCache[$key])) {
             $translationAPI = TranslationAPIFacade::getInstance();
             $schemaFieldArgs = [

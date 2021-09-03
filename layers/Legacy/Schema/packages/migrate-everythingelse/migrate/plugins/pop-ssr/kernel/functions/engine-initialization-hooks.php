@@ -193,13 +193,13 @@ class PoP_SSR_EngineInitialization_Hooks
             /**
              * @var RelationalTypeResolverInterface
              */
-            $typeResolver = $instanceManager->getInstance($typeResolver_class);
-            $database_key = $typeResolver->getTypeOutputName();
+            $relationalTypeResolver = $instanceManager->getInstance($typeResolver_class);
+            $database_key = $relationalTypeResolver->getTypeOutputName();
 
             // Allow plugins to split the object into several databases, not just "primary". Eg: "userstate", by PoP User Login
             // The hook below can modify the list of datafields to be added under "primary", and add those fields directly into $databaseitems under another dbname ("userstate")
             $engine = EngineFacade::getInstance();
-            $data_fields = $engine->moveEntriesUnderDBName($data_properties['data-fields'], true, $typeResolver);
+            $data_fields = $engine->moveEntriesUnderDBName($data_properties['data-fields'], true, $relationalTypeResolver);
 
             foreach ($dbobjectids as $resultItem_id) {
                 // Copy to the dynamic database
@@ -229,7 +229,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
                     // If it is a union type data resolver, then we must add the converted type on each ID
                     $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
-                    if ($subcomponent_typeResolver_class = $dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
+                    if ($subcomponent_typeResolver_class = $dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
                         $subcomponentTypeResolver = $instanceManager->getInstance((string)$subcomponent_typeResolver_class);
                         $typeResultItemIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($resultItemIDs);
                         if (is_null($typeResultItemIDs)) {

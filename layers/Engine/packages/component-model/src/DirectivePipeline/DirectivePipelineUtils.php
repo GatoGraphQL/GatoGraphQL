@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 class DirectivePipelineUtils
 {
     public static function convertArgumentsToPayload(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$pipelineIDsDataFields,
         array &$pipelineDirectiveResolverInstances,
         array &$resultIDItems,
@@ -30,7 +30,7 @@ class DirectivePipelineUtils
         array &$schemaTraces
     ): array {
         return [
-            'typeResolver' => &$typeResolver,
+            'typeResolver' => &$relationalTypeResolver,
             'pipelineIDsDataFields' => &$pipelineIDsDataFields,
             'pipelineDirectiveResolverInstances' => &$pipelineDirectiveResolverInstances,
             'resultIDItems' => &$resultIDItems,

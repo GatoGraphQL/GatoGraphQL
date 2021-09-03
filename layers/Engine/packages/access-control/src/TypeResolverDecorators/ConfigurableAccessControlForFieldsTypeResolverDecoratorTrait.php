@@ -20,8 +20,8 @@ trait ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait
         AccessControlConfigurableMandatoryDirectivesForFieldsTrait::getFieldNames insteadof ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait;
     }
 
-    public function enabled(RelationalTypeResolverInterface $typeResolver): bool
+    public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        return parent::enabled($typeResolver) && !empty($this->getConfigurationEntries());
+        return parent::enabled($relationalTypeResolver) && !empty($this->getConfigurationEntries());
     }
 }

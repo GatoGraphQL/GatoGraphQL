@@ -32,7 +32,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'titleEdit' => SchemaDefinition::TYPE_STRING,
@@ -42,18 +42,18 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
             'deleteURL' => SchemaDefinition::TYPE_URL,
             'coauthors' => SchemaDefinition::TYPE_ID,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'coauthors' => SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+            default => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -64,7 +64,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
             'deleteURL' => $translationAPI->__('', ''),
             'coauthors' => $translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -74,7 +74,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -88,31 +88,31 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
         switch ($fieldName) {
 
             case 'titleEdit':
-                if (gdCurrentUserCanEdit($typeResolver->getID($post))) {
+                if (gdCurrentUserCanEdit($relationalTypeResolver->getID($post))) {
                     return $customPostTypeAPI->getTitle($post);
                 }
                 return '';
 
             case 'contentEditor':
-                if (gdCurrentUserCanEdit($typeResolver->getID($post))) {
-                   return $cmseditpostsapi->getPostEditorContent($typeResolver->getID($post));
+                if (gdCurrentUserCanEdit($relationalTypeResolver->getID($post))) {
+                   return $cmseditpostsapi->getPostEditorContent($relationalTypeResolver->getID($post));
                 }
                 return '';
 
             case 'contentEdit':
-                if (gdCurrentUserCanEdit($typeResolver->getID($post))) {
+                if (gdCurrentUserCanEdit($relationalTypeResolver->getID($post))) {
                     return $customPostTypeAPI->getContent($post);
                 }
                 return '';
 
             case 'editURL':
-                return urldecode($cmseditpostsapi->getEditPostLink($typeResolver->getID($post)));
+                return urldecode($cmseditpostsapi->getEditPostLink($relationalTypeResolver->getID($post)));
 
             case 'deleteURL':
-                return $cmseditpostsapi->getDeletePostLink($typeResolver->getID($post));
+                return $cmseditpostsapi->getDeletePostLink($relationalTypeResolver->getID($post));
 
             case 'coauthors':
-                $authors = $typeResolver->resolveValue($resultItem, FieldQueryInterpreterFacade::getInstance()->getField('authors', $fieldArgs), $variables, $expressions, $options);
+                $authors = $relationalTypeResolver->resolveValue($resultItem, FieldQueryInterpreterFacade::getInstance()->getField('authors', $fieldArgs), $variables, $expressions, $options);
 
                 // This function only makes sense when the user is logged in
                 $vars = ApplicationState::getVars();
@@ -125,17 +125,17 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
                 return $authors;
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'coauthors':
                 return UserTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }
 

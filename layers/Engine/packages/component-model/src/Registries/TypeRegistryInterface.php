@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface TypeRegistryInterface
 {
-    public function addTypeResolver(RelationalTypeResolverInterface $typeResolver): void;
+    public function addTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): void;
     /**
      * @return RelationalTypeResolverInterface[]
      */

@@ -14,7 +14,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDe
     /**
      * Verify that the user is logged in before checking the roles/capabilities
      */
-    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $typeResolver): array
+    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $mandatoryDirectivesForDirectives = [];
         if ($directiveResolverClasses = $this->getDirectiveResolverClasses()) {
@@ -46,7 +46,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDe
     /**
      * Verify that the user is logged in before checking the roles/capabilities
      */
-    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $typeResolver): array
+    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $mandatoryDirectivesForFields = [];
         if ($fieldNames = $this->getFieldNames()) {

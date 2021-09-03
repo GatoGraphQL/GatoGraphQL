@@ -84,20 +84,20 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return $this->recursiveGetResultItemIDTargetTypeResolvers($this, $ids);
     }
 
-    private function recursiveGetResultItemIDTargetTypeResolvers(RelationalTypeResolverInterface $typeResolver, array $ids): array
+    private function recursiveGetResultItemIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
     {
         if (!$ids) {
             return [];
         }
 
         $resultItemIDTargetTypeResolvers = [];
-        $isUnionTypeResolver = $typeResolver instanceof UnionTypeResolverInterface;
+        $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
         if ($isUnionTypeResolver) {
             /** @var UnionTypeResolverInterface */
-            $typeResolver = $typeResolver;
+            $relationalTypeResolver = $relationalTypeResolver;
             $targetTypeResolverClassDataItems = [];
             foreach ($ids as $resultItemID) {
-                if ($targetTypeResolverClass = $typeResolver->getTypeResolverClassForResultItem($resultItemID)) {
+                if ($targetTypeResolverClass = $relationalTypeResolver->getTypeResolverClassForResultItem($resultItemID)) {
                     $targetTypeResolverClassDataItems[$targetTypeResolverClass][] = $resultItemID;
                 } else {
                     $resultItemIDTargetTypeResolvers[(string)$resultItemID] = null;
@@ -115,7 +115,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             }
         } else {
             foreach ($ids as $resultItemID) {
-                $resultItemIDTargetTypeResolvers[(string)$resultItemID] = $typeResolver;
+                $resultItemIDTargetTypeResolvers[(string)$resultItemID] = $relationalTypeResolver;
             }
         }
         return $resultItemIDTargetTypeResolvers;
@@ -274,8 +274,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                     /**
                      * @var RelationalTypeResolverInterface
                      */
-                    $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
-                    return !in_array($typeInterfaceClass, $typeResolver->getAllImplementedInterfaceClasses());
+                    $relationalTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
+                    return !in_array($typeInterfaceClass, $relationalTypeResolver->getAllImplementedInterfaceClasses());
                 }
             );
             if ($notImplementingInterfaceTypeResolverClasses) {
@@ -294,10 +294,10 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                                     /**
                                      * @var RelationalTypeResolverInterface
                                      */
-                                    $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
+                                    $relationalTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
                                     return sprintf(
                                         $this->translationAPI->__('%s (%s)'),
-                                        $typeResolver->getMaybeNamespacedTypeName(),
+                                        $relationalTypeResolver->getMaybeNamespacedTypeName(),
                                         $typeResolverClass
                                     );
                                 },
@@ -356,8 +356,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             /**
              * @var RelationalTypeResolverInterface
              */
-            $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
-            return $typeResolver;
+            $relationalTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
+            return $relationalTypeResolver;
         }
         return null;
     }

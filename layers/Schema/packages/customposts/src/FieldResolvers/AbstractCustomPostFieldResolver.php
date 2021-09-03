@@ -41,7 +41,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -64,7 +64,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                 return $this->hooksAPI->applyFilters(
                     'pop_content',
                     $value,
-                    $typeResolver->getID($customPost)
+                    $relationalTypeResolver->getID($customPost)
                 );
 
             case 'url':
@@ -104,6 +104,6 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                 return $customPostTypeAPI->getCustomPostType($customPost);
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

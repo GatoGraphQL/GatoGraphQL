@@ -31,7 +31,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
 			'recommendPostURL' => SchemaDefinition::TYPE_URL,
@@ -44,10 +44,10 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
             'undoDownvotePostURL' => SchemaDefinition::TYPE_URL,
             'downvotePostCountPlus1' => SchemaDefinition::TYPE_INT,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -61,7 +61,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
             'undoDownvotePostURL' => $translationAPI->__('', ''),
             'downvotePostCountPlus1' => $translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -71,7 +71,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -83,54 +83,54 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
         switch ($fieldName) {
             case 'recommendPostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $relationalTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST));
 
             case 'unrecommendPostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $relationalTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST));
 
             case 'recommendPostCountPlus1':
-                if ($count = $typeResolver->resolveValue($resultItem, 'recommendPostCount', $variables, $expressions, $options)) {
+                if ($count = $relationalTypeResolver->resolveValue($resultItem, 'recommendPostCount', $variables, $expressions, $options)) {
                     return $count+1;
                 }
                 return 1;
 
             case 'upvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $relationalTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UPVOTEPOST));
 
             case 'undoUpvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $relationalTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDOUPVOTEPOST));
 
             case 'upvotePostCountPlus1':
-                if ($count = $typeResolver->resolveValue($resultItem, 'upvotePostCount', $variables, $expressions, $options)) {
+                if ($count = $relationalTypeResolver->resolveValue($resultItem, 'upvotePostCount', $variables, $expressions, $options)) {
                     return $count+1;
                 }
                 return 1;
 
             case 'downvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $relationalTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST));
 
             case 'undoDownvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $relationalTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST));
 
             case 'downvotePostCountPlus1':
-                if ($count = $typeResolver->resolveValue($resultItem, 'downvotePostCount', $variables, $expressions, $options)) {
+                if ($count = $relationalTypeResolver->resolveValue($resultItem, 'downvotePostCount', $variables, $expressions, $options)) {
                     return $count+1;
                 }
                 return 1;
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

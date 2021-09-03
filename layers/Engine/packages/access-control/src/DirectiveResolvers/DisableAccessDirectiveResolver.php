@@ -14,12 +14,12 @@ class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveR
         return 'disableAccess';
     }
 
-    protected function validateCondition(RelationalTypeResolverInterface $typeResolver): bool
+    protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return false;
     }
 
-    protected function getValidationFailedMessage(RelationalTypeResolverInterface $typeResolver, array $failedDataFields): string
+    protected function getValidationFailedMessage(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): string
     {
         $errorMessage = $this->isValidatingDirective() ?
             $this->translationAPI->__('Access to directives in field(s) \'%s\' has been disabled', 'access-control') :
@@ -33,7 +33,7 @@ class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveR
         );
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('It disables access to the field', 'access-control');
     }

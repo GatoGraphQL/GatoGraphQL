@@ -34,13 +34,13 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      * Configuration entries
      */
     final protected function getEntries(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
     ): array {
         return $this->getMatchingEntries(
             $this->getConfigurationEntries(),
-            $typeResolver,
+            $relationalTypeResolver,
             $fieldInterfaceResolverClasses,
             $fieldName
         );
@@ -51,11 +51,11 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      */
     final protected function getMatchingEntries(
         array $entryList,
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
     ): array {
-        $typeResolverClass = get_class($typeResolver);
+        $typeResolverClass = get_class($relationalTypeResolver);
         return array_filter(
             $entryList,
             function ($entry) use ($typeResolverClass, $fieldInterfaceResolverClasses, $fieldName): bool {

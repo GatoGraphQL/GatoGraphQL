@@ -26,7 +26,7 @@ class NoCacheUserStateTypeResolverDecorator extends AbstractTypeResolverDecorato
     /**
      * If validating if the user is logged-in, then we can't cache the response
      */
-    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $typeResolver): array
+    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $noCacheControlDirective = CacheControlHelper::getNoCacheDirective();
         /** @var DirectiveResolverInterface */

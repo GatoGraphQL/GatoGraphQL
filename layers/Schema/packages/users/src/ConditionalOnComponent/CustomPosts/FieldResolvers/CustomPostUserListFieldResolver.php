@@ -15,7 +15,7 @@ class CustomPostUserListFieldResolver extends AbstractCustomPostListFieldResolve
         return array(UserTypeResolver::class);
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'customPosts' => $this->translationAPI->__('Custom posts by the user', 'users'),
@@ -23,7 +23,7 @@ class CustomPostUserListFieldResolver extends AbstractCustomPostListFieldResolve
             'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts by the user', 'users'),
             'customPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts by the user', 'users'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -31,12 +31,12 @@ class CustomPostUserListFieldResolver extends AbstractCustomPostListFieldResolve
      * @return array<string, mixed>
      */
     protected function getQuery(
-        RelationalTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $query = parent::getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
+        $query = parent::getQuery($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs);
 
         $user = $resultItem;
         switch ($fieldName) {
@@ -44,7 +44,7 @@ class CustomPostUserListFieldResolver extends AbstractCustomPostListFieldResolve
             case 'customPostCount':
             case 'customPostsForAdmin':
             case 'customPostCountForAdmin':
-                $query['authors'] = [$typeResolver->getID($user)];
+                $query['authors'] = [$relationalTypeResolver->getID($user)];
                 break;
         }
 
