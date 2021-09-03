@@ -11,7 +11,7 @@ trait UseObjectDictionaryTypeDataLoaderTrait
     public function getObjects(array $ids): array
     {
         $objectDictionary = ObjectDictionaryFacade::getInstance();
-        $typeResolverClass = $this->getTypeResolverClass();
+        $typeResolverClass = $this->getObjectTypeResolverClass();
         $ret = [];
         foreach ($ids as $id) {
             if (!$objectDictionary->has($typeResolverClass, $id)) {
@@ -22,6 +22,6 @@ trait UseObjectDictionaryTypeDataLoaderTrait
         return $ret;
     }
 
-    abstract protected function getTypeResolverClass(): string;
+    abstract protected function getObjectTypeResolverClass(): string;
     abstract protected function getTypeNewInstance(int | string $id);
 }
