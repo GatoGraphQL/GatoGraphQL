@@ -14,7 +14,7 @@ class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
      * in which case we must make a DB call for each result,
      * we obtain all the types from executing a single query against the DB
      */
-    public function getResultItemIDTargetTypeResolvers(array $ids): array
+    public function getResultItemIDTargetObjectTypeResolvers(array $ids): array
     {
         $resultItemIDTargetTypeResolvers = [];
         $customPostUnionTypeDataLoader = $this->instanceManager->getInstance($this->getRelationalTypeDataLoaderClass());
