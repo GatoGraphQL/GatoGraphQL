@@ -8,7 +8,7 @@ use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoP\Engine\ObjectModels\Root;
-use PoP\Engine\RelationalTypeDataLoaders\RootTypeDataLoader;
+use PoP\Engine\RelationalTypeDataLoaders\Object\RootTypeDataLoader;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 
 class RootTypeResolver extends AbstractObjectTypeResolver
