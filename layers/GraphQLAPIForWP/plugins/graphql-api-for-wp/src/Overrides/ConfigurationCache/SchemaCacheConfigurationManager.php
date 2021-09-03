@@ -17,4 +17,12 @@ class SchemaCacheConfigurationManager extends AbstractCacheConfigurationManager
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         return $userSettingsManager->getSchemaTimestamp();
     }
+
+    /**
+     * Cache under the plugin's cache/ subfolder
+     */
+    protected function getDirectoryName(): string
+    {
+        return 'config-via-symfony-cache';
+    }
 }

@@ -54,6 +54,11 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     public function getDirectory(): ?string
     {
         $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
-        return $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'config-via-symfony-cache';
+        return $mainPluginCacheDir . \DIRECTORY_SEPARATOR . $this->getDirectoryName();
     }
+
+    /**
+     * Cache under the plugin's cache/ subfolder
+     */
+    abstract protected function getDirectoryName(): string;
 }

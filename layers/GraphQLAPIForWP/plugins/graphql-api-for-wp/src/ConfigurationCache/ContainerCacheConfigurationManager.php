@@ -16,4 +16,12 @@ class ContainerCacheConfigurationManager extends AbstractCacheConfigurationManag
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         return $userSettingsManager->getContainerTimestamp();
     }
+
+    /**
+     * Cache under the plugin's cache/ subfolder
+     */
+    protected function getDirectoryName(): string
+    {
+        return 'service-containers';
+    }
 }
