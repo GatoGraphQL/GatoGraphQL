@@ -216,10 +216,10 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     public function getTargetTypeResolverClasses(): array
     {
         $typeResolverPickers = $this->getTypeResolverPickers();
-        return $this->getTypeResolverClassesFromPickers($typeResolverPickers);
+        return $this->getObjectTypeResolverClassesFromPickers($typeResolverPickers);
     }
 
-    protected function getTypeResolverClassesFromPickers(array $typeResolverPickers): array
+    protected function getObjectTypeResolverClassesFromPickers(array $typeResolverPickers): array
     {
         return array_map(
             fn (TypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getObjectTypeResolverClass(),
@@ -267,7 +267,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         // Validate that all typeResolvers implement the required interface
         if ($typeInterfaceClass = $this->getSchemaTypeInterfaceClass()) {
-            $typeResolverClasses = $this->getTypeResolverClassesFromPickers($typeResolverPickers);
+            $typeResolverClasses = $this->getObjectTypeResolverClassesFromPickers($typeResolverPickers);
             $notImplementingInterfaceTypeResolverClasses = array_filter(
                 $typeResolverClasses,
                 function ($typeResolverClass) use ($typeInterfaceClass) {
