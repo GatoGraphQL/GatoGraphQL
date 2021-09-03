@@ -40,7 +40,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function getTimestamp(): int
     {
-        return (int) \get_option(Options::TIMESTAMP, time());
+        return (int) \get_option(Options::TIMESTAMPS, time());
     }
     /**
      * Store the current time to indicate the latest executed write to DB,
@@ -48,14 +48,14 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function storeTimestamp(): void
     {
-        \update_option(Options::TIMESTAMP, time());
+        \update_option(Options::TIMESTAMPS, time());
     }
     /**
      * Remove the timestamp
      */
     public function removeTimestamp(): void
     {
-        \delete_option(Options::TIMESTAMP);
+        \delete_option(Options::TIMESTAMPS);
     }
 
     public function hasSetting(string $item): bool
