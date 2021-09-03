@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\TypeResolvers\Object;
+namespace PoPSchema\CustomPosts\TypeResolvers\Union;
 
 use PoP\ComponentModel\TypeResolvers\Union\AbstractUnionTypeResolver;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;

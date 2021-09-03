@@ -16,7 +16,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
-use PoPSchema\CustomPosts\TypeResolvers\Object\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 use PoPSchema\GenericCustomPosts\TypeResolvers\Object\GenericCustomPostTypeResolver;
 use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
 use PoPSchema\Menus\TypeResolvers\Object\MenuTypeResolver;

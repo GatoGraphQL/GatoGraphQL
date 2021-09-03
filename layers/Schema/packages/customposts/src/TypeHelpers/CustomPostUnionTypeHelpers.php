@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeHelpers;
 
 use PoPSchema\CustomPosts\ComponentConfiguration;
-use PoPSchema\CustomPosts\TypeResolvers\Object\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoPSchema\CustomPosts\TypeResolverPickers\CustomPostTypeResolverPickerInterface;
 
