@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {

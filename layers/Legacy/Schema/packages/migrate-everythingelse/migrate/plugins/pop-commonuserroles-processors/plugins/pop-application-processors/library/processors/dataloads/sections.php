@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {

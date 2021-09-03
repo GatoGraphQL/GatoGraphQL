@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Multisite\TypeResolvers\SiteTypeResolver;
+use PoP\Multisite\TypeResolvers\Object\SiteTypeResolver;
 
 class SiteFieldResolver extends AbstractDBDataFieldResolver
 {

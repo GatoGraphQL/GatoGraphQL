@@ -3,7 +3,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\Object\NotificationTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver

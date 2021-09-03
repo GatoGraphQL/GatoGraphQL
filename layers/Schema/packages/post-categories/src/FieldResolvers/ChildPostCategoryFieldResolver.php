@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Categories\FieldResolvers\AbstractChildCategoryFieldResolver;
 use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerModuleProcessor;
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
-use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\Object\PostCategoryTypeResolver;
 
 class ChildPostCategoryFieldResolver extends AbstractChildCategoryFieldResolver
 {

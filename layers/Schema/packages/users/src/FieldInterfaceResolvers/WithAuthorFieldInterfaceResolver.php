@@ -7,7 +7,7 @@ namespace PoPSchema\Users\FieldInterfaceResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {

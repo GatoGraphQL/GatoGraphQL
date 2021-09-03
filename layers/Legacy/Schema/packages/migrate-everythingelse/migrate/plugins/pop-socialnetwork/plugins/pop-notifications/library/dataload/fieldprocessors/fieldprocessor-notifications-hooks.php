@@ -4,7 +4,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\Object\NotificationTypeResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 

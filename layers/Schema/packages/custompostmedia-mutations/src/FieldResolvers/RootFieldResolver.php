@@ -12,15 +12,15 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCustomPostMutationResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolver;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
+use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {

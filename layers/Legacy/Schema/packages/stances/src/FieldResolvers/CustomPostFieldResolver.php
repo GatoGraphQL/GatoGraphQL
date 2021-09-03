@@ -12,7 +12,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Stances\ComponentConfiguration;
-use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\Object\StanceTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver

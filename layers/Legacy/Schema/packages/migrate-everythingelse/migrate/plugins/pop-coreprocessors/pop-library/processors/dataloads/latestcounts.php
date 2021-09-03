@@ -1,6 +1,6 @@
 <?php
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\State\ApplicationState;
 

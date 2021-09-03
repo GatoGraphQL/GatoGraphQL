@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\FieldResolvers;
 
-use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\Object\PostCategoryTypeResolver;
 use PoPSchema\Categories\FieldResolvers\AbstractCategoryFieldResolver;
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
 

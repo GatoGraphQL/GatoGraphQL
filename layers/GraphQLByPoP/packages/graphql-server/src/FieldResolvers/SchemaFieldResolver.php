@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
-use GraphQLByPoP\GraphQLServer\TypeResolvers\DirectiveTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\SchemaTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\DirectiveTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\SchemaTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\TypeTypeResolver;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;

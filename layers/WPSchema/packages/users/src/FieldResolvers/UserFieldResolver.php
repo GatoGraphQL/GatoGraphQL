@@ -17,7 +17,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 use WP_User;
 
 class UserFieldResolver extends AbstractQueryableFieldResolver

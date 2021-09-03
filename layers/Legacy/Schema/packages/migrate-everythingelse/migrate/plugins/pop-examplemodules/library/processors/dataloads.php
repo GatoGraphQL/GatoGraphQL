@@ -2,11 +2,11 @@
 namespace PoP\ExampleModules;
 
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
-use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Pages\TypeResolvers\Object\PageTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Object\CustomPostTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\Object\PostTagTypeResolver;
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 

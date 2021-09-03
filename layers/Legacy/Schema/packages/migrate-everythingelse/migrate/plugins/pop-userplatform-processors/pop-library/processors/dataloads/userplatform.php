@@ -2,7 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\InviteUsersMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\ChangeUserPasswordMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\UpdateMyPreferencesMutationResolverBridge;

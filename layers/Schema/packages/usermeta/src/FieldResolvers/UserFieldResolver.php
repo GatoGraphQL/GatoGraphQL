@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
 use PoPSchema\UserMeta\Facades\UserMetaTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class UserFieldResolver extends AbstractDBDataFieldResolver
 {

@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\Object\StanceTypeResolver;
 
 class PoP_UserStance_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {

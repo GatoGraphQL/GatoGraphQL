@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\Object\StanceTypeResolver;
 
 class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {

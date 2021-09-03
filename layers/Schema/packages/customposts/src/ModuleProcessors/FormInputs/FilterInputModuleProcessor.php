@@ -14,7 +14,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface

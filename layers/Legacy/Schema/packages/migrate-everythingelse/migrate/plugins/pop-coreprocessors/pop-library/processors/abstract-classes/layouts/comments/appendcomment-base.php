@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
 
 abstract class PoP_Module_Processor_AppendCommentLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {

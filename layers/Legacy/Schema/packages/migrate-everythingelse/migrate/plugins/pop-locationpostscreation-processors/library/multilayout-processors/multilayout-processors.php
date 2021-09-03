@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\LocationPosts\TypeResolvers\LocationPostTypeResolver;
+use PoPSchema\LocationPosts\TypeResolvers\Object\LocationPostTypeResolver;
 
 class PoP_LocationPostsCreation_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {

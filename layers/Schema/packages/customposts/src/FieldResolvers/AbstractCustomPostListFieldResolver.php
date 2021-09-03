@@ -13,7 +13,7 @@ use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;

@@ -8,8 +8,8 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Locations\TypeResolvers\Object\LocationTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class UserFieldResolver extends AbstractDBDataFieldResolver
 {

@@ -3,7 +3,7 @@
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\Object\StanceTypeResolver;
 
 class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {

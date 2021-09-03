@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\Extensions;
 
-use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\TypeTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;

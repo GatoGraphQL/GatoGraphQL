@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractReflectionPropertyFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
+use PoPSchema\UserRolesWP\TypeResolvers\Object\UserRoleTypeResolver;
 
 class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
 {

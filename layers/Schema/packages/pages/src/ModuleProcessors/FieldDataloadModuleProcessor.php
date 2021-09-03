@@ -6,7 +6,7 @@ namespace PoPSchema\Pages\ModuleProcessors;
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
+use PoPSchema\Pages\TypeResolvers\Object\PageTypeResolver;
 
 class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {

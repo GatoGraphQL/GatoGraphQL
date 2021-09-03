@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class PoP_Avatar_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
 {

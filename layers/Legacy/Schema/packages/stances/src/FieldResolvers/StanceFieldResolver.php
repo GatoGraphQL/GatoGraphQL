@@ -10,9 +10,9 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\Object\StanceTypeResolver;
 use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 

@@ -16,7 +16,7 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\FieldInterfaceResolvers\CommentableFieldInterfaceResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;

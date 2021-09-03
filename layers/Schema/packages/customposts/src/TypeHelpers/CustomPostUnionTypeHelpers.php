@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeHelpers;
 
 use PoPSchema\CustomPosts\ComponentConfiguration;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoPSchema\CustomPosts\TypeResolverPickers\CustomPostTypeResolverPickerInterface;
+use PoPSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostTypeResolverPickerInterface;
 
 /**
  * In the context of WordPress, "Custom Posts" are all posts (eg: posts, pages, attachments, events, etc)
@@ -35,7 +35,7 @@ class CustomPostUnionTypeHelpers
 
     /**
      * Based on `getUnionOrTargetObjectTypeResolverClass` from class
-     * \PoP\ComponentModel\TypeResolvers\UnionTypeHelpers, but applied
+     * \PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers, but applied
      * to the CustomPostUnion type, to add its own configuration.
      *
      * Return a class or another depending on these possibilities:

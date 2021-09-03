@@ -2,7 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {

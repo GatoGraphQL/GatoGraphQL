@@ -15,12 +15,12 @@ use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
-use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\Object\PostCategoryTypeResolver;
+use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\Object\PostTagTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
 {

@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {

@@ -8,7 +8,7 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {

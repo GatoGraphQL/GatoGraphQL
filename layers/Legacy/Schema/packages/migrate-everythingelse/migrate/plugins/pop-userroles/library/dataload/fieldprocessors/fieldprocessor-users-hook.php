@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class FieldResolver_Users extends AbstractDBDataFieldResolver
 {

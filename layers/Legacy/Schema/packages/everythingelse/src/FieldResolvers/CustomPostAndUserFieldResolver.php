@@ -10,8 +10,8 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Locations\TypeResolvers\Object\LocationTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class CustomPostAndUserFieldResolver extends AbstractDBDataFieldResolver
 {

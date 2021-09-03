@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver

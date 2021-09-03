@@ -9,7 +9,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\Media\Facades\MediaTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {

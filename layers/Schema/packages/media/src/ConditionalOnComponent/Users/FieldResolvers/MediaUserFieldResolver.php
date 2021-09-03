@@ -15,8 +15,8 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class MediaUserFieldResolver extends AbstractDBDataFieldResolver
 {

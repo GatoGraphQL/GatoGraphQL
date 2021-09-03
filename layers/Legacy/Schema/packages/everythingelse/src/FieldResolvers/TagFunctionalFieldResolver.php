@@ -7,7 +7,7 @@ namespace PoPSchema\EverythingElse\FieldResolvers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Tags\TypeResolvers\AbstractTagTypeResolver;
+use PoPSchema\Tags\TypeResolvers\Object\AbstractTagTypeResolver;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 
 class TagFunctionalFieldResolver extends AbstractDBDataFieldResolver

@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Categories\FieldResolvers\AbstractCustomPostQueryableFieldResolver;
 use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerModuleProcessor;
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
 
 class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolver
 {

@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 
 class NestedMutationHookSet extends AbstractHookSet

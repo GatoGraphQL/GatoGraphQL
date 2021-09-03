@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors;
 
-use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\Object\PostTagTypeResolver;
 use PoPSchema\Tags\ConditionalOnComponent\API\ModuleProcessors\AbstractFieldDataloadModuleProcessor;
 
 class PostTagFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor

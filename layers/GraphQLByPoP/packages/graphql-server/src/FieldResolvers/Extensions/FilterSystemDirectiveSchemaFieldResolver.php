@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveTypeEnum;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\SchemaTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\SchemaTypeResolver;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\SchemaFieldResolver;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
 

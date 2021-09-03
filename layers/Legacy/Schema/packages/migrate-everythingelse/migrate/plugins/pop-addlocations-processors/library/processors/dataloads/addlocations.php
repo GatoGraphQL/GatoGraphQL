@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
+use PoPSchema\Locations\TypeResolvers\Object\LocationTypeResolver;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 use PoPSitesWassup\LocationMutations\MutationResolverBridges\CreateLocationMutationResolverBridge;

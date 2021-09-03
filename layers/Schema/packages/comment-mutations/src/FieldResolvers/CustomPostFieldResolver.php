@@ -6,7 +6,7 @@ namespace PoPSchema\CommentMutations\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;

@@ -7,7 +7,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 
 class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
 {

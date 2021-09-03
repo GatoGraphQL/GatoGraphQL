@@ -4,7 +4,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\Object\EventTypeResolver;
 use PoPSchema\Events\Constants\Scopes;
 
 class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase

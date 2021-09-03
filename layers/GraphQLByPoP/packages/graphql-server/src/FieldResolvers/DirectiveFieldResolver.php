@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveLocationEnum;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\DirectiveTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\InputValueTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\DirectiveTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\InputValueTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;

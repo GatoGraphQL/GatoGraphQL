@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\Object\EventTypeResolver;
 
 class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase
 {

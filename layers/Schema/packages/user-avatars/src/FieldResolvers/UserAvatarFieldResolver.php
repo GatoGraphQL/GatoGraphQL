@@ -16,7 +16,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
-use PoPSchema\UserAvatars\TypeResolvers\UserAvatarTypeResolver;
+use PoPSchema\UserAvatars\TypeResolvers\Object\UserAvatarTypeResolver;
 
 class UserAvatarFieldResolver extends AbstractDBDataFieldResolver
 {

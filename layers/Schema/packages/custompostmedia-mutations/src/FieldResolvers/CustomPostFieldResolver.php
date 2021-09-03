@@ -19,8 +19,8 @@ use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCustomPostMutationResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolver;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
+use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {

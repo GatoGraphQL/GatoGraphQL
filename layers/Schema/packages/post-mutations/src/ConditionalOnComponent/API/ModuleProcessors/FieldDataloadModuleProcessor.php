@@ -7,7 +7,7 @@ namespace PoPSchema\PostMutations\ConditionalOnComponent\API\ModuleProcessors;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\PostMutations\ModuleProcessors\PostMutationFilterInputContainerModuleProcessor;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor

@@ -11,7 +11,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoPSchema\Highlights\TypeResolvers\HighlightTypeResolver;
+use PoPSchema\Highlights\TypeResolvers\Object\HighlightTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
