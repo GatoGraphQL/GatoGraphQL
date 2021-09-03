@@ -1031,12 +1031,10 @@ class Engine implements EngineInterface
                     // Execute and get the ids and the meta
                     $dbObjectIDOrIDs = $processor->getDBObjectIDOrIDs($module, $module_props, $data_properties);
                     // If the type is union, we must add the type to each object
-                    if (!is_null($dbObjectIDOrIDs)) {
-                        if ($isUnionTypeResolver) {
-                            $typeDBObjectIDOrIDs = $relationalTypeResolver->getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs);
-                        } else {
-                            $typeDBObjectIDOrIDs = $dbObjectIDOrIDs;
-                        }
+                    if ($dbObjectIDOrIDs !== null) {
+                        $typeDBObjectIDOrIDs = $isUnionTypeResolver ?
+                            $relationalTypeResolver->getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs)
+                            : $dbObjectIDOrIDs;
                     }
 
                     $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : array($dbObjectIDOrIDs);

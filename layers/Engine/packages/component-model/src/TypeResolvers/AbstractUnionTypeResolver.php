@@ -93,8 +93,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $resultItemIDTargetTypeResolvers = [];
         $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
         if ($isUnionTypeResolver) {
-            /** @var UnionTypeResolverInterface */
-            $relationalTypeResolver = $relationalTypeResolver;
+            /** @var UnionTypeResolverInterface $relationalTypeResolver */
             $targetTypeResolverClassDataItems = [];
             foreach ($ids as $resultItemID) {
                 if ($targetTypeResolverClass = $relationalTypeResolver->getTypeResolverClassForResultItem($resultItemID)) {
