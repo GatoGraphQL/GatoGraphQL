@@ -120,9 +120,7 @@ trait QueryDataModuleProcessorTrait
         }
 
         $typeResolverClass = $this->getTypeResolverClass($module);
-        /**
-         * @var RelationalTypeResolverInterface
-         */
+        /** @var RelationalTypeResolverInterface */
         $relationalTypeResolver = $instanceManager->getInstance($typeResolverClass);
         $typeDataLoaderClass = $relationalTypeResolver->getTypeDataLoaderClass();
         $typeDataLoader = $instanceManager->getInstance($typeDataLoaderClass);

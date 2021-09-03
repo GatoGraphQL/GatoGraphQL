@@ -110,9 +110,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     final public function getUniqueFieldOutputKeyByTypeResolverClass(string $typeResolverClass, string $field): string
     {
-        /**
-         * @var RelationalTypeResolverInterface
-         */
+        /** @var RelationalTypeResolverInterface */
         $relationalTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
         return $this->getUniqueFieldOutputKey(
             $relationalTypeResolver,
