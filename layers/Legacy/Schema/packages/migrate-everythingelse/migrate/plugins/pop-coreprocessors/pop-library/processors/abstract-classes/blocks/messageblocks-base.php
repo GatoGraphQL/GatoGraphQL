@@ -1,6 +1,6 @@
 <?php
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Object\CustomPostUnionTypeResolver;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Processor_BlocksBase

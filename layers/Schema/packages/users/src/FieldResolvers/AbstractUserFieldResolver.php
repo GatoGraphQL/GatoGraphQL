@@ -23,7 +23,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\ModuleProcessors\UserFilterInputContainerModuleProcessor;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
 {

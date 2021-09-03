@@ -4,7 +4,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\LocationPosts\TypeResolvers\LocationPostTypeResolver;
+use PoPSchema\LocationPosts\TypeResolvers\Object\LocationPostTypeResolver;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver

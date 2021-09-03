@@ -8,7 +8,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
+use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;

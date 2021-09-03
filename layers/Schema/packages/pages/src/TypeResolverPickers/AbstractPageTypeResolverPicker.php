@@ -6,7 +6,7 @@ namespace PoPSchema\Pages\TypeResolverPickers;
 
 use PoP\ComponentModel\TypeResolverPickers\AbstractObjectTypeResolverPicker;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
-use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
+use PoPSchema\Pages\TypeResolvers\Object\PageTypeResolver;
 
 abstract class AbstractPageTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {

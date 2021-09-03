@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\Object\EventTypeResolver;
 use PoPSchema\EventTags\Facades\EventTagTypeAPIFacade;
 
 class CatEventFieldResolver extends AbstractDBDataFieldResolver

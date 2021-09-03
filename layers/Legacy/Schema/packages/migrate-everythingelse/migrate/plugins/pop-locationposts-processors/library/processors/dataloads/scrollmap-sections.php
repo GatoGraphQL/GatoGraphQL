@@ -1,7 +1,7 @@
 <?php
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\LocationPosts\TypeResolvers\LocationPostTypeResolver;
+use PoPSchema\LocationPosts\TypeResolvers\Object\LocationPostTypeResolver;
 
 class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {

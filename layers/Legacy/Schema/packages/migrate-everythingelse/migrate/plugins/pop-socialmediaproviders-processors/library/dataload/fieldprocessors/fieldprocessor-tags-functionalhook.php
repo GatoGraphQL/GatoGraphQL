@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\Object\PostTagTypeResolver;
 
 class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaItems extends PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialMediaItems
 {

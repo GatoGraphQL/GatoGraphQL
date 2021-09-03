@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\Object\NotificationTypeResolver;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 

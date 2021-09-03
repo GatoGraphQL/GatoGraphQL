@@ -4,8 +4,8 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class GD_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
 {

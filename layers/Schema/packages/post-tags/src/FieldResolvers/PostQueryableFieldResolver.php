@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
 use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
 use PoPSchema\Tags\FieldResolvers\AbstractCustomPostQueryableFieldResolver;
 use PoPSchema\PostTags\ModuleProcessors\PostTagFilterInputContainerModuleProcessor;

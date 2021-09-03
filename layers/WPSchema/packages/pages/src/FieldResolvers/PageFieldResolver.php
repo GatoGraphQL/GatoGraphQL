@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
+use PoPSchema\Pages\TypeResolvers\Object\PageTypeResolver;
 use WP_Post;
 
 class PageFieldResolver extends AbstractQueryableFieldResolver

@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
+use PoPSchema\Locations\TypeResolvers\Object\LocationTypeResolver;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {

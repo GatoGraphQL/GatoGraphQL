@@ -4,7 +4,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoPSchema\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\Object\EventTypeResolver;
 
 class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {

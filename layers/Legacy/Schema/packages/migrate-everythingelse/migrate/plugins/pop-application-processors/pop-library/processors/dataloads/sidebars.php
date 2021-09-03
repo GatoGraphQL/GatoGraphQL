@@ -1,8 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\Object\PostTagTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Object\CustomPostUnionTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase

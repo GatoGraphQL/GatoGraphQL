@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
 use PoPSchema\CommentMeta\Facades\CommentMetaTypeAPIFacade;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 
 class CommentFieldResolver extends AbstractDBDataFieldResolver
 {

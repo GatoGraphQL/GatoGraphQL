@@ -10,8 +10,8 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\Events\TypeResolvers\EventTypeResolver;
-use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
+use PoPSchema\Events\TypeResolvers\Object\EventTypeResolver;
+use PoPSchema\Locations\TypeResolvers\Object\LocationTypeResolver;
 
 class EventFieldResolver extends AbstractDBDataFieldResolver
 {

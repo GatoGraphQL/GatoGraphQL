@@ -19,10 +19,10 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\Object\NotificationTypeResolver;
 use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class NotificationFieldResolver extends AbstractDBDataFieldResolver
 {

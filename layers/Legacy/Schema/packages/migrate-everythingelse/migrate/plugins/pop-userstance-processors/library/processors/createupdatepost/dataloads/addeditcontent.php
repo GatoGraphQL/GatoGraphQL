@@ -3,7 +3,7 @@
 use PoPSchema\CustomPosts\Types\Status;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\Object\StanceTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSitesWassup\StanceMutations\MutationResolverBridges\CreateStanceMutationResolverBridge;
 use PoPSitesWassup\StanceMutations\MutationResolverBridges\UpdateStanceMutationResolverBridge;

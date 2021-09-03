@@ -6,7 +6,7 @@ namespace PoPSchema\Posts\ConditionalOnComponent\Users\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class PostUserFieldResolver extends AbstractPostFieldResolver
 {

@@ -6,7 +6,7 @@ namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldResolvers\AbstractCustomPostListFieldResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class CustomPostUserListFieldResolver extends AbstractCustomPostListFieldResolver
 {

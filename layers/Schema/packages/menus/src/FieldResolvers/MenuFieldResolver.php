@@ -19,8 +19,8 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
-use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
-use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
+use PoPSchema\Menus\TypeResolvers\Object\MenuItemTypeResolver;
+use PoPSchema\Menus\TypeResolvers\Object\MenuTypeResolver;
 
 class MenuFieldResolver extends AbstractDBDataFieldResolver
 {

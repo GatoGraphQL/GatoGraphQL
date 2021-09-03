@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Object\CustomPostTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 use PoPSitesWassup\VolunteerMutations\MutationResolverBridges\VolunteerMutationResolverBridge;
 

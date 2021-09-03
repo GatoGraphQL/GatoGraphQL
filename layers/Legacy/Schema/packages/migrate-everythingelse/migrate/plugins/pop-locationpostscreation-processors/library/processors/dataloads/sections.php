@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\LocationPosts\TypeResolvers\LocationPostTypeResolver;
+use PoPSchema\LocationPosts\TypeResolvers\Object\LocationPostTypeResolver;
 
 class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {

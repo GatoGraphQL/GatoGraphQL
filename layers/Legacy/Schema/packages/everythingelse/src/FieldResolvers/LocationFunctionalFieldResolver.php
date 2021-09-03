@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
+use PoPSchema\Locations\TypeResolvers\Object\LocationTypeResolver;
 
 class LocationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {

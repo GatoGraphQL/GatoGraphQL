@@ -8,10 +8,10 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\ModuleProcessors\MenuFilterInputContainerModuleProcessor;
-use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
+use PoPSchema\Menus\TypeResolvers\Object\MenuTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 

@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
 use PoPSchema\TaxonomyMeta\Facades\TaxonomyMetaTypeAPIFacade;
-use PoPSchema\Taxonomies\TypeResolvers\AbstractTaxonomyTypeResolver;
+use PoPSchema\Taxonomies\TypeResolvers\Object\AbstractTaxonomyTypeResolver;
 
 class TaxonomyFieldResolver extends AbstractDBDataFieldResolver
 {

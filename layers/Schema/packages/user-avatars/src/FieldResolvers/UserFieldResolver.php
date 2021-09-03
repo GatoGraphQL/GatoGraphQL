@@ -19,8 +19,8 @@ use PoPSchema\UserAvatars\ComponentConfiguration;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
-use PoPSchema\UserAvatars\TypeResolvers\UserAvatarTypeResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\UserAvatars\TypeResolvers\Object\UserAvatarTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class UserFieldResolver extends AbstractDBDataFieldResolver
 {

@@ -6,7 +6,7 @@ namespace PoPSchema\PostTags\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
-use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\Object\PostTagTypeResolver;
 
 class PostTagListFieldResolver extends AbstractPostFieldResolver
 {

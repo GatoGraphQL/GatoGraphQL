@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\EditMembershipMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\UpdateMyCommunitiesMutationResolverBridge;

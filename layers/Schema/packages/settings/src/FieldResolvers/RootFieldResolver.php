@@ -7,7 +7,7 @@ namespace PoPSchema\Settings\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoPSchema\Settings\Facades\SettingsTypeAPIFacade;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver

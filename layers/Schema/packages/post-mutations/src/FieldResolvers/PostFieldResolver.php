@@ -7,7 +7,7 @@ namespace PoPSchema\PostMutations\FieldResolvers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPostMutations\FieldResolvers\AbstractCustomPostFieldResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
 use PoPSchema\UserState\FieldResolvers\UserStateFieldResolverTrait;
 
 class PostFieldResolver extends AbstractCustomPostFieldResolver

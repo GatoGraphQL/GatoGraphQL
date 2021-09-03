@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers;
 
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldResolvers\AbstractCustomPostListFieldResolver;
 

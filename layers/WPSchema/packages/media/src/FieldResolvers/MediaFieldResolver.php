@@ -17,7 +17,7 @@ use PoP\Engine\Formatters\DateFormatterInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
+use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 use WP_Post;
 

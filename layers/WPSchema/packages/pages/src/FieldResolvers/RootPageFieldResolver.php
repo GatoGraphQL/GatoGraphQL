@@ -7,9 +7,9 @@ namespace PoPWPSchema\Pages\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
-use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
+use PoPSchema\Pages\TypeResolvers\Object\PageTypeResolver;
 use WP_Post;
 
 class RootPageFieldResolver extends AbstractQueryableFieldResolver

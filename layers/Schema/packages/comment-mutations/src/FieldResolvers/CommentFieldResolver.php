@@ -18,7 +18,7 @@ use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationR
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 
 class CommentFieldResolver extends AbstractDBDataFieldResolver
 {

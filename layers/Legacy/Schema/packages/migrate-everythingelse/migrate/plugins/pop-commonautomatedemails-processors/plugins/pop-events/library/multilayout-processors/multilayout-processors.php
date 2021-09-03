@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\Object\EventTypeResolver;
 
 class PoP_CommonAutomatedEmails_Events_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {

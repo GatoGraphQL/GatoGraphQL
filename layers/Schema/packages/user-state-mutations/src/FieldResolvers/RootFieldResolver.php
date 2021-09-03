@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\FieldResolvers;
 
-use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver;

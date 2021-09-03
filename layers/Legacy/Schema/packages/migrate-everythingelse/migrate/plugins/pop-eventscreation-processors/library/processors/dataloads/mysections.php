@@ -1,6 +1,6 @@
 <?php
 use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoPSchema\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\Object\EventTypeResolver;
 
 class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsCreation_Module_Processor_MySectionDataloadsBase
 {

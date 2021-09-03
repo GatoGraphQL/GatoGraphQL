@@ -9,9 +9,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\Object\NotificationTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver

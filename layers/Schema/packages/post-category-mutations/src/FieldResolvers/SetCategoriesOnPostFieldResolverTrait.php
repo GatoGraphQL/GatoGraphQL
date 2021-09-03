@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategoryMutations\FieldResolvers;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\Object\PostCategoryTypeResolver;
 use PoPSchema\PostCategoryMutations\MutationResolvers\SetCategoriesOnPostMutationResolver;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
 
 trait SetCategoriesOnPostFieldResolverTrait
 {

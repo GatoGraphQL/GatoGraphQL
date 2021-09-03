@@ -8,11 +8,11 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
 {

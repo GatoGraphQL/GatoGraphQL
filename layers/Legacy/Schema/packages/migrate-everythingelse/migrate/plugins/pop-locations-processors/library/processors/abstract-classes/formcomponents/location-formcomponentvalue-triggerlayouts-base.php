@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
+use PoPSchema\Locations\TypeResolvers\Object\LocationTypeResolver;
 
 abstract class PoP_Module_Processor_LocationTriggerLayoutFormComponentValuesBase extends PoP_Module_Processor_TriggerLayoutFormComponentValuesBase
 {

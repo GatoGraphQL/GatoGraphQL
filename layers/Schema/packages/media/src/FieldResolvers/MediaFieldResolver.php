@@ -17,7 +17,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
+use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 
 class MediaFieldResolver extends AbstractQueryableFieldResolver

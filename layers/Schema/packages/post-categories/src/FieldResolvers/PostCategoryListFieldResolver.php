@@ -6,7 +6,7 @@ namespace PoPSchema\PostCategories\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
-use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\Object\PostCategoryTypeResolver;
 
 class PostCategoryListFieldResolver extends AbstractPostFieldResolver
 {

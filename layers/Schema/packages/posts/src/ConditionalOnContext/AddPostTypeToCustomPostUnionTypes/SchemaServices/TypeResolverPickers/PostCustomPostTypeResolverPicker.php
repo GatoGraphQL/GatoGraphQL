@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\ConditionalOnContext\AddPostTypeToCustomPostUnionTypes\SchemaServices\TypeResolverPickers;
 
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Object\CustomPostUnionTypeResolver;
 use PoPSchema\Posts\TypeResolverPickers\AbstractPostTypeResolverPicker;
 
 class PostCustomPostTypeResolverPicker extends AbstractPostTypeResolverPicker

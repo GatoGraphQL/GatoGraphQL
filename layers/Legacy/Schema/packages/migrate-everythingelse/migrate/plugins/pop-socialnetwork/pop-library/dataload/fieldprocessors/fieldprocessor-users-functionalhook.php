@@ -5,7 +5,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunctionalFieldResolver
 {

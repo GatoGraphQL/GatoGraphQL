@@ -6,7 +6,7 @@ namespace PoPSchema\UserRolesWP\Overrides\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
+use PoPSchema\UserRolesWP\TypeResolvers\Object\UserRoleTypeResolver;
 
 trait RolesFieldResolverTrait
 {
