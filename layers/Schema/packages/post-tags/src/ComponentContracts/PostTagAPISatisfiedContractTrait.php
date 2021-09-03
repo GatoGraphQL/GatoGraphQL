@@ -15,7 +15,7 @@ trait PostTagAPISatisfiedContractTrait
         return PostTagTypeAPIFacade::getInstance();
     }
 
-    protected function getTypeResolverClass(): string
+    protected function getTagTypeResolverClass(): string
     {
         return PostTagTypeResolver::class;
     }

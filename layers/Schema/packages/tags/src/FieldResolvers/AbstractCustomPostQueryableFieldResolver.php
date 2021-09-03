@@ -150,7 +150,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
     {
         switch ($fieldName) {
             case 'tags':
-                return $this->getTypeResolverClass();
+                return $this->getTagTypeResolverClass();
         }
 
         return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
