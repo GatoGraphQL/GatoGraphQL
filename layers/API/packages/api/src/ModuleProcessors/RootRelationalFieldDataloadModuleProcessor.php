@@ -28,7 +28,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ROOT:
@@ -36,6 +36,6 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
                 return $schemaDefinitionService->getRootTypeResolverClass();
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 }

@@ -179,7 +179,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function initModelProps(array $module, array &$props): void
     {
         // Set property "succeeding-typeResolver" on every module, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
-        if ($typeResolver_class = $this->getTypeResolverClass($module)) {
+        if ($typeResolver_class = $this->getRelationalTypeResolverClass($module)) {
             $this->setProp($module, $props, 'succeeding-typeResolver', $typeResolver_class);
         } else {
             // Get the prop assigned to the module by its ancestor
@@ -493,7 +493,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function getDatabaseKeys(array $module, array &$props): array
     {
         $ret = array();
-        if ($typeResolver_class = $this->getTypeResolverClass($module)) {
+        if ($typeResolver_class = $this->getRelationalTypeResolverClass($module)) {
             /**
              * @var RelationalTypeResolverInterface
              */
@@ -561,7 +561,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected function addToDatasetDatabaseKeys(array $module, array &$props, $path, &$ret)
     {
         // Add the current module's dbkeys
-        if ($typeResolver_class = $this->getTypeResolverClass($module)) {
+        if ($typeResolver_class = $this->getRelationalTypeResolverClass($module)) {
             /**
              * @var RelationalTypeResolverInterface
              */
@@ -640,14 +640,14 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return array();
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         return null;
     }
 
     public function moduleLoadsData(array $module): bool
     {
-        return !is_null($this->getTypeResolverClass($module));
+        return !is_null($this->getRelationalTypeResolverClass($module));
     }
 
     public function startDataloadingSection(array $module): bool

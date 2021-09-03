@@ -9,7 +9,7 @@ use PoPSchema\Categories\ConditionalOnComponent\API\ModuleProcessors\AbstractFie
 
 class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY:
@@ -17,6 +17,6 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
                 return PostCategoryTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 }
