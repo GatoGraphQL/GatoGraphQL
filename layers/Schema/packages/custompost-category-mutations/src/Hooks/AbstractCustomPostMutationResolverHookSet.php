@@ -39,7 +39,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         ?string $entityTypeResolverClass
     ): array {
         // Only for the specific CPT
-        if ($entityTypeResolverClass !== $this->getTypeResolverClass()) {
+        if ($entityTypeResolverClass !== $this->getCustomPostTypeResolverClass()) {
             return $fieldArgs;
         }
         $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
@@ -57,7 +57,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         return $fieldArgs;
     }
 
-    abstract protected function getTypeResolverClass(): string;
+    abstract protected function getCustomPostTypeResolverClass(): string;
     abstract protected function getCategoryTypeResolverClass(): string;
 
     public function maybeSetCategories(int | string $customPostID, array $form_data): void
