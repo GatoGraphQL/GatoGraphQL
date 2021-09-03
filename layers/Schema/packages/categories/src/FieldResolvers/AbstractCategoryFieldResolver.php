@@ -124,7 +124,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
     {
         switch ($fieldName) {
             case 'parentCategory':
-                return $this->getTypeResolverClass();
+                return $this->getCategoryTypeResolverClass();
         }
 
         return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);

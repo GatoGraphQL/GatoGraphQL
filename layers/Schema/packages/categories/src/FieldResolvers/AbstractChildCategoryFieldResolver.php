@@ -168,7 +168,7 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
             case 'childCategory':
             case 'childCategoryBySlug':
             case 'childCategories':
-                return $this->getTypeResolverClass();
+                return $this->getCategoryTypeResolverClass();
         }
 
         return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);

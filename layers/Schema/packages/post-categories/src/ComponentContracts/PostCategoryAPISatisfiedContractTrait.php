@@ -15,7 +15,7 @@ trait PostCategoryAPISatisfiedContractTrait
         return PostCategoryTypeAPIFacade::getInstance();
     }
 
-    protected function getTypeResolverClass(): string
+    protected function getCategoryTypeResolverClass(): string
     {
         return PostCategoryTypeResolver::class;
     }
