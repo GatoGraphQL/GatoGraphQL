@@ -37,7 +37,7 @@ use PoP\FieldQuery\QueryUtils;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractObjectTypeResolver implements ObjectTypeResolverInterface
+abstract class AbstractObjectTypeResolver extends AbstractTypeResolver implements ObjectTypeResolverInterface
 {
     public const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnResultItem';
 
@@ -104,50 +104,6 @@ abstract class AbstractObjectTypeResolver implements ObjectTypeResolverInterface
      * @var array<string, array>
      */
     private array $fieldNamesResolvedByFieldResolver = [];
-
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI,
-        protected InstanceManagerInterface $instanceManager,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected ErrorProviderInterface $errorProvider,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected SchemaNamespacingServiceInterface $schemaNamespacingService,
-    ) {
-    }
-
-    public function getNamespace(): string
-    {
-        return $this->schemaNamespacingService->getSchemaNamespace(get_called_class());
-    }
-
-    final public function getNamespacedTypeName(): string
-    {
-        return $this->schemaNamespacingService->getSchemaNamespacedName(
-            $this->getNamespace(),
-            $this->getTypeName()
-        );
-    }
-
-    final public function getMaybeNamespacedTypeName(): string
-    {
-        $vars = ApplicationState::getVars();
-        return $vars['namespace-types-and-interfaces'] ?
-            $this->getNamespacedTypeName() :
-            $this->getTypeName();
-    }
-
-    public function getTypeOutputName(): string
-    {
-        // Do not make the first letter lowercase, or namespaced names look bad
-        return $this->getMaybeNamespacedTypeName();
-    }
-
-    public function getSchemaTypeDescription(): ?string
-    {
-        return null;
-    }
 
     /**
      * @return array<string,DirectiveResolverInterface[]>
