@@ -332,7 +332,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return null;
     }
 
-    public function getTargetTypeResolverPicker(object $resultItem): ?ObjectTypeResolverPickerInterface
+    public function getTargetObjectTypeResolverPicker(object $resultItem): ?ObjectTypeResolverPickerInterface
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
@@ -351,7 +351,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     public function getTargetObjectTypeResolver(object $resultItem): ?RelationalTypeResolverInterface
     {
-        if ($typeResolverPicker = $this->getTargetTypeResolverPicker($resultItem)) {
+        if ($typeResolverPicker = $this->getTargetObjectTypeResolverPicker($resultItem)) {
             $objectTypeResolverClass = $typeResolverPicker->getObjectTypeResolverClass();
             /**
              * @var ObjectTypeResolverInterface

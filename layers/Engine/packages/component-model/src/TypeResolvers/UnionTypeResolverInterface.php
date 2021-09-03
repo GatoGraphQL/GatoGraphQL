@@ -11,7 +11,7 @@ interface UnionTypeResolverInterface extends RelationalTypeResolverInterface
 {
     // public function addTypeToID(string | int $resultItemID): string;
     public function getTypeResolverClassForResultItem(string | int $resultItemID);
-    public function getTargetTypeResolverPicker(object $resultItem): ?ObjectTypeResolverPickerInterface;
+    public function getTargetObjectTypeResolverPicker(object $resultItem): ?ObjectTypeResolverPickerInterface;
     public function getTargetObjectTypeResolver(object $resultItem): ?RelationalTypeResolverInterface;
     /**
      * @param array<string|int> $ids

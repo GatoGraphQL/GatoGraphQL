@@ -40,7 +40,7 @@ class CustomPostUnionTypeDataLoader extends CustomPostTypeDataLoader
         $customPostTypeTypeResolverPickers = [];
         $customPostTypeItemCustomPosts = [];
         foreach ($customPosts as $customPost) {
-            $targetTypeResolverPicker = $customPostUnionTypeResolver->getTargetTypeResolverPicker($customPost);
+            $targetTypeResolverPicker = $customPostUnionTypeResolver->getTargetObjectTypeResolverPicker($customPost);
             if (
                 // If `null`, no picker handles this type, then do nothing
                 is_null($targetTypeResolverPicker)
@@ -71,7 +71,7 @@ class CustomPostUnionTypeDataLoader extends CustomPostTypeDataLoader
                 $customPostTypeAPI,
                 $castedCustomPosts
             ) {
-                $targetTypeResolverPicker = $customPostUnionTypeResolver->getTargetTypeResolverPicker($customPost);
+                $targetTypeResolverPicker = $customPostUnionTypeResolver->getTargetObjectTypeResolverPicker($customPost);
                 if (
                     is_null($targetTypeResolverPicker)
                     || !($targetTypeResolverPicker instanceof CustomPostTypeResolverPickerInterface)
