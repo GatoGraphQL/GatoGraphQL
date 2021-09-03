@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Overrides\ConfigurationCache;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ConfigurationCache\AbstractCacheConfigurationManager;
 
-class SchemaCacheConfigurationManager extends AbstractCacheConfigurationManager
+class OperationalCacheConfigurationManager extends AbstractCacheConfigurationManager
 {
     /**
      * The timestamp from when last saving settings/modules to the DB
