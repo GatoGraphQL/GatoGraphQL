@@ -21,9 +21,9 @@ class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
         // If any ID cannot be resolved, the resultItem will be null
         if ($customPosts = array_filter($customPostUnionTypeDataLoader->getObjects($ids))) {
             foreach ($customPosts as $customPost) {
-                $targetTypeResolver = $this->getTargetObjectTypeResolver($customPost);
-                if ($targetTypeResolver !== null) {
-                    $resultItemIDTargetTypeResolvers[$targetTypeResolver->getID($customPost)] = $targetTypeResolver;
+                $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($customPost);
+                if ($targetObjectTypeResolver !== null) {
+                    $resultItemIDTargetTypeResolvers[$targetObjectTypeResolver->getID($customPost)] = $targetObjectTypeResolver;
                 }
             }
         }
