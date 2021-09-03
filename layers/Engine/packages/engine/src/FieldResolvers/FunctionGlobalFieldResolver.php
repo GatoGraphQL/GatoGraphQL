@@ -7,7 +7,7 @@ namespace PoP\Engine\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
 
@@ -20,15 +20,15 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'getSelfProp' => SchemaDefinition::TYPE_MIXED,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'getSelfProp' => sprintf(
@@ -36,12 +36,12 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
                 QueryHelpers::getExpressionQuery(Expressions::NAME_SELF)
             ),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'getSelfProp':
                 return array_merge(
@@ -73,7 +73,7 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -89,6 +89,6 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
                 $property = $fieldArgs['property'];
                 return array_key_exists($property, $self['dbItems']) ? $self['dbItems'][$property] : ($self['previousDBItems'][$property] ?? null);
         }
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

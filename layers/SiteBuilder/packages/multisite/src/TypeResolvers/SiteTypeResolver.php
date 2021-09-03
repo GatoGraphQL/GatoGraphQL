@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\Multisite\TypeResolvers;
 
 use PoP\Multisite\TypeDataLoaders\SiteTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 
-class SiteTypeResolver extends AbstractTypeResolver
+class SiteTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {
@@ -25,7 +25,7 @@ class SiteTypeResolver extends AbstractTypeResolver
         return $site->getID();
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return SiteTypeDataLoader::class;
     }

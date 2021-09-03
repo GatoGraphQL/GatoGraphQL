@@ -7,7 +7,7 @@ namespace PoP\AccessControl\Hooks;
 use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDirectivesForFieldsTrait;
 use PoP\AccessControl\Hooks\AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
 abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet extends AbstractAccessControlForFieldsInPrivateSchemaHookSet
@@ -34,13 +34,13 @@ abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet 
      * @param string[] $fieldInterfaceResolverClasses
      */
     protected function removeFieldName(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         FieldResolverInterface $fieldResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
     ): bool {
         // Obtain all entries for the current combination of [typeResolver or $fieldInterfaceClass]/fieldName
-        foreach ($this->getEntries($typeResolver, $fieldInterfaceResolverClasses, $fieldName) as $entry) {
+        foreach ($this->getEntries($relationalTypeResolver, $fieldInterfaceResolverClasses, $fieldName) as $entry) {
             // Obtain the 3rd value on each entry: if the validation is "in" or "out"
             $entryValue = $entry[2] ?? null;
             // Let the implementation class decide if to remove the field or not

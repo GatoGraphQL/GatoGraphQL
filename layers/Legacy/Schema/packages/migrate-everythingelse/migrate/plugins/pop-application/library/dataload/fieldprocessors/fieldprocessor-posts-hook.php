@@ -4,7 +4,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
@@ -20,9 +20,9 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         );
     }
 
-    public function getThumb($post, TypeResolverInterface $typeResolver, $size = null, $add_description = false)
+    public function getThumb($post, RelationalTypeResolverInterface $relationalTypeResolver, $size = null, $add_description = false)
     {
-        $thumb_id = CustomPostMediaHelpers::getThumbId($typeResolver->getID($post));
+        $thumb_id = CustomPostMediaHelpers::getThumbId($relationalTypeResolver->getID($post));
         $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
         $img = $mediaTypeAPI->getImageProperties($thumb_id, $size);
 
@@ -53,7 +53,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
 			'favicon' => SchemaDefinition::TYPE_OBJECT,
@@ -67,10 +67,10 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
             'hasUserpostactivity' => SchemaDefinition::TYPE_BOOL,
             'userPostActivityCount' => SchemaDefinition::TYPE_INT,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'authors',
@@ -78,11 +78,11 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
             'appliesto'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -97,12 +97,12 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
             'hasUserpostactivity' => $translationAPI->__('', ''),
             'userPostActivityCount' => $translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'favicon':
@@ -141,7 +141,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -153,23 +153,23 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         switch ($fieldName) {
             case 'favicon':
             case 'thumb':
-                return $this->getThumb($post, $typeResolver, $fieldArgs['size'], $fieldArgs['addDescription']);
+                return $this->getThumb($post, $relationalTypeResolver, $fieldArgs['size'], $fieldArgs['addDescription']);
 
             case 'thumbFullSrc':
-                $thumb = $typeResolver->resolveValue($post, FieldQueryInterpreterFacade::getInstance()->getField('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $options);
+                $thumb = $relationalTypeResolver->resolveValue($post, FieldQueryInterpreterFacade::getInstance()->getField('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $options);
                 if (GeneralUtils::isError($thumb)) {
                     return $thumb;
                 }
                 return $thumb['src'];
 
             case 'authors':
-                return gdGetPostauthors($typeResolver->getID($post));
+                return gdGetPostauthors($relationalTypeResolver->getID($post));
 
             case 'topics':
-                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_CATEGORIES);
+                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($relationalTypeResolver->getID($post), GD_METAKEY_POST_CATEGORIES);
 
             case 'hasTopics':
-                $topics = $typeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
+                $topics = $relationalTypeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
                 if (GeneralUtils::isError($topics)) {
                     return $topics;
                 } elseif ($topics) {
@@ -178,10 +178,10 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 return false;
 
             case 'appliesto':
-                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_APPLIESTO);
+                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($relationalTypeResolver->getID($post), GD_METAKEY_POST_APPLIESTO);
 
             case 'hasAppliesto':
-                $appliesto = $typeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);
+                $appliesto = $relationalTypeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);
                 if (GeneralUtils::isError($appliesto)) {
                     return $appliesto;
                 } elseif ($appliesto) {
@@ -191,15 +191,15 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 
             case 'hasUserpostactivity':
                 // User Post Activity: Comments + Responses/Additionals + Hightlights
-                $hasComments = $typeResolver->resolveValue($resultItem, 'hasComments', $variables, $expressions, $options);
+                $hasComments = $relationalTypeResolver->resolveValue($resultItem, 'hasComments', $variables, $expressions, $options);
                 if ($hasComments) {
                     return $hasComments;
                 }
-                $hasReferencedBy = $typeResolver->resolveValue($resultItem, 'hasReferencedBy', $variables, $expressions, $options);
+                $hasReferencedBy = $relationalTypeResolver->resolveValue($resultItem, 'hasReferencedBy', $variables, $expressions, $options);
                 if ($hasReferencedBy) {
                     return $hasReferencedBy;
                 }
-                $hasHighlights = $typeResolver->resolveValue($resultItem, 'hasHighlights', $variables, $expressions, $options);
+                $hasHighlights = $relationalTypeResolver->resolveValue($resultItem, 'hasHighlights', $variables, $expressions, $options);
                 if ($hasHighlights) {
                     return $hasHighlights;
                 }
@@ -207,32 +207,32 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 
             case 'userPostActivityCount':
                 // User Post Activity: Comments + Responses/Additionals + Hightlights
-                $commentCount = $typeResolver->resolveValue($resultItem, 'commentCount', $variables, $expressions, $options);
+                $commentCount = $relationalTypeResolver->resolveValue($resultItem, 'commentCount', $variables, $expressions, $options);
                 if ($commentCount) {
                     return $commentCount;
                 }
-                $referencedByCount = $typeResolver->resolveValue($resultItem, 'referencedByCount', $variables, $expressions, $options);
+                $referencedByCount = $relationalTypeResolver->resolveValue($resultItem, 'referencedByCount', $variables, $expressions, $options);
                 if ($referencedByCount) {
                     return $referencedByCount;
                 }
-                $highlightsCount = $typeResolver->resolveValue($resultItem, 'highlightsCount', $variables, $expressions, $options);
+                $highlightsCount = $relationalTypeResolver->resolveValue($resultItem, 'highlightsCount', $variables, $expressions, $options);
                 if ($highlightsCount) {
                     return $highlightsCount;
                 }
                 return $commentCount + $referencedByCount + $highlightsCount;
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'authors':
                 return UserTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }
 

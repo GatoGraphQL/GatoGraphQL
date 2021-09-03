@@ -9,7 +9,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\DirectiveResolvers\ApplyFunctionDirectiveResolver;
 use PoP\Engine\DirectiveResolvers\ForEachDirectiveResolver;
 use PoP\FieldQuery\QuerySyntax;
@@ -33,7 +33,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
     /**
      * No need to use this function anymore
      */
-    public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         /** @var DirectiveResolverInterface */
         $forEachDirectiveResolver = $this->instanceManager->getInstance(ForEachDirectiveResolver::class);
@@ -63,7 +63,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
      * 3. Pack into the array, once again, and remove all temporary properties
      */
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -84,7 +84,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $dbKey = $typeResolver->getTypeOutputName();
+        $dbKey = $relationalTypeResolver->getTypeOutputName();
         /**
          * Collect all ID => dataFields for the arrayItems
          */
@@ -94,7 +94,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         // By making the property "propertyName:key", the "key" can be extracted and passed under expression `%key%` to the function
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
 
                 // Validate that the property exists
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
@@ -178,7 +178,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $fieldSkipOutputIfNull,
                         $fieldDirectives
                     );
-                    $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $arrayItemProperty);
+                    $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $arrayItemProperty);
                     // Place into the current object
                     $dbItems[(string)$id][$arrayItemPropertyOutputKey] = $value;
                     // Place it into list of fields to process
@@ -187,11 +187,11 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
             }
         }
         // 2. Execute the function for all arrayItems
-        $this->regenerateAndExecuteFunction($typeResolver, $resultIDItems, $arrayItemIdsProperties, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->regenerateAndExecuteFunction($relationalTypeResolver, $resultIDItems, $arrayItemIdsProperties, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // 3. Composer the array from the results for each array item
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
                 $value = $isValueInDBItems ?
                     $dbItems[(string)$id][$fieldOutputKey] :
@@ -226,7 +226,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $fieldDirectives
                     );
                     // Place the result of executing the function on the array item
-                    $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $arrayItemProperty);
+                    $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $arrayItemProperty);
                     $arrayItemValue = $dbItems[(string)$id][$arrayItemPropertyOutputKey];
                     // Remove this temporary property from $dbItems
                     unset($dbItems[(string)$id][$arrayItemPropertyOutputKey]);
@@ -272,7 +272,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
     }
 
     protected function addExpressionsForResultItem(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         string $field,
         array &$resultIDItems,
@@ -288,9 +288,9 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         array &$schemaDeprecations
     ): void {
         // First let the parent add $value, then also add $key, which can be deduced from the fieldOutputKey
-        parent::addExpressionsForResultItem($typeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        parent::addExpressionsForResultItem($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
-        $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
+        $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
         $arrayItemPropertyElems = $this->extractElementsFromArrayItemProperty($arrayItemPropertyOutputKey);
         $key = $arrayItemPropertyElems[1];
         $this->addExpressionForResultItem($id, 'key', $key, $messages);

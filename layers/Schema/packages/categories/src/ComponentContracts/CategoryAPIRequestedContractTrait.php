@@ -8,6 +8,6 @@ use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 
 trait CategoryAPIRequestedContractTrait
 {
-    abstract protected function getTypeAPI(): CategoryTypeAPIInterface;
-    abstract protected function getTypeResolverClass(): string;
+    abstract protected function getCategoryTypeAPI(): CategoryTypeAPIInterface;
+    abstract protected function getCategoryTypeResolverClass(): string;
 }

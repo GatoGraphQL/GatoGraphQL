@@ -8,7 +8,7 @@ use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait ConfigurableCacheControlTypeResolverDecoratorTrait
 {

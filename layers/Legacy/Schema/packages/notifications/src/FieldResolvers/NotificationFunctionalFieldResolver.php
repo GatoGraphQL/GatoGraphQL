@@ -7,7 +7,7 @@ namespace PoPSchema\Notifications\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 
 class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
@@ -24,28 +24,28 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'multilayoutKeys' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'multilayoutKeys' => SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+            default => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'multilayoutKeys' => $this->translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -55,7 +55,7 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -67,13 +67,13 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
         switch ($fieldName) {
             case 'multilayoutKeys':
                 // If multiple-layouts, then we need 'objectType' and 'action' data-fields
-                $object_type = $typeResolver->resolveValue($notification, 'objectType', $variables, $expressions, $options);
-                $action = $typeResolver->resolveValue($notification, 'action', $variables, $expressions, $options);
+                $object_type = $relationalTypeResolver->resolveValue($notification, 'objectType', $variables, $expressions, $options);
+                $action = $relationalTypeResolver->resolveValue($notification, 'action', $variables, $expressions, $options);
                 return array(
                     $object_type . '-' . $action,
                 );
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

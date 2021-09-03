@@ -6,9 +6,9 @@ namespace PoP\ComponentModel\TypeResolverPickers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 
-interface TypeResolverPickerInterface extends AttachableExtensionInterface
+interface ObjectTypeResolverPickerInterface extends AttachableExtensionInterface
 {
-    public function getTypeResolverClass(): string;
+    public function getObjectTypeResolverClass(): string;
     public function isIDOfType(string | int $resultItemID): bool;
     public function isInstanceOfType(object $object): bool;
 }

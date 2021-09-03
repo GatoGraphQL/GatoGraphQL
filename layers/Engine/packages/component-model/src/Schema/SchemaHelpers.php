@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class SchemaHelpers
@@ -115,14 +115,14 @@ class SchemaHelpers
      */
     public static function convertTypeIDToTypeName(
         string $type,
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): string {
         // If the type is an ID, replace it with the actual type the ID references
         if ($type == SchemaDefinition::TYPE_ID) {
             $instanceManager = InstanceManagerFacade::getInstance();
             // The type may not be implemented yet (eg: Category), then skip
-            if ($fieldTypeResolverClass = $typeResolver->resolveFieldTypeResolverClass($fieldName)) {
+            if ($fieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($fieldName)) {
                 $fieldTypeResolver = $instanceManager->getInstance((string)$fieldTypeResolverClass);
                 $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             }

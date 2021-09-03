@@ -7,16 +7,16 @@ namespace PoP\CacheControl\DirectiveResolvers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 // use PoP\CacheControl\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {
-    // public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    // public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     // {
     //     return sprintf(
     //         $this->translationAPI->__('%1$s %2$s'),
     //         $this->translationAPI->__('Helper directive to calculate the Cache Control header when the field composes other fields.', 'cache-control'),
-    //         parent::getSchemaDirectiveDescription($typeResolver)
+    //         parent::getSchemaDirectiveDescription($relationalTypeResolver)
     //     );
     // }
 
@@ -36,7 +36,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
     /**
      * If any argument is a field, then this directive will involve them to calculate the minimum max-age
      */
-    public function resolveCanProcess(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
+    public function resolveCanProcess(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
     {
         if ($fieldArgs = $this->fieldQueryInterpreter->getFieldArgs($field)) {
             $fieldArgElems = QueryHelpers::getFieldArgElements($fieldArgs);
@@ -71,7 +71,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
      * Calculate the max-age involving also the composed fields
      */
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -134,7 +134,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                     $fields
                 )
             ));
-            $fieldDirectiveResolverInstances = $typeResolver->getDirectiveResolverInstanceForDirective(
+            $fieldDirectiveResolverInstances = $relationalTypeResolver->getDirectiveResolverInstanceForDirective(
                 $this->directive,
                 $fieldDirectiveFields,
                 $variables
@@ -169,7 +169,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                     ];
                 }
                 $directiveResolverInstance->resolveDirective(
-                    $typeResolver,
+                    $relationalTypeResolver,
                     $directiveResolverIDDataFields,
                     $succeedingPipelineIDsDataFields,
                     $succeedingPipelineDirectiveResolverInstances,
@@ -197,7 +197,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
 
         // Otherwise, let the parent process it
         parent::resolveDirective(
-            $typeResolver,
+            $relationalTypeResolver,
             $idsDataFields,
             $succeedingPipelineIDsDataFields,
             $succeedingPipelineDirectiveResolverInstances,

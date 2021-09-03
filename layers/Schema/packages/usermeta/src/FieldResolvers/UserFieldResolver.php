@@ -6,7 +6,7 @@ namespace PoPSchema\UserMeta\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
 use PoPSchema\UserMeta\Facades\UserMetaTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
@@ -38,7 +38,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     /**
      * By returning `null`, the schema definition comes from the interface
      */
-    public function getSchemaDefinitionResolver(TypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
+    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?FieldSchemaDefinitionResolverInterface
     {
         return null;
     }
@@ -50,7 +50,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -64,12 +64,12 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             case 'metaValue':
             case 'metaValues':
                 return $userMetaAPI->getUserMeta(
-                    $typeResolver->getID($user),
+                    $relationalTypeResolver->getID($user),
                     $fieldArgs['key'],
                     $fieldName === 'metaValue'
                 );
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

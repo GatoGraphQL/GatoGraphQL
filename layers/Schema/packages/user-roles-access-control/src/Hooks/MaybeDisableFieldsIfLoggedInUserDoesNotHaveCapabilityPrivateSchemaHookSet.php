@@ -7,7 +7,7 @@ namespace PoPSchema\UserRolesAccessControl\Hooks;
 use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDirectivesForFieldsTrait;
 use PoP\AccessControl\Hooks\AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 use PoPSchema\UserRolesAccessControl\Helpers\UserRoleHelper;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
@@ -43,7 +43,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet 
      * Decide if to remove the fieldNames
      */
     protected function removeFieldName(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         FieldResolverInterface $fieldResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
@@ -57,7 +57,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet 
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         if (
             $matchingEntries = $this->getEntries(
-                $typeResolver,
+                $relationalTypeResolver,
                 $fieldInterfaceResolverClasses,
                 $fieldName
             )

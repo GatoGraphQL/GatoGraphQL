@@ -9,7 +9,7 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 trait QueryDataModuleProcessorTrait
@@ -119,12 +119,10 @@ trait QueryDataModuleProcessorTrait
             $queryhandler->prepareQueryArgs($data_properties[DataloadingConstants::QUERYARGS]);
         }
 
-        $typeResolverClass = $this->getTypeResolverClass($module);
-        /**
-         * @var TypeResolverInterface
-         */
-        $typeResolver = $instanceManager->getInstance($typeResolverClass);
-        $typeDataLoaderClass = $typeResolver->getTypeDataLoaderClass();
+        $typeResolverClass = $this->getRelationalTypeResolverClass($module);
+        /** @var RelationalTypeResolverInterface */
+        $relationalTypeResolver = $instanceManager->getInstance($typeResolverClass);
+        $typeDataLoaderClass = $relationalTypeResolver->getRelationalTypeDataLoaderClass();
         $typeDataLoader = $instanceManager->getInstance($typeDataLoaderClass);
         return $typeDataLoader->findIDs($data_properties);
     }

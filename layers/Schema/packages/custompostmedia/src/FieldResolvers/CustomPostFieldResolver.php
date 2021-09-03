@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -66,7 +66,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     /**
      * By returning `null`, the schema definition comes from the interface
      */
-    public function getSchemaDefinitionResolver(TypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
+    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?FieldSchemaDefinitionResolverInterface
     {
         return null;
     }
@@ -78,7 +78,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -89,16 +89,16 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         $post = $resultItem;
         switch ($fieldName) {
             case 'hasFeaturedImage':
-                return $this->customPostMediaTypeAPI->hasCustomPostThumbnail($typeResolver->getID($post));
+                return $this->customPostMediaTypeAPI->hasCustomPostThumbnail($relationalTypeResolver->getID($post));
 
             case 'featuredImage':
-                return $this->customPostMediaTypeAPI->getCustomPostThumbnailID($typeResolver->getID($post));
+                return $this->customPostMediaTypeAPI->getCustomPostThumbnailID($relationalTypeResolver->getID($post));
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'featuredImage':
@@ -109,6 +109,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                 return $fieldInterfaceResolver->getFieldTypeResolverClass($fieldName);
         }
 
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }

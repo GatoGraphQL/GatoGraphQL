@@ -374,7 +374,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS:
@@ -386,7 +386,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST:
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_FULLVIEW:
@@ -415,7 +415,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
                 return UserTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props): void

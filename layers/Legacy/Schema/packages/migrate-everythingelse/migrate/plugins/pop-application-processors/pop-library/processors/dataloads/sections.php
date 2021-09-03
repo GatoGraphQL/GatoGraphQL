@@ -117,7 +117,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS:
@@ -127,7 +127,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
                 return UserTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props): void

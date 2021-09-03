@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -71,7 +71,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
     /**
      * By returning `null`, the schema definition comes from the interface
      */
-    public function getSchemaDefinitionResolver(TypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
+    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?FieldSchemaDefinitionResolverInterface
     {
         return null;
     }
@@ -83,7 +83,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -94,16 +94,16 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         $post = $resultItem;
         switch ($fieldName) {
             case 'areCommentsOpen':
-                return $this->commentTypeAPI->areCommentsOpen($typeResolver->getID($post));
+                return $this->commentTypeAPI->areCommentsOpen($relationalTypeResolver->getID($post));
 
             case 'hasComments':
-                return $typeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
+                return $relationalTypeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
         }
 
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
+            $this->convertFieldArgsToFilteringQueryArgs($relationalTypeResolver, $fieldName, $fieldArgs),
             [
-                'customPostID' => $typeResolver->getID($post),
+                'customPostID' => $relationalTypeResolver->getID($post),
             ]
         );
         switch ($fieldName) {
@@ -116,10 +116,10 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                 return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'comments':
@@ -127,6 +127,6 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                 return CommentTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }

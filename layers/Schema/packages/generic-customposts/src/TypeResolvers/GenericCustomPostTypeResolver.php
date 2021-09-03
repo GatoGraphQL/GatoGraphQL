@@ -19,7 +19,7 @@ class GenericCustomPostTypeResolver extends AbstractCustomPostTypeResolver
         return $this->translationAPI->__('Any custom post, with or without its own type for the schema', 'customposts');
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return GenericCustomPostTypeDataLoader::class;
     }

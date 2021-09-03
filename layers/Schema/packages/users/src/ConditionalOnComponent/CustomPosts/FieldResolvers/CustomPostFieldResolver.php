@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Users\FieldInterfaceResolvers\WithAuthorFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
@@ -43,32 +43,32 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         return $resolver;
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         switch ($fieldName) {
             case 'author':
                 $fieldInterfaceResolver = $this->getWithAuthorFieldInterfaceResolverInstance();
                 return $fieldInterfaceResolver->getSchemaFieldType($fieldName);
         }
-        return parent::getSchemaFieldType($typeResolver, $fieldName);
+        return parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'author' => $this->translationAPI->__('The post\'s author', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'author':
                 $fieldInterfaceResolver = $this->getWithAuthorFieldInterfaceResolverInstance();
                 return $fieldInterfaceResolver->getSchemaFieldTypeModifiers($fieldName);
         }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -78,7 +78,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -92,10 +92,10 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                 return $customPostUserTypeAPI->getAuthorID($resultItem);
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'author':
@@ -103,6 +103,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                 return $fieldInterfaceResolver->getFieldTypeResolverClass($fieldName);
         }
 
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }

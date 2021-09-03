@@ -39,14 +39,14 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         return parent::getStatusSubmodule($module);
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
                 return NotificationTypeResolver::class;
         }
         
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

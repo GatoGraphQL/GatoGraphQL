@@ -10,34 +10,34 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeDataLoaders\CommentTypeDataLoader;
 
-class CommentTypeResolver extends AbstractTypeResolver
+class CommentTypeResolver extends AbstractObjectTypeResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
         protected CommentTypeAPIInterface $commentTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
             $hooksAPI,
             $instanceManager,
+            $schemaNamespacingService,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
             $schemaDefinitionService,
-            $schemaNamespacingService,
         );
     }
 
@@ -57,7 +57,7 @@ class CommentTypeResolver extends AbstractTypeResolver
         return $this->commentTypeAPI->getCommentId($comment);
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return CommentTypeDataLoader::class;
     }

@@ -11,7 +11,7 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -37,7 +37,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
 
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -60,11 +60,11 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ): void {
         // Iterate data, extract into final results
         if ($resultIDItems) {
-            $this->resolveValueForResultItems($typeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+            $this->resolveValueForResultItems($relationalTypeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         }
     }
 
-    protected function resolveValueForResultItems(TypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
+    protected function resolveValueForResultItems(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
     {
         $enqueueFillingResultItemsFromIDs = [];
         foreach (array_keys($idsDataFields) as $id) {
@@ -87,14 +87,14 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             }
 
             $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
-            $this->resolveValuesForResultItem($typeResolver, $id, $resultItem, $idsDataFields[(string)$id]['direct'], $dbItems, $previousDBItems, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
+            $this->resolveValuesForResultItem($relationalTypeResolver, $id, $resultItem, $idsDataFields[(string)$id]['direct'], $dbItems, $previousDBItems, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
 
             // Add the conditional data fields
             // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
             foreach (array_filter($idsDataFields[$id]['conditional']) as $conditionDataField => $conditionalDataFields) {
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $dbItems
-                $conditionFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $conditionDataField);
+                $conditionFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $conditionDataField);
                 if (isset($dbItems[$id]) && array_key_exists($conditionFieldOutputKey, $dbItems[$id])) {
                     $conditionSatisfied = (bool)$dbItems[$id][$conditionFieldOutputKey];
                 } else {
@@ -116,12 +116,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         }
         // Enqueue items for the next iteration
         if ($enqueueFillingResultItemsFromIDs) {
-            $typeResolver->enqueueFillingResultItemsFromIDs($enqueueFillingResultItemsFromIDs);
+            $relationalTypeResolver->enqueueFillingResultItemsFromIDs($enqueueFillingResultItemsFromIDs);
         }
     }
 
     protected function resolveValuesForResultItem(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         object $resultItem,
         array $dataFields,
@@ -134,12 +134,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$dbDeprecations
     ) {
         foreach ($dataFields as $field) {
-            $this->resolveValueForResultItem($typeResolver, $id, $resultItem, $field, $dbItems, $previousDBItems, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
+            $this->resolveValueForResultItem($relationalTypeResolver, $id, $resultItem, $field, $dbItems, $previousDBItems, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
         }
     }
 
     protected function resolveValueForResultItem(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         object $resultItem,
         string $field,
@@ -152,12 +152,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$dbDeprecations
     ) {
         // Get the value, and add it to the database
-        $value = $this->resolveFieldValue($typeResolver, $id, $resultItem, $field, $previousDBItems, $variables, $expressions, $dbWarnings, $dbDeprecations);
-        $this->addValueForResultItem($typeResolver, $id, $field, $value, $dbItems, $dbErrors);
+        $value = $this->resolveFieldValue($relationalTypeResolver, $id, $resultItem, $field, $previousDBItems, $variables, $expressions, $dbWarnings, $dbDeprecations);
+        $this->addValueForResultItem($relationalTypeResolver, $id, $field, $value, $dbItems, $dbErrors);
     }
 
     protected function resolveFieldValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         object $resultItem,
         string $field,
@@ -167,7 +167,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$dbWarnings,
         array &$dbDeprecations
     ) {
-        $value = $typeResolver->resolveValue($resultItem, $field, $variables, $expressions);
+        $value = $relationalTypeResolver->resolveValue($resultItem, $field, $variables, $expressions);
         // Merge the dbWarnings and dbDeprecations, if any
         if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
             $dbWarnings[$id] = array_merge(
@@ -200,7 +200,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         return $errorOutput;
     }
 
-    protected function addValueForResultItem(TypeResolverInterface $typeResolver, $id, string $field, $value, array &$dbItems, array &$dbErrors)
+    protected function addValueForResultItem(RelationalTypeResolverInterface $relationalTypeResolver, $id, string $field, $value, array &$dbItems, array &$dbErrors)
     {
         // The dataitem can contain both rightful values and also errors (eg: when the field doesn't exist, or the field validation fails)
         // Extract the errors and add them on the other array
@@ -217,17 +217,17 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
             // For GraphQL, set the response for the failing field as null
             if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
                 $dbItems[(string)$id][$fieldOutputKey] = null;
             }
         } else {
             // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-            $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
+            $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
             $dbItems[(string)$id][$fieldOutputKey] = $value;
         }
     }
 
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Resolve the value of the field and merge it into results. This directive is already included by the engine, since its execution is mandatory', 'component-model');
     }

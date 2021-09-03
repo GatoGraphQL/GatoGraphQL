@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait GlobalFieldResolverTrait
 {
     public function getClassesToAttachTo(): array
     {
         return [
-            AbstractTypeResolver::class,
+            AbstractRelationalTypeResolver::class,
         ];
     }
 
-    public function isGlobal(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool
     {
         return true;
     }

@@ -6,7 +6,7 @@ namespace PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForDirectivesTrait;
 
 trait ConfigurableMandatoryDirectivesForDirectivesTypeResolverDecoratorTrait
@@ -15,7 +15,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTypeResolverDecoratorTrait
 
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
-    public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
+    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         $mandatoryDirectivesForDirectives = [];

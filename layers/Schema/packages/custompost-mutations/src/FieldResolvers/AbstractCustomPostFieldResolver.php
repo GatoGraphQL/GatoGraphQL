@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutations\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
@@ -19,34 +19,34 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         ];
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'update' => $this->translationAPI->__('Update the custom post', 'custompost-mutations'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'update' => SchemaDefinition::TYPE_ID,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'update':
                 return SchemaDefinitionHelpers::getCreateUpdateCustomPostSchemaFieldArgs(
-                    $typeResolver,
+                    $relationalTypeResolver,
                     $fieldName,
                     false,
-                    $this->resolveFieldTypeResolverClass($typeResolver, $fieldName)
+                    $this->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName)
                 );
         }
-        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        return parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -55,32 +55,32 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
      * present in $form_data
      */
     public function validateMutationOnResultItem(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): bool {
         switch ($fieldName) {
             case 'update':
                 return true;
         }
-        return parent::validateMutationOnResultItem($typeResolver, $fieldName);
+        return parent::validateMutationOnResultItem($relationalTypeResolver, $fieldName);
     }
 
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName
     ): array {
         $fieldArgs = parent::getFieldArgsToExecuteMutation(
             $fieldArgs,
-            $typeResolver,
+            $relationalTypeResolver,
             $resultItem,
             $fieldName
         );
         $post = $resultItem;
         switch ($fieldName) {
             case 'update':
-                $fieldArgs[MutationInputProperties::ID] = $typeResolver->getID($post);
+                $fieldArgs[MutationInputProperties::ID] = $relationalTypeResolver->getID($post);
                 break;
         }
 

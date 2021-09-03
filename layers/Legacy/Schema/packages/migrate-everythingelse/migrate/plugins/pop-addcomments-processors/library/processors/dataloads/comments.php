@@ -107,7 +107,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_COMMENTS_SCROLL:
@@ -115,7 +115,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
                 return \PoPSchema\Comments\CommentTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void

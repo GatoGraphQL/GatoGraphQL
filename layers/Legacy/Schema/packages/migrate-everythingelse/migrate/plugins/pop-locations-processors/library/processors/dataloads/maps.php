@@ -60,14 +60,14 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
         return null;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONSMAP:
                 return LocationTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 }
 

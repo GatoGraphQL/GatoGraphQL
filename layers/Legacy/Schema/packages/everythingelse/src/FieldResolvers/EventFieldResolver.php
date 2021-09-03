@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
@@ -33,7 +33,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'locations' => SchemaDefinition::TYPE_ID,
@@ -44,10 +44,10 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             'daterange' => SchemaDefinition::TYPE_OBJECT,
             'daterangetime' => SchemaDefinition::TYPE_OBJECT,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'dates',
@@ -61,11 +61,11 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             'categories'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'locations' => $this->translationAPI->__('Event\'s locations', 'events'),
@@ -76,7 +76,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             'daterange' => $this->translationAPI->__('Event\'s date range', 'events'),
             'daterangetime' => $this->translationAPI->__('Event\'s date range and time', 'events'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -86,7 +86,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -101,7 +101,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             case 'locations':
                 // Events can have no location
                 $value = array();
-                $location = $typeResolver->resolveValue($event, 'location', $variables, $expressions, $options);
+                $location = $relationalTypeResolver->resolveValue($event, 'location', $variables, $expressions, $options);
                 if (GeneralUtils::isError($location)) {
                     return $location;
                 } elseif ($location) {
@@ -139,16 +139,16 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
                 );
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'locations':
                 return LocationTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }

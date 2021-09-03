@@ -7,7 +7,7 @@ namespace PoPSchema\Tags\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
 
@@ -34,7 +34,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'url' => SchemaDefinition::TYPE_URL,
@@ -44,10 +44,10 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
             'description' => SchemaDefinition::TYPE_STRING,
             'count' => SchemaDefinition::TYPE_INT,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'url',
@@ -57,11 +57,11 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
             'count'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
-                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'url' => $this->translationAPI->__('Tag URL', 'pop-tags'),
@@ -71,7 +71,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
             'description' => $this->translationAPI->__('Tag description', 'pop-tags'),
             'count' => $this->translationAPI->__('Number of custom posts containing this tag', 'pop-tags'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -81,7 +81,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -89,14 +89,14 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $tagTypeAPI = $this->getTypeAPI();
+        $tagTypeAPI = $this->getTagTypeAPI();
         $tag = $resultItem;
         switch ($fieldName) {
             case 'url':
-                return $tagTypeAPI->getTagURL($typeResolver->getID($tag));
+                return $tagTypeAPI->getTagURL($relationalTypeResolver->getID($tag));
 
             case 'urlPath':
-                return $tagTypeAPI->getTagURLPath($typeResolver->getID($tag));
+                return $tagTypeAPI->getTagURLPath($relationalTypeResolver->getID($tag));
 
             case 'name':
                 return $tagTypeAPI->getTagName($tag);
@@ -111,6 +111,6 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
                 return $tagTypeAPI->getTagItemCount($tag);
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

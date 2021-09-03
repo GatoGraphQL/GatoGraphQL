@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 
@@ -17,7 +18,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
     public function getClassesToAttachTo(): array
     {
         return [
-            $this->getTypeResolverClass(),
+            $this->getCustomPostTypeResolverClass(),
         ];
     }
 
@@ -28,7 +29,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         ];
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'setCategories' => sprintf(
@@ -36,18 +37,18 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                 $this->getEntityName()
             )
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'setCategories' => SchemaDefinition::TYPE_ID,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'setCategories',
@@ -55,10 +56,10 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'setCategories':
@@ -84,7 +85,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                     ],
                 ];
         }
-        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        return parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -93,55 +94,55 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
      * present in $form_data
      */
     public function validateMutationOnResultItem(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): bool {
         switch ($fieldName) {
             case 'setCategories':
                 return true;
         }
-        return parent::validateMutationOnResultItem($typeResolver, $fieldName);
+        return parent::validateMutationOnResultItem($relationalTypeResolver, $fieldName);
     }
 
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName
     ): array {
         $fieldArgs = parent::getFieldArgsToExecuteMutation(
             $fieldArgs,
-            $typeResolver,
+            $relationalTypeResolver,
             $resultItem,
             $fieldName
         );
         $customPost = $resultItem;
         switch ($fieldName) {
             case 'setCategories':
-                $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $typeResolver->getID($customPost);
+                $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $relationalTypeResolver->getID($customPost);
                 break;
         }
 
         return $fieldArgs;
     }
 
-    public function resolveFieldMutationResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'setCategories':
                 return $this->getTypeMutationResolverClass();
         }
 
-        return parent::resolveFieldMutationResolverClass($typeResolver, $fieldName);
+        return parent::resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName);
     }
 
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'setCategories':
-                return $this->getTypeResolverClass();
+                return $this->getCustomPostTypeResolverClass();
         }
 
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }

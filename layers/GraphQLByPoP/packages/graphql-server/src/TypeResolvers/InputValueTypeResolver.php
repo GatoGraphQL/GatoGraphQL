@@ -25,7 +25,7 @@ class InputValueTypeResolver extends AbstractIntrospectionTypeResolver
         return $inputValue->getID();
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return SchemaDefinitionReferenceTypeDataLoader::class;
     }

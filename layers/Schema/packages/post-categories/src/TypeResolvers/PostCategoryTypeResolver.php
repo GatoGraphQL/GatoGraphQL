@@ -22,7 +22,7 @@ class PostCategoryTypeResolver extends AbstractCategoryTypeResolver
         return $this->translationAPI->__('Representation of a category, added to a post', 'post-categories');
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return PostCategoryTypeDataLoader::class;
     }

@@ -8,7 +8,7 @@ use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFaca
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 
@@ -44,7 +44,7 @@ class NestedMutationHookSet extends AbstractHookSet
      */
     public function maybeFilterFieldName(
         bool $include,
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         FieldResolverInterface $fieldResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
@@ -56,11 +56,11 @@ class NestedMutationHookSet extends AbstractHookSet
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
         if (
             $include
-            && !in_array(get_class($typeResolver), [
+            && !in_array(get_class($relationalTypeResolver), [
                 $graphQLSchemaDefinitionService->getRootTypeResolverClass(),
                 $graphQLSchemaDefinitionService->getMutationRootTypeResolverClass(),
             ])
-            && $fieldResolver->resolveFieldMutationResolverClass($typeResolver, $fieldName) !== null
+            && $fieldResolver->resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName) !== null
         ) {
             return false;
         }

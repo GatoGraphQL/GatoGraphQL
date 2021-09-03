@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Users\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
@@ -42,7 +42,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         );
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'user' => $this->translationAPI->__('User with a specific ID', 'pop-users'),
@@ -50,22 +50,22 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
             'userByEmail' => $this->translationAPI->__('User with a specific email', 'pop-users'),
             'users' => $this->translationAPI->__('Users in the current site', 'pop-users'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'user' => SchemaDefinition::TYPE_ID,
             'userByUsername' => SchemaDefinition::TYPE_ID,
             'userByEmail' => SchemaDefinition::TYPE_ID,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'userByUsername':
                 return array_merge(
@@ -95,11 +95,11 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         return $schemaFieldArgs;
     }
 
-    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'user' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
-            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+            default => parent::getFieldDataFilteringModule($relationalTypeResolver, $fieldName),
         };
     }
 
@@ -110,7 +110,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -133,7 +133,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
                 return null;
         }
 
-        $query = $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($relationalTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'user':
                 if ($users = $this->userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
@@ -142,10 +142,10 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
                 return null;
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'user':
@@ -154,6 +154,6 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
                 return UserTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }

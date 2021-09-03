@@ -12,7 +12,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoP\Hooks\HooksAPIInterface;
@@ -84,7 +84,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'content' => SchemaDefinition::TYPE_STRING,
@@ -103,10 +103,10 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'responsesForAdmin' => SchemaDefinition::TYPE_ID,
             'responseCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'content',
@@ -123,11 +123,11 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'responsesForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'content' => $this->translationAPI->__('Comment\'s content', 'pop-comments'),
@@ -146,10 +146,10 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'responsesForAdmin' => $this->translationAPI->__('[Unrestricted] Responses to the comment', 'pop-comments'),
             'responseCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of responses to the comment', 'pop-comments'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'responses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSES],
@@ -157,11 +157,11 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'responsesForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSES],
             'responseCountForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT],
             'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
-            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+            default => parent::getFieldDataFilteringModule($relationalTypeResolver, $fieldName),
         };
     }
 
-    protected function getFieldDataFilteringDefaultValues(TypeResolverInterface $typeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'responses':
@@ -182,7 +182,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                     $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
                 ];
         }
-        return parent::getFieldDataFilteringDefaultValues($typeResolver, $fieldName);
+        return parent::getFieldDataFilteringDefaultValues($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -191,13 +191,13 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
      * @return string[] Error messages
      */
     public function validateFieldArgument(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
         $errors = parent::validateFieldArgument(
-            $typeResolver,
+            $relationalTypeResolver,
             $fieldName,
             $fieldArgName,
             $fieldArgValue,
@@ -222,7 +222,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         return $errors;
     }
 
-    protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    protected function getSchemaDefinitionEnumName(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'status':
@@ -235,7 +235,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         return null;
     }
 
-    protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    protected function getSchemaDefinitionEnumValues(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
     {
         switch ($fieldName) {
             case 'status':
@@ -248,7 +248,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         return null;
     }
 
-    protected function getSchemaDefinitionEnumValueDescriptions(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    protected function getSchemaDefinitionEnumValueDescriptions(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
     {
         switch ($fieldName) {
             case 'status':
@@ -268,7 +268,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -315,9 +315,9 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         }
 
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($typeResolver, $fieldName, $fieldArgs),
+            $this->convertFieldArgsToFilteringQueryArgs($relationalTypeResolver, $fieldName, $fieldArgs),
             [
-                'parent-id' => $typeResolver->getID($comment),
+                'parent-id' => $relationalTypeResolver->getID($comment),
             ]
         );
         switch ($fieldName) {
@@ -330,14 +330,14 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                 return $this->commentTypeAPI->getCommentCount($query);
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'customPost':
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case 'parent':
             case 'responses':
@@ -345,6 +345,6 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                 return CommentTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }

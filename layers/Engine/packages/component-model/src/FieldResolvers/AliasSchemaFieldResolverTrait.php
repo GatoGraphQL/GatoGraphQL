@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
@@ -53,11 +53,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function isGlobal(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->isGlobal(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
     }
@@ -66,11 +66,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function decideCanProcessBasedOnVersionConstraint(TypeResolverInterface $typeResolver): bool
+    public function decideCanProcessBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->decideCanProcessBasedOnVersionConstraint(
-            $typeResolver
+            $relationalTypeResolver
         );
     }
 
@@ -78,11 +78,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveCanProcess(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool
+    public function resolveCanProcess(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): bool
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->resolveCanProcess(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName),
             $fieldArgs
         );
@@ -92,11 +92,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveSchemaValidationErrorDescriptions(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->resolveSchemaValidationErrorDescriptions(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName),
             $fieldArgs
         );
@@ -106,11 +106,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveSchemaValidationDeprecationDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveSchemaValidationDeprecationDescriptions(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->resolveSchemaValidationDeprecationDescriptions(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName),
             $fieldArgs
         );
@@ -120,11 +120,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveSchemaValidationWarningDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveSchemaValidationWarningDescriptions(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->resolveSchemaValidationWarningDescriptions(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName),
             $fieldArgs
         );
@@ -138,14 +138,14 @@ trait AliasSchemaFieldResolverTrait
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessResultItem(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->resolveCanProcessResultItem(
-            $typeResolver,
+            $relationalTypeResolver,
             $resultItem,
             $this->getAliasedFieldName($fieldName),
             $fieldArgs
@@ -159,14 +159,14 @@ trait AliasSchemaFieldResolverTrait
      * @param array<string, mixed> $fieldArgs
      */
     public function getValidationErrorDescriptions(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
     ): ?array {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->getValidationErrorDescriptions(
-            $typeResolver,
+            $relationalTypeResolver,
             $resultItem,
             $this->getAliasedFieldName($fieldName),
             $fieldArgs
@@ -177,11 +177,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function skipAddingToSchemaDefinition(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->skipAddingToSchemaDefinition(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
     }
@@ -190,11 +190,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->getSchemaFieldType(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
     }
@@ -203,11 +203,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->getSchemaFieldTypeModifiers(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
     }
@@ -216,11 +216,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->getSchemaFieldDescription(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
     }
@@ -229,11 +229,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->getSchemaFieldArgs(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
     }
@@ -242,11 +242,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function getSchemaFieldDeprecationDescription(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function getSchemaFieldDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->getSchemaFieldDeprecationDescription(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName),
             $fieldArgs
         );
@@ -257,14 +257,14 @@ trait AliasSchemaFieldResolverTrait
      * for the aliased $fieldName
      */
     public function validateFieldArgument(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->validateFieldArgument(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName),
             $fieldArgName,
             $fieldArgValue
@@ -275,12 +275,12 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function addSchemaDefinitionForField(array &$schemaDefinition, TypeResolverInterface $typeResolver, string $fieldName): void
+    public function addSchemaDefinitionForField(array &$schemaDefinition, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): void
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         $aliasedFieldResolver->addSchemaDefinitionForField(
             $schemaDefinition,
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
     }
@@ -289,11 +289,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function enableOrderedSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->enableOrderedSchemaFieldArgs(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
     }
@@ -302,11 +302,11 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function getSchemaFieldVersion(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldVersion(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->getSchemaFieldVersion(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
     }
@@ -316,7 +316,7 @@ trait AliasSchemaFieldResolverTrait
      * for the aliased $fieldName
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -326,7 +326,7 @@ trait AliasSchemaFieldResolverTrait
     ): mixed {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->resolveValue(
-            $typeResolver,
+            $relationalTypeResolver,
             $resultItem,
             $this->getAliasedFieldName($fieldName),
             $fieldArgs,
@@ -343,12 +343,12 @@ trait AliasSchemaFieldResolverTrait
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveFieldTypeResolverClass(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): ?string {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->resolveFieldTypeResolverClass(
-            $typeResolver,
+            $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
     }

@@ -9,7 +9,7 @@ use PoP\Engine\Misc\OperatorHelpers;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
@@ -31,12 +31,12 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         return true;
     }
 
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Apply all composed directives on the element found under the \'path\' parameter in the affected array object', 'component-model');
     }
 
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return array_merge(
             [
@@ -47,14 +47,14 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
                     SchemaDefinition::ARGNAME_MANDATORY => true,
                 ],
             ],
-            parent::getSchemaDirectiveArgs($typeResolver)
+            parent::getSchemaDirectiveArgs($relationalTypeResolver)
         );
     }
 
     /**
      * Directly point to the element under the specified path
      */
-    protected function getArrayItems(array &$array, int | string $id, string $field, TypeResolverInterface $typeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
+    protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
     {
         $path = $this->directiveArgsForSchema['path'];
 
@@ -87,7 +87,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
      * the original ones.
      */
     protected function addProcessedItemBackToDBItems(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$dbItems,
         array &$dbErrors,
         array &$dbWarnings,
@@ -100,7 +100,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         $arrayItemValue
     ): void {
         if (!is_array($arrayItemValue)) {
-            parent::addProcessedItemBackToDBItems($typeResolver, $dbItems, $dbErrors, $dbWarnings, $dbDeprecations, $dbNotices, $dbTraces, $id, $fieldOutputKey, $arrayItemKey, $arrayItemValue);
+            parent::addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $dbErrors, $dbWarnings, $dbDeprecations, $dbNotices, $dbTraces, $id, $fieldOutputKey, $arrayItemKey, $arrayItemValue);
             return;
         }
         foreach ($arrayItemValue as $itemKey => $itemValue) {

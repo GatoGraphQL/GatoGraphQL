@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
@@ -256,7 +256,7 @@ class PoP_Mentions
         } else {
             // Allow for the popover by adding data-popover-id
             $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var TypeResolverInterface */
+            /** @var RelationalTypeResolverInterface */
             $userTypeResolver = $instanceManager->getInstance(UserTypeResolver::class);
             $content = sprintf(
                 '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',

@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 {
@@ -33,7 +33,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'divide'
@@ -55,11 +55,11 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             'arrayAddItem'
                 => SchemaDefinition::TYPE_MIXED,
             default
-                => parent::getSchemaFieldType($typeResolver, $fieldName),
+                => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'concat',
@@ -80,11 +80,11 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             'arrayAddItem'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'concat' => $this->translationAPI->__('Concatenate two or more strings', 'function-fields'),
@@ -103,12 +103,12 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             'lowerCase' => $this->translationAPI->__('Transform a string to lower case', 'function-fields'),
             'titleCase' => $this->translationAPI->__('Transform a string to title case', 'function-fields'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'concat':
                 return array_merge(
@@ -349,7 +349,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
     }
 
     protected function doResolveSchemaValidationErrorDescriptions(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,
         array $fieldArgs = []
     ): ?array {
@@ -400,7 +400,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             }
         }
 
-        return parent::doResolveSchemaValidationErrorDescriptions($typeResolver, $fieldName, $fieldArgs);
+        return parent::doResolveSchemaValidationErrorDescriptions($relationalTypeResolver, $fieldName, $fieldArgs);
     }
 
     /**
@@ -410,7 +410,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -482,6 +482,6 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                 return ucwords($fieldArgs['text']);
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

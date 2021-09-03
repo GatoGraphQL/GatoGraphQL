@@ -7,7 +7,7 @@ namespace PoPSchema\UserRolesAccessControl\DirectiveResolvers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
 
 class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValidateConditionDirectiveResolver
@@ -17,7 +17,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         return 'validateDoesLoggedInUserHaveAnyRole';
     }
 
-    protected function validateCondition(TypeResolverInterface $typeResolver): bool
+    protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $vars = ApplicationState::getVars();
         // If the user is not logged-in, then do nothing: directive `@validateIsUserLoggedIn` will already fail
@@ -32,7 +32,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         return !empty(array_intersect($roles, $userRoles));
     }
 
-    protected function getValidationFailedMessage(TypeResolverInterface $typeResolver, array $failedDataFields): string
+    protected function getValidationFailedMessage(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): string
     {
         $roles = $this->directiveArgsForSchema['roles'];
         $isValidatingDirective = $this->isValidatingDirective();
@@ -55,15 +55,15 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
                 $this->translationAPI->__('\', \''),
                 $failedDataFields
             ),
-            $typeResolver->getMaybeNamespacedTypeName()
+            $relationalTypeResolver->getMaybeNamespacedTypeName()
         );
     }
 
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('It validates if the user has any of the roles provided through directive argument \'roles\'', 'component-model');
     }
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             [

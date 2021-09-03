@@ -6,7 +6,7 @@ namespace PoP\AccessControl\TypeResolverDecorators;
 
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\AccessControl\Schema\SchemaModes;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolverDecorators\AbstractTypeResolverDecorator;
 
 abstract class AbstractPublicSchemaTypeResolverDecorator extends AbstractTypeResolverDecorator
@@ -14,7 +14,7 @@ abstract class AbstractPublicSchemaTypeResolverDecorator extends AbstractTypeRes
     /**
      * Enable only for public schema
      */
-    public function enabled(TypeResolverInterface $typeResolver): bool
+    public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return
             ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode() ||

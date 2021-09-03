@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 use function substr;
@@ -67,10 +67,10 @@ class UnionTypeHelpers
     /**
      * Creates a composed string containing the type and ID of the dbObject
      */
-    public static function getDBObjectComposedTypeAndID(TypeResolverInterface $typeResolver, int | string $id): string
+    public static function getDBObjectComposedTypeAndID(RelationalTypeResolverInterface $relationalTypeResolver, int | string $id): string
     {
         return
-            $typeResolver->getTypeOutputName() .
+            $relationalTypeResolver->getTypeOutputName() .
             UnionTypeSymbols::DBOBJECT_COMPOSED_TYPE_ID_SEPARATOR .
             (string) $id;
     }
@@ -84,11 +84,11 @@ class UnionTypeHelpers
      * - If there are none types, return `null`. As a consequence,
      *   the ID is returned as a field, not as a connection
      */
-    public static function getUnionOrTargetTypeResolverClass(string $unionTypeResolverClass): ?string
+    public static function getUnionOrTargetObjectTypeResolverClass(string $unionTypeResolverClass): ?string
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         $unionTypeResolver = $instanceManager->getInstance($unionTypeResolverClass);
-        $targetTypeResolverClasses = $unionTypeResolver->getTargetTypeResolverClasses();
+        $targetTypeResolverClasses = $unionTypeResolver->getTargetObjectTypeResolverClasses();
         if ($targetTypeResolverClasses) {
             // By configuration: If there is only 1 item, return only that one
             if (ComponentConfiguration::useSingleTypeInsteadOfUnionType()) {

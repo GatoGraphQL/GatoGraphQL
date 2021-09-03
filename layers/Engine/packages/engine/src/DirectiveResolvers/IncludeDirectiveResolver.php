@@ -6,7 +6,7 @@ namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -27,7 +27,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
 
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -49,15 +49,15 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaTraces
     ): void {
         // Check the condition field. If it is satisfied, then keep those fields, otherwise remove them from the $idsDataFields in the upcoming stages of the pipeline
-        $includeDataFieldsForIds = $this->getIdsSatisfyingCondition($typeResolver, $resultIDItems, $idsDataFields, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations);
+        $includeDataFieldsForIds = $this->getIdsSatisfyingCondition($relationalTypeResolver, $resultIDItems, $idsDataFields, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations);
         $idsToRemove = array_diff(array_keys($idsDataFields), $includeDataFieldsForIds);
         $this->removeDataFieldsForIDs($idsDataFields, $idsToRemove, $succeedingPipelineIDsDataFields);
     }
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'api');
     }
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             [

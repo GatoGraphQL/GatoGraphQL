@@ -11,8 +11,8 @@ use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
 
@@ -31,7 +31,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         return DirectiveTypes::SCRIPTING;
     }
 
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             [
@@ -57,7 +57,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         ];
     }
 
-    public function getSchemaDirectiveExpressions(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             Expressions::NAME_VALUE => $this->translationAPI->__('Element being transformed', 'component-model'),
@@ -65,7 +65,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
 
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -86,13 +86,13 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $this->regenerateAndExecuteFunction($typeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->regenerateAndExecuteFunction($relationalTypeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
     }
 
     /**
      * Execute a function on the affected field
      */
-    protected function regenerateAndExecuteFunction(TypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): void
+    protected function regenerateAndExecuteFunction(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): void
     {
         $function = $this->directiveArgsForSchema['function'];
         $addArguments = $this->directiveArgsForSchema['addArguments'] ?? [];
@@ -102,17 +102,17 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         if ($addArguments) {
             $functionName = $this->fieldQueryInterpreter->getFieldName($function);
             $functionArgElems = array_merge(
-                $this->fieldQueryInterpreter->extractFieldArguments($typeResolver, $function) ?? [],
+                $this->fieldQueryInterpreter->extractFieldArguments($relationalTypeResolver, $function) ?? [],
                 $addArguments
             );
             $function = $this->fieldQueryInterpreter->getField($functionName, $functionArgElems);
         }
-        $dbKey = $typeResolver->getTypeOutputName();
+        $dbKey = $relationalTypeResolver->getTypeOutputName();
 
         // Get the value from the object
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
 
                 // Validate that the property exists
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
@@ -141,7 +141,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 }
 
                 // Place all the reserved expressions into the `$expressions` context: $value
-                $this->addExpressionsForResultItem($typeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+                $this->addExpressionsForResultItem($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
                 // Generate the fieldArgs from combining the query with the values in the context, through $variables
                 $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
@@ -151,7 +151,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $schemaFieldArgs,
                     $schemaDBErrors,
                     $schemaDBWarnings
-                ) = $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($typeResolver, $function, $variables);
+                ) = $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($relationalTypeResolver, $function, $variables);
 
                 // Place the errors not under schema but under DB, since they may change on a resultItem by resultItem basis
                 if ($schemaDBWarnings) {
@@ -202,9 +202,9 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 // Execute the function
                 // Because the function was dynamically created, we must indicate to validate the schema when doing ->resolveValue
                 $options = [
-                    AbstractTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
+                    AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
                 ];
-                $functionValue = $typeResolver->resolveValue($resultIDItems[(string)$id], $validFunction, $variables, $expressions, $options);
+                $functionValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $validFunction, $variables, $expressions, $options);
                 // Merge the dbWarnings, if any
                 if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
                     $dbWarnings[$id] = array_merge(
@@ -245,7 +245,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      * Place all the reserved variables into the `$variables` context
      */
     protected function addExpressionsForResultItem(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         string $field,
         array &$resultIDItems,
@@ -260,9 +260,9 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaWarnings,
         array &$schemaDeprecations
     ): void {
-        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($typeResolver, $field);
+        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
         $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
-        $dbKey = $typeResolver->getTypeOutputName();
+        $dbKey = $relationalTypeResolver->getTypeOutputName();
         $value = $isValueInDBItems ?
             $dbItems[(string)$id][$fieldOutputKey] :
             $previousDBItems[$dbKey][(string)$id][$fieldOutputKey];

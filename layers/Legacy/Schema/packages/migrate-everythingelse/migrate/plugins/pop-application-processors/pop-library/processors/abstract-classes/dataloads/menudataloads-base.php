@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         return MenuTypeResolver::class;
     }

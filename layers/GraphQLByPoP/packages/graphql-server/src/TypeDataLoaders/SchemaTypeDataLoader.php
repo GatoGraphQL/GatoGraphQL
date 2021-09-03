@@ -14,12 +14,12 @@ class SchemaTypeDataLoader extends AbstractTypeDataLoader
 {
     use UseObjectDictionaryTypeDataLoaderTrait;
 
-    protected function getTypeResolverClass(): string
+    protected function getObjectTypeResolverClass(): string
     {
         return SchemaTypeResolver::class;
     }
 
-    protected function getTypeNewInstance(int | string $id)
+    protected function getObjectTypeNewInstance(int | string $id)
     {
         return new Schema(
             $this->getSchemaDefinition($id),

@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\LocationPosts\TypeResolvers\LocationPostTypeResolver;
@@ -33,7 +33,7 @@ class PoP_LocationPostCategoryLayouts_LayoutDataloadHooks
             if ($add_layout) {
                 // Priority: place it before the 'postType' layout key
                 $instanceManager = InstanceManagerFacade::getInstance();
-                /** @var TypeResolverInterface */
+                /** @var RelationalTypeResolverInterface */
                 $locationPostTypeResolver = $instanceManager->getInstance(LocationPostTypeResolver::class);
                 array_unshift($keys, $locationPostTypeResolver->getTypeName() . '-map');
             }

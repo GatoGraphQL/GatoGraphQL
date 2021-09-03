@@ -135,7 +135,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:
@@ -147,13 +147,13 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
             case self::MODULE_DATALOAD_SINGLE_CONTENT:
             case self::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT:
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case self::MODULE_DATALOAD_PAGE_CONTENT:
                 return PageTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 }
 

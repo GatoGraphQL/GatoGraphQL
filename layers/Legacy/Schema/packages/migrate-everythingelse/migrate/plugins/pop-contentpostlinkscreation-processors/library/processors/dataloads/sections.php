@@ -97,7 +97,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads extends P
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT:
@@ -106,7 +106,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads extends P
                 return CustomPostTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props): void

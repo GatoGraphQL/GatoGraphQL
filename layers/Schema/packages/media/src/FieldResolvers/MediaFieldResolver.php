@@ -10,7 +10,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Formatters\DateFormatterInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -67,7 +67,7 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'src' => SchemaDefinition::TYPE_URL,
@@ -83,10 +83,10 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
             'modified' => SchemaDefinition::TYPE_DATE,
             'mimeType' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'src',
@@ -96,10 +96,10 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'src' => $this->translationAPI->__('Media element URL source', 'pop-media'),
@@ -115,12 +115,12 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
             'modified' => $this->translationAPI->__('Media element\'s modified date', 'pop-media'),
             'mimeType' => $this->translationAPI->__('Media element\'s mime type', 'pop-media'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'src':
             case 'srcSet':
@@ -140,12 +140,12 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
         return $schemaFieldArgs;
     }
 
-    public function getFieldDataFilteringModule(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
             'modified' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
-            default => parent::getFieldDataFilteringModule($typeResolver, $fieldName),
+            default => parent::getFieldDataFilteringModule($relationalTypeResolver, $fieldName),
         };
     }
 
@@ -156,7 +156,7 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -170,19 +170,19 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
             case 'src':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
-                $imgSrc = $this->mediaTypeAPI->getImageSrc($typeResolver->getID($media), $size);
+                $imgSrc = $this->mediaTypeAPI->getImageSrc($relationalTypeResolver->getID($media), $size);
                 if ($imgSrc !== null) {
                     return $imgSrc;
                 }
-                return $this->mediaTypeAPI->getMediaItemSrc($typeResolver->getID($media));
+                return $this->mediaTypeAPI->getMediaItemSrc($relationalTypeResolver->getID($media));
             case 'width':
             case 'height':
-                $properties = $this->mediaTypeAPI->getImageProperties($typeResolver->getID($media), $size);
+                $properties = $this->mediaTypeAPI->getImageProperties($relationalTypeResolver->getID($media), $size);
                 return $properties[$fieldName];
             case 'srcSet':
-                return $this->mediaTypeAPI->getImageSrcSet($typeResolver->getID($media), $size);
+                return $this->mediaTypeAPI->getImageSrcSet($relationalTypeResolver->getID($media), $size);
             case 'sizes':
-                return $this->mediaTypeAPI->getImageSizes($typeResolver->getID($media), $size);
+                return $this->mediaTypeAPI->getImageSizes($relationalTypeResolver->getID($media), $size);
             case 'title':
                 return $this->mediaTypeAPI->getTitle($media);
             case 'caption':
@@ -205,7 +205,7 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
                 return $this->mediaTypeAPI->getMimeType($media);
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     /**

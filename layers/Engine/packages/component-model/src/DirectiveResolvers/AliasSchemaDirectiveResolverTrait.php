@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
@@ -43,77 +43,77 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->getSchemaDirectiveDescription(
-            $typeResolver
+            $relationalTypeResolver
         );
     }
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function enableOrderedSchemaDirectiveArgs(TypeResolverInterface $typeResolver): bool
+    public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->enableOrderedSchemaDirectiveArgs(
-            $typeResolver
+            $relationalTypeResolver
         );
     }
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->getSchemaDirectiveArgs(
-            $typeResolver
+            $relationalTypeResolver
         );
     }
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getSchemaDirectiveExpressions(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->getSchemaDirectiveExpressions(
-            $typeResolver
+            $relationalTypeResolver
         );
     }
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getSchemaDirectiveWarningDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->getSchemaDirectiveWarningDescription(
-            $typeResolver
+            $relationalTypeResolver
         );
     }
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->getSchemaDirectiveDeprecationDescription(
-            $typeResolver
+            $relationalTypeResolver
         );
     }
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function isGlobal(TypeResolverInterface $typeResolver): bool
+    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->isGlobal(
-            $typeResolver
+            $relationalTypeResolver
         );
     }
 
@@ -139,7 +139,7 @@ trait AliasSchemaDirectiveResolverTrait
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
     public function dissectAndValidateDirectiveForSchema(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$fieldDirectiveFields,
         array &$variables,
         array &$schemaErrors,
@@ -150,7 +150,7 @@ trait AliasSchemaDirectiveResolverTrait
     ): array {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->dissectAndValidateDirectiveForSchema(
-            $typeResolver,
+            $relationalTypeResolver,
             $fieldDirectiveFields,
             $variables,
             $schemaErrors,
@@ -165,7 +165,7 @@ trait AliasSchemaDirectiveResolverTrait
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
     public function validateDirectiveArgumentsForSchema(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
         array &$schemaErrors,
@@ -174,7 +174,7 @@ trait AliasSchemaDirectiveResolverTrait
     ): array {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->validateDirectiveArgumentsForSchema(
-            $typeResolver,
+            $relationalTypeResolver,
             $directiveName,
             $directiveArgs,
             $schemaErrors,
@@ -196,7 +196,7 @@ trait AliasSchemaDirectiveResolverTrait
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
     public function resolveCanProcess(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
         string $field,
@@ -204,7 +204,7 @@ trait AliasSchemaDirectiveResolverTrait
     ): bool {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->resolveCanProcess(
-            $typeResolver,
+            $relationalTypeResolver,
             $directiveName,
             $directiveArgs,
             $field,
@@ -234,7 +234,7 @@ trait AliasSchemaDirectiveResolverTrait
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -257,7 +257,7 @@ trait AliasSchemaDirectiveResolverTrait
     ): void {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         $aliasedDirectiveResolver->resolveDirective(
-            $typeResolver,
+            $relationalTypeResolver,
             $idsDataFields,
             $succeedingPipelineIDsDataFields,
             $succeedingPipelineDirectiveResolverInstances,
@@ -283,11 +283,11 @@ trait AliasSchemaDirectiveResolverTrait
     // /**
     //  * Proxy pattern: execute same function on the aliased DirectiveResolver
     //  */
-    // public function getSchemaDefinitionResolver(TypeResolverInterface $typeResolver): ?SchemaDirectiveResolverInterface
+    // public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?SchemaDirectiveResolverInterface
     // {
     //     $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
     //     return $aliasedDirectiveResolver->getSchemaDefinitionResolver(
-    //         $typeResolver
+    //         $relationalTypeResolver
     //     );
     // }
 
@@ -303,27 +303,27 @@ trait AliasSchemaDirectiveResolverTrait
     // /**
     //  * Proxy pattern: execute same function on the aliased DirectiveResolver
     //  */
-    // public function getSchemaDefinitionForDirective(TypeResolverInterface $typeResolver): array;
+    // public function getSchemaDefinitionForDirective(RelationalTypeResolverInterface $relationalTypeResolver): array;
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function decideCanProcessBasedOnVersionConstraint(TypeResolverInterface $typeResolver): bool
+    public function decideCanProcessBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->decideCanProcessBasedOnVersionConstraint(
-            $typeResolver
+            $relationalTypeResolver
         );
     }
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getSchemaDirectiveVersion(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->getSchemaDirectiveVersion(
-            $typeResolver
+            $relationalTypeResolver
         );
     }
 }

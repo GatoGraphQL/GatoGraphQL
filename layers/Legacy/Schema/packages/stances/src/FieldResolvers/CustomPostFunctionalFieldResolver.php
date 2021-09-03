@@ -10,7 +10,7 @@ use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
@@ -43,7 +43,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'addStanceURL' => SchemaDefinition::TYPE_URL,
@@ -58,10 +58,10 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
             'stanceName' => SchemaDefinition::TYPE_STRING,
             'catName' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'loggedInUserStances',
@@ -69,11 +69,11 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
             'stancesLazy'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'addStanceURL' => $this->translationAPI->__('', ''),
@@ -88,7 +88,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
             'stanceName' => $this->translationAPI->__('', ''),
             'catName' => $this->translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -98,7 +98,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -121,7 +121,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 // $input_name = $moduleprocessor_manager->getProcessor($input)->getName($input);
                 $input_name = POP_INPUTNAME_STANCETARGET;
                 return GeneralUtils::addQueryArgs([
-                    $input_name => $typeResolver->getID($post),
+                    $input_name => $relationalTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL($route));
 
             case 'loggedInUserStances':
@@ -132,16 +132,16 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 $query = array(
                     'authors' => [$vars['global-userstate']['current-user-id']],
                 );
-                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($post));
+                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $relationalTypeResolver->getID($post));
 
                 return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'hasLoggedInUserStances':
-                $referencedby = $typeResolver->resolveValue($resultItem, 'loggedInUserStances', $variables, $expressions, $options);
+                $referencedby = $relationalTypeResolver->resolveValue($resultItem, 'loggedInUserStances', $variables, $expressions, $options);
                 return !empty($referencedby);
 
             case 'editStanceURL':
-                if ($referencedby = $typeResolver->resolveValue($resultItem, 'loggedInUserStances', $variables, $expressions, $options)) {
+                if ($referencedby = $relationalTypeResolver->resolveValue($resultItem, 'loggedInUserStances', $variables, $expressions, $options)) {
                     return urldecode($cmseditpostsapi->getEditPostLink($referencedby[0]));
                 }
                 return null;
@@ -166,7 +166,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 
             case 'stanceName':
             case 'catName':
-                $selected = $typeResolver->resolveValue($resultItem, 'stance', $variables, $expressions, $options);
+                $selected = $relationalTypeResolver->resolveValue($resultItem, 'stance', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -174,6 +174,6 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 return $stance->getSelectedValue();
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

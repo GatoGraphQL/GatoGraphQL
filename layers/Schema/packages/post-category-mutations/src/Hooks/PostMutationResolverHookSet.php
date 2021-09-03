@@ -13,7 +13,7 @@ use PoPSchema\PostCategoryMutations\Facades\PostCategoryTypeMutationAPIFacade;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
-    protected function getTypeResolverClass(): string
+    protected function getCustomPostTypeResolverClass(): string
     {
         return PostTypeResolver::class;
     }

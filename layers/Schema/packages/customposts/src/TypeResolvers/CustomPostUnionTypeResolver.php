@@ -20,7 +20,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         return $this->translationAPI->__('Union of \'custom post\' type resolvers', 'customposts');
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return CustomPostUnionTypeDataLoader::class;
     }

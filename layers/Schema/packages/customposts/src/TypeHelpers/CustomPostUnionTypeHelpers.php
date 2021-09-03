@@ -18,12 +18,12 @@ class CustomPostUnionTypeHelpers
     /**
      * Obtain the post types from all member typeResolvers
      */
-    public static function getTargetTypeResolverCustomPostTypes(string $unionTypeResolverClass): array
+    public static function getTargetObjectTypeResolverCustomPostTypes(string $unionTypeResolverClass): array
     {
         $customPostTypes = [];
         $instanceManager = InstanceManagerFacade::getInstance();
         $unionTypeResolver = $instanceManager->getInstance($unionTypeResolverClass);
-        $typeResolverPickers = $unionTypeResolver->getTypeResolverPickers();
+        $typeResolverPickers = $unionTypeResolver->getObjectTypeResolverPickers();
         foreach ($typeResolverPickers as $typeResolverPicker) {
             // The picker should implement interface CustomPostTypeResolverPickerInterface
             if ($typeResolverPicker instanceof CustomPostTypeResolverPickerInterface) {
@@ -34,7 +34,7 @@ class CustomPostUnionTypeHelpers
     }
 
     /**
-     * Based on `getUnionOrTargetTypeResolverClass` from class
+     * Based on `getUnionOrTargetObjectTypeResolverClass` from class
      * \PoP\ComponentModel\TypeResolvers\UnionTypeHelpers, but applied
      * to the CustomPostUnion type, to add its own configuration.
      *
@@ -46,12 +46,12 @@ class CustomPostUnionTypeHelpers
      * - If there are none types, return `null`. As a consequence,
      *   the ID is returned as a field, not as a connection
      */
-    public static function getCustomPostUnionOrTargetTypeResolverClass(
+    public static function getCustomPostUnionOrTargetObjectTypeResolverClass(
         string $unionTypeResolverClass = CustomPostUnionTypeResolver::class
     ): ?string {
         $instanceManager = InstanceManagerFacade::getInstance();
         $unionTypeResolver = $instanceManager->getInstance($unionTypeResolverClass);
-        $targetTypeResolverClasses = $unionTypeResolver->getTargetTypeResolverClasses();
+        $targetTypeResolverClasses = $unionTypeResolver->getTargetObjectTypeResolverClasses();
         if ($targetTypeResolverClasses) {
             // By configuration: If there is only 1 item, return only that one
             if (ComponentConfiguration::useSingleTypeInsteadOfCustomPostUnionType()) {

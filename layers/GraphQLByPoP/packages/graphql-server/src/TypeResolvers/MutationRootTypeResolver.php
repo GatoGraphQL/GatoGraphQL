@@ -30,7 +30,7 @@ class MutationRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResol
         return $mutationRoot->getID();
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return MutationRootTypeDataLoader::class;
     }

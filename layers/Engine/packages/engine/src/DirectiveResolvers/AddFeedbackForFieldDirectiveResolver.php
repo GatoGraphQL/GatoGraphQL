@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\Engine\Enums\FieldFeedbackTargetEnum;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
@@ -46,7 +46,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
      * Execute the directive
      */
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -78,7 +78,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
                     $resultItemValidDirective,
                     $resultItemDirectiveName,
                     $resultItemDirectiveArgs
-                ) = $this->dissectAndValidateDirectiveForResultItem($typeResolver, $resultItem, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
+                ) = $this->dissectAndValidateDirectiveForResultItem($relationalTypeResolver, $resultItem, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
                 // Check that the directive is valid. If it is not, $dbErrors will have the error already added
                 if (is_null($resultItemValidDirective)) {
                     continue;
@@ -127,12 +127,12 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
         ];
     }
 
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Whenever a field is queried, add a feedback message to the response, of either type "warning", "deprecation" or "log"', 'engine');
     }
 
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         /**
          * @var FieldFeedbackTypeEnum

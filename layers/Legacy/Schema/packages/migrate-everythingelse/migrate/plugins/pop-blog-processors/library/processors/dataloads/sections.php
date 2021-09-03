@@ -702,7 +702,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_POSTS_TYPEAHEAD:
@@ -761,7 +761,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_LIST:
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case self::MODULE_DATALOAD_SEARCHUSERS_TYPEAHEAD:
             case self::MODULE_DATALOAD_USERS_TYPEAHEAD:
@@ -781,7 +781,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
                 return UserTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function getImmutableHeaddatasetmoduleDataProperties(array $module, array &$props): array

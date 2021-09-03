@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\EmbeddableFields;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 /**
  * When Embeddable Fields is enabled, register the `echoStr` field
@@ -19,7 +19,7 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
      * By making it not global, it gets registered on each single type.
      * Otherwise, it is not exposed in the schema
      */
-    public function isGlobal(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool
     {
         return false;
     }
@@ -49,20 +49,20 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
     /**
      * Change the type from mixed to string
      */
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'echoStr' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
     /**
      * Change the type from mixed to string
      */
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'echoStr':
                 return array_merge(
@@ -84,12 +84,12 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
     /**
      * Change the type from mixed to string
      */
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'echoStr' => $this->translationAPI->__('Repeat back the input string', 'graphql-api'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -99,7 +99,7 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -112,6 +112,6 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
                 return $fieldArgs['value'];
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

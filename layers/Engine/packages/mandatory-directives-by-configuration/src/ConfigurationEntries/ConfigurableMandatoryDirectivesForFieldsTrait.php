@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait ConfigurableMandatoryDirectivesForFieldsTrait
 {
@@ -34,13 +34,13 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      * Configuration entries
      */
     final protected function getEntries(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
     ): array {
         return $this->getMatchingEntries(
             $this->getConfigurationEntries(),
-            $typeResolver,
+            $relationalTypeResolver,
             $fieldInterfaceResolverClasses,
             $fieldName
         );
@@ -51,11 +51,11 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      */
     final protected function getMatchingEntries(
         array $entryList,
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
     ): array {
-        $typeResolverClass = get_class($typeResolver);
+        $typeResolverClass = get_class($relationalTypeResolver);
         return array_filter(
             $entryList,
             function ($entry) use ($typeResolverClass, $fieldInterfaceResolverClasses, $fieldName): bool {

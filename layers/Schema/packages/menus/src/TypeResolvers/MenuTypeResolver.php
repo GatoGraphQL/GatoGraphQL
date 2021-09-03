@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\TypeResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\TypeDataLoaders\MenuTypeDataLoader;
 
-class MenuTypeResolver extends AbstractTypeResolver
+class MenuTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {
@@ -27,7 +27,7 @@ class MenuTypeResolver extends AbstractTypeResolver
         return $menuTypeAPI->getMenuID($menu);
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return MenuTypeDataLoader::class;
     }

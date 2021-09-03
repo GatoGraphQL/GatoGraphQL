@@ -13,7 +13,7 @@ class GraphQLAPIArrowFnUnionTypeChainedRuleContainerConfigurationService extends
     protected function getPaths(): array
     {
         return [
-            $this->pluginDir . '/vendor/getpop/component-model/src/TypeResolvers/AbstractTypeResolver.php',
+            $this->pluginDir . '/vendor/getpop/component-model/src/TypeResolvers/AbstractRelationalTypeResolver.php',
             $this->pluginDir . '/vendor/getpop/engine/src/DirectiveResolvers/FilterIDsSatisfyingConditionDirectiveResolverTrait.php',
             $this->pluginDir . '/vendor/pop-schema/menus/src/TypeDataLoaders/MenuItemTypeDataLoader.php',
             $this->pluginDir . '/vendor/pop-schema/menus/src/TypeDataLoaders/MenuTypeDataLoader.php',

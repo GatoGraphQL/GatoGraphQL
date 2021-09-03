@@ -10,7 +10,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeMutationAPIFacade;
@@ -49,7 +49,7 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
 
     public function getSchemaFieldArgs(
         array $fieldArgs,
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): array {
         $fieldArgs[] = [

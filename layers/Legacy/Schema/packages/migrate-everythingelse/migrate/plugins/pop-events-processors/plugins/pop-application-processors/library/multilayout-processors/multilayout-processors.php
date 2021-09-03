@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
@@ -23,7 +23,7 @@ class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_Proce
         $event_post_type = $eventTypeAPI->getEventCustomPostType();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var TypeResolverInterface */
+        /** @var RelationalTypeResolverInterface */
         $eventTypeResolver = $instanceManager->getInstance(EventTypeResolver::class);
         $field = $fieldQueryInterpreter->getField(
             'isType',

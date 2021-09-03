@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 
@@ -15,7 +15,7 @@ class PostCategoryListFieldResolver extends AbstractPostFieldResolver
         return array(PostCategoryTypeResolver::class);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'posts' => $this->translationAPI->__('Posts which contain this category', 'post-categories'),
@@ -23,7 +23,7 @@ class PostCategoryListFieldResolver extends AbstractPostFieldResolver
             'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts which contain this category', 'post-categories'),
             'postCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of posts which contain this category', 'post-categories'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -31,12 +31,12 @@ class PostCategoryListFieldResolver extends AbstractPostFieldResolver
      * @return array<string, mixed>
      */
     protected function getQuery(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $query = parent::getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
+        $query = parent::getQuery($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs);
 
         $category = $resultItem;
         switch ($fieldName) {
@@ -44,7 +44,7 @@ class PostCategoryListFieldResolver extends AbstractPostFieldResolver
             case 'postCount':
             case 'postsForAdmin':
             case 'postCountForAdmin':
-                $query['category-ids'] = [$typeResolver->getID($category)];
+                $query['category-ids'] = [$relationalTypeResolver->getID($category)];
                 break;
         }
 

@@ -9,15 +9,15 @@ use Exception;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\TypeResolverPickers\TypeResolverPickerInterface;
+use PoP\ComponentModel\TypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 
-abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements UnionTypeResolverInterface
+abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver implements UnionTypeResolverInterface
 {
     /**
-     * @var TypeResolverPickerInterface[]
+     * @var ObjectTypeResolverPickerInterface[]
      */
     protected ?array $typeResolverPickers = null;
 
@@ -54,14 +54,14 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
     {
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
-        $resultItemIDTargetTypeResolvers = $this->getResultItemIDTargetTypeResolvers($dbObjectIDs);
+        $resultItemIDTargetObjectTypeResolvers = $this->getResultItemIDTargetTypeResolvers($dbObjectIDs);
         $typeDBObjectIDOrIDs = [];
         foreach ($dbObjectIDs as $resultItemID) {
             // Make sure there is a resolver for this resultItem. If there is none, return the same ID
-            $targetTypeResolver = $resultItemIDTargetTypeResolvers[$resultItemID];
-            if (!is_null($targetTypeResolver)) {
+            $targetObjectTypeResolver = $resultItemIDTargetObjectTypeResolvers[$resultItemID];
+            if (!is_null($targetObjectTypeResolver)) {
                 $typeDBObjectIDOrIDs[] = UnionTypeHelpers::getDBObjectComposedTypeAndID(
-                    $targetTypeResolver,
+                    $targetObjectTypeResolver,
                     $resultItemID
                 );
             } else {
@@ -84,20 +84,19 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         return $this->recursiveGetResultItemIDTargetTypeResolvers($this, $ids);
     }
 
-    private function recursiveGetResultItemIDTargetTypeResolvers(TypeResolverInterface $typeResolver, array $ids): array
+    private function recursiveGetResultItemIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
     {
         if (!$ids) {
             return [];
         }
 
         $resultItemIDTargetTypeResolvers = [];
-        $isUnionTypeResolver = $typeResolver instanceof UnionTypeResolverInterface;
+        $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
         if ($isUnionTypeResolver) {
-            /** @var UnionTypeResolverInterface */
-            $typeResolver = $typeResolver;
+            /** @var UnionTypeResolverInterface $relationalTypeResolver */
             $targetTypeResolverClassDataItems = [];
             foreach ($ids as $resultItemID) {
-                if ($targetTypeResolverClass = $typeResolver->getTypeResolverClassForResultItem($resultItemID)) {
+                if ($targetTypeResolverClass = $relationalTypeResolver->getObjectTypeResolverClassForResultItem($resultItemID)) {
                     $targetTypeResolverClassDataItems[$targetTypeResolverClass][] = $resultItemID;
                 } else {
                     $resultItemIDTargetTypeResolvers[(string)$resultItemID] = null;
@@ -115,7 +114,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
             }
         } else {
             foreach ($ids as $resultItemID) {
-                $resultItemIDTargetTypeResolvers[(string)$resultItemID] = $typeResolver;
+                $resultItemIDTargetTypeResolvers[(string)$resultItemID] = $relationalTypeResolver;
             }
         }
         return $resultItemIDTargetTypeResolvers;
@@ -126,7 +125,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     //  */
     // public function addTypeToID(string | int $resultItemID): string
     // {
-    //     if ($resultItemTypeResolverClass = $this->getTypeResolverClassForResultItem($resultItemID)) {
+    //     if ($resultItemTypeResolverClass = $this->getObjectTypeResolverClassForResultItem($resultItemID)) {
     //         $resultItemTypeResolver = $this->instanceManager->getInstance($resultItemTypeResolverClass);
     //         return UnionTypeHelpers::getDBObjectComposedTypeAndID(
     //             $resultItemTypeResolver,
@@ -137,7 +136,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     // }
 
     /**
-     * Watch out! This function overrides the implementation from the for the AbstractTypeResolver
+     * Watch out! This function overrides the implementation from the for the AbstractRelationalTypeResolver
      *
      * Collect all directives for all fields, and then build a single directive pipeline for all fields,
      * including all directives, even if they don't apply to all fields
@@ -155,7 +154,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         // Otherwise, TypeResolverDecorators can't have their defined ACL rules
         // work when querying a union type (eg: "customPosts")
         $targetTypeResolverClassMandatoryDirectivesForFields = [];
-        $targetTypeResolverClasses = $this->getTargetTypeResolverClasses();
+        $targetTypeResolverClasses = $this->getTargetObjectTypeResolverClasses();
         foreach ($targetTypeResolverClasses as $targetTypeResolverClass) {
             $targetTypeResolver = $this->instanceManager->getInstance($targetTypeResolverClass);
             $targetTypeResolverClassMandatoryDirectivesForFields[$targetTypeResolverClass] = $targetTypeResolver->getAllMandatoryDirectivesForFields();
@@ -201,7 +200,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
      */
     public function getID(object $resultItem): string | int | null
     {
-        $targetTypeResolver = $this->getTargetTypeResolver($resultItem);
+        $targetTypeResolver = $this->getTargetObjectTypeResolver($resultItem);
         if (is_null($targetTypeResolver)) {
             return null;
         }
@@ -214,23 +213,24 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         );
     }
 
-    public function getTargetTypeResolverClasses(): array
+    public function getTargetObjectTypeResolverClasses(): array
     {
-        $typeResolverPickers = $this->getTypeResolverPickers();
-        return $this->getTypeResolverClassesFromPickers($typeResolverPickers);
+        $typeResolverPickers = $this->getObjectTypeResolverPickers();
+        return $this->getObjectTypeResolverClassesFromPickers($typeResolverPickers);
     }
 
-    protected function getTypeResolverClassesFromPickers(array $typeResolverPickers): array
+    protected function getObjectTypeResolverClassesFromPickers(array $typeResolverPickers): array
     {
         return array_map(
-            function ($typeResolverPicker) {
-                return $typeResolverPicker->getTypeResolverClass();
-            },
+            fn (ObjectTypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getObjectTypeResolverClass(),
             $typeResolverPickers
         );
     }
 
-    public function getTypeResolverPickers(): array
+    /**
+     * @return ObjectTypeResolverPickerInterface[]
+     */
+    public function getObjectTypeResolverPickers(): array
     {
         if (is_null($this->typeResolverPickers)) {
             $this->typeResolverPickers = $this->calculateTypeResolverPickers();
@@ -247,11 +247,11 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         do {
             // All the pickers and their priorities for this class level
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-            /** @var TypeResolverPickerInterface[] */
+            /** @var ObjectTypeResolverPickerInterface[] */
             $attachedTypeResolverPickers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::TYPERESOLVERPICKERS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
-                fn (TypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getPriorityToAttachToClasses(),
+                fn (ObjectTypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getPriorityToAttachToClasses(),
                 $attachedTypeResolverPickers
             );
 
@@ -267,15 +267,15 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
 
         // Validate that all typeResolvers implement the required interface
         if ($typeInterfaceClass = $this->getSchemaTypeInterfaceClass()) {
-            $typeResolverClasses = $this->getTypeResolverClassesFromPickers($typeResolverPickers);
+            $objectTypeResolverClasses = $this->getObjectTypeResolverClassesFromPickers($typeResolverPickers);
             $notImplementingInterfaceTypeResolverClasses = array_filter(
-                $typeResolverClasses,
+                $objectTypeResolverClasses,
                 function ($typeResolverClass) use ($typeInterfaceClass) {
                     /**
-                     * @var TypeResolverInterface
+                     * @var ObjectTypeResolverInterface
                      */
-                    $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
-                    return !in_array($typeInterfaceClass, $typeResolver->getAllImplementedInterfaceClasses());
+                    $objectTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
+                    return !in_array($typeInterfaceClass, $objectTypeResolver->getAllImplementedInterfaceClasses());
                 }
             );
             if ($notImplementingInterfaceTypeResolverClasses) {
@@ -290,15 +290,15 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
                         implode(
                             $this->translationAPI->__('\', \''),
                             array_map(
-                                function ($typeResolverClass) {
+                                function ($objectTypeResolverClass) {
                                     /**
-                                     * @var TypeResolverInterface
+                                     * @var ObjectTypeResolverInterface
                                      */
-                                    $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
+                                    $objectTypeResolver = $this->instanceManager->getInstance($objectTypeResolverClass);
                                     return sprintf(
                                         $this->translationAPI->__('%s (%s)'),
-                                        $typeResolver->getMaybeNamespacedTypeName(),
-                                        $typeResolverClass
+                                        $objectTypeResolver->getMaybeNamespacedTypeName(),
+                                        $objectTypeResolverClass
                                     );
                                 },
                                 $notImplementingInterfaceTypeResolverClasses
@@ -313,7 +313,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         return $typeResolverPickers;
     }
 
-    public function getTypeResolverClassForResultItem(string | int $resultItemID)
+    public function getObjectTypeResolverClassForResultItem(string | int $resultItemID)
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
@@ -321,18 +321,18 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         // Then, more specific implementations (eg: Organizations) must be queried before more general ones (eg: Communities)
         // This is not a problem by making the corresponding field processors inherit from each other, so that the more specific object also handles
         // the fields for the more general ones (eg: TypeResolver_OrganizationUsers extends TypeResolver_CommunityUsers, and TypeResolver_CommunityUsers extends UserTypeResolver)
-        foreach ($this->getTypeResolverPickers() as $maybePicker) {
+        foreach ($this->getObjectTypeResolverPickers() as $maybePicker) {
             if ($maybePicker->isIDOfType($resultItemID)) {
                 // Found it!
                 $typeResolverPicker = $maybePicker;
-                return $typeResolverPicker->getTypeResolverClass();
+                return $typeResolverPicker->getObjectTypeResolverClass();
             }
         }
 
         return null;
     }
 
-    public function getTargetTypeResolverPicker(object $resultItem): ?TypeResolverPickerInterface
+    public function getTargetObjectTypeResolverPicker(object $resultItem): ?ObjectTypeResolverPickerInterface
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
@@ -340,7 +340,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         // Then, more specific implementations (eg: Organizations) must be queried before more general ones (eg: Communities)
         // This is not a problem by making the corresponding field processors inherit from each other, so that the more specific object also handles
         // the fields for the more general ones (eg: TypeResolver_OrganizationUsers extends TypeResolver_CommunityUsers, and TypeResolver_CommunityUsers extends UserTypeResolver)
-        foreach ($this->getTypeResolverPickers() as $maybePicker) {
+        foreach ($this->getObjectTypeResolverPickers() as $maybePicker) {
             if ($maybePicker->isInstanceOfType($resultItem)) {
                 // Found it!
                 return $maybePicker;
@@ -349,15 +349,15 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         return null;
     }
 
-    public function getTargetTypeResolver(object $resultItem): ?TypeResolverInterface
+    public function getTargetObjectTypeResolver(object $resultItem): ?RelationalTypeResolverInterface
     {
-        if ($typeResolverPicker = $this->getTargetTypeResolverPicker($resultItem)) {
-            $typeResolverClass = $typeResolverPicker->getTypeResolverClass();
+        if ($typeResolverPicker = $this->getTargetObjectTypeResolverPicker($resultItem)) {
+            $objectTypeResolverClass = $typeResolverPicker->getObjectTypeResolverClass();
             /**
-             * @var TypeResolverInterface
+             * @var ObjectTypeResolverInterface
              */
-            $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
-            return $typeResolver;
+            $objectTypeResolver = $this->instanceManager->getInstance($objectTypeResolverClass);
+            return $objectTypeResolver;
         }
         return null;
     }
@@ -397,7 +397,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         array $options = []
     ): mixed {
         // Check that a typeResolver from this Union can process this resultItem, or return an arror
-        $targetTypeResolver = $this->getTargetTypeResolver($resultItem);
+        $targetTypeResolver = $this->getTargetObjectTypeResolver($resultItem);
         if (is_null($targetTypeResolver)) {
             return $this->getUnresolvedResultItemError($resultItem);
         }
@@ -428,8 +428,8 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         }
 
         // Iterate through the typeResolvers from all the pickers and get their schema definitions
-        foreach ($this->getTypeResolverPickers() as $picker) {
-            $pickerTypeResolver = $this->instanceManager->getInstance($picker->getTypeResolverClass());
+        foreach ($this->getObjectTypeResolverPickers() as $picker) {
+            $pickerTypeResolver = $this->instanceManager->getInstance($picker->getObjectTypeResolverClass());
             $pickerTypeSchemaDefinition = $pickerTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
             $pickerTypeName = $pickerTypeResolver->getMaybeNamespacedTypeName();
             $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_POSSIBLE_TYPES][$pickerTypeName] = $pickerTypeSchemaDefinition[$pickerTypeName];

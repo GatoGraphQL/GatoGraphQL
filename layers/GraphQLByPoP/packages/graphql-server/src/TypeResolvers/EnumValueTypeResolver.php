@@ -25,7 +25,7 @@ class EnumValueTypeResolver extends AbstractIntrospectionTypeResolver
         return $enumValue->getID();
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return SchemaDefinitionReferenceTypeDataLoader::class;
     }

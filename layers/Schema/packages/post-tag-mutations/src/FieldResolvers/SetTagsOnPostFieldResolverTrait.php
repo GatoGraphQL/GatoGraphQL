@@ -10,7 +10,7 @@ use PoPSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
 
 trait SetTagsOnPostFieldResolverTrait
 {
-    protected function getTypeResolverClass(): string
+    protected function getCustomPostTypeResolverClass(): string
     {
         return PostTypeResolver::class;
     }

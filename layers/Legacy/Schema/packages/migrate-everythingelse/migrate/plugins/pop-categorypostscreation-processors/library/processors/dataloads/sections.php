@@ -556,7 +556,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         return PostTypeResolver::class;
     }

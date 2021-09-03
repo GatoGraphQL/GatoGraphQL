@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait GlobalDirectiveResolverTrait
 {
@@ -13,11 +13,11 @@ trait GlobalDirectiveResolverTrait
     {
         // Be attached to all typeResolvers
         return [
-            AbstractTypeResolver::class,
+            AbstractRelationalTypeResolver::class,
         ];
     }
 
-    public function isGlobal(TypeResolverInterface $typeResolver): bool
+    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return true;
     }

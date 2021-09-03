@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\TypeResolverDecorators;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDirectivesForFieldsTrait;
 use PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators\ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait;
 
@@ -20,8 +20,8 @@ trait ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait
         AccessControlConfigurableMandatoryDirectivesForFieldsTrait::getFieldNames insteadof ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait;
     }
 
-    public function enabled(TypeResolverInterface $typeResolver): bool
+    public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        return parent::enabled($typeResolver) && !empty($this->getConfigurationEntries());
+        return parent::enabled($relationalTypeResolver) && !empty($this->getConfigurationEntries());
     }
 }

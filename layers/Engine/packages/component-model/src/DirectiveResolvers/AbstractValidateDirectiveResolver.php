@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -30,7 +30,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     }
 
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -51,11 +51,11 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $this->validateAndFilterFields($typeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $dbItems, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->validateAndFilterFields($relationalTypeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $dbItems, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
     }
 
     protected function validateAndFilterFields(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$dbItems,
@@ -74,7 +74,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $data_fields['direct']
             )));
         }
-        $this->validateFields($typeResolver, $dataFields, $schemaErrors, $schemaWarnings, $schemaDeprecations, $variables, $failedDataFields);
+        $this->validateFields($relationalTypeResolver, $dataFields, $schemaErrors, $schemaWarnings, $schemaDeprecations, $variables, $failedDataFields);
 
         // Remove from the data_fields list to execute on the resultItem for the next stages of the pipeline
         if ($failedDataFields) {
@@ -91,7 +91,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
             );
             if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
                 $this->setIDsDataFieldsAsNull(
-                    $typeResolver,
+                    $relationalTypeResolver,
                     $idsDataFieldsToRemove,
                     $dbItems
                 );
@@ -104,10 +104,10 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         // // Because on the leaves we encounter an empty array, all fields are conditional fields (even if they are on the leaves)
         // foreach ($idsDataFields as $id => $data_fields) {
         //     foreach ($data_fields['conditional'] as $conditionField => $conditionalFields) {
-        //         $this->validateAndFilterConditionalFields($typeResolver, $conditionField, $idsDataFields[$id]['conditional'], $dataFields, $schemaErrors, $schemaWarnings, $schemaDeprecations, $variables, $failedDataFields);
+        //         $this->validateAndFilterConditionalFields($relationalTypeResolver, $conditionField, $idsDataFields[$id]['conditional'], $dataFields, $schemaErrors, $schemaWarnings, $schemaDeprecations, $variables, $failedDataFields);
         //     }
         // }
     }
 
-    abstract protected function validateFields(TypeResolverInterface $typeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void;
+    abstract protected function validateFields(RelationalTypeResolverInterface $relationalTypeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void;
 }

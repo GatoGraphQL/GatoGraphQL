@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait IndividualFieldResolverTrait
 {
@@ -7,15 +7,15 @@ trait IndividualFieldResolverTrait
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessResultItem(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
         $user = $resultItem;
-        if (!gdUreIsIndividual($typeResolver->getID($user))) {
+        if (!gdUreIsIndividual($relationalTypeResolver->getID($user))) {
             return false;
         }
-        return parent::resolveCanProcessResultItem($typeResolver, $resultItem, $fieldName, $fieldArgs);
+        return parent::resolveCanProcessResultItem($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs);
     }
 }

@@ -11,7 +11,7 @@ use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Misc\Extract;
 
 class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
@@ -41,7 +41,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'if' => SchemaDefinition::TYPE_MIXED,
@@ -58,10 +58,10 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             'echo' => SchemaDefinition::TYPE_MIXED,
             'sprintf' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'not':
@@ -75,10 +75,10 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             case 'sprintf':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'if' => $this->translationAPI->__('If a boolean property is true, execute a field, else, execute another field', 'component-model'),
@@ -95,12 +95,12 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             'echo' => $this->translationAPI->__('Repeat back the input, whatever it is', 'function-fields'),
             'sprintf' => $this->translationAPI->__('Replace placeholders inside a string with provided values', 'function-fields'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'if':
                 return array_merge(
@@ -271,7 +271,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
     }
 
     protected function doResolveSchemaValidationErrorDescriptions(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,
         array $fieldArgs = []
     ): ?array {
@@ -295,7 +295,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             }
         }
 
-        return parent::doResolveSchemaValidationErrorDescriptions($typeResolver, $fieldName, $fieldArgs);
+        return parent::doResolveSchemaValidationErrorDescriptions($relationalTypeResolver, $fieldName, $fieldArgs);
     }
 
     protected function getSafeVars()
@@ -317,7 +317,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -378,6 +378,6 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                 }
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

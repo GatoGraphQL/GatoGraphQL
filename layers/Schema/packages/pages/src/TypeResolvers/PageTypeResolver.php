@@ -22,22 +22,22 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
         protected PageTypeAPIInterface $pageTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
             $hooksAPI,
             $instanceManager,
+            $schemaNamespacingService,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
             $schemaDefinitionService,
-            $schemaNamespacingService,
         );
     }
 
@@ -57,7 +57,7 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
         return $this->pageTypeAPI->getPageId($page);
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return PageTypeDataLoader::class;
     }

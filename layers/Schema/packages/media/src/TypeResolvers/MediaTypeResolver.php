@@ -10,34 +10,34 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeDataLoaders\MediaTypeDataLoader;
 
-class MediaTypeResolver extends AbstractTypeResolver
+class MediaTypeResolver extends AbstractObjectTypeResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
         protected MediaTypeAPIInterface $mediaTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
             $hooksAPI,
             $instanceManager,
+            $schemaNamespacingService,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
             $schemaDefinitionService,
-            $schemaNamespacingService,
         );
     }
 
@@ -57,7 +57,7 @@ class MediaTypeResolver extends AbstractTypeResolver
         return $this->mediaTypeAPI->getMediaItemID($media);
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return MediaTypeDataLoader::class;
     }

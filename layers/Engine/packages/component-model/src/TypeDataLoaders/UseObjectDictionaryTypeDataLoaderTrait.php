@@ -11,17 +11,17 @@ trait UseObjectDictionaryTypeDataLoaderTrait
     public function getObjects(array $ids): array
     {
         $objectDictionary = ObjectDictionaryFacade::getInstance();
-        $typeResolverClass = $this->getTypeResolverClass();
+        $objectTypeResolverClass = $this->getObjectTypeResolverClass();
         $ret = [];
         foreach ($ids as $id) {
-            if (!$objectDictionary->has($typeResolverClass, $id)) {
-                $objectDictionary->set($typeResolverClass, $id, $this->getTypeNewInstance($id));
+            if (!$objectDictionary->has($objectTypeResolverClass, $id)) {
+                $objectDictionary->set($objectTypeResolverClass, $id, $this->getObjectTypeNewInstance($id));
             }
-            $ret[] = $objectDictionary->get($typeResolverClass, $id);
+            $ret[] = $objectDictionary->get($objectTypeResolverClass, $id);
         }
         return $ret;
     }
 
-    abstract protected function getTypeResolverClass(): string;
-    abstract protected function getTypeNewInstance(int | string $id);
+    abstract protected function getObjectTypeResolverClass(): string;
+    abstract protected function getObjectTypeNewInstance(int | string $id);
 }

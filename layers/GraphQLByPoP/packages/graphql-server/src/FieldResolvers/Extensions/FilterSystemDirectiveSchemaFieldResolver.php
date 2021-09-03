@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\Extensions;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveTypeEnum;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\SchemaTypeResolver;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\SchemaFieldResolver;
@@ -37,22 +37,22 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
     //  * Only use this fieldResolver when parameter `ofTypes` is provided.
     //  * Otherwise, use the default implementation
     //  */
-    // public function resolveCanProcess(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool
+    // public function resolveCanProcess(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): bool
     // {
     //     return $fieldName == 'directives' && isset($fieldArgs['ofTypes']);
     // }
 
-    // public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    // public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     // {
     //     $descriptions = [
     //         'directives' => $this->translationAPI->__('All directives registered in the data graph, allowing to remove the system directives', 'graphql-api'),
     //     ];
-    //     return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+    //     return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     // }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'directives':
                 /**
@@ -86,7 +86,7 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -137,6 +137,6 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
                 return $directiveIDs;
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

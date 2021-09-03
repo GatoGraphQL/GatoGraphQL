@@ -6,7 +6,7 @@ namespace PoPSchema\UserState\FieldResolvers;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 
 trait UserStateFieldResolverTrait
@@ -16,7 +16,7 @@ trait UserStateFieldResolverTrait
      * @return array<array>|null A checkpoint set, or null
      */
     protected function getValidationCheckpoints(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -30,7 +30,7 @@ trait UserStateFieldResolverTrait
     protected function getValidationCheckpointsErrorMessage(
         Error $error,
         string $errorMessage,
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -39,7 +39,7 @@ trait UserStateFieldResolverTrait
         return sprintf(
             $translationAPI->__('You must be logged in to access field \'%s\' for type \'%s\'', ''),
             $fieldName,
-            $typeResolver->getMaybeNamespacedTypeName()
+            $relationalTypeResolver->getMaybeNamespacedTypeName()
         );
     }
 }

@@ -4,7 +4,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
@@ -24,16 +24,16 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
 			'contentClipped' => SchemaDefinition::TYPE_STRING,
             'replycommentURL' => SchemaDefinition::TYPE_URL,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'contentClipped',
@@ -41,17 +41,17 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
 			'contentClipped' => $translationAPI->__('', ''),
             'replycommentURL' => $translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -61,7 +61,7 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -72,14 +72,14 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
         $comment = $resultItem;
         switch ($fieldName) {
             case 'contentClipped':
-                $content = $typeResolver->resolveValue($resultItem, 'content', $variables, $expressions, $options);
+                $content = $relationalTypeResolver->resolveValue($resultItem, 'content', $variables, $expressions, $options);
                 if (GeneralUtils::isError($content)) {
                     return $content;
                 }
                 return limitString(strip_tags($content), 250);
 
             case 'replycommentURL':
-                $customPostID = $typeResolver->resolveValue($resultItem, 'customPostID', $variables, $expressions, $options);
+                $customPostID = $relationalTypeResolver->resolveValue($resultItem, 'customPostID', $variables, $expressions, $options);
                 if (GeneralUtils::isError($customPostID)) {
                     return null;
                 }
@@ -88,11 +88,11 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
                 $comment_name = $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT])->getName([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT]);
                 return GeneralUtils::addQueryArgs([
                     $post_name => $customPostID,
-                    $comment_name => $typeResolver->getID($comment),
+                    $comment_name => $relationalTypeResolver->getID($comment),
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

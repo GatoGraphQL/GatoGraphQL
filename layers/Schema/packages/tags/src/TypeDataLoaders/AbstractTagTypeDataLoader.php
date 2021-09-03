@@ -32,7 +32,7 @@ abstract class AbstractTagTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = []): array
     {
-        $tagTypeAPI = $this->getTypeAPI();
+        $tagTypeAPI = $this->getTagTypeAPI();
         return $tagTypeAPI->getTags($query, $options);
     }
 

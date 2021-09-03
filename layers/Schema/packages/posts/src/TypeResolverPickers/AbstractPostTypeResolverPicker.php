@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\TypeResolverPickers;
 
-use PoP\ComponentModel\TypeResolverPickers\AbstractTypeResolverPicker;
+use PoP\ComponentModel\TypeResolverPickers\AbstractObjectTypeResolverPicker;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
-abstract class AbstractPostTypeResolverPicker extends AbstractTypeResolverPicker
+abstract class AbstractPostTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    public function getTypeResolverClass(): string
+    public function getObjectTypeResolverClass(): string
     {
         return PostTypeResolver::class;
     }

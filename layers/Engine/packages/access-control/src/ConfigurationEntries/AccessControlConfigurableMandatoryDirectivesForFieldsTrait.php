@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\AccessControl\ConfigurationEntries;
 
 use PoP\AccessControl\ComponentConfiguration;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
 trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
@@ -20,7 +20,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
      */
     final protected function getMatchingEntries(
         array $entryList,
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
     ): array {
@@ -33,12 +33,12 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
         if (!ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode()) {
             return $this->getUpstreamMatchingEntries(
                 $entryList,
-                $typeResolver,
+                $relationalTypeResolver,
                 $fieldInterfaceResolverClasses,
                 $fieldName
             );
         }
-        $typeResolverClass = get_class($typeResolver);
+        $typeResolverClass = get_class($relationalTypeResolver);
         $individualControlSchemaMode = $this->getSchemaMode();
         $matchNullControlEntry = $this->doesSchemaModeProcessNullControlEntry();
         return array_filter(

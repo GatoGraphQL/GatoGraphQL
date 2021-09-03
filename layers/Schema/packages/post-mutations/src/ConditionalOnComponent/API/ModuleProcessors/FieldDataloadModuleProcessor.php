@@ -25,7 +25,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         );
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
@@ -33,7 +33,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
                 return PostTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

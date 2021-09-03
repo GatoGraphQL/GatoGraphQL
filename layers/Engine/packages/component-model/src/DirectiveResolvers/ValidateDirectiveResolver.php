@@ -8,7 +8,7 @@ use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterfa
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -41,34 +41,34 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         return PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE;
     }
 
-    protected function validateFields(TypeResolverInterface $typeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void
+    protected function validateFields(RelationalTypeResolverInterface $relationalTypeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void
     {
         foreach ($dataFields as $field) {
-            $success = $this->validateField($typeResolver, $field, $schemaErrors, $schemaWarnings, $schemaDeprecations, $variables);
+            $success = $this->validateField($relationalTypeResolver, $field, $schemaErrors, $schemaWarnings, $schemaDeprecations, $variables);
             if (!$success) {
                 $failedDataFields[] = $field;
             }
         }
     }
 
-    protected function validateField(TypeResolverInterface $typeResolver, string $field, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables): bool
+    protected function validateField(RelationalTypeResolverInterface $relationalTypeResolver, string $field, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables): bool
     {
         // Check for errors first, warnings and deprecations then
         $success = true;
-        if ($schemaValidationErrors = $typeResolver->resolveSchemaValidationErrorDescriptions($field, $variables)) {
+        if ($schemaValidationErrors = $relationalTypeResolver->resolveSchemaValidationErrorDescriptions($field, $variables)) {
             $schemaErrors = array_merge(
                 $schemaErrors,
                 $schemaValidationErrors
             );
             $success = false;
         }
-        if ($schemaValidationWarnings = $typeResolver->resolveSchemaValidationWarningDescriptions($field, $variables)) {
+        if ($schemaValidationWarnings = $relationalTypeResolver->resolveSchemaValidationWarningDescriptions($field, $variables)) {
             $schemaWarnings = array_merge(
                 $schemaWarnings,
                 $schemaValidationWarnings
             );
         }
-        if ($schemaValidationDeprecations = $typeResolver->resolveSchemaDeprecationDescriptions($field, $variables)) {
+        if ($schemaValidationDeprecations = $relationalTypeResolver->resolveSchemaDeprecationDescriptions($field, $variables)) {
             $schemaDeprecations = array_merge(
                 $schemaDeprecations,
                 $schemaValidationDeprecations
@@ -77,7 +77,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         return $success;
     }
 
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('It validates the field, filtering out those field arguments that raised a warning, or directly invalidating the field if any field argument raised an error. For instance, if a mandatory field argument is not provided, then it is an error and the field is invalidated and removed from the output; if a field argument can\'t be casted to its intended type, then it is a warning, the affected field argument is removed and the field is executed without it. This directive is already included by the engine, since its execution is mandatory', 'component-model');
     }

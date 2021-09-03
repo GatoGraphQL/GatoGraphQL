@@ -16,8 +16,8 @@ class SchemaDefinitionService extends ComponentModelSchemaDefinitionService impl
 
     public function getTypeResolverTypeSchemaKey(string $typeResolverClass): string
     {
-        $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
-        return $this->getTypeSchemaKey($typeResolver);
+        $relationalTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
+        return $this->getTypeSchemaKey($relationalTypeResolver);
     }
 
     public function getRootTypeSchemaKey(): string

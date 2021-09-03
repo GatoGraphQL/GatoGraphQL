@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\TypeResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
 use PoPSchema\Highlights\TypeDataLoaders\HighlightTypeDataLoader;
 
-class HighlightTypeResolver extends AbstractTypeResolver
+class HighlightTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {
@@ -26,7 +26,7 @@ class HighlightTypeResolver extends AbstractTypeResolver
         return $highlightTypeAPI->getID($resultItem);
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return HighlightTypeDataLoader::class;
     }

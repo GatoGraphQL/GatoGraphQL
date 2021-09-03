@@ -72,7 +72,7 @@ class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Proces
         return $format ?? parent::getFormat($module);
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_TABLE_EDIT:
@@ -81,7 +81,7 @@ class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Proces
                 return LocationPostTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props): void

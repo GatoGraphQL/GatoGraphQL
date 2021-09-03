@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers;
 
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldResolvers\AbstractCustomPostListFieldResolver;
 
 class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolver
@@ -15,7 +15,7 @@ class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolve
         return array(UserTypeResolver::class);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'customPosts' => $this->translationAPI->__('Custom posts by the user', 'pop-users'),
@@ -23,7 +23,7 @@ class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolve
             'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts by the user', 'pop-users'),
             'customPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts by the user', 'pop-users'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -31,12 +31,12 @@ class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolve
      * @return array<string, mixed>
      */
     protected function getQuery(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $query = parent::getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
+        $query = parent::getQuery($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs);
 
         $user = $resultItem;
         switch ($fieldName) {
@@ -44,7 +44,7 @@ class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolve
             case 'customPostCount':
             case 'customPostsForAdmin':
             case 'customPostCountForAdmin':
-                $query['authors'] = [$typeResolver->getID($user)];
+                $query['authors'] = [$relationalTypeResolver->getID($user)];
                 break;
         }
 

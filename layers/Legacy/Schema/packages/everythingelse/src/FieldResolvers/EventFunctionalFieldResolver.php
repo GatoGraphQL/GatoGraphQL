@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 
@@ -30,33 +30,33 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'multilayoutKeys' => SchemaDefinition::TYPE_STRING,
             'latestcountsTriggerValues' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'multilayoutKeys',
             'latestcountsTriggerValues'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'multilayoutKeys' => $this->translationAPI->__('', ''),
             'latestcountsTriggerValues' => $this->translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -66,7 +66,7 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -79,27 +79,27 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         switch ($fieldName) {
             case 'multilayoutKeys':
                 // Override the "post" implementation: instead of depending on categories, depend on the scope of the event (future/current/past)
-                $scope = $typeResolver->resolveValue($event, 'scope', $variables, $expressions, $options);
+                $scope = $relationalTypeResolver->resolveValue($event, 'scope', $variables, $expressions, $options);
                 if (GeneralUtils::isError($scope)) {
                     return $scope;
                 }
-                $type = strtolower($typeResolver->getTypeName());
+                $type = strtolower($relationalTypeResolver->getTypeName());
                 return array(
                     $type . '-' . $scope,
                     $type,
                 );
 
             case 'latestcountsTriggerValues':
-                $scope = $typeResolver->resolveValue($event, 'scope', $variables, $expressions, $options);
+                $scope = $relationalTypeResolver->resolveValue($event, 'scope', $variables, $expressions, $options);
                 if (GeneralUtils::isError($scope)) {
                     return $scope;
                 }
-                $type = strtolower($typeResolver->getTypeName());
+                $type = strtolower($relationalTypeResolver->getTypeName());
                 return array(
                     $type . '-' . $scope,
                 );
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

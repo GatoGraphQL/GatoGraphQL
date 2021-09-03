@@ -115,7 +115,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT:
@@ -123,7 +123,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
                 return UserTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     protected function getCheckpointmessageModule(array $module)

@@ -3,7 +3,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -27,23 +27,23 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
 			'printURL' => SchemaDefinition::TYPE_URL,
             'embedURL' => SchemaDefinition::TYPE_URL,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
 			'printURL' => $translationAPI->__('', ''),
             'embedURL' => $translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -53,7 +53,7 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -63,15 +63,15 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
     ): mixed {
         switch ($fieldName) {
             case 'printURL':
-                $url = $typeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options);
+                $url = $relationalTypeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options);
                 return PoP_Application_Engine_Utils::getPrintUrl($url);
 
             case 'embedURL':
-                $url = $typeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options);
+                $url = $relationalTypeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options);
                 return PoP_Application_Engine_Utils::getEmbedUrl($url);
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

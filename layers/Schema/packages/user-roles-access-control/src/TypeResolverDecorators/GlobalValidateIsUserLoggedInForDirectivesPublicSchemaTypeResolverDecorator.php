@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl\TypeResolverDecorators;
 
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoPSchema\UserStateAccessControl\TypeResolverDecorators\AbstractValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolverDecorator;
 use PoPSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
 use PoPSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver;
@@ -14,7 +14,7 @@ class GlobalValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolverDecorator
     public function getClassesToAttachTo(): array
     {
         return array(
-            AbstractTypeResolver::class,
+            AbstractRelationalTypeResolver::class,
         );
     }
 

@@ -65,7 +65,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
@@ -74,7 +74,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
                 return NotificationTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props): void

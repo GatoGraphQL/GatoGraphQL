@@ -7,8 +7,8 @@ namespace PoPSchema\UserStateAccessControl\ConditionalOnComponent\CacheControl\T
 use PoP\CacheControl\Helpers\CacheControlHelper;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolverDecorators\AbstractTypeResolverDecorator;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInDirectiveResolver;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInDirectiveResolver;
@@ -19,14 +19,14 @@ class NoCacheUserStateTypeResolverDecorator extends AbstractTypeResolverDecorato
     public function getClassesToAttachTo(): array
     {
         return array(
-            AbstractTypeResolver::class,
+            AbstractRelationalTypeResolver::class,
         );
     }
 
     /**
      * If validating if the user is logged-in, then we can't cache the response
      */
-    public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
+    public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $noCacheControlDirective = CacheControlHelper::getNoCacheDirective();
         /** @var DirectiveResolverInterface */

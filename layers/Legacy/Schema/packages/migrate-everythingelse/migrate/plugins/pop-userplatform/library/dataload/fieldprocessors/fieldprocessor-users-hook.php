@@ -2,7 +2,7 @@
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
@@ -30,7 +30,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'shortDescription' => SchemaDefinition::TYPE_STRING,
@@ -45,10 +45,10 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
             'instagram' => SchemaDefinition::TYPE_URL,
             'isProfile' => SchemaDefinition::TYPE_BOOL,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'isProfile',
@@ -56,10 +56,10 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -75,7 +75,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
             'instagram' => $translationAPI->__('', ''),
             'isProfile' => $translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -85,7 +85,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -97,19 +97,19 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
 
         switch ($fieldName) {
             case 'shortDescription':
-                return gdGetUserShortdescription($typeResolver->getID($user));
+                return gdGetUserShortdescription($relationalTypeResolver->getID($user));
 
             case 'title':
-                return \PoPSchema\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_TITLE, true);
+                return \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_METAKEY_PROFILE_TITLE, true);
 
             case 'displayEmail':
-                return (bool)\PoPSchema\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_DISPLAYEMAIL, true);
+                return (bool)\PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_METAKEY_PROFILE_DISPLAYEMAIL, true);
 
          // Override
             case 'contact':
                 $value = array();
                 // This one is a quasi copy/paste from the typeResolver
-                if ($user_url = $typeResolver->resolveValue($user, 'websiteURL', $variables, $expressions, $options)) {
+                if ($user_url = $relationalTypeResolver->resolveValue($user, 'websiteURL', $variables, $expressions, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('Website', 'pop-coreprocessors'),
                         'url' => maybeAddHttp($user_url),
@@ -118,8 +118,8 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
                         'fontawesome' => 'fa-home',
                     );
                 }
-                if ($typeResolver->resolveValue($user, 'displayEmail', $variables, $expressions, $options)) {
-                    if ($email = $typeResolver->resolveValue($user, 'email', $variables, $expressions, $options)) {
+                if ($relationalTypeResolver->resolveValue($user, 'displayEmail', $variables, $expressions, $options)) {
+                    if ($email = $relationalTypeResolver->resolveValue($user, 'email', $variables, $expressions, $options)) {
                         $value[] = array(
                             'fontawesome' => 'fa-envelope',
                             'tooltip' => TranslationAPIFacade::getInstance()->__('Email', 'pop-coreprocessors'),
@@ -128,7 +128,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
                         );
                     }
                 }
-                // if ($blog = $typeResolver->resolveValue($user, 'blog', $variables, $expressions, $options)) {
+                // if ($blog = $relationalTypeResolver->resolveValue($user, 'blog', $variables, $expressions, $options)) {
 
                 //     $value[] = array(
                 //         'tooltip' => TranslationAPIFacade::getInstance()->__('Blog', 'poptheme-wassup'),
@@ -138,7 +138,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
                 //         'fontawesome' => 'fa-pencil',
                 //     );
                 // }
-                if ($facebook = $typeResolver->resolveValue($user, 'facebook', $variables, $expressions, $options)) {
+                if ($facebook = $relationalTypeResolver->resolveValue($user, 'facebook', $variables, $expressions, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('Facebook', 'poptheme-wassup'),
                         'fontawesome' => 'fa-facebook',
@@ -147,7 +147,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
                         'target' => '_blank'
                     );
                 }
-                if ($twitter = $typeResolver->resolveValue($user, 'twitter', $variables, $expressions, $options)) {
+                if ($twitter = $relationalTypeResolver->resolveValue($user, 'twitter', $variables, $expressions, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('Twitter', 'poptheme-wassup'),
                         'fontawesome' => 'fa-twitter',
@@ -156,7 +156,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
                         'target' => '_blank'
                     );
                 }
-                if ($linkedin = $typeResolver->resolveValue($user, 'linkedin', $variables, $expressions, $options)) {
+                if ($linkedin = $relationalTypeResolver->resolveValue($user, 'linkedin', $variables, $expressions, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('LinkedIn', 'poptheme-wassup'),
                         'url' => maybeAddHttp($linkedin),
@@ -165,7 +165,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
                         'fontawesome' => 'fa-linkedin'
                     );
                 }
-                if ($youtube = $typeResolver->resolveValue($user, 'youtube', $variables, $expressions, $options)) {
+                if ($youtube = $relationalTypeResolver->resolveValue($user, 'youtube', $variables, $expressions, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('Youtube', 'poptheme-wassup'),
                         'url' => maybeAddHttp($youtube),
@@ -174,7 +174,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
                         'fontawesome' => 'fa-youtube',
                     );
                 }
-                if ($instagram = $typeResolver->resolveValue($user, 'instagram', $variables, $expressions, $options)) {
+                if ($instagram = $relationalTypeResolver->resolveValue($user, 'instagram', $variables, $expressions, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('Instagram', 'poptheme-wassup'),
                         'url' => maybeAddHttp($instagram),
@@ -186,29 +186,29 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
                 return $value;
 
             case 'hasContact':
-                $contact = $typeResolver->resolveValue($resultItem, 'contact', $variables, $expressions, $options);
+                $contact = $relationalTypeResolver->resolveValue($resultItem, 'contact', $variables, $expressions, $options);
                 return !empty($contact);
 
             case 'facebook':
-                return \PoPSchema\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_FACEBOOK, true);
+                return \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_METAKEY_PROFILE_FACEBOOK, true);
 
             case 'twitter':
-                return \PoPSchema\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_TWITTER, true);
+                return \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_METAKEY_PROFILE_TWITTER, true);
 
             case 'linkedin':
-                return \PoPSchema\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_LINKEDIN, true);
+                return \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_METAKEY_PROFILE_LINKEDIN, true);
 
             case 'youtube':
-                return \PoPSchema\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_YOUTUBE, true);
+                return \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_METAKEY_PROFILE_YOUTUBE, true);
 
             case 'instagram':
-                return \PoPSchema\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_INSTAGRAM, true);
+                return \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_METAKEY_PROFILE_INSTAGRAM, true);
 
             case 'isProfile':
-                return isProfile($typeResolver->getID($user));
+                return isProfile($relationalTypeResolver->getID($user));
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

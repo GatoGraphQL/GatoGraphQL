@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
 {
@@ -22,7 +22,7 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
             'typeName' => SchemaDefinition::TYPE_STRING,
@@ -31,10 +31,10 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
             'isType' => SchemaDefinition::TYPE_BOOL,
             'implements' => SchemaDefinition::TYPE_BOOL,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'typeName':
@@ -44,10 +44,10 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
             case 'implements':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'typeName' => $this->translationAPI->__('The object\'s type', 'pop-component-model'),
@@ -56,12 +56,12 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
             'isType' => $this->translationAPI->__('Indicate if the object is of a given type', 'pop-component-model'),
             'implements' => $this->translationAPI->__('Indicate if the object implements a given interface', 'pop-component-model'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'isType':
                 return array_merge(
@@ -100,7 +100,7 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -110,11 +110,11 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'typeName':
-                return $typeResolver->getTypeName();
+                return $relationalTypeResolver->getTypeName();
             case 'namespace':
-                return $typeResolver->getNamespace();
+                return $relationalTypeResolver->getNamespace();
             case 'qualifiedTypeName':
-                return $typeResolver->getNamespacedTypeName();
+                return $relationalTypeResolver->getNamespacedTypeName();
             case 'isType':
                 $typeName = $fieldArgs['type'];
                 // If the provided typeName contains the namespace separator, then compare by qualifiedType
@@ -122,7 +122,7 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
                     /**
                      * @todo Replace the code below with:
                      *
-                     *     return $typeName == $typeResolver->getNamespacedTypeName();
+                     *     return $typeName == $relationalTypeResolver->getNamespacedTypeName();
                      *
                      * Currently, because the GraphQL spec doesn't support namespaces,
                      * we are using "_" as the namespace separator, instead of "/".
@@ -133,13 +133,13 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
                      * @see https://github.com/graphql/graphql-spec/issues/163
                      */
                     return
-                        $typeName == $typeResolver->getNamespacedTypeName()
-                        || $typeName == $typeResolver->getTypeName();
+                        $typeName == $relationalTypeResolver->getNamespacedTypeName()
+                        || $typeName == $relationalTypeResolver->getTypeName();
                 }
-                return $typeName == $typeResolver->getTypeName();
+                return $typeName == $relationalTypeResolver->getTypeName();
             case 'implements':
                 $interface = $fieldArgs['interface'];
-                $implementedInterfaceResolverInstances = $typeResolver->getAllImplementedInterfaceResolverInstances();
+                $implementedInterfaceResolverInstances = $relationalTypeResolver->getAllImplementedInterfaceResolverInstances();
                 // If the provided interface contains the namespace separator, then compare by qualifiedInterface
                 $useNamespaced = str_contains($interface, SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR);
                 $implementedInterfaceNames = array_map(
@@ -181,6 +181,6 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
                 return in_array($interface, $implementedInterfaceNames);
         }
 
-        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

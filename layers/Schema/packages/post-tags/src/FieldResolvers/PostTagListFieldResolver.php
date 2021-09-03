@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 
@@ -15,7 +15,7 @@ class PostTagListFieldResolver extends AbstractPostFieldResolver
         return array(PostTagTypeResolver::class);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'posts' => $this->translationAPI->__('Posts which contain this tag', 'pop-taxonomies'),
@@ -23,7 +23,7 @@ class PostTagListFieldResolver extends AbstractPostFieldResolver
             'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts which contain this tag', 'pop-taxonomies'),
             'postCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of posts which contain this tag', 'pop-taxonomies'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -31,12 +31,12 @@ class PostTagListFieldResolver extends AbstractPostFieldResolver
      * @return array<string, mixed>
      */
     protected function getQuery(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $query = parent::getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
+        $query = parent::getQuery($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs);
 
         $tag = $resultItem;
         switch ($fieldName) {
@@ -44,7 +44,7 @@ class PostTagListFieldResolver extends AbstractPostFieldResolver
             case 'postCount':
             case 'postsForAdmin':
             case 'postCountForAdmin':
-                $query['tag-ids'] = [$typeResolver->getID($tag)];
+                $query['tag-ids'] = [$relationalTypeResolver->getID($tag)];
                 break;
         }
 

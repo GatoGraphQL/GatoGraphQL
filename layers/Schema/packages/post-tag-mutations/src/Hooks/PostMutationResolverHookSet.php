@@ -12,7 +12,7 @@ use PoPSchema\PostTagMutations\Facades\PostTagTypeMutationAPIFacade;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
-    protected function getTypeResolverClass(): string
+    protected function getCustomPostTypeResolverClass(): string
     {
         return PostTypeResolver::class;
     }

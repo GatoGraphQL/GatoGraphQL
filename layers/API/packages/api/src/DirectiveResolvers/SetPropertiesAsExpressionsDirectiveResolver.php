@@ -7,7 +7,7 @@ namespace PoP\API\DirectiveResolvers;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -33,17 +33,17 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
         return true;
     }
 
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Extract a property from the current object, and set it as a expression, so it can be accessed by fieldResolvers', 'component-model');
     }
 
-    public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Use directive `getSelfProp` together with field `extract` instead', 'component-model');
     }
 
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             [
@@ -65,9 +65,9 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
     /**
      * Validate that the number of elements in the fields `properties` and `expressions` match one another
      */
-    public function validateDirectiveArgumentsForSchema(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
+    public function validateDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
-        $directiveArgs = parent::validateDirectiveArgumentsForSchema($typeResolver, $directiveName, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $directiveArgs = parent::validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
         if (isset($directiveArgs['expressions'])) {
             $expressionsName = $directiveArgs['expressions'];
@@ -102,7 +102,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
      * Copy the data under the relational object into the current object
      */
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -126,7 +126,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
         // Send a message to the resolveAndMerge directive, indicating which properties to retrieve
         $properties = $this->directiveArgsForSchema['properties'];
         $expressionNames = $this->directiveArgsForSchema['expressions'] ?? $properties;
-        $dbKey = $typeResolver->getTypeOutputName();
+        $dbKey = $relationalTypeResolver->getTypeOutputName();
         foreach (array_keys($idsDataFields) as $id) {
             for ($i = 0; $i < count($properties); $i++) {
                 // Validate that the property exists in the source object, either on this iteration or any previous one

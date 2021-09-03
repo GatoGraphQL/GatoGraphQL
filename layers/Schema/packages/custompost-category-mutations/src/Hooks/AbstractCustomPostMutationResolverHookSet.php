@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostCategoryMutations\Hooks;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
+use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
+use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
@@ -33,12 +34,12 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 
     public function maybeAddSchemaFieldArgs(
         array $fieldArgs,
-        TypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,
         ?string $entityTypeResolverClass
     ): array {
         // Only for the specific CPT
-        if ($entityTypeResolverClass !== $this->getTypeResolverClass()) {
+        if ($entityTypeResolverClass !== $this->getCustomPostTypeResolverClass()) {
             return $fieldArgs;
         }
         $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
@@ -56,7 +57,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         return $fieldArgs;
     }
 
-    abstract protected function getTypeResolverClass(): string;
+    abstract protected function getCustomPostTypeResolverClass(): string;
     abstract protected function getCategoryTypeResolverClass(): string;
 
     public function maybeSetCategories(int | string $customPostID, array $form_data): void

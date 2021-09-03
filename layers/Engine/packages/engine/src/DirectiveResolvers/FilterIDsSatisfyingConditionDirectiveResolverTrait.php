@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
 
 trait FilterIDsSatisfyingConditionDirectiveResolverTrait
 {
     use RemoveIDsDataFieldsDirectiveResolverTrait;
 
-    protected function getIdsSatisfyingCondition(TypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations)
+    protected function getIdsSatisfyingCondition(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations)
     {
         // Check the condition field. If it is satisfied, then skip those fields
         $idsSatisfyingCondition = [];
@@ -23,7 +23,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
                 $resultItemValidDirective,
                 $resultItemDirectiveName,
                 $resultItemDirectiveArgs
-            ) = $this->dissectAndValidateDirectiveForResultItem($typeResolver, $resultItem, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
+            ) = $this->dissectAndValidateDirectiveForResultItem($relationalTypeResolver, $resultItem, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
             // Check that the directive is valid. If it is not, $dbErrors will have the error already added
             if (is_null($resultItemValidDirective)) {
                 continue;
