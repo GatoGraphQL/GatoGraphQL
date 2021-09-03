@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\RelationalTypeDataLoaders;
 
-use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractTypeQueryableDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
+class UserTypeDataLoader extends AbstractRelationalTypeQueryableDataLoader
 {
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {

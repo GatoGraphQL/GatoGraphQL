@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\RelationalTypeDataLoaders;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractTypeQueryableDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeQueryableDataLoader;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoPSchema\Comments\Constants\CommentStatus;
@@ -14,7 +14,7 @@ use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
+class CommentTypeDataLoader extends AbstractRelationalTypeQueryableDataLoader
 {
     public function __construct(
         HooksAPIInterface $hooksAPI,
