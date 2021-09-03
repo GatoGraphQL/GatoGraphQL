@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\RelationalTypeDataLoaders;
 
-use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractTypeDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeDataLoader;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 
-class MenuTypeDataLoader extends AbstractTypeDataLoader
+class MenuTypeDataLoader extends AbstractRelationalTypeDataLoader
 {
     public function getObjects(array $ids): array
     {

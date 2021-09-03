@@ -6,11 +6,11 @@ namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\SchemaTypeResolver;
-use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractTypeDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeDataLoader;
 use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use PoP\ComponentModel\RelationalTypeDataLoaders\UseObjectDictionaryTypeDataLoaderTrait;
 
-class SchemaTypeDataLoader extends AbstractTypeDataLoader
+class SchemaTypeDataLoader extends AbstractRelationalTypeDataLoader
 {
     use UseObjectDictionaryTypeDataLoaderTrait;
 

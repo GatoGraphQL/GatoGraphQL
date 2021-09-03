@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\RelationalTypeDataLoaders;
 
-use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractTypeDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeDataLoader;
 
-class UserRoleTypeDataLoader extends AbstractTypeDataLoader
+class UserRoleTypeDataLoader extends AbstractRelationalTypeDataLoader
 {
     public function getObjects(array $ids): array
     {

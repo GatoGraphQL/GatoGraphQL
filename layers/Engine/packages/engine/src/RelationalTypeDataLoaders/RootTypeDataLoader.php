@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\Engine\RelationalTypeDataLoaders;
 
 use PoP\Engine\ObjectFacades\RootObjectFacade;
-use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractTypeDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeDataLoader;
 
-class RootTypeDataLoader extends AbstractTypeDataLoader
+class RootTypeDataLoader extends AbstractRelationalTypeDataLoader
 {
     public function getObjects(array $ids): array
     {

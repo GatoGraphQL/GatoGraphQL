@@ -8,7 +8,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
-abstract class AbstractTypeDataLoader implements TypeDataLoaderInterface
+abstract class AbstractRelationalTypeDataLoader implements TypeDataLoaderInterface
 {
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
