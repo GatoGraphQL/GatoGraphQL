@@ -654,8 +654,7 @@ class Engine implements EngineInterface
 
         $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
         if ($isUnionTypeResolver) {
-            /** @var UnionTypeResolverInterface */
-            $relationalTypeResolver = $relationalTypeResolver;
+            /** @var UnionTypeResolverInterface $relationalTypeResolver */
             // Get the actual type for each entity, and add the entry there
             $convertedTypeResolverClassDataItems = $convertedTypeResolverClassDBKeys = [];
             $noTypeResolverDataItems = [];
