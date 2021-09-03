@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Process
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
     }

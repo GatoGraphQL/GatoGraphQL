@@ -56,14 +56,14 @@ class PoP_LocationPosts_Module_Processor_CustomSidebarDataloads extends PoP_Modu
     //     return parent::getNature($module);
     // }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 }
 

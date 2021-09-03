@@ -111,14 +111,14 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
         return null;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CONTACTUSER:
                 return UserTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 }
 

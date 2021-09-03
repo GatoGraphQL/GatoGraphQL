@@ -1021,7 +1021,7 @@ class Engine implements EngineInterface
                 // Re-calculate $data_load, it may have been changed by `prepareDataPropertiesAfterMutationExecution`
                 $load_data = !isset($data_properties[DataloadingConstants::SKIPDATALOAD]) || !$data_properties[DataloadingConstants::SKIPDATALOAD];
                 if ($load_data) {
-                    $typeResolver_class = $processor->getTypeResolverClass($module);
+                    $typeResolver_class = $processor->getRelationalTypeResolverClass($module);
                     /** @var RelationalTypeResolverInterface */
                     $relationalTypeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
                     $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;

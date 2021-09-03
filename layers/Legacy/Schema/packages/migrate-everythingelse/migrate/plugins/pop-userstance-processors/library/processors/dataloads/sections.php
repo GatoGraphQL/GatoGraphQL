@@ -796,7 +796,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCES_TYPEAHEAD:
@@ -873,7 +873,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 return StanceTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props): void

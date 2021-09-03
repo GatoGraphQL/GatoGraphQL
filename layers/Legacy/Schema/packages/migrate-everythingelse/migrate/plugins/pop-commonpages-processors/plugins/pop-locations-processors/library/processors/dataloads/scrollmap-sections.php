@@ -43,14 +43,14 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
         return $format ?? parent::getFormat($module);
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP:
                 return UserTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function getDatasource(array $module, array &$props): string

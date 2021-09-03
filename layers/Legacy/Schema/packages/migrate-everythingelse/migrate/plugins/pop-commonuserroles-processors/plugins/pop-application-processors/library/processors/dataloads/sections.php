@@ -180,7 +180,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_ORGANIZATIONS_TYPEAHEAD:
@@ -200,7 +200,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
                 return UserTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props): void

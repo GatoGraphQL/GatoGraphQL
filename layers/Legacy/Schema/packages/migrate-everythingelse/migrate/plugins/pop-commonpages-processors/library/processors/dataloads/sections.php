@@ -41,7 +41,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         return $inner_modules[$module[1]] ?? null;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_DETAILS:
@@ -51,7 +51,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
                 return UserTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function getDatasource(array $module, array &$props): string

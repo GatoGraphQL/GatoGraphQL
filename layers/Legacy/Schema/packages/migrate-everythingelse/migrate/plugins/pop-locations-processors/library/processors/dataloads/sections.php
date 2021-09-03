@@ -59,7 +59,7 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
         return $format ?? parent::getFormat($module);
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONS_SCROLL:
@@ -67,7 +67,7 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
                 return LocationTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props): void

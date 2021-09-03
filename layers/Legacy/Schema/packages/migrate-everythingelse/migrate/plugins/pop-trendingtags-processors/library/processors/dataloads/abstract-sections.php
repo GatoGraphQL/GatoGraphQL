@@ -18,7 +18,7 @@ abstract class Abstract_PoP_TrendingTags_Module_Processor_SectionDataloads exten
         return \PoP\TrendingTags\QueryInputOutputHandler_TrendingTagList::class;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         return PostTagTypeResolver::class;
     }

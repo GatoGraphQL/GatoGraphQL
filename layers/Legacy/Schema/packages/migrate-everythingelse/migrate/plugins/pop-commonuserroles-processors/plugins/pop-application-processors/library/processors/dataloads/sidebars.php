@@ -65,7 +65,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     }
 
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
@@ -73,7 +73,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
                 return UserTypeResolver::class;
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 }
 

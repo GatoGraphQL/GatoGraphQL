@@ -119,7 +119,7 @@ trait QueryDataModuleProcessorTrait
             $queryhandler->prepareQueryArgs($data_properties[DataloadingConstants::QUERYARGS]);
         }
 
-        $typeResolverClass = $this->getTypeResolverClass($module);
+        $typeResolverClass = $this->getRelationalTypeResolverClass($module);
         /** @var RelationalTypeResolverInterface */
         $relationalTypeResolver = $instanceManager->getInstance($typeResolverClass);
         $typeDataLoaderClass = $relationalTypeResolver->getTypeDataLoaderClass();

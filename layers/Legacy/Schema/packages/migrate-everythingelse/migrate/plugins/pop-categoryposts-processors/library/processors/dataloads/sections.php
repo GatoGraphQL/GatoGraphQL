@@ -4448,7 +4448,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         return PostTypeResolver::class;
     }

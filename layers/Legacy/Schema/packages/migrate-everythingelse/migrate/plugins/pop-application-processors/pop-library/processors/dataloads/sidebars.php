@@ -67,7 +67,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_TAG_SIDEBAR:
@@ -77,7 +77,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
-        return parent::getTypeResolverClass($module);
+        return parent::getRelationalTypeResolverClass($module);
     }
 }
 

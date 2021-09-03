@@ -489,7 +489,7 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
         return $ret;
     }
 
-    public function getTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolverClass(array $module): ?string
     {
         return PostTypeResolver::class;
     }
