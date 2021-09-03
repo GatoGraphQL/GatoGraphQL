@@ -75,9 +75,9 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         // For each class, obtain its namespacedTypeName
         $typeResolvers = $typeRegistry->getTypeResolvers();
         $this->namespacedTypeNameClasses = [];
-        foreach ($typeResolvers as $relationalTypeResolver) {
-            $typeResolverNamespacedName = $relationalTypeResolver->getNamespacedTypeName();
-            $this->namespacedTypeNameClasses[$typeResolverNamespacedName] = $relationalTypeResolver::class;
+        foreach ($typeResolvers as $typeResolver) {
+            $typeResolverNamespacedName = $typeResolver->getNamespacedTypeName();
+            $this->namespacedTypeNameClasses[$typeResolverNamespacedName] = $typeResolver::class;
         }
     }
 
