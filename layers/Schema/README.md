@@ -87,7 +87,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
   }
 
   public function getSchemaFieldDescription(
-    TypeResolverInterface $typeResolver,
+    ObjectTypeResolverInterface $typeResolver,
     string $fieldName
   ): ?string {
     $descriptions = [
@@ -99,7 +99,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
   }
 
   public function getSchemaFieldType(
-    TypeResolverInterface $typeResolver,
+    ObjectTypeResolverInterface $typeResolver,
     string $fieldName
   ): ?string {
     $types = [
@@ -111,7 +111,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
   }
 
   public function resolveValue(
-    TypeResolverInterface $typeResolver,
+    ObjectTypeResolverInterface $typeResolver,
     object $user,
     string $fieldName,
     array $fieldArgs = []

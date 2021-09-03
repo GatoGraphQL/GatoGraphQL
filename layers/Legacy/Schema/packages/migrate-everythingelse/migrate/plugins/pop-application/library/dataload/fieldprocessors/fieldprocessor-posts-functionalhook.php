@@ -4,7 +4,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -33,7 +33,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'multilayoutKeys' => SchemaDefinition::TYPE_STRING,
@@ -48,7 +48,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'multilayoutKeys',
@@ -64,7 +64,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
         };
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -87,7 +87,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

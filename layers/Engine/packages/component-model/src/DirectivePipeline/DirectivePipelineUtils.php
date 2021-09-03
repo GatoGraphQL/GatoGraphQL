@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectivePipeline;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 
 class DirectivePipelineUtils
 {
     public static function convertArgumentsToPayload(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array &$pipelineIDsDataFields,
         array &$pipelineDirectiveResolverInstances,
         array &$resultIDItems,

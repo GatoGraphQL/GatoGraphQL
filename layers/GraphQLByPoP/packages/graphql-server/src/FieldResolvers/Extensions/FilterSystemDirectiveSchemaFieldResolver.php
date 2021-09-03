@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\Extensions;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveTypeEnum;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\SchemaTypeResolver;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\SchemaFieldResolver;
@@ -37,12 +37,12 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
     //  * Only use this fieldResolver when parameter `ofTypes` is provided.
     //  * Otherwise, use the default implementation
     //  */
-    // public function resolveCanProcess(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool
+    // public function resolveCanProcess(ObjectTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool
     // {
     //     return $fieldName == 'directives' && isset($fieldArgs['ofTypes']);
     // }
 
-    // public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    // public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
     // {
     //     $descriptions = [
     //         'directives' => $this->translationAPI->__('All directives registered in the data graph, allowing to remove the system directives', 'graphql-api'),
@@ -50,7 +50,7 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
     //     return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     // }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
@@ -86,7 +86,7 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

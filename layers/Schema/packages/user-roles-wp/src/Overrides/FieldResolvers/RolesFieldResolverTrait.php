@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoPSchema\UserRolesWP\Overrides\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
 
 trait RolesFieldResolverTrait
 {
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'roles' => SchemaDefinition::TYPE_ID,
@@ -18,7 +18,7 @@ trait RolesFieldResolverTrait
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'roles':

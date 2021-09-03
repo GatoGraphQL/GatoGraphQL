@@ -9,7 +9,7 @@ use PoP\Engine\Hooks\AbstractCMSBootHookSet;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 
@@ -63,7 +63,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
 
     public function maybeFilterFieldName(
         bool $include,
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         FieldResolverInterface $fieldResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
@@ -84,7 +84,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
      * Decide if to remove the fieldNames
      */
     protected function removeFieldName(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         FieldResolverInterface $fieldResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName

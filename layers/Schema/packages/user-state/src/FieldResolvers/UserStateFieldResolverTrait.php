@@ -6,7 +6,7 @@ namespace PoPSchema\UserState\FieldResolvers;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 
 trait UserStateFieldResolverTrait
@@ -16,7 +16,7 @@ trait UserStateFieldResolverTrait
      * @return array<array>|null A checkpoint set, or null
      */
     protected function getValidationCheckpoints(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -30,7 +30,7 @@ trait UserStateFieldResolverTrait
     protected function getValidationCheckpointsErrorMessage(
         Error $error,
         string $errorMessage,
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []

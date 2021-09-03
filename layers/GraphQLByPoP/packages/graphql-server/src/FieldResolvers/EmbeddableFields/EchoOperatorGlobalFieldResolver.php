@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\EmbeddableFields;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 
 /**
  * When Embeddable Fields is enabled, register the `echoStr` field
@@ -19,7 +19,7 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
      * By making it not global, it gets registered on each single type.
      * Otherwise, it is not exposed in the schema
      */
-    public function isGlobal(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function isGlobal(ObjectTypeResolverInterface $typeResolver, string $fieldName): bool
     {
         return false;
     }
@@ -49,7 +49,7 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
     /**
      * Change the type from mixed to string
      */
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'echoStr' => SchemaDefinition::TYPE_STRING,
@@ -60,7 +60,7 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
     /**
      * Change the type from mixed to string
      */
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
@@ -84,7 +84,7 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
     /**
      * Change the type from mixed to string
      */
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'echoStr' => $this->translationAPI->__('Repeat back the input string', 'graphql-api'),
@@ -99,7 +99,7 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

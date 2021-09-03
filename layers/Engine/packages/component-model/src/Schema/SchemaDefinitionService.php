@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 
 class SchemaDefinitionService implements SchemaDefinitionServiceInterface
@@ -14,7 +14,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
         // By default, use the type name
         return $interfaceResolver->getMaybeNamespacedInterfaceName();
     }
-    public function getTypeSchemaKey(TypeResolverInterface $typeResolver): string
+    public function getTypeSchemaKey(ObjectTypeResolverInterface $typeResolver): string
     {
         // By default, use the type name
         return $typeResolver->getMaybeNamespacedTypeName();

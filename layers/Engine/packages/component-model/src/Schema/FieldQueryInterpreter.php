@@ -17,7 +17,7 @@ use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\FieldQuery\FeedbackMessageStoreInterface as UpstreamFeedbackMessageStoreInterface;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
@@ -100,7 +100,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         parent::__construct($translationAPI, $feedbackMessageStore, $queryParser);
     }
 
-    final public function getUniqueFieldOutputKey(TypeResolverInterface $typeResolver, string $field): string
+    final public function getUniqueFieldOutputKey(ObjectTypeResolverInterface $typeResolver, string $field): string
     {
         return $this->getUniqueFieldOutputKeyByTypeOutputName(
             $typeResolver->getTypeOutputName(),
@@ -111,7 +111,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     final public function getUniqueFieldOutputKeyByTypeResolverClass(string $typeResolverClass, string $field): string
     {
         /**
-         * @var TypeResolverInterface
+         * @var ObjectTypeResolverInterface
          */
         $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
         return $this->getUniqueFieldOutputKey(
@@ -237,7 +237,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     public function extractDirectiveArguments(
         DirectiveResolverInterface $directiveResolver,
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $fieldDirective,
         ?array $variables = null,
         ?array &$schemaErrors = null,
@@ -275,7 +275,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     protected function doExtractDirectiveArguments(
         DirectiveResolverInterface $directiveResolver,
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $fieldDirective,
         ?array $variables,
         array &$schemaErrors,
@@ -433,7 +433,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      * Return `null` if there is no resolver for the field
      */
     public function extractFieldArguments(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $field,
         ?array $variables = null,
         ?array &$schemaErrors = null,
@@ -469,7 +469,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     protected function doExtractFieldArguments(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $field,
         ?array $variables,
         array &$schemaErrors,
@@ -503,7 +503,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldOrDirectiveArgumentNameDefaultValues;
     }
 
-    protected function getNoFieldErrorMessage(TypeResolverInterface $typeResolver, string $field): string
+    protected function getNoFieldErrorMessage(ObjectTypeResolverInterface $typeResolver, string $field): string
     {
         return sprintf(
             $this->translationAPI->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
@@ -531,7 +531,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     public function extractFieldArgumentsForSchema(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $field,
         ?array $variables = null
     ): array {
@@ -586,7 +586,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     public function extractDirectiveArgumentsForSchema(
         DirectiveResolverInterface $directiveResolver,
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $fieldDirective,
         ?array $variables = null,
         bool $disableDynamicFields = false
@@ -643,7 +643,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         }
     }
 
-    protected function validateExtractedFieldOrDirectiveArgumentsForSchema(TypeResolverInterface $typeResolver, string $fieldOrDirective, array $fieldOrDirectiveArgs, ?array $variables, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
+    protected function validateExtractedFieldOrDirectiveArgumentsForSchema(ObjectTypeResolverInterface $typeResolver, string $fieldOrDirective, array $fieldOrDirectiveArgs, ?array $variables, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
         if ($fieldOrDirectiveArgs) {
             foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
@@ -678,7 +678,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     public function extractFieldArgumentsForResultItem(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         string $field,
         ?array $variables,
@@ -732,7 +732,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     public function extractDirectiveArgumentsForResultItem(
         DirectiveResolverInterface $directiveResolver,
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldDirective,
         array $variables,
@@ -786,7 +786,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     protected function extractFieldOrDirectiveArgumentsForResultItem(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         array $fieldOrDirectiveArgs,
         string $fieldOrDirectiveOutputKey,
@@ -829,7 +829,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     protected function castDirectiveArguments(
         DirectiveResolverInterface $directiveResolver,
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $directive,
         array $directiveArgs,
         array &$failedCastingDirectiveArgErrorMessages,
@@ -845,7 +845,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     protected function castFieldArguments(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $field,
         array $fieldArgs,
         array &$failedCastingFieldArgErrorMessages,
@@ -1094,29 +1094,29 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldOrDirectiveArgs;
     }
 
-    protected function castDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$failedCastingDirectiveArgErrorMessages, bool $disableDynamicFields = false): array
+    protected function castDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, ObjectTypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$failedCastingDirectiveArgErrorMessages, bool $disableDynamicFields = false): array
     {
         // If the directive doesn't allow dynamic fields (Eg: <cacheControl(maxAge:id())>), then treat it as not for schema
         $forSchema = !$disableDynamicFields;
         return $this->castDirectiveArguments($directiveResolver, $typeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrorMessages, $forSchema);
     }
 
-    protected function castFieldArgumentsForSchema(TypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$schemaErrors): ?array
+    protected function castFieldArgumentsForSchema(ObjectTypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$schemaErrors): ?array
     {
         return $this->castFieldArguments($typeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $schemaErrors, true);
     }
 
-    protected function castDirectiveArgumentsForResultItem(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $directive, array $directiveArgs, array &$failedCastingDirectiveArgErrorMessages): array
+    protected function castDirectiveArgumentsForResultItem(DirectiveResolverInterface $directiveResolver, ObjectTypeResolverInterface $typeResolver, string $directive, array $directiveArgs, array &$failedCastingDirectiveArgErrorMessages): array
     {
         return $this->castDirectiveArguments($directiveResolver, $typeResolver, $directive, $directiveArgs, $failedCastingDirectiveArgErrorMessages, false);
     }
 
-    protected function castFieldArgumentsForResultItem(TypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$dbErrors): ?array
+    protected function castFieldArgumentsForResultItem(ObjectTypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$dbErrors): ?array
     {
         return $this->castFieldArguments($typeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $dbErrors, false);
     }
 
-    protected function getDirectiveArgumentNameTypes(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver): array
+    protected function getDirectiveArgumentNameTypes(DirectiveResolverInterface $directiveResolver, ObjectTypeResolverInterface $typeResolver): array
     {
         if (!isset($this->directiveArgumentNameTypesCache[get_class($directiveResolver)][get_class($typeResolver)])) {
             $this->directiveArgumentNameTypesCache[get_class($directiveResolver)][get_class($typeResolver)] = $this->doGetDirectiveArgumentNameTypes($directiveResolver, $typeResolver);
@@ -1124,7 +1124,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->directiveArgumentNameTypesCache[get_class($directiveResolver)][get_class($typeResolver)];
     }
 
-    protected function doGetDirectiveArgumentNameTypes(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver): array
+    protected function doGetDirectiveArgumentNameTypes(DirectiveResolverInterface $directiveResolver, ObjectTypeResolverInterface $typeResolver): array
     {
         // Get the fieldDirective argument types, to know to what type it will cast the value
         $directiveArgNameTypes = [];
@@ -1136,7 +1136,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $directiveArgNameTypes;
     }
 
-    protected function getDirectiveArgumentNameDefaultValues(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver): array
+    protected function getDirectiveArgumentNameDefaultValues(DirectiveResolverInterface $directiveResolver, ObjectTypeResolverInterface $typeResolver): array
     {
         if (!isset($this->directiveArgumentNameDefaultValuesCache[get_class($directiveResolver)][get_class($typeResolver)])) {
             $this->directiveArgumentNameDefaultValuesCache[get_class($directiveResolver)][get_class($typeResolver)] = $this->doGetDirectiveArgumentNameDefaultValues($directiveResolver, $typeResolver);
@@ -1144,7 +1144,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->directiveArgumentNameDefaultValuesCache[get_class($directiveResolver)][get_class($typeResolver)];
     }
 
-    protected function doGetDirectiveArgumentNameDefaultValues(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver): array
+    protected function doGetDirectiveArgumentNameDefaultValues(DirectiveResolverInterface $directiveResolver, ObjectTypeResolverInterface $typeResolver): array
     {
         // Get the directive arguments which have a default value
         $directiveArgNameDefaultValues = [];
@@ -1162,7 +1162,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $directiveArgNameDefaultValues;
     }
 
-    protected function getFieldSchemaDefinitionArgs(TypeResolverInterface $typeResolver, string $field): ?array
+    protected function getFieldSchemaDefinitionArgs(ObjectTypeResolverInterface $typeResolver, string $field): ?array
     {
         if (!array_key_exists($field, $this->fieldSchemaDefinitionArgsCache[get_class($typeResolver)] ?? [])) {
             $this->fieldSchemaDefinitionArgsCache[get_class($typeResolver)][$field] = $typeResolver->getSchemaFieldArgs($field);
@@ -1170,7 +1170,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->fieldSchemaDefinitionArgsCache[get_class($typeResolver)][$field];
     }
 
-    protected function getDirectiveSchemaDefinitionArgs(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver): array
+    protected function getDirectiveSchemaDefinitionArgs(DirectiveResolverInterface $directiveResolver, ObjectTypeResolverInterface $typeResolver): array
     {
         if (!isset($this->directiveSchemaDefinitionArgsCache[get_class($directiveResolver)][get_class($typeResolver)])) {
             $directiveSchemaDefinition = $directiveResolver->getSchemaDefinitionForDirective($typeResolver);
@@ -1180,7 +1180,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->directiveSchemaDefinitionArgsCache[get_class($directiveResolver)][get_class($typeResolver)];
     }
 
-    protected function getFieldArgumentNameTypes(TypeResolverInterface $typeResolver, string $field): ?array
+    protected function getFieldArgumentNameTypes(ObjectTypeResolverInterface $typeResolver, string $field): ?array
     {
         if (!array_key_exists($field, $this->fieldArgumentNameTypesCache[get_class($typeResolver)] ?? [])) {
             $this->fieldArgumentNameTypesCache[get_class($typeResolver)][$field] = $this->doGetFieldArgumentNameTypes($typeResolver, $field);
@@ -1188,7 +1188,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->fieldArgumentNameTypesCache[get_class($typeResolver)][$field];
     }
 
-    protected function doGetFieldArgumentNameTypes(TypeResolverInterface $typeResolver, string $field): ?array
+    protected function doGetFieldArgumentNameTypes(ObjectTypeResolverInterface $typeResolver, string $field): ?array
     {
         // Get the field argument types, to know to what type it will cast the value
         $fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($typeResolver, $field);
@@ -1202,7 +1202,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgNameTypes;
     }
 
-    protected function getFieldArgumentNameDefaultValues(TypeResolverInterface $typeResolver, string $field): ?array
+    protected function getFieldArgumentNameDefaultValues(ObjectTypeResolverInterface $typeResolver, string $field): ?array
     {
         if (!array_key_exists($field, $this->fieldArgumentNameDefaultValuesCache[get_class($typeResolver)] ?? [])) {
             $this->fieldArgumentNameDefaultValuesCache[get_class($typeResolver)][$field] = $this->doGetFieldArgumentNameDefaultValues($typeResolver, $field);
@@ -1210,7 +1210,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->fieldArgumentNameDefaultValuesCache[get_class($typeResolver)][$field];
     }
 
-    protected function doGetFieldArgumentNameDefaultValues(TypeResolverInterface $typeResolver, string $field): ?array
+    protected function doGetFieldArgumentNameDefaultValues(ObjectTypeResolverInterface $typeResolver, string $field): ?array
     {
         // Get the field arguments which have a default value
         $fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($typeResolver, $field);
@@ -1230,7 +1230,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgNameDefaultValues;
     }
 
-    protected function castAndValidateDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, bool $disableDynamicFields = false): array
+    protected function castAndValidateDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, ObjectTypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, bool $disableDynamicFields = false): array
     {
         if ($directiveArgs) {
             $failedCastingDirectiveArgErrorMessages = [];
@@ -1240,7 +1240,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $directiveArgs;
     }
 
-    protected function castAndValidateFieldArgumentsForSchema(TypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): ?array
+    protected function castAndValidateFieldArgumentsForSchema(ObjectTypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): ?array
     {
         if ($fieldArgs) {
             $failedCastingFieldArgErrorMessages = [];
@@ -1258,14 +1258,14 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgs;
     }
 
-    protected function castAndValidateDirectiveArgumentsForResultItem(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$dbErrors, array &$dbWarnings): ?array
+    protected function castAndValidateDirectiveArgumentsForResultItem(DirectiveResolverInterface $directiveResolver, ObjectTypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$dbErrors, array &$dbWarnings): ?array
     {
         $failedCastingDirectiveArgErrorMessages = [];
         $castedDirectiveArgs = $this->castDirectiveArgumentsForResultItem($directiveResolver, $typeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrorMessages);
         return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $typeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrorMessages, $fieldDirective, $directiveArgs, $dbErrors, $dbWarnings);
     }
 
-    protected function castAndValidateFieldArgumentsForResultItem(TypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$dbErrors, array &$dbWarnings): ?array
+    protected function castAndValidateFieldArgumentsForResultItem(ObjectTypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$dbErrors, array &$dbWarnings): ?array
     {
         $failedCastingFieldArgErrorMessages = [];
         $castingDBErrors = [];
@@ -1280,7 +1280,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->validateAndFilterCastFieldArguments($typeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $dbErrors, $dbWarnings);
     }
 
-    protected function validateAndFilterCastDirectiveArguments(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrorMessages, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings): array
+    protected function validateAndFilterCastDirectiveArguments(DirectiveResolverInterface $directiveResolver, ObjectTypeResolverInterface $typeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrorMessages, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings): array
     {
         // If any casting can't be done, show an error
         if ($failedCastingDirectiveArgErrorMessages) {
@@ -1358,7 +1358,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     protected function validateAndFilterCastFieldArguments(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array $castedFieldArgs,
         array &$failedCastingFieldArgErrorMessages,
         string $field,
@@ -1579,7 +1579,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      * - A field
      */
     protected function maybeResolveFieldArgumentValueForResultItem(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         mixed $fieldArgValue,
         ?array $variables,
@@ -1634,7 +1634,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgValue;
     }
 
-    protected function resolveFieldArgumentValueErrorDescriptionsForSchema(TypeResolverInterface $typeResolver, mixed $fieldArgValue, ?array $variables): array
+    protected function resolveFieldArgumentValueErrorDescriptionsForSchema(ObjectTypeResolverInterface $typeResolver, mixed $fieldArgValue, ?array $variables): array
     {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
@@ -1695,7 +1695,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return [];
     }
 
-    protected function resolveFieldArgumentValueWarningsForSchema(TypeResolverInterface $typeResolver, mixed $fieldArgValue, ?array $variables): array
+    protected function resolveFieldArgumentValueWarningsForSchema(ObjectTypeResolverInterface $typeResolver, mixed $fieldArgValue, ?array $variables): array
     {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
@@ -1712,7 +1712,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return [];
     }
 
-    protected function resolveFieldArgumentValueDeprecationsForSchema(TypeResolverInterface $typeResolver, mixed $fieldArgValue, ?array $variables): array
+    protected function resolveFieldArgumentValueDeprecationsForSchema(ObjectTypeResolverInterface $typeResolver, mixed $fieldArgValue, ?array $variables): array
     {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {

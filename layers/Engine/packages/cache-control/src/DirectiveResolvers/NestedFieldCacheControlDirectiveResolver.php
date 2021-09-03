@@ -7,11 +7,11 @@ namespace PoP\CacheControl\DirectiveResolvers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 // use PoP\CacheControl\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 
 class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {
-    // public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    // public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
     // {
     //     return sprintf(
     //         $this->translationAPI->__('%1$s %2$s'),
@@ -36,7 +36,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
     /**
      * If any argument is a field, then this directive will involve them to calculate the minimum max-age
      */
-    public function resolveCanProcess(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
+    public function resolveCanProcess(ObjectTypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
     {
         if ($fieldArgs = $this->fieldQueryInterpreter->getFieldArgs($field)) {
             $fieldArgElems = QueryHelpers::getFieldArgElements($fieldArgs);
@@ -71,7 +71,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
      * Calculate the max-age involving also the composed fields
      */
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,

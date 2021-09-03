@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 
 trait EnumTypeFieldSchemaDefinitionResolverTrait
 {
     use EnumTypeSchemaDefinitionResolverTrait;
 
-    protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    protected function getSchemaDefinitionEnumName(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         return null;
     }
 
-    protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    protected function getSchemaDefinitionEnumValues(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return null;
     }
 
-    protected function getSchemaDefinitionEnumValueDeprecationDescriptions(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    protected function getSchemaDefinitionEnumValueDeprecationDescriptions(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return null;
     }
 
-    protected function getSchemaDefinitionEnumValueDescriptions(TypeResolverInterface $typeResolver, string $fieldName): ?array
+    protected function getSchemaDefinitionEnumValueDescriptions(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return null;
     }
@@ -34,7 +34,7 @@ trait EnumTypeFieldSchemaDefinitionResolverTrait
     /**
      * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
      */
-    protected function addSchemaDefinitionEnumValuesForField(array &$schemaDefinition, TypeResolverInterface $typeResolver, string $fieldName): void
+    protected function addSchemaDefinitionEnumValuesForField(array &$schemaDefinition, ObjectTypeResolverInterface $typeResolver, string $fieldName): void
     {
         $enumValues = $this->getSchemaDefinitionEnumValues($typeResolver, $fieldName);
         if (!is_null($enumValues)) {
@@ -51,7 +51,7 @@ trait EnumTypeFieldSchemaDefinitionResolverTrait
         }
     }
 
-    public function addSchemaDefinitionForField(array &$schemaDefinition, TypeResolverInterface $typeResolver, string $fieldName): void
+    public function addSchemaDefinitionForField(array &$schemaDefinition, ObjectTypeResolverInterface $typeResolver, string $fieldName): void
     {
         parent::addSchemaDefinitionForField($schemaDefinition, $typeResolver, $fieldName);
 

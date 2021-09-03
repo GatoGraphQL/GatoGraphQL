@@ -12,7 +12,7 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
 
@@ -31,7 +31,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         return DirectiveTypes::SCRIPTING;
     }
 
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $typeResolver): array
     {
         return [
             [
@@ -57,7 +57,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         ];
     }
 
-    public function getSchemaDirectiveExpressions(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveExpressions(ObjectTypeResolverInterface $typeResolver): array
     {
         return [
             Expressions::NAME_VALUE => $this->translationAPI->__('Element being transformed', 'component-model'),
@@ -65,7 +65,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
 
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -92,7 +92,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     /**
      * Execute a function on the affected field
      */
-    protected function regenerateAndExecuteFunction(TypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): void
+    protected function regenerateAndExecuteFunction(ObjectTypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): void
     {
         $function = $this->directiveArgsForSchema['function'];
         $addArguments = $this->directiveArgsForSchema['addArguments'] ?? [];
@@ -245,7 +245,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      * Place all the reserved variables into the `$variables` context
      */
     protected function addExpressionsForResultItem(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         $id,
         string $field,
         array &$resultIDItems,

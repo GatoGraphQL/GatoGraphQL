@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\AccessControl\ConfigurationEntries;
 
 use PoP\AccessControl\ComponentConfiguration;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
 trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
@@ -20,7 +20,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
      */
     final protected function getMatchingEntries(
         array $entryList,
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
     ): array {

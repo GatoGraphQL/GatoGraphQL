@@ -9,7 +9,7 @@ use PoP\Engine\Misc\OperatorHelpers;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 
 class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
@@ -31,12 +31,12 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         return true;
     }
 
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
     {
         return $this->translationAPI->__('Apply all composed directives on the element found under the \'path\' parameter in the affected array object', 'component-model');
     }
 
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $typeResolver): array
     {
         return array_merge(
             [
@@ -54,7 +54,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
     /**
      * Directly point to the element under the specified path
      */
-    protected function getArrayItems(array &$array, int | string $id, string $field, TypeResolverInterface $typeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
+    protected function getArrayItems(array &$array, int | string $id, string $field, ObjectTypeResolverInterface $typeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
     {
         $path = $this->directiveArgsForSchema['path'];
 
@@ -87,7 +87,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
      * the original ones.
      */
     protected function addProcessedItemBackToDBItems(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array &$dbItems,
         array &$dbErrors,
         array &$dbWarnings,

@@ -8,7 +8,7 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
@@ -21,7 +21,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     ) {
     }
 
-    public function getTypeResolverClassFromSubcomponentDataField(TypeResolverInterface $typeResolver, string $subcomponent_data_field): ?string
+    public function getTypeResolverClassFromSubcomponentDataField(ObjectTypeResolverInterface $typeResolver, string $subcomponent_data_field): ?string
     {
         $subcomponent_typeResolver_class = $typeResolver->resolveFieldTypeResolverClass($subcomponent_data_field);
         // if (!$subcomponent_typeResolver_class && \PoP\ComponentModel\Environment::failIfSubcomponentTypeDataLoaderUndefined()) {

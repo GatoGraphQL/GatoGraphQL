@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldResolvers\AbstractCustomPostListFieldResolver;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
 
@@ -12,7 +12,7 @@ abstract class AbstractCustomPostListTagFieldResolver extends AbstractCustomPost
 {
     use TagAPIRequestedContractTrait;
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'customPosts' => $this->translationAPI->__('Custom posts which contain this tag', 'pop-tags'),
@@ -30,7 +30,7 @@ abstract class AbstractCustomPostListTagFieldResolver extends AbstractCustomPost
      * @return array<string, mixed>
      */
     protected function getQuery(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []

@@ -6,7 +6,7 @@ namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -27,7 +27,7 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
 
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -52,11 +52,11 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
         $idsToRemove = $this->getIdsSatisfyingCondition($typeResolver, $resultIDItems, $idsDataFields, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations);
         $this->removeDataFieldsForIDs($idsDataFields, $idsToRemove, $succeedingPipelineIDsDataFields);
     }
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
     {
         return $this->translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `false`', 'engine');
     }
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $typeResolver): array
     {
         return [
             [

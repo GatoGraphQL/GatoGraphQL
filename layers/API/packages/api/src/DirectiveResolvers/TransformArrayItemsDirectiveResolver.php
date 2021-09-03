@@ -9,7 +9,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\Engine\DirectiveResolvers\ApplyFunctionDirectiveResolver;
 use PoP\Engine\DirectiveResolvers\ForEachDirectiveResolver;
 use PoP\FieldQuery\QuerySyntax;
@@ -33,7 +33,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
     /**
      * No need to use this function anymore
      */
-    public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDeprecationDescription(ObjectTypeResolverInterface $typeResolver): ?string
     {
         /** @var DirectiveResolverInterface */
         $forEachDirectiveResolver = $this->instanceManager->getInstance(ForEachDirectiveResolver::class);
@@ -63,7 +63,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
      * 3. Pack into the array, once again, and remove all temporary properties
      */
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -272,7 +272,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
     }
 
     protected function addExpressionsForResultItem(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         $id,
         string $field,
         array &$resultIDItems,

@@ -6,7 +6,7 @@ namespace PoPSchema\Locations\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 
@@ -24,7 +24,7 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'locationsmapURL' => SchemaDefinition::TYPE_URL,
@@ -32,7 +32,7 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'locationsmapURL' => $this->translationAPI->__('Locations map URL', 'pop-locations'),
@@ -47,7 +47,7 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

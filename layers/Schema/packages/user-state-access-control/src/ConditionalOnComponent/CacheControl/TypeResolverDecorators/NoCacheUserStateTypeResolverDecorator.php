@@ -8,7 +8,7 @@ use PoP\CacheControl\Helpers\CacheControlHelper;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolverDecorators\AbstractTypeResolverDecorator;
 use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInDirectiveResolver;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInDirectiveResolver;
@@ -26,7 +26,7 @@ class NoCacheUserStateTypeResolverDecorator extends AbstractTypeResolverDecorato
     /**
      * If validating if the user is logged-in, then we can't cache the response
      */
-    public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
+    public function getPrecedingMandatoryDirectivesForDirectives(ObjectTypeResolverInterface $typeResolver): array
     {
         $noCacheControlDirective = CacheControlHelper::getNoCacheDirective();
         /** @var DirectiveResolverInterface */

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
@@ -14,7 +14,7 @@ abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValid
     /**
      * Validate checkpoints
      */
-    protected function validateCondition(TypeResolverInterface $typeResolver): bool
+    protected function validateCondition(ObjectTypeResolverInterface $typeResolver): bool
     {
         $checkpointSet = $this->getValidationCheckpointSet($typeResolver);
         $engine = EngineFacade::getInstance();
@@ -25,5 +25,5 @@ abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValid
     /**
      * Provide the checkpoint to validate
      */
-    abstract protected function getValidationCheckpointSet(TypeResolverInterface $typeResolver): array;
+    abstract protected function getValidationCheckpointSet(ObjectTypeResolverInterface $typeResolver): array;
 }

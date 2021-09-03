@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldResolvers\AbstractCustomPostListFieldResolver;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 
@@ -12,7 +12,7 @@ abstract class AbstractCustomPostListCategoryFieldResolver extends AbstractCusto
 {
     use CategoryAPIRequestedContractTrait;
 
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'customPosts' => $this->translationAPI->__('Custom posts which contain this category', 'pop-categories'),
@@ -30,7 +30,7 @@ abstract class AbstractCustomPostListCategoryFieldResolver extends AbstractCusto
      * @return array<string, mixed>
      */
     protected function getQuery(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []

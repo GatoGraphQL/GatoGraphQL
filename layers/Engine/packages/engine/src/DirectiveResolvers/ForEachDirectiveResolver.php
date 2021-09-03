@@ -11,7 +11,7 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 
 class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
@@ -26,12 +26,12 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
         return DirectiveTypes::INDEXING;
     }
 
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
     {
         return $this->translationAPI->__('Iterate all affected array items and execute the composed directives on them', 'component-model');
     }
 
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $typeResolver): array
     {
         return array_merge(
             parent::getSchemaDirectiveArgs($typeResolver),
@@ -45,7 +45,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
         );
     }
 
-    public function getSchemaDirectiveExpressions(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveExpressions(ObjectTypeResolverInterface $typeResolver): array
     {
         return [
             Expressions::NAME_KEY => $this->translationAPI->__('Key of the array element from the current iteration', 'component-model'),
@@ -56,7 +56,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
     /**
      * Iterate on all items from the array
      */
-    protected function getArrayItems(array &$array, int | string $id, string $field, TypeResolverInterface $typeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
+    protected function getArrayItems(array &$array, int | string $id, string $field, ObjectTypeResolverInterface $typeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
     {
         if ($if = $this->directiveArgsForSchema['if'] ?? null) {
             // If it is a field, execute the function against all the values in the array

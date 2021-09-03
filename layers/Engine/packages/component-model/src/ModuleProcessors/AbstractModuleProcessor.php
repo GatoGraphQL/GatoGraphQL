@@ -21,7 +21,7 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -191,7 +191,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 $this->setProp($submodule, $props, 'succeeding-typeResolver', $typeResolver_class);
             }
             /**
-             * @var TypeResolverInterface
+             * @var ObjectTypeResolverInterface
              */
             $typeResolver = $this->instanceManager->getInstance($typeResolver_class);
             foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
@@ -495,7 +495,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $ret = array();
         if ($typeResolver_class = $this->getTypeResolverClass($module)) {
             /**
-             * @var TypeResolverInterface
+             * @var ObjectTypeResolverInterface
              */
             $typeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
             if ($dbkey = $typeResolver->getTypeOutputName()) {
@@ -507,7 +507,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // This prop is set for both dataloading and non-dataloading modules
         if ($typeResolver_class = $this->getProp($module, $props, 'succeeding-typeResolver')) {
             /**
-             * @var TypeResolverInterface
+             * @var ObjectTypeResolverInterface
              */
             $typeResolver = $this->instanceManager->getInstance($typeResolver_class);
             foreach (array_keys($this->getDomainSwitchingSubmodules($module)) as $subcomponent_data_field) {
@@ -563,7 +563,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // Add the current module's dbkeys
         if ($typeResolver_class = $this->getTypeResolverClass($module)) {
             /**
-             * @var TypeResolverInterface
+             * @var ObjectTypeResolverInterface
              */
             $typeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
             $dbkeys = $this->getDatabaseKeys($module, $props);
@@ -578,7 +578,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         if ($typeResolver_class = $this->getProp($module, $props, 'succeeding-typeResolver')) {
             /**
-             * @var TypeResolverInterface
+             * @var ObjectTypeResolverInterface
              */
             $typeResolver = $this->instanceManager->getInstance($typeResolver_class);
 

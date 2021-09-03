@@ -7,7 +7,7 @@ namespace PoP\CacheControl\DirectiveResolvers;
 use PoP\CacheControl\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\CacheControl\Facades\CacheControlEngineFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
@@ -49,11 +49,11 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         return true;
     }
 
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
     {
         return $this->translationAPI->__('HTTP caching (https://tools.ietf.org/html/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding \'no-store\' value is sent, indicating to not cache the response', 'cache-control');
     }
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $typeResolver): array
     {
         return [
             [
@@ -70,7 +70,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
      * @return string[] Error messages
      */
     protected function validateDirectiveArgument(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $directiveName,
         string $directiveArgName,
         mixed $directiveArgValue
@@ -113,7 +113,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
      * Get the cache control for this field, and set it on the Engine
      */
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,

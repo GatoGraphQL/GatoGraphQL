@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 
 trait RemoveIDsDataFieldsDirectiveResolverTrait
 {
@@ -35,7 +35,7 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
      * For GraphQL, set the response for the failing field as null
      */
     protected function setIDsDataFieldsAsNull(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array &$idsDataFieldsToSetAsNull,
         array &$dbItems
     ): void {

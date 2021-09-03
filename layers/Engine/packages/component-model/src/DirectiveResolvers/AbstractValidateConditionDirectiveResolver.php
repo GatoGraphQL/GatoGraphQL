@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateDirectiveResolver;
 
 abstract class AbstractValidateConditionDirectiveResolver extends AbstractValidateDirectiveResolver
@@ -33,7 +33,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     /**
      * Validate a custom condition
      */
-    protected function validateFields(TypeResolverInterface $typeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void
+    protected function validateFields(ObjectTypeResolverInterface $typeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void
     {
         if (!$this->validateCondition($typeResolver)) {
             // All fields failed
@@ -51,7 +51,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     /**
      * Condition to validate. Return `true` for success, `false` for failure
      */
-    abstract protected function validateCondition(TypeResolverInterface $typeResolver): bool;
+    abstract protected function validateCondition(ObjectTypeResolverInterface $typeResolver): bool;
 
     /**
      * Show a different error message depending on if we are validating the whole field, or a directive
@@ -62,7 +62,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
         return false;
     }
 
-    protected function getValidationFailedMessage(TypeResolverInterface $typeResolver, array $failedDataFields): string
+    protected function getValidationFailedMessage(ObjectTypeResolverInterface $typeResolver, array $failedDataFields): string
     {
         $errorMessage = $this->isValidatingDirective() ?
             $this->translationAPI->__('Validation failed for directives in fields \'%s\'', 'component-model') :

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 
 interface DirectiveResolverInterface extends AttachableExtensionInterface
 {
@@ -25,7 +25,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * Extract and validate the directive arguments
      */
     public function dissectAndValidateDirectiveForSchema(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array &$fieldDirectiveFields,
         array &$variables,
         array &$schemaErrors,
@@ -39,7 +39,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * Enable the directiveResolver to validate the directive arguments in a custom way
      */
     public function validateDirectiveArgumentsForSchema(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $directiveName,
         array $directiveArgs,
         array &$schemaErrors,
@@ -60,7 +60,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * Indicate if the directiveResolver can process the directive with the given name and args
      */
     public function resolveCanProcess(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $directiveName,
         array $directiveArgs,
         string $field,
@@ -78,7 +78,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * Execute the directive
      */
     public function resolveDirective(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -102,23 +102,23 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
     /**
      * Get an instance of the object defining the schema for this fieldResolver
      */
-    public function getSchemaDefinitionResolver(TypeResolverInterface $typeResolver): ?SchemaDirectiveResolverInterface;
+    public function getSchemaDefinitionResolver(ObjectTypeResolverInterface $typeResolver): ?SchemaDirectiveResolverInterface;
     /**
      * A directive can decide to not be added to the schema, eg: when it is repeated/implemented several times
      */
     public function skipAddingToSchemaDefinition(): bool;
-    public function getSchemaDefinitionForDirective(TypeResolverInterface $typeResolver): array;
+    public function getSchemaDefinitionForDirective(ObjectTypeResolverInterface $typeResolver): array;
     /**
      * Define if to use the version to decide if to process the directive or not
      */
-    public function decideCanProcessBasedOnVersionConstraint(TypeResolverInterface $typeResolver): bool;
+    public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $typeResolver): bool;
     /**
      * The version of the directive, using semantic versioning
      */
-    public function getSchemaDirectiveVersion(TypeResolverInterface $typeResolver): ?string;
-    public function enableOrderedSchemaDirectiveArgs(TypeResolverInterface $typeResolver): bool;
+    public function getSchemaDirectiveVersion(ObjectTypeResolverInterface $typeResolver): ?string;
+    public function enableOrderedSchemaDirectiveArgs(ObjectTypeResolverInterface $typeResolver): bool;
     /**
      * Indicate if the directive is global (i.e. it can be applied to all fields, for all typeResolvers)
      */
-    public function isGlobal(TypeResolverInterface $typeResolver): bool;
+    public function isGlobal(ObjectTypeResolverInterface $typeResolver): bool;
 }

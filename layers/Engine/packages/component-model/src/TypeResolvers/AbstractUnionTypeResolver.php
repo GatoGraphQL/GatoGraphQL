@@ -9,7 +9,7 @@ use Exception;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\TypeResolverPickers\TypeResolverPickerInterface;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
@@ -84,7 +84,7 @@ abstract class AbstractUnionTypeResolver extends AbstractObjectTypeResolver impl
         return $this->recursiveGetResultItemIDTargetTypeResolvers($this, $ids);
     }
 
-    private function recursiveGetResultItemIDTargetTypeResolvers(TypeResolverInterface $typeResolver, array $ids): array
+    private function recursiveGetResultItemIDTargetTypeResolvers(ObjectTypeResolverInterface $typeResolver, array $ids): array
     {
         if (!$ids) {
             return [];
@@ -272,7 +272,7 @@ abstract class AbstractUnionTypeResolver extends AbstractObjectTypeResolver impl
                 $typeResolverClasses,
                 function ($typeResolverClass) use ($typeInterfaceClass) {
                     /**
-                     * @var TypeResolverInterface
+                     * @var ObjectTypeResolverInterface
                      */
                     $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
                     return !in_array($typeInterfaceClass, $typeResolver->getAllImplementedInterfaceClasses());
@@ -292,7 +292,7 @@ abstract class AbstractUnionTypeResolver extends AbstractObjectTypeResolver impl
                             array_map(
                                 function ($typeResolverClass) {
                                     /**
-                                     * @var TypeResolverInterface
+                                     * @var ObjectTypeResolverInterface
                                      */
                                     $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
                                     return sprintf(
@@ -349,12 +349,12 @@ abstract class AbstractUnionTypeResolver extends AbstractObjectTypeResolver impl
         return null;
     }
 
-    public function getTargetTypeResolver(object $resultItem): ?TypeResolverInterface
+    public function getTargetTypeResolver(object $resultItem): ?ObjectTypeResolverInterface
     {
         if ($typeResolverPicker = $this->getTargetTypeResolverPicker($resultItem)) {
             $typeResolverClass = $typeResolverPicker->getTypeResolverClass();
             /**
-             * @var TypeResolverInterface
+             * @var ObjectTypeResolverInterface
              */
             $typeResolver = $this->instanceManager->getInstance($typeResolverClass);
             return $typeResolver;

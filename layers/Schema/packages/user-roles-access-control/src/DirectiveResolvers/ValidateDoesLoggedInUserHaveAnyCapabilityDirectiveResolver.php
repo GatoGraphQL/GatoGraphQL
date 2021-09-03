@@ -7,7 +7,7 @@ namespace PoPSchema\UserRolesAccessControl\DirectiveResolvers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
 
 class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends AbstractValidateConditionDirectiveResolver
@@ -17,7 +17,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         return 'validateDoesLoggedInUserHaveAnyCapability';
     }
 
-    protected function validateCondition(TypeResolverInterface $typeResolver): bool
+    protected function validateCondition(ObjectTypeResolverInterface $typeResolver): bool
     {
         $vars = ApplicationState::getVars();
         // If the user is not logged-in, then do nothing: directive `@validateIsUserLoggedIn` will already fail
@@ -32,7 +32,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         return !empty(array_intersect($capabilities, $userCapabilities));
     }
 
-    protected function getValidationFailedMessage(TypeResolverInterface $typeResolver, array $failedDataFields): string
+    protected function getValidationFailedMessage(ObjectTypeResolverInterface $typeResolver, array $failedDataFields): string
     {
         $capabilities = $this->directiveArgsForSchema['capabilities'];
         $isValidatingDirective = $this->isValidatingDirective();
@@ -59,11 +59,11 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         );
     }
 
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
     {
         return $this->translationAPI->__('It validates if the user has any capability provided through directive argument \'capabilities\'', 'component-model');
     }
-    public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $typeResolver): array
     {
         return [
             [

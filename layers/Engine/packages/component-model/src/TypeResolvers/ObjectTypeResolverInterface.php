@@ -8,7 +8,7 @@ use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 
-interface TypeResolverInterface
+interface ObjectTypeResolverInterface
 {
     /**
      * All objects MUST have an ID. `null` is supported for the UnionTypeResolver,

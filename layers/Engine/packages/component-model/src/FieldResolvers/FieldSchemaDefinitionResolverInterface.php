@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 
 interface FieldSchemaDefinitionResolverInterface
 {
     public function getFieldNamesToResolve(): array;
     public function getAdminFieldNames(): array;
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string;
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int;
-    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string;
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array;
-    public function getSchemaFieldDeprecationDescription(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string;
+    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string;
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int;
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string;
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array;
+    public function getSchemaFieldDeprecationDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string;
     /**
      * Validate the constraints for a field argument
      *
      * @return string[] Error messages
      */
     public function validateFieldArgument(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array;
-    public function addSchemaDefinitionForField(array &$schemaDefinition, TypeResolverInterface $typeResolver, string $fieldName): void;
+    public function addSchemaDefinitionForField(array &$schemaDefinition, ObjectTypeResolverInterface $typeResolver, string $fieldName): void;
 }

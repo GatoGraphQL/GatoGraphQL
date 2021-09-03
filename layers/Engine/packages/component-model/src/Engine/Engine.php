@@ -37,7 +37,7 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
@@ -641,7 +641,7 @@ class Engine implements EngineInterface
 
     private function addDatasetToDatabase(
         array &$database,
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $dbKey,
         array $dataitems,
         array $resultIDItems,
@@ -1023,7 +1023,7 @@ class Engine implements EngineInterface
                 $load_data = !isset($data_properties[DataloadingConstants::SKIPDATALOAD]) || !$data_properties[DataloadingConstants::SKIPDATALOAD];
                 if ($load_data) {
                     $typeResolver_class = $processor->getTypeResolverClass($module);
-                    /** @var TypeResolverInterface */
+                    /** @var ObjectTypeResolverInterface */
                     $typeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
                     $isUnionTypeResolver = $typeResolver instanceof UnionTypeResolverInterface;
                     // ------------------------------------------
@@ -1276,7 +1276,7 @@ class Engine implements EngineInterface
     public function moveEntriesUnderDBName(
         array $entries,
         bool $entryHasId,
-        TypeResolverInterface $typeResolver
+        ObjectTypeResolverInterface $typeResolver
     ): array {
         $dbname_entries = [];
         if ($entries) {
@@ -1366,7 +1366,7 @@ class Engine implements EngineInterface
                 );
             }
 
-            /** @var TypeResolverInterface */
+            /** @var ObjectTypeResolverInterface */
             $typeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
             $database_key = $typeResolver->getTypeOutputName();
 
@@ -1650,8 +1650,8 @@ class Engine implements EngineInterface
     }
 
     protected function processSubcomponentData(
-        TypeResolverInterface $typeResolver,
-        TypeResolverInterface $targetTypeResolver,
+        ObjectTypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $targetTypeResolver,
         array $typeResolver_ids,
         string $module_path_key,
         array &$databases,

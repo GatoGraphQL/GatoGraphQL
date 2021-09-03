@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateAccessControl\DirectiveResolvers;
 
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;
 
 class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpointDirectiveResolver
@@ -15,12 +15,12 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
         return 'validateIsUserLoggedIn';
     }
 
-    protected function getValidationCheckpointSet(TypeResolverInterface $typeResolver): array
+    protected function getValidationCheckpointSet(ObjectTypeResolverInterface $typeResolver): array
     {
         return UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER;
     }
 
-    protected function getValidationFailedMessage(TypeResolverInterface $typeResolver, array $failedDataFields): string
+    protected function getValidationFailedMessage(ObjectTypeResolverInterface $typeResolver, array $failedDataFields): string
     {
         $errorMessage = $this->isValidatingDirective() ?
             $this->translationAPI->__('You must be logged in to access directives in field(s) \'%s\' for type \'%s\'', 'user-state') :
@@ -35,7 +35,7 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
         );
     }
 
-    public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
     {
         return $this->translationAPI->__('It validates if the user is logged-in', 'component-model');
     }

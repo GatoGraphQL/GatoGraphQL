@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 use function substr;
@@ -67,7 +67,7 @@ class UnionTypeHelpers
     /**
      * Creates a composed string containing the type and ID of the dbObject
      */
-    public static function getDBObjectComposedTypeAndID(TypeResolverInterface $typeResolver, int | string $id): string
+    public static function getDBObjectComposedTypeAndID(ObjectTypeResolverInterface $typeResolver, int | string $id): string
     {
         return
             $typeResolver->getTypeOutputName() .

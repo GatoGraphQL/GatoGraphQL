@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
@@ -33,17 +33,17 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
     /**
      * Do not show in the schema
      */
-    public function skipAddingToSchemaDefinition(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function skipAddingToSchemaDefinition(ObjectTypeResolverInterface $typeResolver, string $fieldName): bool
     {
         return true;
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
     {
         return SchemaDefinition::TYPE_ID;
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY;
     }
@@ -55,7 +55,7 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -82,7 +82,7 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
     abstract protected function getFieldCustomPostType(string $fieldName): string;
 
     public function resolveFieldTypeResolverClass(
-        TypeResolverInterface $typeResolver,
+        ObjectTypeResolverInterface $typeResolver,
         string $fieldName
     ): ?string {
         return CustomPostTypeResolver::class;
