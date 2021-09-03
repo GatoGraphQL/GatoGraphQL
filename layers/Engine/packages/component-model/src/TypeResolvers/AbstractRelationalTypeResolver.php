@@ -14,6 +14,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
+use PoP\ComponentModel\Facades\DirectivePipeline\DirectivePipelineServiceFacade;
 use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
@@ -349,17 +350,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $this->prependPathOnNestedErrors($nestedDirectiveSchemaError, $directiveField);
             }
         }
-    }
-
-    public function getDirectivePipeline(array $directiveResolverInstances): DirectivePipelineDecorator
-    {
-        // From the ordered directives, create the pipeline
-        $pipelineBuilder = new PipelineBuilder();
-        foreach ($directiveResolverInstances as $directiveResolverInstance) {
-            $pipelineBuilder->add($directiveResolverInstance);
-        }
-        $directivePipeline = new DirectivePipelineDecorator($pipelineBuilder->build());
-        return $directivePipeline;
     }
 
     protected function validateAndResolveInstances(
@@ -941,6 +931,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
+        $directivePipelineService = DirectivePipelineServiceFacade::getInstance();
         // Iterate while there are directives with data to be processed
         while (!empty($this->fieldDirectiveIDFields)) {
             $fieldDirectiveIDFields = $this->fieldDirectiveIDFields;
@@ -1060,7 +1051,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directivePipelineSchemaErrors = $directivePipelineIDDBErrors = [];
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
-            $directivePipeline = $this->getDirectivePipeline($directiveResolverInstances);
+            $directivePipeline = $directivePipelineService->getDirectivePipeline($directiveResolverInstances);
             $directivePipeline->resolveDirectivePipeline(
                 $this,
                 $pipelineIDsDataFields,
