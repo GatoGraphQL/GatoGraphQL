@@ -10,13 +10,13 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeDataLoaders\CommentTypeDataLoader;
 
-class CommentTypeResolver extends AbstractRelationalTypeResolver
+class CommentTypeResolver extends AbstractObjectTypeResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

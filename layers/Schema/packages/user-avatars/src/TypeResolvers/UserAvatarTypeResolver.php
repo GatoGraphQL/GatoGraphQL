@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\TypeResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPSchema\UserAvatars\TypeDataLoaders\UserAvatarTypeDataLoader;
 
-class UserAvatarTypeResolver extends AbstractRelationalTypeResolver
+class UserAvatarTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {
