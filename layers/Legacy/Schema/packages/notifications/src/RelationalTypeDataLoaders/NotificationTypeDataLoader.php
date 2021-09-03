@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPSchema\Notifications\RelationalTypeDataLoaders;
 
 use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeQueryableDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\Object\AbstractObjectTypeQueryableDataLoader;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP_Notifications_API;
 
-class NotificationTypeDataLoader extends AbstractRelationalTypeQueryableDataLoader
+class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected function getOrderbyDefault()
     {
