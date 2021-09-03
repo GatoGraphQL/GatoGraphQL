@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\TypeResolvers;
+namespace PoP\ComponentModel\TypeResolvers\Union;
 
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;

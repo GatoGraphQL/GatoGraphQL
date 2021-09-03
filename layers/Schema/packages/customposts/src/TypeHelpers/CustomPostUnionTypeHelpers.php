@@ -35,7 +35,7 @@ class CustomPostUnionTypeHelpers
 
     /**
      * Based on `getUnionOrTargetObjectTypeResolverClass` from class
-     * \PoP\ComponentModel\TypeResolvers\UnionTypeHelpers, but applied
+     * \PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers, but applied
      * to the CustomPostUnion type, to add its own configuration.
      *
      * Return a class or another depending on these possibilities:

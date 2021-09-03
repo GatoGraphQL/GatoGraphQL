@@ -11,7 +11,7 @@ use PoP\ComponentModel\HelperServices\DataloadHelperService;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_SSR_EngineInitialization_Hooks
