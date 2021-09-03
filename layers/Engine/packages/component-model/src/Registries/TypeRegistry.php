@@ -30,9 +30,9 @@ class TypeRegistry implements TypeRegistryInterface
      */
     public function getRelationalTypeResolvers(): array
     {
-        return array_map(
-            fn ($typeResolver) => $typeResolver instanceof RelationalTypeResolverInterface,
-            $this->typeResolvers
+        return array_filter(
+            $this->typeResolvers,
+            fn ($typeResolver) => $typeResolver instanceof RelationalTypeResolverInterface
         );
     }
 }
