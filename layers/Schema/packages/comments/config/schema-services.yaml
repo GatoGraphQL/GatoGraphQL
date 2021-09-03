@@ -9,8 +9,8 @@ services:
     PoPSchema\Comments\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPSchema\Comments\TypeDataLoaders\:
-        resource: '../src/TypeDataLoaders/*'
+    PoPSchema\Comments\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
 
     PoPSchema\Comments\FieldInterfaceResolvers\:
         resource: '../src/FieldInterfaceResolvers/*'

@@ -12,5 +12,5 @@ services:
     PoP\Engine\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoP\Engine\TypeDataLoaders\:
-        resource: '../src/TypeDataLoaders/*'
+    PoP\Engine\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'

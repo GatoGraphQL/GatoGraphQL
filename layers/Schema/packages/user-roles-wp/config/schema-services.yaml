@@ -9,5 +9,5 @@ services:
     PoPSchema\UserRolesWP\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPSchema\UserRolesWP\TypeDataLoaders\:
-        resource: '../src/TypeDataLoaders/*'
+    PoPSchema\UserRolesWP\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'

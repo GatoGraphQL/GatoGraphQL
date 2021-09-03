@@ -9,5 +9,5 @@ services:
     PoPSchema\UserAvatars\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPSchema\UserAvatars\TypeDataLoaders\:
-        resource: '../src/TypeDataLoaders/*'
+    PoPSchema\UserAvatars\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'

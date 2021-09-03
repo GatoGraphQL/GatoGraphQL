@@ -9,5 +9,5 @@ services:
     PoPSchema\Menus\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPSchema\Menus\TypeDataLoaders\:
-        resource: '../src/TypeDataLoaders/*'
+    PoPSchema\Menus\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'

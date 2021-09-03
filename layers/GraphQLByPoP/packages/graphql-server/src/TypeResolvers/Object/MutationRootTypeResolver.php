@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\Object;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use GraphQLByPoP\GraphQLServer\TypeDataLoaders\MutationRootTypeDataLoader;
+use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\MutationRootTypeDataLoader;
 
 class MutationRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
 {

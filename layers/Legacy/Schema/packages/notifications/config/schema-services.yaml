@@ -9,5 +9,5 @@ services:
     PoPSchema\Notifications\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPSchema\Notifications\TypeDataLoaders\:
-        resource: '../src/TypeDataLoaders/*'
+    PoPSchema\Notifications\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
