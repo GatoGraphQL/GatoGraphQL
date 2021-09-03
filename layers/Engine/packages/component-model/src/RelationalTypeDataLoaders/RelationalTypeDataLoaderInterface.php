@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders;
 
-interface TypeDataLoaderInterface
+interface RelationalTypeDataLoaderInterface
 {
     public function getObjects(array $ids): array;
 }
