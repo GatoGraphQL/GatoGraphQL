@@ -10,7 +10,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-abstract class AbstractRelationalTypeQueryableDataLoader extends AbstractRelationalTypeDataLoader implements TypeQueryableRelationalDataLoaderInterface
+abstract class AbstractRelationalTypeQueryableDataLoader extends AbstractRelationalTypeDataLoader implements RelationalTypeQueryableDataLoaderInterface
 {
     /**
      * @return mixed[]
