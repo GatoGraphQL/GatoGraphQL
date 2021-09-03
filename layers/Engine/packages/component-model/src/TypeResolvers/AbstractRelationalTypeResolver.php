@@ -390,7 +390,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $fieldDirective = $enqueuedFieldDirective;
             }
 
-            $fieldDirectiveResolverInstances = $this->getDirectiveResolverInstanceForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
+            $fieldDirectiveResolverInstances = $this->getDirectiveResolverInstancesForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
             $directiveName = $this->fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
             // If there is no directive with this name, show an error and skip it
             if (is_null($fieldDirectiveResolverInstances)) {
@@ -565,7 +565,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $instances;
     }
 
-    public function getDirectiveResolverInstanceForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array
+    public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array
     {
         $directiveName = $this->fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
         $directiveArgs = $this->fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
