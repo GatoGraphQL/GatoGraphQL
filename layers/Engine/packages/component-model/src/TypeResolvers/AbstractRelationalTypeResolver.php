@@ -95,7 +95,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     private array $dissectedFieldForSchemaCache = [];
     /**
-     * @var array<string, array>
+     * @var array<string, array<string, DirectiveResolverInterface>>
      */
     private array $directiveResolverInstanceCache = [];
     /**
