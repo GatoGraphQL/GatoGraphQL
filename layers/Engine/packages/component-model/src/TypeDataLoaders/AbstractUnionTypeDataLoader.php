@@ -15,11 +15,11 @@ abstract class AbstractUnionTypeDataLoader extends AbstractTypeDataLoader
     {
         $unionTypeResolverClass = $this->getUnionTypeResolverClass();
         $unionTypeResolver = $this->instanceManager->getInstance($unionTypeResolverClass);
-        $resultItemIDTargetTypeResolvers = $unionTypeResolver->getResultItemIDTargetObjectTypeResolvers($ids);
+        $resultItemIDTargetObjectTypeResolvers = $unionTypeResolver->getResultItemIDTargetObjectTypeResolvers($ids);
         // Organize all IDs by same resolverClass
         $typeResolverClassResultItemIDs = [];
-        foreach ($resultItemIDTargetTypeResolvers as $resultItemID => $targetTypeResolver) {
-            $typeResolverClassResultItemIDs[get_class($targetTypeResolver)][] = $resultItemID;
+        foreach ($resultItemIDTargetObjectTypeResolvers as $resultItemID => $targetObjectTypeResolver) {
+            $typeResolverClassResultItemIDs[get_class($targetObjectTypeResolver)][] = $resultItemID;
         }
         // Load all objects by each corresponding typeResolver
         $resultItems = [];
