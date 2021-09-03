@@ -79,7 +79,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             [
                 /**
                  * Where to store the config cache,
-                 * for both /service-containers and /config-via-symfony-cache
+                 * for both /container and /operational
                  * (config persistent cache: component model configuration + schema)
                  */
                 'cache-dir' => PluginEnvironment::getCacheDir(),

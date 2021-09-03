@@ -23,6 +23,6 @@ class SchemaCacheConfigurationManager extends AbstractCacheConfigurationManager
      */
     protected function getDirectoryName(): string
     {
-        return 'config-via-symfony-cache';
+        return 'operational';
     }
 }

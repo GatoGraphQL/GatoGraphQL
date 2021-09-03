@@ -22,6 +22,6 @@ class ContainerCacheConfigurationManager extends AbstractCacheConfigurationManag
      */
     protected function getDirectoryName(): string
     {
-        return 'service-containers';
+        return 'container';
     }
 }
