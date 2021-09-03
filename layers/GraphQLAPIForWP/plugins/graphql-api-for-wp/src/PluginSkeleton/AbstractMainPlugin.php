@@ -97,7 +97,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      */
     public function handleAnyPluginActivatedOrDeactivated(): void
     {
-        $this->invalidateCache();
+        $this->purgeContainer();
     }
 
 
@@ -105,7 +105,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * Remove the cached folders (service container and config),
      * and regenerate the timestamp
      */
-    protected function invalidateCache(): void
+    protected function purgeContainer(): void
     {
         $this->removeCachedFolders();
 
@@ -297,7 +297,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 \flush_rewrite_rules();
 
                 // Regenerate the timestamp, to generate the service container
-                $this->invalidateCache();
+                $this->purgeContainer();
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );

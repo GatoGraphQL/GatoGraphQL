@@ -39,7 +39,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      *
      * By providing `time()`, the cached service container is always
      * a one-time-use before accessing the wp-admin and
-     * having a new timestamp generated via `invalidateCache`.
+     * having a new timestamp generated via `purgeContainer`.
      */
     protected function getTimestamp(string $key): int
     {

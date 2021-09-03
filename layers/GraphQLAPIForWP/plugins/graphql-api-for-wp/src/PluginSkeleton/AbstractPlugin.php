@@ -284,7 +284,7 @@ abstract class AbstractPlugin
          * since AbstractMainPlugin already invalidates it
          * for ANY deactivated plugin.
          */
-        // $this->invalidateCache();
+        // $this->purgeContainer();
     }
 
     /**
