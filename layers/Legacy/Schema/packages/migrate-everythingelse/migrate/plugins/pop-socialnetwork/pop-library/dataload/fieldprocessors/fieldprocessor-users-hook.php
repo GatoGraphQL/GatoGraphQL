@@ -111,7 +111,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
     {
         switch ($fieldName) {
             case 'recommendsCustomPosts':
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case 'followers':
             case 'following':

@@ -45,7 +45,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST:
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
                 return UserTypeResolver::class;

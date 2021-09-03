@@ -84,7 +84,7 @@ class UnionTypeHelpers
      * - If there are none types, return `null`. As a consequence,
      *   the ID is returned as a field, not as a connection
      */
-    public static function getUnionOrTargetTypeResolverClass(string $unionTypeResolverClass): ?string
+    public static function getUnionOrTargetObjectTypeResolverClass(string $unionTypeResolverClass): ?string
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         $unionTypeResolver = $instanceManager->getInstance($unionTypeResolverClass);

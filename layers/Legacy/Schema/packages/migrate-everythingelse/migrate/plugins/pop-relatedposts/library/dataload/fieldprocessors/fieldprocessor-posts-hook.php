@@ -113,7 +113,7 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         switch ($fieldName) {
             case 'references':
             case 'referencedby':
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);

@@ -120,7 +120,7 @@ class HighlightFieldResolver extends AbstractDBDataFieldResolver
     {
         switch ($fieldName) {
             case 'highlightedpost':
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);

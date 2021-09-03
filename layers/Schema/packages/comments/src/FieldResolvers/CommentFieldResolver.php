@@ -337,7 +337,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'customPost':
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case 'parent':
             case 'responses':

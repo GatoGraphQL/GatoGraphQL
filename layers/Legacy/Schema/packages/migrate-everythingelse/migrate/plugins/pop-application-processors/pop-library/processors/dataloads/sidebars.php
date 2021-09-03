@@ -74,7 +74,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
                 return PostTagTypeResolver::class;
 
             case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolverClass($module);

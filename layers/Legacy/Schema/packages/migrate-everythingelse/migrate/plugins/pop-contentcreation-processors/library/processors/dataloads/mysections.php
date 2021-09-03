@@ -97,7 +97,7 @@ class PoP_ContentCreation_Module_Processor_MySectionDataloads extends PoP_Module
             case self::MODULE_DATALOAD_MYCONTENT_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW:
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolverClass($module);

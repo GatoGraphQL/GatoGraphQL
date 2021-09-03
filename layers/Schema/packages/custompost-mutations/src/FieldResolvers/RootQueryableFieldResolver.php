@@ -195,7 +195,7 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'myCustomPosts':
             case 'myCustomPost':
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);

@@ -34,7 +34,7 @@ class CustomPostUnionTypeHelpers
     }
 
     /**
-     * Based on `getUnionOrTargetTypeResolverClass` from class
+     * Based on `getUnionOrTargetObjectTypeResolverClass` from class
      * \PoP\ComponentModel\TypeResolvers\UnionTypeHelpers, but applied
      * to the CustomPostUnion type, to add its own configuration.
      *
@@ -46,7 +46,7 @@ class CustomPostUnionTypeHelpers
      * - If there are none types, return `null`. As a consequence,
      *   the ID is returned as a field, not as a connection
      */
-    public static function getCustomPostUnionOrTargetTypeResolverClass(
+    public static function getCustomPostUnionOrTargetObjectTypeResolverClass(
         string $unionTypeResolverClass = CustomPostUnionTypeResolver::class
     ): ?string {
         $instanceManager = InstanceManagerFacade::getInstance();

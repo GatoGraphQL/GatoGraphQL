@@ -204,7 +204,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostsForAdmin':
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);

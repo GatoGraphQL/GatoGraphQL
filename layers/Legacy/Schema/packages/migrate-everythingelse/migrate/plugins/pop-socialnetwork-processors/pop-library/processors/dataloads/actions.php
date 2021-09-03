@@ -266,7 +266,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNDOUPVOTEPOST:
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case self::MODULE_DATALOADACTION_SUBSCRIBETOTAG:
             case self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG:
