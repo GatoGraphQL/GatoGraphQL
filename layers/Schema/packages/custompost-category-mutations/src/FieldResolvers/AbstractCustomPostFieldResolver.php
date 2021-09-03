@@ -18,7 +18,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
     public function getClassesToAttachTo(): array
     {
         return [
-            $this->getTypeResolverClass(),
+            $this->getCustomPostTypeResolverClass(),
         ];
     }
 
@@ -140,7 +140,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
     {
         switch ($fieldName) {
             case 'setCategories':
-                return $this->getTypeResolverClass();
+                return $this->getCustomPostTypeResolverClass();
         }
 
         return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
