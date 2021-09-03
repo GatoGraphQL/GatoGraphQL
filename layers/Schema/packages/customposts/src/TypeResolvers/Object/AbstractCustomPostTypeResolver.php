@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeResolvers\Object;
 
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 
 abstract class AbstractCustomPostTypeResolver extends AbstractObjectTypeResolver
 {

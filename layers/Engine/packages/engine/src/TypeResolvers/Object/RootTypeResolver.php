@@ -6,7 +6,7 @@ namespace PoP\Engine\TypeResolvers\Object;
 
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\TypeDataLoaders\RootTypeDataLoader;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;

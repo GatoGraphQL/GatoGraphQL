@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\TypeResolvers\Object;
 
-use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPSchema\UserAvatars\TypeDataLoaders\UserAvatarTypeDataLoader;
 

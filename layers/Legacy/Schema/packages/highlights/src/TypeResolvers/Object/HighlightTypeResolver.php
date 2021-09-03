@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\TypeResolvers\Object;
 
-use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
 use PoPSchema\Highlights\TypeDataLoaders\HighlightTypeDataLoader;
 

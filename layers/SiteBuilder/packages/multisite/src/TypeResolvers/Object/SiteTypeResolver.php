@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Multisite\TypeResolvers\Object;
 
 use PoP\Multisite\TypeDataLoaders\SiteTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 
 class SiteTypeResolver extends AbstractObjectTypeResolver
 {
