@@ -11,7 +11,7 @@ use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeDataLoader;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-abstract class AbstractObjectTypeQueryableDataLoader extends AbstractRelationalTypeDataLoader implements RelationalTypeQueryableDataLoaderInterface
+abstract class AbstractObjectTypeQueryableDataLoader extends AbstractRelationalTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
     /**
      * @return mixed[]
