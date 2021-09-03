@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders\Union;
 
+use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeDataLoader;
+
 abstract class AbstractUnionTypeDataLoader extends AbstractRelationalTypeDataLoader
 {
     abstract protected function getUnionTypeResolverClass(): string;
