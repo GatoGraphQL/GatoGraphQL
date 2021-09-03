@@ -143,7 +143,7 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
         array $options = []
     ): mixed {
         $category = $resultItem;
-        $categoryTypeAPI = $this->getTypeAPI();
+        $categoryTypeAPI = $this->getCategoryTypeAPI();
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($relationalTypeResolver, $fieldName, $fieldArgs),
             [

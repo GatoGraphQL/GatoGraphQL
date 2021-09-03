@@ -92,7 +92,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $categoryTypeAPI = $this->getTypeAPI();
+        $categoryTypeAPI = $this->getCategoryTypeAPI();
         $category = $resultItem;
         switch ($fieldName) {
             case 'url':

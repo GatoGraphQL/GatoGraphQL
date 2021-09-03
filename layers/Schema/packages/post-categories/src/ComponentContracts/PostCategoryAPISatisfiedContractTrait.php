@@ -10,7 +10,7 @@ use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 trait PostCategoryAPISatisfiedContractTrait
 {
-    protected function getTypeAPI(): CategoryTypeAPIInterface
+    protected function getCategoryTypeAPI(): CategoryTypeAPIInterface
     {
         return PostCategoryTypeAPIFacade::getInstance();
     }
