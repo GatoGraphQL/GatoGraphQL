@@ -154,6 +154,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Admin fields
 - Validate constraints for field and directive arguments
 - Added options "default limit" and "max limit" for Posts and Pages
+- Performance improvement: Avoid regenerating the container when the schema is modified
 - Prettyprint GraphQL queries in the module docs
 
 ### Fixed
