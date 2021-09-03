@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache;
+namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Services\ConfigurationCache\AbstractCacheConfigurationManager;
 
-class SchemaCacheConfigurationManager extends AbstractCacheConfigurationManager
+class ServiceContainerCacheConfigurationManager extends AbstractCacheConfigurationManager
 {
     /**
      * The timestamp from when last saving settings/modules to the DB
@@ -15,6 +14,6 @@ class SchemaCacheConfigurationManager extends AbstractCacheConfigurationManager
     protected function getTimestamp(): int
     {
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        return $userSettingsManager->getSchemaTimestamp();
+        return $userSettingsManager->getServiceContainerTimestamp();
     }
 }
