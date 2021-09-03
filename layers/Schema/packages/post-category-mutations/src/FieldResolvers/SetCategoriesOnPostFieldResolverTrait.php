@@ -11,7 +11,7 @@ use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 trait SetCategoriesOnPostFieldResolverTrait
 {
-    protected function getTypeResolverClass(): string
+    protected function getCustomPostTypeResolverClass(): string
     {
         return PostTypeResolver::class;
     }
