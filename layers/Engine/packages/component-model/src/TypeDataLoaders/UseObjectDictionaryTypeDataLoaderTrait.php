@@ -22,6 +22,6 @@ trait UseObjectDictionaryTypeDataLoaderTrait
         return $ret;
     }
 
-    abstract protected function getTypeResolverClass(): string;
+    abstract protected function getObjectTypeResolverClass(): string;
     abstract protected function getTypeNewInstance(int | string $id);
 }

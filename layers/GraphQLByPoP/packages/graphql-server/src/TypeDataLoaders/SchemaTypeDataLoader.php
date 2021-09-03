@@ -14,7 +14,7 @@ class SchemaTypeDataLoader extends AbstractTypeDataLoader
 {
     use UseObjectDictionaryTypeDataLoaderTrait;
 
-    protected function getTypeResolverClass(): string
+    protected function getObjectTypeResolverClass(): string
     {
         return SchemaTypeResolver::class;
     }
