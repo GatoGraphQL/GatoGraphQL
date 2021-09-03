@@ -96,7 +96,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             /** @var UnionTypeResolverInterface $relationalTypeResolver */
             $targetTypeResolverClassDataItems = [];
             foreach ($ids as $resultItemID) {
-                if ($targetTypeResolverClass = $relationalTypeResolver->getTypeResolverClassForResultItem($resultItemID)) {
+                if ($targetTypeResolverClass = $relationalTypeResolver->getObjectTypeResolverClassForResultItem($resultItemID)) {
                     $targetTypeResolverClassDataItems[$targetTypeResolverClass][] = $resultItemID;
                 } else {
                     $resultItemIDTargetTypeResolvers[(string)$resultItemID] = null;
@@ -125,7 +125,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     //  */
     // public function addTypeToID(string | int $resultItemID): string
     // {
-    //     if ($resultItemTypeResolverClass = $this->getTypeResolverClassForResultItem($resultItemID)) {
+    //     if ($resultItemTypeResolverClass = $this->getObjectTypeResolverClassForResultItem($resultItemID)) {
     //         $resultItemTypeResolver = $this->instanceManager->getInstance($resultItemTypeResolverClass);
     //         return UnionTypeHelpers::getDBObjectComposedTypeAndID(
     //             $resultItemTypeResolver,
@@ -313,7 +313,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return $typeResolverPickers;
     }
 
-    public function getTypeResolverClassForResultItem(string | int $resultItemID)
+    public function getObjectTypeResolverClassForResultItem(string | int $resultItemID)
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
