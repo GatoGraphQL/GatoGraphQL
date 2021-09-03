@@ -8,7 +8,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\SchemaTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeDataLoader;
 use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
-use PoP\ComponentModel\RelationalTypeDataLoaders\UseObjectDictionaryTypeDataLoaderTrait;
+use PoP\ComponentModel\RelationalTypeDataLoaders\Object\UseObjectDictionaryTypeDataLoaderTrait;
 
 class SchemaTypeDataLoader extends AbstractRelationalTypeDataLoader
 {
