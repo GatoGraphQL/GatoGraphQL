@@ -8,6 +8,6 @@ use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 
 trait TagAPIRequestedContractTrait
 {
-    abstract protected function getTypeAPI(): TagTypeAPIInterface;
+    abstract protected function getTagTypeAPI(): TagTypeAPIInterface;
     abstract protected function getTagTypeResolverClass(): string;
 }

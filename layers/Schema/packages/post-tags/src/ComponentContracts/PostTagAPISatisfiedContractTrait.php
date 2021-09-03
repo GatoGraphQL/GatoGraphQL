@@ -10,7 +10,7 @@ use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 trait PostTagAPISatisfiedContractTrait
 {
-    protected function getTypeAPI(): TagTypeAPIInterface
+    protected function getTagTypeAPI(): TagTypeAPIInterface
     {
         return PostTagTypeAPIFacade::getInstance();
     }

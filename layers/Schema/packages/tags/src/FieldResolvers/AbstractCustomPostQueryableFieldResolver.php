@@ -131,7 +131,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $tagTypeAPI = $this->getTypeAPI();
+        $tagTypeAPI = $this->getTagTypeAPI();
         $customPost = $resultItem;
         $query = $this->convertFieldArgsToFilteringQueryArgs($relationalTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {

@@ -18,7 +18,7 @@ abstract class AbstractTagTypeResolver extends AbstractTaxonomyTypeResolver
 
     public function getID(object $resultItem): string | int | null
     {
-        $tagTypeAPI = $this->getTypeAPI();
+        $tagTypeAPI = $this->getTagTypeAPI();
         $tag = $resultItem;
         return $tagTypeAPI->getTagID($tag);
     }

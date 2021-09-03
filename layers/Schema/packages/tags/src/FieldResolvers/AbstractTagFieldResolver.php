@@ -89,7 +89,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $tagTypeAPI = $this->getTypeAPI();
+        $tagTypeAPI = $this->getTagTypeAPI();
         $tag = $resultItem;
         switch ($fieldName) {
             case 'url':
