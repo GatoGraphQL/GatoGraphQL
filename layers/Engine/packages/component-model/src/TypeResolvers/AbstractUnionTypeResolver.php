@@ -154,7 +154,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // Otherwise, TypeResolverDecorators can't have their defined ACL rules
         // work when querying a union type (eg: "customPosts")
         $targetTypeResolverClassMandatoryDirectivesForFields = [];
-        $targetTypeResolverClasses = $this->getTargetTypeResolverClasses();
+        $targetTypeResolverClasses = $this->getTargetObjectTypeResolverClasses();
         foreach ($targetTypeResolverClasses as $targetTypeResolverClass) {
             $targetTypeResolver = $this->instanceManager->getInstance($targetTypeResolverClass);
             $targetTypeResolverClassMandatoryDirectivesForFields[$targetTypeResolverClass] = $targetTypeResolver->getAllMandatoryDirectivesForFields();
@@ -213,7 +213,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         );
     }
 
-    public function getTargetTypeResolverClasses(): array
+    public function getTargetObjectTypeResolverClasses(): array
     {
         $typeResolverPickers = $this->getTypeResolverPickers();
         return $this->getObjectTypeResolverClassesFromPickers($typeResolverPickers);

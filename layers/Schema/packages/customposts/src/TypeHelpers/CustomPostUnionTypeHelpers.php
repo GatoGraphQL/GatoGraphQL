@@ -51,7 +51,7 @@ class CustomPostUnionTypeHelpers
     ): ?string {
         $instanceManager = InstanceManagerFacade::getInstance();
         $unionTypeResolver = $instanceManager->getInstance($unionTypeResolverClass);
-        $targetTypeResolverClasses = $unionTypeResolver->getTargetTypeResolverClasses();
+        $targetTypeResolverClasses = $unionTypeResolver->getTargetObjectTypeResolverClasses();
         if ($targetTypeResolverClasses) {
             // By configuration: If there is only 1 item, return only that one
             if (ComponentConfiguration::useSingleTypeInsteadOfCustomPostUnionType()) {
