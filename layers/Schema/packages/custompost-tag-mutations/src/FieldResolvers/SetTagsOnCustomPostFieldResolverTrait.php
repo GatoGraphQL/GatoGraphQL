@@ -8,7 +8,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 trait SetTagsOnCustomPostFieldResolverTrait
 {
-    abstract protected function getTypeResolverClass(): string;
+    abstract protected function getCustomPostTypeResolverClass(): string;
     abstract protected function getTypeMutationResolverClass(): string;
 
     protected function getEntityName(): string
