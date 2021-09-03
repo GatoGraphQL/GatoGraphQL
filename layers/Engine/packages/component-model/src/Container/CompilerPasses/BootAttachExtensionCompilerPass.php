@@ -8,7 +8,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\Root\Component\ApplicationEvents;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoP\ComponentModel\TypeResolverPickers\TypeResolverPickerInterface;
+use PoP\ComponentModel\TypeResolverPickers\ObjectTypeResolverPickerInterface;
 
 class BootAttachExtensionCompilerPass extends AbstractAttachExtensionCompilerPass
 {
@@ -25,7 +25,7 @@ class BootAttachExtensionCompilerPass extends AbstractAttachExtensionCompilerPas
         return [
             FieldResolverInterface::class => AttachableExtensionGroups::FIELDRESOLVERS,
             DirectiveResolverInterface::class => AttachableExtensionGroups::DIRECTIVERESOLVERS,
-            TypeResolverPickerInterface::class => AttachableExtensionGroups::TYPERESOLVERPICKERS,
+            ObjectTypeResolverPickerInterface::class => AttachableExtensionGroups::TYPERESOLVERPICKERS,
         ];
     }
 }

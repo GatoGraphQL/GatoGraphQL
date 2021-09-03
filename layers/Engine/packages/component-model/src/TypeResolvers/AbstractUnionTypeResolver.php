@@ -11,13 +11,13 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\TypeResolverPickers\TypeResolverPickerInterface;
+use PoP\ComponentModel\TypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 
 abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver implements UnionTypeResolverInterface
 {
     /**
-     * @var TypeResolverPickerInterface[]
+     * @var ObjectTypeResolverPickerInterface[]
      */
     protected ?array $typeResolverPickers = null;
 
@@ -222,13 +222,13 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     protected function getObjectTypeResolverClassesFromPickers(array $typeResolverPickers): array
     {
         return array_map(
-            fn (TypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getObjectTypeResolverClass(),
+            fn (ObjectTypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getObjectTypeResolverClass(),
             $typeResolverPickers
         );
     }
 
     /**
-     * @return TypeResolverPickerInterface[]
+     * @return ObjectTypeResolverPickerInterface[]
      */
     public function getObjectTypeResolverPickers(): array
     {
@@ -247,11 +247,11 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         do {
             // All the pickers and their priorities for this class level
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-            /** @var TypeResolverPickerInterface[] */
+            /** @var ObjectTypeResolverPickerInterface[] */
             $attachedTypeResolverPickers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::TYPERESOLVERPICKERS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
-                fn (TypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getPriorityToAttachToClasses(),
+                fn (ObjectTypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getPriorityToAttachToClasses(),
                 $attachedTypeResolverPickers
             );
 
@@ -332,7 +332,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return null;
     }
 
-    public function getTargetTypeResolverPicker(object $resultItem): ?TypeResolverPickerInterface
+    public function getTargetTypeResolverPicker(object $resultItem): ?ObjectTypeResolverPickerInterface
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
