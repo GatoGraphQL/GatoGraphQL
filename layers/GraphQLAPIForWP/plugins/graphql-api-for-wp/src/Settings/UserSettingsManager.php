@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Settings\Options;
 
 class UserSettingsManager implements UserSettingsManagerInterface
 {
-    private const TIMESTAMP_SERVICECONTAINER = 'service-container';
+    private const TIMESTAMP_CONTAINER = 'container';
     private const TIMESTAMP_SCHEMA = 'schema';
 
     /**
@@ -46,9 +46,9 @@ class UserSettingsManager implements UserSettingsManagerInterface
         $timestamps = \get_option(Options::TIMESTAMPS, [$key => time()]);
         return (int) $timestamps[$key];
     }
-    public function getServiceContainerTimestamp(): int
+    public function getContainerTimestamp(): int
     {
-        return $this->getTimestamp(self::TIMESTAMP_SERVICECONTAINER);
+        return $this->getTimestamp(self::TIMESTAMP_CONTAINER);
     }
     public function getSchemaTimestamp(): int
     {

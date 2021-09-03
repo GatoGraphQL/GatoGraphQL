@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use GraphQLAPI\GraphQLAPI\Facades\ServiceContainerCacheConfigurationManagerFacade;
+use GraphQLAPI\GraphQLAPI\Facades\ContainerCacheConfigurationManagerFacade;
 use GraphQLAPI\GraphQLAPI\GetterSetterObjects\ContainerCacheConfiguration;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
@@ -28,7 +28,7 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
             $containerConfigurationCacheDirectory = null;
             $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
             if ($cacheContainerConfiguration = $this->isCachingEnabled()) {
-                $cacheConfigurationManager = ServiceContainerCacheConfigurationManagerFacade::getInstance();
+                $cacheConfigurationManager = ContainerCacheConfigurationManagerFacade::getInstance();
                 $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
                 $containerConfigurationCacheDirectory = $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'service-containers';
             }

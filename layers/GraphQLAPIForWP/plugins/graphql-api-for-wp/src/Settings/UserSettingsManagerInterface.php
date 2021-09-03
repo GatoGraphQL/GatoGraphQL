@@ -8,12 +8,14 @@ interface UserSettingsManagerInterface
 {
     /**
      * Timestamp of latest executed write to DB, concerning plugin activation,
-     * module enabled/disabled, user settings updated
+     * module enabled/disabled, user settings updated, to refresh the Service
+     * Container
      */
-    public function getServiceContainerTimestamp(): int;
+    public function getContainerTimestamp(): int;
     /**
      * Timestamp of latest executed write to DB, concerning CPT entity created
-     * or modified (such as Schema Configuration, ACL, etc)
+     * or modified (such as Schema Configuration, ACL, etc), to refresh
+     * the GraphQL schema
      */
     public function getSchemaTimestamp(): int;
     /**
