@@ -105,6 +105,24 @@ abstract class AbstractObjectTypeResolver extends AbstractTypeResolver implement
      */
     private array $fieldNamesResolvedByFieldResolver = [];
 
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
+        protected FeedbackMessageStoreInterface $feedbackMessageStore,
+        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected ErrorProviderInterface $errorProvider,
+        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $schemaNamespacingService,
+        );
+    }
+
     /**
      * @return array<string,DirectiveResolverInterface[]>
      */

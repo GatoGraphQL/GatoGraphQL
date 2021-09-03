@@ -22,22 +22,22 @@ class MediaTypeResolver extends AbstractObjectTypeResolver
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
         protected MediaTypeAPIInterface $mediaTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
             $hooksAPI,
             $instanceManager,
+            $schemaNamespacingService,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
             $schemaDefinitionService,
-            $schemaNamespacingService,
         );
     }
 

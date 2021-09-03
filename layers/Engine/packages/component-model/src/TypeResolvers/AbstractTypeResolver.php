@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
-use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
@@ -20,10 +16,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
         protected InstanceManagerInterface $instanceManager,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected ErrorProviderInterface $errorProvider,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected SchemaNamespacingServiceInterface $schemaNamespacingService,
     ) {
     }
