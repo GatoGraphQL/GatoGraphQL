@@ -310,6 +310,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             <form method="post" action="options.php">
                 <!-- Artificial input as flag that the form belongs to this plugin -->
                 <input type="hidden" name="<?php echo self::FORM_ORIGIN ?>" value="<?php echo self::SETTINGS_FIELD ?>" />
+                <!--
+                    Artificial input to trigger the update of the form always, as to always purge the container/operational cache
+                    (eg: to include 3rd party extensions in the service container, or new Gutenberg blocks)
+                    This is needed because "If the new and old values are the same, no need to update."
+                    which makes "update_option_{$option}" not be triggered when there are no changes
+                    @see wp-includes/option.php
+                -->
+                <input type="hidden" name="<?php echo self::SETTINGS_FIELD?>[last_saved_timestamp]" value="<?php echo time() ?>">
                 <!-- Panels -->
                 <?php
                 $sectionClass = $printWithTabs ? 'tab-content' : '';
