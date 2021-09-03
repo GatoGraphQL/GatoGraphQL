@@ -9,5 +9,5 @@ services:
     GraphQLByPoP\GraphQLServer\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    GraphQLByPoP\GraphQLServer\TypeDataLoaders\:
-        resource: '../src/TypeDataLoaders/*'
+    GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'

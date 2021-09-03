@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\TypeResolvers\Object;
 
-use PoPSchema\Posts\TypeDataLoaders\PostTypeDataLoader;
+use PoPSchema\Posts\RelationalTypeDataLoaders\Object\PostTypeDataLoader;
 use PoPSchema\CustomPosts\TypeResolvers\Object\AbstractCustomPostTypeResolver;
 
 class PostTypeResolver extends AbstractCustomPostTypeResolver

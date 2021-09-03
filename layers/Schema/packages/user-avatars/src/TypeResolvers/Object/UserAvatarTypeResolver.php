@@ -6,7 +6,7 @@ namespace PoPSchema\UserAvatars\TypeResolvers\Object;
 
 use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
-use PoPSchema\UserAvatars\TypeDataLoaders\UserAvatarTypeDataLoader;
+use PoPSchema\UserAvatars\RelationalTypeDataLoaders\Object\UserAvatarTypeDataLoader;
 
 class UserAvatarTypeResolver extends AbstractObjectTypeResolver
 {

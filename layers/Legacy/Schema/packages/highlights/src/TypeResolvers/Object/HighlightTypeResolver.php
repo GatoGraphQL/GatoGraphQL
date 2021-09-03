@@ -6,7 +6,7 @@ namespace PoPSchema\Highlights\TypeResolvers\Object;
 
 use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
-use PoPSchema\Highlights\TypeDataLoaders\HighlightTypeDataLoader;
+use PoPSchema\Highlights\RelationalTypeDataLoaders\Object\HighlightTypeDataLoader;
 
 class HighlightTypeResolver extends AbstractObjectTypeResolver
 {

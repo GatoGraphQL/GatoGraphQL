@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\Object;
 
 use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\AbstractIntrospectionTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeDataLoaders\SchemaDefinitionReferenceTypeDataLoader;
+use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\Object\SchemaDefinitionReferenceTypeDataLoader;
 
 class TypeTypeResolver extends AbstractIntrospectionTypeResolver
 {

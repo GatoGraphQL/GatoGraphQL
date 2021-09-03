@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Stances\TypeResolvers\Object;
 
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
-use PoPSchema\Stances\TypeDataLoaders\StanceTypeDataLoader;
+use PoPSchema\Stances\RelationalTypeDataLoaders\Object\StanceTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 
 class StanceTypeResolver extends AbstractObjectTypeResolver

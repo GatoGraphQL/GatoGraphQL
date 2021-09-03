@@ -9,8 +9,8 @@ services:
     PoPSchema\CustomPosts\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPSchema\CustomPosts\TypeDataLoaders\:
-        resource: '../src/TypeDataLoaders/*'
+    PoPSchema\CustomPosts\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
 
     PoPSchema\CustomPosts\FieldInterfaceResolvers\:
         resource: '../src/FieldInterfaceResolvers/*'

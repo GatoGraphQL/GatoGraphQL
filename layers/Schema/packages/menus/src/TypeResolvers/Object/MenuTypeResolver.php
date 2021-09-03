@@ -6,7 +6,7 @@ namespace PoPSchema\Menus\TypeResolvers\Object;
 
 use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
-use PoPSchema\Menus\TypeDataLoaders\MenuTypeDataLoader;
+use PoPSchema\Menus\RelationalTypeDataLoaders\Object\MenuTypeDataLoader;
 
 class MenuTypeResolver extends AbstractObjectTypeResolver
 {

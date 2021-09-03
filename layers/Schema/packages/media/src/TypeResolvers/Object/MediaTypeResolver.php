@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoPSchema\Media\TypeDataLoaders\MediaTypeDataLoader;
+use PoPSchema\Media\RelationalTypeDataLoaders\Object\MediaTypeDataLoader;
 
 class MediaTypeResolver extends AbstractObjectTypeResolver
 {

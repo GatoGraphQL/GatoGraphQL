@@ -14,7 +14,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\Object\AbstractCustomPostTypeResolver;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
-use PoPSchema\Pages\TypeDataLoaders\PageTypeDataLoader;
+use PoPSchema\Pages\RelationalTypeDataLoaders\Object\PageTypeDataLoader;
 
 class PageTypeResolver extends AbstractCustomPostTypeResolver
 {

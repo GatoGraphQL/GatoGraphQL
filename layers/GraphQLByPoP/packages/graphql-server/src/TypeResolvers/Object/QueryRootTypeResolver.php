@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\Object;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use GraphQLByPoP\GraphQLServer\TypeDataLoaders\QueryRootTypeDataLoader;
+use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\Object\QueryRootTypeDataLoader;
 
 class QueryRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
 {

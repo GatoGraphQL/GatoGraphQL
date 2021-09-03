@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use PoPSchema\Users\TypeDataLoaders\UserTypeDataLoader;
+use PoPSchema\Users\RelationalTypeDataLoaders\Object\UserTypeDataLoader;
 
 class UserTypeResolver extends AbstractObjectTypeResolver
 {

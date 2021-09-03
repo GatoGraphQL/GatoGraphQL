@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\TypeResolvers\Object;
 
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
-use PoPSchema\PostCategories\TypeDataLoaders\PostCategoryTypeDataLoader;
+use PoPSchema\PostCategories\RelationalTypeDataLoaders\Object\PostCategoryTypeDataLoader;
 use PoPSchema\Categories\TypeResolvers\Object\AbstractCategoryTypeResolver;
 
 class PostCategoryTypeResolver extends AbstractCategoryTypeResolver

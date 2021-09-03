@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
-use GraphQLByPoP\GraphQLServer\TypeDataLoaders\SchemaTypeDataLoader;
+use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\Object\SchemaTypeDataLoader;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\SchemaTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\TypeTypeResolver;
 use PoP\API\Schema\SchemaDefinition;

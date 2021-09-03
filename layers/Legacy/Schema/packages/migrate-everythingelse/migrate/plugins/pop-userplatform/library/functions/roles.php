@@ -2,7 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
-use PoPSchema\Users\TypeDataLoaders\UserTypeDataLoader;
+use PoPSchema\Users\RelationalTypeDataLoaders\Object\UserTypeDataLoader;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 define('GD_ROLE_PROFILE', 'profile');

@@ -9,8 +9,8 @@ services:
     PoPSchema\PostCategories\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPSchema\PostCategories\TypeDataLoaders\:
-        resource: '../src/TypeDataLoaders/*'
+    PoPSchema\PostCategories\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
 
     PoPSchema\PostCategories\SchemaHooks\:
         resource: '../src/SchemaHooks/*'

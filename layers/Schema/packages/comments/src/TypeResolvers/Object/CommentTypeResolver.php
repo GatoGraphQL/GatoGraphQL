@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\Comments\TypeDataLoaders\CommentTypeDataLoader;
+use PoPSchema\Comments\RelationalTypeDataLoaders\Object\CommentTypeDataLoader;
 
 class CommentTypeResolver extends AbstractObjectTypeResolver
 {
