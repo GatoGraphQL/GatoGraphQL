@@ -54,14 +54,14 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
     {
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
-        $resultItemIDTargetTypeResolvers = $this->getResultItemIDTargetObjectTypeResolvers($dbObjectIDs);
+        $resultItemIDTargetObjectTypeResolvers = $this->getResultItemIDTargetObjectTypeResolvers($dbObjectIDs);
         $typeDBObjectIDOrIDs = [];
         foreach ($dbObjectIDs as $resultItemID) {
             // Make sure there is a resolver for this resultItem. If there is none, return the same ID
-            $targetTypeResolver = $resultItemIDTargetTypeResolvers[$resultItemID];
-            if (!is_null($targetTypeResolver)) {
+            $targetObjectTypeResolver = $resultItemIDTargetObjectTypeResolvers[$resultItemID];
+            if (!is_null($targetObjectTypeResolver)) {
                 $typeDBObjectIDOrIDs[] = UnionTypeHelpers::getDBObjectComposedTypeAndID(
-                    $targetTypeResolver,
+                    $targetObjectTypeResolver,
                     $resultItemID
                 );
             } else {
