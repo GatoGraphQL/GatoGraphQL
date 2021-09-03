@@ -33,7 +33,7 @@ interface UserSettingsManagerInterface
     /**
      * Remove the timestamp
      */
-    public function removeTimestamp(): void;
+    public function removeTimestamps(): void;
     public function hasSetting(string $item): bool;
     public function getSetting(string $module, string $option): mixed;
     public function hasSetModuleEnabled(string $moduleID): bool;

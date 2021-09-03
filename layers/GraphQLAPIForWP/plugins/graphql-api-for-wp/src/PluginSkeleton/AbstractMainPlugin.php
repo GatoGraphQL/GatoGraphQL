@@ -136,17 +136,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     {
         parent::deactivate();
 
-        // Remove the timestamp
-        $this->removeTimestamp();
+        // Remove the timestamps
+        $this->removeTimestamps();
     }
 
     /**
-     * Regenerate the timestamp
+     * Regenerate the timestamps
      */
-    protected function removeTimestamp(): void
+    protected function removeTimestamps(): void
     {
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->removeTimestamp();
+        $userSettingsManager->removeTimestamps();
     }
 
     /**

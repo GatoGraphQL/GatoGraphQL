@@ -94,7 +94,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     /**
      * Remove the timestamp
      */
-    public function removeTimestamp(): void
+    public function removeTimestamps(): void
     {
         \delete_option(Options::TIMESTAMPS);
     }
