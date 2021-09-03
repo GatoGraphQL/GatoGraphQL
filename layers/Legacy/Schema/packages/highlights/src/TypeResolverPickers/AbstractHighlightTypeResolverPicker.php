@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolverPickers\AbstractTypeResolverPicker;
 
 class AbstractHighlightTypeResolverPicker extends AbstractTypeResolverPicker
 {
-    public function getTypeResolverClass(): string
+    public function getObjectTypeResolverClass(): string
     {
         return HighlightTypeResolver::class;
     }

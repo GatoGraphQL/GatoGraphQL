@@ -10,7 +10,7 @@ use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 
 abstract class AbstractPageTypeResolverPicker extends AbstractTypeResolverPicker
 {
-    public function getTypeResolverClass(): string
+    public function getObjectTypeResolverClass(): string
     {
         return PageTypeResolver::class;
     }

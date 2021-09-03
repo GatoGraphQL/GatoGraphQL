@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolverPickers\AbstractTypeResolverPicker;
 
 class AbstractStanceTypeResolverPicker extends AbstractTypeResolverPicker
 {
-    public function getTypeResolverClass(): string
+    public function getObjectTypeResolverClass(): string
     {
         return StanceTypeResolver::class;
     }

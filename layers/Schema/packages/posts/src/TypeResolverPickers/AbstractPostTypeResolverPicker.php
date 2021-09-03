@@ -10,7 +10,7 @@ use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 abstract class AbstractPostTypeResolverPicker extends AbstractTypeResolverPicker
 {
-    public function getTypeResolverClass(): string
+    public function getObjectTypeResolverClass(): string
     {
         return PostTypeResolver::class;
     }

@@ -222,13 +222,14 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     protected function getTypeResolverClassesFromPickers(array $typeResolverPickers): array
     {
         return array_map(
-            function ($typeResolverPicker) {
-                return $typeResolverPicker->getTypeResolverClass();
-            },
+            fn (TypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getObjectTypeResolverClass(),
             $typeResolverPickers
         );
     }
 
+    /**
+     * @return TypeResolverPickerInterface[]
+     */
     public function getTypeResolverPickers(): array
     {
         if (is_null($this->typeResolverPickers)) {
@@ -324,7 +325,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             if ($maybePicker->isIDOfType($resultItemID)) {
                 // Found it!
                 $typeResolverPicker = $maybePicker;
-                return $typeResolverPicker->getTypeResolverClass();
+                return $typeResolverPicker->getObjectTypeResolverClass();
             }
         }
 
@@ -351,7 +352,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     public function getTargetTypeResolver(object $resultItem): ?RelationalTypeResolverInterface
     {
         if ($typeResolverPicker = $this->getTargetTypeResolverPicker($resultItem)) {
-            $typeResolverClass = $typeResolverPicker->getTypeResolverClass();
+            $typeResolverClass = $typeResolverPicker->getObjectTypeResolverClass();
             /**
              * @var RelationalTypeResolverInterface
              */
@@ -428,7 +429,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         // Iterate through the typeResolvers from all the pickers and get their schema definitions
         foreach ($this->getTypeResolverPickers() as $picker) {
-            $pickerTypeResolver = $this->instanceManager->getInstance($picker->getTypeResolverClass());
+            $pickerTypeResolver = $this->instanceManager->getInstance($picker->getObjectTypeResolverClass());
             $pickerTypeSchemaDefinition = $pickerTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
             $pickerTypeName = $pickerTypeResolver->getMaybeNamespacedTypeName();
             $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_POSSIBLE_TYPES][$pickerTypeName] = $pickerTypeSchemaDefinition[$pickerTypeName];
