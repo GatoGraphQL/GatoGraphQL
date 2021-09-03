@@ -111,7 +111,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
 
         // Regenerate the timestamp
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->storeTimestamp();
+        $userSettingsManager->storeContainerTimestamp();
     }
 
     /**

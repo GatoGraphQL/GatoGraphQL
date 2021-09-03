@@ -124,7 +124,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 function ($postID, $post): void {
                     if ($post->post_status != 'auto-draft') {
                         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-                        $userSettingsManager->storeTimestamp();
+                        $userSettingsManager->storeOperationalTimestamp();
                     }
                 },
                 10,

@@ -48,7 +48,6 @@ class UserSettingsManager implements UserSettingsManagerInterface
     }
     /**
      * Static timestamp, reflecting when the service container has been regenerated.
-     * When this value is updated, the "operational" timestamp must also be updated.
      * Should change not so often
      */
     public function getContainerTimestamp(): int
@@ -65,11 +64,32 @@ class UserSettingsManager implements UserSettingsManagerInterface
     }
     /**
      * Store the current time to indicate the latest executed write to DB,
-     * concerning plugin activation, module enabled/disabled, user settings updated
+     * concerning plugin activation, module enabled/disabled, user settings updated,
+     * to refresh the Service Container.
+     * 
+     * When this value is updated, the "operational" timestamp is also updated.
      */
-    public function storeTimestamp(): void
+    public function storeContainerTimestamp(): void
     {
-        \update_option(Options::TIMESTAMPS, time());
+        $time = time();
+        $timestamps = [
+            self::TIMESTAMP_CONTAINER => $time,
+            self::TIMESTAMP_OPERATIONAL => $time,
+        ];
+        \update_option(Options::TIMESTAMPS, $timestamps);
+    }
+    /**
+     * Store the current time to indicate the latest executed write to DB,
+     * concerning CPT entity created or modified (such as Schema Configuration,
+     * ACL, etc), to refresh the GraphQL schema
+     */
+    public function storeOperationalTimestamp(): void
+    {
+        $timestamps = [
+            self::TIMESTAMP_CONTAINER => $this->getContainerTimestamp(),
+            self::TIMESTAMP_OPERATIONAL => time(),
+        ];
+        \update_option(Options::TIMESTAMPS, $timestamps);
     }
     /**
      * Remove the timestamp
@@ -114,7 +134,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
         $this->storeItem(Options::MODULES, $moduleID, $isEnabled);
 
         // Update the timestamp
-        $this->storeTimestamp();
+        $this->storeContainerTimestamp();
     }
 
     /**
@@ -125,7 +145,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
         $this->storeItems(Options::MODULES, $moduleIDValues);
 
         // Update the timestamp
-        $this->storeTimestamp();
+        $this->storeContainerTimestamp();
     }
 
     /**
