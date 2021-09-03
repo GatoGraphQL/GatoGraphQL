@@ -6,9 +6,9 @@ namespace PoPSchema\Stances\TypeResolverPickers;
 
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
 use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
-use PoP\ComponentModel\TypeResolverPickers\AbstractTypeResolverPicker;
+use PoP\ComponentModel\TypeResolverPickers\AbstractObjectTypeResolverPicker;
 
-class AbstractStanceTypeResolverPicker extends AbstractTypeResolverPicker
+class AbstractStanceTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     public function getObjectTypeResolverClass(): string
     {

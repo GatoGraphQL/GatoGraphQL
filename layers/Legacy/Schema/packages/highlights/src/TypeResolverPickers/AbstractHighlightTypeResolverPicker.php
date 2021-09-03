@@ -6,9 +6,9 @@ namespace PoPSchema\Highlights\TypeResolverPickers;
 
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
 use PoPSchema\Highlights\TypeResolvers\HighlightTypeResolver;
-use PoP\ComponentModel\TypeResolverPickers\AbstractTypeResolverPicker;
+use PoP\ComponentModel\TypeResolverPickers\AbstractObjectTypeResolverPicker;
 
-class AbstractHighlightTypeResolverPicker extends AbstractTypeResolverPicker
+class AbstractHighlightTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     public function getObjectTypeResolverClass(): string
     {
