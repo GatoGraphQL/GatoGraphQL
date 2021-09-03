@@ -15,9 +15,9 @@ class GraphQLAPIArrowFnUnionTypeChainedRuleContainerConfigurationService extends
         return [
             $this->pluginDir . '/vendor/getpop/component-model/src/TypeResolvers/AbstractRelationalTypeResolver.php',
             $this->pluginDir . '/vendor/getpop/engine/src/DirectiveResolvers/FilterIDsSatisfyingConditionDirectiveResolverTrait.php',
-            $this->pluginDir . '/vendor/pop-schema/menus/src/RelationalTypeDataLoaders/MenuItemTypeDataLoader.php',
-            $this->pluginDir . '/vendor/pop-schema/menus/src/RelationalTypeDataLoaders/MenuTypeDataLoader.php',
-            $this->pluginDir . '/vendor/pop-schema/user-avatars/src/RelationalTypeDataLoaders/UserAvatarTypeDataLoader.php',
+            $this->pluginDir . '/vendor/pop-schema/menus/src/RelationalTypeDataLoaders/Object/MenuItemTypeDataLoader.php',
+            $this->pluginDir . '/vendor/pop-schema/menus/src/RelationalTypeDataLoaders/Object/MenuTypeDataLoader.php',
+            $this->pluginDir . '/vendor/pop-schema/user-avatars/src/RelationalTypeDataLoaders/Object/UserAvatarTypeDataLoader.php',
             $this->pluginDir . '/vendor/pop-wp-schema/menus/src/FieldResolvers/MenuFieldResolver.php',
         ];
     }
