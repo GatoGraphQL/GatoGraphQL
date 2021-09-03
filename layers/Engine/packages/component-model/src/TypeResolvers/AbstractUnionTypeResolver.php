@@ -267,9 +267,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         // Validate that all typeResolvers implement the required interface
         if ($typeInterfaceClass = $this->getSchemaTypeInterfaceClass()) {
-            $typeResolverClasses = $this->getObjectTypeResolverClassesFromPickers($typeResolverPickers);
+            $objectTypeResolverClasses = $this->getObjectTypeResolverClassesFromPickers($typeResolverPickers);
             $notImplementingInterfaceTypeResolverClasses = array_filter(
-                $typeResolverClasses,
+                $objectTypeResolverClasses,
                 function ($typeResolverClass) use ($typeInterfaceClass) {
                     /**
                      * @var RelationalTypeResolverInterface
