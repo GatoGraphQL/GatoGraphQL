@@ -39,7 +39,7 @@ The schema is created following the [code-first approach](https://graphql-by-pop
 This is how a `User` type is satisfied:
 
 ```php
-class UserTypeResolver extends AbstractObjectTypeResolver
+class UserTypeResolver extends AbstractRelationalTypeResolver
 {
   public function getTypeName(): string
   {

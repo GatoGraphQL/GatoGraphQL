@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\UserRolesWP\TypeResolvers;
 
 use PoPSchema\UserRolesWP\TypeDataLoaders\UserRoleTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 
-class UserRoleTypeResolver extends AbstractObjectTypeResolver
+class UserRoleTypeResolver extends AbstractRelationalTypeResolver
 {
     public function getTypeName(): string
     {

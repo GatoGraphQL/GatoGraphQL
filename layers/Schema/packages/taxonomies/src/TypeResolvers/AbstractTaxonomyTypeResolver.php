@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Taxonomies\TypeResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 
-abstract class AbstractTaxonomyTypeResolver extends AbstractObjectTypeResolver
+abstract class AbstractTaxonomyTypeResolver extends AbstractRelationalTypeResolver
 {
 }

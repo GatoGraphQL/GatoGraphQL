@@ -7,10 +7,10 @@ namespace PoP\Engine\TypeResolvers;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\TypeDataLoaders\RootTypeDataLoader;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 
-class RootTypeResolver extends AbstractObjectTypeResolver
+class RootTypeResolver extends AbstractRelationalTypeResolver
 {
     use ReservedNameTypeResolverTrait;
 

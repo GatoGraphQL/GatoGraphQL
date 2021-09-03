@@ -6,9 +6,9 @@ namespace PoPSchema\Stances\TypeResolvers;
 
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
 use PoPSchema\Stances\TypeDataLoaders\StanceTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 
-class StanceTypeResolver extends AbstractObjectTypeResolver
+class StanceTypeResolver extends AbstractRelationalTypeResolver
 {
     public function getTypeName(): string
     {

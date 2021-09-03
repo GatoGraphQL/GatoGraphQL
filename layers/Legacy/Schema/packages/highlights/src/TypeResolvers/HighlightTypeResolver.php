@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\TypeResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
 use PoPSchema\Highlights\TypeDataLoaders\HighlightTypeDataLoader;
 
-class HighlightTypeResolver extends AbstractObjectTypeResolver
+class HighlightTypeResolver extends AbstractRelationalTypeResolver
 {
     public function getTypeName(): string
     {
