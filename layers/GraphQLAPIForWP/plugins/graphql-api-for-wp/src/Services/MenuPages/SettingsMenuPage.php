@@ -317,7 +317,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     which makes "update_option_{$option}" not be triggered when there are no changes
                     @see wp-includes/option.php
                 -->
-                <input type="hidden" name="<?php echo self::SETTINGS_FIELD?>[timestamp]" value="<?php echo time() ?>">
+                <input type="hidden" name="<?php echo self::SETTINGS_FIELD?>[last_saved_timestamp]" value="<?php echo time() ?>">
                 <!-- Panels -->
                 <?php
                 $sectionClass = $printWithTabs ? 'tab-content' : '';
