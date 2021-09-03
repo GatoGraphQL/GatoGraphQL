@@ -8,7 +8,7 @@ use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 
-interface ObjectTypeResolverInterface
+interface ObjectTypeResolverInterface extends TypeResolverInterface
 {
     /**
      * All objects MUST have an ID. `null` is supported for the UnionTypeResolver,
@@ -17,14 +17,8 @@ interface ObjectTypeResolverInterface
      * @return string|int|null the ID of the passed object, or `null` if there is no resolver to handle it (for the UnionTypeResolver)
      */
     public function getID(object $resultItem): string | int | null;
-    public function getTypeName(): string;
-    public function getNamespace(): string;
-    public function getNamespacedTypeName(): string;
-    public function getMaybeNamespacedTypeName(): string;
-    public function getTypeOutputName(): string;
     public function getTypeDataLoaderClass(): string;
-    public function getSchemaTypeDescription(): ?string;
-
+    
     // ... because all functions below have already been implemented in the Abstract base class
     public function getAllImplementedInterfaceClasses(): array;
     /**
@@ -82,7 +76,6 @@ interface ObjectTypeResolverInterface
         ?array $expressions = null,
         array $options = []
     ): mixed;
-    public function getSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): array;
     public function hasFieldResolversForField(string $field): bool;
     /**
      * Validate and resolve the fieldDirectives into an array, each item containing:
