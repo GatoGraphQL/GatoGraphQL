@@ -18,7 +18,7 @@ class CustomPostUnionTypeHelpers
     /**
      * Obtain the post types from all member typeResolvers
      */
-    public static function getTargetTypeResolverCustomPostTypes(string $unionTypeResolverClass): array
+    public static function getTargetObjectTypeResolverCustomPostTypes(string $unionTypeResolverClass): array
     {
         $customPostTypes = [];
         $instanceManager = InstanceManagerFacade::getInstance();

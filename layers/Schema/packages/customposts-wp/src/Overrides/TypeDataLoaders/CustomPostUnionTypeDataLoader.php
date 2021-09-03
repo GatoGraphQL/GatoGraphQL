@@ -21,7 +21,7 @@ class CustomPostUnionTypeDataLoader extends CustomPostTypeDataLoader
         $query = parent::getQueryToRetrieveObjectsForIDs($ids);
 
         // From all post types from the member typeResolvers
-        $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(CustomPostUnionTypeResolver::class);
+        $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(CustomPostUnionTypeResolver::class);
 
         return $query;
     }

@@ -62,7 +62,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 if ($value) {
                     $value = array_intersect(
                         $value,
-                        CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
+                        CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(
                             CustomPostUnionTypeResolver::class
                         )
                     );

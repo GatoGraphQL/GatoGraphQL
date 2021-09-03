@@ -228,7 +228,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                  *   }
                  *   ```
                  */
-                $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
+                $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(
                     CustomPostUnionTypeResolver::class
                 );
                 if ($comments = $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
