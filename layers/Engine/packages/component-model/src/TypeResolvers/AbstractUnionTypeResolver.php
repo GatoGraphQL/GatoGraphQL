@@ -272,10 +272,10 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 $objectTypeResolverClasses,
                 function ($typeResolverClass) use ($typeInterfaceClass) {
                     /**
-                     * @var RelationalTypeResolverInterface
+                     * @var ObjectTypeResolverInterface
                      */
-                    $relationalTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
-                    return !in_array($typeInterfaceClass, $relationalTypeResolver->getAllImplementedInterfaceClasses());
+                    $objectTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
+                    return !in_array($typeInterfaceClass, $objectTypeResolver->getAllImplementedInterfaceClasses());
                 }
             );
             if ($notImplementingInterfaceTypeResolverClasses) {
@@ -290,15 +290,15 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                         implode(
                             $this->translationAPI->__('\', \''),
                             array_map(
-                                function ($typeResolverClass) {
+                                function ($objectTypeResolverClass) {
                                     /**
-                                     * @var RelationalTypeResolverInterface
+                                     * @var ObjectTypeResolverInterface
                                      */
-                                    $relationalTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
+                                    $objectTypeResolver = $this->instanceManager->getInstance($objectTypeResolverClass);
                                     return sprintf(
                                         $this->translationAPI->__('%s (%s)'),
-                                        $relationalTypeResolver->getMaybeNamespacedTypeName(),
-                                        $typeResolverClass
+                                        $objectTypeResolver->getMaybeNamespacedTypeName(),
+                                        $objectTypeResolverClass
                                     );
                                 },
                                 $notImplementingInterfaceTypeResolverClasses
@@ -352,12 +352,12 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     public function getTargetTypeResolver(object $resultItem): ?RelationalTypeResolverInterface
     {
         if ($typeResolverPicker = $this->getTargetTypeResolverPicker($resultItem)) {
-            $typeResolverClass = $typeResolverPicker->getObjectTypeResolverClass();
+            $objectTypeResolverClass = $typeResolverPicker->getObjectTypeResolverClass();
             /**
-             * @var RelationalTypeResolverInterface
+             * @var ObjectTypeResolverInterface
              */
-            $relationalTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
-            return $relationalTypeResolver;
+            $objectTypeResolver = $this->instanceManager->getInstance($objectTypeResolverClass);
+            return $objectTypeResolver;
         }
         return null;
     }
