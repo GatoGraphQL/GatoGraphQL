@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Settings\Options;
 class UserSettingsManager implements UserSettingsManagerInterface
 {
     private const TIMESTAMP_CONTAINER = 'container';
-    private const TIMESTAMP_SCHEMA = 'schema';
+    private const TIMESTAMP_OPERATIONAL = 'operational';
 
     /**
      * Cache the values in memory
@@ -50,9 +50,9 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         return $this->getTimestamp(self::TIMESTAMP_CONTAINER);
     }
-    public function getSchemaTimestamp(): int
+    public function getOperationalTimestamp(): int
     {
-        return $this->getTimestamp(self::TIMESTAMP_SCHEMA);
+        return $this->getTimestamp(self::TIMESTAMP_OPERATIONAL);
     }
     /**
      * Store the current time to indicate the latest executed write to DB,

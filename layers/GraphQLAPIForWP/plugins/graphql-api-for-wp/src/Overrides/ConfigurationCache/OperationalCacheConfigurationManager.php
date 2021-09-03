@@ -15,7 +15,7 @@ class OperationalCacheConfigurationManager extends AbstractCacheConfigurationMan
     protected function getTimestamp(): int
     {
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        return $userSettingsManager->getSchemaTimestamp();
+        return $userSettingsManager->getOperationalTimestamp();
     }
 
     /**
