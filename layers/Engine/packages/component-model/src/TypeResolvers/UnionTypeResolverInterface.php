@@ -16,7 +16,7 @@ interface UnionTypeResolverInterface extends RelationalTypeResolverInterface
     /**
      * @param array<string|int> $ids
      */
-    public function getResultItemIDTargetObjectTypeResolvers(array $ids): array;
+    public function getResultItemIDTargetTypeResolvers(array $ids): array;
     public function getTargetObjectTypeResolverClasses(): array;
     public function getSchemaTypeInterfaceClass(): ?string;
     /**
