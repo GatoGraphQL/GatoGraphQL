@@ -66,7 +66,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * Store the current time to indicate the latest executed write to DB,
      * concerning plugin activation, module enabled/disabled, user settings updated,
      * to refresh the Service Container.
-     * 
+     *
      * When this value is updated, the "operational" timestamp is also updated.
      */
     public function storeContainerTimestamp(): void
