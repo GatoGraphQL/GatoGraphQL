@@ -25,7 +25,7 @@ class DirectiveTypeResolver extends AbstractIntrospectionTypeResolver
         return $directive->getID();
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return SchemaDefinitionReferenceTypeDataLoader::class;
     }

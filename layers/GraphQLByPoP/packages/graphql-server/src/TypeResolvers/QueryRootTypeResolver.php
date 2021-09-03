@@ -30,7 +30,7 @@ class QueryRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
         return $queryRoot->getID();
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return QueryRootTypeDataLoader::class;
     }

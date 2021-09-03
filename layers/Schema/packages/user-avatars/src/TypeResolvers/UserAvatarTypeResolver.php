@@ -27,7 +27,7 @@ class UserAvatarTypeResolver extends AbstractObjectTypeResolver
         return $userAvatar->id;
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return UserAvatarTypeDataLoader::class;
     }

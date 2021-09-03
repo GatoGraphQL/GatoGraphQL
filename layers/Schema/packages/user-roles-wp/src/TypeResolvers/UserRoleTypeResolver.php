@@ -25,7 +25,7 @@ class UserRoleTypeResolver extends AbstractObjectTypeResolver
         return $role->name;
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return UserRoleTypeDataLoader::class;
     }

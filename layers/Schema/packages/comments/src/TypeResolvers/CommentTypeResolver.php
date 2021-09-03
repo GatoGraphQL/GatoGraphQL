@@ -57,7 +57,7 @@ class CommentTypeResolver extends AbstractObjectTypeResolver
         return $this->commentTypeAPI->getCommentId($comment);
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return CommentTypeDataLoader::class;
     }

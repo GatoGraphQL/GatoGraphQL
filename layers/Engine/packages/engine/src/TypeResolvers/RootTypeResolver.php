@@ -36,7 +36,7 @@ class RootTypeResolver extends AbstractObjectTypeResolver
         return $root->getID();
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return RootTypeDataLoader::class;
     }

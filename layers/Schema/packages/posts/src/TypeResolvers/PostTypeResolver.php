@@ -19,7 +19,7 @@ class PostTypeResolver extends AbstractCustomPostTypeResolver
         return $this->translationAPI->__('Representation of a post', 'posts');
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return PostTypeDataLoader::class;
     }

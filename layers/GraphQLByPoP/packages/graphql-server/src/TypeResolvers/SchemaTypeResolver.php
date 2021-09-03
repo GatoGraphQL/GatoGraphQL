@@ -25,7 +25,7 @@ class SchemaTypeResolver extends AbstractIntrospectionTypeResolver
         return $schema->getID();
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return SchemaTypeDataLoader::class;
     }

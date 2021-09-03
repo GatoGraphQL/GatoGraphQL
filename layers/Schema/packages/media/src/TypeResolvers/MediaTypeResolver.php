@@ -57,7 +57,7 @@ class MediaTypeResolver extends AbstractObjectTypeResolver
         return $this->mediaTypeAPI->getMediaItemID($media);
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return MediaTypeDataLoader::class;
     }

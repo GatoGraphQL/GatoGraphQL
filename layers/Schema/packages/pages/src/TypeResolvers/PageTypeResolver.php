@@ -57,7 +57,7 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
         return $this->pageTypeAPI->getPageId($page);
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return PageTypeDataLoader::class;
     }

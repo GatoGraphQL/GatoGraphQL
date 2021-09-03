@@ -22,7 +22,7 @@ class PostTagTypeResolver extends AbstractTagTypeResolver
         return $this->translationAPI->__('Representation of a tag, added to a post', 'post-tags');
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return PostTagTypeDataLoader::class;
     }

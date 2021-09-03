@@ -25,7 +25,7 @@ class NotificationTypeResolver extends AbstractObjectTypeResolver
         return $notification->histid;
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return NotificationTypeDataLoader::class;
     }

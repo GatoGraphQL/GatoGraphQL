@@ -25,7 +25,7 @@ class SiteTypeResolver extends AbstractObjectTypeResolver
         return $site->getID();
     }
 
-    public function getTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): string
     {
         return SiteTypeDataLoader::class;
     }

@@ -17,7 +17,7 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
      * @return string|int|null the ID of the passed object, or `null` if there is no resolver to handle it (for the UnionTypeResolver)
      */
     public function getID(object $resultItem): string | int | null;
-    public function getTypeDataLoaderClass(): string;
+    public function getRelationalTypeDataLoaderClass(): string;
     
     // ... because all functions below have already been implemented in the Abstract base class
     public function getAllImplementedInterfaceClasses(): array;
