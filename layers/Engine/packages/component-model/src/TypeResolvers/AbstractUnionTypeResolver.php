@@ -200,7 +200,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      */
     public function getID(object $resultItem): string | int | null
     {
-        $targetTypeResolver = $this->getTargetTypeResolver($resultItem);
+        $targetTypeResolver = $this->getTargetObjectTypeResolver($resultItem);
         if (is_null($targetTypeResolver)) {
             return null;
         }
@@ -349,7 +349,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return null;
     }
 
-    public function getTargetTypeResolver(object $resultItem): ?RelationalTypeResolverInterface
+    public function getTargetObjectTypeResolver(object $resultItem): ?RelationalTypeResolverInterface
     {
         if ($typeResolverPicker = $this->getTargetTypeResolverPicker($resultItem)) {
             $objectTypeResolverClass = $typeResolverPicker->getObjectTypeResolverClass();
@@ -397,7 +397,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         array $options = []
     ): mixed {
         // Check that a typeResolver from this Union can process this resultItem, or return an arror
-        $targetTypeResolver = $this->getTargetTypeResolver($resultItem);
+        $targetTypeResolver = $this->getTargetObjectTypeResolver($resultItem);
         if (is_null($targetTypeResolver)) {
             return $this->getUnresolvedResultItemError($resultItem);
         }

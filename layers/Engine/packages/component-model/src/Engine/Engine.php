@@ -662,7 +662,7 @@ class Engine implements EngineInterface
                 // Obtain the type of the object
                 $exists = false;
                 if ($resultItem = $resultIDItems[$resultItemID] ?? null) {
-                    $targetTypeResolver = $relationalTypeResolver->getTargetTypeResolver($resultItem);
+                    $targetTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($resultItem);
                     if (!is_null($targetTypeResolver)) {
                         $exists = true;
                         // The ID will contain the type. Remove it
