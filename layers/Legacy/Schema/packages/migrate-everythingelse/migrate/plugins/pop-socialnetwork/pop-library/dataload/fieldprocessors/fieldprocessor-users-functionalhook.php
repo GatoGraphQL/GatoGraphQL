@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
@@ -22,7 +22,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractFu
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'followUserURL' => SchemaDefinition::TYPE_URL,
@@ -31,7 +31,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractFu
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -48,7 +48,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractFu
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

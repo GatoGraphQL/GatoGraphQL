@@ -3,7 +3,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -27,7 +27,7 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'printURL' => SchemaDefinition::TYPE_URL,
@@ -36,7 +36,7 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -53,7 +53,7 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

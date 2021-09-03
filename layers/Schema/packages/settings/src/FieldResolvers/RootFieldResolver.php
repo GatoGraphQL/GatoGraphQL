@@ -6,7 +6,7 @@ namespace PoPSchema\Settings\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\Settings\Facades\SettingsTypeAPIFacade;
 
@@ -24,7 +24,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'option' => $this->translationAPI->__('Option saved in the DB', 'pop-settings'),
@@ -32,7 +32,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'option' => SchemaDefinition::TYPE_ANY_SCALAR,
@@ -40,7 +40,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
@@ -67,7 +67,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

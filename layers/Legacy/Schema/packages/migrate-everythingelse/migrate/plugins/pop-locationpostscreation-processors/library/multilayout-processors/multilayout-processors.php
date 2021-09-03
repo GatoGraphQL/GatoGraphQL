@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class PoP_LocationPostsCreation_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
@@ -19,7 +19,7 @@ class PoP_LocationPostsCreation_Multilayout_Processor extends PoP_Application_Mu
 
                 if ($layout = $location_modules[$format] ?? null) {
                     $instanceManager = InstanceManagerFacade::getInstance();
-                    /** @var ObjectTypeResolverInterface */
+                    /** @var RelationalTypeResolverInterface */
                     $locationPostTypeResolver = $instanceManager->getInstance(LocationPostTypeResolver::class);
                     $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                     $field = $fieldQueryInterpreter->getField(

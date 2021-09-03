@@ -11,7 +11,7 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -37,7 +37,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
 
     public function resolveDirective(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -64,7 +64,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         }
     }
 
-    protected function resolveValueForResultItems(ObjectTypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
+    protected function resolveValueForResultItems(RelationalTypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
     {
         $enqueueFillingResultItemsFromIDs = [];
         foreach (array_keys($idsDataFields) as $id) {
@@ -121,7 +121,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
 
     protected function resolveValuesForResultItem(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         $id,
         object $resultItem,
         array $dataFields,
@@ -139,7 +139,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
 
     protected function resolveValueForResultItem(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         $id,
         object $resultItem,
         string $field,
@@ -157,7 +157,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
 
     protected function resolveFieldValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         $id,
         object $resultItem,
         string $field,
@@ -200,7 +200,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         return $errorOutput;
     }
 
-    protected function addValueForResultItem(ObjectTypeResolverInterface $typeResolver, $id, string $field, $value, array &$dbItems, array &$dbErrors)
+    protected function addValueForResultItem(RelationalTypeResolverInterface $typeResolver, $id, string $field, $value, array &$dbItems, array &$dbErrors)
     {
         // The dataitem can contain both rightful values and also errors (eg: when the field doesn't exist, or the field validation fails)
         // Extract the errors and add them on the other array
@@ -227,7 +227,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         }
     }
 
-    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $typeResolver): ?string
     {
         return $this->translationAPI->__('Resolve the value of the field and merge it into results. This directive is already included by the engine, since its execution is mandatory', 'component-model');
     }

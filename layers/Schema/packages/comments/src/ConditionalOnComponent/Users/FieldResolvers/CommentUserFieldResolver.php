@@ -9,7 +9,7 @@ use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -53,7 +53,7 @@ class CommentUserFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'author' => SchemaDefinition::TYPE_ID,
@@ -61,7 +61,7 @@ class CommentUserFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'author' => $this->translationAPI->__('Comment\'s author', 'comments'),
@@ -76,7 +76,7 @@ class CommentUserFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -93,7 +93,7 @@ class CommentUserFieldResolver extends AbstractDBDataFieldResolver
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'author':

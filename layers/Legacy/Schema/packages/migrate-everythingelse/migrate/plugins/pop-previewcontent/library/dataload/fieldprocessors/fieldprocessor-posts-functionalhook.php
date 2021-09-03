@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 
@@ -21,7 +21,7 @@ class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractFunctiona
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'previewURL' => SchemaDefinition::TYPE_URL,
@@ -29,7 +29,7 @@ class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractFunctiona
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -45,7 +45,7 @@ class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractFunctiona
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

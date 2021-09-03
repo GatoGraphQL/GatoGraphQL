@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
@@ -30,7 +30,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'tags' => SchemaDefinition::TYPE_ID,
@@ -40,7 +40,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'tagCount'
@@ -53,7 +53,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'tags' => $this->translationAPI->__('Tags added to this custom post', 'pop-tags'),
@@ -63,7 +63,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'tags':
@@ -85,7 +85,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
      * @return string[] Error messages
      */
     public function validateFieldArgument(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
@@ -123,7 +123,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -146,7 +146,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'tags':

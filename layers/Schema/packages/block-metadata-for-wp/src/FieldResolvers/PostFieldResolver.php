@@ -9,7 +9,7 @@ use Leoloso\BlockMetadata\Metadata;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 class PostFieldResolver extends AbstractDBDataFieldResolver
@@ -28,7 +28,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'blockMetadata' => SchemaDefinition::TYPE_OBJECT,
@@ -36,7 +36,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'blockMetadata':
@@ -45,7 +45,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'blockMetadata' => $this->translationAPI->__('Metadata for all blocks contained in the post, split on a block by block basis', 'pop-block-metadata'),
@@ -53,7 +53,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         switch ($fieldName) {
@@ -98,7 +98,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

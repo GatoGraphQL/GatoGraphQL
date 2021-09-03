@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 /**
  * FieldResolver for the Custom Post Types from this plugin
@@ -26,7 +26,7 @@ class ListOfCPTEntitiesRootFieldResolver extends AbstractListOfCPTEntitiesRootFi
         ];
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'accessControlLists' => $this->translationAPI->__('Access Control Lists', 'graphql-api'),

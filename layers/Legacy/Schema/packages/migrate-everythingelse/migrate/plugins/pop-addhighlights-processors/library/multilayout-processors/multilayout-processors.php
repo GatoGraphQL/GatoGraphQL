@@ -2,7 +2,7 @@
 
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Highlights\TypeResolvers\HighlightTypeResolver;
 
 class PoP_AddHighlights_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
@@ -17,7 +17,7 @@ class PoP_AddHighlights_Multilayout_Processor extends PoP_Application_Multilayou
                 case POP_MULTILAYOUT_HANDLE_AUTHORPOSTCONTENT:
                 case POP_MULTILAYOUT_HANDLE_SINGLEPOSTCONTENT:
                     $instanceManager = InstanceManagerFacade::getInstance();
-                    /** @var ObjectTypeResolverInterface */
+                    /** @var RelationalTypeResolverInterface */
                     $highlightTypeResolver = $instanceManager->getInstance(HighlightTypeResolver::class);
                     $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                     $field = $fieldQueryInterpreter->getField(

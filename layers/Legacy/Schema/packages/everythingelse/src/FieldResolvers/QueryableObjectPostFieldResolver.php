@@ -6,7 +6,7 @@ namespace PoPSchema\EverythingElse\FieldResolvers;
 
 use PoP\API\APIUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 
@@ -26,7 +26,7 @@ class QueryableObjectPostFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'endpoint' => SchemaDefinition::TYPE_URL,
@@ -34,7 +34,7 @@ class QueryableObjectPostFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'endpoint' => $this->translationAPI->__('Endpoint to fetch the object\'s data', 'queriedobject'),
@@ -49,7 +49,7 @@ class QueryableObjectPostFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

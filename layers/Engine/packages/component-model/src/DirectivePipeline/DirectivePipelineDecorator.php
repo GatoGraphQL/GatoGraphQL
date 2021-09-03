@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectivePipeline;
 
 use League\Pipeline\PipelineInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class DirectivePipelineDecorator
 {
@@ -14,7 +14,7 @@ class DirectivePipelineDecorator
     }
 
     public function resolveDirectivePipeline(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         array &$pipelineIDsDataFields,
         array &$pipelineDirectiveResolverInstances,
         array &$resultIDItems,

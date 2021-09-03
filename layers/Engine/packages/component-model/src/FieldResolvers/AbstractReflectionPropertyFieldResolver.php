@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use ReflectionClass;
 use ReflectionProperty;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFieldResolver
@@ -116,21 +116,21 @@ abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFie
         );
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         // TODO: If we are running PHP 7.4, the properties may be typed,
         // so we can already get the type through reflection. Implement this!
         return parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         // TODO: If we are running PHP 7.4, the properties may be typed,
         // so we can already get the type through reflection. Implement this!
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         // Attempt to obtain the description from the docblock
         $reflectionDocComments = $this->getTypePropertyDocComments();
@@ -144,7 +144,7 @@ abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFie
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

@@ -4,7 +4,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
@@ -31,7 +31,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'commentObjectID' => SchemaDefinition::TYPE_ID,
@@ -42,7 +42,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'commentObjectID',
@@ -53,7 +53,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -69,7 +69,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessResultItem(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -91,7 +91,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -193,7 +193,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'commentObjectID':

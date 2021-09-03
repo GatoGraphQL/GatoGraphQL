@@ -4,7 +4,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
@@ -20,7 +20,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         );
     }
 
-    public function getThumb($post, ObjectTypeResolverInterface $typeResolver, $size = null, $add_description = false)
+    public function getThumb($post, RelationalTypeResolverInterface $typeResolver, $size = null, $add_description = false)
     {
         $thumb_id = CustomPostMediaHelpers::getThumbId($typeResolver->getID($post));
         $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
@@ -53,7 +53,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'favicon' => SchemaDefinition::TYPE_OBJECT,
@@ -70,7 +70,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'authors',
@@ -82,7 +82,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -100,7 +100,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         $translationAPI = TranslationAPIFacade::getInstance();
@@ -141,7 +141,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -225,7 +225,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'authors':

@@ -7,7 +7,7 @@ namespace PoPWPSchema\CustomPosts\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use WP_Post;
 
@@ -27,7 +27,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'isSticky' => $this->translationAPI->__('Determines whether a custom post is sticky', 'customposts'),
@@ -35,7 +35,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'isSticky' => SchemaDefinition::TYPE_BOOL,
@@ -43,7 +43,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'isSticky' => SchemaTypeModifiers::NON_NULLABLE,
@@ -58,7 +58,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

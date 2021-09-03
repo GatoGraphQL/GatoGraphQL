@@ -10,14 +10,14 @@ use PoP\ComponentModel\FieldResolvers\SelfQueryableFieldSchemaDefinitionResolver
 use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver
 {
     use QueryableFieldResolverTrait;
     use SelfQueryableFieldSchemaDefinitionResolverTrait;
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         // Get the Schema Field Args from the FilterInput modules
         return array_merge(
@@ -26,7 +26,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         );
     }
 
-    protected function getFieldArgumentsSchemaDefinitions(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    protected function getFieldArgumentsSchemaDefinitions(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         if ($filterDataloadingModule = $this->getFieldDataFilteringModule($typeResolver, $fieldName)) {
             $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
@@ -44,7 +44,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
      * Provide default values for modules in the FilterInputContainer
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
-    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         return [];
     }
@@ -53,7 +53,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
      * Provide the names of the args which are mandatory in the FilterInput
      * @return string[]
      */
-    protected function getFieldDataFilteringMandatoryArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    protected function getFieldDataFilteringMandatoryArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         return [];
     }
@@ -63,7 +63,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         return QueryableInterfaceSchemaDefinitionResolverAdapter::class;
     }
 
-    public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): bool
+    public function enableOrderedSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): bool
     {
         // If there is a filter, there will be many filterInputs, so by default we'd rather not enable ordering
         if ($this->getFieldDataFilteringModule($typeResolver, $fieldName) !== null) {
@@ -89,7 +89,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
      */
-    protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
+    protected function convertFieldArgsToFilteringQueryArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $filteringQueryArgs = [];
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($typeResolver, $fieldName)) {

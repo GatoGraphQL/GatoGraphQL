@@ -11,7 +11,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -68,7 +68,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'users' => SchemaDefinition::TYPE_ID,
@@ -79,7 +79,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'userCount',
@@ -92,7 +92,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'users' => $this->translationAPI->__('Users', 'pop-users'),
@@ -103,7 +103,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getFieldDataFilteringModule(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'users' => [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_USERS],
@@ -114,7 +114,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         };
     }
 
-    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'users':
@@ -136,7 +136,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
      * @return string[] Error messages
      */
     public function validateFieldArgument(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
@@ -174,7 +174,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -196,7 +196,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'users':

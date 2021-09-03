@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers;
 
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldResolvers\AbstractCustomPostListFieldResolver;
 
 class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolver
@@ -15,7 +15,7 @@ class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolve
         return array(UserTypeResolver::class);
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'customPosts' => $this->translationAPI->__('Custom posts by the user', 'pop-users'),
@@ -31,7 +31,7 @@ class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolve
      * @return array<string, mixed>
      */
     protected function getQuery(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []

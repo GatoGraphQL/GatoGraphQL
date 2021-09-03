@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\Engine\Enums\FieldFeedbackTargetEnum;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
@@ -46,7 +46,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
      * Execute the directive
      */
     public function resolveDirective(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -127,12 +127,12 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
         ];
     }
 
-    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $typeResolver): ?string
     {
         return $this->translationAPI->__('Whenever a field is queried, add a feedback message to the response, of either type "warning", "deprecation" or "log"', 'engine');
     }
 
-    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $typeResolver): array
     {
         /**
          * @var FieldFeedbackTypeEnum

@@ -4,7 +4,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
@@ -24,7 +24,7 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'contentClipped' => SchemaDefinition::TYPE_STRING,
@@ -33,7 +33,7 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'contentClipped',
@@ -44,7 +44,7 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -61,7 +61,7 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

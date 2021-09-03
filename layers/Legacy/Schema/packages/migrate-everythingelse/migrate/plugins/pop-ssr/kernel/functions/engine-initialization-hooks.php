@@ -10,7 +10,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\HelperServices\DataloadHelperService;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
@@ -191,7 +191,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
             // Obtain the data from the database, copy it to the dynamic database
             /**
-             * @var ObjectTypeResolverInterface
+             * @var RelationalTypeResolverInterface
              */
             $typeResolver = $instanceManager->getInstance($typeResolver_class);
             $database_key = $typeResolver->getTypeOutputName();

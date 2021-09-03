@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
@@ -20,7 +20,7 @@ class SchemaDefinitionHelpers
     private static array $schemaFieldArgsCache = [];
 
     public static function getCreateUpdateCustomPostSchemaFieldArgs(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName,
         bool $addCustomPostID,
         ?string $entityTypeResolverClass = null

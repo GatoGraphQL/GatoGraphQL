@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
@@ -32,7 +32,7 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
 
     abstract protected function getSetCategoriesFieldName(): string;
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             $this->getSetCategoriesFieldName() => sprintf(
@@ -43,7 +43,7 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             $this->getSetCategoriesFieldName() => SchemaDefinition::TYPE_ID,
@@ -51,12 +51,12 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case $this->getSetCategoriesFieldName():
                 $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
-                /** @var ObjectTypeResolverInterface */
+                /** @var RelationalTypeResolverInterface */
                 $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
                 return [
                     [
@@ -89,7 +89,7 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
         return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    public function resolveFieldMutationResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case $this->getSetCategoriesFieldName():
@@ -99,7 +99,7 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
         return parent::resolveFieldMutationResolverClass($typeResolver, $fieldName);
     }
 
-    public function resolveFieldTypeResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case $this->getSetCategoriesFieldName():

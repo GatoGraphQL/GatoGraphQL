@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoP\AccessControl\Hooks;
 
 use PoP\AccessControl\ComponentConfiguration;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 trait AccessControlConfigurableMandatoryDirectivesForDirectivesHookSetTrait
 {
-    public function maybeFilterDirectiveName(bool $include, ObjectTypeResolverInterface $typeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
+    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $typeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {
         /**
          * If not enabling individual control, then the parent case already deals with the general case

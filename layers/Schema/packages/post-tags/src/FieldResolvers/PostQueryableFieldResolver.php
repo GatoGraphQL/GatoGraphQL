@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
 use PoPSchema\Tags\FieldResolvers\AbstractCustomPostQueryableFieldResolver;
@@ -21,7 +21,7 @@ class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolve
         ];
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'tags' => $this->translationAPI->__('Tags added to this post', 'pop-post-tags'),
@@ -31,7 +31,7 @@ class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolve
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getFieldDataFilteringModule(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'tags' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGS],

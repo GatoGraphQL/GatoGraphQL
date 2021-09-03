@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
@@ -19,7 +19,7 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'avatar' => SchemaDefinition::TYPE_OBJECT,
@@ -27,7 +27,7 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -36,7 +36,7 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         $translationAPI = TranslationAPIFacade::getInstance();
@@ -65,7 +65,7 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

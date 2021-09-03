@@ -4,39 +4,39 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class AbstractSchemaDirectiveResolver extends AbstractDirectiveResolver implements SchemaDirectiveResolverInterface
 {
-    public function getSchemaDefinitionResolver(ObjectTypeResolverInterface $typeResolver): ?SchemaDirectiveResolverInterface
+    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $typeResolver): ?SchemaDirectiveResolverInterface
     {
         return $this;
     }
-    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $typeResolver): ?string
     {
         return null;
     }
-    public function getSchemaDirectiveWarningDescription(ObjectTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $typeResolver): ?string
     {
         return null;
     }
-    public function getSchemaDirectiveDeprecationDescription(ObjectTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $typeResolver): ?string
     {
         return null;
     }
-    public function getSchemaDirectiveExpressions(ObjectTypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $typeResolver): array
     {
         return [];
     }
-    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $typeResolver): array
     {
         return [];
     }
-    public function enableOrderedSchemaDirectiveArgs(ObjectTypeResolverInterface $typeResolver): bool
+    public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $typeResolver): bool
     {
         return true;
     }
-    public function isGlobal(ObjectTypeResolverInterface $typeResolver): bool
+    public function isGlobal(RelationalTypeResolverInterface $typeResolver): bool
     {
         return false;
     }

@@ -10,7 +10,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -58,7 +58,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'setFeaturedImage' => $this->translationAPI->__('Set the featured image on the custom post', 'custompostmedia-mutations'),
@@ -67,7 +67,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'setFeaturedImage' => SchemaDefinition::TYPE_ID,
@@ -76,7 +76,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'setFeaturedImage',
@@ -88,7 +88,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'setFeaturedImage':
@@ -113,7 +113,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
      * present in $form_data
      */
     public function validateMutationOnResultItem(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName
     ): bool {
         switch ($fieldName) {
@@ -126,7 +126,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName
     ): array {
@@ -147,7 +147,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         return $fieldArgs;
     }
 
-    public function resolveFieldMutationResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'setFeaturedImage':
@@ -159,7 +159,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         return parent::resolveFieldMutationResolverClass($typeResolver, $fieldName);
     }
 
-    public function resolveFieldTypeResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'setFeaturedImage':

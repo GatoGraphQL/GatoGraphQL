@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class TypeRegistry implements TypeRegistryInterface
 {
     /**
-     * @var ObjectTypeResolverInterface[]
+     * @var RelationalTypeResolverInterface[]
      */
     protected array $typeResolvers = [];
 
-    public function addTypeResolver(ObjectTypeResolverInterface $typeResolver): void
+    public function addTypeResolver(RelationalTypeResolverInterface $typeResolver): void
     {
         $this->typeResolvers[] = $typeResolver;
     }
     /**
-     * @return ObjectTypeResolverInterface[]
+     * @return RelationalTypeResolverInterface[]
      */
     public function getTypeResolvers(): array
     {

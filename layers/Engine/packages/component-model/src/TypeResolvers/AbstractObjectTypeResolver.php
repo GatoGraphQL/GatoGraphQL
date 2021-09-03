@@ -28,7 +28,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\FieldHelpers;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
@@ -36,7 +36,7 @@ use PoP\FieldQuery\QueryUtils;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractObjectTypeResolver extends AbstractTypeResolver implements ObjectTypeResolverInterface
+abstract class AbstractObjectTypeResolver extends AbstractTypeResolver implements RelationalTypeResolverInterface
 {
     public const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnResultItem';
 

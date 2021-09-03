@@ -9,7 +9,7 @@ use PoP\Engine\Hooks\AbstractCMSBootHookSet;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
@@ -69,7 +69,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
         return true;
     }
 
-    public function maybeFilterDirectiveName(bool $include, ObjectTypeResolverInterface $typeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
+    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $typeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {
         // Because there may be several hooks chained, if any of them has already rejected the field, then already return that response
         if (!$include) {
@@ -96,7 +96,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
     /**
      * Decide if to remove the directiveNames
      */
-    protected function removeDirective(ObjectTypeResolverInterface $typeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
+    protected function removeDirective(RelationalTypeResolverInterface $typeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {
         return true;
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInterpreterInterface
@@ -19,7 +19,7 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
      * In this case, the value of the excerpt would override the value of the title,
      * since they both have fieldOutputKey "title"
      */
-    public function getUniqueFieldOutputKey(ObjectTypeResolverInterface $typeResolver, string $field): string;
+    public function getUniqueFieldOutputKey(RelationalTypeResolverInterface $typeResolver, string $field): string;
     public function getUniqueFieldOutputKeyByTypeResolverClass(string $typeResolverClass, string $field): string;
     public function getUniqueFieldOutputKeyByTypeOutputName(string $dbKey, string $field): string;
     /**
@@ -31,7 +31,7 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
      * Return `null` if there is no resolver for the field
      */
     public function extractFieldArguments(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $field,
         ?array $variables = null,
         ?array &$schemaErrors = null,
@@ -39,16 +39,16 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
     ): ?array;
     public function extractDirectiveArguments(
         DirectiveResolverInterface $directiveResolver,
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $directive,
         ?array $variables = null,
         ?array &$schemaErrors = null,
         ?array &$schemaWarnings = null,
     ): array;
-    public function extractFieldArgumentsForSchema(ObjectTypeResolverInterface $typeResolver, string $field, ?array $variables = null): array;
-    public function extractDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, ObjectTypeResolverInterface $typeResolver, string $directive, ?array $variables = null, bool $disableDynamicFields = false): array;
+    public function extractFieldArgumentsForSchema(RelationalTypeResolverInterface $typeResolver, string $field, ?array $variables = null): array;
+    public function extractDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $typeResolver, string $directive, ?array $variables = null, bool $disableDynamicFields = false): array;
     public function extractFieldArgumentsForResultItem(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $field,
         ?array $variables,
@@ -56,7 +56,7 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
     ): array;
     public function extractDirectiveArgumentsForResultItem(
         DirectiveResolverInterface $directiveResolver,
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $directive,
         array $variables,

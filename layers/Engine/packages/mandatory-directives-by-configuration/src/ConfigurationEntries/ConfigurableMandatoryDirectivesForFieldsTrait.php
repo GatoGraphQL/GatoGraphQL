@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait ConfigurableMandatoryDirectivesForFieldsTrait
 {
@@ -34,7 +34,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      * Configuration entries
      */
     final protected function getEntries(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
     ): array {
@@ -51,7 +51,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      */
     final protected function getMatchingEntries(
         array $entryList,
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName
     ): array {

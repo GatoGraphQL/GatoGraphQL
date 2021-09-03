@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
@@ -38,7 +38,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     /**
      * By returning `null`, the schema definition comes from the interface
      */
-    public function getSchemaDefinitionResolver(ObjectTypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
+    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
     {
         return null;
     }
@@ -50,7 +50,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

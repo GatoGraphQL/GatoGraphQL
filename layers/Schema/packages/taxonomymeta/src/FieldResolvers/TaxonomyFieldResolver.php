@@ -6,7 +6,7 @@ namespace PoPSchema\TaxonomyMeta\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
 use PoPSchema\TaxonomyMeta\Facades\TaxonomyMetaTypeAPIFacade;
 use PoPSchema\Taxonomies\TypeResolvers\AbstractTaxonomyTypeResolver;
@@ -38,7 +38,7 @@ class TaxonomyFieldResolver extends AbstractDBDataFieldResolver
     /**
      * By returning `null`, the schema definition comes from the interface
      */
-    public function getSchemaDefinitionResolver(ObjectTypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
+    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
     {
         return null;
     }
@@ -50,7 +50,7 @@ class TaxonomyFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

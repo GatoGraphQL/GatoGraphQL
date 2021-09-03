@@ -17,7 +17,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\ComponentModel\CheckpointSets\CheckpointSets;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
@@ -90,7 +90,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         return array_values(array_unique($fieldNames));
     }
 
-    public function isGlobal(ObjectTypeResolverInterface $typeResolver, string $fieldName): bool
+    public function isGlobal(RelationalTypeResolverInterface $typeResolver, string $fieldName): bool
     {
         return false;
     }
@@ -113,7 +113,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     /**
      * Define if to use the version to decide if to process the field or not
      */
-    public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $typeResolver): bool
+    public function decideCanProcessBasedOnVersionConstraint(RelationalTypeResolverInterface $typeResolver): bool
     {
         return false;
     }
@@ -124,7 +124,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      *
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcess(ObjectTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool
+    public function resolveCanProcess(RelationalTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool
     {
         /** Check if to validate the version */
         if (
@@ -177,7 +177,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         }
         return true;
     }
-    public function resolveSchemaValidationErrorDescriptions(ObjectTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveSchemaValidationErrorDescriptions(RelationalTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($typeResolver, $fieldName, $fieldArgs);
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
@@ -273,7 +273,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * Validate the constraints for the field arguments
      */
     final protected function resolveFieldArgumentErrors(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName,
         array $fieldArgs = []
     ): array {
@@ -305,7 +305,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * @return string[] Error messages
      */
     public function validateFieldArgument(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
@@ -317,14 +317,14 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * Custom validations. Function to override
      */
     protected function doResolveSchemaValidationErrorDescriptions(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName,
         array $fieldArgs = []
     ): ?array {
         return null;
     }
 
-    public function resolveSchemaValidationDeprecationDescriptions(ObjectTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveSchemaValidationDeprecationDescriptions(RelationalTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($typeResolver, $fieldName, $fieldArgs);
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
@@ -343,7 +343,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * eg: because they are used only by the application, and must not
      * be exposed to the user (eg: "accessControlLists")
      */
-    public function skipAddingToSchemaDefinition(ObjectTypeResolverInterface $typeResolver, string $fieldName): bool
+    public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $typeResolver, string $fieldName): bool
     {
         return false;
     }
@@ -351,7 +351,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     /**
      * Get the "schema" properties as for the fieldName
      */
-    final public function getSchemaDefinitionForField(ObjectTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
+    final public function getSchemaDefinitionForField(RelationalTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
         // First check if the value was cached
         $key = $typeResolver->getNamespacedTypeName() . '|' . $fieldName . '|' . json_encode($fieldArgs);
@@ -364,7 +364,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     /**
      * Get the "schema" properties as for the fieldName
      */
-    final public function doGetSchemaDefinitionForField(ObjectTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
+    final public function doGetSchemaDefinitionForField(RelationalTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $schemaDefinition = [
             SchemaDefinition::ARGNAME_NAME => $fieldName,
@@ -466,7 +466,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         return $schemaDefinition;
     }
 
-    final public function getSchemaDefinitionResolverForField(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?FieldSchemaDefinitionResolverInterface
+    final public function getSchemaDefinitionResolverForField(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?FieldSchemaDefinitionResolverInterface
     {
         // First check if the value was cached
         $key = $typeResolver->getNamespacedTypeName() . '|' . $fieldName;
@@ -476,7 +476,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         return $this->schemaDefinitionResolverForFieldCache[$key];
     }
 
-    final public function doGetSchemaDefinitionResolverForField(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?FieldSchemaDefinitionResolverInterface
+    final public function doGetSchemaDefinitionResolverForField(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?FieldSchemaDefinitionResolverInterface
     {
         // Find which is the $schemaDefinitionResolver that will satisfy this schema definition
         // First try the one declared by the fieldResolver
@@ -515,7 +515,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * @return array<string, array>
      */
     protected function getFilteredSchemaFieldArgs(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName,
         array $schemaFieldArgs
     ): array {
@@ -539,22 +539,22 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         return $schemaFieldArgsByName;
     }
 
-    public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): bool
+    public function enableOrderedSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): bool
     {
         return true;
     }
 
-    public function getSchemaFieldVersion(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldVersion(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         return null;
     }
 
-    protected function hasSchemaFieldVersion(ObjectTypeResolverInterface $typeResolver, string $fieldName): bool
+    protected function hasSchemaFieldVersion(RelationalTypeResolverInterface $typeResolver, string $fieldName): bool
     {
         return !empty($this->getSchemaFieldVersion($typeResolver, $fieldName));
     }
 
-    public function resolveSchemaValidationWarningDescriptions(ObjectTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveSchemaValidationWarningDescriptions(RelationalTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $warnings = [];
         if (Environment::enableSemanticVersionConstraints()) {
@@ -588,7 +588,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessResultItem(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -601,7 +601,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * @return array<array>|null A checkpoint set, or null
      */
     protected function getValidationCheckpoints(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -619,7 +619,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     protected function getValidationCheckpointsErrorMessage(
         Error $error,
         string $errorMessage,
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -631,7 +631,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * @param array<string, mixed> $fieldArgs
      */
     public function getValidationErrorDescriptions(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -674,7 +674,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * on on the resultItem (`true`)
      */
     public function validateMutationOnResultItem(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName
     ): bool {
         return false;
@@ -687,7 +687,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -712,19 +712,19 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName
     ): array {
         return $fieldArgs;
     }
 
-    public function resolveFieldTypeResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         return null;
     }
 
-    public function resolveFieldMutationResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         return null;
     }

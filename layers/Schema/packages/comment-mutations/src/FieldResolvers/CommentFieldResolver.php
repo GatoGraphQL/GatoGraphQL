@@ -9,7 +9,7 @@ use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -55,7 +55,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'reply' => $this->translationAPI->__('Reply a comment with another comment', 'comment-mutations'),
@@ -63,7 +63,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'reply' => SchemaDefinition::TYPE_ID,
@@ -71,7 +71,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'reply':
@@ -86,7 +86,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
      * present in $form_data
      */
     public function validateMutationOnResultItem(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName
     ): bool {
         switch ($fieldName) {
@@ -98,7 +98,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName
     ): array {
@@ -119,7 +119,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
         return $fieldArgs;
     }
 
-    public function resolveFieldMutationResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'reply':
@@ -129,7 +129,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
         return parent::resolveFieldMutationResolverClass($typeResolver, $fieldName);
     }
 
-    public function resolveFieldTypeResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'reply':

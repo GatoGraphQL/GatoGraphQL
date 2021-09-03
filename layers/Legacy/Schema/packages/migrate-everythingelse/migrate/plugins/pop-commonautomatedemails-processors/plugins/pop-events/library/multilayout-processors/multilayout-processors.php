@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 
@@ -26,7 +26,7 @@ class PoP_CommonAutomatedEmails_Events_Multilayout_Processor extends PoP_Applica
                     );
                     if ($layout = $event_layouts[$format] ?? null) {
                         $instanceManager = InstanceManagerFacade::getInstance();
-                        /** @var ObjectTypeResolverInterface */
+                        /** @var RelationalTypeResolverInterface */
                         $eventTypeResolver = $instanceManager->getInstance(EventTypeResolver::class);
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(

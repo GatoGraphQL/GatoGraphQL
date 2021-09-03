@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\DirectiveResolvers;
 
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
 {
@@ -22,7 +22,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
         return DirectiveTypes::SCRIPTING;
     }
 
-    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $typeResolver): ?string
     {
         return $this->translationAPI->__('Rename a property in the current object', 'component-model');
     }
@@ -31,7 +31,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
      * Rename a property from the current object
      */
     public function resolveDirective(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,

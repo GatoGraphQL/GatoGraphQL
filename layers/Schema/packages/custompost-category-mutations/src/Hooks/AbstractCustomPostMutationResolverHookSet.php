@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostCategoryMutations\Hooks;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
@@ -33,7 +33,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 
     public function maybeAddSchemaFieldArgs(
         array $fieldArgs,
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName,
         ?string $entityTypeResolverClass
     ): array {
@@ -42,7 +42,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             return $fieldArgs;
         }
         $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
-        /** @var ObjectTypeResolverInterface */
+        /** @var RelationalTypeResolverInterface */
         $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
         $fieldArgs[] = [
             SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,

@@ -8,7 +8,7 @@ use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterfa
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
 
@@ -51,7 +51,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
         return false;
     }
 
-    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $typeResolver): ?string
     {
         return sprintf(
             $this->translationAPI->__('Place the current object\'s data under expression `%s`, making it accessible to fields and directives through helper function `getPropertyFromSelf`', 'component-model'),
@@ -59,7 +59,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
         );
     }
 
-    public function getSchemaDirectiveExpressions(ObjectTypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $typeResolver): array
     {
         return [
             Expressions::NAME_SELF => $this->translationAPI->__('Object containing all properties for the current object, fetched either in the current or a previous iteration. These properties can be accessed through helper function `getSelfProp`', 'component-model'),
@@ -70,7 +70,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
      * Copy the data under the relational object into the current object
      */
     public function resolveDirective(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,

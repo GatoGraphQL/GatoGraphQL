@@ -7,7 +7,7 @@ namespace PoPSchema\Notifications\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 
 class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
@@ -24,7 +24,7 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'multilayoutKeys' => SchemaDefinition::TYPE_STRING,
@@ -32,7 +32,7 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'multilayoutKeys' => SchemaTypeModifiers::IS_ARRAY,
@@ -40,7 +40,7 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'multilayoutKeys' => $this->translationAPI->__('', ''),
@@ -55,7 +55,7 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

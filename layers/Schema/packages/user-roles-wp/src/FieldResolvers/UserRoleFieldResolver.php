@@ -7,7 +7,7 @@ namespace PoPSchema\UserRolesWP\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractReflectionPropertyFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
 
 class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
@@ -27,7 +27,7 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
      *
      * @see https://github.com/getpop/component-model/issues/1
      */
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'name' => SchemaDefinition::TYPE_STRING,
@@ -36,7 +36,7 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'name' => SchemaTypeModifiers::NON_NULLABLE,
@@ -50,7 +50,7 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
      *
      * @see https://github.com/getpop/component-model/issues/1
      */
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'name' => $this->translationAPI->__('The role name', 'user-roles-wp'),

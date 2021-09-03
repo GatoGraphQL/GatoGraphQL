@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
 
 trait FilterIDsSatisfyingConditionDirectiveResolverTrait
 {
     use RemoveIDsDataFieldsDirectiveResolverTrait;
 
-    protected function getIdsSatisfyingCondition(ObjectTypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations)
+    protected function getIdsSatisfyingCondition(RelationalTypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations)
     {
         // Check the condition field. If it is satisfied, then skip those fields
         $idsSatisfyingCondition = [];

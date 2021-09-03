@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait CommunityFieldResolverTrait
 {
@@ -7,7 +7,7 @@ trait CommunityFieldResolverTrait
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessResultItem(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []

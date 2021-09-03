@@ -7,7 +7,7 @@ namespace PoPSchema\UserRolesAccessControl\Hooks;
 use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDirectivesForFieldsTrait;
 use PoP\AccessControl\Hooks\AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 use PoPSchema\UserRolesAccessControl\Helpers\UserRoleHelper;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
@@ -43,7 +43,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extend
      * Decide if to remove the fieldNames
      */
     protected function removeFieldName(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         FieldResolverInterface $fieldResolver,
         array $fieldInterfaceResolverClasses,
         string $fieldName

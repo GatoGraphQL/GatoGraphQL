@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CommentMutations\Schema;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CommentMutations\ComponentConfiguration;
@@ -15,7 +15,7 @@ class SchemaDefinitionHelpers
     private static array $schemaFieldArgsCache = [];
 
     public static function getAddCommentToCustomPostSchemaFieldArgs(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName,
         bool $addCustomPostID,
         bool $addParentCommentID,

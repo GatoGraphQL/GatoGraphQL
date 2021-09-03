@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait SelfFieldSchemaDefinitionResolverTrait
 {
@@ -16,12 +16,12 @@ trait SelfFieldSchemaDefinitionResolverTrait
     /**
      * The object resolves its own schema definition
      */
-    public function getSchemaDefinitionResolver(ObjectTypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
+    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
     {
         return $this;
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
         return $schemaDefinitionService->getDefaultType();
@@ -30,28 +30,28 @@ trait SelfFieldSchemaDefinitionResolverTrait
     /**
      * By default types are nullable, and not an array
      */
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return null;
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         return null;
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         return [];
     }
 
-    public function getSchemaFieldDeprecationDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function getSchemaFieldDeprecationDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         return null;
     }
 
     public function validateFieldArgument(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
@@ -59,7 +59,7 @@ trait SelfFieldSchemaDefinitionResolverTrait
         return [];
     }
 
-    public function addSchemaDefinitionForField(array &$schemaDefinition, ObjectTypeResolverInterface $typeResolver, string $fieldName): void
+    public function addSchemaDefinitionForField(array &$schemaDefinition, RelationalTypeResolverInterface $typeResolver, string $fieldName): void
     {
     }
 }

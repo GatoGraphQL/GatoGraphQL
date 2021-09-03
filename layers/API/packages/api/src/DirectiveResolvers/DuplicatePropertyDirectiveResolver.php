@@ -7,7 +7,7 @@ namespace PoP\API\DirectiveResolvers;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -33,12 +33,12 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         return true;
     }
 
-    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $typeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $typeResolver): ?string
     {
         return $this->translationAPI->__('Duplicate a property in the current object', 'component-model');
     }
 
-    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $typeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $typeResolver): array
     {
         return [
             [
@@ -54,7 +54,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
      * Duplicate a property from the current object
      */
     public function resolveDirective(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,

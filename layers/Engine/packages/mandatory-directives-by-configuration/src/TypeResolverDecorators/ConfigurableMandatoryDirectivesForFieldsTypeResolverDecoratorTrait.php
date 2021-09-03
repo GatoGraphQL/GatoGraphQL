@@ -6,7 +6,7 @@ namespace PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators;
 
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
 trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
@@ -29,7 +29,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
 
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
-    public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $typeResolver): array
+    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $typeResolver): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         $mandatoryDirectivesForFields = [];

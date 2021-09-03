@@ -8,7 +8,7 @@ use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\QueryRootTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\MutationRootTypeResolver;
@@ -47,7 +47,7 @@ class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataField
         );
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'queryRoot' => $this->translationAPI->__('Get the Query Root type', 'graphql-server'),
@@ -56,7 +56,7 @@ class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataField
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'queryRoot' => SchemaDefinition::TYPE_ID,
@@ -65,7 +65,7 @@ class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataField
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function resolveFieldTypeResolverClass(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'queryRoot':

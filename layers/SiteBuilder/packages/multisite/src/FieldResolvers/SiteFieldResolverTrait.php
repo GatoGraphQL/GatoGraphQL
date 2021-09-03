@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait SiteFieldResolverTrait
 {
@@ -12,7 +12,7 @@ trait SiteFieldResolverTrait
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessResultItem(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []

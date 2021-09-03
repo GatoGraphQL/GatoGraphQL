@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutations\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
@@ -19,7 +19,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         ];
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(RelationalTypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'update' => $this->translationAPI->__('Update the custom post', 'custompost-mutations'),
@@ -27,7 +27,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $typeResolver, string $fieldName): string
+    public function getSchemaFieldType(RelationalTypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'update' => SchemaDefinition::TYPE_ID,
@@ -35,7 +35,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $typeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(RelationalTypeResolverInterface $typeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'update':
@@ -55,7 +55,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
      * present in $form_data
      */
     public function validateMutationOnResultItem(
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         string $fieldName
     ): bool {
         switch ($fieldName) {
@@ -67,7 +67,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
 
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
-        ObjectTypeResolverInterface $typeResolver,
+        RelationalTypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName
     ): array {
