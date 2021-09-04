@@ -92,5 +92,8 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
         array &$schemaNotices,
         array &$schemaTraces
     ): array;
+    /**
+     * @return array<string,DirectiveResolverInterface>|null
+     */
     public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array;
 }
