@@ -35,7 +35,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface, StageInterface
+abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface
 {
     use AttachableExtensionTrait;
     use RemoveIDsDataFieldsDirectiveResolverTrait;
@@ -734,7 +734,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return false;
     }
 
-    public function __invoke($payload)
+    /**
+     * This is the equivalent to `__invoke` in League\Pipeline\StageInterface
+     *
+     * @param mixed[] $payload
+     * @return mixed[]
+     */
+    public function resolveDirectivePipelinePayload(array $payload): array
     {
         // 1. Extract the arguments from the payload
         // $pipelineIDsDataFields is an array containing all stages of the pipe

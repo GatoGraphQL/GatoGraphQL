@@ -18,7 +18,7 @@ class DirectivePipelineService implements DirectivePipelineServiceInterface
         // From the ordered directives, create the pipeline
         $pipelineBuilder = new PipelineBuilder();
         foreach ($directiveResolverInstances as $directiveResolverInstance) {
-            $pipelineBuilder->add($directiveResolverInstance);
+            $pipelineBuilder->add([$directiveResolverInstance, 'resolveDirectivePipelinePayload']);
         }
         $directivePipeline = new DirectivePipelineDecorator($pipelineBuilder->build());
         return $directivePipeline;
