@@ -450,6 +450,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($directiveResolverInstanceFields as $instanceID => $instanceData) {
             $fieldDirective = $instanceData['fieldDirective'];
             $enqueuedFieldDirective = $instanceData['enqueuedFieldDirective'];
+            /** @var DirectiveResolverInterface */
             $directiveResolverInstance = $instanceData['instance'];
             $directiveResolverFields = $instanceData['fields'];
             // If the enqueued and the fieldDirective are different, it's because it is a repeated one

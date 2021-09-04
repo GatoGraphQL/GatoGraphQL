@@ -128,4 +128,12 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * Indicate if the directive is global (i.e. it can be applied to all fields, for all typeResolvers)
      */
     public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool;
+
+    public function resolveSchemaValidationErrorDescriptions(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $directiveName,
+        array $directiveArgs = []
+    ): ?array;
+    public function resolveSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function getSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
 }
