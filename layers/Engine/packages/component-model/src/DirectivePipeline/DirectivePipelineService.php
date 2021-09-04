@@ -18,6 +18,8 @@ class DirectivePipelineService implements DirectivePipelineServiceInterface
         // From the ordered directives, create the pipeline
         $pipelineBuilder = new PipelineBuilder();
         foreach ($directiveResolverInstances as $directiveResolverInstance) {
+            // This is the method to be invoked,
+            // equivalent to `__invoke` in League\Pipeline\StageInterface
             $pipelineBuilder->add([$directiveResolverInstance, 'resolveDirectivePipelinePayload']);
         }
         $directivePipeline = new DirectivePipelineDecorator($pipelineBuilder->build());
