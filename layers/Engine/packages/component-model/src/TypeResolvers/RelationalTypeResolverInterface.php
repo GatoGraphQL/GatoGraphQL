@@ -93,6 +93,5 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
         array &$schemaNotices,
         array &$schemaTraces
     ): array;
-    public function getDirectivePipeline(array $directiveResolverInstances): DirectivePipelineDecorator;
-    public function getDirectiveResolverInstanceForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array;
+    public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array;
 }

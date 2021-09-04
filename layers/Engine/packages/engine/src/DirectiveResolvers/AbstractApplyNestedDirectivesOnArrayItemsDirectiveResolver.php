@@ -6,6 +6,7 @@ namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Facades\DirectivePipeline\DirectivePipelineServiceFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -218,7 +219,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 },
                 $this->nestedDirectivePipelineData
             );
-            $nestedDirectivePipeline = $relationalTypeResolver->getDirectivePipeline($directiveResolverInstances);
+            $directivePipelineService = DirectivePipelineServiceFacade::getInstance();
+            $nestedDirectivePipeline = $directivePipelineService->getDirectivePipeline($directiveResolverInstances);
             // Fill the idsDataFields for each directive in the pipeline
             $pipelineArrayItemIdsProperties = [];
             for ($i = 0; $i < count($directiveResolverInstances); $i++) {

@@ -57,6 +57,13 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      */
     public function getPipelinePosition(): string;
     /**
+     * This is the equivalent to `__invoke` in League\Pipeline\StageInterface
+     *
+     * @param mixed[] $payload
+     * @return mixed[]
+     */
+    public function resolveDirectivePipelinePayload(array $payload): array;
+    /**
      * Indicate if the directiveResolver can process the directive with the given name and args
      */
     public function resolveCanProcess(

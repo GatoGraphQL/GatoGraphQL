@@ -23,6 +23,9 @@ services:
     PoP\ComponentModel\Engine\EngineInterface:
         class: \PoP\ComponentModel\Engine\Engine
 
+    PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface:
+        class: \PoP\ComponentModel\DirectivePipeline\DirectivePipelineService
+
     PoP\ComponentModel\Engine\DataloadingEngineInterface:
         class: \PoP\ComponentModel\Engine\DataloadingEngine
 
