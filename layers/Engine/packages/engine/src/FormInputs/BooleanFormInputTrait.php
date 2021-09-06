@@ -18,6 +18,10 @@ trait BooleanFormInputTrait
         if ($this->isMultiple()) {
             $ret = array();
             if ($values = $source[$this->getName()]) {
+                // Watch out passing a string as REST endpoint arg when array expected
+                if (!is_array($values)) {
+                    $values = [$values];
+                }
                 foreach ($values as $value) {
                     $ret[] = ($value === FormInputConstants::BOOLSTRING_TRUE);
                 }

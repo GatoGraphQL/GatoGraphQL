@@ -43,6 +43,10 @@ class FormInput
         //     $value = array();
         // }
         if ($value !== null && $this->isMultiple()) {
+            // Watch out passing a string as REST endpoint arg when array expected
+            if (!is_array($value)) {
+                $value = [$value];
+            }
             return array_filter($value);
         }
 
