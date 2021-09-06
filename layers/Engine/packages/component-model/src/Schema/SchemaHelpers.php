@@ -12,7 +12,8 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 class SchemaHelpers
 {
     /**
-     * Only validate that if the key is missing, and not if the value is empty,
+     * Validate that if the key is missing or is `null`,
+     * but not if the value is empty such as '""' or [],
      * because empty values could be allowed.
      *
      * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
@@ -22,7 +23,7 @@ class SchemaHelpers
         return array_values(array_filter(
             $fieldArgNames,
             function ($fieldArgName) use ($fieldArgs) {
-                return !array_key_exists($fieldArgName, $fieldArgs);
+                return !isset($fieldArgs[$fieldArgName]);
             }
         ));
     }
