@@ -117,17 +117,4 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
 
         return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
-
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'comments':
-            case 'commentsForAdmin':
-                /** @var CommentableFieldInterfaceResolver */
-                $fieldInterfaceResolver = $this->instanceManager->getInstance(CommentableFieldInterfaceResolver::class);
-                return $fieldInterfaceResolver->getFieldTypeResolverClass($fieldName);
-        }
-
-        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
-    }
 }

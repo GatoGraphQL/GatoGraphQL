@@ -62,6 +62,14 @@ trait FieldSchemaDefinitionResolverTrait
         return null;
     }
 
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    {
+        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+            return $schemaDefinitionResolver->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        }
+        return null;
+    }
+
     /**
      * Validate the constraints for a field argument
      *

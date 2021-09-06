@@ -50,6 +50,11 @@ trait SelfFieldSchemaDefinitionResolverTrait
         return null;
     }
 
+    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    {
+        return null;
+    }
+
     public function validateFieldArgument(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,

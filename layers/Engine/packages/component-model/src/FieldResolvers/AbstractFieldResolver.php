@@ -719,11 +719,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         return $fieldArgs;
     }
 
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
-    {
-        return null;
-    }
-
     final protected function isFieldOfRelationalType(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?bool
     {
         $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($relationalTypeResolver, $field);

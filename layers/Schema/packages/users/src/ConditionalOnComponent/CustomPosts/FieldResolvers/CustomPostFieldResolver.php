@@ -94,15 +94,4 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
         return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
-
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'author':
-                $fieldInterfaceResolver = $this->getWithAuthorFieldInterfaceResolverInstance();
-                return $fieldInterfaceResolver->getFieldTypeResolverClass($fieldName);
-        }
-
-        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
-    }
 }
