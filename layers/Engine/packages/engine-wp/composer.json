@@ -163,9 +163,9 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/engine": "^0.8.5",
-        "getpop/hooks-wp": "^0.8.5",
-        "getpop/routing-wp": "^0.8.5"
+        "getpop/engine": "^0.9",
+        "getpop/hooks-wp": "^0.9",
+        "getpop/routing-wp": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",

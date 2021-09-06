@@ -14,12 +14,12 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/posts": "^0.8.5",
-        "pop-schema/tags": "^0.8.5"
+        "pop-schema/posts": "^0.9",
+        "pop-schema/tags": "^0.9"
     },
     "require-dev": {
-        "getpop/api": "^0.8.5",
-        "getpop/api-rest": "^0.8.5",
+        "getpop/api": "^0.9",
+        "getpop/api-rest": "^0.9",
         "phpstan/phpstan": "^0.12.76",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.11",
