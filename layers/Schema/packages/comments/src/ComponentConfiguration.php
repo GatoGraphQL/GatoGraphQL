@@ -11,16 +11,16 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static ?int $getRootCommentListDefaultLimit = 100;
+    private static ?int $getRootCommentListDefaultLimit = 10;
     private static ?int $getCustomPostCommentOrCommentResponseListDefaultLimit = -1;
-    private static ?int $getCommentListMaxLimit = 10;
+    private static ?int $getCommentListMaxLimit = -1;
 
     public static function getRootCommentListDefaultLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::ROOT_COMMENT_LIST_DEFAULT_LIMIT;
         $selfProperty = &self::$getRootCommentListDefaultLimit;
-        $defaultValue = 100;
+        $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
@@ -56,7 +56,7 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::COMMENT_LIST_MAX_LIMIT;
         $selfProperty = &self::$getCommentListMaxLimit;
-        $defaultValue = 10;
+        $defaultValue = -1;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
         // Initialize property from the environment/hook
