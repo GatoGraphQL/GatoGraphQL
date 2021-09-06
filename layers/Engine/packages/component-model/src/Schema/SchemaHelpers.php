@@ -122,7 +122,8 @@ class SchemaHelpers
         if ($type == SchemaDefinition::TYPE_ID) {
             $instanceManager = InstanceManagerFacade::getInstance();
             // The type may not be implemented yet (eg: Category), then skip
-            if ($fieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($fieldName)) {
+            if ($relationalTypeResolver->isFieldOfRelationalType($fieldName)) {
+                $fieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($fieldName);
                 $fieldTypeResolver = $instanceManager->getInstance((string)$fieldTypeResolverClass);
                 $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             }
