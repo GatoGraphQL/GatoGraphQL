@@ -9,11 +9,7 @@ use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver implements QueryableFieldInterfaceSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
-
-    public function getFieldDataFilteringModule(string $fieldName): ?array
-    {
-        return null;
-    }
+    use QueryableFieldInterfaceSchemaDefinitionResolverTrait;
 
     public function getSchemaFieldArgs(string $fieldName): array
     {
@@ -26,13 +22,16 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSch
 
     protected function getFieldArgumentsSchemaDefinitions(string $fieldName): array
     {
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($fieldName)) {
-            $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
-            return $this->getSchemaFieldArgsWithCustomFilterInputData(
-                $schemaFieldArgs,
-                $this->getFieldDataFilteringDefaultValues($fieldName),
-                $this->getFieldDataFilteringMandatoryArgs($fieldName)
-            );
+        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
+            /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface $schemaDefinitionResolver */
+            if ($filterDataloadingModule = $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName)) {
+                $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
+                return $this->getSchemaFieldArgsWithCustomFilterInputData(
+                    $schemaFieldArgs,
+                    $this->getFieldDataFilteringDefaultValues($fieldName),
+                    $this->getFieldDataFilteringMandatoryArgs($fieldName)
+                );
+            }
         }
 
         return [];
