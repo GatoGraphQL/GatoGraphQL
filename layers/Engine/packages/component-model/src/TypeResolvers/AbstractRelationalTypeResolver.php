@@ -1763,7 +1763,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Add subfield schema if it is deep, and this typeResolver has not been processed yet
         if ($options['deep'] ?? null) {
             // If this field is relational, then add its own schema
-            if ($fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($fieldName)) {
+            if ($this->isFieldOfRelationalType($fieldName)) {
+                $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($fieldName);
                 $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
                 $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] = $fieldTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
             }
