@@ -138,8 +138,25 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
             $copyToField = $copyToFields[$i] ?? $copyFromFields[$i];
             foreach ($idsDataFields as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $relationalField) {
-                    // The data is stored under the field's output key
-                    $relationalFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $relationalField);
+                    /**
+                     * The data is stored under the field's output key.
+                     * 
+                     * Watch out! Must fetch content under the already-used field's output key,
+                     * so must use `getFieldOutputKey` instead of `getUniqueFieldOutputKey`,
+                     * otherwise it will not find the value since it will produce a different entry.
+                     * 
+                     * For instance:
+                     * 
+                     *     /?postId=1
+                     *       &query=
+                     *         post($postId)@post.content|date(d/m/Y)@date;
+                     *         post($postId)@post<copyRelationalResults([content,date],[postContent,postDate])>
+                     * 
+                     * In this query, the unique field output key for "post($postId)@post"
+                     * is "post" and for "post($postId)@post<copyRelationalResults([content,date],[postContent,postDate])>"
+                     * it is "post-1".
+                     */
+                    $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
                     // Validate that the current object has `relationalField` property set
                     // Since we are fetching from a relational object (placed one level below in the iteration stack), the value could've been set only in a previous iteration
                     // Then it must be in $previousDBItems (it can't be in $dbItems unless set by chance, because the same IDs were involved for a possibly different query)
