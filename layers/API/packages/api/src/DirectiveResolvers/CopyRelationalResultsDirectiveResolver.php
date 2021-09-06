@@ -133,56 +133,68 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
         $dbKey = $relationalTypeResolver->getTypeOutputName();
 
         // Copy the data from each of the relational object fields to the current object
-        for ($i = 0; $i < count($copyFromFields); $i++) {
-            $copyFromField = $copyFromFields[$i];
-            $copyToField = $copyToFields[$i] ?? $copyFromFields[$i];
-            foreach ($idsDataFields as $id => $dataFields) {
-                foreach ($dataFields['direct'] as $relationalField) {
-                    /**
-                     * The data is stored under the field's output key.
-                     *
-                     * Watch out! Must fetch content under the already-used field's output key,
-                     * so must use `getFieldOutputKey` instead of `getUniqueFieldOutputKey`,
-                     * otherwise it will not find the value since it will produce a different entry.
-                     *
-                     * For instance:
-                     *
-                     *     /?postId=1
-                     *       &query=
-                     *         post($postId)@post.content|date(d/m/Y)@date;
-                     *         post($postId)@post<copyRelationalResults([content,date],[postContent,postDate])>
-                     *
-                     * In this query, the unique field output key for "post($postId)@post"
-                     * is "post" and for "post($postId)@post<copyRelationalResults([content,date],[postContent,postDate])>"
-                     * it is "post-1".
-                     */
-                    $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
-                    // Validate that the current object has `relationalField` property set
-                    // Since we are fetching from a relational object (placed one level below in the iteration stack), the value could've been set only in a previous iteration
-                    // Then it must be in $previousDBItems (it can't be in $dbItems unless set by chance, because the same IDs were involved for a possibly different query)
-                    if (!array_key_exists($relationalFieldOutputKey, $previousDBItems[$dbKey][(string)$id] ?? [])) {
-                        if ($relationalFieldOutputKey != $relationalField) {
-                            $dbErrors[(string)$id][] = [
-                                Tokens::PATH => [$this->directive],
-                                Tokens::MESSAGE => sprintf(
-                                    $this->translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
-                                    $relationalField,
-                                    $relationalFieldOutputKey,
-                                    $id
-                                ),
-                            ];
-                        } else {
-                            $dbErrors[(string)$id][] = [
-                                Tokens::PATH => [$this->directive],
-                                Tokens::MESSAGE => sprintf(
-                                    $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
-                                    $relationalField,
-                                    $id
-                                ),
-                            ];
-                        }
-                        continue;
+        foreach ($idsDataFields as $id => $dataFields) {
+            foreach ($dataFields['direct'] as $relationalField) {
+                /**
+                 * The data is stored under the field's output key.
+                 *
+                 * Watch out! Must fetch content under the already-used field's output key,
+                 * so must use `getFieldOutputKey` instead of `getUniqueFieldOutputKey`,
+                 * otherwise it will not find the value since it will produce a different entry.
+                 *
+                 * For instance:
+                 *
+                 *     /?postId=1
+                 *       &query=
+                 *         post($postId)@post.content|date(d/m/Y)@date;
+                 *         post($postId)@post<copyRelationalResults([content,date],[postContent,postDate])>
+                 *
+                 * In this query, the unique field output key for "post($postId)@post"
+                 * is "post" and for "post($postId)@post<copyRelationalResults([content,date],[postContent,postDate])>"
+                 * it is "post-1".
+                 */
+                $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
+
+                // Make sure the field is relational, and not a scalar or enum
+                if (!$relationalTypeResolver->isFieldOfRelationalType($relationalField)) {
+                    $dbErrors[(string)$id][] = [
+                        Tokens::PATH => [$this->directive],
+                        Tokens::MESSAGE => sprintf(
+                            $this->translationAPI->__('Field \'%s\' is not a connection, so it cannot have data properties', 'component-model'),
+                            $relationalFieldOutputKey
+                        ),
+                    ];
+                    continue;
+                }
+
+                // Validate that the current object has `relationalField` property set
+                // Since we are fetching from a relational object (placed one level below in the iteration stack), the value could've been set only in a previous iteration
+                // Then it must be in $previousDBItems (it can't be in $dbItems unless set by chance, because the same IDs were involved for a possibly different query)
+                if (!array_key_exists($relationalFieldOutputKey, $previousDBItems[$dbKey][(string)$id] ?? [])) {
+                    if ($relationalFieldOutputKey != $relationalField) {
+                        $dbErrors[(string)$id][] = [
+                            Tokens::PATH => [$this->directive],
+                            Tokens::MESSAGE => sprintf(
+                                $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
+                                $relationalFieldOutputKey,
+                                $id
+                            ),
+                        ];
+                    } else {
+                        $dbErrors[(string)$id][] = [
+                            Tokens::PATH => [$this->directive],
+                            Tokens::MESSAGE => sprintf(
+                                $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
+                                $relationalField,
+                                $id
+                            ),
+                        ];
                     }
+                    continue;
+                }
+                for ($i = 0; $i < count($copyFromFields); $i++) {
+                    $copyFromField = $copyFromFields[$i];
+                    $copyToField = $copyToFields[$i] ?? $copyFromFields[$i];
 
                     // If the destination field already exists, warn that it will be overriden
                     $isTargetValueInDBItems = array_key_exists($copyToField, $dbItems[(string)$id] ?? []);
