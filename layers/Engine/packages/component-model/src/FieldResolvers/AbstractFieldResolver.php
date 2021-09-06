@@ -427,7 +427,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
             }
         }
-        if (!is_null($this->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName))) {
+        if ($this->isFieldOfRelationalType($relationalTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
         }
         if (!is_null($this->resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName))) {
@@ -722,6 +722,16 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         return null;
+    }
+
+    final protected function isFieldOfRelationalType(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?bool
+    {
+        $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($relationalTypeResolver, $field);
+        if ($fieldTypeResolverClass === null) {
+            return null;
+        }
+        $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
+        return $fieldTypeResolver instanceof RelationalTypeResolverInterface;
     }
 
     public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
