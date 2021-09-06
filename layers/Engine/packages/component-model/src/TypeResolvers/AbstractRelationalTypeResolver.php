@@ -23,6 +23,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\FieldHelpers;
@@ -1308,20 +1309,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return null;
     }
 
-    public function isFieldOfRelationalType(string $field): ?bool
-    {
-        // Get the value from a fieldResolver, from the first one that resolves it
-        if ($fieldResolvers = $this->getFieldResolversForField($field)) {
-            list(
-                $validField,
-                $fieldName,
-            ) = $this->dissectFieldForSchema($field);
-            return $fieldResolvers[0]->getSchemaDefinitionResolverForField($this, $field)?->isFieldOfRelationalType($this, $fieldName);
-        }
-
-        return null;
-    }
-
     /**
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
@@ -1766,8 +1753,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Add subfield schema if it is deep, and this typeResolver has not been processed yet
         if ($options['deep'] ?? null) {
             // If this field is relational, then add its own schema
-            if ($this->isFieldOfRelationalType($fieldName)) {
-                $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($fieldName);
+            $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($fieldName);
+            if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
                 $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
                 $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] = $fieldTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
             }

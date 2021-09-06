@@ -77,7 +77,6 @@ interface FieldResolverInterface extends AttachableExtensionInterface
         string $fieldName
     ): bool;
     public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string;
-    public function isFieldOfRelationalType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?bool;
     public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string;
     public function resolveSchemaValidationWarningDescriptions(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
     /**

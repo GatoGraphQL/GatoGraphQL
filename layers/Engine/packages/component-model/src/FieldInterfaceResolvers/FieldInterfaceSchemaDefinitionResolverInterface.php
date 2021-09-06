@@ -13,7 +13,6 @@ interface FieldInterfaceSchemaDefinitionResolverInterface
     public function getSchemaFieldArgs(string $fieldName): array;
     public function getSchemaFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string;
     public function resolveFieldTypeResolverClass(string $fieldName): ?string;
-    public function isFieldOfRelationalType(string $fieldName): ?bool;
     /**
      * Validate the constraints for a field argument
      *

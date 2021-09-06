@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
@@ -69,22 +68,6 @@ trait FieldSchemaDefinitionResolverTrait
             return $schemaDefinitionResolver->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
         }
         return null;
-    }
-
-    public function isFieldOfRelationalType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?bool
-    {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($relationalTypeResolver, $fieldName)) {
-            if ($schemaDefinitionResolver !== $this) {
-                return $schemaDefinitionResolver->isFieldOfRelationalType($relationalTypeResolver, $fieldName);
-            }
-        }
-        $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
-        if ($fieldTypeResolverClass === null) {
-            return null;
-        }
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $fieldTypeResolver = $instanceManager->getInstance($fieldTypeResolverClass);
-        return $fieldTypeResolver instanceof RelationalTypeResolverInterface;
     }
 
     /**

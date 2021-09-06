@@ -350,19 +350,4 @@ trait AliasSchemaFieldResolverTrait
             $this->getAliasedFieldName($fieldName)
         );
     }
-
-    /**
-     * Proxy pattern: execute same function on the aliased FieldResolver,
-     * for the aliased $fieldName
-     */
-    public function isFieldOfRelationalType(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $fieldName
-    ): ?bool {
-        $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
-        return $aliasedFieldResolver->isFieldOfRelationalType(
-            $relationalTypeResolver,
-            $this->getAliasedFieldName($fieldName)
-        );
-    }
 }

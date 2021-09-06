@@ -374,8 +374,9 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         // If we found a resolver for this fieldName, get all its properties from it
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== null) {
-            if ($schemaDefinitionResolver->isFieldOfRelationalType($relationalTypeResolver, $fieldName)) {
-                $fieldTypeResolverClass = $schemaDefinitionResolver->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+            $fieldTypeResolverClass = $schemaDefinitionResolver->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+            if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
                 $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);
                 $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             } else {
@@ -434,9 +435,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             if ($version = $this->getSchemaFieldVersion($relationalTypeResolver, $fieldName)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
             }
-        }
-        if ($this->isFieldOfRelationalType($relationalTypeResolver, $fieldName)) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
         }
         if (!is_null($this->resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName))) {
             $schemaDefinition[SchemaDefinition::ARGNAME_FIELD_IS_MUTATION] = true;

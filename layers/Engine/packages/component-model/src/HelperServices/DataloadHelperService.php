@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\HelperServices;
 
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 
@@ -28,7 +29,8 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         // Otherwise, there will appear 2 error messages:
         // 1. No FieldResolver
         // 2. No FieldDefaultTypeDataLoader
-        if (!$relationalTypeResolver->isFieldOfRelationalType($subcomponent_data_field) && $relationalTypeResolver->hasFieldResolversForField($subcomponent_data_field)) {
+        $subcomponentFieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($subcomponent_data_field);
+        if (!SchemaHelpers::isRelationalFieldTypeResolverClass($subcomponentFieldTypeResolverClass) && $relationalTypeResolver->hasFieldResolversForField($subcomponent_data_field)) {
             // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
             $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
             $this->feedbackMessageStore->addSchemaError(
@@ -40,7 +42,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                 )
             );
         }
-        return $relationalTypeResolver->resolveFieldTypeResolverClass($subcomponent_data_field);
+        return $subcomponentFieldTypeResolverClass;
     }
 
     /**
