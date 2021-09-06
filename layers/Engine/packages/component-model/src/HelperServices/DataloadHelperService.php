@@ -24,9 +24,6 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     public function getTypeResolverClassFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, string $subcomponent_data_field): ?string
     {
         $subcomponent_typeResolver_class = $relationalTypeResolver->resolveFieldTypeResolverClass($subcomponent_data_field);
-        // if (!$subcomponent_typeResolver_class && \PoP\ComponentModel\Environment::failIfSubcomponentTypeDataLoaderUndefined()) {
-        //     throw new \Exception(sprintf('There is no default typeResolver set for field  "%s" from typeResolver "%s" and typeResolver "%s" (%s)', $subcomponent_data_field, $typeResolver_class, $typeResolverClass, RequestUtils::getRequestedFullURL()));
-        // }
         // If this field doesn't have a typeResolver, show a schema error
         // But if there are no FieldResolvers, then skip adding an error here, since that error will have been added already
         // Otherwise, there will appear 2 error messages:
