@@ -113,7 +113,7 @@ class SchemaHelpers
     /**
      * If the internal type is "id", convert it to its type name
      */
-    public static function convertTypeIDToTypeName(
+    public static function getTypeNameFromTypeResolver(
         string $type,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
