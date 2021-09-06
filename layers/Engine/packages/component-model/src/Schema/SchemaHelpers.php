@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class SchemaHelpers
 {
@@ -106,5 +109,19 @@ class SchemaHelpers
             }
         }
         return $enumValueDefinitions;
+    }
+
+    /**
+     * Indicate if a FieldTypeResolver class is of the Relational type
+     */
+    public static function isRelationalFieldTypeResolverClass(?string $fieldTypeResolverClass): ?bool
+    {
+        if ($fieldTypeResolverClass === null) {
+            return null;
+        }
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var TypeResolverInterface */
+        $fieldTypeResolver = $instanceManager->getInstance($fieldTypeResolverClass);
+        return $fieldTypeResolver instanceof RelationalTypeResolverInterface;
     }
 }
