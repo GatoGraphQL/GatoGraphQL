@@ -1309,7 +1309,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return null;
     }
 
-    public function isRelationalType(string $field): ?bool
+    public function isFieldOfRelationalType(string $field): ?bool
     {
         $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($field);
         if ($fieldTypeResolverClass === null) {

@@ -156,7 +156,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                 $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
 
                 // Make sure the field is relational, and not a scalar or enum
-                if (!$relationalTypeResolver->isRelationalType($relationalField)) {
+                if (!$relationalTypeResolver->isFieldOfRelationalType($relationalField)) {
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
