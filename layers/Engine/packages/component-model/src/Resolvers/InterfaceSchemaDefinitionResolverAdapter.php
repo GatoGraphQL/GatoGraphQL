@@ -69,6 +69,11 @@ class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionR
         return $this->fieldInterfaceResolver->resolveFieldTypeResolverClass($fieldName);
     }
 
+    public function isFieldOfRelationalType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?bool
+    {
+        return $this->fieldInterfaceResolver->isFieldOfRelationalType($fieldName);
+    }
+
     public function validateFieldArgument(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,

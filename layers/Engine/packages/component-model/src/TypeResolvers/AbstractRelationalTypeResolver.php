@@ -23,7 +23,6 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
-use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\FieldHelpers;
@@ -1770,16 +1769,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
         }
         // Convert the field type from its internal representation (eg: "array:id") to the type (eg: "array:Post")
-        if ($options['useTypeName'] ?? null) {
-            // The type is mandatory. If not provided, use the default one
-            $type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? $this->schemaDefinitionService->getDefaultType();
-            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeNameFromTypeResolver($this, $fieldName) ?? $type;
-        } else {
+        if (!($options['useTypeName'] ?? null) && ($types = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] ?? null)) {
             // Display the type under entry "referencedType"
-            if ($types = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] ?? null) {
-                $typeNames = array_keys($types);
-                $fieldSchemaDefinition[SchemaDefinition::ARGNAME_REFERENCED_TYPE] = $typeNames[0];
-            }
+            $typeNames = array_keys($types);
+            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_REFERENCED_TYPE] = $typeNames[0];
         }
         $isGlobal = $fieldResolver->isGlobal($this, $fieldName);
         $isConnection = isset($fieldSchemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL]) && $fieldSchemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL];
