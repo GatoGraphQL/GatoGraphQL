@@ -178,8 +178,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                             $dbErrors[(string)$id][] = [
                                 Tokens::PATH => [$this->directive],
                                 Tokens::MESSAGE => sprintf(
-                                    $this->translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
-                                    $relationalField,
+                                    $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
                                     $relationalFieldOutputKey,
                                     $id
                                 ),
