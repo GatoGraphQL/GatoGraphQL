@@ -28,13 +28,16 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
 
     protected function getFieldArgumentsSchemaDefinitions(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($relationalTypeResolver, $fieldName)) {
-            $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
-            return $this->getSchemaFieldArgsWithCustomFilterInputData(
-                $schemaFieldArgs,
-                $this->getFieldDataFilteringDefaultValues($relationalTypeResolver, $fieldName),
-                $this->getFieldDataFilteringMandatoryArgs($relationalTypeResolver, $fieldName)
-            );
+        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($relationalTypeResolver, $fieldName)) {
+            /** @var QueryableFieldSchemaDefinitionResolverInterface $schemaDefinitionResolver */
+            if ($filterDataloadingModule = $schemaDefinitionResolver->getFieldDataFilteringModule($relationalTypeResolver, $fieldName)) {
+                $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
+                return $this->getSchemaFieldArgsWithCustomFilterInputData(
+                    $schemaFieldArgs,
+                    $this->getFieldDataFilteringDefaultValues($relationalTypeResolver, $fieldName),
+                    $this->getFieldDataFilteringMandatoryArgs($relationalTypeResolver, $fieldName)
+                );
+            }
         }
 
         return [];
@@ -65,9 +68,17 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
 
     public function enableOrderedSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool
     {
-        // If there is a filter, there will be many filterInputs, so by default we'd rather not enable ordering
-        if ($this->getFieldDataFilteringModule($relationalTypeResolver, $fieldName) !== null) {
-            return false;
+        // If there is a filter, and it has many filterInputs, then by default we'd rather not enable ordering
+        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($relationalTypeResolver, $fieldName)) {
+            /** @var QueryableFieldSchemaDefinitionResolverInterface $schemaDefinitionResolver */
+            if ($filterDataloadingModule = $schemaDefinitionResolver->getFieldDataFilteringModule($relationalTypeResolver, $fieldName)) {
+                $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+                /** @var FilterDataModuleProcessorInterface */
+                $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($filterDataloadingModule);
+                if (count($filterDataModuleProcessor->getDataloadQueryArgsFilteringModules($filterDataloadingModule)) > 1) {
+                    return false;
+                }
+            }
         }
         return parent::enableOrderedSchemaFieldArgs($relationalTypeResolver, $fieldName);
     }
