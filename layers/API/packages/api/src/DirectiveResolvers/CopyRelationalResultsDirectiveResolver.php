@@ -140,18 +140,18 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                 foreach ($dataFields['direct'] as $relationalField) {
                     /**
                      * The data is stored under the field's output key.
-                     * 
+                     *
                      * Watch out! Must fetch content under the already-used field's output key,
                      * so must use `getFieldOutputKey` instead of `getUniqueFieldOutputKey`,
                      * otherwise it will not find the value since it will produce a different entry.
-                     * 
+                     *
                      * For instance:
-                     * 
+                     *
                      *     /?postId=1
                      *       &query=
                      *         post($postId)@post.content|date(d/m/Y)@date;
                      *         post($postId)@post<copyRelationalResults([content,date],[postContent,postDate])>
-                     * 
+                     *
                      * In this query, the unique field output key for "post($postId)@post"
                      * is "post" and for "post($postId)@post<copyRelationalResults([content,date],[postContent,postDate])>"
                      * it is "post-1".
