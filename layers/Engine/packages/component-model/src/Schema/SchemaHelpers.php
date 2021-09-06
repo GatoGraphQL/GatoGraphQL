@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class SchemaHelpers
 {
@@ -108,21 +106,5 @@ class SchemaHelpers
             }
         }
         return $enumValueDefinitions;
-    }
-
-    /**
-     * Obtain the TypeName from the TypeResolver
-     */
-    public static function getTypeNameFromTypeResolver(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $fieldName
-    ): ?string {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        if ($relationalTypeResolver->isFieldOfRelationalType($fieldName)) {
-            $fieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($fieldName);
-            $fieldTypeResolver = $instanceManager->getInstance((string)$fieldTypeResolverClass);
-            return $fieldTypeResolver->getMaybeNamespacedTypeName();
-        }
-        return null;
     }
 }
