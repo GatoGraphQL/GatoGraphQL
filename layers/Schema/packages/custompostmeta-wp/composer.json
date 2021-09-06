@@ -163,9 +163,9 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/custompostmeta": "^0.8.6",
-        "pop-schema/customposts-wp": "^0.8.6",
-        "pop-schema/metaquery-wp": "^0.8.6"
+        "pop-schema/custompostmeta": "^0.9",
+        "pop-schema/customposts-wp": "^0.9",
+        "pop-schema/metaquery-wp": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",

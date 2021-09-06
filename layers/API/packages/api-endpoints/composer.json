@@ -20,7 +20,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/api": "^0.8.6"
+        "getpop/api": "^0.9"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

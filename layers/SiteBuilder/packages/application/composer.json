@@ -162,10 +162,10 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/api": "^0.8.6",
-        "getpop/component-model-configuration": "^0.8.6",
-        "getpop/definitionpersistence": "^0.8.6",
-        "getpop/definitions-emoji": "^0.8.6"
+        "getpop/api": "^0.9",
+        "getpop/component-model-configuration": "^0.9",
+        "getpop/definitionpersistence": "^0.9",
+        "getpop/definitions-emoji": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.76",
