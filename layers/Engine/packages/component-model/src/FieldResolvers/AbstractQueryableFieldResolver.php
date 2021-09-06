@@ -8,6 +8,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\FieldResolvers\QueryableFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\SelfQueryableFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -73,9 +74,9 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
             /** @var QueryableFieldSchemaDefinitionResolverInterface $schemaDefinitionResolver */
             if ($filterDataloadingModule = $schemaDefinitionResolver->getFieldDataFilteringModule($relationalTypeResolver, $fieldName)) {
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-                /** @var FilterDataModuleProcessorInterface */
+                /** @var FilterInputContainerModuleProcessorInterface */
                 $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($filterDataloadingModule);
-                if (count($filterDataModuleProcessor->getDataloadQueryArgsFilteringModules($filterDataloadingModule)) > 1) {
+                if (count($filterDataModuleProcessor->getFilterInputModules($filterDataloadingModule)) > 1) {
                     return false;
                 }
             }
