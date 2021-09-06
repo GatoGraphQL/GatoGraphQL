@@ -162,10 +162,10 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/custompost-mutations-wp": "^0.8.4",
-        "pop-schema/post-tag-mutations": "^0.8.4",
-        "pop-schema/post-tags-wp": "^0.8.4",
-        "pop-schema/user-state-wp": "^0.8.4"
+        "pop-schema/custompost-mutations-wp": "^0.9",
+        "pop-schema/post-tag-mutations": "^0.9",
+        "pop-schema/post-tags-wp": "^0.9",
+        "pop-schema/user-state-wp": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
