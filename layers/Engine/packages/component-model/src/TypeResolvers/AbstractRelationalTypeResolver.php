@@ -1302,7 +1302,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            return $fieldResolvers[0]->resolveFieldTypeResolverClass($this, $fieldName);
+            return $fieldResolvers[0]->getSchemaDefinitionResolverForField($this, $field)?->resolveFieldTypeResolverClass($this, $fieldName);
         }
 
         return null;
@@ -1310,12 +1310,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     public function isFieldOfRelationalType(string $field): ?bool
     {
-        $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($field);
-        if ($fieldTypeResolverClass === null) {
-            return null;
+        // Get the value from a fieldResolver, from the first one that resolves it
+        if ($fieldResolvers = $this->getFieldResolversForField($field)) {
+            list(
+                $validField,
+                $fieldName,
+            ) = $this->dissectFieldForSchema($field);
+            return $fieldResolvers[0]->getSchemaDefinitionResolverForField($this, $field)?->isFieldOfRelationalType($this, $fieldName);
         }
-        $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
-        return $fieldTypeResolver instanceof RelationalTypeResolverInterface;
+
+        return null;
     }
 
     /**

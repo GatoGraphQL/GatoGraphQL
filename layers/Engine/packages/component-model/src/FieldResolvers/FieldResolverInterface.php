@@ -36,6 +36,7 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      * be exposed to the user (eg: "accessControlLists")
      */
     public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool;
+    public function getSchemaDefinitionResolverForField(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?FieldSchemaDefinitionResolverInterface;
     public function getSchemaDefinitionForField(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): array;
     public function getSchemaFieldVersion(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string;
     /**
@@ -76,6 +77,7 @@ interface FieldResolverInterface extends AttachableExtensionInterface
         string $fieldName
     ): bool;
     public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string;
+    public function isFieldOfRelationalType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?bool;
     public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string;
     public function resolveSchemaValidationWarningDescriptions(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
     /**

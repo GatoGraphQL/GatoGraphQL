@@ -73,7 +73,7 @@ trait FieldSchemaDefinitionResolverTrait
 
     public function isFieldOfRelationalType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?bool
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($relationalTypeResolver, $fieldName)) {
             if ($schemaDefinitionResolver !== $this) {
                 return $schemaDefinitionResolver->isFieldOfRelationalType($relationalTypeResolver, $fieldName);
             }
