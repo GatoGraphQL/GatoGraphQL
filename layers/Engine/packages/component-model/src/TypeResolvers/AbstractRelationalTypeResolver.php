@@ -1309,6 +1309,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return null;
     }
 
+    public function isRelationalType(string $field): ?bool
+    {
+        $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($field);
+        if ($fieldTypeResolverClass === null) {
+            return null;
+        }
+        $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
+        return $fieldTypeResolver instanceof RelationalTypeResolverInterface;
+    }
+
     /**
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
