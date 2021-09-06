@@ -11,6 +11,10 @@ trait QueryableFieldInterfaceSchemaDefinitionResolverTrait
     public function getFieldDataFilteringModule(string $fieldName): ?array
     {
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
+            // Avoid recursion when the Interface is its own DefinitionResolver
+            if ($schemaDefinitionResolver === $this) {
+                return null;
+            }
             /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface $schemaDefinitionResolver */
             return $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName);
         }
