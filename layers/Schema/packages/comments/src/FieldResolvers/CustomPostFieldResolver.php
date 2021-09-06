@@ -16,7 +16,6 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\FieldInterfaceResolvers\CommentableFieldInterfaceResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -124,7 +123,9 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'comments':
             case 'commentsForAdmin':
-                return CommentTypeResolver::class;
+                /** @var CommentableFieldInterfaceResolver */
+                $fieldInterfaceResolver = $this->instanceManager->getInstance(CommentableFieldInterfaceResolver::class);
+                return $fieldInterfaceResolver->getFieldTypeResolverClass($fieldName);
         }
 
         return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
