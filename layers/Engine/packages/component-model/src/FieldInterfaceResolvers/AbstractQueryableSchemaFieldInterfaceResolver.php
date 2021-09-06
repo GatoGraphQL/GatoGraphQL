@@ -12,6 +12,14 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSch
 
     public function getFieldDataFilteringModule(string $fieldName): ?array
     {
+        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
+            // Avoid recursion when the Interface is its own DefinitionResolver
+            if ($schemaDefinitionResolver === $this) {
+                return null;
+            }
+            /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface $schemaDefinitionResolver */
+            return $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName);
+        }
         return null;
     }
 
@@ -26,13 +34,16 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSch
 
     protected function getFieldArgumentsSchemaDefinitions(string $fieldName): array
     {
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($fieldName)) {
-            $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
-            return $this->getSchemaFieldArgsWithCustomFilterInputData(
-                $schemaFieldArgs,
-                $this->getFieldDataFilteringDefaultValues($fieldName),
-                $this->getFieldDataFilteringMandatoryArgs($fieldName)
-            );
+        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
+            /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface $schemaDefinitionResolver */
+            if ($filterDataloadingModule = $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName)) {
+                $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
+                return $this->getSchemaFieldArgsWithCustomFilterInputData(
+                    $schemaFieldArgs,
+                    $this->getFieldDataFilteringDefaultValues($fieldName),
+                    $this->getFieldDataFilteringMandatoryArgs($fieldName)
+                );
+            }
         }
 
         return [];
