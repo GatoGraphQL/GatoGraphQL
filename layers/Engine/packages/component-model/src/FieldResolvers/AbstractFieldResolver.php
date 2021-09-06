@@ -472,8 +472,9 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         return $schemaDefinition;
     }
 
-    final public function getSchemaDefinitionResolverForField(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?FieldSchemaDefinitionResolverInterface
+    final public function getSchemaDefinitionResolverForField(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?FieldSchemaDefinitionResolverInterface
     {
+        $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
         // First check if the value was cached
         $key = $relationalTypeResolver->getNamespacedTypeName() . '|' . $fieldName;
         if (!isset($this->schemaDefinitionResolverForFieldCache[$key])) {
