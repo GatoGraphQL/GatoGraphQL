@@ -111,23 +111,18 @@ class SchemaHelpers
     }
 
     /**
-     * If the internal type is "id", convert it to its type name
+     * Obtain the TypeName from the TypeResolver
      */
     public static function getTypeNameFromTypeResolver(
-        string $type,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
-    ): string {
-        // If the type is an ID, replace it with the actual type the ID references
-        if ($type == SchemaDefinition::TYPE_ID) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            // The type may not be implemented yet (eg: Category), then skip
-            if ($relationalTypeResolver->isFieldOfRelationalType($fieldName)) {
-                $fieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($fieldName);
-                $fieldTypeResolver = $instanceManager->getInstance((string)$fieldTypeResolverClass);
-                $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
-            }
+    ): ?string {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        if ($relationalTypeResolver->isFieldOfRelationalType($fieldName)) {
+            $fieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($fieldName);
+            $fieldTypeResolver = $instanceManager->getInstance((string)$fieldTypeResolverClass);
+            return $fieldTypeResolver->getMaybeNamespacedTypeName();
         }
-        return $type;
+        return null;
     }
 }

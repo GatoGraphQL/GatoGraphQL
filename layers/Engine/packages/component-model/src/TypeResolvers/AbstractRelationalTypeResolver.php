@@ -1773,7 +1773,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         if ($options['useTypeName'] ?? null) {
             // The type is mandatory. If not provided, use the default one
             $type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? $this->schemaDefinitionService->getDefaultType();
-            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeNameFromTypeResolver($type, $this, $fieldName);
+            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeNameFromTypeResolver($this, $fieldName) ?? $type;
         } else {
             // Display the type under entry "referencedType"
             if ($types = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] ?? null) {
