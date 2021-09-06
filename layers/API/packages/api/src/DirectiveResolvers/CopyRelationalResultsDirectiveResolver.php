@@ -157,6 +157,19 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                      * it is "post-1".
                      */
                     $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
+
+                    // Make sure the field is relational, and not a scalar or enum
+                    if (!$relationalTypeResolver->isRelationalType($relationalField)) {
+                        $dbErrors[(string)$id][] = [
+                            Tokens::PATH => [$this->directive],
+                            Tokens::MESSAGE => sprintf(
+                                $this->translationAPI->__('Field \'%s\' is not a connection, so it cannot have data properties', 'component-model'),
+                                $relationalFieldOutputKey
+                            ),
+                        ];
+                        continue;
+                    }
+
                     // Validate that the current object has `relationalField` property set
                     // Since we are fetching from a relational object (placed one level below in the iteration stack), the value could've been set only in a previous iteration
                     // Then it must be in $previousDBItems (it can't be in $dbItems unless set by chance, because the same IDs were involved for a possibly different query)
