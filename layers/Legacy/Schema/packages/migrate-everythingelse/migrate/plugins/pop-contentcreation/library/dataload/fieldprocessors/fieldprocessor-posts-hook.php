@@ -34,15 +34,14 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
-        $types = [
+        return match ($fieldName) {
             'titleEdit' => SchemaDefinition::TYPE_STRING,
             'contentEditor' => SchemaDefinition::TYPE_STRING,
             'contentEdit' => SchemaDefinition::TYPE_STRING,
             'editURL' => SchemaDefinition::TYPE_URL,
             'deleteURL' => SchemaDefinition::TYPE_URL,
-            'coauthors' => SchemaDefinition::TYPE_ID,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int

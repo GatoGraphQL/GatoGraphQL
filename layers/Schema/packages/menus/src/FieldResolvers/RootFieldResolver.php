@@ -44,8 +44,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'menu' => SchemaDefinition::TYPE_ID,
-            'menus' => SchemaDefinition::TYPE_ID,
             'menuCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

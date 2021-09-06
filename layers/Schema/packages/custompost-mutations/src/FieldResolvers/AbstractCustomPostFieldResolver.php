@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
@@ -25,14 +24,6 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
             'update' => $this->translationAPI->__('Update the custom post', 'custompost-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
-    }
-
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
-    {
-        $types = [
-            'update' => SchemaDefinition::TYPE_ID,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array

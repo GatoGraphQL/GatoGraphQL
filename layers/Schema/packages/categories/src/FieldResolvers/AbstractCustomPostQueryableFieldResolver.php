@@ -34,7 +34,6 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'categories' => SchemaDefinition::TYPE_ID,
             'categoryCount' => SchemaDefinition::TYPE_INT,
             'categoryNames' => SchemaDefinition::TYPE_STRING,
         ];

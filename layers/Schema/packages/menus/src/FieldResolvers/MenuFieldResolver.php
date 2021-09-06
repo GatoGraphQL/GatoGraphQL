@@ -7,7 +7,6 @@ namespace PoPSchema\Menus\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -61,7 +60,6 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'items' => SchemaDefinition::TYPE_ID,
             'itemDataEntries' => SchemaDefinition::TYPE_OBJECT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

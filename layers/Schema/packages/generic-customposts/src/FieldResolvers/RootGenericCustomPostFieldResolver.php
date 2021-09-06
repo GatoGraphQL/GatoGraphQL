@@ -66,13 +66,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'genericCustomPost' => SchemaDefinition::TYPE_ID,
-            'genericCustomPostBySlug' => SchemaDefinition::TYPE_ID,
-            'genericCustomPosts' => SchemaDefinition::TYPE_ID,
             'genericCustomPostCount' => SchemaDefinition::TYPE_INT,
-            'genericCustomPostForAdmin' => SchemaDefinition::TYPE_ID,
-            'genericCustomPostBySlugForAdmin' => SchemaDefinition::TYPE_ID,
-            'genericCustomPostsForAdmin' => SchemaDefinition::TYPE_ID,
             'genericCustomPostCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

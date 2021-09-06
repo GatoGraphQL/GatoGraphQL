@@ -48,7 +48,6 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
             'title' => SchemaDefinition::TYPE_STRING,
             'excerpt' => SchemaDefinition::TYPE_STRING,
             'content' => SchemaDefinition::TYPE_STRING,
-            'stancetarget' => SchemaDefinition::TYPE_ID,
             'hasStanceTarget' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

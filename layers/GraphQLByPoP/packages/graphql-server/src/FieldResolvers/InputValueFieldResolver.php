@@ -30,13 +30,12 @@ class InputValueFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
-        $types = [
+        return match ($fieldName) {
             'name' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
-            'type' => SchemaDefinition::TYPE_ID,
             'defaultValue' => SchemaDefinition::TYPE_STRING,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int

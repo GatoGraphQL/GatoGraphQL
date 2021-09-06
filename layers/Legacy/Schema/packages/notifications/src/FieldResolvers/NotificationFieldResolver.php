@@ -60,6 +60,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             'objectSubtype',
             'objectName',
             'objectID',
+            'user',
             'userID',
             'websiteURL',
             'userCaps',
@@ -123,6 +124,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             'action',
             'objectType',
             'objectID',
+            'user',
             'userID',
             'histTime',
             'histTimeNogmt',
@@ -151,6 +153,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             'objectSubtype' => $this->translationAPI->__('', ''),
             'objectName' => $this->translationAPI->__('', ''),
             'objectID' => $this->translationAPI->__('', ''),
+            'user' => $this->translationAPI->__('', ''),
             'userID' => $this->translationAPI->__('', ''),
             'websiteURL' => $this->translationAPI->__('', ''),
             'userCaps' => $this->translationAPI->__('', ''),
@@ -227,6 +230,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
                 return $notification->object_name;
             case 'objectID':
                 return $notification->object_id;
+            case 'user':
             case 'userID':
                 return $notification->user_id;
             case 'websiteURL':
@@ -329,7 +333,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
     public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
-            case 'userID':
+            case 'user':
                 return UserTypeResolver::class;
         }
 

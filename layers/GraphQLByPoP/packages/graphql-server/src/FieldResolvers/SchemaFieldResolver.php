@@ -31,19 +31,6 @@ class SchemaFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
-    {
-        $types = [
-            'queryType' => SchemaDefinition::TYPE_ID,
-            'mutationType' => SchemaDefinition::TYPE_ID,
-            'subscriptionType' => SchemaDefinition::TYPE_ID,
-            'types' => SchemaDefinition::TYPE_ID,
-            'directives' => SchemaDefinition::TYPE_ID,
-            'type' => SchemaDefinition::TYPE_ID,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
-    }
-
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {

@@ -55,19 +55,18 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
-        $types = [
-			'favicon' => SchemaDefinition::TYPE_OBJECT,
+        return match ($fieldName) {
+            'favicon' => SchemaDefinition::TYPE_OBJECT,
             'thumb' => SchemaDefinition::TYPE_OBJECT,
             'thumbFullSrc' => SchemaDefinition::TYPE_URL,
-            'authors' => SchemaDefinition::TYPE_ID,
             'topics' => SchemaDefinition::TYPE_STRING,
             'hasTopics' => SchemaDefinition::TYPE_BOOL,
             'appliesto' => SchemaDefinition::TYPE_STRING,
             'hasAppliesto' => SchemaDefinition::TYPE_BOOL,
             'hasUserpostactivity' => SchemaDefinition::TYPE_BOOL,
             'userPostActivityCount' => SchemaDefinition::TYPE_INT,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int

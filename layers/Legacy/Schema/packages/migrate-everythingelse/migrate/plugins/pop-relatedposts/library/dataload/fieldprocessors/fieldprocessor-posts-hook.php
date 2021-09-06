@@ -32,9 +32,7 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'references' => SchemaDefinition::TYPE_ID,
             'hasReferences' => SchemaDefinition::TYPE_BOOL,
-            'referencedby' => SchemaDefinition::TYPE_ID,
             'hasReferencedBy' => SchemaDefinition::TYPE_BOOL,
             'referencedByCount' => SchemaDefinition::TYPE_INT,
         ];

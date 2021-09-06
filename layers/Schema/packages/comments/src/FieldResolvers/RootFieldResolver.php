@@ -77,11 +77,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'comment' => SchemaDefinition::TYPE_ID,
-            'comments' => SchemaDefinition::TYPE_ID,
             'commentCount' => SchemaDefinition::TYPE_INT,
-            'commentForAdmin' => SchemaDefinition::TYPE_ID,
-            'commentsForAdmin' => SchemaDefinition::TYPE_ID,
             'commentCountForAdmin' => SchemaDefinition::TYPE_INT,
             default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
         };

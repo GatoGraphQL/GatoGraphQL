@@ -35,14 +35,13 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
-        $types = [
+        return match ($fieldName) {
             'name' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
-            'args' => SchemaDefinition::TYPE_ID,
             'locations' => SchemaDefinition::TYPE_ENUM,
             'isRepeatable' => SchemaDefinition::TYPE_BOOL,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int

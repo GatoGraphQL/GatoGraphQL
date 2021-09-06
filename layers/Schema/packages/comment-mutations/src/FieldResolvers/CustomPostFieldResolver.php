@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -33,14 +32,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
             'addComment' => $this->translationAPI->__('Add a comment to the custom post', 'comment-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
-    }
-
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
-    {
-        $types = [
-            'addComment' => SchemaDefinition::TYPE_ID,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array

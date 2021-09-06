@@ -53,16 +53,6 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
-    {
-        $types = [
-            'user' => SchemaDefinition::TYPE_ID,
-            'userByUsername' => SchemaDefinition::TYPE_ID,
-            'userByEmail' => SchemaDefinition::TYPE_ID,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
-    }
-
     public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);

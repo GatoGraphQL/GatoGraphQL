@@ -91,16 +91,12 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'authorName' => SchemaDefinition::TYPE_STRING,
             'authorURL' => SchemaDefinition::TYPE_URL,
             'authorEmail' => SchemaDefinition::TYPE_EMAIL,
-            'customPost' => SchemaDefinition::TYPE_ID,
             'customPostID' => SchemaDefinition::TYPE_ID,
             'approved' => SchemaDefinition::TYPE_BOOL,
             'type' => SchemaDefinition::TYPE_STRING,
             'status' => SchemaDefinition::TYPE_ENUM,
-            'parent' => SchemaDefinition::TYPE_ID,
             'date' => SchemaDefinition::TYPE_DATE,
-            'responses' => SchemaDefinition::TYPE_ID,
             'responseCount' => SchemaDefinition::TYPE_INT,
-            'responsesForAdmin' => SchemaDefinition::TYPE_ID,
             'responseCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

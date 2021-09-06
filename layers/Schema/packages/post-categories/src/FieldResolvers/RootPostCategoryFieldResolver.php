@@ -43,9 +43,6 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'postCategory' => SchemaDefinition::TYPE_ID,
-            'postCategoryBySlug' => SchemaDefinition::TYPE_ID,
-            'postCategories' => SchemaDefinition::TYPE_ID,
             'postCategoryCount' => SchemaDefinition::TYPE_INT,
             'postCategoryNames' => SchemaDefinition::TYPE_STRING,
         ];

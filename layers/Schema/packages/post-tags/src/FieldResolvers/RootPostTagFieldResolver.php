@@ -43,9 +43,6 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'postTag' => SchemaDefinition::TYPE_ID,
-            'postTagBySlug' => SchemaDefinition::TYPE_ID,
-            'postTags' => SchemaDefinition::TYPE_ID,
             'postTagCount' => SchemaDefinition::TYPE_INT,
             'postTagNames' => SchemaDefinition::TYPE_STRING,
         ];

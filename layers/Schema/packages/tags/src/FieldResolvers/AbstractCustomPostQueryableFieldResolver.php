@@ -33,7 +33,6 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'tags' => SchemaDefinition::TYPE_ID,
             'tagCount' => SchemaDefinition::TYPE_INT,
             'tagNames' => SchemaDefinition::TYPE_STRING,
         ];

@@ -44,9 +44,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'customPosts' => SchemaDefinition::TYPE_ID,
             'customPostCount' => SchemaDefinition::TYPE_INT,
-            'customPostsForAdmin' => SchemaDefinition::TYPE_ID,
             'customPostCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

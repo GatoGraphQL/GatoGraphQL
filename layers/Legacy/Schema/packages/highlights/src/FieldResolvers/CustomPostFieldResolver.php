@@ -35,12 +35,11 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
-        $types = [
-            'highlights' => SchemaDefinition::TYPE_ID,
+        return match($fieldName) {
             'hasHighlights' => SchemaDefinition::TYPE_BOOL,
             'highlightsCount' => SchemaDefinition::TYPE_INT,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int

@@ -35,14 +35,13 @@ class HighlightFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
-        $types = [
+        return match($fieldName) {
             'title' => SchemaDefinition::TYPE_STRING,
             'excerpt' => SchemaDefinition::TYPE_STRING,
             'content' => SchemaDefinition::TYPE_STRING,
-            'highlightedpost' => SchemaDefinition::TYPE_ID,
             'highlightedPostURL' => SchemaDefinition::TYPE_URL,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int

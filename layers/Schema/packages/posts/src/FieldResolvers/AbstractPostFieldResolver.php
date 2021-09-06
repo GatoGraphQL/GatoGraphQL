@@ -43,9 +43,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'posts' => SchemaDefinition::TYPE_ID,
             'postCount' => SchemaDefinition::TYPE_INT,
-            'postsForAdmin' => SchemaDefinition::TYPE_ID,
             'postCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

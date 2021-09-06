@@ -38,7 +38,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'stances' => SchemaDefinition::TYPE_ID,
             'hasStances' => SchemaDefinition::TYPE_BOOL,
             'stanceProCount' => SchemaDefinition::TYPE_INT,
             'stanceNeutralCount' => SchemaDefinition::TYPE_INT,

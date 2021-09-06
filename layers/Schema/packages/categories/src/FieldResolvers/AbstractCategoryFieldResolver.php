@@ -43,7 +43,6 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
             'name' => SchemaDefinition::TYPE_STRING,
             'slug' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
-            'parentCategory' => SchemaDefinition::TYPE_ID,
             'count' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

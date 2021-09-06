@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\QueryRootTypeResolver;
@@ -54,15 +53,6 @@ class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataField
             'mutationRoot' => $this->translationAPI->__('Get the Mutation Root type', 'graphql-server'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
-    }
-
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
-    {
-        $types = [
-            'queryRoot' => SchemaDefinition::TYPE_ID,
-            'mutationRoot' => SchemaDefinition::TYPE_ID,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
     public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
