@@ -9,7 +9,19 @@ use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver implements QueryableFieldInterfaceSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
-    use QueryableFieldInterfaceSchemaDefinitionResolverTrait;
+
+    public function getFieldDataFilteringModule(string $fieldName): ?array
+    {
+        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
+            // Avoid recursion when the Interface is its own DefinitionResolver
+            if ($schemaDefinitionResolver === $this) {
+                return null;
+            }
+            /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface $schemaDefinitionResolver */
+            return $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName);
+        }
+        return null;
+    }
 
     public function getSchemaFieldArgs(string $fieldName): array
     {
