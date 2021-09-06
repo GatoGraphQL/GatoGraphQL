@@ -1031,7 +1031,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 // Cast (or "coerce" in GraphQL terms) the value
                 if ($fieldOrDirectiveArgIsArrayOfArraysType) {
                     // If the value is an array of arrays, then cast each subelement to the item type
-                    $argValue = array_map(
+                    $argValue = $argValue === null ? null : array_map(
                         // If it contains a null value, return it as is
                         fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
                             fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $this->typeCastingExecuter->cast(
@@ -1043,7 +1043,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         $argValue
                     );
                     $errorArgValues = GeneralUtils::arrayFlatten(array_filter(
-                        $argValue,
+                        $argValue ?? [],
                         fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? false : array_filter(
                             $arrayArgValueElem,
                             fn (mixed $arrayOfArraysArgValueElem) => GeneralUtils::isError($arrayOfArraysArgValueElem)
@@ -1051,7 +1051,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     ));
                 } elseif ($fieldOrDirectiveArgIsArrayType) {
                     // If the value is an array, then cast each element to the item type
-                    $argValue = array_map(
+                    $argValue = $argValue === null ? null : array_map(
                         fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $this->typeCastingExecuter->cast(
                             $fieldOrDirectiveArgType,
                             $arrayArgValueElem
@@ -1059,7 +1059,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         $argValue
                     );
                     $errorArgValues = array_filter(
-                        $argValue,
+                        $argValue ?? [],
                         fn (mixed $arrayArgValueElem) => GeneralUtils::isError($arrayArgValueElem)
                     );
                 } else {
