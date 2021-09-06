@@ -33,8 +33,6 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'taggedusers' => SchemaDefinition::TYPE_ID,
-            'recommendedby' => SchemaDefinition::TYPE_ID,
             'recommendPostCount' => SchemaDefinition::TYPE_INT,
             'upvotePostCount' => SchemaDefinition::TYPE_INT,
             'downvotePostCount' => SchemaDefinition::TYPE_INT,

@@ -71,9 +71,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'users' => SchemaDefinition::TYPE_ID,
             'userCount' => SchemaDefinition::TYPE_INT,
-            'usersForAdmin' => SchemaDefinition::TYPE_ID,
             'userCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

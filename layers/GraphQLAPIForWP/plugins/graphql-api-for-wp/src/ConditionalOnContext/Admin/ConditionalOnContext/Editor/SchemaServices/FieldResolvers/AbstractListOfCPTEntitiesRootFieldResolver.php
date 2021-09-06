@@ -38,11 +38,6 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
         return true;
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
-    {
-        return SchemaDefinition::TYPE_ID;
-    }
-
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY;

@@ -62,6 +62,14 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
         return null;
     }
 
+    public function resolveFieldTypeResolverClass(string $fieldName): ?string
+    {
+        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
+            return $schemaDefinitionResolver->resolveFieldTypeResolverClass($fieldName);
+        }
+        return null;
+    }
+
     /**
      * Validate the constraints for a field argument
      *

@@ -40,8 +40,6 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
             'memberprivileges' => SchemaDefinition::TYPE_ENUM,
             'membertags' => SchemaDefinition::TYPE_ENUM,
             'isCommunity' => SchemaDefinition::TYPE_BOOL,
-            'communities' => SchemaDefinition::TYPE_ID,
-            'activeCommunities' => SchemaDefinition::TYPE_ID,
             'hasActiveCommunities' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

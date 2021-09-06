@@ -67,16 +67,4 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
     // {
     //     return null;
     // }
-
-    /**
-     * This function is not called by the engine, to generate the schema.
-     * Instead, the resolver is obtained from the fieldResolver.
-     * To make sure that all fieldResolvers implementing the same interface
-     * return the expected type for the field, they can obtain it from the
-     * interface through this function.
-     */
-    public function getFieldTypeResolverClass(string $fieldName): ?string
-    {
-        return null;
-    }
 }

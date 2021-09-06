@@ -1303,20 +1303,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            return $fieldResolvers[0]->resolveFieldTypeResolverClass($this, $fieldName);
+            return $fieldResolvers[0]->getSchemaDefinitionResolverForField($this, $field)?->resolveFieldTypeResolverClass($this, $fieldName);
         }
 
         return null;
-    }
-
-    public function isFieldOfRelationalType(string $field): ?bool
-    {
-        $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($field);
-        if ($fieldTypeResolverClass === null) {
-            return null;
-        }
-        $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
-        return $fieldTypeResolver instanceof RelationalTypeResolverInterface;
     }
 
     /**
@@ -1763,23 +1753,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Add subfield schema if it is deep, and this typeResolver has not been processed yet
         if ($options['deep'] ?? null) {
             // If this field is relational, then add its own schema
-            if ($this->isFieldOfRelationalType($fieldName)) {
-                $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($fieldName);
+            $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($fieldName);
+            if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
                 $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
                 $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] = $fieldTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
             }
         }
         // Convert the field type from its internal representation (eg: "array:id") to the type (eg: "array:Post")
-        if ($options['useTypeName'] ?? null) {
-            // The type is mandatory. If not provided, use the default one
-            $type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? $this->schemaDefinitionService->getDefaultType();
-            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::convertTypeIDToTypeName($type, $this, $fieldName);
-        } else {
+        if (!($options['useTypeName'] ?? null) && ($types = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] ?? null)) {
             // Display the type under entry "referencedType"
-            if ($types = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] ?? null) {
-                $typeNames = array_keys($types);
-                $fieldSchemaDefinition[SchemaDefinition::ARGNAME_REFERENCED_TYPE] = $typeNames[0];
-            }
+            $typeNames = array_keys($types);
+            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_REFERENCED_TYPE] = $typeNames[0];
         }
         $isGlobal = $fieldResolver->isGlobal($this, $fieldName);
         $isConnection = isset($fieldSchemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL]) && $fieldSchemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL];

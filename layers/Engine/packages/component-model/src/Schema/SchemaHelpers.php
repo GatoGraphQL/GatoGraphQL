@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class SchemaHelpers
 {
@@ -111,23 +112,16 @@ class SchemaHelpers
     }
 
     /**
-     * If the internal type is "id", convert it to its type name
+     * Indicate if a FieldTypeResolver class is of the Relational type
      */
-    public static function convertTypeIDToTypeName(
-        string $type,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $fieldName
-    ): string {
-        // If the type is an ID, replace it with the actual type the ID references
-        if ($type == SchemaDefinition::TYPE_ID) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            // The type may not be implemented yet (eg: Category), then skip
-            if ($relationalTypeResolver->isFieldOfRelationalType($fieldName)) {
-                $fieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($fieldName);
-                $fieldTypeResolver = $instanceManager->getInstance((string)$fieldTypeResolverClass);
-                $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
-            }
+    public static function isRelationalFieldTypeResolverClass(?string $fieldTypeResolverClass): ?bool
+    {
+        if ($fieldTypeResolverClass === null) {
+            return null;
         }
-        return $type;
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var TypeResolverInterface */
+        $fieldTypeResolver = $instanceManager->getInstance($fieldTypeResolverClass);
+        return $fieldTypeResolver instanceof RelationalTypeResolverInterface;
     }
 }

@@ -26,7 +26,6 @@ class FieldResolver_CommunityUsers extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'members' => SchemaDefinition::TYPE_ID,
             'hasMembers' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

@@ -70,7 +70,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'mediaItemBySlug' => SchemaDefinition::TYPE_ID,
             'imageSizeNames' => SchemaDefinition::TYPE_STRING,
             default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
         };

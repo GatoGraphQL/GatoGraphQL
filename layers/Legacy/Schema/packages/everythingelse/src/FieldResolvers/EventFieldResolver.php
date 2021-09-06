@@ -35,16 +35,14 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
-        $types = [
-            'locations' => SchemaDefinition::TYPE_ID,
-            'categories' => SchemaDefinition::TYPE_ID,
+        return match($fieldName) {
             'dates' => SchemaDefinition::TYPE_STRING,
             'times' => SchemaDefinition::TYPE_STRING,
             'startDateReadable' => SchemaDefinition::TYPE_STRING,
             'daterange' => SchemaDefinition::TYPE_OBJECT,
             'daterangetime' => SchemaDefinition::TYPE_OBJECT,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int

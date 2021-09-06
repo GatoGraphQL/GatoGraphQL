@@ -74,8 +74,6 @@ class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'myComment' => SchemaDefinition::TYPE_ID,
-            'myComments' => SchemaDefinition::TYPE_ID,
             'myCommentCount' => SchemaDefinition::TYPE_INT,
             default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
         };

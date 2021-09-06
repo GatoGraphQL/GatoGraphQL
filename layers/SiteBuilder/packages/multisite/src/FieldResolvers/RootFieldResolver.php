@@ -9,6 +9,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
+use PoP\Multisite\ObjectFacades\SiteObjectFacade;
 use PoP\Multisite\TypeResolvers\Object\SiteTypeResolver;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
@@ -24,15 +25,6 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
             'sites',
             'site',
         ];
-    }
-
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
-    {
-        $types = [
-            'sites' => SchemaDefinition::TYPE_ID,
-            'site' => SchemaDefinition::TYPE_ID,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int

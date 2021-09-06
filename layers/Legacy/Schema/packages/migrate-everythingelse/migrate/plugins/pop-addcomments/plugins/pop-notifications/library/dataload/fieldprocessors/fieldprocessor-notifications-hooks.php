@@ -24,6 +24,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
     public function getFieldNamesToResolve(): array
     {
         return [
+            'commentObject',
             'commentObjectID',
             'icon',
             'url',
@@ -33,18 +34,19 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
-        $types = [
+        return match ($fieldName) {
             'commentObjectID' => SchemaDefinition::TYPE_ID,
             'icon' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,
             'message' => SchemaDefinition::TYPE_STRING,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
+            'commentObject',
             'commentObjectID',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
@@ -57,6 +59,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
+            'commentObject' => $translationAPI->__('', ''),
             'commentObjectID' => $translationAPI->__('', ''),
             'icon' => $translationAPI->__('', ''),
             'url' => $translationAPI->__('', ''),
@@ -107,6 +110,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         switch ($fieldName) {
             // Specific fields to be used by the subcomponents, based on a combination of Object Type + Action
             // Needed to, for instance, load the comment immediately, already from the notification
+            case 'commentObject':
             case 'commentObjectID':
                 switch ($notification->action) {
                     case AAL_POP_ACTION_COMMENT_ADDED:

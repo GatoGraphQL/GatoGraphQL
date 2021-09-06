@@ -49,19 +49,13 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
-        $types = [
+        return match ($fieldName) {
             'kind' => SchemaDefinition::TYPE_ENUM,
             'name' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
-            'fields' => SchemaDefinition::TYPE_ID,
-            'interfaces' => SchemaDefinition::TYPE_ID,
-            'possibleTypes' => SchemaDefinition::TYPE_ID,
-            'enumValues' => SchemaDefinition::TYPE_ID,
-            'inputFields' => SchemaDefinition::TYPE_ID,
-            'ofType' => SchemaDefinition::TYPE_ID,
             'extensions' => SchemaDefinition::TYPE_OBJECT,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int

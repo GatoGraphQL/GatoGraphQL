@@ -100,7 +100,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'author':
                 $fieldInterfaceResolver = $this->getWithAuthorFieldInterfaceResolverInstance();
-                return $fieldInterfaceResolver->getFieldTypeResolverClass($fieldName);
+                return $fieldInterfaceResolver->resolveFieldTypeResolverClass($fieldName);
         }
 
         return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);

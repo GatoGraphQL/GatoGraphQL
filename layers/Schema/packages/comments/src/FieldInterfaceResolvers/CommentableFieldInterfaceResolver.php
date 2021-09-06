@@ -10,6 +10,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
+use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
@@ -46,9 +47,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
             'areCommentsOpen' => SchemaDefinition::TYPE_BOOL,
             'hasComments' => SchemaDefinition::TYPE_BOOL,
             'commentCount' => SchemaDefinition::TYPE_INT,
-            'comments' => SchemaDefinition::TYPE_ID,
             'commentCountForAdmin' => SchemaDefinition::TYPE_INT,
-            'commentsForAdmin' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
@@ -176,5 +175,16 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
                 break;
         }
         return $errors;
+    }
+
+    public function resolveFieldTypeResolverClass(string $fieldName): ?string
+    {
+        switch ($fieldName) {
+            case 'comments':
+            case 'commentsForAdmin':
+                return CommentTypeResolver::class;
+        }
+
+        return parent::resolveFieldTypeResolverClass($fieldName);
     }
 }

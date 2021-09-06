@@ -10,6 +10,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\Schema\SchemaHelpers;
 
 class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -156,7 +157,8 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                 $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
 
                 // Make sure the field is relational, and not a scalar or enum
-                if (!$relationalTypeResolver->isFieldOfRelationalType($relationalField)) {
+                $fieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($relationalField);
+                if (!SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
@@ -166,6 +168,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                     ];
                     continue;
                 }
+                $relationalFieldTypeResolverClass = $fieldTypeResolverClass;
 
                 // Validate that the current object has `relationalField` property set
                 // Since we are fetching from a relational object (placed one level below in the iteration stack), the value could've been set only in a previous iteration
@@ -192,6 +195,10 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                     }
                     continue;
                 }
+
+                $relationalFieldTypeResolver = $this->instanceManager->getInstance((string)$relationalFieldTypeResolverClass);
+                $relationalFieldDBKey = $relationalFieldTypeResolver->getTypeOutputName();
+                $isUnionRelationalFieldDBKey = UnionTypeHelpers::isUnionType($relationalFieldDBKey);
                 for ($i = 0; $i < count($copyFromFields); $i++) {
                     $copyFromField = $copyFromFields[$i];
                     $copyToField = $copyToFields[$i] ?? $copyFromFields[$i];
@@ -215,10 +222,6 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                     $dbItems[(string)$id][$copyToField] = [];
 
                     // Obtain the DBKey under which the relationalField is stored in the database
-                    $relationalFieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($relationalField);
-                    $relationalFieldTypeResolver = $this->instanceManager->getInstance((string)$relationalFieldTypeResolverClass);
-                    $relationalFieldDBKey = $relationalFieldTypeResolver->getTypeOutputName();
-                    $isUnionRelationalFieldDBKey = UnionTypeHelpers::isUnionType($relationalFieldDBKey);
                     if ($isUnionRelationalFieldDBKey) {
                         // If the relational type data resolver is union, we must use the corresponding IDs from $unionDBKeyIDs, which contain the type in addition to the ID
                         $relationalFieldIDs = $unionDBKeyIDs[$dbKey][(string)$id][$relationalFieldOutputKey];

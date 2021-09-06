@@ -46,6 +46,11 @@ trait SelfFieldInterfaceSchemaDefinitionResolverTrait
         return null;
     }
 
+    public function resolveFieldTypeResolverClass(string $fieldName): ?string
+    {
+        return null;
+    }
+
     /**
      * Validate the constraints for a field argument
      *

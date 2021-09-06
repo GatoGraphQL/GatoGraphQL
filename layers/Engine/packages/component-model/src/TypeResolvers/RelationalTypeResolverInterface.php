@@ -62,7 +62,6 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
     public function getSchemaFieldArgs(string $field): ?array;
     public function enableOrderedSchemaFieldArgs(string $field): bool;
     public function resolveFieldTypeResolverClass(string $field): ?string;
-    public function isFieldOfRelationalType(string $field): ?bool;
     /**
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions

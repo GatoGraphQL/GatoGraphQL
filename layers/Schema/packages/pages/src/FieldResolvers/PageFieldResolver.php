@@ -61,10 +61,7 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'parentPage' => SchemaDefinition::TYPE_ID,
-            'childPages' => SchemaDefinition::TYPE_ID,
             'childPageCount' => SchemaDefinition::TYPE_INT,
-            'childPagesForAdmin' => SchemaDefinition::TYPE_ID,
             'childPageCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);

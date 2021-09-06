@@ -44,9 +44,7 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'myCustomPosts' => SchemaDefinition::TYPE_ID,
             'myCustomPostCount' => SchemaDefinition::TYPE_INT,
-            'myCustomPost' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }

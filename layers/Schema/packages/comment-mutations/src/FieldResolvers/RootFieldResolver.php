@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CommentMutations\FieldResolvers;
 
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
@@ -38,15 +37,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             'replyComment' => $this->translationAPI->__('Reply a comment with another comment', 'comment-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
-    }
-
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
-    {
-        $types = [
-            'addCommentToCustomPost' => SchemaDefinition::TYPE_ID,
-            'replyComment' => SchemaDefinition::TYPE_ID,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array

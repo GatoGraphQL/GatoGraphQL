@@ -5,32 +5,33 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers;
 
 use Exception;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\HookHelpers;
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Resolvers\ResolverTypes;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Versioning\VersioningHelpers;
-use PoP\ComponentModel\CheckpointSets\CheckpointSets;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverTrait;
-use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\CheckpointSets\CheckpointSets;
+use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
+use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\HookHelpers;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSchemaDefinitionResolverInterface
 {
@@ -373,8 +374,16 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         // If we found a resolver for this fieldName, get all its properties from it
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== null) {
-            $type = $schemaDefinitionResolver->getSchemaFieldType($relationalTypeResolver, $fieldName);
+            $fieldTypeResolverClass = $schemaDefinitionResolver->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+            if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
+                $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);
+                $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
+            } else {
+                $type = $schemaDefinitionResolver->getSchemaFieldType($relationalTypeResolver, $fieldName);
+            }
             $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
+
             // Use bitwise operators to extract the applied modifiers
             // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
             $schemaTypeModifiers = $schemaDefinitionResolver->getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
@@ -427,9 +436,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
             }
         }
-        if ($this->isFieldOfRelationalType($relationalTypeResolver, $fieldName)) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
-        }
         if (!is_null($this->resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName))) {
             $schemaDefinition[SchemaDefinition::ARGNAME_FIELD_IS_MUTATION] = true;
         }
@@ -466,8 +472,9 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         return $schemaDefinition;
     }
 
-    final public function getSchemaDefinitionResolverForField(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?FieldSchemaDefinitionResolverInterface
+    final public function getSchemaDefinitionResolverForField(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?FieldSchemaDefinitionResolverInterface
     {
+        $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
         // First check if the value was cached
         $key = $relationalTypeResolver->getNamespacedTypeName() . '|' . $fieldName;
         if (!isset($this->schemaDefinitionResolverForFieldCache[$key])) {
@@ -717,21 +724,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         string $fieldName
     ): array {
         return $fieldArgs;
-    }
-
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
-    {
-        return null;
-    }
-
-    final protected function isFieldOfRelationalType(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?bool
-    {
-        $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($relationalTypeResolver, $field);
-        if ($fieldTypeResolverClass === null) {
-            return null;
-        }
-        $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
-        return $fieldTypeResolver instanceof RelationalTypeResolverInterface;
     }
 
     public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string

@@ -71,7 +71,6 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'children' => SchemaDefinition::TYPE_ID,
             'localURLPath' => SchemaDefinition::TYPE_STRING,
             'label' => SchemaDefinition::TYPE_STRING,
             'title' => SchemaDefinition::TYPE_STRING,

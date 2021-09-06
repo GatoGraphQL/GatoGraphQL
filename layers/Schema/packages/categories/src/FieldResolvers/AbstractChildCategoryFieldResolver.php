@@ -34,7 +34,6 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'childCategories' => SchemaDefinition::TYPE_ID,
             'childCategoryCount' => SchemaDefinition::TYPE_INT,
             'childCategoryNames' => SchemaDefinition::TYPE_STRING,
         ];
@@ -166,8 +165,6 @@ abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableField
     {
         switch ($fieldName) {
             case 'childCategory':
-            case 'childCategoryBySlug':
-            case 'childCategories':
                 return $this->getCategoryTypeResolverClass();
         }
 

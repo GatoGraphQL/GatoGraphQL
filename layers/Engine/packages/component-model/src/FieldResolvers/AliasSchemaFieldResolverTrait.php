@@ -339,8 +339,6 @@ trait AliasSchemaFieldResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
-     *
-     * @param array<string, mixed> $fieldArgs
      */
     public function resolveFieldTypeResolverClass(
         RelationalTypeResolverInterface $relationalTypeResolver,

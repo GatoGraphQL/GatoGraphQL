@@ -28,14 +28,6 @@ class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResol
         ];
     }
 
-    public function getSchemaFieldType(string $fieldName): string
-    {
-        $types = [
-            'author' => SchemaDefinition::TYPE_ID,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
-    }
-
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
         switch ($fieldName) {
@@ -53,20 +45,13 @@ class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResol
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }
 
-    /**
-     * This function is not called by the engine, to generate the schema.
-     * Instead, the resolver is obtained from the fieldResolver.
-     * To make sure that all fieldResolvers implementing the same interface
-     * return the expected type for the field, they can obtain it from the
-     * interface through this function.
-     */
-    public function getFieldTypeResolverClass(string $fieldName): ?string
+    public function resolveFieldTypeResolverClass(string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'author':
                 return UserTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($fieldName);
+        return parent::resolveFieldTypeResolverClass($fieldName);
     }
 }

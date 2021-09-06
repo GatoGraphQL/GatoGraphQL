@@ -36,6 +36,7 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      * be exposed to the user (eg: "accessControlLists")
      */
     public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool;
+    public function getSchemaDefinitionResolverForField(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?FieldSchemaDefinitionResolverInterface;
     public function getSchemaDefinitionForField(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): array;
     public function getSchemaFieldVersion(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string;
     /**
