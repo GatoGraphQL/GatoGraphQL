@@ -12,11 +12,11 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             IsCustomPostInterfaceTypeResolver::class,
             UserTypeResolver::class,
             PostTagTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

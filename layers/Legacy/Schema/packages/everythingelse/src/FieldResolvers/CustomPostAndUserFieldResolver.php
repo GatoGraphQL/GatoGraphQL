@@ -17,10 +17,10 @@ class CustomPostAndUserFieldResolver extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             IsCustomPostInterfaceTypeResolver::class,
             UserTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array
