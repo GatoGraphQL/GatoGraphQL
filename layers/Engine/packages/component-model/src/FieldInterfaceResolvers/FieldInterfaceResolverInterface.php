@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
-interface FieldInterfaceResolverInterface
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
+
+interface FieldInterfaceResolverInterface extends AttachableExtensionInterface
 {
     /**
      * Get an array with the fieldNames that the fieldResolver must implement

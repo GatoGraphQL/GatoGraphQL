@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
@@ -16,6 +17,7 @@ use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverInterface, FieldInterfaceSchemaDefinitionResolverInterface
 {
+    use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
 
     public function __construct(
