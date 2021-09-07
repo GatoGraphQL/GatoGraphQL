@@ -110,7 +110,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * Get an instance of the object defining the schema for this fieldResolver
      */
     public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): SchemaDirectiveResolverInterface;
-    public function getSchemaDefinitionResolverClass(RelationalTypeResolverInterface $relationalTypeResolver): string;
     /**
      * A directive can decide to not be added to the schema, eg: when it is repeated/implemented several times
      */

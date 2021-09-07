@@ -40,18 +40,11 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
 
     /**
      * Return the object implementing the schema definition for this FieldInterfaceResolver.
+     * By default, it is this same object
      */
-    final public function getSchemaDefinitionResolver(string $fieldName): FieldInterfaceSchemaDefinitionResolverInterface
+    public function getSchemaDefinitionResolver(string $fieldName): FieldInterfaceSchemaDefinitionResolverInterface
     {
-        return $this->instanceManager->getInstance($this->getSchemaDefinitionResolverClass($fieldName));
-    }
-
-    /**
-     * By default, the resolver is this same object
-     */
-    public function getSchemaDefinitionResolverClass(string $fieldName): string
-    {
-        return get_called_class();
+        return $this;
     }
 
     public function getSchemaFieldType(string $fieldName): string

@@ -985,19 +985,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     }
 
     /**
-     * Return the object implementing the schema definition for this DirectiveResolver
+     * Return the object implementing the schema definition for this DirectiveResolver.
+     * By default, it is this same object
      */
-    final public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): SchemaDirectiveResolverInterface
+    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): SchemaDirectiveResolverInterface
     {
-        return $this->instanceManager->getInstance($this->getSchemaDefinitionResolverClass($relationalTypeResolver));
-    }
-
-    /**
-     * By default, the resolver is this same object
-     */
-    public function getSchemaDefinitionResolverClass(RelationalTypeResolverInterface $relationalTypeResolver): string
-    {
-        return get_called_class();
+        return $this;
     }
 
     /**
