@@ -51,7 +51,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     /**
      * @var array<string, FieldSchemaDefinitionResolverInterface|null>
      */
-    protected array $schemaDefinitionResolverForFieldCache = [];
+    protected array $fieldInterfaceSchemaDefinitionResolverCache = [];
 
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
@@ -98,31 +98,48 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      */
     final public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): FieldSchemaDefinitionResolverInterface
     {
-        // First check if the value is cached
-        $key = $relationalTypeResolver->getNamespacedTypeName() . '|' . $fieldName;
-        if (isset($this->schemaDefinitionResolverForFieldCache[$key])) {
-            return $this->schemaDefinitionResolverForFieldCache[$key];
-        }
-
-        $schemaDefinitionResolver = $this->doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
-        if ($schemaDefinitionResolver instanceof FieldInterfaceSchemaDefinitionResolverInterface) {
+        $fieldOrFieldInterfaceSchemaDefinitionResolver = $this->doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
+        if ($fieldOrFieldInterfaceSchemaDefinitionResolver instanceof FieldInterfaceSchemaDefinitionResolverInterface) {
             // Interfaces do not receive the typeResolver, so we must bridge it
+            // First check if the class is cached
+            $key = $relationalTypeResolver->getNamespacedTypeName() . '|' . $fieldName;
+            if (isset($this->fieldInterfaceSchemaDefinitionResolverCache[$key])) {
+                return $this->fieldInterfaceSchemaDefinitionResolverCache[$key];
+            }
+            // Create an Adapter and cache it
+            $fieldInterfaceSchemaDefinitionResolver = $fieldOrFieldInterfaceSchemaDefinitionResolver;
             $interfaceSchemaDefinitionResolverAdapterClass = $this->getInterfaceSchemaDefinitionResolverAdapterClass();
-            $this->schemaDefinitionResolverForFieldCache[$key] = new $interfaceSchemaDefinitionResolverAdapterClass($schemaDefinitionResolver);
-        } else {
-            $this->schemaDefinitionResolverForFieldCache[$key] = $schemaDefinitionResolver;
+            $this->fieldInterfaceSchemaDefinitionResolverCache[$key] = new $interfaceSchemaDefinitionResolverAdapterClass($fieldInterfaceSchemaDefinitionResolver);
+            return $this->fieldInterfaceSchemaDefinitionResolverCache[$key];
         }
-        return $this->schemaDefinitionResolverForFieldCache[$key];
+        $fieldSchemaDefinitionResolver = $fieldOrFieldInterfaceSchemaDefinitionResolver;
+        return $fieldSchemaDefinitionResolver;
     }
 
     /**
-     * By default, the resolver is this same object
+     * By default, the resolver is this same object, unless function
+     * `getFieldInterfaceSchemaDefinitionResolverInterfaceClass` is
+     * implemented
      */
     protected function doGetSchemaDefinitionResolver(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
+        if ($fieldInterfaceSchemaDefinitionResolverInterfaceClass = $this->getFieldInterfaceSchemaDefinitionResolverInterfaceClass($relationalTypeResolver, $fieldName)) {
+            /** @var FieldInterfaceSchemaDefinitionResolverInterface */
+            return $this->instanceManager->getInstance($fieldInterfaceSchemaDefinitionResolverInterfaceClass);
+        }
         return $this;
+    }
+
+    /**
+     * Retrieve the class of some FieldInterfaceSchemaDefinitionResolverInterface
+     */
+    protected function getFieldInterfaceSchemaDefinitionResolverInterfaceClass(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): ?string {
+        return null;
     }
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
