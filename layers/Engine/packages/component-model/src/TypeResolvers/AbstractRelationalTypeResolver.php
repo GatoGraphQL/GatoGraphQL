@@ -1675,16 +1675,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $interfaceImplementedInterfaceNames[] = $interfaceImplementedInterfaceInstance->getMaybeNamespacedInterfaceName();
                 }
             }
-            // // Add the versions to the fields, as coming from the interface
-            // $interfaceFields = array_map(
-            //     function ($fieldSchemaDefinition) use ($interfaceInstance) {
-            //         if ($version = $interfaceInstance->getSchemaInterfaceVersion($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NAME])) {
-            //             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
-            //         }
-            //         return $fieldSchemaDefinition;
-            //     },
-            //     $interfaceFields
-            // );
             $interfaceName = $interfaceInstance->getMaybeNamespacedInterfaceName();
             // Possible types: Because we are generating this list as we go along resolving all the types, simply have this value point to a reference in $generalMessages
             // Just by updating that variable, it will eventually be updated everywhere
