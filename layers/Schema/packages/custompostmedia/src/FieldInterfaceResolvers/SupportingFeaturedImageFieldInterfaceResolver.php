@@ -17,16 +17,6 @@ class SupportingFeaturedImageFieldInterfaceResolver extends AbstractFieldInterfa
         return SupportingFeaturedImageInterfaceTypeResolver::class;
     }
 
-    public function getInterfaceName(): string
-    {
-        return 'SupportingFeaturedImage';
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('Fields concerning an entity\'s featured image', 'custompostmedia');
-    }
-
     public function getFieldNamesToImplement(): array
     {
         return [

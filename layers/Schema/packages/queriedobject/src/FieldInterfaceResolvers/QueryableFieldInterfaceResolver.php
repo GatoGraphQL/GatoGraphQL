@@ -16,16 +16,6 @@ class QueryableFieldInterfaceResolver extends AbstractFieldInterfaceResolver
         return QueryableInterfaceTypeResolver::class;
     }
 
-    public function getInterfaceName(): string
-    {
-        return 'Queryable';
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('Entities that can be queried through an URL', 'queriedobject');
-    }
-
     public function getFieldNamesToImplement(): array
     {
         return [

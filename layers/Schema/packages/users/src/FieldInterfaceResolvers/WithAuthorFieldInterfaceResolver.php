@@ -16,16 +16,6 @@ class WithAuthorFieldInterfaceResolver extends AbstractFieldInterfaceResolver
         return WithAuthorInterfaceTypeResolver::class;
     }
 
-    public function getInterfaceName(): string
-    {
-        return 'WithAuthor';
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('Entities that have an author', 'queriedobject');
-    }
-
     public function getFieldNamesToImplement(): array
     {
         return [

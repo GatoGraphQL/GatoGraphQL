@@ -25,16 +25,6 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         return CommentableInterfaceTypeResolver::class;
     }
 
-    public function getInterfaceName(): string
-    {
-        return 'Commentable';
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('The entity can receive comments', 'comments');
-    }
-
     public function getFieldNamesToImplement(): array
     {
         return [

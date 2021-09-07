@@ -16,16 +16,6 @@ class WithMetaFieldInterfaceResolver extends AbstractFieldInterfaceResolver
         return WithMetaInterfaceTypeResolver::class;
     }
 
-    public function getInterfaceName(): string
-    {
-        return 'WithMeta';
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('Fields with meta values', 'custompostmeta');
-    }
-
     public function getFieldNamesToImplement(): array
     {
         return [

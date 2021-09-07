@@ -16,16 +16,6 @@ class ElementalFieldInterfaceResolver extends AbstractFieldInterfaceResolver
         return ElementalInterfaceTypeResolver::class;
     }
 
-    public function getInterfaceName(): string
-    {
-        return 'Elemental';
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('The fundamental fields that must be implemented by all objects', 'component-model');
-    }
-
     public function getFieldNamesToImplement(): array
     {
         return [

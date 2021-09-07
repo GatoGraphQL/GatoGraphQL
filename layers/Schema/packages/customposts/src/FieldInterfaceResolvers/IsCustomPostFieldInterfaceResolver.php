@@ -25,11 +25,6 @@ class IsCustomPostFieldInterfaceResolver extends AbstractQueryableSchemaFieldInt
         return IsCustomPostInterfaceTypeResolver::class;
     }
 
-    public function getInterfaceName(): string
-    {
-        return 'IsCustomPost';
-    }
-
     public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [
@@ -67,11 +62,6 @@ class IsCustomPostFieldInterfaceResolver extends AbstractQueryableSchemaFieldInt
             default
                 => parent::getFieldInterfaceSchemaDefinitionResolverClass($fieldName),
         };
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('Entities representing a custom post', 'customposts');
     }
 
     public function getSchemaFieldType(string $fieldName): string
