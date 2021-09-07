@@ -27,10 +27,6 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      */
     public function getFieldNamesFromInterfaces(): array;
     /**
-     * Get an instance of the object defining the schema for this fieldResolver
-     */
-    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): FieldSchemaDefinitionResolverInterface;
-    /**
      * Fields may not be directly visible in the schema,
      * eg: because they are used only by the application, and must not
      * be exposed to the user (eg: "accessControlLists")
