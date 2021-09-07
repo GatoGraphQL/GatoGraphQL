@@ -165,9 +165,4 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
     {
         return null;
     }
-
-    // public function getSchemaInterfaceVersion(string $fieldName): ?string
-    // {
-    //     return null;
-    // }
 }
