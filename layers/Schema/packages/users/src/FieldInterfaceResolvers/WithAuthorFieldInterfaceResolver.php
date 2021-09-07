@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
-class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
+class WithAuthorFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
     public function getInterfaceName(): string
     {

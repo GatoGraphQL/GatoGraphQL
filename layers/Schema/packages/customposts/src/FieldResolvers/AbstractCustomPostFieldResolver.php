@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers;
 
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
@@ -26,6 +28,32 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
             QueryableFieldInterfaceResolver::class,
             IsCustomPostFieldInterfaceResolver::class,
         ];
+    }
+
+    /**
+     * Get the Schema Definition from the Interface
+     */
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): ?string {
+        return match ($fieldName) {
+            'url',
+            'urlPath',
+            'slug'
+                => QueryableFieldInterfaceResolver::class,
+            'content',
+            'status',
+            'isStatus',
+            'date',
+            'modified',
+            'title',
+            'excerpt',
+            'customPostType'
+                => IsCustomPostFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
@@ -53,6 +81,15 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         $customPostTypeAPI = $this->getCustomPostTypeAPI();
         $customPost = $resultItem;
         switch ($fieldName) {
+            case 'url':
+                return $customPostTypeAPI->getPermalink($customPost);
+
+            case 'urlPath':
+                return $customPostTypeAPI->getPermalinkPath($customPost);
+
+            case 'slug':
+                return $customPostTypeAPI->getSlug($customPost);
+
             case 'content':
                 $format = $fieldArgs['format'];
                 $value = '';
@@ -66,15 +103,6 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                     $value,
                     $relationalTypeResolver->getID($customPost)
                 );
-
-            case 'url':
-                return $customPostTypeAPI->getPermalink($customPost);
-
-            case 'urlPath':
-                return $customPostTypeAPI->getPermalinkPath($customPost);
-
-            case 'slug':
-                return $customPostTypeAPI->getSlug($customPost);
 
             case 'status':
                 return $customPostTypeAPI->getStatus($customPost);

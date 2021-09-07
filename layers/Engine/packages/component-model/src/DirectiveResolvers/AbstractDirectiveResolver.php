@@ -611,7 +611,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->enableOrderedSchemaDirectiveArgs($relationalTypeResolver);
         }
         return true;
@@ -619,7 +620,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaDirectiveArgs($relationalTypeResolver);
         }
         return [];
@@ -655,11 +657,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return $schemaDirectiveArgsByName;
     }
 
-    public function getSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
-    {
-        return $this->getSchemaDefinitionResolver($relationalTypeResolver)?->getSchemaDirectiveDeprecationDescription($relationalTypeResolver);
-    }
-
     public function resolveSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): ?string
     {
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($relationalTypeResolver);
@@ -680,8 +677,18 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function getSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaDirectiveWarningDescription($relationalTypeResolver);
+        }
+        return null;
+    }
+
+    public function getSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getSchemaDirectiveDeprecationDescription($relationalTypeResolver);
         }
         return null;
     }
@@ -711,7 +718,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaDirectiveExpressions($relationalTypeResolver);
         }
         return [];
@@ -719,7 +727,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaDirectiveDescription($relationalTypeResolver);
         }
         return null;
@@ -727,7 +736,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->isGlobal($relationalTypeResolver);
         }
         return false;
@@ -974,9 +984,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         }
     }
 
-    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?SchemaDirectiveResolverInterface
+    /**
+     * Return the object implementing the schema definition for this DirectiveResolver.
+     * By default, it is this same object
+     */
+    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): SchemaDirectiveResolverInterface
     {
-        return null;
+        return $this;
     }
 
     /**
@@ -1005,23 +1019,22 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             if ($limitedToFields = $this->getFieldNamesToApplyTo()) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_LIMITED_TO_FIELDS] = $limitedToFields;
             }
-            if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
-                if ($description = $schemaDefinitionResolver->getSchemaDirectiveDescription($relationalTypeResolver)) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
-                }
-                if ($expressions = $schemaDefinitionResolver->getSchemaDirectiveExpressions($relationalTypeResolver)) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_EXPRESSIONS] = $expressions;
-                }
-                if ($deprecationDescription = $schemaDefinitionResolver->getSchemaDirectiveDeprecationDescription($relationalTypeResolver)) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
-                    $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
-                }
-                if ($args = $schemaDefinitionResolver->getSchemaDirectiveArgs($relationalTypeResolver)) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaDirectiveArgs(
-                        $relationalTypeResolver,
-                        $args
-                    );
-                }
+            $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+            if ($description = $schemaDefinitionResolver->getSchemaDirectiveDescription($relationalTypeResolver)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
+            }
+            if ($expressions = $schemaDefinitionResolver->getSchemaDirectiveExpressions($relationalTypeResolver)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_EXPRESSIONS] = $expressions;
+            }
+            if ($deprecationDescription = $schemaDefinitionResolver->getSchemaDirectiveDeprecationDescription($relationalTypeResolver)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
+                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
+            }
+            if ($args = $schemaDefinitionResolver->getSchemaDirectiveArgs($relationalTypeResolver)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaDirectiveArgs(
+                    $relationalTypeResolver,
+                    $args
+                );
             }
             /**
              * Please notice: the version always comes from the directiveResolver, and not from the schemaDefinitionResolver

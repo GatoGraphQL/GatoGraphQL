@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers;
 
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -17,8 +18,8 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\FieldInterfaceResolvers\CommentableFieldInterfaceResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CustomPostFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -63,16 +64,30 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
             'areCommentsOpen',
             'hasComments',
             'commentCount',
+            'commentCountForAdmin',
             'comments',
+            'commentsForAdmin',
         ];
     }
 
     /**
-     * By returning `null`, the schema definition comes from the interface
+     * Get the Schema Definition from the Interface
      */
-    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?FieldSchemaDefinitionResolverInterface
-    {
-        return null;
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): ?string {
+        return match ($fieldName) {
+            'areCommentsOpen',
+            'hasComments',
+            'commentCount',
+            'commentCountForAdmin',
+            'comments',
+            'commentsForAdmin'
+                => CommentableFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     /**

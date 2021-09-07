@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPostMeta\Facades\CustomPostMetaTypeAPIFacade;
+use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
@@ -36,11 +37,19 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     }
 
     /**
-     * By returning `null`, the schema definition comes from the interface
+     * Get the Schema Definition from the Interface
      */
-    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?FieldSchemaDefinitionResolverInterface
-    {
-        return null;
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): ?string {
+        return match ($fieldName) {
+            'metaValue',
+            'metaValues'
+                => WithMetaFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     /**

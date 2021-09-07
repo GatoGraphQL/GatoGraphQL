@@ -16,13 +16,9 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  * This trait, to be applied on a FieldResolver class, uses the Proxy design pattern:
  * every function executed on the aliasing field executes the same function on the aliased field.
  *
- * The aliased FieldResolver is chosen to be of class `AbstractSchemaFieldResolver`,
- * since this is the highest level comprising the base `AbstractFieldResolver`
- * and the interface `FieldSchemaDefinitionResolverInterface`.
- *
- * It must indicate which specific `FieldResolver` class it is aliasing,
- * because if the field is duplicated, then just using the $fieldName
- * to obtain the FieldResolver is ambiguous.
+ * The aliased FieldResolver must indicate which specific `FieldResolver` class
+ * it is aliasing, because if the field is duplicated, then just using
+ * the $fieldName to obtain the FieldResolver is ambiguous.
  *
  * @author Leonardo Losoviz <leo@getpop.org>
  */
@@ -41,7 +37,7 @@ trait AliasSchemaFieldResolverTrait
     /**
      * Aliased `FieldResolver` instance
      */
-    protected function getAliasedFieldResolverInstance(): AbstractSchemaFieldResolver
+    protected function getAliasedFieldResolverInstance(): AbstractFieldResolver
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         return $instanceManager->getInstance(

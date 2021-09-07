@@ -1303,7 +1303,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            return $fieldResolvers[0]->getSchemaDefinitionResolverForField($this, $field)?->resolveFieldTypeResolverClass($this, $fieldName);
+            return $fieldResolvers[0]->resolveFieldTypeResolverClass($this, $fieldName);
         }
 
         return null;

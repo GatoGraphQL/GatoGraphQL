@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Users\FieldInterfaceResolvers\WithAuthorFieldInterfaceResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoPSchema\Users\FieldInterfaceResolvers\WithAuthorFieldInterfaceResolver;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -34,23 +36,17 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    protected function getWithAuthorFieldInterfaceResolverInstance(): FieldInterfaceResolverInterface
-    {
-        /**
-         * @var WithAuthorFieldInterfaceResolver
-         */
-        $resolver = $this->instanceManager->getInstance(WithAuthorFieldInterfaceResolver::class);
-        return $resolver;
-    }
-
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'author':
-                $fieldInterfaceResolver = $this->getWithAuthorFieldInterfaceResolverInstance();
-                return $fieldInterfaceResolver->getSchemaFieldType($fieldName);
-        }
-        return parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+    /**
+     * Get the Schema Definition from the Interface
+     */
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): ?string {
+        return match ($fieldName) {
+            'author' => WithAuthorFieldInterfaceResolver::class,
+            default => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
@@ -59,16 +55,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
             'author' => $this->translationAPI->__('The post\'s author', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
-    }
-
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
-    {
-        switch ($fieldName) {
-            case 'author':
-                $fieldInterfaceResolver = $this->getWithAuthorFieldInterfaceResolverInstance();
-                return $fieldInterfaceResolver->getSchemaFieldTypeModifiers($fieldName);
-        }
-        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
     }
 
     /**
@@ -93,16 +79,5 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         }
 
         return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'author':
-                $fieldInterfaceResolver = $this->getWithAuthorFieldInterfaceResolverInstance();
-                return $fieldInterfaceResolver->resolveFieldTypeResolverClass($fieldName);
-        }
-
-        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }

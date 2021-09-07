@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\FieldInterfaceResolvers\ElementalFieldInterfaceResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -35,18 +36,22 @@ class ElementalFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
-    {
+    /**
+     * Get the Schema Definition from the Interface
+     */
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): ?string {
         return match ($fieldName) {
-            'id' => SchemaDefinition::TYPE_ID,
-            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+            'id' => ElementalFieldInterfaceResolver::class,
+            default => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
         };
     }
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         switch ($fieldName) {
-            case 'id':
             case 'self':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
@@ -56,7 +61,6 @@ class ElementalFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
-            'id' => $this->translationAPI->__('The object ID', 'pop-component-model'),
             'self' => $this->translationAPI->__('The same object', 'pop-component-model'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);

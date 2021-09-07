@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers;
 
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -57,18 +59,35 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
+            'url',
+            'urlPath',
+            'slug',
             'username',
             'name',
             'displayName',
             'firstName',
             'lastName',
             'email',
-            'url',
-            'urlPath',
-            'slug',
             'description',
             'websiteURL',
         ];
+    }
+
+    /**
+     * Get the Schema Definition from the Interface
+     */
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): ?string {
+        return match ($fieldName) {
+            'url',
+            'urlPath',
+            'slug'
+                => QueryableFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
@@ -80,9 +99,6 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'firstName' => SchemaDefinition::TYPE_STRING,
             'lastName' => SchemaDefinition::TYPE_STRING,
             'email' => SchemaDefinition::TYPE_EMAIL,
-            'url' => SchemaDefinition::TYPE_URL,
-            'urlPath' => SchemaDefinition::TYPE_STRING,
-            'slug' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
             'websiteURL' => SchemaDefinition::TYPE_URL,
         ];
@@ -94,10 +110,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         return match ($fieldName) {
             'username',
             'name',
-            'displayName',
-            'url',
-            'urlPath',
-            'slug'
+            'displayName'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
@@ -107,15 +120,15 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
+            'url' => $this->translationAPI->__('URL of the user\'s profile in the website', 'pop-users'),
+            'urlPath' => $this->translationAPI->__('URL path of the user\'s profile in the website', 'pop-users'),
+            'slug' => $this->translationAPI->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),
             'username' => $this->translationAPI->__('User\'s username handle', 'pop-users'),
             'name' => $this->translationAPI->__('Name of the user', 'pop-users'),
             'displayName' => $this->translationAPI->__('Name of the user as displayed on the website', 'pop-users'),
             'firstName' => $this->translationAPI->__('User\'s first name', 'pop-users'),
             'lastName' => $this->translationAPI->__('User\'s last name', 'pop-users'),
             'email' => $this->translationAPI->__('User\'s email', 'pop-users'),
-            'url' => $this->translationAPI->__('URL of the user\'s profile in the website', 'pop-users'),
-            'urlPath' => $this->translationAPI->__('URL path of the user\'s profile in the website', 'pop-users'),
-            'slug' => $this->translationAPI->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),
             'description' => $this->translationAPI->__('Description of the user', 'pop-users'),
             'websiteURL' => $this->translationAPI->__('User\'s own website\'s URL', 'pop-users'),
         ];

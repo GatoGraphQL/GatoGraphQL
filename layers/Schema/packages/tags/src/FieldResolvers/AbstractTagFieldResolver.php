@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\FieldResolvers;
 
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -27,20 +29,34 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
         return [
             'url',
             'urlPath',
-            'name',
             'slug',
+            'name',
             'description',
             'count',
         ];
     }
 
+    /**
+     * Get the Schema Definition from the Interface
+     */
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): ?string {
+        return match ($fieldName) {
+            'url',
+            'urlPath',
+            'slug'
+                => QueryableFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
+    }
+
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
         $types = [
-            'url' => SchemaDefinition::TYPE_URL,
-            'urlPath' => SchemaDefinition::TYPE_STRING,
             'name' => SchemaDefinition::TYPE_STRING,
-            'slug' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
             'count' => SchemaDefinition::TYPE_INT,
         ];
@@ -50,10 +66,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
-            'url',
-            'urlPath',
             'name',
-            'slug',
             'count'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default

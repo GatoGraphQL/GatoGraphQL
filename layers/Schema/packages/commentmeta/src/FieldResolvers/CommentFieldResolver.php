@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta\FieldResolvers;
 
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
 use PoPSchema\CommentMeta\Facades\CommentMetaTypeAPIFacade;
 use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
+use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
 
 class CommentFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -36,11 +37,19 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
     }
 
     /**
-     * By returning `null`, the schema definition comes from the interface
+     * Get the Schema Definition from the Interface
      */
-    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?FieldSchemaDefinitionResolverInterface
-    {
-        return null;
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): ?string {
+        return match ($fieldName) {
+            'metaValue',
+            'metaValues'
+                => WithMetaFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     /**
