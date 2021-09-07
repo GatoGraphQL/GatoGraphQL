@@ -42,14 +42,14 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
      * Return the object implementing the schema definition for this FieldInterfaceResolver.
      * By default, it is this same object
      */
-    public function getSchemaDefinitionResolver(): FieldInterfaceSchemaDefinitionResolverInterface
+    public function getSchemaDefinitionResolver(string $fieldName): FieldInterfaceSchemaDefinitionResolverInterface
     {
         return $this;
     }
 
     public function getSchemaFieldType(string $fieldName): string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldType($fieldName);
         }
@@ -60,7 +60,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldTypeModifiers($fieldName);
         }
@@ -69,7 +69,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldDescription($fieldName);
         }
@@ -78,7 +78,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
 
     public function getSchemaFieldArgs(string $fieldName): array
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldArgs($fieldName);
         }
@@ -87,7 +87,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
 
     public function getSchemaFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($fieldName, $fieldArgs);
         }
@@ -96,7 +96,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
 
     public function resolveFieldTypeResolverClass(string $fieldName): ?string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->resolveFieldTypeResolverClass($fieldName);
         }
@@ -113,7 +113,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->validateFieldArgument($fieldName, $fieldArgName, $fieldArgValue);
         }
@@ -122,7 +122,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
 
     public function addSchemaDefinitionForField(array &$schemaDefinition, string $fieldName): void
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $fieldName);
         }

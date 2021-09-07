@@ -96,14 +96,14 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * Return the object implementing the schema definition for this FieldResolver.
      * By default, it is this same object
      */
-    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): FieldSchemaDefinitionResolverInterface
+    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): FieldSchemaDefinitionResolverInterface
     {
         return $this;
     }
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldType($relationalTypeResolver, $fieldName);
         }
@@ -113,7 +113,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
         }
@@ -122,7 +122,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldDescription($relationalTypeResolver, $fieldName);
         }
@@ -131,7 +131,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldArgs($relationalTypeResolver, $fieldName);
         }
@@ -140,7 +140,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     public function getSchemaFieldDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($relationalTypeResolver, $fieldName, $fieldArgs);
         }
@@ -149,7 +149,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
         }
@@ -167,7 +167,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->validateFieldArgument($relationalTypeResolver, $fieldName, $fieldArgName, $fieldArgValue);
         }
@@ -176,7 +176,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     public function addSchemaDefinitionForField(array &$schemaDefinition, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): void
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
             $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $relationalTypeResolver, $fieldName);
         }
@@ -564,7 +564,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     {
         // Find which is the $schemaDefinitionResolver that will satisfy this schema definition
         // First try the one declared by the fieldResolver
-        $maybeSchemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        $maybeSchemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if (
             $maybeSchemaDefinitionResolver !== null
             && in_array($fieldName, $maybeSchemaDefinitionResolver->getFieldNamesToResolve())
