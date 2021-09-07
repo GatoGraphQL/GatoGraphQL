@@ -11,11 +11,9 @@ use PoP\ComponentModel\TypeResolvers\Interface\ElementalInterfaceTypeResolver;
 
 class ElementalFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
-    public function getClassesToAttachTo(): array
+    function getInterfaceTypeResolverClass(): string
     {
-        return [
-            ElementalInterfaceTypeResolver::class,
-        ];
+        return ElementalInterfaceTypeResolver::class;
     }
 
     public function getInterfaceName(): string

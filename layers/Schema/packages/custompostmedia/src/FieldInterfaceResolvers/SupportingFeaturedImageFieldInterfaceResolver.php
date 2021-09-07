@@ -12,11 +12,9 @@ use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
 
 class SupportingFeaturedImageFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
-    public function getClassesToAttachTo(): array
+    function getInterfaceTypeResolverClass(): string
     {
-        return [
-            SupportingFeaturedImageInterfaceTypeResolver::class,
-        ];
+        return SupportingFeaturedImageInterfaceTypeResolver::class;
     }
 
     public function getInterfaceName(): string
