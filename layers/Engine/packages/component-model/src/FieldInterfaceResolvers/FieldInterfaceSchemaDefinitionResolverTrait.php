@@ -24,7 +24,7 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
     public function getSchemaFieldType(string $fieldName): string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
-        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldType($fieldName);
         }
 
@@ -35,7 +35,7 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
-        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldTypeModifiers($fieldName);
         }
         return null;
@@ -44,7 +44,7 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
-        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldDescription($fieldName);
         }
         return null;
@@ -53,7 +53,7 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
     public function getSchemaFieldArgs(string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
-        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldArgs($fieldName);
         }
         return [];
@@ -62,7 +62,7 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
     public function getSchemaFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
-        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($fieldName, $fieldArgs);
         }
         return null;
@@ -71,7 +71,7 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
     public function resolveFieldTypeResolverClass(string $fieldName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
-        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->resolveFieldTypeResolverClass($fieldName);
         }
         return null;
@@ -88,7 +88,7 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
         mixed $fieldArgValue
     ): array {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
-        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
+        if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->validateFieldArgument($fieldName, $fieldArgName, $fieldArgValue);
         }
         return [];
@@ -97,7 +97,7 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
     public function addSchemaDefinitionForField(array &$schemaDefinition, string $fieldName): void
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver();
-        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
+        if ($schemaDefinitionResolver !== $this) {
             $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $fieldName);
         }
     }
