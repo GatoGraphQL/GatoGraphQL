@@ -18,9 +18,10 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
 
     public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
     {
+        /** @var QueryableFieldSchemaDefinitionResolverInterface */
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getFieldDataFilteringModule($relationalTypeResolver, $fieldName);
         }
         return null;
     }
