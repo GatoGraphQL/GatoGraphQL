@@ -370,22 +370,19 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         array $fieldArgs = []
     ): array {
         $errors = [];
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($relationalTypeResolver, $fieldName);
-        if ($schemaDefinitionResolver !== null) {
-            foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
-                if (
-                    $maybeErrors = $schemaDefinitionResolver->validateFieldArgument(
-                        $relationalTypeResolver,
-                        $fieldName,
-                        $fieldArgName,
-                        $fieldArgValue
-                    )
-                ) {
-                    $errors = array_merge(
-                        $errors,
-                        $maybeErrors
-                    );
-                }
+        foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
+            if (
+                $maybeErrors = $this->validateFieldArgument(
+                    $relationalTypeResolver,
+                    $fieldName,
+                    $fieldArgName,
+                    $fieldArgValue
+                )
+            ) {
+                $errors = array_merge(
+                    $errors,
+                    $maybeErrors
+                );
             }
         }
         return $errors;
@@ -449,57 +446,56 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         ];
 
         // If we found a resolver for this fieldName, get all its properties from it
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolverForField($relationalTypeResolver, $fieldName);
-        if ($schemaDefinitionResolver !== null) {
-            $fieldTypeResolverClass = $schemaDefinitionResolver->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
-            if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
-                $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);
-                $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
-            } else {
-                $type = $schemaDefinitionResolver->getSchemaFieldType($relationalTypeResolver, $fieldName);
-            }
-            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
-
-            // Use bitwise operators to extract the applied modifiers
-            // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
-            $schemaTypeModifiers = $schemaDefinitionResolver->getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
-            if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
-            }
-            // If setting the "array of arrays" flag, there's no need to set the "array" flag
-            $isArrayOfArrays = $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-            if (
-                $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY
-                || $isArrayOfArrays
-            ) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
-                if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
-                }
-                if ($isArrayOfArrays) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
-                    if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
-                        $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
-                    }
-                }
-            }
-            if ($description = $schemaDefinitionResolver->getSchemaFieldDescription($relationalTypeResolver, $fieldName)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
-            }
-            if ($deprecationDescription = $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($relationalTypeResolver, $fieldName, $fieldArgs)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
-                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
-            }
-            if ($args = $schemaDefinitionResolver->getSchemaFieldArgs($relationalTypeResolver, $fieldName)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaFieldArgs(
-                    $relationalTypeResolver,
-                    $fieldName,
-                    $args
-                );
-            }
-            $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $relationalTypeResolver, $fieldName);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
+        $fieldTypeResolverClass = $schemaDefinitionResolver->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
+            $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
+            $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);
+            $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
+        } else {
+            $type = $schemaDefinitionResolver->getSchemaFieldType($relationalTypeResolver, $fieldName);
         }
+        $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
+
+        // Use bitwise operators to extract the applied modifiers
+        // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
+        $schemaTypeModifiers = $schemaDefinitionResolver->getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
+        if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
+            $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
+        }
+        // If setting the "array of arrays" flag, there's no need to set the "array" flag
+        $isArrayOfArrays = $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+        if (
+            $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY
+            || $isArrayOfArrays
+        ) {
+            $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
+            if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
+            }
+            if ($isArrayOfArrays) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
+                if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
+                }
+            }
+        }
+        if ($description = $schemaDefinitionResolver->getSchemaFieldDescription($relationalTypeResolver, $fieldName)) {
+            $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
+        }
+        if ($deprecationDescription = $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($relationalTypeResolver, $fieldName, $fieldArgs)) {
+            $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
+            $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
+        }
+        if ($args = $schemaDefinitionResolver->getSchemaFieldArgs($relationalTypeResolver, $fieldName)) {
+            $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaFieldArgs(
+                $relationalTypeResolver,
+                $fieldName,
+                $args
+            );
+        }
+        $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $relationalTypeResolver, $fieldName);
+        
         /**
          * Please notice: the version always comes from the fieldResolver, and not from the schemaDefinitionResolver
          * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
