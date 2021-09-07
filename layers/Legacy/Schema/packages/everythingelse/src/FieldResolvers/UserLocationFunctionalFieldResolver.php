@@ -11,9 +11,9 @@ class UserLocationFunctionalFieldResolver extends AbstractLocationFunctionalFiel
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             UserTypeResolver::class,
-        );
+        ];
     }
 
     protected function getDbobjectIdField()

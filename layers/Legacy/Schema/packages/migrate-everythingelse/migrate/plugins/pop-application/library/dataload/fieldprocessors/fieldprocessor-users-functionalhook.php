@@ -11,9 +11,9 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             UserTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

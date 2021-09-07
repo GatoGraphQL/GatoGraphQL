@@ -19,9 +19,9 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             IsCustomPostInterfaceTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

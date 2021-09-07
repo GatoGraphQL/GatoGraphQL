@@ -11,9 +11,9 @@ class GD_ApplicationProcessors_DataLoad_FieldResolver_Posts extends AbstractDBDa
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             IsCustomPostInterfaceTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

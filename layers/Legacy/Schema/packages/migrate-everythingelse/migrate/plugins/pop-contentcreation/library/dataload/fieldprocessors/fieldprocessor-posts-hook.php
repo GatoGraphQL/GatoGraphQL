@@ -15,9 +15,9 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             IsCustomPostInterfaceTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

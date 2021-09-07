@@ -12,9 +12,9 @@ class PoP_EventsCreation_DataLoad_FunctionalFieldResolver extends AbstractFuncti
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             IsCustomPostInterfaceTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

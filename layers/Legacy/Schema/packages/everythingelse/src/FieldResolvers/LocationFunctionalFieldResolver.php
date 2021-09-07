@@ -16,9 +16,9 @@ class LocationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             LocationTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

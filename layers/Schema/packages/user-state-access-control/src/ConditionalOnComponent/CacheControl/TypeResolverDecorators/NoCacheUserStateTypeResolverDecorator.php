@@ -18,9 +18,9 @@ class NoCacheUserStateTypeResolverDecorator extends AbstractTypeResolverDecorato
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             AbstractRelationalTypeResolver::class,
-        );
+        ];
     }
 
     /**

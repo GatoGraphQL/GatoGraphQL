@@ -5,9 +5,9 @@ class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaIt
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             PostTagTypeResolver::class,
-        );
+        ];
     }
 
     protected function getTitleField()

@@ -15,9 +15,9 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             IsCustomPostInterfaceTypeResolver::class,
-        );
+        ];
     }
 
     public function getThumb($post, RelationalTypeResolverInterface $relationalTypeResolver, $size = null, $add_description = false)

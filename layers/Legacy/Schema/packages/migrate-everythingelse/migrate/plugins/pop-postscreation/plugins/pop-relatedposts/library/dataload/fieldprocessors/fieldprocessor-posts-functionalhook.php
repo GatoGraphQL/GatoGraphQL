@@ -11,9 +11,9 @@ class GD_PostsCreation_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             IsCustomPostInterfaceTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

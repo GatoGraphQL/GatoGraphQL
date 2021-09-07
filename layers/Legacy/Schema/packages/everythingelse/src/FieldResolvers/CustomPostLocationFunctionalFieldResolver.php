@@ -11,9 +11,9 @@ class CustomPostLocationFunctionalFieldResolver extends AbstractLocationFunction
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             IsCustomPostInterfaceTypeResolver::class,
-        );
+        ];
     }
 
     protected function getDbobjectIdField()

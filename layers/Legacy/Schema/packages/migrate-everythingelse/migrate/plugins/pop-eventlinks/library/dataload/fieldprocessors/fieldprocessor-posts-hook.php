@@ -10,9 +10,9 @@ class GD_EM_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             EventTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

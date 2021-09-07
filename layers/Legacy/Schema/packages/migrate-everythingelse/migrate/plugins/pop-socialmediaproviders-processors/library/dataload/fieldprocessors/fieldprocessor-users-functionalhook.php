@@ -5,9 +5,9 @@ class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_UserSocialMediaI
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             UserTypeResolver::class,
-        );
+        ];
     }
 
     protected function getTitleField()

@@ -14,9 +14,9 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             IsCustomPostInterfaceTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

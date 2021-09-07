@@ -9,9 +9,9 @@ class PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunc
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             UserTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

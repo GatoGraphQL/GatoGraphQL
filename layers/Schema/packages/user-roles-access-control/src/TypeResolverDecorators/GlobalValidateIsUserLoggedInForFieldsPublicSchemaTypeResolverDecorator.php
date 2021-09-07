@@ -13,9 +13,9 @@ class GlobalValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDecorator ext
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             AbstractRelationalTypeResolver::class,
-        );
+        ];
     }
 
     /**

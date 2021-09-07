@@ -13,9 +13,9 @@ class GlobalValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolverDecorator
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             AbstractRelationalTypeResolver::class,
-        );
+        ];
     }
 
     /**

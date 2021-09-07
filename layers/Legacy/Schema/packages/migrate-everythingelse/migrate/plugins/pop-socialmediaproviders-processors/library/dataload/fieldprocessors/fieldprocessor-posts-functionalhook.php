@@ -6,9 +6,9 @@ class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_PostSocialMediaI
 {
     public function getClassesToAttachTo(): array
     {
-        return array(
+        return [
             IsCustomPostInterfaceTypeResolver::class,
-        );
+        ];
     }
 
     protected function getTitleField()
