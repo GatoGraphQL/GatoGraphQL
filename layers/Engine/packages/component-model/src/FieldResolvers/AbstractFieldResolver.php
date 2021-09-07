@@ -93,10 +93,10 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     }
 
     /**
-     * Return the object implementing the schema definition for this fieldResolver.
+     * Return the object implementing the schema definition for this FieldResolver.
      * By default, it is this same object
      */
-    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?FieldSchemaDefinitionResolverInterface
+    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): FieldSchemaDefinitionResolverInterface
     {
         return $this;
     }

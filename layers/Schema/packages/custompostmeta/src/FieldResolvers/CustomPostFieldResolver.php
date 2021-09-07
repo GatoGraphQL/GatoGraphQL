@@ -7,7 +7,6 @@ namespace PoPSchema\CustomPostMeta\FieldResolvers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoPSchema\CustomPostMeta\Facades\CustomPostMetaTypeAPIFacade;
 use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
 
@@ -33,14 +32,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
             'metaValue',
             'metaValues',
         ];
-    }
-
-    /**
-     * By returning `null`, the schema definition comes from the interface
-     */
-    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?FieldSchemaDefinitionResolverInterface
-    {
-        return null;
     }
 
     /**

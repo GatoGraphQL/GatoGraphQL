@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMedia\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -61,14 +60,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
             'hasFeaturedImage',
             'featuredImage',
         ];
-    }
-
-    /**
-     * By returning `null`, the schema definition comes from the interface
-     */
-    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?FieldSchemaDefinitionResolverInterface
-    {
-        return null;
     }
 
     /**

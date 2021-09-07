@@ -985,7 +985,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     }
 
     /**
-     * Return the object implementing the schema definition for this directiveResolver.
+     * Return the object implementing the schema definition for this DirectiveResolver.
      * By default, it is this same object
      */
     public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): SchemaDirectiveResolverInterface
