@@ -98,12 +98,21 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      */
     final public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): FieldSchemaDefinitionResolverInterface
     {
-        $schemaDefinitionResolver = $this;
-        if ($schemaDefinitionResolver instanceof FieldInterfaceSchemaDefinitionResolverInterface) {
-            $interfaceSchemaDefinitionResolverAdapterClass = $this->getInterfaceSchemaDefinitionResolverAdapterClass();
-            return new $interfaceSchemaDefinitionResolverAdapterClass($schemaDefinitionResolver);
+        // First check if the value is cached
+        $key = $relationalTypeResolver->getNamespacedTypeName() . '|' . $fieldName;
+        if (isset($this->schemaDefinitionResolverForFieldCache[$key])) {
+            return $this->schemaDefinitionResolverForFieldCache[$key];
         }
-        return $schemaDefinitionResolver;
+        
+        $schemaDefinitionResolver = $this->doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
+        if ($schemaDefinitionResolver instanceof FieldInterfaceSchemaDefinitionResolverInterface) {
+            // Interfaces do not receive the typeResolver, so we must bridge it
+            $interfaceSchemaDefinitionResolverAdapterClass = $this->getInterfaceSchemaDefinitionResolverAdapterClass();
+            $this->schemaDefinitionResolverForFieldCache[$key] = new $interfaceSchemaDefinitionResolverAdapterClass($schemaDefinitionResolver);
+        } else {
+            $this->schemaDefinitionResolverForFieldCache[$key] = $schemaDefinitionResolver;
+        }
+        return $this->schemaDefinitionResolverForFieldCache[$key];
     }
 
     /**
@@ -558,41 +567,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             }
         }
         return $schemaDefinition;
-    }
-
-    final public function getSchemaDefinitionResolverForField(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?FieldSchemaDefinitionResolverInterface
-    {
-        $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
-        // First check if the value was cached
-        $key = $relationalTypeResolver->getNamespacedTypeName() . '|' . $fieldName;
-        if (!isset($this->schemaDefinitionResolverForFieldCache[$key])) {
-            $this->schemaDefinitionResolverForFieldCache[$key] = $this->doGetSchemaDefinitionResolverForField($relationalTypeResolver, $fieldName);
-        }
-        return $this->schemaDefinitionResolverForFieldCache[$key];
-    }
-
-    final public function doGetSchemaDefinitionResolverForField(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?FieldSchemaDefinitionResolverInterface
-    {
-        // Find which is the $schemaDefinitionResolver that will satisfy this schema definition
-        // First try the one declared by the fieldResolver
-        $maybeSchemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
-        if (
-            $maybeSchemaDefinitionResolver !== null
-            && in_array($fieldName, $maybeSchemaDefinitionResolver->getFieldNamesToResolve())
-        ) {
-            return $maybeSchemaDefinitionResolver;
-        } else {
-            // Otherwise, try through all of its interfaces
-            foreach ($this->getFieldInterfaceResolvers() as $fieldInterfaceResolver) {
-                if (in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement())) {
-                    // Interfaces do not receive the typeResolver, so we must bridge it
-                    $interfaceSchemaDefinitionResolverAdapterClass = $this->getInterfaceSchemaDefinitionResolverAdapterClass();
-                    return new $interfaceSchemaDefinitionResolverAdapterClass($fieldInterfaceResolver);
-                }
-            }
-        }
-
-        return null;
     }
 
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
