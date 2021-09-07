@@ -76,7 +76,7 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
 
     abstract protected function getFieldCustomPostType(string $fieldName): string;
 
-    public function resolveFieldTypeResolverClass(
+    public function getFieldTypeResolverClass(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): ?string {

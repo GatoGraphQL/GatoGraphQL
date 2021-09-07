@@ -336,12 +336,12 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveFieldTypeResolverClass(
+    public function getFieldTypeResolverClass(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): ?string {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
-        return $aliasedFieldResolver->resolveFieldTypeResolverClass(
+        return $aliasedFieldResolver->getFieldTypeResolverClass(
             $relationalTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
