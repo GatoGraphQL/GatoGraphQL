@@ -12,6 +12,7 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -91,13 +92,27 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
         return array_values(array_unique($fieldNames));
     }
-
+    
     /**
      * Return the object implementing the schema definition for this FieldResolver.
-     * By default, it is this same object
      */
-    public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): FieldSchemaDefinitionResolverInterface
+    final public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): FieldSchemaDefinitionResolverInterface
     {
+        $schemaDefinitionResolver = $this;
+        if ($schemaDefinitionResolver instanceof FieldInterfaceSchemaDefinitionResolverInterface) {
+            $interfaceSchemaDefinitionResolverAdapterClass = $this->getInterfaceSchemaDefinitionResolverAdapterClass();
+            return new $interfaceSchemaDefinitionResolverAdapterClass($schemaDefinitionResolver);
+        }
+        return $schemaDefinitionResolver;
+    }
+
+    /**
+     * By default, the resolver is this same object
+     */
+    protected function doGetSchemaDefinitionResolver(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
         return $this;
     }
 
