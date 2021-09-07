@@ -62,7 +62,9 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
             'areCommentsOpen',
             'hasComments',
             'commentCount',
+            'commentCountForAdmin',
             'comments',
+            'commentsForAdmin',
         ];
     }
 
