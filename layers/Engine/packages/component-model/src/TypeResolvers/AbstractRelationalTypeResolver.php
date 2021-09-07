@@ -46,10 +46,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     protected array $fieldResolvers = [];
     /**
-     * @var array<string, array>
-     */
-    protected ?array $schemaDefinition = null;
-    /**
      * @var array<string,DirectiveResolverInterface[]>|null
      */
     protected ?array $directiveNameResolvers = null;
@@ -1574,9 +1570,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $stackMessages['processed'][] = $class;
         $generalMessages['processed'][] = $class;
         if (is_null($this->schemaDefinition)) {
-            // Important: This line stops the recursion when a type reference each other circularly, so do not remove it!
-            $this->schemaDefinition = [];
-            $this->addSchemaDefinition($stackMessages, $generalMessages, $options);
+            $this->schemaDefinition = parent::getSchemaDefinition($stackMessages, $generalMessages, $options);
             // If it is a flat shape, we can remove the nested connections, replace them only with the type name
             if ($isFlatShape) {
                 $this->processFlatShapeSchemaDefinition($options);
@@ -1597,17 +1591,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])
     {
+        parent::addSchemaDefinition($stackMessages, $generalMessages, $options);
+
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
         $typeName = $this->getMaybeNamespacedTypeName();
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAME] = $typeName;
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAMESPACED_NAME] = $this->getNamespacedTypeName();
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_ELEMENT_NAME] = $this->getTypeName();
-
-        // Properties
-        if ($description = $this->getSchemaTypeDescription()) {
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
-        }
-
+        
         // Add the directives (non-global)
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_DIRECTIVES] = [];
         $schemaDirectiveResolvers = $this->getSchemaDirectiveResolvers(false);
