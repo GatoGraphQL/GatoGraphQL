@@ -9,7 +9,6 @@ use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -152,31 +151,5 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
         if ($schemaDefinitionResolver !== $this) {
             $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $fieldName);
         }
-    }
-
-    public function getNamespace(): string
-    {
-        return $this->schemaNamespacingService->getSchemaNamespace(get_called_class());
-    }
-
-    final public function getNamespacedInterfaceName(): string
-    {
-        return $this->schemaNamespacingService->getSchemaNamespacedName(
-            $this->getNamespace(),
-            $this->getInterfaceName()
-        );
-    }
-
-    final public function getMaybeNamespacedInterfaceName(): string
-    {
-        $vars = ApplicationState::getVars();
-        return $vars['namespace-types-and-interfaces'] ?
-            $this->getNamespacedInterfaceName() :
-            $this->getInterfaceName();
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return null;
     }
 }

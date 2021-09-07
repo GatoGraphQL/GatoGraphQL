@@ -16,9 +16,4 @@ interface FieldInterfaceResolverInterface extends AttachableExtensionInterface
      * An interface can itself implement other interfaces!
      */
     public function getImplementedFieldInterfaceResolverClasses(): array;
-    public function getInterfaceName(): string;
-    public function getNamespace(): string;
-    public function getNamespacedInterfaceName(): string;
-    public function getMaybeNamespacedInterfaceName(): string;
-    public function getSchemaInterfaceDescription(): ?string;
 }
