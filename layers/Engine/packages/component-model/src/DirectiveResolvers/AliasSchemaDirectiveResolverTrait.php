@@ -280,17 +280,6 @@ trait AliasSchemaDirectiveResolverTrait
         );
     }
 
-    // /**
-    //  * Proxy pattern: execute same function on the aliased DirectiveResolver
-    //  */
-    // public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?SchemaDirectiveResolverInterface
-    // {
-    //     $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
-    //     return $aliasedDirectiveResolver->getSchemaDefinitionResolver(
-    //         $relationalTypeResolver
-    //     );
-    // }
-
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
@@ -299,11 +288,6 @@ trait AliasSchemaDirectiveResolverTrait
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
         return $aliasedDirectiveResolver->skipAddingToSchemaDefinition();
     }
-
-    // /**
-    //  * Proxy pattern: execute same function on the aliased DirectiveResolver
-    //  */
-    // public function getSchemaDefinitionForDirective(RelationalTypeResolverInterface $relationalTypeResolver): array;
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
