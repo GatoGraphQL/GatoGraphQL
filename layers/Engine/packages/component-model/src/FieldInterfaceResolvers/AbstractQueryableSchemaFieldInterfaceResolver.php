@@ -14,11 +14,9 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractFie
     {
         /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface */
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        // Avoid recursion when the Interface is its own DefinitionResolver
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName);
         }
-
         return null;
     }
 

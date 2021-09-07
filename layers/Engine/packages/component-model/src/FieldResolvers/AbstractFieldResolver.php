@@ -49,7 +49,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      */
     protected array $schemaDefinitionForFieldCache = [];
     /**
-     * @var array<string, FieldSchemaDefinitionResolverInterface|null>
+     * @var array<string, FieldSchemaDefinitionResolverInterface>
      */
     protected array $fieldInterfaceSchemaDefinitionResolverCache = [];
 
@@ -96,7 +96,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     /**
      * Return the object implementing the schema definition for this FieldResolver.
      */
-    final public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): FieldSchemaDefinitionResolverInterface
+    final protected function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): FieldSchemaDefinitionResolverInterface
     {
         $fieldOrFieldInterfaceSchemaDefinitionResolver = $this->doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($fieldOrFieldInterfaceSchemaDefinitionResolver instanceof FieldInterfaceSchemaDefinitionResolverInterface) {
