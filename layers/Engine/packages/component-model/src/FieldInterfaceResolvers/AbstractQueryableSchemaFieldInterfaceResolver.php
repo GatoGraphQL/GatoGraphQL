@@ -18,7 +18,7 @@ abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractFie
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName);
         }
-        
+
         return null;
     }
 

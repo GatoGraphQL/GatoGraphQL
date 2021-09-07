@@ -17,7 +17,7 @@ use PoP\Translation\TranslationAPIInterface;
 abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverInterface
 {
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
-    
+
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,

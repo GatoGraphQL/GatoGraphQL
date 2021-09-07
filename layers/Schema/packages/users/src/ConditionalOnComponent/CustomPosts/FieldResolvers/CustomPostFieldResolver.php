@@ -43,7 +43,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
-        
+
         switch ($fieldName) {
             case 'author':
                 /** @var WithAuthorFieldInterfaceResolver */

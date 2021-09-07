@@ -92,7 +92,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
         return array_values(array_unique($fieldNames));
     }
-    
+
     /**
      * Return the object implementing the schema definition for this FieldResolver.
      */
@@ -103,7 +103,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         if (isset($this->schemaDefinitionResolverForFieldCache[$key])) {
             return $this->schemaDefinitionResolverForFieldCache[$key];
         }
-        
+
         $schemaDefinitionResolver = $this->doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver instanceof FieldInterfaceSchemaDefinitionResolverInterface) {
             // Interfaces do not receive the typeResolver, so we must bridge it
@@ -519,7 +519,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             );
         }
         $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $relationalTypeResolver, $fieldName);
-        
+
         /**
          * Please notice: the version always comes from the fieldResolver, and not from the schemaDefinitionResolver
          * That is because it is the implementer the one who knows what version it is, and not the one defining the interface

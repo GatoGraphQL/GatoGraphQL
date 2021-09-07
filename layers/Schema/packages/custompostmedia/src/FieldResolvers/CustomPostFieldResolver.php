@@ -71,7 +71,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
-        
+
         switch ($fieldName) {
             case 'hasFeaturedImage':
             case 'featuredImage':

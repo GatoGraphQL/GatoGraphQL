@@ -77,7 +77,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
-        
+
         switch ($fieldName) {
             case 'areCommentsOpen':
             case 'hasComments':
