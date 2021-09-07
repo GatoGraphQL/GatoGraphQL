@@ -611,7 +611,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->enableOrderedSchemaDirectiveArgs($relationalTypeResolver);
         }
         return true;
@@ -619,7 +620,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaDirectiveArgs($relationalTypeResolver);
         }
         return [];
@@ -680,7 +682,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function getSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaDirectiveWarningDescription($relationalTypeResolver);
         }
         return null;
@@ -711,7 +714,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaDirectiveExpressions($relationalTypeResolver);
         }
         return [];
@@ -719,7 +723,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaDirectiveDescription($relationalTypeResolver);
         }
         return null;
@@ -727,7 +732,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->isGlobal($relationalTypeResolver);
         }
         return false;
@@ -974,9 +980,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         }
     }
 
+    /**
+     * Return the object implementing the schema definition for this directiveResolver.
+     * By default, it is this same object
+     */
     public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?SchemaDirectiveResolverInterface
     {
-        return null;
+        return $this;
     }
 
     /**
