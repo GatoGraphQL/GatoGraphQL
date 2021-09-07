@@ -39,20 +39,17 @@ class TaxonomyFieldResolver extends AbstractDBDataFieldResolver
     /**
      * Get the Schema Definition from the Interface
      */
-    protected function doGetSchemaDefinitionResolver(
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
-    ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
-
-        switch ($fieldName) {
-            case 'metaValue':
-            case 'metaValues':
-                /** @var WithMetaFieldInterfaceResolver */
-                $resolver = $this->instanceManager->getInstance(WithMetaFieldInterfaceResolver::class);
-                return $resolver;
-        }
-
-        return parent::doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
+    ): ?string {
+        return match ($fieldName) {
+            'metaValue',
+            'metaValues'
+                => WithMetaFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     /**

@@ -67,20 +67,17 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     /**
      * Get the Schema Definition from the Interface
      */
-    protected function doGetSchemaDefinitionResolver(
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
-    ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
-
-        switch ($fieldName) {
-            case 'hasFeaturedImage':
-            case 'featuredImage':
-                /** @var SupportingFeaturedImageFieldInterfaceResolver */
-                $resolver = $this->instanceManager->getInstance(SupportingFeaturedImageFieldInterfaceResolver::class);
-                return $resolver;
-        }
-
-        return parent::doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
+    ): ?string {
+        return match ($fieldName) {
+            'hasFeaturedImage',
+            'featuredImage'
+                => SupportingFeaturedImageFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     /**

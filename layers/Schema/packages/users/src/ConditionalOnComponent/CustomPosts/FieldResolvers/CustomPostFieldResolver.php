@@ -39,19 +39,14 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     /**
      * Get the Schema Definition from the Interface
      */
-    protected function doGetSchemaDefinitionResolver(
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
-    ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
-
-        switch ($fieldName) {
-            case 'author':
-                /** @var WithAuthorFieldInterfaceResolver */
-                $resolver = $this->instanceManager->getInstance(WithAuthorFieldInterfaceResolver::class);
-                return $resolver;
-        }
-
-        return parent::doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
+    ): ?string {
+        return match ($fieldName) {
+            'author' => WithAuthorFieldInterfaceResolver::class,
+            default => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string

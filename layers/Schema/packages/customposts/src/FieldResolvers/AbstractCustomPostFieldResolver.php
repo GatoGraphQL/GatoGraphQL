@@ -33,33 +33,27 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
     /**
      * Get the Schema Definition from the Interface
      */
-    protected function doGetSchemaDefinitionResolver(
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
-    ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
-
-        switch ($fieldName) {
-            case 'url':
-            case 'urlPath':
-            case 'slug':
-                /** @var QueryableFieldInterfaceResolver */
-                $resolver = $this->instanceManager->getInstance(QueryableFieldInterfaceResolver::class);
-                return $resolver;
-                
-            case 'content':
-            case 'status':
-            case 'isStatus':
-            case 'date':
-            case 'modified':
-            case 'title':
-            case 'excerpt':
-            case 'customPostType':
-                /** @var IsCustomPostFieldInterfaceResolver */
-                $resolver = $this->instanceManager->getInstance(IsCustomPostFieldInterfaceResolver::class);
-                return $resolver;
-        }
-
-        return parent::doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
+    ): ?string {
+        return match ($fieldName) {
+            'url',
+            'urlPath',
+            'slug'
+                => QueryableFieldInterfaceResolver::class,
+            'content',
+            'status',
+            'isStatus',
+            'date',
+            'modified',
+            'title',
+            'excerpt',
+            'customPostType'
+                => IsCustomPostFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface

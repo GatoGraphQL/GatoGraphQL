@@ -40,21 +40,18 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
     /**
      * Get the Schema Definition from the Interface
      */
-    protected function doGetSchemaDefinitionResolver(
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
-    ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
-
-        switch ($fieldName) {
-            case 'url':
-            case 'urlPath':
-            case 'slug':
-                /** @var QueryableFieldInterfaceResolver */
-                $resolver = $this->instanceManager->getInstance(QueryableFieldInterfaceResolver::class);
-                return $resolver;
-        }
-
-        return parent::doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
+    ): ?string {
+        return match ($fieldName) {
+            'url',
+            'urlPath',
+            'slug'
+                => QueryableFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string

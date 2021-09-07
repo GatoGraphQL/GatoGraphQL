@@ -73,24 +73,21 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
     /**
      * Get the Schema Definition from the Interface
      */
-    protected function doGetSchemaDefinitionResolver(
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
-    ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
-
-        switch ($fieldName) {
-            case 'areCommentsOpen':
-            case 'hasComments':
-            case 'commentCount':
-            case 'commentCountForAdmin':
-            case 'comments':
-            case 'commentsForAdmin':
-                /** @var CommentableFieldInterfaceResolver */
-                $resolver = $this->instanceManager->getInstance(CommentableFieldInterfaceResolver::class);
-                return $resolver;
-        }
-
-        return parent::doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
+    ): ?string {
+        return match ($fieldName) {
+            'areCommentsOpen',
+            'hasComments',
+            'commentCount',
+            'commentCountForAdmin',
+            'comments',
+            'commentsForAdmin'
+                => CommentableFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+        };
     }
 
     /**
