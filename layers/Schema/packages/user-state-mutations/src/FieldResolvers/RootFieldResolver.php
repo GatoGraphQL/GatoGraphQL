@@ -71,7 +71,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         return parent::resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName);
     }
 
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'loginUser':
@@ -79,6 +79,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 return UserTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }

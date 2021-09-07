@@ -196,13 +196,13 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         return 0;
     }
 
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'items':
                 return MenuItemTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }
