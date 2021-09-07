@@ -6,6 +6,9 @@ services:
     PoP\ComponentModel\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
+    PoP\ComponentModel\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
     PoP\ComponentModel\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
 

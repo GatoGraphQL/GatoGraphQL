@@ -5,3 +5,6 @@ services:
 
     PoPSchema\Meta\FieldInterfaceResolvers\:
         resource: '../src/FieldInterfaceResolvers/*'
+
+    PoPSchema\Meta\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

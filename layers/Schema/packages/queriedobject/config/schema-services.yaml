@@ -5,3 +5,6 @@ services:
 
     PoPSchema\QueriedObject\FieldInterfaceResolvers\:
         resource: '../src/FieldInterfaceResolvers/*'
+
+    PoPSchema\QueriedObject\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
