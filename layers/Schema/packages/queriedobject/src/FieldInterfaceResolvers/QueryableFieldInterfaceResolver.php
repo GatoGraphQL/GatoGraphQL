@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\QueriedObject\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractQueryableSchemaFieldInterfaceResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 
-class QueryableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
+class QueryableFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
     public function getInterfaceName(): string
     {
