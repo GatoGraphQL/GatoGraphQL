@@ -14,16 +14,18 @@ trait FieldSchemaDefinitionResolverTrait
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
 
     /**
-     * Return the object implementing the schema definition for this fieldResolver
+     * Return the object implementing the schema definition for this fieldResolver.
+     * By default, it is this same object
      */
     public function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?FieldSchemaDefinitionResolverInterface
     {
-        return null;
+        return $this;
     }
 
     public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldType($relationalTypeResolver, $fieldName);
         }
         $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
@@ -32,7 +34,8 @@ trait FieldSchemaDefinitionResolverTrait
 
     public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
         }
         return null;
@@ -40,7 +43,8 @@ trait FieldSchemaDefinitionResolverTrait
 
     public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldDescription($relationalTypeResolver, $fieldName);
         }
         return null;
@@ -48,7 +52,8 @@ trait FieldSchemaDefinitionResolverTrait
 
     public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldArgs($relationalTypeResolver, $fieldName);
         }
         return [];
@@ -56,7 +61,8 @@ trait FieldSchemaDefinitionResolverTrait
 
     public function getSchemaFieldDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($relationalTypeResolver, $fieldName, $fieldArgs);
         }
         return null;
@@ -64,7 +70,8 @@ trait FieldSchemaDefinitionResolverTrait
 
     public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
         }
         return null;
@@ -81,7 +88,8 @@ trait FieldSchemaDefinitionResolverTrait
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->validateFieldArgument($relationalTypeResolver, $fieldName, $fieldArgName, $fieldArgValue);
         }
         return null;
@@ -89,7 +97,8 @@ trait FieldSchemaDefinitionResolverTrait
 
     public function addSchemaDefinitionForField(array &$schemaDefinition, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): void
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver)) {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== null && $schemaDefinitionResolver !== $this) {
             $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $relationalTypeResolver, $fieldName);
         }
     }
