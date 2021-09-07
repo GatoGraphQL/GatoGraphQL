@@ -7,9 +7,15 @@ namespace PoPSchema\Meta\FieldInterfaceResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\Meta\TypeResolvers\Interface\WithMetaInterfaceTypeResolver;
 
 class WithMetaFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
+    public function getClassesToAttachTo(): array
+    {
+        return array(WithMetaInterfaceTypeResolver::class);
+    }
+
     public function getInterfaceName(): string
     {
         return 'WithMeta';

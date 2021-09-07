@@ -6,10 +6,16 @@ namespace PoPSchema\Users\FieldInterfaceResolvers;
 
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\Users\TypeResolvers\Interface\WithAuthorInterfaceTypeResolver;
 use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class WithAuthorFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
+    public function getClassesToAttachTo(): array
+    {
+        return array(WithAuthorInterfaceTypeResolver::class);
+    }
+
     public function getInterfaceName(): string
     {
         return 'WithAuthor';

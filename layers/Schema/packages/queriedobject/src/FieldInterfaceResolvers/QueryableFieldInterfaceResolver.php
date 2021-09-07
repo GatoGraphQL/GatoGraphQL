@@ -7,9 +7,15 @@ namespace PoPSchema\QueriedObject\FieldInterfaceResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\QueriedObject\TypeResolvers\Interface\QueryableInterfaceTypeResolver;
 
 class QueryableFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
+    public function getClassesToAttachTo(): array
+    {
+        return array(QueryableInterfaceTypeResolver::class);
+    }
+
     public function getInterfaceName(): string
     {
         return 'Queryable';

@@ -10,6 +10,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
+use PoPSchema\Comments\TypeResolvers\Interface\CommentableInterfaceTypeResolver;
 use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
@@ -18,6 +19,11 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
 {
     use WithLimitFieldArgResolverTrait;
+
+    public function getClassesToAttachTo(): array
+    {
+        return array(CommentableInterfaceTypeResolver::class);
+    }
 
     public function getInterfaceName(): string
     {

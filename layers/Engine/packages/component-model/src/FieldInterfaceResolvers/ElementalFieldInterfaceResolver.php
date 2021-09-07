@@ -7,9 +7,15 @@ namespace PoP\ComponentModel\FieldInterfaceResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\Interface\ElementalInterfaceTypeResolver;
 
 class ElementalFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
+    public function getClassesToAttachTo(): array
+    {
+        return array(ElementalInterfaceTypeResolver::class);
+    }
+
     public function getInterfaceName(): string
     {
         return 'Elemental';

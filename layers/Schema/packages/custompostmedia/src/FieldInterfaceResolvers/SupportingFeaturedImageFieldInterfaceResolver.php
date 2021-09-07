@@ -7,10 +7,16 @@ namespace PoPSchema\CustomPostMedia\FieldInterfaceResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\CustomPostMedia\TypeResolvers\Interface\SupportingFeaturedImageInterfaceTypeResolver;
 use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
 
 class SupportingFeaturedImageFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
+    public function getClassesToAttachTo(): array
+    {
+        return array(SupportingFeaturedImageInterfaceTypeResolver::class);
+    }
+
     public function getInterfaceName(): string
     {
         return 'SupportingFeaturedImage';
