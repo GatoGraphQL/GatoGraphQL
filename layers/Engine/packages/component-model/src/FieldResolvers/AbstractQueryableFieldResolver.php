@@ -6,17 +6,24 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\FieldResolvers\QueryableFieldSchemaDefinitionResolverInterface;
-use PoP\ComponentModel\FieldResolvers\SelfQueryableFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver
+abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver implements QueryableFieldSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
-    use SelfQueryableFieldSchemaDefinitionResolverTrait;
+
+    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
+        }
+        return null;
+    }
 
     public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
     {
