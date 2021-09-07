@@ -118,16 +118,16 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     /**
      * By default, the resolver is this same object, unless function
-     * `getFieldInterfaceSchemaDefinitionResolverInterfaceClass` is
+     * `getFieldInterfaceSchemaDefinitionResolverClass` is
      * implemented
      */
     protected function doGetSchemaDefinitionResolver(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
-        if ($fieldInterfaceSchemaDefinitionResolverInterfaceClass = $this->getFieldInterfaceSchemaDefinitionResolverInterfaceClass($relationalTypeResolver, $fieldName)) {
+        if ($fieldInterfaceSchemaDefinitionResolverClass = $this->getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName)) {
             /** @var FieldInterfaceSchemaDefinitionResolverInterface */
-            return $this->instanceManager->getInstance($fieldInterfaceSchemaDefinitionResolverInterfaceClass);
+            return $this->instanceManager->getInstance($fieldInterfaceSchemaDefinitionResolverClass);
         }
         return $this;
     }
@@ -135,7 +135,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     /**
      * Retrieve the class of some FieldInterfaceSchemaDefinitionResolverInterface
      */
-    protected function getFieldInterfaceSchemaDefinitionResolverInterfaceClass(
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName
     ): ?string {
