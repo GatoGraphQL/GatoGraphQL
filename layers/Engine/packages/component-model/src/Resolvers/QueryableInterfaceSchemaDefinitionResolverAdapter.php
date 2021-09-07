@@ -13,7 +13,7 @@ class QueryableInterfaceSchemaDefinitionResolverAdapter extends InterfaceSchemaD
     public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
     {
         /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface */
-        $fieldInterfaceResolver = $this->fieldInterfaceResolver;
-        return $fieldInterfaceResolver->getFieldDataFilteringModule($fieldName);
+        $fieldInterfaceSchemaDefinitionResolver = $this->fieldInterfaceSchemaDefinitionResolver;
+        return $fieldInterfaceSchemaDefinitionResolver->getFieldDataFilteringModule($fieldName);
     }
 }

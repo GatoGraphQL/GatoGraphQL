@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
-
-interface FieldInterfaceResolverInterface extends FieldInterfaceSchemaDefinitionResolverInterface
+interface FieldInterfaceResolverInterface
 {
     /**
      * Get an array with the fieldNames that the fieldResolver must implement

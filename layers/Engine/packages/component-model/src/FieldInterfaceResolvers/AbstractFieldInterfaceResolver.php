@@ -14,7 +14,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverInterface
+abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverInterface, FieldInterfaceSchemaDefinitionResolverInterface
 {
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
 
