@@ -49,7 +49,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      */
     protected array $schemaDefinitionForFieldCache = [];
     /**
-     * @var array<string, FieldSchemaDefinitionResolverInterface|null>
+     * @var array<string, FieldSchemaDefinitionResolverInterface>
      */
     protected array $fieldInterfaceSchemaDefinitionResolverCache = [];
 

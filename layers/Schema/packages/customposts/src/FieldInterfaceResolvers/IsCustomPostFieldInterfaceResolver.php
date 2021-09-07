@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldInterfaceResolvers;
 
+use PoP\ComponentModel\FieldInterfaceResolvers\AbstractQueryableSchemaFieldInterfaceResolver;
 use PoP\ComponentModel\FieldInterfaceResolvers\EnumTypeFieldInterfaceSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
@@ -14,7 +15,7 @@ use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 
-class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
+class IsCustomPostFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
 {
     use EnumTypeFieldInterfaceSchemaDefinitionResolverTrait;
 
@@ -30,26 +31,41 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
         ];
     }
 
+    public function getFieldNamesToImplement(): array
+    {
+        return [
+            'url',
+            'urlPath',
+            'slug',
+            'content',
+            'status',
+            'isStatus',
+            'date',
+            'modified',
+            'title',
+            'excerpt',
+            'customPostType',
+        ];
+    }
+
+    /**
+     * Get the Schema Definition from the Interface
+     */
+    protected function getFieldInterfaceSchemaDefinitionResolverClass(string $fieldName): ?string
+    {
+        return match ($fieldName) {
+            'url',
+            'urlPath',
+            'slug'
+                => QueryableFieldInterfaceResolver::class,
+            default
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($fieldName),
+        };
+    }
+
     public function getSchemaInterfaceDescription(): ?string
     {
         return $this->translationAPI->__('Entities representing a custom post', 'customposts');
-    }
-
-    public function getFieldNamesToImplement(): array
-    {
-        return array_merge(
-            parent::getFieldNamesToImplement(),
-            [
-                'content',
-                'status',
-                'isStatus',
-                'date',
-                'modified',
-                'title',
-                'excerpt',
-                'customPostType',
-            ]
-        );
     }
 
     public function getSchemaFieldType(string $fieldName): string
@@ -88,6 +104,9 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
         $descriptions = [
+            'url' => $this->translationAPI->__('Custom post URL', 'customposts'),
+            'urlPath' => $this->translationAPI->__('Custom post URL path', 'customposts'),
+            'slug' => $this->translationAPI->__('Custom post slug', 'customposts'),
             'content' => $this->translationAPI->__('Custom post content', 'customposts'),
             'status' => $this->translationAPI->__('Custom post status', 'customposts'),
             'isStatus' => $this->translationAPI->__('Is the custom post in the given status?', 'customposts'),
