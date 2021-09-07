@@ -7,7 +7,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
@@ -16,7 +16,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
     public function getClassesToAttachTo(): array
     {
         return array(
-            IsCustomPostFieldInterfaceResolver::class,
+            IsCustomPostInterfaceTypeResolver::class,
         );
     }
 

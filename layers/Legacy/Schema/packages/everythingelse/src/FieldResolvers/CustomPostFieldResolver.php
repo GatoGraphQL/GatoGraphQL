@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\Locations\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\Locations\TypeResolvers\Object\LocationTypeResolver;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
@@ -16,7 +15,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     public function getClassesToAttachTo(): array
     {
         return array(
-            IsCustomPostFieldInterfaceResolver::class,
+            IsCustomPostInterfaceTypeResolver::class,
         );
     }
 

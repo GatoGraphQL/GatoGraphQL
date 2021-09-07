@@ -8,7 +8,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
@@ -16,7 +16,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
     public function getClassesToAttachTo(): array
     {
         return array(
-            IsCustomPostFieldInterfaceResolver::class,
+            IsCustomPostInterfaceTypeResolver::class,
         );
     }
 

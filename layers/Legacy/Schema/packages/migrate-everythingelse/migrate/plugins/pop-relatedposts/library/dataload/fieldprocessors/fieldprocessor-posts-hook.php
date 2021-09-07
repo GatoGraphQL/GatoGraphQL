@@ -5,8 +5,8 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 
 class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
@@ -14,7 +14,7 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     public function getClassesToAttachTo(): array
     {
         return array(
-            IsCustomPostFieldInterfaceResolver::class,
+            IsCustomPostInterfaceTypeResolver::class,
         );
     }
 

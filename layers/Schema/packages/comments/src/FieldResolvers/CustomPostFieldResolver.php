@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -17,7 +15,7 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\FieldInterfaceResolvers\CommentableFieldInterfaceResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -47,7 +45,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
     public function getClassesToAttachTo(): array
     {
         return [
-            IsCustomPostFieldInterfaceResolver::class,
+            IsCustomPostInterfaceTypeResolver::class,
         ];
     }
 

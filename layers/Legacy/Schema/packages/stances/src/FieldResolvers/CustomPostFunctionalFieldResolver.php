@@ -13,16 +13,16 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
         return array(
-            IsCustomPostFieldInterfaceResolver::class,
+            IsCustomPostInterfaceTypeResolver::class,
         );
     }
 

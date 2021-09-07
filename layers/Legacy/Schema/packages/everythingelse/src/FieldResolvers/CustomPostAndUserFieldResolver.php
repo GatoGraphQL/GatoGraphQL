@@ -9,7 +9,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\Locations\TypeResolvers\Object\LocationTypeResolver;
 use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
@@ -18,7 +18,7 @@ class CustomPostAndUserFieldResolver extends AbstractDBDataFieldResolver
     public function getClassesToAttachTo(): array
     {
         return array(
-            IsCustomPostFieldInterfaceResolver::class,
+            IsCustomPostInterfaceTypeResolver::class,
             UserTypeResolver::class,
         );
     }

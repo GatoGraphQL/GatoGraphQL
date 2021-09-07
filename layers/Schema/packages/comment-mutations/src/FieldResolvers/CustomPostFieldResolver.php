@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
+use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
+use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(IsCustomPostFieldInterfaceResolver::class);
+        return [
+            IsCustomPostInterfaceTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

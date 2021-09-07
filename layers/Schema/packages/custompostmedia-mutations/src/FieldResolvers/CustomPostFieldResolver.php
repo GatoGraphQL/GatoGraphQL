@@ -18,7 +18,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCustomPostMutationResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolver;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
 
@@ -47,7 +47,9 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(IsCustomPostFieldInterfaceResolver::class);
+        return [
+            IsCustomPostInterfaceTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

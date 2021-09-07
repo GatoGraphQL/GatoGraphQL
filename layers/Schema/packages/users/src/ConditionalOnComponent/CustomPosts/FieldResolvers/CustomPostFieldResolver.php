@@ -6,7 +6,7 @@ namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 use PoPSchema\Users\FieldInterfaceResolvers\WithAuthorFieldInterfaceResolver;
 
@@ -15,7 +15,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     public function getClassesToAttachTo(): array
     {
         return [
-            IsCustomPostFieldInterfaceResolver::class,
+            IsCustomPostInterfaceTypeResolver::class,
         ];
     }
 

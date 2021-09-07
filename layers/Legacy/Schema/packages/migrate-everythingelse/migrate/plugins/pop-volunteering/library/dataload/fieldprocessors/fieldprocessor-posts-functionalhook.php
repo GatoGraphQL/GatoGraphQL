@@ -1,19 +1,19 @@
 <?php
-use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 
 class PoP_Volunteering_DataLoad_FieldResolver_FunctionalPosts extends AbstractFunctionalFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
         return [
-            IsCustomPostFieldInterfaceResolver::class,
+            IsCustomPostInterfaceTypeResolver::class,
         ];
     }
 
