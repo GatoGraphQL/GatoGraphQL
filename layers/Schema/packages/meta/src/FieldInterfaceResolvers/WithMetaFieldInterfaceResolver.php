@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Meta\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 
-class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
+class WithMetaFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
     public function getInterfaceName(): string
     {
