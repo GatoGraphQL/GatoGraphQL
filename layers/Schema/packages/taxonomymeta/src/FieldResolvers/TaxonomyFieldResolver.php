@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomyMeta\FieldResolvers;
 
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
-use PoPSchema\TaxonomyMeta\Facades\TaxonomyMetaTypeAPIFacade;
 use PoPSchema\Taxonomies\TypeResolvers\Object\AbstractTaxonomyTypeResolver;
+use PoPSchema\TaxonomyMeta\Facades\TaxonomyMetaTypeAPIFacade;
 
 class TaxonomyFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -32,6 +34,25 @@ class TaxonomyFieldResolver extends AbstractDBDataFieldResolver
             'metaValue',
             'metaValues',
         ];
+    }
+
+    /**
+     * Get the Schema Definition from the Interface
+     */
+    protected function doGetSchemaDefinitionResolver(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
+
+        switch ($fieldName) {
+            case 'metaValue':
+            case 'metaValues':
+                /** @var WithMetaFieldInterfaceResolver */
+                $resolver = $this->instanceManager->getInstance(WithMetaFieldInterfaceResolver::class);
+                return $resolver;
+        }
+
+        return parent::doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
     }
 
     /**

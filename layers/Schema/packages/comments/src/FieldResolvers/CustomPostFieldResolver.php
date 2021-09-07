@@ -71,7 +71,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
     }
 
     /**
-     * Get the SchemaDefinition from the Interface
+     * Get the Schema Definition from the Interface
      */
     protected function doGetSchemaDefinitionResolver(
         RelationalTypeResolverInterface $relationalTypeResolver,

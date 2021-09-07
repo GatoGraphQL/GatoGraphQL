@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta\FieldResolvers;
 
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
 use PoPSchema\UserMeta\Facades\UserMetaTypeAPIFacade;
@@ -32,6 +34,25 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'metaValue',
             'metaValues',
         ];
+    }
+
+    /**
+     * Get the Schema Definition from the Interface
+     */
+    protected function doGetSchemaDefinitionResolver(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
+
+        switch ($fieldName) {
+            case 'metaValue':
+            case 'metaValues':
+                /** @var WithMetaFieldInterfaceResolver */
+                $resolver = $this->instanceManager->getInstance(WithMetaFieldInterfaceResolver::class);
+                return $resolver;
+        }
+
+        return parent::doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
     }
 
     /**
