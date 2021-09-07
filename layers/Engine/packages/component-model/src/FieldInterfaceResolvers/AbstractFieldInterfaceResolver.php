@@ -36,11 +36,6 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
         ];
     }
 
-    /**
-     * The InterfaceType the FieldInterfaceResolver adds fields to
-     */
-    abstract public function getInterfaceTypeResolverClass(): string;
-
     public function getFieldNamesToResolve(): array
     {
         return $this->getFieldNamesToImplement();
