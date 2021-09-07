@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Media\FieldResolvers;
 
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -66,27 +68,24 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
-    {
-        $types = [
-            'url' => SchemaDefinition::TYPE_URL,
-            'urlPath' => SchemaDefinition::TYPE_STRING,
-            'slug' => SchemaDefinition::TYPE_STRING,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
-    }
+    /**
+     * Get the Schema Definition from the Interface
+     */
+    protected function doGetSchemaDefinitionResolver(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $fieldName
+    ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
-    {
-        $nonNullableFieldNames = [
-            'url',
-            'urlPath',
-            'slug',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
+        switch ($fieldName) {
+            case 'url':
+            case 'urlPath':
+            case 'slug':
+                /** @var QueryableFieldInterfaceResolver */
+                $resolver = $this->instanceManager->getInstance(QueryableFieldInterfaceResolver::class);
+                return $resolver;
         }
-        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
+
+        return parent::doGetSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
