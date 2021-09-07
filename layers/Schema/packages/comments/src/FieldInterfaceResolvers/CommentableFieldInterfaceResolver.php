@@ -177,7 +177,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         return $errors;
     }
 
-    public function resolveFieldTypeResolverClass(string $fieldName): ?string
+    public function getFieldTypeResolverClass(string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'comments':
@@ -185,6 +185,6 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
                 return CommentTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($fieldName);
+        return parent::getFieldTypeResolverClass($fieldName);
     }
 }

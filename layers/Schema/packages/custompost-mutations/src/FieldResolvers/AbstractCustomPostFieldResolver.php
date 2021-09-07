@@ -34,7 +34,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                     $relationalTypeResolver,
                     $fieldName,
                     false,
-                    $this->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName)
+                    $this->getFieldTypeResolverClass($relationalTypeResolver, $fieldName)
                 );
         }
         return parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);

@@ -188,11 +188,11 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         return null;
     }
 
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
         }
         return null;
     }
@@ -488,7 +488,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
         // If we found a resolver for this fieldName, get all its properties from it
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
-        $fieldTypeResolverClass = $schemaDefinitionResolver->resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        $fieldTypeResolverClass = $schemaDefinitionResolver->getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
         if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
             $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
             $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);

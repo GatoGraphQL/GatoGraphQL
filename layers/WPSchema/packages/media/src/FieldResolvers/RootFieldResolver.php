@@ -126,13 +126,13 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'mediaItemBySlug':
                 return MediaTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }

@@ -91,13 +91,13 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         return parent::resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName);
     }
 
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'addComment':
                 return CommentTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }

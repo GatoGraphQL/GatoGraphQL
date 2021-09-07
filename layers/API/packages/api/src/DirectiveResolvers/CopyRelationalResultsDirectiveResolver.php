@@ -157,7 +157,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                 $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
 
                 // Make sure the field is relational, and not a scalar or enum
-                $fieldTypeResolverClass = $relationalTypeResolver->resolveFieldTypeResolverClass($relationalField);
+                $fieldTypeResolverClass = $relationalTypeResolver->getFieldTypeResolverClass($relationalField);
                 if (!SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],

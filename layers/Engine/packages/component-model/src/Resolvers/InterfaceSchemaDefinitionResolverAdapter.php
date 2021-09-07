@@ -64,9 +64,9 @@ class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionR
         return $this->fieldInterfaceResolver->getSchemaFieldDeprecationDescription($fieldName, $fieldArgs);
     }
 
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
-        return $this->fieldInterfaceResolver->resolveFieldTypeResolverClass($fieldName);
+        return $this->fieldInterfaceResolver->getFieldTypeResolverClass($fieldName);
     }
 
     public function validateFieldArgument(

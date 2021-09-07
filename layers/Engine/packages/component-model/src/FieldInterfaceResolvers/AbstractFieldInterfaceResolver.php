@@ -106,11 +106,11 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
         return null;
     }
 
-    public function resolveFieldTypeResolverClass(string $fieldName): ?string
+    public function getFieldTypeResolverClass(string $fieldName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->resolveFieldTypeResolverClass($fieldName);
+            return $schemaDefinitionResolver->getFieldTypeResolverClass($fieldName);
         }
         return null;
     }

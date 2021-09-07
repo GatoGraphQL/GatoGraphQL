@@ -1295,7 +1295,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return false;
     }
 
-    public function resolveFieldTypeResolverClass(string $field): ?string
+    public function getFieldTypeResolverClass(string $field): ?string
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($fieldResolvers = $this->getFieldResolversForField($field)) {
@@ -1303,7 +1303,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            return $fieldResolvers[0]->resolveFieldTypeResolverClass($this, $fieldName);
+            return $fieldResolvers[0]->getFieldTypeResolverClass($this, $fieldName);
         }
 
         return null;
@@ -1753,7 +1753,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Add subfield schema if it is deep, and this typeResolver has not been processed yet
         if ($options['deep'] ?? null) {
             // If this field is relational, then add its own schema
-            $fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($fieldName);
+            $fieldTypeResolverClass = $this->getFieldTypeResolverClass($fieldName);
             if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
                 $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
                 $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] = $fieldTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);

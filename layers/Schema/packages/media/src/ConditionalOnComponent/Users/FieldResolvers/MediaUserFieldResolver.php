@@ -85,13 +85,13 @@ class MediaUserFieldResolver extends AbstractDBDataFieldResolver
         return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'author':
                 return UserTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
     }
 }
