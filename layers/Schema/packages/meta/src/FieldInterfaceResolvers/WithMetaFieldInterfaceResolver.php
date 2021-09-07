@@ -13,7 +13,9 @@ class WithMetaFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(WithMetaInterfaceTypeResolver::class);
+        return [
+            WithMetaInterfaceTypeResolver::class,
+        ];
     }
 
     public function getInterfaceName(): string

@@ -22,7 +22,9 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
 
     public function getClassesToAttachTo(): array
     {
-        return array(CommentableInterfaceTypeResolver::class);
+        return [
+            CommentableInterfaceTypeResolver::class,
+        ];
     }
 
     public function getInterfaceName(): string

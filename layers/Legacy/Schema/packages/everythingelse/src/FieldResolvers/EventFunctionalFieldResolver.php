@@ -19,7 +19,9 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(EventTypeResolver::class);
+        return [
+            EventTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

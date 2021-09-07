@@ -12,7 +12,9 @@ class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDB
 {
     public function getClassesToAttachTo(): array
     {
-        return array(NotificationTypeResolver::class);
+        return [
+            NotificationTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

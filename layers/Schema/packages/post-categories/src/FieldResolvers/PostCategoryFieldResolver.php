@@ -14,6 +14,8 @@ class PostCategoryFieldResolver extends AbstractCategoryFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(PostCategoryTypeResolver::class);
+        return [
+            PostCategoryTypeResolver::class,
+        ];
     }
 }

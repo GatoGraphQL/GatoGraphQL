@@ -13,7 +13,9 @@ class ElementalFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(ElementalInterfaceTypeResolver::class);
+        return [
+            ElementalInterfaceTypeResolver::class,
+        ];
     }
 
     public function getInterfaceName(): string

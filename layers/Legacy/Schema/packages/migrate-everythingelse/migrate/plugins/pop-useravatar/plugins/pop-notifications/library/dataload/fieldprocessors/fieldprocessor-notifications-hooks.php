@@ -10,7 +10,9 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBD
 {
     public function getClassesToAttachTo(): array
     {
-        return array(NotificationTypeResolver::class);
+        return [
+            NotificationTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

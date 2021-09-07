@@ -28,7 +28,9 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(TypeTypeResolver::class);
+        return [
+            TypeTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

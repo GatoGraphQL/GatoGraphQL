@@ -13,7 +13,9 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
 {
     public function getClassesToAttachTo(): array
     {
-        return array(CommentTypeResolver::class);
+        return [
+            CommentTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

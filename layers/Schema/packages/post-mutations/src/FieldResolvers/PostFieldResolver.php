@@ -16,7 +16,9 @@ class PostFieldResolver extends AbstractCustomPostFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(PostTypeResolver::class);
+        return [
+            PostTypeResolver::class,
+        ];
     }
 
     public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string

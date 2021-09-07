@@ -14,7 +14,9 @@ class EnumValueFieldResolver extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(EnumValueTypeResolver::class);
+        return [
+            EnumValueTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

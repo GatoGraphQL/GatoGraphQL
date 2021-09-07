@@ -9,7 +9,9 @@ class PoP_Avatar_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolve
 {
     public function getClassesToAttachTo(): array
     {
-        return array(UserTypeResolver::class);
+        return [
+            UserTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

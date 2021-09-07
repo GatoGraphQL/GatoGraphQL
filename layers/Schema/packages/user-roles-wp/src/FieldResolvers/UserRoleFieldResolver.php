@@ -14,7 +14,9 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(UserRoleTypeResolver::class);
+        return [
+            UserRoleTypeResolver::class,
+        ];
     }
 
     protected function getTypeClass(): string

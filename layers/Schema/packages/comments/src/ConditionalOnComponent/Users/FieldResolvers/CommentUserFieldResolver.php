@@ -42,7 +42,9 @@ class CommentUserFieldResolver extends AbstractDBDataFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(CommentTypeResolver::class);
+        return [
+            CommentTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

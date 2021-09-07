@@ -9,7 +9,9 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
 {
     public function getClassesToAttachTo(): array
     {
-        return array(UserTypeResolver::class);
+        return [
+            UserTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

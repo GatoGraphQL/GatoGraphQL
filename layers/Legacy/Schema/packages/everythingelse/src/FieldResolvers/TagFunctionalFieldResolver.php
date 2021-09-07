@@ -14,7 +14,9 @@ class TagFunctionalFieldResolver extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(AbstractTagTypeResolver::class);
+        return [
+            AbstractTagTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

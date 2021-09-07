@@ -10,7 +10,9 @@ class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends A
 {
     public function getClassesToAttachTo(): array
     {
-        return array(NotificationTypeResolver::class);
+        return [
+            NotificationTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

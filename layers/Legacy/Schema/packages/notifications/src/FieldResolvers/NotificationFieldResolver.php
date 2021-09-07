@@ -49,7 +49,9 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(NotificationTypeResolver::class);
+        return [
+            NotificationTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

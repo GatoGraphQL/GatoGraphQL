@@ -17,7 +17,9 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(RootTypeResolver::class);
+        return [
+            RootTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

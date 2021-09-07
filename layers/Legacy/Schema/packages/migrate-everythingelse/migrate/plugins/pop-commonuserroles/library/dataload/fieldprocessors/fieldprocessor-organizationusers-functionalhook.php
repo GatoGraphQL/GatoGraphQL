@@ -12,7 +12,9 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends A
 
     public function getClassesToAttachTo(): array
     {
-        return array(UserTypeResolver::class);
+        return [
+            UserTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

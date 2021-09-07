@@ -16,7 +16,9 @@ class ChildPostCategoryFieldResolver extends AbstractChildCategoryFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(PostCategoryTypeResolver::class);
+        return [
+            PostCategoryTypeResolver::class,
+        ];
     }
 
     public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array

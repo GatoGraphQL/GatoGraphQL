@@ -11,7 +11,9 @@ class PoPGenericForms_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
 {
     public function getClassesToAttachTo(): array
     {
-        return array(UserTypeResolver::class);
+        return [
+            UserTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

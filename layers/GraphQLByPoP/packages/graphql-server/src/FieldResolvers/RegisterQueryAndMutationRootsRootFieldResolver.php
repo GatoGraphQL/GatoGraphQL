@@ -21,7 +21,9 @@ class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataField
 {
     public function getClassesToAttachTo(): array
     {
-        return array(RootTypeResolver::class);
+        return [
+            RootTypeResolver::class,
+        ];
     }
 
     /**

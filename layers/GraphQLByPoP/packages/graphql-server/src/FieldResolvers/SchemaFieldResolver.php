@@ -16,7 +16,9 @@ class SchemaFieldResolver extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(SchemaTypeResolver::class);
+        return [
+            SchemaTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

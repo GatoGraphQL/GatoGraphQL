@@ -17,7 +17,9 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(SchemaTypeResolver::class);
+        return [
+            SchemaTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

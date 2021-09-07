@@ -10,7 +10,9 @@ class GD_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(CommentTypeResolver::class);
+        return [
+            CommentTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

@@ -43,7 +43,9 @@ class MediaUserFieldResolver extends AbstractDBDataFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(MediaTypeResolver::class);
+        return [
+            MediaTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

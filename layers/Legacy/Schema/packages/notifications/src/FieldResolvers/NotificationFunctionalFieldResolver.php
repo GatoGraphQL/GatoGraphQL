@@ -14,7 +14,9 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
 {
     public function getClassesToAttachTo(): array
     {
-        return array(NotificationTypeResolver::class);
+        return [
+            NotificationTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

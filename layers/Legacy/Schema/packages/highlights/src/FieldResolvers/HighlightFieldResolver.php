@@ -18,7 +18,9 @@ class HighlightFieldResolver extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(HighlightTypeResolver::class);
+        return [
+            HighlightTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

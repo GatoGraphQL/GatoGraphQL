@@ -8,14 +8,15 @@ use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoPSchema\UserState\FieldResolvers\AbstractUserStateFieldResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class RootMeFieldResolver extends AbstractUserStateFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(RootTypeResolver::class);
+        return [
+            RootTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

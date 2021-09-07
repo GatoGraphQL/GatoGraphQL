@@ -12,7 +12,9 @@ class PostCategoryListFieldResolver extends AbstractPostFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(PostCategoryTypeResolver::class);
+        return [
+            PostCategoryTypeResolver::class,
+        ];
     }
 
     public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string

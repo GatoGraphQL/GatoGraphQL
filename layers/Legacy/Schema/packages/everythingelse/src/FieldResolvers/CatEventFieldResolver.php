@@ -17,7 +17,9 @@ class CatEventFieldResolver extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(EventTypeResolver::class);
+        return [
+            EventTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

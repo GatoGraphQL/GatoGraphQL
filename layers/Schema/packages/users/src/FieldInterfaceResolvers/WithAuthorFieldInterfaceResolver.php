@@ -13,7 +13,9 @@ class WithAuthorFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(WithAuthorInterfaceTypeResolver::class);
+        return [
+            WithAuthorInterfaceTypeResolver::class,
+        ];
     }
 
     public function getInterfaceName(): string

@@ -13,7 +13,9 @@ class QueryableFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(QueryableInterfaceTypeResolver::class);
+        return [
+            QueryableInterfaceTypeResolver::class,
+        ];
     }
 
     public function getInterfaceName(): string

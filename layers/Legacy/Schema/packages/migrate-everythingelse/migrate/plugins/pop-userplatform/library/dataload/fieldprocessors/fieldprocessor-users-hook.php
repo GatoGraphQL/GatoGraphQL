@@ -10,7 +10,9 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
 {
     public function getClassesToAttachTo(): array
     {
-        return array(UserTypeResolver::class);
+        return [
+            UserTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

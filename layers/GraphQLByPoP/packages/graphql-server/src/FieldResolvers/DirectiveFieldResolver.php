@@ -19,7 +19,9 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(DirectiveTypeResolver::class);
+        return [
+            DirectiveTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

@@ -24,7 +24,9 @@ class PageFieldResolver extends AbstractQueryableFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(PageTypeResolver::class);
+        return [
+            PageTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

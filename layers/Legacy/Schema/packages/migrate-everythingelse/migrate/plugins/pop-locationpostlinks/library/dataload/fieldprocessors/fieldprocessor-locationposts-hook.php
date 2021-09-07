@@ -11,7 +11,9 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends 
 {
     public function getClassesToAttachTo(): array
     {
-        return array(LocationPostTypeResolver::class);
+        return [
+            LocationPostTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

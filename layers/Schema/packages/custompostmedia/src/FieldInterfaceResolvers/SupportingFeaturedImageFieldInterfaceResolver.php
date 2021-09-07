@@ -14,7 +14,9 @@ class SupportingFeaturedImageFieldInterfaceResolver extends AbstractFieldInterfa
 {
     public function getClassesToAttachTo(): array
     {
-        return array(SupportingFeaturedImageInterfaceTypeResolver::class);
+        return [
+            SupportingFeaturedImageInterfaceTypeResolver::class,
+        ];
     }
 
     public function getInterfaceName(): string

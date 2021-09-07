@@ -49,7 +49,9 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(MediaTypeResolver::class);
+        return [
+            MediaTypeResolver::class,
+        ];
     }
 
     public function getImplementedFieldInterfaceResolverClasses(): array

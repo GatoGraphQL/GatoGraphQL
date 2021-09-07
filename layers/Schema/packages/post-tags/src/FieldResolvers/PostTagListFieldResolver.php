@@ -12,7 +12,9 @@ class PostTagListFieldResolver extends AbstractPostFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(PostTagTypeResolver::class);
+        return [
+            PostTagTypeResolver::class,
+        ];
     }
 
     public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string

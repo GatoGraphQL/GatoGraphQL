@@ -12,7 +12,9 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abstr
 {
     public function getClassesToAttachTo(): array
     {
-        return array(NotificationTypeResolver::class);
+        return [
+            NotificationTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

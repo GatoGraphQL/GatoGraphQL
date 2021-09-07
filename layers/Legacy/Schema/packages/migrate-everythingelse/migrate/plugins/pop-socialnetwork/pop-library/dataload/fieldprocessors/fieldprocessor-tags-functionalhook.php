@@ -11,7 +11,9 @@ class GD_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
-        return array(PostTagTypeResolver::class);
+        return [
+            PostTagTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

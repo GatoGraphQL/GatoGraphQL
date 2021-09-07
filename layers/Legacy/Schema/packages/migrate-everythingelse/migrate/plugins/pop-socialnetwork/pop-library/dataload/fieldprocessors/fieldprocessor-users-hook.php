@@ -16,7 +16,9 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
 {
     public function getClassesToAttachTo(): array
     {
-        return array(UserTypeResolver::class);
+        return [
+            UserTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

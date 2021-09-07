@@ -27,7 +27,9 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(RootTypeResolver::class);
+        return [
+            RootTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

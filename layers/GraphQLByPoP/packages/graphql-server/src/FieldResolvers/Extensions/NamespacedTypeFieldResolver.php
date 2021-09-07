@@ -17,7 +17,9 @@ class NamespacedTypeFieldResolver extends AbstractDBDataFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(TypeTypeResolver::class);
+        return [
+            TypeTypeResolver::class,
+        ];
     }
 
     public function getPriorityToAttachToClasses(): int

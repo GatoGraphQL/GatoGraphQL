@@ -14,6 +14,8 @@ class PostTagFieldResolver extends AbstractTagFieldResolver
 
     public function getClassesToAttachTo(): array
     {
-        return array(PostTagTypeResolver::class);
+        return [
+            PostTagTypeResolver::class,
+        ];
     }
 }

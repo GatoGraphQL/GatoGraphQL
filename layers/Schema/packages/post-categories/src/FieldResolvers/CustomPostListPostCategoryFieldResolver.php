@@ -22,7 +22,9 @@ class CustomPostListPostCategoryFieldResolver extends AbstractCustomPostListCate
 
     public function getClassesToAttachTo(): array
     {
-        return array(PostCategoryTypeResolver::class);
+        return [
+            PostCategoryTypeResolver::class,
+        ];
     }
 
     protected function getQueryProperty(): string

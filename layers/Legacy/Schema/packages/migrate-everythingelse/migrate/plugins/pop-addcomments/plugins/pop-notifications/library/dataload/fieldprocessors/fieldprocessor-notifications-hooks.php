@@ -18,7 +18,9 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
 {
     public function getClassesToAttachTo(): array
     {
-        return array(NotificationTypeResolver::class);
+        return [
+            NotificationTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
