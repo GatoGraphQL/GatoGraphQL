@@ -94,6 +94,28 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     }
 
     /**
+     * Each FieldInterfaceResolver provides a list of fieldNames to the Interface.
+     * The Interface may also accept other fieldNames from other FieldInterfaceResolvers.
+     * That's why this function is "partially" implemented: the Interface
+     * may be completely implemented or not.
+     * 
+     * @return string[]
+     */
+    final public function getPartiallyImplementedInterfaceTypeResolverClasses(): array
+    {
+        $interfaceTypeResolverClasses = [];
+        foreach ($this->getImplementedFieldInterfaceResolverClasses() as $fieldInterfaceResolverClass) {
+            /** @var FieldInterfaceResolverInterface */
+            $fieldInterfaceResolver = $this->instanceManager->getInstance($fieldInterfaceResolverClass);
+            $interfaceTypeResolverClasses = array_merge(
+                $interfaceTypeResolverClasses,
+                $fieldInterfaceResolver->getInterfaceTypeResolverClasses()
+            );
+        }
+        return array_values(array_unique($interfaceTypeResolverClasses));
+    }
+
+    /**
      * Return the object implementing the schema definition for this FieldResolver.
      */
     final protected function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): FieldSchemaDefinitionResolverInterface

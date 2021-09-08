@@ -1771,15 +1771,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $this->schemaDefinition[$typeSchemaKey][$entry][$fieldName] = $fieldSchemaDefinition;
     }
 
-    protected function isFieldNameResolvedByFieldResolver(FieldResolverInterface $fieldResolver, string $fieldName, array $fieldInterfaceResolverClasses): bool
+    protected function isFieldNameResolvedByFieldResolver(FieldResolverInterface $fieldResolver, string $fieldName, array $interfaceTypeResolverClasses): bool
     {
         // Calculate all the interfaces that define this fieldName
-        $fieldInterfaceResolverClassesForField = array_values(array_filter(
-            $fieldInterfaceResolverClasses,
-            function ($fieldInterfaceResolverClass) use ($fieldName): bool {
-                /** @var FieldInterfaceResolverInterface */
-                $fieldInterfaceResolver = $this->instanceManager->getInstance($fieldInterfaceResolverClass);
-                return in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement());
+        $interfaceTypeResolverClassesForField = array_values(array_filter(
+            $interfaceTypeResolverClasses,
+            function (string $interfaceTypeResolverClass) use ($fieldName): bool {
+                /** @var InterfaceTypeResolverInterface */
+                $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
+                return in_array($fieldName, $interfaceTypeResolver->getFieldNamesToImplement());
             }
         ));
         // Execute 2 filters: a generic one, and a specific one
@@ -1789,7 +1789,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 true,
                 $this,
                 $fieldResolver,
-                $fieldInterfaceResolverClassesForField,
+                $interfaceTypeResolverClassesForField,
                 $fieldName
             )
         ) {
@@ -1798,7 +1798,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 true,
                 $this,
                 $fieldResolver,
-                $fieldInterfaceResolverClassesForField,
+                $interfaceTypeResolverClassesForField,
                 $fieldName
             );
         }
@@ -1842,11 +1842,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
-            // Also pass the implemented interfaces defining the field
-            $fieldInterfaceResolverClasses = $fieldResolver->getImplementedFieldInterfaceResolverClasses();
+            // Also pass the Interfaces defining the field
+            $interfaceTypeResolverClasses = $fieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses();
             $fieldNames = array_filter(
                 $fieldNames,
-                fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $fieldInterfaceResolverClasses)
+                fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $interfaceTypeResolverClasses)
             );
             $this->fieldNamesResolvedByFieldResolver[$fieldResolverClass] = $fieldNames;
         }

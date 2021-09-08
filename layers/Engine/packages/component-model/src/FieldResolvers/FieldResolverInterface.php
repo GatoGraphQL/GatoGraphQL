@@ -11,16 +11,31 @@ interface FieldResolverInterface extends AttachableExtensionInterface
 {
     /**
      * Get an array with the fieldNames that this fieldResolver resolves
+     * 
+     * @return string[]
      */
     public function getFieldNamesToResolve(): array;
     /**
      * Those fieldNames to be enabled for the "Admin" schema only
+     * 
+     * @return string[]
      */
     public function getAdminFieldNames(): array;
     /**
      * A list of classes of all the (GraphQL-style) interfaces the fieldResolver implements
+     * 
+     * @return string[]
      */
     public function getImplementedFieldInterfaceResolverClasses(): array;
+    /**
+     * Each FieldInterfaceResolver provides a list of fieldNames to the Interface.
+     * The Interface may also accept other fieldNames from other FieldInterfaceResolvers.
+     * That's why this function is "partially" implemented: the Interface
+     * may be completely implemented or not.
+     * 
+     * @return string[]
+     */
+    public function getPartiallyImplementedInterfaceTypeResolverClasses(): array;
     /**
      * Obtain the fieldNames from all implemented interfaces
      */
