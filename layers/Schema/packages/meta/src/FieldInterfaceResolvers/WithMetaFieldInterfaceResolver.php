@@ -11,7 +11,7 @@ use PoPSchema\Meta\TypeResolvers\Interface\WithMetaInterfaceTypeResolver;
 
 class WithMetaFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getInterfaceTypeResolverClasses(): array
     {
         return [
             WithMetaInterfaceTypeResolver::class,

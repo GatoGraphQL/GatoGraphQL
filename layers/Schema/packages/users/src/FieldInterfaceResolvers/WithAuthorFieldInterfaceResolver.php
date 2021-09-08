@@ -11,7 +11,7 @@ use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class WithAuthorFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getInterfaceTypeResolverClasses(): array
     {
         return [
             WithAuthorInterfaceTypeResolver::class,
