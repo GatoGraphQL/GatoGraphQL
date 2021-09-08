@@ -72,7 +72,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @var string[]|null
      */
-    protected ?array $interfaceClasses = null;
+    protected ?array $fieldInterfaceClasses = null;
     /**
      * @var array<FieldInterfaceResolverInterface>|null
      */
@@ -1997,7 +1997,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             [
                 $this->getTypeResolverClassToCalculateSchema(),
             ],
-            $this->getAllImplementedInterfaceClasses()
+            $this->getAllImplementedFieldInterfaceClasses()
         );
         foreach ($classes as $class) {
             $typeResolverDecorators = array_merge(
@@ -2056,21 +2056,21 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             function ($interfaceClass) {
                 return $this->instanceManager->getInstance($interfaceClass);
             },
-            $this->getAllImplementedInterfaceClasses()
+            $this->getAllImplementedFieldInterfaceClasses()
         );
     }
 
-    public function getAllImplementedInterfaceClasses(): array
+    public function getAllImplementedFieldInterfaceClasses(): array
     {
-        if (is_null($this->interfaceClasses)) {
-            $this->interfaceClasses = $this->calculateAllImplementedFieldInterfaceClasses();
+        if (is_null($this->fieldInterfaceClasses)) {
+            $this->fieldInterfaceClasses = $this->calculateAllImplementedFieldInterfaceClasses();
         }
-        return $this->interfaceClasses;
+        return $this->fieldInterfaceClasses;
     }
 
     private function calculateAllImplementedFieldInterfaceClasses(): array
     {
-        $interfaceClasses = [];
+        $fieldInterfaceClasses = [];
         $processedFieldResolverClasses = [];
 
         foreach ($this->getAllFieldResolvers() as $fieldName => $fieldResolvers) {
@@ -2078,15 +2078,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $fieldResolverClass = get_class($fieldResolver);
                 if (!in_array($fieldResolverClass, $processedFieldResolverClasses)) {
                     $processedFieldResolverClasses[] = $fieldResolverClass;
-                    $interfaceClasses = array_merge(
-                        $interfaceClasses,
+                    $fieldInterfaceClasses = array_merge(
+                        $fieldInterfaceClasses,
                         $fieldResolver->getImplementedFieldInterfaceResolverClasses()
                     );
                 }
             }
         }
 
-        return array_values(array_unique($interfaceClasses));
+        return array_values(array_unique($fieldInterfaceClasses));
     }
 
     /**
@@ -2180,7 +2180,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             [
                 $this->getTypeResolverClassToCalculateSchema(),
             ],
-            $this->getAllImplementedInterfaceClasses()
+            $this->getAllImplementedFieldInterfaceClasses()
         );
         foreach ($classes as $class) {
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field

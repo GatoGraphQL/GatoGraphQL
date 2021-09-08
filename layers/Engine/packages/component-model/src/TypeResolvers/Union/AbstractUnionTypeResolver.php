@@ -277,7 +277,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                      * @var ObjectTypeResolverInterface
                      */
                     $objectTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
-                    return !in_array($typeInterfaceClass, $objectTypeResolver->getAllImplementedInterfaceClasses());
+                    return !in_array($typeInterfaceClass, $objectTypeResolver->getAllImplementedFieldInterfaceClasses());
                 }
             );
             if ($notImplementingInterfaceTypeResolverClasses) {

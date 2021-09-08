@@ -18,7 +18,7 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
     public function getID(object $resultItem): string | int | null;
     public function getRelationalTypeDataLoaderClass(): string;
 
-    public function getAllImplementedInterfaceClasses(): array;
+    public function getAllImplementedFieldInterfaceClasses(): array;
     /**
      * @return FieldInterfaceResolverInterface[]
      */
