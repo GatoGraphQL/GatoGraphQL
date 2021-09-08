@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
@@ -139,17 +140,17 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
                 return $typeName == $relationalTypeResolver->getTypeName();
             case 'implements':
                 $interface = $fieldArgs['interface'];
-                $implementedInterfaceResolverInstances = $relationalTypeResolver->getAllImplementedFieldInterfaceResolvers();
+                $implementedInterfaceTypeResolvers = $relationalTypeResolver->getAllImplementedInterfaceTypeResolvers();
                 // If the provided interface contains the namespace separator, then compare by qualifiedInterface
                 $useNamespaced = str_contains($interface, SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR);
                 $implementedInterfaceNames = array_map(
-                    function ($interfaceResolver) use ($useNamespaced) {
+                    function (InterfaceTypeResolverInterface $interfaceTypeResolver) use ($useNamespaced) {
                         if ($useNamespaced) {
-                            return $interfaceResolver->getNamespacedInterfaceName();
+                            return $interfaceTypeResolver->getNamespacedTypeName();
                         }
-                        return $interfaceResolver->getInterfaceName();
+                        return $interfaceTypeResolver->getTypeName();
                     },
-                    $implementedInterfaceResolverInstances
+                    $implementedInterfaceTypeResolvers
                 );
                 /**
                  * @todo Remove the block of code below.
@@ -168,10 +169,10 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
                     $implementedInterfaceNames = array_merge(
                         $implementedInterfaceNames,
                         array_map(
-                            function ($interfaceResolver) {
-                                return $interfaceResolver->getInterfaceName();
+                            function (InterfaceTypeResolverInterface $interfaceTypeResolver) {
+                                return $interfaceTypeResolver->getTypeName();
                             },
-                            $implementedInterfaceResolverInstances
+                            $implementedInterfaceTypeResolvers
                         )
                     );
                 }
