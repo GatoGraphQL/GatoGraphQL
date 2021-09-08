@@ -38,6 +38,8 @@ use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver implements RelationalTypeResolverInterface
 {
+    use ExcludeFieldNamesFromSchemaTypeResolverTrait;
+
     public const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnResultItem';
 
     /**
@@ -1752,42 +1754,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $this->schemaDefinition[$typeSchemaKey][$entry][$fieldName] = $fieldSchemaDefinition;
     }
 
-    protected function isFieldNameResolvedByFieldResolver(FieldResolverInterface $fieldResolver, string $fieldName, array $interfaceTypeResolverClasses): bool
-    {
-        // Calculate all the interfaces that define this fieldName
-        $interfaceTypeResolverClassesForField = array_values(array_filter(
-            $interfaceTypeResolverClasses,
-            function (string $interfaceTypeResolverClass) use ($fieldName): bool {
-                /** @var InterfaceTypeResolverInterface */
-                $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
-                return in_array($fieldName, $interfaceTypeResolver->getFieldNamesToImplement());
-            }
-        ));
-        // Execute 2 filters: a generic one, and a specific one
-        if (
-            $this->hooksAPI->applyFilters(
-                HookHelpers::getHookNameToFilterField(),
-                true,
-                $this,
-                $fieldResolver,
-                $interfaceTypeResolverClassesForField,
-                $fieldName
-            )
-        ) {
-            return $this->hooksAPI->applyFilters(
-                HookHelpers::getHookNameToFilterField($fieldName),
-                true,
-                $this,
-                $fieldResolver,
-                $interfaceTypeResolverClassesForField,
-                $fieldName
-            );
-        }
-        return false;
-    }
-
     /**
-     * Return the fieldNames resolved by the fieldResolverClass, adding a hook to disable each of them (eg: to implement a private schema)
+     * Return the fieldNames resolved by the fieldResolver, adding a hook to disable each of them (eg: to implement a private schema)
      *
      * @return string[]
      */
@@ -1804,44 +1772,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $this->fieldNamesResolvedByFieldResolver[$fieldResolverClass] = $fieldNames;
         }
         return $this->fieldNamesResolvedByFieldResolver[$fieldResolverClass];
-    }
-
-    /**
-     * Call a hook to allow removing fields from the schema
-     *
-     * @return string[]
-     */
-    protected function maybeExcludeFieldNamesFromSchema(FieldResolverInterface $fieldResolver, array $fieldNames): array
-    {
-        // Enable to exclude fieldNames, so they are not added to the schema.
-        $excludedFieldNames = [];
-        // Whenever:
-        // 1. Exclude the admin fields, if "Admin" Schema is not enabled
-        if (!ComponentConfiguration::enableAdminSchema()) {
-            $excludedFieldNames = $fieldResolver->getAdminFieldNames();
-        }
-        // 2. By filter hook
-        $excludedFieldNames = $this->hooksAPI->applyFilters(
-            Hooks::EXCLUDE_FIELDNAMES,
-            $excludedFieldNames,
-            $fieldResolver,
-            $fieldNames
-        );
-        if ($excludedFieldNames !== []) {
-            $fieldNames = array_values(array_diff(
-                $fieldNames,
-                $excludedFieldNames
-            ));
-        }
-
-        // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
-        // Also pass the Interfaces defining the field
-        $interfaceTypeResolverClasses = $fieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses();
-        $fieldNames = array_filter(
-            $fieldNames,
-            fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $interfaceTypeResolverClasses)
-        );
-        return $fieldNames;
     }
 
     protected function getAllFieldResolvers(): array

@@ -8,10 +8,13 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ExcludeFieldNamesFromSchemaTypeResolverTrait;
 use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 
 abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implements InterfaceTypeResolverInterface
 {
+    use ExcludeFieldNamesFromSchemaTypeResolverTrait;
+    
     /**
      * @var array<string, FieldInterfaceResolverInterface[]>|null
      */
@@ -24,6 +27,10 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      * @var string[]|null
      */
     protected ?array $fieldNamesToImplement = null;
+    /**
+     * @var array<string, array>
+     */
+    private array $fieldNamesResolvedByFieldInterfaceResolver = [];
 
     /**
      * The list of the fieldNames to implement in the Interface,
@@ -179,7 +186,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
                 $attachedFieldInterfaceResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDINTERFACERESOLVERS);
                 foreach ($attachedFieldInterfaceResolvers as $fieldInterfaceResolver) {
                     // Process the fields which have not been processed yet
-                    $extensionFieldNames = $fieldInterfaceResolver->getFieldNamesToImplement();
+                    $extensionFieldNames = $this->getFieldNamesResolvedByFieldInterfaceResolver($fieldInterfaceResolver);
                     foreach (array_diff($extensionFieldNames, array_keys($fieldInterfaceResolversByField)) as $fieldName) {
                         $fieldInterfaceResolversByField[$fieldName] ??= [];
                         $fieldInterfaceResolversByField[$fieldName][] = $fieldInterfaceResolver;
@@ -195,5 +202,22 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         }
 
         return $fieldInterfaceResolversByField;
+    }
+
+    /**
+     * Return the fieldNames resolved by the fieldInterfaceResolver, adding a hook to disable each of them (eg: to implement a private schema)
+     *
+     * @return string[]
+     */
+    protected function getFieldNamesResolvedByFieldInterfaceResolver(FieldInterfaceResolverInterface $fieldInterfaceResolver): array
+    {
+        $fieldInterfaceResolverClass = get_class($fieldInterfaceResolver);
+        if (!isset($this->fieldNamesResolvedByFieldInterfaceResolver[$fieldInterfaceResolverClass])) {
+            // Merge the fieldNames resolved by this field resolver class, and the interfaces it implements
+            $fieldNames = $fieldInterfaceResolver->getFieldNamesToImplement();
+            $fieldNames = $this->maybeExcludeFieldNamesFromSchema($fieldInterfaceResolver, $fieldNames);
+            $this->fieldNamesResolvedByFieldInterfaceResolver[$fieldInterfaceResolverClass] = $fieldNames;
+        }
+        return $this->fieldNamesResolvedByFieldInterfaceResolver[$fieldInterfaceResolverClass];
     }
 }
