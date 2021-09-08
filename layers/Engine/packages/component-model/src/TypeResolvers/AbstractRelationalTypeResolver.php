@@ -2024,7 +2024,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @return FieldInterfaceResolverInterface[]
      */
-    final public function getAllImplementedFieldInterfaceResolvers(): array
+    final protected function getAllImplementedFieldInterfaceResolvers(): array
     {
         return array_map(
             fn (string $fieldInterfaceResolverClass) => $this->instanceManager->getInstance($fieldInterfaceResolverClass),
@@ -2032,7 +2032,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         );
     }
 
-    final public function getAllImplementedFieldInterfaceResolverClasses(): array
+    final protected function getAllImplementedFieldInterfaceResolverClasses(): array
     {
         if ($this->fieldInterfaceResolverClasses === null) {
             $this->fieldInterfaceResolverClasses = $this->calculateAllImplementedFieldInterfaceResolverClasses();
