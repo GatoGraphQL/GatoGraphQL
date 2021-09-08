@@ -87,13 +87,12 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function initNamespacedInterfaceTypeNameClasses(): void
     {
-        $fieldInterfaceRegistry = FieldInterfaceRegistryFacade::getInstance();
         // For each interface, obtain its namespacedInterfaceName
-        $fieldInterfaceResolvers = $fieldInterfaceRegistry->getFieldInterfaceResolvers();
+        $interfaceTypeResolvers = $this->typeRegistry->getInterfaceTypeResolvers();
         $this->namespacedInterfaceTypeNameClasses = [];
-        foreach ($fieldInterfaceResolvers as $fieldInterfaceResolver) {
-            $fieldInterfaceResolverNamespacedName = $fieldInterfaceResolver->getNamespacedInterfaceName();
-            $this->namespacedInterfaceTypeNameClasses[$fieldInterfaceResolverNamespacedName] = $fieldInterfaceResolver::class;
+        foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
+            $interfaceTypeResolverNamespacedName = $interfaceTypeResolver->getNamespacedTypeName();
+            $this->namespacedInterfaceTypeNameClasses[$interfaceTypeResolverNamespacedName] = $interfaceTypeResolver::class;
         }
     }
 
