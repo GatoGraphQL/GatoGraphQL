@@ -8,6 +8,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 
 abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implements InterfaceTypeResolverInterface
 {
@@ -48,6 +49,49 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
             );
         }
         return array_values(array_unique($fieldNamesToImplement));
+    }
+
+    /**
+     * Interfaces "partially" implemented by this Interface
+     * 
+     * @return string[]
+     */
+    public function getPartiallyImplementedInterfaceTypeResolverClasses(): array
+    {
+        $implementedFieldInterfaceResolverClasses = [];
+        foreach ($this->getAllFieldInterfaceResolvers() as $fieldInterfaceResolver) {
+            $implementedFieldInterfaceResolverClasses = array_merge(
+                $implementedFieldInterfaceResolverClasses,
+                $fieldInterfaceResolver->getImplementedFieldInterfaceResolverClasses()
+            );
+        }
+        $implementedFieldInterfaceResolverClasses = array_values(array_unique($implementedFieldInterfaceResolverClasses));
+        /** @var FieldInterfaceResolverInterface[] */
+        $implementedFieldInterfaceResolvers = array_map(
+            fn (string $fieldInterfaceResolverClass) => $this->instanceManager->getInstance($fieldInterfaceResolverClass),
+            $implementedFieldInterfaceResolverClasses
+        );
+        $implementedInterfaceTypeResolverClasses = [];
+        foreach ($implementedFieldInterfaceResolvers as $implementedFieldInterfaceResolver) {
+            $implementedInterfaceTypeResolverClasses = array_merge(
+                $implementedInterfaceTypeResolverClasses,
+                $implementedFieldInterfaceResolver->getInterfaceTypeResolverClasses()
+            );
+        }
+        return array_values(array_unique($implementedInterfaceTypeResolverClasses));
+    }
+
+    /**
+     * Interfaces "partially" implemented by this Interface
+     * 
+     * @return InterfaceTypeResolverInterface[]
+     */
+    public function getPartiallyImplementedInterfaceTypeResolvers(): array
+    {
+        return array_map(
+            fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
+            $this->getPartiallyImplementedInterfaceTypeResolvers()
+        );
     }
 
     /**
