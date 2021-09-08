@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
 use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
-use PoP\ComponentModel\Facades\Registries\FieldInterfaceRegistryFacade;
 
 trait WithTypeFieldControlBlockTrait
 {
@@ -22,7 +21,6 @@ trait WithTypeFieldControlBlockTrait
     {
         $groupFieldsUnderTypeForPrint = ComponentConfiguration::groupFieldsUnderTypeForPrint();
         $typeRegistry = TypeRegistryFacade::getInstance();
-        $fieldInterfaceRegistry = FieldInterfaceRegistryFacade::getInstance();
         // For each class, obtain its namespacedTypeName
         $objectTypeResolvers = $typeRegistry->getObjectTypeResolvers();
         $namespacedObjectTypeNameNames = [];
