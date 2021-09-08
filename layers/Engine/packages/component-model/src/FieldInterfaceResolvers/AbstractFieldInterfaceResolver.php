@@ -7,8 +7,10 @@ namespace PoP\ComponentModel\FieldInterfaceResolvers;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -19,6 +21,11 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
 
+    /**
+     * @var InterfaceTypeResolverInterface[]|null
+     */
+    protected ?array $partiallyImplementedInterfaceTypeResolvers = null;
+
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
@@ -26,6 +33,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
         protected NameResolverInterface $nameResolver,
         protected CMSServiceInterface $cmsService,
         protected SchemaNamespacingServiceInterface $schemaNamespacingService,
+        protected TypeRegistryInterface $typeRegistry,
     ) {
     }
 
@@ -36,7 +44,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
      */
     final public function getClassesToAttachTo(): array
     {
-        return $this->getInterfaceTypeResolverClasses();
+        return $this->getInterfaceTypeResolverClassesToAttachTo();
     }
 
     public function getFieldNamesToResolve(): array
@@ -47,6 +55,38 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
     public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [];
+    }
+
+    /**
+     * Each FieldInterfaceResolver provides a list of fieldNames to the Interface.
+     * The Interface may also accept other fieldNames from other FieldInterfaceResolvers.
+     * That's why this function is "partially" implemented: the Interface
+     * may be completely implemented or not.
+     * 
+     * @return InterfaceTypeResolverInterface[]
+     */
+    final public function getPartiallyImplementedInterfaceTypeResolvers(): array
+    {
+        if ($this->partiallyImplementedInterfaceTypeResolverClasses === null) {
+            // Search all the InterfaceTypeResolvers who have this FieldInterface
+            $interfaceTypeResolvers = $this->typeRegistry->getInterfaceTypeResolvers();
+            $this->partiallyImplementedInterfaceTypeResolverClasses = array_filter(
+                $interfaceTypeResolvers,
+                fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => in_array(get_called_class(), $interfaceTypeResolver->getAllFieldInterfaceResolverClasses())
+            );
+        }
+        return $this->partiallyImplementedInterfaceTypeResolverClasses;
+    }
+
+    /**
+     * @return string[]
+     */
+    final public function getPartiallyImplementedInterfaceTypeResolverClasses(): array
+    {
+        return array_map(
+            'get_class',
+            $this->getPartiallyImplementedInterfaceTypeResolvers()
+        );
     }
 
     /**

@@ -109,7 +109,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             $fieldInterfaceResolver = $this->instanceManager->getInstance($fieldInterfaceResolverClass);
             $interfaceTypeResolverClasses = array_merge(
                 $interfaceTypeResolverClasses,
-                $fieldInterfaceResolver->getInterfaceTypeResolverClasses()
+                $fieldInterfaceResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
             );
         }
         return array_values(array_unique($interfaceTypeResolverClasses));

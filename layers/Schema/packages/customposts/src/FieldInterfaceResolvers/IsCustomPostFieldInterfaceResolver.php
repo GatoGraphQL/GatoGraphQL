@@ -20,7 +20,7 @@ class IsCustomPostFieldInterfaceResolver extends AbstractQueryableSchemaFieldInt
 {
     use EnumTypeFieldInterfaceSchemaDefinitionResolverTrait;
 
-    public function getInterfaceTypeResolverClasses(): array
+    public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
             IsCustomPostInterfaceTypeResolver::class,

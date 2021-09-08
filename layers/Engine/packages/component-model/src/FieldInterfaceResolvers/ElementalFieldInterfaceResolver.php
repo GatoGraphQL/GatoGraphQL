@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\Interface\ElementalInterfaceTypeResolver;
 
 class ElementalFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
-    public function getInterfaceTypeResolverClasses(): array
+    public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
             ElementalInterfaceTypeResolver::class,

@@ -75,7 +75,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         foreach ($implementedFieldInterfaceResolvers as $implementedFieldInterfaceResolver) {
             $implementedInterfaceTypeResolverClasses = array_merge(
                 $implementedInterfaceTypeResolverClasses,
-                $implementedFieldInterfaceResolver->getInterfaceTypeResolverClasses()
+                $implementedFieldInterfaceResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
             );
         }
         return array_values(array_unique($implementedInterfaceTypeResolverClasses));

@@ -2090,7 +2090,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($this->getAllImplementedFieldInterfaceResolvers() as $fieldInterfaceResolver) {
             $interfaceTypeResolverClasses = array_merge(
                 $interfaceTypeResolverClasses,
-                $fieldInterfaceResolver->getInterfaceTypeResolverClasses()
+                $fieldInterfaceResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
             );
         }
         $interfaceTypeResolverClasses = array_values(array_unique($interfaceTypeResolverClasses));
