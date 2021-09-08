@@ -65,7 +65,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
         bool $include,
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldResolverInterface $fieldResolver,
-        array $fieldInterfaceResolverClasses,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         // Because there may be several hooks chained, if any of them has already rejected the field, then already return that response
@@ -74,7 +74,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
         }
 
         // Check if to remove the field
-        return !$this->removeFieldName($relationalTypeResolver, $fieldResolver, $fieldInterfaceResolverClasses, $fieldName);
+        return !$this->removeFieldName($relationalTypeResolver, $fieldResolver, $interfaceTypeResolverClasses, $fieldName);
     }
     /**
      * Field names to remove
@@ -86,7 +86,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
     protected function removeFieldName(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldResolverInterface $fieldResolver,
-        array $fieldInterfaceResolverClasses,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         return true;

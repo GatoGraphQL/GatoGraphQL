@@ -46,7 +46,7 @@ class NestedMutationHookSet extends AbstractHookSet
         bool $include,
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldResolverInterface $fieldResolver,
-        array $fieldInterfaceResolverClasses,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         $vars = ApplicationState::getVars();

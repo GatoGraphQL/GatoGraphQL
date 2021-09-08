@@ -31,16 +31,16 @@ abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet 
     /**
      * Remove fieldName "roles" if the user is not logged in
      *
-     * @param string[] $fieldInterfaceResolverClasses
+     * @param string[] $interfaceTypeResolverClasses
      */
     protected function removeFieldName(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldResolverInterface $fieldResolver,
-        array $fieldInterfaceResolverClasses,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
-        // Obtain all entries for the current combination of [typeResolver or $fieldInterfaceClass]/fieldName
-        foreach ($this->getEntries($relationalTypeResolver, $fieldInterfaceResolverClasses, $fieldName) as $entry) {
+        // Obtain all entries for the current combination of [typeResolver or interfaceTypeResolverClass]/fieldName
+        foreach ($this->getEntries($relationalTypeResolver, $interfaceTypeResolverClasses, $fieldName) as $entry) {
             // Obtain the 3rd value on each entry: if the validation is "in" or "out"
             $entryValue = $entry[2] ?? null;
             // Let the implementation class decide if to remove the field or not

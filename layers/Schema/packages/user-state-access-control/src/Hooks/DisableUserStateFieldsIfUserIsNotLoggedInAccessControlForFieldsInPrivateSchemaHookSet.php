@@ -34,12 +34,12 @@ class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSc
     /**
      * Remove the fieldNames if the fieldResolver is an instance of the "user state" one
      *
-     * @param string[] $fieldInterfaceResolverClasses
+     * @param string[] $interfaceTypeResolverClasses
      */
     protected function removeFieldName(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldResolverInterface $fieldResolver,
-        array $fieldInterfaceResolverClasses,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         return $fieldResolver instanceof AbstractUserStateFieldResolver;

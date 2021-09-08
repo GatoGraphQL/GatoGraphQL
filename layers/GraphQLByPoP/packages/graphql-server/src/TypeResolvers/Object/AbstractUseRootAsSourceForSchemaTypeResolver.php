@@ -17,11 +17,11 @@ abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObje
 
     abstract protected function isFieldNameConditionSatisfiedForSchema(FieldResolverInterface $fieldResolver, string $fieldName): bool;
 
-    protected function isFieldNameResolvedByFieldResolver(FieldResolverInterface $fieldResolver, string $fieldName, array $fieldInterfaceResolverClasses): bool
+    protected function isFieldNameResolvedByFieldResolver(FieldResolverInterface $fieldResolver, string $fieldName, array $interfaceTypeResolverClasses): bool
     {
         if (!$this->isFieldNameConditionSatisfiedForSchema($fieldResolver, $fieldName)) {
             return false;
         }
-        return parent::isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $fieldInterfaceResolverClasses);
+        return parent::isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $interfaceTypeResolverClasses);
     }
 }

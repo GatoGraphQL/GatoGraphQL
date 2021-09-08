@@ -2063,7 +2063,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         $fieldInterfaceResolverClasses = [];
         $processedFieldResolverClasses = [];
-
         foreach ($this->getAllFieldResolvers() as $fieldName => $fieldResolvers) {
             foreach ($fieldResolvers as $fieldResolver) {
                 $fieldResolverClass = get_class($fieldResolver);
@@ -2076,7 +2075,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
             }
         }
-
         return array_values(array_unique($fieldInterfaceResolverClasses));
     }
 

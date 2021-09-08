@@ -14,7 +14,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
         bool $include,
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldResolverInterface $fieldResolver,
-        array $fieldInterfaceResolverClasses,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         /**
@@ -24,7 +24,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
             /**
              * If there are no entries, then exit by returning the original hook value
              */
-            if (empty($this->getEntries($relationalTypeResolver, $fieldInterfaceResolverClasses, $fieldName))) {
+            if (empty($this->getEntries($relationalTypeResolver, $interfaceTypeResolverClasses, $fieldName))) {
                 return $include;
             }
         }
@@ -36,7 +36,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
             $include,
             $relationalTypeResolver,
             $fieldResolver,
-            $fieldInterfaceResolverClasses,
+            $interfaceTypeResolverClasses,
             $fieldName
         );
     }

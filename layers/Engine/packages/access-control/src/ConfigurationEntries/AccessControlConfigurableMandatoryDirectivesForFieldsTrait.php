@@ -21,7 +21,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
     final protected function getMatchingEntries(
         array $entryList,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $fieldInterfaceResolverClasses,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): array {
         /**
@@ -34,7 +34,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
             return $this->getUpstreamMatchingEntries(
                 $entryList,
                 $relationalTypeResolver,
-                $fieldInterfaceResolverClasses,
+                $interfaceTypeResolverClasses,
                 $fieldName
             );
         }
@@ -46,7 +46,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
             fn ($entry): bool =>
                 (
                     $entry[0] == $typeResolverClass
-                    || in_array($entry[0], $fieldInterfaceResolverClasses)
+                    || in_array($entry[0], $interfaceTypeResolverClasses)
                 )
                 && $entry[1] == $fieldName
                 && (
