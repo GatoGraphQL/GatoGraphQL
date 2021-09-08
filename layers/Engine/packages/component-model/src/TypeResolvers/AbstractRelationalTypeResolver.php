@@ -2050,7 +2050,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $this->interfaceResolverInstances;
     }
 
-    protected function calculateAllImplementedInterfaceResolverInstances(): array
+    private function calculateAllImplementedInterfaceResolverInstances(): array
     {
         return array_map(
             function ($interfaceClass) {
@@ -2068,7 +2068,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $this->interfaceClasses;
     }
 
-    protected function calculateAllImplementedInterfaceClasses(): array
+    private function calculateAllImplementedInterfaceClasses(): array
     {
         $interfaceClasses = [];
         $processedFieldResolverClasses = [];
