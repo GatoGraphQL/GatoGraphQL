@@ -2202,7 +2202,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             [
                 $this->getTypeResolverClassToCalculateSchema(),
             ],
-            $this->getAllImplementedFieldInterfaceResolverClasses()
+            $this->getAllImplementedInterfaceTypeResolverClasses()
         );
         foreach ($classes as $class) {
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
