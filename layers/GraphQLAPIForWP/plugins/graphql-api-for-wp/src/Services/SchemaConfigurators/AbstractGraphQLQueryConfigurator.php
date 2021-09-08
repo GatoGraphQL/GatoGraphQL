@@ -6,10 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
-use PoP\ComponentModel\Facades\Registries\FieldInterfaceRegistryFacade;
-use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\Hooks\HooksAPIInterface;
 
@@ -23,6 +21,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
         protected TypeRegistryInterface $typeRegistry,
+        protected DirectiveRegistryInterface $directiveRegistry,
     ) {
     }
 
@@ -113,8 +112,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function initDirectiveNameClasses(): void
     {
-        $directiveRegistry = DirectiveRegistryFacade::getInstance();
-        $directiveResolvers = $directiveRegistry->getDirectiveResolvers();
+        $directiveResolvers = $this->directiveRegistry->getDirectiveResolvers();
         // For each class, obtain its directive name. Notice that different directives
         // can have the same name (eg: @translate as implemented for Google and Azure),
         // then the mapping goes from name to list of resolvers
