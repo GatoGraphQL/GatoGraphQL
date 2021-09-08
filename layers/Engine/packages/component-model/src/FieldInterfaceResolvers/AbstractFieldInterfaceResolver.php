@@ -67,15 +67,15 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
      */
     final public function getPartiallyImplementedInterfaceTypeResolvers(): array
     {
-        if ($this->partiallyImplementedInterfaceTypeResolverClasses === null) {
+        if ($this->partiallyImplementedInterfaceTypeResolvers === null) {
             // Search all the InterfaceTypeResolvers who have this FieldInterface
             $interfaceTypeResolvers = $this->typeRegistry->getInterfaceTypeResolvers();
-            $this->partiallyImplementedInterfaceTypeResolverClasses = array_filter(
+            $this->partiallyImplementedInterfaceTypeResolvers = array_filter(
                 $interfaceTypeResolvers,
                 fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => in_array(get_called_class(), $interfaceTypeResolver->getAllFieldInterfaceResolverClasses())
             );
         }
-        return $this->partiallyImplementedInterfaceTypeResolverClasses;
+        return $this->partiallyImplementedInterfaceTypeResolvers;
     }
 
     /**
