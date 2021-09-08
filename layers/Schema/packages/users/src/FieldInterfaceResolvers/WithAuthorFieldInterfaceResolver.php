@@ -6,6 +6,7 @@ namespace PoPSchema\Users\FieldInterfaceResolvers;
 
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\Users\TypeResolvers\Interface\WithAuthorInterfaceTypeResolver;
 use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
@@ -15,6 +16,7 @@ class WithAuthorFieldInterfaceResolver extends AbstractFieldInterfaceResolver
     {
         return [
             WithAuthorInterfaceTypeResolver::class,
+            IsCustomPostInterfaceTypeResolver::class,
         ];
     }
 
