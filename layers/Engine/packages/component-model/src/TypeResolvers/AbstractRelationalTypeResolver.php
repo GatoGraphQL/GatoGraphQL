@@ -1613,12 +1613,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         // Add all the implemented interfaces
         $typeInterfaceDefinitions = [];
-        foreach ($this->getAllImplementedFieldInterfaceResolvers() as $interfaceInstance) {
-            $interfaceSchemaKey = $this->schemaDefinitionService->getInterfaceSchemaKey($interfaceInstance);
+        foreach ($this->getAllImplementedInterfaceTypeResolvers() as $interfaceTypeResolver) {
+            $interfaceSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($interfaceTypeResolver);
 
             // Conveniently get the fields from the schema, which have already been calculated above
             // since they also include their interface fields
-            $interfaceFieldNames = $interfaceInstance->getFieldNamesToImplement();
+            $interfaceFieldNames = $interfaceTypeResolver->getFieldNamesToImplement();
             // The Interface fields may be implemented as either FieldResolver fields or FieldResolver connections,
             // Eg: Interface "Elemental" has field "id" and connection "self"
             // Merge both cases into interface fields
@@ -1648,7 +1648,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // Make sure a definition for that fieldName has been added,
                 // since the field could've been removed through an ACL
                 if ($interfaceFields[$interfaceFieldName]) {
-                    if ($description = $interfaceInstance->getSchemaFieldDescription($interfaceFieldName)) {
+                    if ($description = $interfaceTypeResolver->getSchemaFieldDescription($interfaceFieldName)) {
                         $interfaceFields[$interfaceFieldName][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
                     } else {
                         // Do not keep the description from the fieldResolver
@@ -1658,13 +1658,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
             // An interface can itself implement interfaces!
             $interfaceImplementedInterfaceNames = [];
-            if ($interfaceImplementedInterfaceClasses = $interfaceInstance->getImplementedFieldInterfaceResolverClasses()) {
-                foreach ($interfaceImplementedInterfaceClasses as $interfaceImplementedInterfaceClass) {
-                    $interfaceImplementedInterfaceInstance = $this->instanceManager->getInstance($interfaceImplementedInterfaceClass);
-                    $interfaceImplementedInterfaceNames[] = $interfaceImplementedInterfaceInstance->getMaybeNamespacedInterfaceName();
-                }
+            foreach ($interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers() as $implementedInterfaceTypeResolver) {
+                $interfaceImplementedInterfaceNames[] = $implementedInterfaceTypeResolver->getMaybeNamespacedTypeName();
             }
-            $interfaceName = $interfaceInstance->getMaybeNamespacedInterfaceName();
+            $interfaceName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
             // Possible types: Because we are generating this list as we go along resolving all the types, simply have this value point to a reference in $generalMessages
             // Just by updating that variable, it will eventually be updated everywhere
             $generalMessages['interfaceGeneralTypes'][$interfaceName] = $generalMessages['interfaceGeneralTypes'][$interfaceName] ?? [];
@@ -1673,9 +1670,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $interfacePossibleTypes[] = $typeName;
             $typeInterfaceDefinitions[$interfaceSchemaKey] = [
                 SchemaDefinition::ARGNAME_NAME => $interfaceName,
-                SchemaDefinition::ARGNAME_NAMESPACED_NAME => $interfaceInstance->getNamespacedInterfaceName(),
-                SchemaDefinition::ARGNAME_ELEMENT_NAME => $interfaceInstance->getInterfaceName(),
-                SchemaDefinition::ARGNAME_DESCRIPTION => $interfaceInstance->getSchemaInterfaceDescription(),
+                SchemaDefinition::ARGNAME_NAMESPACED_NAME => $interfaceTypeResolver->getNamespacedTypeName(),
+                SchemaDefinition::ARGNAME_ELEMENT_NAME => $interfaceTypeResolver->getTypeName(),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $interfaceTypeResolver->getSchemaTypeDescription(),
                 SchemaDefinition::ARGNAME_FIELDS => $interfaceFields,
                 SchemaDefinition::ARGNAME_INTERFACES => $interfaceImplementedInterfaceNames,
                 // The list of types that implement this interface
