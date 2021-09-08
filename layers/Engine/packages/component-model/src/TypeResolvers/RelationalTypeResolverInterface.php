@@ -22,7 +22,7 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
     /**
      * @return FieldInterfaceResolverInterface[]
      */
-    public function getAllImplementedInterfaceResolverInstances(): array;
+    public function getAllImplementedFieldInterfaceResolverInstances(): array;
     /**
      * @param string|int|array<string|int> $dbObjectIDOrIDs
      * @return string|int|array<string|int>
