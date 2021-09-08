@@ -9,9 +9,10 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers;
@@ -272,30 +273,27 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             $objectTypeResolverClasses = $this->getObjectTypeResolverClassesFromPickers($typeResolverPickers);
             $notImplementingInterfaceTypeResolverClasses = array_filter(
                 $objectTypeResolverClasses,
-                function ($typeResolverClass) use ($interfaceTypeResolverClass) {
-                    /**
-                     * @var ObjectTypeResolverInterface
-                     */
+                function (string $typeResolverClass) use ($interfaceTypeResolverClass) {
+                    /** @var ObjectTypeResolverInterface */
                     $objectTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
-                    return !in_array($interfaceTypeResolverClass, $objectTypeResolver->getAllImplementedFieldInterfaceResolverClasses());
+                    return !in_array($interfaceTypeResolverClass, $objectTypeResolver->getAllImplementedInterfaceTypeResolverClasses());
                 }
             );
             if ($notImplementingInterfaceTypeResolverClasses) {
-                $typeInterfaceResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
+                /** @var InterfaceTypeResolverInterface */
+                $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
                 throw new Exception(
                     sprintf(
                         $this->translationAPI->__('UnionTypeResolver \'%s\' (\'%s\') must return results implementing interface \'%s\' (\'%s\'), however its following member TypeResolvers do not: \'%s\'', 'component-model'),
                         $this->getMaybeNamespacedTypeName(),
                         get_called_class(),
-                        $typeInterfaceResolver->getMaybeNamespacedInterfaceName(),
+                        $interfaceTypeResolver->getMaybeNamespacedTypeName(),
                         $interfaceTypeResolverClass,
                         implode(
                             $this->translationAPI->__('\', \''),
                             array_map(
-                                function ($objectTypeResolverClass) {
-                                    /**
-                                     * @var ObjectTypeResolverInterface
-                                     */
+                                function (string $objectTypeResolverClass) {
+                                    /** @var ObjectTypeResolverInterface */
                                     $objectTypeResolver = $this->instanceManager->getInstance($objectTypeResolverClass);
                                     return sprintf(
                                         $this->translationAPI->__('%s (%s)'),
@@ -425,8 +423,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         // If it returns an interface as type, add it to the schemaDefinition
         if ($interfaceTypeResolverClass = $this->getSchemaTypeInterfaceTypeResolverClass()) {
-            $typeInterfaceResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_RESULTS_IMPLEMENT_INTERFACE] = $typeInterfaceResolver->getMaybeNamespacedInterfaceName();
+            /** @var InterfaceTypeResolverInterface */
+            $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
+            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_RESULTS_IMPLEMENT_INTERFACE] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
         }
 
         // Iterate through the typeResolvers from all the pickers and get their schema definitions
