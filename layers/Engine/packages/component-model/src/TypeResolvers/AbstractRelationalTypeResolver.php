@@ -27,6 +27,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\FieldHelpers;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
@@ -73,6 +74,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @var string[]|null
      */
     protected ?array $fieldInterfaceResolverClasses = null;
+    /**
+     * @var string[]|null
+     */
+    protected ?array $interfaceTypeResolverClasses = null;
 
     /**
      * @var array<string, array>
@@ -2073,6 +2078,37 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
 
         return array_values(array_unique($fieldInterfaceResolverClasses));
+    }
+
+    /**
+     * @return InterfaceTypeResolverInterface[]
+     */
+    final public function getAllImplementedInterfaceTypeResolvers(): array
+    {
+        return array_map(
+            fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
+            $this->getAllImplementedInterfaceTypeResolverClasses()
+        );
+    }
+
+    final public function getAllImplementedInterfaceTypeResolverClasses(): array
+    {
+        if ($this->interfaceTypeResolverClasses === null) {
+            $this->interfaceTypeResolverClasses = $this->calculateAllImplementedInterfaceTypeResolverClasses();
+        }
+        return $this->interfaceTypeResolverClasses;
+    }
+
+    private function calculateAllImplementedInterfaceTypeResolverClasses(): array
+    {
+        $interfaceTypeResolverClasses = [];
+        foreach ($this->getAllImplementedFieldInterfaceResolvers() as $fieldInterfaceResolver) {
+            $interfaceTypeResolverClasses = array_merge(
+                $interfaceTypeResolverClasses,
+                $fieldInterfaceResolver->getInterfaceTypeResolverClasses()
+            );
+        }
+        return array_values(array_unique($interfaceTypeResolverClasses));
     }
 
     /**

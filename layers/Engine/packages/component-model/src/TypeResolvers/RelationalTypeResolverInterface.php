@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 
 interface RelationalTypeResolverInterface extends TypeResolverInterface
 {
@@ -17,12 +18,22 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
      */
     public function getID(object $resultItem): string | int | null;
     public function getRelationalTypeDataLoaderClass(): string;
-
+    /**
+     * @return string[]
+     */
     public function getAllImplementedFieldInterfaceResolverClasses(): array;
     /**
      * @return FieldInterfaceResolverInterface[]
      */
     public function getAllImplementedFieldInterfaceResolvers(): array;
+    /**
+     * @return string[]
+     */
+    public function getAllImplementedInterfaceTypeResolverClasses(): array;
+    /**
+     * @return InterfaceTypeResolverInterface[]
+     */
+    public function getAllImplementedInterfaceTypeResolvers(): array;
     /**
      * @param string|int|array<string|int> $dbObjectIDOrIDs
      * @return string|int|array<string|int>
