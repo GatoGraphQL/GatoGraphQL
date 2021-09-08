@@ -139,7 +139,7 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
                 return $typeName == $relationalTypeResolver->getTypeName();
             case 'implements':
                 $interface = $fieldArgs['interface'];
-                $implementedInterfaceResolverInstances = $relationalTypeResolver->getAllImplementedFieldInterfaceResolverInstances();
+                $implementedInterfaceResolverInstances = $relationalTypeResolver->getAllImplementedFieldInterfaceResolvers();
                 // If the provided interface contains the namespace separator, then compare by qualifiedInterface
                 $useNamespaced = str_contains($interface, SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR);
                 $implementedInterfaceNames = array_map(

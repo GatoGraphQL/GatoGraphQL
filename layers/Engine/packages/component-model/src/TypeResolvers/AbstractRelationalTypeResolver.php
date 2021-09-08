@@ -1612,7 +1612,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         // Add all the implemented interfaces
         $typeInterfaceDefinitions = [];
-        foreach ($this->getAllImplementedFieldInterfaceResolverInstances() as $interfaceInstance) {
+        foreach ($this->getAllImplementedFieldInterfaceResolvers() as $interfaceInstance) {
             $interfaceSchemaKey = $this->schemaDefinitionService->getInterfaceSchemaKey($interfaceInstance);
 
             // Conveniently get the fields from the schema, which have already been calculated above
@@ -2042,15 +2042,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @return FieldInterfaceResolverInterface[]
      */
-    public function getAllImplementedFieldInterfaceResolverInstances(): array
+    public function getAllImplementedFieldInterfaceResolvers(): array
     {
         if ($this->fieldInterfaceResolverInstances === null) {
-            $this->fieldInterfaceResolverInstances = $this->calculateAllImplementedFieldInterfaceResolverInstances();
+            $this->fieldInterfaceResolverInstances = $this->calculateAllImplementedFieldInterfaceResolvers();
         }
         return $this->fieldInterfaceResolverInstances;
     }
 
-    private function calculateAllImplementedFieldInterfaceResolverInstances(): array
+    private function calculateAllImplementedFieldInterfaceResolvers(): array
     {
         return array_map(
             function ($interfaceClass) {
