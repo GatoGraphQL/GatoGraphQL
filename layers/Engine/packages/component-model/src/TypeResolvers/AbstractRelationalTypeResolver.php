@@ -1640,22 +1640,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $interfaceFields,
                 $interfaceConnections
             );
-            // Interfaces and FieldResolvers must match on all attributes of the signature:
-            // fieldName, arguments, and return type. But not on the description of the field,
-            // as to make it more specific for the field
-            // So override the description with the interface's own
-            foreach ($interfaceFieldNames as $interfaceFieldName) {
-                // Make sure a definition for that fieldName has been added,
-                // since the field could've been removed through an ACL
-                if ($interfaceFields[$interfaceFieldName]) {
-                    if ($description = $interfaceTypeResolver->getSchemaFieldDescription($interfaceFieldName)) {
-                        $interfaceFields[$interfaceFieldName][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
-                    } else {
-                        // Do not keep the description from the fieldResolver
-                        unset($interfaceFields[$interfaceFieldName][SchemaDefinition::ARGNAME_DESCRIPTION]);
-                    }
-                }
-            }
             // An interface can itself implement interfaces!
             $interfaceImplementedInterfaceNames = [];
             foreach ($interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers() as $implementedInterfaceTypeResolver) {
