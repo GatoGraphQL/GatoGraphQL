@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use PoP\Hooks\HooksAPIInterface;
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
 use PoP\ComponentModel\Facades\Registries\FieldInterfaceRegistryFacade;
+use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\Hooks\HooksAPIInterface;
 
 /**
  * Base class for configuring the persisted GraphQL query before its execution
@@ -20,7 +21,8 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry
+        protected ModuleRegistryInterface $moduleRegistry,
+        protected TypeRegistryInterface $typeRegistry,
     ) {
     }
 
@@ -71,13 +73,12 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function initNamespacedObjectTypeNameClasses(): void
     {
-        $typeRegistry = TypeRegistryFacade::getInstance();
         // For each class, obtain its namespacedTypeName
-        $typeResolvers = $typeRegistry->getTypeResolvers();
+        $objectTypeResolvers = $this->typeRegistry->getObjectTypeResolvers();
         $this->namespacedObjectTypeNameClasses = [];
-        foreach ($typeResolvers as $typeResolver) {
-            $typeResolverNamespacedName = $typeResolver->getNamespacedTypeName();
-            $this->namespacedObjectTypeNameClasses[$typeResolverNamespacedName] = $typeResolver::class;
+        foreach ($objectTypeResolvers as $objectTypeResolver) {
+            $objectTypeResolverNamespacedName = $objectTypeResolver->getNamespacedTypeName();
+            $this->namespacedObjectTypeNameClasses[$objectTypeResolverNamespacedName] = $objectTypeResolver::class;
         }
     }
 
