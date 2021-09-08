@@ -76,7 +76,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @var array<FieldInterfaceResolverInterface>|null
      */
-    protected ?array $fieldInterfaceResolverInstances = null;
+    protected ?array $fieldInterfaceResolvers = null;
 
     /**
      * @var array<string, array>
@@ -2044,10 +2044,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     public function getAllImplementedFieldInterfaceResolvers(): array
     {
-        if ($this->fieldInterfaceResolverInstances === null) {
-            $this->fieldInterfaceResolverInstances = $this->calculateAllImplementedFieldInterfaceResolvers();
+        if ($this->fieldInterfaceResolvers === null) {
+            $this->fieldInterfaceResolvers = $this->calculateAllImplementedFieldInterfaceResolvers();
         }
-        return $this->fieldInterfaceResolverInstances;
+        return $this->fieldInterfaceResolvers;
     }
 
     private function calculateAllImplementedFieldInterfaceResolvers(): array
