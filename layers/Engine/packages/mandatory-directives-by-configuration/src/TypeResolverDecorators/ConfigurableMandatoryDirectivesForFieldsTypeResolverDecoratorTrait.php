@@ -33,7 +33,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         $mandatoryDirectivesForFields = [];
-        $fieldInterfaceResolverClasses = $relationalTypeResolver->getAllImplementedFieldInterfaceClasses();
+        $fieldInterfaceResolverClasses = $relationalTypeResolver->getAllImplementedFieldInterfaceResolverClasses();
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
             // Calculate all the interfaces that define this fieldName

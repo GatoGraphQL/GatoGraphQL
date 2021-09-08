@@ -28,7 +28,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return UnionTypeHelpers::getUnionTypeCollectionName(parent::getTypeOutputName());
     }
 
-    public function getSchemaTypeInterfaceClass(): ?string
+    public function getSchemaTypeInterfaceResolverClass(): ?string
     {
         return null;
     }
@@ -268,27 +268,27 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         } while ($class = get_parent_class($class));
 
         // Validate that all typeResolvers implement the required interface
-        if ($typeInterfaceClass = $this->getSchemaTypeInterfaceClass()) {
+        if ($typeInterfaceResolverClass = $this->getSchemaTypeInterfaceResolverClass()) {
             $objectTypeResolverClasses = $this->getObjectTypeResolverClassesFromPickers($typeResolverPickers);
             $notImplementingInterfaceTypeResolverClasses = array_filter(
                 $objectTypeResolverClasses,
-                function ($typeResolverClass) use ($typeInterfaceClass) {
+                function ($typeResolverClass) use ($typeInterfaceResolverClass) {
                     /**
                      * @var ObjectTypeResolverInterface
                      */
                     $objectTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
-                    return !in_array($typeInterfaceClass, $objectTypeResolver->getAllImplementedFieldInterfaceClasses());
+                    return !in_array($typeInterfaceResolverClass, $objectTypeResolver->getAllImplementedFieldInterfaceResolverClasses());
                 }
             );
             if ($notImplementingInterfaceTypeResolverClasses) {
-                $typeInterfaceResolver = $this->instanceManager->getInstance($typeInterfaceClass);
+                $typeInterfaceResolver = $this->instanceManager->getInstance($typeInterfaceResolverClass);
                 throw new Exception(
                     sprintf(
                         $this->translationAPI->__('UnionTypeResolver \'%s\' (\'%s\') must return results implementing interface \'%s\' (\'%s\'), however its following member TypeResolvers do not: \'%s\'', 'component-model'),
                         $this->getMaybeNamespacedTypeName(),
                         get_called_class(),
                         $typeInterfaceResolver->getMaybeNamespacedInterfaceName(),
-                        $typeInterfaceClass,
+                        $typeInterfaceResolverClass,
                         implode(
                             $this->translationAPI->__('\', \''),
                             array_map(
@@ -424,8 +424,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_IS_UNION] = true;
 
         // If it returns an interface as type, add it to the schemaDefinition
-        if ($typeInterfaceClass = $this->getSchemaTypeInterfaceClass()) {
-            $typeInterfaceResolver = $this->instanceManager->getInstance($typeInterfaceClass);
+        if ($typeInterfaceResolverClass = $this->getSchemaTypeInterfaceResolverClass()) {
+            $typeInterfaceResolver = $this->instanceManager->getInstance($typeInterfaceResolverClass);
             $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_RESULTS_IMPLEMENT_INTERFACE] = $typeInterfaceResolver->getMaybeNamespacedInterfaceName();
         }
 
