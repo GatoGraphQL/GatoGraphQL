@@ -8,14 +8,14 @@ use PoP\API\APIUtils;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\QueriedObject\TypeResolvers\Interface\QueryableInterfaceTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Object\AbstractCustomPostTypeResolver;
 
 class QueryableObjectPostFieldResolver extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
         return [
-            QueryableInterfaceTypeResolver::class,
+            AbstractCustomPostTypeResolver::class,
         ];
     }
 
