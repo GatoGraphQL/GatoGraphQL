@@ -1796,10 +1796,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $fieldResolverClass = get_class($fieldResolver);
         if (!isset($this->fieldNamesResolvedByFieldResolver[$fieldResolverClass])) {
             // Merge the fieldNames resolved by this field resolver class, and the interfaces it implements
-            $fieldNames = array_merge(
+            $fieldNames = array_values(array_unique(array_merge(
                 $fieldResolver->getFieldNamesToResolve(),
                 $fieldResolver->getFieldNamesFromInterfaces()
-            );
+            )));
             $fieldNames = $this->maybeExcludeFieldNamesFromSchema($fieldResolver, $fieldNames);
             $this->fieldNamesResolvedByFieldResolver[$fieldResolverClass] = $fieldNames;
         }
