@@ -1963,7 +1963,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     protected function getAllTypeResolverDecorators(): array
     {
-        if (is_null($this->typeResolverDecorators)) {
+        if ($this->typeResolverDecorators === null) {
             $this->typeResolverDecorators = $this->calculateAllTypeResolverDecorators();
         }
         return $this->typeResolverDecorators;
@@ -1979,7 +1979,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             [
                 $this->getTypeResolverClassToCalculateSchema(),
             ],
-            $this->getAllImplementedFieldInterfaceResolverClasses()
+            $this->getAllImplementedInterfaceTypeResolverClasses()
         );
         foreach ($classes as $class) {
             $typeResolverDecorators = array_merge(
