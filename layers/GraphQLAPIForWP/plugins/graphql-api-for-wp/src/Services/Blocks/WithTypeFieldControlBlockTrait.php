@@ -24,11 +24,11 @@ trait WithTypeFieldControlBlockTrait
         $typeRegistry = TypeRegistryFacade::getInstance();
         $fieldInterfaceRegistry = FieldInterfaceRegistryFacade::getInstance();
         // For each class, obtain its namespacedTypeName
-        $relationalTypeResolvers = $typeRegistry->getRelationalTypeResolvers();
+        $objectTypeResolvers = $typeRegistry->getObjectTypeResolvers();
         $namespacedTypeNameNames = [];
-        foreach ($relationalTypeResolvers as $relationalTypeResolver) {
-            $relationalTypeResolverNamespacedName = $relationalTypeResolver->getNamespacedTypeName();
-            $namespacedTypeNameNames[$relationalTypeResolverNamespacedName] = $relationalTypeResolver->getMaybeNamespacedTypeName();
+        foreach ($objectTypeResolvers as $objectTypeResolver) {
+            $objectTypeResolverNamespacedName = $objectTypeResolver->getNamespacedTypeName();
+            $namespacedTypeNameNames[$objectTypeResolverNamespacedName] = $objectTypeResolver->getMaybeNamespacedTypeName();
         }
         // For each interface, obtain its namespacedInterfaceName
         $fieldInterfaceResolvers = $fieldInterfaceRegistry->getFieldInterfaceResolvers();
