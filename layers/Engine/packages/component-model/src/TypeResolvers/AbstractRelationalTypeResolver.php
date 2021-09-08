@@ -75,9 +75,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     protected ?array $fieldInterfaceResolverClasses = null;
     /**
-     * @var string[]|null
+     * @var InterfaceTypeResolverInterface[]|null
      */
-    protected ?array $interfaceTypeResolverClasses = null;
+    protected ?array $interfaceTypeResolvers = null;
+    // /**
+    //  * @var string[]|null
+    //  */
+    // protected ?array $interfaceTypeResolverClasses = null;
 
     /**
      * @var array<string, array>
@@ -2080,26 +2084,40 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return array_values(array_unique($fieldInterfaceResolverClasses));
     }
 
+    // /**
+    //  * @return InterfaceTypeResolverInterface[]
+    //  */
+    // final public function getAllImplementedInterfaceTypeResolvers(): array
+    // {
+    //     return array_map(
+    //         fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
+    //         $this->getAllImplementedInterfaceTypeResolverClasses()
+    //     );
+    // }
+
+    // final public function getAllImplementedInterfaceTypeResolverClasses(): array
+    // {
+    //     if ($this->interfaceTypeResolverClasses === null) {
+    //         $this->interfaceTypeResolverClasses = $this->calculateAllImplementedInterfaceTypeResolverClasses();
+    //     }
+    //     return $this->interfaceTypeResolverClasses;
+    // }
+
     /**
      * @return InterfaceTypeResolverInterface[]
      */
     final public function getAllImplementedInterfaceTypeResolvers(): array
     {
-        return array_map(
-            fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
-            $this->getAllImplementedInterfaceTypeResolverClasses()
-        );
-    }
-
-    final public function getAllImplementedInterfaceTypeResolverClasses(): array
-    {
-        if ($this->interfaceTypeResolverClasses === null) {
-            $this->interfaceTypeResolverClasses = $this->calculateAllImplementedInterfaceTypeResolverClasses();
+        if ($this->interfaceTypeResolvers === null) {
+            $this->interfaceTypeResolvers = $this->calculateAllImplementedInterfaceTypeResolvers();
         }
-        return $this->interfaceTypeResolverClasses;
+        return $this->interfaceTypeResolvers;
     }
 
-    private function calculateAllImplementedInterfaceTypeResolverClasses(): array
+    /**
+     * @return InterfaceTypeResolverInterface[]
+     */
+    private function calculateAllImplementedInterfaceTypeResolvers(): array
     {
         $interfaceTypeResolverClasses = [];
         foreach ($this->getAllImplementedFieldInterfaceResolvers() as $fieldInterfaceResolver) {
@@ -2108,7 +2126,22 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $fieldInterfaceResolver->getInterfaceTypeResolverClasses()
             );
         }
-        return array_values(array_unique($interfaceTypeResolverClasses));
+        $interfaceTypeResolverClasses = array_values(array_unique($interfaceTypeResolverClasses));
+        // Every InterfaceTypeResolver can be injected fields from many FieldInterfaceResolvers
+        // Make sure that this typeResolver implements all these FieldInterfaceResolver
+        // If not, the type does not fully satisfy the Interface
+        $interfaceTypeResolvers = array_map(
+            fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
+            $interfaceTypeResolverClasses
+        );
+        $implementedFieldInterfaceResolverClasses = $this->getAllImplementedFieldInterfaceResolverClasses();
+        return array_filter(
+            $interfaceTypeResolvers,
+            fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => array_diff(
+                $interfaceTypeResolver->getAllFieldInterfaceResolverClasses(),
+                $implementedFieldInterfaceResolverClasses
+            ) === [],
+        );
     }
 
     /**
