@@ -90,7 +90,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     {
         return array_map(
             fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
-            $this->getPartiallyImplementedInterfaceTypeResolvers()
+            $this->getPartiallyImplementedInterfaceTypeResolverClasses()
         );
     }
 
