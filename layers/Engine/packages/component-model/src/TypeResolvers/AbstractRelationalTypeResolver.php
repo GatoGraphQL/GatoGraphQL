@@ -2053,9 +2053,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     private function calculateAllImplementedFieldInterfaceResolvers(): array
     {
         return array_map(
-            function ($interfaceClass) {
-                return $this->instanceManager->getInstance($interfaceClass);
-            },
+            fn (string $fieldInterfaceResolverClass) => $this->instanceManager->getInstance($fieldInterfaceResolverClass),
             $this->getAllImplementedFieldInterfaceResolverClasses()
         );
     }
