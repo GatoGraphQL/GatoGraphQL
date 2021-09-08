@@ -1800,38 +1800,48 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $fieldResolver->getFieldNamesToResolve(),
                 $fieldResolver->getFieldNamesFromInterfaces()
             );
-
-            // Enable to exclude fieldNames, so they are not added to the schema.
-            $excludedFieldNames = [];
-            // Whenever:
-            // 1. Exclude the admin fields, if "Admin" Schema is not enabled
-            if (!ComponentConfiguration::enableAdminSchema()) {
-                $excludedFieldNames = $fieldResolver->getAdminFieldNames();
-            }
-            // 2. By filter hook
-            $excludedFieldNames = $this->hooksAPI->applyFilters(
-                Hooks::EXCLUDE_FIELDNAMES,
-                $excludedFieldNames,
-                $fieldResolver,
-                $fieldNames
-            );
-            if ($excludedFieldNames !== []) {
-                $fieldNames = array_values(array_diff(
-                    $fieldNames,
-                    $excludedFieldNames
-                ));
-            }
-
-            // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
-            // Also pass the Interfaces defining the field
-            $interfaceTypeResolverClasses = $fieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses();
-            $fieldNames = array_filter(
-                $fieldNames,
-                fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $interfaceTypeResolverClasses)
-            );
+            $fieldNames = $this->maybeExcludeFieldNamesFromSchema($fieldResolver, $fieldNames);
             $this->fieldNamesResolvedByFieldResolver[$fieldResolverClass] = $fieldNames;
         }
         return $this->fieldNamesResolvedByFieldResolver[$fieldResolverClass];
+    }
+
+    /**
+     * Call a hook to allow removing fields from the schema
+     *
+     * @return string[]
+     */
+    protected function maybeExcludeFieldNamesFromSchema(FieldResolverInterface $fieldResolver, array $fieldNames): array
+    {
+        // Enable to exclude fieldNames, so they are not added to the schema.
+        $excludedFieldNames = [];
+        // Whenever:
+        // 1. Exclude the admin fields, if "Admin" Schema is not enabled
+        if (!ComponentConfiguration::enableAdminSchema()) {
+            $excludedFieldNames = $fieldResolver->getAdminFieldNames();
+        }
+        // 2. By filter hook
+        $excludedFieldNames = $this->hooksAPI->applyFilters(
+            Hooks::EXCLUDE_FIELDNAMES,
+            $excludedFieldNames,
+            $fieldResolver,
+            $fieldNames
+        );
+        if ($excludedFieldNames !== []) {
+            $fieldNames = array_values(array_diff(
+                $fieldNames,
+                $excludedFieldNames
+            ));
+        }
+
+        // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
+        // Also pass the Interfaces defining the field
+        $interfaceTypeResolverClasses = $fieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses();
+        $fieldNames = array_filter(
+            $fieldNames,
+            fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $interfaceTypeResolverClasses)
+        );
+        return $fieldNames;
     }
 
     protected function getAllFieldResolvers(): array
