@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -23,4 +24,8 @@ interface TypeRegistryInterface
      * @return ObjectTypeResolverInterface[]
      */
     public function getObjectTypeResolvers(): array;
+    /**
+     * @return InterfaceTypeResolverInterface[]
+     */
+    public function getInterfaceTypeResolvers(): array;
 }
