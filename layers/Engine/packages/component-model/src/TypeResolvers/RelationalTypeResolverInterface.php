@@ -26,10 +26,6 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
      * @return FieldInterfaceResolverInterface[]
      */
     public function getAllImplementedFieldInterfaceResolvers(): array;
-    // /**
-    //  * @return string[]
-    //  */
-    // public function getAllImplementedInterfaceTypeResolverClasses(): array;
     /**
      * @return InterfaceTypeResolverInterface[]
      */

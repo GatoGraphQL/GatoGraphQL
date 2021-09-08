@@ -78,10 +78,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @var InterfaceTypeResolverInterface[]|null
      */
     protected ?array $interfaceTypeResolvers = null;
-    // /**
-    //  * @var string[]|null
-    //  */
-    // protected ?array $interfaceTypeResolverClasses = null;
 
     /**
      * @var array<string, array>
@@ -2083,25 +2079,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         return array_values(array_unique($fieldInterfaceResolverClasses));
     }
-
-    // /**
-    //  * @return InterfaceTypeResolverInterface[]
-    //  */
-    // final public function getAllImplementedInterfaceTypeResolvers(): array
-    // {
-    //     return array_map(
-    //         fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
-    //         $this->getAllImplementedInterfaceTypeResolverClasses()
-    //     );
-    // }
-
-    // final public function getAllImplementedInterfaceTypeResolverClasses(): array
-    // {
-    //     if ($this->interfaceTypeResolverClasses === null) {
-    //         $this->interfaceTypeResolverClasses = $this->calculateAllImplementedInterfaceTypeResolverClasses();
-    //     }
-    //     return $this->interfaceTypeResolverClasses;
-    // }
 
     /**
      * @return InterfaceTypeResolverInterface[]
