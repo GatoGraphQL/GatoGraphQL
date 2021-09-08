@@ -2081,6 +2081,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
+     * @return string[]
+     */
+    final public function getAllImplementedInterfaceTypeResolverClasses(): array
+    {
+        return array_map(
+            'get_class',
+            $this->getAllImplementedInterfaceTypeResolvers()
+        );
+    }
+
+    /**
      * @return InterfaceTypeResolverInterface[]
      */
     final public function getAllImplementedInterfaceTypeResolvers(): array
