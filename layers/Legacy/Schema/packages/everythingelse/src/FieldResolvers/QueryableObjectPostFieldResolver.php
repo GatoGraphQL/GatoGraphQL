@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\FieldResolvers;
 
-use PoP\API\APIUtils;
+use PoP\SiteBuilderAPI\Helpers\APIUtils;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
