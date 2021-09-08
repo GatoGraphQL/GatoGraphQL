@@ -25,7 +25,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         return CustomPostUnionTypeDataLoader::class;
     }
 
-    public function getSchemaTypeInterfaceResolverClass(): ?string
+    public function getSchemaTypeInterfaceTypeResolverClass(): ?string
     {
         return IsCustomPostFieldInterfaceResolver::class;
     }
