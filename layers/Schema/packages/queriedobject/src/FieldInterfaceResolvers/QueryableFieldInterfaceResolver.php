@@ -11,9 +11,11 @@ use PoPSchema\QueriedObject\TypeResolvers\Interface\QueryableInterfaceTypeResolv
 
 class QueryableFieldInterfaceResolver extends AbstractFieldInterfaceResolver
 {
-    function getInterfaceTypeResolverClass(): string
+    public function getClassesToAttachTo(): array
     {
-        return QueryableInterfaceTypeResolver::class;
+        return [
+            QueryableInterfaceTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToImplement(): array

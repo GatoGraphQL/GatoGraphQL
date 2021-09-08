@@ -20,9 +20,11 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
 {
     use WithLimitFieldArgResolverTrait;
 
-    function getInterfaceTypeResolverClass(): string
+    public function getClassesToAttachTo(): array
     {
-        return CommentableInterfaceTypeResolver::class;
+        return [
+            CommentableInterfaceTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToImplement(): array
