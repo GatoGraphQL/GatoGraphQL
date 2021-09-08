@@ -28,12 +28,12 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      * Keep a map of all namespaced type names to their resolver classes
      * @var array<string, array>|null
      */
-    protected ?array $namespacedTypeNameClasses = null;
+    protected ?array $namespacedObjectTypeNameClasses = null;
     /**
      * Keep a map of all namespaced field interface names to their resolver classes
      * @var array<string, array>|null
      */
-    protected ?array $namespacedFieldInterfaceNameClasses = null;
+    protected ?array $namespacedInterfaceTypeNameClasses = null;
     /**
      * Keep a map of all directives names to their resolver classes
      * @var array<string, array>|null
@@ -41,58 +41,58 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     protected ?array $directiveNameClasses = null;
 
     /**
-     * Lazy load and return the `$namespacedTypeNameClasses` array
+     * Lazy load and return the `$namespacedObjectTypeNameClasses` array
      *
      * @return array<string, array>
      */
-    protected function getNamespacedTypeNameClasses(): array
+    protected function getNamespacedObjectTypeNameClasses(): array
     {
-        if (is_null($this->namespacedTypeNameClasses)) {
-            $this->initNamespacedTypeNameClasses();
+        if (is_null($this->namespacedObjectTypeNameClasses)) {
+            $this->initNamespacedObjectTypeNameClasses();
         }
-        return (array)$this->namespacedTypeNameClasses;
+        return (array)$this->namespacedObjectTypeNameClasses;
     }
 
     /**
-     * Lazy load and return the `$namespacedTypeNameClasses` array
+     * Lazy load and return the `$namespacedInterfaceTypeNameClasses` array
      *
      * @return array<string, array>
      */
-    protected function getNamespacedFieldInterfaceNameClasses(): array
+    protected function getNamespacedInterfaceTypeNameClasses(): array
     {
-        if (is_null($this->namespacedFieldInterfaceNameClasses)) {
-            $this->initNamespacedFieldInterfaceNameClasses();
+        if (is_null($this->namespacedInterfaceTypeNameClasses)) {
+            $this->initNamespacedInterfaceTypeNameClasses();
         }
-        return (array)$this->namespacedFieldInterfaceNameClasses;
+        return (array)$this->namespacedInterfaceTypeNameClasses;
     }
 
     /**
-     * Initialize the `$namespacedTypeNameClasses` array
+     * Initialize the `$namespacedObjectTypeNameClasses` array
      */
-    protected function initNamespacedTypeNameClasses(): void
+    protected function initNamespacedObjectTypeNameClasses(): void
     {
         $typeRegistry = TypeRegistryFacade::getInstance();
         // For each class, obtain its namespacedTypeName
         $typeResolvers = $typeRegistry->getTypeResolvers();
-        $this->namespacedTypeNameClasses = [];
+        $this->namespacedObjectTypeNameClasses = [];
         foreach ($typeResolvers as $typeResolver) {
             $typeResolverNamespacedName = $typeResolver->getNamespacedTypeName();
-            $this->namespacedTypeNameClasses[$typeResolverNamespacedName] = $typeResolver::class;
+            $this->namespacedObjectTypeNameClasses[$typeResolverNamespacedName] = $typeResolver::class;
         }
     }
 
     /**
-     * Initialize the `$namespacedTypeNameClasses` array
+     * Initialize the `$namespacedObjectTypeNameClasses` array
      */
-    protected function initNamespacedFieldInterfaceNameClasses(): void
+    protected function initNamespacedInterfaceTypeNameClasses(): void
     {
         $fieldInterfaceRegistry = FieldInterfaceRegistryFacade::getInstance();
         // For each interface, obtain its namespacedInterfaceName
         $fieldInterfaceResolvers = $fieldInterfaceRegistry->getFieldInterfaceResolvers();
-        $this->namespacedFieldInterfaceNameClasses = [];
+        $this->namespacedInterfaceTypeNameClasses = [];
         foreach ($fieldInterfaceResolvers as $fieldInterfaceResolver) {
             $fieldInterfaceResolverNamespacedName = $fieldInterfaceResolver->getNamespacedInterfaceName();
-            $this->namespacedFieldInterfaceNameClasses[$fieldInterfaceResolverNamespacedName] = $fieldInterfaceResolver::class;
+            $this->namespacedInterfaceTypeNameClasses[$fieldInterfaceResolverNamespacedName] = $fieldInterfaceResolver::class;
         }
     }
 
@@ -138,7 +138,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function getEntriesFromField(string $selectedField, mixed $value): array
     {
-        $namespacedTypeNameClasses = $this->getNamespacedTypeNameClasses();
+        $namespacedObjectTypeNameClasses = $this->getNamespacedObjectTypeNameClasses();
         // The field is composed by the type namespaced name, and the field name, separated by "."
         // Extract these values
         $entry = explode(BlockConstants::TYPE_FIELD_SEPARATOR_FOR_DB, $selectedField);
@@ -147,15 +147,15 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         $maybeNamespacedFieldInterfaceName = $entry[0];
         $field = $entry[1];
         // From the type, obtain which resolver class processes it
-        if ($typeResolverClass = $namespacedTypeNameClasses[$maybeNamespacedTypeName] ?? null) {
+        if ($typeResolverClass = $namespacedObjectTypeNameClasses[$maybeNamespacedTypeName] ?? null) {
             // Check `getConfigurationEntries` to understand format of each entry
             return [
                 [$typeResolverClass, $field, $value],
             ];
         }
         // If it is an interface, add all the types implementing that interface!
-        $namespacedFieldInterfaceNameClasses = $this->getNamespacedFieldInterfaceNameClasses();
-        if ($fieldInterfaceResolverClass = $namespacedFieldInterfaceNameClasses[$maybeNamespacedFieldInterfaceName] ?? null) {
+        $namespacedInterfaceTypeNameClasses = $this->getNamespacedInterfaceTypeNameClasses();
+        if ($fieldInterfaceResolverClass = $namespacedInterfaceTypeNameClasses[$maybeNamespacedFieldInterfaceName] ?? null) {
             // Check `getConfigurationEntries` to understand format of each entry
             return [
                 [$fieldInterfaceResolverClass, $field, $value],

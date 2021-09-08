@@ -32,10 +32,10 @@ trait WithTypeFieldControlBlockTrait
         }
         // For each interface, obtain its namespacedInterfaceName
         $fieldInterfaceResolvers = $fieldInterfaceRegistry->getFieldInterfaceResolvers();
-        $namespacedFieldInterfaceNameClasses = [];
+        $namespacedInterfaceTypeNameClasses = [];
         foreach ($fieldInterfaceResolvers as $fieldInterfaceResolver) {
             $fieldInterfaceResolverNamespacedName = $fieldInterfaceResolver->getNamespacedInterfaceName();
-            $namespacedFieldInterfaceNameClasses[$fieldInterfaceResolverNamespacedName] = $fieldInterfaceResolver->getMaybeNamespacedInterfaceName();
+            $namespacedInterfaceTypeNameClasses[$fieldInterfaceResolverNamespacedName] = $fieldInterfaceResolver->getMaybeNamespacedInterfaceName();
         }
         $typeFieldsForPrint = [];
         foreach ($typeFields as $selectedField) {
@@ -47,7 +47,7 @@ trait WithTypeFieldControlBlockTrait
             // It can either be a type, or an interface. If not, return the same element
             $typeOrInterfaceName =
                 $namespacedTypeNameNames[$namespacedTypeOrInterfaceName]
-                ?? $namespacedFieldInterfaceNameClasses[$namespacedTypeOrInterfaceName]
+                ?? $namespacedInterfaceTypeNameClasses[$namespacedTypeOrInterfaceName]
                 ?? $namespacedTypeOrInterfaceName;
             /**
              * If $groupFieldsUnderTypeForPrint is true, combine all types under their shared typeName
