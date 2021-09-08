@@ -6,6 +6,7 @@ namespace PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators;
 
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
@@ -31,24 +32,23 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
 
     public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $mandatoryDirectivesForFields = [];
-        $fieldInterfaceResolverClasses = $relationalTypeResolver->getAllImplementedFieldInterfaceResolverClasses();
+        $interfaceTypeResolvers = $relationalTypeResolver->getAllImplementedInterfaceTypeResolvers();
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
             // Calculate all the interfaces that define this fieldName
-            $fieldInterfaceResolverClassesForField = array_values(array_filter(
-                $fieldInterfaceResolverClasses,
-                function ($fieldInterfaceResolverClass) use ($fieldName, $instanceManager): bool {
-                    /** @var FieldInterfaceResolverInterface */
-                    $fieldInterfaceResolver = $instanceManager->getInstance($fieldInterfaceResolverClass);
-                    return in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement());
-                }
+            $interfaceTypeResolversForField = array_values(array_filter(
+                $interfaceTypeResolvers,
+                fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => in_array($fieldName, $interfaceTypeResolver->getFieldNamesToImplement()),
             ));
+            $interfaceTypeResolverClassesForField = array_map(
+                'get_class',
+                $interfaceTypeResolversForField
+            );
             foreach (
                 $this->getEntries(
                     $relationalTypeResolver,
-                    $fieldInterfaceResolverClassesForField,
+                    $interfaceTypeResolverClassesForField,
                     $fieldName
                 ) as $entry
             ) {
