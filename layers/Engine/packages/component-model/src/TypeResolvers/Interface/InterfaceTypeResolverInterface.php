@@ -9,6 +9,13 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 interface InterfaceTypeResolverInterface extends TypeResolverInterface
 {
     /**
+     * The list of the fieldNames to implement in the Interface,
+     * collected from all the injected FieldInterfaceResolvers
+     *
+     * @return string[]
+     */
+    public function getFieldNamesToImplement(): array;
+    /**
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the FieldResolverInterfaces
      * 

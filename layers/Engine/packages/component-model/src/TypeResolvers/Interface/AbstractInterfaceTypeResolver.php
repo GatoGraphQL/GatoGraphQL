@@ -19,6 +19,36 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      * @var string[]|null
      */
     protected ?array $fieldInterfaceResolverClasses = null;
+    /**
+     * @var string[]|null
+     */
+    protected ?array $fieldNamesToImplement = null;
+
+    /**
+     * The list of the fieldNames to implement in the Interface,
+     * collected from all the injected FieldInterfaceResolvers
+     *
+     * @return string[]
+     */
+    final public function getFieldNamesToImplement(): array
+    {
+        if ($this->fieldNamesToImplement === null) {
+            $this->fieldNamesToImplement = $this->calculateFieldNamesToImplement();
+        }
+        return $this->fieldNamesToImplement;
+    }
+
+    private function calculateFieldNamesToImplement(): array
+    {
+        $fieldNamesToImplement = [];
+        foreach ($this->getAllFieldInterfaceResolvers() as $fieldInterfaceResolver) {
+            $fieldNamesToImplement = array_merge(
+                $fieldNamesToImplement,
+                $fieldInterfaceResolver->getFieldNamesToImplement()
+            );
+        }
+        return array_values(array_unique($fieldNamesToImplement));
+    }
 
     /**
      * Produce an array of all the attached FieldResolverInterfaces
