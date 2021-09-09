@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\TypeResolverDecorators;
 
-use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDirectivesForDirectivesTrait;
+use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators\ConfigurableMandatoryDirectivesForDirectivesTypeResolverDecoratorTrait;
 
 trait ConfigurableAccessControlForDirectivesTypeResolverDecoratorTrait
@@ -27,7 +27,7 @@ trait ConfigurableAccessControlForDirectivesTypeResolverDecoratorTrait
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractRelationalTypeResolver::class,
+            AbstractObjectTypeResolver::class,
         ];
     }
 }

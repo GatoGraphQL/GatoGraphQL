@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators;
 
-use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolverDecorators\AbstractTypeResolverDecorator;
+use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators\ConfigurableMandatoryDirectivesForDirectivesTypeResolverDecoratorTrait;
 
 abstract class AbstractMandatoryDirectivesForDirectivesTypeResolverDecorator extends AbstractTypeResolverDecorator
@@ -18,7 +18,7 @@ abstract class AbstractMandatoryDirectivesForDirectivesTypeResolverDecorator ext
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractRelationalTypeResolver::class,
+            AbstractObjectTypeResolver::class,
         ];
     }
 }
