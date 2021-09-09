@@ -10,6 +10,14 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 interface TypeResolverDecoratorInterface extends AttachableExtensionInterface
 {
     /**
+     * The classes of the ObjectTypeResolvers this TypeResolverDecorator decorates.
+     * The list can contain both concrete and abstract classes (in which case all classes
+     * extending from them will be selected)
+     * 
+     * @return string[]
+     */
+    public function getObjectTypeResolverClassesToAttachTo(): array;
+    /**
      * Allow to disable the functionality
      */
     public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool;

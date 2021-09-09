@@ -24,7 +24,7 @@ trait ConfigurableAccessControlForDirectivesTypeResolverDecoratorTrait
     /**
      * Because the validation can be done on any directive applied to any typeResolver, then attach it to the base abstract class: AbstractRelationalTypeResolver::class
      */
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             AbstractRelationalTypeResolver::class,

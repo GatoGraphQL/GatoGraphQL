@@ -11,7 +11,7 @@ use PoPSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUser
 
 class GlobalValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolverDecorator extends AbstractValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolverDecorator
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             AbstractRelationalTypeResolver::class,
