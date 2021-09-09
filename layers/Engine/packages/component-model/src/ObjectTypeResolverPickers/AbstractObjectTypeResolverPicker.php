@@ -10,6 +10,11 @@ abstract class AbstractObjectTypeResolverPicker implements ObjectTypeResolverPic
 {
     use AttachableExtensionTrait;
 
+    final public function getClassesToAttachTo(): array
+    {
+        return $this->getUnionTypeResolverClassesToAttachTo();
+    }
+
     public function isIDOfType(string | int $resultItemID): bool
     {
         return true;
