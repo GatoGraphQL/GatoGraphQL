@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait GlobalDirectiveResolverTrait
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeOrInterfaceTypeResolverClassesToAttachTo(): array
     {
-        // Be attached to all typeResolvers
+        // Global: Be attached to all ObjectTypeResolvers
         return [
-            AbstractRelationalTypeResolver::class,
+            AbstractObjectTypeResolver::class,
         ];
     }
 
