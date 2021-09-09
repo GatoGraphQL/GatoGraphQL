@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateAccessControl\DirectiveResolvers;
 
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;
 
 class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpointDirectiveResolver
@@ -15,12 +15,12 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
         return 'validateIsUserLoggedIn';
     }
 
-    protected function getValidationCheckpointSet(RelationalTypeResolverInterface $relationalTypeResolver): array
+    protected function getValidationCheckpointSet(ObjectTypeResolverInterface $objectTypeResolver): array
     {
         return UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER;
     }
 
-    protected function getValidationFailedMessage(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): string
+    protected function getValidationFailedMessage(ObjectTypeResolverInterface $objectTypeResolver, array $failedDataFields): string
     {
         $errorMessage = $this->isValidatingDirective() ?
             $this->translationAPI->__('You must be logged in to access directives in field(s) \'%s\' for type \'%s\'', 'user-state') :
@@ -31,11 +31,11 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
                 $this->translationAPI->__('\', \''),
                 $failedDataFields
             ),
-            $relationalTypeResolver->getMaybeNamespacedTypeName()
+            $objectTypeResolver->getMaybeNamespacedTypeName()
         );
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string
     {
         return $this->translationAPI->__('It validates if the user is logged-in', 'component-model');
     }

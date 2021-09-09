@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\DirectiveResolvers;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
 
 class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveResolver
@@ -14,12 +14,12 @@ class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveR
         return 'disableAccess';
     }
 
-    protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    protected function validateCondition(ObjectTypeResolverInterface $objectTypeResolver): bool
     {
         return false;
     }
 
-    protected function getValidationFailedMessage(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): string
+    protected function getValidationFailedMessage(ObjectTypeResolverInterface $objectTypeResolver, array $failedDataFields): string
     {
         $errorMessage = $this->isValidatingDirective() ?
             $this->translationAPI->__('Access to directives in field(s) \'%s\' has been disabled', 'access-control') :
@@ -33,7 +33,7 @@ class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveR
         );
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string
     {
         return $this->translationAPI->__('It disables access to the field', 'access-control');
     }

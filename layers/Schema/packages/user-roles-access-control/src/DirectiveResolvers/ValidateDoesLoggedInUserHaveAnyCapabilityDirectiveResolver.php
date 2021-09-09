@@ -7,7 +7,7 @@ namespace PoPSchema\UserRolesAccessControl\DirectiveResolvers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
 
 class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends AbstractValidateConditionDirectiveResolver
@@ -17,7 +17,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         return 'validateDoesLoggedInUserHaveAnyCapability';
     }
 
-    protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    protected function validateCondition(ObjectTypeResolverInterface $objectTypeResolver): bool
     {
         $vars = ApplicationState::getVars();
         // If the user is not logged-in, then do nothing: directive `@validateIsUserLoggedIn` will already fail
@@ -32,7 +32,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         return !empty(array_intersect($capabilities, $userCapabilities));
     }
 
-    protected function getValidationFailedMessage(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): string
+    protected function getValidationFailedMessage(ObjectTypeResolverInterface $objectTypeResolver, array $failedDataFields): string
     {
         $capabilities = $this->directiveArgsForSchema['capabilities'];
         $isValidatingDirective = $this->isValidatingDirective();
@@ -55,15 +55,15 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
                 $this->translationAPI->__('\', \''),
                 $failedDataFields
             ),
-            $relationalTypeResolver->getMaybeNamespacedTypeName()
+            $objectTypeResolver->getMaybeNamespacedTypeName()
         );
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string
     {
         return $this->translationAPI->__('It validates if the user has any capability provided through directive argument \'capabilities\'', 'component-model');
     }
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $objectTypeResolver): array
     {
         return [
             [

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 trait GlobalDirectiveResolverTrait
 {
@@ -17,7 +17,7 @@ trait GlobalDirectiveResolverTrait
         ];
     }
 
-    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    public function isGlobal(ObjectTypeResolverInterface $objectTypeResolver): bool
     {
         return true;
     }

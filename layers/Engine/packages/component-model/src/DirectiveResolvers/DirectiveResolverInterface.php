@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 interface DirectiveResolverInterface extends AttachableExtensionInterface
 {
@@ -34,7 +34,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * Extract and validate the directive arguments
      */
     public function dissectAndValidateDirectiveForSchema(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         array &$fieldDirectiveFields,
         array &$variables,
         array &$schemaErrors,
@@ -48,7 +48,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * Enable the directiveResolver to validate the directive arguments in a custom way
      */
     public function validateDirectiveArgumentsForSchema(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $directiveName,
         array $directiveArgs,
         array &$schemaErrors,
@@ -76,7 +76,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * Indicate if the directiveResolver can process the directive with the given name and args
      */
     public function resolveCanProcess(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $directiveName,
         array $directiveArgs,
         string $field,
@@ -94,7 +94,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * Execute the directive
      */
     public function resolveDirective(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -119,26 +119,26 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * A directive can decide to not be added to the schema, eg: when it is repeated/implemented several times
      */
     public function skipAddingToSchemaDefinition(): bool;
-    public function getSchemaDefinitionForDirective(RelationalTypeResolverInterface $relationalTypeResolver): array;
+    public function getSchemaDefinitionForDirective(ObjectTypeResolverInterface $objectTypeResolver): array;
     /**
      * Define if to use the version to decide if to process the directive or not
      */
-    public function decideCanProcessBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool;
+    public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool;
     /**
      * The version of the directive, using semantic versioning
      */
-    public function getSchemaDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
-    public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool;
+    public function getSchemaDirectiveVersion(ObjectTypeResolverInterface $objectTypeResolver): ?string;
+    public function enableOrderedSchemaDirectiveArgs(ObjectTypeResolverInterface $objectTypeResolver): bool;
     /**
      * Indicate if the directive is global (i.e. it can be applied to all fields, for all typeResolvers)
      */
-    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool;
+    public function isGlobal(ObjectTypeResolverInterface $objectTypeResolver): bool;
 
     public function resolveSchemaValidationErrorDescriptions(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $directiveName,
         array $directiveArgs = []
     ): ?array;
-    public function resolveSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
-    public function getSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function resolveSchemaDirectiveWarningDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string;
+    public function getSchemaDirectiveDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string;
 }

@@ -11,7 +11,7 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 
 class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
@@ -26,15 +26,15 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
         return DirectiveTypes::INDEXING;
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string
     {
         return $this->translationAPI->__('Iterate all affected array items and execute the composed directives on them', 'component-model');
     }
 
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $objectTypeResolver): array
     {
         return array_merge(
-            parent::getSchemaDirectiveArgs($relationalTypeResolver),
+            parent::getSchemaDirectiveArgs($objectTypeResolver),
             [
                 [
                     SchemaDefinition::ARGNAME_NAME => 'if',
@@ -45,7 +45,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
         );
     }
 
-    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getSchemaDirectiveExpressions(ObjectTypeResolverInterface $objectTypeResolver): array
     {
         return [
             Expressions::NAME_KEY => $this->translationAPI->__('Key of the array element from the current iteration', 'component-model'),
@@ -56,7 +56,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
     /**
      * Iterate on all items from the array
      */
-    protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
+    protected function getArrayItems(array &$array, int | string $id, string $field, ObjectTypeResolverInterface $objectTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
     {
         if ($if = $this->directiveArgsForSchema['if'] ?? null) {
             // If it is a field, execute the function against all the values in the array
@@ -71,7 +71,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                     $this->addExpressionForResultItem($id, Expressions::NAME_KEY, $key, $messages);
                     $this->addExpressionForResultItem($id, Expressions::NAME_VALUE, $value, $messages);
                     $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
-                    $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $if, $variables, $expressions, $options);
+                    $resolvedValue = $objectTypeResolver->resolveValue($resultIDItems[(string)$id], $if, $variables, $expressions, $options);
                     // Merge the dbWarnings, if any
                     if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
                         $dbWarnings[$id] = array_merge(

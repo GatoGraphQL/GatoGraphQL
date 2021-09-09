@@ -8,7 +8,7 @@ use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterfa
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
 
@@ -51,7 +51,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
         return false;
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string
     {
         return sprintf(
             $this->translationAPI->__('Place the current object\'s data under expression `%s`, making it accessible to fields and directives through helper function `getPropertyFromSelf`', 'component-model'),
@@ -59,7 +59,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
         );
     }
 
-    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getSchemaDirectiveExpressions(ObjectTypeResolverInterface $objectTypeResolver): array
     {
         return [
             Expressions::NAME_SELF => $this->translationAPI->__('Object containing all properties for the current object, fetched either in the current or a previous iteration. These properties can be accessed through helper function `getSelfProp`', 'component-model'),
@@ -70,7 +70,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
      * Copy the data under the relational object into the current object
      */
     public function resolveDirective(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -92,7 +92,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
         array &$schemaTraces
     ): void {
         // The name of the variable is always set to "self", accessed as $self
-        $dbKey = $relationalTypeResolver->getTypeOutputName();
+        $dbKey = $objectTypeResolver->getTypeOutputName();
         foreach (array_keys($idsDataFields) as $id) {
             // Make an array of references, pointing to the position of the current object in arrays $dbItems and $previousDBItems;
             // It is extremeley important to make it by reference, so that when the 2 variables are updated later on during the current iteration,
