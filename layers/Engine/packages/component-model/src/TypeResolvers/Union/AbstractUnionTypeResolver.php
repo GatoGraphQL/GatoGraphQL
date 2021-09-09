@@ -377,7 +377,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     ): mixed {
         // Check that a typeResolver from this Union can process this resultItem, or return an arror
         $targetTypeResolver = $this->getTargetObjectTypeResolver($resultItem);
-        if (is_null($targetTypeResolver)) {
+        if ($targetTypeResolver === null) {
             return $this->getUnresolvedResultItemError($resultItem);
         }
         // Delegate to that typeResolver to obtain the value
