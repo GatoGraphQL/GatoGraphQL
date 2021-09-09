@@ -11,7 +11,7 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
@@ -24,7 +24,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
      */
     public const PROPERTY_SEPARATOR = '.';
 
-    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $objectTypeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return ComponentConfiguration::enablePassingExpressionsByArgInNestedDirectives() ? [
             [
@@ -48,7 +48,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         ] : [];
     }
 
-    public function getSchemaDirectiveExpressions(ObjectTypeResolverInterface $objectTypeResolver): array
+    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             Expressions::NAME_VALUE => sprintf(
@@ -67,7 +67,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
      * 3. Pack into the array, once again, and remove all temporary properties
      */
     public function resolveDirective(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -102,7 +102,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
          * Collect all ID => dataFields for the arrayItems
          */
         $arrayItemIdsProperties = [];
-        $dbKey = $objectTypeResolver->getTypeOutputName();
+        $dbKey = $relationalTypeResolver->getTypeOutputName();
         /**
          * Execute composed directive only if the validations do not fail
          */
@@ -112,7 +112,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         // By making the property "propertyName:key", the "key" can be extracted and passed under expression `%key%` to the function
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($objectTypeResolver, $field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
 
                 // Validate that the property exists
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
@@ -184,7 +184,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
 
                 // The value is an array. Unpack all the elements into their own property
                 $array = $value;
-                if ($arrayItems = $this->getArrayItems($array, $id, $field, $objectTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations)) {
+                if ($arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations)) {
                     $execute = true;
                     foreach ($arrayItems as $key => &$value) {
                         // Add into the $idsDataFields object for the array items
@@ -198,7 +198,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                             $fieldSkipOutputIfNull,
                             $fieldDirectives
                         );
-                        $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($objectTypeResolver, $arrayItemProperty);
+                        $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $arrayItemProperty);
                         // Place into the current object
                         $dbItems[(string)$id][$arrayItemPropertyOutputKey] = $value;
                         // Place it into list of fields to process
@@ -206,7 +206,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $arrayItemIdsProperties[(string)$id]['conditional'] = [];
 
-                    $this->addExpressionsForResultItem($objectTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+                    $this->addExpressionsForResultItem($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
                 }
             }
         }
@@ -229,7 +229,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
             // 2. Execute the composed directive pipeline on all arrayItems
             $nestedSchemaErrors = $nestedIDDBErrors = [];
             $nestedDirectivePipeline->resolveDirectivePipeline(
-                $objectTypeResolver,
+                $relationalTypeResolver,
                 $pipelineArrayItemIdsProperties, // Here we pass the properties to the array elements!
                 $directiveResolverInstances,
                 $resultIDItems,
@@ -276,7 +276,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
             // 3. Compose the array from the results for each array item
             foreach ($idsDataFields as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $field) {
-                    $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($objectTypeResolver, $field);
+                    $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
                     $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
                     $value = $isValueInDBItems ?
                         $dbItems[(string)$id][$fieldOutputKey] :
@@ -301,7 +301,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     // If there are errors, it will return null. Don't add the errors again
                     $arrayItemDBErrors = $arrayItemDBWarnings = $arrayItemDBDeprecations = [];
                     $array = $value;
-                    $arrayItems = $this->getArrayItems($array, $id, $field, $objectTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemDBErrors, $arrayItemDBWarnings, $arrayItemDBDeprecations);
+                    $arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemDBErrors, $arrayItemDBWarnings, $arrayItemDBDeprecations);
                     // The value is an array. Unpack all the elements into their own property
                     foreach ($arrayItems as $key => &$value) {
                         $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
@@ -313,7 +313,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                             $fieldDirectives
                         );
                         // Place the result of executing the function on the array item
-                        $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($objectTypeResolver, $arrayItemProperty);
+                        $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $arrayItemProperty);
                         $arrayItemValue = $dbItems[(string)$id][$arrayItemPropertyOutputKey];
                         // Remove this temporary property from $dbItems
                         unset($dbItems[(string)$id][$arrayItemPropertyOutputKey]);
@@ -334,7 +334,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                             continue;
                         }
                         // Place the result for the array in the original property
-                        $this->addProcessedItemBackToDBItems($objectTypeResolver, $dbItems, $dbErrors, $dbWarnings, $dbDeprecations, $dbNotices, $dbTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
+                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $dbErrors, $dbWarnings, $dbDeprecations, $dbNotices, $dbTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
                     }
                 }
             }
@@ -344,7 +344,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
      * Place the result for the array in the original property
      */
     protected function addProcessedItemBackToDBItems(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$dbItems,
         array &$dbErrors,
         array &$dbWarnings,
@@ -362,7 +362,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     /**
      * Return the items to iterate on
      */
-    abstract protected function getArrayItems(array &$array, int | string $id, string $field, ObjectTypeResolverInterface $objectTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array;
+    abstract protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array;
 
     /**
      * Create a property for storing the array item in the current object
@@ -381,7 +381,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     //     return explode(self::PROPERTY_SEPARATOR, $arrayItemProperty);
     // }
     protected function addExpressionsForResultItem(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         string $field,
         array &$resultIDItems,
@@ -401,9 +401,9 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         $appendExpressions = $this->directiveArgsForSchema['appendExpressions'] ?? [];
         if ($addExpressions || $appendExpressions) {
             // The expressions may need `$value`, so add it
-            $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($objectTypeResolver, $field);
+            $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
             $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
-            $dbKey = $objectTypeResolver->getTypeOutputName();
+            $dbKey = $relationalTypeResolver->getTypeOutputName();
             $value = $isValueInDBItems ?
                 $dbItems[(string)$id][$fieldOutputKey] :
                 $previousDBItems[$dbKey][(string)$id][$fieldOutputKey];
@@ -416,7 +416,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
             foreach ($addExpressions as $key => $value) {
                 // Evaluate the $value, since it may be a function
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
-                    $resolvedValue = $objectTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
+                    $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the dbWarnings, if any
                     if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
                         $dbWarnings[$id] = array_merge(
@@ -448,7 +448,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 $existingValue = $this->getExpressionForResultItem($id, (string) $key, $messages) ?? [];
                 // Evaluate the $value, since it may be a function
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
-                    $resolvedValue = $objectTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
+                    $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the dbWarnings, if any
                     if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
                         $dbWarnings[$id] = array_merge(

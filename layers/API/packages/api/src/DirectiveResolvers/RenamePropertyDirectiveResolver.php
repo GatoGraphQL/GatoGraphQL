@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\DirectiveResolvers;
 
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
 {
@@ -22,7 +22,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
         return DirectiveTypes::SCRIPTING;
     }
 
-    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Rename a property in the current object', 'component-model');
     }
@@ -31,7 +31,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
      * Rename a property from the current object
      */
     public function resolveDirective(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -54,7 +54,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
     ): void {
         // After duplicating the property, delete the original
         parent::resolveDirective(
-            $objectTypeResolver,
+            $relationalTypeResolver,
             $idsDataFields,
             $succeedingPipelineIDsDataFields,
             $succeedingPipelineDirectiveResolverInstances,
@@ -77,7 +77,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
         );
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($objectTypeResolver, $field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
                 unset($dbItems[(string)$id][$fieldOutputKey]);
             }
         }

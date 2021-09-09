@@ -8,7 +8,7 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 
@@ -35,12 +35,12 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
         return true;
     }
 
-    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Copy the data from a relational object (which is one level below) to the current object', 'component-model');
     }
 
-    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $objectTypeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             [
@@ -68,9 +68,9 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
     /**
      * Validate that the number of elements in the fields `copyToFields` and `copyFromFields` match one another
      */
-    public function validateDirectiveArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
+    public function validateDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
-        $directiveArgs = parent::validateDirectiveArgumentsForSchema($objectTypeResolver, $directiveName, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $directiveArgs = parent::validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
         if (isset($directiveArgs['copyToFields'])) {
             $copyToFields = $directiveArgs['copyToFields'];
@@ -105,7 +105,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
      * Copy the data under the relational object into the current object
      */
     public function resolveDirective(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
@@ -131,7 +131,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
         $keepRelationalIDs = $this->directiveArgsForSchema['keepRelationalIDs'];
 
         // From the typeResolver, obtain under what type the data for the current object is stored
-        $dbKey = $objectTypeResolver->getTypeOutputName();
+        $dbKey = $relationalTypeResolver->getTypeOutputName();
 
         // Copy the data from each of the relational object fields to the current object
         foreach ($idsDataFields as $id => $dataFields) {
@@ -157,7 +157,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                 $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
 
                 // Make sure the field is relational, and not a scalar or enum
-                $fieldTypeResolverClass = $objectTypeResolver->getFieldTypeResolverClass($relationalField);
+                $fieldTypeResolverClass = $relationalTypeResolver->getFieldTypeResolverClass($relationalField);
                 if (!SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],

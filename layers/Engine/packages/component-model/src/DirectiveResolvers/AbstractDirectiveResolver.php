@@ -26,7 +26,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -97,7 +97,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     final public function getClassesToAttachTo(): array
     {
-        return $this->getObjectTypeOrInterfaceTypeResolverClassesToAttachTo();
+        return $this->getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo();
     }
 
     /**
@@ -121,7 +121,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     }
 
     public function dissectAndValidateDirectiveForSchema(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array &$fieldDirectiveFields,
         array &$variables,
         array &$schemaErrors,
@@ -156,7 +156,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             foreach ($nestedFieldDirectives as $nestedFieldDirective) {
                 $nestedFieldDirectiveFields[$nestedFieldDirective] = $fieldDirectiveFields[$this->directive];
             }
-            $this->nestedDirectivePipelineData = $objectTypeResolver->resolveDirectivesIntoPipelineData(
+            $this->nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
                 $nestedFieldDirectives,
                 $nestedFieldDirectiveFields,
                 true,
@@ -214,7 +214,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $directiveSchemaDeprecations
         ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForSchema(
             $this,
-            $objectTypeResolver,
+            $relationalTypeResolver,
             $this->directive,
             $variables,
             $this->disableDynamicFieldsFromDirectiveArgs()
@@ -260,11 +260,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * By default, validate if there are deprecated fields
      */
-    public function validateDirectiveArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
+    public function validateDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
         if (
             $maybeDeprecation = $this->resolveSchemaDirectiveDeprecationDescription(
-                $objectTypeResolver,
+                $relationalTypeResolver,
                 $directiveName,
                 $directiveArgs
             )
@@ -278,7 +278,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     }
 
     public function dissectAndValidateDirectiveForResultItem(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         array &$variables,
         array &$expressions,
@@ -292,10 +292,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $directiveArgs,
             $nestedDBErrors,
             $nestedDBWarnings
-        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForResultItem($this, $objectTypeResolver, $resultItem, $this->directive, $variables, $expressions);
+        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForResultItem($this, $relationalTypeResolver, $resultItem, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
-        $resultItemID = $objectTypeResolver->getID($resultItem);
+        $resultItemID = $relationalTypeResolver->getID($resultItem);
         $this->directiveArgsForResultItems[$resultItemID] = $directiveArgs;
 
         // Store errors (if any)
@@ -318,7 +318,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         if (!$nestedDBErrors) {
             if (
                 $maybeErrors = $this->resolveDirectiveArgumentErrors(
-                    $objectTypeResolver,
+                    $relationalTypeResolver,
                     $directiveName,
                     $directiveArgs
                 )
@@ -352,7 +352,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * Define if to use the version to decide if to process the directive or not
      */
-    public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool
+    public function decideCanProcessBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return false;
     }
@@ -361,12 +361,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * By default, the directiveResolver instance can process the directive
      * This function can be overriden to force certain value on the directive args before it can be executed
      */
-    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
+    public function resolveCanProcess(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
     {
         /** Check if to validate the version */
         if (
             Environment::enableSemanticVersionConstraints() &&
-            $this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)
+            $this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)
         ) {
             /**
              * Please notice: we can get the fieldVersion directly from this instance,
@@ -375,7 +375,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
              * inside the schemaDefinition object.
              * If this directive is tagged with a version...
              */
-            if ($schemaDirectiveVersion = $this->getSchemaDirectiveVersion($objectTypeResolver)) {
+            if ($schemaDirectiveVersion = $this->getSchemaDirectiveVersion($relationalTypeResolver)) {
                 $vars = ApplicationState::getVars();
                 /**
                  * Get versionConstraint in this order:
@@ -408,11 +408,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     }
 
     public function resolveSchemaValidationErrorDescriptions(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs = []
     ): ?array {
-        $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($objectTypeResolver);
+        $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             /**
              * Validate mandatory values. If it produces errors, return immediately
@@ -468,7 +468,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                  */
                 if (
                     $maybeErrors = $this->resolveDirectiveArgumentErrors(
-                        $objectTypeResolver,
+                        $relationalTypeResolver,
                         $directiveName,
                         $directiveArgs
                     )
@@ -487,7 +487,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
         // Custom validations
         return $this->doResolveSchemaValidationErrorDescriptions(
-            $objectTypeResolver,
+            $relationalTypeResolver,
             $directiveName,
             $directiveArgs,
         );
@@ -497,7 +497,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Validate the constraints for the directive arguments
      */
     final protected function resolveDirectiveArgumentErrors(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs = []
     ): array {
@@ -505,7 +505,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
             if (
                 $maybeErrors = $this->validateDirectiveArgument(
-                    $objectTypeResolver,
+                    $relationalTypeResolver,
                     $directiveName,
                     $directiveArgName,
                     $directiveArgValue
@@ -524,7 +524,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Validate the constraints for a directive argument
      */
     protected function validateDirectiveArgument(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         string $directiveArgName,
         mixed $directiveArgValue
@@ -536,7 +536,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Custom validations. Function to override
      */
     protected function doResolveSchemaValidationErrorDescriptions(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs = []
     ): ?array {
@@ -609,25 +609,25 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return false;
     }
 
-    public function getSchemaDirectiveVersion(ObjectTypeResolverInterface $objectTypeResolver): ?string
+    public function getSchemaDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return null;
     }
 
-    public function enableOrderedSchemaDirectiveArgs(ObjectTypeResolverInterface $objectTypeResolver): bool
+    public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->enableOrderedSchemaDirectiveArgs($objectTypeResolver);
+            return $schemaDefinitionResolver->enableOrderedSchemaDirectiveArgs($relationalTypeResolver);
         }
         return true;
     }
 
-    public function getSchemaDirectiveArgs(ObjectTypeResolverInterface $objectTypeResolver): array
+    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaDirectiveArgs($objectTypeResolver);
+            return $schemaDefinitionResolver->getSchemaDirectiveArgs($relationalTypeResolver);
         }
         return [];
     }
@@ -642,12 +642,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * @return array<string, array>
      */
     protected function getFilteredSchemaDirectiveArgs(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         array $schemaDirectiveArgs
     ): array {
         $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
             $schemaDirectiveArgs,
-            !empty($this->getSchemaDirectiveVersion($objectTypeResolver))
+            !empty($this->getSchemaDirectiveVersion($relationalTypeResolver))
         );
 
         // Add the args under their name. Watch out: the name is mandatory!
@@ -662,9 +662,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return $schemaDirectiveArgsByName;
     }
 
-    public function resolveSchemaDirectiveDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $directiveName, array $directiveArgs = []): ?string
+    public function resolveSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): ?string
     {
-        $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($objectTypeResolver);
+        $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             if (
                 $maybeDeprecations = $this->getEnumFieldOrDirectiveArgumentDeprecations(
@@ -680,25 +680,25 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return null;
     }
 
-    public function getSchemaDirectiveWarningDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string
+    public function getSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaDirectiveWarningDescription($objectTypeResolver);
+            return $schemaDefinitionResolver->getSchemaDirectiveWarningDescription($relationalTypeResolver);
         }
         return null;
     }
 
-    public function getSchemaDirectiveDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string
+    public function getSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaDirectiveDeprecationDescription($objectTypeResolver);
+            return $schemaDefinitionResolver->getSchemaDirectiveDeprecationDescription($relationalTypeResolver);
         }
         return null;
     }
 
-    public function resolveSchemaDirectiveWarningDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string
+    public function resolveSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         if (Environment::enableSemanticVersionConstraints()) {
             /**
@@ -708,42 +708,42 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 /**
                  * If this fieldResolver doesn't have versioning, then it accepts everything
                  */
-                if (!$this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)) {
+                if (!$this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)) {
                     return sprintf(
                         $this->translationAPI->__('The DirectiveResolver used to process directive \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
                         $this->getDirectiveName(),
-                        $this->getSchemaDirectiveVersion($objectTypeResolver) ?? '',
+                        $this->getSchemaDirectiveVersion($relationalTypeResolver) ?? '',
                         $versionConstraint
                     );
                 }
             }
         }
-        return $this->getSchemaDirectiveWarningDescription($objectTypeResolver);
+        return $this->getSchemaDirectiveWarningDescription($relationalTypeResolver);
     }
 
-    public function getSchemaDirectiveExpressions(ObjectTypeResolverInterface $objectTypeResolver): array
+    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaDirectiveExpressions($objectTypeResolver);
+            return $schemaDefinitionResolver->getSchemaDirectiveExpressions($relationalTypeResolver);
         }
         return [];
     }
 
-    public function getSchemaDirectiveDescription(ObjectTypeResolverInterface $objectTypeResolver): ?string
+    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaDirectiveDescription($objectTypeResolver);
+            return $schemaDefinitionResolver->getSchemaDirectiveDescription($relationalTypeResolver);
         }
         return null;
     }
 
-    public function isGlobal(ObjectTypeResolverInterface $objectTypeResolver): bool
+    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->isGlobal($objectTypeResolver);
+            return $schemaDefinitionResolver->isGlobal($relationalTypeResolver);
         }
         return false;
     }
@@ -761,7 +761,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         // The one corresponding to the current stage is at the head. Take it out from there,
         // and keep passing down the rest of the array to the next stages
         list(
-            $objectTypeResolver,
+            $relationalTypeResolver,
             $pipelineIDsDataFields,
             $pipelineDirectiveResolverInstances,
             $resultIDItems,
@@ -791,7 +791,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
         // // 2. Validate operation
         // $this->validateDirective(
-        //     $objectTypeResolver,
+        //     $relationalTypeResolver,
         //     $idsDataFields,
         //     $pipelineIDsDataFields,
         //     $pipelineDirectiveResolverInstances,
@@ -821,7 +821,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             // catch it and add dbErrors
             try {
                 $this->resolveDirective(
-                    $objectTypeResolver,
+                    $relationalTypeResolver,
                     $idsDataFields,
                     $pipelineIDsDataFields,
                     $pipelineDirectiveResolverInstances,
@@ -849,7 +849,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $e->getMessage()
                 );
                 $this->processFailure(
-                    $objectTypeResolver,
+                    $relationalTypeResolver,
                     $failureMessage,
                     [],
                     $idsDataFields,
@@ -863,7 +863,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
         // 3. Re-create the payload from the modified variables
         return DirectivePipelineUtils::convertArgumentsToPayload(
-            $objectTypeResolver,
+            $relationalTypeResolver,
             $pipelineIDsDataFields,
             $pipelineDirectiveResolverInstances,
             $resultIDItems,
@@ -890,7 +890,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * or show an error and remove the fields from the directive pipeline for further execution
      */
     protected function processFailure(
-        ObjectTypeResolverInterface $objectTypeResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         string $failureMessage,
         array $failedFields,
         array &$idsDataFields,
@@ -932,7 +932,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $setFailingFieldResponseAsNull = ComponentConfiguration::setFailingFieldResponseAsNull();
         if ($setFailingFieldResponseAsNull) {
             $this->setIDsDataFieldsAsNull(
-                $objectTypeResolver,
+                $relationalTypeResolver,
                 $idsDataFieldsToRemove,
                 $dbItems
             );
@@ -993,7 +993,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Return the object implementing the schema definition for this DirectiveResolver.
      * By default, it is this same object
      */
-    protected function getSchemaDefinitionResolver(ObjectTypeResolverInterface $objectTypeResolver): SchemaDirectiveResolverInterface
+    protected function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): SchemaDirectiveResolverInterface
     {
         return $this;
     }
@@ -1008,10 +1008,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return false;
     }
 
-    public function getSchemaDefinitionForDirective(ObjectTypeResolverInterface $objectTypeResolver): array
+    public function getSchemaDefinitionForDirective(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         // First check if the value was cached
-        $key = $objectTypeResolver->getNamespacedTypeName();
+        $key = $relationalTypeResolver->getNamespacedTypeName();
         if (!isset($this->schemaDefinitionForDirectiveCache[$key])) {
             $directiveName = $this->getDirectiveName();
             $schemaDefinition = [
@@ -1024,20 +1024,20 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             if ($limitedToFields = $this->getFieldNamesToApplyTo()) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_LIMITED_TO_FIELDS] = $limitedToFields;
             }
-            $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver);
-            if ($description = $schemaDefinitionResolver->getSchemaDirectiveDescription($objectTypeResolver)) {
+            $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+            if ($description = $schemaDefinitionResolver->getSchemaDirectiveDescription($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
             }
-            if ($expressions = $schemaDefinitionResolver->getSchemaDirectiveExpressions($objectTypeResolver)) {
+            if ($expressions = $schemaDefinitionResolver->getSchemaDirectiveExpressions($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_EXPRESSIONS] = $expressions;
             }
-            if ($deprecationDescription = $schemaDefinitionResolver->getSchemaDirectiveDeprecationDescription($objectTypeResolver)) {
+            if ($deprecationDescription = $schemaDefinitionResolver->getSchemaDirectiveDeprecationDescription($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
                 $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
             }
-            if ($args = $schemaDefinitionResolver->getSchemaDirectiveArgs($objectTypeResolver)) {
+            if ($args = $schemaDefinitionResolver->getSchemaDirectiveArgs($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaDirectiveArgs(
-                    $objectTypeResolver,
+                    $relationalTypeResolver,
                     $args
                 );
             }
@@ -1049,7 +1049,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
              * it's really not their responsibility
              */
             if (Environment::enableSemanticVersionConstraints()) {
-                if ($version = $this->getSchemaDirectiveVersion($objectTypeResolver)) {
+                if ($version = $this->getSchemaDirectiveVersion($relationalTypeResolver)) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
                 }
             }

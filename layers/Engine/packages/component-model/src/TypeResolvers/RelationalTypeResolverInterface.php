@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 
 interface RelationalTypeResolverInterface extends TypeResolverInterface
