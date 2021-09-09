@@ -30,10 +30,6 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
      * @return string|int|array<string|int>
      */
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array;
-    /**
-     * @return array<string,DirectiveResolverInterface[]>
-     */
-    public function validateFieldArgumentsForSchema(string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array;
     public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void;
     public function fillResultItems(
         array $ids_data_fields,
@@ -56,11 +52,6 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
     public function resolveSchemaValidationErrorDescriptions(string $field, array &$variables = null): array;
     public function resolveSchemaValidationWarningDescriptions(string $field, array &$variables = null): array;
     public function resolveSchemaDeprecationDescriptions(string $field, array &$variables = null): array;
-    /**
-     * @return array<string,mixed>|null `null` if there are no fieldResolvers for the field
-     */
-    public function getSchemaFieldArgs(string $field): ?array;
-    public function enableOrderedSchemaFieldArgs(string $field): bool;
     public function getFieldTypeResolverClass(string $field): ?string;
     /**
      * @param array<string, mixed>|null $variables

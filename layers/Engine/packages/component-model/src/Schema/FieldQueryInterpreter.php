@@ -17,7 +17,9 @@ use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Union\UnionTypeResolverInterface;
 use PoP\FieldQuery\FeedbackMessageStoreInterface as UpstreamFeedbackMessageStoreInterface;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
@@ -431,60 +433,61 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      * Return `null` if there is no resolver for the field
      */
     public function extractFieldArguments(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         ?array $variables = null,
         ?array &$schemaErrors = null,
         ?array &$schemaWarnings = null,
     ): ?array {
         $variablesHash = $this->getVariablesHash($variables);
-        if (!array_key_exists($variablesHash, $this->extractedFieldArgumentsCache[get_class($relationalTypeResolver)][$field] ?? [])) {
+        $objectTypeResolverClass = get_class($objectTypeResolver);
+        if (!array_key_exists($variablesHash, $this->extractedFieldArgumentsCache[$objectTypeResolverClass][$field] ?? [])) {
             $fieldSchemaErrors = $fieldSchemaWarnings = [];
-            $this->extractedFieldArgumentsCache[get_class($relationalTypeResolver)][$field][$variablesHash] = $this->doExtractFieldArguments(
-                $relationalTypeResolver,
+            $this->extractedFieldArgumentsCache[$objectTypeResolverClass][$field][$variablesHash] = $this->doExtractFieldArguments(
+                $objectTypeResolver,
                 $field,
                 $variables,
                 $fieldSchemaErrors,
                 $fieldSchemaWarnings,
             );
-            $this->extractedFieldArgumentErrorsCache[get_class($relationalTypeResolver)][$field][$variablesHash] = $fieldSchemaErrors;
-            $this->extractedFieldArgumentWarningsCache[get_class($relationalTypeResolver)][$field][$variablesHash] = $fieldSchemaWarnings;
+            $this->extractedFieldArgumentErrorsCache[$objectTypeResolverClass][$field][$variablesHash] = $fieldSchemaErrors;
+            $this->extractedFieldArgumentWarningsCache[$objectTypeResolverClass][$field][$variablesHash] = $fieldSchemaWarnings;
         }
         // Integrate the errors/warnings too
         if ($schemaErrors !== null) {
             $schemaErrors = array_merge(
                 $schemaErrors,
-                $this->extractedFieldArgumentErrorsCache[get_class($relationalTypeResolver)][$field][$variablesHash]
+                $this->extractedFieldArgumentErrorsCache[$objectTypeResolverClass][$field][$variablesHash]
             );
         }
         if ($schemaWarnings !== null) {
             $schemaWarnings = array_merge(
                 $schemaWarnings,
-                $this->extractedFieldArgumentWarningsCache[get_class($relationalTypeResolver)][$field][$variablesHash]
+                $this->extractedFieldArgumentWarningsCache[$objectTypeResolverClass][$field][$variablesHash]
             );
         }
-        return $this->extractedFieldArgumentsCache[get_class($relationalTypeResolver)][$field][$variablesHash];
+        return $this->extractedFieldArgumentsCache[$objectTypeResolverClass][$field][$variablesHash];
     }
 
     protected function doExtractFieldArguments(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         ?array $variables,
         array &$schemaErrors,
         array &$schemaWarnings,
     ): ?array {
         // Iterate all the elements, and extract them into the array
-        $fieldOrDirectiveArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($relationalTypeResolver, $field);
+        $fieldOrDirectiveArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($objectTypeResolver, $field);
         if ($fieldOrDirectiveArgumentNameDefaultValues === null) {
             $schemaErrors[] = [
                 Tokens::PATH => [$field],
-                Tokens::MESSAGE => $this->getNoFieldErrorMessage($relationalTypeResolver, $field),
+                Tokens::MESSAGE => $this->getNoFieldErrorMessage($objectTypeResolver, $field),
             ];
             return null;
         }
         if ($fieldArgElems = QueryHelpers::getFieldArgElements($this->getFieldArgs($field))) {
-            $fieldArgumentNameTypes = $this->getFieldArgumentNameTypes($relationalTypeResolver, $field) ?? [];
-            $orderedFieldArgNamesEnabled = $relationalTypeResolver->enableOrderedSchemaFieldArgs($field);
+            $fieldArgumentNameTypes = $this->getFieldArgumentNameTypes($objectTypeResolver, $field) ?? [];
+            $orderedFieldArgNamesEnabled = $objectTypeResolver->enableOrderedSchemaFieldArgs($field);
             return $this->extractAndValidateFielOrDirectiveArguments(
                 $field,
                 $fieldArgElems,
@@ -501,12 +504,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldOrDirectiveArgumentNameDefaultValues;
     }
 
-    protected function getNoFieldErrorMessage(RelationalTypeResolverInterface $relationalTypeResolver, string $field): string
+    protected function getNoFieldErrorMessage(ObjectTypeResolverInterface $objectTypeResolver, string $field): string
     {
         return sprintf(
             $this->translationAPI->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
             $this->getFieldName($field),
-            $relationalTypeResolver->getMaybeNamespacedTypeName()
+            $objectTypeResolver->getMaybeNamespacedTypeName()
         );
     }
 
@@ -529,7 +532,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     public function extractFieldArgumentsForSchema(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         ?array $variables = null
     ): array {
@@ -539,7 +542,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $validAndResolvedField = $field;
         $fieldName = $this->getFieldName($field);
         $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
-            $relationalTypeResolver,
+            $objectTypeResolver,
             $field,
             $variables,
             $schemaErrors,
@@ -556,11 +559,11 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $schemaDeprecations,
             ];
         }
-        $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($relationalTypeResolver, $field, $fieldArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        if ($fieldArgs = $this->castAndValidateFieldArgumentsForSchema($relationalTypeResolver, $field, $fieldArgs, $schemaErrors, $schemaWarnings)) {
+        if ($fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $schemaErrors, $schemaWarnings)) {
             // Enable the typeResolver to add its own code validations
-            $fieldArgs = $relationalTypeResolver->validateFieldArgumentsForSchema($field, $fieldArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+            $fieldArgs = $objectTypeResolver->validateFieldArgumentsForSchema($field, $fieldArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         }
 
         // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
@@ -643,10 +646,19 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     protected function validateExtractedFieldOrDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldOrDirective, array $fieldOrDirectiveArgs, ?array $variables, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
+        // The UnionTypeResolver cannot validate, it needs to delegate to each targetObjectTypeResolver
+        // which will be done on ResultItem, not on Schema.
+        // This situation can only happen for Directive
+        // (which can receive RelationalType), not for Field (which receives ObjectType)
+        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
+            return $fieldOrDirectiveArgs;
+        }
+        /** @var ObjectTypeResolverInterface */
+        $objectTypeResolver = $relationalTypeResolver;
         if ($fieldOrDirectiveArgs) {
             foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
                 // Validate it
-                if ($maybeErrors = $this->resolveFieldArgumentValueErrorDescriptionsForSchema($relationalTypeResolver, $argValue, $variables)) {
+                if ($maybeErrors = $this->resolveFieldArgumentValueErrorDescriptionsForSchema($objectTypeResolver, $argValue, $variables)) {
                     foreach ($maybeErrors as $schemaError) {
                         array_unshift($schemaError[Tokens::PATH], $fieldOrDirective);
                         $this->prependPathOnNestedErrors($schemaError, $fieldOrDirective);
@@ -656,13 +668,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     $fieldOrDirectiveArgs[$argName] = null;
                 }
                 // Find warnings and deprecations
-                if ($maybeWarnings = $this->resolveFieldArgumentValueWarningsForSchema($relationalTypeResolver, $argValue, $variables)) {
+                if ($maybeWarnings = $this->resolveFieldArgumentValueWarningsForSchema($objectTypeResolver, $argValue, $variables)) {
                     foreach ($maybeWarnings as $schemaWarning) {
                         array_unshift($schemaWarning[Tokens::PATH], $fieldOrDirective);
                         $schemaWarnings[] = $schemaWarning;
                     }
                 }
-                if ($maybeDeprecations = $this->resolveFieldArgumentValueDeprecationsForSchema($relationalTypeResolver, $argValue, $variables)) {
+                if ($maybeDeprecations = $this->resolveFieldArgumentValueDeprecationsForSchema($objectTypeResolver, $argValue, $variables)) {
                     foreach ($maybeDeprecations as $schemaDeprecation) {
                         array_unshift($schemaDeprecation[Tokens::PATH], $fieldOrDirective);
                         $schemaDeprecations[] = $schemaDeprecation;
@@ -676,7 +688,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     public function extractFieldArgumentsForResultItem(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $field,
         ?array $variables,
@@ -686,18 +698,18 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $validAndResolvedField = $field;
         $fieldName = $this->getFieldName($field);
         $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
-            $relationalTypeResolver,
+            $objectTypeResolver,
             $field,
             $variables
         );
         // Only need to extract arguments if they have fields or arrays
         $fieldOutputKey = $this->getFieldOutputKey($field);
-        $fieldArgs = $this->extractFieldOrDirectiveArgumentsForResultItem($relationalTypeResolver, $resultItem, $fieldArgs, $fieldOutputKey, $variables, $expressions, $dbErrors);
+        $fieldArgs = $this->extractFieldOrDirectiveArgumentsForResultItem($objectTypeResolver, $resultItem, $fieldArgs, $fieldOutputKey, $variables, $expressions, $dbErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $resultItemDBErrors = $resultItemDBWarnings = [];
-        $fieldArgs = $this->castAndValidateFieldArgumentsForResultItem($relationalTypeResolver, $field, $fieldArgs, $resultItemDBErrors, $resultItemDBWarnings);
+        $fieldArgs = $this->castAndValidateFieldArgumentsForResultItem($objectTypeResolver, $field, $fieldArgs, $resultItemDBErrors, $resultItemDBWarnings);
         if ($resultItemDBErrors || $resultItemDBWarnings) {
-            $id = $relationalTypeResolver->getID($resultItem);
+            $id = $objectTypeResolver->getID($resultItem);
             if ($resultItemDBErrors) {
                 $dbErrors[(string)$id] = array_merge(
                     $dbErrors[(string)$id] ?? [],
@@ -843,18 +855,18 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     protected function castFieldArguments(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         array $fieldArgs,
         array &$failedCastingFieldArgErrorMessages,
         array &$schemaOrDBErrors,
         bool $forSchema
     ): ?array {
-        $fieldArgSchemaDefinition = $this->getFieldSchemaDefinitionArgs($relationalTypeResolver, $field);
+        $fieldArgSchemaDefinition = $this->getFieldSchemaDefinitionArgs($objectTypeResolver, $field);
         if ($fieldArgSchemaDefinition === null) {
             $schemaOrDBErrors[] = [
                 Tokens::PATH => [$field],
-                Tokens::MESSAGE => $this->getNoFieldErrorMessage($relationalTypeResolver, $field),
+                Tokens::MESSAGE => $this->getNoFieldErrorMessage($objectTypeResolver, $field),
             ];
             return null;
         }
@@ -1099,9 +1111,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrorMessages, $forSchema);
     }
 
-    protected function castFieldArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$schemaErrors): ?array
+    protected function castFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$schemaErrors): ?array
     {
-        return $this->castFieldArguments($relationalTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $schemaErrors, true);
+        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $schemaErrors, true);
     }
 
     protected function castDirectiveArgumentsForResultItem(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $directive, array $directiveArgs, array &$failedCastingDirectiveArgErrorMessages): array
@@ -1109,9 +1121,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directive, $directiveArgs, $failedCastingDirectiveArgErrorMessages, false);
     }
 
-    protected function castFieldArgumentsForResultItem(RelationalTypeResolverInterface $relationalTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$dbErrors): ?array
+    protected function castFieldArgumentsForResultItem(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$dbErrors): ?array
     {
-        return $this->castFieldArguments($relationalTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $dbErrors, false);
+        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $dbErrors, false);
     }
 
     protected function getDirectiveArgumentNameTypes(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -1160,12 +1172,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $directiveArgNameDefaultValues;
     }
 
-    protected function getFieldSchemaDefinitionArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?array
+    protected function getFieldSchemaDefinitionArgs(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
     {
-        if (!array_key_exists($field, $this->fieldSchemaDefinitionArgsCache[get_class($relationalTypeResolver)] ?? [])) {
-            $this->fieldSchemaDefinitionArgsCache[get_class($relationalTypeResolver)][$field] = $relationalTypeResolver->getSchemaFieldArgs($field);
+        $objectTypeResolverClass = get_class($objectTypeResolver);
+        if (!array_key_exists($field, $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass] ?? [])) {
+            $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field] = $objectTypeResolver->getSchemaFieldArgs($field);
         }
-        return $this->fieldSchemaDefinitionArgsCache[get_class($relationalTypeResolver)][$field];
+        return $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field];
     }
 
     protected function getDirectiveSchemaDefinitionArgs(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -1178,18 +1191,19 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->directiveSchemaDefinitionArgsCache[get_class($directiveResolver)][get_class($relationalTypeResolver)];
     }
 
-    protected function getFieldArgumentNameTypes(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?array
+    protected function getFieldArgumentNameTypes(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
     {
-        if (!array_key_exists($field, $this->fieldArgumentNameTypesCache[get_class($relationalTypeResolver)] ?? [])) {
-            $this->fieldArgumentNameTypesCache[get_class($relationalTypeResolver)][$field] = $this->doGetFieldArgumentNameTypes($relationalTypeResolver, $field);
+        $objectTypeResolverClass = get_class($objectTypeResolver);
+        if (!array_key_exists($field, $this->fieldArgumentNameTypesCache[$objectTypeResolverClass] ?? [])) {
+            $this->fieldArgumentNameTypesCache[$objectTypeResolverClass][$field] = $this->doGetFieldArgumentNameTypes($objectTypeResolver, $field);
         }
-        return $this->fieldArgumentNameTypesCache[get_class($relationalTypeResolver)][$field];
+        return $this->fieldArgumentNameTypesCache[$objectTypeResolverClass][$field];
     }
 
-    protected function doGetFieldArgumentNameTypes(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?array
+    protected function doGetFieldArgumentNameTypes(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
     {
         // Get the field argument types, to know to what type it will cast the value
-        $fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($relationalTypeResolver, $field);
+        $fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($objectTypeResolver, $field);
         if ($fieldSchemaDefinitionArgs === null) {
             return null;
         }
@@ -1200,18 +1214,19 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgNameTypes;
     }
 
-    protected function getFieldArgumentNameDefaultValues(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?array
+    protected function getFieldArgumentNameDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
     {
-        if (!array_key_exists($field, $this->fieldArgumentNameDefaultValuesCache[get_class($relationalTypeResolver)] ?? [])) {
-            $this->fieldArgumentNameDefaultValuesCache[get_class($relationalTypeResolver)][$field] = $this->doGetFieldArgumentNameDefaultValues($relationalTypeResolver, $field);
+        $objectTypeResolverClass = get_class($objectTypeResolver);
+        if (!array_key_exists($field, $this->fieldArgumentNameDefaultValuesCache[$objectTypeResolverClass] ?? [])) {
+            $this->fieldArgumentNameDefaultValuesCache[$objectTypeResolverClass][$field] = $this->doGetFieldArgumentNameDefaultValues($objectTypeResolver, $field);
         }
-        return $this->fieldArgumentNameDefaultValuesCache[get_class($relationalTypeResolver)][$field];
+        return $this->fieldArgumentNameDefaultValuesCache[$objectTypeResolverClass][$field];
     }
 
-    protected function doGetFieldArgumentNameDefaultValues(RelationalTypeResolverInterface $relationalTypeResolver, string $field): ?array
+    protected function doGetFieldArgumentNameDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
     {
         // Get the field arguments which have a default value
-        $fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($relationalTypeResolver, $field);
+        $fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($objectTypeResolver, $field);
         if ($fieldSchemaDefinitionArgs === null) {
             return null;
         }
@@ -1238,12 +1253,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $directiveArgs;
     }
 
-    protected function castAndValidateFieldArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): ?array
+    protected function castAndValidateFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): ?array
     {
         if ($fieldArgs) {
             $failedCastingFieldArgErrorMessages = [];
             $castingSchemaErrors = [];
-            $castedFieldArgs = $this->castFieldArgumentsForSchema($relationalTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $castingSchemaErrors);
+            $castedFieldArgs = $this->castFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $castingSchemaErrors);
             if ($castingSchemaErrors) {
                 $schemaErrors = array_merge(
                     $schemaErrors,
@@ -1251,7 +1266,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 );
                 return null;
             }
-            return $this->validateAndFilterCastFieldArguments($relationalTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
+            return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
         }
         return $fieldArgs;
     }
@@ -1263,11 +1278,11 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrorMessages, $fieldDirective, $directiveArgs, $dbErrors, $dbWarnings);
     }
 
-    protected function castAndValidateFieldArgumentsForResultItem(RelationalTypeResolverInterface $relationalTypeResolver, string $field, array $fieldArgs, array &$dbErrors, array &$dbWarnings): ?array
+    protected function castAndValidateFieldArgumentsForResultItem(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$dbErrors, array &$dbWarnings): ?array
     {
         $failedCastingFieldArgErrorMessages = [];
         $castingDBErrors = [];
-        $castedFieldArgs = $this->castFieldArgumentsForResultItem($relationalTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $castingDBErrors);
+        $castedFieldArgs = $this->castFieldArgumentsForResultItem($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $castingDBErrors);
         if ($castingDBErrors) {
             $dbErrors = array_merge(
                 $dbErrors,
@@ -1275,7 +1290,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             );
             return null;
         }
-        return $this->validateAndFilterCastFieldArguments($relationalTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $dbErrors, $dbWarnings);
+        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $dbErrors, $dbWarnings);
     }
 
     protected function validateAndFilterCastDirectiveArguments(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrorMessages, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings): array
@@ -1356,7 +1371,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     protected function validateAndFilterCastFieldArguments(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         array $castedFieldArgs,
         array &$failedCastingFieldArgErrorMessages,
         string $field,
@@ -1367,8 +1382,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         // If any casting can't be done, show an error
         if ($failedCastingFieldArgErrorMessages) {
             $fieldName = $this->getFieldName($field);
-            $fieldArgNameTypes = $this->getFieldArgumentNameTypes($relationalTypeResolver, $field) ?? [];
-            $fieldArgNameSchemaDefinition = $this->getFieldSchemaDefinitionArgs($relationalTypeResolver, $field) ?? [];
+            $fieldArgNameTypes = $this->getFieldArgumentNameTypes($objectTypeResolver, $field) ?? [];
+            $fieldArgNameSchemaDefinition = $this->getFieldSchemaDefinitionArgs($objectTypeResolver, $field) ?? [];
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingFieldArgErrorMessages) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
@@ -1632,12 +1647,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgValue;
     }
 
-    protected function resolveFieldArgumentValueErrorDescriptionsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, mixed $fieldArgValue, ?array $variables): array
+    protected function resolveFieldArgumentValueErrorDescriptionsForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
     {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
-            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($relationalTypeResolver, $variables) {
-                return $this->resolveFieldArgumentValueErrorDescriptionsForSchema($relationalTypeResolver, $fieldArgValueElem, $variables);
+            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables) {
+                return $this->resolveFieldArgumentValueErrorDescriptionsForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
             }, $fieldArgValue)));
         }
 
@@ -1687,41 +1702,41 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             // }
 
             // If it reached here, it's a field! Validate it, or show an error
-            return $relationalTypeResolver->resolveSchemaValidationErrorDescriptions($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveSchemaValidationErrorDescriptions($fieldArgValue, $variables);
         }
 
         return [];
     }
 
-    protected function resolveFieldArgumentValueWarningsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, mixed $fieldArgValue, ?array $variables): array
+    protected function resolveFieldArgumentValueWarningsForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
     {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
-            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($relationalTypeResolver, $variables) {
-                return $this->resolveFieldArgumentValueWarningsForSchema($relationalTypeResolver, $fieldArgValueElem, $variables);
+            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables) {
+                return $this->resolveFieldArgumentValueWarningsForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
             }, $fieldArgValue)));
         }
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            return $relationalTypeResolver->resolveSchemaValidationWarningDescriptions($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveSchemaValidationWarningDescriptions($fieldArgValue, $variables);
         }
 
         return [];
     }
 
-    protected function resolveFieldArgumentValueDeprecationsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, mixed $fieldArgValue, ?array $variables): array
+    protected function resolveFieldArgumentValueDeprecationsForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
     {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
-            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($relationalTypeResolver, $variables) {
-                return $this->resolveFieldArgumentValueDeprecationsForSchema($relationalTypeResolver, $fieldArgValueElem, $variables);
+            return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables) {
+                return $this->resolveFieldArgumentValueDeprecationsForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
             }, $fieldArgValue)));
         }
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            return $relationalTypeResolver->resolveSchemaDeprecationDescriptions($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveSchemaDeprecationDescriptions($fieldArgValue, $variables);
         }
 
         return [];

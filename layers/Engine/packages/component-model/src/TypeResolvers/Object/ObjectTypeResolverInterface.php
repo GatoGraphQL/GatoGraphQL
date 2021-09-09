@@ -9,4 +9,10 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
 {
     public function getSelfFieldTypeResolverClass(): string;
+    public function validateFieldArgumentsForSchema(string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array;
+    /**
+     * @return array<string,mixed>|null `null` if there are no fieldResolvers for the field
+     */
+    public function getSchemaFieldArgs(string $field): ?array;
+    public function enableOrderedSchemaFieldArgs(string $field): bool;
 }

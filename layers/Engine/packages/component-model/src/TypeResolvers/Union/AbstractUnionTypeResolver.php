@@ -430,10 +430,38 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     }
 
     /**
-     * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used (that depends on each resultItem), it can't resolve error validation
+     * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
+     * (that depends on each resultItem), it can't resolve this functionality
      */
     public function resolveSchemaValidationErrorDescriptions(string $field, array &$variables = null): array
     {
         return [];
+    }
+
+    /**
+     * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
+     * (that depends on each resultItem), it can't resolve this functionality
+     */
+    public function resolveSchemaValidationWarningDescriptions(string $field, array &$variables = null): array
+    {
+        return [];
+    }
+
+    /**
+     * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
+     * (that depends on each resultItem), it can't resolve this functionality
+     */
+    public function resolveSchemaDeprecationDescriptions(string $field, array &$variables = null): array
+    {
+        return [];
+    }
+
+    /**
+     * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
+     * (that depends on each resultItem), it can't resolve this functionality
+     */
+    public function getFieldTypeResolverClass(string $field): ?string
+    {
+        return null;
     }
 }
