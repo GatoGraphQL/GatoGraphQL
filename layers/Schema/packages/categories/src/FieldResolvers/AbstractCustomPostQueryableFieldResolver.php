@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoPSchema\Categories\ComponentConfiguration;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
@@ -31,16 +31,16 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'categoryCount' => SchemaDefinition::TYPE_INT,
             'categoryNames' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'categoryCount'
@@ -49,31 +49,31 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
             'categoryNames'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'categories' => $this->translationAPI->__('Categories added to this custom post', 'pop-categories'),
             'categoryCount' => $this->translationAPI->__('Number of categories added to this custom post', 'pop-categories'),
             'categoryNames' => $this->translationAPI->__('Names of the categories added to this custom post', 'pop-categories'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'categories' => [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES],
             'categoryCount' => [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT],
             'categoryNames' => [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES],
-            default => parent::getFieldDataFilteringModule($relationalTypeResolver, $fieldName),
+            default => parent::getFieldDataFilteringModule($objectTypeResolver, $fieldName),
         };
     }
 
-    protected function getFieldDataFilteringDefaultValues(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'categories':
@@ -86,7 +86,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
                     $limitFilterInputName => ComponentConfiguration::getCategoryListDefaultLimit(),
                 ];
         }
-        return parent::getFieldDataFilteringDefaultValues($relationalTypeResolver, $fieldName);
+        return parent::getFieldDataFilteringDefaultValues($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -95,13 +95,13 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
      * @return string[] Error messages
      */
     public function validateFieldArgument(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
         $errors = parent::validateFieldArgument(
-            $relationalTypeResolver,
+            $objectTypeResolver,
             $fieldName,
             $fieldArgName,
             $fieldArgValue,
@@ -133,7 +133,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -143,26 +143,26 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
     ): mixed {
         $categoryTypeAPI = $this->getCategoryTypeAPI();
         $post = $resultItem;
-        $query = $this->convertFieldArgsToFilteringQueryArgs($relationalTypeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'categories':
-                return $categoryTypeAPI->getCustomPostCategories($relationalTypeResolver->getID($post), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $categoryTypeAPI->getCustomPostCategories($objectTypeResolver->getID($post), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'categoryNames':
-                return $categoryTypeAPI->getCustomPostCategories($relationalTypeResolver->getID($post), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
+                return $categoryTypeAPI->getCustomPostCategories($objectTypeResolver->getID($post), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'categoryCount':
-                return $categoryTypeAPI->getCustomPostCategoryCount($relationalTypeResolver->getID($post), $query);
+                return $categoryTypeAPI->getCustomPostCategoryCount($objectTypeResolver->getID($post), $query);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'categories':
                 return $this->getCategoryTypeResolverClass();
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

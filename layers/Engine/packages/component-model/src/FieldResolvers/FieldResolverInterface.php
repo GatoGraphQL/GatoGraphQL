@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 interface FieldResolverInterface extends AttachableExtensionInterface
 {
@@ -45,13 +45,13 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      * eg: because they are used only by the application, and must not
      * be exposed to the user (eg: "accessControlLists")
      */
-    public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool;
-    public function getSchemaDefinitionForField(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): array;
-    public function getSchemaFieldVersion(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string;
+    public function skipAddingToSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
+    public function getSchemaDefinitionForField(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
+    public function getSchemaFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
     /**
      * Indicate if the fields are global (i.e. they apply to all typeResolvers)
      */
-    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool;
+    public function isGlobal(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
 
     /**
      * Indicates if the fieldResolver can process this combination of fieldName and fieldArgs
@@ -59,9 +59,9 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      *
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcess(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): bool;
-    public function resolveSchemaValidationErrorDescriptions(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
-    public function resolveSchemaValidationDeprecationDescriptions(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
+    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): bool;
+    public function resolveSchemaValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
+    public function resolveSchemaValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -69,7 +69,7 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -82,27 +82,27 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      * on on the resultItem (`true`)
      */
     public function validateMutationOnResultItem(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): bool;
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string;
-    public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string;
-    public function resolveSchemaValidationWarningDescriptions(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
+    public function resolveFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
+    public function resolveSchemaValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
     /**
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessResultItem(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
     ): bool;
-    public function enableOrderedSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool;
+    public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
     /**
      * @param array<string, mixed> $fieldArgs
      */
     public function getValidationErrorDescriptions(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -110,5 +110,5 @@ interface FieldResolverInterface extends AttachableExtensionInterface
     /**
      * Define if to use the version to decide if to process the field or not
      */
-    public function decideCanProcessBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool;
+    public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool;
 }

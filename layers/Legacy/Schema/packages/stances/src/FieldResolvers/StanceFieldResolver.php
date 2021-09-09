@@ -7,7 +7,7 @@ namespace PoPSchema\Stances\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
@@ -39,7 +39,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'categories' => SchemaDefinition::TYPE_ID,
@@ -50,10 +50,10 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
             'content' => SchemaDefinition::TYPE_STRING,
             'hasStanceTarget' => SchemaDefinition::TYPE_BOOL,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'content',
@@ -63,11 +63,11 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
             'catSlugs'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'categories' => $this->translationAPI->__('', ''),
@@ -79,7 +79,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
             'stancetarget' => $this->translationAPI->__('', ''),
             'hasStanceTarget' => $this->translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -89,7 +89,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -103,7 +103,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'categories':
                 return $taxonomyapi->getCustomPostTaxonomyTerms(
-                    $relationalTypeResolver->getID($stance),
+                    $objectTypeResolver->getID($stance),
                     POP_USERSTANCE_TAXONOMY_STANCE,
                     [
                         QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
@@ -112,7 +112,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
 
             case 'catSlugs':
                 return $taxonomyapi->getCustomPostTaxonomyTerms(
-                    $relationalTypeResolver->getID($stance),
+                    $objectTypeResolver->getID($stance),
                     POP_USERSTANCE_TAXONOMY_STANCE,
                     [
                         QueryOptions::RETURN_TYPE => ReturnTypes::SLUGS,
@@ -121,7 +121,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
 
             case 'stance':
                 // The stance is the category
-                return $relationalTypeResolver->resolveValue($resultItem, 'mainCategory', $variables, $expressions, $options);
+                return $objectTypeResolver->resolveValue($resultItem, 'mainCategory', $variables, $expressions, $options);
 
             // The Stance has no title, so return the excerpt instead.
             // Needed for when adding a comment on the Stance, where it will say: Add comment for...
@@ -138,23 +138,23 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
                 return $value;
 
             case 'stancetarget':
-                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($relationalTypeResolver->getID($stance), GD_METAKEY_POST_STANCETARGET, true);
+                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($stance), GD_METAKEY_POST_STANCETARGET, true);
 
             case 'hasStanceTarget':
                 // Cannot use !is_null because getCustomPostMeta returns "" when there's no entry, instead of null
-                return $relationalTypeResolver->resolveValue($resultItem, 'stancetarget', $variables, $expressions, $options);
+                return $objectTypeResolver->resolveValue($resultItem, 'stancetarget', $variables, $expressions, $options);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'stancetarget':
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

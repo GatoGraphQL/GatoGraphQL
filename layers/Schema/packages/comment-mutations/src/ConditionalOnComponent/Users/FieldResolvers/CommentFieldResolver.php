@@ -7,7 +7,7 @@ namespace PoPSchema\CommentMutations\ConditionalOnComponent\Users\FieldResolvers
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -77,7 +77,7 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
      * Check there is an author. Otherwise, let the upstream resolve it
      */
     public function resolveCanProcessResultItem(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -94,7 +94,7 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -115,6 +115,6 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
                 return $this->userTypeAPI->getUserEmail($commentUserID);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

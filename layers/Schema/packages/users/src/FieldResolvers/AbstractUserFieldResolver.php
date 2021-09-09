@@ -11,7 +11,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -68,16 +68,16 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'userCount' => SchemaDefinition::TYPE_INT,
             'userCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'userCount',
@@ -86,11 +86,11 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
             'users',
             'usersForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'users' => $this->translationAPI->__('Users', 'pop-users'),
@@ -98,21 +98,21 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
             'usersForAdmin' => $this->translationAPI->__('[Unrestricted] Users', 'pop-users'),
             'userCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of users', 'pop-users'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'users' => [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_USERS],
             'userCount' => [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_USERCOUNT],
             'usersForAdmin' => [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUSERS],
             'userCountForAdmin' => [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUSERCOUNT],
-            default => parent::getFieldDataFilteringModule($relationalTypeResolver, $fieldName),
+            default => parent::getFieldDataFilteringModule($objectTypeResolver, $fieldName),
         };
     }
 
-    protected function getFieldDataFilteringDefaultValues(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'users':
@@ -125,7 +125,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
                     $limitFilterInputName => ComponentConfiguration::getUserListDefaultLimit(),
                 ];
         }
-        return parent::getFieldDataFilteringDefaultValues($relationalTypeResolver, $fieldName);
+        return parent::getFieldDataFilteringDefaultValues($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -134,13 +134,13 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
      * @return string[] Error messages
      */
     public function validateFieldArgument(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
         $errors = parent::validateFieldArgument(
-            $relationalTypeResolver,
+            $objectTypeResolver,
             $fieldName,
             $fieldArgName,
             $fieldArgValue,
@@ -172,7 +172,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -180,7 +180,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($relationalTypeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'users':
             case 'usersForAdmin':
@@ -191,10 +191,10 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
                 return $this->userTypeAPI->getUserCount($query);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'users':
@@ -202,6 +202,6 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
                 return UserTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

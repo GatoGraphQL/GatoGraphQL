@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\QueryRootTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\MutationRootTypeResolver;
@@ -48,16 +48,16 @@ class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataField
         );
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'queryRoot' => $this->translationAPI->__('Get the Query Root type', 'graphql-server'),
             'mutationRoot' => $this->translationAPI->__('Get the Mutation Root type', 'graphql-server'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'queryRoot':
@@ -66,6 +66,6 @@ class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataField
                 return MutationRootTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

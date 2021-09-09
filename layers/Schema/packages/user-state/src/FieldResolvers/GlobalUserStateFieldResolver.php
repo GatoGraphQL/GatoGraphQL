@@ -6,7 +6,7 @@ namespace PoPSchema\UserState\FieldResolvers;
 
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoPSchema\UserState\FieldResolvers\AbstractGlobalUserStateFieldResolver;
 
 class GlobalUserStateFieldResolver extends AbstractGlobalUserStateFieldResolver
@@ -18,20 +18,20 @@ class GlobalUserStateFieldResolver extends AbstractGlobalUserStateFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'loggedInUserID' => SchemaDefinition::TYPE_ID,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'loggedInUserID' => $this->translationAPI->__('The logged-in user\'s ID', 'user-state'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -41,7 +41,7 @@ class GlobalUserStateFieldResolver extends AbstractGlobalUserStateFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -55,6 +55,6 @@ class GlobalUserStateFieldResolver extends AbstractGlobalUserStateFieldResolver
                 return $vars['global-userstate']['current-user-id'];
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

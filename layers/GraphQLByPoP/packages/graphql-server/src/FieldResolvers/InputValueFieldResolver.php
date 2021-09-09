@@ -9,7 +9,7 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\TypeTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 class InputValueFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -30,17 +30,17 @@ class InputValueFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'name' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
             'defaultValue' => SchemaDefinition::TYPE_STRING,
-            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'name',
@@ -49,10 +49,10 @@ class InputValueFieldResolver extends AbstractDBDataFieldResolver
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'name' => $this->translationAPI->__('Input value\'s name as defined by the GraphQL spec', 'graphql-server'),
@@ -60,7 +60,7 @@ class InputValueFieldResolver extends AbstractDBDataFieldResolver
             'type' => $this->translationAPI->__('Type of the input value', 'graphql-server'),
             'defaultValue' => $this->translationAPI->__('Default value of the input value', 'graphql-server'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -70,7 +70,7 @@ class InputValueFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -90,15 +90,15 @@ class InputValueFieldResolver extends AbstractDBDataFieldResolver
                 return $inputValue->getDefaultValue();
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'type':
                 return TypeTypeResolver::class;
         }
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

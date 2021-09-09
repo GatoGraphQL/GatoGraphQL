@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 class GlobalFieldResolver extends AbstractGlobalFieldResolver
 {
@@ -19,15 +19,15 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'isUserLoggedIn' => SchemaDefinition::TYPE_BOOL,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'isUserLoggedIn',
@@ -35,15 +35,15 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'isUserLoggedIn' => $this->translationAPI->__('Is the user logged-in?', 'user-state'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -53,7 +53,7 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -67,6 +67,6 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
                 return $vars['global-userstate']['is-user-logged-in'];
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

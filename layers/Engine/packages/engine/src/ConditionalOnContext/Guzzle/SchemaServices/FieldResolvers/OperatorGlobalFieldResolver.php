@@ -7,7 +7,7 @@ namespace PoP\Engine\ConditionalOnContext\Guzzle\SchemaServices\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\GuzzleHelpers\GuzzleHelpers;
 
 class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
@@ -20,35 +20,35 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'getJSON' => SchemaDefinition::TYPE_OBJECT,
             'getAsyncJSON' => SchemaDefinition::TYPE_OBJECT,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'getAsyncJSON' => SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'getJSON' => $this->translationAPI->__('Retrieve data from URL and decode it as a JSON object', 'pop-component-model'),
             'getAsyncJSON' => $this->translationAPI->__('Retrieve data from multiple URL asynchronously, and decode each of them as a JSON object', 'pop-component-model'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'getJSON':
                 return array_merge(
@@ -87,7 +87,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -101,6 +101,6 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             case 'getAsyncJSON':
                 return GuzzleHelpers::requestAsyncJSON($fieldArgs['urls'], [], 'GET');
         }
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

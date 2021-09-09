@@ -10,39 +10,39 @@ use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver implements QueryableFieldSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
 
-    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         /** @var QueryableFieldSchemaDefinitionResolverInterface */
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver, $fieldName);
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldDataFilteringModule($relationalTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getFieldDataFilteringModule($objectTypeResolver, $fieldName);
         }
         return null;
     }
 
-    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         // Get the Schema Field Args from the FilterInput modules
         return array_merge(
-            parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName),
-            $this->getFieldArgumentsSchemaDefinitions($relationalTypeResolver, $fieldName)
+            parent::getSchemaFieldArgs($objectTypeResolver, $fieldName),
+            $this->getFieldArgumentsSchemaDefinitions($objectTypeResolver, $fieldName)
         );
     }
 
-    protected function getFieldArgumentsSchemaDefinitions(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    protected function getFieldArgumentsSchemaDefinitions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($relationalTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($objectTypeResolver, $fieldName)) {
             $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
             return $this->getSchemaFieldArgsWithCustomFilterInputData(
                 $schemaFieldArgs,
-                $this->getFieldDataFilteringDefaultValues($relationalTypeResolver, $fieldName),
-                $this->getFieldDataFilteringMandatoryArgs($relationalTypeResolver, $fieldName)
+                $this->getFieldDataFilteringDefaultValues($objectTypeResolver, $fieldName),
+                $this->getFieldDataFilteringMandatoryArgs($objectTypeResolver, $fieldName)
             );
         }
 
@@ -53,7 +53,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
      * Provide default values for modules in the FilterInputContainer
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
-    protected function getFieldDataFilteringDefaultValues(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return [];
     }
@@ -62,7 +62,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
      * Provide the names of the args which are mandatory in the FilterInput
      * @return string[]
      */
-    protected function getFieldDataFilteringMandatoryArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    protected function getFieldDataFilteringMandatoryArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return [];
     }
@@ -72,10 +72,10 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
         return QueryableInterfaceSchemaDefinitionResolverAdapter::class;
     }
 
-    public function enableOrderedSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool
+    public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         // If there is a filter, and it has many filterInputs, then by default we'd rather not enable ordering
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($relationalTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($objectTypeResolver, $fieldName)) {
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             /** @var FilterInputContainerModuleProcessorInterface */
             $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($filterDataloadingModule);
@@ -83,7 +83,7 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
                 return false;
             }
         }
-        return parent::enableOrderedSchemaFieldArgs($relationalTypeResolver, $fieldName);
+        return parent::enableOrderedSchemaFieldArgs($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -103,10 +103,10 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
      */
-    protected function convertFieldArgsToFilteringQueryArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): array
+    protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $filteringQueryArgs = [];
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($relationalTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($objectTypeResolver, $fieldName)) {
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             /** @var FilterDataModuleProcessorInterface */
             $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($filterDataloadingModule);

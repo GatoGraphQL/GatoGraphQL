@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use ReflectionClass;
 use ReflectionProperty;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFieldResolver
@@ -116,25 +116,25 @@ abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFie
         );
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         // TODO: If we are running PHP 7.4, the properties may be typed,
         // so we can already get the type through reflection. Implement this!
-        return parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         // TODO: If we are running PHP 7.4, the properties may be typed,
         // so we can already get the type through reflection. Implement this!
-        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         // Attempt to obtain the description from the docblock
         $reflectionDocComments = $this->getTypePropertyDocComments();
-        return $reflectionDocComments[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $reflectionDocComments[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -144,7 +144,7 @@ abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFie
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],

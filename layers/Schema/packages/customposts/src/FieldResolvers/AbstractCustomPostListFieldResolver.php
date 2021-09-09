@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
@@ -41,16 +41,16 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'customPostCount' => SchemaDefinition::TYPE_INT,
             'customPostCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'customPostCount',
@@ -60,11 +60,11 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
             'customPostsForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'customPosts' => $this->translationAPI->__('Custom posts', 'pop-posts'),
@@ -72,10 +72,10 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
             'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts', 'pop-posts'),
             'customPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts', 'pop-posts'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'customPosts' => [
@@ -94,11 +94,11 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
                 CustomPostFilterInputContainerModuleProcessor::class,
                 CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT
             ],
-            default => parent::getFieldDataFilteringModule($relationalTypeResolver, $fieldName),
+            default => parent::getFieldDataFilteringModule($objectTypeResolver, $fieldName),
         };
     }
 
-    protected function getFieldDataFilteringDefaultValues(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'customPosts':
@@ -111,7 +111,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
                     $limitFilterInputName => ComponentConfiguration::getCustomPostListDefaultLimit(),
                 ];
         }
-        return parent::getFieldDataFilteringDefaultValues($relationalTypeResolver, $fieldName);
+        return parent::getFieldDataFilteringDefaultValues($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -120,13 +120,13 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
      * @return string[] Error messages
      */
     public function validateFieldArgument(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
         $errors = parent::validateFieldArgument(
-            $relationalTypeResolver,
+            $objectTypeResolver,
             $fieldName,
             $fieldArgName,
             $fieldArgValue,
@@ -156,7 +156,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
      * @return array<string, mixed>
      */
     protected function getQuery(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -171,7 +171,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -181,8 +181,8 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($relationalTypeResolver, $fieldName, $fieldArgs),
-            $this->getQuery($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs)
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
+            $this->getQuery($objectTypeResolver, $resultItem, $fieldName, $fieldArgs)
         );
         switch ($fieldName) {
             case 'customPosts':
@@ -194,10 +194,10 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
                 return $customPostTypeAPI->getCustomPostCount($query);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'customPosts':
@@ -205,6 +205,6 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

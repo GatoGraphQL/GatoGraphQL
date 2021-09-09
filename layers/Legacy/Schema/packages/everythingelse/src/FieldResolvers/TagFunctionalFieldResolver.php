@@ -6,7 +6,7 @@ namespace PoPSchema\EverythingElse\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoPSchema\Tags\TypeResolvers\Object\AbstractTagTypeResolver;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 
@@ -29,7 +29,7 @@ class TagFunctionalFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'symbol' => SchemaDefinition::TYPE_STRING,
@@ -37,10 +37,10 @@ class TagFunctionalFieldResolver extends AbstractDBDataFieldResolver
             'namedescription' => SchemaDefinition::TYPE_STRING,
             'symbolname' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'symbol' => $this->translationAPI->__('Tag symbol', 'pop-everythingelse'),
@@ -48,7 +48,7 @@ class TagFunctionalFieldResolver extends AbstractDBDataFieldResolver
             'namedescription' => $this->translationAPI->__('Tag and description', 'pop-everythingelse'),
             'symbolname' => $this->translationAPI->__('Symbol and tag', 'pop-everythingelse'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -58,7 +58,7 @@ class TagFunctionalFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -82,6 +82,6 @@ class TagFunctionalFieldResolver extends AbstractDBDataFieldResolver
                 return $applicationtaxonomyapi->getTagSymbolName($tag);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

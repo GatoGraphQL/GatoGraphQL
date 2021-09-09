@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 trait GlobalFieldResolverTrait
 {
@@ -16,7 +16,7 @@ trait GlobalFieldResolverTrait
         ];
     }
 
-    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool
+    public function isGlobal(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         return true;
     }

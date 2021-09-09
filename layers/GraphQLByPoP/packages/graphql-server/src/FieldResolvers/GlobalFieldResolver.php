@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 class GlobalFieldResolver extends AbstractGlobalFieldResolver
 {
@@ -18,15 +18,15 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             '__typename' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             '__typename',
@@ -34,15 +34,15 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             '__typename' => $this->translationAPI->__('The object\'s type', 'graphql-server'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -52,7 +52,7 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -62,9 +62,9 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
     ): mixed {
         switch ($fieldName) {
             case '__typename':
-                return $relationalTypeResolver->getMaybeNamespacedTypeName();
+                return $objectTypeResolver->getMaybeNamespacedTypeName();
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

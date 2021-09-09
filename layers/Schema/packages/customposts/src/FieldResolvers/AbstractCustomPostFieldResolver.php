@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPosts\FieldResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -34,7 +34,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
      * Get the Schema Definition from the Interface
      */
     protected function getFieldInterfaceSchemaDefinitionResolverClass(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?string {
         return match ($fieldName) {
@@ -52,7 +52,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
             'customPostType'
                 => IsCustomPostFieldInterfaceResolver::class,
             default
-                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($objectTypeResolver, $fieldName),
         };
     }
 
@@ -69,7 +69,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -101,7 +101,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                 return $this->hooksAPI->applyFilters(
                     'pop_content',
                     $value,
-                    $relationalTypeResolver->getID($customPost)
+                    $objectTypeResolver->getID($customPost)
                 );
 
             case 'status':
@@ -132,6 +132,6 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                 return $customPostTypeAPI->getCustomPostType($customPost);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
