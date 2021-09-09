@@ -592,7 +592,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_INTERFACES] = $typeInterfaceDefinitions;
     }
 
-    protected function addFieldSchemaDefinition(FieldResolverInterface $fieldResolver, string $fieldName, array $stackMessages, array &$generalMessages, array $options = [])
+    protected function addFieldSchemaDefinition(FieldResolverInterface $fieldResolver, string $fieldName, array $stackMessages, array &$generalMessages, array $options = []): void
     {
         /**
          * Fields may not be directly visible in the schema
