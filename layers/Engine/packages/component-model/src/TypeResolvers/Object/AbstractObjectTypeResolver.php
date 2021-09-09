@@ -16,7 +16,6 @@ use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 
@@ -25,6 +24,24 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function getSelfFieldTypeResolverClass(): string
     {
         return get_called_class();
+    }
+
+    /**
+     * Watch out! This function will be overridden for the UnionTypeResolver
+     *
+     * Collect all directives for all fields, and then build a single directive pipeline for all fields,
+     * including all directives, even if they don't apply to all fields
+     * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
+     * to different fields. After producing the pipeline, add the mandatory items
+     */
+    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void
+    {
+        $mandatoryDirectivesForFields = $this->getAllMandatoryDirectivesForFields();
+        $mandatorySystemDirectives = $this->getMandatoryDirectives();
+        foreach ($ids_data_fields as $id => $data_fields) {
+            $fields = $this->getFieldsToEnqueueFillingResultItemsFromIDs($data_fields);
+            $this->doEnqueueFillingResultItemsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
+        }
     }
 
     /**

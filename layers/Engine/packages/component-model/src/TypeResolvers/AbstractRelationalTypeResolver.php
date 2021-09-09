@@ -924,24 +924,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * Watch out! This function will be overridden for the UnionTypeResolver
-     *
-     * Collect all directives for all fields, and then build a single directive pipeline for all fields,
-     * including all directives, even if they don't apply to all fields
-     * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
-     * to different fields. After producing the pipeline, add the mandatory items
-     */
-    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void
-    {
-        $mandatoryDirectivesForFields = $this->getAllMandatoryDirectivesForFields();
-        $mandatorySystemDirectives = $this->getMandatoryDirectives();
-        foreach ($ids_data_fields as $id => $data_fields) {
-            $fields = $this->getFieldsToEnqueueFillingResultItemsFromIDs($data_fields);
-            $this->doEnqueueFillingResultItemsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
-        }
-    }
-
-    /**
      * Split function, so it can be invoked both from here and from the UnionTypeResolver
      */
     protected function getFieldsToEnqueueFillingResultItemsFromIDs(array $data_fields)
