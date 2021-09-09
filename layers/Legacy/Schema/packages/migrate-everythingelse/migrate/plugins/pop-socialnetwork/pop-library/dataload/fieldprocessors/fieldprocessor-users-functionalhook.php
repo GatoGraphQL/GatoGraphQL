@@ -9,7 +9,7 @@ use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunctionalFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             UserTypeResolver::class,
