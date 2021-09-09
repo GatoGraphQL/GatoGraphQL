@@ -30,7 +30,7 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
      * @return string|int|array<string|int>
      */
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array;
-    public function getIdFieldTypeResolverClass(): string;
+    public function getIDFieldTypeResolverClass(): string;
     /**
      * @return array<string,DirectiveResolverInterface[]>
      */

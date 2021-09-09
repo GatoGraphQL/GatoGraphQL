@@ -92,7 +92,7 @@ class ElementalFieldResolver extends AbstractDBDataFieldResolver
     {
         switch ($fieldName) {
             case 'self':
-                return $objectTypeResolver->getIdFieldTypeResolverClass();
+                return $objectTypeResolver->getIDFieldTypeResolverClass();
         }
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

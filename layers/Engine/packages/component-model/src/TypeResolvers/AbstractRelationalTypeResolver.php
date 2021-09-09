@@ -131,7 +131,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $this->directiveNameResolvers;
     }
 
-    public function getIdFieldTypeResolverClass(): string
+    public function getIDFieldTypeResolverClass(): string
     {
         return get_called_class();
     }

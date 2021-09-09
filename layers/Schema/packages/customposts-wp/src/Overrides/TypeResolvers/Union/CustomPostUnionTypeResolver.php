@@ -30,7 +30,7 @@ class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
         return $resultItemIDTargetTypeResolvers;
     }
 
-    public function getIdFieldTypeResolverClass(): string
+    public function getIDFieldTypeResolverClass(): string
     {
         return UpstreamCustomPostUnionTypeResolver::class;
     }
