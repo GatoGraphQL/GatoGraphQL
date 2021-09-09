@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
-    public function getIDFieldTypeResolverClass(): string
+    public function getSelfFieldTypeResolverClass(): string
     {
         return get_called_class();
     }
