@@ -19,15 +19,19 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
         return SchemaTypeResolver::class;
     }
 
-    protected function getObjectTypeNewInstance(int | string $id)
+    protected function getObjectTypeNewInstance(int | string $id): mixed
     {
+        $schemaDefinition = $this->getSchemaDefinition($id);
+        if ($schemaDefinition === null) {
+            return null;
+        }
         return new Schema(
-            $this->getSchemaDefinition($id),
+            $schemaDefinition,
             (string) $id
         );
     }
 
-    protected function &getSchemaDefinition(string $id): array
+    protected function &getSchemaDefinition(string $id): ?array
     {
         $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
         return $schemaDefinitionReferenceRegistry->getFullSchemaDefinition();

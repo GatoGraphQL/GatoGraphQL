@@ -23,5 +23,5 @@ trait UseObjectDictionaryTypeDataLoaderTrait
     }
 
     abstract protected function getObjectTypeResolverClass(): string;
-    abstract protected function getObjectTypeNewInstance(int | string $id);
+    abstract protected function getObjectTypeNewInstance(int | string $id): mixed;
 }
