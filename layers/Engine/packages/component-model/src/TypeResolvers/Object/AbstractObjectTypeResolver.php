@@ -5,15 +5,20 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\Object;
 
 use Exception;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
@@ -425,6 +430,20 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->errorProvider->getNoFieldError($this->getID($resultItem), $fieldName, $this->getMaybeNamespacedTypeName());
     }
 
+    protected function getSchemaFieldResolvers(bool $global): array
+    {
+        $schemaFieldResolvers = [];
+        foreach ($this->getAllFieldResolvers() as $fieldName => $fieldResolvers) {
+            // Get the documentation from the first element
+            $fieldResolver = $fieldResolvers[0];
+            $isGlobal = $fieldResolver->isGlobal($this, $fieldName);
+            if (($global && $isGlobal) || (!$global && !$isGlobal)) {
+                $schemaFieldResolvers[$fieldName] =  $fieldResolver;
+            }
+        }
+        return $schemaFieldResolvers;
+    }
+
     protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])
     {
         parent::addSchemaDefinition($stackMessages, $generalMessages, $options);
@@ -552,5 +571,257 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
         $this->schemaDefinition[$typeSchemaKey][$entry][$fieldName] = $fieldSchemaDefinition;
+    }
+
+    /**
+     * Return the fieldNames resolved by the fieldResolver, adding a hook to disable each of them (eg: to implement a private schema)
+     *
+     * @return string[]
+     */
+    protected function getFieldNamesResolvedByFieldResolver(FieldResolverInterface $fieldResolver): array
+    {
+        $fieldResolverClass = get_class($fieldResolver);
+        if (!isset($this->fieldNamesResolvedByFieldResolver[$fieldResolverClass])) {
+            // Merge the fieldNames resolved by this field resolver class, and the interfaces it implements
+            $fieldNames = array_values(array_unique(array_merge(
+                $fieldResolver->getFieldNamesToResolve(),
+                $fieldResolver->getFieldNamesFromInterfaces()
+            )));
+            $fieldNames = $this->maybeExcludeFieldNamesFromSchema($fieldResolver, $fieldNames);
+            $this->fieldNamesResolvedByFieldResolver[$fieldResolverClass] = $fieldNames;
+        }
+        return $this->fieldNamesResolvedByFieldResolver[$fieldResolverClass];
+    }
+
+    protected function getAllFieldResolvers(): array
+    {
+        if (is_null($this->schemaFieldResolvers)) {
+            $this->schemaFieldResolvers = $this->calculateAllFieldResolvers();
+        }
+        return $this->schemaFieldResolvers;
+    }
+
+    protected function calculateAllFieldResolvers(): array
+    {
+        $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
+        $schemaFieldResolvers = [];
+
+        // Get the fieldResolvers attached to this typeResolver and to all the interfaces it implements
+        $classStack = [
+            $this->getTypeResolverClassToCalculateSchema(),
+        ];
+        while (!empty($classStack)) {
+            $class = array_shift($classStack);
+            // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
+            do {
+                /** @var FieldResolverInterface[] */
+                $attachedFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
+                foreach ($attachedFieldResolvers as $fieldResolver) {
+                    // Process the fields which have not been processed yet
+                    $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
+                    foreach (array_diff($extensionFieldNames, array_keys($schemaFieldResolvers)) as $fieldName) {
+                        // Watch out here: no fieldArgs!!!! So this deals with the base case (static), not with all cases (runtime)
+                        // If using an ACL to remove a field from an interface,
+                        // getting the fieldResolvers for that field will be empty
+                        // Then ignore adding the field, it must not be added to the schema
+                        if ($fieldResolversForField = $this->getFieldResolversForField($fieldName)) {
+                            $schemaFieldResolvers[$fieldName] = $fieldResolversForField;
+                        }
+                    }
+                    // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
+                    $classStack = array_values(array_unique(array_merge(
+                        $classStack,
+                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
+                    )));
+                }
+                // Otherwise, continue iterating for the class parents
+            } while ($class = get_parent_class($class));
+        }
+
+        return $schemaFieldResolvers;
+    }
+
+    /**
+     * @return FieldInterfaceResolverInterface[]
+     */
+    final protected function getAllImplementedFieldInterfaceResolvers(): array
+    {
+        return array_map(
+            fn (string $fieldInterfaceResolverClass) => $this->instanceManager->getInstance($fieldInterfaceResolverClass),
+            $this->getAllImplementedFieldInterfaceResolverClasses()
+        );
+    }
+
+    final protected function getAllImplementedFieldInterfaceResolverClasses(): array
+    {
+        if ($this->fieldInterfaceResolverClasses === null) {
+            $this->fieldInterfaceResolverClasses = $this->calculateAllImplementedFieldInterfaceResolverClasses();
+        }
+        return $this->fieldInterfaceResolverClasses;
+    }
+
+    private function calculateAllImplementedFieldInterfaceResolverClasses(): array
+    {
+        $fieldInterfaceResolverClasses = [];
+        $processedFieldResolverClasses = [];
+        foreach ($this->getAllFieldResolvers() as $fieldName => $fieldResolvers) {
+            foreach ($fieldResolvers as $fieldResolver) {
+                $fieldResolverClass = get_class($fieldResolver);
+                if (!in_array($fieldResolverClass, $processedFieldResolverClasses)) {
+                    $processedFieldResolverClasses[] = $fieldResolverClass;
+                    $fieldInterfaceResolverClasses = array_merge(
+                        $fieldInterfaceResolverClasses,
+                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
+                    );
+                }
+            }
+        }
+        return array_values(array_unique($fieldInterfaceResolverClasses));
+    }
+
+    /**
+     * @return InterfaceTypeResolverInterface[]
+     */
+    final public function getAllImplementedInterfaceTypeResolvers(): array
+    {
+        if ($this->interfaceTypeResolvers === null) {
+            $this->interfaceTypeResolvers = $this->calculateAllImplementedInterfaceTypeResolvers();
+        }
+        return $this->interfaceTypeResolvers;
+    }
+
+    /**
+     * @return InterfaceTypeResolverInterface[]
+     */
+    private function calculateAllImplementedInterfaceTypeResolvers(): array
+    {
+        $interfaceTypeResolverClasses = [];
+        foreach ($this->getAllImplementedFieldInterfaceResolvers() as $fieldInterfaceResolver) {
+            $interfaceTypeResolverClasses = array_merge(
+                $interfaceTypeResolverClasses,
+                $fieldInterfaceResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
+            );
+        }
+        $interfaceTypeResolverClasses = array_values(array_unique($interfaceTypeResolverClasses));
+        // Every InterfaceTypeResolver can be injected fields from many FieldInterfaceResolvers
+        // Make sure that this typeResolver implements all these FieldInterfaceResolver
+        // If not, the type does not fully satisfy the Interface
+        $interfaceTypeResolvers = array_map(
+            fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
+            $interfaceTypeResolverClasses
+        );
+        $implementedFieldInterfaceResolverClasses = $this->getAllImplementedFieldInterfaceResolverClasses();
+        return array_filter(
+            $interfaceTypeResolvers,
+            fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => array_diff(
+                $interfaceTypeResolver->getAllFieldInterfaceResolverClasses(),
+                $implementedFieldInterfaceResolverClasses
+            ) === [],
+        );
+    }
+
+    /**
+     * @return FieldResolverInterface[]
+     */
+    protected function getFieldResolversForField(string $field): array
+    {
+        // Calculate the fieldResolver to process this field if not already in the cache
+        // If none is found, this value will be set to NULL. This is needed to stop attempting to find the fieldResolver
+        if (!isset($this->fieldResolvers[$field])) {
+            $this->fieldResolvers[$field] = $this->calculateFieldResolversForField($field);
+        }
+
+        return $this->fieldResolvers[$field];
+    }
+
+    public function hasFieldResolversForField(string $field): bool
+    {
+        return !empty($this->getFieldResolversForField($field));
+    }
+
+    protected function calculateFieldResolversForField(string $field): array
+    {
+        // Important: here we CAN'T use `dissectFieldForSchema` to get the fieldArgs, because it will attempt to validate them
+        // To validate them, the fieldQueryInterpreter needs to know the schema, so it once again calls functions from this typeResolver
+        // Generating an infinite loop
+        // Then, just to find out which fieldResolvers will process this field, crudely obtain the fieldArgs, with NO schema-based validation!
+        // list(
+        //     $field,
+        //     $fieldName,
+        //     $fieldArgs,
+        // ) = $this->dissectFieldForSchema($field);
+        $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
+        $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
+
+        $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
+        $fieldResolvers = [];
+        // Get the fieldResolvers attached to this typeResolver and to all the interfaces it implements
+        $classStack = [
+            $this->getTypeResolverClassToCalculateSchema(),
+        ];
+        while (!empty($classStack)) {
+            $class = array_shift($classStack);
+            // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
+            do {
+                // All the Units and their priorities for this class level
+                $classTypeResolverPriorities = [];
+                $classFieldResolvers = [];
+
+                // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
+                /** @var FieldResolverInterface[] */
+                $attachedFieldResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS));
+                foreach ($attachedFieldResolvers as $fieldResolver) {
+                    $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
+                    if (in_array($fieldName, $extensionFieldNames)) {
+                        // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
+                        if ($fieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
+                            $extensionPriority = $fieldResolver->getPriorityToAttachToClasses();
+                            $classTypeResolverPriorities[] = $extensionPriority;
+                            $classFieldResolvers[] = $fieldResolver;
+                        }
+                    }
+                    // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
+                    $classStack = array_values(array_unique(array_merge(
+                        $classStack,
+                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
+                    )));
+                }
+                // Sort the found units by their priority, and then add to the stack of all units, for all classes
+                // Higher priority means they execute first!
+                array_multisort($classTypeResolverPriorities, SORT_DESC, SORT_NUMERIC, $classFieldResolvers);
+                $fieldResolvers = array_merge(
+                    $fieldResolvers,
+                    $classFieldResolvers
+                );
+                // Continue iterating for the class parents
+            } while ($class = get_parent_class($class));
+        }
+
+        // Return all the units that resolve the fieldName
+        return $fieldResolvers;
+    }
+
+    protected function calculateFieldNamesToResolve(): array
+    {
+        $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
+
+        $fieldNames = [];
+
+        // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
+        $class = $this->getTypeResolverClassToCalculateSchema();
+        do {
+            /** @var FieldResolverInterface[] */
+            $attachedFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
+            foreach ($attachedFieldResolvers as $fieldResolver) {
+                $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
+                $fieldNames = array_merge(
+                    $fieldNames,
+                    $extensionFieldNames
+                );
+            }
+            // Continue iterating for the class parents
+        } while ($class = get_parent_class($class));
+
+        return array_values(array_unique($fieldNames));
     }
 }

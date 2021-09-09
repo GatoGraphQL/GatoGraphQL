@@ -464,4 +464,15 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     {
         return null;
     }
+
+    /**
+     * The UnionTypeResolver itself does not implement interfaces.
+     * @see https://github.com/graphql/graphql-spec/issues/518
+     * 
+     * @return InterfaceTypeResolverInterface[]
+     */
+    public function getAllImplementedInterfaceTypeResolvers(): array
+    {
+        return [];
+    }
 }

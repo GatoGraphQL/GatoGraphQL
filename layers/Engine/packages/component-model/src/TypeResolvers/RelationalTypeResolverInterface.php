@@ -65,7 +65,6 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
         ?array $expressions = null,
         array $options = []
     ): mixed;
-    public function hasFieldResolversForField(string $field): bool;
     /**
      * Validate and resolve the fieldDirectives into an array, each item containing:
      * 1. the directiveResolverInstance
