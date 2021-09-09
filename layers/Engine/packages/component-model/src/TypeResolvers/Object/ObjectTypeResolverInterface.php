@@ -8,4 +8,5 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
 {
+    public function getIDFieldTypeResolverClass(): string;
 }
