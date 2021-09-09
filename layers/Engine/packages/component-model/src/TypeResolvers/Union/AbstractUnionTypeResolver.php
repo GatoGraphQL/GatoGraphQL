@@ -284,22 +284,16 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
                 throw new Exception(
                     sprintf(
-                        $this->translationAPI->__('UnionTypeResolver \'%s\' (\'%s\') must return results implementing interface \'%s\' (\'%s\'), however its following member TypeResolvers do not: \'%s\'', 'component-model'),
+                        $this->translationAPI->__('UnionTypeResolver \'%s\' is defined to implement interface \'%s\', hence its TypeResolver members must also satisfy this interface, but the following ones do not: \'%s\'', 'component-model'),
                         $this->getMaybeNamespacedTypeName(),
-                        get_called_class(),
                         $interfaceTypeResolver->getMaybeNamespacedTypeName(),
-                        $interfaceTypeResolverClass,
                         implode(
                             $this->translationAPI->__('\', \''),
                             array_map(
                                 function (string $objectTypeResolverClass) {
                                     /** @var ObjectTypeResolverInterface */
                                     $objectTypeResolver = $this->instanceManager->getInstance($objectTypeResolverClass);
-                                    return sprintf(
-                                        $this->translationAPI->__('%s (%s)'),
-                                        $objectTypeResolver->getMaybeNamespacedTypeName(),
-                                        $objectTypeResolverClass
-                                    );
+                                    return $objectTypeResolver->getMaybeNamespacedTypeName();
                                 },
                                 $notImplementingInterfaceTypeResolverClasses
                             )
