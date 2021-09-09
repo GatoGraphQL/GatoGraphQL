@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolverDecorators;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface TypeResolverDecoratorInterface extends AttachableExtensionInterface
@@ -29,7 +30,7 @@ interface TypeResolverDecoratorInterface extends AttachableExtensionInterface
     /**
      * Return an array of fieldNames as keys, and, for each fieldName, an array of directives (including directive arguments) to be applied always on the field
      */
-    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $relationalTypeResolver): array;
+    public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array;
     /**
      * Return an array of directiveName as keys, and, for each directiveName,
      * an array of directives (including directive arguments) to be applied before

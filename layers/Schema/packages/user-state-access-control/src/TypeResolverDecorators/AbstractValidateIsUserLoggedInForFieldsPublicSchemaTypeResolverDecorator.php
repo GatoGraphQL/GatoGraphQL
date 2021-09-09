@@ -6,6 +6,7 @@ namespace PoPSchema\UserStateAccessControl\TypeResolverDecorators;
 
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInDirectiveResolver;
 
@@ -46,7 +47,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDe
     /**
      * Verify that the user is logged in before checking the roles/capabilities
      */
-    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array
     {
         $mandatoryDirectivesForFields = [];
         if ($fieldNames = $this->getFieldNames()) {

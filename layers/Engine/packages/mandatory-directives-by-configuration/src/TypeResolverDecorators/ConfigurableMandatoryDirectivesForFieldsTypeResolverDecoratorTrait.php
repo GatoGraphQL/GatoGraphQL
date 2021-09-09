@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators;
 
 use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
@@ -28,10 +29,10 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
 
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
-    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array
     {
         $mandatoryDirectivesForFields = [];
-        $interfaceTypeResolvers = $relationalTypeResolver->getAllImplementedInterfaceTypeResolvers();
+        $interfaceTypeResolvers = $objectTypeResolver->getAllImplementedInterfaceTypeResolvers();
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
             // Calculate all the interfaces that define this fieldName
@@ -45,7 +46,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
             );
             foreach (
                 $this->getEntries(
-                    $relationalTypeResolver,
+                    $objectTypeResolver,
                     $interfaceTypeResolverClassesForField,
                     $fieldName
                 ) as $entry
