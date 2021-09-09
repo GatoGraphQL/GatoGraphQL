@@ -123,21 +123,6 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return $resultItemIDTargetTypeResolvers;
     }
 
-    // /**
-    //  * Add the type to the ID
-    //  */
-    // public function addTypeToID(string | int $resultItemID): string
-    // {
-    //     if ($resultItemTypeResolverClass = $this->getObjectTypeResolverClassForResultItem($resultItemID)) {
-    //         $resultItemTypeResolver = $this->instanceManager->getInstance($resultItemTypeResolverClass);
-    //         return UnionTypeHelpers::getDBObjectComposedTypeAndID(
-    //             $resultItemTypeResolver,
-    //             $resultItemID
-    //         );
-    //     }
-    //     return (string)$resultItemID;
-    // }
-
     /**
      * Watch out! This function overrides the implementation from the for the AbstractRelationalTypeResolver
      *
