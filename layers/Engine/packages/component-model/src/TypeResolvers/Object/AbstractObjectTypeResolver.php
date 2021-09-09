@@ -445,7 +445,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 && is_array($value)
                                 && array_filter(
                                     $value,
-                                    fn ($arrayItem) => $arrayItem === null
+                                    fn (mixed $arrayItem) => $arrayItem === null
                                 )
                             ) {
                                 return $this->errorProvider->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
@@ -467,7 +467,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 && array_filter(
                                     $value,
                                     // `null` could be accepted as an array! (Validation against null comes next)
-                                    fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
+                                    fn (mixed $arrayItem) => !is_array($arrayItem) && $arrayItem !== null
                                 )
                             ) {
                                 return $this->errorProvider->getMustBeArrayOfArraysFieldError($fieldName, $value);
@@ -480,7 +480,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                     $value,
                                     fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
                                         $arrayItem,
-                                        fn ($arrayItemItem) => $arrayItemItem === null
+                                        fn (mixed $arrayItemItem) => $arrayItemItem === null
                                     ) !== [],
                                 )
                             ) {
