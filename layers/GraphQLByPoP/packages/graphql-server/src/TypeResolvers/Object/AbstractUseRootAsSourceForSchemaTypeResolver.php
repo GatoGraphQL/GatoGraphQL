@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\Object;
 
-use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
-use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
+use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 
 abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObjectTypeResolver
 {
@@ -17,11 +18,18 @@ abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObje
 
     abstract protected function isFieldNameConditionSatisfiedForSchema(FieldResolverInterface $fieldResolver, string $fieldName): bool;
 
-    protected function isFieldNameResolvedByFieldResolver(FieldResolverInterface $fieldResolver, string $fieldName, array $interfaceTypeResolverClasses): bool
-    {
-        if (!$this->isFieldNameConditionSatisfiedForSchema($fieldResolver, $fieldName)) {
+    protected function isFieldNameResolvedByFieldResolver(
+        FieldResolverInterface | FieldInterfaceResolverInterface $fieldOrFieldInterfaceResolver,
+        string $fieldName,
+        array $interfaceTypeResolverClasses,
+    ): bool {
+        if (!$this->isFieldNameConditionSatisfiedForSchema($fieldOrFieldInterfaceResolver, $fieldName)) {
             return false;
         }
-        return parent::isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $interfaceTypeResolverClasses);
+        return parent::isFieldNameResolvedByFieldResolver(
+            $fieldOrFieldInterfaceResolver,
+            $fieldName,
+            $interfaceTypeResolverClasses
+        );
     }
 }
