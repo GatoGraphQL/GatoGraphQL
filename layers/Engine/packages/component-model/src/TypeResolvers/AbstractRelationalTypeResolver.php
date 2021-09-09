@@ -13,7 +13,6 @@ use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFa
 use PoP\ComponentModel\Facades\DirectivePipeline\DirectivePipelineServiceFacade;
 use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -22,7 +21,6 @@ use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\FieldHelpers;
-use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
@@ -38,19 +36,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     public const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnResultItem';
 
     /**
-     * Cache of which fieldResolvers will process the given field
-     *
-     * @var array<string, FieldResolverInterface[]>
-     */
-    protected array $fieldResolvers = [];
-    /**
      * @var array<string,DirectiveResolverInterface[]>|null
      */
     protected ?array $directiveNameResolvers = null;
-    /**
-     * @var array<string, FieldResolverInterface>|null
-     */
-    protected ?array $schemaFieldResolvers = null;
     /**
      * @var string[]|null
      */
@@ -63,14 +51,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @var array<string, array>|null
      */
     protected ?array $succeedingMandatoryDirectivesForDirectives = null;
-    /**
-     * @var string[]|null
-     */
-    protected ?array $fieldInterfaceResolverClasses = null;
-    /**
-     * @var InterfaceTypeResolverInterface[]|null
-     */
-    protected ?array $interfaceTypeResolvers = null;
 
     /**
      * @var array<string, array>
@@ -81,17 +61,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     private array $fieldDirectivesFromFieldCache = [];
     /**
-     * @var array<string, array>
-     */
-    private array $dissectedFieldForSchemaCache = [];
-    /**
      * @var array<string, array<string, DirectiveResolverInterface>>
      */
     private array $directiveResolverInstanceCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $fieldNamesResolvedByFieldResolver = [];
 
     public function __construct(
         TranslationAPIInterface $translationAPI,

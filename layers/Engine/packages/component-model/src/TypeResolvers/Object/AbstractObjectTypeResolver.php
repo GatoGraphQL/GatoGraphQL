@@ -22,10 +22,36 @@ use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
     /**
+     * Cache of which fieldResolvers will process the given field
+     *
+     * @var array<string, FieldResolverInterface[]>
+     */
+    protected array $fieldResolvers = [];
+    /**
      * @var array<string, array>|null
      */
     protected ?array $mandatoryDirectivesForFields = null;
-    
+    /**
+     * @var array<string, FieldResolverInterface>|null
+     */
+    protected ?array $schemaFieldResolvers = null;
+    /**
+     * @var string[]|null
+     */
+    protected ?array $fieldInterfaceResolverClasses = null;
+    /**
+     * @var InterfaceTypeResolverInterface[]|null
+     */
+    protected ?array $interfaceTypeResolvers = null;
+    /**
+     * @var array<string, array>
+     */
+    private array $dissectedFieldForSchemaCache = [];
+    /**
+     * @var array<string, array>
+     */
+    private array $fieldNamesResolvedByFieldResolver = [];
+
     public function getSelfFieldTypeResolverClass(): string
     {
         return get_called_class();
@@ -51,7 +77,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     public function getAllMandatoryDirectivesForFields(): array
     {
-        if (is_null($this->mandatoryDirectivesForFields)) {
+        if ($this->mandatoryDirectivesForFields === null) {
             $this->mandatoryDirectivesForFields = $this->calculateAllMandatoryDirectivesForFields();
         }
         return $this->mandatoryDirectivesForFields;
@@ -641,7 +667,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     protected function getAllFieldResolvers(): array
     {
-        if (is_null($this->schemaFieldResolvers)) {
+        if ($this->schemaFieldResolvers === null) {
             $this->schemaFieldResolvers = $this->calculateAllFieldResolvers();
         }
         return $this->schemaFieldResolvers;
