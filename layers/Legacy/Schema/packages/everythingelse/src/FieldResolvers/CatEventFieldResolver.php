@@ -15,7 +15,7 @@ use PoPSchema\EventTags\Facades\EventTagTypeAPIFacade;
 
 class CatEventFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             EventTypeResolver::class,

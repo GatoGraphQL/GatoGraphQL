@@ -14,7 +14,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
 {
     use SetTagsOnCustomPostFieldResolverTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             $this->getCustomPostTypeResolverClass(),

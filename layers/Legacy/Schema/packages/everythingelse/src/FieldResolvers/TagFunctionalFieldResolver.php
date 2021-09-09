@@ -12,7 +12,7 @@ use PoPSchema\EverythingElse\Misc\TagHelpers;
 
 class TagFunctionalFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             AbstractTagTypeResolver::class,

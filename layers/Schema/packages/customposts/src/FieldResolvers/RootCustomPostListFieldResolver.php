@@ -20,7 +20,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
  */
 class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             RootTypeResolver::class,

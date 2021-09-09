@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 trait GlobalFieldResolverTrait
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             AbstractRelationalTypeResolver::class,

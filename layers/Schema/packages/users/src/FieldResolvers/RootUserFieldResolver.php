@@ -15,7 +15,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootUserFieldResolver extends AbstractUserFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             RootTypeResolver::class,

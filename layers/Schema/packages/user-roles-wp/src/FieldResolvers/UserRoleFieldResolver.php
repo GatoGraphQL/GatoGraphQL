@@ -12,7 +12,7 @@ use PoPSchema\UserRolesWP\TypeResolvers\Object\UserRoleTypeResolver;
 
 class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             UserRoleTypeResolver::class,

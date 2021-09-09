@@ -15,7 +15,7 @@ use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 class FieldFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             FieldTypeResolver::class,

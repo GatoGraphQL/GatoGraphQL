@@ -42,7 +42,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         );
     }
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             AbstractCustomPostTypeResolver::class,

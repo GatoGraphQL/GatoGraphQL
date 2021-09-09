@@ -17,7 +17,7 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
     use EnumTypeFieldSchemaDefinitionResolverTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             EventTypeResolver::class,

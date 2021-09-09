@@ -9,7 +9,7 @@ use PoPSchema\Posts\Constants\InputNames;
 
 class CustomPostLocationFunctionalFieldResolver extends AbstractLocationFunctionalFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             AbstractCustomPostTypeResolver::class,

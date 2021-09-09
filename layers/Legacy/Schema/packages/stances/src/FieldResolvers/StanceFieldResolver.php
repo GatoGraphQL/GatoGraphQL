@@ -18,7 +18,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class StanceFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             StanceTypeResolver::class,

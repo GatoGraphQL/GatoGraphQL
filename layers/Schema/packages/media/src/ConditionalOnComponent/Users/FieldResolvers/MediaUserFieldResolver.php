@@ -41,7 +41,7 @@ class MediaUserFieldResolver extends AbstractDBDataFieldResolver
         );
     }
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             MediaTypeResolver::class,

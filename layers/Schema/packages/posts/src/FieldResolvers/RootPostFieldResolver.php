@@ -16,7 +16,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootPostFieldResolver extends AbstractPostFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             RootTypeResolver::class,

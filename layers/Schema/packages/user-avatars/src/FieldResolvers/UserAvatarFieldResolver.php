@@ -13,7 +13,7 @@ use PoPSchema\UserAvatars\TypeResolvers\Object\UserAvatarTypeResolver;
 
 class UserAvatarFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             UserAvatarTypeResolver::class,

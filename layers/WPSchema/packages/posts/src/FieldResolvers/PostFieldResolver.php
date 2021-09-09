@@ -13,7 +13,7 @@ use WP_Post;
 
 class PostFieldResolver extends AbstractQueryableFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             PostTypeResolver::class,

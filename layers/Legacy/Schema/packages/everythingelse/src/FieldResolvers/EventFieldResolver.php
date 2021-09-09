@@ -15,7 +15,7 @@ use PoPSchema\Locations\TypeResolvers\Object\LocationTypeResolver;
 
 class EventFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             EventTypeResolver::class,

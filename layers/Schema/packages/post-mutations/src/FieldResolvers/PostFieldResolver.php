@@ -14,7 +14,7 @@ class PostFieldResolver extends AbstractCustomPostFieldResolver
 {
     use UserStateFieldResolverTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             PostTypeResolver::class,

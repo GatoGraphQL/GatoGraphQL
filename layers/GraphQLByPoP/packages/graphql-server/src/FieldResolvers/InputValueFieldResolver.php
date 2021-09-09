@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 class InputValueFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             InputValueTypeResolver::class,

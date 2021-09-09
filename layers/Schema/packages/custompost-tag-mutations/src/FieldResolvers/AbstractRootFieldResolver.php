@@ -15,7 +15,7 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
 {
     use SetTagsOnCustomPostFieldResolverTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             RootTypeResolver::class,

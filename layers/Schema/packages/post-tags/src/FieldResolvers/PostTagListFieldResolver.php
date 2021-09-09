@@ -10,7 +10,7 @@ use PoPSchema\PostTags\TypeResolvers\Object\PostTagTypeResolver;
 
 class PostTagListFieldResolver extends AbstractPostFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             PostTagTypeResolver::class,

@@ -10,7 +10,7 @@ use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class PostUserFieldResolver extends AbstractPostFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             UserTypeResolver::class,

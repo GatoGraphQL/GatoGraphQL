@@ -14,7 +14,7 @@ use PoPSchema\TaxonomyMeta\Facades\TaxonomyMetaTypeAPIFacade;
 
 class TaxonomyFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             AbstractTaxonomyTypeResolver::class,

@@ -15,7 +15,7 @@ use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class CustomPostAndUserFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             AbstractCustomPostTypeResolver::class,

@@ -10,7 +10,7 @@ use PoPSchema\PostCategories\TypeResolvers\Object\PostCategoryTypeResolver;
 
 class PostCategoryListFieldResolver extends AbstractPostFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             PostCategoryTypeResolver::class,

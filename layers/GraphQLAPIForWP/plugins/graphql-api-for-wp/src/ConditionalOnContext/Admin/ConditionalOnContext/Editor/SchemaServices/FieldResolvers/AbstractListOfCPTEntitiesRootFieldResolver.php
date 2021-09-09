@@ -23,7 +23,7 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
     /**
      * @return string[]
      */
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             RootTypeResolver::class,

@@ -16,7 +16,7 @@ use PoPSchema\Highlights\TypeResolvers\Object\HighlightTypeResolver;
 
 class HighlightFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             HighlightTypeResolver::class,

@@ -10,6 +10,14 @@ use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 interface FieldResolverInterface extends AttachableExtensionInterface
 {
     /**
+     * The classes of the ObjectTypeResolvers this FieldResolver adds fields to.
+     * The list can contain both concrete and abstract classes (in which case all classes
+     * extending from them will be selected)
+     * 
+     * @return string[]
+     */
+    public function getObjectTypeResolverClassesToAttachTo(): array;
+    /**
      * Get an array with the fieldNames that this fieldResolver resolves
      * 
      * @return string[]

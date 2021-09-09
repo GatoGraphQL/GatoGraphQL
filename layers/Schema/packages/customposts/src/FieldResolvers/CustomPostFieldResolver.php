@@ -9,7 +9,7 @@ use PoPSchema\CustomPosts\FieldResolvers\AbstractCustomPostFieldResolver;
 
 class CustomPostFieldResolver extends AbstractCustomPostFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             AbstractCustomPostTypeResolver::class,

@@ -27,7 +27,7 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
     use UserStateFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             RootTypeResolver::class,

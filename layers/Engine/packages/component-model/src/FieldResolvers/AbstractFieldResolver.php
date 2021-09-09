@@ -64,6 +64,11 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     ) {
     }
 
+    final public function getClassesToAttachTo(): array
+    {
+        return $this->getObjectTypeResolverClassesToAttachTo();
+    }
+
     public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [];

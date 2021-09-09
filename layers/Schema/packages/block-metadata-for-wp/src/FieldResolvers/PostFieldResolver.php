@@ -14,7 +14,7 @@ use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
 
 class PostFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             PostTypeResolver::class,

@@ -20,7 +20,7 @@ class CustomPostListPostCategoryFieldResolver extends AbstractCustomPostListCate
         return false;
     }
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             PostCategoryTypeResolver::class,

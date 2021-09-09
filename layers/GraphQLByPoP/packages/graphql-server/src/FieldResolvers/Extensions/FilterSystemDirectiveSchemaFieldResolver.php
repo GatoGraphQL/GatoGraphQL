@@ -15,7 +15,7 @@ use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
 
 class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             SchemaTypeResolver::class,
