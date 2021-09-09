@@ -10,13 +10,18 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 interface TypeResolverDecoratorInterface extends AttachableExtensionInterface
 {
     /**
-     * The classes of the ObjectTypeResolvers this TypeResolverDecorator decorates.
+     * The classes of the RelationalTypeResolvers this TypeResolverDecorator decorates.
+     * 
+     * It is RelationalType and not ObjectType because directives can be applied on
+     * the UnionTypeResolver too, and the TypeResolverDecorator will deal with
+     * the IFTTT rules for those directives.
+     * 
      * The list can contain both concrete and abstract classes (in which case all classes
      * extending from them will be selected)
      * 
      * @return string[]
      */
-    public function getObjectTypeResolverClassesToAttachTo(): array;
+    public function getRelationalTypeResolverClassesToAttachTo(): array;
     /**
      * Allow to disable the functionality
      */

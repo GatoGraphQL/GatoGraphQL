@@ -25,7 +25,7 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
 
     final public function getClassesToAttachTo(): array
     {
-        return $this->getObjectTypeResolverClassesToAttachTo();
+        return $this->getRelationalTypeResolverClassesToAttachTo();
     }
 
     /**

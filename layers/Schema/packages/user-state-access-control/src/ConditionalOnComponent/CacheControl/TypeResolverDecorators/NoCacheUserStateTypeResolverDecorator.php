@@ -7,7 +7,7 @@ namespace PoPSchema\UserStateAccessControl\ConditionalOnComponent\CacheControl\T
 use PoP\CacheControl\Helpers\CacheControlHelper;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolverDecorators\AbstractTypeResolverDecorator;
-use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInDirectiveResolver;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
@@ -16,10 +16,10 @@ use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedI
 
 class NoCacheUserStateTypeResolverDecorator extends AbstractTypeResolverDecorator
 {
-    public function getObjectTypeResolverClassesToAttachTo(): array
+    public function getRelationalTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractObjectTypeResolver::class,
+            AbstractRelationalTypeResolver::class,
         ];
     }
 

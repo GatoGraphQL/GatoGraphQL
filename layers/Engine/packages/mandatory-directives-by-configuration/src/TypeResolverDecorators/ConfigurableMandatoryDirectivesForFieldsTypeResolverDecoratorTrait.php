@@ -12,7 +12,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
 {
     use ConfigurableMandatoryDirectivesForFieldsTrait;
 
-    public function getObjectTypeResolverClassesToAttachTo(): array
+    public function getRelationalTypeResolverClassesToAttachTo(): array
     {
         return array_map(
             function ($entry) {

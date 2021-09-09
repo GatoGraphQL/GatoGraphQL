@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\AccessControl\TypeResolverDecorators;
 
 use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDirectivesForDirectivesTrait;
-use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators\ConfigurableMandatoryDirectivesForDirectivesTypeResolverDecoratorTrait;
 
 trait ConfigurableAccessControlForDirectivesTypeResolverDecoratorTrait
@@ -23,12 +23,12 @@ trait ConfigurableAccessControlForDirectivesTypeResolverDecoratorTrait
 
     /**
      * Because the validation can be done on any directive applied to any typeResolver,
-     * then attach it to the base class AbstractObjectTypeResolver
+     * then attach it to the base class AbstractRelationalTypeResolver
      */
-    public function getObjectTypeResolverClassesToAttachTo(): array
+    public function getRelationalTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractObjectTypeResolver::class,
+            AbstractRelationalTypeResolver::class,
         ];
     }
 }
