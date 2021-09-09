@@ -10,7 +10,7 @@ class FieldResolver_OrganizationUsers extends AbstractDBDataFieldResolver
 {
     use OrganizationFieldResolverTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             UserTypeResolver::class,

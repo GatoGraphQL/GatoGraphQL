@@ -10,7 +10,7 @@ class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
 {
     use IndividualFieldResolverTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             UserTypeResolver::class,
