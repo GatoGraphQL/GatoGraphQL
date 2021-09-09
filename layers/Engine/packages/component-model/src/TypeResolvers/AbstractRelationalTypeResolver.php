@@ -13,7 +13,6 @@ use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFa
 use PoP\ComponentModel\Facades\DirectivePipeline\DirectivePipelineServiceFacade;
 use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -56,10 +55,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @var string[]|null
      */
     protected ?array $typeResolverDecorators = null;
-    /**
-     * @var array<string, array>|null
-     */
-    protected ?array $mandatoryDirectivesForFields = null;
     /**
      * @var array<string, array>|null
      */
@@ -703,30 +698,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         );
 
         return $resultIDItems;
-    }
-
-    public function getAllMandatoryDirectivesForFields(): array
-    {
-        if (is_null($this->mandatoryDirectivesForFields)) {
-            $this->mandatoryDirectivesForFields = $this->calculateAllMandatoryDirectivesForFields();
-        }
-        return $this->mandatoryDirectivesForFields;
-    }
-
-    protected function calculateAllMandatoryDirectivesForFields(): array
-    {
-        $mandatoryDirectivesForFields = [];
-        $typeResolverDecorators = $this->getAllTypeResolverDecorators();
-        foreach ($typeResolverDecorators as $typeResolverDecorator) {
-            // array_merge_recursive so that if 2 different decorators add a directive for the same field, the results are merged together, not override each other
-            if ($typeResolverDecorator->enabled($this)) {
-                $mandatoryDirectivesForFields = array_merge_recursive(
-                    $mandatoryDirectivesForFields,
-                    $typeResolverDecorator->getMandatoryDirectivesForFields($this)
-                );
-            }
-        }
-        return $mandatoryDirectivesForFields;
     }
 
     /**

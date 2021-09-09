@@ -21,6 +21,11 @@ use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
+    /**
+     * @var array<string, array>|null
+     */
+    protected ?array $mandatoryDirectivesForFields = null;
+    
     public function getSelfFieldTypeResolverClass(): string
     {
         return get_called_class();
@@ -42,6 +47,30 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fields = $this->getFieldsToEnqueueFillingResultItemsFromIDs($data_fields);
             $this->doEnqueueFillingResultItemsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
         }
+    }
+
+    public function getAllMandatoryDirectivesForFields(): array
+    {
+        if (is_null($this->mandatoryDirectivesForFields)) {
+            $this->mandatoryDirectivesForFields = $this->calculateAllMandatoryDirectivesForFields();
+        }
+        return $this->mandatoryDirectivesForFields;
+    }
+
+    protected function calculateAllMandatoryDirectivesForFields(): array
+    {
+        $mandatoryDirectivesForFields = [];
+        $typeResolverDecorators = $this->getAllTypeResolverDecorators();
+        foreach ($typeResolverDecorators as $typeResolverDecorator) {
+            // array_merge_recursive so that if 2 different decorators add a directive for the same field, the results are merged together, not override each other
+            if ($typeResolverDecorator->enabled($this)) {
+                $mandatoryDirectivesForFields = array_merge_recursive(
+                    $mandatoryDirectivesForFields,
+                    $typeResolverDecorator->getMandatoryDirectivesForFields($this)
+                );
+            }
+        }
+        return $mandatoryDirectivesForFields;
     }
 
     /**
