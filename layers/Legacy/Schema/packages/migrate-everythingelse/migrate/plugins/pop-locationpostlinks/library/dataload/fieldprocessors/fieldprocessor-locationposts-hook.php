@@ -9,7 +9,7 @@ use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             LocationPostTypeResolver::class,

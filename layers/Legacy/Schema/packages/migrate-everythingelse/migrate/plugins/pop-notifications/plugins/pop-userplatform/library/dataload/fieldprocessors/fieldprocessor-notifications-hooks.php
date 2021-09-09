@@ -8,7 +8,7 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Notifications_UserPlatform_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             NotificationTypeResolver::class,

@@ -8,7 +8,7 @@ use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class GD_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             CommentTypeResolver::class,

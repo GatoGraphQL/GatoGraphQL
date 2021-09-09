@@ -16,7 +16,7 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             NotificationTypeResolver::class,

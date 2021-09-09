@@ -8,7 +8,7 @@ use PoPSchema\Events\TypeResolvers\Object\EventTypeResolver;
 
 class GD_EM_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             EventTypeResolver::class,

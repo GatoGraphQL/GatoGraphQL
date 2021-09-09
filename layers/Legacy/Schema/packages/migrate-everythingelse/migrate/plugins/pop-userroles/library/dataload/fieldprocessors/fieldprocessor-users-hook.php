@@ -13,7 +13,7 @@ use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class FieldResolver_Users extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             UserTypeResolver::class,

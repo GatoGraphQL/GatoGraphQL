@@ -9,7 +9,7 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             NotificationTypeResolver::class,

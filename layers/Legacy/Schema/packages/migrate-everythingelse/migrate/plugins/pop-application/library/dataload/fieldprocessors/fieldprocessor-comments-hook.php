@@ -11,7 +11,7 @@ use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 
 class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             CommentTypeResolver::class,
