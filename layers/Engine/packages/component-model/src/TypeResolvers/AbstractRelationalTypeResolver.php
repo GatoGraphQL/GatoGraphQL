@@ -789,7 +789,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($classes as $class) {
             $typeResolverDecorators = array_merge(
                 $typeResolverDecorators,
-                $this->calculateAllTypeResolverDecoratorsForObjectTypeOrInterfaceTypeResolverClass($class)
+                $this->calculateAllTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass($class)
             );
         }
 
@@ -799,7 +799,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @return TypeResolverDecoratorInterface[]
      */
-    protected function calculateAllTypeResolverDecoratorsForObjectTypeOrInterfaceTypeResolverClass(string $class): array
+    protected function calculateAllTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass(string $class): array
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $typeResolverDecorators = [];
