@@ -284,7 +284,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
                 throw new Exception(
                     sprintf(
-                        $this->translationAPI->__('UnionTypeResolver \'%s\' is defined to implement interface \'%s\', hence its TypeResolver members must also satisfy this interface, but the following ones do not: \'%s\'', 'component-model'),
+                        $this->translationAPI->__('Union Type \'%s\' is defined to implement interface \'%s\', hence its Type members must also satisfy this interface, but the following ones do not: \'%s\'', 'component-model'),
                         $this->getMaybeNamespacedTypeName(),
                         $interfaceTypeResolver->getMaybeNamespacedTypeName(),
                         implode(
