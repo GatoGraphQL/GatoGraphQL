@@ -257,12 +257,12 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         /**
          * Support Union Type implementing an Interface Type?
          * This functionality is not supported by the GraphQL spec.
-         * 
+         *
          * @see https://github.com/graphql/graphql-spec/issues/518
-         * 
+         *
          * It is disabled by default in this GraphQL server, because it can produce a runtime exception
          * when creating an Access Control List:
-         * 
+         *
          * - CustomPostUnionTypeResolver is set to implement IsCustomPostInterfaceType
          * - CustomPostUnionTypeResolver contains types PostTypeResolver and PageTypeResolver
          * - Via ACL in a private schema, we disable access to field "Post.author"
@@ -490,7 +490,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     /**
      * The UnionTypeResolver itself does not implement interfaces.
      * @see https://github.com/graphql/graphql-spec/issues/518
-     * 
+     *
      * @return InterfaceTypeResolverInterface[]
      */
     public function getAllImplementedInterfaceTypeResolvers(): array

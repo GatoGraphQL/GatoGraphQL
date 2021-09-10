@@ -98,7 +98,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * The Interface may also accept other fieldNames from other FieldInterfaceResolvers.
      * That's why this function is "partially" implemented: the Interface
      * may be completely implemented or not.
-     * 
+     *
      * @return string[]
      */
     final public function getPartiallyImplementedInterfaceTypeResolverClasses(): array

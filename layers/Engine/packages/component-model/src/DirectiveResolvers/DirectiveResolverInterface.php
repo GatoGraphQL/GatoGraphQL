@@ -14,7 +14,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * this DirectiveResolver adds directives to.
      * The list can contain both concrete and abstract classes (in which case all classes
      * extending from them will be selected)
-     * 
+     *
      * @return string[]
      */
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array;

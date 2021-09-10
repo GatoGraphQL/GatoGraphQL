@@ -42,11 +42,13 @@ abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet 
         string $fieldName
     ): bool {
         // Obtain all entries for the current combination of [typeResolver or interfaceTypeResolverClass]/fieldName
-        foreach ($this->getEntries(
-            $objectTypeOrInterfaceTypeResolver,
-            $interfaceTypeResolverClasses,
-            $fieldName
-        ) as $entry) {
+        foreach (
+            $this->getEntries(
+                $objectTypeOrInterfaceTypeResolver,
+                $interfaceTypeResolverClasses,
+                $fieldName
+            ) as $entry
+        ) {
             // Obtain the 3rd value on each entry: if the validation is "in" or "out"
             $entryValue = $entry[2] ?? null;
             // Let the implementation class decide if to remove the field or not

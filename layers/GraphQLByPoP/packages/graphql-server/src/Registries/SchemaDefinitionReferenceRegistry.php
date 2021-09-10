@@ -55,7 +55,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * It can store the value in the cache.
      * Use cache with care: if the schema is dynamic, it should not be cached.
      * Public schema: can cache, Private schema: cannot cache.
-     * 
+     *
      * Return null if retrieving the schema data via field "fullSchema" failed
      */
     public function &getFullSchemaDefinition(): ?array

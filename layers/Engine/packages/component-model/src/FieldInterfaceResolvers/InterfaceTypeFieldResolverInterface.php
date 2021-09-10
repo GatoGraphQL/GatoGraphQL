@@ -12,7 +12,7 @@ interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface
      * The classes of the InterfaceTypeResolvers this FieldInterfaceResolver adds fields to.
      * The list can contain both concrete and abstract classes (in which case all classes
      * extending from them will be selected)
-     * 
+     *
      * @return string[]
      */
     public function getInterfaceTypeResolverClassesToAttachTo(): array;
@@ -25,7 +25,7 @@ interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface
      * The Interface may also accept other fieldNames from other FieldInterfaceResolvers.
      * That's why this function is "partially" implemented: the Interface
      * may be completely implemented or not.
-     * 
+     *
      * @return InterfaceTypeResolverInterface[]
      */
     public function getPartiallyImplementedInterfaceTypeResolvers(): array;

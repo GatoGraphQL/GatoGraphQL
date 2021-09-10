@@ -40,7 +40,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 
     /**
      * The InterfaceTypes the FieldInterfaceResolver adds fields to
-     * 
+     *
      * @return string[]
      */
     final public function getClassesToAttachTo(): array
@@ -63,7 +63,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      * The Interface may also accept other fieldNames from other FieldInterfaceResolvers.
      * That's why this function is "partially" implemented: the Interface
      * may be completely implemented or not.
-     * 
+     *
      * @return InterfaceTypeResolverInterface[]
      */
     final public function getPartiallyImplementedInterfaceTypeResolvers(): array
@@ -77,14 +77,15 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
                 $interfaceTypeResolverClass = get_class($interfaceTypeResolver);
                 foreach ($interfaceTypeResolverClassesToAttachTo as $interfaceTypeResolverClassToAttachTo) {
-                    if ($interfaceTypeResolverClass === $interfaceTypeResolverClassToAttachTo
+                    if (
+                        $interfaceTypeResolverClass === $interfaceTypeResolverClassToAttachTo
                         || in_array($interfaceTypeResolverClassToAttachTo, class_parents($interfaceTypeResolverClass))
                     ) {
                         $this->partiallyImplementedInterfaceTypeResolvers[] = $interfaceTypeResolver;
                         break;
                     }
                 }
-            }            
+            }
         }
         return $this->partiallyImplementedInterfaceTypeResolvers;
     }

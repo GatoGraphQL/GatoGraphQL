@@ -29,7 +29,8 @@ abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObje
         string $fieldName,
         array $interfaceTypeResolverClasses,
     ): bool {
-        if ($objectTypeOrInterfaceTypeFieldResolver instanceof ObjectTypeFieldResolverInterface
+        if (
+            $objectTypeOrInterfaceTypeFieldResolver instanceof ObjectTypeFieldResolverInterface
             && !$this->isFieldNameConditionSatisfiedForSchema($objectTypeOrInterfaceTypeFieldResolver, $fieldName)
         ) {
             return false;

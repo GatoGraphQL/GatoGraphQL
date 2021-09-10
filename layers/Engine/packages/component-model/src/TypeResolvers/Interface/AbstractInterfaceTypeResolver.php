@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implements InterfaceTypeResolverInterface
 {
     use ExcludeFieldNamesFromSchemaTypeResolverTrait;
-    
+
     /**
      * @var array<string, InterfaceTypeFieldResolverInterface[]>|null
      */
@@ -60,7 +60,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
 
     /**
      * Interfaces "partially" implemented by this Interface
-     * 
+     *
      * @return string[]
      */
     public function getPartiallyImplementedInterfaceTypeResolverClasses(): array
@@ -90,7 +90,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
 
     /**
      * Interfaces "partially" implemented by this Interface
-     * 
+     *
      * @return InterfaceTypeResolverInterface[]
      */
     public function getPartiallyImplementedInterfaceTypeResolvers(): array
@@ -103,7 +103,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
 
     /**
      * Produce an array of all the attached FieldResolverInterfaces
-     * 
+     *
      * @return InterfaceTypeFieldResolverInterface[]
      */
     public function getAllFieldInterfaceResolvers(): array
@@ -116,7 +116,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
 
     /**
      * Produce an array of all the attached FieldResolverInterfaces
-     * 
+     *
      * @return string[]
      */
     public function getAllFieldInterfaceResolverClasses(): array
@@ -137,7 +137,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     /**
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the FieldInterfaceResolver classes
-     * 
+     *
      * @return array<string, string[]>
      */
     final public function getAllFieldInterfaceResolverClassesByField(): array
@@ -151,7 +151,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     /**
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the FieldResolverInterfaces
-     * 
+     *
      * @return array<string, InterfaceTypeFieldResolverInterface[]>
      */
     final public function getAllFieldInterfaceResolversByField(): array
@@ -165,7 +165,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     /**
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the FieldResolverInterfaces
-     * 
+     *
      * @return array<string, InterfaceTypeFieldResolverInterface[]>
      */
     protected function calculateAllFieldInterfaceResolversByField(): array

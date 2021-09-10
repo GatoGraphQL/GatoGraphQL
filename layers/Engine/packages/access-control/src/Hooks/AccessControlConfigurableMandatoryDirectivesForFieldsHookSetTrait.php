@@ -26,11 +26,13 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
             /**
              * If there are no entries, then exit by returning the original hook value
              */
-            if (empty($this->getEntries(
-                $objectTypeOrInterfaceTypeResolver,
-                $interfaceTypeResolverClasses,
-                $fieldName
-            ))) {
+            if (
+                empty($this->getEntries(
+                    $objectTypeOrInterfaceTypeResolver,
+                    $interfaceTypeResolverClasses,
+                    $fieldName
+                ))
+            ) {
                 return $include;
             }
         }

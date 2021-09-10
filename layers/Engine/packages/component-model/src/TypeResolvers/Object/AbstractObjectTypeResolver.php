@@ -522,7 +522,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
         $typeName = $this->getMaybeNamespacedTypeName();
-        
+
         // Add the directives (non-global)
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_DIRECTIVES] = [];
         $schemaDirectiveResolvers = $this->getSchemaDirectiveResolvers(false);

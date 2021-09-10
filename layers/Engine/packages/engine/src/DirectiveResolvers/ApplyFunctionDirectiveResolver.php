@@ -106,7 +106,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
          */
         /** @var RootTypeResolver */
         $rootTypeResolver = $this->instanceManager->getInstance(RootTypeResolver::class);
-        
+
         // Maybe re-generate the function: Inject the provided `$addArguments` to the fieldArgs already declared in the query
         if ($addArguments) {
             $functionName = $this->fieldQueryInterpreter->getFieldName($function);
