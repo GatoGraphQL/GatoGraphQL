@@ -7,8 +7,8 @@ namespace PoPSchema\CustomPostMedia\FieldInterfaceResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoPSchema\CustomPostMedia\TypeResolvers\Interface\SupportingFeaturedImageInterfaceTypeResolver;
-use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
+use PoPSchema\CustomPostMedia\TypeResolvers\InterfaceType\SupportingFeaturedImageInterfaceTypeResolver;
+use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
 
 class SupportingFeaturedImageFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver
 {

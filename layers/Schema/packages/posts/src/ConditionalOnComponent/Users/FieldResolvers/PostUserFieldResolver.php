@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\ConditionalOnComponent\Users\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
-use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
 class PostUserFieldResolver extends AbstractPostFieldResolver
 {

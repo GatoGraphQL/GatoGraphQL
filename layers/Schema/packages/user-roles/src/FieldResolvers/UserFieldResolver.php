@@ -7,9 +7,9 @@ namespace PoPSchema\UserRoles\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
 class UserFieldResolver extends AbstractDBDataFieldResolver
 {

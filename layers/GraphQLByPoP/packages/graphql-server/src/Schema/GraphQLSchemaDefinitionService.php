@@ -7,8 +7,8 @@ namespace GraphQLByPoP\GraphQLServer\Schema;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Schema\SchemaDefinitionService;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\QueryRootTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\MutationRootTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootTypeResolver;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 
 class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements GraphQLSchemaDefinitionServiceInterface

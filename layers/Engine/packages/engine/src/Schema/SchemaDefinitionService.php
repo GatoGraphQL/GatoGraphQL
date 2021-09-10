@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Schema;
 
-use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinitionService as ComponentModelSchemaDefinitionService;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 

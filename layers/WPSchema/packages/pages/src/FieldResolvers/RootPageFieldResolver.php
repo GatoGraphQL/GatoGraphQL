@@ -6,10 +6,10 @@ namespace PoPWPSchema\Pages\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
-use PoPSchema\Pages\TypeResolvers\Object\PageTypeResolver;
+use PoPSchema\Pages\TypeResolvers\ObjectType\PageTypeResolver;
 use WP_Post;
 
 class RootPageFieldResolver extends AbstractQueryableFieldResolver

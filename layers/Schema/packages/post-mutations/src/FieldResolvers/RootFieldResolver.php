@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoPSchema\PostMutations\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
-use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
-use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
 {

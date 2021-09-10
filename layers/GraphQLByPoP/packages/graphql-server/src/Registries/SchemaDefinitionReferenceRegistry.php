@@ -15,7 +15,7 @@ use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInter
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\QueryRootTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootTypeResolver;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Facades\SchemaDefinitionRegistryFacade;

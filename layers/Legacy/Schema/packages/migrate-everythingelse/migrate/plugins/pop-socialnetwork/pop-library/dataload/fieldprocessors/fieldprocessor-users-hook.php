@@ -6,10 +6,10 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver

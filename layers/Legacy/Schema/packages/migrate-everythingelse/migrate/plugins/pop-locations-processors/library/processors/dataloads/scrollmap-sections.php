@@ -3,9 +3,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoPSchema\Events\TypeResolvers\Object\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase

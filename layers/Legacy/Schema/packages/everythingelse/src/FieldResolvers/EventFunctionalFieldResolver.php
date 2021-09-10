@@ -9,9 +9,9 @@ use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\Events\TypeResolvers\Object\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
 
 class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {

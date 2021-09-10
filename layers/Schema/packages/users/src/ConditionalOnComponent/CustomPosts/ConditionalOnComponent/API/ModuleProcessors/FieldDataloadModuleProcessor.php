@@ -6,7 +6,7 @@ namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnCompon
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoPSchema\CustomPosts\TypeResolvers\Object\CustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 

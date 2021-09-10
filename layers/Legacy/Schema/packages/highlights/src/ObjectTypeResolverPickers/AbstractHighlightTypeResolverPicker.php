@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Highlights\ObjectTypeResolverPickers;
 
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
-use PoPSchema\Highlights\TypeResolvers\Object\HighlightTypeResolver;
+use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightTypeResolver;
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 
 class AbstractHighlightTypeResolverPicker extends AbstractObjectTypeResolverPicker

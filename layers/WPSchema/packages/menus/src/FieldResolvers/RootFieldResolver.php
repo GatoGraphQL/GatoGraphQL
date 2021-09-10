@@ -6,9 +6,9 @@ namespace PoPWPSchema\Menus\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
-use PoPSchema\Menus\TypeResolvers\Object\MenuTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {

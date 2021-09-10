@@ -6,11 +6,11 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\QueryRootTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\MutationRootTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootTypeResolver;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 
 /**

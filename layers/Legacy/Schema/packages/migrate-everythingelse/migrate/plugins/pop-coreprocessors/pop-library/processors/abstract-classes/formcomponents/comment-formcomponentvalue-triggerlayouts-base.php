@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
 
 abstract class PoP_Module_Processor_CommentTriggerLayoutFormComponentValuesBase extends PoP_Module_Processor_TriggerLayoutFormComponentValuesBase
 {

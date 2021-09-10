@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Categories\FieldResolvers\AbstractCustomPostQueryableFieldResolver;
 use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerModuleProcessor;
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
-use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
 
 class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolver
 {

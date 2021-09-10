@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers;
 
-use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
-use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;

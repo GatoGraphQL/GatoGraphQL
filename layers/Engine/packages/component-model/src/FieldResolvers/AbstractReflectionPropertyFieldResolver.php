@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use ReflectionClass;
 use ReflectionProperty;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFieldResolver

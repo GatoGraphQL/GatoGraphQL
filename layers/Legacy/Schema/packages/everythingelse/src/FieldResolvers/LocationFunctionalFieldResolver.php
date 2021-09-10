@@ -8,9 +8,9 @@ use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\Locations\TypeResolvers\Object\LocationTypeResolver;
+use PoPSchema\Locations\TypeResolvers\ObjectType\LocationTypeResolver;
 
 class LocationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {

@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\EmbeddableFields;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 /**
  * When Embeddable Fields is enabled, register the `echoStr` field

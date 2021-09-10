@@ -7,7 +7,7 @@ namespace PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 

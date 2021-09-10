@@ -12,7 +12,7 @@ class MonorepoArrowFnMixedTypeChainedRuleContainerConfigurationService extends A
             $this->rootDirectory . '/layers/Engine/packages/component-model/src/Resolvers/FieldOrDirectiveResolverTrait.php',
             $this->rootDirectory . '/layers/Engine/packages/component-model/src/Schema/FieldQueryInterpreter.php',
             $this->rootDirectory . '/layers/Engine/packages/component-model/src/TypeResolvers/AbstractRelationalTypeResolver.php',
-            $this->rootDirectory . '/layers/Engine/packages/component-model/src/TypeResolvers/Object/AbstractObjectTypeResolver.php',
+            $this->rootDirectory . '/layers/Engine/packages/component-model/src/TypeResolvers/ObjectType/AbstractObjectTypeResolver.php',
             $this->rootDirectory . '/layers/API/packages/api/src/Schema/FieldQueryConvertor.php',
         ];
     }

@@ -7,8 +7,8 @@ namespace PoPWPSchema\Menus\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
-use PoPSchema\Menus\TypeResolvers\Object\MenuTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
 use WP_Term;
 
 class MenuFieldResolver extends AbstractDBDataFieldResolver

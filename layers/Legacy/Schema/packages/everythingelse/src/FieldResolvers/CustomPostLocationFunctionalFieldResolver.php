@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers;
 
-use PoPSchema\CustomPosts\TypeResolvers\Object\AbstractCustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use PoPSchema\Posts\Constants\InputNames;
 
 class CustomPostLocationFunctionalFieldResolver extends AbstractLocationFunctionalFieldResolver

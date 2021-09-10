@@ -1,10 +1,10 @@
 <?php
-use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\Object\PostTagTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\FollowUserMutationResolverBridge;

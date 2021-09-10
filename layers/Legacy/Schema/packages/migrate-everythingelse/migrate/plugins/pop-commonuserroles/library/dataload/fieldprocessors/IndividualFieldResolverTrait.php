@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 trait IndividualFieldResolverTrait
 {

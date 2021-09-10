@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
 class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_UserSocialMediaItems extends PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialMediaItems
 {

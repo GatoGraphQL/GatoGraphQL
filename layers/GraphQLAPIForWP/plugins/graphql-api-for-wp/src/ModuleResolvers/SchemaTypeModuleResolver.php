@@ -15,19 +15,19 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
-use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
-use PoPSchema\GenericCustomPosts\TypeResolvers\Object\GenericCustomPostTypeResolver;
-use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
-use PoPSchema\Menus\TypeResolvers\Object\MenuTypeResolver;
-use PoPSchema\Pages\TypeResolvers\Object\PageTypeResolver;
-use PoPSchema\PostCategories\TypeResolvers\Object\PostCategoryTypeResolver;
-use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\Object\PostTagTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
+use PoPSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostTypeResolver;
+use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
+use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
+use PoPSchema\Pages\TypeResolvers\ObjectType\PageTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
-use PoPSchema\UserAvatars\TypeResolvers\Object\UserAvatarTypeResolver;
-use PoPSchema\UserRolesWP\TypeResolvers\Object\UserRoleTypeResolver;
-use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
+use PoPSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarTypeResolver;
+use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
 class SchemaTypeModuleResolver extends AbstractModuleResolver
 {

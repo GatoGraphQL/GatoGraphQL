@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\ConditionalOnContext\AddHighlightTypeToCustomPostUnionTypes\SchemaServices\ObjectTypeResolverPickers;
 
-use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\Highlights\ObjectTypeResolverPickers\AbstractHighlightTypeResolverPicker;
 
 class HighlightCustomPostTypeResolverPicker extends AbstractHighlightTypeResolverPicker

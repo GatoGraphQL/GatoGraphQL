@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;

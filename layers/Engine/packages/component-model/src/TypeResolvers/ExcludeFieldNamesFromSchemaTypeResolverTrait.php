@@ -7,8 +7,8 @@ namespace PoP\ComponentModel\TypeResolvers;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
-use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 trait ExcludeFieldNamesFromSchemaTypeResolverTrait
 {
