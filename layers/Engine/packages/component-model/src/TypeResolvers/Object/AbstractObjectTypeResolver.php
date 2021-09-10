@@ -804,7 +804,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Calculate the fieldResolver to process this field if not already in the cache
         // If none is found, this value will be set to NULL. This is needed to stop attempting to find the fieldResolver
         if (!isset($this->fieldResolvers[$field])) {
-            $this->fieldResolvers[$field] = $this->calculateFieldResolversForField($field);
+            $this->fieldResolvers[$field] = $this->calculateObjectTypeFieldResolversForField($field);
         }
 
         return $this->fieldResolvers[$field];
@@ -815,7 +815,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return !empty($this->getObjectTypeFieldResolversForField($field));
     }
 
-    protected function calculateFieldResolversForField(string $field): array
+    protected function calculateObjectTypeFieldResolversForField(string $field): array
     {
         // Important: here we CAN'T use `dissectFieldForSchema` to get the fieldArgs, because it will attempt to validate them
         // To validate them, the fieldQueryInterpreter needs to know the schema, so it once again calls functions from this typeResolver
