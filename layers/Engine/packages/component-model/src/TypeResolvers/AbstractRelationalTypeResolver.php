@@ -70,16 +70,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected FeedbackMessageStoreInterface $feedbackMessageStore,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected ErrorProviderInterface $errorProvider,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
         parent::__construct(
             $translationAPI,
             $hooksAPI,
             $instanceManager,
             $schemaNamespacingService,
+            $schemaDefinitionService,
         );
     }
 

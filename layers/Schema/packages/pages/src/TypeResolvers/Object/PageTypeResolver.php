@@ -23,10 +23,10 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected PageTypeAPIInterface $pageTypeAPI,
     ) {
         parent::__construct(
@@ -34,10 +34,10 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
             $hooksAPI,
             $instanceManager,
             $schemaNamespacingService,
+            $schemaDefinitionService,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
-            $schemaDefinitionService,
         );
     }
 

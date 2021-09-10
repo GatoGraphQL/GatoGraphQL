@@ -1582,6 +1582,7 @@ class Engine implements EngineInterface
                             $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetIDs, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
                         }
                     } else {
+                        /** @var ObjectTypeResolverInterface $relationalTypeResolver */
                         $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolver_ids, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
                     }
                 }

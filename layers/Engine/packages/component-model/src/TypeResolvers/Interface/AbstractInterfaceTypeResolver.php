@@ -156,10 +156,10 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      */
     final public function getAllFieldInterfaceResolversByField(): array
     {
-        if ($this->fieldInterfaceResolversByField === null) {
-            $this->fieldInterfaceResolversByField = $this->calculateAllFieldInterfaceResolversByField();
+        if ($this->interfaceTypeFieldResolversByField === null) {
+            $this->interfaceTypeFieldResolversByField = $this->calculateAllFieldInterfaceResolversByField();
         }
-        return $this->fieldInterfaceResolversByField;
+        return $this->interfaceTypeFieldResolversByField;
     }
 
     /**

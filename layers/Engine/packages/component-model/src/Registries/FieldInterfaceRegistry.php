@@ -15,13 +15,13 @@ class FieldInterfaceRegistry implements FieldInterfaceRegistryInterface
 
     public function addFieldInterfaceResolver(InterfaceTypeFieldResolverInterface $interfaceTypeFieldResolver): void
     {
-        $this->fieldInterfaceResolvers[] = $interfaceTypeFieldResolver;
+        $this->interfaceTypeFieldResolvers[] = $interfaceTypeFieldResolver;
     }
     /**
      * @return InterfaceTypeFieldResolverInterface[]
      */
     public function getFieldInterfaceResolvers(): array
     {
-        return $this->fieldInterfaceResolvers;
+        return $this->interfaceTypeFieldResolvers;
     }
 }

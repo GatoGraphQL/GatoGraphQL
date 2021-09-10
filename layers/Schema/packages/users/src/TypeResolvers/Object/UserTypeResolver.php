@@ -23,10 +23,10 @@ class UserTypeResolver extends AbstractObjectTypeResolver
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected UserTypeAPIInterface $userTypeAPI,
     ) {
         parent::__construct(
@@ -34,10 +34,10 @@ class UserTypeResolver extends AbstractObjectTypeResolver
             $hooksAPI,
             $instanceManager,
             $schemaNamespacingService,
+            $schemaDefinitionService,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
-            $schemaDefinitionService,
         );
     }
 
