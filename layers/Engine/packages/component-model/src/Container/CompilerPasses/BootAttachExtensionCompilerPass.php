@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Container\CompilerPasses;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\Root\Component\ApplicationEvents;
@@ -25,7 +25,7 @@ class BootAttachExtensionCompilerPass extends AbstractAttachExtensionCompilerPas
     {
         return [
             ObjectTypeFieldResolverInterface::class => AttachableExtensionGroups::FIELDRESOLVERS,
-            FieldInterfaceResolverInterface::class => AttachableExtensionGroups::FIELDINTERFACERESOLVERS,
+            InterfaceTypeFieldResolverInterface::class => AttachableExtensionGroups::FIELDINTERFACERESOLVERS,
             DirectiveResolverInterface::class => AttachableExtensionGroups::DIRECTIVERESOLVERS,
             ObjectTypeResolverPickerInterface::class => AttachableExtensionGroups::TYPERESOLVERPICKERS,
         ];

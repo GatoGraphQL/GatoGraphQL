@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
@@ -18,7 +18,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
      * @return string[]
      */
     protected function maybeExcludeFieldNamesFromSchema(
-        ObjectTypeFieldResolverInterface | FieldInterfaceResolverInterface $fieldOrFieldInterfaceResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $fieldOrFieldInterfaceResolver,
         array $fieldNames
     ): array {
         // Enable to exclude fieldNames, so they are not added to the schema.
@@ -53,7 +53,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
     }
 
     protected function isFieldNameResolvedByFieldResolver(
-        ObjectTypeFieldResolverInterface | FieldInterfaceResolverInterface $fieldOrFieldInterfaceResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $fieldOrFieldInterfaceResolver,
         string $fieldName,
         array $interfaceTypeResolverClasses
     ): bool {
@@ -76,7 +76,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
 
     protected function triggerHookToMaybeFilterFieldName(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
-        ObjectTypeFieldResolverInterface | FieldInterfaceResolverInterface $fieldOrFieldInterfaceResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $fieldOrFieldInterfaceResolver,
         string $fieldName,
         array $interfaceTypeResolverClassesForField
     ): bool {

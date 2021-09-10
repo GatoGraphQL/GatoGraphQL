@@ -11,7 +11,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -110,7 +110,7 @@ abstract class AbstractObjectTypeFieldResolver implements ObjectTypeFieldResolve
     {
         $interfaceTypeResolverClasses = [];
         foreach ($this->getImplementedFieldInterfaceResolverClasses() as $fieldInterfaceResolverClass) {
-            /** @var FieldInterfaceResolverInterface */
+            /** @var InterfaceTypeFieldResolverInterface */
             $fieldInterfaceResolver = $this->instanceManager->getInstance($fieldInterfaceResolverClass);
             $interfaceTypeResolverClasses = array_merge(
                 $interfaceTypeResolverClasses,
@@ -258,7 +258,7 @@ abstract class AbstractObjectTypeFieldResolver implements ObjectTypeFieldResolve
     /**
      * Implement all the fieldNames defined in the interfaces
      *
-     * @return FieldInterfaceResolverInterface[]
+     * @return InterfaceTypeFieldResolverInterface[]
      */
     public function getFieldInterfaceResolvers(): array
     {

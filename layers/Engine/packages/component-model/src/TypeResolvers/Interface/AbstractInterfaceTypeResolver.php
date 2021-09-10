@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\Interface;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ExcludeFieldNamesFromSchemaTypeResolverTrait;
 use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
@@ -16,7 +16,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     use ExcludeFieldNamesFromSchemaTypeResolverTrait;
     
     /**
-     * @var array<string, FieldInterfaceResolverInterface[]>|null
+     * @var array<string, InterfaceTypeFieldResolverInterface[]>|null
      */
     protected ?array $fieldInterfaceResolversByField = null;
     /**
@@ -73,7 +73,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
             );
         }
         $implementedFieldInterfaceResolverClasses = array_values(array_unique($implementedFieldInterfaceResolverClasses));
-        /** @var FieldInterfaceResolverInterface[] */
+        /** @var InterfaceTypeFieldResolverInterface[] */
         $implementedFieldInterfaceResolvers = array_map(
             fn (string $fieldInterfaceResolverClass) => $this->instanceManager->getInstance($fieldInterfaceResolverClass),
             $implementedFieldInterfaceResolverClasses
@@ -104,7 +104,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     /**
      * Produce an array of all the attached FieldResolverInterfaces
      * 
-     * @return FieldInterfaceResolverInterface[]
+     * @return InterfaceTypeFieldResolverInterface[]
      */
     public function getAllFieldInterfaceResolvers(): array
     {
@@ -152,7 +152,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the FieldResolverInterfaces
      * 
-     * @return array<string, FieldInterfaceResolverInterface[]>
+     * @return array<string, InterfaceTypeFieldResolverInterface[]>
      */
     final public function getAllFieldInterfaceResolversByField(): array
     {
@@ -166,7 +166,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the FieldResolverInterfaces
      * 
-     * @return array<string, FieldInterfaceResolverInterface[]>
+     * @return array<string, InterfaceTypeFieldResolverInterface[]>
      */
     protected function calculateAllFieldInterfaceResolversByField(): array
     {
@@ -182,7 +182,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
             $class = array_shift($classStack);
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
             do {
-                /** @var FieldInterfaceResolverInterface[] */
+                /** @var InterfaceTypeFieldResolverInterface[] */
                 $attachedFieldInterfaceResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDINTERFACERESOLVERS);
                 foreach ($attachedFieldInterfaceResolvers as $fieldInterfaceResolver) {
                     // Process the fields which have not been processed yet
@@ -209,7 +209,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      *
      * @return string[]
      */
-    protected function getFieldNamesResolvedByFieldInterfaceResolver(FieldInterfaceResolverInterface $fieldInterfaceResolver): array
+    protected function getFieldNamesResolvedByFieldInterfaceResolver(InterfaceTypeFieldResolverInterface $fieldInterfaceResolver): array
     {
         $fieldInterfaceResolverClass = get_class($fieldInterfaceResolver);
         if (!isset($this->fieldNamesResolvedByFieldInterfaceResolver[$fieldInterfaceResolverClass])) {
