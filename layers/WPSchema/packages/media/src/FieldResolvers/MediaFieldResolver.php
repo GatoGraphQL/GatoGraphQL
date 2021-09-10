@@ -12,7 +12,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Formatters\DateFormatterInterface;
@@ -47,9 +47,11 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
         );
     }
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(MediaTypeResolver::class);
+        return [
+            MediaTypeResolver::class,
+        ];
     }
 
     public function getImplementedFieldInterfaceResolverClasses(): array
@@ -72,7 +74,7 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
      * Get the Schema Definition from the Interface
      */
     protected function getFieldInterfaceSchemaDefinitionResolverClass(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?string {
         return match ($fieldName) {
@@ -81,18 +83,18 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
             'slug'
                 => QueryableFieldInterfaceResolver::class,
             default
-                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'url' => $this->translationAPI->__('Media element URL', 'pop-media'),
             'urlPath' => $this->translationAPI->__('Media element URL path', 'pop-media'),
             'slug' => $this->translationAPI->__('Media element slug', 'pop-media'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -102,7 +104,7 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -125,6 +127,6 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
                 return $mediaItem->post_name;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

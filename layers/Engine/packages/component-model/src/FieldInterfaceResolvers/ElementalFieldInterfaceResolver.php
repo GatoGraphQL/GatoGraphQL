@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\Interface\ElementalInterfaceTypeResolver;
 
-class ElementalFieldInterfaceResolver extends AbstractFieldInterfaceResolver
+class ElementalFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver
 {
-    public function getInterfaceName(): string
+    public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
-        return 'Elemental';
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('The fundamental fields that must be implemented by all objects', 'component-model');
+        return [
+            ElementalInterfaceTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToImplement(): array

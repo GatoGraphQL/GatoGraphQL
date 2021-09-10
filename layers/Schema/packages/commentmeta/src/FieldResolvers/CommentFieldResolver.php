@@ -7,14 +7,14 @@ namespace PoPSchema\CommentMeta\FieldResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoPSchema\CommentMeta\Facades\CommentMetaTypeAPIFacade;
 use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
 
 class CommentFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             CommentTypeResolver::class,
@@ -40,7 +40,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
      * Get the Schema Definition from the Interface
      */
     protected function getFieldInterfaceSchemaDefinitionResolverClass(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?string {
         return match ($fieldName) {
@@ -48,7 +48,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
             'metaValues'
                 => WithMetaFieldInterfaceResolver::class,
             default
-                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($objectTypeResolver, $fieldName),
         };
     }
 
@@ -59,7 +59,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -73,12 +73,12 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
             case 'metaValue':
             case 'metaValues':
                 return $commentMetaAPI->getCommentMeta(
-                    $relationalTypeResolver->getID($comment),
+                    $objectTypeResolver->getID($comment),
                     $fieldArgs['key'],
                     $fieldName === 'metaValue'
                 );
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

@@ -6,7 +6,7 @@ namespace PoPSchema\Locations\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 
@@ -24,20 +24,20 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'locationsmapURL' => SchemaDefinition::TYPE_URL,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'locationsmapURL' => $this->translationAPI->__('Locations map URL', 'pop-locations'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -47,7 +47,7 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -57,7 +57,7 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
     ): mixed {
         switch ($fieldName) {
             case 'locationsmapURL':
-                $locations = $relationalTypeResolver->resolveValue($resultItem, 'locations', $variables, $expressions, $options);
+                $locations = $objectTypeResolver->resolveValue($resultItem, 'locations', $variables, $expressions, $options);
                 if (GeneralUtils::isError($locations)) {
                     return null;
                 }
@@ -69,11 +69,11 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
                             POP_INPUTNAME_LOCATIONID => $locations,
                             // In order to keep always the same layout for the same URL, we add the param of which object we are coming from
                             // (Then, in the modal map, it will show either post/user layout, and that layout will be cached for that post/user but not for other objects)
-                            $this->getDbobjectIdField() => $relationalTypeResolver->getID($resultItem),
+                            $this->getDbobjectIdField() => $objectTypeResolver->getID($resultItem),
                         ], RouteUtils::getRouteURL(POP_LOCATIONS_ROUTE_LOCATIONSMAP))
                     );
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

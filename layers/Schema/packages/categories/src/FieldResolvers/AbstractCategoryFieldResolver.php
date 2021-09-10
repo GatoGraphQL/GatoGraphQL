@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\FieldResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 
@@ -41,7 +39,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
      * Get the Schema Definition from the Interface
      */
     protected function getFieldInterfaceSchemaDefinitionResolverClass(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?string {
         return match ($fieldName) {
@@ -50,32 +48,32 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
             'slug'
                 => QueryableFieldInterfaceResolver::class,
             default
-                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'name' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
             'count' => SchemaDefinition::TYPE_INT,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'name',
             'count'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'url' => $this->translationAPI->__('Category URL', 'pop-categories'),
@@ -86,7 +84,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
             'parentCategory' => $this->translationAPI->__('Parent category (if this category is a child of another one)', 'pop-categories'),
             'count' => $this->translationAPI->__('Number of custom posts containing this category', 'pop-categories'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -96,7 +94,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -108,13 +106,13 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
         $category = $resultItem;
         switch ($fieldName) {
             case 'url':
-                return $categoryTypeAPI->getCategoryURL($relationalTypeResolver->getID($category));
+                return $categoryTypeAPI->getCategoryURL($objectTypeResolver->getID($category));
 
             case 'urlPath':
-                return $categoryTypeAPI->getCategoryURLPath($relationalTypeResolver->getID($category));
+                return $categoryTypeAPI->getCategoryURLPath($objectTypeResolver->getID($category));
 
             case 'name':
-                return $categoryTypeAPI->getCategoryName($relationalTypeResolver->getID($category));
+                return $categoryTypeAPI->getCategoryName($objectTypeResolver->getID($category));
 
             case 'slug':
                 return $categoryTypeAPI->getCategorySlug($category);
@@ -123,22 +121,22 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
                 return $categoryTypeAPI->getCategoryDescription($category);
 
             case 'parentCategory':
-                return $categoryTypeAPI->getCategoryParentID($relationalTypeResolver->getID($category));
+                return $categoryTypeAPI->getCategoryParentID($objectTypeResolver->getID($category));
 
             case 'count':
                 return $categoryTypeAPI->getCategoryItemCount($category);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'parentCategory':
                 return $this->getCategoryTypeResolverClass();
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

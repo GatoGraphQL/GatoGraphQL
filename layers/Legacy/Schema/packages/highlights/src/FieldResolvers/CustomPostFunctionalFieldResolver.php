@@ -8,17 +8,17 @@ use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Object\AbstractCustomPostTypeResolver;
 
 class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(
-            IsCustomPostFieldInterfaceResolver::class,
-        );
+        return [
+            AbstractCustomPostTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
@@ -28,15 +28,15 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'addhighlightURL' => SchemaDefinition::TYPE_URL,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'addhighlightURL',
@@ -44,15 +44,15 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'addhighlightURL' => $this->translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -62,7 +62,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -83,10 +83,10 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 // $input_name = $moduleprocessor_manager->getProcessor($input)->getName($input);
                 $input_name = POP_INPUTNAME_HIGHLIGHTEDPOST;
                 return GeneralUtils::addQueryArgs([
-                    $input_name => $relationalTypeResolver->getID($post),
+                    $input_name => $objectTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL($route));
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

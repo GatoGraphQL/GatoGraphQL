@@ -23,10 +23,10 @@ class CommentTypeResolver extends AbstractObjectTypeResolver
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected CommentTypeAPIInterface $commentTypeAPI,
     ) {
         parent::__construct(
@@ -34,10 +34,10 @@ class CommentTypeResolver extends AbstractObjectTypeResolver
             $hooksAPI,
             $instanceManager,
             $schemaNamespacingService,
+            $schemaDefinitionService,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
-            $schemaDefinitionService,
         );
     }
 

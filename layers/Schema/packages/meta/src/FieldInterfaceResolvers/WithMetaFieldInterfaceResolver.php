@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace PoPSchema\Meta\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\Meta\TypeResolvers\Interface\WithMetaInterfaceTypeResolver;
 
-class WithMetaFieldInterfaceResolver extends AbstractFieldInterfaceResolver
+class WithMetaFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver
 {
-    public function getInterfaceName(): string
+    public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
-        return 'WithMeta';
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('Fields with meta values', 'custompostmeta');
+        return [
+            WithMetaInterfaceTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToImplement(): array

@@ -11,6 +11,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
+use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
@@ -19,9 +20,11 @@ class IsCustomPostFieldInterfaceResolver extends AbstractQueryableSchemaFieldInt
 {
     use EnumTypeFieldInterfaceSchemaDefinitionResolverTrait;
 
-    public function getInterfaceName(): string
+    public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
-        return 'IsCustomPost';
+        return [
+            IsCustomPostInterfaceTypeResolver::class,
+        ];
     }
 
     public function getImplementedFieldInterfaceResolverClasses(): array
@@ -61,11 +64,6 @@ class IsCustomPostFieldInterfaceResolver extends AbstractQueryableSchemaFieldInt
             default
                 => parent::getFieldInterfaceSchemaDefinitionResolverClass($fieldName),
         };
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('Entities representing a custom post', 'customposts');
     }
 
     public function getSchemaFieldType(string $fieldName): string

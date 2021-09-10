@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolverDecorators;
 
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInterface
 {
@@ -23,6 +24,11 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
     ) {
     }
 
+    final public function getClassesToAttachTo(): array
+    {
+        return $this->getRelationalTypeResolverClassesToAttachTo();
+    }
+
     /**
      * Allow to disable the functionality
      */
@@ -34,7 +40,7 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
     /**
      * Return an array of fieldNames as keys, and, for each fieldName, an array of directives (including directive arguments) to be applied always on the field
      */
-    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array
     {
         return [];
     }

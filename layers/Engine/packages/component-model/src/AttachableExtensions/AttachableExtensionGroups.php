@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\AttachableExtensions;
 class AttachableExtensionGroups
 {
     public const FIELDRESOLVERS = 'fieldresolvers';
+    public const FIELDINTERFACERESOLVERS = 'fieldinterfaceresolvers';
     public const DIRECTIVERESOLVERS = 'directiveresolvers';
     public const TYPERESOLVERPICKERS = 'typeresolverpickers';
     public const TYPERESOLVERDECORATORS = 'typeresolverdecorators';

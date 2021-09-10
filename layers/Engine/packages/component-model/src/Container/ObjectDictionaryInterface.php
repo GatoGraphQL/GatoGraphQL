@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Container;
 
 interface ObjectDictionaryInterface
 {
-    public function get(string $class, $id);
-    public function has(string $class, $id): bool;
-    public function set(string $class, $id, $instance): void;
+    public function get(string $class, string | int $id): mixed;
+    public function has(string $class, string | int $id): bool;
+    public function set(string $class, string | int $id, mixed $instance): void;
 }

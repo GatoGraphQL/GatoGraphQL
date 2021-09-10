@@ -16,14 +16,16 @@ use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(RootTypeResolver::class);
+        return [
+            RootTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
@@ -33,33 +35,33 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'fullSchema' => SchemaDefinition::TYPE_OBJECT,
-            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'fullSchema' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'fullSchema' => $this->translationAPI->__('The whole API schema, exposing what fields can be queried', 'api'),
-            default => parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName),
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'fullSchema':
                 /**
@@ -118,7 +120,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -153,7 +155,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                     $generalMessages = [
                         'processed' => [],
                     ];
-                    $rootTypeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($relationalTypeResolver);
+                    $rootTypeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($objectTypeResolver);
                     // Normalize properties in $fieldArgs with their defaults
                     // By default make it deep. To avoid it, must pass argument (deep:false)
                     // By default, use the "flat" shape
@@ -171,7 +173,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                     if ($isFlatShape) {
                         $generalMessages[SchemaDefinition::ARGNAME_TYPES] = [];
                     }
-                    $typeSchemaDefinition = $relationalTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $schemaOptions);
+                    $typeSchemaDefinition = $objectTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $schemaOptions);
                     $schemaDefinition[SchemaDefinition::ARGNAME_TYPES] = $typeSchemaDefinition;
 
                     // Add the queryType
@@ -231,6 +233,6 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                 return $schemaDefinition;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

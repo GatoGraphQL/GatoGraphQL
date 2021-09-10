@@ -32,6 +32,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * @var array<string, mixed>
      */
     protected ?array $fullSchemaDefinition = null;
+    protected bool $isFullSchemaDefinitionLoaded = false;
     /**
      * @var array<string, AbstractSchemaDefinitionReferenceObject>
      */
@@ -54,10 +55,15 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * It can store the value in the cache.
      * Use cache with care: if the schema is dynamic, it should not be cached.
      * Public schema: can cache, Private schema: cannot cache.
+     *
+     * Return null if retrieving the schema data via field "fullSchema" failed
      */
-    public function &getFullSchemaDefinition(): array
+    public function &getFullSchemaDefinition(): ?array
     {
-        if (is_null($this->fullSchemaDefinition)) {
+        // Use a bool flag, because the fullSchemaDefinition can be null!
+        if (!$this->isFullSchemaDefinitionLoaded) {
+            $this->isFullSchemaDefinitionLoaded = true;
+
             // These are the configuration options to work with the "full schema"
             $fieldArgs = [
                 'deep' => true,
@@ -90,10 +96,15 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             }
 
             // If either not using cache, or using but the value had not been cached, then calculate the value
-            if (!$this->fullSchemaDefinition) {
+            if ($this->fullSchemaDefinition === null) {
                 // Get the schema definitions
                 $schemaDefinitionRegistry = SchemaDefinitionRegistryFacade::getInstance();
                 $this->fullSchemaDefinition = $schemaDefinitionRegistry->getSchemaDefinition($fieldArgs);
+
+                // If the schemaDefinition is null, it failed generating it. Then do nothing
+                if ($this->fullSchemaDefinition === null) {
+                    return $this->fullSchemaDefinition;
+                }
 
                 // Convert the schema from PoP's format to what GraphQL needs to work with
                 $this->prepareSchemaDefinitionForGraphQL();

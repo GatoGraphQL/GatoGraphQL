@@ -7,15 +7,17 @@ namespace PoPWPSchema\Menus\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoPSchema\Menus\TypeResolvers\Object\MenuTypeResolver;
 use WP_Term;
 
 class MenuFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(MenuTypeResolver::class);
+        return [
+            MenuTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
@@ -28,7 +30,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'name',
@@ -38,11 +40,11 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
             'count'
                 => SchemaDefinition::TYPE_INT,
             default
-                => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'count'
@@ -50,18 +52,18 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
             'locations'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'name' => $this->translationAPI->__('Menu\'s name', 'pop-menus'),
             'slug' => $this->translationAPI->__('Menu\'s slug', 'pop-menus'),
             'count' => $this->translationAPI->__('Number of items contained in the menu', 'pop-menus'),
             'locations' => $this->translationAPI->__('To which locations has the menu been assigned to', 'pop-menus'),
-            default => parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName),
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
@@ -72,7 +74,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -82,7 +84,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     ): mixed {
         /** @var WP_Term */
         $menu = $resultItem;
-        $menuID = $relationalTypeResolver->getID($menu);
+        $menuID = $objectTypeResolver->getID($menu);
         switch ($fieldName) {
             case 'name':
                 return $menu->name;
@@ -100,6 +102,6 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                 );
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

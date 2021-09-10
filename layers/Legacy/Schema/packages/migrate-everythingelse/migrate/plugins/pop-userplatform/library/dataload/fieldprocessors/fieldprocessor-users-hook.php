@@ -8,9 +8,11 @@ use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(UserTypeResolver::class);
+        return [
+            UserTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

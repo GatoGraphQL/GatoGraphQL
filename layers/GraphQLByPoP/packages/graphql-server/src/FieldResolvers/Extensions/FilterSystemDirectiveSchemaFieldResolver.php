@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\Extensions;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveTypeEnum;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\SchemaTypeResolver;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\SchemaFieldResolver;
@@ -15,9 +15,11 @@ use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
 
 class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(SchemaTypeResolver::class);
+        return [
+            SchemaTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
@@ -37,22 +39,22 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
     //  * Only use this fieldResolver when parameter `ofTypes` is provided.
     //  * Otherwise, use the default implementation
     //  */
-    // public function resolveCanProcess(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName, array $fieldArgs = []): bool
+    // public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): bool
     // {
     //     return $fieldName == 'directives' && isset($fieldArgs['ofTypes']);
     // }
 
-    // public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    // public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     // {
     //     $descriptions = [
     //         'directives' => $this->translationAPI->__('All directives registered in the data graph, allowing to remove the system directives', 'graphql-api'),
     //     ];
-    //     return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+    //     return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     // }
 
-    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'directives':
                 /**
@@ -86,7 +88,7 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -137,6 +139,6 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
                 return $directiveIDs;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

@@ -12,8 +12,10 @@ class PostTagFieldResolver extends AbstractTagFieldResolver
 {
     use PostTagAPISatisfiedContractTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(PostTagTypeResolver::class);
+        return [
+            PostTagTypeResolver::class,
+        ];
     }
 }

@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\Pages\ComponentConfiguration;
@@ -25,9 +25,11 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(RootTypeResolver::class);
+        return [
+            RootTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
@@ -54,7 +56,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'page' => $this->translationAPI->__('Page with a specific ID', 'pages'),
@@ -66,19 +68,19 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             'pagesForAdmin' => $this->translationAPI->__('[Unrestricted] Pages', 'pages'),
             'pageCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of pages', 'pages'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'pageCount' => SchemaDefinition::TYPE_INT,
             'pageCountForAdmin' => SchemaDefinition::TYPE_INT,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'pageCount',
@@ -88,11 +90,11 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             'pagesForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getFieldDataFilteringModule(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
+    public function getFieldDataFilteringModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'pages' => [
@@ -127,11 +129,11 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
                 CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS
             ],
-            default => parent::getFieldDataFilteringModule($relationalTypeResolver, $fieldName),
+            default => parent::getFieldDataFilteringModule($objectTypeResolver, $fieldName),
         };
     }
 
-    protected function getFieldDataFilteringDefaultValues(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'pages':
@@ -144,7 +146,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                     $limitFilterInputName => ComponentConfiguration::getPageListDefaultLimit(),
                 ];
         }
-        return parent::getFieldDataFilteringDefaultValues($relationalTypeResolver, $fieldName);
+        return parent::getFieldDataFilteringDefaultValues($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -153,13 +155,13 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
      * @return string[] Error messages
      */
     public function validateFieldArgument(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
         $errors = parent::validateFieldArgument(
-            $relationalTypeResolver,
+            $objectTypeResolver,
             $fieldName,
             $fieldArgName,
             $fieldArgValue,
@@ -191,7 +193,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -200,7 +202,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        $query = $this->convertFieldArgsToFilteringQueryArgs($relationalTypeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'page':
             case 'pageBySlug':
@@ -218,10 +220,10 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                 return $pageTypeAPI->getPageCount($query);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'page':
@@ -233,6 +235,6 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                 return PageTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

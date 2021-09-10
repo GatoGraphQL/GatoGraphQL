@@ -6,8 +6,10 @@ namespace PoP\AccessControl\Hooks;
 
 use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDirectivesForFieldsTrait;
 use PoP\AccessControl\Hooks\AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
 abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet extends AbstractAccessControlForFieldsInPrivateSchemaHookSet
@@ -31,16 +33,22 @@ abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet 
     /**
      * Remove fieldName "roles" if the user is not logged in
      *
-     * @param string[] $fieldInterfaceResolverClasses
+     * @param string[] $interfaceTypeResolverClasses
      */
     protected function removeFieldName(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldResolverInterface $fieldResolver,
-        array $fieldInterfaceResolverClasses,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
-        // Obtain all entries for the current combination of [typeResolver or $fieldInterfaceClass]/fieldName
-        foreach ($this->getEntries($relationalTypeResolver, $fieldInterfaceResolverClasses, $fieldName) as $entry) {
+        // Obtain all entries for the current combination of [typeResolver or interfaceTypeResolverClass]/fieldName
+        foreach (
+            $this->getEntries(
+                $objectTypeOrInterfaceTypeResolver,
+                $interfaceTypeResolverClasses,
+                $fieldName
+            ) as $entry
+        ) {
             // Obtain the 3rd value on each entry: if the validation is "in" or "out"
             $entryValue = $entry[2] ?? null;
             // Let the implementation class decide if to remove the field or not

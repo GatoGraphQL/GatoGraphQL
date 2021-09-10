@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostMutations\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
@@ -15,9 +15,11 @@ use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(RootTypeResolver::class);
+        return [
+            RootTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
@@ -33,16 +35,16 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
         );
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'createPost' => $this->translationAPI->__('Create a post', 'post-mutations'),
             'updatePost' => $this->translationAPI->__('Update a post', 'post-mutations'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'createPost':
@@ -52,16 +54,16 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                     'updatePost' => true,
                 ];
                 return SchemaDefinitionHelpers::getCreateUpdateCustomPostSchemaFieldArgs(
-                    $relationalTypeResolver,
+                    $objectTypeResolver,
                     $fieldName,
                     $addCustomPostIDConfig[$fieldName],
                     PostTypeResolver::class
                 );
         }
-        return parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
     }
 
-    public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function resolveFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'createPost':
@@ -70,10 +72,10 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                 return UpdatePostMutationResolver::class;
         }
 
-        return parent::resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName);
+        return parent::resolveFieldMutationResolverClass($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'createPost':
@@ -81,6 +83,6 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                 return PostTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

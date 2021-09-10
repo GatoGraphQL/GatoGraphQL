@@ -7,9 +7,11 @@ use PoPSchema\Tags\TypeResolvers\Object\AbstractTagTypeResolver;
 
 class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(AbstractTagTypeResolver::class);
+        return [
+            AbstractTagTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

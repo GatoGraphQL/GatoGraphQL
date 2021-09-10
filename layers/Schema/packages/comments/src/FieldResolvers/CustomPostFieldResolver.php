@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\FieldInterfaceResolvers\CommentableFieldInterfaceResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Object\AbstractCustomPostTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -44,10 +42,10 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         );
     }
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            IsCustomPostFieldInterfaceResolver::class,
+            AbstractCustomPostTypeResolver::class,
         ];
     }
 
@@ -74,7 +72,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
      * Get the Schema Definition from the Interface
      */
     protected function getFieldInterfaceSchemaDefinitionResolverClass(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?string {
         return match ($fieldName) {
@@ -86,7 +84,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
             'commentsForAdmin'
                 => CommentableFieldInterfaceResolver::class,
             default
-                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($objectTypeResolver, $fieldName),
         };
     }
 
@@ -97,7 +95,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -108,16 +106,16 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         $post = $resultItem;
         switch ($fieldName) {
             case 'areCommentsOpen':
-                return $this->commentTypeAPI->areCommentsOpen($relationalTypeResolver->getID($post));
+                return $this->commentTypeAPI->areCommentsOpen($objectTypeResolver->getID($post));
 
             case 'hasComments':
-                return $relationalTypeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
+                return $objectTypeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
         }
 
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($relationalTypeResolver, $fieldName, $fieldArgs),
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
             [
-                'customPostID' => $relationalTypeResolver->getID($post),
+                'customPostID' => $objectTypeResolver->getID($post),
             ]
         );
         switch ($fieldName) {
@@ -130,6 +128,6 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                 return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

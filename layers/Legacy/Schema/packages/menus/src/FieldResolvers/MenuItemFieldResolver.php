@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Menus\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
 
 /**
@@ -21,7 +21,7 @@ abstract class MenuItemFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -48,6 +48,6 @@ abstract class MenuItemFieldResolver extends AbstractDBDataFieldResolver
                 return $this->hooksAPI->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array());
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

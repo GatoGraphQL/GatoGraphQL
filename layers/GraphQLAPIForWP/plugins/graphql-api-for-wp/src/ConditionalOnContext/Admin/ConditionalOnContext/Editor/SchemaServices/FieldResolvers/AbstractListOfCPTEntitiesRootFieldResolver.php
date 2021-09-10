@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\Object\CustomPostTypeResolver;
@@ -23,7 +23,7 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
     /**
      * @return string[]
      */
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
             RootTypeResolver::class,
@@ -33,12 +33,12 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
     /**
      * Do not show in the schema
      */
-    public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): bool
+    public function skipAddingToSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         return true;
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY;
     }
@@ -50,7 +50,7 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -77,7 +77,7 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
     abstract protected function getFieldCustomPostType(string $fieldName): string;
 
     public function getFieldTypeResolverClass(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?string {
         return CustomPostTypeResolver::class;

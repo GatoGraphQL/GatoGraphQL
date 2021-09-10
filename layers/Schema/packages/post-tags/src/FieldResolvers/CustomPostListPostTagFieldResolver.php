@@ -20,9 +20,11 @@ class CustomPostListPostTagFieldResolver extends AbstractCustomPostListTagFieldR
         return false;
     }
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(PostTagTypeResolver::class);
+        return [
+            PostTagTypeResolver::class,
+        ];
     }
 
     protected function getQueryProperty(): string

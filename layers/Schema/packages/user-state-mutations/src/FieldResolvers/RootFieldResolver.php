@@ -7,7 +7,7 @@ namespace PoPSchema\UserStateMutations\FieldResolvers;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LogoutMutationResolver;
@@ -15,9 +15,11 @@ use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(RootTypeResolver::class);
+        return [
+            RootTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
@@ -28,16 +30,16 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'loginUser' => $this->translationAPI->__('Log the user in', 'user-state-mutations'),
             'logoutUser' => $this->translationAPI->__('Log the user out', 'user-state-mutations'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'loginUser':
@@ -56,10 +58,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                     ],
                 ];
         }
-        return parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
     }
 
-    public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function resolveFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'loginUser':
@@ -68,10 +70,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 return LogoutMutationResolver::class;
         }
 
-        return parent::resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName);
+        return parent::resolveFieldMutationResolverClass($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'loginUser':
@@ -79,6 +81,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 return UserTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

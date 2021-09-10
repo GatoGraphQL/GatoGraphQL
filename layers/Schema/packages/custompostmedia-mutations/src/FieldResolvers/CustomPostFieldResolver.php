@@ -10,7 +10,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -18,7 +18,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCustomPostMutationResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolver;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Object\AbstractCustomPostTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
 use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
 
@@ -45,9 +45,11 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         );
     }
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(IsCustomPostFieldInterfaceResolver::class);
+        return [
+            AbstractCustomPostTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
@@ -58,16 +60,16 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'setFeaturedImage' => $this->translationAPI->__('Set the featured image on the custom post', 'custompostmedia-mutations'),
             'removeFeaturedImage' => $this->translationAPI->__('Remove the featured image on the custom post', 'custompostmedia-mutations'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'setFeaturedImage',
@@ -76,10 +78,10 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'setFeaturedImage':
@@ -95,7 +97,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                     ],
                 ];
         }
-        return parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -104,7 +106,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
      * present in $form_data
      */
     public function validateMutationOnResultItem(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): bool {
         switch ($fieldName) {
@@ -112,18 +114,18 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
             case 'removeFeaturedImage':
                 return true;
         }
-        return parent::validateMutationOnResultItem($relationalTypeResolver, $fieldName);
+        return parent::validateMutationOnResultItem($objectTypeResolver, $fieldName);
     }
 
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName
     ): array {
         $fieldArgs = parent::getFieldArgsToExecuteMutation(
             $fieldArgs,
-            $relationalTypeResolver,
+            $objectTypeResolver,
             $resultItem,
             $fieldName
         );
@@ -131,14 +133,14 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'setFeaturedImage':
             case 'removeFeaturedImage':
-                $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $relationalTypeResolver->getID($customPost);
+                $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);
                 break;
         }
 
         return $fieldArgs;
     }
 
-    public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function resolveFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'setFeaturedImage':
@@ -147,10 +149,10 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                 return RemoveFeaturedImageOnCustomPostMutationResolver::class;
         }
 
-        return parent::resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName);
+        return parent::resolveFieldMutationResolverClass($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'setFeaturedImage':
@@ -158,6 +160,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                 return CustomPostUnionTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

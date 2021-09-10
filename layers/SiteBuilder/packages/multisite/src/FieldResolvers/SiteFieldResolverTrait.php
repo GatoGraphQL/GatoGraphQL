@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 trait SiteFieldResolverTrait
 {
@@ -12,7 +12,7 @@ trait SiteFieldResolverTrait
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessResultItem(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = []
@@ -24,6 +24,6 @@ trait SiteFieldResolverTrait
         if ($site->getHost() != $cmsengineapi->getHost()) {
             return false;
         }
-        return parent::resolveCanProcessResultItem($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs);
+        return parent::resolveCanProcessResultItem($objectTypeResolver, $resultItem, $fieldName, $fieldArgs);
     }
 }

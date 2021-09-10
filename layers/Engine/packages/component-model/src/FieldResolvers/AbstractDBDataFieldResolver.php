@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
-abstract class AbstractDBDataFieldResolver extends AbstractFieldResolver
+abstract class AbstractDBDataFieldResolver extends AbstractObjectTypeFieldResolver
 {
 }

@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use PoP\Hooks\HooksAPIInterface;
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
-use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
-use PoP\ComponentModel\Facades\Registries\FieldInterfaceRegistryFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\Hooks\HooksAPIInterface;
 
 /**
  * Base class for configuring the persisted GraphQL query before its execution
@@ -20,7 +19,9 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry
+        protected ModuleRegistryInterface $moduleRegistry,
+        protected TypeRegistryInterface $typeRegistry,
+        protected DirectiveRegistryInterface $directiveRegistry,
     ) {
     }
 
@@ -28,12 +29,12 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      * Keep a map of all namespaced type names to their resolver classes
      * @var array<string, array>|null
      */
-    protected ?array $namespacedTypeNameClasses = null;
+    protected ?array $namespacedObjectTypeNameResolverClasses = null;
     /**
      * Keep a map of all namespaced field interface names to their resolver classes
      * @var array<string, array>|null
      */
-    protected ?array $namespacedFieldInterfaceNameClasses = null;
+    protected ?array $namespacedInterfaceTypeNameResolverClasses = null;
     /**
      * Keep a map of all directives names to their resolver classes
      * @var array<string, array>|null
@@ -41,58 +42,56 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     protected ?array $directiveNameClasses = null;
 
     /**
-     * Lazy load and return the `$namespacedTypeNameClasses` array
+     * Lazy load and return the `$namespacedObjectTypeNameResolverClasses` array
      *
      * @return array<string, array>
      */
-    protected function getNamespacedTypeNameClasses(): array
+    protected function getNamespacedObjectTypeNameClasses(): array
     {
-        if (is_null($this->namespacedTypeNameClasses)) {
-            $this->initNamespacedTypeNameClasses();
+        if ($this->namespacedObjectTypeNameResolverClasses === null) {
+            $this->initNamespacedObjectTypeNameClasses();
         }
-        return (array)$this->namespacedTypeNameClasses;
+        return (array)$this->namespacedObjectTypeNameResolverClasses;
     }
 
     /**
-     * Lazy load and return the `$namespacedTypeNameClasses` array
+     * Lazy load and return the `$namespacedInterfaceTypeNameResolverClasses` array
      *
      * @return array<string, array>
      */
-    protected function getNamespacedFieldInterfaceNameClasses(): array
+    protected function getNamespacedInterfaceTypeNameClasses(): array
     {
-        if (is_null($this->namespacedFieldInterfaceNameClasses)) {
-            $this->initNamespacedFieldInterfaceNameClasses();
+        if ($this->namespacedInterfaceTypeNameResolverClasses === null) {
+            $this->initNamespacedInterfaceTypeNameClasses();
         }
-        return (array)$this->namespacedFieldInterfaceNameClasses;
+        return (array)$this->namespacedInterfaceTypeNameResolverClasses;
     }
 
     /**
-     * Initialize the `$namespacedTypeNameClasses` array
+     * Initialize the `$namespacedObjectTypeNameResolverClasses` array
      */
-    protected function initNamespacedTypeNameClasses(): void
+    protected function initNamespacedObjectTypeNameClasses(): void
     {
-        $typeRegistry = TypeRegistryFacade::getInstance();
         // For each class, obtain its namespacedTypeName
-        $typeResolvers = $typeRegistry->getTypeResolvers();
-        $this->namespacedTypeNameClasses = [];
-        foreach ($typeResolvers as $typeResolver) {
-            $typeResolverNamespacedName = $typeResolver->getNamespacedTypeName();
-            $this->namespacedTypeNameClasses[$typeResolverNamespacedName] = $typeResolver::class;
+        $objectTypeResolvers = $this->typeRegistry->getObjectTypeResolvers();
+        $this->namespacedObjectTypeNameResolverClasses = [];
+        foreach ($objectTypeResolvers as $objectTypeResolver) {
+            $objectTypeResolverNamespacedName = $objectTypeResolver->getNamespacedTypeName();
+            $this->namespacedObjectTypeNameResolverClasses[$objectTypeResolverNamespacedName] = $objectTypeResolver::class;
         }
     }
 
     /**
-     * Initialize the `$namespacedTypeNameClasses` array
+     * Initialize the `$namespacedObjectTypeNameResolverClasses` array
      */
-    protected function initNamespacedFieldInterfaceNameClasses(): void
+    protected function initNamespacedInterfaceTypeNameClasses(): void
     {
-        $fieldInterfaceRegistry = FieldInterfaceRegistryFacade::getInstance();
         // For each interface, obtain its namespacedInterfaceName
-        $fieldInterfaceResolvers = $fieldInterfaceRegistry->getFieldInterfaceResolvers();
-        $this->namespacedFieldInterfaceNameClasses = [];
-        foreach ($fieldInterfaceResolvers as $fieldInterfaceResolver) {
-            $fieldInterfaceResolverNamespacedName = $fieldInterfaceResolver->getNamespacedInterfaceName();
-            $this->namespacedFieldInterfaceNameClasses[$fieldInterfaceResolverNamespacedName] = $fieldInterfaceResolver::class;
+        $interfaceTypeResolvers = $this->typeRegistry->getInterfaceTypeResolvers();
+        $this->namespacedInterfaceTypeNameResolverClasses = [];
+        foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
+            $interfaceTypeResolverNamespacedName = $interfaceTypeResolver->getNamespacedTypeName();
+            $this->namespacedInterfaceTypeNameResolverClasses[$interfaceTypeResolverNamespacedName] = $interfaceTypeResolver::class;
         }
     }
 
@@ -103,7 +102,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function getDirectiveNameClasses(): array
     {
-        if (is_null($this->directiveNameClasses)) {
+        if ($this->directiveNameClasses === null) {
             $this->initDirectiveNameClasses();
         }
         return (array)$this->directiveNameClasses;
@@ -113,8 +112,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function initDirectiveNameClasses(): void
     {
-        $directiveRegistry = DirectiveRegistryFacade::getInstance();
-        $directiveResolvers = $directiveRegistry->getDirectiveResolvers();
+        $directiveResolvers = $this->directiveRegistry->getDirectiveResolvers();
         // For each class, obtain its directive name. Notice that different directives
         // can have the same name (eg: @translate as implemented for Google and Azure),
         // then the mapping goes from name to list of resolvers
@@ -138,27 +136,27 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function getEntriesFromField(string $selectedField, mixed $value): array
     {
-        $namespacedTypeNameClasses = $this->getNamespacedTypeNameClasses();
+        $namespacedObjectTypeNameResolverClasses = $this->getNamespacedObjectTypeNameClasses();
         // The field is composed by the type namespaced name, and the field name, separated by "."
         // Extract these values
         $entry = explode(BlockConstants::TYPE_FIELD_SEPARATOR_FOR_DB, $selectedField);
         // Maybe the namespaced name corresponds to a type, maybe to an interface
-        $maybeNamespacedTypeName = $entry[0];
-        $maybeNamespacedFieldInterfaceName = $entry[0];
+        $maybeNamespacedObjectTypeName = $entry[0];
+        $maybeNamespacedInterfaceTypeName = $entry[0];
         $field = $entry[1];
         // From the type, obtain which resolver class processes it
-        if ($typeResolverClass = $namespacedTypeNameClasses[$maybeNamespacedTypeName] ?? null) {
+        if ($objectTypeResolverClass = $namespacedObjectTypeNameResolverClasses[$maybeNamespacedObjectTypeName] ?? null) {
             // Check `getConfigurationEntries` to understand format of each entry
             return [
-                [$typeResolverClass, $field, $value],
+                [$objectTypeResolverClass, $field, $value],
             ];
         }
         // If it is an interface, add all the types implementing that interface!
-        $namespacedFieldInterfaceNameClasses = $this->getNamespacedFieldInterfaceNameClasses();
-        if ($fieldInterfaceResolverClass = $namespacedFieldInterfaceNameClasses[$maybeNamespacedFieldInterfaceName] ?? null) {
+        $namespacedInterfaceTypeNameResolverClasses = $this->getNamespacedInterfaceTypeNameClasses();
+        if ($interfaceTypeResolverClass = $namespacedInterfaceTypeNameResolverClasses[$maybeNamespacedInterfaceTypeName] ?? null) {
             // Check `getConfigurationEntries` to understand format of each entry
             return [
-                [$fieldInterfaceResolverClass, $field, $value],
+                [$interfaceTypeResolverClass, $field, $value],
             ];
         }
 

@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\Object;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\Object\QueryRootTypeDataLoader;
 
 class QueryRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
@@ -35,11 +35,13 @@ class QueryRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
         return QueryRootTypeDataLoader::class;
     }
 
-    protected function isFieldNameConditionSatisfiedForSchema(FieldResolverInterface $fieldResolver, string $fieldName): bool
-    {
+    protected function isFieldNameConditionSatisfiedForSchema(
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
+        string $fieldName
+    ): bool {
         return
             // Fields "queryRoot" and "mutationRoot" are helpers, must not be ported to QueryRoot
             !in_array($fieldName, ['queryRoot', 'mutationRoot'])
-            && $fieldResolver->resolveFieldMutationResolverClass($this, $fieldName) === null;
+            && $objectTypeFieldResolver->resolveFieldMutationResolverClass($this, $fieldName) === null;
     }
 }

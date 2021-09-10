@@ -9,9 +9,9 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait GlobalDirectiveResolverTrait
 {
-    public function getClassesToAttachTo(): array
+    public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array
     {
-        // Be attached to all typeResolvers
+        // Global: Be attached to all RelationalTypeResolvers
         return [
             AbstractRelationalTypeResolver::class,
         ];

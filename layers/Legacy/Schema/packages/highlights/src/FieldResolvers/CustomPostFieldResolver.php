@@ -8,20 +8,20 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Object\AbstractCustomPostTypeResolver;
 use PoPSchema\Highlights\TypeResolvers\Object\HighlightTypeResolver;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(
-            IsCustomPostFieldInterfaceResolver::class,
-        );
+        return [
+            AbstractCustomPostTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
@@ -33,16 +33,16 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match($fieldName) {
             'hasHighlights' => SchemaDefinition::TYPE_BOOL,
             'highlightsCount' => SchemaDefinition::TYPE_INT,
-            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'hasHighlights',
@@ -51,18 +51,18 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
             'highlights'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'highlights' => $this->translationAPI->__('', ''),
             'hasHighlights' => $this->translationAPI->__('', ''),
             'highlightsCount' => $this->translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -72,7 +72,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -90,7 +90,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                     'meta-query' => [
                         [
                             'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_HIGHLIGHTEDPOST),
-                            'value' => $relationalTypeResolver->getID($customPost),
+                            'value' => $objectTypeResolver->getID($customPost),
                         ],
                     ],
                     'custompost-types' => [POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT],
@@ -101,30 +101,30 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                 return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'hasHighlights':
-                $referencedbyCount = $relationalTypeResolver->resolveValue($resultItem, 'highlightsCount', $variables, $expressions, $options);
+                $referencedbyCount = $objectTypeResolver->resolveValue($resultItem, 'highlightsCount', $variables, $expressions, $options);
                 if (GeneralUtils::isError($referencedbyCount)) {
                     return $referencedbyCount;
                 }
                 return $referencedbyCount > 0;
 
             case 'highlightsCount':
-                $referencedby = $relationalTypeResolver->resolveValue($resultItem, 'highlights', $variables, $expressions, $options);
+                $referencedby = $objectTypeResolver->resolveValue($resultItem, 'highlights', $variables, $expressions, $options);
                 if (GeneralUtils::isError($referencedby)) {
                     return $referencedby;
                 }
                 return count($referencedby);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'highlights':
                 return HighlightTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

@@ -1,22 +1,22 @@
 <?php
-use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\PostTags\TypeResolvers\Object\PostTagTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPosts\TypeResolvers\Object\AbstractCustomPostTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\Object\PostTagTypeResolver;
+use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(
-            IsCustomPostFieldInterfaceResolver::class,
+        return [
+            AbstractCustomPostTypeResolver::class,
             UserTypeResolver::class,
             PostTagTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

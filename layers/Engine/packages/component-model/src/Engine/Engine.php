@@ -37,6 +37,7 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\Union\UnionTypeResolverInterface;
@@ -662,8 +663,8 @@ class Engine implements EngineInterface
                 // Obtain the type of the object
                 $exists = false;
                 if ($resultItem = $resultIDItems[$resultItemID] ?? null) {
-                    $targetTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($resultItem);
-                    if (!is_null($targetTypeResolver)) {
+                    $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($resultItem);
+                    if ($targetObjectTypeResolver !== null) {
                         $exists = true;
                         // The ID will contain the type. Remove it
                         list(
@@ -671,7 +672,7 @@ class Engine implements EngineInterface
                             $resultItemID
                         ) = UnionTypeHelpers::extractDBObjectTypeAndID($resultItemID);
 
-                        $convertedTypeResolverClass = get_class($targetTypeResolver);
+                        $convertedTypeResolverClass = get_class($targetObjectTypeResolver);
                         $convertedTypeResolverClassDataItems[$convertedTypeResolverClass][$resultItemID] = $dataItem;
                         $convertedTypeResolverClassDBKeys[$convertedTypeResolverClass] = $resultItemDBKey;
                     }
@@ -1565,8 +1566,7 @@ class Engine implements EngineInterface
 
                         // If it's a unionTypeResolver, get the typeResolver for each resultItem
                         // to obtain the subcomponent typeResolver
-                        /** @var UnionTypeResolverInterface */
-                        $relationalTypeResolver = $relationalTypeResolver;
+                        /** @var UnionTypeResolverInterface $relationalTypeResolver */
                         $resultItemTypeResolvers = $relationalTypeResolver->getResultItemIDTargetTypeResolvers($typeResolver_ids);
                         $iterationTypeResolverIDs = [];
                         foreach ($typeResolver_ids as $id) {
@@ -1576,11 +1576,13 @@ class Engine implements EngineInterface
                                 $iterationTypeResolverIDs[$resultItemTypeResolverClass][] = $id;
                             }
                         }
-                        foreach ($iterationTypeResolverIDs as $targetTypeResolverClass => $targetIDs) {
-                            $targetTypeResolver = $this->instanceManager->getInstance($targetTypeResolverClass);
-                            $this->processSubcomponentData($relationalTypeResolver, $targetTypeResolver, $targetIDs, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
+                        foreach ($iterationTypeResolverIDs as $targetObjectTypeResolverClass => $targetIDs) {
+                            /** @var ObjectTypeResolverInterface */
+                            $targetObjectTypeResolver = $this->instanceManager->getInstance($targetObjectTypeResolverClass);
+                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetIDs, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
                         }
                     } else {
+                        /** @var ObjectTypeResolverInterface $relationalTypeResolver */
                         $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolver_ids, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
                     }
                 }
@@ -1593,7 +1595,7 @@ class Engine implements EngineInterface
         // Executing the following query will produce duplicates on SchemaWarnings:
         // ?query=posts(limit:3.5).title,posts(limit:extract(posts(limit:4.5),saraza)).title
         // This is unavoidable, since add schemaWarnings (and, correspondingly, errors and deprecations) in functions
-        // `resolveSchemaValidationWarningDescriptions` and `resolveValue` from the AbstractRelationalTypeResolver
+        // `resolveSchemaValidationWarningDescriptions` and `resolveValue` from the AbstractObjectTypeResolver
         // Ideally, doing it in `resolveValue` is not needed, since it already went through the validation in `resolveSchemaValidationWarningDescriptions`, so it's a duplication
         // However, when having composed fields, the warnings are caught only in `resolveValue`, hence we need to add it there too
         // Then, we will certainly have duplicates. Remove them now
@@ -1648,7 +1650,7 @@ class Engine implements EngineInterface
 
     protected function processSubcomponentData(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        RelationalTypeResolverInterface $targetTypeResolver,
+        ObjectTypeResolverInterface $targetObjectTypeResolver,
         array $typeResolver_ids,
         string $module_path_key,
         array &$databases,
@@ -1657,16 +1659,16 @@ class Engine implements EngineInterface
         array &$unionDBKeyIDs,
         array &$combinedUnionDBKeyIDs,
     ): void {
-        $database_key = $targetTypeResolver->getTypeOutputName();
+        $database_key = $targetObjectTypeResolver->getTypeOutputName();
         foreach ($subcomponents_data_properties as $subcomponent_data_field => $subcomponent_data_properties) {
             // Retrieve the subcomponent typeResolver from the current typeResolver
             // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
-            // However, for the targetTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
+            // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
             $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field);
-            if (!$subcomponent_typeResolver_class && $relationalTypeResolver != $targetTypeResolver) {
-                $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($targetTypeResolver, $subcomponent_data_field);
+            if (!$subcomponent_typeResolver_class && $relationalTypeResolver != $targetObjectTypeResolver) {
+                $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponent_typeResolver_class) {
                 $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field);

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 
 trait EnumTypeFieldInterfaceSchemaDefinitionResolverTrait

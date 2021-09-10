@@ -8,9 +8,11 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(NotificationTypeResolver::class);
+        return [
+            NotificationTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

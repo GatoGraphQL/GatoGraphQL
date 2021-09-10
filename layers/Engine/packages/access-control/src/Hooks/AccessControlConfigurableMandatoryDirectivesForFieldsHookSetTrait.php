@@ -5,16 +5,18 @@ declare(strict_types=1);
 namespace PoP\AccessControl\Hooks;
 
 use PoP\AccessControl\ComponentConfiguration;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
 {
     public function maybeFilterFieldName(
         bool $include,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldResolverInterface $fieldResolver,
-        array $fieldInterfaceResolverClasses,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         /**
@@ -24,7 +26,13 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
             /**
              * If there are no entries, then exit by returning the original hook value
              */
-            if (empty($this->getEntries($relationalTypeResolver, $fieldInterfaceResolverClasses, $fieldName))) {
+            if (
+                empty($this->getEntries(
+                    $objectTypeOrInterfaceTypeResolver,
+                    $interfaceTypeResolverClasses,
+                    $fieldName
+                ))
+            ) {
                 return $include;
             }
         }
@@ -34,9 +42,9 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
          */
         return parent::maybeFilterFieldName(
             $include,
-            $relationalTypeResolver,
-            $fieldResolver,
-            $fieldInterfaceResolverClasses,
+            $objectTypeOrInterfaceTypeResolver,
+            $objectTypeOrInterfaceTypeFieldResolver,
+            $interfaceTypeResolverClasses,
             $fieldName
         );
     }

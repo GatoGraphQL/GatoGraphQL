@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
@@ -13,42 +13,39 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
 {
     use ConfigurableMandatoryDirectivesForFieldsTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getRelationalTypeResolverClassesToAttachTo(): array
     {
         return array_map(
-            function ($entry) {
-                // The tuple has format [typeOrFieldInterfaceResolverClass, fieldName]
-                // or [typeOrFieldInterfaceResolverClass, fieldName, $role]
-                // or [typeOrFieldInterfaceResolverClass, fieldName, $capability]
-                // So, in position [0], will always be the $typeOrFieldInterfaceResolverClass
-                return $entry[0];
-            },
+            // The tuple has format [typeOrFieldInterfaceResolverClass, fieldName]
+            // or [typeOrFieldInterfaceResolverClass, fieldName, $role]
+            // or [typeOrFieldInterfaceResolverClass, fieldName, $capability]
+            // So, in position [0], will always be the $typeOrFieldInterfaceResolverClass
+            fn (array $entry) => $entry[0],
             $this->getConfigurationEntries()
         );
     }
 
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
-    public function getMandatoryDirectivesForFields(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $mandatoryDirectivesForFields = [];
-        $fieldInterfaceResolverClasses = $relationalTypeResolver->getAllImplementedInterfaceClasses();
+        $interfaceTypeResolvers = $objectTypeResolver->getAllImplementedInterfaceTypeResolvers();
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
             // Calculate all the interfaces that define this fieldName
-            $fieldInterfaceResolverClassesForField = array_values(array_filter(
-                $fieldInterfaceResolverClasses,
-                function ($fieldInterfaceResolverClass) use ($fieldName, $instanceManager): bool {
-                    /** @var FieldInterfaceResolverInterface */
-                    $fieldInterfaceResolver = $instanceManager->getInstance($fieldInterfaceResolverClass);
-                    return in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement());
-                }
+            $interfaceTypeResolversForField = array_values(array_filter(
+                $interfaceTypeResolvers,
+                fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => in_array($fieldName, $interfaceTypeResolver->getFieldNamesToImplement()),
             ));
+            $interfaceTypeResolverClassesForField = array_map(
+                'get_class',
+                $interfaceTypeResolversForField
+            );
             foreach (
                 $this->getEntries(
-                    $relationalTypeResolver,
-                    $fieldInterfaceResolverClassesForField,
+                    $objectTypeResolver,
+                    $interfaceTypeResolverClassesForField,
                     $fieldName
                 ) as $entry
             ) {

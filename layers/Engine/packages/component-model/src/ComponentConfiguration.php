@@ -33,6 +33,7 @@ class ComponentConfiguration
     private static bool $setFailingFieldResponseAsNull = false;
     private static bool $removeFieldIfDirectiveFailed = false;
     private static bool $coerceInputFromSingleValueToList = false;
+    private static bool $enableUnionTypeImplementingInterfaceType = false;
 
     /**
      * Initialize component configuration
@@ -332,6 +333,30 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::COERCE_INPUT_FROM_SINGLE_VALUE_TO_LIST;
         $selfProperty = &self::$coerceInputFromSingleValueToList;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    /**
+     * Support GraphQL RFC "Union types can implement interfaces".
+     * It is disabled by default because it can lead to runtime exceptions.
+     *
+     * @see https://github.com/graphql/graphql-spec/issues/518
+     */
+    public static function enableUnionTypeImplementingInterfaceType(): bool
+    {
+        // Define properties
+        $envVariable = Environment::ENABLE_UNION_TYPE_IMPLEMENTING_INTERFACE_TYPE;
+        $selfProperty = &self::$enableUnionTypeImplementingInterfaceType;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

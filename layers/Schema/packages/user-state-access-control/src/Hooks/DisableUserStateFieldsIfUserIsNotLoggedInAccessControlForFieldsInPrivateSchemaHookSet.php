@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateAccessControl\Hooks;
 
 use PoP\AccessControl\ComponentConfiguration;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoPSchema\UserState\FieldResolvers\AbstractUserStateFieldResolver;
 use PoP\AccessControl\Hooks\AbstractAccessControlForFieldsHookSet;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoPSchema\UserState\FieldResolvers\AbstractUserStateFieldResolver;
 
 class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSchemaHookSet extends AbstractAccessControlForFieldsHookSet
 {
@@ -34,14 +36,14 @@ class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSc
     /**
      * Remove the fieldNames if the fieldResolver is an instance of the "user state" one
      *
-     * @param string[] $fieldInterfaceResolverClasses
+     * @param string[] $interfaceTypeResolverClasses
      */
     protected function removeFieldName(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldResolverInterface $fieldResolver,
-        array $fieldInterfaceResolverClasses,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
-        return $fieldResolver instanceof AbstractUserStateFieldResolver;
+        return $objectTypeOrInterfaceTypeFieldResolver instanceof AbstractUserStateFieldResolver;
     }
 }

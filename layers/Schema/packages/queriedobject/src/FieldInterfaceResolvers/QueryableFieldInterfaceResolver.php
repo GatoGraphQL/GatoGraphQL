@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace PoPSchema\QueriedObject\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\QueriedObject\TypeResolvers\Interface\QueryableInterfaceTypeResolver;
 
-class QueryableFieldInterfaceResolver extends AbstractFieldInterfaceResolver
+class QueryableFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver
 {
-    public function getInterfaceName(): string
+    public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
-        return 'Queryable';
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('Entities that can be queried through an URL', 'queriedobject');
+        return [
+            QueryableInterfaceTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToImplement(): array

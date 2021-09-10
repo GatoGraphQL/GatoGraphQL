@@ -12,8 +12,10 @@ class PostCategoryFieldResolver extends AbstractCategoryFieldResolver
 {
     use PostCategoryAPISatisfiedContractTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(PostCategoryTypeResolver::class);
+        return [
+            PostCategoryTypeResolver::class,
+        ];
     }
 }

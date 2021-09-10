@@ -15,9 +15,11 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
 {
     use EnumTypeFieldSchemaDefinitionResolverTrait;
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(UserTypeResolver::class);
+        return [
+            UserTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array

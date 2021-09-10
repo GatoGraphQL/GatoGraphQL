@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\Object;
 
-use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 
 abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObjectTypeResolver
 {
@@ -15,13 +18,28 @@ abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObje
         return RootTypeResolver::class;
     }
 
-    abstract protected function isFieldNameConditionSatisfiedForSchema(FieldResolverInterface $fieldResolver, string $fieldName): bool;
+    abstract protected function isFieldNameConditionSatisfiedForSchema(
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
+        string $fieldName
+    ): bool;
 
-    protected function isFieldNameResolvedByFieldResolver(FieldResolverInterface $fieldResolver, string $fieldName, array $fieldInterfaceResolverClasses): bool
-    {
-        if (!$this->isFieldNameConditionSatisfiedForSchema($fieldResolver, $fieldName)) {
+    protected function isFieldNameResolvedByFieldResolver(
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
+        string $fieldName,
+        array $interfaceTypeResolverClasses,
+    ): bool {
+        if (
+            $objectTypeOrInterfaceTypeFieldResolver instanceof ObjectTypeFieldResolverInterface
+            && !$this->isFieldNameConditionSatisfiedForSchema($objectTypeOrInterfaceTypeFieldResolver, $fieldName)
+        ) {
             return false;
         }
-        return parent::isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $fieldInterfaceResolverClasses);
+        return parent::isFieldNameResolvedByFieldResolver(
+            $objectTypeOrInterfaceTypeResolver,
+            $objectTypeOrInterfaceTypeFieldResolver,
+            $fieldName,
+            $interfaceTypeResolverClasses
+        );
     }
 }

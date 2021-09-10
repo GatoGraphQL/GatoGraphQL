@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace PoPSchema\UserRolesAccessControl\TypeResolverDecorators;
 
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
-use PoPSchema\UserStateAccessControl\TypeResolverDecorators\AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDecorator;
-use PoPSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
 use PoPSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
+use PoPSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
+use PoPSchema\UserStateAccessControl\TypeResolverDecorators\AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDecorator;
 
 class GlobalValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDecorator extends AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDecorator
 {
-    public function getClassesToAttachTo(): array
+    public function getRelationalTypeResolverClassesToAttachTo(): array
     {
-        return array(
+        return [
             AbstractRelationalTypeResolver::class,
-        );
+        ];
     }
 
     /**

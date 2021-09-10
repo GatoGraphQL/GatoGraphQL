@@ -9,7 +9,7 @@ use PoPSchema\Pages\ObjectTypeResolverPickers\AbstractPageTypeResolverPicker;
 
 class PageCustomPostTypeResolverPicker extends AbstractPageTypeResolverPicker
 {
-    public function getClassesToAttachTo(): array
+    public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
             CustomPostUnionTypeResolver::class,

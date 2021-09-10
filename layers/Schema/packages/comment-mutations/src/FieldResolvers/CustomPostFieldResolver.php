@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
+use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
+use PoPSchema\Comments\TypeResolvers\Object\CommentTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\Object\AbstractCustomPostTypeResolver;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(IsCustomPostFieldInterfaceResolver::class);
+        return [
+            AbstractCustomPostTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
@@ -26,21 +28,21 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'addComment' => $this->translationAPI->__('Add a comment to the custom post', 'comment-mutations'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'addComment':
-                return SchemaDefinitionHelpers::getAddCommentToCustomPostSchemaFieldArgs($relationalTypeResolver, $fieldName, false, true);
+                return SchemaDefinitionHelpers::getAddCommentToCustomPostSchemaFieldArgs($objectTypeResolver, $fieldName, false, true);
         }
-        return parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -49,55 +51,55 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
      * present in $form_data
      */
     public function validateMutationOnResultItem(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): bool {
         switch ($fieldName) {
             case 'addComment':
                 return true;
         }
-        return parent::validateMutationOnResultItem($relationalTypeResolver, $fieldName);
+        return parent::validateMutationOnResultItem($objectTypeResolver, $fieldName);
     }
 
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName
     ): array {
         $fieldArgs = parent::getFieldArgsToExecuteMutation(
             $fieldArgs,
-            $relationalTypeResolver,
+            $objectTypeResolver,
             $resultItem,
             $fieldName
         );
         $customPost = $resultItem;
         switch ($fieldName) {
             case 'addComment':
-                $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $relationalTypeResolver->getID($customPost);
+                $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);
                 break;
         }
 
         return $fieldArgs;
     }
 
-    public function resolveFieldMutationResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function resolveFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'addComment':
                 return AddCommentToCustomPostMutationResolver::class;
         }
 
-        return parent::resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName);
+        return parent::resolveFieldMutationResolverClass($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'addComment':
                 return CommentTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

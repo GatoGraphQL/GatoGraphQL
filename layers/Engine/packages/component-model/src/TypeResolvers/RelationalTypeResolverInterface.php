@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 
 interface RelationalTypeResolverInterface extends TypeResolverInterface
 {
@@ -17,23 +17,19 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
      */
     public function getID(object $resultItem): string | int | null;
     public function getRelationalTypeDataLoaderClass(): string;
-
-    // ... because all functions below have already been implemented in the Abstract base class
-    public function getAllImplementedInterfaceClasses(): array;
     /**
-     * @return FieldInterfaceResolverInterface[]
+     * @return string[]
      */
-    public function getAllImplementedInterfaceResolverInstances(): array;
+    public function getAllImplementedInterfaceTypeResolverClasses(): array;
+    /**
+     * @return InterfaceTypeResolverInterface[]
+     */
+    public function getAllImplementedInterfaceTypeResolvers(): array;
     /**
      * @param string|int|array<string|int> $dbObjectIDOrIDs
      * @return string|int|array<string|int>
      */
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array;
-    public function getIdFieldTypeResolverClass(): string;
-    /**
-     * @return array<string,DirectiveResolverInterface[]>
-     */
-    public function validateFieldArgumentsForSchema(string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array;
     public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void;
     public function fillResultItems(
         array $ids_data_fields,
@@ -56,11 +52,6 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
     public function resolveSchemaValidationErrorDescriptions(string $field, array &$variables = null): array;
     public function resolveSchemaValidationWarningDescriptions(string $field, array &$variables = null): array;
     public function resolveSchemaDeprecationDescriptions(string $field, array &$variables = null): array;
-    /**
-     * @return array<string,mixed>|null `null` if there are no fieldResolvers for the field
-     */
-    public function getSchemaFieldArgs(string $field): ?array;
-    public function enableOrderedSchemaFieldArgs(string $field): bool;
     public function getFieldTypeResolverClass(string $field): ?string;
     /**
      * @param array<string, mixed>|null $variables
@@ -74,7 +65,6 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
         ?array $expressions = null,
         array $options = []
     ): mixed;
-    public function hasFieldResolversForField(string $field): bool;
     /**
      * Validate and resolve the fieldDirectives into an array, each item containing:
      * 1. the directiveResolverInstance

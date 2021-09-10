@@ -9,6 +9,15 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface DirectiveResolverInterface extends AttachableExtensionInterface
 {
+    /**
+     * The classes of the ObjectTypeResolvers and/or InterfaceTypeResolvers
+     * this DirectiveResolver adds directives to.
+     * The list can contain both concrete and abstract classes (in which case all classes
+     * extending from them will be selected)
+     *
+     * @return string[]
+     */
+    public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array;
     public function getDirectiveName(): string;
     /**
      * Indicate to what fieldNames this directive can be applied.

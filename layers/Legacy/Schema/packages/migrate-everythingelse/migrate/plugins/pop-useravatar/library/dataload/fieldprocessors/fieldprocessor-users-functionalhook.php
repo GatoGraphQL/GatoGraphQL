@@ -7,11 +7,11 @@ use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
 class PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunctionalFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(
+        return [
             UserTypeResolver::class,
-        );
+        ];
     }
 
     public function getFieldNamesToResolve(): array

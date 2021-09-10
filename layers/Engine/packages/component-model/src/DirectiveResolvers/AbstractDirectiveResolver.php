@@ -95,6 +95,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $this->semverHelperService = SemverHelperServiceFacade::getInstance();
     }
 
+    final public function getClassesToAttachTo(): array
+    {
+        return $this->getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo();
+    }
+
     /**
      * Directives can be either of type "Schema" or "Query" and,
      * depending on one case or the other, might be exposed to the user.

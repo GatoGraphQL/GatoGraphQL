@@ -5,17 +5,29 @@ declare(strict_types=1);
 namespace PoP\API\Registries;
 
 use PoP\API\Cache\CacheTypes;
-use PoP\Engine\Cache\CacheUtils;
 use PoP\API\ComponentConfiguration;
+use PoP\API\Registries\SchemaDefinitionRegistryInterface;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\ObjectFacades\RootObjectFacade;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
-use PoP\API\Registries\SchemaDefinitionRegistryInterface;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\Translation\TranslationAPIInterface;
 
 class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
 {
+    public function __construct(
+        protected FeedbackMessageStoreInterface $feedbackMessageStore,
+        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected TranslationAPIInterface $translationAPI,
+        protected InstanceManagerInterface $instanceManager,
+    ) {
+    }
+
     /**
      * @var array<string, array>
      */
@@ -35,12 +47,15 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
      * Produce the schema definition. It can store the value in the cache.
      * Use cache with care: if the schema is dynamic, it should not be cached.
      * Public schema: can cache, Private schema: cannot cache.
+     *
+     * Return null if retrieving the schema data via field "fullSchema" failed
      */
-    public function &getSchemaDefinition(?array $fieldArgs = [], ?array $options = []): array
+    public function &getSchemaDefinition(?array $fieldArgs = [], ?array $options = []): ?array
     {
         // Create a key from the arrays, to cache the results
         $key = $this->getArgumentKey($fieldArgs, $options);
-        if (!isset($this->schemaInstances[$key])) {
+        // Watch out: the result can be null!
+        if (!array_key_exists($key, $this->schemaInstances)) {
             // Attempt to retrieve from the cache, if enabled
             if ($useCache = ComponentConfiguration::useSchemaDefinitionCache()) {
                 $persistentCache = PersistentCacheFacade::getInstance();
@@ -59,23 +74,35 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
             }
             // If either not using cache, or using but the value had not been cached, then calculate the value
             if ($schemaDefinition === null) {
-                $instanceManager = InstanceManagerFacade::getInstance();
                 /**
                  * @var RootTypeResolver
                  */
-                $rootTypeResolver = $instanceManager->getInstance(RootTypeResolver::class);
-                $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
+                $rootTypeResolver = $this->instanceManager->getInstance(RootTypeResolver::class);
                 $root = RootObjectFacade::getInstance();
                 $schemaDefinition = $rootTypeResolver->resolveValue(
                     $root,
-                    $fieldQueryInterpreter->getField('fullSchema', $fieldArgs ?? []),
+                    $this->fieldQueryInterpreter->getField('fullSchema', $fieldArgs ?? []),
                     null,
                     null,
                     $options
                 );
 
-                // Store in the cache
-                if ($useCache) {
+                if (GeneralUtils::isError($schemaDefinition)) {
+                    /** @var Error */
+                    $error = $schemaDefinition;
+                    // Store the error, and reset the definition to empty
+                    $this->feedbackMessageStore->addSchemaError(
+                        $rootTypeResolver->getTypeOutputName(),
+                        'fullSchema',
+                        sprintf(
+                            $this->translationAPI->__('Retrieving the schema data via Introspection failed: \'%s\'. Please contact the admin.', 'pop-component-model'),
+                            $error->getMessage()
+                        )
+                    );
+                    // Assign and return `null` to denote there was an error
+                    $schemaDefinition = null;
+                } elseif ($useCache) {
+                    // Store in the cache
                     $persistentCache->storeCache($cacheKey, $cacheType, $schemaDefinition);
                 }
             }

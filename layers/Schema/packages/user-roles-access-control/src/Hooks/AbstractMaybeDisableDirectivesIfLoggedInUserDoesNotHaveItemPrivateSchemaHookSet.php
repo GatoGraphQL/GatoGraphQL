@@ -31,15 +31,13 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
      */
     protected function getDirectiveResolverClasses(): array
     {
-        if (is_null($this->directiveResolverClasses)) {
+        if ($this->directiveResolverClasses === null) {
             $entries = $this->getEntries();
             // If the user is not logged in, then it's all directives
             $vars = ApplicationState::getVars();
             if (!$vars['global-userstate']['is-user-logged-in']) {
                 $this->directiveResolverClasses = array_values(array_unique(array_map(
-                    function ($entry) {
-                        return $entry[0];
-                    },
+                    fn (array $entry) => $entry[0],
                     $entries
                 )));
             } else {

@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 
@@ -44,23 +46,30 @@ class NestedMutationHookSet extends AbstractHookSet
      */
     public function maybeFilterFieldName(
         bool $include,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldResolverInterface $fieldResolver,
-        array $fieldInterfaceResolverClasses,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         $vars = ApplicationState::getVars();
         if ($vars['nested-mutations-enabled']) {
             return $include;
         }
+        if ($objectTypeOrInterfaceTypeResolver instanceof InterfaceTypeResolverInterface) {
+            return $include;
+        }
+        /** @var ObjectTypeResolverInterface */
+        $objectTypeResolver = $objectTypeOrInterfaceTypeResolver;
+        /** @var ObjectTypeFieldResolverInterface */
+        $objectTypeFieldResolver = $objectTypeOrInterfaceTypeFieldResolver;
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
         if (
             $include
-            && !in_array(get_class($relationalTypeResolver), [
+            && !in_array(get_class($objectTypeResolver), [
                 $graphQLSchemaDefinitionService->getRootTypeResolverClass(),
                 $graphQLSchemaDefinitionService->getMutationRootTypeResolverClass(),
             ])
-            && $fieldResolver->resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName) !== null
+            && $objectTypeFieldResolver->resolveFieldMutationResolverClass($objectTypeResolver, $fieldName) !== null
         ) {
             return false;
         }

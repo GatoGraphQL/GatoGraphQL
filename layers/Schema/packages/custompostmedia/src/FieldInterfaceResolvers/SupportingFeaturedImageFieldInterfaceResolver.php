@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMedia\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\CustomPostMedia\TypeResolvers\Interface\SupportingFeaturedImageInterfaceTypeResolver;
 use PoPSchema\Media\TypeResolvers\Object\MediaTypeResolver;
 
-class SupportingFeaturedImageFieldInterfaceResolver extends AbstractFieldInterfaceResolver
+class SupportingFeaturedImageFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver
 {
-    public function getInterfaceName(): string
+    public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
-        return 'SupportingFeaturedImage';
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('Fields concerning an entity\'s featured image', 'custompostmedia');
+        return [
+            SupportingFeaturedImageInterfaceTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToImplement(): array

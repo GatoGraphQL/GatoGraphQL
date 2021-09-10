@@ -7,13 +7,13 @@ namespace PoP\Engine\DirectiveResolvers;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
+use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 
 class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -98,11 +98,20 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         $addArguments = $this->directiveArgsForSchema['addArguments'] ?? [];
         $target = $this->directiveArgsForSchema['target'] ?? null;
 
+        /**
+         * "Functions" are global fields, defined in all TypeResolvers.
+         * Use RootTypeResolver instead of $relationalTypeResolver
+         * since this could be a UnionTypeResolver,
+         * but `extractFieldArguments` expects an ObjectTypeResolver
+         */
+        /** @var RootTypeResolver */
+        $rootTypeResolver = $this->instanceManager->getInstance(RootTypeResolver::class);
+
         // Maybe re-generate the function: Inject the provided `$addArguments` to the fieldArgs already declared in the query
         if ($addArguments) {
             $functionName = $this->fieldQueryInterpreter->getFieldName($function);
             $functionArgElems = array_merge(
-                $this->fieldQueryInterpreter->extractFieldArguments($relationalTypeResolver, $function) ?? [],
+                $this->fieldQueryInterpreter->extractFieldArguments($rootTypeResolver, $function) ?? [],
                 $addArguments
             );
             $function = $this->fieldQueryInterpreter->getField($functionName, $functionArgElems);
@@ -151,7 +160,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $schemaFieldArgs,
                     $schemaDBErrors,
                     $schemaDBWarnings
-                ) = $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($relationalTypeResolver, $function, $variables);
+                ) = $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($rootTypeResolver, $function, $variables);
 
                 // Place the errors not under schema but under DB, since they may change on a resultItem by resultItem basis
                 if ($schemaDBWarnings) {

@@ -11,7 +11,6 @@ use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
@@ -37,12 +36,11 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
         // If no directiveNames defined, apply to all of them
         if (
             $directiveNames = array_map(
-                function ($directiveResolver) {
-                    return $directiveResolver->getDirectiveName();
-                },
+                fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->getDirectiveName(),
                 $this->getDirectiveResolvers()
             )
         ) {
+            /** @var string[] $directiveNames */
             foreach ($directiveNames as $directiveName) {
                 $this->hooksAPI->addFilter(
                     HookHelpers::getHookNameToFilterDirective($directiveName),
@@ -80,10 +78,13 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
     }
     /**
      * Affected directives
+     *
+     * @return string[]
      */
     abstract protected function getDirectiveResolverClasses(): array;
     /**
      * Affected directives
+     *
      * @return DirectiveResolverInterface[]
      */
     protected function getDirectiveResolvers(): array

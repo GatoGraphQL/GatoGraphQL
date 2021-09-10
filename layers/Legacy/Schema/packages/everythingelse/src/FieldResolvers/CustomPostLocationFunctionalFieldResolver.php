@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers;
 
+use PoPSchema\CustomPosts\TypeResolvers\Object\AbstractCustomPostTypeResolver;
 use PoPSchema\Posts\Constants\InputNames;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 
 class CustomPostLocationFunctionalFieldResolver extends AbstractLocationFunctionalFieldResolver
 {
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(
-            IsCustomPostFieldInterfaceResolver::class,
-        );
+        return [
+            AbstractCustomPostTypeResolver::class,
+        ];
     }
 
     protected function getDbobjectIdField()

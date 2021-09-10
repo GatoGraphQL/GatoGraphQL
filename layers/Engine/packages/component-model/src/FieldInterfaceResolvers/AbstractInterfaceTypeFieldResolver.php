@@ -4,19 +4,28 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
+use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverInterface, FieldInterfaceSchemaDefinitionResolverInterface
+abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver implements InterfaceTypeFieldResolverInterface, FieldInterfaceSchemaDefinitionResolverInterface
 {
+    use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
+
+    /**
+     * @var InterfaceTypeResolverInterface[]|null
+     */
+    protected ?array $partiallyImplementedInterfaceTypeResolvers = null;
 
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
@@ -25,7 +34,18 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
         protected NameResolverInterface $nameResolver,
         protected CMSServiceInterface $cmsService,
         protected SchemaNamespacingServiceInterface $schemaNamespacingService,
+        protected TypeRegistryInterface $typeRegistry,
     ) {
+    }
+
+    /**
+     * The InterfaceTypes the FieldInterfaceResolver adds fields to
+     *
+     * @return string[]
+     */
+    final public function getClassesToAttachTo(): array
+    {
+        return $this->getInterfaceTypeResolverClassesToAttachTo();
     }
 
     public function getFieldNamesToResolve(): array
@@ -36,6 +56,49 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
     public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [];
+    }
+
+    /**
+     * Each FieldInterfaceResolver provides a list of fieldNames to the Interface.
+     * The Interface may also accept other fieldNames from other FieldInterfaceResolvers.
+     * That's why this function is "partially" implemented: the Interface
+     * may be completely implemented or not.
+     *
+     * @return InterfaceTypeResolverInterface[]
+     */
+    final public function getPartiallyImplementedInterfaceTypeResolvers(): array
+    {
+        if ($this->partiallyImplementedInterfaceTypeResolvers === null) {
+            // Search all the InterfaceTypeResolvers who either are, or inherit from,
+            // any class from getInterfaceTypeResolverClassesToAttachTo
+            $this->partiallyImplementedInterfaceTypeResolvers = [];
+            $interfaceTypeResolverClassesToAttachTo = $this->getInterfaceTypeResolverClassesToAttachTo();
+            $interfaceTypeResolvers = $this->typeRegistry->getInterfaceTypeResolvers();
+            foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
+                $interfaceTypeResolverClass = get_class($interfaceTypeResolver);
+                foreach ($interfaceTypeResolverClassesToAttachTo as $interfaceTypeResolverClassToAttachTo) {
+                    if (
+                        $interfaceTypeResolverClass === $interfaceTypeResolverClassToAttachTo
+                        || in_array($interfaceTypeResolverClassToAttachTo, class_parents($interfaceTypeResolverClass))
+                    ) {
+                        $this->partiallyImplementedInterfaceTypeResolvers[] = $interfaceTypeResolver;
+                        break;
+                    }
+                }
+            }
+        }
+        return $this->partiallyImplementedInterfaceTypeResolvers;
+    }
+
+    /**
+     * @return string[]
+     */
+    final public function getPartiallyImplementedInterfaceTypeResolverClasses(): array
+    {
+        return array_map(
+            'get_class',
+            $this->getPartiallyImplementedInterfaceTypeResolvers()
+        );
     }
 
     /**
@@ -139,35 +202,4 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
             $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $fieldName);
         }
     }
-
-    public function getNamespace(): string
-    {
-        return $this->schemaNamespacingService->getSchemaNamespace(get_called_class());
-    }
-
-    final public function getNamespacedInterfaceName(): string
-    {
-        return $this->schemaNamespacingService->getSchemaNamespacedName(
-            $this->getNamespace(),
-            $this->getInterfaceName()
-        );
-    }
-
-    final public function getMaybeNamespacedInterfaceName(): string
-    {
-        $vars = ApplicationState::getVars();
-        return $vars['namespace-types-and-interfaces'] ?
-            $this->getNamespacedInterfaceName() :
-            $this->getInterfaceName();
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return null;
-    }
-
-    // public function getSchemaInterfaceVersion(string $fieldName): ?string
-    // {
-    //     return null;
-    // }
 }

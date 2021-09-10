@@ -16,11 +16,11 @@ use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedI
 
 class NoCacheUserStateTypeResolverDecorator extends AbstractTypeResolverDecorator
 {
-    public function getClassesToAttachTo(): array
+    public function getRelationalTypeResolverClassesToAttachTo(): array
     {
-        return array(
+        return [
             AbstractRelationalTypeResolver::class,
-        );
+        ];
     }
 
     /**

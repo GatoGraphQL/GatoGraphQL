@@ -9,7 +9,7 @@ use PoPSchema\Highlights\ObjectTypeResolverPickers\AbstractHighlightTypeResolver
 
 class HighlightCustomPostTypeResolverPicker extends AbstractHighlightTypeResolverPicker
 {
-    public function getClassesToAttachTo(): array
+    public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
             CustomPostUnionTypeResolver::class,

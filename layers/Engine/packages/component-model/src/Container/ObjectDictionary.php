@@ -7,19 +7,20 @@ namespace PoP\ComponentModel\Container;
 class ObjectDictionary implements ObjectDictionaryInterface
 {
     /**
-     * @var array<string, array>
+     * @var array<string, array<string|int,mixed>>
      */
     protected array $dictionary = [];
 
-    public function get(string $class, $id)
+    public function get(string $class, string | int $id): mixed
     {
-        return $this->dictionary[$class][$id];
+        return $this->dictionary[$class][$id] ?? null;
     }
-    public function has(string $class, $id): bool
+    public function has(string $class, string | int $id): bool
     {
-        return isset($this->dictionary[$class][$id]);
+        // The stored item can also be null!
+        return array_key_exists($id, $this->dictionary[$class] ?? []);
     }
-    public function set(string $class, $id, $instance): void
+    public function set(string $class, string | int $id, mixed $instance): void
     {
         $this->dictionary[$class][$id] = $instance;
     }

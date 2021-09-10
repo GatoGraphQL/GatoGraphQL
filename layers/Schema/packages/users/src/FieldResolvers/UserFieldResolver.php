@@ -12,7 +12,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -44,9 +44,11 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         );
     }
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(UserTypeResolver::class);
+        return [
+            UserTypeResolver::class,
+        ];
     }
 
     public function getImplementedFieldInterfaceResolverClasses(): array
@@ -77,7 +79,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
      * Get the Schema Definition from the Interface
      */
     protected function getFieldInterfaceSchemaDefinitionResolverClass(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?string {
         return match ($fieldName) {
@@ -86,11 +88,11 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'slug'
                 => QueryableFieldInterfaceResolver::class,
             default
-                => parent::getFieldInterfaceSchemaDefinitionResolverClass($relationalTypeResolver, $fieldName),
+                => parent::getFieldInterfaceSchemaDefinitionResolverClass($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'username' => SchemaDefinition::TYPE_STRING,
@@ -102,10 +104,10 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'description' => SchemaDefinition::TYPE_STRING,
             'websiteURL' => SchemaDefinition::TYPE_URL,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'username',
@@ -113,11 +115,11 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'displayName'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'url' => $this->translationAPI->__('URL of the user\'s profile in the website', 'pop-users'),
@@ -132,7 +134,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'description' => $this->translationAPI->__('Description of the user', 'pop-users'),
             'websiteURL' => $this->translationAPI->__('User\'s own website\'s URL', 'pop-users'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -142,7 +144,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -169,10 +171,10 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
                 return $this->userTypeAPI->getUserEmail($user);
 
             case 'url':
-                return $this->userTypeAPI->getUserURL($relationalTypeResolver->getID($user));
+                return $this->userTypeAPI->getUserURL($objectTypeResolver->getID($user));
 
             case 'urlPath':
-                return $this->userTypeAPI->getUserURLPath($relationalTypeResolver->getID($user));
+                return $this->userTypeAPI->getUserURLPath($objectTypeResolver->getID($user));
 
             case 'slug':
                 return $this->userTypeAPI->getUserSlug($user);
@@ -184,6 +186,6 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
                 return $this->userTypeAPI->getUserWebsiteUrl($user);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

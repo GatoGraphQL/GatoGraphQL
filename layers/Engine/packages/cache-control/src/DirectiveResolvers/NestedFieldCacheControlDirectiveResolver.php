@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
-use PoP\FieldQuery\QueryHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 // use PoP\CacheControl\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\FieldQuery\QueryHelpers;
 
 class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {

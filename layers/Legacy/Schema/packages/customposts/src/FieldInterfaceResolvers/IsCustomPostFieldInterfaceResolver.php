@@ -10,21 +10,11 @@ use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResol
 
 class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 {
-    public function getInterfaceName(): string
-    {
-        return 'IsCustomPost';
-    }
-
     public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [
             QueryableFieldInterfaceResolver::class,
         ];
-    }
-
-    public function getSchemaInterfaceDescription(): ?string
-    {
-        return $this->translationAPI->__('Entities representing a custom post', 'customposts');
     }
 
     public function getFieldNamesToImplement(): array

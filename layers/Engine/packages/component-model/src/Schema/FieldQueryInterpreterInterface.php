@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInterpreterInterface
 {
@@ -31,7 +32,7 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
      * Return `null` if there is no resolver for the field
      */
     public function extractFieldArguments(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         ?array $variables = null,
         ?array &$schemaErrors = null,
@@ -45,10 +46,10 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
         ?array &$schemaErrors = null,
         ?array &$schemaWarnings = null,
     ): array;
-    public function extractFieldArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $field, ?array $variables = null): array;
+    public function extractFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, ?array $variables = null): array;
     public function extractDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $directive, ?array $variables = null, bool $disableDynamicFields = false): array;
     public function extractFieldArgumentsForResultItem(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $field,
         ?array $variables,

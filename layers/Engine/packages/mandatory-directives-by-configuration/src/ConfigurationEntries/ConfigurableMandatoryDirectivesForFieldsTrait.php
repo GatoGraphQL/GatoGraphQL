@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 trait ConfigurableMandatoryDirectivesForFieldsTrait
 {
@@ -19,13 +20,11 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
     protected function getFieldNames(): array
     {
         return array_map(
-            function ($entry) {
-                // The tuple has format [typeOrFieldInterfaceResolverClass, fieldName]
-                // or [typeOrFieldInterfaceResolverClass, fieldName, $role]
-                // or [typeOrFieldInterfaceResolverClass, fieldName, $capability]
-                // So, in position [1], will always be the $fieldName
-                return $entry[1];
-            },
+            // The tuple has format [typeOrFieldInterfaceResolverClass, fieldName]
+            // or [typeOrFieldInterfaceResolverClass, fieldName, $role]
+            // or [typeOrFieldInterfaceResolverClass, fieldName, $capability]
+            // So, in position [1], will always be the $fieldName
+            fn (array $entry) => $entry[1],
             $this->getConfigurationEntries()
         );
     }
@@ -34,14 +33,14 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      * Configuration entries
      */
     final protected function getEntries(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        array $fieldInterfaceResolverClasses,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): array {
         return $this->getMatchingEntries(
             $this->getConfigurationEntries(),
-            $relationalTypeResolver,
-            $fieldInterfaceResolverClasses,
+            $objectTypeOrInterfaceTypeResolver,
+            $interfaceTypeResolverClasses,
             $fieldName
         );
     }
@@ -51,19 +50,17 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      */
     final protected function getMatchingEntries(
         array $entryList,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        array $fieldInterfaceResolverClasses,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        array $interfaceTypeResolverClasses,
         string $fieldName
     ): array {
-        $typeResolverClass = get_class($relationalTypeResolver);
+        $objectTypeOrInterfaceTypeResolverClass = get_class($objectTypeOrInterfaceTypeResolver);
         return array_filter(
             $entryList,
-            function ($entry) use ($typeResolverClass, $fieldInterfaceResolverClasses, $fieldName): bool {
-                return (
-                    $entry[0] == $typeResolverClass
-                    || in_array($entry[0], $fieldInterfaceResolverClasses)
-                ) && $entry[1] == $fieldName;
-            }
+            fn (array $entry) => (
+                $entry[0] === $objectTypeOrInterfaceTypeResolverClass
+                || in_array($entry[0], $interfaceTypeResolverClasses)
+            ) && $entry[1] == $fieldName
         );
     }
 }

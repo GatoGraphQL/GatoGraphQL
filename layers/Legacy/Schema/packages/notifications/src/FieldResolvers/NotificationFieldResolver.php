@@ -11,7 +11,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\HooksAPIInterface;
@@ -47,9 +47,11 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
         );
     }
 
-    public function getClassesToAttachTo(): array
+    public function getObjectTypeResolverClassesToAttachTo(): array
     {
-        return array(NotificationTypeResolver::class);
+        return [
+            NotificationTypeResolver::class,
+        ];
     }
 
     public function getFieldNamesToResolve(): array
@@ -85,7 +87,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'action' => SchemaDefinition::TYPE_STRING,
@@ -115,10 +117,10 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             'isTaxonomyNotification' => SchemaDefinition::TYPE_BOOL,
             'isAction' => SchemaDefinition::TYPE_BOOL,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'action',
@@ -141,11 +143,11 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             'userCaps'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
             'action' => $this->translationAPI->__('', ''),
@@ -176,12 +178,12 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             'isTaxonomyNotification' => $this->translationAPI->__('', ''),
             'isAction' => $this->translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($relationalTypeResolver, $fieldName);
+        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'isAction':
                 return array_merge(
@@ -207,7 +209,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $resultItem,
         string $fieldName,
         array $fieldArgs = [],
@@ -261,21 +263,21 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
                 return $value;
 
             case 'isStatusRead':
-                $status = $relationalTypeResolver->resolveValue($resultItem, 'status', $variables, $expressions, $options);
+                $status = $objectTypeResolver->resolveValue($resultItem, 'status', $variables, $expressions, $options);
                 return ($status == AAL_POP_STATUS_READ);
 
             case 'isStatusNotRead':
-                $is_read = $relationalTypeResolver->resolveValue($resultItem, 'isStatusRead', $variables, $expressions, $options);
+                $is_read = $objectTypeResolver->resolveValue($resultItem, 'isStatusRead', $variables, $expressions, $options);
                 return !$is_read;
 
             case 'markAsReadURL':
                 return GeneralUtils::addQueryArgs([
-                    'nid' => $relationalTypeResolver->getID($notification),
+                    'nid' => $objectTypeResolver->getID($notification),
                 ], RouteUtils::getRouteURL(POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASREAD));
 
             case 'markAsUnreadURL':
                 return GeneralUtils::addQueryArgs([
-                    'nid' => $relationalTypeResolver->getID($notification),
+                    'nid' => $objectTypeResolver->getID($notification),
                 ], RouteUtils::getRouteURL(POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASUNREAD));
 
             case 'icon':
@@ -327,16 +329,16 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
                 return $fieldArgs['action'] == $notification->action;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'user':
                 return UserTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }
