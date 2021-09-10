@@ -115,7 +115,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function getSchemaFieldArgs(string $field): ?array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
             $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
             $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
             $fieldSchemaDefinition = $objectTypeFieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
@@ -128,7 +128,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function enableOrderedSchemaFieldArgs(string $field): bool
     {
         // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
             $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
             return $objectTypeFieldResolvers[0]->enableOrderedSchemaFieldArgs($this, $fieldName);
         }
@@ -149,7 +149,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($schemaErrors) {
             return $schemaErrors;
         }
-        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
             if ($maybeErrors = $objectTypeFieldResolvers[0]->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeErrors as $error) {
                     $schemaErrors[] = [
@@ -199,7 +199,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function resolveSchemaValidationWarningDescriptions(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
             list(
                 $validField,
                 $fieldName,
@@ -224,7 +224,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function resolveSchemaDeprecationDescriptions(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
             list(
                 $validField,
                 $fieldName,
@@ -258,7 +258,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function getFieldTypeResolverClass(string $field): ?string
     {
         // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
             list(
                 $validField,
                 $fieldName,
@@ -296,7 +296,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): mixed {
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $resultItem)
-        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
             // Important: $validField becomes $field: remove all invalid fieldArgs before executing `resolveValue` on the fieldResolver
             list(
                 $field,
@@ -700,7 +700,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         // If using an ACL to remove a field from an interface,
                         // getting the fieldResolvers for that field will be empty
                         // Then ignore adding the field, it must not be added to the schema
-                        if ($objectTypeFieldResolversForField = $this->getFieldResolversForField($fieldName)) {
+                        if ($objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForField($fieldName)) {
                             $schemaFieldResolvers[$fieldName] = $objectTypeFieldResolversForField;
                         }
                     }
@@ -799,7 +799,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @return ObjectTypeFieldResolverInterface[]
      */
-    protected function getFieldResolversForField(string $field): array
+    protected function getObjectTypeFieldResolversForField(string $field): array
     {
         // Calculate the fieldResolver to process this field if not already in the cache
         // If none is found, this value will be set to NULL. This is needed to stop attempting to find the fieldResolver
@@ -812,7 +812,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     public function hasFieldResolversForField(string $field): bool
     {
-        return !empty($this->getFieldResolversForField($field));
+        return !empty($this->getObjectTypeFieldResolversForField($field));
     }
 
     protected function calculateFieldResolversForField(string $field): array
