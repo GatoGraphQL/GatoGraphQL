@@ -22,7 +22,7 @@ use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
     /**
-     * Cache of which fieldResolvers will process the given field
+     * Cache of which objectTypeFieldResolvers will process the given field
      *
      * @var array<string, ObjectTypeFieldResolverInterface[]>
      */
@@ -110,7 +110,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * @return array<string,mixed>|null `null` if there are no fieldResolvers for the field
+     * @return array<string,mixed>|null `null` if there are no objectTypeFieldResolvers for the field
      */
     public function getSchemaFieldArgs(string $field): ?array
     {
@@ -682,7 +682,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $schemaObjectTypeFieldResolvers = [];
 
-        // Get the fieldResolvers attached to this typeResolver and to all the interfaces it implements
+        // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver and to all the interfaces it implements
         $classStack = [
             $this->getTypeResolverClassToCalculateSchema(),
         ];
@@ -698,7 +698,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     foreach (array_diff($extensionFieldNames, array_keys($schemaObjectTypeFieldResolvers)) as $fieldName) {
                         // Watch out here: no fieldArgs!!!! So this deals with the base case (static), not with all cases (runtime)
                         // If using an ACL to remove a field from an interface,
-                        // getting the fieldResolvers for that field will be empty
+                        // getting the ObjectTypeFieldResolvers for that field will be empty
                         // Then ignore adding the field, it must not be added to the schema
                         if ($objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForField($fieldName)) {
                             $schemaObjectTypeFieldResolvers[$fieldName] = $objectTypeFieldResolversForField;
@@ -803,11 +803,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     {
         // Calculate the fieldResolver to process this field if not already in the cache
         // If none is found, this value will be set to NULL. This is needed to stop attempting to find the fieldResolver
-        if (!isset($this->fieldResolvers[$field])) {
-            $this->fieldResolvers[$field] = $this->calculateObjectTypeFieldResolversForField($field);
+        if (!isset($this->objectTypeFieldResolvers[$field])) {
+            $this->objectTypeFieldResolvers[$field] = $this->calculateObjectTypeFieldResolversForField($field);
         }
 
-        return $this->fieldResolvers[$field];
+        return $this->objectTypeFieldResolvers[$field];
     }
 
     public function hasObjectTypeFieldResolversForField(string $field): bool
@@ -820,7 +820,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Important: here we CAN'T use `dissectFieldForSchema` to get the fieldArgs, because it will attempt to validate them
         // To validate them, the fieldQueryInterpreter needs to know the schema, so it once again calls functions from this typeResolver
         // Generating an infinite loop
-        // Then, just to find out which fieldResolvers will process this field, crudely obtain the fieldArgs, with NO schema-based validation!
+        // Then, just to find out which ObjectTypeFieldResolvers will process this field, crudely obtain the fieldArgs, with NO schema-based validation!
         // list(
         //     $field,
         //     $fieldName,
@@ -831,7 +831,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $objectTypeFieldResolvers = [];
-        // Get the fieldResolvers attached to this typeResolver and to all the interfaces it implements
+        // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver and to all the interfaces it implements
         $classStack = [
             $this->getTypeResolverClassToCalculateSchema(),
         ];
