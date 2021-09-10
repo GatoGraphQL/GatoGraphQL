@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateAccessControl\Hooks;
 
 use PoP\AccessControl\ComponentConfiguration;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
-use PoPSchema\UserState\FieldResolvers\AbstractUserStateFieldResolver;
 use PoP\AccessControl\Hooks\AbstractAccessControlForFieldsHookSet;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoPSchema\UserState\FieldResolvers\AbstractUserStateFieldResolver;
 
 class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSchemaHookSet extends AbstractAccessControlForFieldsHookSet
 {
@@ -37,11 +38,11 @@ class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSc
      * @param string[] $interfaceTypeResolverClasses
      */
     protected function removeFieldName(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        FieldResolverInterface $fieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
-        return $objectTypeFieldResolver instanceof AbstractUserStateFieldResolver;
+        return $fieldResolver instanceof AbstractUserStateFieldResolver;
     }
 }

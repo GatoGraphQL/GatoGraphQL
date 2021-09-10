@@ -6,8 +6,9 @@ namespace PoPSchema\UserRolesAccessControl\Hooks;
 
 use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDirectivesForFieldsTrait;
 use PoP\AccessControl\Hooks\AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait;
-use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 use PoPSchema\UserRolesAccessControl\Helpers\UserRoleHelper;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
@@ -43,10 +44,10 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet 
      * Decide if to remove the fieldNames
      */
     protected function removeFieldName(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        FieldResolverInterface $fieldResolver,
         array $interfaceTypeResolverClasses,
-        string $fieldName
+        string $fieldName,
     ): bool {
         // If the user is not logged in, then remove the field
         $isUserLoggedIn = $this->isUserLoggedIn();
@@ -57,7 +58,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet 
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         if (
             $matchingEntries = $this->getEntries(
-                $relationalTypeResolver,
+                $objectTypeOrInterfaceTypeResolver,
                 $interfaceTypeResolverClasses,
                 $fieldName
             )

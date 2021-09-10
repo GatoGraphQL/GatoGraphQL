@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace PoP\AccessControl\ConfigurationEntries;
 
 use PoP\AccessControl\ComponentConfiguration;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
 trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
@@ -20,7 +21,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
      */
     final protected function getMatchingEntries(
         array $entryList,
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): array {
@@ -33,19 +34,19 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
         if (!ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode()) {
             return $this->getUpstreamMatchingEntries(
                 $entryList,
-                $relationalTypeResolver,
+                $objectTypeOrInterfaceTypeResolver,
                 $interfaceTypeResolverClasses,
                 $fieldName
             );
         }
-        $typeResolverClass = get_class($relationalTypeResolver);
+        $objectTypeOrInterfaceTypeResolverClass = get_class($objectTypeOrInterfaceTypeResolver);
         $individualControlSchemaMode = $this->getSchemaMode();
         $matchNullControlEntry = $this->doesSchemaModeProcessNullControlEntry();
         return array_filter(
             $entryList,
             fn ($entry): bool =>
                 (
-                    $entry[0] == $typeResolverClass
+                    $entry[0] == $objectTypeOrInterfaceTypeResolverClass
                     || in_array($entry[0], $interfaceTypeResolverClasses)
                 )
                 && $entry[1] == $fieldName

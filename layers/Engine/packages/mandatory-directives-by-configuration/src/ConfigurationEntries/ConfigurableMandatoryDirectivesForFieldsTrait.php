@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 trait ConfigurableMandatoryDirectivesForFieldsTrait
 {
@@ -34,13 +35,13 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      * Configuration entries
      */
     final protected function getEntries(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): array {
         return $this->getMatchingEntries(
             $this->getConfigurationEntries(),
-            $relationalTypeResolver,
+            $objectTypeOrInterfaceTypeResolver,
             $interfaceTypeResolverClasses,
             $fieldName
         );
@@ -51,16 +52,16 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      */
     final protected function getMatchingEntries(
         array $entryList,
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): array {
-        $typeResolverClass = get_class($relationalTypeResolver);
+        $objectTypeOrInterfaceTypeResolverClass = get_class($objectTypeOrInterfaceTypeResolver);
         return array_filter(
             $entryList,
-            function ($entry) use ($typeResolverClass, $interfaceTypeResolverClasses, $fieldName): bool {
+            function ($entry) use ($objectTypeOrInterfaceTypeResolverClass, $interfaceTypeResolverClasses, $fieldName): bool {
                 return (
-                    $entry[0] == $typeResolverClass
+                    $entry[0] == $objectTypeOrInterfaceTypeResolverClass
                     || in_array($entry[0], $interfaceTypeResolverClasses)
                 ) && $entry[1] == $fieldName;
             }

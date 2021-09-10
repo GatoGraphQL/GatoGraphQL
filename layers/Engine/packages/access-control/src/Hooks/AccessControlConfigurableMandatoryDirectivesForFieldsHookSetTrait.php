@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace PoP\AccessControl\Hooks;
 
 use PoP\AccessControl\ComponentConfiguration;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
 trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
 {
     public function maybeFilterFieldName(
         bool $include,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        FieldResolverInterface $fieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
@@ -24,7 +25,11 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
             /**
              * If there are no entries, then exit by returning the original hook value
              */
-            if (empty($this->getEntries($relationalTypeResolver, $interfaceTypeResolverClasses, $fieldName))) {
+            if (empty($this->getEntries(
+                $objectTypeOrInterfaceTypeResolver,
+                $interfaceTypeResolverClasses,
+                $fieldName
+            ))) {
                 return $include;
             }
         }
@@ -34,8 +39,8 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
          */
         return parent::maybeFilterFieldName(
             $include,
-            $relationalTypeResolver,
-            $objectTypeFieldResolver,
+            $objectTypeOrInterfaceTypeResolver,
+            $fieldResolver,
             $interfaceTypeResolverClasses,
             $fieldName
         );
