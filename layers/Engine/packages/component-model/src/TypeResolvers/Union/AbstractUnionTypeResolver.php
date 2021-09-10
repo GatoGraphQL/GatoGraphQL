@@ -258,9 +258,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             $objectTypeResolverClasses = $this->getObjectTypeResolverClassesFromPickers($objectTypeResolverPickers);
             $notImplementingInterfaceTypeResolverClasses = array_filter(
                 $objectTypeResolverClasses,
-                function (string $typeResolverClass) use ($interfaceTypeResolverClass) {
+                function (string $objectTypeResolverClass) use ($interfaceTypeResolverClass) {
                     /** @var ObjectTypeResolverInterface */
-                    $objectTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
+                    $objectTypeResolver = $this->instanceManager->getInstance($objectTypeResolverClass);
                     return !in_array($interfaceTypeResolverClass, $objectTypeResolver->getAllImplementedInterfaceTypeResolverClasses());
                 }
             );
