@@ -682,37 +682,27 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $schemaObjectTypeFieldResolvers = [];
 
-        // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver and to all the interfaces it implements
-        $classStack = [
-            $this->getTypeResolverClassToCalculateSchema(),
-        ];
-        while (!empty($classStack)) {
-            $class = array_shift($classStack);
-            // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
-            do {
-                /** @var ObjectTypeFieldResolverInterface[] */
-                $attachedFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
-                foreach ($attachedFieldResolvers as $objectTypeFieldResolver) {
-                    // Process the fields which have not been processed yet
-                    $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
-                    foreach (array_diff($extensionFieldNames, array_keys($schemaObjectTypeFieldResolvers)) as $fieldName) {
-                        // Watch out here: no fieldArgs!!!! So this deals with the base case (static), not with all cases (runtime)
-                        // If using an ACL to remove a field from an interface,
-                        // getting the ObjectTypeFieldResolvers for that field will be empty
-                        // Then ignore adding the field, it must not be added to the schema
-                        if ($objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForField($fieldName)) {
-                            $schemaObjectTypeFieldResolvers[$fieldName] = $objectTypeFieldResolversForField;
-                        }
+        // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver
+        $class = $this->getTypeResolverClassToCalculateSchema();
+        // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
+        do {
+            /** @var ObjectTypeFieldResolverInterface[] */
+            $attachedFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
+            foreach ($attachedFieldResolvers as $objectTypeFieldResolver) {
+                // Process the fields which have not been processed yet
+                $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
+                foreach (array_diff($extensionFieldNames, array_keys($schemaObjectTypeFieldResolvers)) as $fieldName) {
+                    // Watch out here: no fieldArgs!!!! So this deals with the base case (static), not with all cases (runtime)
+                    // If using an ACL to remove a field from an interface,
+                    // getting the ObjectTypeFieldResolvers for that field will be empty
+                    // Then ignore adding the field, it must not be added to the schema
+                    if ($objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForField($fieldName)) {
+                        $schemaObjectTypeFieldResolvers[$fieldName] = $objectTypeFieldResolversForField;
                     }
-                    // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
-                    $classStack = array_values(array_unique(array_merge(
-                        $classStack,
-                        $objectTypeFieldResolver->getImplementedFieldInterfaceResolverClasses()
-                    )));
                 }
-                // Otherwise, continue iterating for the class parents
-            } while ($class = get_parent_class($class));
-        }
+            }
+            // Otherwise, continue iterating for the class parents
+        } while ($class = get_parent_class($class));
 
         return $schemaObjectTypeFieldResolvers;
     }
@@ -831,47 +821,37 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $objectTypeFieldResolvers = [];
-        // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver and to all the interfaces it implements
-        $classStack = [
-            $this->getTypeResolverClassToCalculateSchema(),
-        ];
-        while (!empty($classStack)) {
-            $class = array_shift($classStack);
-            // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
-            do {
-                // All the Units and their priorities for this class level
-                $classTypeResolverPriorities = [];
-                $classFieldResolvers = [];
+        // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver
+        $class = $this->getTypeResolverClassToCalculateSchema();
+        // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
+        do {
+            // All the Units and their priorities for this class level
+            $classTypeResolverPriorities = [];
+            $classFieldResolvers = [];
 
-                // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-                /** @var ObjectTypeFieldResolverInterface[] */
-                $attachedFieldResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS));
-                foreach ($attachedFieldResolvers as $objectTypeFieldResolver) {
-                    $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
-                    if (in_array($fieldName, $extensionFieldNames)) {
-                        // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
-                        if ($objectTypeFieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
-                            $extensionPriority = $objectTypeFieldResolver->getPriorityToAttachToClasses();
-                            $classTypeResolverPriorities[] = $extensionPriority;
-                            $classFieldResolvers[] = $objectTypeFieldResolver;
-                        }
+            // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
+            /** @var ObjectTypeFieldResolverInterface[] */
+            $attachedFieldResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS));
+            foreach ($attachedFieldResolvers as $objectTypeFieldResolver) {
+                $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
+                if (in_array($fieldName, $extensionFieldNames)) {
+                    // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
+                    if ($objectTypeFieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
+                        $extensionPriority = $objectTypeFieldResolver->getPriorityToAttachToClasses();
+                        $classTypeResolverPriorities[] = $extensionPriority;
+                        $classFieldResolvers[] = $objectTypeFieldResolver;
                     }
-                    // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
-                    $classStack = array_values(array_unique(array_merge(
-                        $classStack,
-                        $objectTypeFieldResolver->getImplementedFieldInterfaceResolverClasses()
-                    )));
                 }
-                // Sort the found units by their priority, and then add to the stack of all units, for all classes
-                // Higher priority means they execute first!
-                array_multisort($classTypeResolverPriorities, SORT_DESC, SORT_NUMERIC, $classFieldResolvers);
-                $objectTypeFieldResolvers = array_merge(
-                    $objectTypeFieldResolvers,
-                    $classFieldResolvers
-                );
-                // Continue iterating for the class parents
-            } while ($class = get_parent_class($class));
-        }
+            }
+            // Sort the found units by their priority, and then add to the stack of all units, for all classes
+            // Higher priority means they execute first!
+            array_multisort($classTypeResolverPriorities, SORT_DESC, SORT_NUMERIC, $classFieldResolvers);
+            $objectTypeFieldResolvers = array_merge(
+                $objectTypeFieldResolvers,
+                $classFieldResolvers
+            );
+            // Continue iterating for the class parents
+        } while ($class = get_parent_class($class));
 
         // Return all the units that resolve the fieldName
         return $objectTypeFieldResolvers;
