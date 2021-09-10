@@ -6,7 +6,7 @@ namespace PoPSchema\UserStateAccessControl\Hooks;
 
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\AccessControl\Hooks\AbstractAccessControlForFieldsInPrivateSchemaHookSet;
 
 abstract class AbstractDisableFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSchemaHookSet extends AbstractAccessControlForFieldsInPrivateSchemaHookSet
@@ -16,7 +16,7 @@ abstract class AbstractDisableFieldsIfUserIsNotLoggedInAccessControlForFieldsInP
      */
     protected function removeFieldName(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface $fieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {

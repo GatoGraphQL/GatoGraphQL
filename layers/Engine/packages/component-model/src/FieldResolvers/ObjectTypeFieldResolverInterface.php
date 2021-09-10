@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
-interface FieldResolverInterface extends AttachableExtensionInterface
+interface ObjectTypeFieldResolverInterface extends AttachableExtensionInterface
 {
     /**
      * The classes of the ObjectTypeResolvers this FieldResolver adds fields to.

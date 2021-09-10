@@ -12,7 +12,7 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
@@ -24,7 +24,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * Cache of which fieldResolvers will process the given field
      *
-     * @var array<string, FieldResolverInterface[]>
+     * @var array<string, ObjectTypeFieldResolverInterface[]>
      */
     protected array $fieldResolvers = [];
     /**
@@ -32,7 +32,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected ?array $mandatoryDirectivesForFields = null;
     /**
-     * @var array<string, FieldResolverInterface>|null
+     * @var array<string, ObjectTypeFieldResolverInterface>|null
      */
     protected ?array $schemaFieldResolvers = null;
     /**
@@ -592,7 +592,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_INTERFACES] = $typeInterfaceDefinitions;
     }
 
-    protected function addFieldSchemaDefinition(FieldResolverInterface $fieldResolver, string $fieldName, array $stackMessages, array &$generalMessages, array $options = []): void
+    protected function addFieldSchemaDefinition(ObjectTypeFieldResolverInterface $fieldResolver, string $fieldName, array $stackMessages, array &$generalMessages, array $options = []): void
     {
         /**
          * Fields may not be directly visible in the schema
@@ -650,7 +650,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @return string[]
      */
-    protected function getFieldNamesResolvedByFieldResolver(FieldResolverInterface $fieldResolver): array
+    protected function getFieldNamesResolvedByFieldResolver(ObjectTypeFieldResolverInterface $fieldResolver): array
     {
         $fieldResolverClass = get_class($fieldResolver);
         if (!isset($this->fieldNamesResolvedByFieldResolver[$fieldResolverClass])) {
@@ -686,7 +686,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $class = array_shift($classStack);
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
             do {
-                /** @var FieldResolverInterface[] */
+                /** @var ObjectTypeFieldResolverInterface[] */
                 $attachedFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
                 foreach ($attachedFieldResolvers as $fieldResolver) {
                     // Process the fields which have not been processed yet
@@ -793,7 +793,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * @return FieldResolverInterface[]
+     * @return ObjectTypeFieldResolverInterface[]
      */
     protected function getFieldResolversForField(string $field): array
     {
@@ -840,7 +840,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $classFieldResolvers = [];
 
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-                /** @var FieldResolverInterface[] */
+                /** @var ObjectTypeFieldResolverInterface[] */
                 $attachedFieldResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS));
                 foreach ($attachedFieldResolvers as $fieldResolver) {
                     $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
@@ -882,7 +882,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         $class = $this->getTypeResolverClassToCalculateSchema();
         do {
-            /** @var FieldResolverInterface[] */
+            /** @var ObjectTypeFieldResolverInterface[] */
             $attachedFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
             foreach ($attachedFieldResolvers as $fieldResolver) {
                 $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);

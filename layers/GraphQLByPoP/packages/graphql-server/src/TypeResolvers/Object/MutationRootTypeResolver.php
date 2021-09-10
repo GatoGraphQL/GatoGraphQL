@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\Object;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\Object\MutationRootTypeDataLoader;
 
 class MutationRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
@@ -35,7 +35,7 @@ class MutationRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResol
         return MutationRootTypeDataLoader::class;
     }
 
-    protected function isFieldNameConditionSatisfiedForSchema(FieldResolverInterface $fieldResolver, string $fieldName): bool
+    protected function isFieldNameConditionSatisfiedForSchema(ObjectTypeFieldResolverInterface $fieldResolver, string $fieldName): bool
     {
         return
             // Fields "id", "self" and "__typename" are mandatory, so they must both

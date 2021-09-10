@@ -136,7 +136,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
 
     /**
      * Produce an array of all the interface's fieldNames and, for each,
-     * a list of all the FieldResolverInterface classes
+     * a list of all the FieldInterfaceResolver classes
      * 
      * @return array<string, string[]>
      */

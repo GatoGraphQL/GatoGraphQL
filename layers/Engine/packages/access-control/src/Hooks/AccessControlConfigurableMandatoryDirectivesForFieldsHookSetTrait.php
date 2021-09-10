@@ -6,14 +6,14 @@ namespace PoP\AccessControl\Hooks;
 
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 
 trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
 {
     public function maybeFilterFieldName(
         bool $include,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface $fieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {

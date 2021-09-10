@@ -7,7 +7,7 @@ namespace PoPSchema\UserStateAccessControl\Hooks;
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoPSchema\UserState\FieldResolvers\AbstractUserStateFieldResolver;
 use PoP\AccessControl\Hooks\AbstractAccessControlForFieldsHookSet;
 
@@ -38,7 +38,7 @@ class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSc
      */
     protected function removeFieldName(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface $fieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {

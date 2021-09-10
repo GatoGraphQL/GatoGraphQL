@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 
 abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHookSet
 {
@@ -64,7 +64,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
     public function maybeFilterFieldName(
         bool $include,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface $fieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
@@ -85,7 +85,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
      */
     protected function removeFieldName(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface $fieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {

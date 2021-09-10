@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
