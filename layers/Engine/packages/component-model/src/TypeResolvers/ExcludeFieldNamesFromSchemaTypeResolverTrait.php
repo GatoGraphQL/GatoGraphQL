@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
@@ -18,7 +19,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
      */
     protected function maybeExcludeFieldNamesFromSchema(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
-        FieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         array $fieldNames
     ): array {
         // Enable to exclude fieldNames, so they are not added to the schema.
@@ -26,13 +27,13 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
         // Whenever:
         // 1. Exclude the admin fields, if "Admin" Schema is not enabled
         if (!ComponentConfiguration::enableAdminSchema()) {
-            $excludedFieldNames = $fieldResolver->getAdminFieldNames();
+            $excludedFieldNames = $objectTypeOrInterfaceTypeFieldResolver->getAdminFieldNames();
         }
         // 2. By filter hook
         $excludedFieldNames = $this->hooksAPI->applyFilters(
             Hooks::EXCLUDE_FIELDNAMES,
             $excludedFieldNames,
-            $fieldResolver,
+            $objectTypeOrInterfaceTypeFieldResolver,
             $fieldNames
         );
         if ($excludedFieldNames !== []) {
@@ -44,12 +45,12 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
 
         // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
         // Also pass the Interfaces defining the field
-        $interfaceTypeResolverClasses = $fieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses();
+        $interfaceTypeResolverClasses = $objectTypeOrInterfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses();
         $fieldNames = array_filter(
             $fieldNames,
             fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver(
                 $objectTypeOrInterfaceTypeResolver,
-                $fieldResolver,
+                $objectTypeOrInterfaceTypeFieldResolver,
                 $fieldName,
                 $interfaceTypeResolverClasses,
             )
@@ -59,14 +60,14 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
 
     /**
      * $interfaceTypeResolverClasses is the list of all the interfaces implemented
-     * by the fieldResolver, and not only those ones containing the fieldName.
+     * by the objectTypeOrInterfaceTypeFieldResolver, and not only those ones containing the fieldName.
      * This is because otherwise we'd need to call `$interfaceTypeResolver->getFieldNamesToImplement()`
      * to find out the list of Interfaces containing $fieldName, however this function relies
      * on the InterfaceTypeFieldResolver once again, so we'd get a recursion.
      */
     protected function isFieldNameResolvedByFieldResolver(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
-        FieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         string $fieldName,
         array $interfaceTypeResolverClasses
     ): bool {
@@ -76,7 +77,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
                 HookHelpers::getHookNameToFilterField(),
                 true,
                 $objectTypeOrInterfaceTypeResolver,
-                $fieldResolver,
+                $objectTypeOrInterfaceTypeFieldResolver,
                 $interfaceTypeResolverClasses,
                 $fieldName
             )
@@ -85,7 +86,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
                 HookHelpers::getHookNameToFilterField($fieldName),
                 true,
                 $objectTypeOrInterfaceTypeResolver,
-                $fieldResolver,
+                $objectTypeOrInterfaceTypeFieldResolver,
                 $interfaceTypeResolverClasses,
                 $fieldName
             );

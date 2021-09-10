@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace PoP\AccessControl\Hooks;
 
 use PoP\AccessControl\ComponentConfiguration;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 
@@ -14,7 +15,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
     public function maybeFilterFieldName(
         bool $include,
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
-        FieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
@@ -40,7 +41,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
         return parent::maybeFilterFieldName(
             $include,
             $objectTypeOrInterfaceTypeResolver,
-            $fieldResolver,
+            $objectTypeOrInterfaceTypeFieldResolver,
             $interfaceTypeResolverClasses,
             $fieldName
         );

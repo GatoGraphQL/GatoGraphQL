@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace PoP\AccessControl\Hooks;
 
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
@@ -65,7 +66,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
     public function maybeFilterFieldName(
         bool $include,
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
-        FieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
@@ -77,7 +78,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
         // Check if to remove the field
         return !$this->removeFieldName(
             $objectTypeOrInterfaceTypeResolver,
-            $fieldResolver,
+            $objectTypeOrInterfaceTypeFieldResolver,
             $interfaceTypeResolverClasses,
             $fieldName,
         );
@@ -91,7 +92,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
      */
     protected function removeFieldName(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
-        FieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
