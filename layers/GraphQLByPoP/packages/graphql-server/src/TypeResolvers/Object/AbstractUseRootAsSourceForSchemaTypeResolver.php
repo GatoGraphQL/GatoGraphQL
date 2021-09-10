@@ -16,7 +16,7 @@ abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObje
         return RootTypeResolver::class;
     }
 
-    abstract protected function isFieldNameConditionSatisfiedForSchema(ObjectTypeFieldResolverInterface $fieldResolver, string $fieldName): bool;
+    abstract protected function isFieldNameConditionSatisfiedForSchema(ObjectTypeFieldResolverInterface $objectTypeFieldResolver, string $fieldName): bool;
 
     protected function isFieldNameResolvedByFieldResolver(
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $fieldOrFieldInterfaceResolver,

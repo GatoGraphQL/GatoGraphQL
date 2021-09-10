@@ -13,7 +13,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
     public function maybeFilterFieldName(
         bool $include,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        ObjectTypeFieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
@@ -35,7 +35,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
         return parent::maybeFilterFieldName(
             $include,
             $relationalTypeResolver,
-            $fieldResolver,
+            $objectTypeFieldResolver,
             $interfaceTypeResolverClasses,
             $fieldName
         );

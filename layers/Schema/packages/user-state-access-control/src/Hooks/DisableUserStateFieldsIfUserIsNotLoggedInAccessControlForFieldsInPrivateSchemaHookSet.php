@@ -38,10 +38,10 @@ class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSc
      */
     protected function removeFieldName(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        ObjectTypeFieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
-        return $fieldResolver instanceof AbstractUserStateFieldResolver;
+        return $objectTypeFieldResolver instanceof AbstractUserStateFieldResolver;
     }
 }

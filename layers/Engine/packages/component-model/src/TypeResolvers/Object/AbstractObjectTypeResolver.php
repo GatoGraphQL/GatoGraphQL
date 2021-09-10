@@ -26,7 +26,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @var array<string, ObjectTypeFieldResolverInterface[]>
      */
-    protected array $fieldResolvers = [];
+    protected array $objectTypeFieldResolvers = [];
     /**
      * @var array<string, array>|null
      */
@@ -115,10 +115,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function getSchemaFieldArgs(string $field): ?array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
-        if ($fieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
             $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
             $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
-            $fieldSchemaDefinition = $fieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+            $fieldSchemaDefinition = $objectTypeFieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
             return $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? [];
         }
 
@@ -128,9 +128,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function enableOrderedSchemaFieldArgs(string $field): bool
     {
         // Get the value from a fieldResolver, from the first one that resolves it
-        if ($fieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
             $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
-            return $fieldResolvers[0]->enableOrderedSchemaFieldArgs($this, $fieldName);
+            return $objectTypeFieldResolvers[0]->enableOrderedSchemaFieldArgs($this, $fieldName);
         }
 
         return false;
@@ -149,8 +149,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($schemaErrors) {
             return $schemaErrors;
         }
-        if ($fieldResolvers = $this->getFieldResolversForField($field)) {
-            if ($maybeErrors = $fieldResolvers[0]->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
+        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
+            if ($maybeErrors = $objectTypeFieldResolvers[0]->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeErrors as $error) {
                     $schemaErrors[] = [
                         Tokens::PATH => [$field],
@@ -199,7 +199,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function resolveSchemaValidationWarningDescriptions(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
-        if ($fieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
             list(
                 $validField,
                 $fieldName,
@@ -207,7 +207,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $schemaErrors,
                 $schemaWarnings,
             ) = $this->dissectFieldForSchema($field);
-            if ($maybeWarnings = $fieldResolvers[0]->resolveSchemaValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
+            if ($maybeWarnings = $objectTypeFieldResolvers[0]->resolveSchemaValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeWarnings as $warning) {
                     $schemaWarnings[] = [
                         Tokens::PATH => [$field],
@@ -224,7 +224,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function resolveSchemaDeprecationDescriptions(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
-        if ($fieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
             list(
                 $validField,
                 $fieldName,
@@ -233,7 +233,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $schemaWarnings,
                 $schemaDeprecations,
             ) = $this->dissectFieldForSchema($field);
-            $fieldSchemaDefinition = $fieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+            $fieldSchemaDefinition = $objectTypeFieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
             if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? null) {
                 $schemaDeprecations[] = [
                     Tokens::PATH => [$field],
@@ -241,7 +241,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ];
             }
             // Check for deprecations in the enums
-            if ($maybeDeprecations = $fieldResolvers[0]->resolveSchemaValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
+            if ($maybeDeprecations = $objectTypeFieldResolvers[0]->resolveSchemaValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeDeprecations as $deprecation) {
                     $schemaDeprecations[] = [
                         Tokens::PATH => [$field],
@@ -258,12 +258,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function getFieldTypeResolverClass(string $field): ?string
     {
         // Get the value from a fieldResolver, from the first one that resolves it
-        if ($fieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
             list(
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            return $fieldResolvers[0]->getFieldTypeResolverClass($this, $fieldName);
+            return $objectTypeFieldResolvers[0]->getFieldTypeResolverClass($this, $fieldName);
         }
 
         return null;
@@ -296,7 +296,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): mixed {
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $resultItem)
-        if ($fieldResolvers = $this->getFieldResolversForField($field)) {
+        if ($objectTypeFieldResolvers = $this->getFieldResolversForField($field)) {
             // Important: $validField becomes $field: remove all invalid fieldArgs before executing `resolveValue` on the fieldResolver
             list(
                 $field,
@@ -349,14 +349,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 return $this->errorProvider->getNestedDBErrorsFieldError($dbErrors, $fieldName);
             }
 
-            foreach ($fieldResolvers as $fieldResolver) {
+            foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
                 // Also send the typeResolver along, as to get the id of the $resultItem being passed
-                if ($fieldResolver->resolveCanProcessResultItem($this, $resultItem, $fieldName, $fieldArgs)) {
+                if ($objectTypeFieldResolver->resolveCanProcessResultItem($this, $resultItem, $fieldName, $fieldArgs)) {
                     if ($validateSchemaOnResultItem) {
-                        if ($maybeErrors = $fieldResolver->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
+                        if ($maybeErrors = $objectTypeFieldResolver->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                             return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
                         }
-                        if ($maybeDeprecations = $fieldResolver->resolveSchemaValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
+                        if ($maybeDeprecations = $objectTypeFieldResolver->resolveSchemaValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
                             $id = $this->getID($resultItem);
                             foreach ($maybeDeprecations as $deprecation) {
                                 $dbDeprecations[(string)$id][] = [
@@ -367,14 +367,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             $this->feedbackMessageStore->addDBDeprecations($dbDeprecations);
                         }
                     }
-                    if ($validationErrorDescriptions = $fieldResolver->getValidationErrorDescriptions($this, $resultItem, $fieldName, $fieldArgs)) {
+                    if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $resultItem, $fieldName, $fieldArgs)) {
                         return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
                     }
 
                     // Resolve the value. If the field resolver throws an Exception,
                     // catch it and return the equivalent GraphQL error
                     try {
-                        $value = $fieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+                        $value = $objectTypeFieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
                     } catch (Exception $e) {
                         return new Error(
                             'exception',
@@ -412,12 +412,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                      * All other conditions, check them when enabled by configuration.
                      */
                     if ($value === null) {
-                        $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+                        $fieldSchemaDefinition = $objectTypeFieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
                         if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? false) {
                             return $this->errorProvider->getNonNullableFieldError($fieldName);
                         }
                     } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
-                        $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+                        $fieldSchemaDefinition = $objectTypeFieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
                         // If may be array or not, then there's no validation to do
                         $fieldType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
                         $fieldMayBeArrayType = in_array($fieldType, [
@@ -505,12 +505,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     protected function getSchemaFieldResolvers(bool $global): array
     {
         $schemaFieldResolvers = [];
-        foreach ($this->getAllFieldResolvers() as $fieldName => $fieldResolvers) {
+        foreach ($this->getAllFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
             // Get the documentation from the first element
-            $fieldResolver = $fieldResolvers[0];
-            $isGlobal = $fieldResolver->isGlobal($this, $fieldName);
+            $objectTypeFieldResolver = $objectTypeFieldResolvers[0];
+            $isGlobal = $objectTypeFieldResolver->isGlobal($this, $fieldName);
             if (($global && $isGlobal) || (!$global && !$isGlobal)) {
-                $schemaFieldResolvers[$fieldName] =  $fieldResolver;
+                $schemaFieldResolvers[$fieldName] =  $objectTypeFieldResolver;
             }
         }
         return $schemaFieldResolvers;
@@ -533,8 +533,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Add the fields (non-global)
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_FIELDS] = [];
         $schemaFieldResolvers = $this->getSchemaFieldResolvers(false);
-        foreach ($schemaFieldResolvers as $fieldName => $fieldResolver) {
-            $this->addFieldSchemaDefinition($fieldResolver, $fieldName, $stackMessages, $generalMessages, $options);
+        foreach ($schemaFieldResolvers as $fieldName => $objectTypeFieldResolver) {
+            $this->addFieldSchemaDefinition($objectTypeFieldResolver, $fieldName, $stackMessages, $generalMessages, $options);
         }
 
         // Add all the implemented interfaces
@@ -592,17 +592,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_INTERFACES] = $typeInterfaceDefinitions;
     }
 
-    protected function addFieldSchemaDefinition(ObjectTypeFieldResolverInterface $fieldResolver, string $fieldName, array $stackMessages, array &$generalMessages, array $options = []): void
+    protected function addFieldSchemaDefinition(ObjectTypeFieldResolverInterface $objectTypeFieldResolver, string $fieldName, array $stackMessages, array &$generalMessages, array $options = []): void
     {
         /**
          * Fields may not be directly visible in the schema
          */
-        if ($fieldResolver->skipAddingToSchemaDefinition($this, $fieldName)) {
+        if ($objectTypeFieldResolver->skipAddingToSchemaDefinition($this, $fieldName)) {
             return;
         }
 
         // Watch out! We are passing empty $fieldArgs to generate the schema!
-        $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, []);
+        $fieldSchemaDefinition = $objectTypeFieldResolver->getSchemaDefinitionForField($this, $fieldName, []);
         // Add subfield schema if it is deep, and this typeResolver has not been processed yet
         if ($options['deep'] ?? null) {
             // If this field is relational, then add its own schema
@@ -618,7 +618,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $typeNames = array_keys($types);
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_REFERENCED_TYPE] = $typeNames[0];
         }
-        $isGlobal = $fieldResolver->isGlobal($this, $fieldName);
+        $isGlobal = $objectTypeFieldResolver->isGlobal($this, $fieldName);
         $isConnection = isset($fieldSchemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL]) && $fieldSchemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL];
         if ($isGlobal) {
             // If it is relational, it is a global connection
@@ -650,19 +650,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @return string[]
      */
-    protected function getFieldNamesResolvedByFieldResolver(ObjectTypeFieldResolverInterface $fieldResolver): array
+    protected function getFieldNamesResolvedByFieldResolver(ObjectTypeFieldResolverInterface $objectTypeFieldResolver): array
     {
-        $fieldResolverClass = get_class($fieldResolver);
-        if (!isset($this->fieldNamesResolvedByFieldResolver[$fieldResolverClass])) {
+        $objectTypeFieldResolverClass = get_class($objectTypeFieldResolver);
+        if (!isset($this->fieldNamesResolvedByFieldResolver[$objectTypeFieldResolverClass])) {
             // Merge the fieldNames resolved by this field resolver class, and the interfaces it implements
             $fieldNames = array_values(array_unique(array_merge(
-                $fieldResolver->getFieldNamesToResolve(),
-                $fieldResolver->getFieldNamesFromInterfaces()
+                $objectTypeFieldResolver->getFieldNamesToResolve(),
+                $objectTypeFieldResolver->getFieldNamesFromInterfaces()
             )));
-            $fieldNames = $this->maybeExcludeFieldNamesFromSchema($fieldResolver, $fieldNames);
-            $this->fieldNamesResolvedByFieldResolver[$fieldResolverClass] = $fieldNames;
+            $fieldNames = $this->maybeExcludeFieldNamesFromSchema($objectTypeFieldResolver, $fieldNames);
+            $this->fieldNamesResolvedByFieldResolver[$objectTypeFieldResolverClass] = $fieldNames;
         }
-        return $this->fieldNamesResolvedByFieldResolver[$fieldResolverClass];
+        return $this->fieldNamesResolvedByFieldResolver[$objectTypeFieldResolverClass];
     }
 
     protected function getAllFieldResolvers(): array
@@ -688,22 +688,22 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             do {
                 /** @var ObjectTypeFieldResolverInterface[] */
                 $attachedFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
-                foreach ($attachedFieldResolvers as $fieldResolver) {
+                foreach ($attachedFieldResolvers as $objectTypeFieldResolver) {
                     // Process the fields which have not been processed yet
-                    $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
+                    $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($objectTypeFieldResolver);
                     foreach (array_diff($extensionFieldNames, array_keys($schemaFieldResolvers)) as $fieldName) {
                         // Watch out here: no fieldArgs!!!! So this deals with the base case (static), not with all cases (runtime)
                         // If using an ACL to remove a field from an interface,
                         // getting the fieldResolvers for that field will be empty
                         // Then ignore adding the field, it must not be added to the schema
-                        if ($fieldResolversForField = $this->getFieldResolversForField($fieldName)) {
-                            $schemaFieldResolvers[$fieldName] = $fieldResolversForField;
+                        if ($objectTypeFieldResolversForField = $this->getFieldResolversForField($fieldName)) {
+                            $schemaFieldResolvers[$fieldName] = $objectTypeFieldResolversForField;
                         }
                     }
                     // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
-                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
+                        $objectTypeFieldResolver->getImplementedFieldInterfaceResolverClasses()
                     )));
                 }
                 // Otherwise, continue iterating for the class parents
@@ -736,14 +736,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     {
         $fieldInterfaceResolverClasses = [];
         $processedFieldResolverClasses = [];
-        foreach ($this->getAllFieldResolvers() as $fieldName => $fieldResolvers) {
-            foreach ($fieldResolvers as $fieldResolver) {
-                $fieldResolverClass = get_class($fieldResolver);
-                if (!in_array($fieldResolverClass, $processedFieldResolverClasses)) {
-                    $processedFieldResolverClasses[] = $fieldResolverClass;
+        foreach ($this->getAllFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
+            foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
+                $objectTypeFieldResolverClass = get_class($objectTypeFieldResolver);
+                if (!in_array($objectTypeFieldResolverClass, $processedFieldResolverClasses)) {
+                    $processedFieldResolverClasses[] = $objectTypeFieldResolverClass;
                     $fieldInterfaceResolverClasses = array_merge(
                         $fieldInterfaceResolverClasses,
-                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
+                        $objectTypeFieldResolver->getImplementedFieldInterfaceResolverClasses()
                     );
                 }
             }
@@ -826,7 +826,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
 
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
-        $fieldResolvers = [];
+        $objectTypeFieldResolvers = [];
         // Get the fieldResolvers attached to this typeResolver and to all the interfaces it implements
         $classStack = [
             $this->getTypeResolverClassToCalculateSchema(),
@@ -842,27 +842,27 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
                 /** @var ObjectTypeFieldResolverInterface[] */
                 $attachedFieldResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS));
-                foreach ($attachedFieldResolvers as $fieldResolver) {
-                    $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
+                foreach ($attachedFieldResolvers as $objectTypeFieldResolver) {
+                    $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($objectTypeFieldResolver);
                     if (in_array($fieldName, $extensionFieldNames)) {
                         // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
-                        if ($fieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
-                            $extensionPriority = $fieldResolver->getPriorityToAttachToClasses();
+                        if ($objectTypeFieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
+                            $extensionPriority = $objectTypeFieldResolver->getPriorityToAttachToClasses();
                             $classTypeResolverPriorities[] = $extensionPriority;
-                            $classFieldResolvers[] = $fieldResolver;
+                            $classFieldResolvers[] = $objectTypeFieldResolver;
                         }
                     }
                     // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
-                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
+                        $objectTypeFieldResolver->getImplementedFieldInterfaceResolverClasses()
                     )));
                 }
                 // Sort the found units by their priority, and then add to the stack of all units, for all classes
                 // Higher priority means they execute first!
                 array_multisort($classTypeResolverPriorities, SORT_DESC, SORT_NUMERIC, $classFieldResolvers);
-                $fieldResolvers = array_merge(
-                    $fieldResolvers,
+                $objectTypeFieldResolvers = array_merge(
+                    $objectTypeFieldResolvers,
                     $classFieldResolvers
                 );
                 // Continue iterating for the class parents
@@ -870,7 +870,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         // Return all the units that resolve the fieldName
-        return $fieldResolvers;
+        return $objectTypeFieldResolvers;
     }
 
     protected function calculateFieldNamesToResolve(): array
@@ -884,8 +884,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         do {
             /** @var ObjectTypeFieldResolverInterface[] */
             $attachedFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
-            foreach ($attachedFieldResolvers as $fieldResolver) {
-                $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
+            foreach ($attachedFieldResolvers as $objectTypeFieldResolver) {
+                $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($objectTypeFieldResolver);
                 $fieldNames = array_merge(
                     $fieldNames,
                     $extensionFieldNames

@@ -64,7 +64,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
     public function maybeFilterFieldName(
         bool $include,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        ObjectTypeFieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
@@ -74,7 +74,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
         }
 
         // Check if to remove the field
-        return !$this->removeFieldName($relationalTypeResolver, $fieldResolver, $interfaceTypeResolverClasses, $fieldName);
+        return !$this->removeFieldName($relationalTypeResolver, $objectTypeFieldResolver, $interfaceTypeResolverClasses, $fieldName);
     }
     /**
      * Field names to remove
@@ -85,7 +85,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
      */
     protected function removeFieldName(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        ObjectTypeFieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {

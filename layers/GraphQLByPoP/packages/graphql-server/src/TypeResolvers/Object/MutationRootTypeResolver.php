@@ -35,12 +35,12 @@ class MutationRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResol
         return MutationRootTypeDataLoader::class;
     }
 
-    protected function isFieldNameConditionSatisfiedForSchema(ObjectTypeFieldResolverInterface $fieldResolver, string $fieldName): bool
+    protected function isFieldNameConditionSatisfiedForSchema(ObjectTypeFieldResolverInterface $objectTypeFieldResolver, string $fieldName): bool
     {
         return
             // Fields "id", "self" and "__typename" are mandatory, so they must both
             // also be allowed for the MutationRoot, even if they are not mutations!
             in_array($fieldName, ['id', 'self', '__typename'])
-            || $fieldResolver->resolveFieldMutationResolverClass($this, $fieldName) !== null;
+            || $objectTypeFieldResolver->resolveFieldMutationResolverClass($this, $fieldName) !== null;
     }
 }

@@ -44,7 +44,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extend
      */
     protected function removeFieldName(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        ObjectTypeFieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {

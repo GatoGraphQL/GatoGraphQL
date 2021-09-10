@@ -45,7 +45,7 @@ class NestedMutationHookSet extends AbstractHookSet
     public function maybeFilterFieldName(
         bool $include,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        ObjectTypeFieldResolverInterface $fieldResolver,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
@@ -60,7 +60,7 @@ class NestedMutationHookSet extends AbstractHookSet
                 $graphQLSchemaDefinitionService->getRootTypeResolverClass(),
                 $graphQLSchemaDefinitionService->getMutationRootTypeResolverClass(),
             ])
-            && $fieldResolver->resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName) !== null
+            && $objectTypeFieldResolver->resolveFieldMutationResolverClass($relationalTypeResolver, $fieldName) !== null
         ) {
             return false;
         }
