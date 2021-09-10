@@ -21,10 +21,6 @@ interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface
      */
     public function getFieldNamesToImplement(): array;
     /**
-     * An interface can itself implement other interfaces!
-     */
-    public function getImplementedFieldInterfaceResolverClasses(): array;
-    /**
      * Each FieldInterfaceResolver provides a list of fieldNames to the Interface.
      * The Interface may also accept other fieldNames from other FieldInterfaceResolvers.
      * That's why this function is "partially" implemented: the Interface

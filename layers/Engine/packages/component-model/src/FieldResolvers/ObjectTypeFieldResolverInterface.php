@@ -23,12 +23,6 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
      */
     public function getFieldNamesToResolve(): array;
     /**
-     * A list of classes of all the (GraphQL-style) interfaces the fieldResolver implements
-     * 
-     * @return string[]
-     */
-    public function getImplementedFieldInterfaceResolverClasses(): array;
-    /**
      * Obtain the fieldNames from all implemented interfaces
      */
     public function getFieldNamesFromInterfaces(): array;
