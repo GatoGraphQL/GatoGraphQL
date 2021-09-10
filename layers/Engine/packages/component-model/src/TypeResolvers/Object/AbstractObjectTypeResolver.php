@@ -810,7 +810,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->fieldResolvers[$field];
     }
 
-    public function hasFieldResolversForField(string $field): bool
+    public function hasObjectTypeFieldResolversForField(string $field): bool
     {
         return !empty($this->getObjectTypeFieldResolversForField($field));
     }

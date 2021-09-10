@@ -47,7 +47,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         // 1. No FieldResolver
         // 2. No FieldDefaultTypeDataLoader
         $subcomponentFieldTypeResolverClass = $objectTypeResolver->getFieldTypeResolverClass($subcomponent_data_field);
-        if (!SchemaHelpers::isRelationalFieldTypeResolverClass($subcomponentFieldTypeResolverClass) && $objectTypeResolver->hasFieldResolversForField($subcomponent_data_field)) {
+        if (!SchemaHelpers::isRelationalFieldTypeResolverClass($subcomponentFieldTypeResolverClass) && $objectTypeResolver->hasObjectTypeFieldResolversForField($subcomponent_data_field)) {
             // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
             $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
             $this->feedbackMessageStore->addSchemaError(
