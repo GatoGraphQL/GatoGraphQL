@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP\TypeResolvers\Object;
+namespace PoPSchema\UserRolesWP\TypeResolvers\ObjectType;
 
-use PoPSchema\UserRolesWP\RelationalTypeDataLoaders\Object\UserRoleTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
+use PoPSchema\UserRolesWP\RelationalTypeDataLoaders\ObjectType\UserRoleTypeDataLoader;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 
 class UserRoleTypeResolver extends AbstractObjectTypeResolver
 {

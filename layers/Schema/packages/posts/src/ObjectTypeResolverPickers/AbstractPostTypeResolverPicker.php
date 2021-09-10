@@ -6,7 +6,7 @@ namespace PoPSchema\Posts\ObjectTypeResolverPickers;
 
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
-use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
 
 abstract class AbstractPostTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {

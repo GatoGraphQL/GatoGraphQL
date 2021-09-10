@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Highlights\TypeResolvers\Object;
+namespace PoPSchema\Highlights\TypeResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
-use PoPSchema\Highlights\RelationalTypeDataLoaders\Object\HighlightTypeDataLoader;
+use PoPSchema\Highlights\RelationalTypeDataLoaders\ObjectType\HighlightTypeDataLoader;
 
 class HighlightTypeResolver extends AbstractObjectTypeResolver
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\RelationalTypeDataLoaders\Object;
+namespace PoP\Engine\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\Engine\ObjectFacades\RootObjectFacade;
-use PoP\ComponentModel\RelationalTypeDataLoaders\Object\AbstractObjectTypeDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 
 class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {

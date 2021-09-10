@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\TypeResolvers\Object;
+namespace PoPSchema\PostCategories\TypeResolvers\ObjectType;
 
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
-use PoPSchema\PostCategories\RelationalTypeDataLoaders\Object\PostCategoryTypeDataLoader;
-use PoPSchema\Categories\TypeResolvers\Object\AbstractCategoryTypeResolver;
+use PoPSchema\PostCategories\RelationalTypeDataLoaders\ObjectType\PostCategoryTypeDataLoader;
+use PoPSchema\Categories\TypeResolvers\ObjectType\AbstractCategoryTypeResolver;
 
 class PostCategoryTypeResolver extends AbstractCategoryTypeResolver
 {

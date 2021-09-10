@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Stances\ObjectTypeResolverPickers;
 
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
-use PoPSchema\Stances\TypeResolvers\Object\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\ObjectType\StanceTypeResolver;
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 
 class AbstractStanceTypeResolverPicker extends AbstractObjectTypeResolverPicker

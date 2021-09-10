@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\Overrides\FieldResolvers;
 
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
-use PoPSchema\UserRolesWP\TypeResolvers\Object\UserRoleTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleTypeResolver;
 
 trait RolesFieldResolverTrait
 {

@@ -15,7 +15,7 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\ObjectFacades\RootObjectFacade;
-use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoP\Translation\TranslationAPIInterface;
 
 class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface

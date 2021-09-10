@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\Multisite\RelationalTypeDataLoaders\Object;
+namespace PoP\Multisite\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\Multisite\ObjectFacades\SiteObjectFacade;
-use PoP\ComponentModel\RelationalTypeDataLoaders\Object\AbstractObjectTypeDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 
 class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\TypeResolvers\Object;
+namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 

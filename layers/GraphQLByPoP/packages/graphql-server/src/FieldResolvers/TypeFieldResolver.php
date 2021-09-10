@@ -12,15 +12,15 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasPossibleTypesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\InputObjectType;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\EnumValueTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\FieldTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\InputValueTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\Object\TypeTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\EnumValueTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class TypeFieldResolver extends AbstractDBDataFieldResolver
 {

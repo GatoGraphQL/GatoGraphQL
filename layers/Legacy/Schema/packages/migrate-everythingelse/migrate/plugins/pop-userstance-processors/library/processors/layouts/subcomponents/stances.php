@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Stances\TypeResolvers\Object\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\ObjectType\StanceTypeResolver;
 
 class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {

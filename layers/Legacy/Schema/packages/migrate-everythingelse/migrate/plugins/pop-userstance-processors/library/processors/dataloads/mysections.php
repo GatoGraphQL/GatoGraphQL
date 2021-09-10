@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Stances\TypeResolvers\Object\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\ObjectType\StanceTypeResolver;
 
 class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\TypeResolvers\Object;
+namespace PoP\Engine\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Engine\ObjectModels\Root;
-use PoP\Engine\RelationalTypeDataLoaders\Object\RootTypeDataLoader;
+use PoP\Engine\RelationalTypeDataLoaders\ObjectType\RootTypeDataLoader;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 
 class RootTypeResolver extends AbstractObjectTypeResolver

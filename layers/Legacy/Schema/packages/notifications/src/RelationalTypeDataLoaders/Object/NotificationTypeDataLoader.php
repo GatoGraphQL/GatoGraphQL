@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Notifications\RelationalTypeDataLoaders\Object;
+namespace PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\RelationalTypeDataLoaders\Object\AbstractObjectTypeQueryableDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP_Notifications_API;
 

@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Pages\TypeResolvers\Object\PageTypeResolver;
+use PoPSchema\Pages\TypeResolvers\ObjectType\PageTypeResolver;
 
 abstract class PoP_Module_Processor_PageContentDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {

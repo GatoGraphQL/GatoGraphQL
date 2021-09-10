@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRolesWP\RelationalTypeDataLoaders\Object;
+namespace PoPSchema\UserRolesWP\RelationalTypeDataLoaders\ObjectType;
 
-use PoP\ComponentModel\RelationalTypeDataLoaders\Object\AbstractObjectTypeDataLoader;
+use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 
 class UserRoleTypeDataLoader extends AbstractObjectTypeDataLoader
 {

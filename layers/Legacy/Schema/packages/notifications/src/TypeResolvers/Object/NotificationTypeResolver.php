@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Notifications\TypeResolvers\Object;
+namespace PoPSchema\Notifications\TypeResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
-use PoPSchema\Notifications\RelationalTypeDataLoaders\Object\NotificationTypeDataLoader;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
+use PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType\NotificationTypeDataLoader;
 
 class NotificationTypeResolver extends AbstractObjectTypeResolver
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Taxonomies\TypeResolvers\Object;
+namespace PoPSchema\Taxonomies\TypeResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 
 abstract class AbstractTaxonomyTypeResolver extends AbstractObjectTypeResolver
 {

@@ -7,8 +7,8 @@ namespace PoP\ComponentModel\FieldResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\ElementalFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class ElementalFieldResolver extends AbstractDBDataFieldResolver
 {

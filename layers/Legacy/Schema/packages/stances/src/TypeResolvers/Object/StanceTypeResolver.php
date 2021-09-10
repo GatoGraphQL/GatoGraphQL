@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Stances\TypeResolvers\Object;
+namespace PoPSchema\Stances\TypeResolvers\ObjectType;
 
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
-use PoPSchema\Stances\RelationalTypeDataLoaders\Object\StanceTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
+use PoPSchema\Stances\RelationalTypeDataLoaders\ObjectType\StanceTypeDataLoader;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 
 class StanceTypeResolver extends AbstractObjectTypeResolver
 {

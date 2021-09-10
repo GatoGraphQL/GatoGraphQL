@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Categories\TypeResolvers\Object;
+namespace PoPSchema\Categories\TypeResolvers\ObjectType;
 
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
-use PoPSchema\Taxonomies\TypeResolvers\Object\AbstractTaxonomyTypeResolver;
+use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyTypeResolver;
 
 abstract class AbstractCategoryTypeResolver extends AbstractTaxonomyTypeResolver
 {

@@ -9,8 +9,8 @@ use Leoloso\BlockMetadata\Metadata;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
-use PoPSchema\Posts\TypeResolvers\Object\PostTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
 
 class PostFieldResolver extends AbstractDBDataFieldResolver
 {

@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldInterfaceResolvers\AbstractInterfaceTypeFieldResolve
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\Users\TypeResolvers\Interface\WithAuthorInterfaceTypeResolver;
-use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
 class WithAuthorFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver
 {
