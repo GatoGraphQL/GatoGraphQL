@@ -35,8 +35,10 @@ class QueryRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
         return QueryRootTypeDataLoader::class;
     }
 
-    protected function isFieldNameConditionSatisfiedForSchema(ObjectTypeFieldResolverInterface $objectTypeFieldResolver, string $fieldName): bool
-    {
+    protected function isFieldNameConditionSatisfiedForSchema(
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
+        string $fieldName
+    ): bool {
         return
             // Fields "queryRoot" and "mutationRoot" are helpers, must not be ported to QueryRoot
             !in_array($fieldName, ['queryRoot', 'mutationRoot'])
