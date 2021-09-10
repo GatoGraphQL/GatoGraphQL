@@ -34,7 +34,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @var array<string, ObjectTypeFieldResolverInterface>|null
      */
-    protected ?array $schemaFieldResolvers = null;
+    protected ?array $schemaObjectTypeFieldResolvers = null;
     /**
      * @var string[]|null
      */
@@ -502,18 +502,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->errorProvider->getNoFieldError($this->getID($resultItem), $fieldName, $this->getMaybeNamespacedTypeName());
     }
 
-    protected function getSchemaFieldResolvers(bool $global): array
+    protected function getSchemaObjecTypeFieldResolvers(bool $global): array
     {
-        $schemaFieldResolvers = [];
+        $schemaObjectTypeFieldResolvers = [];
         foreach ($this->getAllObjectTypeFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
             // Get the documentation from the first element
             $objectTypeFieldResolver = $objectTypeFieldResolvers[0];
             $isGlobal = $objectTypeFieldResolver->isGlobal($this, $fieldName);
             if (($global && $isGlobal) || (!$global && !$isGlobal)) {
-                $schemaFieldResolvers[$fieldName] =  $objectTypeFieldResolver;
+                $schemaObjectTypeFieldResolvers[$fieldName] =  $objectTypeFieldResolver;
             }
         }
-        return $schemaFieldResolvers;
+        return $schemaObjectTypeFieldResolvers;
     }
 
     protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])
@@ -532,8 +532,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         // Add the fields (non-global)
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_FIELDS] = [];
-        $schemaFieldResolvers = $this->getSchemaFieldResolvers(false);
-        foreach ($schemaFieldResolvers as $fieldName => $objectTypeFieldResolver) {
+        $schemaObjectTypeFieldResolvers = $this->getSchemaObjecTypeFieldResolvers(false);
+        foreach ($schemaObjectTypeFieldResolvers as $fieldName => $objectTypeFieldResolver) {
             $this->addFieldSchemaDefinition($objectTypeFieldResolver, $fieldName, $stackMessages, $generalMessages, $options);
         }
 
@@ -671,16 +671,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     protected function getAllObjectTypeFieldResolvers(): array
     {
-        if ($this->schemaFieldResolvers === null) {
-            $this->schemaFieldResolvers = $this->calculateAllObjectTypeFieldResolvers();
+        if ($this->schemaObjectTypeFieldResolvers === null) {
+            $this->schemaObjectTypeFieldResolvers = $this->calculateAllObjectTypeFieldResolvers();
         }
-        return $this->schemaFieldResolvers;
+        return $this->schemaObjectTypeFieldResolvers;
     }
 
     protected function calculateAllObjectTypeFieldResolvers(): array
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
-        $schemaFieldResolvers = [];
+        $schemaObjectTypeFieldResolvers = [];
 
         // Get the fieldResolvers attached to this typeResolver and to all the interfaces it implements
         $classStack = [
@@ -695,13 +695,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 foreach ($attachedFieldResolvers as $objectTypeFieldResolver) {
                     // Process the fields which have not been processed yet
                     $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($objectTypeFieldResolver);
-                    foreach (array_diff($extensionFieldNames, array_keys($schemaFieldResolvers)) as $fieldName) {
+                    foreach (array_diff($extensionFieldNames, array_keys($schemaObjectTypeFieldResolvers)) as $fieldName) {
                         // Watch out here: no fieldArgs!!!! So this deals with the base case (static), not with all cases (runtime)
                         // If using an ACL to remove a field from an interface,
                         // getting the fieldResolvers for that field will be empty
                         // Then ignore adding the field, it must not be added to the schema
                         if ($objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForField($fieldName)) {
-                            $schemaFieldResolvers[$fieldName] = $objectTypeFieldResolversForField;
+                            $schemaObjectTypeFieldResolvers[$fieldName] = $objectTypeFieldResolversForField;
                         }
                     }
                     // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
@@ -714,7 +714,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             } while ($class = get_parent_class($class));
         }
 
-        return $schemaFieldResolvers;
+        return $schemaObjectTypeFieldResolvers;
     }
 
     /**
