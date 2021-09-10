@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\Union;
 
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
@@ -253,38 +254,57 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             // Continue iterating for the class parents
         } while ($class = get_parent_class($class));
 
-        // Validate that all typeResolvers implement the required interface
-        if ($interfaceTypeResolverClass = $this->getSchemaTypeInterfaceTypeResolverClass()) {
-            $objectTypeResolverClasses = $this->getObjectTypeResolverClassesFromPickers($objectTypeResolverPickers);
-            $notImplementingInterfaceTypeResolverClasses = array_filter(
-                $objectTypeResolverClasses,
-                function (string $objectTypeResolverClass) use ($interfaceTypeResolverClass) {
-                    /** @var ObjectTypeResolverInterface */
-                    $objectTypeResolver = $this->instanceManager->getInstance($objectTypeResolverClass);
-                    return !in_array($interfaceTypeResolverClass, $objectTypeResolver->getAllImplementedInterfaceTypeResolverClasses());
-                }
-            );
-            if ($notImplementingInterfaceTypeResolverClasses) {
-                /** @var InterfaceTypeResolverInterface */
-                $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
-                throw new Exception(
-                    sprintf(
-                        $this->translationAPI->__('Union Type \'%s\' is defined to implement interface \'%s\', hence its Type members must also satisfy this interface, but the following ones do not: \'%s\'', 'component-model'),
-                        $this->getMaybeNamespacedTypeName(),
-                        $interfaceTypeResolver->getMaybeNamespacedTypeName(),
-                        implode(
-                            $this->translationAPI->__('\', \''),
-                            array_map(
-                                function (string $objectTypeResolverClass) {
-                                    /** @var ObjectTypeResolverInterface */
-                                    $objectTypeResolver = $this->instanceManager->getInstance($objectTypeResolverClass);
-                                    return $objectTypeResolver->getMaybeNamespacedTypeName();
-                                },
-                                $notImplementingInterfaceTypeResolverClasses
+        /**
+         * Support Union Type implementing an Interface Type?
+         * This functionality is not supported by the GraphQL spec.
+         * 
+         * @see https://github.com/graphql/graphql-spec/issues/518
+         * 
+         * It is disabled by default in this GraphQL server, because it can produce a runtime exception
+         * when creating an Access Control List:
+         * 
+         * - CustomPostUnionTypeResolver is set to implement IsCustomPostInterfaceType
+         * - CustomPostUnionTypeResolver contains types PostTypeResolver and PageTypeResolver
+         * - Via ACL in a private schema, we disable access to field "Post.author"
+         * - Because IsCustomPostInterfaceType contains field "author", then Post suddenly
+         *   does not satisfy this interface anymore
+         * - But Post is still part of CustomPostUnion, then the code below will throw an exception
+         *   stating that the member Post type does not implement the IsCustomPost interface!
+         */
+        if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
+            // Validate that all typeResolvers implement the required interface
+            if ($interfaceTypeResolverClass = $this->getSchemaTypeInterfaceTypeResolverClass()) {
+                $objectTypeResolverClasses = $this->getObjectTypeResolverClassesFromPickers($objectTypeResolverPickers);
+                $notImplementingInterfaceTypeResolverClasses = array_filter(
+                    $objectTypeResolverClasses,
+                    function (string $objectTypeResolverClass) use ($interfaceTypeResolverClass) {
+                        /** @var ObjectTypeResolverInterface */
+                        $objectTypeResolver = $this->instanceManager->getInstance($objectTypeResolverClass);
+                        return !in_array($interfaceTypeResolverClass, $objectTypeResolver->getAllImplementedInterfaceTypeResolverClasses());
+                    }
+                );
+                if ($notImplementingInterfaceTypeResolverClasses) {
+                    /** @var InterfaceTypeResolverInterface */
+                    $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
+                    throw new Exception(
+                        sprintf(
+                            $this->translationAPI->__('Union Type \'%s\' is defined to implement interface \'%s\', hence its Type members must also satisfy this interface, but the following ones do not: \'%s\'', 'component-model'),
+                            $this->getMaybeNamespacedTypeName(),
+                            $interfaceTypeResolver->getMaybeNamespacedTypeName(),
+                            implode(
+                                $this->translationAPI->__('\', \''),
+                                array_map(
+                                    function (string $objectTypeResolverClass) {
+                                        /** @var ObjectTypeResolverInterface */
+                                        $objectTypeResolver = $this->instanceManager->getInstance($objectTypeResolverClass);
+                                        return $objectTypeResolver->getMaybeNamespacedTypeName();
+                                    },
+                                    $notImplementingInterfaceTypeResolverClasses
+                                )
                             )
                         )
-                    )
-                );
+                    );
+                }
             }
         }
 
@@ -400,11 +420,13 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         }
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_IS_UNION] = true;
 
-        // If it returns an interface as type, add it to the schemaDefinition
-        if ($interfaceTypeResolverClass = $this->getSchemaTypeInterfaceTypeResolverClass()) {
-            /** @var InterfaceTypeResolverInterface */
-            $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_RESULTS_IMPLEMENT_INTERFACE] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
+        if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
+            // If it returns an interface as type, add it to the schemaDefinition
+            if ($interfaceTypeResolverClass = $this->getSchemaTypeInterfaceTypeResolverClass()) {
+                /** @var InterfaceTypeResolverInterface */
+                $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
+                $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_RESULTS_IMPLEMENT_INTERFACE] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
+            }
         }
 
         // Iterate through the typeResolvers from all the pickers and get their schema definitions
