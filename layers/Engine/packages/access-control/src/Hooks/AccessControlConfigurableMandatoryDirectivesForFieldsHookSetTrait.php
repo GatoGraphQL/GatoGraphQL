@@ -7,7 +7,7 @@ namespace PoP\AccessControl\Hooks;
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
-use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait

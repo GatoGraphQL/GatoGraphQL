@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\TypeResolvers\Interface;
+namespace PoP\ComponentModel\TypeResolvers\InterfaceType;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ExcludeFieldNamesFromSchemaTypeResolverTrait;
-use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 
 abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implements InterfaceTypeResolverInterface
 {

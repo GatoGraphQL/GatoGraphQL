@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\TypeResolvers\Interface;
+namespace PoP\ComponentModel\TypeResolvers\InterfaceType;
 
 use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;

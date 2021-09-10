@@ -8,7 +8,7 @@ use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDir
 use PoP\AccessControl\Hooks\AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait;
 use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
-use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 

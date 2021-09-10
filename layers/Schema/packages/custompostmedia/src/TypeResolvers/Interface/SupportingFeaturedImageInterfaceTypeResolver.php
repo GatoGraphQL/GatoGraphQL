@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMedia\TypeResolvers\Interface;
+namespace PoPSchema\CustomPostMedia\TypeResolvers\InterfaceType;
 
-use PoP\ComponentModel\TypeResolvers\Interface\AbstractInterfaceTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
 class SupportingFeaturedImageInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {

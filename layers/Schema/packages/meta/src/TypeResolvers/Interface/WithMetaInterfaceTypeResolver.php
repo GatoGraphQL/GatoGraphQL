@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Meta\TypeResolvers\Interface;
+namespace PoPSchema\Meta\TypeResolvers\InterfaceType;
 
-use PoP\ComponentModel\TypeResolvers\Interface\AbstractInterfaceTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
 class WithMetaInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {

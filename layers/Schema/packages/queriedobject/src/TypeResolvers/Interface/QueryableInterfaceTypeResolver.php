@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\QueriedObject\TypeResolvers\Interface;
+namespace PoPSchema\QueriedObject\TypeResolvers\InterfaceType;
 
-use PoP\ComponentModel\TypeResolvers\Interface\AbstractInterfaceTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
 class QueryableInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {

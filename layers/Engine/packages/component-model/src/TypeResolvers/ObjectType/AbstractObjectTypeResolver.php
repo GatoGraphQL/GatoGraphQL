@@ -17,7 +17,7 @@ use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
-use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {

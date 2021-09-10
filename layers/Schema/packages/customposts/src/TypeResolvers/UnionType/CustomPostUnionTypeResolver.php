@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPosts\TypeResolvers\UnionType;
 
 use PoP\ComponentModel\TypeResolvers\UnionType\AbstractUnionTypeResolver;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader;
-use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
 
 class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 {

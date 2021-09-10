@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\TypeResolvers\Interface;
+namespace PoPSchema\Comments\TypeResolvers\InterfaceType;
 
-use PoP\ComponentModel\TypeResolvers\Interface\AbstractInterfaceTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
 class CommentableInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {

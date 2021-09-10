@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\TypeResolvers\Interface;
+namespace PoP\ComponentModel\TypeResolvers\InterfaceType;
 
-use PoP\ComponentModel\TypeResolvers\Interface\AbstractInterfaceTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
 class ElementalInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {
