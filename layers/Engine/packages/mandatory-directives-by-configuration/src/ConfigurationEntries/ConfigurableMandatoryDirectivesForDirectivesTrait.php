@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-
 trait ConfigurableMandatoryDirectivesForDirectivesTrait
 {
     /**
