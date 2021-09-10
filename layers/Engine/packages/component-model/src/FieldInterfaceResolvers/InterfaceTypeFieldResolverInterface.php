@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 
-interface InterfaceTypeFieldResolverInterface extends AttachableExtensionInterface
+interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface
 {
     /**
      * The classes of the InterfaceTypeResolvers this FieldInterfaceResolver adds fields to.
