@@ -35,7 +35,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractFieldResolver implements ObjectTypeFieldResolverInterface, FieldSchemaDefinitionResolverInterface
+abstract class AbstractObjectTypeFieldResolver implements ObjectTypeFieldResolverInterface, FieldSchemaDefinitionResolverInterface
 {
     /**
      * This class is attached to a TypeResolver

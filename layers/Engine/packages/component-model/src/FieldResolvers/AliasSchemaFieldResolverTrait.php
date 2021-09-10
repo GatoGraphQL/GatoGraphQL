@@ -37,7 +37,7 @@ trait AliasSchemaFieldResolverTrait
     /**
      * Aliased `FieldResolver` instance
      */
-    protected function getAliasedFieldResolverInstance(): AbstractFieldResolver
+    protected function getAliasedFieldResolverInstance(): AbstractObjectTypeFieldResolver
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         return $instanceManager->getInstance(
