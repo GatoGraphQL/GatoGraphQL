@@ -57,34 +57,18 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
         return $fieldNames;
     }
 
+    /**
+     * $interfaceTypeResolverClasses is the list of all the interfaces implemented
+     * by the fieldResolver, and not only those ones containing the fieldName.
+     * This is because otherwise we'd need to call `$interfaceTypeResolver->getFieldNamesToImplement()`
+     * to find out the list of Interfaces containing $fieldName, however this function relies
+     * on the InterfaceTypeFieldResolver once again, so we'd get a recursion.
+     */
     protected function isFieldNameResolvedByFieldResolver(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         FieldResolverInterface $fieldResolver,
         string $fieldName,
         array $interfaceTypeResolverClasses
-    ): bool {
-        // Calculate all the interfaces that define this fieldName
-        $interfaceTypeResolverClassesForField = array_values(array_filter(
-            $interfaceTypeResolverClasses,
-            function (string $interfaceTypeResolverClass) use ($fieldName): bool {
-                /** @var InterfaceTypeResolverInterface */
-                $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
-                return in_array($fieldName, $interfaceTypeResolver->getFieldNamesToImplement());
-            }
-        ));
-        return $this->triggerHookToMaybeFilterFieldName(
-            $objectTypeOrInterfaceTypeResolver,
-            $fieldResolver,
-            $fieldName,
-            $interfaceTypeResolverClassesForField,
-        );
-    }
-
-    protected function triggerHookToMaybeFilterFieldName(
-        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
-        FieldResolverInterface $fieldResolver,
-        string $fieldName,
-        array $interfaceTypeResolverClassesForField
     ): bool {
         // Execute 2 filters: a generic one, and a specific one
         if (
@@ -93,7 +77,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
                 true,
                 $objectTypeOrInterfaceTypeResolver,
                 $fieldResolver,
-                $interfaceTypeResolverClassesForField,
+                $interfaceTypeResolverClasses,
                 $fieldName
             )
         ) {
@@ -102,7 +86,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
                 true,
                 $objectTypeOrInterfaceTypeResolver,
                 $fieldResolver,
-                $interfaceTypeResolverClassesForField,
+                $interfaceTypeResolverClasses,
                 $fieldName
             );
         }
