@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\CustomPosts\TypeResolvers\Interface\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\Users\TypeResolvers\Interface\WithAuthorInterfaceTypeResolver;
 use PoPSchema\Users\TypeResolvers\Object\UserTypeResolver;
 
-class WithAuthorFieldInterfaceResolver extends AbstractFieldInterfaceResolver
+class WithAuthorFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver
 {
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

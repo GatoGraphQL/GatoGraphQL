@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractFieldInterfaceResolver;
+use PoP\ComponentModel\FieldInterfaceResolvers\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\Interface\ElementalInterfaceTypeResolver;
 
-class ElementalFieldInterfaceResolver extends AbstractFieldInterfaceResolver
+class ElementalFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver
 {
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

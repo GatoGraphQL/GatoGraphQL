@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 
-abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractFieldInterfaceResolver implements QueryableFieldInterfaceSchemaDefinitionResolverInterface
+abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver implements QueryableFieldInterfaceSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
 
