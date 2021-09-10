@@ -215,7 +215,11 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         if (!isset($this->fieldNamesResolvedByFieldInterfaceResolver[$interfaceTypeFieldResolverClass])) {
             // Merge the fieldNames resolved by this field resolver class, and the interfaces it implements
             $fieldNames = $interfaceTypeFieldResolver->getFieldNamesToImplement();
-            $fieldNames = $this->maybeExcludeFieldNamesFromSchema($interfaceTypeFieldResolver, $fieldNames);
+            $fieldNames = $this->maybeExcludeFieldNamesFromSchema(
+                $this,
+                $interfaceTypeFieldResolver,
+                $fieldNames
+            );
             $this->fieldNamesResolvedByFieldInterfaceResolver[$interfaceTypeFieldResolverClass] = $fieldNames;
         }
         return $this->fieldNamesResolvedByFieldInterfaceResolver[$interfaceTypeFieldResolverClass];

@@ -6,7 +6,9 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\Object;
 
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
+use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\Object\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
 
 abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObjectTypeResolver
@@ -22,6 +24,7 @@ abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObje
     ): bool;
 
     protected function isFieldNameResolvedByFieldResolver(
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         FieldResolverInterface $fieldResolver,
         string $fieldName,
         array $interfaceTypeResolverClasses,
@@ -32,6 +35,7 @@ abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObje
             return false;
         }
         return parent::isFieldNameResolvedByFieldResolver(
+            $objectTypeOrInterfaceTypeResolver,
             $fieldResolver,
             $fieldName,
             $interfaceTypeResolverClasses

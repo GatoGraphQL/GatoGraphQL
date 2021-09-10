@@ -659,7 +659,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $objectTypeFieldResolver->getFieldNamesToResolve(),
                 $objectTypeFieldResolver->getFieldNamesFromInterfaces()
             )));
-            $fieldNames = $this->maybeExcludeFieldNamesFromSchema($objectTypeFieldResolver, $fieldNames);
+            $fieldNames = $this->maybeExcludeFieldNamesFromSchema(
+                $this,
+                $objectTypeFieldResolver,
+                $fieldNames
+            );
             $this->fieldNamesResolvedByFieldResolver[$objectTypeFieldResolverClass] = $fieldNames;
         }
         return $this->fieldNamesResolvedByFieldResolver[$objectTypeFieldResolverClass];

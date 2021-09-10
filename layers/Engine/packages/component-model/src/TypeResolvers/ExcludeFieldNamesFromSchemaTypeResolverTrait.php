@@ -17,6 +17,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
      * @return string[]
      */
     protected function maybeExcludeFieldNamesFromSchema(
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         FieldResolverInterface $fieldResolver,
         array $fieldNames
     ): array {
@@ -46,12 +47,18 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
         $interfaceTypeResolverClasses = $fieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses();
         $fieldNames = array_filter(
             $fieldNames,
-            fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $interfaceTypeResolverClasses)
+            fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver(
+                $objectTypeOrInterfaceTypeResolver,
+                $fieldResolver,
+                $fieldName,
+                $interfaceTypeResolverClasses,
+            )
         );
         return $fieldNames;
     }
 
     protected function isFieldNameResolvedByFieldResolver(
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         FieldResolverInterface $fieldResolver,
         string $fieldName,
         array $interfaceTypeResolverClasses
@@ -66,7 +73,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
             }
         ));
         return $this->triggerHookToMaybeFilterFieldName(
-            $this,
+            $objectTypeOrInterfaceTypeResolver,
             $fieldResolver,
             $fieldName,
             $interfaceTypeResolverClassesForField,
