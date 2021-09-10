@@ -33,8 +33,4 @@ interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface
      * @return InterfaceTypeResolverInterface[]
      */
     public function getPartiallyImplementedInterfaceTypeResolvers(): array;
-    /**
-     * @return string[]
-     */
-    public function getPartiallyImplementedInterfaceTypeResolverClasses(): array;
 }

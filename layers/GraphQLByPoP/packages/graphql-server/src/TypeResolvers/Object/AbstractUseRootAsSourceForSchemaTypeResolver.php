@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\Object;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\Object\AbstractObjectTypeResolver;
 use PoP\Engine\TypeResolvers\Object\RootTypeResolver;
@@ -19,15 +19,15 @@ abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObje
     abstract protected function isFieldNameConditionSatisfiedForSchema(ObjectTypeFieldResolverInterface $objectTypeFieldResolver, string $fieldName): bool;
 
     protected function isFieldNameResolvedByFieldResolver(
-        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $fieldOrFieldInterfaceResolver,
+        FieldResolverInterface $fieldResolver,
         string $fieldName,
         array $interfaceTypeResolverClasses,
     ): bool {
-        if (!$this->isFieldNameConditionSatisfiedForSchema($fieldOrFieldInterfaceResolver, $fieldName)) {
+        if (!$this->isFieldNameConditionSatisfiedForSchema($fieldResolver, $fieldName)) {
             return false;
         }
         return parent::isFieldNameResolvedByFieldResolver(
-            $fieldOrFieldInterfaceResolver,
+            $fieldResolver,
             $fieldName,
             $interfaceTypeResolverClasses
         );

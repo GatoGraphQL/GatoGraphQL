@@ -74,11 +74,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return [];
     }
 
-    public function getAdminFieldNames(): array
-    {
-        return [];
-    }
-
     /**
      * Implement all the fieldNames defined in the interfaces
      *
