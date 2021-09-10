@@ -164,8 +164,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/post-mutations": "^0.8.7",
-        "pop-sites-wassup/custompost-mutations": "^0.8.7"
+        "pop-schema/post-mutations": "^0.9",
+        "pop-sites-wassup/custompost-mutations": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.76",

@@ -164,8 +164,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/custompost-categories-wp": "^0.8.7",
-        "pop-schema/post-categories": "^0.8.7"
+        "pop-schema/custompost-categories-wp": "^0.9",
+        "pop-schema/post-categories": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
