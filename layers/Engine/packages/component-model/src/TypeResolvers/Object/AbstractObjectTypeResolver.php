@@ -650,7 +650,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @return string[]
      */
-    protected function getFieldNamesResolvedByFieldResolver(ObjectTypeFieldResolverInterface $objectTypeFieldResolver): array
+    protected function getFieldNamesResolvedByObjectTypeFieldResolver(ObjectTypeFieldResolverInterface $objectTypeFieldResolver): array
     {
         $objectTypeFieldResolverClass = get_class($objectTypeFieldResolver);
         if (!isset($this->fieldNamesResolvedByFieldResolver[$objectTypeFieldResolverClass])) {
@@ -694,7 +694,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $attachedFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
                 foreach ($attachedFieldResolvers as $objectTypeFieldResolver) {
                     // Process the fields which have not been processed yet
-                    $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($objectTypeFieldResolver);
+                    $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
                     foreach (array_diff($extensionFieldNames, array_keys($schemaObjectTypeFieldResolvers)) as $fieldName) {
                         // Watch out here: no fieldArgs!!!! So this deals with the base case (static), not with all cases (runtime)
                         // If using an ACL to remove a field from an interface,
@@ -847,7 +847,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 /** @var ObjectTypeFieldResolverInterface[] */
                 $attachedFieldResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS));
                 foreach ($attachedFieldResolvers as $objectTypeFieldResolver) {
-                    $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($objectTypeFieldResolver);
+                    $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
                     if (in_array($fieldName, $extensionFieldNames)) {
                         // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
                         if ($objectTypeFieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
@@ -889,7 +889,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             /** @var ObjectTypeFieldResolverInterface[] */
             $attachedFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
             foreach ($attachedFieldResolvers as $objectTypeFieldResolver) {
-                $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($objectTypeFieldResolver);
+                $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
                 $fieldNames = array_merge(
                     $fieldNames,
                     $extensionFieldNames
