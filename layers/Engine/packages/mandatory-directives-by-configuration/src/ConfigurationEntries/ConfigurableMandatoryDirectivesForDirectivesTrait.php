@@ -41,9 +41,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
     {
         // Obtain all entries for the current combination of typeResolver/fieldName
         return array_values(array_unique(array_map(
-            function ($entry) {
-                return $entry[0];
-            },
+            fn (array $entry) => $entry[0],
             $this->getEntries()
         )));
     }
@@ -56,9 +54,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
         if ($value) {
             return array_filter(
                 $entryList,
-                function ($entry) use ($value) {
-                    return ($entry[1] ?? null) == $value;
-                }
+                fn (array $entry) => ($entry[1] ?? null) == $value
             );
         }
         return $entryList;

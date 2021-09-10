@@ -20,13 +20,11 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
     protected function getFieldNames(): array
     {
         return array_map(
-            function ($entry) {
-                // The tuple has format [typeOrFieldInterfaceResolverClass, fieldName]
-                // or [typeOrFieldInterfaceResolverClass, fieldName, $role]
-                // or [typeOrFieldInterfaceResolverClass, fieldName, $capability]
-                // So, in position [1], will always be the $fieldName
-                return $entry[1];
-            },
+            // The tuple has format [typeOrFieldInterfaceResolverClass, fieldName]
+            // or [typeOrFieldInterfaceResolverClass, fieldName, $role]
+            // or [typeOrFieldInterfaceResolverClass, fieldName, $capability]
+            // So, in position [1], will always be the $fieldName
+            fn (array $entry) => $entry[1],
             $this->getConfigurationEntries()
         );
     }
@@ -59,12 +57,10 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
         $objectTypeOrInterfaceTypeResolverClass = get_class($objectTypeOrInterfaceTypeResolver);
         return array_filter(
             $entryList,
-            function ($entry) use ($objectTypeOrInterfaceTypeResolverClass, $interfaceTypeResolverClasses, $fieldName): bool {
-                return (
-                    $entry[0] == $objectTypeOrInterfaceTypeResolverClass
-                    || in_array($entry[0], $interfaceTypeResolverClasses)
-                ) && $entry[1] == $fieldName;
-            }
+            fn (array $entry) => (
+                $entry[0] === $objectTypeOrInterfaceTypeResolverClass
+                || in_array($entry[0], $interfaceTypeResolverClasses)
+            ) && $entry[1] == $fieldName
         );
     }
 }
