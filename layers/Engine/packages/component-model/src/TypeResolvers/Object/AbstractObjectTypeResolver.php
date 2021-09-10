@@ -505,7 +505,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     protected function getSchemaFieldResolvers(bool $global): array
     {
         $schemaFieldResolvers = [];
-        foreach ($this->getAllFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
+        foreach ($this->getAllObjectTypeFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
             // Get the documentation from the first element
             $objectTypeFieldResolver = $objectTypeFieldResolvers[0];
             $isGlobal = $objectTypeFieldResolver->isGlobal($this, $fieldName);
@@ -669,15 +669,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->fieldNamesResolvedByFieldResolver[$objectTypeFieldResolverClass];
     }
 
-    protected function getAllFieldResolvers(): array
+    protected function getAllObjectTypeFieldResolvers(): array
     {
         if ($this->schemaFieldResolvers === null) {
-            $this->schemaFieldResolvers = $this->calculateAllFieldResolvers();
+            $this->schemaFieldResolvers = $this->calculateAllObjectTypeFieldResolvers();
         }
         return $this->schemaFieldResolvers;
     }
 
-    protected function calculateAllFieldResolvers(): array
+    protected function calculateAllObjectTypeFieldResolvers(): array
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $schemaFieldResolvers = [];
@@ -740,7 +740,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     {
         $interfaceTypeFieldResolverClasses = [];
         $processedFieldResolverClasses = [];
-        foreach ($this->getAllFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
+        foreach ($this->getAllObjectTypeFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
                 $objectTypeFieldResolverClass = get_class($objectTypeFieldResolver);
                 if (!in_array($objectTypeFieldResolverClass, $processedFieldResolverClasses)) {
