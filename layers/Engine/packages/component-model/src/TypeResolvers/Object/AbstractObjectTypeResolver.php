@@ -38,7 +38,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @var string[]|null
      */
-    protected ?array $fieldInterfaceResolverClasses = null;
+    protected ?array $interfaceTypeFieldResolverClasses = null;
     /**
      * @var InterfaceTypeResolverInterface[]|null
      */
@@ -719,7 +719,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final protected function getAllImplementedFieldInterfaceResolvers(): array
     {
         return array_map(
-            fn (string $fieldInterfaceResolverClass) => $this->instanceManager->getInstance($fieldInterfaceResolverClass),
+            fn (string $interfaceTypeFieldResolverClass) => $this->instanceManager->getInstance($interfaceTypeFieldResolverClass),
             $this->getAllImplementedFieldInterfaceResolverClasses()
         );
     }
@@ -734,21 +734,21 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     private function calculateAllImplementedFieldInterfaceResolverClasses(): array
     {
-        $fieldInterfaceResolverClasses = [];
+        $interfaceTypeFieldResolverClasses = [];
         $processedFieldResolverClasses = [];
         foreach ($this->getAllFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
                 $objectTypeFieldResolverClass = get_class($objectTypeFieldResolver);
                 if (!in_array($objectTypeFieldResolverClass, $processedFieldResolverClasses)) {
                     $processedFieldResolverClasses[] = $objectTypeFieldResolverClass;
-                    $fieldInterfaceResolverClasses = array_merge(
-                        $fieldInterfaceResolverClasses,
+                    $interfaceTypeFieldResolverClasses = array_merge(
+                        $interfaceTypeFieldResolverClasses,
                         $objectTypeFieldResolver->getImplementedFieldInterfaceResolverClasses()
                     );
                 }
             }
         }
-        return array_values(array_unique($fieldInterfaceResolverClasses));
+        return array_values(array_unique($interfaceTypeFieldResolverClasses));
     }
 
     /**
@@ -768,10 +768,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     private function calculateAllImplementedInterfaceTypeResolvers(): array
     {
         $interfaceTypeResolverClasses = [];
-        foreach ($this->getAllImplementedFieldInterfaceResolvers() as $fieldInterfaceResolver) {
+        foreach ($this->getAllImplementedFieldInterfaceResolvers() as $interfaceTypeFieldResolver) {
             $interfaceTypeResolverClasses = array_merge(
                 $interfaceTypeResolverClasses,
-                $fieldInterfaceResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
+                $interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
             );
         }
         $interfaceTypeResolverClasses = array_values(array_unique($interfaceTypeResolverClasses));

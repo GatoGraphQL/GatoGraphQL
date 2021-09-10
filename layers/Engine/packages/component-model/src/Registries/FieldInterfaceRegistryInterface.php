@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterfa
 
 interface FieldInterfaceRegistryInterface
 {
-    public function addFieldInterfaceResolver(InterfaceTypeFieldResolverInterface $fieldInterfaceResolver): void;
+    public function addFieldInterfaceResolver(InterfaceTypeFieldResolverInterface $interfaceTypeFieldResolver): void;
     /**
      * @return InterfaceTypeFieldResolverInterface[]
      */

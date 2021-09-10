@@ -11,11 +11,11 @@ class FieldInterfaceRegistry implements FieldInterfaceRegistryInterface
     /**
      * @var InterfaceTypeFieldResolverInterface[]
      */
-    protected array $fieldInterfaceResolvers = [];
+    protected array $interfaceTypeFieldResolvers = [];
 
-    public function addFieldInterfaceResolver(InterfaceTypeFieldResolverInterface $fieldInterfaceResolver): void
+    public function addFieldInterfaceResolver(InterfaceTypeFieldResolverInterface $interfaceTypeFieldResolver): void
     {
-        $this->fieldInterfaceResolvers[] = $fieldInterfaceResolver;
+        $this->fieldInterfaceResolvers[] = $interfaceTypeFieldResolver;
     }
     /**
      * @return InterfaceTypeFieldResolverInterface[]

@@ -88,10 +88,10 @@ abstract class AbstractObjectTypeFieldResolver implements ObjectTypeFieldResolve
     {
         $fieldNames = [];
 
-        foreach ($this->getFieldInterfaceResolvers() as $fieldInterfaceResolver) {
+        foreach ($this->getFieldInterfaceResolvers() as $interfaceTypeFieldResolver) {
             $fieldNames = array_merge(
                 $fieldNames,
-                $fieldInterfaceResolver->getFieldNamesToImplement()
+                $interfaceTypeFieldResolver->getFieldNamesToImplement()
             );
         }
 
@@ -109,12 +109,12 @@ abstract class AbstractObjectTypeFieldResolver implements ObjectTypeFieldResolve
     final public function getPartiallyImplementedInterfaceTypeResolverClasses(): array
     {
         $interfaceTypeResolverClasses = [];
-        foreach ($this->getImplementedFieldInterfaceResolverClasses() as $fieldInterfaceResolverClass) {
+        foreach ($this->getImplementedFieldInterfaceResolverClasses() as $interfaceTypeFieldResolverClass) {
             /** @var InterfaceTypeFieldResolverInterface */
-            $fieldInterfaceResolver = $this->instanceManager->getInstance($fieldInterfaceResolverClass);
+            $interfaceTypeFieldResolver = $this->instanceManager->getInstance($interfaceTypeFieldResolverClass);
             $interfaceTypeResolverClasses = array_merge(
                 $interfaceTypeResolverClasses,
-                $fieldInterfaceResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
+                $interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
             );
         }
         return array_values(array_unique($interfaceTypeResolverClasses));
@@ -595,10 +595,10 @@ abstract class AbstractObjectTypeFieldResolver implements ObjectTypeFieldResolve
             $fieldArgs
         );
         // 2. Applied on each of the implemented interfaces
-        foreach ($this->getFieldInterfaceResolvers() as $fieldInterfaceResolver) {
-            if (in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement())) {
+        foreach ($this->getFieldInterfaceResolvers() as $interfaceTypeFieldResolver) {
+            if (in_array($fieldName, $interfaceTypeFieldResolver->getFieldNamesToImplement())) {
                 $hookName = HookHelpers::getSchemaDefinitionForFieldHookName(
-                    get_class($fieldInterfaceResolver),
+                    get_class($interfaceTypeFieldResolver),
                     $fieldName
                 );
                 $schemaDefinition = $this->hooksAPI->applyFilters(
