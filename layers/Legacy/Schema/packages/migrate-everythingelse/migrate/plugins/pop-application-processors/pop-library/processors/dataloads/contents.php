@@ -4,7 +4,7 @@ use PoPSchema\Pages\TypeResolvers\ObjectType\PageTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoP\ComponentModel\State\ApplicationState;
 

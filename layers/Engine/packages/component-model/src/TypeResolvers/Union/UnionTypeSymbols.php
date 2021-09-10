@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\TypeResolvers\Union;
+namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
 class UnionTypeSymbols
 {

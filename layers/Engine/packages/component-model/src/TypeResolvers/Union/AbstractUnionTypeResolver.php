@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\TypeResolvers\Union;
+namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
@@ -16,7 +16,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\Interface\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 
 abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver implements UnionTypeResolverInterface
 {

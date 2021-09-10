@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostsWP\Overrides\RelationalTypeDataLoaders\Union;
+namespace PoPSchema\CustomPostsWP\Overrides\RelationalTypeDataLoaders\UnionType;
 
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\CustomPostTypeDataLoader;
-use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostTypeResolverPickerInterface;
 

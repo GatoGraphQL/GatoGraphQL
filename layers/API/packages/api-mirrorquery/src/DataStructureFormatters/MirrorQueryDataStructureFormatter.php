@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\APIMirrorQuery\DataStructureFormatters;
 
-use PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\DataStructure\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\State\ApplicationState;
 

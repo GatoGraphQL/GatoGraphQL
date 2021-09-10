@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\RelationalTypeDataLoaders\Union;
+namespace PoP\ComponentModel\RelationalTypeDataLoaders\UnionType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeDataLoader;
 

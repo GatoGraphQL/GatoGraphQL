@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeHelpers;
 
 use PoPSchema\CustomPosts\ComponentConfiguration;
-use PoPSchema\CustomPosts\TypeResolvers\Union\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoPSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostTypeResolverPickerInterface;
 
@@ -35,7 +35,7 @@ class CustomPostUnionTypeHelpers
 
     /**
      * Based on `getUnionOrTargetObjectTypeResolverClass` from class
-     * \PoP\ComponentModel\TypeResolvers\Union\UnionTypeHelpers, but applied
+     * \PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers, but applied
      * to the CustomPostUnion type, to add its own configuration.
      *
      * Return a class or another depending on these possibilities:
