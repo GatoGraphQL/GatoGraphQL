@@ -36,10 +36,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected ?array $schemaObjectTypeFieldResolvers = null;
     /**
-     * @var string[]|null
-     */
-    protected ?array $interfaceTypeFieldResolverClasses = null;
-    /**
      * @var InterfaceTypeResolverInterface[]|null
      */
     protected ?array $interfaceTypeResolvers = null;
@@ -51,6 +47,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @var array<string, array>
      */
     private array $fieldNamesResolvedByFieldResolver = [];
+    /**
+     * @var string[]|null
+     */
+    protected ?array $fieldInterfaceResolverClasses = null;
 
     public function getSelfFieldTypeResolverClass(): string
     {
