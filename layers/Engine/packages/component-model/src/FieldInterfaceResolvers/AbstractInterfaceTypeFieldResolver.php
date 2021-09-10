@@ -71,10 +71,11 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if ($this->partiallyImplementedInterfaceTypeResolvers === null) {
             // Search all the InterfaceTypeResolvers who have this FieldInterface
             $interfaceTypeResolvers = $this->typeRegistry->getInterfaceTypeResolvers();
+            $class = get_called_class();
             $this->partiallyImplementedInterfaceTypeResolvers = array_filter(
                 $interfaceTypeResolvers,
                 fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => in_array(
-                    get_called_class(),
+                    $class,
                     $interfaceTypeResolver->getAllFieldInterfaceResolverClasses()
                 )
             );
