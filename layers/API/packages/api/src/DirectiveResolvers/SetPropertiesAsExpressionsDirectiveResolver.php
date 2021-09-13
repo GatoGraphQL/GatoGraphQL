@@ -8,9 +8,9 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalObjectTypeDirectiveResolver;
 
-class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiveResolver
+class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalObjectTypeDirectiveResolver
 {
     public function getDirectiveName(): string
     {
