@@ -38,11 +38,11 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
             );
         }
     }
-    public function addDBDeprecations(array $dbDeprecations)
+    public function addDBDeprecations(array $objectIDDeprecations)
     {
-        foreach ($dbDeprecations as $objectID => $objectDeprecations) {
-            $this->dbDeprecations[$objectID] = array_merge(
-                $this->dbDeprecations[$objectID] ?? [],
+        foreach ($objectIDDeprecations as $objectID => $objectDeprecations) {
+            $this->objectIDDeprecations[$objectID] = array_merge(
+                $this->objectIDDeprecations[$objectID] ?? [],
                 $objectDeprecations
             );
         }
