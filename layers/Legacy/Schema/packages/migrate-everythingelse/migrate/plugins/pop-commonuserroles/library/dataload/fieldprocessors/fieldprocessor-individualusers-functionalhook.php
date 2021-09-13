@@ -80,4 +80,4 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers e
 }
 
 // Static Initialization: Attach
-(new GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

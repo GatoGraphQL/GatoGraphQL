@@ -267,4 +267,4 @@ class PoP_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Notifications extends A
 }
 
 // Static Initialization: Attach
-(new PoP_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS, 20);

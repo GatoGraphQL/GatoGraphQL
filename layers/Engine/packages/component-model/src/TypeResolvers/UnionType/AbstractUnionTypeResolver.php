@@ -237,7 +237,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             // All the pickers and their priorities for this class level
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
             /** @var ObjectTypeResolverPickerInterface[] */
-            $attachedTypeResolverPickers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::TYPERESOLVERPICKERS));
+            $attachedTypeResolverPickers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_RESOLVER_PICKERS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
                 fn (ObjectTypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getPriorityToAttachToClasses(),

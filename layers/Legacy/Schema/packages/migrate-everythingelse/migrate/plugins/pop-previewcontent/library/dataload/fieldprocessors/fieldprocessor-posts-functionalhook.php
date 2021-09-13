@@ -66,4 +66,4 @@ class PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles extends Abstrac
 }
 
 // Static Initialization: Attach
-(new PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

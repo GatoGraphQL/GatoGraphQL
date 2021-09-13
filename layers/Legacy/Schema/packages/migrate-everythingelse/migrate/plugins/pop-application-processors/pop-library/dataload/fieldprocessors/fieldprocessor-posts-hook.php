@@ -81,4 +81,4 @@ class GD_ApplicationProcessors_DataLoad_ObjectTypeFieldResolver_Posts extends Ab
 }
 
 // Static Initialization: Attach
-(new GD_ApplicationProcessors_DataLoad_ObjectTypeFieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_ApplicationProcessors_DataLoad_ObjectTypeFieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

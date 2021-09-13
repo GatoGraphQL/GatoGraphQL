@@ -89,4 +89,4 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
 }
 
 // Static Initialization: Attach
-(new PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

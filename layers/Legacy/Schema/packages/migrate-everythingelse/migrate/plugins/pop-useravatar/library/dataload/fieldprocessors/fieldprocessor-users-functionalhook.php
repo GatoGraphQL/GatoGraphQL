@@ -65,4 +65,4 @@ class PoP_UserAvatar_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends Ab
 }
 
 // Static Initialization: Attach
-(new PoP_UserAvatar_DataLoad_ObjectTypeFieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_UserAvatar_DataLoad_ObjectTypeFieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

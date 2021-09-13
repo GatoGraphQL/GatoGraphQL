@@ -108,4 +108,4 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
 }
 
 // Static Initialization: Attach
-(new ObjectTypeFieldResolver_OrganizationUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new ObjectTypeFieldResolver_OrganizationUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

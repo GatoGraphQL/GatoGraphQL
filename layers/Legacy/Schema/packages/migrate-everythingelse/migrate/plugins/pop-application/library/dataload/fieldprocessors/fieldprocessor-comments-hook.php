@@ -99,4 +99,4 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
 }
 
 // Static Initialization: Attach
-(new PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

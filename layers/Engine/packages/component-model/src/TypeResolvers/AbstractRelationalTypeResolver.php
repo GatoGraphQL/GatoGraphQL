@@ -809,7 +809,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         do {
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
             /** @var TypeResolverDecoratorInterface[] */
-            $attachedTypeResolverDecorators = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::TYPERESOLVERDECORATORS));
+            $attachedTypeResolverDecorators = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
                 fn (TypeResolverDecoratorInterface $typeResolverDecorator) => $typeResolverDecorator->getPriorityToAttachToClasses(),
@@ -1281,7 +1281,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             do {
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
                 /** @var DirectiveResolverInterface[] */
-                $attachedDirectiveResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::DIRECTIVERESOLVERS));
+                $attachedDirectiveResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::DIRECTIVE_RESOLVERS));
                 // Order them by priority: higher priority are evaluated first
                 $extensionPriorities = array_map(
                     fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->getPriorityToAttachToClasses(),

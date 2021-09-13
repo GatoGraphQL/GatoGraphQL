@@ -99,4 +99,4 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
 }
 
 // Static Initialization: Attach
-(new GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);
