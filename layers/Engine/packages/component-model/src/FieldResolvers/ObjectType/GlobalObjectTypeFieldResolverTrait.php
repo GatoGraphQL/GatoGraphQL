@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-trait GlobalFieldResolverTrait
+trait GlobalObjectTypeFieldResolverTrait
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
