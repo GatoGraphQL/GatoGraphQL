@@ -17,7 +17,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver implements InterfaceTypeFieldResolverInterface, FieldInterfaceSchemaDefinitionResolverInterface
+abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver implements InterfaceTypeFieldResolverInterface, InterfaceTypeFieldSchemaDefinitionResolverInterface
 {
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
@@ -108,24 +108,24 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 
     /**
      * By default, the resolver is this same object, unless function
-     * `getFieldInterfaceSchemaDefinitionResolverClass` is
+     * `getInterfaceTypeFieldSchemaDefinitionResolverClass` is
      * implemented
      */
-    protected function getSchemaDefinitionResolver(string $fieldName): FieldInterfaceSchemaDefinitionResolverInterface
+    protected function getSchemaDefinitionResolver(string $fieldName): InterfaceTypeFieldSchemaDefinitionResolverInterface
     {
-        if ($fieldInterfaceSchemaDefinitionResolverClass = $this->getFieldInterfaceSchemaDefinitionResolverClass($fieldName)) {
-            /** @var FieldInterfaceSchemaDefinitionResolverInterface */
+        if ($fieldInterfaceSchemaDefinitionResolverClass = $this->getInterfaceTypeFieldSchemaDefinitionResolverClass($fieldName)) {
+            /** @var InterfaceTypeFieldSchemaDefinitionResolverInterface */
             return $this->instanceManager->getInstance($fieldInterfaceSchemaDefinitionResolverClass);
         }
         return $this;
     }
 
     /**
-     * Retrieve the class of some FieldInterfaceSchemaDefinitionResolverInterface
+     * Retrieve the class of some InterfaceTypeFieldSchemaDefinitionResolverInterface
      * By default, if the InterfaceTypeFieldResolver implements an interface,
      * it is used as SchemaDefinitionResolver for the matching fields
      */
-    protected function getFieldInterfaceSchemaDefinitionResolverClass(string $fieldName): ?string
+    protected function getInterfaceTypeFieldSchemaDefinitionResolverClass(string $fieldName): ?string
     {
         foreach ($this->getImplementedInterfaceTypeFieldResolverClasses() as $implementedInterfaceTypeFieldResolverClass) {
             /** @var InterfaceTypeFieldResolverInterface */

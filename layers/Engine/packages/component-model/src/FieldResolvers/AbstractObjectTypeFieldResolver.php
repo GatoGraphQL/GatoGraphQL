@@ -11,7 +11,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\InterfaceTypeFieldResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -124,8 +124,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     final protected function getSchemaDefinitionResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): FieldSchemaDefinitionResolverInterface
     {
-        $fieldOrFieldInterfaceSchemaDefinitionResolver = $this->doGetSchemaDefinitionResolver($objectTypeResolver, $fieldName);
-        if ($fieldOrFieldInterfaceSchemaDefinitionResolver instanceof FieldInterfaceSchemaDefinitionResolverInterface) {
+        $fieldOrInterfaceTypeFieldSchemaDefinitionResolver = $this->doGetSchemaDefinitionResolver($objectTypeResolver, $fieldName);
+        if ($fieldOrInterfaceTypeFieldSchemaDefinitionResolver instanceof InterfaceTypeFieldSchemaDefinitionResolverInterface) {
             // Interfaces do not receive the typeResolver, so we must bridge it
             // First check if the class is cached
             $key = $objectTypeResolver->getNamespacedTypeName() . '|' . $fieldName;
@@ -133,37 +133,37 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 return $this->fieldInterfaceSchemaDefinitionResolverCache[$key];
             }
             // Create an Adapter and cache it
-            $fieldInterfaceSchemaDefinitionResolver = $fieldOrFieldInterfaceSchemaDefinitionResolver;
+            $fieldInterfaceSchemaDefinitionResolver = $fieldOrInterfaceTypeFieldSchemaDefinitionResolver;
             $interfaceSchemaDefinitionResolverAdapterClass = $this->getInterfaceSchemaDefinitionResolverAdapterClass();
             $this->fieldInterfaceSchemaDefinitionResolverCache[$key] = new $interfaceSchemaDefinitionResolverAdapterClass($fieldInterfaceSchemaDefinitionResolver);
             return $this->fieldInterfaceSchemaDefinitionResolverCache[$key];
         }
-        $fieldSchemaDefinitionResolver = $fieldOrFieldInterfaceSchemaDefinitionResolver;
+        $fieldSchemaDefinitionResolver = $fieldOrInterfaceTypeFieldSchemaDefinitionResolver;
         return $fieldSchemaDefinitionResolver;
     }
 
     /**
      * By default, the resolver is this same object, unless function
-     * `getFieldInterfaceSchemaDefinitionResolverClass` is
+     * `getInterfaceTypeFieldSchemaDefinitionResolverClass` is
      * implemented
      */
     protected function doGetSchemaDefinitionResolver(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
-    ): FieldSchemaDefinitionResolverInterface | FieldInterfaceSchemaDefinitionResolverInterface {
-        if ($fieldInterfaceSchemaDefinitionResolverClass = $this->getFieldInterfaceSchemaDefinitionResolverClass($objectTypeResolver, $fieldName)) {
-            /** @var FieldInterfaceSchemaDefinitionResolverInterface */
+    ): FieldSchemaDefinitionResolverInterface | InterfaceTypeFieldSchemaDefinitionResolverInterface {
+        if ($fieldInterfaceSchemaDefinitionResolverClass = $this->getInterfaceTypeFieldSchemaDefinitionResolverClass($objectTypeResolver, $fieldName)) {
+            /** @var InterfaceTypeFieldSchemaDefinitionResolverInterface */
             return $this->instanceManager->getInstance($fieldInterfaceSchemaDefinitionResolverClass);
         }
         return $this;
     }
 
     /**
-     * Retrieve the class of some FieldInterfaceSchemaDefinitionResolverInterface
+     * Retrieve the class of some InterfaceTypeFieldSchemaDefinitionResolverInterface
      * By default, if the FieldResolver implements an interface,
      * it is used as SchemaDefinitionResolver for the matching fields
      */
-    protected function getFieldInterfaceSchemaDefinitionResolverClass(
+    protected function getInterfaceTypeFieldSchemaDefinitionResolverClass(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?string {

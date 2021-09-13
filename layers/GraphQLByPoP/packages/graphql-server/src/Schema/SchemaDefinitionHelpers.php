@@ -41,7 +41,7 @@ class SchemaDefinitionHelpers
      * @deprecated 0.1.0 The error above must be fixed for the Enum, by unifying its name wherever it is referenced
      * This solution with the interfaces creates other issue: The type cannot customize its field schema definition
      */
-    protected static function getFieldInterfaces(array &$fullSchemaDefinition, array $interfaceNames): array
+    protected static function getInterfaceTypeFields(array &$fullSchemaDefinition, array $interfaceNames): array
     {
         $fieldInterfaces = [];
         if ($interfaceNames) {
@@ -86,7 +86,7 @@ class SchemaDefinitionHelpers
     public static function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath, array $interfaceNames = []): array
     {
         $addVersionToSchemaFieldDescription = ComponentConfiguration::addVersionToSchemaFieldDescription();
-        // $fieldInterfaces = self::getFieldInterfaces($fullSchemaDefinition, $interfaceNames);
+        // $fieldInterfaces = self::getInterfaceTypeFields($fullSchemaDefinition, $interfaceNames);
         $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
         $fields = [];
         foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
