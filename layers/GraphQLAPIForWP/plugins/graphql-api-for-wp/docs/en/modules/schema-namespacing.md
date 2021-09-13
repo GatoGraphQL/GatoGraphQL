@@ -1,6 +1,6 @@
 # Schema Namespacing
 
-This module allows to have all types and interfaces added to the schema by plugins be automatically namespaced, by prepending their names with the corresponding PHP package's owner and name (by default) or providing a specific prefix for them.
+This module allows to have all types added to the schema by plugins be automatically namespaced, by prepending their names with the corresponding PHP package's owner and name (by default) or providing a specific prefix for them.
 
 Namespacing the schema avoids naming conflicts, which happens when different owners (eg: different teams in the company, or 3rd party plugins) use the same name for a type or interface.
 
@@ -8,7 +8,7 @@ The WordPress data model is considered canonical, and its GraphQL schema types (
 
 ## How it works
 
-In the namespaced schema, types `Event` and `Location` become `EM_Event` and `EM_Location` respectively, following the addition of prefix `EM_` to the types and interfaces from a certain plugin.
+In the namespaced schema, types `Event` and `Location` become `EM_Event` and `EM_Location` respectively, following the addition of prefix `EM_` to the types from a certain plugin.
 
 While the schema normally looks like this:
 
