@@ -175,7 +175,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $objectObjectWarnings
             );
         }
-        if ($objectDBDeprecations = $this->feedbackMessageStore->retrieveAndClearObjectDBDeprecations($id)) {
+        if ($objectDBDeprecations = $this->feedbackMessageStore->retrieveAndClearObjectDeprecations($id)) {
             $objectDeprecations[$id] = array_merge(
                 $objectDeprecations[$id] ?? [],
                 $objectDBDeprecations

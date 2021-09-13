@@ -60,7 +60,7 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
         unset($this->objectWarnings[$objectID]);
         return $objectObjectWarnings;
     }
-    public function retrieveAndClearObjectDBDeprecations(string | int $objectID): ?array
+    public function retrieveAndClearObjectDeprecations(string | int $objectID): ?array
     {
         $objectDBDeprecations = $this->objectDeprecations[$objectID] ?? null;
         unset($this->objectDeprecations[$objectID]);
