@@ -3341,12 +3341,12 @@ window.pop.Manager = {
 	// 		}
 
 	// 		// Extend with new values
-	// 		$.each(dbObjectIDAttributes, function(dbObjectID, dbObjectAttributes) {
+	// 		$.each(dbObjectIDAttributes, function(objectID, dbObjectAttributes) {
 
-	// 			if (!database[dbKey][dbObjectID]) {
-	// 				database[dbKey][dbObjectID] = {};
+	// 			if (!database[dbKey][objectID]) {
+	// 				database[dbKey][objectID] = {};
 	// 			}
-	// 			$.extend(database[dbKey][dbObjectID], dbObjectAttributes);
+	// 			$.extend(database[dbKey][objectID], dbObjectAttributes);
 	// 		});
 	// 	});
 	// },
@@ -3629,7 +3629,7 @@ window.pop.Manager = {
 		return targetConfiguration;
 	},
 
-	getModuleHtml : function(domain, pageSection, target, moduleName, options, dbKey, dbObjectID) {
+	getModuleHtml : function(domain, pageSection, target, moduleName, options, dbKey, objectID) {
 
 		var that = this;
 		var targetConfiguration = that.getTargetConfiguration(domain, pageSection, target, moduleName);
@@ -3642,7 +3642,7 @@ window.pop.Manager = {
 		if (modulePath.length) {
 			var block = that.getBlock(target);
 			that.initContextSettings(domain, pageSection, block, targetContext);
-			that.extendContext(targetContext, domain, dbKey, dbObjectID);
+			that.extendContext(targetContext, domain, dbKey, objectID);
 		}
 
 		// extendContext: don't keep the overriding in the configuration. This way, we can use the preloading without having to reset
@@ -3655,7 +3655,7 @@ window.pop.Manager = {
 		return that.getHtml(domain, moduleName, targetContext);
 	},
 
-	extendContext : function(context, domain, dbKey, dbObjectID, override) {
+	extendContext : function(context, domain, dbKey, objectID, override) {
 
 		// If merging a subcomponent (eg: appending data to Carousel), then we need to recreate the block Context
 		// Also used from within function enterModules to create the context to pass to each module
@@ -3667,9 +3667,9 @@ window.pop.Manager = {
 		if (dbKey) {
 
 			$.extend(context, {dbKey: dbKey});
-			if (dbObjectID) {
+			if (objectID) {
 
-				var dbObject = that.getDBObject(domain, dbKey, dbObjectID);
+				var dbObject = that.getDBObject(domain, dbKey, objectID);
 				$.extend(context, {dbObject: dbObject, dbObjectDBKey: dbKey});
 			}
 		}
@@ -4575,17 +4575,17 @@ window.pop.Manager = {
 		return '';
 	},
 
-	getDBObject : function(domain, dbKey, dbObjectID) {
+	getDBObject : function(domain, dbKey, objectID) {
 
 		var that = this;
 		var userItem = {}, item = {};
 		var userdatabase = that.getUserDatabase(domain);
 		var database = that.getDatabase(domain);
-		if (userdatabase[dbKey] && userdatabase[dbKey][dbObjectID]) {
-			userItem = userdatabase[dbKey][dbObjectID];
+		if (userdatabase[dbKey] && userdatabase[dbKey][objectID]) {
+			userItem = userdatabase[dbKey][objectID];
 		}
-		if (database[dbKey] && database[dbKey][dbObjectID]) {
-			item = database[dbKey][dbObjectID];
+		if (database[dbKey] && database[dbKey][objectID]) {
+			item = database[dbKey][objectID];
 		}
 		return $.extend({}, userItem, item);
 	},
