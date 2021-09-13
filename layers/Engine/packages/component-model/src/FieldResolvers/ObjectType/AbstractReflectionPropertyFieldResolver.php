@@ -7,9 +7,9 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use ReflectionClass;
 use ReflectionProperty;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 
-abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFieldResolver
+abstract class AbstractReflectionPropertyFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected $reflectionInstance;
     protected $reflectionFieldNames;

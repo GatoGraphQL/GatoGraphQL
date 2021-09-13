@@ -7,13 +7,13 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveLocationEnum;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueTypeResolver;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class DirectiveFieldResolver extends AbstractDBDataFieldResolver
+class DirectiveFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use EnumTypeFieldSchemaDefinitionResolverTrait;
 

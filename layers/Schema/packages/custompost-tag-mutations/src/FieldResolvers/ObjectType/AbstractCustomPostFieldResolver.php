@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
-abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolver
+abstract class AbstractCustomPostFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use SetTagsOnCustomPostFieldResolverTrait;
 

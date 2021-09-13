@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 
-abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolver
+abstract class AbstractCustomPostFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getFieldNamesToResolve(): array
     {

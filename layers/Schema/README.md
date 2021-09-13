@@ -68,7 +68,7 @@ Please notice how the `TypeResolver` does not indicate which are its fields. It 
 Adding fields to the type is done via a `FieldResolver`:
 
 ```php
-class UserFieldResolver extends AbstractDBDataFieldResolver
+class UserFieldResolver extends AbstractObjectTypeFieldResolver
 {
   public function getClassesToAttachTo(): array
   {

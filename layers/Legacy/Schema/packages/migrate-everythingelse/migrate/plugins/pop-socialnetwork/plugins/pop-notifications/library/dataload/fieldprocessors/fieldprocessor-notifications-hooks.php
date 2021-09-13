@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -8,7 +8,7 @@ use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
-class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
+class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
@@ -13,7 +13,7 @@ use PoPSchema\CustomPosts\FieldResolvers\InterfaceType\IsCustomPostInterfaceType
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 
-abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolver
+abstract class AbstractCustomPostFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getFieldNamesToResolve(): array
     {

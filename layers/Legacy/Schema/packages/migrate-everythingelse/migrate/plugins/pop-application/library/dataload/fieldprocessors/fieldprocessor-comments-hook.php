@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -9,7 +9,7 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
 
-class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
+class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

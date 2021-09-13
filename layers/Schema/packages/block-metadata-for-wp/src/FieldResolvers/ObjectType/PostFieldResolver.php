@@ -6,13 +6,13 @@ namespace PoPSchema\BlockMetadataWP\FieldResolvers\ObjectType;
 
 use Leoloso\BlockMetadata\Data;
 use Leoloso\BlockMetadata\Metadata;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
 
-class PostFieldResolver extends AbstractDBDataFieldResolver
+class PostFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

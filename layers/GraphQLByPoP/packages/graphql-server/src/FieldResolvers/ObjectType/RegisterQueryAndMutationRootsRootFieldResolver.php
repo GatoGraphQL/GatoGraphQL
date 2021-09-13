@@ -8,7 +8,7 @@ use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootTypeResolver;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
@@ -17,7 +17,7 @@ use PoP\API\ComponentConfiguration as APIComponentConfiguration;
  * Add connections to the QueryRoot and MutationRoot types,
  * so they can be accessed to generate the schema
  */
-class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataFieldResolver
+class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

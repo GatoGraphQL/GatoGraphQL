@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
 use WP_Term;
 
-class MenuFieldResolver extends AbstractDBDataFieldResolver
+class MenuFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

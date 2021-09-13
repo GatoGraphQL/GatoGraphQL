@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -15,7 +15,7 @@ use PoPSchema\EverythingElse\Enums\MemberTagEnum;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
-class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
+class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractObjectTypeFieldResolver
 {
     use EnumTypeFieldSchemaDefinitionResolverTrait;
 

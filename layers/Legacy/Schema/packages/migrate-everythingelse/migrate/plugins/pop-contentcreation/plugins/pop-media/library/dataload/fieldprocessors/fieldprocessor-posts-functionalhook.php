@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractFunctionalFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -7,7 +7,7 @@ use PoPSchema\CustomPostMedia\Facades\CustomPostMediaTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 
-class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends AbstractFunctionalFieldResolver
+class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

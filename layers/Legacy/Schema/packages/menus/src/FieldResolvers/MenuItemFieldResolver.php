@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
 
@@ -12,7 +12,7 @@ use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
  * Move the classes added to field "classes" to a hook!
  * Kept "classes" clean in this same FieldResolver, in the actual menus package
  */
-abstract class MenuItemFieldResolver extends AbstractDBDataFieldResolver
+abstract class MenuItemFieldResolver extends AbstractObjectTypeFieldResolver
 {
     /**
      * @param array<string, mixed> $fieldArgs

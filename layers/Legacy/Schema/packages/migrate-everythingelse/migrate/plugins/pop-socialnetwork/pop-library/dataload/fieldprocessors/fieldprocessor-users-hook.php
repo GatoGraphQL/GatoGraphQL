@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -12,7 +12,7 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
+class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

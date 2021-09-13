@@ -1,7 +1,7 @@
 <?php
 namespace PoPSchema\UserRoles;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -11,7 +11,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class FieldResolver_Users extends AbstractDBDataFieldResolver
+class FieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

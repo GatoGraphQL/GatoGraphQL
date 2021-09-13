@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 
-abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
+abstract class AbstractCategoryFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use CategoryAPIRequestedContractTrait;
 

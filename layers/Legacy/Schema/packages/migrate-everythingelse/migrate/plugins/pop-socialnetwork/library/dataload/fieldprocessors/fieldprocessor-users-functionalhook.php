@@ -1,13 +1,13 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractFunctionalFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class PoPGenericForms_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunctionalFieldResolver
+class PoPGenericForms_DataLoad_FieldResolver_FunctionalUsers extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -11,7 +11,7 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolve
 use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
+class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractFunctionalFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
 
-class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
+class EventFunctionalFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use EnumTypeFieldSchemaDefinitionResolverTrait;
 

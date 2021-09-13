@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -8,7 +8,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
-class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
+class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractObjectTypeFieldResolver
 {
     use EnumTypeFieldSchemaDefinitionResolverTrait;
 

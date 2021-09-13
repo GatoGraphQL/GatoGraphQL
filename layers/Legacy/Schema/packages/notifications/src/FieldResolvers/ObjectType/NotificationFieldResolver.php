@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -24,7 +24,7 @@ use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class NotificationFieldResolver extends AbstractDBDataFieldResolver
+class NotificationFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

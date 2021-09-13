@@ -1,11 +1,11 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class PoP_Avatar_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
+class PoP_Avatar_DataLoad_FieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

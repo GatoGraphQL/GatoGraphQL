@@ -1,12 +1,12 @@
 <?php
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractFunctionalFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends AbstractFunctionalFieldResolver
+class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends AbstractObjectTypeFieldResolver
 {
     use OrganizationFieldResolverTrait;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ConditionalOnComponent\Users\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -17,7 +17,7 @@ use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInter
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class CommentUserFieldResolver extends AbstractDBDataFieldResolver
+class CommentUserFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

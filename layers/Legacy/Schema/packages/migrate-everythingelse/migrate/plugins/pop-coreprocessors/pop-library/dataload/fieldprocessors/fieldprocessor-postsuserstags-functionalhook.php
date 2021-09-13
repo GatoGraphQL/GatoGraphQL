@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractFunctionalFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -8,7 +8,7 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolve
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolver
+class GD_DataLoad_FunctionalFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

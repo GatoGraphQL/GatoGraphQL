@@ -16,13 +16,13 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\EnumValueTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeTypeResolver;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class TypeFieldResolver extends AbstractDBDataFieldResolver
+class TypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use EnumTypeFieldSchemaDefinitionResolverTrait;
 

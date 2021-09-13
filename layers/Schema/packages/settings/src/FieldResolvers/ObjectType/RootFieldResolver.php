@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoPSchema\Settings\Facades\SettingsTypeAPIFacade;
 
-class RootFieldResolver extends AbstractDBDataFieldResolver
+class RootFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

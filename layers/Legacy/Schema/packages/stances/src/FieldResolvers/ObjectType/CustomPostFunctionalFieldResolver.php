@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractFunctionalFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -17,7 +17,7 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolve
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
+class CustomPostFunctionalFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

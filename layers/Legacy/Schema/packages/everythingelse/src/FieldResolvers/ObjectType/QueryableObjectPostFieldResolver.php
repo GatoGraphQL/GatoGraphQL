@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoPSchema\EverythingElse\FieldResolvers\ObjectType;
 
 use PoP\SiteBuilderAPI\Helpers\APIUtils;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 
-class QueryableObjectPostFieldResolver extends AbstractDBDataFieldResolver
+class QueryableObjectPostFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

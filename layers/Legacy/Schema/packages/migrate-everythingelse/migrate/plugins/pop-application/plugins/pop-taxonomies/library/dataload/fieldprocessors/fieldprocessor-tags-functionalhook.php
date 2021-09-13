@@ -1,11 +1,11 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagTypeResolver;
 
-class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
+class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

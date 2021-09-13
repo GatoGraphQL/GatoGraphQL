@@ -12,7 +12,7 @@ use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver implements QueryableObjectTypeFieldSchemaDefinitionResolverInterface
+abstract class AbstractQueryableFieldResolver extends AbstractObjectTypeFieldResolver implements QueryableObjectTypeFieldSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
 

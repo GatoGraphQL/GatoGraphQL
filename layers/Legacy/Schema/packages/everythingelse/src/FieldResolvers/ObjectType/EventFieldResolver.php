@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -13,7 +13,7 @@ use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
 use PoPSchema\Locations\TypeResolvers\ObjectType\LocationTypeResolver;
 
-class EventFieldResolver extends AbstractDBDataFieldResolver
+class EventFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

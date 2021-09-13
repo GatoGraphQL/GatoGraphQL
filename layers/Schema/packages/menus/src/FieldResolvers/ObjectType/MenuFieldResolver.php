@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -21,7 +21,7 @@ use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
 
-class MenuFieldResolver extends AbstractDBDataFieldResolver
+class MenuFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,
