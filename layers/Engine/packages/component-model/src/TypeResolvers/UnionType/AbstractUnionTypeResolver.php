@@ -112,8 +112,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                     $targetObjectTypeResolver,
                     $resultItemIDs
                 );
-                foreach ($targetObjectIDTargetTypeResolvers as $targetResultItemID => $targetObjectTypeResolver) {
-                    $resultItemIDTargetTypeResolvers[(string)$targetResultItemID] = $targetObjectTypeResolver;
+                foreach ($targetObjectIDTargetTypeResolvers as $targetObjectID => $targetObjectTypeResolver) {
+                    $resultItemIDTargetTypeResolvers[(string)$targetObjectID] = $targetObjectTypeResolver;
                 }
             }
         } else {
