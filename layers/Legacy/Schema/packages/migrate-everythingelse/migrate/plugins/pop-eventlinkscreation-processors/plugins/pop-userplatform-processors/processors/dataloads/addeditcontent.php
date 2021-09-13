@@ -105,7 +105,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTLINK_UPDATE:
-                return $this->getDBObjectIDFromURLParam($module, $props, $data_properties);
+                return $this->getObjectIDFromURLParam($module, $props, $data_properties);
         }
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }

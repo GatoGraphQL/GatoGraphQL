@@ -97,7 +97,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FLAG:
-                return $this->getDBObjectIDFromURLParam($module, $props, $data_properties);
+                return $this->getObjectIDFromURLParam($module, $props, $data_properties);
         }
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
