@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\FieldResolvers\ObjectType\EnumTypeFieldSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\FieldResolvers\ObjectType\WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -34,7 +34,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
 class CommentFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    use EnumTypeFieldSchemaDefinitionResolverTrait;
+    use WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
     use WithLimitFieldArgResolverTrait;
 
     public function __construct(

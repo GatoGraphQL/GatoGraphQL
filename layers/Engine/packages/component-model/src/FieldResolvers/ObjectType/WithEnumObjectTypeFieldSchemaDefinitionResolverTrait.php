@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 
-trait EnumTypeFieldSchemaDefinitionResolverTrait
+trait WithEnumObjectTypeFieldSchemaDefinitionResolverTrait
 {
     use EnumTypeSchemaDefinitionResolverTrait;
 
