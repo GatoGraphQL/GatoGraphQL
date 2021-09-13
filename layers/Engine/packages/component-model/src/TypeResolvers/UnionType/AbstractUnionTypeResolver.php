@@ -85,10 +85,10 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     public function getObjectIDTargetTypeResolvers(array $ids): array
     {
-        return $this->recursiveGetResultItemIDTargetTypeResolvers($this, $ids);
+        return $this->recursiveGetObjectIDTargetTypeResolvers($this, $ids);
     }
 
-    private function recursiveGetResultItemIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
+    private function recursiveGetObjectIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
     {
         if (!$ids) {
             return [];
@@ -108,7 +108,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             }
             foreach ($targetTypeResolverClassDataItems as $targetObjectTypeResolverClass => $resultItemIDs) {
                 $targetObjectTypeResolver = $this->instanceManager->getInstance($targetObjectTypeResolverClass);
-                $targetObjectIDTargetTypeResolvers = $this->recursiveGetResultItemIDTargetTypeResolvers(
+                $targetObjectIDTargetTypeResolvers = $this->recursiveGetObjectIDTargetTypeResolvers(
                     $targetObjectTypeResolver,
                     $resultItemIDs
                 );
