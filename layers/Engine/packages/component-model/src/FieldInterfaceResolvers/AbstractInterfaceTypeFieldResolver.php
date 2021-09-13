@@ -28,14 +28,19 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected ?array $partiallyImplementedInterfaceTypeResolvers = null;
 
     public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI,
-        protected InstanceManagerInterface $instanceManager,
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
         protected NameResolverInterface $nameResolver,
         protected CMSServiceInterface $cmsService,
         protected SchemaNamespacingServiceInterface $schemaNamespacingService,
         protected TypeRegistryInterface $typeRegistry,
     ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+        );
     }
 
     /**

@@ -53,14 +53,19 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected array $fieldInterfaceSchemaDefinitionResolverCache = [];
 
     public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI,
-        protected InstanceManagerInterface $instanceManager,
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected NameResolverInterface $nameResolver,
         protected CMSServiceInterface $cmsService,
         protected SemverHelperServiceInterface $semverHelperService,
     ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+        );
     }
 
     final public function getClassesToAttachTo(): array
