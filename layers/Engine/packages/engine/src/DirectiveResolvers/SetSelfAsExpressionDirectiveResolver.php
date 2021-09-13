@@ -101,7 +101,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
                 'dbItems' => &$dbItems[(string)$id],
                 'previousDBItems' => &$previousDBItems[$dbKey][(string)$id],
             ];
-            $this->addExpressionForResultItem($id, Expressions::NAME_SELF, $value, $messages);
+            $this->addExpressionForObject($id, Expressions::NAME_SELF, $value, $messages);
         }
     }
 }

@@ -59,7 +59,7 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -67,7 +67,7 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
         array $options = []
     ): mixed {
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        $tag = $resultItem;
+        $tag = $object;
         switch ($fieldName) {
             case 'symbol':
                 return TagHelpers::getTagSymbol();
@@ -82,6 +82,6 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
                 return $applicationtaxonomyapi->getTagSymbolName($tag);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

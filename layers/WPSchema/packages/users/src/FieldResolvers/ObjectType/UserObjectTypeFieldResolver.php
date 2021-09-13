@@ -111,7 +111,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -119,7 +119,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         array $options = []
     ): mixed {
         /** @var WP_User */
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'nicename':
                 return $user->user_nicename;
@@ -134,6 +134,6 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

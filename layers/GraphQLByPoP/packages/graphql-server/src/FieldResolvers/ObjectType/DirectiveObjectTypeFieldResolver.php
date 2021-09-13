@@ -106,14 +106,14 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $directive = $resultItem;
+        $directive = $object;
         switch ($fieldName) {
             case 'name':
                 return $directive->getName();
@@ -127,7 +127,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $directive->isRepeatable();
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

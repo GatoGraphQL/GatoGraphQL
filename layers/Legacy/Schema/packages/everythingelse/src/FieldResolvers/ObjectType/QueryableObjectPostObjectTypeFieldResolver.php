@@ -50,7 +50,7 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -59,9 +59,9 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
     ): mixed {
         switch ($fieldName) {
             case 'endpoint':
-                return APIUtils::getEndpoint($objectTypeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options));
+                return APIUtils::getEndpoint($objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $options));
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

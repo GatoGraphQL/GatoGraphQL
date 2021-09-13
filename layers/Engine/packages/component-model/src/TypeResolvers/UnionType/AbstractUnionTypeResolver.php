@@ -58,18 +58,18 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
     {
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
-        $resultItemIDTargetObjectTypeResolvers = $this->getResultItemIDTargetTypeResolvers($dbObjectIDs);
+        $objectIDTargetObjectTypeResolvers = $this->getObjectIDTargetTypeResolvers($dbObjectIDs);
         $typeDBObjectIDOrIDs = [];
-        foreach ($dbObjectIDs as $resultItemID) {
-            // Make sure there is a resolver for this resultItem. If there is none, return the same ID
-            $targetObjectTypeResolver = $resultItemIDTargetObjectTypeResolvers[$resultItemID];
+        foreach ($dbObjectIDs as $objectID) {
+            // Make sure there is a resolver for this object. If there is none, return the same ID
+            $targetObjectTypeResolver = $objectIDTargetObjectTypeResolvers[$objectID];
             if (!is_null($targetObjectTypeResolver)) {
                 $typeDBObjectIDOrIDs[] = UnionTypeHelpers::getDBObjectComposedTypeAndID(
                     $targetObjectTypeResolver,
-                    $resultItemID
+                    $objectID
                 );
             } else {
-                $typeDBObjectIDOrIDs[] = $resultItemID;
+                $typeDBObjectIDOrIDs[] = $objectID;
             }
         }
         if (!is_array($dbObjectIDOrIDs)) {
@@ -83,45 +83,45 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return true;
     }
 
-    public function getResultItemIDTargetTypeResolvers(array $ids): array
+    public function getObjectIDTargetTypeResolvers(array $ids): array
     {
-        return $this->recursiveGetResultItemIDTargetTypeResolvers($this, $ids);
+        return $this->recursiveGetObjectIDTargetTypeResolvers($this, $ids);
     }
 
-    private function recursiveGetResultItemIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
+    private function recursiveGetObjectIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
     {
         if (!$ids) {
             return [];
         }
 
-        $resultItemIDTargetTypeResolvers = [];
+        $objectIDTargetTypeResolvers = [];
         $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
         if ($isUnionTypeResolver) {
             /** @var UnionTypeResolverInterface $relationalTypeResolver */
             $targetTypeResolverClassDataItems = [];
-            foreach ($ids as $resultItemID) {
-                if ($targetObjectTypeResolverClass = $relationalTypeResolver->getObjectTypeResolverClassForResultItem($resultItemID)) {
-                    $targetTypeResolverClassDataItems[$targetObjectTypeResolverClass][] = $resultItemID;
+            foreach ($ids as $objectID) {
+                if ($targetObjectTypeResolverClass = $relationalTypeResolver->getObjectTypeResolverClassForObject($objectID)) {
+                    $targetTypeResolverClassDataItems[$targetObjectTypeResolverClass][] = $objectID;
                 } else {
-                    $resultItemIDTargetTypeResolvers[(string)$resultItemID] = null;
+                    $objectIDTargetTypeResolvers[(string)$objectID] = null;
                 }
             }
-            foreach ($targetTypeResolverClassDataItems as $targetObjectTypeResolverClass => $resultItemIDs) {
+            foreach ($targetTypeResolverClassDataItems as $targetObjectTypeResolverClass => $objectIDs) {
                 $targetObjectTypeResolver = $this->instanceManager->getInstance($targetObjectTypeResolverClass);
-                $targetResultItemIDTargetTypeResolvers = $this->recursiveGetResultItemIDTargetTypeResolvers(
+                $targetObjectIDTargetTypeResolvers = $this->recursiveGetObjectIDTargetTypeResolvers(
                     $targetObjectTypeResolver,
-                    $resultItemIDs
+                    $objectIDs
                 );
-                foreach ($targetResultItemIDTargetTypeResolvers as $targetResultItemID => $targetObjectTypeResolver) {
-                    $resultItemIDTargetTypeResolvers[(string)$targetResultItemID] = $targetObjectTypeResolver;
+                foreach ($targetObjectIDTargetTypeResolvers as $targetObjectID => $targetObjectTypeResolver) {
+                    $objectIDTargetTypeResolvers[(string)$targetObjectID] = $targetObjectTypeResolver;
                 }
             }
         } else {
-            foreach ($ids as $resultItemID) {
-                $resultItemIDTargetTypeResolvers[(string)$resultItemID] = $relationalTypeResolver;
+            foreach ($ids as $objectID) {
+                $objectIDTargetTypeResolvers[(string)$objectID] = $relationalTypeResolver;
             }
         }
-        return $resultItemIDTargetTypeResolvers;
+        return $objectIDTargetTypeResolvers;
     }
 
     /**
@@ -132,7 +132,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
      */
-    final public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void
+    final public function enqueueFillingObjectsFromIDs(array $ids_data_fields): void
     {
         /**
          * This section is different from parent's implementation
@@ -151,7 +151,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // If the type data resolver is union, the dbKey where the value is stored
         // is contained in the ID itself, with format dbKey/ID.
         // Remove this information, and get purely the ID
-        $resultItemIDs = array_map(
+        $objectIDs = array_map(
             function ($composedID) {
                 list(
                     $dbKey,
@@ -161,23 +161,23 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             },
             array_keys($ids_data_fields)
         );
-        $resultItemIDTargetTypeResolvers = $this->getResultItemIDTargetTypeResolvers($resultItemIDs);
+        $objectIDTargetTypeResolvers = $this->getObjectIDTargetTypeResolvers($objectIDs);
 
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
         foreach ($ids_data_fields as $id => $data_fields) {
-            $fields = $this->getFieldsToEnqueueFillingResultItemsFromIDs($data_fields);
+            $fields = $this->getFieldsToEnqueueFillingObjectsFromIDs($data_fields);
 
             /**
              * This section is different from parent's implementation
              */
             list(
                 $dbKey,
-                $resultItemID
+                $objectID
             ) = UnionTypeHelpers::extractDBObjectTypeAndID($id);
-            $resultItemIDTargetTypeResolver = $resultItemIDTargetTypeResolvers[$resultItemID];
-            $mandatoryDirectivesForFields = $targetObjectTypeResolverClassMandatoryDirectivesForFields[get_class($resultItemIDTargetTypeResolver)];
+            $objectIDTargetTypeResolver = $objectIDTargetTypeResolvers[$objectID];
+            $mandatoryDirectivesForFields = $targetObjectTypeResolverClassMandatoryDirectivesForFields[get_class($objectIDTargetTypeResolver)];
 
-            $this->doEnqueueFillingResultItemsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
+            $this->doEnqueueFillingObjectsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
         }
     }
 
@@ -187,9 +187,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      *
      * @return string|int|null the ID of the passed object, or `null` if there is no resolver to handle it
      */
-    public function getID(object $resultItem): string | int | null
+    public function getID(object $object): string | int | null
     {
-        $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($resultItem);
+        $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
         if ($targetObjectTypeResolver === null) {
             return null;
         }
@@ -198,7 +198,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // The type will be removed again in `getIDsToQuery`
         return UnionTypeHelpers::getDBObjectComposedTypeAndID(
             $targetObjectTypeResolver,
-            $targetObjectTypeResolver->getID($resultItem)
+            $targetObjectTypeResolver->getID($object)
         );
     }
 
@@ -312,7 +312,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return $objectTypeResolverPickers;
     }
 
-    public function getObjectTypeResolverClassForResultItem(string | int $resultItemID)
+    public function getObjectTypeResolverClassForObject(string | int $objectID)
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
@@ -321,7 +321,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // This is not a problem by making the corresponding field processors inherit from each other, so that the more specific object also handles
         // the fields for the more general ones (eg: TypeResolver_OrganizationUsers extends TypeResolver_CommunityUsers, and TypeResolver_CommunityUsers extends UserObjectTypeResolver)
         foreach ($this->getObjectTypeResolverPickers() as $maybePicker) {
-            if ($maybePicker->isIDOfType($resultItemID)) {
+            if ($maybePicker->isIDOfType($objectID)) {
                 // Found it!
                 $typeResolverPicker = $maybePicker;
                 return $typeResolverPicker->getObjectTypeResolverClass();
@@ -331,7 +331,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return null;
     }
 
-    public function getTargetObjectTypeResolverPicker(object $resultItem): ?ObjectTypeResolverPickerInterface
+    public function getTargetObjectTypeResolverPicker(object $object): ?ObjectTypeResolverPickerInterface
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
@@ -340,7 +340,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // This is not a problem by making the corresponding field processors inherit from each other, so that the more specific object also handles
         // the fields for the more general ones (eg: TypeResolver_OrganizationUsers extends TypeResolver_CommunityUsers, and TypeResolver_CommunityUsers extends UserObjectTypeResolver)
         foreach ($this->getObjectTypeResolverPickers() as $maybePicker) {
-            if ($maybePicker->isInstanceOfType($resultItem)) {
+            if ($maybePicker->isInstanceOfType($object)) {
                 // Found it!
                 return $maybePicker;
             }
@@ -348,9 +348,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return null;
     }
 
-    public function getTargetObjectTypeResolver(object $resultItem): ?RelationalTypeResolverInterface
+    public function getTargetObjectTypeResolver(object $object): ?RelationalTypeResolverInterface
     {
-        if ($typeResolverPicker = $this->getTargetObjectTypeResolverPicker($resultItem)) {
+        if ($typeResolverPicker = $this->getTargetObjectTypeResolverPicker($object)) {
             $objectTypeResolverClass = $typeResolverPicker->getObjectTypeResolverClass();
             /**
              * @var ObjectTypeResolverInterface
@@ -361,24 +361,24 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return null;
     }
 
-    protected function getUnresolvedResultItemIDError(string | int $resultItemID)
+    protected function getUnresolvedObjectIDError(string | int $objectID)
     {
         return new Error(
             'unresolved-resultitem-id',
             sprintf(
                 $this->translationAPI->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'pop-component-model'),
-                (string) $resultItemID
+                (string) $objectID
             )
         );
     }
 
-    protected function getUnresolvedResultItemError(object $resultItem): Error
+    protected function getUnresolvedObjectError(object $object): Error
     {
         return new Error(
             'unresolved-resultitem',
             sprintf(
                 $this->translationAPI->__('No TypeResolver resolves object \'%s\'', 'pop-component-model'),
-                json_encode($resultItem)
+                json_encode($object)
             )
         );
     }
@@ -389,21 +389,21 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        object $resultItem,
+        object $object,
         string $field,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        // Check that a typeResolver from this Union can process this resultItem, or return an arror
-        $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($resultItem);
+        // Check that a typeResolver from this Union can process this object, or return an arror
+        $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
         if ($targetObjectTypeResolver === null) {
-            return $this->getUnresolvedResultItemError($resultItem);
+            return $this->getUnresolvedObjectError($object);
         }
         // Delegate to that typeResolver to obtain the value
         // Because the schema validation cannot be performed through the UnionTypeResolver, since it depends on each dbObject, indicate that it must be done in resolveValue
         $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] = true;
-        return $targetObjectTypeResolver->resolveValue($resultItem, $field, $variables, $expressions, $options);
+        return $targetObjectTypeResolver->resolveValue($object, $field, $variables, $expressions, $options);
     }
 
     protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])

@@ -119,14 +119,14 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $user = $resultItem;
+        $user = $object;
 
         switch ($fieldName) {
             case 'memberstatus':
@@ -162,11 +162,11 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
                 return gdUreGetCommunitiesStatusActive($relationalTypeResolver->getID($user));
 
             case 'hasActiveCommunities':
-                $communities = $relationalTypeResolver->resolveValue($resultItem, 'activeCommunities', $variables, $expressions, $options);
+                $communities = $relationalTypeResolver->resolveValue($object, 'activeCommunities', $variables, $expressions, $options);
                 return !empty($communities);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string

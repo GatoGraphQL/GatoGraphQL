@@ -74,11 +74,11 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     /**
-     * Validated the mutation on the resultItem because the ID
+     * Validated the mutation on the object because the ID
      * is obtained from the same object, so it's not originally
      * present in $form_data
      */
-    public function validateMutationOnResultItem(
+    public function validateMutationOnObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): bool {
@@ -86,22 +86,22 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'reply':
                 return true;
         }
-        return parent::validateMutationOnResultItem($objectTypeResolver, $fieldName);
+        return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
     }
 
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName
     ): array {
         $fieldArgs = parent::getFieldArgsToExecuteMutation(
             $fieldArgs,
             $objectTypeResolver,
-            $resultItem,
+            $object,
             $fieldName
         );
-        $comment = $resultItem;
+        $comment = $object;
         switch ($fieldName) {
             case 'reply':
                 $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $this->commentTypeAPI->getCommentPostId($comment);

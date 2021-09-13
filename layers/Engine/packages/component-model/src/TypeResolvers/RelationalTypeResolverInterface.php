@@ -15,7 +15,7 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
      *
      * @return string|int|null the ID of the passed object, or `null` if there is no resolver to handle it (for the UnionTypeResolver)
      */
-    public function getID(object $resultItem): string | int | null;
+    public function getID(object $object): string | int | null;
     public function getRelationalTypeDataLoaderClass(): string;
     /**
      * @return string[]
@@ -30,8 +30,8 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
      * @return string|int|array<string|int>
      */
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array;
-    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void;
-    public function fillResultItems(
+    public function enqueueFillingObjectsFromIDs(array $ids_data_fields): void;
+    public function fillObjects(
         array $ids_data_fields,
         array &$unionDBKeyIDs,
         array &$dbItems,
@@ -55,7 +55,7 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        object $resultItem,
+        object $object,
         string $field,
         ?array $variables = null,
         ?array $expressions = null,

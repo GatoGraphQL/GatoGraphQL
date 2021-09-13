@@ -57,7 +57,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -66,9 +66,9 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
     ): mixed;
     /**
      * The mutation can be validated either on the schema (`false`)
-     * on on the resultItem (`true`)
+     * on on the object (`true`)
      */
-    public function validateMutationOnResultItem(
+    public function validateMutationOnObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): bool;
@@ -78,9 +78,9 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool;
@@ -90,7 +90,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
      */
     public function getValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): ?array;

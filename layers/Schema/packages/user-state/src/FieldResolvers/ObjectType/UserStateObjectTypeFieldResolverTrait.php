@@ -17,7 +17,7 @@ trait UserStateObjectTypeFieldResolverTrait
      */
     protected function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): ?array {
@@ -31,7 +31,7 @@ trait UserStateObjectTypeFieldResolverTrait
         Error $error,
         string $errorMessage,
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): string {

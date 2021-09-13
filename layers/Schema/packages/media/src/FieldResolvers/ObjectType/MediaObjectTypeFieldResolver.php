@@ -159,14 +159,14 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $media = $resultItem;
+        $media = $object;
         $size = $this->obtainImageSizeFromParameters($fieldArgs);
         switch ($fieldName) {
             case 'src':
@@ -207,7 +207,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
                 return $this->mediaTypeAPI->getMimeType($media);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     /**

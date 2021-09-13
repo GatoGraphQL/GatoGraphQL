@@ -206,7 +206,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $arrayItemIdsProperties[(string)$id]['conditional'] = [];
 
-                    $this->addExpressionsForResultItem($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+                    $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
                 }
             }
         }
@@ -380,7 +380,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     //     // $pos = QueryUtils::findLastSymbolPosition($arrayItemProperty, self::PROPERTY_SEPARATOR);
     //     return explode(self::PROPERTY_SEPARATOR, $arrayItemProperty);
     // }
-    protected function addExpressionsForResultItem(
+    protected function addExpressionsForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         string $field,
@@ -407,8 +407,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
             $value = $isValueInDBItems ?
                 $dbItems[(string)$id][$fieldOutputKey] :
                 $previousDBItems[$dbKey][(string)$id][$fieldOutputKey];
-            $this->addExpressionForResultItem($id, Expressions::NAME_VALUE, $value, $messages);
-            $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
+            $this->addExpressionForObject($id, Expressions::NAME_VALUE, $value, $messages);
+            $expressions = $this->getExpressionsForObject($id, $variables, $messages);
 
             $options = [
                 AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
@@ -418,10 +418,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
                     $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the dbWarnings, if any
-                    if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
+                    if ($objectDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
                         $dbWarnings[$id] = array_merge(
                             $dbWarnings[$id] ?? [],
-                            $resultItemDBWarnings
+                            $objectDBWarnings
                         );
                     }
                     if (GeneralUtils::isError($resolvedValue)) {
@@ -442,18 +442,18 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $value = $resolvedValue;
                 }
-                $this->addExpressionForResultItem($id, (string) $key, $value, $messages);
+                $this->addExpressionForObject($id, (string) $key, $value, $messages);
             }
             foreach ($appendExpressions as $key => $value) {
-                $existingValue = $this->getExpressionForResultItem($id, (string) $key, $messages) ?? [];
+                $existingValue = $this->getExpressionForObject($id, (string) $key, $messages) ?? [];
                 // Evaluate the $value, since it may be a function
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
                     $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the dbWarnings, if any
-                    if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
+                    if ($objectDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
                         $dbWarnings[$id] = array_merge(
                             $dbWarnings[$id] ?? [],
-                            $resultItemDBWarnings
+                            $objectDBWarnings
                         );
                     }
                     if (GeneralUtils::isError($resolvedValue)) {
@@ -474,7 +474,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $existingValue[] = $resolvedValue;
                 }
-                $this->addExpressionForResultItem($id, (string) $key, $existingValue, $messages);
+                $this->addExpressionForObject($id, (string) $key, $existingValue, $messages);
             }
         }
     }

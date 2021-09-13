@@ -21,9 +21,9 @@ abstract class AbstractPostTypeResolverPicker extends AbstractObjectTypeResolver
         return $postTypeAPI->isInstanceOfPostType($object);
     }
 
-    public function isIDOfType(string | int $resultItemID): bool
+    public function isIDOfType(string | int $objectID): bool
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        return $postTypeAPI->postExists($resultItemID);
+        return $postTypeAPI->postExists($objectID);
     }
 }

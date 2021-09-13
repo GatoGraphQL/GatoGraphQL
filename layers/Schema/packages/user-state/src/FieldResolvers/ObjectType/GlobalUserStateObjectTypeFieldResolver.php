@@ -42,7 +42,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -55,6 +55,6 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
                 return $vars['global-userstate']['current-user-id'];
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

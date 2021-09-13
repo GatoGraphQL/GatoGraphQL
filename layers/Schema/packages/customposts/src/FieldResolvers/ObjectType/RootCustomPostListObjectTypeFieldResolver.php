@@ -81,7 +81,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -96,7 +96,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
             case 'customPostBySlugForAdmin':
                 $query = array_merge(
                     $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
-                    $this->getQuery($objectTypeResolver, $resultItem, $fieldName, $fieldArgs)
+                    $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
                 );
                 if ($posts = $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
@@ -104,7 +104,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

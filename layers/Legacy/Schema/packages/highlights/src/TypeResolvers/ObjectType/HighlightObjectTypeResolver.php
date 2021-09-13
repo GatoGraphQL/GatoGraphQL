@@ -20,10 +20,10 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->translationAPI->__('A highlighted piece of text, extracted from a post', 'highlights');
     }
 
-    public function getID(object $resultItem): string | int | null
+    public function getID(object $object): string | int | null
     {
         $highlightTypeAPI = HighlightTypeAPIFacade::getInstance();
-        return $highlightTypeAPI->getID($resultItem);
+        return $highlightTypeAPI->getID($object);
     }
 
     public function getRelationalTypeDataLoaderClass(): string

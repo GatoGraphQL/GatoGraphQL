@@ -53,13 +53,13 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
-        $notification = $resultItem;
+        $notification = $object;
         return $notification->object_type == 'Post' && in_array(
             $notification->action,
             [
@@ -86,7 +86,7 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -95,7 +95,7 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
     ): mixed {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
-        $notification = $resultItem;
+        $notification = $object;
         switch ($fieldName) {
             case 'icon':
                 $icons = array(
@@ -211,7 +211,7 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
                 return null;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

@@ -76,7 +76,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         }
         $this->validateFields($relationalTypeResolver, $dataFields, $schemaErrors, $schemaWarnings, $schemaDeprecations, $variables, $failedDataFields);
 
-        // Remove from the data_fields list to execute on the resultItem for the next stages of the pipeline
+        // Remove from the data_fields list to execute on the object for the next stages of the pipeline
         if ($failedDataFields) {
             $idsDataFieldsToRemove = [];
             foreach ($idsDataFields as $id => $dataFields) {

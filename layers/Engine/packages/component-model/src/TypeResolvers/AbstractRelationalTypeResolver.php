@@ -33,7 +33,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 {
     use ExcludeFieldNamesFromSchemaTypeResolverTrait;
 
-    public const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnResultItem';
+    public const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnObject';
 
     /**
      * @var array<string,DirectiveResolverInterface[]>|null
@@ -571,19 +571,19 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return array_keys($ids_data_fields);
     }
 
-    protected function getUnresolvedResultItemIDError(string | int $resultItemID)
+    protected function getUnresolvedObjectIDError(string | int $objectID)
     {
         return new Error(
             'unresolved-resultitem-id',
             sprintf(
                 $this->translationAPI->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
                 $this->getTypeOutputName(),
-                $resultItemID
+                $objectID
             )
         );
     }
 
-    public function fillResultItems(
+    public function fillObjects(
         array $ids_data_fields,
         array &$unionDBKeyIDs,
         array &$dbItems,
@@ -606,23 +606,23 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $ids = $this->getIDsToQuery($ids_data_fields);
         $typeDataLoaderClass = $this->getRelationalTypeDataLoaderClass();
         $typeDataLoader = $this->instanceManager->getInstance($typeDataLoaderClass);
-        // If any ID cannot be resolved, the resultItem will be null
-        $resultItems = array_filter($typeDataLoader->getObjects($ids));
-        foreach ($resultItems as $resultItem) {
-            $resultItemID = $this->getID($resultItem);
+        // If any ID cannot be resolved, the object will be null
+        $objects = array_filter($typeDataLoader->getObjects($ids));
+        foreach ($objects as $object) {
+            $objectID = $this->getID($object);
             // If the UnionTypeResolver doesn't have a TypeResolver to process this element, the ID will be null, and an error will be show below
-            if ($resultItemID === null) {
+            if ($objectID === null) {
                 continue;
             }
-            $resultIDItems[$resultItemID] = $resultItem;
+            $resultIDItems[$objectID] = $object;
         }
-        // Show an error for all resultItems that couldn't be processed
-        $resolvedResultItemIDs = $this->getIDsToQuery($resultIDItems);
-        $unresolvedResultItemIDs = [];
-        foreach (array_diff($ids, $resolvedResultItemIDs) as $unresolvedResultItemID) {
-            $error = $this->getUnresolvedResultItemIDError($unresolvedResultItemID);
+        // Show an error for all objects that couldn't be processed
+        $resolvedObjectIDs = $this->getIDsToQuery($resultIDItems);
+        $unresolvedObjectIDs = [];
+        foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
+            $error = $this->getUnresolvedObjectIDError($unresolvedObjectID);
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
-            $failedFields = $ids_data_fields[$unresolvedResultItemID]['direct'] ?? [];
+            $failedFields = $ids_data_fields[$unresolvedObjectID]['direct'] ?? [];
             // Add in $schemaErrors instead of $dbErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
                 $schemaErrors[] = [
@@ -632,26 +632,26 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             // Indicate that this ID must be removed from the results
-            $unresolvedResultItemIDs[] = $unresolvedResultItemID;
+            $unresolvedObjectIDs[] = $unresolvedObjectID;
         }
         // Remove all the IDs that failed from the elements to process, so it doesn't show a "Corrupted Data" error
         // Because these are IDs (eg: 223) and $ids_data_fields contains qualified or typed IDs (eg: post/223), we must convert them first
-        if ($unresolvedResultItemIDs) {
+        if ($unresolvedObjectIDs) {
             if ($this->qualifyDBObjectIDsToRemoveFromErrors()) {
-                $unresolvedResultItemIDs = $this->getQualifiedDBObjectIDOrIDs($unresolvedResultItemIDs);
+                $unresolvedObjectIDs = $this->getQualifiedDBObjectIDOrIDs($unresolvedObjectIDs);
             }
             $ids_data_fields = array_filter(
                 $ids_data_fields,
-                fn (int | string $id) => !in_array($id, $unresolvedResultItemIDs),
+                fn (int | string $id) => !in_array($id, $unresolvedObjectIDs),
                 ARRAY_FILTER_USE_KEY
             );
         }
 
         // Enqueue the items
-        $this->enqueueFillingResultItemsFromIDs($ids_data_fields);
+        $this->enqueueFillingObjectsFromIDs($ids_data_fields);
 
         // Process them
-        $this->processFillingResultItemsFromIDs(
+        $this->processFillingObjectsFromIDs(
             $resultIDItems,
             $unionDBKeyIDs,
             $dbItems,
@@ -870,7 +870,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * Split function, so it can be invoked both from here and from the UnionTypeResolver
      */
-    protected function getFieldsToEnqueueFillingResultItemsFromIDs(array $data_fields)
+    protected function getFieldsToEnqueueFillingObjectsFromIDs(array $data_fields)
     {
         $fields = $data_fields['direct'];
         // Watch out: If there are conditional fields, these will be processed by this directive too
@@ -885,7 +885,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * Split function, so it can be invoked both from here and from the UnionTypeResolver
      */
-    public function doEnqueueFillingResultItemsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, $id, array $data_fields)
+    public function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, $id, array $data_fields)
     {
         $fieldDirectiveCounter = [];
         foreach ($fields as $field) {
@@ -955,7 +955,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
     }
 
-    protected function processFillingResultItemsFromIDs(
+    protected function processFillingObjectsFromIDs(
         array &$resultIDItems,
         array &$unionDBKeyIDs,
         array &$dbItems,

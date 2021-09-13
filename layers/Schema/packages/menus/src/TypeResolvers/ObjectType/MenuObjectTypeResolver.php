@@ -20,10 +20,10 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->translationAPI->__('Representation of a navigation menu', 'menus');
     }
 
-    public function getID(object $resultItem): string | int | null
+    public function getID(object $object): string | int | null
     {
         $menuTypeAPI = MenuTypeAPIFacade::getInstance();
-        $menu = $resultItem;
+        $menu = $object;
         return $menuTypeAPI->getMenuID($menu);
     }
 

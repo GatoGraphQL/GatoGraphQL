@@ -145,7 +145,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
                 }
                 // Check if the value already exists
                 $expressionName = (string) $expressionNames[$i];
-                $existingValue = $this->getExpressionForResultItem($id, $expressionName, $messages);
+                $existingValue = $this->getExpressionForObject($id, $expressionName, $messages);
                 if (!is_null($existingValue)) {
                     $dbWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
@@ -157,7 +157,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
                     ];
                 }
                 $value = $isValueInDBItems ? $dbItems[(string)$id][$property] : $previousDBItems[$dbKey][(string)$id][$property];
-                $this->addExpressionForResultItem($id, $expressionName, $value, $messages);
+                $this->addExpressionForObject($id, $expressionName, $value, $messages);
             }
         }
     }

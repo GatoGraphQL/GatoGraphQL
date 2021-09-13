@@ -43,7 +43,7 @@ class ErrorProvider implements ErrorProviderInterface
      * Needed for compatibility with CustomPostUnionTypeResolver,
      * so that data-fields aimed for another post_type are not retrieved
      */
-    public function getNoFieldError(string | int $resultItemID, string $fieldName, string $typeName): Error
+    public function getNoFieldError(string | int $objectID, string $fieldName, string $typeName): Error
     {
         return $this->getError(
             $fieldName,
@@ -52,7 +52,7 @@ class ErrorProvider implements ErrorProviderInterface
                 $this->translationAPI->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
                 $fieldName,
                 $typeName,
-                $resultItemID
+                $objectID
             )
         );
     }
@@ -183,7 +183,7 @@ class ErrorProvider implements ErrorProviderInterface
         );
     }
 
-    public function getNoObjectTypeFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error
+    public function getNoObjectTypeFieldResolverProcessesFieldError(string | int $objectID, string $fieldName, array $fieldArgs): Error
     {
         return $this->getError(
             $fieldName,
@@ -191,7 +191,7 @@ class ErrorProvider implements ErrorProviderInterface
             sprintf(
                 $this->translationAPI->__('No ObjectTypeFieldResolver processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
                 $fieldName,
-                (string) $resultItemID
+                (string) $objectID
             )
         );
     }

@@ -65,13 +65,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
      */
-    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void
+    public function enqueueFillingObjectsFromIDs(array $ids_data_fields): void
     {
         $mandatoryDirectivesForFields = $this->getAllMandatoryDirectivesForFields();
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
         foreach ($ids_data_fields as $id => $data_fields) {
-            $fields = $this->getFieldsToEnqueueFillingResultItemsFromIDs($data_fields);
-            $this->doEnqueueFillingResultItemsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
+            $fields = $this->getFieldsToEnqueueFillingObjectsFromIDs($data_fields);
+            $this->doEnqueueFillingObjectsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
         }
     }
 
@@ -288,14 +288,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        object $resultItem,
+        object $object,
         string $field,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
         // Get the value from a fieldResolver, from the first one who can deliver the value
-        // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $resultItem)
+        // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $object)
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
             // Important: $validField becomes $field: remove all invalid fieldArgs before executing `resolveValue` on the fieldResolver
             list(
@@ -314,17 +314,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 return $this->errorProvider->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
             }
 
-            // Important: calculate 'isAnyFieldArgumentValueDynamic' before resolving the args for the resultItem
+            // Important: calculate 'isAnyFieldArgumentValueDynamic' before resolving the args for the object
             // That is because if when resolving there is an error, the fieldArgValue will be removed completely, then we don't know that we must validate the schema again
             // Eg: doing /?query=arrayUnique(extract(..., 0)) and extract fails, arrayUnique will have no fieldArgs. However its fieldArg is mandatory, but by then it doesn't know it needs to validate it
             // Before resolving the fieldArgValues which are fields:
-            // Calculate $validateSchemaOnResultItem: if any value containes a field, then we must perform the schemaValidation on the item, such as checking that all mandatory fields are there
+            // Calculate $validateSchemaOnObject: if any value containes a field, then we must perform the schemaValidation on the item, such as checking that all mandatory fields are there
             // For instance: After resolving a field and being casted it may be incorrect, so the value is invalidated, and after the schemaValidation the proper error is shown
             // Also need to check for variables, since these must be resolved too
             // For instance: ?query=posts(limit:3),post(id:$id).id|title&id=112
             // We can also force it through an option. This is needed when the field is created on runtime.
             // Eg: through the <transform> directive, in which case no parameter is dynamic anymore by the time it reaches here, yet it was not validated statically either
-            $validateSchemaOnResultItem =
+            $validateSchemaOnObject =
                 ($options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? null) ||
                 FieldQueryUtils::isAnyFieldArgumentValueDynamic(
                     array_values(
@@ -339,7 +339,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $fieldArgs,
                 $dbErrors,
                 $dbWarnings
-            ) = $this->fieldQueryInterpreter->extractFieldArgumentsForResultItem($this, $resultItem, $field, $variables, $expressions);
+            ) = $this->fieldQueryInterpreter->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions);
 
             // Store the warnings to be read if needed
             if ($dbWarnings) {
@@ -350,14 +350,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
 
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
-                // Also send the typeResolver along, as to get the id of the $resultItem being passed
-                if ($objectTypeFieldResolver->resolveCanProcessResultItem($this, $resultItem, $fieldName, $fieldArgs)) {
-                    if ($validateSchemaOnResultItem) {
+                // Also send the typeResolver along, as to get the id of the $object being passed
+                if ($objectTypeFieldResolver->resolveCanProcessObject($this, $object, $fieldName, $fieldArgs)) {
+                    if ($validateSchemaOnObject) {
                         if ($maybeErrors = $objectTypeFieldResolver->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                             return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
                         }
                         if ($maybeDeprecations = $objectTypeFieldResolver->resolveSchemaValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
-                            $id = $this->getID($resultItem);
+                            $id = $this->getID($object);
                             foreach ($maybeDeprecations as $deprecation) {
                                 $dbDeprecations[(string)$id][] = [
                                     Tokens::PATH => [$field],
@@ -367,14 +367,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             $this->feedbackMessageStore->addDBDeprecations($dbDeprecations);
                         }
                     }
-                    if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $resultItem, $fieldName, $fieldArgs)) {
+                    if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {
                         return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
                     }
 
                     // Resolve the value. If the field resolver throws an Exception,
                     // catch it and return the equivalent GraphQL error
                     try {
-                        $value = $objectTypeFieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+                        $value = $objectTypeFieldResolver->resolveValue($this, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
                     } catch (Exception $e) {
                         return new Error(
                             'exception',
@@ -493,13 +493,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     return $value;
                 }
             }
-            return $this->errorProvider->getNoObjectTypeFieldResolverProcessesFieldError($this->getID($resultItem), $fieldName, $fieldArgs);
+            return $this->errorProvider->getNoObjectTypeFieldResolverProcessesFieldError($this->getID($object), $fieldName, $fieldArgs);
         }
 
         // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
         // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
         $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
-        return $this->errorProvider->getNoFieldError($this->getID($resultItem), $fieldName, $this->getMaybeNamespacedTypeName());
+        return $this->errorProvider->getNoFieldError($this->getID($object), $fieldName, $this->getMaybeNamespacedTypeName());
     }
 
     protected function getSchemaObjecTypeObjectTypeFieldResolvers(bool $global): array

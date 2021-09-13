@@ -48,13 +48,13 @@ class PoP_Notifications_UserLogin_DataLoad_ObjectTypeFieldResolver_Notifications
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
-        $notification = $resultItem;
+        $notification = $object;
         return $notification->object_type == 'User' && in_array(
             $notification->action,
             [
@@ -72,14 +72,14 @@ class PoP_Notifications_UserLogin_DataLoad_ObjectTypeFieldResolver_Notifications
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $notification = $resultItem;
+        $notification = $object;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'icon':
@@ -103,7 +103,7 @@ class PoP_Notifications_UserLogin_DataLoad_ObjectTypeFieldResolver_Notifications
                 );
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

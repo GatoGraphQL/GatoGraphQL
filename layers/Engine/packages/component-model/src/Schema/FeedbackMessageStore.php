@@ -31,19 +31,19 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
 
     public function addDBWarnings(array $dbWarnings)
     {
-        foreach ($dbWarnings as $resultItemID => $resultItemWarnings) {
-            $this->dbWarnings[$resultItemID] = array_merge(
-                $this->dbWarnings[$resultItemID] ?? [],
-                $resultItemWarnings
+        foreach ($dbWarnings as $objectID => $objectWarnings) {
+            $this->dbWarnings[$objectID] = array_merge(
+                $this->dbWarnings[$objectID] ?? [],
+                $objectWarnings
             );
         }
     }
     public function addDBDeprecations(array $dbDeprecations)
     {
-        foreach ($dbDeprecations as $resultItemID => $resultItemDeprecations) {
-            $this->dbDeprecations[$resultItemID] = array_merge(
-                $this->dbDeprecations[$resultItemID] ?? [],
-                $resultItemDeprecations
+        foreach ($dbDeprecations as $objectID => $objectDeprecations) {
+            $this->dbDeprecations[$objectID] = array_merge(
+                $this->dbDeprecations[$objectID] ?? [],
+                $objectDeprecations
             );
         }
     }
@@ -54,17 +54,17 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
             $schemaWarnings
         );
     }
-    public function retrieveAndClearResultItemDBWarnings(string | int $resultItemID): ?array
+    public function retrieveAndClearObjectDBWarnings(string | int $objectID): ?array
     {
-        $resultItemDBWarnings = $this->dbWarnings[$resultItemID] ?? null;
-        unset($this->dbWarnings[$resultItemID]);
-        return $resultItemDBWarnings;
+        $objectDBWarnings = $this->dbWarnings[$objectID] ?? null;
+        unset($this->dbWarnings[$objectID]);
+        return $objectDBWarnings;
     }
-    public function retrieveAndClearResultItemDBDeprecations(string | int $resultItemID): ?array
+    public function retrieveAndClearObjectDBDeprecations(string | int $objectID): ?array
     {
-        $resultItemDBDeprecations = $this->dbDeprecations[$resultItemID] ?? null;
-        unset($this->dbDeprecations[$resultItemID]);
-        return $resultItemDBDeprecations;
+        $objectDBDeprecations = $this->dbDeprecations[$objectID] ?? null;
+        unset($this->dbDeprecations[$objectID]);
+        return $objectDBDeprecations;
     }
 
     public function addSchemaError(string $dbKey, string $field, string $error)

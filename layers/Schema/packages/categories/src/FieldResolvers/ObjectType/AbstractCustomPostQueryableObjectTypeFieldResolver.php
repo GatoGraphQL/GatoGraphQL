@@ -134,7 +134,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -142,7 +142,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         array $options = []
     ): mixed {
         $categoryTypeAPI = $this->getCategoryTypeAPI();
-        $post = $resultItem;
+        $post = $object;
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'categories':
@@ -153,7 +153,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
                 return $categoryTypeAPI->getCustomPostCategoryCount($objectTypeResolver->getID($post), $query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

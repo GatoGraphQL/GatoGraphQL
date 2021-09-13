@@ -59,7 +59,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -67,12 +67,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         array $options = []
     ): mixed {
         /** @var WP_Post */
-        $customPost = $resultItem;
+        $customPost = $object;
         switch ($fieldName) {
             case 'isSticky':
                 return \is_sticky($customPost->ID);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

@@ -49,13 +49,13 @@ class WSL_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
-        $notification = $resultItem;
+        $notification = $object;
         return $notification->object_type == 'User' && in_array(
             $notification->action,
             [
@@ -72,14 +72,14 @@ class WSL_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $notification = $resultItem;
+        $notification = $object;
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($fieldName) {
@@ -112,7 +112,7 @@ class WSL_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return null;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

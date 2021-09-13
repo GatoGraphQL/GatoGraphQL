@@ -46,21 +46,21 @@ class PoP_UserAvatar_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends Ab
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'fileUploadPictureURL':
                 // URL which will upload the images for the user
-                return GD_FileUpload_Picture_Utils::getFileuploadUrl($relationalTypeResolver->resolveValue($resultItem, 'id', $variables, $expressions, $options));
+                return GD_FileUpload_Picture_Utils::getFileuploadUrl($relationalTypeResolver->resolveValue($object, 'id', $variables, $expressions, $options));
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

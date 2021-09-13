@@ -64,7 +64,7 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -72,13 +72,13 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         /** @var UserAvatar */
-        $userAvatar = $resultItem;
+        $userAvatar = $object;
         switch ($fieldName) {
             case 'src':
             case 'size':
                 return $userAvatar->$fieldName;
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

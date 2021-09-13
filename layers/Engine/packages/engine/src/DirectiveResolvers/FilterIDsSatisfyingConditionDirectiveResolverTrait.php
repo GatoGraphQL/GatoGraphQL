@@ -16,20 +16,20 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         // Check the condition field. If it is satisfied, then skip those fields
         $idsSatisfyingCondition = [];
         foreach (array_keys($idsDataFields) as $id) {
-            // Validate directive args for the resultItem
-            $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
-            $resultItem = $resultIDItems[$id];
+            // Validate directive args for the object
+            $expressions = $this->getExpressionsForObject($id, $variables, $messages);
+            $object = $resultIDItems[$id];
             list(
-                $resultItemValidDirective,
-                $resultItemDirectiveName,
-                $resultItemDirectiveArgs
-            ) = $this->dissectAndValidateDirectiveForResultItem($relationalTypeResolver, $resultItem, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
+                $objectValidDirective,
+                $objectDirectiveName,
+                $objectDirectiveArgs
+            ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
             // Check that the directive is valid. If it is not, $dbErrors will have the error already added
-            if (is_null($resultItemValidDirective)) {
+            if (is_null($objectValidDirective)) {
                 continue;
             }
-            // $resultItemDirectiveArgs has all the right directiveArgs values. Now we can evaluate on it
-            if ($resultItemDirectiveArgs['if'] ?? null) {
+            // $objectDirectiveArgs has all the right directiveArgs values. Now we can evaluate on it
+            if ($objectDirectiveArgs['if'] ?? null) {
                 $idsSatisfyingCondition[] = $id;
             }
         }

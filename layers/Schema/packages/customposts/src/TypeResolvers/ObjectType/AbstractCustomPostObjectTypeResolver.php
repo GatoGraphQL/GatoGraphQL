@@ -14,9 +14,9 @@ abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeRe
         return $this->translationAPI->__('Representation of a custom post', 'customposts');
     }
 
-    public function getID(object $resultItem): string | int | null
+    public function getID(object $object): string | int | null
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        return $customPostTypeAPI->getID($resultItem);
+        return $customPostTypeAPI->getID($object);
     }
 }

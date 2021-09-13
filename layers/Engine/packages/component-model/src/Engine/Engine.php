@@ -659,27 +659,27 @@ class Engine implements EngineInterface
             // Get the actual type for each entity, and add the entry there
             $convertedTypeResolverClassDataItems = $convertedTypeResolverClassDBKeys = [];
             $noTypeResolverDataItems = [];
-            foreach ($dataitems as $resultItemID => $dataItem) {
+            foreach ($dataitems as $objectID => $dataItem) {
                 // Obtain the type of the object
                 $exists = false;
-                if ($resultItem = $resultIDItems[$resultItemID] ?? null) {
-                    $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($resultItem);
+                if ($object = $resultIDItems[$objectID] ?? null) {
+                    $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
                     if ($targetObjectTypeResolver !== null) {
                         $exists = true;
                         // The ID will contain the type. Remove it
                         list(
-                            $resultItemDBKey,
-                            $resultItemID
-                        ) = UnionTypeHelpers::extractDBObjectTypeAndID($resultItemID);
+                            $objectDBKey,
+                            $objectID
+                        ) = UnionTypeHelpers::extractDBObjectTypeAndID($objectID);
 
                         $convertedTypeResolverClass = get_class($targetObjectTypeResolver);
-                        $convertedTypeResolverClassDataItems[$convertedTypeResolverClass][$resultItemID] = $dataItem;
-                        $convertedTypeResolverClassDBKeys[$convertedTypeResolverClass] = $resultItemDBKey;
+                        $convertedTypeResolverClassDataItems[$convertedTypeResolverClass][$objectID] = $dataItem;
+                        $convertedTypeResolverClassDBKeys[$convertedTypeResolverClass] = $objectDBKey;
                     }
                 }
                 if (!$exists && $addEntryIfError) {
                     // If the UnionTypeResolver doesn't have a type to process the dataItem, show the error under its own ID
-                    $noTypeResolverDataItems[$resultItemID] = $dataItem;
+                    $noTypeResolverDataItems[$objectID] = $dataItem;
                 }
             }
             foreach ($convertedTypeResolverClassDataItems as $convertedTypeResolverClass => $convertedDataItems) {
@@ -1371,7 +1371,7 @@ class Engine implements EngineInterface
             // Execute the typeResolver for all combined ids
             $iterationDBItems = $iterationDBErrors = $iterationDBWarnings = $iterationDBDeprecations = $iterationDBNotices = $iterationDBTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
-            $resultIDItems = $relationalTypeResolver->fillResultItems(
+            $resultIDItems = $relationalTypeResolver->fillObjects(
                 $ids_data_fields,
                 $combinedUnionDBKeyIDs,
                 $iterationDBItems,
@@ -1564,16 +1564,16 @@ class Engine implements EngineInterface
                             $typeResolver_ids
                         );
 
-                        // If it's a unionTypeResolver, get the typeResolver for each resultItem
+                        // If it's a unionTypeResolver, get the typeResolver for each object
                         // to obtain the subcomponent typeResolver
                         /** @var UnionTypeResolverInterface $relationalTypeResolver */
-                        $resultItemTypeResolvers = $relationalTypeResolver->getResultItemIDTargetTypeResolvers($typeResolver_ids);
+                        $objectTypeResolvers = $relationalTypeResolver->getObjectIDTargetTypeResolvers($typeResolver_ids);
                         $iterationTypeResolverIDs = [];
                         foreach ($typeResolver_ids as $id) {
                             // If there's no resolver, it's an error: the ID can't be processed by anyone
-                            if ($resultItemTypeResolver = $resultItemTypeResolvers[(string)$id]) {
-                                $resultItemTypeResolverClass = get_class($resultItemTypeResolver);
-                                $iterationTypeResolverIDs[$resultItemTypeResolverClass][] = $id;
+                            if ($objectTypeResolver = $objectTypeResolvers[(string)$id]) {
+                                $objectTypeResolverClass = get_class($objectTypeResolver);
+                                $iterationTypeResolverIDs[$objectTypeResolverClass][] = $id;
                             }
                         }
                         foreach ($iterationTypeResolverIDs as $targetObjectTypeResolverClass => $targetIDs) {

@@ -145,7 +145,7 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -153,6 +153,6 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         array $options = []
     ): mixed {
         // Simply return the value of the property in the object
-        return $resultItem->$fieldName;
+        return $object->$fieldName;
     }
 }

@@ -76,14 +76,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             case 'areCommentsOpen':
                 return $this->commentTypeAPI->areCommentsOpen($objectTypeResolver->getID($post));
@@ -108,6 +108,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

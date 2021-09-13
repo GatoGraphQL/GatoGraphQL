@@ -39,7 +39,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -48,7 +48,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     ): mixed {
         $dateFormatter = DateFormatterFacade::getInstance();
         $customPostTypeAPI = $this->getCustomPostTypeAPI();
-        $customPost = $resultItem;
+        $customPost = $object;
         switch ($fieldName) {
             case 'datetime':
                 // If it is the current year, don't add the year. Otherwise, do
@@ -61,6 +61,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $dateFormatter->format($format, $date);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

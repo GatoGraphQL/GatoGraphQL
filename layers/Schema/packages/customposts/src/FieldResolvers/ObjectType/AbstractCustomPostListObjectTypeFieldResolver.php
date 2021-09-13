@@ -157,7 +157,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
      */
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): array {
@@ -172,7 +172,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -182,7 +182,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
-            $this->getQuery($objectTypeResolver, $resultItem, $fieldName, $fieldArgs)
+            $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
         );
         switch ($fieldName) {
             case 'customPosts':
@@ -194,7 +194,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
                 return $customPostTypeAPI->getCustomPostCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

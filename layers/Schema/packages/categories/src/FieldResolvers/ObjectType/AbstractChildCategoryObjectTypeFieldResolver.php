@@ -134,14 +134,14 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $category = $resultItem;
+        $category = $object;
         $categoryTypeAPI = $this->getCategoryTypeAPI();
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
@@ -158,7 +158,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
                 return $categoryTypeAPI->getCategoryCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

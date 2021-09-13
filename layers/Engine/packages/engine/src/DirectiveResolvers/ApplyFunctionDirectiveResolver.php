@@ -150,10 +150,10 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 }
 
                 // Place all the reserved expressions into the `$expressions` context: $value
-                $this->addExpressionsForResultItem($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+                $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
                 // Generate the fieldArgs from combining the query with the values in the context, through $variables
-                $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
+                $expressions = $this->getExpressionsForObject($id, $variables, $messages);
                 list(
                     $validFunction,
                     $schemaFieldName,
@@ -162,7 +162,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $schemaDBWarnings
                 ) = $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($rootTypeResolver, $function, $variables);
 
-                // Place the errors not under schema but under DB, since they may change on a resultItem by resultItem basis
+                // Place the errors not under schema but under DB, since they may change on a object by object basis
                 if ($schemaDBWarnings) {
                     $dbWarning = [
                         Tokens::PATH => [$this->directive],
@@ -215,10 +215,10 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 ];
                 $functionValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $validFunction, $variables, $expressions, $options);
                 // Merge the dbWarnings, if any
-                if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
+                if ($objectDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
                     $dbWarnings[$id] = array_merge(
                         $dbWarnings[$id] ?? [],
-                        $resultItemDBWarnings
+                        $objectDBWarnings
                     );
                 }
 
@@ -253,7 +253,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     /**
      * Place all the reserved variables into the `$variables` context
      */
-    protected function addExpressionsForResultItem(
+    protected function addExpressionsForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         string $field,
@@ -275,6 +275,6 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         $value = $isValueInDBItems ?
             $dbItems[(string)$id][$fieldOutputKey] :
             $previousDBItems[$dbKey][(string)$id][$fieldOutputKey];
-        $this->addExpressionForResultItem($id, Expressions::NAME_VALUE, $value, $messages);
+        $this->addExpressionForObject($id, Expressions::NAME_VALUE, $value, $messages);
     }
 }

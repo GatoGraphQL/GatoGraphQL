@@ -25,7 +25,7 @@ interface ErrorProviderInterface
      * Needed for compatibility with CustomPostUnionTypeResolver,
      * so that data-fields aimed for another post_type are not retrieved
      */
-    public function getNoFieldError(string | int $resultItemID, string $fieldName, string $typeName): Error;
+    public function getNoFieldError(string | int $objectID, string $fieldName, string $typeName): Error;
 
     /**
      * Return an error to indicate that a non-nullable field is returning a `null` value
@@ -47,7 +47,7 @@ interface ErrorProviderInterface
      * (so that data-fields aimed for another post_type are not retrieved)
      */
     public function getValidationFailedError(string $fieldName, array $fieldArgs, array $validationDescriptions): Error;
-    public function getNoObjectTypeFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error;
+    public function getNoObjectTypeFieldResolverProcessesFieldError(string | int $objectID, string $fieldName, array $fieldArgs): Error;
     /**
      * @param string[] $schemaErrors
      */

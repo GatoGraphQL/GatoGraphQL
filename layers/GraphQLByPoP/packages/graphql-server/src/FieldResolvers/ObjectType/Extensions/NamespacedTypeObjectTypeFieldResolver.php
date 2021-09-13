@@ -101,14 +101,14 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $type = $resultItem;
+        $type = $object;
         switch ($fieldName) {
             case 'name':
                 if ($fieldArgs['namespaced']) {
@@ -117,6 +117,6 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
                 return $type->getElementName();
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

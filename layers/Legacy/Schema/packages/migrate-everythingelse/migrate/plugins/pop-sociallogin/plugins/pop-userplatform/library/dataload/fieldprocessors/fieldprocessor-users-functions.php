@@ -42,14 +42,14 @@ class GD_WSL_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolv
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
         // Only if the user is a subscriber
-        $user = $resultItem;
+        $user = $object;
         return !userHasProfileAccess($relationalTypeResolver->getID($user));
     }
 
@@ -61,14 +61,14 @@ class GD_WSL_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolv
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'url':
                 // Return the user's website url from the connecting network (eg: facebook, twitter)
@@ -76,7 +76,7 @@ class GD_WSL_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolv
                 return $userTypeAPI->getUserWebsiteUrl($user);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

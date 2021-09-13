@@ -57,7 +57,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * @var array<string, mixed>
      */
-    protected array $directiveArgsForResultItems = [];
+    protected array $directiveArgsForObjects = [];
     /**
      * @var array[]
      */
@@ -111,7 +111,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     }
 
     /**
-     * If a directive does not operate over the resultItems, then it must not allow to add fields or dynamic values in the directive arguments
+     * If a directive does not operate over the objects, then it must not allow to add fields or dynamic values in the directive arguments
      * Otherwise, it can lead to errors, since the field would never be transformed/casted to the expected type
      * Eg: <cacheControl(maxAge:id())>
      */
@@ -277,9 +277,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return $directiveArgs;
     }
 
-    public function dissectAndValidateDirectiveForResultItem(
+    public function dissectAndValidateDirectiveForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         array &$variables,
         array &$expressions,
         array &$dbErrors,
@@ -292,11 +292,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $directiveArgs,
             $nestedDBErrors,
             $nestedDBWarnings
-        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForResultItem($this, $relationalTypeResolver, $resultItem, $this->directive, $variables, $expressions);
+        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
-        $resultItemID = $relationalTypeResolver->getID($resultItem);
-        $this->directiveArgsForResultItems[$resultItemID] = $directiveArgs;
+        $objectID = $relationalTypeResolver->getID($object);
+        $this->directiveArgsForObjects[$objectID] = $directiveArgs;
 
         // Store errors (if any)
         foreach ($nestedDBErrors as $id => $fieldOutputKeyErrorMessages) {
@@ -324,7 +324,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 )
             ) {
                 foreach ($maybeErrors as $errorMessage) {
-                    $dbErrors[$resultItemID][] = [
+                    $dbErrors[$objectID][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => $errorMessage,
                     ];
@@ -534,9 +534,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * @return mixed[]
      */
-    protected function getExpressionsForResultItem(int | string $id, array &$variables, array &$messages): array
+    protected function getExpressionsForObject(int | string $id, array &$variables, array &$messages): array
     {
-        // Create a custom $variables containing all the properties from $dbItems for this resultItem
+        // Create a custom $variables containing all the properties from $dbItems for this object
         // This way, when encountering $propName in a fieldArg in a fieldResolver, it can resolve that value
         // Otherwise it can't, since the fieldResolver doesn't have access to either $dbItems
         return array_merge(
@@ -545,12 +545,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         );
     }
 
-    protected function addExpressionForResultItem(int | string $id, string $key, mixed $value, array &$messages): void
+    protected function addExpressionForObject(int | string $id, string $key, mixed $value, array &$messages): void
     {
         $messages[self::MESSAGE_EXPRESSIONS][(string)$id][$key] = $value;
     }
 
-    protected function getExpressionForResultItem(int | string $id, string $key, array &$messages): mixed
+    protected function getExpressionForObject(int | string $id, string $key, array &$messages): mixed
     {
         return $messages[self::MESSAGE_EXPRESSIONS][(string)$id][$key] ?? null;
     }

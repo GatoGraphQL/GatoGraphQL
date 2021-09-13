@@ -76,7 +76,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -84,7 +84,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         array $options = []
     ): mixed {
         $tagTypeAPI = $this->getTagTypeAPI();
-        $tag = $resultItem;
+        $tag = $object;
         switch ($fieldName) {
             case 'url':
                 return $tagTypeAPI->getTagURL($objectTypeResolver->getID($tag));
@@ -105,6 +105,6 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 return $tagTypeAPI->getTagItemCount($tag);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

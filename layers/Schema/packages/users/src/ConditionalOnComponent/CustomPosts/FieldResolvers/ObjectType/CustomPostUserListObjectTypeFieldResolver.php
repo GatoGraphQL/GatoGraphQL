@@ -34,13 +34,13 @@ class CustomPostUserListObjectTypeFieldResolver extends AbstractCustomPostListOb
      */
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $query = parent::getQuery($objectTypeResolver, $resultItem, $fieldName, $fieldArgs);
+        $query = parent::getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs);
 
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostCount':

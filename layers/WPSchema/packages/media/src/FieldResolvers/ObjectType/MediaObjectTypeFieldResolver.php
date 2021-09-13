@@ -84,7 +84,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -92,7 +92,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         array $options = []
     ): mixed {
         /** @var WP_Post */
-        $mediaItem = $resultItem;
+        $mediaItem = $object;
         switch ($fieldName) {
             case 'url':
             case 'urlPath':
@@ -106,6 +106,6 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
                 return $mediaItem->post_name;
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

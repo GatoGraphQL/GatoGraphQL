@@ -210,14 +210,14 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $notification = $resultItem;
+        $notification = $object;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
@@ -263,11 +263,11 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                 return $value;
 
             case 'isStatusRead':
-                $status = $objectTypeResolver->resolveValue($resultItem, 'status', $variables, $expressions, $options);
+                $status = $objectTypeResolver->resolveValue($object, 'status', $variables, $expressions, $options);
                 return ($status == AAL_POP_STATUS_READ);
 
             case 'isStatusNotRead':
-                $is_read = $objectTypeResolver->resolveValue($resultItem, 'isStatusRead', $variables, $expressions, $options);
+                $is_read = $objectTypeResolver->resolveValue($object, 'isStatusRead', $variables, $expressions, $options);
                 return !$is_read;
 
             case 'markAsReadURL':
@@ -329,7 +329,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                 return $fieldArgs['action'] == $notification->action;
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

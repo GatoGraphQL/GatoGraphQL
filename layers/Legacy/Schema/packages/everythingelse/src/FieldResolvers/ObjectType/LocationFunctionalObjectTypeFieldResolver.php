@@ -63,7 +63,7 @@ class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldR
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -74,10 +74,10 @@ class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldR
             case 'mapURL':
                 // Decode it, because add_query_arg sends the params encoded and it doesn't look nice
                 return urldecode(GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_LOCATIONID => [$objectTypeResolver->getID($resultItem)],
+                    POP_INPUTNAME_LOCATIONID => [$objectTypeResolver->getID($object)],
                 ], RouteUtils::getRouteURL(POP_LOCATIONS_ROUTE_LOCATIONSMAP)));
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

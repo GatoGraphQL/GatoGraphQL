@@ -41,11 +41,11 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
 
     /**
-     * Validated the mutation on the resultItem because the ID
+     * Validated the mutation on the object because the ID
      * is obtained from the same object, so it's not originally
      * present in $form_data
      */
-    public function validateMutationOnResultItem(
+    public function validateMutationOnObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): bool {
@@ -53,22 +53,22 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             case 'update':
                 return true;
         }
-        return parent::validateMutationOnResultItem($objectTypeResolver, $fieldName);
+        return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
     }
 
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName
     ): array {
         $fieldArgs = parent::getFieldArgsToExecuteMutation(
             $fieldArgs,
             $objectTypeResolver,
-            $resultItem,
+            $object,
             $fieldName
         );
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             case 'update':
                 $fieldArgs[MutationInputProperties::ID] = $objectTypeResolver->getID($post);

@@ -201,12 +201,12 @@ class PoP_SSR_EngineInitialization_Hooks
             $engine = EngineFacade::getInstance();
             $data_fields = $engine->moveEntriesUnderDBName($data_properties['data-fields'], true, $relationalTypeResolver);
 
-            foreach ($dbobjectids as $resultItem_id) {
+            foreach ($dbobjectids as $object_id) {
                 // Copy to the dynamic database
                 foreach ($databases as $dbname => $database) {
                     foreach ($data_fields[$dbname] as $data_field) {
-                        if (isset($database[$database_key][$resultItem_id][$data_field])) {
-                            $dynamicdatabases[$dbname][$database_key][$resultItem_id][$data_field] = $database[$database_key][$resultItem_id][$data_field];
+                        if (isset($database[$database_key][$object_id][$data_field])) {
+                            $dynamicdatabases[$dbname][$database_key][$object_id][$data_field] = $database[$database_key][$object_id][$data_field];
                         }
                     }
                 }
@@ -225,30 +225,30 @@ class PoP_SSR_EngineInitialization_Hooks
                     }
                     // From the $subcomponent_data_field we obtain the subcomponent dbobjectids IDs, fetching the corresponding values from the DB
                     $subcomponent_dataset = array();
-                    $resultItemIDs = array_keys($sourcedb[$database_key]);
+                    $objectIDs = array_keys($sourcedb[$database_key]);
 
                     // If it is a union type data resolver, then we must add the converted type on each ID
                     $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
                     if ($subcomponent_typeResolver_class = $dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
                         $subcomponentTypeResolver = $instanceManager->getInstance((string)$subcomponent_typeResolver_class);
-                        $typeResultItemIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($resultItemIDs);
-                        if (is_null($typeResultItemIDs)) {
+                        $typeObjectIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($objectIDs);
+                        if (is_null($typeObjectIDs)) {
                             $isUnionType = false;
-                            $typeResultItemIDs = $resultItemIDs;
+                            $typeObjectIDs = $objectIDs;
                         } else {
                             $isUnionType = true;
                         }
 
-                        foreach ($typeResultItemIDs as $resultItem_id) {
+                        foreach ($typeObjectIDs as $object_id) {
                             if ($isUnionType) {
                                 list(
                                     $database_key,
-                                    $resultItem_id
-                                ) = UnionTypeHelpers::extractDBObjectTypeAndID($resultItem_id);
+                                    $object_id
+                                ) = UnionTypeHelpers::extractDBObjectTypeAndID($object_id);
                             }
                             // This value may be an array (eg: 'locations' => array(123, 343)) or a single value (eg: 'author' => 432)
                             // So convert to array, to deal with all cases
-                            $subcomponent_resultitem_ids = $sourcedb[$database_key][$resultItem_id][$subcomponent_data_field];
+                            $subcomponent_resultitem_ids = $sourcedb[$database_key][$object_id][$subcomponent_data_field];
                             $subcomponent_resultitem_ids = is_array($subcomponent_resultitem_ids) ? $subcomponent_resultitem_ids : array($subcomponent_resultitem_ids);
 
                             // Add these IDs to the sucomponent's dbobjectids

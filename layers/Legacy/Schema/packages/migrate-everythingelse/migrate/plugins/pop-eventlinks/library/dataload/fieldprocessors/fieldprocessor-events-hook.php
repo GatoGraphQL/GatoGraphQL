@@ -56,9 +56,9 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Events extends AbstractObjectTypeFi
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
@@ -66,7 +66,7 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Events extends AbstractObjectTypeFi
             'excerpt',
             'content',
         ])) {
-            $event = $resultItem;
+            $event = $object;
             return defined('POP_EVENTLINKS_CAT_EVENTLINKS') && POP_EVENTLINKS_CAT_EVENTLINKS && eventHasCategory($event, POP_EVENTLINKS_CAT_EVENTLINKS);
         }
         return true;
@@ -80,14 +80,14 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Events extends AbstractObjectTypeFi
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $event = $resultItem;
+        $event = $object;
         switch ($fieldName) {
             // Override fields for Links
             case 'excerpt':
@@ -96,7 +96,7 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Events extends AbstractObjectTypeFi
                 return PoP_ContentPostLinks_Utils::getLinkContent($event);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

@@ -78,7 +78,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -86,7 +86,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         array $options = []
     ): mixed {
         $categoryTypeAPI = $this->getCategoryTypeAPI();
-        $category = $resultItem;
+        $category = $object;
         switch ($fieldName) {
             case 'url':
                 return $categoryTypeAPI->getCategoryURL($objectTypeResolver->getID($category));
@@ -110,7 +110,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
                 return $categoryTypeAPI->getCategoryItemCount($category);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

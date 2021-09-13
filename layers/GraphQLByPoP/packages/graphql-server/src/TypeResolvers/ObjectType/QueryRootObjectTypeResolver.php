@@ -23,10 +23,10 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
         return $this->translationAPI->__('Query type, starting from which the query is executed. Available when \'nested mutations\' is disabled', 'graphql-server');
     }
 
-    public function getID(object $resultItem): string | int | null
+    public function getID(object $object): string | int | null
     {
         /** @var QueryRoot */
-        $queryRoot = $resultItem;
+        $queryRoot = $object;
         return $queryRoot->getID();
     }
 

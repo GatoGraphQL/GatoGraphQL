@@ -20,10 +20,10 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->translationAPI->__('A stance by the user (from among “positive”, “neutral” or “negative”) and why', 'stances');
     }
 
-    public function getID(object $resultItem): string | int | null
+    public function getID(object $object): string | int | null
     {
         $stanceTypeAPI = StanceTypeAPIFacade::getInstance();
-        return $stanceTypeAPI->getID($resultItem);
+        return $stanceTypeAPI->getID($object);
     }
 
     public function getRelationalTypeDataLoaderClass(): string

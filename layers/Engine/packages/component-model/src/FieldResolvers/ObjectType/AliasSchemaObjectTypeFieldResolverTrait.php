@@ -133,16 +133,16 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
-        return $aliasedObjectTypeFieldResolver->resolveCanProcessResultItem(
+        return $aliasedObjectTypeFieldResolver->resolveCanProcessObject(
             $objectTypeResolver,
-            $resultItem,
+            $object,
             $this->getAliasedFieldName($fieldName),
             $fieldArgs
         );
@@ -156,14 +156,14 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function getValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): ?array {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
         return $aliasedObjectTypeFieldResolver->getValidationErrorDescriptions(
             $objectTypeResolver,
-            $resultItem,
+            $object,
             $this->getAliasedFieldName($fieldName),
             $fieldArgs
         );
@@ -313,7 +313,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        $resultItem,
+        $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -323,7 +323,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
         return $aliasedObjectTypeFieldResolver->resolveValue(
             $objectTypeResolver,
-            $resultItem,
+            $object,
             $this->getAliasedFieldName($fieldName),
             $fieldArgs,
             $variables,

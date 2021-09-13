@@ -6,16 +6,16 @@ trait OrganizationObjectTypeFieldResolverTrait
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
-        $user = $resultItem;
+        $user = $object;
         if (!gdUreIsOrganization($objectTypeResolver->getID($user))) {
             return false;
         }
-        return parent::resolveCanProcessResultItem($objectTypeResolver, $resultItem, $fieldName, $fieldArgs);
+        return parent::resolveCanProcessObject($objectTypeResolver, $object, $fieldName, $fieldArgs);
     }
 }
