@@ -14,7 +14,7 @@ use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInFo
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInDirectiveResolver;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInForDirectivesDirectiveResolver;
 
-class NoCacheUserStateTypeResolverDecorator extends AbstractRelationalTypeResolverDecorator
+class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelationalTypeResolverDecorator
 {
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {

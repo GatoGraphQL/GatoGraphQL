@@ -86,7 +86,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     protected function calculateAllMandatoryDirectivesForFields(): array
     {
         $mandatoryDirectivesForFields = [];
-        $typeResolverDecorators = $this->getAllTypeResolverDecorators();
+        $typeResolverDecorators = $this->getAllRelationalTypeResolverDecorators();
         foreach ($typeResolverDecorators as $typeResolverDecorator) {
             // array_merge_recursive so that if 2 different decorators add a directive for the same field, the results are merged together, not override each other
             if ($typeResolverDecorator->enabled($this)) {

@@ -8,9 +8,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 
-abstract class AbstractConfigurableAccessControlForDirectivesInPublicSchemaTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
+abstract class AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
 {
-    use ConfigurableAccessControlForDirectivesTypeResolverDecoratorTrait;
+    use ConfigurableAccessControlForDirectivesRelationalTypeResolverDecoratorTrait;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,

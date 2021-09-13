@@ -6,7 +6,7 @@ namespace PoPSchema\UserStateAccessControl\ConditionalOnComponent\CacheControl\R
 
 use PoP\CacheControl\Helpers\CacheControlHelper;
 
-trait NoCacheConfigurableAccessControlTypeResolverDecoratorTrait
+trait NoCacheConfigurableAccessControlRelationalTypeResolverDecoratorTrait
 {
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {

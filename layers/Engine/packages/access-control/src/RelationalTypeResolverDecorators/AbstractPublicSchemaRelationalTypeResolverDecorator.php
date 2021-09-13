@@ -9,7 +9,7 @@ use PoP\AccessControl\Schema\SchemaModes;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\AbstractRelationalTypeResolverDecorator;
 
-abstract class AbstractPublicSchemaTypeResolverDecorator extends AbstractRelationalTypeResolverDecorator
+abstract class AbstractPublicSchemaRelationalTypeResolverDecorator extends AbstractRelationalTypeResolverDecorator
 {
     /**
      * Enable only for public schema

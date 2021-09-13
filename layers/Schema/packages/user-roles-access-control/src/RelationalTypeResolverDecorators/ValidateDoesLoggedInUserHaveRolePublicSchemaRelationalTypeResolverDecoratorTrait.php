@@ -10,7 +10,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
 
-trait ValidateDoesLoggedInUserHaveRolePublicSchemaTypeResolverDecoratorTrait
+trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait
 {
     /**
      * By default, only the admin can see the roles from the users

@@ -8,7 +8,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
-trait UserStateConfigurableAccessControlInPublicSchemaTypeResolverDecoratorTrait
+trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait
 {
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {

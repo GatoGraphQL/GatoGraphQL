@@ -10,7 +10,7 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-trait ConfigurableCacheControlTypeResolverDecoratorTrait
+trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
 {
     /**
      * By default, only the admin can see the roles from the users

@@ -728,7 +728,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function calculateAllPrecedingMandatoryDirectivesForDirectives(): array
     {
         $precedingMandatoryDirectivesForDirectives = [];
-        $typeResolverDecorators = $this->getAllTypeResolverDecorators();
+        $typeResolverDecorators = $this->getAllRelationalTypeResolverDecorators();
         foreach ($typeResolverDecorators as $typeResolverDecorator) {
             // array_merge_recursive so that if 2 different decorators add a directive for the same directive, the results are merged together, not override each other
             if ($typeResolverDecorator->enabled($this)) {
@@ -753,7 +753,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function calculateAllSucceedingMandatoryDirectivesForDirectives(): array
     {
         $succeedingMandatoryDirectivesForDirectives = [];
-        $typeResolverDecorators = $this->getAllTypeResolverDecorators();
+        $typeResolverDecorators = $this->getAllRelationalTypeResolverDecorators();
         foreach ($typeResolverDecorators as $typeResolverDecorator) {
             // array_merge_recursive so that if 2 different decorators add a directive for the same directive, the results are merged together, not override each other
             if ($typeResolverDecorator->enabled($this)) {
@@ -767,15 +767,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $succeedingMandatoryDirectivesForDirectives;
     }
 
-    protected function getAllTypeResolverDecorators(): array
+    protected function getAllRelationalTypeResolverDecorators(): array
     {
         if ($this->typeResolverDecorators === null) {
-            $this->typeResolverDecorators = $this->calculateAllTypeResolverDecorators();
+            $this->typeResolverDecorators = $this->calculateAllRelationalTypeResolverDecorators();
         }
         return $this->typeResolverDecorators;
     }
 
-    protected function calculateAllTypeResolverDecorators(): array
+    protected function calculateAllRelationalTypeResolverDecorators(): array
     {
         $typeResolverDecorators = [];
         /**
@@ -790,7 +790,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($classes as $class) {
             $typeResolverDecorators = array_merge(
                 $typeResolverDecorators,
-                $this->calculateAllTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass($class)
+                $this->calculateAllRelationalTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass($class)
             );
         }
 
@@ -800,7 +800,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @return RelationalTypeResolverDecoratorInterface[]
      */
-    protected function calculateAllTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass(string $class): array
+    protected function calculateAllRelationalTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass(string $class): array
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $typeResolverDecorators = [];
@@ -809,17 +809,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         do {
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
             /** @var RelationalTypeResolverDecoratorInterface[] */
-            $attachedTypeResolverDecorators = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS));
+            $attachedRelationalTypeResolverDecorators = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
                 fn (RelationalTypeResolverDecoratorInterface $typeResolverDecorator) => $typeResolverDecorator->getPriorityToAttachToClasses(),
-                $attachedTypeResolverDecorators
+                $attachedRelationalTypeResolverDecorators
             );
-            array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedTypeResolverDecorators);
+            array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedRelationalTypeResolverDecorators);
             // Add them to the results
             $typeResolverDecorators = array_merge(
                 $typeResolverDecorators,
-                $attachedTypeResolverDecorators
+                $attachedRelationalTypeResolverDecorators
             );
             // Continue iterating for the class parents
         } while ($class = get_parent_class($class));

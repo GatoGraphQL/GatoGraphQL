@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
 use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
-use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
+use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInForDirectivesDirectiveResolver;
 
-trait ValidateUserLoggedInForDirectivesTypeResolverDecoratorTrait
+trait ValidateUserNotLoggedInForDirectivesRelationalTypeResolverDecoratorTrait
 {
     protected function getRequiredEntryValue(): ?string
     {
-        return UserStates::IN;
+        return UserStates::OUT;
     }
     protected function getValidateUserStateDirectiveResolverClass(): string
     {
-        return ValidateIsUserLoggedInForDirectivesDirectiveResolver::class;
+        return ValidateIsUserNotLoggedInForDirectivesDirectiveResolver::class;
     }
 }
