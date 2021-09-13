@@ -146,34 +146,34 @@ class PoP_ServerSide_KernelHelpers
         $popManager->expandJSKeys($context);
 
         // DBObjectId could be passed as an array ('dbobjectids' is an array), so if it's the case, and it's empty, then nullify it
-        $dbObjectID = $options['hash']['dbObjectID'];
-        if (is_array($dbObjectID)) {
-            if (count($dbObjectID)) {
-                $dbObjectID = $dbObjectID[0];
+        $objectID = $options['hash']['objectID'];
+        if (is_array($objectID)) {
+            if (count($objectID)) {
+                $objectID = $objectID[0];
             } else {
-                $dbObjectID = null;
+                $objectID = null;
                 $dbObject = null;
                 $extend['dbObject'] = $dbObject;
             }
         }
 
-        if (isset($options['hash']['dbKey']) && $dbObjectID) {
+        if (isset($options['hash']['dbKey']) && $objectID) {
             $dbKey = $options['hash']['dbKey'];
-            $dbObject = $popManager->getDBObject($domain, $dbKey, $dbObjectID);
+            $dbObject = $popManager->getDBObject($domain, $dbKey, $objectID);
             $extend['dbObject'] = $dbObject;
             $extend['dbObjectDBKey'] = $dbKey;
             $extend['dbKey'] = $dbKey;
-            $extend['objectIDs'] = array($dbObjectID);
+            $extend['objectIDs'] = array($objectID);
         } elseif (isset($options['hash']['dbKey']) && $options['hash']['objectIDs']) {
             $extend['dbKey'] = $options['hash']['dbKey'];
             $extend['objectIDs'] = $options['hash']['objectIDs'];
-        } elseif (isset($options['hash']['subcomponent']) && $dbObjectID) {
+        } elseif (isset($options['hash']['subcomponent']) && $objectID) {
             $dbKey = $bs['dbkeys'][$options['hash']['subcomponent']];
-            $dbObject = $popManager->getDBObject($domain, $dbKey, $dbObjectID);
+            $dbObject = $popManager->getDBObject($domain, $dbKey, $objectID);
             $extend['dbObject'] = $dbObject;
             $extend['dbObjectDBKey'] = $dbKey;
             $extend['dbKey'] = $dbKey;
-            $extend['objectIDs'] = array($dbObjectID);
+            $extend['objectIDs'] = array($objectID);
         } elseif (isset($options['hash']['subcomponent']) && $options['hash']['objectIDs']) {
             $dbKey = $bs['dbkeys'][$options['hash']['subcomponent']];
             $extend['dbKey'] = $dbKey;
@@ -181,7 +181,7 @@ class PoP_ServerSide_KernelHelpers
         } elseif (isset($options['hash']['objectIDs'])) {
             $extend['objectIDs'] = $options['hash']['objectIDs'];
         } elseif (isset($options['hash']['dbKey'])) {
-            // If only the dbKey has value, it means the other value passes (dbObjectID or objectIDs) is null
+            // If only the dbKey has value, it means the other value passes (objectID or objectIDs) is null
             // So then put everything to null
             $extend['dbKey'] = $options['hash']['dbKey'];
             $extend['dbObject'] = null;
