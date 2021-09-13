@@ -10,12 +10,12 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
 {
     use QueryableFieldResolverTrait;
 
-    public function getFieldDataFilteringModule(string $fieldName): ?array
+    public function getFieldFilterInputContainerModule(string $fieldName): ?array
     {
         /** @var QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface */
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName);
+            return $schemaDefinitionResolver->getFieldFilterInputContainerModule($fieldName);
         }
         return null;
     }
@@ -31,7 +31,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
 
     protected function getFieldArgumentsSchemaDefinitions(string $fieldName): array
     {
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
             $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
             return $this->getSchemaFieldArgsWithCustomFilterInputData(
                 $schemaFieldArgs,

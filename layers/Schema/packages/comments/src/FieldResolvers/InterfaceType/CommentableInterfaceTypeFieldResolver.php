@@ -79,7 +79,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }
 
-    public function getFieldDataFilteringModule(string $fieldName): ?array
+    public function getFieldFilterInputContainerModule(string $fieldName): ?array
     {
         return match ($fieldName) {
             'comments' => [
@@ -98,7 +98,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                 CommentFilterInputContainerModuleProcessor::class,
                 CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT
             ],
-            default => parent::getFieldDataFilteringModule($fieldName),
+            default => parent::getFieldFilterInputContainerModule($fieldName),
         };
     }
 
