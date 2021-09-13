@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -20,7 +20,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleP
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\Tags\ComponentConfiguration;
 
-class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
+class RootPostTagFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
 

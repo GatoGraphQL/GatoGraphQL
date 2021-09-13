@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\GenericCustomPosts\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -25,7 +25,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
  *
  * @author Leonardo Losoviz <leo@getpop.org>
  */
-class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
+class RootGenericCustomPostFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
 

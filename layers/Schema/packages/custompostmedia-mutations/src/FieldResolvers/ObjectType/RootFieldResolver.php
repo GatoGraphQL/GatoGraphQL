@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -22,7 +22,7 @@ use PoPSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCusto
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
 
-class RootFieldResolver extends AbstractQueryableFieldResolver
+class RootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

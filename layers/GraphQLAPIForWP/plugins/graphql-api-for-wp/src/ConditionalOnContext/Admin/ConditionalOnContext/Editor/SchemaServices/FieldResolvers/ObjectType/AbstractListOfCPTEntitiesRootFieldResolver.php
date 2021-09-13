@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor\SchemaServices\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -18,7 +18,7 @@ use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
 /**
  * FieldResolver for the Custom Post Types from this plugin
  */
-abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQueryableFieldResolver
+abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     /**
      * @return string[]

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Media\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -19,7 +19,7 @@ use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use WP_Post;
 
-class MediaFieldResolver extends AbstractQueryableFieldResolver
+class MediaFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

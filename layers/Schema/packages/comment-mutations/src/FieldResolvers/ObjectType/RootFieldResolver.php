@@ -8,11 +8,11 @@ use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 
-class RootFieldResolver extends AbstractQueryableFieldResolver
+class RootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

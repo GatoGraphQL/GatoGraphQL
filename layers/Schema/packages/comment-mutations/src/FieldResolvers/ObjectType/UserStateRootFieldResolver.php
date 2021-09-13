@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -29,7 +29,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleP
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateFieldResolverTrait;
 
-class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
+class UserStateRootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use UserStateFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;

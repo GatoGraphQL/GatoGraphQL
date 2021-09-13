@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use WP_Post;
 
-class CustomPostFieldResolver extends AbstractQueryableFieldResolver
+class CustomPostFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

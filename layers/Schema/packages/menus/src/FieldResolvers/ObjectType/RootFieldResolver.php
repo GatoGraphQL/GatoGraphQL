@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -15,7 +15,7 @@ use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-class RootFieldResolver extends AbstractQueryableFieldResolver
+class RootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

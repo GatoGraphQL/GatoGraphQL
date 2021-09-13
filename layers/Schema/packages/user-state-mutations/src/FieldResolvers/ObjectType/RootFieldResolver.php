@@ -8,12 +8,12 @@ use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LogoutMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 
-class RootFieldResolver extends AbstractQueryableFieldResolver
+class RootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

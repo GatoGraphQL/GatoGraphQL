@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -19,7 +19,7 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolve
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-class CustomPostFieldResolver extends AbstractQueryableFieldResolver
+class CustomPostFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,
