@@ -29,20 +29,20 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
      */
     protected array $logEntries = [];
 
-    public function addObjectWarnings(array $objectIDWarnings)
+    public function addObjectWarnings(array $objectWarnings)
     {
-        foreach ($objectIDWarnings as $objectID => $objectWarnings) {
-            $this->objectIDWarnings[$objectID] = array_merge(
-                $this->objectIDWarnings[$objectID] ?? [],
+        foreach ($objectWarnings as $objectID => $objectWarnings) {
+            $this->objectWarnings[$objectID] = array_merge(
+                $this->objectWarnings[$objectID] ?? [],
                 $objectWarnings
             );
         }
     }
-    public function addDBDeprecations(array $objectIDDeprecations)
+    public function addDBDeprecations(array $objectDeprecations)
     {
-        foreach ($objectIDDeprecations as $objectID => $objectDeprecations) {
-            $this->objectIDDeprecations[$objectID] = array_merge(
-                $this->objectIDDeprecations[$objectID] ?? [],
+        foreach ($objectDeprecations as $objectID => $objectDeprecations) {
+            $this->objectDeprecations[$objectID] = array_merge(
+                $this->objectDeprecations[$objectID] ?? [],
                 $objectDeprecations
             );
         }
