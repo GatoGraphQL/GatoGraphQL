@@ -67,7 +67,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
-        array &$dbNotices,
+        array &$objectNotices,
         array &$dbTraces,
         array &$schemaErrors,
         array &$schemaWarnings,

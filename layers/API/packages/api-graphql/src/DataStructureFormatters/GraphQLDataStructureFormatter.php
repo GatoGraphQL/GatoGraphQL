@@ -81,8 +81,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($this->addTopLevelExtensionsEntryToResponse()) {
             // Add notices
             if (ComponentConfiguration::enableProactiveFeedbackNotices()) {
-                if ($data['dbNotices'] ?? null) {
-                    $notices = $this->reformatDBEntries($data['dbNotices']);
+                if ($data['objectNotices'] ?? null) {
+                    $notices = $this->reformatDBEntries($data['objectNotices']);
                 }
                 if ($data['schemaNotices'] ?? null) {
                     $notices = array_merge(

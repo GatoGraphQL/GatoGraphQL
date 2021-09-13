@@ -80,7 +80,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
-        array &$dbNotices,
+        array &$objectNotices,
         array &$dbTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
@@ -241,7 +241,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 $nestedIDObjectErrors,
                 $objectWarnings,
                 $objectDeprecations,
-                $dbNotices,
+                $objectNotices,
                 $dbTraces,
                 $nestedSchemaErrors,
                 $schemaWarnings,
@@ -334,7 +334,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                             continue;
                         }
                         // Place the result for the array in the original property
-                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $dbNotices, $dbTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
+                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $dbTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
                     }
                 }
             }
@@ -349,7 +349,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
-        array &$dbNotices,
+        array &$objectNotices,
         array &$dbTraces,
         $id,
         string $fieldOutputKey,

@@ -59,7 +59,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
         array &$objectErrors,
         array &$objectWarnings,
         array &$objectDeprecations,
-        array &$dbNotices,
+        array &$objectNotices,
         array &$dbTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
@@ -103,7 +103,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
                 } elseif ($type == FieldFeedbackTypeEnum::DEPRECATION) {
                     $objectDeprecations[(string)$id][] = $feedbackMessageEntry;
                 } elseif ($type == FieldFeedbackTypeEnum::NOTICE) {
-                    $dbNotices[(string)$id][] = $feedbackMessageEntry;
+                    $objectNotices[(string)$id][] = $feedbackMessageEntry;
                 }
             }
         } elseif ($target == FieldFeedbackTargetEnum::SCHEMA) {
