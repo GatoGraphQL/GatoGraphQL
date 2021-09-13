@@ -13,9 +13,6 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class AbstractRelationalTypeResolverDecorator implements RelationalTypeResolverDecoratorInterface
 {
-    /**
-     * This class is attached to a TypeResolver
-     */
     use AttachableExtensionTrait;
 
     public function __construct(
