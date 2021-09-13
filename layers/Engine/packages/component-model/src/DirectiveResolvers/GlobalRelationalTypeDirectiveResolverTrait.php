@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 
-trait GlobalRelationalTypeDirectiveResolverTrait
+trait GlobalDirectiveResolverTrait
 {
     use GlobalDirectiveResolverTrait;
 

@@ -6,5 +6,5 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 abstract class AbstractGlobalDirectiveResolver extends AbstractDirectiveResolver
 {
-    use GlobalRelationalTypeDirectiveResolverTrait;
+    use GlobalDirectiveResolverTrait;
 }
