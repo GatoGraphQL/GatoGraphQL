@@ -66,7 +66,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     protected function resolveValueForObjects(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
     {
-        $enqueueFillingResultItemsFromIDs = [];
+        $enqueueFillingObjectsFromIDs = [];
         foreach (array_keys($idsDataFields) as $id) {
             // Obtain its ID and the required data-fields for that ID
             $object = $resultIDItems[$id];
@@ -101,13 +101,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                     $conditionSatisfied = false;
                 }
                 if ($conditionSatisfied) {
-                    $enqueueFillingResultItemsFromIDs[(string)$id]['direct'] = array_unique(array_merge(
-                        $enqueueFillingResultItemsFromIDs[(string)$id]['direct'] ?? [],
+                    $enqueueFillingObjectsFromIDs[(string)$id]['direct'] = array_unique(array_merge(
+                        $enqueueFillingObjectsFromIDs[(string)$id]['direct'] ?? [],
                         array_keys($conditionalDataFields)
                     ));
                     foreach ($conditionalDataFields as $nextConditionDataField => $nextConditionalDataFields) {
-                        $enqueueFillingResultItemsFromIDs[(string)$id]['conditional'][$nextConditionDataField] = array_merge_recursive(
-                            $enqueueFillingResultItemsFromIDs[(string)$id]['conditional'][$nextConditionDataField] ?? [],
+                        $enqueueFillingObjectsFromIDs[(string)$id]['conditional'][$nextConditionDataField] = array_merge_recursive(
+                            $enqueueFillingObjectsFromIDs[(string)$id]['conditional'][$nextConditionDataField] ?? [],
                             $nextConditionalDataFields
                         );
                     }
@@ -115,8 +115,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             }
         }
         // Enqueue items for the next iteration
-        if ($enqueueFillingResultItemsFromIDs) {
-            $relationalTypeResolver->enqueueFillingResultItemsFromIDs($enqueueFillingResultItemsFromIDs);
+        if ($enqueueFillingObjectsFromIDs) {
+            $relationalTypeResolver->enqueueFillingObjectsFromIDs($enqueueFillingObjectsFromIDs);
         }
     }
 

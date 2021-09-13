@@ -132,7 +132,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
      */
-    final public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void
+    final public function enqueueFillingObjectsFromIDs(array $ids_data_fields): void
     {
         /**
          * This section is different from parent's implementation

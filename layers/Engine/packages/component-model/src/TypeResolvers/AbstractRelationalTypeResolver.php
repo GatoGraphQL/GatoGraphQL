@@ -648,7 +648,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
 
         // Enqueue the items
-        $this->enqueueFillingResultItemsFromIDs($ids_data_fields);
+        $this->enqueueFillingObjectsFromIDs($ids_data_fields);
 
         // Process them
         $this->processFillingResultItemsFromIDs(

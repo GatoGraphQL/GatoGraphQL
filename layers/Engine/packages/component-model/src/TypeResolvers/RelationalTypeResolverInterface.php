@@ -30,7 +30,7 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
      * @return string|int|array<string|int>
      */
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array;
-    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void;
+    public function enqueueFillingObjectsFromIDs(array $ids_data_fields): void;
     public function fillResultItems(
         array $ids_data_fields,
         array &$unionDBKeyIDs,

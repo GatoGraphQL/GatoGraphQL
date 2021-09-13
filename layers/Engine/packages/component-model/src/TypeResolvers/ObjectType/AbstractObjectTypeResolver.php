@@ -65,7 +65,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
      */
-    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void
+    public function enqueueFillingObjectsFromIDs(array $ids_data_fields): void
     {
         $mandatoryDirectivesForFields = $this->getAllMandatoryDirectivesForFields();
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
