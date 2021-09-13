@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\UserState\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
-use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
+use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalFieldResolver;
 use PoPSchema\UserState\State\ApplicationStateUtils;
 
 class VarsHookSet extends AbstractHookSet
