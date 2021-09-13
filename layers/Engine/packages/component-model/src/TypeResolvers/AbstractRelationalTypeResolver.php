@@ -617,12 +617,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $resultIDItems[$resultItemID] = $object;
         }
         // Show an error for all resultItems that couldn't be processed
-        $resolvedResultItemIDs = $this->getIDsToQuery($resultIDItems);
-        $unresolvedResultItemIDs = [];
-        foreach (array_diff($ids, $resolvedResultItemIDs) as $unresolvedResultItemID) {
-            $error = $this->getUnresolvedObjectIDError($unresolvedResultItemID);
+        $resolvedObjectIDs = $this->getIDsToQuery($resultIDItems);
+        $unresolvedObjectIDs = [];
+        foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
+            $error = $this->getUnresolvedObjectIDError($unresolvedObjectID);
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
-            $failedFields = $ids_data_fields[$unresolvedResultItemID]['direct'] ?? [];
+            $failedFields = $ids_data_fields[$unresolvedObjectID]['direct'] ?? [];
             // Add in $schemaErrors instead of $dbErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
                 $schemaErrors[] = [
@@ -632,17 +632,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             // Indicate that this ID must be removed from the results
-            $unresolvedResultItemIDs[] = $unresolvedResultItemID;
+            $unresolvedObjectIDs[] = $unresolvedObjectID;
         }
         // Remove all the IDs that failed from the elements to process, so it doesn't show a "Corrupted Data" error
         // Because these are IDs (eg: 223) and $ids_data_fields contains qualified or typed IDs (eg: post/223), we must convert them first
-        if ($unresolvedResultItemIDs) {
+        if ($unresolvedObjectIDs) {
             if ($this->qualifyDBObjectIDsToRemoveFromErrors()) {
-                $unresolvedResultItemIDs = $this->getQualifiedDBObjectIDOrIDs($unresolvedResultItemIDs);
+                $unresolvedObjectIDs = $this->getQualifiedDBObjectIDOrIDs($unresolvedObjectIDs);
             }
             $ids_data_fields = array_filter(
                 $ids_data_fields,
-                fn (int | string $id) => !in_array($id, $unresolvedResultItemIDs),
+                fn (int | string $id) => !in_array($id, $unresolvedObjectIDs),
                 ARRAY_FILTER_USE_KEY
             );
         }
