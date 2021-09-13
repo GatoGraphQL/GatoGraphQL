@@ -4,16 +4,29 @@ declare(strict_types=1);
 
 namespace PoP\API\DirectiveResolvers;
 
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 
 class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
+    /**
+     * Only the ObjectTypeResolver can hold data, so that it resolve this functionality.
+     * Since the UnionTypeResolver cannot, do not process in that case.
+     */
+    public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array
+    {
+        return [
+            AbstractObjectTypeResolver::class,
+        ];
+    }
+
     public function getDirectiveName(): string
     {
         return 'copyRelationalResults';
@@ -126,12 +139,15 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
+        /** @var ObjectTypeResolverInterface */
+        $objectTypeResolver = $relationalTypeResolver;
+
         $copyFromFields = $this->directiveArgsForSchema['copyFromFields'];
         $copyToFields = $this->directiveArgsForSchema['copyToFields'] ?? $copyFromFields;
         $keepRelationalIDs = $this->directiveArgsForSchema['keepRelationalIDs'];
 
         // From the typeResolver, obtain under what type the data for the current object is stored
-        $dbKey = $relationalTypeResolver->getTypeOutputName();
+        $dbKey = $objectTypeResolver->getTypeOutputName();
 
         // Copy the data from each of the relational object fields to the current object
         foreach ($idsDataFields as $id => $dataFields) {
@@ -157,7 +173,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                 $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
 
                 // Make sure the field is relational, and not a scalar or enum
-                $fieldTypeResolverClass = $relationalTypeResolver->getFieldTypeResolverClass($relationalField);
+                $fieldTypeResolverClass = $objectTypeResolver->getFieldTypeResolverClass($relationalField);
                 if (!SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],

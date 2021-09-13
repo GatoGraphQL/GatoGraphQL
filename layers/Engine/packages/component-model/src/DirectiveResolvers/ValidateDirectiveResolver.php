@@ -7,8 +7,10 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -53,22 +55,33 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
 
     protected function validateField(RelationalTypeResolverInterface $relationalTypeResolver, string $field, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables): bool
     {
+        /**
+         * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
+         * (that depends on each resultItem), it can't resolve this functionality
+         */
+        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
+            return true;
+        }
+
+        /** @var ObjectTypeResolverInterface */
+        $objectTypeResolver = $relationalTypeResolver;
+
         // Check for errors first, warnings and deprecations then
         $success = true;
-        if ($schemaValidationErrors = $relationalTypeResolver->resolveSchemaValidationErrorDescriptions($field, $variables)) {
+        if ($schemaValidationErrors = $objectTypeResolver->resolveSchemaValidationErrorDescriptions($field, $variables)) {
             $schemaErrors = array_merge(
                 $schemaErrors,
                 $schemaValidationErrors
             );
             $success = false;
         }
-        if ($schemaValidationWarnings = $relationalTypeResolver->resolveSchemaValidationWarningDescriptions($field, $variables)) {
+        if ($schemaValidationWarnings = $objectTypeResolver->resolveSchemaValidationWarningDescriptions($field, $variables)) {
             $schemaWarnings = array_merge(
                 $schemaWarnings,
                 $schemaValidationWarnings
             );
         }
-        if ($schemaValidationDeprecations = $relationalTypeResolver->resolveSchemaDeprecationDescriptions($field, $variables)) {
+        if ($schemaValidationDeprecations = $objectTypeResolver->resolveSchemaDeprecationDescriptions($field, $variables)) {
             $schemaDeprecations = array_merge(
                 $schemaDeprecations,
                 $schemaValidationDeprecations
