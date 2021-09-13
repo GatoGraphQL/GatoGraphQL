@@ -62,9 +62,9 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
     }
     public function retrieveAndClearObjectDeprecations(string | int $objectID): ?array
     {
-        $objectDBDeprecations = $this->objectDeprecations[$objectID] ?? null;
+        $objectDeprecations = $this->objectDeprecations[$objectID] ?? null;
         unset($this->objectDeprecations[$objectID]);
-        return $objectDBDeprecations;
+        return $objectDeprecations;
     }
 
     public function addSchemaError(string $dbKey, string $field, string $error)
