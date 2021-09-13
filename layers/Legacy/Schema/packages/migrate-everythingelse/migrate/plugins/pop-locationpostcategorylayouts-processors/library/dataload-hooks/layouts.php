@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostTypeResolver;
+use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostObjectTypeResolver;
 use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 class PoP_LocationPostCategoryLayouts_LayoutDataloadHooks
@@ -34,7 +34,7 @@ class PoP_LocationPostCategoryLayouts_LayoutDataloadHooks
                 // Priority: place it before the 'postType' layout key
                 $instanceManager = InstanceManagerFacade::getInstance();
                 /** @var RelationalTypeResolverInterface */
-                $locationPostTypeResolver = $instanceManager->getInstance(LocationPostTypeResolver::class);
+                $locationPostTypeResolver = $instanceManager->getInstance(LocationPostObjectTypeResolver::class);
                 array_unshift($keys, $locationPostTypeResolver->getTypeName() . '-map');
             }
         }

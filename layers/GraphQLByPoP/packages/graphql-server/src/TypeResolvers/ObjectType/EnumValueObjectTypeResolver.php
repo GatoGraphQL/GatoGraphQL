@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractIntrospectionTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractIntrospectionObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaDefinitionReferenceTypeDataLoader;
 
-class EnumValueTypeResolver extends AbstractIntrospectionTypeResolver
+class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
     public function getTypeName(): string
     {

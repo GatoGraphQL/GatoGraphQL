@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaTypeDataLoader;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractIntrospectionTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractIntrospectionObjectTypeResolver;
 
-class SchemaTypeResolver extends AbstractIntrospectionTypeResolver
+class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
     public function getTypeName(): string
     {

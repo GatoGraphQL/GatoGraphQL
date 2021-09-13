@@ -6,11 +6,11 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 
 /**
@@ -22,7 +22,7 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootTypeResolver::class,
+            RootObjectTypeResolver::class,
         ];
     }
 
@@ -61,9 +61,9 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     {
         switch ($fieldName) {
             case 'queryRoot':
-                return QueryRootTypeResolver::class;
+                return QueryRootObjectTypeResolver::class;
             case 'mutationRoot':
-                return MutationRootTypeResolver::class;
+                return MutationRootObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

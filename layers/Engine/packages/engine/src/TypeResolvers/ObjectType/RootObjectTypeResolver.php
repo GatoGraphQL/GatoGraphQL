@@ -11,7 +11,7 @@ use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\RelationalTypeDataLoaders\ObjectType\RootTypeDataLoader;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 
-class RootTypeResolver extends AbstractObjectTypeResolver
+class RootObjectTypeResolver extends AbstractObjectTypeResolver
 {
     use ReservedNameTypeResolverTrait;
 

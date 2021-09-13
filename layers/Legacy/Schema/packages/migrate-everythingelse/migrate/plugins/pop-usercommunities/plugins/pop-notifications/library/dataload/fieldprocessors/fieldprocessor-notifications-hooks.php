@@ -12,7 +12,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
 use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
 use PoPSchema\EverythingElse\Enums\MemberTagEnum;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends AbstractObjectTypeFieldResolver
@@ -22,7 +22,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            NotificationTypeResolver::class,
+            NotificationObjectTypeResolver::class,
         ];
     }
 

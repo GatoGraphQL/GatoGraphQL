@@ -4,7 +4,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldResolver
 {
@@ -13,7 +13,7 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            UserTypeResolver::class,
+            UserObjectTypeResolver::class,
         ];
     }
 
@@ -83,7 +83,7 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
     {
         switch ($fieldName) {
             case 'members':
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);

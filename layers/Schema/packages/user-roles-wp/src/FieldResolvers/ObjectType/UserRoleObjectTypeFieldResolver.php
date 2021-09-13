@@ -8,14 +8,14 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractReflectionPropertyObjec
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleTypeResolver;
+use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 
 class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            UserRoleTypeResolver::class,
+            UserRoleObjectTypeResolver::class,
         ];
     }
 

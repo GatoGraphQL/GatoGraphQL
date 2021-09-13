@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -17,7 +17,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            SchemaTypeResolver::class,
+            SchemaObjectTypeResolver::class,
         ];
     }
 
@@ -122,9 +122,9 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'subscriptionType':
             case 'types':
             case 'type':
-                return TypeTypeResolver::class;
+                return TypeObjectTypeResolver::class;
             case 'directives':
-                return DirectiveTypeResolver::class;
+                return DirectiveObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuItemTypeDataLoader;
 
-class MenuItemTypeResolver extends AbstractObjectTypeResolver
+class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {

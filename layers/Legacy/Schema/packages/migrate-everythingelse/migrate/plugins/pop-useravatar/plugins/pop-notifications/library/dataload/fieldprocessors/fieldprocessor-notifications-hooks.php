@@ -3,7 +3,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends AbstractObjectTypeFieldResolver
@@ -11,7 +11,7 @@ class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends A
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            NotificationTypeResolver::class,
+            NotificationObjectTypeResolver::class,
         ];
     }
 

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -18,7 +18,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            FieldTypeResolver::class,
+            FieldObjectTypeResolver::class,
         ];
     }
 
@@ -118,9 +118,9 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'args':
-                return InputValueTypeResolver::class;
+                return InputValueObjectTypeResolver::class;
             case 'type':
-                return TypeTypeResolver::class;
+                return TypeObjectTypeResolver::class;
         }
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

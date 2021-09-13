@@ -6,7 +6,7 @@ namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnCompon
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 
@@ -25,7 +25,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
-                return CustomPostTypeResolver::class;
+                return CustomPostObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

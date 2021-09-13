@@ -7,7 +7,7 @@ namespace PoPSchema\Posts\ConditionalOnComponent\API\ModuleProcessors;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
@@ -49,7 +49,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT:
-                return PostTypeResolver::class;
+                return PostObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

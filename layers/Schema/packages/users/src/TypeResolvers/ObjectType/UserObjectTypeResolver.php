@@ -16,7 +16,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\Users\RelationalTypeDataLoaders\ObjectType\UserTypeDataLoader;
 
-class UserTypeResolver extends AbstractObjectTypeResolver
+class UserObjectTypeResolver extends AbstractObjectTypeResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

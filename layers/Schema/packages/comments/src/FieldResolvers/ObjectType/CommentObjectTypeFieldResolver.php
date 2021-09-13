@@ -22,7 +22,7 @@ use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Enums\CommentStatusEnum;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -61,7 +61,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            CommentTypeResolver::class,
+            CommentObjectTypeResolver::class,
         ];
     }
 
@@ -340,7 +340,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             case 'parent':
             case 'responses':
             case 'responsesForAdmin':
-                return CommentTypeResolver::class;
+                return CommentObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

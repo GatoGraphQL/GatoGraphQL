@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPosts\TypeResolvers\ObjectType;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 
-abstract class AbstractCustomPostTypeResolver extends AbstractObjectTypeResolver
+abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeResolver
 {
     public function getSchemaTypeDescription(): ?string
     {

@@ -7,7 +7,7 @@ namespace PoPSchema\Notifications\TypeResolvers\ObjectType;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType\NotificationTypeDataLoader;
 
-class NotificationTypeResolver extends AbstractObjectTypeResolver
+class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {

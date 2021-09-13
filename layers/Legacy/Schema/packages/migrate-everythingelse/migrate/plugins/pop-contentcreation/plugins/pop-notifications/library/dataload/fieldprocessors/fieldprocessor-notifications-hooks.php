@@ -5,7 +5,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends AbstractObjectTypeFieldResolver
@@ -13,7 +13,7 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            NotificationTypeResolver::class,
+            NotificationObjectTypeResolver::class,
         ];
     }
 

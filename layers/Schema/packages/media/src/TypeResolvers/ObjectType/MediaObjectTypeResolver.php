@@ -16,7 +16,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\RelationalTypeDataLoaders\ObjectType\MediaTypeDataLoader;
 
-class MediaTypeResolver extends AbstractObjectTypeResolver
+class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

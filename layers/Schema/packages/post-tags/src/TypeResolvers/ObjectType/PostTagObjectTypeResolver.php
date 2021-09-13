@@ -6,9 +6,9 @@ namespace PoPSchema\PostTags\TypeResolvers\ObjectType;
 
 use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
 use PoPSchema\PostTags\RelationalTypeDataLoaders\ObjectType\PostTagTypeDataLoader;
-use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagTypeResolver;
+use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
 
-class PostTagTypeResolver extends AbstractTagTypeResolver
+class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 {
     use PostTagAPISatisfiedContractTrait;
 

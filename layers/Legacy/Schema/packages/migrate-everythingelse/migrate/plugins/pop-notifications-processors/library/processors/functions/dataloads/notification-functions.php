@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 use PoPSitesWassup\NotificationMutations\MutationResolverBridges\MarkAsReadNotificationMutationResolverBridge;
 use PoPSitesWassup\NotificationMutations\MutationResolverBridges\MarkAsUnreadNotificationMutationResolverBridge;
@@ -71,7 +71,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
             case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
-                return NotificationTypeResolver::class;
+                return NotificationObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

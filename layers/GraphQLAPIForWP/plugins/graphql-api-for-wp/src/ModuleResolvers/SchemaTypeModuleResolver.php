@@ -15,19 +15,19 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoPSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostTypeResolver;
-use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
-use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
-use PoPSchema\Pages\TypeResolvers\ObjectType\PageTypeResolver;
-use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryTypeResolver;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
+use PoPSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
+use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
+use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
+use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
-use PoPSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarTypeResolver;
-use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
+use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class SchemaTypeModuleResolver extends AbstractModuleResolver
 {
@@ -80,18 +80,18 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         TranslationAPIInterface $translationAPI,
-        protected ?CommentTypeResolver $commentTypeResolver,
+        protected ?CommentObjectTypeResolver $commentTypeResolver,
         protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        protected ?GenericCustomPostTypeResolver $genericCustomPostTypeResolver,
-        protected ?MediaTypeResolver $mediaTypeResolver,
-        protected ?PageTypeResolver $pageTypeResolver,
-        protected ?PostTagTypeResolver $postTagTypeResolver,
-        protected ?PostCategoryTypeResolver $postCategoryTypeResolver,
-        protected ?MenuTypeResolver $menuTypeResolver,
-        protected ?PostTypeResolver $postTypeResolver,
-        protected ?UserRoleTypeResolver $userRoleTypeResolver,
-        protected ?UserAvatarTypeResolver $userAvatarTypeResolver,
-        protected ?UserTypeResolver $userTypeResolver,
+        protected ?GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver,
+        protected ?MediaObjectTypeResolver $mediaTypeResolver,
+        protected ?PageObjectTypeResolver $pageTypeResolver,
+        protected ?PostTagObjectTypeResolver $postTagTypeResolver,
+        protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,
+        protected ?MenuObjectTypeResolver $menuTypeResolver,
+        protected ?PostObjectTypeResolver $postTypeResolver,
+        protected ?UserRoleObjectTypeResolver $userRoleTypeResolver,
+        protected ?UserAvatarObjectTypeResolver $userAvatarTypeResolver,
+        protected ?UserObjectTypeResolver $userTypeResolver,
         protected ?CustomPostTypeRegistryInterface $customPostTypeRegistry
     ) {
         parent::__construct(
@@ -203,27 +203,27 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
          * Inner properties will not be null. Assign them their type,
          * to avoid PHPStan errors
          */
-        /** @var CommentTypeResolver */
+        /** @var CommentObjectTypeResolver */
         $commentTypeResolver = $this->commentTypeResolver;
-        /** @var GenericCustomPostTypeResolver */
+        /** @var GenericCustomPostObjectTypeResolver */
         $genericCustomPostTypeResolver = $this->genericCustomPostTypeResolver;
-        /** @var MediaTypeResolver */
+        /** @var MediaObjectTypeResolver */
         $mediaTypeResolver = $this->mediaTypeResolver;
-        /** @var PageTypeResolver */
+        /** @var PageObjectTypeResolver */
         $pageTypeResolver = $this->pageTypeResolver;
-        /** @var PostTagTypeResolver */
+        /** @var PostTagObjectTypeResolver */
         $postTagTypeResolver = $this->postTagTypeResolver;
-        /** @var PostCategoryTypeResolver */
+        /** @var PostCategoryObjectTypeResolver */
         $postCategoryTypeResolver = $this->postCategoryTypeResolver;
-        /** @var MenuTypeResolver */
+        /** @var MenuObjectTypeResolver */
         $menuTypeResolver = $this->menuTypeResolver;
-        /** @var PostTypeResolver */
+        /** @var PostObjectTypeResolver */
         $postTypeResolver = $this->postTypeResolver;
-        /** @var UserRoleTypeResolver */
+        /** @var UserRoleObjectTypeResolver */
         $userRoleTypeResolver = $this->userRoleTypeResolver;
-        /** @var UserAvatarTypeResolver */
+        /** @var UserAvatarObjectTypeResolver */
         $userAvatarTypeResolver = $this->userAvatarTypeResolver;
-        /** @var UserTypeResolver */
+        /** @var UserObjectTypeResolver */
         $userTypeResolver = $this->userTypeResolver;
         switch ($module) {
             case self::SCHEMA_ADMIN_FIELDS:
@@ -467,15 +467,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
          */
         /** @var CustomPostUnionTypeResolver */
         $customPostUnionTypeResolver = $this->customPostUnionTypeResolver;
-        /** @var GenericCustomPostTypeResolver */
+        /** @var GenericCustomPostObjectTypeResolver */
         $genericCustomPostTypeResolver = $this->genericCustomPostTypeResolver;
-        /** @var PageTypeResolver */
+        /** @var PageObjectTypeResolver */
         $pageTypeResolver = $this->pageTypeResolver;
-        /** @var PostTypeResolver */
+        /** @var PostObjectTypeResolver */
         $postTypeResolver = $this->postTypeResolver;
         /** @var CustomPostTypeRegistryInterface */
         $customPostTypeRegistry = $this->customPostTypeRegistry;
-        /** @var UserTypeResolver */
+        /** @var UserObjectTypeResolver */
         $userTypeResolver = $this->userTypeResolver;
 
         $moduleSettings = parent::getSettings($module);

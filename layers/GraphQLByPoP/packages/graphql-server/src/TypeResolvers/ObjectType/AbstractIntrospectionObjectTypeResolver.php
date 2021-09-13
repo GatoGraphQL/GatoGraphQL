@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 
-abstract class AbstractIntrospectionTypeResolver extends AbstractObjectTypeResolver
+abstract class AbstractIntrospectionObjectTypeResolver extends AbstractObjectTypeResolver
 {
     use ReservedNameTypeResolverTrait;
 }

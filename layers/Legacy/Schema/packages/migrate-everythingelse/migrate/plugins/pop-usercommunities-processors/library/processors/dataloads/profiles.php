@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\EditMembershipMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\UpdateMyCommunitiesMutationResolverBridge;
@@ -165,7 +165,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

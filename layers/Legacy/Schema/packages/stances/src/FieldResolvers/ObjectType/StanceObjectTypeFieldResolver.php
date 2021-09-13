@@ -12,7 +12,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Stances\TypeResolvers\ObjectType\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
@@ -21,7 +21,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            StanceTypeResolver::class,
+            StanceObjectTypeResolver::class,
         ];
     }
 

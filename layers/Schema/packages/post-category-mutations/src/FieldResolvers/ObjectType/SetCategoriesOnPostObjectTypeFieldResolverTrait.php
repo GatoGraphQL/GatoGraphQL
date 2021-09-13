@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPSchema\PostCategoryMutations\MutationResolvers\SetCategoriesOnPostMutationResolver;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 {
     protected function getCustomPostTypeResolverClass(): string
     {
-        return PostTypeResolver::class;
+        return PostObjectTypeResolver::class;
     }
 
     protected function getTypeMutationResolverClass(): string
@@ -23,7 +23,7 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 
     protected function getCategoryTypeResolverClass(): string
     {
-        return PostCategoryTypeResolver::class;
+        return PostCategoryObjectTypeResolver::class;
     }
 
     protected function getEntityName(): string

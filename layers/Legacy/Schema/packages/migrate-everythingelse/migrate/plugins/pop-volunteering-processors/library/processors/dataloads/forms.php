@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 use PoPSitesWassup\VolunteerMutations\MutationResolverBridges\VolunteerMutationResolverBridge;
 
@@ -114,7 +114,7 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_VOLUNTEER:
-                return CustomPostTypeResolver::class;
+                return CustomPostObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

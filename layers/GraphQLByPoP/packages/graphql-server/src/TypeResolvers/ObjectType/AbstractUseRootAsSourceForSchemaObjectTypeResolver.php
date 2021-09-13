@@ -9,13 +9,13 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterfac
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
-abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObjectTypeResolver
+abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected function getTypeResolverClassToCalculateSchema(): string
     {
-        return RootTypeResolver::class;
+        return RootObjectTypeResolver::class;
     }
 
     abstract protected function isFieldNameConditionSatisfiedForSchema(

@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
@@ -29,9 +29,9 @@ class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
             [
                 UserRolesAccessControlGroups::CAPABILITIES,
                 [
-                    [RootTypeResolver::class, 'accessControlLists', $capabilities],
-                    [RootTypeResolver::class, 'cacheControlLists', $capabilities],
-                    [RootTypeResolver::class, 'fieldDeprecationLists', $capabilities],
+                    [RootObjectTypeResolver::class, 'accessControlLists', $capabilities],
+                    [RootObjectTypeResolver::class, 'cacheControlLists', $capabilities],
+                    [RootObjectTypeResolver::class, 'fieldDeprecationLists', $capabilities],
                 ]
             ]
         );

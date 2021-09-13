@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
+use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 use WP_Term;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -16,7 +16,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            MenuTypeResolver::class,
+            MenuObjectTypeResolver::class,
         ];
     }
 

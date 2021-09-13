@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
@@ -114,7 +114,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
-                return NotificationTypeResolver::class;
+                return NotificationObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

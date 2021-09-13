@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Stances\TypeResolvers\ObjectType\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -184,7 +184,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
             case self::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST:
             case self::MODULE_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL:
             case self::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL:
-                return StanceTypeResolver::class;
+                return StanceObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

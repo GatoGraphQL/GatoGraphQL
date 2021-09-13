@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
-use PoPSchema\Pages\TypeResolvers\ObjectType\PageTypeResolver;
+use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
@@ -25,7 +25,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            PageTypeResolver::class,
+            PageObjectTypeResolver::class,
         ];
     }
 
@@ -205,7 +205,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'parentPage':
             case 'childPages':
             case 'childPagesForAdmin':
-                return PageTypeResolver::class;
+                return PageObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

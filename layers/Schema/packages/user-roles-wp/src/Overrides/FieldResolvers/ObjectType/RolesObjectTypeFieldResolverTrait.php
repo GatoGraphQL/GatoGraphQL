@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleTypeResolver;
+use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 
 trait RolesObjectTypeFieldResolverTrait
 {
@@ -13,7 +13,7 @@ trait RolesObjectTypeFieldResolverTrait
     {
         switch ($fieldName) {
             case 'roles':
-                return UserRoleTypeResolver::class;
+                return UserRoleObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

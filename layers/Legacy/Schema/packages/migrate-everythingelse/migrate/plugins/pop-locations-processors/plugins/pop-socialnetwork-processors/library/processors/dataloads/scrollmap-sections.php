@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -148,7 +148,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
             case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
             case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

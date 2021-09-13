@@ -6,13 +6,13 @@ namespace PoPSchema\Pages\ObjectTypeResolverPickers;
 
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
-use PoPSchema\Pages\TypeResolvers\ObjectType\PageTypeResolver;
+use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 
 abstract class AbstractPageTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     public function getObjectTypeResolverClass(): string
     {
-        return PageTypeResolver::class;
+        return PageObjectTypeResolver::class;
     }
 
     public function isInstanceOfType(object $object): bool

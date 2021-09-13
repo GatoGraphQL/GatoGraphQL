@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Schema;
 
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinitionService as ComponentModelSchemaDefinitionService;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -28,6 +28,6 @@ class SchemaDefinitionService extends ComponentModelSchemaDefinitionService impl
 
     public function getRootTypeResolverClass(): string
     {
-        return RootTypeResolver::class;
+        return RootObjectTypeResolver::class;
     }
 }

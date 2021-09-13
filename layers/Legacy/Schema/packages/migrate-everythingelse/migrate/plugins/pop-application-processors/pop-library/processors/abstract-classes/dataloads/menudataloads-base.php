@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
-use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
+use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 
 abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
@@ -40,6 +40,6 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
 
     public function getRelationalTypeResolverClass(array $module): ?string
     {
-        return MenuTypeResolver::class;
+        return MenuObjectTypeResolver::class;
     }
 }

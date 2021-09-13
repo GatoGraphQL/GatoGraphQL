@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -47,7 +47,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

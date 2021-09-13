@@ -6,9 +6,9 @@ namespace PoPSchema\PostCategories\TypeResolvers\ObjectType;
 
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
 use PoPSchema\PostCategories\RelationalTypeDataLoaders\ObjectType\PostCategoryTypeDataLoader;
-use PoPSchema\Categories\TypeResolvers\ObjectType\AbstractCategoryTypeResolver;
+use PoPSchema\Categories\TypeResolvers\ObjectType\AbstractCategoryObjectTypeResolver;
 
-class PostCategoryTypeResolver extends AbstractCategoryTypeResolver
+class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 {
     use PostCategoryAPISatisfiedContractTrait;
 

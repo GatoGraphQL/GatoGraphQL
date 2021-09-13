@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 use PoPSitesWassup\EventLinkMutations\MutationResolverBridges\CreateEventLinkMutationResolverBridge;
 use PoPSitesWassup\EventLinkMutations\MutationResolverBridges\UpdateEventLinkMutationResolverBridge;
@@ -124,7 +124,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTLINK_UPDATE:
             case self::MODULE_DATALOAD_EVENTLINK_CREATE:
-                return EventTypeResolver::class;
+                return EventObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

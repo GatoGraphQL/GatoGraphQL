@@ -11,7 +11,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 
 class NestedMutationHookSet extends AbstractHookSet
@@ -26,7 +26,7 @@ class NestedMutationHookSet extends AbstractHookSet
         );
 
         $this->hooksAPI->addFilter(
-            RootTypeResolver::HOOK_DESCRIPTION,
+            RootObjectTypeResolver::HOOK_DESCRIPTION,
             array($this, 'getRootTypeDescription')
         );
     }

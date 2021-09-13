@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 
 class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
@@ -43,7 +43,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
-                return NotificationTypeResolver::class;
+                return NotificationObjectTypeResolver::class;
         }
         
         return parent::getRelationalTypeResolverClass($module);

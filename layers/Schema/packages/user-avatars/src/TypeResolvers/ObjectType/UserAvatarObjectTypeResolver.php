@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType\UserAvatarTypeDataLoader;
 
-class UserAvatarTypeResolver extends AbstractObjectTypeResolver
+class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {

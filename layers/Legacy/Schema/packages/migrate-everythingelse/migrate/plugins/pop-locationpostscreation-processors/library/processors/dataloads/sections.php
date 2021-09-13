@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostTypeResolver;
+use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostObjectTypeResolver;
 
 class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
@@ -78,7 +78,7 @@ class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_SCROLL_FULLVIEWPREVIEW:
-                return LocationPostTypeResolver::class;
+                return LocationPostObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

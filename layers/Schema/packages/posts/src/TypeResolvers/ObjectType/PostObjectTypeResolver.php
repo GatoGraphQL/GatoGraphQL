@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\Posts\TypeResolvers\ObjectType;
 
 use PoPSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostTypeDataLoader;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 
-class PostTypeResolver extends AbstractCustomPostTypeResolver
+class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     public function getTypeName(): string
     {

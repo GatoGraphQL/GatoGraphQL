@@ -1,9 +1,9 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
@@ -125,15 +125,15 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FOLLOWSUSERS:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
 
             case self::MODULE_DATALOAD_UPVOTESPOSTS:
             case self::MODULE_DATALOAD_RECOMMENDSPOSTS:
             case self::MODULE_DATALOAD_DOWNVOTESPOSTS:
-                return CustomPostTypeResolver::class;
+                return CustomPostObjectTypeResolver::class;
 
             case self::MODULE_DATALOAD_SUBSCRIBESTOTAGS:
-                return PostTagTypeResolver::class;
+                return PostTagObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

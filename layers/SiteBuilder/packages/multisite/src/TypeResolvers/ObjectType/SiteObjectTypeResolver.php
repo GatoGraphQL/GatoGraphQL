@@ -7,7 +7,7 @@ namespace PoP\Multisite\TypeResolvers\ObjectType;
 use PoP\Multisite\RelationalTypeDataLoaders\ObjectType\SiteTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 
-class SiteTypeResolver extends AbstractObjectTypeResolver
+class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {

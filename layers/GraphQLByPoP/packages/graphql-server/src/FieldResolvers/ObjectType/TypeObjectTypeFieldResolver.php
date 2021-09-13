@@ -12,10 +12,10 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasPossibleTypesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\InputObjectType;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\EnumValueTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\EnumValueObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -29,7 +29,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            TypeTypeResolver::class,
+            TypeObjectTypeResolver::class,
         ];
     }
 
@@ -219,15 +219,15 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'fields':
-                return FieldTypeResolver::class;
+                return FieldObjectTypeResolver::class;
             case 'interfaces':
             case 'possibleTypes':
             case 'ofType':
-                return TypeTypeResolver::class;
+                return TypeObjectTypeResolver::class;
             case 'enumValues':
-                return EnumValueTypeResolver::class;
+                return EnumValueObjectTypeResolver::class;
             case 'inputFields':
-                return InputValueTypeResolver::class;
+                return InputValueObjectTypeResolver::class;
         }
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

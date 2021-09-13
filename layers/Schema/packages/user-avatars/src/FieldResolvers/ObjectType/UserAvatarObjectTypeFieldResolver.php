@@ -9,14 +9,14 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
-use PoPSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarTypeResolver;
+use PoPSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
 
 class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            UserAvatarTypeResolver::class,
+            UserAvatarObjectTypeResolver::class,
         ];
     }
 

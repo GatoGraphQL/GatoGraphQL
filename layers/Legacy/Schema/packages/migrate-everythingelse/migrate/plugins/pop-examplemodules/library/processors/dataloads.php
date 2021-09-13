@@ -2,11 +2,11 @@
 namespace PoP\ExampleModules;
 
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
-use PoPSchema\Pages\TypeResolvers\ObjectType\PageTypeResolver;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
@@ -77,17 +77,17 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
             case self::MODULE_EXAMPLE_SINGLE:
-                return CustomPostTypeResolver::class;
+                return CustomPostObjectTypeResolver::class;
 
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
 
             case self::MODULE_EXAMPLE_TAGDESCRIPTION:
-                return PostTagTypeResolver::class;
+                return PostTagObjectTypeResolver::class;
 
             case self::MODULE_EXAMPLE_PAGE:
             case self::MODULE_EXAMPLE_HOMESTATICPAGE:
-                return PageTypeResolver::class;
+                return PageObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

@@ -8,14 +8,14 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Multisite\TypeResolvers\ObjectType\SiteTypeResolver;
+use PoP\Multisite\TypeResolvers\ObjectType\SiteObjectTypeResolver;
 
 class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            SiteTypeResolver::class,
+            SiteObjectTypeResolver::class,
         ];
     }
 

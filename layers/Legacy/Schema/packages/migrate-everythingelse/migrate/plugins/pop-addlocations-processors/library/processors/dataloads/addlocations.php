@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Locations\TypeResolvers\ObjectType\LocationTypeResolver;
+use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 use PoPSitesWassup\LocationMutations\MutationResolverBridges\CreateLocationMutationResolverBridge;
@@ -103,7 +103,7 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION:
-                return LocationTypeResolver::class;
+                return LocationObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

@@ -3,7 +3,7 @@
 use PoPSchema\CustomPosts\Types\Status;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Stances\TypeResolvers\ObjectType\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSitesWassup\StanceMutations\MutationResolverBridges\CreateStanceMutationResolverBridge;
 use PoPSitesWassup\StanceMutations\MutationResolverBridges\UpdateStanceMutationResolverBridge;
@@ -167,7 +167,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_STANCE_CREATE:
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                return StanceTypeResolver::class;
+                return StanceObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

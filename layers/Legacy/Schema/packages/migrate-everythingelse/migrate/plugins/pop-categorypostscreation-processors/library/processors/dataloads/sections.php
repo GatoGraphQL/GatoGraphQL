@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
@@ -558,7 +558,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
 
     public function getRelationalTypeResolverClass(array $module): ?string
     {
-        return PostTypeResolver::class;
+        return PostObjectTypeResolver::class;
     }
 
     public function initModelProps(array $module, array &$props): void

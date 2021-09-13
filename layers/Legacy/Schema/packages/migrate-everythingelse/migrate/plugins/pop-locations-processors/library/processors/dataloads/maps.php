@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\ModuleProcessors\DBObjectIDsFromURLParamModuleProcessorTrait;
-use PoPSchema\Locations\TypeResolvers\ObjectType\LocationTypeResolver;
+use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 
 class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -64,7 +64,7 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONSMAP:
-                return LocationTypeResolver::class;
+                return LocationObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

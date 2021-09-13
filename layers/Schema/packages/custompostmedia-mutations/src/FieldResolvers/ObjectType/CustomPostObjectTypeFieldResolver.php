@@ -18,9 +18,9 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCustomPostMutationResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolver;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
+use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -32,7 +32,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected MediaTypeResolver $mediaTypeResolver
+        protected MediaObjectTypeResolver $mediaTypeResolver
     ) {
         parent::__construct(
             $translationAPI,
@@ -48,7 +48,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCustomPostTypeResolver::class,
+            AbstractCustomPostObjectTypeResolver::class,
         ];
     }
 

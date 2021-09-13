@@ -6,14 +6,14 @@ namespace PoPSchema\PostCategories\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Posts\FieldResolvers\ObjectType\AbstractPostObjectTypeFieldResolver;
-use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 
 class PostCategoryListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            PostCategoryTypeResolver::class,
+            PostCategoryObjectTypeResolver::class,
         ];
     }
 

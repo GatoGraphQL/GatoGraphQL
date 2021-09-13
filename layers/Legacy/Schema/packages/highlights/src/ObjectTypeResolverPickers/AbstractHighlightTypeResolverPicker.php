@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoPSchema\Highlights\ObjectTypeResolverPickers;
 
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
-use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightTypeResolver;
+use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 
 class AbstractHighlightTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     public function getObjectTypeResolverClass(): string
     {
-        return HighlightTypeResolver::class;
+        return HighlightObjectTypeResolver::class;
     }
 
     public function isInstanceOfType(object $object): bool

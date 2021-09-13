@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\Categories\TypeResolvers\ObjectType;
 
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
-use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyTypeResolver;
+use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeResolver;
 
-abstract class AbstractCategoryTypeResolver extends AbstractTaxonomyTypeResolver
+abstract class AbstractCategoryObjectTypeResolver extends AbstractTaxonomyObjectTypeResolver
 {
     use CategoryAPIRequestedContractTrait;
 

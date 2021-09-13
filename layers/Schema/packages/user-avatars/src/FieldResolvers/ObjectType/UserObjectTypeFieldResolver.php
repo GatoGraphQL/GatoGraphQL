@@ -18,8 +18,8 @@ use PoPSchema\UserAvatars\ComponentConfiguration;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
-use PoPSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -48,7 +48,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            UserTypeResolver::class,
+            UserObjectTypeResolver::class,
         ];
     }
 
@@ -129,7 +129,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'avatar':
-                return UserAvatarTypeResolver::class;
+                return UserAvatarObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

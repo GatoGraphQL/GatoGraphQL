@@ -12,11 +12,11 @@ use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoPSchema\Pages\RelationalTypeDataLoaders\ObjectType\PageTypeDataLoader;
 
-class PageTypeResolver extends AbstractCustomPostTypeResolver
+class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

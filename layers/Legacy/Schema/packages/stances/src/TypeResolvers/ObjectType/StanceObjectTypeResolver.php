@@ -8,7 +8,7 @@ use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
 use PoPSchema\Stances\RelationalTypeDataLoaders\ObjectType\StanceTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 
-class StanceTypeResolver extends AbstractObjectTypeResolver
+class StanceObjectTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {

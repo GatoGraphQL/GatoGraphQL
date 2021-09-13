@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\ComponentContracts;
 
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 trait PostCategoryAPISatisfiedContractTrait
@@ -17,6 +17,6 @@ trait PostCategoryAPISatisfiedContractTrait
 
     protected function getCategoryTypeResolverClass(): string
     {
-        return PostCategoryTypeResolver::class;
+        return PostCategoryObjectTypeResolver::class;
     }
 }

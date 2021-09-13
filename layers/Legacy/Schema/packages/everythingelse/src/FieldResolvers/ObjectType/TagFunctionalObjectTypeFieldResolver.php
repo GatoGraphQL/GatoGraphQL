@@ -7,7 +7,7 @@ namespace PoPSchema\EverythingElse\FieldResolvers\ObjectType;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagTypeResolver;
+use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 
 class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -15,7 +15,7 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractTagTypeResolver::class,
+            AbstractTagObjectTypeResolver::class,
         ];
     }
 

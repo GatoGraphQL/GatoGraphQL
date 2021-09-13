@@ -113,7 +113,7 @@ class SchemaHelpers
     }
 
     /**
-     * Indicate if a FieldTypeResolver class is of the Relational type
+     * Indicate if a FieldObjectTypeResolver class is of the Relational type
      */
     public static function isRelationalFieldTypeResolverClass(?string $fieldTypeResolverClass): ?bool
     {

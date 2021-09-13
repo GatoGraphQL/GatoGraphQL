@@ -11,7 +11,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 
 class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -20,7 +20,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            EventTypeResolver::class,
+            EventObjectTypeResolver::class,
         ];
     }
 

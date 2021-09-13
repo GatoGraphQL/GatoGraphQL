@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -48,7 +48,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_LIST:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_FULLVIEW:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

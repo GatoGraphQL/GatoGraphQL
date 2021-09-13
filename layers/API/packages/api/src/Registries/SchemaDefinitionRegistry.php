@@ -15,7 +15,7 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\ObjectFacades\RootObjectFacade;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Translation\TranslationAPIInterface;
 
 class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
@@ -75,9 +75,9 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
             // If either not using cache, or using but the value had not been cached, then calculate the value
             if ($schemaDefinition === null) {
                 /**
-                 * @var RootTypeResolver
+                 * @var RootObjectTypeResolver
                  */
-                $rootTypeResolver = $this->instanceManager->getInstance(RootTypeResolver::class);
+                $rootTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
                 $root = RootObjectFacade::getInstance();
                 $schemaDefinition = $rootTypeResolver->resolveValue(
                     $root,

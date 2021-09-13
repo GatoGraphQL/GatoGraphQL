@@ -9,7 +9,7 @@ use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\QueryRootTypeDataLoader;
 
-class QueryRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
+class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObjectTypeResolver
 {
     use ReservedNameTypeResolverTrait;
 

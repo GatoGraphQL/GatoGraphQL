@@ -8,7 +8,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
+use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
@@ -22,7 +22,7 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected MediaTypeResolver $mediaTypeResolver
+        protected MediaObjectTypeResolver $mediaTypeResolver
     ) {
         parent::__construct(
             $hooksAPI,

@@ -16,7 +16,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoader;
 
-class CommentTypeResolver extends AbstractObjectTypeResolver
+class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

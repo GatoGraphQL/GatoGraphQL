@@ -3,7 +3,7 @@
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Stances\TypeResolvers\ObjectType\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -870,7 +870,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST:
             case self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL:
             case self::MODULE_DATALOAD_TAGSTANCES_CAROUSEL:
-                return StanceTypeResolver::class;
+                return StanceObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

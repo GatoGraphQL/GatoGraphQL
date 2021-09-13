@@ -55,7 +55,7 @@ function gdUreGetuserrole($userID)
 
 
 // Make sure we always get the most specific role
-HooksAPIFacade::getInstance()->addFilter('UserTypeResolver:getValue:role', 'gdUreGetuserroleHook', 10, 2);
+HooksAPIFacade::getInstance()->addFilter('UserObjectTypeResolver:getValue:role', 'gdUreGetuserroleHook', 10, 2);
 function gdUreGetuserroleHook($role, $user_id)
 {
     return gdUreGetuserrole($user_id);

@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -197,7 +197,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_LIST:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class PoP_PostCategoryLayouts_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
@@ -19,7 +19,7 @@ class PoP_PostCategoryLayouts_Multilayout_Processor extends PoP_Application_Mult
                     if (POP_POSTCATEGORYLAYOUTS_CATEGORIES_LAYOUTFEATUREIMAGE) {
                         $instanceManager = InstanceManagerFacade::getInstance();
                         /** @var RelationalTypeResolverInterface */
-                        $postTypeResolver = $instanceManager->getInstance(PostTypeResolver::class);
+                        $postTypeResolver = $instanceManager->getInstance(PostObjectTypeResolver::class);
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
                             'isType',

@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
 use PoPSchema\Highlights\RelationalTypeDataLoaders\ObjectType\HighlightTypeDataLoader;
 
-class HighlightTypeResolver extends AbstractObjectTypeResolver
+class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 {
     public function getTypeName(): string
     {

@@ -9,14 +9,14 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            UserTypeResolver::class,
+            UserObjectTypeResolver::class,
         ];
     }
 
@@ -103,7 +103,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
                 // Allow to hook for URE: Make sure we always get the most specific role
                 // Otherwise, users like Leo get role 'administrator'
                 return HooksAPIFacade::getInstance()->applyFilters(
-                    'UserTypeResolver:getValue:role',
+                    'UserObjectTypeResolver:getValue:role',
                     array_shift($user_roles),
                     $relationalTypeResolver->getID($user)
                 );

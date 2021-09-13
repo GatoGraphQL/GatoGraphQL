@@ -7,7 +7,7 @@ namespace PoPSchema\GenericCustomPosts\ConditionalOnComponent\API\ModuleProcesso
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostTypeResolver;
+use PoPSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
@@ -34,7 +34,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
-                return GenericCustomPostTypeResolver::class;
+                return GenericCustomPostObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

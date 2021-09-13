@@ -1,7 +1,7 @@
 <?php
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -4450,7 +4450,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
 
     public function getRelationalTypeResolverClass(array $module): ?string
     {
-        return PostTypeResolver::class;
+        return PostObjectTypeResolver::class;
     }
 
     public function initModelProps(array $module, array &$props): void
