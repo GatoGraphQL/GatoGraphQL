@@ -337,7 +337,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $field,
                 $fieldName,
                 $fieldArgs,
-                $dbErrors,
+                $objectErrors,
                 $dbWarnings
             ) = $this->fieldQueryInterpreter->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions);
 
@@ -345,8 +345,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($dbWarnings) {
                 $this->feedbackMessageStore->addDBWarnings($dbWarnings);
             }
-            if ($dbErrors) {
-                return $this->errorProvider->getNestedDBErrorsFieldError($dbErrors, $fieldName);
+            if ($objectErrors) {
+                return $this->errorProvider->getNestedDBErrorsFieldError($objectErrors, $fieldName);
             }
 
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {

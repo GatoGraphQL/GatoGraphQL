@@ -80,7 +80,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations,
         array &$dbNotices,

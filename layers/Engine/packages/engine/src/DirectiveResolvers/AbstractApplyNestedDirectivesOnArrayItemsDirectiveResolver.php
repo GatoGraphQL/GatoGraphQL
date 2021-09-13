@@ -77,7 +77,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations,
         array &$dbNotices,
@@ -118,7 +118,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
                 if (!$isValueInDBItems && !array_key_exists($fieldOutputKey, $previousDBItems[$dbKey][(string)$id] ?? [])) {
                     if ($fieldOutputKey != $field) {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
@@ -128,7 +128,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                             ),
                         ];
                     } else {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
@@ -152,7 +152,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 // Validate that the value is an array
                 if (!is_array($value)) {
                     if ($fieldOutputKey != $field) {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('The value for field \'%s\' (under property \'%s\') is not an array, so execution of this directive can\'t continue', 'component-model'),
@@ -162,7 +162,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                             ),
                         ];
                     } else {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'component-model'),
@@ -184,7 +184,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
 
                 // The value is an array. Unpack all the elements into their own property
                 $array = $value;
-                if ($arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations)) {
+                if ($arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $dbWarnings, $dbDeprecations)) {
                     $execute = true;
                     foreach ($arrayItems as $key => &$value) {
                         // Add into the $idsDataFields object for the array items
@@ -206,7 +206,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $arrayItemIdsProperties[(string)$id]['conditional'] = [];
 
-                    $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+                    $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
                 }
             }
         }
@@ -269,7 +269,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                         array_unshift($nestedDBError[Tokens::PATH], $this->directive);
                         $this->prependPathOnNestedErrors($nestedDBError);
                     }
-                    $dbErrors[(string) $id] = $nestedDBErrors;
+                    $objectErrors[(string) $id] = $nestedDBErrors;
                 }
             }
 
@@ -321,7 +321,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                         if (GeneralUtils::isError($arrayItemValue)) {
                             /** @var Error */
                             $error = $arrayItemValue;
-                            $dbErrors[(string)$id][] = [
+                            $objectErrors[(string)$id][] = [
                                 Tokens::PATH => [$this->directive],
                                 Tokens::MESSAGE => sprintf(
                                     $this->translationAPI->__('Transformation of element with key \'%s\' on array from property \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
@@ -334,7 +334,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                             continue;
                         }
                         // Place the result for the array in the original property
-                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $dbErrors, $dbWarnings, $dbDeprecations, $dbNotices, $dbTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
+                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $dbWarnings, $dbDeprecations, $dbNotices, $dbTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
                     }
                 }
             }
@@ -346,7 +346,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     protected function addProcessedItemBackToDBItems(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$dbItems,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations,
         array &$dbNotices,
@@ -362,7 +362,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     /**
      * Return the items to iterate on
      */
-    abstract protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array;
+    abstract protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$dbWarnings, array &$dbDeprecations): ?array;
 
     /**
      * Create a property for storing the array item in the current object
@@ -389,7 +389,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations,
         array &$schemaErrors,
@@ -428,7 +428,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                         // Show the error message, and return nothing
                         /** @var Error */
                         $error = $resolvedValue;
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
@@ -460,7 +460,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                         // Show the error message, and return nothing
                         /** @var Error */
                         $error = $resolvedValue;
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),

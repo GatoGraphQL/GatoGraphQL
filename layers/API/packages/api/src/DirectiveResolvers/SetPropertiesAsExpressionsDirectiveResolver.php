@@ -112,7 +112,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations,
         array &$dbNotices,
@@ -133,7 +133,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
                 $property = $properties[$i];
                 $isValueInDBItems = array_key_exists($property, $dbItems[(string)$id] ?? []);
                 if (!$isValueInDBItems && !array_key_exists($property, $previousDBItems[$dbKey][(string)$id] ?? [])) {
-                    $dbErrors[(string)$id][] = [
+                    $objectErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
                             $this->translationAPI->__('Property \'%s\' hadn\'t been set for object with ID \'%s\', so no expression has been defined', 'component-model'),

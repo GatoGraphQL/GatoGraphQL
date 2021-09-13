@@ -590,7 +590,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations,
         array &$dbNotices,
@@ -623,7 +623,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $error = $this->getUnresolvedObjectIDError($unresolvedObjectID);
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
             $failedFields = $ids_data_fields[$unresolvedObjectID]['direct'] ?? [];
-            // Add in $schemaErrors instead of $dbErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
+            // Add in $schemaErrors instead of $objectErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
                 $schemaErrors[] = [
                     Tokens::PATH => [$failedField],
@@ -658,7 +658,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $previousDBItems,
             $variables,
             $messages,
-            $dbErrors,
+            $objectErrors,
             $dbWarnings,
             $dbDeprecations,
             $dbNotices,
@@ -962,7 +962,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations,
         array &$dbNotices,
@@ -1157,13 +1157,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 $failingFieldIDDBErrors[$failingField][$id][] = $dbError;
                             }
                         } else {
-                            $dbErrors[$id][] = $directivePipelineDBError;
+                            $objectErrors[$id][] = $directivePipelineDBError;
                         }
                     }
                 }
                 foreach ($failingFieldIDDBErrors as $failingField => $failingIDDBErrors) {
                     foreach ($failingIDDBErrors as $id => $failingDBErrors) {
-                        $dbErrors[$id][] = [
+                        $objectErrors[$id][] = [
                             Tokens::PATH => [$failingField],
                             Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its directives', 'component-model'),
                             Tokens::EXTENSIONS => [

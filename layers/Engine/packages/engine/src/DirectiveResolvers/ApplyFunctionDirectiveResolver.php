@@ -75,7 +75,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations,
         array &$dbNotices,
@@ -86,13 +86,13 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $this->regenerateAndExecuteFunction($relationalTypeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->regenerateAndExecuteFunction($relationalTypeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
     }
 
     /**
      * Execute a function on the affected field
      */
-    protected function regenerateAndExecuteFunction(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): void
+    protected function regenerateAndExecuteFunction(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): void
     {
         $function = $this->directiveArgsForSchema['function'];
         $addArguments = $this->directiveArgsForSchema['addArguments'] ?? [];
@@ -127,7 +127,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
                 if (!$isValueInDBItems && !array_key_exists($fieldOutputKey, $previousDBItems[$dbKey][(string)$id] ?? [])) {
                     if ($fieldOutputKey != $field) {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
@@ -137,7 +137,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                             ),
                         ];
                     } else {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
@@ -150,7 +150,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 }
 
                 // Place all the reserved expressions into the `$expressions` context: $value
-                $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+                $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
                 // Generate the fieldArgs from combining the query with the values in the context, through $variables
                 $expressions = $this->getExpressionsForObject($id, $variables, $messages);
@@ -204,7 +204,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $this->prependPathOnNestedErrors($schemaDBError);
                         $dbError[Tokens::EXTENSIONS][Tokens::NESTED][] = $schemaDBError;
                     }
-                    $dbErrors[(string)$id][] = $dbError;
+                    $objectErrors[(string)$id][] = $dbError;
                     continue;
                 }
 
@@ -226,7 +226,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 if (GeneralUtils::isError($functionValue)) {
                     /** @var Error */
                     $error = $functionValue;
-                    $dbErrors[(string)$id][] = [
+                    $objectErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
                             $this->translationAPI->__('Applying function on \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
@@ -262,7 +262,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations,
         array &$schemaErrors,

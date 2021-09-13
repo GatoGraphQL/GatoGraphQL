@@ -47,7 +47,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations,
         array &$dbNotices,
@@ -60,11 +60,11 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ): void {
         // Iterate data, extract into final results
         if ($resultIDItems) {
-            $this->resolveValueForObjects($relationalTypeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+            $this->resolveValueForObjects($relationalTypeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         }
     }
 
-    protected function resolveValueForObjects(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
+    protected function resolveValueForObjects(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
     {
         $enqueueFillingObjectsFromIDs = [];
         foreach (array_keys($idsDataFields) as $id) {
@@ -73,7 +73,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if (is_null($object)) {
-                $dbErrors[(string)$id][] = [
+                $objectErrors[(string)$id][] = [
                     Tokens::PATH => ['id'],
                     Tokens::MESSAGE => sprintf(
                         $this->translationAPI->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
@@ -87,7 +87,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             }
 
             $expressions = $this->getExpressionsForObject($id, $variables, $messages);
-            $this->resolveValuesForObject($relationalTypeResolver, $id, $object, $idsDataFields[(string)$id]['direct'], $dbItems, $previousDBItems, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
+            $this->resolveValuesForObject($relationalTypeResolver, $id, $object, $idsDataFields[(string)$id]['direct'], $dbItems, $previousDBItems, $variables, $expressions, $objectErrors, $dbWarnings, $dbDeprecations);
 
             // Add the conditional data fields
             // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
@@ -129,12 +129,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$previousDBItems,
         array &$variables,
         array &$expressions,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations
     ) {
         foreach ($dataFields as $field) {
-            $this->resolveValueForObject($relationalTypeResolver, $id, $object, $field, $dbItems, $previousDBItems, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
+            $this->resolveValueForObject($relationalTypeResolver, $id, $object, $field, $dbItems, $previousDBItems, $variables, $expressions, $objectErrors, $dbWarnings, $dbDeprecations);
         }
     }
 
@@ -147,13 +147,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$previousDBItems,
         array &$variables,
         array &$expressions,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations
     ) {
         // Get the value, and add it to the database
         $value = $this->resolveFieldValue($relationalTypeResolver, $id, $object, $field, $previousDBItems, $variables, $expressions, $dbWarnings, $dbDeprecations);
-        $this->addValueForObject($relationalTypeResolver, $id, $field, $value, $dbItems, $dbErrors);
+        $this->addValueForObject($relationalTypeResolver, $id, $field, $value, $dbItems, $objectErrors);
     }
 
     protected function resolveFieldValue(
@@ -200,7 +200,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         return $errorOutput;
     }
 
-    protected function addValueForObject(RelationalTypeResolverInterface $relationalTypeResolver, $id, string $field, $value, array &$dbItems, array &$dbErrors)
+    protected function addValueForObject(RelationalTypeResolverInterface $relationalTypeResolver, $id, string $field, $value, array &$dbItems, array &$objectErrors)
     {
         // The dataitem can contain both rightful values and also errors (eg: when the field doesn't exist, or the field validation fails)
         // Extract the errors and add them on the other array
@@ -208,7 +208,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             // Extract the error message
             /** @var Error */
             $error = $value;
-            $dbErrors[(string)$id][] = array_merge(
+            $objectErrors[(string)$id][] = array_merge(
                 [
                     Tokens::PATH => [$field],
                 ],

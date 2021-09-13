@@ -56,7 +56,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
     /**
      * Iterate on all items from the array
      */
-    protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
+    protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$dbWarnings, array &$dbDeprecations): ?array
     {
         if ($if = $this->directiveArgsForSchema['if'] ?? null) {
             // If it is a field, execute the function against all the values in the array
@@ -83,7 +83,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                         // Show the error message, and return nothing
                         /** @var Error */
                         $error = $resolvedValue;
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),

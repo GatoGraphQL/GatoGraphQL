@@ -56,7 +56,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
+        array &$objectErrors,
         array &$dbWarnings,
         array &$dbDeprecations,
         array &$dbNotices,
@@ -78,17 +78,17 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
                     $objectValidDirective,
                     $objectDirectiveName,
                     $objectDirectiveArgs
-                ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
-                // Check that the directive is valid. If it is not, $dbErrors will have the error already added
+                ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $variables, $expressions, $objectErrors, $dbWarnings, $dbDeprecations);
+                // Check that the directive is valid. If it is not, $objectErrors will have the error already added
                 if (is_null($objectValidDirective)) {
                     continue;
                 }
                 // Take the default value from the directiveArgs
                 $message = $objectDirectiveArgs['message'];
                 // Check that the message was composed properly (eg: it didn't fail).
-                // If it is not, $dbErrors will have the error already added
+                // If it is not, $objectErrors will have the error already added
                 if (is_null($message)) {
-                    $dbErrors[(string)$id][] = [
+                    $objectErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => $this->translationAPI->__(
                             'The message could not be composed. Check previous errors',

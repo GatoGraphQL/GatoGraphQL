@@ -33,10 +33,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 $this->reformatSchemaEntries($data['schemaErrors'])
             );
         }
-        if (isset($data['dbErrors'])) {
+        if (isset($data['objectErrors'])) {
             $errors = array_merge(
                 $errors,
-                $this->reformatDBEntries($data['dbErrors'])
+                $this->reformatDBEntries($data['objectErrors'])
             );
         }
         if ($errors) {
