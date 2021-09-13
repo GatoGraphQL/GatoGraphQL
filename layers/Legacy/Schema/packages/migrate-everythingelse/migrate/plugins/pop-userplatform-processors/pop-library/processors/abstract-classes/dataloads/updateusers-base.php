@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_UpdateUserDataloadsBase extends PoP_Module_Processor_CreateUpdateUserDataloadsBase
@@ -12,6 +12,6 @@ abstract class PoP_Module_Processor_UpdateUserDataloadsBase extends PoP_Module_P
 
     public function getRelationalTypeResolverClass(array $module): ?string
     {
-        return UserTypeResolver::class;
+        return UserObjectTypeResolver::class;
     }
 }

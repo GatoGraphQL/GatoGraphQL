@@ -1,7 +1,7 @@
 <?php
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
@@ -723,13 +723,13 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_LIST:
-                return PostTypeResolver::class;
+                return PostObjectTypeResolver::class;
 
             case self::MODULE_DATALOAD_TAGS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_TAGS_SCROLL_LIST:
             case self::MODULE_DATALOAD_TAGS_TYPEAHEAD:
             case self::MODULE_DATALOAD_TAGS_MENTIONS:
-                return PostTagTypeResolver::class;
+                return PostTagObjectTypeResolver::class;
 
             case self::MODULE_DATALOAD_CONTENT_TYPEAHEAD:
             case self::MODULE_DATALOAD_CONTENT_SCROLL_NAVIGATOR:
@@ -778,7 +778,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLL_LIST:
             case self::MODULE_DATALOAD_USERS_SCROLL_LIST:
             case self::MODULE_DATALOAD_USERS_CAROUSEL:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

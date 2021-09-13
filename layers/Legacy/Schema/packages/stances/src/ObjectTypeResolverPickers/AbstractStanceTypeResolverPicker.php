@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoPSchema\Stances\ObjectTypeResolverPickers;
 
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
-use PoPSchema\Stances\TypeResolvers\ObjectType\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 
 class AbstractStanceTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     public function getObjectTypeResolverClass(): string
     {
-        return StanceTypeResolver::class;
+        return StanceObjectTypeResolver::class;
     }
 
     public function isInstanceOfType(object $object): bool

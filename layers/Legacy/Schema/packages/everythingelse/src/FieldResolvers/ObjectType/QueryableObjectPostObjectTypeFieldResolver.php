@@ -8,14 +8,14 @@ use PoP\SiteBuilderAPI\Helpers\APIUtils;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 
 class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCustomPostTypeResolver::class,
+            AbstractCustomPostObjectTypeResolver::class,
         ];
     }
 

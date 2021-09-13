@@ -8,16 +8,16 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Multisite\ObjectFacades\SiteObjectFacade;
-use PoP\Multisite\TypeResolvers\ObjectType\SiteTypeResolver;
+use PoP\Multisite\TypeResolvers\ObjectType\SiteObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootTypeResolver::class,
+            RootObjectTypeResolver::class,
         ];
     }
 
@@ -80,7 +80,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'sites':
             case 'site':
-                return SiteTypeResolver::class;
+                return SiteObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

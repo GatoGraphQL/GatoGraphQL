@@ -17,7 +17,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
+use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 
 class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
@@ -47,7 +47,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            MediaTypeResolver::class,
+            MediaObjectTypeResolver::class,
         ];
     }
 

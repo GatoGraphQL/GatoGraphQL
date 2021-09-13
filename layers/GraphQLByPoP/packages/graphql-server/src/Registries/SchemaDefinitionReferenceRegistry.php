@@ -15,7 +15,7 @@ use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInter
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Facades\SchemaDefinitionRegistryFacade;
@@ -131,7 +131,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
         } elseif (ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
             // Additionally append the QueryRoot and MutationRoot to the schema
-            $queryRootTypeResolverClass = QueryRootTypeResolver::class;
+            $queryRootTypeResolverClass = QueryRootObjectTypeResolver::class;
             $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getTypeResolverTypeSchemaKey($queryRootTypeResolverClass);
             // Remove the fields connecting from Root to QueryRoot and MutationRoot
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['queryRoot']);

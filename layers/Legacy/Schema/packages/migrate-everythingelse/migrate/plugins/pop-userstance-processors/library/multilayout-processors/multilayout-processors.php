@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Stances\TypeResolvers\ObjectType\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 class PoP_UserStance_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
@@ -38,7 +38,7 @@ class PoP_UserStance_Multilayout_Processor extends PoP_Application_Multilayout_P
                     if ($layout = $stance_layouts[$format] ?? null) {
                         $instanceManager = InstanceManagerFacade::getInstance();
                         /** @var RelationalTypeResolverInterface */
-                        $stanceTypeResolver = $instanceManager->getInstance(StanceTypeResolver::class);
+                        $stanceTypeResolver = $instanceManager->getInstance(StanceObjectTypeResolver::class);
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
                             'isType',

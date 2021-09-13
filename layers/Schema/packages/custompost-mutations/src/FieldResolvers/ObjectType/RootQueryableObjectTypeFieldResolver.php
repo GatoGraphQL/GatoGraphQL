@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\CustomPostMutations\ModuleProcessors\CustomPostMutationFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -30,7 +30,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootTypeResolver::class,
+            RootObjectTypeResolver::class,
         ];
     }
 

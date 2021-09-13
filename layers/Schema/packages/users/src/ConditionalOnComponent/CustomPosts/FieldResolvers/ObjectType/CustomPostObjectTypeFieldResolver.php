@@ -6,7 +6,7 @@ namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers\Obje
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 use PoPSchema\Users\FieldResolvers\InterfaceType\WithAuthorInterfaceTypeFieldResolver;
 
@@ -15,7 +15,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCustomPostTypeResolver::class,
+            AbstractCustomPostObjectTypeResolver::class,
         ];
     }
 

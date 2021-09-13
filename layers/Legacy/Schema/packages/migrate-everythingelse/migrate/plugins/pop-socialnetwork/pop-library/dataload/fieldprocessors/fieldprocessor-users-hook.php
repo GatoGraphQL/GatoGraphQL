@@ -9,7 +9,7 @@ use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
@@ -17,7 +17,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Users extends AbstractOb
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            UserTypeResolver::class,
+            UserObjectTypeResolver::class,
         ];
     }
 
@@ -114,7 +114,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Users extends AbstractOb
 
             case 'followers':
             case 'following':
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);

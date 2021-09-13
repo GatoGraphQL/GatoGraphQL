@@ -15,12 +15,12 @@ use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
-use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryTypeResolver;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
 {
@@ -46,11 +46,11 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         TranslationAPIInterface $translationAPI,
-        protected ?CommentTypeResolver $commentTypeResolver,
-        protected ?PostTagTypeResolver $postTagTypeResolver,
-        protected ?PostCategoryTypeResolver $postCategoryTypeResolver,
-        protected ?PostTypeResolver $postTypeResolver,
-        protected ?UserTypeResolver $userTypeResolver
+        protected ?CommentObjectTypeResolver $commentTypeResolver,
+        protected ?PostTagObjectTypeResolver $postTagTypeResolver,
+        protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,
+        protected ?PostObjectTypeResolver $postTypeResolver,
+        protected ?UserObjectTypeResolver $userTypeResolver
     ) {
         parent::__construct(
             $instanceManager,
@@ -129,15 +129,15 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
          * Inner properties will not be null. Assign them their type,
          * to avoid PHPStan errors
          */
-        /** @var CommentTypeResolver */
+        /** @var CommentObjectTypeResolver */
         $commentTypeResolver = $this->commentTypeResolver;
-        /** @var PostTagTypeResolver */
+        /** @var PostTagObjectTypeResolver */
         $postTagTypeResolver = $this->postTagTypeResolver;
-        /** @var PostCategoryTypeResolver */
+        /** @var PostCategoryObjectTypeResolver */
         $postCategoryTypeResolver = $this->postCategoryTypeResolver;
-        /** @var PostTypeResolver */
+        /** @var PostObjectTypeResolver */
         $postTypeResolver = $this->postTypeResolver;
-        /** @var UserTypeResolver */
+        /** @var UserObjectTypeResolver */
         $userTypeResolver = $this->userTypeResolver;
         switch ($module) {
             case self::SCHEMA_CUSTOMPOST_META:

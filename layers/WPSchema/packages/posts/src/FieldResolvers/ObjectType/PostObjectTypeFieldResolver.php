@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFiel
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use WP_Post;
 
 class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
@@ -16,7 +16,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            PostTypeResolver::class,
+            PostObjectTypeResolver::class,
         ];
     }
 

@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -82,7 +82,7 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
         switch ($module[1]) {
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP:
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLLMAP:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

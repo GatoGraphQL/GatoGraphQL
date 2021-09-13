@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveLocationEnum;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -20,7 +20,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            DirectiveTypeResolver::class,
+            DirectiveObjectTypeResolver::class,
         ];
     }
 
@@ -134,7 +134,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'args':
-                return InputValueTypeResolver::class;
+                return InputValueObjectTypeResolver::class;
         }
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

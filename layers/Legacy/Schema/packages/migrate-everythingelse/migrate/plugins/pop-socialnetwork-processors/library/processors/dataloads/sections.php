@@ -1,7 +1,7 @@
 <?php
 
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
@@ -379,7 +379,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST:
-                return PostTagTypeResolver::class;
+                return PostTagObjectTypeResolver::class;
 
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW:
@@ -412,7 +412,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_LIST:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

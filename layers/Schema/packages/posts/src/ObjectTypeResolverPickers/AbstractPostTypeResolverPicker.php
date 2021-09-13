@@ -6,13 +6,13 @@ namespace PoPSchema\Posts\ObjectTypeResolverPickers;
 
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 abstract class AbstractPostTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     public function getObjectTypeResolverClass(): string
     {
-        return PostTypeResolver::class;
+        return PostObjectTypeResolver::class;
     }
 
     public function isInstanceOfType(object $object): bool

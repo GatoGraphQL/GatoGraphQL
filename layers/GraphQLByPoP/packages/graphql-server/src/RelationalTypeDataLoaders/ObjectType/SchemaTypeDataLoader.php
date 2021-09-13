@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\UseObjectDictionaryTypeDataLoaderTrait;
@@ -16,7 +16,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
 
     protected function getObjectTypeResolverClass(): string
     {
-        return SchemaTypeResolver::class;
+        return SchemaObjectTypeResolver::class;
     }
 
     protected function getObjectTypeNewInstance(int | string $id): mixed

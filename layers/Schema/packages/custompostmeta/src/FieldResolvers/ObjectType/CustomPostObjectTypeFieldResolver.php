@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPostMeta\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPostMeta\Facades\CustomPostMetaTypeAPIFacade;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -15,7 +15,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCustomPostTypeResolver::class,
+            AbstractCustomPostObjectTypeResolver::class,
         ];
     }
 

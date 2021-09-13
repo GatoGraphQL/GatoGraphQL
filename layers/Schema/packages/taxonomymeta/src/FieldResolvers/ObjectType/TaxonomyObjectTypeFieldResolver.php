@@ -7,7 +7,7 @@ namespace PoPSchema\TaxonomyMeta\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
-use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyTypeResolver;
+use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeResolver;
 use PoPSchema\TaxonomyMeta\Facades\TaxonomyMetaTypeAPIFacade;
 
 class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -15,7 +15,7 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractTaxonomyTypeResolver::class,
+            AbstractTaxonomyObjectTypeResolver::class,
         ];
     }
 

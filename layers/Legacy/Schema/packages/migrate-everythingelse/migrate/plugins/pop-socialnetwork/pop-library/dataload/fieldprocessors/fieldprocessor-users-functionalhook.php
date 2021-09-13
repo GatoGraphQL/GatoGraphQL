@@ -5,14 +5,14 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            UserTypeResolver::class,
+            UserObjectTypeResolver::class,
         ];
     }
 

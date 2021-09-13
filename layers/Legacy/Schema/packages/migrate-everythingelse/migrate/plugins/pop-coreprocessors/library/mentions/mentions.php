@@ -9,7 +9,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 /**
@@ -257,7 +257,7 @@ class PoP_Mentions
             // Allow for the popover by adding data-popover-id
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var RelationalTypeResolverInterface */
-            $userTypeResolver = $instanceManager->getInstance(UserTypeResolver::class);
+            $userTypeResolver = $instanceManager->getInstance(UserObjectTypeResolver::class);
             $content = sprintf(
                 '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',
                 '#popover-' . RequestUtils::getDomainId($cmsService->getSiteURL()) . '-' . $userTypeResolver->getTypeName() . '-' . $userTypeAPI->getUserId($user),

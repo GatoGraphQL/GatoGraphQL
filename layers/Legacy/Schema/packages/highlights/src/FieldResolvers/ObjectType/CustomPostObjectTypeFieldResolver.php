@@ -10,8 +10,8 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
-use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
+use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -20,7 +20,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCustomPostTypeResolver::class,
+            AbstractCustomPostObjectTypeResolver::class,
         ];
     }
 
@@ -122,7 +122,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'highlights':
-                return HighlightTypeResolver::class;
+                return HighlightObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

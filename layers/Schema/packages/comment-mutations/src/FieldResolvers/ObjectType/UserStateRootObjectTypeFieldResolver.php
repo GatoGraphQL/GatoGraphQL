@@ -14,14 +14,14 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
@@ -58,7 +58,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootTypeResolver::class,
+            RootObjectTypeResolver::class,
         ];
     }
 
@@ -212,7 +212,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         switch ($fieldName) {
             case 'myComments':
             case 'myComment':
-                return CommentTypeResolver::class;
+                return CommentObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

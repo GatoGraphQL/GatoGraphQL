@@ -7,7 +7,7 @@ namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPostMutations\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateObjectTypeFieldResolverTrait;
 
 class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
@@ -17,7 +17,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            PostTypeResolver::class,
+            PostObjectTypeResolver::class,
         ];
     }
 
@@ -43,7 +43,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     {
         switch ($fieldName) {
             case 'update':
-                return PostTypeResolver::class;
+                return PostObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

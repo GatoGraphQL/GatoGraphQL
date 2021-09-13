@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveTypeEnum;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\SchemaObjectTypeFieldResolver;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
 
@@ -18,7 +18,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            SchemaTypeResolver::class,
+            SchemaObjectTypeResolver::class,
         ];
     }
 

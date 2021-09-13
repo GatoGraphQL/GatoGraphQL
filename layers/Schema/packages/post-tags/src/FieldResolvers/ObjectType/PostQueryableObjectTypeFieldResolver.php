@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
 use PoPSchema\Tags\FieldResolvers\ObjectType\AbstractCustomPostQueryableObjectTypeFieldResolver;
 use PoPSchema\PostTags\ModuleProcessors\PostTagFilterInputContainerModuleProcessor;
@@ -17,7 +17,7 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            PostTypeResolver::class,
+            PostObjectTypeResolver::class,
         ];
     }
 

@@ -6,14 +6,14 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 
 class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCustomPostTypeResolver::class,
+            AbstractCustomPostObjectTypeResolver::class,
         ];
     }
 

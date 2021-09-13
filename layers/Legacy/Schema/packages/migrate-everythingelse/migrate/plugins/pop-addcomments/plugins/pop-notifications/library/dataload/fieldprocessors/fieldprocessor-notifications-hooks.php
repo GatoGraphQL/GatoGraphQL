@@ -9,9 +9,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends AbstractObjectTypeFieldResolver
@@ -19,7 +19,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            NotificationTypeResolver::class,
+            NotificationObjectTypeResolver::class,
         ];
     }
 
@@ -203,7 +203,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
     {
         switch ($fieldName) {
             case 'commentObjectID':
-                return CommentTypeResolver::class;
+                return CommentObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);

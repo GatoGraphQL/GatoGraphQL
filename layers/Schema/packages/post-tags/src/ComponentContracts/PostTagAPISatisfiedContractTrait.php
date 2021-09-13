@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\ComponentContracts;
 
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
@@ -17,6 +17,6 @@ trait PostTagAPISatisfiedContractTrait
 
     protected function getTagTypeResolverClass(): string
     {
-        return PostTagTypeResolver::class;
+        return PostTagObjectTypeResolver::class;
     }
 }

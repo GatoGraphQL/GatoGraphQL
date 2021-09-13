@@ -7,9 +7,9 @@ namespace PoPWPSchema\Pages\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
-use PoPSchema\Pages\TypeResolvers\ObjectType\PageTypeResolver;
+use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use WP_Post;
 
 class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
@@ -17,7 +17,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootTypeResolver::class,
+            RootObjectTypeResolver::class,
         ];
     }
 
@@ -107,7 +107,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         switch ($fieldName) {
             case 'pageByPath':
             case 'pageByPathForAdmin':
-                return PageTypeResolver::class;
+                return PageObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

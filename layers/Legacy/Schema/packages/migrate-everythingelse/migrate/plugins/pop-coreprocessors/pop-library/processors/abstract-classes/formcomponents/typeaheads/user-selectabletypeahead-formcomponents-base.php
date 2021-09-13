@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 abstract class PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase extends PoP_Module_Processor_SelectableTypeaheadFormComponentsBase
 {
@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase ex
 
     public function getTriggerTypeResolverClass(array $module): ?string
     {
-        return UserTypeResolver::class;
+        return UserObjectTypeResolver::class;
     }
 
     public function getTriggerSubmodule(array $module): ?array

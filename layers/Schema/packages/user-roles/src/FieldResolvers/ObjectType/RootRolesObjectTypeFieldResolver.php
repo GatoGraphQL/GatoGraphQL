@@ -7,7 +7,7 @@ namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoPSchema\UserRoles\FieldResolvers\ObjectType\RolesObjectTypeFieldResolverTrait;
 
@@ -18,7 +18,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootTypeResolver::class,
+            RootObjectTypeResolver::class,
         ];
     }
 

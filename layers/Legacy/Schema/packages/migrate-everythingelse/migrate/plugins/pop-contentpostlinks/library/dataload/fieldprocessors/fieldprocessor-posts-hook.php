@@ -5,7 +5,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
@@ -15,7 +15,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCustomPostTypeResolver::class,
+            AbstractCustomPostObjectTypeResolver::class,
         ];
     }
 

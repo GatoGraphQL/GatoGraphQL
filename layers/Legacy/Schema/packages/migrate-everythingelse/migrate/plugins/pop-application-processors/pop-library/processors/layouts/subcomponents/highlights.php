@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightTypeResolver;
+use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 
 class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {

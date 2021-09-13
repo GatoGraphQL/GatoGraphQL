@@ -112,7 +112,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_COMMENTS_SCROLL:
             case self::MODULE_DATALOAD_ADDCOMMENT:
-                return \PoPSchema\Comments\CommentTypeResolver::class;
+                return \PoPSchema\Comments\CommentObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

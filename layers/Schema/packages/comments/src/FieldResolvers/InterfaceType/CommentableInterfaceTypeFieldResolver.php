@@ -11,7 +11,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeResolvers\InterfaceType\CommentableInterfaceTypeResolver;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
@@ -180,7 +180,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         switch ($fieldName) {
             case 'comments':
             case 'commentsForAdmin':
-                return CommentTypeResolver::class;
+                return CommentObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($fieldName);

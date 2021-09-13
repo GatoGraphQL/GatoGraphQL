@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
@@ -112,7 +112,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
         switch ($module[1]) {
             case self::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

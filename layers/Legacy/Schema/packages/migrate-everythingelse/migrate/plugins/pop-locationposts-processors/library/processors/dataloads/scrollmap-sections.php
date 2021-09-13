@@ -1,7 +1,7 @@
 <?php
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostTypeResolver;
+use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostObjectTypeResolver;
 
 class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -135,7 +135,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
             case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-                return LocationPostTypeResolver::class;
+                return LocationPostObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

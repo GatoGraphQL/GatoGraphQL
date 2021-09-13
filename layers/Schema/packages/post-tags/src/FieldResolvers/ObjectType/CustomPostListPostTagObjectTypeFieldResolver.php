@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\FieldResolvers\ObjectType;
 
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\Tags\FieldResolvers\ObjectType\AbstractCustomPostListTagObjectTypeFieldResolver;
 use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
 
@@ -23,7 +23,7 @@ class CustomPostListPostTagObjectTypeFieldResolver extends AbstractCustomPostLis
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            PostTagTypeResolver::class,
+            PostTagObjectTypeResolver::class,
         ];
     }
 

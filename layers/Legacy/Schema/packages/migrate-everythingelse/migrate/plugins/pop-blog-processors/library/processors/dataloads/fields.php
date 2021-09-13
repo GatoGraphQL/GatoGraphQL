@@ -1,7 +1,7 @@
 <?php
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
@@ -40,7 +40,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
-                return PostTypeResolver::class;
+                return PostObjectTypeResolver::class;
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST:
@@ -48,13 +48,13 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
-                return PostTagTypeResolver::class;
+                return PostTagObjectTypeResolver::class;
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

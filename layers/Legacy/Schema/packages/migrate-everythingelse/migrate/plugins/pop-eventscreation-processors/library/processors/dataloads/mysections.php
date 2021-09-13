@@ -1,6 +1,6 @@
 <?php
 use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 
 class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsCreation_Module_Processor_MySectionDataloadsBase
 {
@@ -127,7 +127,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
             case self::MODULE_DATALOAD_MYPASTEVENTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW:
-                return EventTypeResolver::class;
+                return EventObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightTypeResolver;
+use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 
 class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -195,7 +195,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST:
-                return HighlightTypeResolver::class;
+                return HighlightObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

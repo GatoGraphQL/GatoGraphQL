@@ -15,8 +15,8 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
-use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -44,7 +44,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            MediaTypeResolver::class,
+            MediaObjectTypeResolver::class,
         ];
     }
 
@@ -91,7 +91,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'author':
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

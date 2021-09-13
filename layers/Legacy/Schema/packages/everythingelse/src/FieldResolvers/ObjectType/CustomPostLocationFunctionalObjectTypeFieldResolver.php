@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers\ObjectType;
 
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\Posts\Constants\InputNames;
 
 class CustomPostLocationFunctionalObjectTypeFieldResolver extends AbstractLocationFunctionalObjectTypeFieldResolver
@@ -12,7 +12,7 @@ class CustomPostLocationFunctionalObjectTypeFieldResolver extends AbstractLocati
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCustomPostTypeResolver::class,
+            AbstractCustomPostObjectTypeResolver::class,
         ];
     }
 

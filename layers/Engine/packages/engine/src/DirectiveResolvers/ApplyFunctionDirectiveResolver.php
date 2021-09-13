@@ -13,7 +13,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 
 class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -100,12 +100,12 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 
         /**
          * "Functions" are global fields, defined in all TypeResolvers.
-         * Use RootTypeResolver instead of $relationalTypeResolver
+         * Use RootObjectTypeResolver instead of $relationalTypeResolver
          * since this could be a UnionTypeResolver,
          * but `extractFieldArguments` expects an ObjectTypeResolver
          */
-        /** @var RootTypeResolver */
-        $rootTypeResolver = $this->instanceManager->getInstance(RootTypeResolver::class);
+        /** @var RootObjectTypeResolver */
+        $rootTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
 
         // Maybe re-generate the function: Inject the provided `$addArguments` to the fieldArgs already declared in the query
         if ($addArguments) {

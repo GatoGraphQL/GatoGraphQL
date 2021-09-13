@@ -7,7 +7,7 @@ namespace PoPSchema\CommentMeta\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CommentMeta\Facades\CommentMetaTypeAPIFacade;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
 
 class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -15,7 +15,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            CommentTypeResolver::class,
+            CommentObjectTypeResolver::class,
         ];
     }
 

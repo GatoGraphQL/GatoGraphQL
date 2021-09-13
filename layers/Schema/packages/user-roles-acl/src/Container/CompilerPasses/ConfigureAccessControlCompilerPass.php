@@ -6,12 +6,12 @@ namespace PoPSchema\UserRolesACL\Container\CompilerPasses;
 
 use PoP\AccessControl\Services\AccessControlGroups as AccessControlGroups;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
 use PoPSchema\UserRolesACL\Environment;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use PoPSchema\UserStateAccessControl\Services\AccessControlGroups as UserStateAccessControlGroups;
 
@@ -30,10 +30,10 @@ class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
                 [
                     AccessControlGroups::DISABLED,
                     [
-                        [RootTypeResolver::class, 'roles'],
-                        [UserTypeResolver::class, 'roles'],
-                        [RootTypeResolver::class, 'capabilities'],
-                        [UserTypeResolver::class, 'capabilities'],
+                        [RootObjectTypeResolver::class, 'roles'],
+                        [UserObjectTypeResolver::class, 'roles'],
+                        [RootObjectTypeResolver::class, 'capabilities'],
+                        [UserObjectTypeResolver::class, 'capabilities'],
                     ]
                 ]
             );
@@ -44,10 +44,10 @@ class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
                 [
                     UserStateAccessControlGroups::STATE,
                     [
-                        [RootTypeResolver::class, 'roles', UserStates::IN],
-                        [UserTypeResolver::class, 'roles', UserStates::IN],
-                        [RootTypeResolver::class, 'capabilities', UserStates::IN],
-                        [UserTypeResolver::class, 'capabilities', UserStates::IN],
+                        [RootObjectTypeResolver::class, 'roles', UserStates::IN],
+                        [UserObjectTypeResolver::class, 'roles', UserStates::IN],
+                        [RootObjectTypeResolver::class, 'capabilities', UserStates::IN],
+                        [UserObjectTypeResolver::class, 'capabilities', UserStates::IN],
                     ]
                 ]
             );
@@ -58,10 +58,10 @@ class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
                 [
                     UserRolesAccessControlGroups::ROLES,
                     [
-                        [RootTypeResolver::class, 'roles', $roles],
-                        [UserTypeResolver::class, 'roles', $roles],
-                        [RootTypeResolver::class, 'capabilities', $roles],
-                        [UserTypeResolver::class, 'capabilities', $roles],
+                        [RootObjectTypeResolver::class, 'roles', $roles],
+                        [UserObjectTypeResolver::class, 'roles', $roles],
+                        [RootObjectTypeResolver::class, 'capabilities', $roles],
+                        [UserObjectTypeResolver::class, 'capabilities', $roles],
                     ]
                 ]
             );
@@ -72,10 +72,10 @@ class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
                 [
                     UserRolesAccessControlGroups::CAPABILITIES,
                     [
-                        [RootTypeResolver::class, 'roles', $capabilities],
-                        [UserTypeResolver::class, 'roles', $capabilities],
-                        [RootTypeResolver::class, 'capabilities', $capabilities],
-                        [UserTypeResolver::class, 'capabilities', $capabilities],
+                        [RootObjectTypeResolver::class, 'roles', $capabilities],
+                        [UserObjectTypeResolver::class, 'roles', $capabilities],
+                        [RootObjectTypeResolver::class, 'capabilities', $capabilities],
+                        [UserObjectTypeResolver::class, 'capabilities', $capabilities],
                     ]
                 ]
             );

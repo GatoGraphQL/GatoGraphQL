@@ -9,12 +9,12 @@ use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostTypeResolver;
+use PoPSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
@@ -32,7 +32,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootTypeResolver::class,
+            RootObjectTypeResolver::class,
         ];
     }
 
@@ -254,7 +254,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             case 'genericCustomPostForAdmin':
             case 'genericCustomPostBySlugForAdmin':
             case 'genericCustomPostsForAdmin':
-                return GenericCustomPostTypeResolver::class;
+                return GenericCustomPostObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

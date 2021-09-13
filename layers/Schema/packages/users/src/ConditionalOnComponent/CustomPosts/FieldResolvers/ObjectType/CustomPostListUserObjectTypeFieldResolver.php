@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers\ObjectType;
 
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldResolvers\ObjectType\AbstractCustomPostListObjectTypeFieldResolver;
 
@@ -13,7 +13,7 @@ class CustomPostListUserObjectTypeFieldResolver extends AbstractCustomPostListOb
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            UserTypeResolver::class,
+            UserObjectTypeResolver::class,
         ];
     }
 

@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldRe
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\CustomPostMedia\TypeResolvers\InterfaceType\SupportingFeaturedImageInterfaceTypeResolver;
-use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
+use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 
 class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
@@ -60,7 +60,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
     {
         switch ($fieldName) {
             case 'featuredImage':
-                return MediaTypeResolver::class;
+                return MediaObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($fieldName);

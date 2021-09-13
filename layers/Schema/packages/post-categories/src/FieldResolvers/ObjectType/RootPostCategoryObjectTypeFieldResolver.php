@@ -9,11 +9,11 @@ use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\Categories\ComponentConfiguration;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerModuleProcessor;
-use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
@@ -27,7 +27,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootTypeResolver::class,
+            RootObjectTypeResolver::class,
         ];
     }
 
@@ -182,7 +182,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             case 'postCategory':
             case 'postCategoryBySlug':
             case 'postCategories':
-                return PostCategoryTypeResolver::class;
+                return PostCategoryObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

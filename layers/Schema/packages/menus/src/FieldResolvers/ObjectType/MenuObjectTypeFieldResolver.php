@@ -18,8 +18,8 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
-use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemTypeResolver;
-use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
+use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemObjectTypeResolver;
+use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -47,7 +47,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            MenuTypeResolver::class,
+            MenuObjectTypeResolver::class,
         ];
     }
 
@@ -202,7 +202,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'items':
-                return MenuItemTypeResolver::class;
+                return MenuItemObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

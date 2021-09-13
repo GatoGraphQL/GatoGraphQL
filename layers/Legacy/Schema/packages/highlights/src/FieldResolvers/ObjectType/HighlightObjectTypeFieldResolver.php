@@ -12,14 +12,14 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightTypeResolver;
+use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 
 class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            HighlightTypeResolver::class,
+            HighlightObjectTypeResolver::class,
         ];
     }
 

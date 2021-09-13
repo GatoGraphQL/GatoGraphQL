@@ -23,7 +23,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\ModuleProcessors\UserFilterInputContainerModuleProcessor;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -199,7 +199,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         switch ($fieldName) {
             case 'users':
             case 'usersForAdmin':
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

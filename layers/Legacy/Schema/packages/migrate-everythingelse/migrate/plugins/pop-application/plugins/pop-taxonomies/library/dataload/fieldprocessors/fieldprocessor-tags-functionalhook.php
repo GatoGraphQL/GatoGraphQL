@@ -3,14 +3,14 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagTypeResolver;
+use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
 
 class PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractTagTypeResolver::class,
+            AbstractTagObjectTypeResolver::class,
         ];
     }
 

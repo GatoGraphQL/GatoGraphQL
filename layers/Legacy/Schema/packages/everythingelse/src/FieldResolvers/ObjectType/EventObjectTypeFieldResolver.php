@@ -10,15 +10,15 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
-use PoPSchema\Locations\TypeResolvers\ObjectType\LocationTypeResolver;
+use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
+use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 
 class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            EventTypeResolver::class,
+            EventObjectTypeResolver::class,
         ];
     }
 
@@ -146,7 +146,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'locations':
-                return LocationTypeResolver::class;
+                return LocationObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);

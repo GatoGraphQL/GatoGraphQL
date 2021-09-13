@@ -1,10 +1,10 @@
 <?php
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 abstract class PoP_Module_Processor_UserTriggerLayoutFormComponentValuesBase extends PoP_Module_Processor_TriggerLayoutFormComponentValuesBase
 {
     public function getTriggerTypeResolverClass(array $module): ?string
     {
-        return UserTypeResolver::class;
+        return UserObjectTypeResolver::class;
     }
 }

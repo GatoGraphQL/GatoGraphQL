@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -120,7 +120,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

@@ -3,9 +3,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
@@ -196,12 +196,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             case self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
-                return EventTypeResolver::class;
+                return EventObjectTypeResolver::class;
 
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
             case self::MODULE_DATALOAD_USERS_SCROLLMAP:
             case self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
@@ -71,7 +71,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_TAG_SIDEBAR:
-                return PostTagTypeResolver::class;
+                return PostTagObjectTypeResolver::class;
 
             case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);

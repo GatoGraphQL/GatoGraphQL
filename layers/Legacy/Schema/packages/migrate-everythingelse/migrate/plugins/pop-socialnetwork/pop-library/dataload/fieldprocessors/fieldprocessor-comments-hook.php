@@ -3,15 +3,15 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_DataLoad_ObjectTypeFieldResolver_Comments extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            CommentTypeResolver::class,
+            CommentObjectTypeResolver::class,
         ];
     }
 
@@ -68,7 +68,7 @@ class GD_DataLoad_ObjectTypeFieldResolver_Comments extends AbstractObjectTypeFie
     {
         switch ($fieldName) {
             case 'taggedusers':
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);

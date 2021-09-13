@@ -3,7 +3,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\UpdateUserAvatarMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\FileUploadPictureMutationResolverBridge;
 
@@ -41,7 +41,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

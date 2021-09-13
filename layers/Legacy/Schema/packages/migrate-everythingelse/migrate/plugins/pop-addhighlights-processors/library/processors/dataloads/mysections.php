@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightTypeResolver;
+use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 
 class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
@@ -69,7 +69,7 @@ class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_P
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYHIGHLIGHTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW:
-                return HighlightTypeResolver::class;
+                return HighlightObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

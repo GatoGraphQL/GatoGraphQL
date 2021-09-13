@@ -1,6 +1,6 @@
 <?php
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
@@ -258,7 +258,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
 
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
             case self::MODULE_DATALOADACTION_UNRECOMMENDPOST:
@@ -270,7 +270,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
 
             case self::MODULE_DATALOADACTION_SUBSCRIBETOTAG:
             case self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG:
-                return PostTagTypeResolver::class;
+                return PostTagObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

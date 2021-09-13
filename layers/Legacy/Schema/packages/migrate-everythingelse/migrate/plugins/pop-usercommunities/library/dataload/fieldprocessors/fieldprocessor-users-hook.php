@@ -9,7 +9,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
 use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
 use PoPSchema\EverythingElse\Enums\MemberTagEnum;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
@@ -18,7 +18,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            UserTypeResolver::class,
+            UserObjectTypeResolver::class,
         ];
     }
 
@@ -174,7 +174,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
         switch ($fieldName) {
             case 'communities':
             case 'activeCommunities':
-                return UserTypeResolver::class;
+                return UserObjectTypeResolver::class;
         }
 
         return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);

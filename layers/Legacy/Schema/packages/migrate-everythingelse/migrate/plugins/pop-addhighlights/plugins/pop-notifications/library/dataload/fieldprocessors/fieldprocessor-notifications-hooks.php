@@ -5,7 +5,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoPTheme_Wassup_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends AbstractObjectTypeFieldResolver
@@ -13,7 +13,7 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications ext
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            NotificationTypeResolver::class,
+            NotificationObjectTypeResolver::class,
         ];
     }
 

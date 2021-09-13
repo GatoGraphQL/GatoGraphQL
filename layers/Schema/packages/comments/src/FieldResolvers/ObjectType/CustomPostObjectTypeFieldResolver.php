@@ -15,7 +15,7 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\FieldResolvers\InterfaceType\CommentableInterfaceTypeFieldResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -45,7 +45,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCustomPostTypeResolver::class,
+            AbstractCustomPostObjectTypeResolver::class,
         ];
     }
 

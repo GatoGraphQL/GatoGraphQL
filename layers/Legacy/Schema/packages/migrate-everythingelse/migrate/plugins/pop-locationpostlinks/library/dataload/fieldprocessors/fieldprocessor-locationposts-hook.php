@@ -4,7 +4,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostTypeResolver;
+use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostObjectTypeResolver;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 class GD_Custom_Locations_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
@@ -12,7 +12,7 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Post
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            LocationPostTypeResolver::class,
+            LocationPostObjectTypeResolver::class,
         ];
     }
 

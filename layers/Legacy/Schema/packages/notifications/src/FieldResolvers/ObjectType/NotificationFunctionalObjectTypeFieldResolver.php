@@ -8,14 +8,14 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 
 class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            NotificationTypeResolver::class,
+            NotificationObjectTypeResolver::class,
         ];
     }
 

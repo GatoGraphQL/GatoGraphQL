@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 
 class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -303,7 +303,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST:
-                return CustomPostTypeResolver::class;
+                return CustomPostObjectTypeResolver::class;
         }
 
         return parent::getRelationalTypeResolverClass($module);

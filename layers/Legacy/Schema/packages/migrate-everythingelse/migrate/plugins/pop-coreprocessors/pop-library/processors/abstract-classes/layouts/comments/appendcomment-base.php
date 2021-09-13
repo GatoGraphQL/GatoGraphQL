@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 abstract class PoP_Module_Processor_AppendCommentLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -26,7 +26,7 @@ abstract class PoP_Module_Processor_AppendCommentLayoutsBase extends PoPEngine_Q
 
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var RelationalTypeResolverInterface */
-        $postTypeResolver = $instanceManager->getInstance(PostTypeResolver::class);
+        $postTypeResolver = $instanceManager->getInstance(PostObjectTypeResolver::class);
         $ret['post-dbkey'] = $postTypeResolver->getTypeName();
         $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = 'comments';
 

@@ -264,7 +264,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
          * when creating an Access Control List:
          *
          * - CustomPostUnionTypeResolver is set to implement IsCustomPostInterfaceType
-         * - CustomPostUnionTypeResolver contains types PostTypeResolver and PageTypeResolver
+         * - CustomPostUnionTypeResolver contains types PostObjectTypeResolver and PageObjectTypeResolver
          * - Via ACL in a private schema, we disable access to field "Post.author"
          * - Because IsCustomPostInterfaceType contains field "author", then Post suddenly
          *   does not satisfy this interface anymore
@@ -319,7 +319,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // and dependent components (eg: Communities, Organizations) are defined later
         // Then, more specific implementations (eg: Organizations) must be queried before more general ones (eg: Communities)
         // This is not a problem by making the corresponding field processors inherit from each other, so that the more specific object also handles
-        // the fields for the more general ones (eg: TypeResolver_OrganizationUsers extends TypeResolver_CommunityUsers, and TypeResolver_CommunityUsers extends UserTypeResolver)
+        // the fields for the more general ones (eg: TypeResolver_OrganizationUsers extends TypeResolver_CommunityUsers, and TypeResolver_CommunityUsers extends UserObjectTypeResolver)
         foreach ($this->getObjectTypeResolverPickers() as $maybePicker) {
             if ($maybePicker->isIDOfType($resultItemID)) {
                 // Found it!
@@ -338,7 +338,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // and dependent components (eg: Communities, Organizations) are defined later
         // Then, more specific implementations (eg: Organizations) must be queried before more general ones (eg: Communities)
         // This is not a problem by making the corresponding field processors inherit from each other, so that the more specific object also handles
-        // the fields for the more general ones (eg: TypeResolver_OrganizationUsers extends TypeResolver_CommunityUsers, and TypeResolver_CommunityUsers extends UserTypeResolver)
+        // the fields for the more general ones (eg: TypeResolver_OrganizationUsers extends TypeResolver_CommunityUsers, and TypeResolver_CommunityUsers extends UserObjectTypeResolver)
         foreach ($this->getObjectTypeResolverPickers() as $maybePicker) {
             if ($maybePicker->isInstanceOfType($resultItem)) {
                 // Found it!

@@ -7,14 +7,14 @@ namespace PoPSchema\PostTagMutations\Hooks;
 use PoPSchema\CustomPostTagMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\PostTagMutations\Facades\PostTagTypeMutationAPIFacade;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
     protected function getCustomPostTypeResolverClass(): string
     {
-        return PostTypeResolver::class;
+        return PostObjectTypeResolver::class;
     }
 
     protected function getCustomPostType(): string
