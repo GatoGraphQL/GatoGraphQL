@@ -314,7 +314,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 return $this->errorProvider->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
             }
 
-            // Important: calculate 'isAnyFieldArgumentValueDynamic' before resolving the args for the resultItem
+            // Important: calculate 'isAnyFieldArgumentValueDynamic' before resolving the args for the object
             // That is because if when resolving there is an error, the fieldArgValue will be removed completely, then we don't know that we must validate the schema again
             // Eg: doing /?query=arrayUnique(extract(..., 0)) and extract fails, arrayUnique will have no fieldArgs. However its fieldArg is mandatory, but by then it doesn't know it needs to validate it
             // Before resolving the fieldArgValues which are fields:

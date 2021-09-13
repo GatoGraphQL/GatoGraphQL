@@ -74,7 +74,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     /**
-     * Validated the mutation on the resultItem because the ID
+     * Validated the mutation on the object because the ID
      * is obtained from the same object, so it's not originally
      * present in $form_data
      */

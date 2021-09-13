@@ -57,7 +57,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
     {
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
-         * (that depends on each resultItem), it can't resolve this functionality
+         * (that depends on each object), it can't resolve this functionality
          */
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
             return true;

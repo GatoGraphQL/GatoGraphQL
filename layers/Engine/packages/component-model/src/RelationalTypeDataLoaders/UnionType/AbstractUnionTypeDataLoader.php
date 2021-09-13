@@ -17,23 +17,23 @@ abstract class AbstractUnionTypeDataLoader extends AbstractRelationalTypeDataLoa
     {
         $unionTypeResolverClass = $this->getUnionTypeResolverClass();
         $unionTypeResolver = $this->instanceManager->getInstance($unionTypeResolverClass);
-        $resultItemIDTargetTypeResolvers = $unionTypeResolver->getObjectIDTargetTypeResolvers($ids);
+        $objectIDTargetTypeResolvers = $unionTypeResolver->getObjectIDTargetTypeResolvers($ids);
         // Organize all IDs by same resolverClass
         $typeResolverClassObjectIDs = [];
-        foreach ($resultItemIDTargetTypeResolvers as $resultItemID => $targetTypeResolver) {
-            $typeResolverClassObjectIDs[get_class($targetTypeResolver)][] = $resultItemID;
+        foreach ($objectIDTargetTypeResolvers as $objectID => $targetTypeResolver) {
+            $typeResolverClassObjectIDs[get_class($targetTypeResolver)][] = $objectID;
         }
         // Load all objects by each corresponding typeResolver
-        $resultItems = [];
-        foreach ($typeResolverClassObjectIDs as $targetTypeResolverClass => $resultItemIDs) {
+        $objects = [];
+        foreach ($typeResolverClassObjectIDs as $targetTypeResolverClass => $objectIDs) {
             $targetTypeResolver = $this->instanceManager->getInstance($targetTypeResolverClass);
             $targetTypeDataLoaderClass = $targetTypeResolver->getRelationalTypeDataLoaderClass();
             $targetTypeDataLoader = $this->instanceManager->getInstance($targetTypeDataLoaderClass);
-            $resultItems = array_merge(
-                $resultItems,
-                $targetTypeDataLoader->getObjects($resultItemIDs)
+            $objects = array_merge(
+                $objects,
+                $targetTypeDataLoader->getObjects($objectIDs)
             );
         }
-        return $resultItems;
+        return $objects;
     }
 }

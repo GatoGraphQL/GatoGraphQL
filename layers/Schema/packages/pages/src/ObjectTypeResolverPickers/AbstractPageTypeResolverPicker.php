@@ -21,9 +21,9 @@ abstract class AbstractPageTypeResolverPicker extends AbstractObjectTypeResolver
         return $pageTypeAPI->isInstanceOfPageType($object);
     }
 
-    public function isIDOfType(string | int $resultItemID): bool
+    public function isIDOfType(string | int $objectID): bool
     {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        return $pageTypeAPI->pageExists($resultItemID);
+        return $pageTypeAPI->pageExists($objectID);
     }
 }

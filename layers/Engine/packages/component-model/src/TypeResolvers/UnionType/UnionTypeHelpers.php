@@ -35,7 +35,7 @@ class UnionTypeHelpers
     }
 
     /**
-     * Extracts the DB key and ID from the resultItem ID
+     * Extracts the DB key and ID from the object ID
      */
     public static function extractDBObjectTypeAndID(string $composedDBKeyObjectID): array
     {
@@ -51,7 +51,7 @@ class UnionTypeHelpers
     }
 
     /**
-     * Extracts the ID from the resultItem ID
+     * Extracts the ID from the object ID
      */
     public static function extractDBObjectID(string $composedDBObjectTypeAndID): string | int
     {

@@ -571,14 +571,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return array_keys($ids_data_fields);
     }
 
-    protected function getUnresolvedObjectIDError(string | int $resultItemID)
+    protected function getUnresolvedObjectIDError(string | int $objectID)
     {
         return new Error(
             'unresolved-resultitem-id',
             sprintf(
                 $this->translationAPI->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
                 $this->getTypeOutputName(),
-                $resultItemID
+                $objectID
             )
         );
     }
@@ -606,17 +606,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $ids = $this->getIDsToQuery($ids_data_fields);
         $typeDataLoaderClass = $this->getRelationalTypeDataLoaderClass();
         $typeDataLoader = $this->instanceManager->getInstance($typeDataLoaderClass);
-        // If any ID cannot be resolved, the resultItem will be null
-        $resultItems = array_filter($typeDataLoader->getObjects($ids));
-        foreach ($resultItems as $object) {
-            $resultItemID = $this->getID($object);
+        // If any ID cannot be resolved, the object will be null
+        $objects = array_filter($typeDataLoader->getObjects($ids));
+        foreach ($objects as $object) {
+            $objectID = $this->getID($object);
             // If the UnionTypeResolver doesn't have a TypeResolver to process this element, the ID will be null, and an error will be show below
-            if ($resultItemID === null) {
+            if ($objectID === null) {
                 continue;
             }
-            $resultIDItems[$resultItemID] = $object;
+            $resultIDItems[$objectID] = $object;
         }
-        // Show an error for all resultItems that couldn't be processed
+        // Show an error for all objects that couldn't be processed
         $resolvedObjectIDs = $this->getIDsToQuery($resultIDItems);
         $unresolvedObjectIDs = [];
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {

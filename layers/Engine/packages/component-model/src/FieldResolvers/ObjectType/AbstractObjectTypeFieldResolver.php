@@ -739,7 +739,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         // If a MutationResolver is declared, let it resolve the value
         if ($mutationResolverClass = $this->resolveFieldMutationResolverClass($objectTypeResolver, $fieldName)) {
-            // Validate on the resultItem?
+            // Validate on the object?
             if ($this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
                 /** @var MutationResolverInterface */
                 $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
@@ -758,7 +758,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * The mutation can be validated either on the schema (`false`)
-     * on on the resultItem (`true`)
+     * on on the object (`true`)
      */
     public function validateMutationOnObject(
         ObjectTypeResolverInterface $objectTypeResolver,

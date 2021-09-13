@@ -111,7 +111,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     }
 
     /**
-     * If a directive does not operate over the resultItems, then it must not allow to add fields or dynamic values in the directive arguments
+     * If a directive does not operate over the objects, then it must not allow to add fields or dynamic values in the directive arguments
      * Otherwise, it can lead to errors, since the field would never be transformed/casted to the expected type
      * Eg: <cacheControl(maxAge:id())>
      */
@@ -295,8 +295,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
-        $resultItemID = $relationalTypeResolver->getID($object);
-        $this->directiveArgsForObjects[$resultItemID] = $directiveArgs;
+        $objectID = $relationalTypeResolver->getID($object);
+        $this->directiveArgsForObjects[$objectID] = $directiveArgs;
 
         // Store errors (if any)
         foreach ($nestedDBErrors as $id => $fieldOutputKeyErrorMessages) {
@@ -324,7 +324,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 )
             ) {
                 foreach ($maybeErrors as $errorMessage) {
-                    $dbErrors[$resultItemID][] = [
+                    $dbErrors[$objectID][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => $errorMessage,
                     ];
@@ -536,7 +536,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      */
     protected function getExpressionsForObject(int | string $id, array &$variables, array &$messages): array
     {
-        // Create a custom $variables containing all the properties from $dbItems for this resultItem
+        // Create a custom $variables containing all the properties from $dbItems for this object
         // This way, when encountering $propName in a fieldArg in a fieldResolver, it can resolve that value
         // Otherwise it can't, since the fieldResolver doesn't have access to either $dbItems
         return array_merge(

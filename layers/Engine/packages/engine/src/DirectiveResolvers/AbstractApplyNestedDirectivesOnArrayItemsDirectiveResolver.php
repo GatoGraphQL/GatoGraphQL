@@ -418,10 +418,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
                     $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the dbWarnings, if any
-                    if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
+                    if ($objectDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
                         $dbWarnings[$id] = array_merge(
                             $dbWarnings[$id] ?? [],
-                            $resultItemDBWarnings
+                            $objectDBWarnings
                         );
                     }
                     if (GeneralUtils::isError($resolvedValue)) {
@@ -450,10 +450,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
                     $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the dbWarnings, if any
-                    if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
+                    if ($objectDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
                         $dbWarnings[$id] = array_merge(
                             $dbWarnings[$id] ?? [],
-                            $resultItemDBWarnings
+                            $objectDBWarnings
                         );
                     }
                     if (GeneralUtils::isError($resolvedValue)) {

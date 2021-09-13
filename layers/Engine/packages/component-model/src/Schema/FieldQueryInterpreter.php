@@ -706,20 +706,20 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $fieldOutputKey = $this->getFieldOutputKey($field);
         $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $dbErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $resultItemDBErrors = $resultItemDBWarnings = [];
-        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $resultItemDBErrors, $resultItemDBWarnings);
-        if ($resultItemDBErrors || $resultItemDBWarnings) {
+        $objectDBErrors = $objectDBWarnings = [];
+        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $objectDBErrors, $objectDBWarnings);
+        if ($objectDBErrors || $objectDBWarnings) {
             $id = $objectTypeResolver->getID($object);
-            if ($resultItemDBErrors) {
+            if ($objectDBErrors) {
                 $dbErrors[(string)$id] = array_merge(
                     $dbErrors[(string)$id] ?? [],
-                    $resultItemDBErrors
+                    $objectDBErrors
                 );
             }
-            if ($resultItemDBWarnings) {
+            if ($objectDBWarnings) {
                 $dbWarnings[(string)$id] = array_merge(
                     $dbWarnings[(string)$id] ?? [],
-                    $resultItemDBWarnings
+                    $objectDBWarnings
                 );
             }
         }
@@ -761,20 +761,20 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $directiveOutputKey = $this->getDirectiveOutputKey($fieldDirective);
         $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $directiveOutputKey, $variables, $expressions, $dbErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $resultItemDBErrors = $resultItemDBWarnings = [];
-        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $resultItemDBErrors, $resultItemDBWarnings);
-        if ($resultItemDBErrors || $resultItemDBWarnings) {
+        $objectDBErrors = $objectDBWarnings = [];
+        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectDBErrors, $objectDBWarnings);
+        if ($objectDBErrors || $objectDBWarnings) {
             $id = $relationalTypeResolver->getID($object);
-            if ($resultItemDBErrors) {
+            if ($objectDBErrors) {
                 $dbErrors[(string)$id] = array_merge(
                     $dbErrors[(string)$id] ?? [],
-                    $resultItemDBErrors
+                    $objectDBErrors
                 );
             }
-            if ($resultItemDBWarnings) {
+            if ($objectDBWarnings) {
                 $dbWarnings[(string)$id] = array_merge(
                     $dbWarnings[(string)$id] ?? [],
-                    $resultItemDBWarnings
+                    $objectDBWarnings
                 );
             }
         }
