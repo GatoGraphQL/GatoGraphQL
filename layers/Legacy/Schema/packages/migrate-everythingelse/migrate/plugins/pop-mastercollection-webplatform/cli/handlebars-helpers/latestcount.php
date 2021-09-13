@@ -1,6 +1,6 @@
 <?php
 /**
-Helper functions, they have the same logic as the original javascript helper file wp-content/plugins/pop-coreprocessors/js/helpers.handlebars.js
+ * Helper functions, they have the same logic as the original javascript helper file wp-content/plugins/pop-coreprocessors/js/helpers.handlebars.js
 */
 class PoP_ServerSide_LatestCountHelperCallers
 {
