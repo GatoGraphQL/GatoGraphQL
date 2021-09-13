@@ -8,7 +8,7 @@ use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
-use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 

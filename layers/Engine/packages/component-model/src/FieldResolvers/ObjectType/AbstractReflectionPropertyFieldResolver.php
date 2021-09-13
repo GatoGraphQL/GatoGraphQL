@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\FieldResolvers;
+namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
 use ReflectionClass;
 use ReflectionProperty;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
 
 abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFieldResolver
 {

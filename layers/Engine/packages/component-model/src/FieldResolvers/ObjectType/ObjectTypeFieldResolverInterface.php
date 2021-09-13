@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\FieldResolvers;
+namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 interface ObjectTypeFieldResolverInterface extends FieldResolverInterface

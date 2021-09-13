@@ -6,7 +6,7 @@ namespace PoP\Engine\FieldResolvers;
 
 use ArgumentCountError;
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;

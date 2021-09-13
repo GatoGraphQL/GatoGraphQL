@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\FieldResolvers;
 
-use PoP\ComponentModel\FieldResolvers\AbstractReflectionPropertyFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractReflectionPropertyFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
