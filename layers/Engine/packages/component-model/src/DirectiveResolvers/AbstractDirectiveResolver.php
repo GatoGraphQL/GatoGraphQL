@@ -412,6 +412,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         string $directiveName,
         array $directiveArgs = []
     ): ?array {
+        $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs);
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             /**
@@ -428,7 +429,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 return [$maybeError];
             }
 
-            if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
+            if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
                 /**
                  * Validate array types are provided as arrays. If it produces errors, return immediately
                  */
@@ -443,9 +444,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     return $maybeErrors;
                 }
 
-                // The errors below can be accumulated
-                $errors = [];
-
                 /**
                  * Validate enums
                  */
@@ -457,34 +455,24 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                         ResolverTypes::DIRECTIVE
                     )
                 ) {
-                    $errors = array_merge(
-                        $errors,
-                        $maybeErrors
-                    );
-                }
-
-                /**
-                 * Validate directive argument constraints
-                 */
-                if (
-                    $maybeErrors = $this->resolveDirectiveArgumentErrors(
-                        $relationalTypeResolver,
-                        $directiveName,
-                        $directiveArgs
-                    )
-                ) {
-                    $errors = array_merge(
-                        $errors,
-                        $maybeErrors
-                    );
-                }
-
-                if ($errors) {
-                    return $errors;
+                    return $maybeErrors;
                 }
             }
         }
-
+        if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
+            /**
+             * Validate directive argument constraints
+             */
+            if (
+                $maybeErrors = $this->resolveDirectiveArgumentErrors(
+                    $relationalTypeResolver,
+                    $directiveName,
+                    $directiveArgs
+                )
+            ) {
+                return $maybeErrors;
+            }
+        }
         // Custom validations
         return $this->doResolveSchemaValidationErrorDescriptions(
             $relationalTypeResolver,

@@ -333,6 +333,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     public function resolveSchemaValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
+        $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs);
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($objectTypeResolver, $fieldName, $fieldArgs);
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             /**
@@ -349,7 +350,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 return [$maybeError];
             }
 
-            if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs)) {
+            if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
                 /**
                  * Validate array types are provided as arrays. If it produces errors, return immediately
                  */
@@ -364,9 +365,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     return $maybeErrors;
                 }
 
-                // The errors below can be accumulated
-                $errors = [];
-
                 /**
                  * Validate enums
                  */
@@ -378,31 +376,22 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         ResolverTypes::FIELD
                     )
                 ) {
-                    $errors = array_merge(
-                        $errors,
-                        $maybeErrors
-                    );
+                    return $maybeErrors;
                 }
-
-                /**
-                 * Validate field argument constraints
-                 */
-                if (
-                    $maybeErrors = $this->resolveFieldArgumentErrors(
-                        $objectTypeResolver,
-                        $fieldName,
-                        $fieldArgs
-                    )
-                ) {
-                    $errors = array_merge(
-                        $errors,
-                        $maybeErrors
-                    );
-                }
-
-                if ($errors) {
-                    return $errors;
-                }
+            }
+        }
+        if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
+            /**
+             * Validate field argument constraints
+             */
+            if (
+                $maybeErrors = $this->resolveFieldArgumentErrors(
+                    $objectTypeResolver,
+                    $fieldName,
+                    $fieldArgs
+                )
+            ) {
+                return $maybeErrors;
             }
         }
         // If a MutationResolver is declared, let it resolve the value
