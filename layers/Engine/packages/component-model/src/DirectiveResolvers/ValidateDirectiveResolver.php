@@ -65,7 +65,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
 
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
-        
+
         // Check for errors first, warnings and deprecations then
         $success = true;
         if ($schemaValidationErrors = $objectTypeResolver->resolveSchemaValidationErrorDescriptions($field, $variables)) {
