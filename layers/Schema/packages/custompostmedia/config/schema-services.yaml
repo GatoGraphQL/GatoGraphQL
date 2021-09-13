@@ -8,6 +8,3 @@ services:
 
     PoPSchema\CustomPostMedia\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
-
-    PoPSchema\CustomPostMedia\InterfaceTypeFieldResolvers\:
-        resource: '../src/InterfaceTypeFieldResolvers/*'

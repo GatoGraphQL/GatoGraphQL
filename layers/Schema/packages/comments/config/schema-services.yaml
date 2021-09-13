@@ -11,6 +11,3 @@ services:
 
     PoPSchema\Comments\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
-
-    PoPSchema\Comments\InterfaceTypeFieldResolvers\:
-        resource: '../src/InterfaceTypeFieldResolvers/*'
