@@ -583,7 +583,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         );
     }
 
-    public function fillResultItems(
+    public function fillObjects(
         array $ids_data_fields,
         array &$unionDBKeyIDs,
         array &$dbItems,
