@@ -12,6 +12,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -34,7 +35,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
      */
     public function resolveCanProcess(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
     {
-        if (!($relationalTypeResolver instanceof ObjectTypeResolverInterface)) {
+        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
             return false;
         }
 
