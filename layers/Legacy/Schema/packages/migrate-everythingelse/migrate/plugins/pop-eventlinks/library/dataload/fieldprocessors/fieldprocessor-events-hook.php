@@ -56,7 +56,7 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Events extends AbstractObjectTypeFi
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
         string $fieldName,

@@ -133,14 +133,14 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
-        return $aliasedObjectTypeFieldResolver->resolveCanProcessResultItem(
+        return $aliasedObjectTypeFieldResolver->resolveCanProcessObject(
             $objectTypeResolver,
             $object,
             $this->getAliasedFieldName($fieldName),

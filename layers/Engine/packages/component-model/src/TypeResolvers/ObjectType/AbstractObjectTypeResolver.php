@@ -351,7 +351,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
                 // Also send the typeResolver along, as to get the id of the $object being passed
-                if ($objectTypeFieldResolver->resolveCanProcessResultItem($this, $object, $fieldName, $fieldArgs)) {
+                if ($objectTypeFieldResolver->resolveCanProcessObject($this, $object, $fieldName, $fieldArgs)) {
                     if ($validateSchemaOnObject) {
                         if ($maybeErrors = $objectTypeFieldResolver->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                             return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);

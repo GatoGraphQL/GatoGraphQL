@@ -6,7 +6,7 @@ trait IndividualObjectTypeFieldResolverTrait
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
@@ -16,6 +16,6 @@ trait IndividualObjectTypeFieldResolverTrait
         if (!gdUreIsIndividual($objectTypeResolver->getID($user))) {
             return false;
         }
-        return parent::resolveCanProcessResultItem($objectTypeResolver, $object, $fieldName, $fieldArgs);
+        return parent::resolveCanProcessObject($objectTypeResolver, $object, $fieldName, $fieldArgs);
     }
 }

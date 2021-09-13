@@ -11,7 +11,7 @@ trait SiteObjectTypeFieldResolverTrait
     /**
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcessResultItem(
+    public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
@@ -24,6 +24,6 @@ trait SiteObjectTypeFieldResolverTrait
         if ($site->getHost() != $cmsengineapi->getHost()) {
             return false;
         }
-        return parent::resolveCanProcessResultItem($objectTypeResolver, $object, $fieldName, $fieldArgs);
+        return parent::resolveCanProcessObject($objectTypeResolver, $object, $fieldName, $fieldArgs);
     }
 }
