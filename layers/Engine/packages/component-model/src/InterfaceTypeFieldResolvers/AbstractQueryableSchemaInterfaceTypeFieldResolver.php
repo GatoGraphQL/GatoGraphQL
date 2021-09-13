@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\FieldInterfaceResolvers;
+namespace PoP\ComponentModel\InterfaceTypeFieldResolvers;
 
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 
-abstract class AbstractQueryableSchemaFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver implements QueryableFieldInterfaceSchemaDefinitionResolverInterface
+abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver implements QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
 
     public function getFieldDataFilteringModule(string $fieldName): ?array
     {
-        /** @var QueryableFieldInterfaceSchemaDefinitionResolverInterface */
+        /** @var QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface */
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName);

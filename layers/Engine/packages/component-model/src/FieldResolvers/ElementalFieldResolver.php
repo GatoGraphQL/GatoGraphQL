@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\ElementalFieldInterfaceResolver;
+use PoP\ComponentModel\InterfaceTypeFieldResolvers\ElementalInterfaceTypeFieldResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
@@ -19,10 +19,10 @@ class ElementalFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getImplementedFieldInterfaceResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolverClasses(): array
     {
         return [
-            ElementalFieldInterfaceResolver::class,
+            ElementalInterfaceTypeFieldResolver::class,
         ];
     }
 

@@ -15,8 +15,8 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      */
     public function getAdminFieldNames(): array;
     /**
-     * Each FieldInterfaceResolver provides a list of fieldNames to the Interface.
-     * The Interface may also accept other fieldNames from other FieldInterfaceResolvers.
+     * Each InterfaceTypeFieldResolver provides a list of fieldNames to the Interface.
+     * The Interface may also accept other fieldNames from other InterfaceTypeFieldResolvers.
      * That's why this function is "partially" implemented: the Interface
      * may be completely implemented or not.
      *
@@ -28,5 +28,5 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      *
      * @return string[]
      */
-    public function getImplementedFieldInterfaceResolverClasses(): array;
+    public function getImplementedInterfaceTypeFieldResolverClasses(): array;
 }

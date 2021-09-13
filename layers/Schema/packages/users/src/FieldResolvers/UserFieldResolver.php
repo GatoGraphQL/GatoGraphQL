@@ -15,7 +15,7 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoPSchema\QueriedObject\InterfaceTypeFieldResolvers\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
@@ -49,10 +49,10 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getImplementedFieldInterfaceResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolverClasses(): array
     {
         return [
-            QueryableFieldInterfaceResolver::class,
+            QueryableInterfaceTypeFieldResolver::class,
         ];
     }
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\FieldInterfaceResolvers;
+namespace PoP\ComponentModel\InterfaceTypeFieldResolvers;
 
-interface FieldInterfaceSchemaDefinitionResolverInterface
+interface InterfaceTypeFieldSchemaDefinitionResolverInterface
 {
     public function getFieldNamesToResolve(): array;
     public function getSchemaFieldType(string $fieldName): string;

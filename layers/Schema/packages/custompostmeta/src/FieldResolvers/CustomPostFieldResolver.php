@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPostMeta\Facades\CustomPostMetaTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
-use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
+use PoPSchema\Meta\InterfaceTypeFieldResolvers\WithMetaInterfaceTypeFieldResolver;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -19,10 +19,10 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getImplementedFieldInterfaceResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolverClasses(): array
     {
         return [
-            WithMetaFieldInterfaceResolver::class,
+            WithMetaInterfaceTypeFieldResolver::class,
         ];
     }
 

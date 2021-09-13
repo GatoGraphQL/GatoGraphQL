@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\FieldInterfaceResolvers;
+namespace PoP\ComponentModel\InterfaceTypeFieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface
 {
     /**
-     * The classes of the InterfaceTypeResolvers this FieldInterfaceResolver adds fields to.
+     * The classes of the InterfaceTypeResolvers this InterfaceTypeFieldResolver adds fields to.
      * The list can contain both concrete and abstract classes (in which case all classes
      * extending from them will be selected)
      *
@@ -22,8 +22,8 @@ interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface
      */
     public function getFieldNamesToImplement(): array;
     /**
-     * Each FieldInterfaceResolver provides a list of fieldNames to the Interface.
-     * The Interface may also accept other fieldNames from other FieldInterfaceResolvers.
+     * Each InterfaceTypeFieldResolver provides a list of fieldNames to the Interface.
+     * The Interface may also accept other fieldNames from other InterfaceTypeFieldResolvers.
      * That's why this function is "partially" implemented: the Interface
      * may be completely implemented or not.
      *

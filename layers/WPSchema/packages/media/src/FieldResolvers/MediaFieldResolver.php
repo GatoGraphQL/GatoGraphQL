@@ -16,7 +16,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
-use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoPSchema\QueriedObject\InterfaceTypeFieldResolvers\QueryableInterfaceTypeFieldResolver;
 use WP_Post;
 
 class MediaFieldResolver extends AbstractQueryableFieldResolver
@@ -50,10 +50,10 @@ class MediaFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getImplementedFieldInterfaceResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolverClasses(): array
     {
         return [
-            QueryableFieldInterfaceResolver::class,
+            QueryableInterfaceTypeFieldResolver::class,
         ];
     }
 

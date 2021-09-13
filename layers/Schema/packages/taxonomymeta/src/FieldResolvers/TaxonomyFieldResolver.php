@@ -6,7 +6,7 @@ namespace PoPSchema\TaxonomyMeta\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
+use PoPSchema\Meta\InterfaceTypeFieldResolvers\WithMetaInterfaceTypeFieldResolver;
 use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyTypeResolver;
 use PoPSchema\TaxonomyMeta\Facades\TaxonomyMetaTypeAPIFacade;
 
@@ -19,10 +19,10 @@ class TaxonomyFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getImplementedFieldInterfaceResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolverClasses(): array
     {
         return [
-            WithMetaFieldInterfaceResolver::class,
+            WithMetaInterfaceTypeFieldResolver::class,
         ];
     }
 

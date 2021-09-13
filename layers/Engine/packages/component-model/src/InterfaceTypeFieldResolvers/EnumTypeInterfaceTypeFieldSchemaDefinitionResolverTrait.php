@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\FieldInterfaceResolvers;
+namespace PoP\ComponentModel\InterfaceTypeFieldResolvers;
 
 use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 
-trait EnumTypeFieldInterfaceSchemaDefinitionResolverTrait
+trait EnumTypeInterfaceTypeFieldSchemaDefinitionResolverTrait
 {
     use EnumTypeSchemaDefinitionResolverTrait;
 

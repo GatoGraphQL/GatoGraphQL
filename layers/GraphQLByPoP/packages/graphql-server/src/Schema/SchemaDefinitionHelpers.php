@@ -41,9 +41,9 @@ class SchemaDefinitionHelpers
      * @deprecated 0.1.0 The error above must be fixed for the Enum, by unifying its name wherever it is referenced
      * This solution with the interfaces creates other issue: The type cannot customize its field schema definition
      */
-    protected static function getFieldInterfaces(array &$fullSchemaDefinition, array $interfaceNames): array
+    protected static function getInterfaceTypeFields(array &$fullSchemaDefinition, array $interfaceNames): array
     {
-        $fieldInterfaces = [];
+        $interfaceTypeFields = [];
         if ($interfaceNames) {
             foreach ($interfaceNames as $interfaceName) {
                 $interfaceSchemaDefinition = $fullSchemaDefinition[SchemaDefinition::ARGNAME_INTERFACES][$interfaceName];
@@ -77,16 +77,16 @@ class SchemaDefinitionHelpers
                 }
                 // Set these fields as being defined by which interface
                 foreach ($interfaceFields as $interfaceField) {
-                    $fieldInterfaces[$interfaceField] = $interfaceName;
+                    $interfaceTypeFields[$interfaceField] = $interfaceName;
                 }
             }
         }
-        return $fieldInterfaces;
+        return $interfaceTypeFields;
     }
     public static function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath, array $interfaceNames = []): array
     {
         $addVersionToSchemaFieldDescription = ComponentConfiguration::addVersionToSchemaFieldDescription();
-        // $fieldInterfaces = self::getFieldInterfaces($fullSchemaDefinition, $interfaceNames);
+        // $interfaceTypeFields = self::getInterfaceTypeFields($fullSchemaDefinition, $interfaceNames);
         $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
         $fields = [];
         foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
@@ -104,7 +104,7 @@ class SchemaDefinitionHelpers
              * and the field can be deprecated just for that type (eg: Page.excerpt) and
              * not everywhere (eg: IsCustomPost.excerpt)
              */
-            // if ($interfaceName = $fieldInterfaces[$fieldName] ?? null) {
+            // if ($interfaceName = $interfaceTypeFields[$fieldName] ?? null) {
             //     $targetFieldSchemaDefinitionPath = [
             //         SchemaDefinition::ARGNAME_INTERFACES,
             //         $interfaceName,

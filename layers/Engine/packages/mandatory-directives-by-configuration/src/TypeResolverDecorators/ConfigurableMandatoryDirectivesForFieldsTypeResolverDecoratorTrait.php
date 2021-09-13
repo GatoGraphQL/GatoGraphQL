@@ -16,10 +16,10 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {
         return array_map(
-            // The tuple has format [typeOrFieldInterfaceResolverClass, fieldName]
-            // or [typeOrFieldInterfaceResolverClass, fieldName, $role]
-            // or [typeOrFieldInterfaceResolverClass, fieldName, $capability]
-            // So, in position [0], will always be the $typeOrFieldInterfaceResolverClass
+            // The tuple has format [typeOrInterfaceTypeFieldResolverClass, fieldName]
+            // or [typeOrInterfaceTypeFieldResolverClass, fieldName, $role]
+            // or [typeOrInterfaceTypeFieldResolverClass, fieldName, $capability]
+            // So, in position [0], will always be the $typeOrInterfaceTypeFieldResolverClass
             fn (array $entry) => $entry[0],
             $this->getConfigurationEntries()
         );

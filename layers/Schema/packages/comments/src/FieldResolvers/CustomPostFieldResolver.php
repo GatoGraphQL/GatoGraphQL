@@ -13,7 +13,7 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Comments\FieldInterfaceResolvers\CommentableFieldInterfaceResolver;
+use PoPSchema\Comments\InterfaceTypeFieldResolvers\CommentableInterfaceTypeFieldResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -49,10 +49,10 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getImplementedFieldInterfaceResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolverClasses(): array
     {
         return [
-            CommentableFieldInterfaceResolver::class,
+            CommentableInterfaceTypeFieldResolver::class,
         ];
     }
 

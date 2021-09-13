@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\QueriedObject\FieldInterfaceResolvers\:
-        resource: '../src/FieldInterfaceResolvers/*'
+    PoPSchema\QueriedObject\InterfaceTypeFieldResolvers\:
+        resource: '../src/InterfaceTypeFieldResolvers/*'
 
     PoPSchema\QueriedObject\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

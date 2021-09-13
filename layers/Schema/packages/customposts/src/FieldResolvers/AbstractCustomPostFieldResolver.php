@@ -9,9 +9,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\InterfaceTypeFieldResolvers\IsCustomPostInterfaceTypeFieldResolver;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoPSchema\QueriedObject\InterfaceTypeFieldResolvers\QueryableInterfaceTypeFieldResolver;
 
 abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -20,11 +20,11 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         return [];
     }
 
-    public function getImplementedFieldInterfaceResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolverClasses(): array
     {
         return [
-            QueryableFieldInterfaceResolver::class,
-            IsCustomPostFieldInterfaceResolver::class,
+            QueryableInterfaceTypeFieldResolver::class,
+            IsCustomPostInterfaceTypeFieldResolver::class,
         ];
     }
 

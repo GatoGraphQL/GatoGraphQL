@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\FieldInterfaceResolvers;
+namespace PoPSchema\Comments\InterfaceTypeFieldResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractQueryableSchemaFieldInterfaceResolver;
+use PoP\ComponentModel\InterfaceTypeFieldResolvers\AbstractQueryableSchemaInterfaceTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -16,7 +16,7 @@ use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
-class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
+class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
 

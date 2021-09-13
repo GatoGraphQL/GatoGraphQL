@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\FieldInterfaceResolvers;
+namespace PoPSchema\Users\InterfaceTypeFieldResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractInterfaceTypeFieldResolver;
+use PoP\ComponentModel\InterfaceTypeFieldResolvers\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Users\TypeResolvers\InterfaceType\WithAuthorInterfaceTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class WithAuthorFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver
+class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

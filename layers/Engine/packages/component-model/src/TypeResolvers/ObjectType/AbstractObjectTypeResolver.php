@@ -11,7 +11,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -50,7 +50,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @var string[]|null
      */
-    protected ?array $fieldInterfaceResolverClasses = null;
+    protected ?array $interfaceTypeFieldResolverClasses = null;
 
     public function getSelfFieldTypeResolverClass(): string
     {
@@ -710,23 +710,23 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @return InterfaceTypeFieldResolverInterface[]
      */
-    final protected function getAllImplementedFieldInterfaceResolvers(): array
+    final protected function getAllImplementedInterfaceTypeFieldResolvers(): array
     {
         return array_map(
             fn (string $interfaceTypeFieldResolverClass) => $this->instanceManager->getInstance($interfaceTypeFieldResolverClass),
-            $this->getAllImplementedFieldInterfaceResolverClasses()
+            $this->getAllImplementedInterfaceTypeFieldResolverClasses()
         );
     }
 
-    final protected function getAllImplementedFieldInterfaceResolverClasses(): array
+    final protected function getAllImplementedInterfaceTypeFieldResolverClasses(): array
     {
-        if ($this->fieldInterfaceResolverClasses === null) {
-            $this->fieldInterfaceResolverClasses = $this->calculateAllImplementedFieldInterfaceResolverClasses();
+        if ($this->interfaceTypeFieldResolverClasses === null) {
+            $this->interfaceTypeFieldResolverClasses = $this->calculateAllImplementedInterfaceTypeFieldResolverClasses();
         }
-        return $this->fieldInterfaceResolverClasses;
+        return $this->interfaceTypeFieldResolverClasses;
     }
 
-    private function calculateAllImplementedFieldInterfaceResolverClasses(): array
+    private function calculateAllImplementedInterfaceTypeFieldResolverClasses(): array
     {
         $interfaceTypeFieldResolverClasses = [];
         $processedFieldResolverClasses = [];
@@ -737,7 +737,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $processedFieldResolverClasses[] = $objectTypeFieldResolverClass;
                     $interfaceTypeFieldResolverClasses = array_merge(
                         $interfaceTypeFieldResolverClasses,
-                        $objectTypeFieldResolver->getImplementedFieldInterfaceResolverClasses()
+                        $objectTypeFieldResolver->getImplementedInterfaceTypeFieldResolverClasses()
                     );
                 }
             }
@@ -762,26 +762,26 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     private function calculateAllImplementedInterfaceTypeResolvers(): array
     {
         $interfaceTypeResolverClasses = [];
-        foreach ($this->getAllImplementedFieldInterfaceResolvers() as $interfaceTypeFieldResolver) {
+        foreach ($this->getAllImplementedInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
             $interfaceTypeResolverClasses = array_merge(
                 $interfaceTypeResolverClasses,
                 $interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
             );
         }
         $interfaceTypeResolverClasses = array_values(array_unique($interfaceTypeResolverClasses));
-        // Every InterfaceTypeResolver can be injected fields from many FieldInterfaceResolvers
-        // Make sure that this typeResolver implements all these FieldInterfaceResolver
+        // Every InterfaceTypeResolver can be injected fields from many InterfaceTypeFieldResolvers
+        // Make sure that this typeResolver implements all these InterfaceTypeFieldResolver
         // If not, the type does not fully satisfy the Interface
         $interfaceTypeResolvers = array_map(
             fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
             $interfaceTypeResolverClasses
         );
-        $implementedFieldInterfaceResolverClasses = $this->getAllImplementedFieldInterfaceResolverClasses();
+        $implementedInterfaceTypeFieldResolverClasses = $this->getAllImplementedInterfaceTypeFieldResolverClasses();
         return array_filter(
             $interfaceTypeResolvers,
             fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => array_diff(
-                $interfaceTypeResolver->getAllFieldInterfaceResolverClasses(),
-                $implementedFieldInterfaceResolverClasses
+                $interfaceTypeResolver->getAllInterfaceTypeFieldResolverClasses(),
+                $implementedInterfaceTypeFieldResolverClasses
             ) === [],
         );
     }
