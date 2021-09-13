@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-trait GlobalDirectiveResolverTrait
+trait GlobalRelationalTypeDirectiveResolverTrait
 {
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array
     {
