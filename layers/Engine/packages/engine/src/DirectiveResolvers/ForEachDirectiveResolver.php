@@ -73,7 +73,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                     $expressions = $this->getExpressionsForObject($id, $variables, $messages);
                     $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $if, $variables, $expressions, $options);
                     // Merge the objectWarnings, if any
-                    if ($objectObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectObjectWarnings($id)) {
+                    if ($objectObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectWarnings($id)) {
                         $objectWarnings[$id] = array_merge(
                             $objectWarnings[$id] ?? [],
                             $objectObjectWarnings
