@@ -102,13 +102,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
     {
         // Add the type before the ID
-        $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
+        $objectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
         $qualifiedDBObjectIDs = array_map(
-            fn (int | string $id) => UnionTypeHelpers::getDBObjectComposedTypeAndID(
+            fn (int | string $id) => UnionTypeHelpers::getObjectComposedTypeAndID(
                 $this,
                 $id
             ),
-            $dbObjectIDs
+            $objectIDs
         );
         return is_array($dbObjectIDOrIDs) ? $qualifiedDBObjectIDs : $qualifiedDBObjectIDs[0];
     }
@@ -590,11 +590,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
-        array &$dbWarnings,
-        array &$dbDeprecations,
-        array &$dbNotices,
-        array &$dbTraces,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
+        array &$objectNotices,
+        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
@@ -602,7 +602,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$schemaTraces
     ): array {
         // Obtain the data for the required object IDs
-        $resultIDItems = [];
+        $objectIDItems = [];
         $ids = $this->getIDsToQuery($ids_data_fields);
         $typeDataLoaderClass = $this->getRelationalTypeDataLoaderClass();
         $typeDataLoader = $this->instanceManager->getInstance($typeDataLoaderClass);
@@ -614,16 +614,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             if ($objectID === null) {
                 continue;
             }
-            $resultIDItems[$objectID] = $object;
+            $objectIDItems[$objectID] = $object;
         }
         // Show an error for all objects that couldn't be processed
-        $resolvedObjectIDs = $this->getIDsToQuery($resultIDItems);
+        $resolvedObjectIDs = $this->getIDsToQuery($objectIDItems);
         $unresolvedObjectIDs = [];
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
             $error = $this->getUnresolvedObjectIDError($unresolvedObjectID);
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
             $failedFields = $ids_data_fields[$unresolvedObjectID]['direct'] ?? [];
-            // Add in $schemaErrors instead of $dbErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
+            // Add in $schemaErrors instead of $objectErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
                 $schemaErrors[] = [
                     Tokens::PATH => [$failedField],
@@ -652,17 +652,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         // Process them
         $this->processFillingObjectsFromIDs(
-            $resultIDItems,
+            $objectIDItems,
             $unionDBKeyIDs,
             $dbItems,
             $previousDBItems,
             $variables,
             $messages,
-            $dbErrors,
-            $dbWarnings,
-            $dbDeprecations,
-            $dbNotices,
-            $dbTraces,
+            $objectErrors,
+            $objectWarnings,
+            $objectDeprecations,
+            $objectNotices,
+            $objectTraces,
             $schemaErrors,
             $schemaWarnings,
             $schemaDeprecations,
@@ -670,7 +670,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $schemaTraces
         );
 
-        return $resultIDItems;
+        return $objectIDItems;
     }
 
     /**
@@ -956,17 +956,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     protected function processFillingObjectsFromIDs(
-        array &$resultIDItems,
+        array &$objectIDItems,
         array &$unionDBKeyIDs,
         array &$dbItems,
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
-        array &$dbWarnings,
-        array &$dbDeprecations,
-        array &$dbNotices,
-        array &$dbTraces,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
+        array &$objectNotices,
+        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
@@ -1090,7 +1090,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $directiveResolverInstances[] = $directiveResolverInstance;
             }
 
-            $directivePipelineSchemaErrors = $directivePipelineIDDBErrors = [];
+            $directivePipelineSchemaErrors = $directivePipelineIDObjectErrors = [];
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
             $directivePipeline = $directivePipelineService->getDirectivePipeline($directiveResolverInstances);
@@ -1098,17 +1098,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $this,
                 $pipelineIDsDataFields,
                 $directiveResolverInstances,
-                $resultIDItems,
+                $objectIDItems,
                 $unionDBKeyIDs,
                 $dbItems,
                 $previousDBItems,
                 $variables,
                 $messages,
-                $directivePipelineIDDBErrors,
-                $dbWarnings,
-                $dbDeprecations,
-                $dbNotices,
-                $dbTraces,
+                $directivePipelineIDObjectErrors,
+                $objectWarnings,
+                $objectDeprecations,
+                $objectNotices,
+                $objectTraces,
                 $directivePipelineSchemaErrors,
                 $schemaWarnings,
                 $schemaDeprecations,
@@ -1143,31 +1143,31 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     ];
                 }
             }
-            if ($directivePipelineIDDBErrors) {
+            if ($directivePipelineIDObjectErrors) {
                 // Extract the failing fields from the path of the thrown error
-                $failingFieldIDDBErrors = [];
-                foreach ($directivePipelineIDDBErrors as $id => $directivePipelineDBErrors) {
-                    foreach ($directivePipelineDBErrors as $directivePipelineDBError) {
+                $failingFieldIDObjectErrors = [];
+                foreach ($directivePipelineIDObjectErrors as $id => $directivePipelineObjectErrors) {
+                    foreach ($directivePipelineObjectErrors as $directivePipelineDBError) {
                         $dbErrorFailingField = $directivePipelineDBError[Tokens::PATH][0];
                         if ($failingFields = $fieldDirectiveFields[$dbErrorFailingField] ?? []) {
                             foreach ($failingFields as $failingField) {
                                 $dbError = $directivePipelineDBError;
                                 array_unshift($dbError[Tokens::PATH], $failingField);
                                 $this->prependPathOnNestedErrors($dbError, $failingField);
-                                $failingFieldIDDBErrors[$failingField][$id][] = $dbError;
+                                $failingFieldIDObjectErrors[$failingField][$id][] = $dbError;
                             }
                         } else {
-                            $dbErrors[$id][] = $directivePipelineDBError;
+                            $objectErrors[$id][] = $directivePipelineDBError;
                         }
                     }
                 }
-                foreach ($failingFieldIDDBErrors as $failingField => $failingIDDBErrors) {
-                    foreach ($failingIDDBErrors as $id => $failingDBErrors) {
-                        $dbErrors[$id][] = [
+                foreach ($failingFieldIDObjectErrors as $failingField => $failingIDObjectErrors) {
+                    foreach ($failingIDObjectErrors as $id => $failingObjectErrors) {
+                        $objectErrors[$id][] = [
                             Tokens::PATH => [$failingField],
                             Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its directives', 'component-model'),
                             Tokens::EXTENSIONS => [
-                                Tokens::NESTED => $failingDBErrors,
+                                Tokens::NESTED => $failingObjectErrors,
                             ],
                         ];
                     }

@@ -47,9 +47,9 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getBackgroundurls(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDs): array
+    public function getBackgroundurls(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs): array
     {
-        $ret = parent::getBackgroundurls($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDs);
+        $ret = parent::getBackgroundurls($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
         switch ($module[1]) {
             case self::MODULE_DATALOAD_INITIALIZEDOMAIN:

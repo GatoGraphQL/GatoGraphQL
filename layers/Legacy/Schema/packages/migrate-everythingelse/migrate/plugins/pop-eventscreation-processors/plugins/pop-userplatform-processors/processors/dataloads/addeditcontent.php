@@ -1,13 +1,13 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
 use PoPSitesWassup\EventMutations\MutationResolverBridges\CreateEventMutationResolverBridge;
 use PoPSitesWassup\EventMutations\MutationResolverBridges\UpdateEventMutationResolverBridge;
 
 class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
-    use DBObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamModuleProcessorTrait;
 
     public const MODULE_DATALOAD_EVENT_UPDATE = 'dataload-event-update';
     public const MODULE_DATALOAD_EVENT_CREATE = 'dataload-event-create';
@@ -101,16 +101,16 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         return parent::getComponentMutationResolverBridgeClass($module);
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENT_UPDATE:
-                return $this->getDBObjectIDFromURLParam($module, $props, $data_properties);
+                return $this->getObjectIDFromURLParam($module, $props, $data_properties);
         }
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getDBObjectIDParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENT_UPDATE:

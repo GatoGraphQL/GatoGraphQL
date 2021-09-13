@@ -1,10 +1,10 @@
 <?php
-use PoP\Engine\ModuleProcessors\DBObjectIDsFromURLParamModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\ObjectIDsFromURLParamModuleProcessorTrait;
 use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 
 class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use DBObjectIDsFromURLParamModuleProcessorTrait;
+    use ObjectIDsFromURLParamModuleProcessorTrait;
 
     public const MODULE_DATALOAD_LOCATIONSMAP = 'dataload-locationsmap';
 
@@ -42,16 +42,16 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
         return $ret;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONSMAP:
-                return $this->getDBObjectIDsFromURLParam($module, $props, $data_properties);
+                return $this->getObjectIDsFromURLParam($module, $props, $data_properties);
         }
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getDBObjectIDsParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDsParamName(array $module, array &$props, &$data_properties)
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONSMAP:

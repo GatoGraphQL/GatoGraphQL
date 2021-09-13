@@ -26,14 +26,14 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
         );
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY:
                 return $this->getQueriedDBObjectID($module, $props, $data_properties);
         }
 
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

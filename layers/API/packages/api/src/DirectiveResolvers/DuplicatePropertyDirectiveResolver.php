@@ -58,17 +58,17 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
-        array &$resultIDItems,
+        array &$objectIDItems,
         array &$unionDBKeyIDs,
         array &$dbItems,
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
-        array &$dbWarnings,
-        array &$dbDeprecations,
-        array &$dbNotices,
-        array &$dbTraces,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
+        array &$objectNotices,
+        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
@@ -83,7 +83,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
                  */
                 $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 if (!array_key_exists($fieldOutputKey, $dbItems[(string)$id])) {
-                    $dbWarnings[(string)$id][] = [
+                    $objectWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
                             $this->translationAPI->__('Property \'%s\' doesn\'t exist in object with ID \'%s\', so it can\'t be copied to \'%s\''),

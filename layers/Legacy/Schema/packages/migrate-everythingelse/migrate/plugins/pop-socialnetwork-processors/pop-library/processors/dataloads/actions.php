@@ -5,7 +5,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\FollowUserMutationResolverBridge;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnfollowUserMutationResolverBridge;
@@ -20,7 +20,7 @@ use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UndoDownvoteC
 
 class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use DBObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamModuleProcessorTrait;
 
     public const MODULE_DATALOADACTION_FOLLOWUSER = 'dataloadaction-followuser';
     public const MODULE_DATALOADACTION_UNFOLLOWUSER = 'dataloadaction-unfollowuser';
@@ -215,7 +215,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return $ret;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
@@ -228,12 +228,12 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG:
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
-                return $this->getDBObjectIDFromURLParam($module, $props, $data_properties);
+                return $this->getObjectIDFromURLParam($module, $props, $data_properties);
         }
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getDBObjectIDParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:

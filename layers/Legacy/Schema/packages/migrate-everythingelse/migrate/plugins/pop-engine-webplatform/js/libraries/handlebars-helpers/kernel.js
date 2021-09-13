@@ -128,43 +128,43 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	pop.Manager.expandJSKeys(context);
 
 	// DBObjectId could be passed as an array ('dbobjectids' is an array), so if it's the case, and it's empty, then nullify it
-	var dbObjectID = options.hash.dbObjectID;
-	if (jQuery.type(dbObjectID) === "array") {
+	var objectID = options.hash.objectID;
+	if (jQuery.type(objectID) === "array") {
 		
-		if (dbObjectID.length) {
+		if (objectID.length) {
 
-			dbObjectID = dbObjectID[0];
+			objectID = objectID[0];
 		}
 		else {
 
-			dbObjectID = null;
+			objectID = null;
 			dbObject = null;
 			extend.dbObject = dbObject;
 		}
 	}
 
-	if (options.hash.dbKey && dbObjectID) {
+	if (options.hash.dbKey && objectID) {
 
 		dbKey = options.hash.dbKey;
-		dbObject = pop.Manager.getDBObject(domain, dbKey, dbObjectID);
+		dbObject = pop.Manager.getDBObject(domain, dbKey, objectID);
 		extend.dbObject = dbObject;
 		extend.dbObjectDBKey = dbKey;
 		extend.dbKey = dbKey;
-		extend.dbObjectIDs = [dbObjectID];
+		extend.dbObjectIDs = [objectID];
 	}
 	else if (options.hash.dbKey && dbObjectIDs) {
 
 		extend.dbKey = options.hash.dbKey;
 		extend.dbObjectIDs = dbObjectIDs;
 	}
-	else if (options.hash.subcomponent && dbObjectID) {
+	else if (options.hash.subcomponent && objectID) {
 
 		dbKey = bs.dbkeys[options.hash.subcomponent];
-		dbObject = pop.Manager.getDBObject(domain, dbKey, dbObjectID);
+		dbObject = pop.Manager.getDBObject(domain, dbKey, objectID);
 		extend.dbObject = dbObject;
 		extend.dbObjectDBKey = dbKey;
 		extend.dbKey = dbKey;
-		extend.dbObjectIDs = [dbObjectID];
+		extend.dbObjectIDs = [objectID];
 	}
 	else if (options.hash.subcomponent && dbObjectIDs) {
 
@@ -178,7 +178,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	}
 	else if (options.hash.dbKey) {
 
-		// If only the dbKey has value, it means the other value passes (dbObjectID or dbObjectIDs) is null
+		// If only the dbKey has value, it means the other value passes (objectID or dbObjectIDs) is null
 		// So then put everything to null
 		extend.dbKey = options.hash.dbKey;
 		extend.dbObject = null;

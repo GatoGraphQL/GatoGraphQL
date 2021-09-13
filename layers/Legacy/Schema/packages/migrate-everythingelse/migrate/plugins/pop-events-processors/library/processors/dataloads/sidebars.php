@@ -41,7 +41,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR:
@@ -49,7 +49,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
                 return $this->getQueriedDBObjectID($module, $props, $data_properties);
         }
 
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
     // public function getNature(array $module)

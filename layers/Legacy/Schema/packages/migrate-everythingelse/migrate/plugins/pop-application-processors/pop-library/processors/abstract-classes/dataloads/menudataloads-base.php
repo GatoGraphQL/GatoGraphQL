@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
         return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
         if ($menuName = $query_args['menu']) {
@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
             }
             return $menuID;
         }
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
     public function getRelationalTypeResolverClass(array $module): ?string

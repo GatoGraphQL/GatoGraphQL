@@ -19,30 +19,30 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
     /**
      * @var array<string, array>
      */
-    protected array $dbWarnings = [];
+    protected array $objectWarnings = [];
     /**
      * @var array<string, array>
      */
-    protected array $dbDeprecations = [];
+    protected array $objectDeprecations = [];
     /**
      * @var string[]
      */
     protected array $logEntries = [];
 
-    public function addDBWarnings(array $dbWarnings)
+    public function addObjectWarnings(array $objectWarnings)
     {
-        foreach ($dbWarnings as $objectID => $objectWarnings) {
-            $this->dbWarnings[$objectID] = array_merge(
-                $this->dbWarnings[$objectID] ?? [],
+        foreach ($objectWarnings as $objectID => $objectWarnings) {
+            $this->objectWarnings[$objectID] = array_merge(
+                $this->objectWarnings[$objectID] ?? [],
                 $objectWarnings
             );
         }
     }
-    public function addDBDeprecations(array $dbDeprecations)
+    public function addDBDeprecations(array $objectDeprecations)
     {
-        foreach ($dbDeprecations as $objectID => $objectDeprecations) {
-            $this->dbDeprecations[$objectID] = array_merge(
-                $this->dbDeprecations[$objectID] ?? [],
+        foreach ($objectDeprecations as $objectID => $objectDeprecations) {
+            $this->objectDeprecations[$objectID] = array_merge(
+                $this->objectDeprecations[$objectID] ?? [],
                 $objectDeprecations
             );
         }
@@ -54,17 +54,17 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
             $schemaWarnings
         );
     }
-    public function retrieveAndClearObjectDBWarnings(string | int $objectID): ?array
+    public function retrieveAndClearObjectWarnings(string | int $objectID): ?array
     {
-        $objectDBWarnings = $this->dbWarnings[$objectID] ?? null;
-        unset($this->dbWarnings[$objectID]);
-        return $objectDBWarnings;
+        $objectWarnings = $this->objectWarnings[$objectID] ?? null;
+        unset($this->objectWarnings[$objectID]);
+        return $objectWarnings;
     }
-    public function retrieveAndClearObjectDBDeprecations(string | int $objectID): ?array
+    public function retrieveAndClearObjectDeprecations(string | int $objectID): ?array
     {
-        $objectDBDeprecations = $this->dbDeprecations[$objectID] ?? null;
-        unset($this->dbDeprecations[$objectID]);
-        return $objectDBDeprecations;
+        $objectDeprecations = $this->objectDeprecations[$objectID] ?? null;
+        unset($this->objectDeprecations[$objectID]);
+        return $objectDeprecations;
     }
 
     public function addSchemaError(string $dbKey, string $field, string $error)

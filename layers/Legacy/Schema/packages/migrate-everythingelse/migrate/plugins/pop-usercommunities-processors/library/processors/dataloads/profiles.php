@@ -2,14 +2,14 @@
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\EditMembershipMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\UpdateMyCommunitiesMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\InviteMembersMutationResolverBridge;
 
 class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use DBObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamModuleProcessorTrait;
 
     public const MODULE_DATALOAD_MYCOMMUNITIES_UPDATE = 'dataload-mycommunities-update';
     public const MODULE_DATALOAD_INVITENEWMEMBERS = 'dataload-invitemembers';
@@ -139,19 +139,19 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getCheckpointmessageModule($module);
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
-                return $this->getDBObjectIDFromURLParam($module, $props, $data_properties);
+                return $this->getObjectIDFromURLParam($module, $props, $data_properties);
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
                 $vars = ApplicationState::getVars();
                 return $vars['global-userstate']['current-user-id'];
         }
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getDBObjectIDParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:

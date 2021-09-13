@@ -118,17 +118,17 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
-        array &$resultIDItems,
+        array &$objectIDItems,
         array &$unionDBKeyIDs,
         array &$dbItems,
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
-        array &$dbWarnings,
-        array &$dbDeprecations,
-        array &$dbNotices,
-        array &$dbTraces,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
+        array &$objectNotices,
+        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
@@ -171,7 +171,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
                 // Make sure the field is relational, and not a scalar or enum
                 $fieldTypeResolverClass = $objectTypeResolver->getFieldTypeResolverClass($relationalField);
                 if (!SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
-                    $dbErrors[(string)$id][] = [
+                    $objectErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
                             $this->translationAPI->__('Field \'%s\' is not a connection, so it cannot have data properties', 'component-model'),
@@ -187,7 +187,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
                 // Then it must be in $previousDBItems (it can't be in $dbItems unless set by chance, because the same IDs were involved for a possibly different query)
                 if (!array_key_exists($relationalFieldOutputKey, $previousDBItems[$dbKey][(string)$id] ?? [])) {
                     if ($relationalFieldOutputKey != $relationalField) {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
@@ -196,7 +196,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
                             ),
                         ];
                     } else {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
@@ -218,7 +218,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
                     // If the destination field already exists, warn that it will be overriden
                     $isTargetValueInDBItems = array_key_exists($copyToField, $dbItems[(string)$id] ?? []);
                     if ($isTargetValueInDBItems || array_key_exists($copyToField, $previousDBItems[$dbKey][(string)$id] ?? [])) {
-                        $dbWarnings[(string)$id][] = [
+                        $objectWarnings[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('The existing value for field \'%s\' from object with ID \'%s\' has been overriden: \'%s\'', 'component-model'),
@@ -253,7 +253,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
                     foreach ($relationalFieldIDs as $relationalFieldID) {
                         // Validate that the source field has been set.
                         if (!array_key_exists($copyFromField, $previousDBItems[$relationalFieldDBKey][(string)$relationalFieldID] ?? [])) {
-                            $dbErrors[(string)$id][] = [
+                            $objectErrors[(string)$id][] = [
                                 Tokens::PATH => [$this->directive],
                                 Tokens::MESSAGE => sprintf(
                                     $this->translationAPI->__('Field \'%s\' hadn\'t been set for object of entity \'%s\' and ID \'%s\', so no data can be copied', 'component-model'),

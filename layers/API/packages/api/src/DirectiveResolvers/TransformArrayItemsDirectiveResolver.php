@@ -67,17 +67,17 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
-        array &$resultIDItems,
+        array &$objectIDItems,
         array &$unionDBKeyIDs,
         array &$dbItems,
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
-        array &$dbWarnings,
-        array &$dbDeprecations,
-        array &$dbNotices,
-        array &$dbTraces,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
+        array &$objectNotices,
+        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
@@ -100,7 +100,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
                 if (!$isValueInDBItems && !array_key_exists($fieldOutputKey, $previousDBItems[$dbKey][(string)$id] ?? [])) {
                     if ($fieldOutputKey != $field) {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
@@ -110,7 +110,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                             ),
                         ];
                     } else {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
@@ -134,7 +134,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 // Validate that the value is an array
                 if (!is_array($value)) {
                     if ($fieldOutputKey != $field) {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('The value for field \'%s\' (under property \'%s\') is not an array, so execution of this directive can\'t continue', 'component-model'),
@@ -144,7 +144,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                             ),
                         ];
                     } else {
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'component-model'),
@@ -187,7 +187,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
             }
         }
         // 2. Execute the function for all arrayItems
-        $this->regenerateAndExecuteFunction($relationalTypeResolver, $resultIDItems, $arrayItemIdsProperties, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->regenerateAndExecuteFunction($relationalTypeResolver, $objectIDItems, $arrayItemIdsProperties, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // 3. Composer the array from the results for each array item
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
@@ -236,7 +236,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                          * @var Error
                          */
                         $error = $arrayItemValue;
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Transformation of element with key \'%s\' on array from property \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
@@ -275,20 +275,20 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         string $field,
-        array &$resultIDItems,
+        array &$objectIDItems,
         array &$dbItems,
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
-        array &$dbWarnings,
-        array &$dbDeprecations,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations
     ): void {
         // First let the parent add $value, then also add $key, which can be deduced from the fieldOutputKey
-        parent::addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        parent::addExpressionsForObject($relationalTypeResolver, $id, $field, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
         $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
         $arrayItemPropertyElems = $this->extractElementsFromArrayItemProperty($arrayItemPropertyOutputKey);

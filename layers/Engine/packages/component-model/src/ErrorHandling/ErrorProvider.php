@@ -223,12 +223,12 @@ class ErrorProvider implements ErrorProviderInterface
         );
     }
 
-    public function getNestedDBErrorsFieldError(array $dbErrors, string $fieldName): Error
+    public function getNestedObjectErrorsFieldError(array $objectErrors, string $fieldName): Error
     {
         return $this->getNestedArgumentError(
             $fieldName,
             ErrorCodes::NESTED_DB_ERRORS,
-            $dbErrors
+            $objectErrors
         );
     }
 

@@ -549,16 +549,16 @@ class PoP_ServerSideManager
         return '';
     }
 
-    public function getDBObject($domain, $dbKey, $dbObjectID)
+    public function getDBObject($domain, $dbKey, $ojectID)
     {
         $userItem = $item = array();
         $userstatedatabase = $this->getUserStateDatabase($domain);
         $primarydatabase = $this->getPrimaryDatabase($domain);
-        if ($userstatedatabase[$dbKey] && $userstatedatabase[$dbKey][$dbObjectID]) {
-            $userItem = $userstatedatabase[$dbKey][$dbObjectID];
+        if ($userstatedatabase[$dbKey] && $userstatedatabase[$dbKey][$ojectID]) {
+            $userItem = $userstatedatabase[$dbKey][$ojectID];
         }
-        if ($primarydatabase[$dbKey] && $primarydatabase[$dbKey][$dbObjectID]) {
-            $item = $primarydatabase[$dbKey][$dbObjectID];
+        if ($primarydatabase[$dbKey] && $primarydatabase[$dbKey][$ojectID]) {
+            $item = $primarydatabase[$dbKey][$ojectID];
         }
         return array_merge(
             $userItem,

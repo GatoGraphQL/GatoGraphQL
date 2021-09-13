@@ -31,17 +31,17 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
-        array &$resultIDItems,
+        array &$objectIDItems,
         array &$unionDBKeyIDs,
         array &$dbItems,
         array &$previousDBItems,
         array &$variables,
         array &$messages,
-        array &$dbErrors,
-        array &$dbWarnings,
-        array &$dbDeprecations,
-        array &$dbNotices,
-        array &$dbTraces,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
+        array &$objectNotices,
+        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,
@@ -49,7 +49,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaTraces
     ): void {
         // Check the condition field. If it is satisfied, then keep those fields, otherwise remove them from the $idsDataFields in the upcoming stages of the pipeline
-        $includeDataFieldsForIds = $this->getIdsSatisfyingCondition($relationalTypeResolver, $resultIDItems, $idsDataFields, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations);
+        $includeDataFieldsForIds = $this->getIdsSatisfyingCondition($relationalTypeResolver, $objectIDItems, $idsDataFields, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations);
         $idsToRemove = array_diff(array_keys($idsDataFields), $includeDataFieldsForIds);
         $this->removeDataFieldsForIDs($idsDataFields, $idsToRemove, $succeedingPipelineIDsDataFields);
     }

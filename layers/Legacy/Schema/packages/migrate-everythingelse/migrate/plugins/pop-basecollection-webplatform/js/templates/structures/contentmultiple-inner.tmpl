@@ -2,7 +2,7 @@
 	<div class="{{../class}} pop-structureinner" style="{{../style}}">
 		{{#each ../submoduleoutputnames.layouts}}
 			{{#withModule ../../. this}}
-				{{enterModule ../../../. dbKey=../../../dbKey dbObjectID=../../.}}
+				{{enterModule ../../../. dbKey=../../../dbKey objectID=../../.}}
 			{{/withModule}}
 		{{/each}}
 	</div>

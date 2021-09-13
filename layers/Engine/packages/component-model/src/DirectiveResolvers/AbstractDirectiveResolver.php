@@ -282,16 +282,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         object $object,
         array &$variables,
         array &$expressions,
-        array &$dbErrors,
-        array &$dbWarnings,
-        array &$dbDeprecations
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations
     ): array {
         list(
             $validDirective,
             $directiveName,
             $directiveArgs,
-            $nestedDBErrors,
-            $nestedDBWarnings
+            $nestedObjectErrors,
+            $nestedObjectWarnings
         ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
@@ -299,15 +299,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $this->directiveArgsForObjects[$objectID] = $directiveArgs;
 
         // Store errors (if any)
-        foreach ($nestedDBErrors as $id => $fieldOutputKeyErrorMessages) {
-            $dbErrors[$id] = array_merge(
-                $dbErrors[$id] ?? [],
+        foreach ($nestedObjectErrors as $id => $fieldOutputKeyErrorMessages) {
+            $objectErrors[$id] = array_merge(
+                $objectErrors[$id] ?? [],
                 $fieldOutputKeyErrorMessages
             );
         }
-        foreach ($nestedDBWarnings as $id => $fieldOutputKeyWarningMessages) {
-            $dbWarnings[$id] = array_merge(
-                $dbWarnings[$id] ?? [],
+        foreach ($nestedObjectWarnings as $id => $fieldOutputKeyWarningMessages) {
+            $objectWarnings[$id] = array_merge(
+                $objectWarnings[$id] ?? [],
                 $fieldOutputKeyWarningMessages
             );
         }
@@ -315,7 +315,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         /**
          * Validate directive argument constraints, only if there are no previous errors
          */
-        if (!$nestedDBErrors) {
+        if (!$nestedObjectErrors) {
             if (
                 $maybeErrors = $this->resolveDirectiveArgumentErrors(
                     $relationalTypeResolver,
@@ -324,7 +324,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 )
             ) {
                 foreach ($maybeErrors as $errorMessage) {
-                    $dbErrors[$objectID][] = [
+                    $objectErrors[$objectID][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => $errorMessage,
                     ];
@@ -752,17 +752,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $relationalTypeResolver,
             $pipelineIDsDataFields,
             $pipelineDirectiveResolverInstances,
-            $resultIDItems,
+            $objectIDItems,
             $unionDBKeyIDs,
             $dbItems,
             $previousDBItems,
             $variables,
             $messages,
-            $dbErrors,
-            $dbWarnings,
-            $dbDeprecations,
-            $dbNotices,
-            $dbTraces,
+            $objectErrors,
+            $objectWarnings,
+            $objectDeprecations,
+            $objectNotices,
+            $objectTraces,
             $schemaErrors,
             $schemaWarnings,
             $schemaDeprecations,
@@ -783,16 +783,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         //     $idsDataFields,
         //     $pipelineIDsDataFields,
         //     $pipelineDirectiveResolverInstances,
-        //     $resultIDItems,
+        //     $objectIDItems,
         //     $dbItems,
         //     $previousDBItems,
         //     $variables,
         //     $messages,
-        //     $dbErrors,
-        //     $dbWarnings,
-        //     $dbDeprecations,
-        //     $dbNotices,
-        //     $dbTraces,
+        //     $objectErrors,
+        //     $objectWarnings,
+        //     $objectDeprecations,
+        //     $objectNotices,
+        //     $objectTraces,
         //     $schemaErrors,
         //     $schemaWarnings,
         //     $schemaDeprecations,
@@ -806,24 +806,24 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         // after directive "default", so directive "translate" must not even execute
         if (!$this->needsIDsDataFieldsToExecute() || $this->hasIDsDataFields($idsDataFields)) {
             // If the directive resolver throws an Exception,
-            // catch it and add dbErrors
+            // catch it and add objectErrors
             try {
                 $this->resolveDirective(
                     $relationalTypeResolver,
                     $idsDataFields,
                     $pipelineIDsDataFields,
                     $pipelineDirectiveResolverInstances,
-                    $resultIDItems,
+                    $objectIDItems,
                     $unionDBKeyIDs,
                     $dbItems,
                     $previousDBItems,
                     $variables,
                     $messages,
-                    $dbErrors,
-                    $dbWarnings,
-                    $dbDeprecations,
-                    $dbNotices,
-                    $dbTraces,
+                    $objectErrors,
+                    $objectWarnings,
+                    $objectDeprecations,
+                    $objectNotices,
+                    $objectTraces,
                     $schemaErrors,
                     $schemaWarnings,
                     $schemaDeprecations,
@@ -843,8 +843,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $idsDataFields,
                     $pipelineIDsDataFields,
                     $dbItems,
-                    $dbErrors,
-                    $dbWarnings
+                    $objectErrors,
+                    $objectWarnings
                 );
             }
         }
@@ -854,17 +854,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $relationalTypeResolver,
             $pipelineIDsDataFields,
             $pipelineDirectiveResolverInstances,
-            $resultIDItems,
+            $objectIDItems,
             $unionDBKeyIDs,
             $dbItems,
             $previousDBItems,
             $variables,
             $messages,
-            $dbErrors,
-            $dbWarnings,
-            $dbDeprecations,
-            $dbNotices,
-            $dbTraces,
+            $objectErrors,
+            $objectWarnings,
+            $objectDeprecations,
+            $objectNotices,
+            $objectTraces,
             $schemaErrors,
             $schemaWarnings,
             $schemaDeprecations,
@@ -884,8 +884,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$dbItems,
-        array &$dbErrors,
-        array &$dbWarnings
+        array &$objectErrors,
+        array &$objectWarnings
     ): void {
         $allFieldsFailed = empty($failedFields);
         if ($allFieldsFailed) {
@@ -931,7 +931,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         if ($setFailingFieldResponseAsNull) {
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $failedField) {
-                    $dbErrors[(string)$id][] = [
+                    $objectErrors[(string)$id][] = [
                         Tokens::PATH => [$failedField, $this->directive],
                         Tokens::MESSAGE => $failureMessage,
                     ];
@@ -945,7 +945,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             }
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $failedField) {
-                    $dbErrors[(string)$id][] = [
+                    $objectErrors[(string)$id][] = [
                         Tokens::PATH => [$failedField, $this->directive],
                         Tokens::MESSAGE => sprintf(
                             $message,
@@ -963,7 +963,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             }
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $failedField) {
-                    $dbWarnings[(string)$id][] = [
+                    $objectWarnings[(string)$id][] = [
                         Tokens::PATH => [$failedField, $this->directive],
                         Tokens::MESSAGE => sprintf(
                             $message,

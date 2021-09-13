@@ -33,10 +33,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 $this->reformatSchemaEntries($data['schemaErrors'])
             );
         }
-        if (isset($data['dbErrors'])) {
+        if (isset($data['objectErrors'])) {
             $errors = array_merge(
                 $errors,
-                $this->reformatDBEntries($data['dbErrors'])
+                $this->reformatDBEntries($data['objectErrors'])
             );
         }
         if ($errors) {
@@ -48,8 +48,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // Eg: `{ posts(searchfor: ["posts"]) { id } }` will fail casting fieldArg `searchfor`,
         // raising a warning, but field `posts` is still executed, retrieving all results.
         // If the user is not told that there was an error/warning, it's very confusing
-        if ($data['dbWarnings'] ?? null) {
-            $warnings = $this->reformatDBEntries($data['dbWarnings']);
+        if ($data['objectWarnings'] ?? null) {
+            $warnings = $this->reformatDBEntries($data['objectWarnings']);
         }
         if ($data['schemaWarnings'] ?? null) {
             $warnings = array_merge(
@@ -81,8 +81,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($this->addTopLevelExtensionsEntryToResponse()) {
             // Add notices
             if (ComponentConfiguration::enableProactiveFeedbackNotices()) {
-                if ($data['dbNotices'] ?? null) {
-                    $notices = $this->reformatDBEntries($data['dbNotices']);
+                if ($data['objectNotices'] ?? null) {
+                    $notices = $this->reformatDBEntries($data['objectNotices']);
                 }
                 if ($data['schemaNotices'] ?? null) {
                     $notices = array_merge(
@@ -97,8 +97,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
             // Add traces
             if (ComponentConfiguration::enableProactiveFeedbackTraces()) {
-                if ($data['dbTraces'] ?? null) {
-                    $traces = $this->reformatDBEntries($data['dbTraces']);
+                if ($data['objectTraces'] ?? null) {
+                    $traces = $this->reformatDBEntries($data['objectTraces']);
                 }
                 if ($data['schemaTraces'] ?? null) {
                     $traces = array_merge(
@@ -113,8 +113,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
             // Add deprecations
             if (ComponentConfiguration::enableProactiveFeedbackDeprecations()) {
-                if ($data['dbDeprecations'] ?? null) {
-                    $deprecations = $this->reformatDBEntries($data['dbDeprecations']);
+                if ($data['objectDeprecations'] ?? null) {
+                    $deprecations = $this->reformatDBEntries($data['objectDeprecations']);
                 }
                 if ($data['schemaDeprecations'] ?? null) {
                     $deprecations = array_merge(

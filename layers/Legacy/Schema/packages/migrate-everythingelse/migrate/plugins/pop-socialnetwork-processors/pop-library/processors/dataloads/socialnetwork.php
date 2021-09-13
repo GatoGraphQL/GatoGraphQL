@@ -97,7 +97,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return $ret;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         // All of these modules require the user to be logged in
         $vars = ApplicationState::getVars();
@@ -118,7 +118,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             return \PoPSchema\UserMeta\Utils::getUserMeta($userID, $metaKey) ?? [];
         }
 
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
     public function getRelationalTypeResolverClass(array $module): ?string

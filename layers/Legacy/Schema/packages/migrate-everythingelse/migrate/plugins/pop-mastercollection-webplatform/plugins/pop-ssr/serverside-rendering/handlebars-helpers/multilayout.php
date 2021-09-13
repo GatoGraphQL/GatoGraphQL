@@ -4,13 +4,13 @@ use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class PoP_ServerSide_MultiLayoutHelpers
 {
-    public function withConditionalOnDataFieldModule($dbKey, $dbObjectID, $conditionDataFieldModules, $defaultModule, $context, $options)
+    public function withConditionalOnDataFieldModule($dbKey, $objectID, $conditionDataFieldModules, $defaultModule, $context, $options)
     {
         $tls = $context['tls'];
         $domain = $tls['domain'];
 
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
-        $dbObject = $popManager->getDBObject($domain, $dbKey, $dbObjectID);
+        $dbObject = $popManager->getDBObject($domain, $dbKey, $objectID);
 
         // Fetch the layout for that particular configuration
         $layout = '';
@@ -33,12 +33,12 @@ class PoP_ServerSide_MultiLayoutHelpers
         // Render the content from this layout
         $layoutContext = $context[ComponentModelComponentInfo::get('response-prop-submodules')][$layout];
 
-        // Add dbKey and dbObjectID back into the context
+        // Add dbKey and objectID back into the context
         $layoutContext = array_merge(
             $layoutContext,
             array(
                 'dbKey' => $dbKey,
-                'dbObjectID' => $dbObjectID,
+                'objectID' => $objectID,
             )
         );
 

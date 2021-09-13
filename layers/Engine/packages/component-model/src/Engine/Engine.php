@@ -645,7 +645,7 @@ class Engine implements EngineInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $dbKey,
         array $dataitems,
-        array $resultIDItems,
+        array $objectIDItems,
         bool $addEntryIfError = false
     ): void {
         // Do not create the database key entry when there are no items, or it produces an error when deep merging the database object in the webplatform with that from the response
@@ -662,7 +662,7 @@ class Engine implements EngineInterface
             foreach ($dataitems as $objectID => $dataItem) {
                 // Obtain the type of the object
                 $exists = false;
-                if ($object = $resultIDItems[$objectID] ?? null) {
+                if ($object = $objectIDItems[$objectID] ?? null) {
                     $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
                     if ($targetObjectTypeResolver !== null) {
                         $exists = true;
@@ -685,7 +685,7 @@ class Engine implements EngineInterface
             foreach ($convertedTypeResolverClassDataItems as $convertedTypeResolverClass => $convertedDataItems) {
                 $convertedTypeResolver = $this->instanceManager->getInstance($convertedTypeResolverClass);
                 $convertedDBKey = $convertedTypeResolverClassDBKeys[$convertedTypeResolverClass];
-                $this->addDatasetToDatabase($database, $convertedTypeResolver, $convertedDBKey, $convertedDataItems, $resultIDItems, $addEntryIfError);
+                $this->addDatasetToDatabase($database, $convertedTypeResolver, $convertedDBKey, $convertedDataItems, $objectIDItems, $addEntryIfError);
             }
             // Add the errors under the UnionTypeResolver key
             if ($noTypeResolverDataItems) {
@@ -988,7 +988,7 @@ class Engine implements EngineInterface
             $module_path_key = $this->getModulePathKey($module_path, $module);
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
-            $dataset_meta = $dbObjectIDs = $typeDBObjectIDs = array();
+            $dataset_meta = $objectIDs = $typeDBObjectIDs = array();
             $mutation_checkpoint_validation = $executed = $dbObjectIDOrIDs = $typeDBObjectIDOrIDs = $typeResolver_class = null;
             if ($load_data) {
                 // ------------------------------------------
@@ -1030,7 +1030,7 @@ class Engine implements EngineInterface
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
                     // Execute and get the ids and the meta
-                    $dbObjectIDOrIDs = $processor->getDBObjectIDOrIDs($module, $module_props, $data_properties);
+                    $dbObjectIDOrIDs = $processor->getObjectIDOrIDs($module, $module_props, $data_properties);
                     // If the type is union, we must add the type to each object
                     if ($dbObjectIDOrIDs !== null) {
                         $typeDBObjectIDOrIDs = $isUnionTypeResolver ?
@@ -1038,7 +1038,7 @@ class Engine implements EngineInterface
                             : $dbObjectIDOrIDs;
                     }
 
-                    $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : array($dbObjectIDOrIDs);
+                    $objectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : array($dbObjectIDOrIDs);
                     $typeDBObjectIDs = is_array($typeDBObjectIDOrIDs) ? $typeDBObjectIDOrIDs : array($typeDBObjectIDOrIDs);
 
                     // Store the ids under $data under key dataload_name => id
@@ -1121,7 +1121,7 @@ class Engine implements EngineInterface
             }
 
             // Integrate the feedback into $moduledata
-            $this->processAndAddModuleData($module_path, $module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs);
+            $this->processAndAddModuleData($module_path, $module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
             // Allow other modules to produce their own feedback using this module's data results
             if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[$this->modulePathHelpers->stringifyModulePath(array_merge($module_path, array($module)))] ?? null) {
@@ -1149,14 +1149,14 @@ class Engine implements EngineInterface
                     } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
                         $referencer_module_props = &$referencer_props;
                     }
-                    $this->processAndAddModuleData($referencer_modulepath, $referencer_module, $referencer_module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs);
+                    $this->processAndAddModuleData($referencer_modulepath, $referencer_module, $referencer_module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
                 }
             }
 
             // Incorporate the background URLs
             $this->backgroundload_urls = array_merge(
                 $this->backgroundload_urls,
-                $processor->getBackgroundurlsMergeddatasetmoduletree($module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs)
+                $processor->getBackgroundurlsMergeddatasetmoduletree($module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
             );
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
@@ -1324,7 +1324,7 @@ class Engine implements EngineInterface
         $vars = ApplicationState::getVars();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $dbErrors = $dbWarnings = $dbDeprecations = $dbNotices = $dbTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = array();
+        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $objectTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = array();
         $this->nocache_fields = array();
         // $format = $vars['format'];
         // $route = $vars['route'];
@@ -1369,17 +1369,17 @@ class Engine implements EngineInterface
             $database_key = $relationalTypeResolver->getTypeOutputName();
 
             // Execute the typeResolver for all combined ids
-            $iterationDBItems = $iterationDBErrors = $iterationDBWarnings = $iterationDBDeprecations = $iterationDBNotices = $iterationDBTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
+            $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationDBDeprecations = $iterationDBNotices = $iterationDBTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
-            $resultIDItems = $relationalTypeResolver->fillObjects(
+            $objectIDItems = $relationalTypeResolver->fillObjects(
                 $ids_data_fields,
                 $combinedUnionDBKeyIDs,
                 $iterationDBItems,
                 $previousDBItems,
                 $variables,
                 $messages,
-                $iterationDBErrors,
-                $iterationDBWarnings,
+                $iterationObjectErrors,
+                $iterationObjectWarnings,
                 $iterationDBDeprecations,
                 $iterationDBNotices,
                 $iterationDBTraces,
@@ -1421,7 +1421,7 @@ class Engine implements EngineInterface
                 $dbItems = $this->moveEntriesUnderDBName($iterationDBItems, true, $relationalTypeResolver);
                 foreach ($dbItems as $dbname => $entries) {
                     $databases[$dbname] ??= [];
-                    $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems);
+                    $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems);
 
                     // Populate the $previousDBItems, pointing to the newly fetched dbItems (but without the dbname!)
                     // Save the reference to the values, instead of the values, to save memory
@@ -1434,39 +1434,39 @@ class Engine implements EngineInterface
                     }
                 }
             }
-            if ($iterationDBErrors) {
-                $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationDBErrors, true, $relationalTypeResolver);
+            if ($iterationObjectErrors) {
+                $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationObjectErrors, true, $relationalTypeResolver);
                 foreach ($dbNameErrorEntries as $dbname => $entries) {
-                    $dbErrors[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $objectErrors[$dbname] ??= [];
+                    $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
-            if ($iterationDBWarnings) {
-                $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationDBWarnings, true, $relationalTypeResolver);
+            if ($iterationObjectWarnings) {
+                $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationObjectWarnings, true, $relationalTypeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $entries) {
-                    $dbWarnings[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $objectWarnings[$dbname] ??= [];
+                    $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
             if ($iterationDBDeprecations) {
                 $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationDBDeprecations, true, $relationalTypeResolver);
                 foreach ($dbNameDeprecationEntries as $dbname => $entries) {
-                    $dbDeprecations[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbDeprecations[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $objectDeprecations[$dbname] ??= [];
+                    $this->addDatasetToDatabase($objectDeprecations[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
             if ($iterationDBNotices) {
                 $dbNameNoticeEntries = $this->moveEntriesUnderDBName($iterationDBNotices, true, $relationalTypeResolver);
                 foreach ($dbNameNoticeEntries as $dbname => $entries) {
-                    $dbNotices[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbNotices[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $objectNotices[$dbname] ??= [];
+                    $this->addDatasetToDatabase($objectNotices[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
             if ($iterationDBTraces) {
                 $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationDBTraces, true, $relationalTypeResolver);
                 foreach ($dbNameTraceEntries as $dbname => $entries) {
-                    $dbTraces[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbTraces[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $objectTraces[$dbname] ??= [];
+                    $this->addDatasetToDatabase($objectTraces[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
 
@@ -1613,10 +1613,10 @@ class Engine implements EngineInterface
         if ($queryWarnings = $this->feedbackMessageStore->getQueryWarnings()) {
             $ret['queryWarnings'] = $queryWarnings;
         }
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'dbErrors', $dbErrors);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'dbWarnings', $dbWarnings);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'dbDeprecations', $dbDeprecations);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'dbNotices', $dbNotices);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectDeprecations);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectNotices', $objectNotices);
         $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaErrors);
         $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaWarnings);
         $this->maybeCombineAndAddSchemaEntries($ret, 'schemaDeprecations', $schemaDeprecations);
@@ -1629,10 +1629,10 @@ class Engine implements EngineInterface
         );
         $this->hooksAPI->doAction(
             '\PoP\ComponentModel\Engine:traces:db',
-            $dbTraces
+            $objectTraces
         );
         if (Environment::showTracesInResponse()) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'dbTraces', $dbTraces);
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectTraces', $objectTraces);
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaTraces', $schemaTraces);
         }
 
@@ -1858,7 +1858,7 @@ class Engine implements EngineInterface
         $dataaccess_checkpoint_validation,
         $mutation_checkpoint_validation,
         $executed,
-        $dbObjectIDs
+        $objectIDs
     ): void {
         $processor = $this->moduleProcessorManager->getProcessor($module);
 
@@ -1867,7 +1867,7 @@ class Engine implements EngineInterface
             $moduledata = &$this->moduledata;
 
             // Add the feedback into the object
-            if ($feedback = $processor->getDataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs)) {
+            if ($feedback = $processor->getDataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
                     $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);

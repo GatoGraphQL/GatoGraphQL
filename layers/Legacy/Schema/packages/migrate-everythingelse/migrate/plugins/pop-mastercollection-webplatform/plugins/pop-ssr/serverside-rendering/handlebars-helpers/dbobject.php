@@ -1,10 +1,10 @@
 <?php
 /**
-Helper functions, they have the same logic as the original javascript helper file wp-content/plugins/pop-engine-webplatform/js/helpers.handlebars.js
+ * Helper functions, they have the same logic as the original javascript helper file wp-content/plugins/pop-engine-webplatform/js/helpers.handlebars.js
  */
 class PoP_ServerSide_DBObjectHelpers
 {
-    public function withDBObject($dbKey, $dbObjectID, $options)
+    public function withDBObject($dbKey, $objectID, $options)
     {
         $context = $options['hash']['context'] ?? $options['_this'];
         $tls = $context['tls'];
@@ -12,7 +12,7 @@ class PoP_ServerSide_DBObjectHelpers
 
         // Replace the context with only the dbObject
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
-        $context = $popManager->getDBObject($domain, $dbKey, $dbObjectID);
+        $context = $popManager->getDBObject($domain, $dbKey, $objectID);
         
         return $options['fn']($context);
     }

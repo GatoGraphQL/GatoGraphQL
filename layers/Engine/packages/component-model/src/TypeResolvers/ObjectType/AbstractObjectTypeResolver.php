@@ -337,16 +337,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $field,
                 $fieldName,
                 $fieldArgs,
-                $dbErrors,
-                $dbWarnings
+                $objectErrors,
+                $objectWarnings
             ) = $this->fieldQueryInterpreter->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions);
 
             // Store the warnings to be read if needed
-            if ($dbWarnings) {
-                $this->feedbackMessageStore->addDBWarnings($dbWarnings);
+            if ($objectWarnings) {
+                $this->feedbackMessageStore->addObjectWarnings($objectWarnings);
             }
-            if ($dbErrors) {
-                return $this->errorProvider->getNestedDBErrorsFieldError($dbErrors, $fieldName);
+            if ($objectErrors) {
+                return $this->errorProvider->getNestedObjectErrorsFieldError($objectErrors, $fieldName);
             }
 
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
@@ -359,12 +359,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         if ($maybeDeprecations = $objectTypeFieldResolver->resolveSchemaValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
                             $id = $this->getID($object);
                             foreach ($maybeDeprecations as $deprecation) {
-                                $dbDeprecations[(string)$id][] = [
+                                $objectDeprecations[(string)$id][] = [
                                     Tokens::PATH => [$field],
                                     Tokens::MESSAGE => $deprecation,
                                 ];
                             }
-                            $this->feedbackMessageStore->addDBDeprecations($dbDeprecations);
+                            $this->feedbackMessageStore->addDBDeprecations($objectDeprecations);
                         }
                     }
                     if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {

@@ -33,7 +33,7 @@ interface ModuleProcessorInterface
     public function getImmutableDatasetsettings(array $module, array &$props): array;
     public function getDatasetDatabaseKeys(array $module, array &$props): array;
     public function getDatasource(array $module, array &$props): string;
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array;
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array;
     public function getRelationalTypeResolverClass(array $module): ?string;
     public function getComponentMutationResolverBridgeClass(array $module): ?string;
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void;
@@ -56,8 +56,8 @@ interface ModuleProcessorInterface
     public function getDataFeedbackModuletree(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array;
     public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array;
     public function getDataFeedbackInterreferencedModulepath(array $module, array &$props): ?array;
-    public function getBackgroundurlsMergeddatasetmoduletree(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDs): array;
-    public function getBackgroundurls(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDs): array;
+    public function getBackgroundurlsMergeddatasetmoduletree(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs): array;
+    public function getBackgroundurls(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs): array;
     public function getDatasetmeta(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array;
     public function getDataAccessCheckpoints(array $module, array &$props): array;
     public function getActionExecutionCheckpoints(array $module, array &$props): array;

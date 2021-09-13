@@ -54,7 +54,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
     /**
      * Directly point to the element under the specified path
      */
-    protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
+    protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$objectIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array
     {
         $path = $this->directiveArgsForSchema['path'];
 
@@ -63,7 +63,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
             $arrayItemPointer = OperatorHelpers::getPointerToArrayItemUnderPath($array, $path);
         } catch (Exception $e) {
             // Add an error and return null
-            $dbErrors[(string)$id][] = [
+            $objectErrors[(string)$id][] = [
                 Tokens::PATH => [$this->directive],
                 Tokens::MESSAGE => $e->getMessage(),
             ];
@@ -89,18 +89,18 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
     protected function addProcessedItemBackToDBItems(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$dbItems,
-        array &$dbErrors,
-        array &$dbWarnings,
-        array &$dbDeprecations,
-        array &$dbNotices,
-        array &$dbTraces,
+        array &$objectErrors,
+        array &$objectWarnings,
+        array &$objectDeprecations,
+        array &$objectNotices,
+        array &$objectTraces,
         $id,
         string $fieldOutputKey,
         int|string $arrayItemKey,
         $arrayItemValue
     ): void {
         if (!is_array($arrayItemValue)) {
-            parent::addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $dbErrors, $dbWarnings, $dbDeprecations, $dbNotices, $dbTraces, $id, $fieldOutputKey, $arrayItemKey, $arrayItemValue);
+            parent::addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $objectTraces, $id, $fieldOutputKey, $arrayItemKey, $arrayItemValue);
             return;
         }
         foreach ($arrayItemValue as $itemKey => $itemValue) {
@@ -113,7 +113,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
                     $itemValue
                 );
             } catch (Exception $e) {
-                $dbErrors[(string)$id][] = [
+                $objectErrors[(string)$id][] = [
                     Tokens::PATH => [$this->directive],
                     Tokens::MESSAGE => $e->getMessage(),
                 ];

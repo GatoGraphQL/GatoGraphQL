@@ -56,7 +56,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
     /**
      * Iterate on all items from the array
      */
-    protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
+    protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$objectIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array
     {
         if ($if = $this->directiveArgsForSchema['if'] ?? null) {
             // If it is a field, execute the function against all the values in the array
@@ -71,19 +71,19 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                     $this->addExpressionForObject($id, Expressions::NAME_KEY, $key, $messages);
                     $this->addExpressionForObject($id, Expressions::NAME_VALUE, $value, $messages);
                     $expressions = $this->getExpressionsForObject($id, $variables, $messages);
-                    $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $if, $variables, $expressions, $options);
-                    // Merge the dbWarnings, if any
-                    if ($objectDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
-                        $dbWarnings[$id] = array_merge(
-                            $dbWarnings[$id] ?? [],
-                            $objectDBWarnings
+                    $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $if, $variables, $expressions, $options);
+                    // Merge the objectWarnings, if any
+                    if ($storedObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectWarnings($id)) {
+                        $objectWarnings[$id] = array_merge(
+                            $objectWarnings[$id] ?? [],
+                            $storedObjectWarnings
                         );
                     }
                     if (GeneralUtils::isError($resolvedValue)) {
                         // Show the error message, and return nothing
                         /** @var Error */
                         $error = $resolvedValue;
-                        $dbErrors[(string)$id][] = [
+                        $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),

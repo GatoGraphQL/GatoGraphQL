@@ -1,12 +1,12 @@
 "use strict";
 
-Handlebars.registerHelper('withConditionalOnDataFieldModule', function(dbKey, dbObjectID, conditionDataFieldModules, $defaultModule, context, options) {
+Handlebars.registerHelper('withConditionalOnDataFieldModule', function(dbKey, objectID, conditionDataFieldModules, $defaultModule, context, options) {
 
 	var tls = context.tls;
 	var domain = tls.domain;
 
 	// Obtain the key composed as: 'post_type'-'mainCategory'
-	var dbObject = pop.Manager.getDBObject(domain, dbKey, dbObjectID);
+	var dbObject = pop.Manager.getDBObject(domain, dbKey, objectID);
 
 	// Fetch the layout for that particular configuration
 	var layout = '';
@@ -29,8 +29,8 @@ Handlebars.registerHelper('withConditionalOnDataFieldModule', function(dbKey, db
 	// Render the content from this layout
 	var layoutContext = context[pop.c.JS_SUBMODULES][layout];
 
-	// Add dbKey and dbObjectID back into the context
-	jQuery.extend(layoutContext, {dbKey: dbKey, dbObjectID: dbObjectID});
+	// Add dbKey and objectID back into the context
+	jQuery.extend(layoutContext, {dbKey: dbKey, objectID: objectID});
 
 	// Expand the JS Keys
 	pop.Manager.expandJSKeys(layoutContext);

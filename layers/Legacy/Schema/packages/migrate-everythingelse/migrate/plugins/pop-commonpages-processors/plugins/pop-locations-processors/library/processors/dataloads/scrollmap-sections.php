@@ -63,14 +63,14 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
         return parent::getDatasource($module, $props);
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP:
                 return getWhoweareCoreUserIds();
         }
 
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 }
 
