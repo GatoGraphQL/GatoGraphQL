@@ -97,8 +97,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
             // Add traces
             if (ComponentConfiguration::enableProactiveFeedbackTraces()) {
-                if ($data['dbTraces'] ?? null) {
-                    $traces = $this->reformatDBEntries($data['dbTraces']);
+                if ($data['objectTraces'] ?? null) {
+                    $traces = $this->reformatDBEntries($data['objectTraces']);
                 }
                 if ($data['schemaTraces'] ?? null) {
                     $traces = array_merge(

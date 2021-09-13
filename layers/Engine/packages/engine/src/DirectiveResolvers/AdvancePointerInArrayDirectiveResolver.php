@@ -93,14 +93,14 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         array &$objectWarnings,
         array &$objectDeprecations,
         array &$objectNotices,
-        array &$dbTraces,
+        array &$objectTraces,
         $id,
         string $fieldOutputKey,
         int|string $arrayItemKey,
         $arrayItemValue
     ): void {
         if (!is_array($arrayItemValue)) {
-            parent::addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $dbTraces, $id, $fieldOutputKey, $arrayItemKey, $arrayItemValue);
+            parent::addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $objectTraces, $id, $fieldOutputKey, $arrayItemKey, $arrayItemValue);
             return;
         }
         foreach ($arrayItemValue as $itemKey => $itemValue) {

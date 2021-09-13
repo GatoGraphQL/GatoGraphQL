@@ -79,7 +79,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$objectWarnings,
         array &$objectDeprecations,
         array &$objectNotices,
-        array &$dbTraces,
+        array &$objectTraces,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations,

@@ -1324,7 +1324,7 @@ class Engine implements EngineInterface
         $vars = ApplicationState::getVars();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $dbTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = array();
+        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $objectTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = array();
         $this->nocache_fields = array();
         // $format = $vars['format'];
         // $route = $vars['route'];
@@ -1465,8 +1465,8 @@ class Engine implements EngineInterface
             if ($iterationDBTraces) {
                 $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationDBTraces, true, $relationalTypeResolver);
                 foreach ($dbNameTraceEntries as $dbname => $entries) {
-                    $dbTraces[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbTraces[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $objectTraces[$dbname] ??= [];
+                    $this->addDatasetToDatabase($objectTraces[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
 
@@ -1629,10 +1629,10 @@ class Engine implements EngineInterface
         );
         $this->hooksAPI->doAction(
             '\PoP\ComponentModel\Engine:traces:db',
-            $dbTraces
+            $objectTraces
         );
         if (Environment::showTracesInResponse()) {
-            $this->maybeCombineAndAddDatabaseEntries($ret, 'dbTraces', $dbTraces);
+            $this->maybeCombineAndAddDatabaseEntries($ret, 'objectTraces', $objectTraces);
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaTraces', $schemaTraces);
         }
 
