@@ -9,13 +9,24 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
+    /**
+     * Only the ObjectTypeResolver can hold data, so that it resolve this functionality.
+     * Since the UnionTypeResolver cannot, do not process in that case.
+     */
+    public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array
+    {
+        return [
+            AbstractObjectTypeResolver::class,
+        ];
+    }
+
     public function getDirectiveName(): string
     {
         return 'copyRelationalResults';
@@ -27,19 +38,6 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
     public function getDirectiveType(): string
     {
         return DirectiveTypes::SCRIPTING;
-    }
-
-    /**
-     * Only the ObjectTypeResolver can hold data, so that it resolve this functionality.
-     * Since the UnionTypeResolver cannot, do not process in that case.
-     */
-    public function resolveCanProcess(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
-    {
-        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
-            return false;
-        }
-
-        return parent::resolveCanProcess($relationalTypeResolver, $directiveName, $directiveArgs, $field, $variables);
     }
 
     /**
