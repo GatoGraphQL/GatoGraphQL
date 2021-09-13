@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Container\CompilerPasses;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\Root\Component\ApplicationEvents;
-use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
+use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 
 class AfterBootAttachExtensionCompilerPass extends AbstractAttachExtensionCompilerPass
 {
@@ -21,7 +21,7 @@ class AfterBootAttachExtensionCompilerPass extends AbstractAttachExtensionCompil
     protected function getAttachableClassGroups(): array
     {
         return [
-            TypeResolverDecoratorInterface::class => AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS,
+            RelationalTypeResolverDecoratorInterface::class => AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS,
         ];
     }
 }

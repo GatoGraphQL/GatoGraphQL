@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\UserRolesAccessControl\TypeResolverDecorators\:
-        resource: '../src/TypeResolverDecorators/*'
+    PoPSchema\UserRolesAccessControl\RelationalTypeResolverDecorators\:
+        resource: '../src/RelationalTypeResolverDecorators/*'
 
     PoPSchema\UserRolesAccessControl\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'

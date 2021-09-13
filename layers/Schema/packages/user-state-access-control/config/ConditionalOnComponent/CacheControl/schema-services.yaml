@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\UserStateAccessControl\ConditionalOnComponent\CacheControl\TypeResolverDecorators\:
-        resource: '../../../src/ConditionalOnComponent/CacheControl/TypeResolverDecorators/*'
+    PoPSchema\UserStateAccessControl\ConditionalOnComponent\CacheControl\RelationalTypeResolverDecorators\:
+        resource: '../../../src/ConditionalOnComponent/CacheControl/RelationalTypeResolverDecorators/*'

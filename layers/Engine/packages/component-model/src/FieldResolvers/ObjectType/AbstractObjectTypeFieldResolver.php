@@ -37,9 +37,6 @@ use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface, ObjectTypeFieldSchemaDefinitionResolverInterface
 {
-    /**
-     * This class is attached to a TypeResolver
-     */
     use AttachableExtensionTrait;
     use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
