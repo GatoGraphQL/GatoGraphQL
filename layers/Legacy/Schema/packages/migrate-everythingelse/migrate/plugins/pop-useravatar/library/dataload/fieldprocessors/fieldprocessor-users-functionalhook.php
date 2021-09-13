@@ -5,7 +5,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers extends AbstractObjectTypeFieldResolver
+class PoP_UserAvatar_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -65,4 +65,4 @@ class PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers extends AbstractObje
 }
 
 // Static Initialization: Attach
-(new PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_UserAvatar_DataLoad_ObjectTypeFieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

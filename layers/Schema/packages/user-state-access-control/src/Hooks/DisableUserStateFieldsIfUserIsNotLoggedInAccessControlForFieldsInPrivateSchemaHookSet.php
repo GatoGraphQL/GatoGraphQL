@@ -11,7 +11,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterfac
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractUserStateFieldResolver;
+use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractUserStateObjectTypeFieldResolver;
 
 class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSchemaHookSet extends AbstractAccessControlForFieldsHookSet
 {
@@ -44,6 +44,6 @@ class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSc
         array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
-        return $objectTypeOrInterfaceTypeFieldResolver instanceof AbstractUserStateFieldResolver;
+        return $objectTypeOrInterfaceTypeFieldResolver instanceof AbstractUserStateObjectTypeFieldResolver;
     }
 }

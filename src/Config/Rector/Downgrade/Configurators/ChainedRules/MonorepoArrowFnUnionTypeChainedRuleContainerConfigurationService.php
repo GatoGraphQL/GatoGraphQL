@@ -15,7 +15,7 @@ class MonorepoArrowFnUnionTypeChainedRuleContainerConfigurationService extends A
             $this->rootDirectory . '/layers/Schema/packages/menus/src/RelationalTypeDataLoaders/ObjectType/MenuItemTypeDataLoader.php',
             $this->rootDirectory . '/layers/Schema/packages/menus/src/RelationalTypeDataLoaders/ObjectType/MenuTypeDataLoader.php',
             $this->rootDirectory . '/layers/Schema/packages/user-avatars/src/RelationalTypeDataLoaders/ObjectType/UserAvatarTypeDataLoader.php',
-            $this->rootDirectory . '/layers/WPSchema/packages/menus/src/FieldResolvers/ObjectType/MenuFieldResolver.php',
+            $this->rootDirectory . '/layers/WPSchema/packages/menus/src/FieldResolvers/ObjectType/MenuObjectTypeFieldResolver.php',
         ];
     }
 }

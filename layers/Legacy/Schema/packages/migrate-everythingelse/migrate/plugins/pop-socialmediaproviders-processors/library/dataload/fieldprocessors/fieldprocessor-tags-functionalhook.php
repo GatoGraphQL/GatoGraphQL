@@ -1,7 +1,7 @@
 <?php
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
 
-class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaItems extends PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialMediaItems
+class PoP_SocialMediaProviders_DataLoad_FunctionalObjectTypeFieldResolver_TagSocialMediaItems extends PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -17,4 +17,4 @@ class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaIt
 }
 
 // Static Initialization: Attach
-(new PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaItems())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_SocialMediaProviders_DataLoad_FunctionalObjectTypeFieldResolver_TagSocialMediaItems())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

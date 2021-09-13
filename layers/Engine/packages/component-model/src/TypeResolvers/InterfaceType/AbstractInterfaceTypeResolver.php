@@ -102,7 +102,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     }
 
     /**
-     * Produce an array of all the attached FieldResolverInterfaces
+     * Produce an array of all the attached ObjectTypeFieldResolverInterfaces
      *
      * @return InterfaceTypeFieldResolverInterface[]
      */
@@ -115,7 +115,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     }
 
     /**
-     * Produce an array of all the attached FieldResolverInterfaces
+     * Produce an array of all the attached ObjectTypeFieldResolverInterfaces
      *
      * @return string[]
      */
@@ -150,7 +150,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
 
     /**
      * Produce an array of all the interface's fieldNames and, for each,
-     * a list of all the FieldResolverInterfaces
+     * a list of all the ObjectTypeFieldResolverInterfaces
      *
      * @return array<string, InterfaceTypeFieldResolverInterface[]>
      */
@@ -164,7 +164,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
 
     /**
      * Produce an array of all the interface's fieldNames and, for each,
-     * a list of all the FieldResolverInterfaces
+     * a list of all the ObjectTypeFieldResolverInterfaces
      *
      * @return array<string, InterfaceTypeFieldResolverInterface[]>
      */

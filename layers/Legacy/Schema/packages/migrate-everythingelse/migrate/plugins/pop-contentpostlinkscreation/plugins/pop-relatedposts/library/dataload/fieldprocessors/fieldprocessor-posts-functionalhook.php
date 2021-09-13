@@ -7,7 +7,7 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 
-class GD_ContentPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts extends AbstractObjectTypeFieldResolver
+class GD_ContentPostLinksCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -73,4 +73,4 @@ class GD_ContentPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts extends
 }
 
 // Static Initialization: Attach
-(new GD_ContentPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_ContentPostLinksCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

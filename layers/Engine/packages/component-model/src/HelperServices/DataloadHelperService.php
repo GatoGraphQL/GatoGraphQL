@@ -43,9 +43,9 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         $objectTypeResolver = $relationalTypeResolver;
 
         // If this field doesn't have a typeResolver, show a schema error
-        // But if there are no FieldResolvers, then skip adding an error here, since that error will have been added already
+        // But if there are no ObjectTypeFieldResolvers, then skip adding an error here, since that error will have been added already
         // Otherwise, there will appear 2 error messages:
-        // 1. No FieldResolver
+        // 1. No ObjectTypeFieldResolver
         // 2. No FieldDefaultTypeDataLoader
         $subcomponentFieldTypeResolverClass = $objectTypeResolver->getFieldTypeResolverClass($subcomponent_data_field);
         if (!SchemaHelpers::isRelationalFieldTypeResolverClass($subcomponentFieldTypeResolverClass) && $objectTypeResolver->hasObjectTypeFieldResolversForField($subcomponent_data_field)) {

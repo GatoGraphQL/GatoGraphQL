@@ -5,7 +5,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 
-class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractObjectTypeFieldResolver
+class PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -66,4 +66,4 @@ class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractObjectTyp
 }
 
 // Static Initialization: Attach
-(new PPPPoP_DataLoad_FieldResolver_FunctionalProfiles())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

@@ -183,13 +183,13 @@ class ErrorProvider implements ErrorProviderInterface
         );
     }
 
-    public function getNoFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error
+    public function getNoObjectTypeFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error
     {
         return $this->getError(
             $fieldName,
             ErrorCodes::NO_FIELD_RESOLVER_UNIT_PROCESSES_FIELD,
             sprintf(
-                $this->translationAPI->__('No FieldResolver processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
+                $this->translationAPI->__('No ObjectTypeFieldResolver processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
                 $fieldName,
                 (string) $resultItemID
             )

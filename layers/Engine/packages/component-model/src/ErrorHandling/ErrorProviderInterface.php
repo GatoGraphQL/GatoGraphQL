@@ -47,7 +47,7 @@ interface ErrorProviderInterface
      * (so that data-fields aimed for another post_type are not retrieved)
      */
     public function getValidationFailedError(string $fieldName, array $fieldArgs, array $validationDescriptions): Error;
-    public function getNoFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error;
+    public function getNoObjectTypeFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error;
     /**
      * @param string[] $schemaErrors
      */

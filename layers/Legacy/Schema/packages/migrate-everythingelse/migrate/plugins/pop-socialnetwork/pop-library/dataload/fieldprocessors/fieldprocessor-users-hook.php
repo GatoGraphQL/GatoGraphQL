@@ -12,7 +12,7 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractObjectTypeFieldResolver
+class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -122,4 +122,4 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractObjectTypeFi
 }
 
 // Static Initialization: Attach
-(new GD_SocialNetwork_DataLoad_FieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

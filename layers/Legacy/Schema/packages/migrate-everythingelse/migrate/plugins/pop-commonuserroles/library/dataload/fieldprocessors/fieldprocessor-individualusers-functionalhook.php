@@ -6,9 +6,9 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers extends AbstractObjectTypeFieldResolver
+class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers extends AbstractObjectTypeFieldResolver
 {
-    use IndividualFieldResolverTrait;
+    use IndividualObjectTypeFieldResolverTrait;
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -80,4 +80,4 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers extends Abs
 }
 
 // Static Initialization: Attach
-(new GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

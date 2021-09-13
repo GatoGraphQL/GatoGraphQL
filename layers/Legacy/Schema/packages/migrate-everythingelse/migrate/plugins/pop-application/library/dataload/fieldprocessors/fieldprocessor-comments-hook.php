@@ -9,7 +9,7 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
 
-class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractObjectTypeFieldResolver
+class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -99,4 +99,4 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractObjectType
 }
 
 // Static Initialization: Attach
-(new PoPGenericForms_DataLoad_FieldResolver_Comments())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

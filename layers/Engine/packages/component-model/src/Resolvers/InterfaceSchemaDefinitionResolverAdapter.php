@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldSchemaDefinition
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 /**
- * A TypeResolver may be useful when retrieving the schema from a FieldResolver,
+ * A TypeResolver may be useful when retrieving the schema from a ObjectTypeFieldResolver,
  * but it cannot be used with a InterfaceTypeFieldResolver.
  * Hence, this adapter receives function calls to resolve the schema
  * containing a TypeResolver, strips this param, and then calls

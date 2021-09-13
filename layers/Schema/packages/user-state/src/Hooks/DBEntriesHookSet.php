@@ -8,7 +8,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoPSchema\UserState\FieldResolvers\ObjectType\GlobalFieldResolver;
+use PoPSchema\UserState\FieldResolvers\ObjectType\GlobalObjectTypeFieldResolver;
 
 class DBEntriesHookSet extends AbstractHookSet
 {
@@ -16,7 +16,7 @@ class DBEntriesHookSet extends AbstractHookSet
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected GlobalFieldResolver $globalFieldResolver
+        protected GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver
     ) {
         parent::__construct(
             $hooksAPI,
@@ -39,7 +39,7 @@ class DBEntriesHookSet extends AbstractHookSet
     {
         $dbname_datafields['userstate'] = $this->hooksAPI->applyFilters(
             'PoPSchema\UserState\DataloaderHooks:metaFields',
-            $this->globalFieldResolver->getFieldNamesToResolve()
+            $this->globalObjectTypeFieldResolver->getFieldNamesToResolve()
         );
         return $dbname_datafields;
     }

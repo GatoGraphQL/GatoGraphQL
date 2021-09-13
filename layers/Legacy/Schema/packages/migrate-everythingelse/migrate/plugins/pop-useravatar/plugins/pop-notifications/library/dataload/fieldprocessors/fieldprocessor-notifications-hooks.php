@@ -6,7 +6,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
-class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractObjectTypeFieldResolver
+class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -110,4 +110,4 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractObj
 }
 
 // Static Initialization: Attach
-(new PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
