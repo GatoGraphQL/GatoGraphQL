@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostMutations\FieldResolvers;
+namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\CustomPostMutations\FieldResolvers\AbstractCustomPostFieldResolver;
+use PoPSchema\CustomPostMutations\FieldResolvers\ObjectType\AbstractCustomPostFieldResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
-use PoPSchema\UserState\FieldResolvers\UserStateFieldResolverTrait;
+use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateFieldResolverTrait;
 
 class PostFieldResolver extends AbstractCustomPostFieldResolver
 {

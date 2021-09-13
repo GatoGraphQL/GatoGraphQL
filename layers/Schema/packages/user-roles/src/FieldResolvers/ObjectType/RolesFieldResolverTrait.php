@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserRoles\FieldResolvers;
+namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserState\FieldResolvers;
+namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;

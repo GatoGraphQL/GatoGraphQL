@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Locations\FieldResolvers;
+namespace PoPSchema\Locations\FieldResolvers\ObjectType;
 
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use PoPSchema\Posts\Constants\InputNames;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\Pages\FieldResolvers;
+namespace PoPWPSchema\Pages\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\FieldResolvers\EmbeddableFields;
+namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\EmbeddableFields;
 
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 

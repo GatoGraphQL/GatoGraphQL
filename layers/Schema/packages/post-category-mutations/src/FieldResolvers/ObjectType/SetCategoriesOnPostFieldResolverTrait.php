@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoryMutations\FieldResolvers;
+namespace PoPSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryTypeResolver;

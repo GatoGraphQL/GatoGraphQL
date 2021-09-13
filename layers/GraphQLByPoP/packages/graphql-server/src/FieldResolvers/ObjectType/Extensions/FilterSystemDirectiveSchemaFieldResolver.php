@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\FieldResolvers\Extensions;
+namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
@@ -10,7 +10,7 @@ use GraphQLByPoP\GraphQLServer\Enums\DirectiveTypeEnum;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaTypeResolver;
-use GraphQLByPoP\GraphQLServer\FieldResolvers\SchemaFieldResolver;
+use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\SchemaFieldResolver;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
 
 class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver

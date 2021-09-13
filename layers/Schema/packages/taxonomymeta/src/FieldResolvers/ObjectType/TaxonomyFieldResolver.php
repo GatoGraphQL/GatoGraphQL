@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomyMeta\FieldResolvers;
+namespace PoPSchema\TaxonomyMeta\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;

@@ -2,7 +2,7 @@
 namespace PoP\Theme;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
+use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalFieldResolver;
 
 class PoP_Theme_UtilsHooks
 {

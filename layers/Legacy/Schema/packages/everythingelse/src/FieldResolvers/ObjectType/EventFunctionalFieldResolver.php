@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Events\FieldResolvers;
+namespace PoPSchema\Events\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\EnumTypeFieldSchemaDefinitionResolverTrait;

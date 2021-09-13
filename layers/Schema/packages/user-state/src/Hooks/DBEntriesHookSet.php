@@ -8,7 +8,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoPSchema\UserState\FieldResolvers\GlobalFieldResolver;
+use PoPSchema\UserState\FieldResolvers\ObjectType\GlobalFieldResolver;
 
 class DBEntriesHookSet extends AbstractHookSet
 {

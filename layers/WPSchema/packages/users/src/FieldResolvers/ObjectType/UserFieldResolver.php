@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\Users\FieldResolvers;
+namespace PoPWPSchema\Users\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;

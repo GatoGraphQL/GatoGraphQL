@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserState\FieldResolvers;
+namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
-use PoPSchema\UserState\FieldResolvers\AbstractUserStateFieldResolver;
+use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractUserStateFieldResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;

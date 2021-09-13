@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\FieldResolvers\Extensions;
+namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;

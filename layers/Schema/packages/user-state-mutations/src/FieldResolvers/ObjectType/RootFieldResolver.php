@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserStateMutations\FieldResolvers;
+namespace PoPSchema\UserStateMutations\FieldResolvers\ObjectType;
 
 use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;

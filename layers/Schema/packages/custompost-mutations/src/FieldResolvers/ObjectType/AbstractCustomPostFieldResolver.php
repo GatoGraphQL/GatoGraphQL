@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutations\FieldResolvers;
+namespace PoPSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;

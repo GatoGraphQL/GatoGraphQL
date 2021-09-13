@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\FieldResolvers;
+namespace PoP\API\FieldResolvers\ObjectType;
 
 use PoP\API\Cache\CacheTypes;
 use PoP\Engine\Cache\CacheUtils;

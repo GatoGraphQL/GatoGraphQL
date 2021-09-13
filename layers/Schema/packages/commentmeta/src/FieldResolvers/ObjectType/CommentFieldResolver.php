@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMeta\FieldResolvers;
+namespace PoPSchema\CommentMeta\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;

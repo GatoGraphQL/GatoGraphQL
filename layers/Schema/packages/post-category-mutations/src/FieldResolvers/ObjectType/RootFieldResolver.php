@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoryMutations\FieldResolvers;
+namespace PoPSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 
-use PoPSchema\CustomPostCategoryMutations\FieldResolvers\AbstractRootFieldResolver;
+use PoPSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType\AbstractRootFieldResolver;
 
 class RootFieldResolver extends AbstractRootFieldResolver
 {

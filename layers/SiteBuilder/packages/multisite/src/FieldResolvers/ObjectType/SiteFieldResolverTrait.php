@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Multisite\FieldResolvers;
+namespace PoP\Multisite\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 

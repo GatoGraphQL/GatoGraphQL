@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\FieldResolvers;
+namespace PoPSchema\PostCategories\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Categories\FieldResolvers\AbstractCustomPostQueryableFieldResolver;
+use PoPSchema\Categories\FieldResolvers\ObjectType\AbstractCustomPostQueryableFieldResolver;
 use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerModuleProcessor;
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;

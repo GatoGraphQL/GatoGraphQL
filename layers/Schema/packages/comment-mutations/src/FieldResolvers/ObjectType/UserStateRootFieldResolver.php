@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations\FieldResolvers;
+namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
@@ -27,7 +27,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\UserState\FieldResolvers\UserStateFieldResolverTrait;
+use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateFieldResolverTrait;
 
 class UserStateRootFieldResolver extends AbstractQueryableFieldResolver
 {

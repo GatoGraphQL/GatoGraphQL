@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CommentMutations\FieldResolvers;
+namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 
 use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;

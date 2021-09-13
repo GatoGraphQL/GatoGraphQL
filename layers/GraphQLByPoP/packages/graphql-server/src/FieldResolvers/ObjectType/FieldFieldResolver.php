@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
+namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldTypeResolver;

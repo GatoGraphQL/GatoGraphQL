@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\UserState\FieldResolvers;
+namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\GlobalFieldResolverTrait;
-use PoPSchema\UserState\FieldResolvers\AbstractUserStateFieldResolver;
+use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractUserStateFieldResolver;
 
 abstract class AbstractGlobalUserStateFieldResolver extends AbstractUserStateFieldResolver
 {

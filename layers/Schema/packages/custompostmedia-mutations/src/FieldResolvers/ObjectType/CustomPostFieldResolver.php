@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMediaMutations\FieldResolvers;
+namespace PoPSchema\CustomPostMediaMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;

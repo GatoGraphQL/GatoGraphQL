@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMutations\FieldResolvers;
+namespace PoPSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
@@ -20,7 +20,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\UserState\FieldResolvers\UserStateFieldResolverTrait;
+use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateFieldResolverTrait;
 
 class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
 {

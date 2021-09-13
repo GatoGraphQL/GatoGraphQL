@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\FieldResolvers;
+namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\EnumTypeFieldSchemaDefinitionResolverTrait;

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\FieldResolvers;
+namespace PoPSchema\Users\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
-use PoPSchema\Users\FieldResolvers\AbstractUserFieldResolver;
+use PoPSchema\Users\FieldResolvers\ObjectType\AbstractUserFieldResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 

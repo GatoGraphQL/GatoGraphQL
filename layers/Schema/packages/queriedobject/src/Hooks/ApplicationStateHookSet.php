@@ -9,7 +9,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
-use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
+use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalFieldResolver;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {

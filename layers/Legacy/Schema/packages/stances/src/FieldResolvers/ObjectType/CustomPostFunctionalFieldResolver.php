@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Stances\FieldResolvers;
+namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\GenericCustomPosts\FieldResolvers;
+namespace PoPSchema\GenericCustomPosts\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;

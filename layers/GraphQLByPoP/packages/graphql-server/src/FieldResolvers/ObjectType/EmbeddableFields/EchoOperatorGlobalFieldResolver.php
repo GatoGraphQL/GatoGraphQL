@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\FieldResolvers\EmbeddableFields;
+namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\EmbeddableFields;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
+use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 /**

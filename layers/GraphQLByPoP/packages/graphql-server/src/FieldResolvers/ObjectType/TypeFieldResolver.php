@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
+namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\Enums\TypeKindEnum;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractNestableType;

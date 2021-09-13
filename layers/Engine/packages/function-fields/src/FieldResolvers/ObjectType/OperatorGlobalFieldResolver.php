@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\FunctionFields\FieldResolvers;
+namespace PoP\FunctionFields\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;

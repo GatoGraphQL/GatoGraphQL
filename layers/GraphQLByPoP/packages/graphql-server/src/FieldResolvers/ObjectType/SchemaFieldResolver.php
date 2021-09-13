@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
+namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaTypeResolver;
