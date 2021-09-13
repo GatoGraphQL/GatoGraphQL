@@ -346,7 +346,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $this->feedbackMessageStore->addDBWarnings($dbWarnings);
             }
             if ($objectErrors) {
-                return $this->errorProvider->getNestedDBErrorsFieldError($objectErrors, $fieldName);
+                return $this->errorProvider->getNestedObjectErrorsFieldError($objectErrors, $fieldName);
             }
 
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {

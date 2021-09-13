@@ -706,14 +706,14 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $fieldOutputKey = $this->getFieldOutputKey($field);
         $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $objectErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $objectDBErrors = $objectDBWarnings = [];
-        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $objectDBErrors, $objectDBWarnings);
-        if ($objectDBErrors || $objectDBWarnings) {
+        $objectObjectErrors = $objectDBWarnings = [];
+        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $objectObjectErrors, $objectDBWarnings);
+        if ($objectObjectErrors || $objectDBWarnings) {
             $id = $objectTypeResolver->getID($object);
-            if ($objectDBErrors) {
+            if ($objectObjectErrors) {
                 $objectErrors[(string)$id] = array_merge(
                     $objectErrors[(string)$id] ?? [],
-                    $objectDBErrors
+                    $objectObjectErrors
                 );
             }
             if ($objectDBWarnings) {
@@ -761,14 +761,14 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $directiveOutputKey = $this->getDirectiveOutputKey($fieldDirective);
         $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $directiveOutputKey, $variables, $expressions, $objectErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $objectDBErrors = $objectDBWarnings = [];
-        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectDBErrors, $objectDBWarnings);
-        if ($objectDBErrors || $objectDBWarnings) {
+        $objectObjectErrors = $objectDBWarnings = [];
+        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectObjectErrors, $objectDBWarnings);
+        if ($objectObjectErrors || $objectDBWarnings) {
             $id = $relationalTypeResolver->getID($object);
-            if ($objectDBErrors) {
+            if ($objectObjectErrors) {
                 $objectErrors[(string)$id] = array_merge(
                     $objectErrors[(string)$id] ?? [],
-                    $objectDBErrors
+                    $objectObjectErrors
                 );
             }
             if ($objectDBWarnings) {
@@ -859,12 +859,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         string $field,
         array $fieldArgs,
         array &$failedCastingFieldArgErrorMessages,
-        array &$schemaOrDBErrors,
+        array &$schemaOrObjectErrors,
         bool $forSchema
     ): ?array {
         $fieldArgSchemaDefinition = $this->getFieldSchemaDefinitionArgs($objectTypeResolver, $field);
         if ($fieldArgSchemaDefinition === null) {
-            $schemaOrDBErrors[] = [
+            $schemaOrObjectErrors[] = [
                 Tokens::PATH => [$field],
                 Tokens::MESSAGE => $this->getNoFieldErrorMessage($objectTypeResolver, $field),
             ];
@@ -1281,12 +1281,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     protected function castAndValidateFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$objectErrors, array &$dbWarnings): ?array
     {
         $failedCastingFieldArgErrorMessages = [];
-        $castingDBErrors = [];
-        $castedFieldArgs = $this->castFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $castingDBErrors);
-        if ($castingDBErrors) {
+        $castingObjectErrors = [];
+        $castedFieldArgs = $this->castFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $castingObjectErrors);
+        if ($castingObjectErrors) {
             $objectErrors = array_merge(
                 $objectErrors,
-                $castingDBErrors
+                $castingObjectErrors
             );
             return null;
         }

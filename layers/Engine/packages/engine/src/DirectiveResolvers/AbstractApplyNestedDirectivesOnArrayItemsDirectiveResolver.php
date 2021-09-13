@@ -227,7 +227,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 $pipelineArrayItemIdsProperties[] = $arrayItemIdsProperties;
             }
             // 2. Execute the composed directive pipeline on all arrayItems
-            $nestedSchemaErrors = $nestedIDDBErrors = [];
+            $nestedSchemaErrors = $nestedIDObjectErrors = [];
             $nestedDirectivePipeline->resolveDirectivePipeline(
                 $relationalTypeResolver,
                 $pipelineArrayItemIdsProperties, // Here we pass the properties to the array elements!
@@ -238,7 +238,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 $previousDBItems,
                 $variables,
                 $messages,
-                $nestedIDDBErrors,
+                $nestedIDObjectErrors,
                 $dbWarnings,
                 $dbDeprecations,
                 $dbNotices,
@@ -263,13 +263,13 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 }
                 $schemaErrors[] = $schemaError;
             }
-            if ($nestedIDDBErrors) {
-                foreach ($nestedIDDBErrors as $id => $nestedDBErrors) {
-                    foreach ($nestedDBErrors as &$nestedDBError) {
+            if ($nestedIDObjectErrors) {
+                foreach ($nestedIDObjectErrors as $id => $nestedObjectErrors) {
+                    foreach ($nestedObjectErrors as &$nestedDBError) {
                         array_unshift($nestedDBError[Tokens::PATH], $this->directive);
                         $this->prependPathOnNestedErrors($nestedDBError);
                     }
-                    $objectErrors[(string) $id] = $nestedDBErrors;
+                    $objectErrors[(string) $id] = $nestedObjectErrors;
                 }
             }
 
@@ -299,9 +299,9 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     $fieldDirectives = $fieldParts[4];
 
                     // If there are errors, it will return null. Don't add the errors again
-                    $arrayItemDBErrors = $arrayItemDBWarnings = $arrayItemDBDeprecations = [];
+                    $arrayItemObjectErrors = $arrayItemDBWarnings = $arrayItemDBDeprecations = [];
                     $array = $value;
-                    $arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemDBErrors, $arrayItemDBWarnings, $arrayItemDBDeprecations);
+                    $arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemObjectErrors, $arrayItemDBWarnings, $arrayItemDBDeprecations);
                     // The value is an array. Unpack all the elements into their own property
                     foreach ($arrayItems as $key => &$value) {
                         $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);

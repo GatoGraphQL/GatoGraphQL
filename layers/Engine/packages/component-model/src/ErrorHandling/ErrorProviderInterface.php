@@ -55,7 +55,7 @@ interface ErrorProviderInterface
     /**
      * @param string[] $objectErrors
      */
-    public function getNestedDBErrorsFieldError(array $objectErrors, string $fieldName): Error;
+    public function getNestedObjectErrorsFieldError(array $objectErrors, string $fieldName): Error;
     /**
      * @param Error[] $nestedErrors
      */

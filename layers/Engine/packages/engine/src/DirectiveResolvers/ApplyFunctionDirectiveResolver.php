@@ -158,7 +158,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $validFunction,
                     $schemaFieldName,
                     $schemaFieldArgs,
-                    $schemaDBErrors,
+                    $schemaObjectErrors,
                     $schemaDBWarnings
                 ) = $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($rootTypeResolver, $function, $variables);
 
@@ -180,7 +180,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     }
                     $dbWarnings[(string)$id][] = $dbWarning;
                 }
-                if ($schemaDBErrors) {
+                if ($schemaObjectErrors) {
                     if ($fieldOutputKey != $field) {
                         $errorMessage = sprintf(
                             $this->translationAPI->__('Applying function on field \'%s\' (under property \'%s\') on object with ID \'%s\' can\'t be executed due to nested errors', 'component-model'),
@@ -199,7 +199,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => $errorMessage
                     ];
-                    foreach ($schemaDBErrors as $schemaDBError) {
+                    foreach ($schemaObjectErrors as $schemaDBError) {
                         array_unshift($schemaDBError[Tokens::PATH], $this->directive);
                         $this->prependPathOnNestedErrors($schemaDBError);
                         $dbError[Tokens::EXTENSIONS][Tokens::NESTED][] = $schemaDBError;

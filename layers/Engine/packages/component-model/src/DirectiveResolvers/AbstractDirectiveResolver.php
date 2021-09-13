@@ -290,7 +290,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $validDirective,
             $directiveName,
             $directiveArgs,
-            $nestedDBErrors,
+            $nestedObjectErrors,
             $nestedDBWarnings
         ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
 
@@ -299,7 +299,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $this->directiveArgsForObjects[$objectID] = $directiveArgs;
 
         // Store errors (if any)
-        foreach ($nestedDBErrors as $id => $fieldOutputKeyErrorMessages) {
+        foreach ($nestedObjectErrors as $id => $fieldOutputKeyErrorMessages) {
             $objectErrors[$id] = array_merge(
                 $objectErrors[$id] ?? [],
                 $fieldOutputKeyErrorMessages
@@ -315,7 +315,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         /**
          * Validate directive argument constraints, only if there are no previous errors
          */
-        if (!$nestedDBErrors) {
+        if (!$nestedObjectErrors) {
             if (
                 $maybeErrors = $this->resolveDirectiveArgumentErrors(
                     $relationalTypeResolver,

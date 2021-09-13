@@ -1369,7 +1369,7 @@ class Engine implements EngineInterface
             $database_key = $relationalTypeResolver->getTypeOutputName();
 
             // Execute the typeResolver for all combined ids
-            $iterationDBItems = $iterationDBErrors = $iterationDBWarnings = $iterationDBDeprecations = $iterationDBNotices = $iterationDBTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
+            $iterationDBItems = $iterationObjectErrors = $iterationDBWarnings = $iterationDBDeprecations = $iterationDBNotices = $iterationDBTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $resultIDItems = $relationalTypeResolver->fillObjects(
                 $ids_data_fields,
@@ -1378,7 +1378,7 @@ class Engine implements EngineInterface
                 $previousDBItems,
                 $variables,
                 $messages,
-                $iterationDBErrors,
+                $iterationObjectErrors,
                 $iterationDBWarnings,
                 $iterationDBDeprecations,
                 $iterationDBNotices,
@@ -1434,8 +1434,8 @@ class Engine implements EngineInterface
                     }
                 }
             }
-            if ($iterationDBErrors) {
-                $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationDBErrors, true, $relationalTypeResolver);
+            if ($iterationObjectErrors) {
+                $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationObjectErrors, true, $relationalTypeResolver);
                 foreach ($dbNameErrorEntries as $dbname => $entries) {
                     $objectErrors[$dbname] ??= [];
                     $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);

@@ -1090,7 +1090,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $directiveResolverInstances[] = $directiveResolverInstance;
             }
 
-            $directivePipelineSchemaErrors = $directivePipelineIDDBErrors = [];
+            $directivePipelineSchemaErrors = $directivePipelineIDObjectErrors = [];
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
             $directivePipeline = $directivePipelineService->getDirectivePipeline($directiveResolverInstances);
@@ -1104,7 +1104,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $previousDBItems,
                 $variables,
                 $messages,
-                $directivePipelineIDDBErrors,
+                $directivePipelineIDObjectErrors,
                 $dbWarnings,
                 $dbDeprecations,
                 $dbNotices,
@@ -1143,31 +1143,31 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     ];
                 }
             }
-            if ($directivePipelineIDDBErrors) {
+            if ($directivePipelineIDObjectErrors) {
                 // Extract the failing fields from the path of the thrown error
-                $failingFieldIDDBErrors = [];
-                foreach ($directivePipelineIDDBErrors as $id => $directivePipelineDBErrors) {
-                    foreach ($directivePipelineDBErrors as $directivePipelineDBError) {
+                $failingFieldIDObjectErrors = [];
+                foreach ($directivePipelineIDObjectErrors as $id => $directivePipelineObjectErrors) {
+                    foreach ($directivePipelineObjectErrors as $directivePipelineDBError) {
                         $dbErrorFailingField = $directivePipelineDBError[Tokens::PATH][0];
                         if ($failingFields = $fieldDirectiveFields[$dbErrorFailingField] ?? []) {
                             foreach ($failingFields as $failingField) {
                                 $dbError = $directivePipelineDBError;
                                 array_unshift($dbError[Tokens::PATH], $failingField);
                                 $this->prependPathOnNestedErrors($dbError, $failingField);
-                                $failingFieldIDDBErrors[$failingField][$id][] = $dbError;
+                                $failingFieldIDObjectErrors[$failingField][$id][] = $dbError;
                             }
                         } else {
                             $objectErrors[$id][] = $directivePipelineDBError;
                         }
                     }
                 }
-                foreach ($failingFieldIDDBErrors as $failingField => $failingIDDBErrors) {
-                    foreach ($failingIDDBErrors as $id => $failingDBErrors) {
+                foreach ($failingFieldIDObjectErrors as $failingField => $failingIDObjectErrors) {
+                    foreach ($failingIDObjectErrors as $id => $failingObjectErrors) {
                         $objectErrors[$id][] = [
                             Tokens::PATH => [$failingField],
                             Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its directives', 'component-model'),
                             Tokens::EXTENSIONS => [
-                                Tokens::NESTED => $failingDBErrors,
+                                Tokens::NESTED => $failingObjectErrors,
                             ],
                         ];
                     }
