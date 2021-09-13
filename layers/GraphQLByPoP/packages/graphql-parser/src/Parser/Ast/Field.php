@@ -8,10 +8,10 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\InterfaceTypeField;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 
-class Field extends AbstractAst implements InterfaceTypeField
+class Field extends AbstractAst implements FieldInterface
 {
     use AstArgumentsTrait;
     use AstDirectivesTrait;

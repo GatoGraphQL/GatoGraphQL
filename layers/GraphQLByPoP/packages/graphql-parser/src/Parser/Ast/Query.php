@@ -8,11 +8,11 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\InterfaceTypeField;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\FragmentInterface;
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 
-class Query extends AbstractAst implements InterfaceTypeField
+class Query extends AbstractAst implements FieldInterface
 {
     use AstArgumentsTrait;
     use AstDirectivesTrait;
