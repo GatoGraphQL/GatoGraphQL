@@ -110,7 +110,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getDBObjectIDParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTLINK_UPDATE:

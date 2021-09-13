@@ -233,7 +233,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getDBObjectIDParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDParamName(array $module, array &$props, &$data_properties)
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
