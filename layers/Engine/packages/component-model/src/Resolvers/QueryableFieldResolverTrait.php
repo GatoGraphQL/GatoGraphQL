@@ -31,7 +31,7 @@ trait QueryableFieldResolverTrait
         return $this->getSchemaFieldArgsWithCustomFilterInputData(
             $schemaFieldArgs,
             $filterDataModuleProcessor->getFieldFilterInputDefaultValues($filterDataloadingModule),
-            $filterDataModuleProcessor->getFieldDataFilteringMandatoryArgs($filterDataloadingModule)
+            $filterDataModuleProcessor->getFieldFilterInputMandatoryArgs($filterDataloadingModule)
         );
     }
 

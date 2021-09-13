@@ -36,7 +36,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
             return $this->getSchemaFieldArgsWithCustomFilterInputData(
                 $schemaFieldArgs,
                 $this->getFieldFilterInputDefaultValues($fieldName),
-                $this->getFieldDataFilteringMandatoryArgs($fieldName)
+                $this->getFieldFilterInputMandatoryArgs($fieldName)
             );
         }
 
@@ -56,7 +56,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
      * Provide the names of the args which are mandatory in the FilterInput
      * @return string[]
      */
-    protected function getFieldDataFilteringMandatoryArgs(string $fieldName): array
+    protected function getFieldFilterInputMandatoryArgs(string $fieldName): array
     {
         return [];
     }
