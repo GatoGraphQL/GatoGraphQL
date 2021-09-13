@@ -1369,7 +1369,7 @@ class Engine implements EngineInterface
             $database_key = $relationalTypeResolver->getTypeOutputName();
 
             // Execute the typeResolver for all combined ids
-            $iterationDBItems = $iterationObjectErrors = $iterationDBWarnings = $iterationDBDeprecations = $iterationDBNotices = $iterationDBTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
+            $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationDBDeprecations = $iterationDBNotices = $iterationDBTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $resultIDItems = $relationalTypeResolver->fillObjects(
                 $ids_data_fields,
@@ -1379,7 +1379,7 @@ class Engine implements EngineInterface
                 $variables,
                 $messages,
                 $iterationObjectErrors,
-                $iterationDBWarnings,
+                $iterationObjectWarnings,
                 $iterationDBDeprecations,
                 $iterationDBNotices,
                 $iterationDBTraces,
@@ -1441,8 +1441,8 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
-            if ($iterationDBWarnings) {
-                $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationDBWarnings, true, $relationalTypeResolver);
+            if ($iterationObjectWarnings) {
+                $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationObjectWarnings, true, $relationalTypeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $entries) {
                     $objectWarnings[$dbname] ??= [];
                     $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);

@@ -169,10 +169,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ) {
         $value = $relationalTypeResolver->resolveValue($object, $field, $variables, $expressions);
         // Merge the objectWarnings and dbDeprecations, if any
-        if ($objectDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
+        if ($objectObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectObjectWarnings($id)) {
             $objectWarnings[$id] = array_merge(
                 $objectWarnings[$id] ?? [],
-                $objectDBWarnings
+                $objectObjectWarnings
             );
         }
         if ($objectDBDeprecations = $this->feedbackMessageStore->retrieveAndClearObjectDBDeprecations($id)) {

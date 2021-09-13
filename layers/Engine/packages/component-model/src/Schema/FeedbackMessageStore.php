@@ -29,7 +29,7 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
      */
     protected array $logEntries = [];
 
-    public function addDBWarnings(array $objectIDWarnings)
+    public function addObjectWarnings(array $objectIDWarnings)
     {
         foreach ($objectIDWarnings as $objectID => $objectWarnings) {
             $this->objectIDWarnings[$objectID] = array_merge(
@@ -54,11 +54,11 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
             $schemaWarnings
         );
     }
-    public function retrieveAndClearObjectDBWarnings(string | int $objectID): ?array
+    public function retrieveAndClearObjectObjectWarnings(string | int $objectID): ?array
     {
-        $objectDBWarnings = $this->objectWarnings[$objectID] ?? null;
+        $objectObjectWarnings = $this->objectWarnings[$objectID] ?? null;
         unset($this->objectWarnings[$objectID]);
-        return $objectDBWarnings;
+        return $objectObjectWarnings;
     }
     public function retrieveAndClearObjectDBDeprecations(string | int $objectID): ?array
     {

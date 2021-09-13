@@ -291,7 +291,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $directiveName,
             $directiveArgs,
             $nestedObjectErrors,
-            $nestedDBWarnings
+            $nestedObjectWarnings
         ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
@@ -305,7 +305,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $fieldOutputKeyErrorMessages
             );
         }
-        foreach ($nestedDBWarnings as $id => $fieldOutputKeyWarningMessages) {
+        foreach ($nestedObjectWarnings as $id => $fieldOutputKeyWarningMessages) {
             $objectWarnings[$id] = array_merge(
                 $objectWarnings[$id] ?? [],
                 $fieldOutputKeyWarningMessages

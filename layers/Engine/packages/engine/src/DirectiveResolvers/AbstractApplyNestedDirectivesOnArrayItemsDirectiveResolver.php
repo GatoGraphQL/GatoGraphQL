@@ -299,9 +299,9 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     $fieldDirectives = $fieldParts[4];
 
                     // If there are errors, it will return null. Don't add the errors again
-                    $arrayItemObjectErrors = $arrayItemDBWarnings = $arrayItemDBDeprecations = [];
+                    $arrayItemObjectErrors = $arrayItemObjectWarnings = $arrayItemDBDeprecations = [];
                     $array = $value;
-                    $arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemObjectErrors, $arrayItemDBWarnings, $arrayItemDBDeprecations);
+                    $arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemObjectErrors, $arrayItemObjectWarnings, $arrayItemDBDeprecations);
                     // The value is an array. Unpack all the elements into their own property
                     foreach ($arrayItems as $key => &$value) {
                         $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
@@ -418,10 +418,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
                     $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the objectWarnings, if any
-                    if ($objectDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
+                    if ($objectObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectObjectWarnings($id)) {
                         $objectWarnings[$id] = array_merge(
                             $objectWarnings[$id] ?? [],
-                            $objectDBWarnings
+                            $objectObjectWarnings
                         );
                     }
                     if (GeneralUtils::isError($resolvedValue)) {
@@ -450,10 +450,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
                     $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the objectWarnings, if any
-                    if ($objectDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
+                    if ($objectObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectObjectWarnings($id)) {
                         $objectWarnings[$id] = array_merge(
                             $objectWarnings[$id] ?? [],
-                            $objectDBWarnings
+                            $objectObjectWarnings
                         );
                     }
                     if (GeneralUtils::isError($resolvedValue)) {

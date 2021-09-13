@@ -343,7 +343,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
             // Store the warnings to be read if needed
             if ($objectWarnings) {
-                $this->feedbackMessageStore->addDBWarnings($objectWarnings);
+                $this->feedbackMessageStore->addObjectWarnings($objectWarnings);
             }
             if ($objectErrors) {
                 return $this->errorProvider->getNestedObjectErrorsFieldError($objectErrors, $fieldName);

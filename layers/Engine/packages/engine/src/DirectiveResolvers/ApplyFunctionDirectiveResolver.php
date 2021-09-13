@@ -159,11 +159,11 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $schemaFieldName,
                     $schemaFieldArgs,
                     $schemaObjectErrors,
-                    $schemaDBWarnings
+                    $schemaObjectWarnings
                 ) = $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($rootTypeResolver, $function, $variables);
 
                 // Place the errors not under schema but under DB, since they may change on a object by object basis
-                if ($schemaDBWarnings) {
+                if ($schemaObjectWarnings) {
                     $dbWarning = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
@@ -173,7 +173,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                             $fieldOutputKey
                         )
                     ];
-                    foreach ($schemaDBWarnings as $schemaDBWarning) {
+                    foreach ($schemaObjectWarnings as $schemaDBWarning) {
                         array_unshift($schemaDBWarning[Tokens::PATH], $this->directive);
                         $this->prependPathOnNestedErrors($schemaDBWarning);
                         $dbWarning[Tokens::EXTENSIONS][Tokens::NESTED][] = $schemaDBWarning;
@@ -215,10 +215,10 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 ];
                 $functionValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $validFunction, $variables, $expressions, $options);
                 // Merge the objectWarnings, if any
-                if ($objectDBWarnings = $this->feedbackMessageStore->retrieveAndClearObjectDBWarnings($id)) {
+                if ($objectObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectObjectWarnings($id)) {
                     $objectWarnings[$id] = array_merge(
                         $objectWarnings[$id] ?? [],
-                        $objectDBWarnings
+                        $objectObjectWarnings
                     );
                 }
 
