@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\InterfaceTypeFieldResolvers;
 
-interface InterfaceTypeFieldSchemaDefinitionResolverInterface
+interface InterfaceTypeObjectTypeFieldSchemaDefinitionResolverInterface
 {
     public function getFieldNamesToResolve(): array;
     public function getSchemaFieldType(string $fieldName): string;

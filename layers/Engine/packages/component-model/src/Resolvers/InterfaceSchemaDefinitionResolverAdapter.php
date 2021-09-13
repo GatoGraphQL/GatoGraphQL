@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
-use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeFieldSchemaDefinitionResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeObjectTypeFieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 /**
@@ -15,9 +15,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
  * containing a TypeResolver, strips this param, and then calls
  * the corresponding InterfaceTypeFieldResolver.
  */
-class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionResolverInterface
+class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaDefinitionResolverInterface
 {
-    public function __construct(protected InterfaceTypeFieldSchemaDefinitionResolverInterface $interfaceTypeFieldSchemaDefinitionResolver)
+    public function __construct(protected InterfaceTypeObjectTypeFieldSchemaDefinitionResolverInterface $interfaceTypeFieldSchemaDefinitionResolver)
     {
     }
 

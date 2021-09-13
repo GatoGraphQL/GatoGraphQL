@@ -6,13 +6,13 @@ namespace PoP\ComponentModel\InterfaceTypeFieldResolvers;
 
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 
-abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver implements QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface
+abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver implements QueryableInterfaceTypeObjectTypeFieldSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
 
     public function getFieldDataFilteringModule(string $fieldName): ?array
     {
-        /** @var QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface */
+        /** @var QueryableInterfaceTypeObjectTypeFieldSchemaDefinitionResolverInterface */
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName);

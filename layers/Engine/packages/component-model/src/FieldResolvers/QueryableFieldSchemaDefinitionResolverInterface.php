@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-interface QueryableFieldSchemaDefinitionResolverInterface extends FieldSchemaDefinitionResolverInterface
+interface QueryableObjectTypeFieldSchemaDefinitionResolverInterface extends ObjectTypeFieldSchemaDefinitionResolverInterface
 {
     public function getFieldDataFilteringModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array;
 }

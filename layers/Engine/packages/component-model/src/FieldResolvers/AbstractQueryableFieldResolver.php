@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\FieldResolvers\QueryableFieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\FieldResolvers\QueryableObjectTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver implements QueryableFieldSchemaDefinitionResolverInterface
+abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver implements QueryableObjectTypeFieldSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
 
     public function getFieldDataFilteringModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
-        /** @var QueryableFieldSchemaDefinitionResolverInterface */
+        /** @var QueryableObjectTypeFieldSchemaDefinitionResolverInterface */
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldDataFilteringModule($objectTypeResolver, $fieldName);
