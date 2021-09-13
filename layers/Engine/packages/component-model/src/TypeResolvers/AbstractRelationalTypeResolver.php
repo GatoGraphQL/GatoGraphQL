@@ -19,7 +19,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\ComponentModel\RelationalTypeResolverDecorators\TypeResolverDecoratorInterface;
+use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\FieldHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -798,7 +798,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * @return TypeResolverDecoratorInterface[]
+     * @return RelationalTypeResolverDecoratorInterface[]
      */
     protected function calculateAllTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass(string $class): array
     {
@@ -808,11 +808,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         do {
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-            /** @var TypeResolverDecoratorInterface[] */
+            /** @var RelationalTypeResolverDecoratorInterface[] */
             $attachedTypeResolverDecorators = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
-                fn (TypeResolverDecoratorInterface $typeResolverDecorator) => $typeResolverDecorator->getPriorityToAttachToClasses(),
+                fn (RelationalTypeResolverDecoratorInterface $typeResolverDecorator) => $typeResolverDecorator->getPriorityToAttachToClasses(),
                 $attachedTypeResolverDecorators
             );
             array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedTypeResolverDecorators);

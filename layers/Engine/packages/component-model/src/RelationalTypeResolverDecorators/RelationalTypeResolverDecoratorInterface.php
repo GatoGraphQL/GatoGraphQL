@@ -8,7 +8,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-interface TypeResolverDecoratorInterface extends AttachableExtensionInterface
+interface RelationalTypeResolverDecoratorInterface extends AttachableExtensionInterface
 {
     /**
      * The classes of the RelationalTypeResolvers this TypeResolverDecorator decorates.

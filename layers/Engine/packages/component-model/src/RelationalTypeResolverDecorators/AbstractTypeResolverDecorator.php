@@ -7,11 +7,11 @@ namespace PoP\ComponentModel\RelationalTypeResolverDecorators;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\RelationalTypeResolverDecorators\TypeResolverDecoratorInterface;
+use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInterface
+abstract class AbstractTypeResolverDecorator implements RelationalTypeResolverDecoratorInterface
 {
     /**
      * This class is attached to a TypeResolver
