@@ -164,7 +164,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     ): ?string {
         foreach ($this->getImplementedFieldInterfaceResolverClasses() as $implementedFieldInterfaceResolverClass) {
             /** @var InterfaceTypeFieldResolverInterface */
-            $implementedFieldInterfaceResolver = $this->instanceManager->getInstance($implementedFieldInterfaceResolverClass);;
+            $implementedFieldInterfaceResolver = $this->instanceManager->getInstance($implementedFieldInterfaceResolverClass);
+            ;
             if (!in_array($fieldName, $implementedFieldInterfaceResolver->getFieldNamesToImplement())) {
                 continue;
             }
