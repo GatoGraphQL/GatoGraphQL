@@ -11,7 +11,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;

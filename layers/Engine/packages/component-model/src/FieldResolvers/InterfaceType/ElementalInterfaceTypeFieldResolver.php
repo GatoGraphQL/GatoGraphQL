@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\InterfaceTypeFieldResolvers;
+namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
-use PoP\ComponentModel\InterfaceTypeFieldResolvers\AbstractInterfaceTypeFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\ElementalInterfaceTypeResolver;

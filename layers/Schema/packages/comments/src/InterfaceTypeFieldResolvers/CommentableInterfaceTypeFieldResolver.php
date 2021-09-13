@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\InterfaceTypeFieldResolvers;
 
-use PoP\ComponentModel\InterfaceTypeFieldResolvers\AbstractQueryableSchemaInterfaceTypeFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;

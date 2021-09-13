@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\InterfaceTypeFieldResolvers;
+namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;

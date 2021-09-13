@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Meta\InterfaceTypeFieldResolvers;
 
-use PoP\ComponentModel\InterfaceTypeFieldResolvers\AbstractInterfaceTypeFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
