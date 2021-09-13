@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\FieldInterfaceResolvers;
+namespace PoPSchema\CustomPosts\InterfaceTypeFieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoPSchema\QueriedObject\InterfaceTypeFieldResolvers\QueryableInterfaceTypeFieldResolver;
 
-class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
+class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldResolver
 {
-    public function getImplementedFieldInterfaceResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolverClasses(): array
     {
         return [
-            QueryableFieldInterfaceResolver::class,
+            QueryableInterfaceTypeFieldResolver::class,
         ];
     }
 

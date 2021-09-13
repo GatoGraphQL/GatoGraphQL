@@ -20,9 +20,9 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
     protected function getFieldNames(): array
     {
         return array_map(
-            // The tuple has format [typeOrFieldInterfaceResolverClass, fieldName]
-            // or [typeOrFieldInterfaceResolverClass, fieldName, $role]
-            // or [typeOrFieldInterfaceResolverClass, fieldName, $capability]
+            // The tuple has format [typeOrInterfaceTypeFieldResolverClass, fieldName]
+            // or [typeOrInterfaceTypeFieldResolverClass, fieldName, $role]
+            // or [typeOrInterfaceTypeFieldResolverClass, fieldName, $capability]
             // So, in position [1], will always be the $fieldName
             fn (array $entry) => $entry[1],
             $this->getConfigurationEntries()

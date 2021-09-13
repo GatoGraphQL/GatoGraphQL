@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\AccessControl\Hooks;
 
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;

@@ -12,5 +12,5 @@ services:
     PoPSchema\CustomPosts\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
 
-    PoPSchema\CustomPosts\FieldInterfaceResolvers\:
-        resource: '../src/FieldInterfaceResolvers/*'
+    PoPSchema\CustomPosts\InterfaceTypeFieldResolvers\:
+        resource: '../src/InterfaceTypeFieldResolvers/*'

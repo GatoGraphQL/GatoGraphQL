@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\InterfaceTypeFieldResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 /**
  * A TypeResolver may be useful when retrieving the schema from a FieldResolver,
- * but it cannot be used with a FieldInterfaceResolver.
+ * but it cannot be used with a InterfaceTypeFieldResolver.
  * Hence, this adapter receives function calls to resolve the schema
  * containing a TypeResolver, strips this param, and then calls
- * the corresponding FieldInterfaceResolver.
+ * the corresponding InterfaceTypeFieldResolver.
  */
 class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionResolverInterface
 {

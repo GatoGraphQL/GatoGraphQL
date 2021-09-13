@@ -20,11 +20,11 @@ class HookHelpers
         return self::HOOK_ENABLED_FIELD_NAMES . ($fieldName ? ':' . $fieldName : '');
     }
 
-    public static function getSchemaDefinitionForFieldHookName(string $typeOrFieldInterfaceResolverClass, string $fieldName): string
+    public static function getSchemaDefinitionForFieldHookName(string $typeOrInterfaceTypeFieldResolverClass, string $fieldName): string
     {
         return sprintf(
             self::HOOK_SCHEMA_DEFINITION_FOR_FIELD,
-            $typeOrFieldInterfaceResolverClass,
+            $typeOrInterfaceTypeFieldResolverClass,
             $fieldName
         );
     }

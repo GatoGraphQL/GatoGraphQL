@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Meta\FieldInterfaceResolvers;
+namespace PoPSchema\Meta\InterfaceTypeFieldResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractInterfaceTypeFieldResolver;
+use PoP\ComponentModel\InterfaceTypeFieldResolvers\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
 
-class WithMetaFieldInterfaceResolver extends AbstractInterfaceTypeFieldResolver
+class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

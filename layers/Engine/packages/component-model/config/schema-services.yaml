@@ -12,5 +12,5 @@ services:
     PoP\ComponentModel\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
 
-    PoP\ComponentModel\FieldInterfaceResolvers\:
-        resource: '../src/FieldInterfaceResolvers/*'
+    PoP\ComponentModel\InterfaceTypeFieldResolvers\:
+        resource: '../src/InterfaceTypeFieldResolvers/*'

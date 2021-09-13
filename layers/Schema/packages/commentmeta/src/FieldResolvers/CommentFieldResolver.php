@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CommentMeta\Facades\CommentMetaTypeAPIFacade;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
-use PoPSchema\Meta\FieldInterfaceResolvers\WithMetaFieldInterfaceResolver;
+use PoPSchema\Meta\InterfaceTypeFieldResolvers\WithMetaInterfaceTypeFieldResolver;
 
 class CommentFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -19,10 +19,10 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getImplementedFieldInterfaceResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolverClasses(): array
     {
         return [
-            WithMetaFieldInterfaceResolver::class,
+            WithMetaInterfaceTypeFieldResolver::class,
         ];
     }
 
