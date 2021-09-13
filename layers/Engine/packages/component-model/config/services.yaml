@@ -109,9 +109,6 @@ services:
     PoP\ComponentModel\Registries\DirectiveRegistryInterface:
         class: \PoP\ComponentModel\Registries\DirectiveRegistry
 
-    PoP\ComponentModel\Registries\FieldInterfaceRegistryInterface:
-        class: \PoP\ComponentModel\Registries\FieldInterfaceRegistry
-
     PoP\FieldQuery\FeedbackMessageStoreInterface:
         class: \PoP\ComponentModel\Schema\FeedbackMessageStore
     PoP\ComponentModel\Schema\FeedbackMessageStoreInterface:
