@@ -1567,7 +1567,7 @@ class Engine implements EngineInterface
                         // If it's a unionTypeResolver, get the typeResolver for each resultItem
                         // to obtain the subcomponent typeResolver
                         /** @var UnionTypeResolverInterface $relationalTypeResolver */
-                        $resultItemTypeResolvers = $relationalTypeResolver->getResultItemIDTargetTypeResolvers($typeResolver_ids);
+                        $resultItemTypeResolvers = $relationalTypeResolver->getObjectIDTargetTypeResolvers($typeResolver_ids);
                         $iterationTypeResolverIDs = [];
                         foreach ($typeResolver_ids as $id) {
                             // If there's no resolver, it's an error: the ID can't be processed by anyone

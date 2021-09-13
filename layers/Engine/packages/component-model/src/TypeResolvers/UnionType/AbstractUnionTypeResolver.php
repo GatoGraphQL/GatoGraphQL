@@ -58,7 +58,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
     {
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
-        $resultItemIDTargetObjectTypeResolvers = $this->getResultItemIDTargetTypeResolvers($dbObjectIDs);
+        $resultItemIDTargetObjectTypeResolvers = $this->getObjectIDTargetTypeResolvers($dbObjectIDs);
         $typeDBObjectIDOrIDs = [];
         foreach ($dbObjectIDs as $resultItemID) {
             // Make sure there is a resolver for this resultItem. If there is none, return the same ID
@@ -83,7 +83,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return true;
     }
 
-    public function getResultItemIDTargetTypeResolvers(array $ids): array
+    public function getObjectIDTargetTypeResolvers(array $ids): array
     {
         return $this->recursiveGetResultItemIDTargetTypeResolvers($this, $ids);
     }
@@ -108,11 +108,11 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             }
             foreach ($targetTypeResolverClassDataItems as $targetObjectTypeResolverClass => $resultItemIDs) {
                 $targetObjectTypeResolver = $this->instanceManager->getInstance($targetObjectTypeResolverClass);
-                $targetResultItemIDTargetTypeResolvers = $this->recursiveGetResultItemIDTargetTypeResolvers(
+                $targetObjectIDTargetTypeResolvers = $this->recursiveGetResultItemIDTargetTypeResolvers(
                     $targetObjectTypeResolver,
                     $resultItemIDs
                 );
-                foreach ($targetResultItemIDTargetTypeResolvers as $targetResultItemID => $targetObjectTypeResolver) {
+                foreach ($targetObjectIDTargetTypeResolvers as $targetResultItemID => $targetObjectTypeResolver) {
                     $resultItemIDTargetTypeResolvers[(string)$targetResultItemID] = $targetObjectTypeResolver;
                 }
             }
@@ -161,7 +161,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             },
             array_keys($ids_data_fields)
         );
-        $resultItemIDTargetTypeResolvers = $this->getResultItemIDTargetTypeResolvers($resultItemIDs);
+        $resultItemIDTargetTypeResolvers = $this->getObjectIDTargetTypeResolvers($resultItemIDs);
 
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
         foreach ($ids_data_fields as $id => $data_fields) {

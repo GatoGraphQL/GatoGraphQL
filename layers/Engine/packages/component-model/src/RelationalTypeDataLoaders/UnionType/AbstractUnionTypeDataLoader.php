@@ -17,7 +17,7 @@ abstract class AbstractUnionTypeDataLoader extends AbstractRelationalTypeDataLoa
     {
         $unionTypeResolverClass = $this->getUnionTypeResolverClass();
         $unionTypeResolver = $this->instanceManager->getInstance($unionTypeResolverClass);
-        $resultItemIDTargetTypeResolvers = $unionTypeResolver->getResultItemIDTargetTypeResolvers($ids);
+        $resultItemIDTargetTypeResolvers = $unionTypeResolver->getObjectIDTargetTypeResolvers($ids);
         // Organize all IDs by same resolverClass
         $typeResolverClassResultItemIDs = [];
         foreach ($resultItemIDTargetTypeResolvers as $resultItemID => $targetTypeResolver) {
