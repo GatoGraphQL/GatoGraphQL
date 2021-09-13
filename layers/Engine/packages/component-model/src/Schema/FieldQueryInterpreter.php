@@ -647,7 +647,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     protected function validateExtractedFieldOrDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldOrDirective, array $fieldOrDirectiveArgs, ?array $variables, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
         // The UnionTypeResolver cannot validate, it needs to delegate to each targetObjectTypeResolver
-        // which will be done on ResultItem, not on Schema.
+        // which will be done on Object, not on Schema.
         // This situation can only happen for Directive
         // (which can receive RelationalType), not for Field (which receives ObjectType)
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {

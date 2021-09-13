@@ -571,7 +571,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return array_keys($ids_data_fields);
     }
 
-    protected function getUnresolvedResultItemIDError(string | int $resultItemID)
+    protected function getUnresolvedObjectIDError(string | int $resultItemID)
     {
         return new Error(
             'unresolved-resultitem-id',
@@ -620,7 +620,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $resolvedResultItemIDs = $this->getIDsToQuery($resultIDItems);
         $unresolvedResultItemIDs = [];
         foreach (array_diff($ids, $resolvedResultItemIDs) as $unresolvedResultItemID) {
-            $error = $this->getUnresolvedResultItemIDError($unresolvedResultItemID);
+            $error = $this->getUnresolvedObjectIDError($unresolvedResultItemID);
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
             $failedFields = $ids_data_fields[$unresolvedResultItemID]['direct'] ?? [];
             // Add in $schemaErrors instead of $dbErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do

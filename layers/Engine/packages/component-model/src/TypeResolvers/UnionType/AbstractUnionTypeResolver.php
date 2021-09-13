@@ -361,7 +361,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return null;
     }
 
-    protected function getUnresolvedResultItemIDError(string | int $resultItemID)
+    protected function getUnresolvedObjectIDError(string | int $resultItemID)
     {
         return new Error(
             'unresolved-resultitem-id',
@@ -372,7 +372,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         );
     }
 
-    protected function getUnresolvedResultItemError(object $object): Error
+    protected function getUnresolvedObjectError(object $object): Error
     {
         return new Error(
             'unresolved-resultitem',
@@ -398,7 +398,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // Check that a typeResolver from this Union can process this resultItem, or return an arror
         $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
         if ($targetObjectTypeResolver === null) {
-            return $this->getUnresolvedResultItemError($object);
+            return $this->getUnresolvedObjectError($object);
         }
         // Delegate to that typeResolver to obtain the value
         // Because the schema validation cannot be performed through the UnionTypeResolver, since it depends on each dbObject, indicate that it must be done in resolveValue
