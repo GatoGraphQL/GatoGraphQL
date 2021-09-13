@@ -8,9 +8,9 @@ use PoP\CacheControl\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\CacheControl\Facades\CacheControlEngineFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalRelationalTypeDirectiveResolver;
 
-abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
+abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalRelationalTypeDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
     public function getDirectiveName(): string
     {

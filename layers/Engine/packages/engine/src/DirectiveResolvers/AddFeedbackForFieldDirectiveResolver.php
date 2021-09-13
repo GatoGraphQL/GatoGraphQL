@@ -12,9 +12,9 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalRelationalTypeDirectiveResolver;
 
-class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolver
+class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalRelationalTypeDirectiveResolver
 {
     public function getDirectiveName(): string
     {

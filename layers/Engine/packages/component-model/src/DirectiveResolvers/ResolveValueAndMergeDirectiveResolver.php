@@ -13,7 +13,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
+final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalRelationalTypeDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
     public function getDirectiveName(): string
     {
