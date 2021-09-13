@@ -67,7 +67,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         return parent::getDatasource($module, $props);
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_DETAILS:
@@ -77,7 +77,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
                 return getWhoweareCoreUserIds();
         }
 
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 }
 

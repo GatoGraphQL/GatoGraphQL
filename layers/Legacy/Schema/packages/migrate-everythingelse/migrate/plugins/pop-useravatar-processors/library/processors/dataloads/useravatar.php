@@ -26,7 +26,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         $vars = ApplicationState::getVars();
         switch ($module[1]) {
@@ -34,7 +34,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
                 return $vars['global-userstate']['current-user-id'];
         }
 
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
     public function getRelationalTypeResolverClass(array $module): ?string

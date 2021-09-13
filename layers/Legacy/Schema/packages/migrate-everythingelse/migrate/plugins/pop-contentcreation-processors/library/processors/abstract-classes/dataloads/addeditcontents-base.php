@@ -18,13 +18,13 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         return null;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         if ($this->isUpdate($module)) {
             return $this->getDBObjectIDFromURLParam($module, $props, $data_properties);
         }
         // The parent obtains a list of IDs. Return it as a single ID
-        $ids = parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        $ids = parent::getObjectIDOrIDs($module, $props, $data_properties);
         if (is_array($ids) && count($ids) == 1) {
             return $ids[0];
         }

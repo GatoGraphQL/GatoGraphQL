@@ -33,7 +33,7 @@ interface ModuleProcessorInterface
     public function getImmutableDatasetsettings(array $module, array &$props): array;
     public function getDatasetDatabaseKeys(array $module, array &$props): array;
     public function getDatasource(array $module, array &$props): string;
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array;
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array;
     public function getRelationalTypeResolverClass(array $module): ?string;
     public function getComponentMutationResolverBridgeClass(array $module): ?string;
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void;

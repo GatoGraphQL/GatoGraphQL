@@ -77,7 +77,7 @@ trait QueryDataModuleProcessorTrait
         return $ret;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
 

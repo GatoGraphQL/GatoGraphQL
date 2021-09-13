@@ -139,7 +139,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getCheckpointmessageModule($module);
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
@@ -148,7 +148,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
                 $vars = ApplicationState::getVars();
                 return $vars['global-userstate']['current-user-id'];
         }
-        return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
+        return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
     protected function getDBObjectIDParamName(array $module, array &$props, &$data_properties)

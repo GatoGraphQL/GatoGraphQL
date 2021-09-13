@@ -1030,7 +1030,7 @@ class Engine implements EngineInterface
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
                     // Execute and get the ids and the meta
-                    $dbObjectIDOrIDs = $processor->getDBObjectIDOrIDs($module, $module_props, $data_properties);
+                    $dbObjectIDOrIDs = $processor->getObjectIDOrIDs($module, $module_props, $data_properties);
                     // If the type is union, we must add the type to each object
                     if ($dbObjectIDOrIDs !== null) {
                         $typeDBObjectIDOrIDs = $isUnionTypeResolver ?
