@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagMutations\FieldResolvers\ObjectType;
 
-use PoPSchema\CustomPostTagMutations\FieldResolvers\ObjectType\AbstractCustomPostFieldResolver;
+use PoPSchema\CustomPostTagMutations\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
 
-class PostFieldResolver extends AbstractCustomPostFieldResolver
+class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
-    use SetTagsOnPostFieldResolverTrait;
+    use SetTagsOnPostObjectTypeFieldResolverTrait;
 }

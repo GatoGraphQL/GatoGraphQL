@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\Categories\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\CustomPosts\FieldResolvers\ObjectType\AbstractCustomPostListFieldResolver;
+use PoPSchema\CustomPosts\FieldResolvers\ObjectType\AbstractCustomPostListObjectTypeFieldResolver;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 
-abstract class AbstractCustomPostListCategoryFieldResolver extends AbstractCustomPostListFieldResolver
+abstract class AbstractCustomPostListCategoryObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver
 {
     use CategoryAPIRequestedContractTrait;
 

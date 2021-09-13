@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class GlobalFieldResolver extends AbstractGlobalObjectTypeFieldResolver
+class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     public function getFieldNamesToResolve(): array
     {

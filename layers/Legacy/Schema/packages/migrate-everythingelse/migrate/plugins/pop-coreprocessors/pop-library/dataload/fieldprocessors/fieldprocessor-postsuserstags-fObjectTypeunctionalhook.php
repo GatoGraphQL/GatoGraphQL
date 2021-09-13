@@ -8,7 +8,7 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolve
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class GD_DataLoad_FunctionalFieldResolver extends AbstractObjectTypeFieldResolver
+class GD_DataLoad_FunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -78,4 +78,4 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractObjectTypeFieldResolve
 // Static Initialization: Attach
 $translationAPI = TranslationAPIFacade::getInstance();
 $hooksAPI = HooksAPIFacade::getInstance();
-(new GD_DataLoad_FunctionalFieldResolver($translationAPI, $hooksAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_DataLoad_FunctionalObjectTypeFieldResolver($translationAPI, $hooksAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

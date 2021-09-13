@@ -2,7 +2,7 @@
 
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 
-class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_PostSocialMediaItems extends PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialMediaItems
+class PoP_SocialMediaProviders_DataLoad_FunctionalObjectTypeFieldResolver_PostSocialMediaItems extends PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -18,4 +18,4 @@ class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_PostSocialMediaI
 }
 
 // Static Initialization: Attach
-(new PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_PostSocialMediaItems())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_SocialMediaProviders_DataLoad_FunctionalObjectTypeFieldResolver_PostSocialMediaItems())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

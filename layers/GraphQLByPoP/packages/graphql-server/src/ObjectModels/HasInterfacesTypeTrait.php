@@ -39,12 +39,12 @@ trait HasInterfacesTypeTrait
                     $interfaceName
                 ]
             );
-            // If the interface was not registered, that means that no FieldResolver implements it
+            // If the interface was not registered, that means that no ObjectTypeFieldResolver implements it
             $interface = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReference($schemaDefinitionID);
             if ($interface === null) {
                 $translationAPI = TranslationAPIFacade::getInstance();
                 throw new Exception(sprintf(
-                    $translationAPI->__('No FieldResolver resolves Interface \'%s\' for schema definition path \'%s\'', 'graphql-server'),
+                    $translationAPI->__('No ObjectTypeFieldResolver resolves Interface \'%s\' for schema definition path \'%s\'', 'graphql-server'),
                     $interfaceName,
                     implode(' => ', $schemaDefinitionPath)
                 ));

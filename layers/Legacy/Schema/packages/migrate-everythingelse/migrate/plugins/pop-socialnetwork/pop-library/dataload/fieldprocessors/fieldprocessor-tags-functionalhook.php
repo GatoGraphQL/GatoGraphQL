@@ -7,7 +7,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
 
-class GD_DataLoad_FieldResolver_Tags extends AbstractObjectTypeFieldResolver
+class GD_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -76,4 +76,4 @@ class GD_DataLoad_FieldResolver_Tags extends AbstractObjectTypeFieldResolver
 }
 
 // Static Initialization: Attach
-(new GD_DataLoad_FieldResolver_Tags())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_DataLoad_ObjectTypeFieldResolver_Tags())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

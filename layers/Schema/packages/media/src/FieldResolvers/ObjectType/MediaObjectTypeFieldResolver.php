@@ -20,7 +20,7 @@ use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 
-class MediaFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

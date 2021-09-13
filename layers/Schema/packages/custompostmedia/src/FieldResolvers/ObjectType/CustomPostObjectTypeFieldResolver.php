@@ -17,7 +17,7 @@ use PoPSchema\CustomPostMedia\FieldResolvers\InterfaceType\SupportingFeaturedIma
 use PoPSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 
-class CustomPostFieldResolver extends AbstractObjectTypeFieldResolver
+class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

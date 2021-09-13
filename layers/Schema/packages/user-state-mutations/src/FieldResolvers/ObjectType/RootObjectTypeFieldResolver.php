@@ -13,7 +13,7 @@ use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LogoutMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 
-class RootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Posts\FieldResolvers\ObjectType\AbstractPostFieldResolver;
+use PoPSchema\Posts\FieldResolvers\ObjectType\AbstractPostObjectTypeFieldResolver;
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagTypeResolver;
 
-class PostTagListFieldResolver extends AbstractPostFieldResolver
+class PostTagListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

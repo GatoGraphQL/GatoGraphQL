@@ -25,7 +25,7 @@ use PoPSchema\Users\ModuleProcessors\UserFilterInputContainerModuleProcessor;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-abstract class AbstractUserFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
 

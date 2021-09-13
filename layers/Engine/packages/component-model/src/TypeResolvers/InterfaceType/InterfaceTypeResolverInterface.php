@@ -18,7 +18,7 @@ interface InterfaceTypeResolverInterface extends TypeResolverInterface
     public function getFieldNamesToImplement(): array;
     /**
      * Produce an array of all the interface's fieldNames and, for each,
-     * a list of all the FieldResolverInterfaces
+     * a list of all the ObjectTypeFieldResolverInterfaces
      *
      * @return array<string, InterfaceTypeFieldResolverInterface[]>
      */
@@ -31,7 +31,7 @@ interface InterfaceTypeResolverInterface extends TypeResolverInterface
      */
     public function getAllInterfaceTypeFieldResolverClassesByField(): array;
     /**
-     * Produce an array of all the attached FieldResolverInterfaces
+     * Produce an array of all the attached ObjectTypeFieldResolverInterfaces
      *
      * @return InterfaceTypeFieldResolverInterface[]
      */

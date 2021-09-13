@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\EmbeddableFields;
 
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 
-trait EmbeddableFieldsFieldResolverTrait
+trait EmbeddableFieldsObjectTypeFieldResolverTrait
 {
     /**
      * Only use it when "embeddable fields" is enabled.

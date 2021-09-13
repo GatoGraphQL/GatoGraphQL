@@ -11,7 +11,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractObjectTypeFieldResolver
+class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -139,4 +139,4 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractObjectType
 }
 
 // Static Initialization: Attach
-(new GD_ContentCreation_DataLoad_FieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

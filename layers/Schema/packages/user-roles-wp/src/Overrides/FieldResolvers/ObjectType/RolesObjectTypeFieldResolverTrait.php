@@ -7,7 +7,7 @@ namespace PoPSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleTypeResolver;
 
-trait RolesFieldResolverTrait
+trait RolesObjectTypeFieldResolverTrait
 {
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {

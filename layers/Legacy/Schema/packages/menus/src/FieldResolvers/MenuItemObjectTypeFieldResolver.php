@@ -10,9 +10,9 @@ use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
 
 /**
  * Move the classes added to field "classes" to a hook!
- * Kept "classes" clean in this same FieldResolver, in the actual menus package
+ * Kept "classes" clean in this same ObjectTypeFieldResolver, in the actual menus package
  */
-abstract class MenuItemFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     /**
      * @param array<string, mixed> $fieldArgs

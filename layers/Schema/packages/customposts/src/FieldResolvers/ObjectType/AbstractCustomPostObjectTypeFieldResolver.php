@@ -13,7 +13,7 @@ use PoPSchema\CustomPosts\FieldResolvers\InterfaceType\IsCustomPostInterfaceType
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 
-abstract class AbstractCustomPostFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getFieldNamesToResolve(): array
     {

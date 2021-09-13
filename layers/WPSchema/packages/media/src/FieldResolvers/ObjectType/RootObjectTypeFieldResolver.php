@@ -22,7 +22,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-class RootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

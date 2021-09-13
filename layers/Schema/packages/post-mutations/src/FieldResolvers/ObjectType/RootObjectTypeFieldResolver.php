@@ -13,7 +13,7 @@ use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
 
-class RootFieldResolver extends AbstractObjectTypeFieldResolver
+class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

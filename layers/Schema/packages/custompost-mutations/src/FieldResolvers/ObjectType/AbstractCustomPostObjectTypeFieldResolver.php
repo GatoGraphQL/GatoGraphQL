@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 
-abstract class AbstractCustomPostFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getFieldNamesToResolve(): array
     {

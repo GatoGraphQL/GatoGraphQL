@@ -21,7 +21,7 @@ use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
 
-class MenuFieldResolver extends AbstractObjectTypeFieldResolver
+class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

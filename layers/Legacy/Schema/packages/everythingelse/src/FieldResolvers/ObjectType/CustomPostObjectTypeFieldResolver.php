@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use PoPSchema\Locations\TypeResolvers\ObjectType\LocationTypeResolver;
 
-class CustomPostFieldResolver extends AbstractObjectTypeFieldResolver
+class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

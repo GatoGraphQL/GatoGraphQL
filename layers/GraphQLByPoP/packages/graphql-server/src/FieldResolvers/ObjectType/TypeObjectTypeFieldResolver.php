@@ -22,7 +22,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class TypeFieldResolver extends AbstractObjectTypeFieldResolver
+class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 

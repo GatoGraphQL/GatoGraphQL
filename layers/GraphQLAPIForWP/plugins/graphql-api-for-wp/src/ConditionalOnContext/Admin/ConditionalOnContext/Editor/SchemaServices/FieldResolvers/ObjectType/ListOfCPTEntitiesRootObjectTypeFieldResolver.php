@@ -10,9 +10,9 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCus
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 /**
- * FieldResolver for the Custom Post Types from this plugin
+ * ObjectTypeFieldResolver for the Custom Post Types from this plugin
  */
-class ListOfCPTEntitiesRootFieldResolver extends AbstractListOfCPTEntitiesRootFieldResolver
+class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEntitiesRootObjectTypeFieldResolver
 {
     /**
      * @return string[]

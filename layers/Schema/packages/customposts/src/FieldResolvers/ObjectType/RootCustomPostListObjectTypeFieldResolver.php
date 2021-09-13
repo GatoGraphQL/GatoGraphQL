@@ -18,7 +18,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
  *
  * @author Leonardo Losoviz <leo@getpop.org>
  */
-class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolver
+class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

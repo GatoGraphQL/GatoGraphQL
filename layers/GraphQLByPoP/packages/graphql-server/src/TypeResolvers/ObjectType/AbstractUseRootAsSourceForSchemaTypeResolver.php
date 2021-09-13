@@ -23,7 +23,7 @@ abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObje
         string $fieldName
     ): bool;
 
-    protected function isFieldNameResolvedByFieldResolver(
+    protected function isFieldNameResolvedByObjectTypeFieldResolver(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         string $fieldName,
@@ -35,7 +35,7 @@ abstract class AbstractUseRootAsSourceForSchemaTypeResolver extends AbstractObje
         ) {
             return false;
         }
-        return parent::isFieldNameResolvedByFieldResolver(
+        return parent::isFieldNameResolvedByObjectTypeFieldResolver(
             $objectTypeOrInterfaceTypeResolver,
             $objectTypeOrInterfaceTypeFieldResolver,
             $fieldName,

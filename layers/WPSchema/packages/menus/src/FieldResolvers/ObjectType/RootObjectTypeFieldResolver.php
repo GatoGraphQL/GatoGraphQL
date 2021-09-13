@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
 
-class RootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

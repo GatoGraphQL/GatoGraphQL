@@ -14,7 +14,7 @@ use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightTypeResolver;
 
-class HighlightFieldResolver extends AbstractObjectTypeFieldResolver
+class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

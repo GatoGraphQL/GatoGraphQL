@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Locations\TypeResolvers\ObjectType\LocationTypeResolver;
 
-class LocationFunctionalFieldResolver extends AbstractObjectTypeFieldResolver
+class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

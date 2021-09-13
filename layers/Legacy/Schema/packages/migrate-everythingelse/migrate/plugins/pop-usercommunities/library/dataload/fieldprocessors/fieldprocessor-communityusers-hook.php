@@ -6,9 +6,9 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class FieldResolver_CommunityUsers extends AbstractObjectTypeFieldResolver
+class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldResolver
 {
-    use CommunityFieldResolverTrait;
+    use CommunityObjectTypeFieldResolverTrait;
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -91,4 +91,4 @@ class FieldResolver_CommunityUsers extends AbstractObjectTypeFieldResolver
 }
 
 // Static Initialization: Attach
-(new FieldResolver_CommunityUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new ObjectTypeFieldResolver_CommunityUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

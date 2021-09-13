@@ -8,7 +8,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-trait RolesFieldResolverTrait
+trait RolesObjectTypeFieldResolverTrait
 {
     public function getFieldNamesToResolve(): array
     {

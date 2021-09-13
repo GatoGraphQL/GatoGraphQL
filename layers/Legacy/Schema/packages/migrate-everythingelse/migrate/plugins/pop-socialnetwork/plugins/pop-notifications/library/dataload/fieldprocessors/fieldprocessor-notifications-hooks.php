@@ -8,7 +8,7 @@ use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
-class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractObjectTypeFieldResolver
+class PoP_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Notifications extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -267,4 +267,4 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractObj
 }
 
 // Static Initialization: Attach
-(new PoP_SocialNetwork_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

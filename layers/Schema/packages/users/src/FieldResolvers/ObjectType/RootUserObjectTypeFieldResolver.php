@@ -9,11 +9,11 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
-use PoPSchema\Users\FieldResolvers\ObjectType\AbstractUserFieldResolver;
+use PoPSchema\Users\FieldResolvers\ObjectType\AbstractUserObjectTypeFieldResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-class RootUserFieldResolver extends AbstractUserFieldResolver
+class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -20,7 +20,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModulePro
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use WP_User;
 
-class UserFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

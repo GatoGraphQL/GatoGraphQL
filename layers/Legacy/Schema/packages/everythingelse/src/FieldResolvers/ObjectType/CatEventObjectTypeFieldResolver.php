@@ -13,7 +13,7 @@ use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
 use PoPSchema\EventTags\Facades\EventTagTypeAPIFacade;
 
-class CatEventFieldResolver extends AbstractObjectTypeFieldResolver
+class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

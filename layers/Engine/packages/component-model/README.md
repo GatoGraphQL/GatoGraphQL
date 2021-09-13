@@ -1390,7 +1390,7 @@ function getDataFields($module, $props)
 }
 ```
 
-The value for "data-fields" is resolved through an object called a [FieldResolver](#fieldprocessor), described below.
+The value for "data-fields" is resolved through an object called a [ObjectTypeFieldResolver](#fieldprocessor), described below.
 
 ##### Switching domain to a relational object
 
@@ -1429,7 +1429,7 @@ function getDomainSwitchingSubmodules($module)
 
 > Note: Similar to `getModules`, this method also loads modules into the component hierarchy, hence it cannot receive parameter `$props`.
 
-Alternatively, instead of explicitly defining the name of the dataloader, we can also select the default dataloader defined for that field through constant `POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD`, which are defined through the [FieldResolver](#FieldResolver). In the example below, the default dataloaders for fields `"author"` and `"comments"` will be automatically selected:
+Alternatively, instead of explicitly defining the name of the dataloader, we can also select the default dataloader defined for that field through constant `POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD`, which are defined through the [ObjectTypeFieldResolver](#ObjectTypeFieldResolver). In the example below, the default dataloaders for fields `"author"` and `"comments"` will be automatically selected:
 
 ```php
 function getDomainSwitchingSubmodules($module) 
@@ -1487,7 +1487,7 @@ function executeGetData($ids) {
 
 The dataloader must also implement the following functions:
 
-- `getFieldprocessor`: return the name of the [FieldResolver](#fieldprocessor) that will handle the data-fields for all objects returned by the dataloader
+- `getFieldprocessor`: return the name of the [ObjectTypeFieldResolver](#fieldprocessor) that will handle the data-fields for all objects returned by the dataloader
 - `getDatabaseKey`: return the object type under which objects returned by the dataloader will be stored under `databases` in the JSON response
 
 For instance, a [dataloader fetching posts](https://github.com/leoloso/PoP/blob/master/pop-cmsmodel/library/dataload/dataloaders/dataloader-post-base.php) will implement these functions like this:
@@ -1568,20 +1568,20 @@ function executeQueryIDs($query) {
 }  
 ```
 
-### FieldResolver
+### ObjectTypeFieldResolver
 
-The FieldResolver is the object resolving "data-fields" to their corresponding value. It must inherit from class `AbstractObjectTypeFieldResolver`, and implement function `getValue`, which receives two parameters, `$resultitem` which is the database object, and `$field` which is the data-field to resolve, and must return the value for that property applied to the database object. 
+The ObjectTypeFieldResolver is the object resolving "data-fields" to their corresponding value. It must inherit from class `AbstractObjectTypeFieldResolver`, and implement function `getValue`, which receives two parameters, `$resultitem` which is the database object, and `$field` which is the data-field to resolve, and must return the value for that property applied to the database object. 
 
 > Note: the names of fields cannot include the following special characters: "," (`\PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR`), "." (`POP_CONSTANT_DOTSYNTAX_DOT`) or "|" (`POP_CONSTANT_PARAMFIELD_SEPARATOR`)
 
-For instance, a FieldResolver for posts looks like this:
+For instance, a ObjectTypeFieldResolver for posts looks like this:
 
 ```php
-class FieldResolver_Posts extends \PoP\Engine\AbstractObjectTypeFieldResolver {
+class ObjectTypeFieldResolver_Posts extends \PoP\Engine\AbstractObjectTypeFieldResolver {
 
   function getValue($resultitem, $field) {
   
-    // First Check if there's a FieldResolverExtension to implement this field
+    // First Check if there's a ObjectTypeFieldResolverExtension to implement this field
     $hook_value = $this->getHookValue(GD_DATALOAD_FIELDPROCESSOR_POSTS, $resultitem, $field);
     if (!\PoP\ComponentModel\GeneralUtils::isError($hook_value)) {
       return $hook_value;
@@ -1645,7 +1645,7 @@ class FieldResolver_Posts extends \PoP\Engine\AbstractObjectTypeFieldResolver {
 }
 ```
 
-The FieldResolver also allows to select the default dataloader to process a specific field through function `getFieldDefaultDataloader`. This feature is required for [switching domain](#Switching-domain-to-a-relational-object) through function `getDomainSwitchingSubmodules` and deciding to not explicitly indicate the dataloader to use to load relationships, but use the default one for that field instead. For instance, for the fieldprocessor for posts, it is implemented like this:
+The ObjectTypeFieldResolver also allows to select the default dataloader to process a specific field through function `getFieldDefaultDataloader`. This feature is required for [switching domain](#Switching-domain-to-a-relational-object) through function `getDomainSwitchingSubmodules` and deciding to not explicitly indicate the dataloader to use to load relationships, but use the default one for that field instead. For instance, for the fieldprocessor for posts, it is implemented like this:
 
 ```php
 function getFieldDefaultDataloader($field) 
@@ -1666,19 +1666,19 @@ function getFieldDefaultDataloader($field)
 }
 ```
 
-#### FieldResolverExtension
+#### ObjectTypeFieldResolverExtension
 
-A FieldResolverExtension is an object that allows to resolve data-fields for specific FieldResolvers, either to override their value or to extend them. For instance, it can be implemented at the application level, resolving those application-specific data fields. It must inherit from class `FieldResolver_HookBase` and implement function `getValue`, which receives three parameters, `$resultitem` which is the database object, `$field` which is the data-field to resolve, and `$fieldprocessor` which is the FieldResolver object hooked into, and must return the value for that property applied to the database object. 
+A ObjectTypeFieldResolverExtension is an object that allows to resolve data-fields for specific ObjectTypeFieldResolvers, either to override their value or to extend them. For instance, it can be implemented at the application level, resolving those application-specific data fields. It must inherit from class `ObjectTypeFieldResolver_HookBase` and implement function `getValue`, which receives three parameters, `$resultitem` which is the database object, `$field` which is the data-field to resolve, and `$fieldprocessor` which is the ObjectTypeFieldResolver object hooked into, and must return the value for that property applied to the database object. 
 
-For instance, a FieldResolverExtension for posts might add a custom "disclaimer" message, and it looks like this:
+For instance, a ObjectTypeFieldResolverExtension for posts might add a custom "disclaimer" message, and it looks like this:
 
 ```php
-class FieldResolver_Posts_Hook extends \PoP\Engine\FieldResolver_HookBase {
+class ObjectTypeFieldResolver_Posts_Hook extends \PoP\Engine\ObjectTypeFieldResolver_HookBase {
 
   function getClassesToAttachTo() {
     
     return array(
-      [FieldResolver::class, FieldResolver::FIELDPROCESSOR_POSTS],
+      [ObjectTypeFieldResolver::class, ObjectTypeFieldResolver::FIELDPROCESSOR_POSTS],
     );
   }
 

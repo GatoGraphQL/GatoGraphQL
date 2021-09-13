@@ -9,7 +9,7 @@ use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 
-class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractObjectTypeFieldResolver
+class PoP_RelatedPosts_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -119,4 +119,4 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractObjectTypeFi
 }
 
 // Static Initialization: Attach
-(new PoP_RelatedPosts_DataLoad_FieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_RelatedPosts_DataLoad_ObjectTypeFieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

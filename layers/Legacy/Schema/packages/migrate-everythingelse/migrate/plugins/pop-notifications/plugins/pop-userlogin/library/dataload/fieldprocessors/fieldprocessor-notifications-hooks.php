@@ -6,7 +6,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
-class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends AbstractObjectTypeFieldResolver
+class PoP_Notifications_UserLogin_DataLoad_ObjectTypeFieldResolver_Notifications extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -108,4 +108,4 @@ class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends A
 }
 
 // Static Initialization: Attach
-(new PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_Notifications_UserLogin_DataLoad_ObjectTypeFieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

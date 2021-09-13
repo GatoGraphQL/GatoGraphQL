@@ -7,7 +7,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractObjectTypeFieldResolver
+class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -76,4 +76,4 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractOb
 }
 
 // Static Initialization: Attach
-(new GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

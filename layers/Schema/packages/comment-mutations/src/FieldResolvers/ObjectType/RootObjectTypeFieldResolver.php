@@ -12,7 +12,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFiel
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 
-class RootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

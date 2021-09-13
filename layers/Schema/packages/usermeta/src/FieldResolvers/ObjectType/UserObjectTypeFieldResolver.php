@@ -10,7 +10,7 @@ use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolv
 use PoPSchema\UserMeta\Facades\UserMetaTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class UserFieldResolver extends AbstractObjectTypeFieldResolver
+class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

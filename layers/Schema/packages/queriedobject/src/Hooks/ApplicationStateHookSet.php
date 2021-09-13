@@ -9,7 +9,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
-use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalFieldResolver;
+use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {
@@ -35,7 +35,7 @@ class ApplicationStateHookSet extends AbstractHookSet
             1
         );
         $this->hooksAPI->addAction(
-            OperatorGlobalFieldResolver::HOOK_SAFEVARS,
+            OperatorGlobalObjectTypeFieldResolver::HOOK_SAFEVARS,
             [$this, 'setSafeVars'],
             10,
             1

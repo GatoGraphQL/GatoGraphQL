@@ -12,7 +12,7 @@ use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\Pages\TypeResolvers\ObjectType\PageTypeResolver;
 use WP_Post;
 
-class RootPageFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

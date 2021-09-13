@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 
-abstract class AbstractLocationFunctionalFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected function getDbobjectIdField()
     {

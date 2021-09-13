@@ -27,11 +27,11 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateFieldResolverTrait;
+use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateObjectTypeFieldResolverTrait;
 
-class UserStateRootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    use UserStateFieldResolverTrait;
+    use UserStateObjectTypeFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;
 
     public function __construct(

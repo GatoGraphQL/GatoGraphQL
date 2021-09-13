@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Pages\TypeResolvers\ObjectType\PageTypeResolver;
 use WP_Post;
 
-class PageFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

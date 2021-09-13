@@ -8,7 +8,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
 use PoPSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
 
-trait SetTagsOnPostFieldResolverTrait
+trait SetTagsOnPostObjectTypeFieldResolverTrait
 {
     protected function getCustomPostTypeResolverClass(): string
     {

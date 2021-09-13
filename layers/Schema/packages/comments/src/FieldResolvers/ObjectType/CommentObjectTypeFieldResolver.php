@@ -32,7 +32,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModulePro
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
-class CommentFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
     use WithLimitFieldArgResolverTrait;

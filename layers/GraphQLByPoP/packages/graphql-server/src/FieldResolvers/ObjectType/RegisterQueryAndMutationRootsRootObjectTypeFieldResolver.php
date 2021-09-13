@@ -17,7 +17,7 @@ use PoP\API\ComponentConfiguration as APIComponentConfiguration;
  * Add connections to the QueryRoot and MutationRoot types,
  * so they can be accessed to generate the schema
  */
-class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractObjectTypeFieldResolver
+class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

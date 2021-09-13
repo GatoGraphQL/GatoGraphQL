@@ -7,9 +7,9 @@ namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractGlobalUserStateFieldResolver;
+use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractGlobalUserStateObjectTypeFieldResolver;
 
-class GlobalUserStateFieldResolver extends AbstractGlobalUserStateFieldResolver
+class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObjectTypeFieldResolver
 {
     public function getFieldNamesToResolve(): array
     {

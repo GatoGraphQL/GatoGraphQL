@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\CustomPostMutations\FieldResolvers\ObjectType\AbstractCustomPostFieldResolver;
+use PoPSchema\CustomPostMutations\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
-use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateFieldResolverTrait;
+use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateObjectTypeFieldResolverTrait;
 
-class PostFieldResolver extends AbstractCustomPostFieldResolver
+class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
-    use UserStateFieldResolverTrait;
+    use UserStateObjectTypeFieldResolverTrait;
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -8,7 +8,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
-class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractObjectTypeFieldResolver
+class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
 {
     use WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 
@@ -192,4 +192,4 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractObjectTy
 }
 
 // Static Initialization: Attach
-(new PoP_ContentPostLinks_DataLoad_FieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

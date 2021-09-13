@@ -6,7 +6,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class GD_DataLoad_FieldResolver_Comments extends AbstractObjectTypeFieldResolver
+class GD_DataLoad_ObjectTypeFieldResolver_Comments extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -76,4 +76,4 @@ class GD_DataLoad_FieldResolver_Comments extends AbstractObjectTypeFieldResolver
 }
 
 // Static Initialization: Attach
-(new GD_DataLoad_FieldResolver_Comments())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_DataLoad_ObjectTypeFieldResolver_Comments())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

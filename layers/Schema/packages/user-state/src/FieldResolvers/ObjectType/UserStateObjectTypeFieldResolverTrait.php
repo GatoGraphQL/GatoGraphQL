@@ -9,7 +9,7 @@ use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 
-trait UserStateFieldResolverTrait
+trait UserStateObjectTypeFieldResolverTrait
 {
     /**
      * @param array<string, mixed> $fieldArgs

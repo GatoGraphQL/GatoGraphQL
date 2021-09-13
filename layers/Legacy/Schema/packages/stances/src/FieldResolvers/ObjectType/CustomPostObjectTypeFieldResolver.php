@@ -15,7 +15,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Stances\ComponentConfiguration;
 use PoPSchema\Stances\TypeResolvers\ObjectType\StanceTypeResolver;
 
-class CustomPostFieldResolver extends AbstractObjectTypeFieldResolver
+class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

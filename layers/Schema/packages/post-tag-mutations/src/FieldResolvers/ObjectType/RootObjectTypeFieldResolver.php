@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagMutations\FieldResolvers\ObjectType;
 
-use PoPSchema\CustomPostTagMutations\FieldResolvers\ObjectType\AbstractRootFieldResolver;
+use PoPSchema\CustomPostTagMutations\FieldResolvers\ObjectType\AbstractRootObjectTypeFieldResolver;
 
-class RootFieldResolver extends AbstractRootFieldResolver
+class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
 {
-    use SetTagsOnPostFieldResolverTrait;
+    use SetTagsOnPostObjectTypeFieldResolverTrait;
 
     protected function getSetTagsFieldName(): string
     {

@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-trait CommunityFieldResolverTrait
+trait IndividualObjectTypeFieldResolverTrait
 {
     /**
      * @param array<string, mixed> $fieldArgs
@@ -13,7 +13,7 @@ trait CommunityFieldResolverTrait
         array $fieldArgs = []
     ): bool {
         $user = $resultItem;
-        if (!gdUreIsCommunity($objectTypeResolver->getID($user))) {
+        if (!gdUreIsIndividual($objectTypeResolver->getID($user))) {
             return false;
         }
         return parent::resolveCanProcessResultItem($objectTypeResolver, $resultItem, $fieldName, $fieldArgs);

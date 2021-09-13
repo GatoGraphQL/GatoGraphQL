@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
 
-abstract class AbstractTagFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use TagAPIRequestedContractTrait;
 

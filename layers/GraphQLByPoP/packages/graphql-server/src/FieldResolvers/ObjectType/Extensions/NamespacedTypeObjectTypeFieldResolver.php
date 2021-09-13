@@ -11,7 +11,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class NamespacedTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 

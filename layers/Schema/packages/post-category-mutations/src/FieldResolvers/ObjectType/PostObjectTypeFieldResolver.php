@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 
-use PoPSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType\AbstractCustomPostFieldResolver;
+use PoPSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
 
-class PostFieldResolver extends AbstractCustomPostFieldResolver
+class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
-    use SetCategoriesOnPostFieldResolverTrait;
+    use SetCategoriesOnPostObjectTypeFieldResolverTrait;
 }

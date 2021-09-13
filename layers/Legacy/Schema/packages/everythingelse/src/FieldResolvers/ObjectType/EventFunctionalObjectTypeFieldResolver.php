@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
 
-class EventFunctionalFieldResolver extends AbstractObjectTypeFieldResolver
+class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 

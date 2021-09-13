@@ -17,7 +17,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
-abstract class AbstractChildCategoryFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use CategoryAPIRequestedContractTrait;
     use WithLimitFieldArgResolverTrait;

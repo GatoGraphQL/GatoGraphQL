@@ -106,7 +106,7 @@ class Component extends AbstractPluginComponent
         self::initServices(dirname(__DIR__), '/Overrides');
         // Conditional DI settings
         /**
-         * FieldResolvers used to configure the services can also be accessed in the admin area
+         * ObjectTypeFieldResolvers used to configure the services can also be accessed in the admin area
          */
         if (\is_admin()) {
             self::initServices(dirname(__DIR__), '/ConditionalOnContext/Admin');

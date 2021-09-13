@@ -19,11 +19,11 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateFieldResolverTrait;
+use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateObjectTypeFieldResolverTrait;
 
-class RootQueryableFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    use UserStateFieldResolverTrait;
+    use UserStateObjectTypeFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;
 
     public function getObjectTypeResolverClassesToAttachTo(): array

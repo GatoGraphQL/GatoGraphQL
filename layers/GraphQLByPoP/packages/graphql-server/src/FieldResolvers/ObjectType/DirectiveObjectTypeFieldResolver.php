@@ -13,7 +13,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class DirectiveFieldResolver extends AbstractObjectTypeFieldResolver
+class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 

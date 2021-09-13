@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuTypeResolver;
 use WP_Term;
 
-class MenuFieldResolver extends AbstractObjectTypeFieldResolver
+class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

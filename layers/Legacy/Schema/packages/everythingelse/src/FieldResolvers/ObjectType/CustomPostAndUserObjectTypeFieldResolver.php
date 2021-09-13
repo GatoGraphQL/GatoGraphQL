@@ -13,7 +13,7 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolve
 use PoPSchema\Locations\TypeResolvers\ObjectType\LocationTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class CustomPostAndUserFieldResolver extends AbstractObjectTypeFieldResolver
+class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

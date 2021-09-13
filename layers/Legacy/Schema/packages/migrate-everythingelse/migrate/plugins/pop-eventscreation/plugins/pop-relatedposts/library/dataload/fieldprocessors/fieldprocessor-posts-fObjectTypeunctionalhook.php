@@ -8,7 +8,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 
-class PoP_EventsCreation_DataLoad_FunctionalFieldResolver extends AbstractObjectTypeFieldResolver
+class PoP_EventsCreation_DataLoad_FunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -77,4 +77,4 @@ class PoP_EventsCreation_DataLoad_FunctionalFieldResolver extends AbstractObject
 // Static Initialization: Attach
 $translationAPI = TranslationAPIFacade::getInstance();
 $hooksAPI = HooksAPIFacade::getInstance();
-(new PoP_EventsCreation_DataLoad_FunctionalFieldResolver($translationAPI, $hooksAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_EventsCreation_DataLoad_FunctionalObjectTypeFieldResolver($translationAPI, $hooksAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

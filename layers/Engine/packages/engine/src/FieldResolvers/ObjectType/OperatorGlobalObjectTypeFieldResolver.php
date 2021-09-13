@@ -14,7 +14,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Misc\Extract;
 
-class OperatorGlobalFieldResolver extends AbstractGlobalObjectTypeFieldResolver
+class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     /**
      * @var array<string, mixed>

@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-trait OrganizationFieldResolverTrait
+trait OrganizationObjectTypeFieldResolverTrait
 {
     /**
      * @param array<string, mixed> $fieldArgs

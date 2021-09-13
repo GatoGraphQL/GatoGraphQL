@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-trait SetCategoriesOnCustomPostFieldResolverTrait
+trait SetCategoriesOnCustomPostObjectTypeFieldResolverTrait
 {
     abstract protected function getCustomPostTypeResolverClass(): string;
     abstract protected function getCategoryTypeResolverClass(): string;

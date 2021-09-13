@@ -20,7 +20,7 @@ use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemTypeResolver;
 
-class MenuItemFieldResolver extends AbstractObjectTypeFieldResolver
+class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

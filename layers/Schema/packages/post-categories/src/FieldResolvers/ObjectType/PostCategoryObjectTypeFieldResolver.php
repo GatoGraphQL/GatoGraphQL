@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\FieldResolvers\ObjectType;
 
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryTypeResolver;
-use PoPSchema\Categories\FieldResolvers\ObjectType\AbstractCategoryFieldResolver;
+use PoPSchema\Categories\FieldResolvers\ObjectType\AbstractCategoryObjectTypeFieldResolver;
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
 
-class PostCategoryFieldResolver extends AbstractCategoryFieldResolver
+class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFieldResolver
 {
     use PostCategoryAPISatisfiedContractTrait;
 

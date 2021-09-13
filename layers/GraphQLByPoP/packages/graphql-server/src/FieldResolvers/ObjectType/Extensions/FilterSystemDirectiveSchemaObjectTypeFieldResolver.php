@@ -10,10 +10,10 @@ use GraphQLByPoP\GraphQLServer\Enums\DirectiveTypeEnum;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaTypeResolver;
-use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\SchemaFieldResolver;
+use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\SchemaObjectTypeFieldResolver;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
 
-class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
+class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

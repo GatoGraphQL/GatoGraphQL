@@ -16,9 +16,9 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
 use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
 
 /**
- * FieldResolver for the Custom Post Types from this plugin
+ * ObjectTypeFieldResolver for the Custom Post Types from this plugin
  */
-abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     /**
      * @return string[]

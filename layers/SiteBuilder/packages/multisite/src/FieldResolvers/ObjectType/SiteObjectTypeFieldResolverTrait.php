@@ -6,7 +6,7 @@ namespace PoP\Multisite\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-trait SiteFieldResolverTrait
+trait SiteObjectTypeFieldResolverTrait
 {
     /**
      * @param array<string, mixed> $fieldArgs

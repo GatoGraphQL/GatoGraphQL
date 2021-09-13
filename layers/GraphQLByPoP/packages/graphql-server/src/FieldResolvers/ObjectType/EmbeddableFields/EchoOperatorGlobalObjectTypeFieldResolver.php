@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\EmbeddableFields;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalFieldResolver;
+use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 /**
  * When Embeddable Fields is enabled, register the `echoStr` field
  */
-class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
+class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectTypeFieldResolver
 {
-    use EmbeddableFieldsFieldResolverTrait;
+    use EmbeddableFieldsObjectTypeFieldResolverTrait;
 
     /**
      * By making it not global, it gets registered on each single type.

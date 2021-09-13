@@ -12,9 +12,9 @@ use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 
-abstract class AbstractRootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    use SetCategoriesOnCustomPostFieldResolverTrait;
+    use SetCategoriesOnCustomPostObjectTypeFieldResolverTrait;
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

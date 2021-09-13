@@ -12,7 +12,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
 
-class PostFieldResolver extends AbstractObjectTypeFieldResolver
+class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

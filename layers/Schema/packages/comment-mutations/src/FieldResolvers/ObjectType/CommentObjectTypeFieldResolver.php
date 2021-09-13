@@ -19,7 +19,7 @@ use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
 
-class CommentFieldResolver extends AbstractObjectTypeFieldResolver
+class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

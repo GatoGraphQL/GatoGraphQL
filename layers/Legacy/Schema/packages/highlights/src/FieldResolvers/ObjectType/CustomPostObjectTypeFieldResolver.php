@@ -15,7 +15,7 @@ use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-class CustomPostFieldResolver extends AbstractObjectTypeFieldResolver
+class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -14,7 +14,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationTypeResolver;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
-class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractObjectTypeFieldResolver
+class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -211,4 +211,4 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractObjec
 }
 
 // Static Initialization: Attach
-(new PoP_AddComments_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

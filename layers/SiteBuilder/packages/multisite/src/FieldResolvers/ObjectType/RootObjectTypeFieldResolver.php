@@ -12,7 +12,7 @@ use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoP\Multisite\ObjectFacades\SiteObjectFacade;
 use PoP\Multisite\TypeResolvers\ObjectType\SiteTypeResolver;
 
-class RootFieldResolver extends AbstractObjectTypeFieldResolver
+class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

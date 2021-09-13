@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
 {
     /**
-     * The classes of the ObjectTypeResolvers this FieldResolver adds fields to.
+     * The classes of the ObjectTypeResolvers this ObjectTypeFieldResolver adds fields to.
      * The list can contain both concrete and abstract classes (in which case all classes
      * extending from them will be selected)
      *

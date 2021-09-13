@@ -19,7 +19,7 @@ use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use WP_Post;
 
-class MediaFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

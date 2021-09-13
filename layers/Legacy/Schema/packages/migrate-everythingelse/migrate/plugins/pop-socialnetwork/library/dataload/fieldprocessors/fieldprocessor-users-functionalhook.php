@@ -7,7 +7,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class PoPGenericForms_DataLoad_FieldResolver_FunctionalUsers extends AbstractObjectTypeFieldResolver
+class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -68,4 +68,4 @@ class PoPGenericForms_DataLoad_FieldResolver_FunctionalUsers extends AbstractObj
 }
 
 // Static Initialization: Attach
-(new PoPGenericForms_DataLoad_FieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoPGenericForms_DataLoad_ObjectTypeFieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

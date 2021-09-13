@@ -6,4 +6,4 @@ parameters:
 	ignoreErrors:
 		-
 			message: '#^Match arm comparison between \*NEVER\* and (.*) is always false.$#'
-			path: src/FieldResolvers/ObjectType/OperatorGlobalFieldResolver.php
+			path: src/FieldResolvers/ObjectType/OperatorGlobalObjectTypeFieldResolver.php

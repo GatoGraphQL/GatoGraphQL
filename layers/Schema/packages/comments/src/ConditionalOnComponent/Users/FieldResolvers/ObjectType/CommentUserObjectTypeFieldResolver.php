@@ -17,7 +17,7 @@ use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInter
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class CommentUserFieldResolver extends AbstractObjectTypeFieldResolver
+class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

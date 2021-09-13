@@ -11,7 +11,7 @@ use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
 use PoPSchema\EverythingElse\Enums\MemberTagEnum;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractObjectTypeFieldResolver
+class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
     use WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 
@@ -182,4 +182,4 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractObjectType
 }
 
 // Static Initialization: Attach
-(new GD_UserCommunities_DataLoad_FieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

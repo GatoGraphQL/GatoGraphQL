@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\FieldResolvers\ObjectType;
 
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
-use PoPSchema\CustomPosts\FieldResolvers\ObjectType\AbstractCustomPostFieldResolver;
+use PoPSchema\CustomPosts\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
 
-class CustomPostFieldResolver extends AbstractCustomPostFieldResolver
+class CustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

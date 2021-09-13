@@ -10,7 +10,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractObjectTypeFieldResolver
+class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -121,4 +121,4 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractObjectTypeFi
 }
 
 // Static Initialization: Attach
-(new GD_SocialNetwork_DataLoad_FieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

@@ -16,7 +16,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\Tags\ComponentConfiguration;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
 
-abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use TagAPIRequestedContractTrait;
     use WithLimitFieldArgResolverTrait;

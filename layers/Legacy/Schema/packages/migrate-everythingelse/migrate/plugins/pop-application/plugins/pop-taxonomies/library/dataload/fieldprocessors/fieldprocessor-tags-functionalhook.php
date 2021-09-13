@@ -5,7 +5,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagTypeResolver;
 
-class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractObjectTypeFieldResolver
+class PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -65,4 +65,4 @@ class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractObjectTypeFiel
 }
 
 // Static Initialization: Attach
-(new PoP_Application_DataLoad_FieldResolver_Tags())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

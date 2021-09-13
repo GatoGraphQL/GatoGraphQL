@@ -19,7 +19,7 @@ use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeF
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class UserFieldResolver extends AbstractObjectTypeFieldResolver
+class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

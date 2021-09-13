@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagTypeResolver;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 
-class TagFunctionalFieldResolver extends AbstractObjectTypeFieldResolver
+class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

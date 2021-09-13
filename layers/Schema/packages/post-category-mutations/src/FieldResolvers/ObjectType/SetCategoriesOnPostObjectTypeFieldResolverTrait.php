@@ -9,7 +9,7 @@ use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryTypeResolver;
 use PoPSchema\PostCategoryMutations\MutationResolvers\SetCategoriesOnPostMutationResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostTypeResolver;
 
-trait SetCategoriesOnPostFieldResolverTrait
+trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 {
     protected function getCustomPostTypeResolverClass(): string
     {

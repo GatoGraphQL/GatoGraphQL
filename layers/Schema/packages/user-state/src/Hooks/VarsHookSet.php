@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\UserState\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
-use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalFieldResolver;
+use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
 use PoPSchema\UserState\State\ApplicationStateUtils;
 
 class VarsHookSet extends AbstractHookSet
@@ -19,7 +19,7 @@ class VarsHookSet extends AbstractHookSet
             1
         );
         $this->hooksAPI->addAction(
-            OperatorGlobalFieldResolver::HOOK_SAFEVARS,
+            OperatorGlobalObjectTypeFieldResolver::HOOK_SAFEVARS,
             [$this, 'setSafeVars'],
             10,
             1

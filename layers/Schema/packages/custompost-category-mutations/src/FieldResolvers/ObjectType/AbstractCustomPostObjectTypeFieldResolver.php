@@ -11,9 +11,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 
-abstract class AbstractCustomPostFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    use SetCategoriesOnCustomPostFieldResolverTrait;
+    use SetCategoriesOnCustomPostObjectTypeFieldResolverTrait;
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

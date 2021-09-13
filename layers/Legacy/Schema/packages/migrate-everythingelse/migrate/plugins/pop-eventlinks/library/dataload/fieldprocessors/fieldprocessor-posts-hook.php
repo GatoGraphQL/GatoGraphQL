@@ -6,7 +6,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
 
-class GD_EM_DataLoad_FieldResolver_Posts extends AbstractObjectTypeFieldResolver
+class GD_EM_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -101,4 +101,4 @@ class GD_EM_DataLoad_FieldResolver_Posts extends AbstractObjectTypeFieldResolver
 }
 
 // Static Initialization: Attach
-(new GD_EM_DataLoad_FieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new GD_EM_DataLoad_ObjectTypeFieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

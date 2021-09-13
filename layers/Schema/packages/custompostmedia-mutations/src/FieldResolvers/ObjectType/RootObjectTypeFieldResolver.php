@@ -22,7 +22,7 @@ use PoPSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCusto
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
 
-class RootFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

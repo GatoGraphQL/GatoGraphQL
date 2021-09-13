@@ -25,7 +25,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
  *
  * @author Leonardo Losoviz <leo@getpop.org>
  */
-class RootGenericCustomPostFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
 

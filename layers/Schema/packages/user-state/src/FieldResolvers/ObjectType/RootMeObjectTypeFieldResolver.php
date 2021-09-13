@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
-use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractUserStateFieldResolver;
+use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractUserStateObjectTypeFieldResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class RootMeFieldResolver extends AbstractUserStateFieldResolver
+class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -47,12 +47,12 @@ class SchemaDefinitionHelpers
         if ($interfaceNames) {
             foreach ($interfaceNames as $interfaceName) {
                 $interfaceSchemaDefinition = $fullSchemaDefinition[SchemaDefinition::ARGNAME_INTERFACES][$interfaceName];
-                // If there is no definition for the interface, that means that it is not resolved by any FieldResolver
+                // If there is no definition for the interface, that means that it is not resolved by any ObjectTypeFieldResolver
                 // That's an error, so throw a helpful exception
                 if (is_null($interfaceSchemaDefinition)) {
                     $translationAPI = TranslationAPIFacade::getInstance();
                     throw new Exception(sprintf(
-                        $translationAPI->__('Interface \'%s\' is not resolved by any FieldResolver', 'graphql-server'),
+                        $translationAPI->__('Interface \'%s\' is not resolved by any ObjectTypeFieldResolver', 'graphql-server'),
                         $interfaceName
                     ));
                 }

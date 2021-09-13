@@ -48,7 +48,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
         $interfaceTypeResolverClasses = $objectTypeOrInterfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses();
         $fieldNames = array_filter(
             $fieldNames,
-            fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver(
+            fn ($fieldName) => $this->isFieldNameResolvedByObjectTypeFieldResolver(
                 $objectTypeOrInterfaceTypeResolver,
                 $objectTypeOrInterfaceTypeFieldResolver,
                 $fieldName,
@@ -65,7 +65,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
      * to find out the list of Interfaces containing $fieldName, however this function relies
      * on the InterfaceTypeFieldResolver once again, so we'd get a recursion.
      */
-    protected function isFieldNameResolvedByFieldResolver(
+    protected function isFieldNameResolvedByObjectTypeFieldResolver(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         string $fieldName,

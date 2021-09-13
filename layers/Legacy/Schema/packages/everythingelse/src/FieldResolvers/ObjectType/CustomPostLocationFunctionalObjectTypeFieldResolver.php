@@ -7,7 +7,7 @@ namespace PoPSchema\Locations\FieldResolvers\ObjectType;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use PoPSchema\Posts\Constants\InputNames;
 
-class CustomPostLocationFunctionalFieldResolver extends AbstractLocationFunctionalFieldResolver
+class CustomPostLocationFunctionalObjectTypeFieldResolver extends AbstractLocationFunctionalObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

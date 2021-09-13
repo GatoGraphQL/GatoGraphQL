@@ -7,7 +7,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractObjectTypeFieldResolver
+class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -104,4 +104,4 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractObj
 }
 
 // Static Initialization: Attach
-(new PoP_Application_DataLoad_FieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

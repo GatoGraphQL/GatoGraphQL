@@ -121,7 +121,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * Return the object implementing the schema definition for this FieldResolver.
+     * Return the object implementing the schema definition for this ObjectTypeFieldResolver.
      */
     final protected function getSchemaDefinitionResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ObjectTypeFieldSchemaDefinitionResolverInterface
     {
@@ -161,7 +161,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Retrieve the class of some InterfaceTypeFieldSchemaDefinitionResolverInterface
-     * By default, if the FieldResolver implements an interface,
+     * By default, if the ObjectTypeFieldResolver implements an interface,
      * it is used as SchemaDefinitionResolver for the matching fields
      */
     protected function getInterfaceTypeFieldSchemaDefinitionResolverClass(
@@ -304,7 +304,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ) {
             /**
              * Please notice: we can get the fieldVersion directly from this instance,
-             * and not from the schemaDefinition, because the version is set at the FieldResolver level,
+             * and not from the schemaDefinition, because the version is set at the ObjectTypeFieldResolver level,
              * and not the InterfaceTypeFieldResolver, which is the other entity filling data
              * inside the schemaDefinition object.
              * If this field is tagged with a version...
@@ -657,7 +657,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                  */
                 if (!$this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)) {
                     $warnings[] = sprintf(
-                        $this->translationAPI->__('The FieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
+                        $this->translationAPI->__('The ObjectTypeFieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
                         $fieldName,
                         $this->getSchemaFieldVersion($objectTypeResolver, $fieldName) ?? '',
                         $versionConstraint

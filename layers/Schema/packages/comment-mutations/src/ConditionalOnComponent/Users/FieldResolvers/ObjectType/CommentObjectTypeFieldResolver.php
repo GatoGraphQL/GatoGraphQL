@@ -14,14 +14,14 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface as UserCommentTypeAPIInterface;
-use PoPSchema\Comments\FieldResolvers\ObjectType\CommentFieldResolver as UpstreamCommentFieldResolver;
+use PoPSchema\Comments\FieldResolvers\ObjectType\CommentObjectTypeFieldResolver as UpstreamCommentObjectTypeFieldResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 /**
  * Override fields from the upstream class, getting the data from the user
  */
-class CommentFieldResolver extends UpstreamCommentFieldResolver
+class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

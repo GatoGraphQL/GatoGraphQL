@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 
-abstract class AbstractCategoryFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use CategoryAPIRequestedContractTrait;
 

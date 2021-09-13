@@ -13,7 +13,7 @@ use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventTypeResolver;
 use PoPSchema\Locations\TypeResolvers\ObjectType\LocationTypeResolver;
 
-class EventFieldResolver extends AbstractObjectTypeFieldResolver
+class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

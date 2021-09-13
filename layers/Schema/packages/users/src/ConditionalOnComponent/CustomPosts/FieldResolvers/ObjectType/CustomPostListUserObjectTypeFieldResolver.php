@@ -6,9 +6,9 @@ namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers\Obje
 
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\CustomPosts\FieldResolvers\ObjectType\AbstractCustomPostListFieldResolver;
+use PoPSchema\CustomPosts\FieldResolvers\ObjectType\AbstractCustomPostListObjectTypeFieldResolver;
 
-class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolver
+class CustomPostListUserObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

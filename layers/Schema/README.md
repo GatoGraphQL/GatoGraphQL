@@ -65,10 +65,10 @@ class UserTypeResolver extends AbstractObjectTypeResolver
 
 Please notice how the `TypeResolver` does not indicate which are its fields. It also does not load the objects from the database, but instead delegates this task to a `TypeDataLoader`. And it doesn't know how to retrieve the ID for the user; that will be done for a CMS-specific service.
 
-Adding fields to the type is done via a `FieldResolver`:
+Adding fields to the type is done via a `ObjectTypeFieldResolver`:
 
 ```php
-class UserFieldResolver extends AbstractObjectTypeFieldResolver
+class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
   public function getClassesToAttachTo(): array
   {
@@ -132,7 +132,7 @@ class UserFieldResolver extends AbstractObjectTypeFieldResolver
 }
 ```
 
-The definition of a field for the schema, and its resolution, is split into a multitude of functions from the `FieldResolver`: 
+The definition of a field for the schema, and its resolution, is split into a multitude of functions from the `ObjectTypeFieldResolver`: 
 
 - `getSchemaFieldDescription`
 - `getSchemaFieldType`

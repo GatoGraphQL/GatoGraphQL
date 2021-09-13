@@ -7,7 +7,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostTypeResolver;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
-class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractObjectTypeFieldResolver
+class GD_Custom_Locations_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -103,4 +103,4 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends 
 }
 
 // Static Initialization: Attach
-(new GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new GD_Custom_Locations_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

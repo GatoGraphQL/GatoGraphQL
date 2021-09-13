@@ -9,11 +9,11 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootTypeResolver;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoPSchema\UserRoles\FieldResolvers\ObjectType\RolesFieldResolverTrait;
+use PoPSchema\UserRoles\FieldResolvers\ObjectType\RolesObjectTypeFieldResolverTrait;
 
-class RootRolesFieldResolver extends AbstractObjectTypeFieldResolver
+class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    use RolesFieldResolverTrait;
+    use RolesObjectTypeFieldResolverTrait;
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

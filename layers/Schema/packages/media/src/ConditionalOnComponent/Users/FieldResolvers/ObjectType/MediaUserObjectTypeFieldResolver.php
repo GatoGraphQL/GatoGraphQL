@@ -18,7 +18,7 @@ use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterf
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserTypeResolver;
 
-class MediaUserFieldResolver extends AbstractObjectTypeFieldResolver
+class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function __construct(
         TranslationAPIInterface $translationAPI,

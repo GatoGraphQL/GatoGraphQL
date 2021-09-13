@@ -16,7 +16,7 @@ use PoPSchema\Stances\TypeResolvers\ObjectType\StanceTypeResolver;
 use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-class StanceFieldResolver extends AbstractObjectTypeFieldResolver
+class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
