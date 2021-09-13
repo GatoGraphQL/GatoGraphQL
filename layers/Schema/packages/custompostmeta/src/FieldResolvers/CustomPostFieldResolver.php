@@ -35,22 +35,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     }
 
     /**
-     * Get the Schema Definition from the Interface
-     */
-    protected function getFieldInterfaceSchemaDefinitionResolverClass(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?string {
-        return match ($fieldName) {
-            'metaValue',
-            'metaValues'
-                => WithMetaFieldInterfaceResolver::class,
-            default
-                => parent::getFieldInterfaceSchemaDefinitionResolverClass($objectTypeResolver, $fieldName),
-        };
-    }
-
-    /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions

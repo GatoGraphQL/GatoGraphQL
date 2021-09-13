@@ -35,23 +35,6 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    /**
-     * Get the Schema Definition from the Interface
-     */
-    protected function getFieldInterfaceSchemaDefinitionResolverClass(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?string {
-        return match ($fieldName) {
-            'url',
-            'urlPath',
-            'slug'
-                => QueryableFieldInterfaceResolver::class,
-            default
-                => parent::getFieldInterfaceSchemaDefinitionResolverClass($objectTypeResolver, $fieldName),
-        };
-    }
-
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [

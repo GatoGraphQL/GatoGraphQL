@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
@@ -28,32 +26,6 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
             QueryableFieldInterfaceResolver::class,
             IsCustomPostFieldInterfaceResolver::class,
         ];
-    }
-
-    /**
-     * Get the Schema Definition from the Interface
-     */
-    protected function getFieldInterfaceSchemaDefinitionResolverClass(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?string {
-        return match ($fieldName) {
-            'url',
-            'urlPath',
-            'slug'
-                => QueryableFieldInterfaceResolver::class,
-            'content',
-            'status',
-            'isStatus',
-            'date',
-            'modified',
-            'title',
-            'excerpt',
-            'customPostType'
-                => IsCustomPostFieldInterfaceResolver::class,
-            default
-                => parent::getFieldInterfaceSchemaDefinitionResolverClass($objectTypeResolver, $fieldName),
-        };
     }
 
     protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface

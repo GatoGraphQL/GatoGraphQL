@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers;
 
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -73,23 +71,6 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'description',
             'websiteURL',
         ];
-    }
-
-    /**
-     * Get the Schema Definition from the Interface
-     */
-    protected function getFieldInterfaceSchemaDefinitionResolverClass(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?string {
-        return match ($fieldName) {
-            'url',
-            'urlPath',
-            'slug'
-                => QueryableFieldInterfaceResolver::class,
-            default
-                => parent::getFieldInterfaceSchemaDefinitionResolverClass($objectTypeResolver, $fieldName),
-        };
     }
 
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
