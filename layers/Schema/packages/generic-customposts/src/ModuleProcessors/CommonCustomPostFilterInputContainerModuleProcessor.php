@@ -54,7 +54,7 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
         };
     }
 
-    public function getFieldDataFilteringMandatoryArgs(array $module): array
+    public function getFieldFilterInputMandatoryArgs(array $module): array
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_GENERICTYPE:
@@ -76,7 +76,7 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
                     $slugFilterInputName,
                 ];
         }
-        return parent::getFieldDataFilteringMandatoryArgs($module);
+        return parent::getFieldFilterInputMandatoryArgs($module);
     }
 
     /**

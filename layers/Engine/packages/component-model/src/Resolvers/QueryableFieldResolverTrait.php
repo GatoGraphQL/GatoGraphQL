@@ -30,8 +30,8 @@ trait QueryableFieldResolverTrait
         );
         return $this->getSchemaFieldArgsWithCustomFilterInputData(
             $schemaFieldArgs,
-            $filterDataModuleProcessor->getFieldDataFilteringDefaultValues($filterDataloadingModule),
-            $filterDataModuleProcessor->getFieldDataFilteringMandatoryArgs($filterDataloadingModule)
+            $filterDataModuleProcessor->getFieldFilterInputDefaultValues($filterDataloadingModule),
+            $filterDataModuleProcessor->getFieldFilterInputMandatoryArgs($filterDataloadingModule)
         );
     }
 

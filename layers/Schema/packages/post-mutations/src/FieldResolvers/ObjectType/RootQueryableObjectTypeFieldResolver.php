@@ -69,17 +69,17 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldDataFilteringModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
             'myPost' => [PostMutationFilterInputContainerModuleProcessor::class, PostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYPOST],
             'myPosts' => [PostMutationFilterInputContainerModuleProcessor::class, PostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTS],
             'myPostCount' => [PostMutationFilterInputContainerModuleProcessor::class, PostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT],
-            default => parent::getFieldDataFilteringModule($objectTypeResolver, $fieldName),
+            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
 
-    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'myPosts':
@@ -91,7 +91,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
                     $limitFilterInputName => ComponentConfiguration::getPostListDefaultLimit(),
                 ];
         }
-        return parent::getFieldDataFilteringDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
     }
 
     /**

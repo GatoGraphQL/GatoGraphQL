@@ -62,7 +62,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'tags':
@@ -75,7 +75,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
                     $limitFilterInputName => ComponentConfiguration::getTagListDefaultLimit(),
                 ];
         }
-        return parent::getFieldDataFilteringDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
     }
 
     /**

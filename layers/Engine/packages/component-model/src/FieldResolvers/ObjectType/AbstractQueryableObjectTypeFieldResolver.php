@@ -16,12 +16,12 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
 {
     use QueryableFieldResolverTrait;
 
-    public function getFieldDataFilteringModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         /** @var QueryableObjectTypeFieldSchemaDefinitionResolverInterface */
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldDataFilteringModule($objectTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName);
         }
         return null;
     }
@@ -37,12 +37,12 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
 
     protected function getFieldArgumentsSchemaDefinitions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($objectTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
             $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
             return $this->getSchemaFieldArgsWithCustomFilterInputData(
                 $schemaFieldArgs,
-                $this->getFieldDataFilteringDefaultValues($objectTypeResolver, $fieldName),
-                $this->getFieldDataFilteringMandatoryArgs($objectTypeResolver, $fieldName)
+                $this->getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName),
+                $this->getFieldFilterInputMandatoryArgs($objectTypeResolver, $fieldName)
             );
         }
 
@@ -53,7 +53,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      * Provide default values for modules in the FilterInputContainer
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
-    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return [];
     }
@@ -62,7 +62,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      * Provide the names of the args which are mandatory in the FilterInput
      * @return string[]
      */
-    protected function getFieldDataFilteringMandatoryArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    protected function getFieldFilterInputMandatoryArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return [];
     }
@@ -75,7 +75,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         // If there is a filter, and it has many filterInputs, then by default we'd rather not enable ordering
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($objectTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             /** @var FilterInputContainerModuleProcessorInterface */
             $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($filterDataloadingModule);
@@ -95,7 +95,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      *
      * This function transforms between the 2 states:
      *
-     * - For each FilterInput defined via `getFieldDataFilteringModule`:
+     * - For each FilterInput defined via `getFieldFilterInputContainerModule`:
      * - Check if the entry with that name exists in fieldArgs, and if so:
      * - Execute `filterDataloadQueryArgs` on the FilterInput to place the value
      *   under the expected input name
@@ -106,7 +106,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $filteringQueryArgs = [];
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($objectTypeResolver, $fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             /** @var FilterDataModuleProcessorInterface */
             $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($filterDataloadingModule);

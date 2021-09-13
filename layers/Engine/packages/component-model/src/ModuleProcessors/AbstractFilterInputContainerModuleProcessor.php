@@ -42,7 +42,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
      * Provide default values for modules in the FilterInputContainer
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
-    public function getFieldDataFilteringDefaultValues(array $module): array
+    public function getFieldFilterInputDefaultValues(array $module): array
     {
         return [];
     }
@@ -51,7 +51,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
      * Provide the names of the args which are mandatory in the FilterInput
      * @return string[]
      */
-    public function getFieldDataFilteringMandatoryArgs(array $module): array
+    public function getFieldFilterInputMandatoryArgs(array $module): array
     {
         return [];
     }

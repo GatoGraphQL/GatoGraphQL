@@ -10,12 +10,12 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
 {
     use QueryableFieldResolverTrait;
 
-    public function getFieldDataFilteringModule(string $fieldName): ?array
+    public function getFieldFilterInputContainerModule(string $fieldName): ?array
     {
         /** @var QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface */
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldDataFilteringModule($fieldName);
+            return $schemaDefinitionResolver->getFieldFilterInputContainerModule($fieldName);
         }
         return null;
     }
@@ -31,12 +31,12 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
 
     protected function getFieldArgumentsSchemaDefinitions(string $fieldName): array
     {
-        if ($filterDataloadingModule = $this->getFieldDataFilteringModule($fieldName)) {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
             $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
             return $this->getSchemaFieldArgsWithCustomFilterInputData(
                 $schemaFieldArgs,
-                $this->getFieldDataFilteringDefaultValues($fieldName),
-                $this->getFieldDataFilteringMandatoryArgs($fieldName)
+                $this->getFieldFilterInputDefaultValues($fieldName),
+                $this->getFieldFilterInputMandatoryArgs($fieldName)
             );
         }
 
@@ -47,7 +47,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
      * Provide default values for modules in the FilterInputContainer
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
-    protected function getFieldDataFilteringDefaultValues(string $fieldName): array
+    protected function getFieldFilterInputDefaultValues(string $fieldName): array
     {
         return [];
     }
@@ -56,7 +56,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
      * Provide the names of the args which are mandatory in the FilterInput
      * @return string[]
      */
-    protected function getFieldDataFilteringMandatoryArgs(string $fieldName): array
+    protected function getFieldFilterInputMandatoryArgs(string $fieldName): array
     {
         return [];
     }

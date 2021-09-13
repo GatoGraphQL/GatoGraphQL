@@ -123,7 +123,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
         };
     }
 
-    public function getFieldDataFilteringMandatoryArgs(array $module): array
+    public function getFieldFilterInputMandatoryArgs(array $module): array
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS:
@@ -135,7 +135,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
                     $idFilterInputName,
                 ];
         }
-        return parent::getFieldDataFilteringMandatoryArgs($module);
+        return parent::getFieldFilterInputMandatoryArgs($module);
     }
 
     /**

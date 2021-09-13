@@ -47,7 +47,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
         };
     }
 
-    public function getFieldDataFilteringMandatoryArgs(array $module): array
+    public function getFieldFilterInputMandatoryArgs(array $module): array
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID:
@@ -67,13 +67,13 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
                     $slugFilterInputName,
                 ];
         }
-        return parent::getFieldDataFilteringMandatoryArgs($module);
+        return parent::getFieldFilterInputMandatoryArgs($module);
     }
 
     /**
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
-    public function getFieldDataFilteringDefaultValues(array $module): array
+    public function getFieldFilterInputDefaultValues(array $module): array
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING:
@@ -95,7 +95,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
                 $filterInputNameDefaultValues[$gmtFilterInputName] = false;
                 return $filterInputNameDefaultValues;
         }
-        return parent::getFieldDataFilteringMandatoryArgs($module);
+        return parent::getFieldFilterInputMandatoryArgs($module);
     }
 
     /**
