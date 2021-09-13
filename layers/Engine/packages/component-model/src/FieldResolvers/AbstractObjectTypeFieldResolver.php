@@ -11,7 +11,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeObjectTypeFieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -125,7 +125,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function getSchemaDefinitionResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ObjectTypeFieldSchemaDefinitionResolverInterface
     {
         $fieldOrInterfaceTypeFieldSchemaDefinitionResolver = $this->doGetSchemaDefinitionResolver($objectTypeResolver, $fieldName);
-        if ($fieldOrInterfaceTypeFieldSchemaDefinitionResolver instanceof InterfaceTypeObjectTypeFieldSchemaDefinitionResolverInterface) {
+        if ($fieldOrInterfaceTypeFieldSchemaDefinitionResolver instanceof InterfaceTypeFieldSchemaDefinitionResolverInterface) {
             // Interfaces do not receive the typeResolver, so we must bridge it
             // First check if the class is cached
             $key = $objectTypeResolver->getNamespacedTypeName() . '|' . $fieldName;
@@ -150,16 +150,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected function doGetSchemaDefinitionResolver(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
-    ): ObjectTypeFieldSchemaDefinitionResolverInterface | InterfaceTypeObjectTypeFieldSchemaDefinitionResolverInterface {
+    ): ObjectTypeFieldSchemaDefinitionResolverInterface | InterfaceTypeFieldSchemaDefinitionResolverInterface {
         if ($interfaceTypeFieldSchemaDefinitionResolverClass = $this->getInterfaceTypeFieldSchemaDefinitionResolverClass($objectTypeResolver, $fieldName)) {
-            /** @var InterfaceTypeObjectTypeFieldSchemaDefinitionResolverInterface */
+            /** @var InterfaceTypeFieldSchemaDefinitionResolverInterface */
             return $this->instanceManager->getInstance($interfaceTypeFieldSchemaDefinitionResolverClass);
         }
         return $this;
     }
 
     /**
-     * Retrieve the class of some InterfaceTypeObjectTypeFieldSchemaDefinitionResolverInterface
+     * Retrieve the class of some InterfaceTypeFieldSchemaDefinitionResolverInterface
      * By default, if the FieldResolver implements an interface,
      * it is used as SchemaDefinitionResolver for the matching fields
      */
