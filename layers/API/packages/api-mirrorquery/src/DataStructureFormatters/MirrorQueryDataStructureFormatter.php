@@ -33,8 +33,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $datasetModuleData = $data['datasetmoduledata'] ?? [];
             foreach ($datasetModuleData as $moduleName => $objectIDs) {
                 $dbKeyPaths = $data['datasetmodulesettings'][$moduleName]['dbkeys'] ?? [];
-                $dbObjectIDorIDs = $objectIDs['dbobjectids'];
-                $this->addData($ret, $fields, $databases, $unionDBKeyIDs, $dbObjectIDorIDs, 'id', $dbKeyPaths, false);
+                $objectIDorIDs = $objectIDs['dbobjectids'];
+                $this->addData($ret, $fields, $databases, $unionDBKeyIDs, $objectIDorIDs, 'id', $dbKeyPaths, false);
             }
         }
 
@@ -76,15 +76,15 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     //         }
     //         foreach ($datasetModuleData as $moduleName => $objectIDs) {
     //             $dbKeyPaths = $datasetModuleSettings[$moduleName]['dbkeys'] ?? [];
-    //             $dbObjectIDorIDs = $objectIDs['dbobjectids'];
-    //             $this->addData($ret, $fields, $databases, $dbObjectIDorIDs, 'id', $dbKeyPaths, false);
+    //             $objectIDorIDs = $objectIDs['dbobjectids'];
+    //             $this->addData($ret, $fields, $databases, $objectIDorIDs, 'id', $dbKeyPaths, false);
     //         }
     //     }
 
     //     return $ret;
     // }
 
-    protected function addData(&$ret, $fields, &$databases, &$unionDBKeyIDs, $dbObjectIDorIDs, $dbObjectKeyPath, &$dbKeyPaths, $concatenateField = true)
+    protected function addData(&$ret, $fields, &$databases, &$unionDBKeyIDs, $objectIDorIDs, $dbObjectKeyPath, &$dbKeyPaths, $concatenateField = true)
     {
         // Property fields have numeric key only. From them, obtain the fields to print for the object
         $propertyFields = array_filter(
@@ -104,15 +104,15 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         );
 
         // The results can be a single ID or value, or an array of IDs
-        if (is_array($dbObjectIDorIDs)) {
-            foreach ($dbObjectIDorIDs as $dbObjectID) {
+        if (is_array($objectIDorIDs)) {
+            foreach ($objectIDorIDs as $dbObjectID) {
                 // Add a new array for this DB object, where to return all its properties
                 $ret[] = [];
                 $dbObjectRet = &$ret[count($ret) - 1];
                 $this->addDBObjectData($dbObjectRet, $propertyFields, $nestedFields, $databases, $unionDBKeyIDs, $dbObjectID, $dbObjectKeyPath, $dbKeyPaths, $concatenateField);
             }
         } else {
-            $dbObjectID = $dbObjectIDorIDs;
+            $dbObjectID = $objectIDorIDs;
             $this->addDBObjectData($ret, $propertyFields, $nestedFields, $databases, $unionDBKeyIDs, $dbObjectID, $dbObjectKeyPath, $dbKeyPaths, $concatenateField);
         }
     }
