@@ -231,15 +231,15 @@ class PoP_SSR_EngineInitialization_Hooks
                     $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
                     if ($subcomponent_typeResolver_class = $dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
                         $subcomponentTypeResolver = $instanceManager->getInstance((string)$subcomponent_typeResolver_class);
-                        $typeResultItemIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($resultItemIDs);
-                        if (is_null($typeResultItemIDs)) {
+                        $typeObjectIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($resultItemIDs);
+                        if (is_null($typeObjectIDs)) {
                             $isUnionType = false;
-                            $typeResultItemIDs = $resultItemIDs;
+                            $typeObjectIDs = $resultItemIDs;
                         } else {
                             $isUnionType = true;
                         }
 
-                        foreach ($typeResultItemIDs as $resultItem_id) {
+                        foreach ($typeObjectIDs as $resultItem_id) {
                             if ($isUnionType) {
                                 list(
                                     $database_key,
