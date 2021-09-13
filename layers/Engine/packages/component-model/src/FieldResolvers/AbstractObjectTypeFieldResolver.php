@@ -11,8 +11,8 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -23,7 +23,6 @@ use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Schema\HookHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -577,35 +576,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         // Hook to override the values, eg: by the Field Deprecation List
-        // 1. Applied on the type
-        $hookName = HookHelpers::getSchemaDefinitionForFieldHookName(
-            get_class($objectTypeResolver),
-            $fieldName
-        );
-        $schemaDefinition = $this->hooksAPI->applyFilters(
-            $hookName,
+        return $this->triggerHookToOverrideSchemaDefinition(
             $schemaDefinition,
             $objectTypeResolver,
             $fieldName,
             $fieldArgs
         );
-        // 2. Applied on each of the implemented interfaces
-        foreach ($this->getFieldInterfaceResolvers() as $interfaceTypeFieldResolver) {
-            if (in_array($fieldName, $interfaceTypeFieldResolver->getFieldNamesToImplement())) {
-                $hookName = HookHelpers::getSchemaDefinitionForFieldHookName(
-                    get_class($interfaceTypeFieldResolver),
-                    $fieldName
-                );
-                $schemaDefinition = $this->hooksAPI->applyFilters(
-                    $hookName,
-                    $schemaDefinition,
-                    $objectTypeResolver,
-                    $fieldName,
-                    $fieldArgs
-                );
-            }
-        }
-        return $schemaDefinition;
     }
 
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
