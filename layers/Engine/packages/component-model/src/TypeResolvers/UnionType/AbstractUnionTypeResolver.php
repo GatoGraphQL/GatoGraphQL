@@ -177,7 +177,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             $resultItemIDTargetTypeResolver = $resultItemIDTargetTypeResolvers[$resultItemID];
             $mandatoryDirectivesForFields = $targetObjectTypeResolverClassMandatoryDirectivesForFields[get_class($resultItemIDTargetTypeResolver)];
 
-            $this->doEnqueueFillingResultItemsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
+            $this->doEnqueueFillingObjectsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
         }
     }
 
