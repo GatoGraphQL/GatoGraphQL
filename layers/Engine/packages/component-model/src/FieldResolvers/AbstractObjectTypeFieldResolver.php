@@ -13,7 +13,7 @@ use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\InterfaceTypeFieldResolvers\InterfaceTypeFieldResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -34,7 +34,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface, FieldSchemaDefinitionResolverInterface
+abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface, ObjectTypeFieldSchemaDefinitionResolverInterface
 {
     /**
      * This class is attached to a TypeResolver
@@ -48,7 +48,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected array $schemaDefinitionForFieldCache = [];
     /**
-     * @var array<string, FieldSchemaDefinitionResolverInterface>
+     * @var array<string, ObjectTypeFieldSchemaDefinitionResolverInterface>
      */
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
 
@@ -122,7 +122,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Return the object implementing the schema definition for this FieldResolver.
      */
-    final protected function getSchemaDefinitionResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): FieldSchemaDefinitionResolverInterface
+    final protected function getSchemaDefinitionResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ObjectTypeFieldSchemaDefinitionResolverInterface
     {
         $fieldOrInterfaceTypeFieldSchemaDefinitionResolver = $this->doGetSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($fieldOrInterfaceTypeFieldSchemaDefinitionResolver instanceof InterfaceTypeFieldSchemaDefinitionResolverInterface) {
@@ -150,7 +150,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected function doGetSchemaDefinitionResolver(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
-    ): FieldSchemaDefinitionResolverInterface | InterfaceTypeFieldSchemaDefinitionResolverInterface {
+    ): ObjectTypeFieldSchemaDefinitionResolverInterface | InterfaceTypeFieldSchemaDefinitionResolverInterface {
         if ($interfaceTypeFieldSchemaDefinitionResolverClass = $this->getInterfaceTypeFieldSchemaDefinitionResolverClass($objectTypeResolver, $fieldName)) {
             /** @var InterfaceTypeFieldSchemaDefinitionResolverInterface */
             return $this->instanceManager->getInstance($interfaceTypeFieldSchemaDefinitionResolverClass);

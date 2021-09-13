@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-interface FieldSchemaDefinitionResolverInterface
+interface ObjectTypeFieldSchemaDefinitionResolverInterface
 {
     public function getFieldNamesToResolve(): array;
     public function getAdminFieldNames(): array;
