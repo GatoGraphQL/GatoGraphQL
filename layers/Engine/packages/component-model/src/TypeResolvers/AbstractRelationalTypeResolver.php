@@ -870,7 +870,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * Split function, so it can be invoked both from here and from the UnionTypeResolver
      */
-    protected function getFieldsToEnqueueFillingResultItemsFromIDs(array $data_fields)
+    protected function getFieldsToEnqueueFillingObjectsFromIDs(array $data_fields)
     {
         $fields = $data_fields['direct'];
         // Watch out: If there are conditional fields, these will be processed by this directive too

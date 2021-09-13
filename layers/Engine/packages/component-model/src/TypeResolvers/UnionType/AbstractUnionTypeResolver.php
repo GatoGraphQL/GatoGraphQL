@@ -165,7 +165,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
         foreach ($ids_data_fields as $id => $data_fields) {
-            $fields = $this->getFieldsToEnqueueFillingResultItemsFromIDs($data_fields);
+            $fields = $this->getFieldsToEnqueueFillingObjectsFromIDs($data_fields);
 
             /**
              * This section is different from parent's implementation

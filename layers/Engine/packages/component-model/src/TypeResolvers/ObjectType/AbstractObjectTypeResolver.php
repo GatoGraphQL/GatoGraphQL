@@ -70,7 +70,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $mandatoryDirectivesForFields = $this->getAllMandatoryDirectivesForFields();
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
         foreach ($ids_data_fields as $id => $data_fields) {
-            $fields = $this->getFieldsToEnqueueFillingResultItemsFromIDs($data_fields);
+            $fields = $this->getFieldsToEnqueueFillingObjectsFromIDs($data_fields);
             $this->doEnqueueFillingResultItemsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
         }
     }
