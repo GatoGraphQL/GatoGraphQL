@@ -5,7 +5,7 @@
 				{{#if ../../../../individual}}
 					{{#each (maybe_make_array ../../.)}}
 						<{{../../../../../html-tag}} class="{{../../../../../class}}" style="{{../../../../../style}}"  {{#each ../../../../../previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../../../../../../. module=this}}"{{/each}}>
-							{{enterModule ../../../../../. subcomponent=../../../../../subcomponent-field dbObjectID=. context=../.}}
+							{{enterModule ../../../../../. subcomponent=../../../../../subcomponent-field objectID=. context=../.}}
 						</{{../../../../../html-tag}}>
 					{{/each}}
 				{{else}}
