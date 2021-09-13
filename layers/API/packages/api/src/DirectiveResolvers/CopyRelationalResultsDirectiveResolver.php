@@ -4,29 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\API\DirectiveResolvers;
 
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalObjectTypeDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 
-class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveResolver
+class CopyRelationalResultsDirectiveResolver extends AbstractGlobalObjectTypeDirectiveResolver
 {
-    /**
-     * Only the ObjectTypeResolver can hold data, so that it resolve this functionality.
-     * Since the UnionTypeResolver cannot, do not process in that case.
-     */
-    public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array
-    {
-        return [
-            AbstractObjectTypeResolver::class,
-        ];
-    }
-
     public function getDirectiveName(): string
     {
         return 'copyRelationalResults';
