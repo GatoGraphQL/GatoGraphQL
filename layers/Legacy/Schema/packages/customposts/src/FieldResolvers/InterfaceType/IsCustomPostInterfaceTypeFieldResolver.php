@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\InterfaceTypeFieldResolvers;
+namespace PoPSchema\CustomPosts\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoPSchema\QueriedObject\InterfaceTypeFieldResolvers\QueryableInterfaceTypeFieldResolver;
+use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 
 class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldResolver
 {

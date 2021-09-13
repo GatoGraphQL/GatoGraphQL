@@ -13,7 +13,7 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Comments\InterfaceTypeFieldResolvers\CommentableInterfaceTypeFieldResolver;
+use PoPSchema\Comments\FieldResolvers\InterfaceType\CommentableInterfaceTypeFieldResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;

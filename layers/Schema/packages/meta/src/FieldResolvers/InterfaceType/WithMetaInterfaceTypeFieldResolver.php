@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Meta\InterfaceTypeFieldResolvers;
+namespace PoPSchema\Meta\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
