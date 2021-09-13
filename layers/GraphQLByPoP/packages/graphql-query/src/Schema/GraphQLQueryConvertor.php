@@ -14,7 +14,7 @@ use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Field;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\FragmentReference;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\InterfaceTypeField;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Query;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
 use GraphQLByPoP\GraphQLParser\Parser\Parser;
@@ -210,7 +210,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         return $arguments;
     }
 
-    protected function convertField(InterfaceTypeField $field): string
+    protected function convertField(FieldInterface $field): string
     {
         // Convert the arguments and directives into an array
         $arguments = $this->convertArguments($field->getArguments());
