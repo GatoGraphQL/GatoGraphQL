@@ -6,5 +6,5 @@ services:
     PoP\CacheControl\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
 
-    PoP\CacheControl\TypeResolverDecorators\:
-        resource: '../src/TypeResolverDecorators/*'
+    PoP\CacheControl\RelationalTypeResolverDecorators\:
+        resource: '../src/RelationalTypeResolverDecorators/*'

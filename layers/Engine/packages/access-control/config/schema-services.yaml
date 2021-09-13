@@ -6,5 +6,5 @@ services:
     PoP\AccessControl\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
 
-    PoP\AccessControl\TypeResolverDecorators\:
-        resource: '../src/TypeResolverDecorators/*'
+    PoP\AccessControl\RelationalTypeResolverDecorators\:
+        resource: '../src/RelationalTypeResolverDecorators/*'

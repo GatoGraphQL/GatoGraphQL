@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\UserRolesAccessControl\ConditionalOnComponent\CacheControl\RelationalTypeResolverDecorators;
+
+use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAccessControlForFieldsInPrivateSchemaTypeResolverDecorator;
+use PoPSchema\UserStateAccessControl\ConditionalOnComponent\CacheControl\RelationalTypeResolverDecorators\NoCacheConfigurableAccessControlTypeResolverDecoratorTrait;
+
+abstract class AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTypeResolverDecorator extends AbstractConfigurableAccessControlForFieldsInPrivateSchemaTypeResolverDecorator
+{
+    use NoCacheConfigurableAccessControlTypeResolverDecoratorTrait;
+}

@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
+
+use PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators\ValidateUserNotLoggedInForDirectivesTypeResolverDecoratorTrait;
+
+class ValidateUserNotLoggedInForDirectivesPublicSchemaTypeResolverDecorator extends AbstractUserStateConfigurableAccessControlForDirectivesInPublicSchemaTypeResolverDecorator
+{
+    use ValidateUserNotLoggedInForDirectivesTypeResolverDecoratorTrait;
+}

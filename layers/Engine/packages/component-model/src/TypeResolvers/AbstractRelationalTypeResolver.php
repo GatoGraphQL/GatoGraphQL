@@ -19,7 +19,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
+use PoP\ComponentModel\RelationalTypeResolverDecorators\TypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\FieldHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;

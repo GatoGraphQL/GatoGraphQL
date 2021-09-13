@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Container\CompilerPasses;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\Root\Component\ApplicationEvents;
-use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
+use PoP\ComponentModel\RelationalTypeResolverDecorators\TypeResolverDecoratorInterface;
 
 class AfterBootAttachExtensionCompilerPass extends AbstractAttachExtensionCompilerPass
 {
