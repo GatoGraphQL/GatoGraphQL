@@ -24,16 +24,16 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
     public function getFormattedData($data)
     {
-        // Re-create the shape of the query by iterating through all dbObjectIDs and all required fields,
+        // Re-create the shape of the query by iterating through all objectIDs and all required fields,
         // getting the data from the corresponding dbKeyPath
         $ret = [];
         if ($fields = $this->getFields()) {
             $databases = $data['dbData'] ?? [];
             $unionDBKeyIDs = $data['unionDBKeyIDs'] ?? [];
             $datasetModuleData = $data['datasetmoduledata'] ?? [];
-            foreach ($datasetModuleData as $moduleName => $dbObjectIDs) {
+            foreach ($datasetModuleData as $moduleName => $objectIDs) {
                 $dbKeyPaths = $data['datasetmodulesettings'][$moduleName]['dbkeys'] ?? [];
-                $dbObjectIDorIDs = $dbObjectIDs['dbobjectids'];
+                $dbObjectIDorIDs = $objectIDs['dbobjectids'];
                 $this->addData($ret, $fields, $databases, $unionDBKeyIDs, $dbObjectIDorIDs, 'id', $dbKeyPaths, false);
             }
         }
@@ -43,7 +43,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     // GraphQL/REST cannot have getExtraRoutes()!!!!! Because the fields can't be applied to different resources! (Eg: author/leo/ and author/leo/?route=posts)
     // public function getFormattedData($data)
     // {
-    //     // Re-create the shape of the query by iterating through all dbObjectIDs and all required fields,
+    //     // Re-create the shape of the query by iterating through all objectIDs and all required fields,
     //     // getting the data from the corresponding dbKeyPath
     //     $ret = [];
     //     if ($fields = $this->getFields()) {
@@ -74,9 +74,9 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     //                 $datasetModuleSettings = array_values($datasetModuleSettings)[0];
     //             }
     //         }
-    //         foreach ($datasetModuleData as $moduleName => $dbObjectIDs) {
+    //         foreach ($datasetModuleData as $moduleName => $objectIDs) {
     //             $dbKeyPaths = $datasetModuleSettings[$moduleName]['dbkeys'] ?? [];
-    //             $dbObjectIDorIDs = $dbObjectIDs['dbobjectids'];
+    //             $dbObjectIDorIDs = $objectIDs['dbobjectids'];
     //             $this->addData($ret, $fields, $databases, $dbObjectIDorIDs, 'id', $dbKeyPaths, false);
     //         }
     //     }

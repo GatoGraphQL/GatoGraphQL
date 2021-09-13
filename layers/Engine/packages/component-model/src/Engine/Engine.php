@@ -988,7 +988,7 @@ class Engine implements EngineInterface
             $module_path_key = $this->getModulePathKey($module_path, $module);
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
-            $dataset_meta = $dbObjectIDs = $typeDBObjectIDs = array();
+            $dataset_meta = $objectIDs = $typeDBObjectIDs = array();
             $mutation_checkpoint_validation = $executed = $dbObjectIDOrIDs = $typeDBObjectIDOrIDs = $typeResolver_class = null;
             if ($load_data) {
                 // ------------------------------------------
@@ -1038,7 +1038,7 @@ class Engine implements EngineInterface
                             : $dbObjectIDOrIDs;
                     }
 
-                    $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : array($dbObjectIDOrIDs);
+                    $objectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : array($dbObjectIDOrIDs);
                     $typeDBObjectIDs = is_array($typeDBObjectIDOrIDs) ? $typeDBObjectIDOrIDs : array($typeDBObjectIDOrIDs);
 
                     // Store the ids under $data under key dataload_name => id
@@ -1121,7 +1121,7 @@ class Engine implements EngineInterface
             }
 
             // Integrate the feedback into $moduledata
-            $this->processAndAddModuleData($module_path, $module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs);
+            $this->processAndAddModuleData($module_path, $module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
             // Allow other modules to produce their own feedback using this module's data results
             if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[$this->modulePathHelpers->stringifyModulePath(array_merge($module_path, array($module)))] ?? null) {
@@ -1149,14 +1149,14 @@ class Engine implements EngineInterface
                     } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
                         $referencer_module_props = &$referencer_props;
                     }
-                    $this->processAndAddModuleData($referencer_modulepath, $referencer_module, $referencer_module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs);
+                    $this->processAndAddModuleData($referencer_modulepath, $referencer_module, $referencer_module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
                 }
             }
 
             // Incorporate the background URLs
             $this->backgroundload_urls = array_merge(
                 $this->backgroundload_urls,
-                $processor->getBackgroundurlsMergeddatasetmoduletree($module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs)
+                $processor->getBackgroundurlsMergeddatasetmoduletree($module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
             );
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
@@ -1858,7 +1858,7 @@ class Engine implements EngineInterface
         $dataaccess_checkpoint_validation,
         $mutation_checkpoint_validation,
         $executed,
-        $dbObjectIDs
+        $objectIDs
     ): void {
         $processor = $this->moduleProcessorManager->getProcessor($module);
 
@@ -1867,7 +1867,7 @@ class Engine implements EngineInterface
             $moduledata = &$this->moduledata;
 
             // Add the feedback into the object
-            if ($feedback = $processor->getDataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs)) {
+            if ($feedback = $processor->getDataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
                     $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);

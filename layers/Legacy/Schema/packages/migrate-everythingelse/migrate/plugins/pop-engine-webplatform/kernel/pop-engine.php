@@ -179,9 +179,9 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $dataaccess_checkpoint_validation,
         $mutation_checkpoint_validation,
         $executed,
-        $dbObjectIDs
+        $objectIDs
     ): void {
-        parent::processAndAddModuleData($module_path, $module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDs);
+        parent::processAndAddModuleData($module_path, $module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
@@ -207,7 +207,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         if (!is_null($modulejsdata)) {
 
             // Add the feedback into the object
-            if ($feedback = $processor->getJsdataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDs)) {
+            if ($feedback = $processor->getJsdataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs)) {
 
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {

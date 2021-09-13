@@ -51,8 +51,8 @@ class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryIn
             // Check if there are errors or if it was successful, and add corresponding messages.
             // $data = $this->getFormExecutedResponse($executed);
             if ($executed[ResponseConstants::SUCCESS]) {
-                $dbObjectIDs = $dbObjectIDOrIDs;
-                $pid = $dbObjectIDs[0];
+                $objectIDs = $dbObjectIDOrIDs;
+                $pid = $objectIDs[0];
                 $nonce = $pid ? gdCreateNonce(GD_NONCE_EDITURL, $pid) : '';
                 $ret[\PoPSchema\Posts\Constants\InputNames::POST_ID] = $pid;
                 $ret[POP_INPUTNAME_NONCE] = $nonce;

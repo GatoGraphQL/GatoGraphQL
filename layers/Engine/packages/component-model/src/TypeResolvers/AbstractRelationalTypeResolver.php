@@ -102,13 +102,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
     {
         // Add the type before the ID
-        $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
+        $objectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
         $qualifiedDBObjectIDs = array_map(
             fn (int | string $id) => UnionTypeHelpers::getObjectComposedTypeAndID(
                 $this,
                 $id
             ),
-            $dbObjectIDs
+            $objectIDs
         );
         return is_array($dbObjectIDOrIDs) ? $qualifiedDBObjectIDs : $qualifiedDBObjectIDs[0];
     }
