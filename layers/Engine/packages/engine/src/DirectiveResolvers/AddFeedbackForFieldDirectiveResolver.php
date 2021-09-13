@@ -58,7 +58,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
         array &$messages,
         array &$objectErrors,
         array &$objectWarnings,
-        array &$dbDeprecations,
+        array &$objectDeprecations,
         array &$dbNotices,
         array &$dbTraces,
         array &$schemaErrors,
@@ -78,7 +78,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
                     $objectValidDirective,
                     $objectDirectiveName,
                     $objectDirectiveArgs
-                ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $variables, $expressions, $objectErrors, $objectWarnings, $dbDeprecations);
+                ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $variables, $expressions, $objectErrors, $objectWarnings, $objectDeprecations);
                 // Check that the directive is valid. If it is not, $objectErrors will have the error already added
                 if (is_null($objectValidDirective)) {
                     continue;
@@ -101,7 +101,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
                 if ($type == FieldFeedbackTypeEnum::WARNING) {
                     $objectWarnings[(string)$id][] = $feedbackMessageEntry;
                 } elseif ($type == FieldFeedbackTypeEnum::DEPRECATION) {
-                    $dbDeprecations[(string)$id][] = $feedbackMessageEntry;
+                    $objectDeprecations[(string)$id][] = $feedbackMessageEntry;
                 } elseif ($type == FieldFeedbackTypeEnum::NOTICE) {
                     $dbNotices[(string)$id][] = $feedbackMessageEntry;
                 }

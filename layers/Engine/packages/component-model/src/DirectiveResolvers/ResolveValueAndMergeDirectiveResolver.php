@@ -49,7 +49,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$messages,
         array &$objectErrors,
         array &$objectWarnings,
-        array &$dbDeprecations,
+        array &$objectDeprecations,
         array &$dbNotices,
         array &$dbTraces,
         array &$schemaErrors,
@@ -60,11 +60,11 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ): void {
         // Iterate data, extract into final results
         if ($resultIDItems) {
-            $this->resolveValueForObjects($relationalTypeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+            $this->resolveValueForObjects($relationalTypeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         }
     }
 
-    protected function resolveValueForObjects(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
+    protected function resolveValueForObjects(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
     {
         $enqueueFillingObjectsFromIDs = [];
         foreach (array_keys($idsDataFields) as $id) {
@@ -87,7 +87,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             }
 
             $expressions = $this->getExpressionsForObject($id, $variables, $messages);
-            $this->resolveValuesForObject($relationalTypeResolver, $id, $object, $idsDataFields[(string)$id]['direct'], $dbItems, $previousDBItems, $variables, $expressions, $objectErrors, $objectWarnings, $dbDeprecations);
+            $this->resolveValuesForObject($relationalTypeResolver, $id, $object, $idsDataFields[(string)$id]['direct'], $dbItems, $previousDBItems, $variables, $expressions, $objectErrors, $objectWarnings, $objectDeprecations);
 
             // Add the conditional data fields
             // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
@@ -131,10 +131,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$expressions,
         array &$objectErrors,
         array &$objectWarnings,
-        array &$dbDeprecations
+        array &$objectDeprecations
     ) {
         foreach ($dataFields as $field) {
-            $this->resolveValueForObject($relationalTypeResolver, $id, $object, $field, $dbItems, $previousDBItems, $variables, $expressions, $objectErrors, $objectWarnings, $dbDeprecations);
+            $this->resolveValueForObject($relationalTypeResolver, $id, $object, $field, $dbItems, $previousDBItems, $variables, $expressions, $objectErrors, $objectWarnings, $objectDeprecations);
         }
     }
 
@@ -149,10 +149,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$expressions,
         array &$objectErrors,
         array &$objectWarnings,
-        array &$dbDeprecations
+        array &$objectDeprecations
     ) {
         // Get the value, and add it to the database
-        $value = $this->resolveFieldValue($relationalTypeResolver, $id, $object, $field, $previousDBItems, $variables, $expressions, $objectWarnings, $dbDeprecations);
+        $value = $this->resolveFieldValue($relationalTypeResolver, $id, $object, $field, $previousDBItems, $variables, $expressions, $objectWarnings, $objectDeprecations);
         $this->addValueForObject($relationalTypeResolver, $id, $field, $value, $dbItems, $objectErrors);
     }
 
@@ -165,10 +165,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$variables,
         array &$expressions,
         array &$objectWarnings,
-        array &$dbDeprecations
+        array &$objectDeprecations
     ) {
         $value = $relationalTypeResolver->resolveValue($object, $field, $variables, $expressions);
-        // Merge the objectWarnings and dbDeprecations, if any
+        // Merge the objectWarnings and objectDeprecations, if any
         if ($objectObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectObjectWarnings($id)) {
             $objectWarnings[$id] = array_merge(
                 $objectWarnings[$id] ?? [],
@@ -176,8 +176,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             );
         }
         if ($objectDBDeprecations = $this->feedbackMessageStore->retrieveAndClearObjectDBDeprecations($id)) {
-            $dbDeprecations[$id] = array_merge(
-                $dbDeprecations[$id] ?? [],
+            $objectDeprecations[$id] = array_merge(
+                $objectDeprecations[$id] ?? [],
                 $objectDBDeprecations
             );
         }

@@ -113,8 +113,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
             // Add deprecations
             if (ComponentConfiguration::enableProactiveFeedbackDeprecations()) {
-                if ($data['dbDeprecations'] ?? null) {
-                    $deprecations = $this->reformatDBEntries($data['dbDeprecations']);
+                if ($data['objectDeprecations'] ?? null) {
+                    $deprecations = $this->reformatDBEntries($data['objectDeprecations']);
                 }
                 if ($data['schemaDeprecations'] ?? null) {
                     $deprecations = array_merge(

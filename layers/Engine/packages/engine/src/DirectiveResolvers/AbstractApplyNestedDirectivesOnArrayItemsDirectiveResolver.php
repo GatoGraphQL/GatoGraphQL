@@ -79,7 +79,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         array &$messages,
         array &$objectErrors,
         array &$objectWarnings,
-        array &$dbDeprecations,
+        array &$objectDeprecations,
         array &$dbNotices,
         array &$dbTraces,
         array &$schemaErrors,
@@ -184,7 +184,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
 
                 // The value is an array. Unpack all the elements into their own property
                 $array = $value;
-                if ($arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $dbDeprecations)) {
+                if ($arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations)) {
                     $execute = true;
                     foreach ($arrayItems as $key => &$value) {
                         // Add into the $idsDataFields object for the array items
@@ -206,7 +206,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $arrayItemIdsProperties[(string)$id]['conditional'] = [];
 
-                    $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+                    $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
                 }
             }
         }
@@ -240,7 +240,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 $messages,
                 $nestedIDObjectErrors,
                 $objectWarnings,
-                $dbDeprecations,
+                $objectDeprecations,
                 $dbNotices,
                 $dbTraces,
                 $nestedSchemaErrors,
@@ -334,7 +334,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                             continue;
                         }
                         // Place the result for the array in the original property
-                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $dbDeprecations, $dbNotices, $dbTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
+                        $this->addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $dbNotices, $dbTraces, $id, $fieldOutputKey, $key, $arrayItemValue);
                     }
                 }
             }
@@ -348,7 +348,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         array &$dbItems,
         array &$objectErrors,
         array &$objectWarnings,
-        array &$dbDeprecations,
+        array &$objectDeprecations,
         array &$dbNotices,
         array &$dbTraces,
         $id,
@@ -362,7 +362,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     /**
      * Return the items to iterate on
      */
-    abstract protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$dbDeprecations): ?array;
+    abstract protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array;
 
     /**
      * Create a property for storing the array item in the current object
@@ -391,7 +391,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         array &$messages,
         array &$objectErrors,
         array &$objectWarnings,
-        array &$dbDeprecations,
+        array &$objectDeprecations,
         array &$schemaErrors,
         array &$schemaWarnings,
         array &$schemaDeprecations

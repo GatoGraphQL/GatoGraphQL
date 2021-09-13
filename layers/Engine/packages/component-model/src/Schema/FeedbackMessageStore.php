@@ -23,7 +23,7 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
     /**
      * @var array<string, array>
      */
-    protected array $dbDeprecations = [];
+    protected array $objectDeprecations = [];
     /**
      * @var string[]
      */
@@ -62,8 +62,8 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
     }
     public function retrieveAndClearObjectDBDeprecations(string | int $objectID): ?array
     {
-        $objectDBDeprecations = $this->dbDeprecations[$objectID] ?? null;
-        unset($this->dbDeprecations[$objectID]);
+        $objectDBDeprecations = $this->objectDeprecations[$objectID] ?? null;
+        unset($this->objectDeprecations[$objectID]);
         return $objectDBDeprecations;
     }
 

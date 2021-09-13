@@ -1324,7 +1324,7 @@ class Engine implements EngineInterface
         $vars = ApplicationState::getVars();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $dbDeprecations = $dbNotices = $dbTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = array();
+        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $dbNotices = $dbTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = array();
         $this->nocache_fields = array();
         // $format = $vars['format'];
         // $route = $vars['route'];
@@ -1451,8 +1451,8 @@ class Engine implements EngineInterface
             if ($iterationDBDeprecations) {
                 $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationDBDeprecations, true, $relationalTypeResolver);
                 foreach ($dbNameDeprecationEntries as $dbname => $entries) {
-                    $dbDeprecations[$dbname] ??= [];
-                    $this->addDatasetToDatabase($dbDeprecations[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $objectDeprecations[$dbname] ??= [];
+                    $this->addDatasetToDatabase($objectDeprecations[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBNotices) {
@@ -1615,7 +1615,7 @@ class Engine implements EngineInterface
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectWarnings', $objectWarnings);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'dbDeprecations', $dbDeprecations);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'objectDeprecations', $objectDeprecations);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbNotices', $dbNotices);
         $this->maybeCombineAndAddSchemaEntries($ret, 'schemaErrors', $schemaErrors);
         $this->maybeCombineAndAddSchemaEntries($ret, 'schemaWarnings', $schemaWarnings);

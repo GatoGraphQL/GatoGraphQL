@@ -359,12 +359,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         if ($maybeDeprecations = $objectTypeFieldResolver->resolveSchemaValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
                             $id = $this->getID($object);
                             foreach ($maybeDeprecations as $deprecation) {
-                                $dbDeprecations[(string)$id][] = [
+                                $objectDeprecations[(string)$id][] = [
                                     Tokens::PATH => [$field],
                                     Tokens::MESSAGE => $deprecation,
                                 ];
                             }
-                            $this->feedbackMessageStore->addDBDeprecations($dbDeprecations);
+                            $this->feedbackMessageStore->addDBDeprecations($objectDeprecations);
                         }
                     }
                     if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {

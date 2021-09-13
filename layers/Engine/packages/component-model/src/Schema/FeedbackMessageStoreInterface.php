@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Schema;
 interface FeedbackMessageStoreInterface extends \PoP\FieldQuery\FeedbackMessageStoreInterface
 {
     public function addObjectWarnings(array $objectWarnings);
-    public function addDBDeprecations(array $dbDeprecations);
+    public function addDBDeprecations(array $objectDeprecations);
     public function addSchemaWarnings(array $schemaWarnings);
     public function retrieveAndClearObjectObjectWarnings(string | int $objectID): ?array;
     public function retrieveAndClearObjectDBDeprecations(string | int $objectID): ?array;
