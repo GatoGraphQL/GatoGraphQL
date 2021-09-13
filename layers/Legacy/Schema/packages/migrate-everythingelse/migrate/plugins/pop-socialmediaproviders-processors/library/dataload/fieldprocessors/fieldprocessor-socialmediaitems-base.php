@@ -85,7 +85,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -95,11 +95,11 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
         $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'shareURL':
-                $url = $relationalTypeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options);
+                $url = $relationalTypeResolver->resolveValue($object, 'url', $variables, $expressions, $options);
                 if (GeneralUtils::isError($url)) {
                     return $url;
                 }
-                $title = $relationalTypeResolver->resolveValue($resultItem, $this->getTitleField(), $variables, $expressions, $options);
+                $title = $relationalTypeResolver->resolveValue($object, $this->getTitleField(), $variables, $expressions, $options);
                 if (GeneralUtils::isError($title)) {
                     return $title;
                 }
@@ -111,6 +111,6 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
                 return $this->getShareUrl($url, $title, $providerURLs[$fieldArgs['provider']]);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

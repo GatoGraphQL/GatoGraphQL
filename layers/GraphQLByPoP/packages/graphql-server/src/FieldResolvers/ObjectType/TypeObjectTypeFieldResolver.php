@@ -150,7 +150,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -158,7 +158,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         /** @var AbstractType */
-        $type = $resultItem;
+        $type = $object;
         switch ($fieldName) {
             case 'kind':
                 return $type->getKind();
@@ -212,7 +212,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $type->getExtensions();
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

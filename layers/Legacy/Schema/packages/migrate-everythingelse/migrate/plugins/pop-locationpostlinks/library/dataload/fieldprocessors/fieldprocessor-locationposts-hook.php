@@ -59,7 +59,7 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Post
      */
     public function resolveCanProcessResultItem(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
@@ -67,7 +67,7 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Post
             'excerpt',
             'content',
         ])) {
-            $locationpost = $resultItem;
+            $locationpost = $object;
             $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
             return POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS && $postCategoryTypeAPI->hasCategory(POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS, $relationalTypeResolver->getID($locationpost));
         }
@@ -82,14 +82,14 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Post
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $locationpost = $resultItem;
+        $locationpost = $object;
         switch ($fieldName) {
             // Override fields for Location Post Links
             case 'excerpt':
@@ -98,7 +98,7 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Post
                 return PoP_ContentPostLinks_Utils::getLinkContent($locationpost);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

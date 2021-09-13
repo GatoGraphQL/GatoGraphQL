@@ -64,7 +64,7 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -73,7 +73,7 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $eventTagTypeAPI = EventTagTypeAPIFacade::getInstance();
-        $event = $resultItem;
+        $event = $object;
         switch ($fieldName) {
              // Override
             case 'catSlugs':
@@ -94,6 +94,6 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

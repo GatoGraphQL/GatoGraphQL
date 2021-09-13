@@ -112,7 +112,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
      */
     public function resolveCanProcessResultItem(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
@@ -125,7 +125,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 ]
             )
         ) {
-            $post = $resultItem;
+            $post = $object;
             $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
             return defined('POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS') && POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS && $postCategoryTypeAPI->hasCategory(POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS, $relationalTypeResolver->getID($post));
         }
@@ -140,14 +140,14 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             // Override fields for Links
             case 'excerpt':
@@ -187,7 +187,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 return false;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

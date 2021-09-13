@@ -49,14 +49,14 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extend
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             case 'flagURL':
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
@@ -66,7 +66,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extend
                 ], RouteUtils::getRouteURL(POP_CONTENTCREATION_ROUTE_FLAG));
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

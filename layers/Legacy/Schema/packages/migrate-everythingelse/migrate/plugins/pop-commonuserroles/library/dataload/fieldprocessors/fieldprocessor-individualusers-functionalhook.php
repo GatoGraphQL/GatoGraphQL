@@ -57,14 +57,14 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers e
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'individualInterestsByName':
                 $selected = $relationalTypeResolver->resolveValue($user, 'individualinterests', $variables, $expressions, $options);
@@ -75,7 +75,7 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers e
                 return $individualinterests->getSelectedValue();
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

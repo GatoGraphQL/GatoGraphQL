@@ -58,14 +58,14 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $notification = $resultItem;
+        $notification = $object;
         switch ($fieldName) {
             case 'multilayoutKeys':
                 // If multiple-layouts, then we need 'objectType' and 'action' data-fields
@@ -76,6 +76,6 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

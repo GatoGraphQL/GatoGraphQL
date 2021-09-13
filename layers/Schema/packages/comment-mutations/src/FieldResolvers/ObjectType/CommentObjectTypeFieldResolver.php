@@ -92,16 +92,16 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName
     ): array {
         $fieldArgs = parent::getFieldArgsToExecuteMutation(
             $fieldArgs,
             $objectTypeResolver,
-            $resultItem,
+            $object,
             $fieldName
         );
-        $comment = $resultItem;
+        $comment = $object;
         switch ($fieldName) {
             case 'reply':
                 $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $this->commentTypeAPI->getCommentPostId($comment);

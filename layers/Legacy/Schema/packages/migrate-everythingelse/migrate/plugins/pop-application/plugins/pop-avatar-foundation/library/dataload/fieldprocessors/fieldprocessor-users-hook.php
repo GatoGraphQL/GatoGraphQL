@@ -68,21 +68,21 @@ class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends 
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'avatar':
                 // The avatar size is set through fieldArgs
                 return gdGetAvatar($relationalTypeResolver->getID($user), (int) $fieldArgs['size']);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

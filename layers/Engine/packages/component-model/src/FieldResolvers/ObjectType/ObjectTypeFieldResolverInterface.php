@@ -57,7 +57,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -80,7 +80,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
      */
     public function resolveCanProcessResultItem(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool;
@@ -90,7 +90,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
      */
     public function getValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): ?array;

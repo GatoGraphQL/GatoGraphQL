@@ -70,7 +70,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -78,12 +78,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'roleNames':
                 return $userRoleTypeAPI->getUserRoles($user);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

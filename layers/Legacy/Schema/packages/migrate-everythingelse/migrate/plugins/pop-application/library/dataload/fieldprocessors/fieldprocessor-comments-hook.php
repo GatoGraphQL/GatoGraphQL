@@ -64,24 +64,24 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $comment = $resultItem;
+        $comment = $object;
         switch ($fieldName) {
             case 'contentClipped':
-                $content = $relationalTypeResolver->resolveValue($resultItem, 'content', $variables, $expressions, $options);
+                $content = $relationalTypeResolver->resolveValue($object, 'content', $variables, $expressions, $options);
                 if (GeneralUtils::isError($content)) {
                     return $content;
                 }
                 return limitString(strip_tags($content), 250);
 
             case 'replycommentURL':
-                $customPostID = $relationalTypeResolver->resolveValue($resultItem, 'customPostID', $variables, $expressions, $options);
+                $customPostID = $relationalTypeResolver->resolveValue($object, 'customPostID', $variables, $expressions, $options);
                 if (GeneralUtils::isError($customPostID)) {
                     return null;
                 }
@@ -94,7 +94,7 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

@@ -72,14 +72,14 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             case 'recommendPostURL':
                 return GeneralUtils::addQueryArgs([
@@ -92,7 +92,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST));
 
             case 'recommendPostCountPlus1':
-                if ($count = $relationalTypeResolver->resolveValue($resultItem, 'recommendPostCount', $variables, $expressions, $options)) {
+                if ($count = $relationalTypeResolver->resolveValue($object, 'recommendPostCount', $variables, $expressions, $options)) {
                     return $count+1;
                 }
                 return 1;
@@ -108,7 +108,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDOUPVOTEPOST));
 
             case 'upvotePostCountPlus1':
-                if ($count = $relationalTypeResolver->resolveValue($resultItem, 'upvotePostCount', $variables, $expressions, $options)) {
+                if ($count = $relationalTypeResolver->resolveValue($object, 'upvotePostCount', $variables, $expressions, $options)) {
                     return $count+1;
                 }
                 return 1;
@@ -124,13 +124,13 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST));
 
             case 'downvotePostCountPlus1':
-                if ($count = $relationalTypeResolver->resolveValue($resultItem, 'downvotePostCount', $variables, $expressions, $options)) {
+                if ($count = $relationalTypeResolver->resolveValue($object, 'downvotePostCount', $variables, $expressions, $options)) {
                     return $count+1;
                 }
                 return 1;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

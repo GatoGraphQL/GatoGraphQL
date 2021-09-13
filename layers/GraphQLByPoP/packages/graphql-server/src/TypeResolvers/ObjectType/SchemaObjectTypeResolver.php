@@ -19,9 +19,9 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         return $this->translationAPI->__('Schema type, to implement the introspection fields', 'graphql-server');
     }
 
-    public function getID(object $resultItem): string | int | null
+    public function getID(object $object): string | int | null
     {
-        $schema = $resultItem;
+        $schema = $object;
         return $schema->getID();
     }
 

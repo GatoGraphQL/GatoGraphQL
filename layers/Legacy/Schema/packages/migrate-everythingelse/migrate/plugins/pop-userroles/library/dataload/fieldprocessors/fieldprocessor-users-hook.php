@@ -88,7 +88,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -96,7 +96,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'role':
                 $user_roles = $userRoleTypeAPI->getUserRoles($relationalTypeResolver->getID($user));
@@ -115,7 +115,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
                 return $role == $fieldArgs['role'];
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

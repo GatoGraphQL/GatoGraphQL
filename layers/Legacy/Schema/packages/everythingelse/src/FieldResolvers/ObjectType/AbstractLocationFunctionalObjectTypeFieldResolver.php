@@ -48,7 +48,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -57,7 +57,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
     ): mixed {
         switch ($fieldName) {
             case 'locationsmapURL':
-                $locations = $objectTypeResolver->resolveValue($resultItem, 'locations', $variables, $expressions, $options);
+                $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $options);
                 if (GeneralUtils::isError($locations)) {
                     return null;
                 }
@@ -69,11 +69,11 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
                             POP_INPUTNAME_LOCATIONID => $locations,
                             // In order to keep always the same layout for the same URL, we add the param of which object we are coming from
                             // (Then, in the modal map, it will show either post/user layout, and that layout will be cached for that post/user but not for other objects)
-                            $this->getDbobjectIdField() => $objectTypeResolver->getID($resultItem),
+                            $this->getDbobjectIdField() => $objectTypeResolver->getID($object),
                         ], RouteUtils::getRouteURL(POP_LOCATIONS_ROUTE_LOCATIONSMAP))
                     );
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

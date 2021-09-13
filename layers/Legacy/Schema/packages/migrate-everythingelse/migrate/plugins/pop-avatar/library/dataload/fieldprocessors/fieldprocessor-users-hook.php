@@ -46,7 +46,7 @@ class PoP_Avatar_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTy
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -54,7 +54,7 @@ class PoP_Avatar_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTy
         array $options = []
     ): mixed {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'userphoto':
                 $userphoto = gdGetAvatarPhotoinfo($relationalTypeResolver->getID($user));
@@ -65,7 +65,7 @@ class PoP_Avatar_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTy
                 );
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

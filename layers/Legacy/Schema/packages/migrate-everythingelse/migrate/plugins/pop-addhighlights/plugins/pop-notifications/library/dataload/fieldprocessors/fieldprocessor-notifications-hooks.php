@@ -52,11 +52,11 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications ext
      */
     public function resolveCanProcessResultItem(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
-        $notification = $resultItem;
+        $notification = $object;
         return $notification->object_type == 'Post' && in_array(
             $notification->action,
             [
@@ -73,7 +73,7 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications ext
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -82,7 +82,7 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications ext
     ): mixed {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $notification = $resultItem;
+        $notification = $object;
         switch ($fieldName) {
             case 'icon':
                 // URL depends basically on the action performed on the object type
@@ -113,7 +113,7 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications ext
                 return null;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

@@ -58,14 +58,14 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             case 'isLinkEmbeddable':
                 $nonembeddable = PoP_MediaHostThumbs_Utils::getNonembeddableHosts();
@@ -74,7 +74,7 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 return (!is_ssl() || substr($link, 0, 8) == 'https://') && !in_array($host, $nonembeddable);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

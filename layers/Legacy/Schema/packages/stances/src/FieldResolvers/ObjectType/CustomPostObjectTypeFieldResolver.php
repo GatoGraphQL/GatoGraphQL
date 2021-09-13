@@ -81,7 +81,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -89,7 +89,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $customPost = $resultItem;
+        $customPost = $object;
         switch ($fieldName) {
             case 'stances':
                 $query = array(
@@ -102,7 +102,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'hasStances':
-                $referencedby = $objectTypeResolver->resolveValue($resultItem, 'stances', $variables, $expressions, $options);
+                $referencedby = $objectTypeResolver->resolveValue($object, 'stances', $variables, $expressions, $options);
                 return !empty($referencedby);
 
             case 'stanceProCount':
@@ -129,7 +129,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $customPostTypeAPI->getCustomPostCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

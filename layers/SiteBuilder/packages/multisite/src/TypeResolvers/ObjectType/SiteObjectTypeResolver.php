@@ -19,9 +19,9 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->translationAPI->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
     }
 
-    public function getID(object $resultItem): string | int | null
+    public function getID(object $object): string | int | null
     {
-        $site = $resultItem;
+        $site = $object;
         return $site->getID();
     }
 

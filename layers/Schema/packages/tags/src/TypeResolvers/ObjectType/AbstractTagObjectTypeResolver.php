@@ -16,10 +16,10 @@ abstract class AbstractTagObjectTypeResolver extends AbstractTaxonomyObjectTypeR
         return $this->translationAPI->__('Representation of a tag, added to a custom post', 'tags');
     }
 
-    public function getID(object $resultItem): string | int | null
+    public function getID(object $object): string | int | null
     {
         $tagTypeAPI = $this->getTagTypeAPI();
-        $tag = $resultItem;
+        $tag = $object;
         return $tagTypeAPI->getTagID($tag);
     }
 }

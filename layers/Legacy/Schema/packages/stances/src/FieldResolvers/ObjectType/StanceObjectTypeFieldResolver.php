@@ -90,7 +90,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -99,7 +99,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
-        $stance = $resultItem;
+        $stance = $object;
         switch ($fieldName) {
             case 'categories':
                 return $taxonomyapi->getCustomPostTaxonomyTerms(
@@ -121,7 +121,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
             case 'stance':
                 // The stance is the category
-                return $objectTypeResolver->resolveValue($resultItem, 'mainCategory', $variables, $expressions, $options);
+                return $objectTypeResolver->resolveValue($object, 'mainCategory', $variables, $expressions, $options);
 
             // The Stance has no title, so return the excerpt instead.
             // Needed for when adding a comment on the Stance, where it will say: Add comment for...
@@ -142,10 +142,10 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
             case 'hasStanceTarget':
                 // Cannot use !is_null because getCustomPostMeta returns "" when there's no entry, instead of null
-                return $objectTypeResolver->resolveValue($resultItem, 'stancetarget', $variables, $expressions, $options);
+                return $objectTypeResolver->resolveValue($object, 'stancetarget', $variables, $expressions, $options);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

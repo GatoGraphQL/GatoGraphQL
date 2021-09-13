@@ -100,7 +100,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -112,6 +112,6 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
                 return $fieldArgs['value'];
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

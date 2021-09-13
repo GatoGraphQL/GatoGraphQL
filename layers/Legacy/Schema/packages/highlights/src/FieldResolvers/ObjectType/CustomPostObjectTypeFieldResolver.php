@@ -73,14 +73,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $customPost = $resultItem;
+        $customPost = $object;
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'highlights':
@@ -101,21 +101,21 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'hasHighlights':
-                $referencedbyCount = $objectTypeResolver->resolveValue($resultItem, 'highlightsCount', $variables, $expressions, $options);
+                $referencedbyCount = $objectTypeResolver->resolveValue($object, 'highlightsCount', $variables, $expressions, $options);
                 if (GeneralUtils::isError($referencedbyCount)) {
                     return $referencedbyCount;
                 }
                 return $referencedbyCount > 0;
 
             case 'highlightsCount':
-                $referencedby = $objectTypeResolver->resolveValue($resultItem, 'highlights', $variables, $expressions, $options);
+                $referencedby = $objectTypeResolver->resolveValue($object, 'highlights', $variables, $expressions, $options);
                 if (GeneralUtils::isError($referencedby)) {
                     return $referencedby;
                 }
                 return count($referencedby);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

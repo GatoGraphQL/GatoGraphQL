@@ -662,8 +662,8 @@ class Engine implements EngineInterface
             foreach ($dataitems as $resultItemID => $dataItem) {
                 // Obtain the type of the object
                 $exists = false;
-                if ($resultItem = $resultIDItems[$resultItemID] ?? null) {
-                    $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($resultItem);
+                if ($object = $resultIDItems[$resultItemID] ?? null) {
+                    $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
                     if ($targetObjectTypeResolver !== null) {
                         $exists = true;
                         // The ID will contain the type. Remove it

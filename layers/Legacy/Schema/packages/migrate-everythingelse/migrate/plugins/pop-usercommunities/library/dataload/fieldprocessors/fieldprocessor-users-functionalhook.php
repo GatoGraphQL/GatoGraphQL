@@ -71,14 +71,14 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'editMembershipURL':
                 return gdUreEditMembershipUrl($relationalTypeResolver->getID($user));
@@ -111,7 +111,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
                 return $tags->getSelectedValue();
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

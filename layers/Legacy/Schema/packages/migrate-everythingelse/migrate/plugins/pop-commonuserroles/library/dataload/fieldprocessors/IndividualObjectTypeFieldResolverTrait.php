@@ -8,14 +8,14 @@ trait IndividualObjectTypeFieldResolverTrait
      */
     public function resolveCanProcessResultItem(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
-        $user = $resultItem;
+        $user = $object;
         if (!gdUreIsIndividual($objectTypeResolver->getID($user))) {
             return false;
         }
-        return parent::resolveCanProcessResultItem($objectTypeResolver, $resultItem, $fieldName, $fieldArgs);
+        return parent::resolveCanProcessResultItem($objectTypeResolver, $object, $fieldName, $fieldArgs);
     }
 }

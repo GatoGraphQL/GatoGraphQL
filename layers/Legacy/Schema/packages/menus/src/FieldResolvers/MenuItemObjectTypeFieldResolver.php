@@ -22,7 +22,7 @@ abstract class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -30,7 +30,7 @@ abstract class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
         array $options = []
     ): mixed {
         $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();
-        $menuItem = $resultItem;
+        $menuItem = $object;
         switch ($fieldName) {
             case 'classes':
                 // Copied from nav-menu-template.php function start_el
@@ -48,6 +48,6 @@ abstract class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
                 return $this->hooksAPI->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array());
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

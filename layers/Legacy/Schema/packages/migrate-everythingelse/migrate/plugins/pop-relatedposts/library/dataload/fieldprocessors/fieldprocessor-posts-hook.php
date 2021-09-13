@@ -75,35 +75,35 @@ class PoP_RelatedPosts_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             case 'references':
                 return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($relationalTypeResolver->getID($post), GD_METAKEY_POST_REFERENCES) ?? [];
 
             case 'hasReferences':
-                $references = $relationalTypeResolver->resolveValue($resultItem, 'references', $variables, $expressions, $options);
+                $references = $relationalTypeResolver->resolveValue($object, 'references', $variables, $expressions, $options);
                 return !empty($references);
 
             case 'referencedby':
                 return PoP_RelatedPosts_SectionUtils::getReferencedby($relationalTypeResolver->getID($post));
 
             case 'hasReferencedBy':
-                $referencedby = $relationalTypeResolver->resolveValue($resultItem, 'referencedby', $variables, $expressions, $options);
+                $referencedby = $relationalTypeResolver->resolveValue($object, 'referencedby', $variables, $expressions, $options);
                 return !empty($referencedby);
 
             case 'referencedByCount':
-                $referencedby = $relationalTypeResolver->resolveValue($resultItem, 'referencedby', $variables, $expressions, $options);
+                $referencedby = $relationalTypeResolver->resolveValue($object, 'referencedby', $variables, $expressions, $options);
                 return count($referencedby);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string

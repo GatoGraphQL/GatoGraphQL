@@ -42,7 +42,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -50,7 +50,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         $commentMetaAPI = CommentMetaTypeAPIFacade::getInstance();
-        $comment = $resultItem;
+        $comment = $object;
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
@@ -61,6 +61,6 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

@@ -65,14 +65,14 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $site = $resultItem;
+        $site = $object;
         switch ($fieldName) {
             case 'domain':
                 return $site->getDomain();
@@ -80,6 +80,6 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $site->getHost();
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

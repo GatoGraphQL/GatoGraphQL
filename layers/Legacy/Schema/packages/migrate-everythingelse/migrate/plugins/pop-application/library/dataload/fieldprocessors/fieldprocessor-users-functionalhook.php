@@ -65,14 +65,14 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $user = $resultItem;
+        $user = $object;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
         switch ($fieldName) {
@@ -99,7 +99,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
                 return $cmsapplicationhelpers->makeClickable(limitString(strip_tags($cmsapplicationhelpers->convertLinebreaksToHTML($userTypeAPI->getUserDescription($relationalTypeResolver->getID($user)))), $length, $readmore));
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

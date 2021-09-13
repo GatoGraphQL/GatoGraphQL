@@ -49,7 +49,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -59,9 +59,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'author':
-                return $customPostUserTypeAPI->getAuthorID($resultItem);
+                return $customPostUserTypeAPI->getAuthorID($object);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

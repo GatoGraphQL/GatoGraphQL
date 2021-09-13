@@ -141,14 +141,14 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             case 'favicon':
             case 'thumb':
@@ -190,15 +190,15 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
 
             case 'hasUserpostactivity':
                 // User Post Activity: Comments + Responses/Additionals + Hightlights
-                $hasComments = $relationalTypeResolver->resolveValue($resultItem, 'hasComments', $variables, $expressions, $options);
+                $hasComments = $relationalTypeResolver->resolveValue($object, 'hasComments', $variables, $expressions, $options);
                 if ($hasComments) {
                     return $hasComments;
                 }
-                $hasReferencedBy = $relationalTypeResolver->resolveValue($resultItem, 'hasReferencedBy', $variables, $expressions, $options);
+                $hasReferencedBy = $relationalTypeResolver->resolveValue($object, 'hasReferencedBy', $variables, $expressions, $options);
                 if ($hasReferencedBy) {
                     return $hasReferencedBy;
                 }
-                $hasHighlights = $relationalTypeResolver->resolveValue($resultItem, 'hasHighlights', $variables, $expressions, $options);
+                $hasHighlights = $relationalTypeResolver->resolveValue($object, 'hasHighlights', $variables, $expressions, $options);
                 if ($hasHighlights) {
                     return $hasHighlights;
                 }
@@ -206,22 +206,22 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
 
             case 'userPostActivityCount':
                 // User Post Activity: Comments + Responses/Additionals + Hightlights
-                $commentCount = $relationalTypeResolver->resolveValue($resultItem, 'commentCount', $variables, $expressions, $options);
+                $commentCount = $relationalTypeResolver->resolveValue($object, 'commentCount', $variables, $expressions, $options);
                 if ($commentCount) {
                     return $commentCount;
                 }
-                $referencedByCount = $relationalTypeResolver->resolveValue($resultItem, 'referencedByCount', $variables, $expressions, $options);
+                $referencedByCount = $relationalTypeResolver->resolveValue($object, 'referencedByCount', $variables, $expressions, $options);
                 if ($referencedByCount) {
                     return $referencedByCount;
                 }
-                $highlightsCount = $relationalTypeResolver->resolveValue($resultItem, 'highlightsCount', $variables, $expressions, $options);
+                $highlightsCount = $relationalTypeResolver->resolveValue($object, 'highlightsCount', $variables, $expressions, $options);
                 if ($highlightsCount) {
                     return $highlightsCount;
                 }
                 return $commentCount + $referencedByCount + $highlightsCount;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string

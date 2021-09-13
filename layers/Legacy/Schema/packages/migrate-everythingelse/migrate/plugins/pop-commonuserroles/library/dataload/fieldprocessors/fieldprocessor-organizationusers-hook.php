@@ -74,14 +74,14 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'contactPerson':
                 return \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_CONTACTPERSON, true);
@@ -103,7 +103,7 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
                     $relationalTypeResolver->resolveValue($user, 'contactNumber', $variables, $expressions, $options);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

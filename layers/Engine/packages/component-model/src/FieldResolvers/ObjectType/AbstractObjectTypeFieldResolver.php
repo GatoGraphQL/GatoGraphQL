@@ -676,7 +676,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function resolveCanProcessResultItem(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
@@ -689,7 +689,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): ?array {
@@ -707,7 +707,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         Error $error,
         string $errorMessage,
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): string {
@@ -719,12 +719,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function getValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): ?array {
         // Can perform validation through checkpoints
-        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $resultItem, $fieldName, $fieldArgs)) {
+        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
             $engine = EngineFacade::getInstance();
             $validation = $engine->validateCheckpoints($checkpoints);
             if (GeneralUtils::isError($validation)) {
@@ -732,7 +732,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $errorMessage = $error->getMessageOrCode();
                 // Allow to customize the error message for the failing entity
                 return [
-                    $this->getValidationCheckpointsErrorMessage($error, $errorMessage, $objectTypeResolver, $resultItem, $fieldName, $fieldArgs)
+                    $this->getValidationCheckpointsErrorMessage($error, $errorMessage, $objectTypeResolver, $object, $fieldName, $fieldArgs)
                 ];
             }
         }
@@ -746,7 +746,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $mutationFieldArgs = $this->getFieldArgsToExecuteMutation(
                     $fieldArgs,
                     $objectTypeResolver,
-                    $resultItem,
+                    $object,
                     $fieldName
                 );
                 return $mutationResolver->validateErrors($mutationFieldArgs);
@@ -775,7 +775,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -789,7 +789,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $mutationFieldArgs = $this->getFieldArgsToExecuteMutation(
                 $fieldArgs,
                 $objectTypeResolver,
-                $resultItem,
+                $object,
                 $fieldName
             );
             return $mutationResolver->execute($mutationFieldArgs);
@@ -800,7 +800,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName
     ): array {
         return $fieldArgs;

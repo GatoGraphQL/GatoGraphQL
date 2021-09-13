@@ -62,14 +62,14 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             case 'link':
                 return PoP_AddPostLinks_Utils::getLink($relationalTypeResolver->getID($post));
@@ -84,7 +84,7 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
                 return false;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

@@ -267,14 +267,14 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $comment = $resultItem;
+        $comment = $object;
         switch ($fieldName) {
             case 'content':
                 return $this->commentTypeAPI->getCommentContent($comment);
@@ -328,7 +328,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 return $this->commentTypeAPI->getCommentCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

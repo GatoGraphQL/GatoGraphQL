@@ -88,14 +88,14 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             case 'multilayoutKeys':
                 // Allow pop-categorypostlayouts to add more layouts
@@ -158,7 +158,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 return $appliesto->getSelectedValue();
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

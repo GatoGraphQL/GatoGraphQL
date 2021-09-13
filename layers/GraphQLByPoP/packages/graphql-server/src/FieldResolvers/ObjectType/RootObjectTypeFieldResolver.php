@@ -88,21 +88,21 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $root = $resultItem;
+        $root = $object;
         switch ($fieldName) {
             case '__schema':
                 return 'schema';
             case '__type':
                 // Get an instance of the schema and then execute function `getType` there
                 $schemaID = $objectTypeResolver->resolveValue(
-                    $resultItem,
+                    $object,
                     $this->fieldQueryInterpreter->getField(
                         '__schema',
                         []
@@ -124,7 +124,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $schema->getTypeID($fieldArgs['name']);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

@@ -288,14 +288,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        object $resultItem,
+        object $object,
         string $field,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
         // Get the value from a fieldResolver, from the first one who can deliver the value
-        // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $resultItem)
+        // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $object)
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
             // Important: $validField becomes $field: remove all invalid fieldArgs before executing `resolveValue` on the fieldResolver
             list(
@@ -339,7 +339,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $fieldArgs,
                 $dbErrors,
                 $dbWarnings
-            ) = $this->fieldQueryInterpreter->extractFieldArgumentsForObject($this, $resultItem, $field, $variables, $expressions);
+            ) = $this->fieldQueryInterpreter->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions);
 
             // Store the warnings to be read if needed
             if ($dbWarnings) {
@@ -350,14 +350,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
 
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
-                // Also send the typeResolver along, as to get the id of the $resultItem being passed
-                if ($objectTypeFieldResolver->resolveCanProcessResultItem($this, $resultItem, $fieldName, $fieldArgs)) {
+                // Also send the typeResolver along, as to get the id of the $object being passed
+                if ($objectTypeFieldResolver->resolveCanProcessResultItem($this, $object, $fieldName, $fieldArgs)) {
                     if ($validateSchemaOnResultItem) {
                         if ($maybeErrors = $objectTypeFieldResolver->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                             return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
                         }
                         if ($maybeDeprecations = $objectTypeFieldResolver->resolveSchemaValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
-                            $id = $this->getID($resultItem);
+                            $id = $this->getID($object);
                             foreach ($maybeDeprecations as $deprecation) {
                                 $dbDeprecations[(string)$id][] = [
                                     Tokens::PATH => [$field],
@@ -367,14 +367,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             $this->feedbackMessageStore->addDBDeprecations($dbDeprecations);
                         }
                     }
-                    if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $resultItem, $fieldName, $fieldArgs)) {
+                    if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {
                         return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
                     }
 
                     // Resolve the value. If the field resolver throws an Exception,
                     // catch it and return the equivalent GraphQL error
                     try {
-                        $value = $objectTypeFieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+                        $value = $objectTypeFieldResolver->resolveValue($this, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
                     } catch (Exception $e) {
                         return new Error(
                             'exception',
@@ -493,13 +493,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     return $value;
                 }
             }
-            return $this->errorProvider->getNoObjectTypeFieldResolverProcessesFieldError($this->getID($resultItem), $fieldName, $fieldArgs);
+            return $this->errorProvider->getNoObjectTypeFieldResolverProcessesFieldError($this->getID($object), $fieldName, $fieldArgs);
         }
 
         // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
         // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
         $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
-        return $this->errorProvider->getNoFieldError($this->getID($resultItem), $fieldName, $this->getMaybeNamespacedTypeName());
+        return $this->errorProvider->getNoFieldError($this->getID($object), $fieldName, $this->getMaybeNamespacedTypeName());
     }
 
     protected function getSchemaObjecTypeObjectTypeFieldResolvers(bool $global): array

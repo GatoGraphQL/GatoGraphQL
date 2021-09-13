@@ -120,16 +120,16 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName
     ): array {
         $fieldArgs = parent::getFieldArgsToExecuteMutation(
             $fieldArgs,
             $objectTypeResolver,
-            $resultItem,
+            $object,
             $fieldName
         );
-        $customPost = $resultItem;
+        $customPost = $object;
         switch ($fieldName) {
             case 'setFeaturedImage':
             case 'removeFeaturedImage':

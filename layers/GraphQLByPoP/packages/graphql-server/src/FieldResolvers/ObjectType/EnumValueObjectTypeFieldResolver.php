@@ -71,14 +71,14 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $enumValue = $resultItem;
+        $enumValue = $object;
         switch ($fieldName) {
             case 'name':
                 return $enumValue->getName();
@@ -90,6 +90,6 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $enumValue->getDeprecatedReason();
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

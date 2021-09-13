@@ -279,7 +279,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function dissectAndValidateDirectiveForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         array &$variables,
         array &$expressions,
         array &$dbErrors,
@@ -292,10 +292,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $directiveArgs,
             $nestedDBErrors,
             $nestedDBWarnings
-        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $resultItem, $this->directive, $variables, $expressions);
+        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
-        $resultItemID = $relationalTypeResolver->getID($resultItem);
+        $resultItemID = $relationalTypeResolver->getID($object);
         $this->directiveArgsForObjects[$resultItemID] = $directiveArgs;
 
         // Store errors (if any)

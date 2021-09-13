@@ -73,7 +73,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Users extends AbstractOb
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -82,7 +82,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Users extends AbstractOb
     ): mixed {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'recommendsCustomPosts':
                 $query = [];
@@ -103,7 +103,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Users extends AbstractOb
                 return \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_METAKEY_PROFILE_FOLLOWERSCOUNT, true);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string

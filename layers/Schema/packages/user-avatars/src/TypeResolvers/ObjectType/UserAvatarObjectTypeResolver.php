@@ -20,10 +20,10 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->translationAPI->__('User avatar', 'user-avatars');
     }
 
-    public function getID(object $resultItem): string | int | null
+    public function getID(object $object): string | int | null
     {
         /** @var UserAvatar */
-        $userAvatar = $resultItem;
+        $userAvatar = $object;
         return $userAvatar->id;
     }
 

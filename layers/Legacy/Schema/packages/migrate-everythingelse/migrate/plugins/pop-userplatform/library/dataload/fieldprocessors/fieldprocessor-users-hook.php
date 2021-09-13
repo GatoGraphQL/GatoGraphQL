@@ -88,14 +88,14 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $user = $resultItem;
+        $user = $object;
 
         switch ($fieldName) {
             case 'shortDescription':
@@ -188,7 +188,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
                 return $value;
 
             case 'hasContact':
-                $contact = $relationalTypeResolver->resolveValue($resultItem, 'contact', $variables, $expressions, $options);
+                $contact = $relationalTypeResolver->resolveValue($object, 'contact', $variables, $expressions, $options);
                 return !empty($contact);
 
             case 'facebook':
@@ -210,7 +210,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
                 return isProfile($relationalTypeResolver->getID($user));
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

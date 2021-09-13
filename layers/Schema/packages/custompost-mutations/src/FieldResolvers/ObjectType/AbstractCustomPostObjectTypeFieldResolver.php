@@ -59,16 +59,16 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     protected function getFieldArgsToExecuteMutation(
         array $fieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName
     ): array {
         $fieldArgs = parent::getFieldArgsToExecuteMutation(
             $fieldArgs,
             $objectTypeResolver,
-            $resultItem,
+            $object,
             $fieldName
         );
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             case 'update':
                 $fieldArgs[MutationInputProperties::ID] = $objectTypeResolver->getID($post);

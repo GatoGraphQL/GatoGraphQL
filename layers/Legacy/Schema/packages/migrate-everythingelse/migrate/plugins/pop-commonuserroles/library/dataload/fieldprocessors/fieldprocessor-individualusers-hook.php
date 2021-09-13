@@ -61,14 +61,14 @@ class ObjectTypeFieldResolver_IndividualUsers extends AbstractObjectTypeFieldRes
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'individualinterests':
                 return \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS);
@@ -77,7 +77,7 @@ class ObjectTypeFieldResolver_IndividualUsers extends AbstractObjectTypeFieldRes
                 return !empty($relationalTypeResolver->resolveValue($user, 'individualinterests', $variables, $expressions, $options));
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

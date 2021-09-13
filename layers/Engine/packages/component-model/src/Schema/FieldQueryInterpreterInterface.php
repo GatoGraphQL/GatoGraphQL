@@ -50,7 +50,7 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
     public function extractDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $directive, ?array $variables = null, bool $disableDynamicFields = false): array;
     public function extractFieldArgumentsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $field,
         ?array $variables,
         ?array $expressions
@@ -58,7 +58,7 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
     public function extractDirectiveArgumentsForObject(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $directive,
         array $variables,
         array $expressions

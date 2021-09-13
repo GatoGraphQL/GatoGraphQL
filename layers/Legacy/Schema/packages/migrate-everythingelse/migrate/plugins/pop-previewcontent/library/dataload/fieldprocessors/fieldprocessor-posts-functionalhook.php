@@ -46,7 +46,7 @@ class PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles extends Abstrac
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -54,14 +54,14 @@ class PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles extends Abstrac
         array $options = []
     ): mixed {
         $pluginapi = PoP_PreviewContent_FunctionsAPIFactory::getInstance();
-        $post = $resultItem;
+        $post = $object;
         switch ($fieldName) {
             case 'previewURL':
                 // Use function getID to also cater for events (whose ID is $event->post_id)
                 return $pluginapi->getPreviewLink($relationalTypeResolver->getID($post));
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

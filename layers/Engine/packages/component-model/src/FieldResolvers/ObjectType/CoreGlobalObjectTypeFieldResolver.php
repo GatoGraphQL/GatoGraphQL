@@ -102,7 +102,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -182,6 +182,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 return in_array($interface, $implementedInterfaceNames);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

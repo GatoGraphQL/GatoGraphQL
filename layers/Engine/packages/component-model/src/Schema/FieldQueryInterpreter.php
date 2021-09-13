@@ -689,7 +689,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     public function extractFieldArgumentsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $field,
         ?array $variables,
         ?array $expressions
@@ -704,12 +704,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         );
         // Only need to extract arguments if they have fields or arrays
         $fieldOutputKey = $this->getFieldOutputKey($field);
-        $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $resultItem, $fieldArgs, $fieldOutputKey, $variables, $expressions, $dbErrors);
+        $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $dbErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $resultItemDBErrors = $resultItemDBWarnings = [];
         $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $resultItemDBErrors, $resultItemDBWarnings);
         if ($resultItemDBErrors || $resultItemDBWarnings) {
-            $id = $objectTypeResolver->getID($resultItem);
+            $id = $objectTypeResolver->getID($object);
             if ($resultItemDBErrors) {
                 $dbErrors[(string)$id] = array_merge(
                     $dbErrors[(string)$id] ?? [],
@@ -743,7 +743,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     public function extractDirectiveArgumentsForObject(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldDirective,
         array $variables,
         array $expressions
@@ -759,12 +759,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         );
         // Only need to extract arguments if they have fields or arrays
         $directiveOutputKey = $this->getDirectiveOutputKey($fieldDirective);
-        $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $resultItem, $directiveArgs, $directiveOutputKey, $variables, $expressions, $dbErrors);
+        $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $directiveOutputKey, $variables, $expressions, $dbErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $resultItemDBErrors = $resultItemDBWarnings = [];
         $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $resultItemDBErrors, $resultItemDBWarnings);
         if ($resultItemDBErrors || $resultItemDBWarnings) {
-            $id = $relationalTypeResolver->getID($resultItem);
+            $id = $relationalTypeResolver->getID($object);
             if ($resultItemDBErrors) {
                 $dbErrors[(string)$id] = array_merge(
                     $dbErrors[(string)$id] ?? [],
@@ -797,7 +797,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     protected function extractFieldOrDirectiveArgumentsForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         array $fieldOrDirectiveArgs,
         string $fieldOrDirectiveOutputKey,
         ?array $variables,
@@ -812,9 +812,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 )
             )
         ) {
-            $id = $relationalTypeResolver->getID($resultItem);
+            $id = $relationalTypeResolver->getID($object);
             foreach ($fieldOrDirectiveArgs as $directiveArgName => $directiveArgValue) {
-                $directiveArgValue = $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $resultItem, $directiveArgValue, $variables, $expressions);
+                $directiveArgValue = $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $directiveArgValue, $variables, $expressions);
                 // Validate it
                 if (GeneralUtils::isError($directiveArgValue)) {
                     /** @var Error */
@@ -1593,7 +1593,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      */
     protected function maybeResolveFieldArgumentValueForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         mixed $fieldArgValue,
         ?array $variables,
         ?array $expressions
@@ -1601,8 +1601,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
             return array_map(
-                function ($fieldArgValueElem) use ($relationalTypeResolver, $resultItem, $variables, $expressions) {
-                    return $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $resultItem, $fieldArgValueElem, $variables, $expressions);
+                function ($fieldArgValueElem) use ($relationalTypeResolver, $object, $variables, $expressions) {
+                    return $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $fieldArgValueElem, $variables, $expressions);
                 },
                 (array)$fieldArgValue
             );
@@ -1629,7 +1629,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $options = [
                 AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
             ];
-            $resolvedValue = $relationalTypeResolver->resolveValue($resultItem, (string)$fieldArgValue, $variables, $expressions, $options);
+            $resolvedValue = $relationalTypeResolver->resolveValue($object, (string)$fieldArgValue, $variables, $expressions, $options);
             if (GeneralUtils::isError($resolvedValue)) {
                 // Show the error message, and return nothing
                 /** @var Error */

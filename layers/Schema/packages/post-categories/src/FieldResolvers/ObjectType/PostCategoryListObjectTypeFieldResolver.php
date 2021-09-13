@@ -34,13 +34,13 @@ class PostCategoryListObjectTypeFieldResolver extends AbstractPostObjectTypeFiel
      */
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $query = parent::getQuery($objectTypeResolver, $resultItem, $fieldName, $fieldArgs);
+        $query = parent::getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs);
 
-        $category = $resultItem;
+        $category = $object;
         switch ($fieldName) {
             case 'posts':
             case 'postCount':

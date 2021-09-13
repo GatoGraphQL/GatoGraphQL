@@ -276,7 +276,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         array $fieldArgs = []
     ): ?array {
         // Important: The validations below can only be done if no fieldArg contains a field!
-        // That is because this is a schema error, so we still don't have the $resultItem against which to resolve the field
+        // That is because this is a schema error, so we still don't have the $object against which to resolve the field
         // For instance, this doesn't work: /?query=arrayItem(posts(),3)
         // In that case, the validation will be done inside ->resolveValue(), and will be treated as a $dbError, not a $schemaError
         if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
@@ -318,7 +318,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -378,6 +378,6 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 }
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

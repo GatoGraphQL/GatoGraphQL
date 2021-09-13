@@ -608,13 +608,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $typeDataLoader = $this->instanceManager->getInstance($typeDataLoaderClass);
         // If any ID cannot be resolved, the resultItem will be null
         $resultItems = array_filter($typeDataLoader->getObjects($ids));
-        foreach ($resultItems as $resultItem) {
-            $resultItemID = $this->getID($resultItem);
+        foreach ($resultItems as $object) {
+            $resultItemID = $this->getID($object);
             // If the UnionTypeResolver doesn't have a TypeResolver to process this element, the ID will be null, and an error will be show below
             if ($resultItemID === null) {
                 continue;
             }
-            $resultIDItems[$resultItemID] = $resultItem;
+            $resultIDItems[$resultItemID] = $object;
         }
         // Show an error for all resultItems that couldn't be processed
         $resolvedResultItemIDs = $this->getIDsToQuery($resultIDItems);

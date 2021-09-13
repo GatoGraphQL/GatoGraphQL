@@ -54,7 +54,7 @@ class GD_DataLoad_FunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -63,15 +63,15 @@ class GD_DataLoad_FunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
     ): mixed {
         switch ($fieldName) {
             case 'printURL':
-                $url = $relationalTypeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options);
+                $url = $relationalTypeResolver->resolveValue($object, 'url', $variables, $expressions, $options);
                 return PoP_Application_Engine_Utils::getPrintUrl($url);
 
             case 'embedURL':
-                $url = $relationalTypeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options);
+                $url = $relationalTypeResolver->resolveValue($object, 'url', $variables, $expressions, $options);
                 return PoP_Application_Engine_Utils::getEmbedUrl($url);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

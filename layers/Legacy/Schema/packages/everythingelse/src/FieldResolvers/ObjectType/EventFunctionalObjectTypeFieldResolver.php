@@ -69,7 +69,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -77,7 +77,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         array $options = []
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
-        $event = $resultItem;
+        $event = $object;
         switch ($fieldName) {
             case 'multilayoutKeys':
                 // Override the "post" implementation: instead of depending on categories, depend on the scope of the event (future/current/past)
@@ -102,6 +102,6 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }

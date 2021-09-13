@@ -75,11 +75,11 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
      */
     public function resolveCanProcessResultItem(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = []
     ): bool {
-        $notification = $resultItem;
+        $notification = $object;
         return $notification->object_type == 'Comments' && in_array(
             $notification->action,
             [
@@ -97,7 +97,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -108,7 +108,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $notification = $resultItem;
+        $notification = $object;
         switch ($fieldName) {
             // Specific fields to be used by the subcomponents, based on a combination of Object Type + Action
             // Needed to, for instance, load the comment immediately, already from the notification
@@ -117,7 +117,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                 switch ($notification->action) {
                     case AAL_POP_ACTION_COMMENT_ADDED:
                         // comment-object-id is the object-id
-                        return $relationalTypeResolver->resolveValue($resultItem, FieldQueryInterpreterFacade::getInstance()->getField('objectID', $fieldArgs), $variables, $expressions, $options);
+                        return $relationalTypeResolver->resolveValue($object, FieldQueryInterpreterFacade::getInstance()->getField('objectID', $fieldArgs), $variables, $expressions, $options);
                 }
                 return null;
 
@@ -196,7 +196,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                 return null;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string

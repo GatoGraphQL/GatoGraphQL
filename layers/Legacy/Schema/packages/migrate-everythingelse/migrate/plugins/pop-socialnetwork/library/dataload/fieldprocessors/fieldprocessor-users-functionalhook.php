@@ -48,14 +48,14 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $user = $resultItem;
+        $user = $object;
         switch ($fieldName) {
             case 'contactURL':
                 return GeneralUtils::addQueryArgs([
@@ -63,7 +63,7 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_CONTACTUSER));
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

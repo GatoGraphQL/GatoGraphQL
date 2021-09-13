@@ -79,7 +79,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
@@ -87,7 +87,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $highlight = $resultItem;
+        $highlight = $object;
         switch ($fieldName) {
          // Override fields for Highlights
          // The Stance has no title, so return the excerpt instead.
@@ -114,7 +114,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $customPostTypeAPI->getPermalink($highlightedPost);
         }
 
-        return parent::resolveValue($objectTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

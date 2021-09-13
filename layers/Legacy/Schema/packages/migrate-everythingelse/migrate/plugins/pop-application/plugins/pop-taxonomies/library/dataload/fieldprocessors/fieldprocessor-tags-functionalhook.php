@@ -46,21 +46,21 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObje
      */
     public function resolveValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        object $resultItem,
+        object $object,
         string $fieldName,
         array $fieldArgs = [],
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $tag = $resultItem;
+        $tag = $object;
         switch ($fieldName) {
              // Needed for tinyMCE-mention plug-in
             case 'mentionQueryby':
                 return $relationalTypeResolver->resolveValue($tag, 'name', $variables, $expressions, $options);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 
