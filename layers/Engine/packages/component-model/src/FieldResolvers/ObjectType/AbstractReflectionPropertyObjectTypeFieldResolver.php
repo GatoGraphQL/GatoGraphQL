@@ -9,7 +9,7 @@ use ReflectionProperty;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 
-abstract class AbstractReflectionPropertyFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected $reflectionInstance;
     protected $reflectionFieldNames;

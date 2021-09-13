@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractReflectionPropertyFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractReflectionPropertyObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleTypeResolver;
 
-class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
+class UserRoleFieldResolver extends AbstractReflectionPropertyObjectTypeFieldResolver
 {
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
