@@ -22,7 +22,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
             AbstractObjectTypeResolver::class,
         ];
     }
-    
+
     public function getDirectiveName(): string
     {
         return 'copyRelationalResults';
