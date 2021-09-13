@@ -9,7 +9,7 @@ use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTr
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-abstract class AbstractValidateDirectiveResolver extends AbstractGlobalRelationalTypeDirectiveResolver
+abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     use RemoveIDsDataFieldsDirectiveResolverTrait;
 

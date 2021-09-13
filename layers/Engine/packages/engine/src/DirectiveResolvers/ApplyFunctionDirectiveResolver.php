@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalRelationalTypeDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -16,7 +16,7 @@ use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 
-class ApplyFunctionDirectiveResolver extends AbstractGlobalRelationalTypeDirectiveResolver
+class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     public function getDirectiveName(): string
     {
