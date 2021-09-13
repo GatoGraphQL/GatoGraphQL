@@ -271,7 +271,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         return explode(self::PROPERTY_SEPARATOR, $arrayItemProperty);
     }
 
-    protected function addExpressionsForResultItem(
+    protected function addExpressionsForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         string $field,
@@ -288,11 +288,11 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         array &$schemaDeprecations
     ): void {
         // First let the parent add $value, then also add $key, which can be deduced from the fieldOutputKey
-        parent::addExpressionsForResultItem($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        parent::addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
         $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
         $arrayItemPropertyElems = $this->extractElementsFromArrayItemProperty($arrayItemPropertyOutputKey);
         $key = $arrayItemPropertyElems[1];
-        $this->addExpressionForResultItem($id, 'key', $key, $messages);
+        $this->addExpressionForObject($id, 'key', $key, $messages);
     }
 }

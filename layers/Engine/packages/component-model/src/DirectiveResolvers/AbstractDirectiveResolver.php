@@ -57,7 +57,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * @var array<string, mixed>
      */
-    protected array $directiveArgsForResultItems = [];
+    protected array $directiveArgsForObjects = [];
     /**
      * @var array[]
      */
@@ -277,7 +277,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return $directiveArgs;
     }
 
-    public function dissectAndValidateDirectiveForResultItem(
+    public function dissectAndValidateDirectiveForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $resultItem,
         array &$variables,
@@ -292,11 +292,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $directiveArgs,
             $nestedDBErrors,
             $nestedDBWarnings
-        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForResultItem($this, $relationalTypeResolver, $resultItem, $this->directive, $variables, $expressions);
+        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $resultItem, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
         $resultItemID = $relationalTypeResolver->getID($resultItem);
-        $this->directiveArgsForResultItems[$resultItemID] = $directiveArgs;
+        $this->directiveArgsForObjects[$resultItemID] = $directiveArgs;
 
         // Store errors (if any)
         foreach ($nestedDBErrors as $id => $fieldOutputKeyErrorMessages) {
@@ -534,7 +534,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * @return mixed[]
      */
-    protected function getExpressionsForResultItem(int | string $id, array &$variables, array &$messages): array
+    protected function getExpressionsForObject(int | string $id, array &$variables, array &$messages): array
     {
         // Create a custom $variables containing all the properties from $dbItems for this resultItem
         // This way, when encountering $propName in a fieldArg in a fieldResolver, it can resolve that value
@@ -545,12 +545,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         );
     }
 
-    protected function addExpressionForResultItem(int | string $id, string $key, mixed $value, array &$messages): void
+    protected function addExpressionForObject(int | string $id, string $key, mixed $value, array &$messages): void
     {
         $messages[self::MESSAGE_EXPRESSIONS][(string)$id][$key] = $value;
     }
 
-    protected function getExpressionForResultItem(int | string $id, string $key, array &$messages): mixed
+    protected function getExpressionForObject(int | string $id, string $key, array &$messages): mixed
     {
         return $messages[self::MESSAGE_EXPRESSIONS][(string)$id][$key] ?? null;
     }

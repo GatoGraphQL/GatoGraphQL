@@ -17,13 +17,13 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         $idsSatisfyingCondition = [];
         foreach (array_keys($idsDataFields) as $id) {
             // Validate directive args for the resultItem
-            $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
+            $expressions = $this->getExpressionsForObject($id, $variables, $messages);
             $resultItem = $resultIDItems[$id];
             list(
                 $resultItemValidDirective,
                 $resultItemDirectiveName,
                 $resultItemDirectiveArgs
-            ) = $this->dissectAndValidateDirectiveForResultItem($relationalTypeResolver, $resultItem, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
+            ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $resultItem, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
             // Check that the directive is valid. If it is not, $dbErrors will have the error already added
             if (is_null($resultItemValidDirective)) {
                 continue;

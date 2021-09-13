@@ -68,9 +68,9 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                 ];
                 $arrayItems = [];
                 foreach ($array as $key => $value) {
-                    $this->addExpressionForResultItem($id, Expressions::NAME_KEY, $key, $messages);
-                    $this->addExpressionForResultItem($id, Expressions::NAME_VALUE, $value, $messages);
-                    $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
+                    $this->addExpressionForObject($id, Expressions::NAME_KEY, $key, $messages);
+                    $this->addExpressionForObject($id, Expressions::NAME_VALUE, $value, $messages);
+                    $expressions = $this->getExpressionsForObject($id, $variables, $messages);
                     $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $if, $variables, $expressions, $options);
                     // Merge the dbWarnings, if any
                     if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {

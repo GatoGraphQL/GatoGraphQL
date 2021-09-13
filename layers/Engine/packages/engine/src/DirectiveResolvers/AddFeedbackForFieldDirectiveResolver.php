@@ -72,13 +72,13 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
         if ($target == FieldFeedbackTargetEnum::DB) {
             foreach (array_keys($idsDataFields) as $id) {
                 // Use either the default value passed under param "value" or, if this is NULL, use a predefined value
-                $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
+                $expressions = $this->getExpressionsForObject($id, $variables, $messages);
                 $resultItem = $resultIDItems[$id];
                 list(
                     $resultItemValidDirective,
                     $resultItemDirectiveName,
                     $resultItemDirectiveArgs
-                ) = $this->dissectAndValidateDirectiveForResultItem($relationalTypeResolver, $resultItem, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
+                ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $resultItem, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
                 // Check that the directive is valid. If it is not, $dbErrors will have the error already added
                 if (is_null($resultItemValidDirective)) {
                     continue;

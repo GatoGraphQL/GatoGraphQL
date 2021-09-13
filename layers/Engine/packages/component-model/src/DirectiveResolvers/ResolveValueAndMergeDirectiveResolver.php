@@ -60,11 +60,11 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ): void {
         // Iterate data, extract into final results
         if ($resultIDItems) {
-            $this->resolveValueForResultItems($relationalTypeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+            $this->resolveValueForObjects($relationalTypeResolver, $resultIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         }
     }
 
-    protected function resolveValueForResultItems(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
+    protected function resolveValueForObjects(RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
     {
         $enqueueFillingResultItemsFromIDs = [];
         foreach (array_keys($idsDataFields) as $id) {
@@ -86,8 +86,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 continue;
             }
 
-            $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
-            $this->resolveValuesForResultItem($relationalTypeResolver, $id, $resultItem, $idsDataFields[(string)$id]['direct'], $dbItems, $previousDBItems, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
+            $expressions = $this->getExpressionsForObject($id, $variables, $messages);
+            $this->resolveValuesForObject($relationalTypeResolver, $id, $resultItem, $idsDataFields[(string)$id]['direct'], $dbItems, $previousDBItems, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
 
             // Add the conditional data fields
             // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
@@ -120,7 +120,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         }
     }
 
-    protected function resolveValuesForResultItem(
+    protected function resolveValuesForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         object $resultItem,
@@ -134,11 +134,11 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$dbDeprecations
     ) {
         foreach ($dataFields as $field) {
-            $this->resolveValueForResultItem($relationalTypeResolver, $id, $resultItem, $field, $dbItems, $previousDBItems, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
+            $this->resolveValueForObject($relationalTypeResolver, $id, $resultItem, $field, $dbItems, $previousDBItems, $variables, $expressions, $dbErrors, $dbWarnings, $dbDeprecations);
         }
     }
 
-    protected function resolveValueForResultItem(
+    protected function resolveValueForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         object $resultItem,
@@ -153,7 +153,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ) {
         // Get the value, and add it to the database
         $value = $this->resolveFieldValue($relationalTypeResolver, $id, $resultItem, $field, $previousDBItems, $variables, $expressions, $dbWarnings, $dbDeprecations);
-        $this->addValueForResultItem($relationalTypeResolver, $id, $field, $value, $dbItems, $dbErrors);
+        $this->addValueForObject($relationalTypeResolver, $id, $field, $value, $dbItems, $dbErrors);
     }
 
     protected function resolveFieldValue(
@@ -200,7 +200,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         return $errorOutput;
     }
 
-    protected function addValueForResultItem(RelationalTypeResolverInterface $relationalTypeResolver, $id, string $field, $value, array &$dbItems, array &$dbErrors)
+    protected function addValueForObject(RelationalTypeResolverInterface $relationalTypeResolver, $id, string $field, $value, array &$dbItems, array &$dbErrors)
     {
         // The dataitem can contain both rightful values and also errors (eg: when the field doesn't exist, or the field validation fails)
         // Extract the errors and add them on the other array

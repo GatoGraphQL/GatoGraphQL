@@ -10,7 +10,7 @@ use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterfa
 interface UnionTypeResolverInterface extends RelationalTypeResolverInterface
 {
     // public function addTypeToID(string | int $resultItemID): string;
-    public function getObjectTypeResolverClassForResultItem(string | int $resultItemID);
+    public function getObjectTypeResolverClassForObject(string | int $resultItemID);
     public function getTargetObjectTypeResolverPicker(object $resultItem): ?ObjectTypeResolverPickerInterface;
     public function getTargetObjectTypeResolver(object $resultItem): ?RelationalTypeResolverInterface;
     /**

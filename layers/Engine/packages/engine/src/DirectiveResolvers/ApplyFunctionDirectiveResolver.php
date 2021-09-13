@@ -150,10 +150,10 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 }
 
                 // Place all the reserved expressions into the `$expressions` context: $value
-                $this->addExpressionsForResultItem($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+                $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
                 // Generate the fieldArgs from combining the query with the values in the context, through $variables
-                $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
+                $expressions = $this->getExpressionsForObject($id, $variables, $messages);
                 list(
                     $validFunction,
                     $schemaFieldName,
@@ -253,7 +253,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     /**
      * Place all the reserved variables into the `$variables` context
      */
-    protected function addExpressionsForResultItem(
+    protected function addExpressionsForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         string $field,
@@ -275,6 +275,6 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         $value = $isValueInDBItems ?
             $dbItems[(string)$id][$fieldOutputKey] :
             $previousDBItems[$dbKey][(string)$id][$fieldOutputKey];
-        $this->addExpressionForResultItem($id, Expressions::NAME_VALUE, $value, $messages);
+        $this->addExpressionForObject($id, Expressions::NAME_VALUE, $value, $messages);
     }
 }
