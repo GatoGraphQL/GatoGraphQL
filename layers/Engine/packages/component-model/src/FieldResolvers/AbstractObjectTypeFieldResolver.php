@@ -50,7 +50,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @var array<string, FieldSchemaDefinitionResolverInterface>
      */
-    protected array $fieldInterfaceSchemaDefinitionResolverCache = [];
+    protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -129,14 +129,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             // Interfaces do not receive the typeResolver, so we must bridge it
             // First check if the class is cached
             $key = $objectTypeResolver->getNamespacedTypeName() . '|' . $fieldName;
-            if (isset($this->fieldInterfaceSchemaDefinitionResolverCache[$key])) {
-                return $this->fieldInterfaceSchemaDefinitionResolverCache[$key];
+            if (isset($this->interfaceTypeFieldSchemaDefinitionResolverCache[$key])) {
+                return $this->interfaceTypeFieldSchemaDefinitionResolverCache[$key];
             }
             // Create an Adapter and cache it
-            $fieldInterfaceSchemaDefinitionResolver = $fieldOrInterfaceTypeFieldSchemaDefinitionResolver;
+            $interfaceTypeFieldSchemaDefinitionResolver = $fieldOrInterfaceTypeFieldSchemaDefinitionResolver;
             $interfaceSchemaDefinitionResolverAdapterClass = $this->getInterfaceSchemaDefinitionResolverAdapterClass();
-            $this->fieldInterfaceSchemaDefinitionResolverCache[$key] = new $interfaceSchemaDefinitionResolverAdapterClass($fieldInterfaceSchemaDefinitionResolver);
-            return $this->fieldInterfaceSchemaDefinitionResolverCache[$key];
+            $this->interfaceTypeFieldSchemaDefinitionResolverCache[$key] = new $interfaceSchemaDefinitionResolverAdapterClass($interfaceTypeFieldSchemaDefinitionResolver);
+            return $this->interfaceTypeFieldSchemaDefinitionResolverCache[$key];
         }
         $fieldSchemaDefinitionResolver = $fieldOrInterfaceTypeFieldSchemaDefinitionResolver;
         return $fieldSchemaDefinitionResolver;
@@ -151,9 +151,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): FieldSchemaDefinitionResolverInterface | InterfaceTypeFieldSchemaDefinitionResolverInterface {
-        if ($fieldInterfaceSchemaDefinitionResolverClass = $this->getInterfaceTypeFieldSchemaDefinitionResolverClass($objectTypeResolver, $fieldName)) {
+        if ($interfaceTypeFieldSchemaDefinitionResolverClass = $this->getInterfaceTypeFieldSchemaDefinitionResolverClass($objectTypeResolver, $fieldName)) {
             /** @var InterfaceTypeFieldSchemaDefinitionResolverInterface */
-            return $this->instanceManager->getInstance($fieldInterfaceSchemaDefinitionResolverClass);
+            return $this->instanceManager->getInstance($interfaceTypeFieldSchemaDefinitionResolverClass);
         }
         return $this;
     }

@@ -17,7 +17,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
  */
 class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionResolverInterface
 {
-    public function __construct(protected InterfaceTypeFieldSchemaDefinitionResolverInterface $fieldInterfaceSchemaDefinitionResolver)
+    public function __construct(protected InterfaceTypeFieldSchemaDefinitionResolverInterface $interfaceTypeFieldSchemaDefinitionResolver)
     {
     }
 
@@ -41,32 +41,32 @@ class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionR
 
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
-        return $this->fieldInterfaceSchemaDefinitionResolver->getSchemaFieldType($fieldName);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldType($fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
-        return $this->fieldInterfaceSchemaDefinitionResolver->getSchemaFieldTypeModifiers($fieldName);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldTypeModifiers($fieldName);
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return $this->fieldInterfaceSchemaDefinitionResolver->getSchemaFieldDescription($fieldName);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldDescription($fieldName);
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        return $this->fieldInterfaceSchemaDefinitionResolver->getSchemaFieldArgs($fieldName);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldArgs($fieldName);
     }
 
     public function getSchemaFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
-        return $this->fieldInterfaceSchemaDefinitionResolver->getSchemaFieldDeprecationDescription($fieldName, $fieldArgs);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldDeprecationDescription($fieldName, $fieldArgs);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return $this->fieldInterfaceSchemaDefinitionResolver->getFieldTypeResolverClass($fieldName);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getFieldTypeResolverClass($fieldName);
     }
 
     public function validateFieldArgument(
@@ -75,11 +75,11 @@ class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionR
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
-        return $this->fieldInterfaceSchemaDefinitionResolver->validateFieldArgument($fieldName, $fieldArgName, $fieldArgValue);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->validateFieldArgument($fieldName, $fieldArgName, $fieldArgValue);
     }
 
     public function addSchemaDefinitionForField(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
     {
-        $this->fieldInterfaceSchemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $fieldName);
+        $this->interfaceTypeFieldSchemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $fieldName);
     }
 }

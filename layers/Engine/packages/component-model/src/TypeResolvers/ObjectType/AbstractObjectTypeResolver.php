@@ -50,7 +50,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @var string[]|null
      */
-    protected ?array $fieldInterfaceResolverClasses = null;
+    protected ?array $interfaceTypeFieldResolverClasses = null;
 
     public function getSelfFieldTypeResolverClass(): string
     {
@@ -720,10 +720,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final protected function getAllImplementedInterfaceTypeFieldResolverClasses(): array
     {
-        if ($this->fieldInterfaceResolverClasses === null) {
-            $this->fieldInterfaceResolverClasses = $this->calculateAllImplementedInterfaceTypeFieldResolverClasses();
+        if ($this->interfaceTypeFieldResolverClasses === null) {
+            $this->interfaceTypeFieldResolverClasses = $this->calculateAllImplementedInterfaceTypeFieldResolverClasses();
         }
-        return $this->fieldInterfaceResolverClasses;
+        return $this->interfaceTypeFieldResolverClasses;
     }
 
     private function calculateAllImplementedInterfaceTypeFieldResolverClasses(): array

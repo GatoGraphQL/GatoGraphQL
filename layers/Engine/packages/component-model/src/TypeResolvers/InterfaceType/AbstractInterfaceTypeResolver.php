@@ -30,7 +30,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     /**
      * @var string[]|null
      */
-    protected ?array $fieldInterfaceResolverClasses = null;
+    protected ?array $interfaceTypeFieldResolverClasses = null;
 
     /**
      * The list of the fieldNames to implement in the Interface,
@@ -121,17 +121,17 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      */
     public function getAllInterfaceTypeFieldResolverClasses(): array
     {
-        if ($this->fieldInterfaceResolverClasses === null) {
-            $this->fieldInterfaceResolverClasses = [];
+        if ($this->interfaceTypeFieldResolverClasses === null) {
+            $this->interfaceTypeFieldResolverClasses = [];
             foreach ($this->getAllInterfaceTypeFieldResolverClassesByField() as $fieldName => $interfaceTypeFieldResolverClasses) {
-                $this->fieldInterfaceResolverClasses = array_merge(
-                    $this->fieldInterfaceResolverClasses,
+                $this->interfaceTypeFieldResolverClasses = array_merge(
+                    $this->interfaceTypeFieldResolverClasses,
                     $interfaceTypeFieldResolverClasses
                 );
             }
-            $this->fieldInterfaceResolverClasses = array_values(array_unique($this->fieldInterfaceResolverClasses));
+            $this->interfaceTypeFieldResolverClasses = array_values(array_unique($this->interfaceTypeFieldResolverClasses));
         }
-        return $this->fieldInterfaceResolverClasses;
+        return $this->interfaceTypeFieldResolverClasses;
     }
 
     /**
@@ -205,7 +205,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     }
 
     /**
-     * Return the fieldNames resolved by the fieldInterfaceResolver, adding a hook to disable each of them (eg: to implement a private schema)
+     * Return the fieldNames resolved by the interfaceTypeFieldResolver, adding a hook to disable each of them (eg: to implement a private schema)
      *
      * @return string[]
      */
