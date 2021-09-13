@@ -29,11 +29,11 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
      */
     protected array $logEntries = [];
 
-    public function addDBWarnings(array $dbWarnings)
+    public function addDBWarnings(array $objectIDWarnings)
     {
-        foreach ($dbWarnings as $objectID => $objectWarnings) {
-            $this->dbWarnings[$objectID] = array_merge(
-                $this->dbWarnings[$objectID] ?? [],
+        foreach ($objectIDWarnings as $objectID => $objectWarnings) {
+            $this->objectIDWarnings[$objectID] = array_merge(
+                $this->objectIDWarnings[$objectID] ?? [],
                 $objectWarnings
             );
         }
