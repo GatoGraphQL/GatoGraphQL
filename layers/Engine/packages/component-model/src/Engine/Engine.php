@@ -645,7 +645,7 @@ class Engine implements EngineInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $dbKey,
         array $dataitems,
-        array $resultIDItems,
+        array $objectIDItems,
         bool $addEntryIfError = false
     ): void {
         // Do not create the database key entry when there are no items, or it produces an error when deep merging the database object in the webplatform with that from the response
@@ -662,7 +662,7 @@ class Engine implements EngineInterface
             foreach ($dataitems as $objectID => $dataItem) {
                 // Obtain the type of the object
                 $exists = false;
-                if ($object = $resultIDItems[$objectID] ?? null) {
+                if ($object = $objectIDItems[$objectID] ?? null) {
                     $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
                     if ($targetObjectTypeResolver !== null) {
                         $exists = true;
@@ -685,7 +685,7 @@ class Engine implements EngineInterface
             foreach ($convertedTypeResolverClassDataItems as $convertedTypeResolverClass => $convertedDataItems) {
                 $convertedTypeResolver = $this->instanceManager->getInstance($convertedTypeResolverClass);
                 $convertedDBKey = $convertedTypeResolverClassDBKeys[$convertedTypeResolverClass];
-                $this->addDatasetToDatabase($database, $convertedTypeResolver, $convertedDBKey, $convertedDataItems, $resultIDItems, $addEntryIfError);
+                $this->addDatasetToDatabase($database, $convertedTypeResolver, $convertedDBKey, $convertedDataItems, $objectIDItems, $addEntryIfError);
             }
             // Add the errors under the UnionTypeResolver key
             if ($noTypeResolverDataItems) {
@@ -1371,7 +1371,7 @@ class Engine implements EngineInterface
             // Execute the typeResolver for all combined ids
             $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationDBDeprecations = $iterationDBNotices = $iterationDBTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
-            $resultIDItems = $relationalTypeResolver->fillObjects(
+            $objectIDItems = $relationalTypeResolver->fillObjects(
                 $ids_data_fields,
                 $combinedUnionDBKeyIDs,
                 $iterationDBItems,
@@ -1421,7 +1421,7 @@ class Engine implements EngineInterface
                 $dbItems = $this->moveEntriesUnderDBName($iterationDBItems, true, $relationalTypeResolver);
                 foreach ($dbItems as $dbname => $entries) {
                     $databases[$dbname] ??= [];
-                    $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems);
+                    $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems);
 
                     // Populate the $previousDBItems, pointing to the newly fetched dbItems (but without the dbname!)
                     // Save the reference to the values, instead of the values, to save memory
@@ -1438,35 +1438,35 @@ class Engine implements EngineInterface
                 $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationObjectErrors, true, $relationalTypeResolver);
                 foreach ($dbNameErrorEntries as $dbname => $entries) {
                     $objectErrors[$dbname] ??= [];
-                    $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
             if ($iterationObjectWarnings) {
                 $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationObjectWarnings, true, $relationalTypeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $entries) {
                     $objectWarnings[$dbname] ??= [];
-                    $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
             if ($iterationDBDeprecations) {
                 $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationDBDeprecations, true, $relationalTypeResolver);
                 foreach ($dbNameDeprecationEntries as $dbname => $entries) {
                     $objectDeprecations[$dbname] ??= [];
-                    $this->addDatasetToDatabase($objectDeprecations[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $this->addDatasetToDatabase($objectDeprecations[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
             if ($iterationDBNotices) {
                 $dbNameNoticeEntries = $this->moveEntriesUnderDBName($iterationDBNotices, true, $relationalTypeResolver);
                 foreach ($dbNameNoticeEntries as $dbname => $entries) {
                     $objectNotices[$dbname] ??= [];
-                    $this->addDatasetToDatabase($objectNotices[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $this->addDatasetToDatabase($objectNotices[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
             if ($iterationDBTraces) {
                 $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationDBTraces, true, $relationalTypeResolver);
                 foreach ($dbNameTraceEntries as $dbname => $entries) {
                     $objectTraces[$dbname] ??= [];
-                    $this->addDatasetToDatabase($objectTraces[$dbname], $relationalTypeResolver, $database_key, $entries, $resultIDItems, true);
+                    $this->addDatasetToDatabase($objectTraces[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
 

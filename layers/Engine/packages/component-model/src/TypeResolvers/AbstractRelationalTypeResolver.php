@@ -602,7 +602,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$schemaTraces
     ): array {
         // Obtain the data for the required object IDs
-        $resultIDItems = [];
+        $objectIDItems = [];
         $ids = $this->getIDsToQuery($ids_data_fields);
         $typeDataLoaderClass = $this->getRelationalTypeDataLoaderClass();
         $typeDataLoader = $this->instanceManager->getInstance($typeDataLoaderClass);
@@ -614,10 +614,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             if ($objectID === null) {
                 continue;
             }
-            $resultIDItems[$objectID] = $object;
+            $objectIDItems[$objectID] = $object;
         }
         // Show an error for all objects that couldn't be processed
-        $resolvedObjectIDs = $this->getIDsToQuery($resultIDItems);
+        $resolvedObjectIDs = $this->getIDsToQuery($objectIDItems);
         $unresolvedObjectIDs = [];
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
             $error = $this->getUnresolvedObjectIDError($unresolvedObjectID);
@@ -652,7 +652,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         // Process them
         $this->processFillingObjectsFromIDs(
-            $resultIDItems,
+            $objectIDItems,
             $unionDBKeyIDs,
             $dbItems,
             $previousDBItems,
@@ -670,7 +670,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $schemaTraces
         );
 
-        return $resultIDItems;
+        return $objectIDItems;
     }
 
     /**
@@ -956,7 +956,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     protected function processFillingObjectsFromIDs(
-        array &$resultIDItems,
+        array &$objectIDItems,
         array &$unionDBKeyIDs,
         array &$dbItems,
         array &$previousDBItems,
@@ -1098,7 +1098,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $this,
                 $pipelineIDsDataFields,
                 $directiveResolverInstances,
-                $resultIDItems,
+                $objectIDItems,
                 $unionDBKeyIDs,
                 $dbItems,
                 $previousDBItems,

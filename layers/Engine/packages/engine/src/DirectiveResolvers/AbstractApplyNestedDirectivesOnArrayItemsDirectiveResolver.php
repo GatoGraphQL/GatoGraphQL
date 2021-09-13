@@ -71,7 +71,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
-        array &$resultIDItems,
+        array &$objectIDItems,
         array &$unionDBKeyIDs,
         array &$dbItems,
         array &$previousDBItems,
@@ -184,7 +184,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
 
                 // The value is an array. Unpack all the elements into their own property
                 $array = $value;
-                if ($arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations)) {
+                if ($arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations)) {
                     $execute = true;
                     foreach ($arrayItems as $key => &$value) {
                         // Add into the $idsDataFields object for the array items
@@ -206,7 +206,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $arrayItemIdsProperties[(string)$id]['conditional'] = [];
 
-                    $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+                    $this->addExpressionsForObject($relationalTypeResolver, $id, $field, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
                 }
             }
         }
@@ -232,7 +232,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 $relationalTypeResolver,
                 $pipelineArrayItemIdsProperties, // Here we pass the properties to the array elements!
                 $directiveResolverInstances,
-                $resultIDItems,
+                $objectIDItems,
                 $unionDBKeyIDs,
                 $dbItems,
                 $previousDBItems,
@@ -301,7 +301,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     // If there are errors, it will return null. Don't add the errors again
                     $arrayItemObjectErrors = $arrayItemObjectWarnings = $arrayItemDBDeprecations = [];
                     $array = $value;
-                    $arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemObjectErrors, $arrayItemObjectWarnings, $arrayItemDBDeprecations);
+                    $arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemObjectErrors, $arrayItemObjectWarnings, $arrayItemDBDeprecations);
                     // The value is an array. Unpack all the elements into their own property
                     foreach ($arrayItems as $key => &$value) {
                         $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
@@ -362,7 +362,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     /**
      * Return the items to iterate on
      */
-    abstract protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array;
+    abstract protected function getArrayItems(array &$array, int | string $id, string $field, RelationalTypeResolverInterface $relationalTypeResolver, array &$objectIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array;
 
     /**
      * Create a property for storing the array item in the current object
@@ -384,7 +384,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         RelationalTypeResolverInterface $relationalTypeResolver,
         $id,
         string $field,
-        array &$resultIDItems,
+        array &$objectIDItems,
         array &$dbItems,
         array &$previousDBItems,
         array &$variables,
@@ -416,7 +416,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
             foreach ($addExpressions as $key => $value) {
                 // Evaluate the $value, since it may be a function
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
-                    $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
+                    $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the objectWarnings, if any
                     if ($objectObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectObjectWarnings($id)) {
                         $objectWarnings[$id] = array_merge(
@@ -448,7 +448,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 $existingValue = $this->getExpressionForObject($id, (string) $key, $messages) ?? [];
                 // Evaluate the $value, since it may be a function
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
-                    $resolvedValue = $relationalTypeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
+                    $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the objectWarnings, if any
                     if ($objectObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectObjectWarnings($id)) {
                         $objectWarnings[$id] = array_merge(

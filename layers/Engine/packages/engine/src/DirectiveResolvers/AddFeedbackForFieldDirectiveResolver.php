@@ -50,7 +50,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$succeedingPipelineDirectiveResolverInstances,
-        array &$resultIDItems,
+        array &$objectIDItems,
         array &$unionDBKeyIDs,
         array &$dbItems,
         array &$previousDBItems,
@@ -73,7 +73,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
             foreach (array_keys($idsDataFields) as $id) {
                 // Use either the default value passed under param "value" or, if this is NULL, use a predefined value
                 $expressions = $this->getExpressionsForObject($id, $variables, $messages);
-                $object = $resultIDItems[$id];
+                $object = $objectIDItems[$id];
                 list(
                     $objectValidDirective,
                     $objectDirectiveName,
