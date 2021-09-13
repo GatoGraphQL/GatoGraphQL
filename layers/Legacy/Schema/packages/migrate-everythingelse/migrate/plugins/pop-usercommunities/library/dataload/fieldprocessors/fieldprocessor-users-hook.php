@@ -182,4 +182,4 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
 }
 
 // Static Initialization: Attach
-(new GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

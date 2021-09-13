@@ -91,4 +91,4 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
 }
 
 // Static Initialization: Attach
-(new ObjectTypeFieldResolver_CommunityUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new ObjectTypeFieldResolver_CommunityUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

@@ -71,4 +71,4 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extend
 }
 
 // Static Initialization: Attach
-(new GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

@@ -110,4 +110,4 @@ class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends A
 }
 
 // Static Initialization: Attach
-(new PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS, 20);

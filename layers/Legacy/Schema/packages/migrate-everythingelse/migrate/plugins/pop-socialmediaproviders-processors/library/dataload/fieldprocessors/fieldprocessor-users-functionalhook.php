@@ -17,4 +17,4 @@ class PoP_SocialMediaProviders_DataLoad_FunctionalObjectTypeFieldResolver_UserSo
 }
 
 // Static Initialization: Attach
-(new PoP_SocialMediaProviders_DataLoad_FunctionalObjectTypeFieldResolver_UserSocialMediaItems())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_SocialMediaProviders_DataLoad_FunctionalObjectTypeFieldResolver_UserSocialMediaItems())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

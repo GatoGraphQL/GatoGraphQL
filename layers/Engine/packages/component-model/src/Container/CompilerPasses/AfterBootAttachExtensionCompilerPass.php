@@ -21,7 +21,7 @@ class AfterBootAttachExtensionCompilerPass extends AbstractAttachExtensionCompil
     protected function getAttachableClassGroups(): array
     {
         return [
-            TypeResolverDecoratorInterface::class => AttachableExtensionGroups::TYPERESOLVERDECORATORS,
+            TypeResolverDecoratorInterface::class => AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS,
         ];
     }
 }

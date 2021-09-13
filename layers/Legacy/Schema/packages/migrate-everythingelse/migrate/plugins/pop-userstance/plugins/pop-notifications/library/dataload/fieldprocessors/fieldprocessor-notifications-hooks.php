@@ -118,4 +118,4 @@ class UserStance_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends 
 }
 
 // Static Initialization: Attach
-(new UserStance_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new UserStance_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS, 20);

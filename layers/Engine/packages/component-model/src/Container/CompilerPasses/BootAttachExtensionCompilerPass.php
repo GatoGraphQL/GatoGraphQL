@@ -24,10 +24,10 @@ class BootAttachExtensionCompilerPass extends AbstractAttachExtensionCompilerPas
     protected function getAttachableClassGroups(): array
     {
         return [
-            ObjectTypeFieldResolverInterface::class => AttachableExtensionGroups::FIELDRESOLVERS,
-            InterfaceTypeFieldResolverInterface::class => AttachableExtensionGroups::FIELDINTERFACERESOLVERS,
-            DirectiveResolverInterface::class => AttachableExtensionGroups::DIRECTIVERESOLVERS,
-            ObjectTypeResolverPickerInterface::class => AttachableExtensionGroups::TYPERESOLVERPICKERS,
+            ObjectTypeFieldResolverInterface::class => AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS,
+            InterfaceTypeFieldResolverInterface::class => AttachableExtensionGroups::INTERFACE_TYPE_FIELD_RESOLVERS,
+            DirectiveResolverInterface::class => AttachableExtensionGroups::DIRECTIVE_RESOLVERS,
+            ObjectTypeResolverPickerInterface::class => AttachableExtensionGroups::OBJECT_TYPE_RESOLVER_PICKERS,
         ];
     }
 }
