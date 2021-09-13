@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\Engine\ConditionalOnContext\Guzzle\SchemaServices\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GuzzleHelpers\GuzzleHelpers;
 
-class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
+class OperatorGlobalFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     public function getFieldNamesToResolve(): array
     {

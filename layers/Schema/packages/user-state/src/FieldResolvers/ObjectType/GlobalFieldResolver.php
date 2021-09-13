@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class GlobalFieldResolver extends AbstractGlobalFieldResolver
+class GlobalFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     public function getFieldNamesToResolve(): array
     {

@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\GlobalFieldResolverTrait;
 
-abstract class AbstractGlobalFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractGlobalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use GlobalFieldResolverTrait;
 }

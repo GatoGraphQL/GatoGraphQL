@@ -6,7 +6,7 @@ namespace PoP\Engine\FieldResolvers\ObjectType;
 
 use ArgumentCountError;
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -14,7 +14,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Misc\Extract;
 
-class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
+class OperatorGlobalFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     /**
      * @var array<string, mixed>
