@@ -102,7 +102,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         };
     }
 
-    protected function getFieldDataFilteringDefaultValues(string $fieldName): array
+    protected function getFieldFilterInputDefaultValues(string $fieldName): array
     {
         $parentIDFilterInputName = FilterInputHelper::getFilterInputName([
             CommonFilterInputModuleProcessor::class,
@@ -137,7 +137,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
             case 'commentCountForAdmin':
                 return $filterInputNameDefaultValues;
         }
-        return parent::getFieldDataFilteringDefaultValues($fieldName);
+        return parent::getFieldFilterInputDefaultValues($fieldName);
     }
 
     /**

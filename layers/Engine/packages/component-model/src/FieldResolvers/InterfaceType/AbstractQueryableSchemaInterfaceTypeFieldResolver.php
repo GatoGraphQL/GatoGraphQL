@@ -35,7 +35,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
             $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
             return $this->getSchemaFieldArgsWithCustomFilterInputData(
                 $schemaFieldArgs,
-                $this->getFieldDataFilteringDefaultValues($fieldName),
+                $this->getFieldFilterInputDefaultValues($fieldName),
                 $this->getFieldDataFilteringMandatoryArgs($fieldName)
             );
         }
@@ -47,7 +47,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
      * Provide default values for modules in the FilterInputContainer
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
-    protected function getFieldDataFilteringDefaultValues(string $fieldName): array
+    protected function getFieldFilterInputDefaultValues(string $fieldName): array
     {
         return [];
     }

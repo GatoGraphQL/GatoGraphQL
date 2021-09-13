@@ -10,7 +10,7 @@ interface FilterInputContainerModuleProcessorInterface extends FilterDataModuleP
      * Provide default values for modules in the FilterInputContainer
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
-    public function getFieldDataFilteringDefaultValues(array $module): array;
+    public function getFieldFilterInputDefaultValues(array $module): array;
 
     /**
      * Provide the names of the args which are mandatory in the FilterInput

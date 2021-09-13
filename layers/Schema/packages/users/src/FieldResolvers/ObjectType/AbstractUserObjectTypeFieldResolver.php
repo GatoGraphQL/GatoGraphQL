@@ -112,7 +112,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
 
-    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         switch ($fieldName) {
             case 'users':
@@ -125,7 +125,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
                     $limitFilterInputName => ComponentConfiguration::getUserListDefaultLimit(),
                 ];
         }
-        return parent::getFieldDataFilteringDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
     }
 
     /**

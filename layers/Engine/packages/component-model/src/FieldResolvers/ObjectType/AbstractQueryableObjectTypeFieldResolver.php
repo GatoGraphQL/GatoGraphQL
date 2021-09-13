@@ -41,7 +41,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
             $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
             return $this->getSchemaFieldArgsWithCustomFilterInputData(
                 $schemaFieldArgs,
-                $this->getFieldDataFilteringDefaultValues($objectTypeResolver, $fieldName),
+                $this->getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName),
                 $this->getFieldDataFilteringMandatoryArgs($objectTypeResolver, $fieldName)
             );
         }
@@ -53,7 +53,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      * Provide default values for modules in the FilterInputContainer
      * @return array<string,mixed> A list of filterInputName as key, and its value
      */
-    protected function getFieldDataFilteringDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return [];
     }
