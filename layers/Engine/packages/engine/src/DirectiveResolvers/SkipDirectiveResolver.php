@@ -7,9 +7,9 @@ namespace PoP\Engine\DirectiveResolvers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalRelationalTypeDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
-class SkipDirectiveResolver extends AbstractGlobalRelationalTypeDirectiveResolver
+class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     use FilterIDsSatisfyingConditionDirectiveResolverTrait;
 
