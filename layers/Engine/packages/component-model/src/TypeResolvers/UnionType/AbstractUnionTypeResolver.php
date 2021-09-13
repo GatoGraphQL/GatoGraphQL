@@ -64,7 +64,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             // Make sure there is a resolver for this object. If there is none, return the same ID
             $targetObjectTypeResolver = $objectIDTargetObjectTypeResolvers[$objectID];
             if (!is_null($targetObjectTypeResolver)) {
-                $typeDBObjectIDOrIDs[] = UnionTypeHelpers::getDBObjectComposedTypeAndID(
+                $typeDBObjectIDOrIDs[] = UnionTypeHelpers::getObjectComposedTypeAndID(
                     $targetObjectTypeResolver,
                     $objectID
                 );
@@ -196,7 +196,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         // Add the type to the ID, so that elements of different types can live side by side
         // The type will be removed again in `getIDsToQuery`
-        return UnionTypeHelpers::getDBObjectComposedTypeAndID(
+        return UnionTypeHelpers::getObjectComposedTypeAndID(
             $targetObjectTypeResolver,
             $targetObjectTypeResolver->getID($object)
         );

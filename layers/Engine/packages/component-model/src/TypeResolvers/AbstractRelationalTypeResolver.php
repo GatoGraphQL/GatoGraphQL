@@ -104,7 +104,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Add the type before the ID
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
         $qualifiedDBObjectIDs = array_map(
-            fn (int | string $id) => UnionTypeHelpers::getDBObjectComposedTypeAndID(
+            fn (int | string $id) => UnionTypeHelpers::getObjectComposedTypeAndID(
                 $this,
                 $id
             ),
