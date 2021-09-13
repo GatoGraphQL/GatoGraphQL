@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 
-trait EnumTypeInterfaceTypeFieldSchemaDefinitionResolverTrait
+trait WithEnumInterfaceTypeFieldSchemaDefinitionResolverTrait
 {
     use EnumTypeSchemaDefinitionResolverTrait;
 

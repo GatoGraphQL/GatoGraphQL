@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\EnumTypeInterfaceTypeFieldSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\WithEnumInterfaceTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -18,7 +18,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModulePro
 
 class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
 {
-    use EnumTypeInterfaceTypeFieldSchemaDefinitionResolverTrait;
+    use WithEnumInterfaceTypeFieldSchemaDefinitionResolverTrait;
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
