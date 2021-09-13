@@ -651,7 +651,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $this->enqueueFillingObjectsFromIDs($ids_data_fields);
 
         // Process them
-        $this->processFillingResultItemsFromIDs(
+        $this->processFillingObjectsFromIDs(
             $resultIDItems,
             $unionDBKeyIDs,
             $dbItems,
@@ -955,7 +955,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
     }
 
-    protected function processFillingResultItemsFromIDs(
+    protected function processFillingObjectsFromIDs(
         array &$resultIDItems,
         array &$unionDBKeyIDs,
         array &$dbItems,
