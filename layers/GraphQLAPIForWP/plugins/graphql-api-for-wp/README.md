@@ -107,7 +107,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/en/modules/api-hierarchy.md">API Hierarchy</a></td><td>Create a hierarchy of API endpoints extending from other endpoints, and inheriting their properties</td></tr>
 <tr><th colspan="2"><br/>Schema Configuration</th></tr>
 <tr><td><a href="docs/en/modules/schema-configuration.md">Schema Configuration</a></td><td>Customize the schema accessible to different Custom Endpoints and Persisted Queries, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema</td></tr>
-<tr><td><a href="docs/en/modules/schema-namespacing.md">Schema Namespacing</a></td><td>Automatically namespace types and interfaces with a vendor/project name, to avoid naming collisions</td></tr>
+<tr><td><a href="docs/en/modules/schema-namespacing.md">Schema Namespacing</a></td><td>Automatically namespace types with a vendor/project name, to avoid naming collisions</td></tr>
 <tr><td><a href="docs/en/modules/nested-mutations.md">Nested Mutations</a></td><td>Execute mutations from any type in the schema, not only from the root</td></tr>
 <tr><td><a href="docs/en/modules/public-private-schema.md">Public/Private Schema</a></td><td>Enable to communicate the existence of some field from the schema to certain users only (private mode) or to everyone (public mode). If disabled, fields are always available to everyone (public mode)</td></tr>
 <tr><th colspan="2"><br/>Access Control</th></tr>

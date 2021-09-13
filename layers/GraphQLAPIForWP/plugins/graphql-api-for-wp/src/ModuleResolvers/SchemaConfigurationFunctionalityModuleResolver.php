@@ -86,7 +86,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             case self::SCHEMA_CONFIGURATION:
                 return \__('Customize the schema accessible to different Custom Endpoints and Persisted Queries, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema', 'graphql-api');
             case self::SCHEMA_NAMESPACING:
-                return \__('Automatically namespace types and interfaces with a vendor/project name, to avoid naming collisions', 'graphql-api');
+                return \__('Automatically namespace types with a vendor/project name, to avoid naming collisions', 'graphql-api');
             case self::PUBLIC_PRIVATE_SCHEMA:
                 return \__('Enable to communicate the existence of some field from the schema to certain users only (private mode) or to everyone (public mode). If disabled, fields are always available to everyone (public mode)', 'graphql-api');
             case self::NESTED_MUTATIONS:
@@ -211,7 +211,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Namespace types and interfaces in the GraphQL schema? %s', 'graphql-api'),
+                    \__('Namespace types in the GraphQL schema? %s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,

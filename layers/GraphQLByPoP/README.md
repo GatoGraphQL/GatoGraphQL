@@ -89,7 +89,7 @@ Perform mutations on every type, not just on the root type, and have a mutation 
 
 ### Automatic namespacing
 
-No need to worry if different teams or 3rd party providers using the same names for their types and interfaces. Create neater schemas by removing the 'MyCompanyName' prefix from your types, you won't need it.
+No need to worry if different teams or 3rd party providers using the same names for their types. Create neater schemas by removing the 'MyCompanyName' prefix from your types, you won't need it.
 
 ### Proactive warnings/deprecations
 

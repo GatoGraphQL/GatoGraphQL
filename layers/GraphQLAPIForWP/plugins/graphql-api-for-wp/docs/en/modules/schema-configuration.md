@@ -72,7 +72,7 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
     <td><strong>Mutation Scheme</strong></td><td>Define if to enable mutations, and if the redundant fields from the root must be removed. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 <tr>
-    <td><strong>Namespace Types and Interfaces?</strong></td><td>Define if to have all types and interfaces in the schema automatically namespaced. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
+    <td><strong>Namespace Types?</strong></td><td>Define if to have all types in the schema automatically namespaced. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 </tbody>
 </table>

@@ -771,11 +771,11 @@ query=
 
 <a href="https://newapi.getpop.org/api/graphql/?githubRepo=getpop/api-graphql&amp;weatherZone=AKZ017&amp;photoPage=3&amp;query=!contentMesh">View query results #2</a>
 
-### Automatic namespacing of types and interfaces
+### Automatic namespacing of types
 
 Namespaces help manage the complexity of the schema. This can avoid different types having the same name, which can happen when embedding components from a 3rd party.
 
-PoP allows to have all types and interfaces in the schema be automatically namespaced, by prepending their names with the corresponding PHP package's owner and name (following the [PSR-4](https://www.php-fig.org/psr/psr-4/) convention, PHP namespaces have the form of `ownerName\projectName`, such as `"PoP\ComponentModel"`). Namespacing is disabled by default, and enabled through an environment variable. More info [here](https://leoloso.com/posts/added-namespaces-to-graphql-by-pop/).
+PoP allows to have all types in the schema be automatically namespaced, by prepending their names with the corresponding PHP package's owner and name (following the [PSR-4](https://www.php-fig.org/psr/psr-4/) convention, PHP namespaces have the form of `ownerName\projectName`, such as `"PoP\ComponentModel"`). Namespacing is disabled by default, and enabled through an environment variable. More info [here](https://leoloso.com/posts/added-namespaces-to-graphql-by-pop/).
 
 ### Field/directive-based versioning
 

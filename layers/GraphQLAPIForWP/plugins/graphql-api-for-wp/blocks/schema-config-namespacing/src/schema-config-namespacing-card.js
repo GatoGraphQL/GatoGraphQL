@@ -49,10 +49,10 @@ const SchemaConfigNamespacingCard = ( props ) => {
 				</CardHeader>
 				<CardBody>
 					<div className={ `${ className }__namespacing` }>
-						<em>{ __('Namespace Types and Interfaces?', 'graphql-api') }</em>
+						<em>{ __('Namespace Types?', 'graphql-api') }</em>
 						<InfoTooltip
 							{ ...props }
-							text={ __('Add a unique namespace to types and interfaces to avoid conflicts', 'graphql-api') }
+							text={ __('Add a unique namespace to types to avoid conflicts', 'graphql-api') }
 						/>
 						{ !isSelected && (
 							<>
