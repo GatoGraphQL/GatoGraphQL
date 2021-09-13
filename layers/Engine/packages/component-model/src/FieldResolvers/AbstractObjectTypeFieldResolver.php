@@ -155,11 +155,22 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Retrieve the class of some FieldInterfaceSchemaDefinitionResolverInterface
+     * By default, if the FieldResolver implements an interface,
+     * it is used as SchemaDefinitionResolver for the matching fields
      */
     protected function getFieldInterfaceSchemaDefinitionResolverClass(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?string {
+        foreach ($this->getImplementedFieldInterfaceResolverClasses() as $implementedFieldInterfaceResolverClass) {
+            /** @var InterfaceTypeFieldResolverInterface */
+            $implementedFieldInterfaceResolver = $this->instanceManager->getInstance($implementedFieldInterfaceResolverClass);
+            ;
+            if (!in_array($fieldName, $implementedFieldInterfaceResolver->getFieldNamesToImplement())) {
+                continue;
+            }
+            return $implementedFieldInterfaceResolverClass;
+        }
         return null;
     }
 

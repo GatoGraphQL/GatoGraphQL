@@ -51,21 +51,6 @@ class IsCustomPostFieldInterfaceResolver extends AbstractQueryableSchemaFieldInt
         ];
     }
 
-    /**
-     * Get the Schema Definition from the Interface
-     */
-    protected function getFieldInterfaceSchemaDefinitionResolverClass(string $fieldName): ?string
-    {
-        return match ($fieldName) {
-            'url',
-            'urlPath',
-            'slug'
-                => QueryableFieldInterfaceResolver::class,
-            default
-                => parent::getFieldInterfaceSchemaDefinitionResolverClass($fieldName),
-        };
-    }
-
     public function getSchemaFieldType(string $fieldName): string
     {
         $types = [

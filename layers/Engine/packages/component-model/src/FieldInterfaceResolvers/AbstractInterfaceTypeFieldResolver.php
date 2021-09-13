@@ -102,8 +102,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
 
     /**
-     * Return the object implementing the schema definition for this FieldResolver.
-     * By default, it is this same object
+     * By default, the resolver is this same object, unless function
+     * `getFieldInterfaceSchemaDefinitionResolverClass` is
+     * implemented
      */
     protected function getSchemaDefinitionResolver(string $fieldName): FieldInterfaceSchemaDefinitionResolverInterface
     {
@@ -116,9 +117,20 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 
     /**
      * Retrieve the class of some FieldInterfaceSchemaDefinitionResolverInterface
+     * By default, if the InterfaceTypeFieldResolver implements an interface,
+     * it is used as SchemaDefinitionResolver for the matching fields
      */
     protected function getFieldInterfaceSchemaDefinitionResolverClass(string $fieldName): ?string
     {
+        foreach ($this->getImplementedFieldInterfaceResolverClasses() as $implementedFieldInterfaceResolverClass) {
+            /** @var InterfaceTypeFieldResolverInterface */
+            $implementedFieldInterfaceResolver = $this->instanceManager->getInstance($implementedFieldInterfaceResolverClass);
+            ;
+            if (!in_array($fieldName, $implementedFieldInterfaceResolver->getFieldNamesToImplement())) {
+                continue;
+            }
+            return $implementedFieldInterfaceResolverClass;
+        }
         return null;
     }
 
