@@ -1670,36 +1670,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             if ($fieldArgsClosingSymbolPos !== (strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_FIELDARGS_CLOSING)) || $fieldArgsOpeningSymbolPos === false || $fieldArgsOpeningSymbolPos === 0) {
                 return [];
             }
-            // // If there is only one of them, it's a query error, so discard the query bit
-            // if (($fieldArgsClosingSymbolPos === false && $fieldArgsOpeningSymbolPos !== false) || ($fieldArgsClosingSymbolPos !== false && $fieldArgsOpeningSymbolPos === false)) {
-            //     return [
-            //         sprintf(
-            //             $this->translationAPI->__('Arguments in field \'%s\' must start with symbol \'%s\' and end with symbol \'%s\', so they have been ignored', 'pop-component-model'),
-            //             $fieldArgValue,
-            //             QuerySyntax::SYMBOL_FIELDARGS_OPENING,
-            //             QuerySyntax::SYMBOL_FIELDARGS_CLOSING
-            //         ),
-            //     ];
-            // }
-
-            // // If the opening bracket is at the beginning, or the closing one is not at the end, it's an error
-            // if ($fieldArgsOpeningSymbolPos === 0) {
-            //     return [
-            //         sprintf(
-            //             $this->translationAPI->__('Field name is missing in \'%s\', so it has been ignored', 'pop-component-model'),
-            //             $fieldArgValue
-            //         ),
-            //     ];
-            // }
-            // if ($fieldArgsClosingSymbolPos !== strlen($fieldArgValue)-1) {
-            //     return [
-            //         sprintf(
-            //             $this->translationAPI->__('Field \'%s\' has arguments, but because the closing argument symbol \'%s\' is not at the end, it has been ignored', 'pop-component-model'),
-            //             $fieldArgValue,
-            //             QuerySyntax::SYMBOL_FIELDARGS_CLOSING
-            //         ),
-            //     ];
-            // }
 
             // If it reached here, it's a field! Validate it, or show an error
             return $objectTypeResolver->resolveSchemaValidationErrorDescriptions($fieldArgValue, $variables);
