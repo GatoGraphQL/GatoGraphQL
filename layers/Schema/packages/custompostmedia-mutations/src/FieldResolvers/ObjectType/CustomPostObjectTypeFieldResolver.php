@@ -105,7 +105,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      * is obtained from the same object, so it's not originally
      * present in $form_data
      */
-    public function validateMutationOnResultItem(
+    public function validateMutationOnObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): bool {
@@ -114,7 +114,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'removeFeaturedImage':
                 return true;
         }
-        return parent::validateMutationOnResultItem($objectTypeResolver, $fieldName);
+        return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
     }
 
     protected function getFieldArgsToExecuteMutation(

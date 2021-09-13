@@ -68,7 +68,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
      * The mutation can be validated either on the schema (`false`)
      * on on the resultItem (`true`)
      */
-    public function validateMutationOnResultItem(
+    public function validateMutationOnObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): bool;

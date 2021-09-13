@@ -318,13 +318,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // That is because if when resolving there is an error, the fieldArgValue will be removed completely, then we don't know that we must validate the schema again
             // Eg: doing /?query=arrayUnique(extract(..., 0)) and extract fails, arrayUnique will have no fieldArgs. However its fieldArg is mandatory, but by then it doesn't know it needs to validate it
             // Before resolving the fieldArgValues which are fields:
-            // Calculate $validateSchemaOnResultItem: if any value containes a field, then we must perform the schemaValidation on the item, such as checking that all mandatory fields are there
+            // Calculate $validateSchemaOnObject: if any value containes a field, then we must perform the schemaValidation on the item, such as checking that all mandatory fields are there
             // For instance: After resolving a field and being casted it may be incorrect, so the value is invalidated, and after the schemaValidation the proper error is shown
             // Also need to check for variables, since these must be resolved too
             // For instance: ?query=posts(limit:3),post(id:$id).id|title&id=112
             // We can also force it through an option. This is needed when the field is created on runtime.
             // Eg: through the <transform> directive, in which case no parameter is dynamic anymore by the time it reaches here, yet it was not validated statically either
-            $validateSchemaOnResultItem =
+            $validateSchemaOnObject =
                 ($options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? null) ||
                 FieldQueryUtils::isAnyFieldArgumentValueDynamic(
                     array_values(
@@ -352,7 +352,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
                 // Also send the typeResolver along, as to get the id of the $object being passed
                 if ($objectTypeFieldResolver->resolveCanProcessResultItem($this, $object, $fieldName, $fieldArgs)) {
-                    if ($validateSchemaOnResultItem) {
+                    if ($validateSchemaOnObject) {
                         if ($maybeErrors = $objectTypeFieldResolver->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                             return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
                         }
