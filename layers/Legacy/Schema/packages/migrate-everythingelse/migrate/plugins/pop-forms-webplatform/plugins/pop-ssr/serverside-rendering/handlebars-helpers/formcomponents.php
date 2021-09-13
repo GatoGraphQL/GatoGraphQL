@@ -6,7 +6,6 @@ class PoP_Forms_ServerSide_FormcomponentsHelpers
 {
     public function formcomponentValue($value, $dbObject, $dbObjectField, $defaultValue, $options)
     {
-
         // If the value has been set, return that value already, even if it is empty
         if (!is_null($value)) {
             return $this->applyFormfieldvalueOptions($value, $options);
@@ -28,7 +27,6 @@ class PoP_Forms_ServerSide_FormcomponentsHelpers
 
     protected function applyFormfieldvalueOptions($value, $options)
     {
-
         // Allow MultipleInput to obtain the values for the subfields (eg: DateRange from/to values)
         $subfields = $options['hash']['subfields'] ?? array();
         foreach ($subfields as $subfield) {
