@@ -51,7 +51,7 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    protected function getDBObjectIDsParamName(array $module, array &$props, &$data_properties)
+    protected function getObjectIDsParamName(array $module, array &$props, &$data_properties)
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONSMAP:
