@@ -49,10 +49,6 @@ interface RelationalTypeResolverInterface extends TypeResolverInterface
         array &$schemaNotices,
         array &$schemaTraces
     ): array;
-    public function resolveSchemaValidationErrorDescriptions(string $field, array &$variables = null): array;
-    public function resolveSchemaValidationWarningDescriptions(string $field, array &$variables = null): array;
-    public function resolveSchemaDeprecationDescriptions(string $field, array &$variables = null): array;
-    public function getFieldTypeResolverClass(string $field): ?string;
     /**
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
