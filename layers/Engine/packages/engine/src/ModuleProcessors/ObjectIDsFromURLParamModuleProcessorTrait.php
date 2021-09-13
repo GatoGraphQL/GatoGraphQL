@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\ModuleProcessors;
 
-trait DBObjectIDsFromURLParamModuleProcessorTrait
+trait ObjectIDsFromURLParamModuleProcessorTrait
 {
     abstract protected function getDBObjectIDsParamName(array $module, array &$props, &$data_properties);
     protected function getDBObjectIDsFromURLParam(array $module, array &$props, &$data_properties)

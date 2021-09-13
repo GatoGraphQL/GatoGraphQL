@@ -2,11 +2,11 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
 
 class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use DBObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamModuleProcessorTrait;
 
     public const MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST = 'dataload-automatedemails-singlepost';
 

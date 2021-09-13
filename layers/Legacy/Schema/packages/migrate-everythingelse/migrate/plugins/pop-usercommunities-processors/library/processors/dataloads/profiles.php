@@ -2,14 +2,14 @@
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\EditMembershipMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\UpdateMyCommunitiesMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\InviteMembersMutationResolverBridge;
 
 class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use DBObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamModuleProcessorTrait;
 
     public const MODULE_DATALOAD_MYCOMMUNITIES_UPDATE = 'dataload-mycommunities-update';
     public const MODULE_DATALOAD_INVITENEWMEMBERS = 'dataload-invitemembers';

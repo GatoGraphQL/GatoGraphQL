@@ -5,7 +5,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\FollowUserMutationResolverBridge;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnfollowUserMutationResolverBridge;
@@ -20,7 +20,7 @@ use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UndoDownvoteC
 
 class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use DBObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamModuleProcessorTrait;
 
     public const MODULE_DATALOADACTION_FOLLOWUSER = 'dataloadaction-followuser';
     public const MODULE_DATALOADACTION_UNFOLLOWUSER = 'dataloadaction-unfollowuser';

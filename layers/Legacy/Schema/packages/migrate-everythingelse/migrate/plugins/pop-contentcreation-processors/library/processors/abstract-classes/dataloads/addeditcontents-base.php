@@ -1,13 +1,13 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
 abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
-    use DBObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamModuleProcessorTrait;
 
     protected function isCreate(array $module)
     {

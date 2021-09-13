@@ -1,13 +1,13 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
 use PoPSitesWassup\EventMutations\MutationResolverBridges\CreateEventMutationResolverBridge;
 use PoPSitesWassup\EventMutations\MutationResolverBridges\UpdateEventMutationResolverBridge;
 
 class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
-    use DBObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamModuleProcessorTrait;
 
     public const MODULE_DATALOAD_EVENT_UPDATE = 'dataload-event-update';
     public const MODULE_DATALOAD_EVENT_CREATE = 'dataload-event-create';
