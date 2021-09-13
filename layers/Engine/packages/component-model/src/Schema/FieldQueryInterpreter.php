@@ -706,20 +706,20 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $fieldOutputKey = $this->getFieldOutputKey($field);
         $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $objectErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $objectObjectErrors = $objectObjectWarnings = [];
-        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $objectObjectErrors, $objectObjectWarnings);
-        if ($objectObjectErrors || $objectObjectWarnings) {
+        $castingObjectErrors = $castingObjectWarnings = [];
+        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $castingObjectErrors, $castingObjectWarnings);
+        if ($castingObjectErrors || $castingObjectWarnings) {
             $id = $objectTypeResolver->getID($object);
-            if ($objectObjectErrors) {
+            if ($castingObjectErrors) {
                 $objectErrors[(string)$id] = array_merge(
                     $objectErrors[(string)$id] ?? [],
-                    $objectObjectErrors
+                    $castingObjectErrors
                 );
             }
-            if ($objectObjectWarnings) {
+            if ($castingObjectWarnings) {
                 $objectWarnings[(string)$id] = array_merge(
                     $objectWarnings[(string)$id] ?? [],
-                    $objectObjectWarnings
+                    $castingObjectWarnings
                 );
             }
         }
@@ -761,20 +761,20 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $directiveOutputKey = $this->getDirectiveOutputKey($fieldDirective);
         $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $directiveOutputKey, $variables, $expressions, $objectErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $objectObjectErrors = $objectObjectWarnings = [];
-        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectObjectErrors, $objectObjectWarnings);
-        if ($objectObjectErrors || $objectObjectWarnings) {
+        $castingObjectErrors = $castingObjectWarnings = [];
+        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $castingObjectErrors, $castingObjectWarnings);
+        if ($castingObjectErrors || $castingObjectWarnings) {
             $id = $relationalTypeResolver->getID($object);
-            if ($objectObjectErrors) {
+            if ($castingObjectErrors) {
                 $objectErrors[(string)$id] = array_merge(
                     $objectErrors[(string)$id] ?? [],
-                    $objectObjectErrors
+                    $castingObjectErrors
                 );
             }
-            if ($objectObjectWarnings) {
+            if ($castingObjectWarnings) {
                 $objectWarnings[(string)$id] = array_merge(
                     $objectWarnings[(string)$id] ?? [],
-                    $objectObjectWarnings
+                    $castingObjectWarnings
                 );
             }
         }

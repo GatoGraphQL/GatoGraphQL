@@ -215,10 +215,10 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 ];
                 $functionValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $validFunction, $variables, $expressions, $options);
                 // Merge the objectWarnings, if any
-                if ($objectObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectWarnings($id)) {
+                if ($storedObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectWarnings($id)) {
                     $objectWarnings[$id] = array_merge(
                         $objectWarnings[$id] ?? [],
-                        $objectObjectWarnings
+                        $storedObjectWarnings
                     );
                 }
 
