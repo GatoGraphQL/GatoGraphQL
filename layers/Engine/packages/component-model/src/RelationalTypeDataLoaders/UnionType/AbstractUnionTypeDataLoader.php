@@ -19,13 +19,13 @@ abstract class AbstractUnionTypeDataLoader extends AbstractRelationalTypeDataLoa
         $unionTypeResolver = $this->instanceManager->getInstance($unionTypeResolverClass);
         $resultItemIDTargetTypeResolvers = $unionTypeResolver->getObjectIDTargetTypeResolvers($ids);
         // Organize all IDs by same resolverClass
-        $typeResolverClassResultItemIDs = [];
+        $typeResolverClassObjectIDs = [];
         foreach ($resultItemIDTargetTypeResolvers as $resultItemID => $targetTypeResolver) {
-            $typeResolverClassResultItemIDs[get_class($targetTypeResolver)][] = $resultItemID;
+            $typeResolverClassObjectIDs[get_class($targetTypeResolver)][] = $resultItemID;
         }
         // Load all objects by each corresponding typeResolver
         $resultItems = [];
-        foreach ($typeResolverClassResultItemIDs as $targetTypeResolverClass => $resultItemIDs) {
+        foreach ($typeResolverClassObjectIDs as $targetTypeResolverClass => $resultItemIDs) {
             $targetTypeResolver = $this->instanceManager->getInstance($targetTypeResolverClass);
             $targetTypeDataLoaderClass = $targetTypeResolver->getRelationalTypeDataLoaderClass();
             $targetTypeDataLoader = $this->instanceManager->getInstance($targetTypeDataLoaderClass);
