@@ -11,7 +11,7 @@ use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDe
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-abstract class AbstractTypeResolverDecorator implements RelationalTypeResolverDecoratorInterface
+abstract class AbstractRelationalTypeResolverDecorator implements RelationalTypeResolverDecoratorInterface
 {
     /**
      * This class is attached to a TypeResolver
