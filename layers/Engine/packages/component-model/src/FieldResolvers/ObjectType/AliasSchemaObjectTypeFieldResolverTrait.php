@@ -22,7 +22,7 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  *
  * @author Leonardo Losoviz <leo@getpop.org>
  */
-trait AliasSchemaFieldResolverTrait
+trait AliasSchemaObjectTypeFieldResolverTrait
 {
     /**
      * The fieldName that is being aliased
