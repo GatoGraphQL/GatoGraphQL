@@ -19,7 +19,7 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
     /**
      * @var array<string, array>
      */
-    protected array $dbWarnings = [];
+    protected array $objectWarnings = [];
     /**
      * @var array<string, array>
      */
@@ -56,8 +56,8 @@ class FeedbackMessageStore extends \PoP\FieldQuery\FeedbackMessageStore implemen
     }
     public function retrieveAndClearObjectDBWarnings(string | int $objectID): ?array
     {
-        $objectDBWarnings = $this->dbWarnings[$objectID] ?? null;
-        unset($this->dbWarnings[$objectID]);
+        $objectDBWarnings = $this->objectWarnings[$objectID] ?? null;
+        unset($this->objectWarnings[$objectID]);
         return $objectDBWarnings;
     }
     public function retrieveAndClearObjectDBDeprecations(string | int $objectID): ?array

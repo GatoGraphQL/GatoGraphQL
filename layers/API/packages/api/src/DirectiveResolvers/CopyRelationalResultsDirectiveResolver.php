@@ -125,7 +125,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
         array &$variables,
         array &$messages,
         array &$objectErrors,
-        array &$dbWarnings,
+        array &$objectWarnings,
         array &$dbDeprecations,
         array &$dbNotices,
         array &$dbTraces,
@@ -218,7 +218,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
                     // If the destination field already exists, warn that it will be overriden
                     $isTargetValueInDBItems = array_key_exists($copyToField, $dbItems[(string)$id] ?? []);
                     if ($isTargetValueInDBItems || array_key_exists($copyToField, $previousDBItems[$dbKey][(string)$id] ?? [])) {
-                        $dbWarnings[(string)$id][] = [
+                        $objectWarnings[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
                                 $this->translationAPI->__('The existing value for field \'%s\' from object with ID \'%s\' has been overriden: \'%s\'', 'component-model'),

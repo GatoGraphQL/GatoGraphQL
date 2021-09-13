@@ -105,7 +105,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
         array &$variables,
         array &$messages,
         array &$objectErrors,
-        array &$dbWarnings,
+        array &$objectWarnings,
         array &$dbDeprecations,
         array &$dbNotices,
         array &$dbTraces,

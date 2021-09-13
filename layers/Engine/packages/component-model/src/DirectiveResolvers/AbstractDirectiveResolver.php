@@ -283,7 +283,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array &$variables,
         array &$expressions,
         array &$objectErrors,
-        array &$dbWarnings,
+        array &$objectWarnings,
         array &$dbDeprecations
     ): array {
         list(
@@ -306,8 +306,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             );
         }
         foreach ($nestedDBWarnings as $id => $fieldOutputKeyWarningMessages) {
-            $dbWarnings[$id] = array_merge(
-                $dbWarnings[$id] ?? [],
+            $objectWarnings[$id] = array_merge(
+                $objectWarnings[$id] ?? [],
                 $fieldOutputKeyWarningMessages
             );
         }
@@ -759,7 +759,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $variables,
             $messages,
             $objectErrors,
-            $dbWarnings,
+            $objectWarnings,
             $dbDeprecations,
             $dbNotices,
             $dbTraces,
@@ -789,7 +789,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         //     $variables,
         //     $messages,
         //     $objectErrors,
-        //     $dbWarnings,
+        //     $objectWarnings,
         //     $dbDeprecations,
         //     $dbNotices,
         //     $dbTraces,
@@ -820,7 +820,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $variables,
                     $messages,
                     $objectErrors,
-                    $dbWarnings,
+                    $objectWarnings,
                     $dbDeprecations,
                     $dbNotices,
                     $dbTraces,
@@ -844,7 +844,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $pipelineIDsDataFields,
                     $dbItems,
                     $objectErrors,
-                    $dbWarnings
+                    $objectWarnings
                 );
             }
         }
@@ -861,7 +861,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $variables,
             $messages,
             $objectErrors,
-            $dbWarnings,
+            $objectWarnings,
             $dbDeprecations,
             $dbNotices,
             $dbTraces,
@@ -885,7 +885,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array &$succeedingPipelineIDsDataFields,
         array &$dbItems,
         array &$objectErrors,
-        array &$dbWarnings
+        array &$objectWarnings
     ): void {
         $allFieldsFailed = empty($failedFields);
         if ($allFieldsFailed) {
@@ -963,7 +963,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             }
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $failedField) {
-                    $dbWarnings[(string)$id][] = [
+                    $objectWarnings[(string)$id][] = [
                         Tokens::PATH => [$failedField, $this->directive],
                         Tokens::MESSAGE => sprintf(
                             $message,

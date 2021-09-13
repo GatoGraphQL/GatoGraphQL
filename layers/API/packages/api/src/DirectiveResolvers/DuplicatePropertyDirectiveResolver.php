@@ -65,7 +65,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$variables,
         array &$messages,
         array &$objectErrors,
-        array &$dbWarnings,
+        array &$objectWarnings,
         array &$dbDeprecations,
         array &$dbNotices,
         array &$dbTraces,
@@ -83,7 +83,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
                  */
                 $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 if (!array_key_exists($fieldOutputKey, $dbItems[(string)$id])) {
-                    $dbWarnings[(string)$id][] = [
+                    $objectWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
                             $this->translationAPI->__('Property \'%s\' doesn\'t exist in object with ID \'%s\', so it can\'t be copied to \'%s\''),

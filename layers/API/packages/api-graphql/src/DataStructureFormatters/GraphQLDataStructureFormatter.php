@@ -48,8 +48,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // Eg: `{ posts(searchfor: ["posts"]) { id } }` will fail casting fieldArg `searchfor`,
         // raising a warning, but field `posts` is still executed, retrieving all results.
         // If the user is not told that there was an error/warning, it's very confusing
-        if ($data['dbWarnings'] ?? null) {
-            $warnings = $this->reformatDBEntries($data['dbWarnings']);
+        if ($data['objectWarnings'] ?? null) {
+            $warnings = $this->reformatDBEntries($data['objectWarnings']);
         }
         if ($data['schemaWarnings'] ?? null) {
             $warnings = array_merge(

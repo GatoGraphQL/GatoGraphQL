@@ -694,7 +694,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         ?array $variables,
         ?array $expressions
     ): array {
-        $objectErrors = $dbWarnings = [];
+        $objectErrors = $objectWarnings = [];
         $validAndResolvedField = $field;
         $fieldName = $this->getFieldName($field);
         $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
@@ -717,8 +717,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 );
             }
             if ($objectDBWarnings) {
-                $dbWarnings[(string)$id] = array_merge(
-                    $dbWarnings[(string)$id] ?? [],
+                $objectWarnings[(string)$id] = array_merge(
+                    $objectWarnings[(string)$id] ?? [],
                     $objectDBWarnings
                 );
             }
@@ -727,7 +727,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $validAndResolvedField = null;
         } elseif ($extractedFieldArgs != $fieldArgs) {
             // There are 2 reasons why the field might have changed:
-            // 1. validField: There are $dbWarnings: remove the fieldArgs that failed
+            // 1. validField: There are $objectWarnings: remove the fieldArgs that failed
             // 2. resolvedField: Some fieldArg was a variable: replace it with its value
             $validAndResolvedField = $this->replaceFieldArgs($field, $fieldArgs);
         }
@@ -736,7 +736,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $fieldName,
             $fieldArgs ?? [],
             $objectErrors,
-            $dbWarnings
+            $objectWarnings
         ];
     }
 
@@ -748,7 +748,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array $variables,
         array $expressions
     ): array {
-        $objectErrors = $dbWarnings = [];
+        $objectErrors = $objectWarnings = [];
         $validAndResolvedDirective = $fieldDirective;
         $directiveName = $this->getFieldDirectiveName($fieldDirective);
         $extractedDirectiveArgs = $directiveArgs = $this->extractDirectiveArguments(
@@ -772,8 +772,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 );
             }
             if ($objectDBWarnings) {
-                $dbWarnings[(string)$id] = array_merge(
-                    $dbWarnings[(string)$id] ?? [],
+                $objectWarnings[(string)$id] = array_merge(
+                    $objectWarnings[(string)$id] ?? [],
                     $objectDBWarnings
                 );
             }
@@ -782,7 +782,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $validAndResolvedDirective = null;
         } elseif ($extractedDirectiveArgs != $directiveArgs) {
             // There are 2 reasons why the fieldDirective might have changed:
-            // 1. validField: There are $dbWarnings: remove the directiveArgs that failed
+            // 1. validField: There are $objectWarnings: remove the directiveArgs that failed
             // 2. resolvedField: Some directiveArg was a variable: replace it with its value
             $validAndResolvedDirective = $this->replaceFieldArgs($fieldDirective, $directiveArgs);
         }
@@ -791,7 +791,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $directiveName,
             $directiveArgs,
             $objectErrors,
-            $dbWarnings
+            $objectWarnings
         ];
     }
 
@@ -1271,14 +1271,14 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgs;
     }
 
-    protected function castAndValidateDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$objectErrors, array &$dbWarnings): ?array
+    protected function castAndValidateDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$objectErrors, array &$objectWarnings): ?array
     {
         $failedCastingDirectiveArgErrorMessages = [];
         $castedDirectiveArgs = $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrorMessages);
-        return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrorMessages, $fieldDirective, $directiveArgs, $objectErrors, $dbWarnings);
+        return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrorMessages, $fieldDirective, $directiveArgs, $objectErrors, $objectWarnings);
     }
 
-    protected function castAndValidateFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$objectErrors, array &$dbWarnings): ?array
+    protected function castAndValidateFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$objectErrors, array &$objectWarnings): ?array
     {
         $failedCastingFieldArgErrorMessages = [];
         $castingObjectErrors = [];
@@ -1290,7 +1290,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             );
             return null;
         }
-        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $objectErrors, $dbWarnings);
+        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $objectErrors, $objectWarnings);
     }
 
     protected function validateAndFilterCastDirectiveArguments(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrorMessages, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings): array
