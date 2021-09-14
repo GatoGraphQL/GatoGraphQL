@@ -1553,23 +1553,23 @@ class Engine implements EngineInterface
                         // and remove the dbKey from the ID.
                         // If the Dataloader failed loading the object, the original ID as int
                         // may have been stored, so cast it always to string
-                        $typeResolver_ids = array_map(
-                            function ($composedID) {
-                                list(
-                                    $database_key,
-                                    $id
-                                ) = UnionTypeHelpers::extractDBObjectTypeAndID((string)$composedID);
-                                return $id;
-                            },
-                            $typeResolver_ids
-                        );
+                        $targetObjectIDItems = [];
+                        $objectTypeResolver_ids = [];
+                        foreach ($typeResolver_ids as $composedID) {
+                            list(
+                                $database_key,
+                                $id
+                            ) = UnionTypeHelpers::extractDBObjectTypeAndID((string)$composedID);
+                            $targetObjectIDItems[$id] = $objectIDItems[$composedID];
+                            $objectTypeResolver_ids[] = $id;
+                        }
 
                         // If it's a unionTypeResolver, get the typeResolver for each object
                         // to obtain the subcomponent typeResolver
                         /** @var UnionTypeResolverInterface $relationalTypeResolver */
-                        $objectTypeResolvers = $relationalTypeResolver->getObjectIDTargetTypeResolvers($typeResolver_ids);
+                        $objectTypeResolvers = $relationalTypeResolver->getObjectIDTargetTypeResolvers($objectTypeResolver_ids);
                         $iterationTypeResolverIDs = [];
-                        foreach ($typeResolver_ids as $id) {
+                        foreach ($objectTypeResolver_ids as $id) {
                             // If there's no resolver, it's an error: the ID can't be processed by anyone
                             if ($objectTypeResolver = $objectTypeResolvers[(string)$id]) {
                                 $objectTypeResolverClass = get_class($objectTypeResolver);
@@ -1579,11 +1579,11 @@ class Engine implements EngineInterface
                         foreach ($iterationTypeResolverIDs as $targetObjectTypeResolverClass => $targetIDs) {
                             /** @var ObjectTypeResolverInterface */
                             $targetObjectTypeResolver = $this->instanceManager->getInstance($targetObjectTypeResolverClass);
-                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetIDs, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
+                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetIDs, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $targetObjectIDItems);
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
-                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolver_ids, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolver_ids, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $objectIDItems);
                     }
                 }
             }
@@ -1658,6 +1658,7 @@ class Engine implements EngineInterface
         array &$already_loaded_ids_data_fields,
         array &$unionDBKeyIDs,
         array &$combinedUnionDBKeyIDs,
+        array &$objectIDItems,
     ): void {
         $database_key = $targetObjectTypeResolver->getTypeOutputName();
         foreach ($subcomponents_data_properties as $subcomponent_data_field => $subcomponent_data_properties) {
@@ -1671,7 +1672,6 @@ class Engine implements EngineInterface
                 $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponent_typeResolver_class) {
-                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field);
                 // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
                 $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
                 $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];
@@ -1685,6 +1685,8 @@ class Engine implements EngineInterface
                     }
                     $subcomponentIDs = [];
                     foreach ($typeResolver_ids as $id) {
+                        $object = $objectIDItems[$id];
+                        $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
                         // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                         // Fetch the field_ids from all these DBs
                         foreach ($databases as $dbname => $database) {
@@ -1730,6 +1732,8 @@ class Engine implements EngineInterface
                                 if ($subcomponentIsUnionTypeResolver) {
                                     $database_field_ids = $typed_database_field_ids;
                                 }
+                                $object = $objectIDItems[$id];
+                                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
                                 // Set on the `unionDBKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
                                 $entryIsArray = $databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey]);
                                 $unionDBKeyIDs[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];

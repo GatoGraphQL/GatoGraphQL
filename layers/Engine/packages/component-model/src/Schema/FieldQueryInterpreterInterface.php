@@ -18,9 +18,21 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
      *   ?query=posts.title|self.excerpt@title
      *
      * In this case, the value of the excerpt would override the value of the title,
-     * since they both have fieldOutputKey "title"
+     * since they both have fieldOutputKey "title".
+     *
+     * If the TypeResolver is of Union type, because the data for the object
+     * is stored under the target ObjectTypeResolver, then the unique field name
+     * must be retrieved against the target ObjectTypeResolver
      */
-    public function getUniqueFieldOutputKey(RelationalTypeResolverInterface $relationalTypeResolver, string $field): string;
+    public function getUniqueFieldOutputKey(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field,
+        object $object,
+    ): string;
+    public function getUniqueFieldOutputKeyByObjectTypeResolver(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $field,
+    ): string;
     public function getUniqueFieldOutputKeyByTypeResolverClass(string $typeResolverClass, string $field): string;
     public function getUniqueFieldOutputKeyByTypeOutputName(string $dbKey, string $field): string;
     /**

@@ -842,6 +842,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     [],
                     $idsDataFields,
                     $pipelineIDsDataFields,
+                    $objectIDItems,
                     $dbItems,
                     $objectErrors,
                     $objectWarnings
@@ -883,6 +884,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array $failedFields,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
+        array &$objectIDItems,
         array &$dbItems,
         array &$objectErrors,
         array &$objectWarnings
@@ -922,7 +924,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $this->setIDsDataFieldsAsNull(
                 $relationalTypeResolver,
                 $idsDataFieldsToRemove,
-                $dbItems
+                $dbItems,
+                $objectIDItems,
             );
         }
 

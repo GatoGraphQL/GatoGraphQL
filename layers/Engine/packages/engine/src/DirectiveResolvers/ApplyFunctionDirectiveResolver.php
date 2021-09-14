@@ -120,8 +120,9 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 
         // Get the value from the object
         foreach ($idsDataFields as $id => $dataFields) {
+            $object = $objectIDItems[$id];
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
 
                 // Validate that the property exists
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
@@ -255,7 +256,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      */
     protected function addExpressionsForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        $id,
+        string | int $id,
         string $field,
         array &$objectIDItems,
         array &$dbItems,
@@ -269,7 +270,8 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaWarnings,
         array &$schemaDeprecations
     ): void {
-        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
+        $object = $objectIDItems[$id];
+        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
         $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
         $dbKey = $relationalTypeResolver->getTypeOutputName();
         $value = $isValueInDBItems ?
