@@ -37,7 +37,8 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
     protected function setIDsDataFieldsAsNull(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFieldsToSetAsNull,
-        array &$dbItems
+        array &$dbItems,
+        array &$objectIDItems,
     ): void {
         foreach (array_keys($idsDataFieldsToSetAsNull) as $id) {
             $object = $objectIDItems[$id];

@@ -51,13 +51,14 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $this->validateAndFilterFields($relationalTypeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $dbItems, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->validateAndFilterFields($relationalTypeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $objectIDItems, $dbItems, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
     }
 
     protected function validateAndFilterFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
+        array &$objectIDItems,
         array &$dbItems,
         array &$variables,
         array &$schemaErrors,
@@ -93,7 +94,8 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $this->setIDsDataFieldsAsNull(
                     $relationalTypeResolver,
                     $idsDataFieldsToRemove,
-                    $dbItems
+                    $dbItems,
+                    $objectIDItems,
                 );
             }
         }
