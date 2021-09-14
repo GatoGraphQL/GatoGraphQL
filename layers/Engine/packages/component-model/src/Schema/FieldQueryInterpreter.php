@@ -102,10 +102,35 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         parent::__construct($translationAPI, $feedbackMessageStore, $queryParser);
     }
 
-    final public function getUniqueFieldOutputKey(RelationalTypeResolverInterface $relationalTypeResolver, string $field): string
-    {
+    /**
+     * If two different fields for the same type have the same fieldOutputKey, then
+     * add a counter to the second one, so each of them is unique.
+     * That is to avoid overriding the previous value, as when doing:
+     *
+     *   ?query=posts.title|self.excerpt@title
+     *
+     * In this case, the value of the excerpt would override the value of the title,
+     * since they both have fieldOutputKey "title".
+     * 
+     * If the TypeResolver is of Union type, because the data for the object
+     * is stored under the target ObjectTypeResolver, then the unique field name
+     * must be retrieved against the target ObjectTypeResolver
+     */
+    final public function getUniqueFieldOutputKey(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field,
+        ?object $object = null
+    ): string {
+        $typeOutputName = null;
+        if ($relationalTypeResolver instanceof UnionTypeResolverInterface && $object !== null) {
+            // Obtain the typeOutputName from the target ObjectTypeResolver
+            $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
+            if ($targetObjectTypeResolver !== null) {
+                $typeOutputName = $targetObjectTypeResolver->getTypeOutputName();
+            }
+        }
         return $this->getUniqueFieldOutputKeyByTypeOutputName(
-            $relationalTypeResolver->getTypeOutputName(),
+            $typeOutputName ?? $relationalTypeResolver->getTypeOutputName(),
             $field
         );
     }
