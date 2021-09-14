@@ -40,15 +40,14 @@ class NestedMutationHookSet extends AbstractHookSet
      * Not needed anymore since duplicating Root entries into QueryRoot and MutationRoot
      * when injecting them via "addEntriesForFields"
      * @see ...
-     * @deprecated
      */
-    public function getRootTypeDescription(string $description): string
-    {
-        return sprintf(
-            $this->translationAPI->__('%s. Available when \'nested mutations\' is enabled', 'graphql-server'),
-            $description
-        );
-    }
+    // public function getRootTypeDescription(string $description): string
+    // {
+    //     return sprintf(
+    //         $this->translationAPI->__('%s. Available when \'nested mutations\' is enabled', 'graphql-server'),
+    //         $description
+    //     );
+    // }
 
     /**
      * For the standard GraphQL server:
