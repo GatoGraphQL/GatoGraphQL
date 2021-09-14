@@ -6,5 +6,11 @@ services:
 
     # Change the properties printed for the standard GraphQL response:
     PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter:
-        class: '\GraphQLByPoP\GraphQLServer\Overrides\Services\DataStructureFormatters\GraphQLDataStructureFormatter'
+        class: \GraphQLByPoP\GraphQLServer\Overrides\Services\DataStructureFormatters\GraphQLDataStructureFormatter
 
+    PoP\AccessControl\Services\AccessControlManagerInterface:
+        class: GraphQLByPoP\GraphQLServer\Overrides\AccessControl\AccessControlManager
+
+    PoP\CacheControl\Managers\CacheControlManagerInterface:
+        class: GraphQLByPoP\GraphQLServer\Overrides\CacheControl\CacheControlManager
+        

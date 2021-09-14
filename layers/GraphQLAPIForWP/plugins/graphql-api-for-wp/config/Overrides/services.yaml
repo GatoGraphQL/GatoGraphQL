@@ -9,8 +9,8 @@ services:
     # but if disabled for the single endpoint, then it must not
     # (for that case, it will be overriden once again by another ConditionalOnContext)
     GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
-        class: '\GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient'
+        class: \GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient
 
     # Override to configure the cache with dynamic values
     PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
-        class: '\GraphQLAPI\GraphQLAPI\Overrides\ConfigurationCache\OperationalCacheConfigurationManager'
+        class: \GraphQLAPI\GraphQLAPI\Overrides\ConfigurationCache\OperationalCacheConfigurationManager

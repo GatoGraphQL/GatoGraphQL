@@ -20,4 +20,6 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
     public function resolveSchemaValidationWarningDescriptions(string $field, array &$variables = null): array;
     public function resolveSchemaDeprecationDescriptions(string $field, array &$variables = null): array;
     public function getFieldTypeResolverClass(string $field): ?string;
+    public function getFieldMutationResolverClass(string $field): ?string;
+    public function isFieldAMutation(string $field): ?bool;
 }
