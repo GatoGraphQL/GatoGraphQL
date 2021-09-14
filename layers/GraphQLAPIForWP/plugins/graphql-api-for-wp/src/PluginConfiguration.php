@@ -602,15 +602,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
             // Do not disable redundant mutation fields in the root type
             $componentClassConfiguration[\PoP\Engine\Component::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
-            /**
-             * Not needed anymore since duplicating Root entries into QueryRoot and MutationRoot
-             * when injecting them via "addEntriesForFields"
-             * 
-             * @see https://github.com/leoloso/PoP/pull/1045
-             */
-            // // Print the full schema, including all fields for Root, QueryRoot and MutationRoot
-            // // This is needed for the Field(/Directive) Printout, so that ACLs still work after toggling Nested mutations
-            // $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::ADD_CONNECTION_FROM_ROOT_TO_QUERYROOT_AND_MUTATIONROOT] = true;
             // Allow disabling introspection via Access Control on field "__schema"
             $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::EXPOSE_SCHEMA_INTROSPECTION_FIELD_IN_SCHEMA] = true;
             // Allow access to all entries for Root.option

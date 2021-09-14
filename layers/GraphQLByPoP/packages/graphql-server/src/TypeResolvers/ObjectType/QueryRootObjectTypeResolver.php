@@ -20,13 +20,6 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 
     public function getSchemaTypeDescription(): ?string
     {
-        /**
-         * Not needed anymore since duplicating Root entries into QueryRoot and MutationRoot
-         * when injecting them via "addEntriesForFields"
-         * 
-         * @see https://github.com/leoloso/PoP/pull/1045
-         */
-        // return $this->translationAPI->__('Query type, starting from which the query is executed. Available when \'nested mutations\' is disabled', 'graphql-server');
         return $this->translationAPI->__('Query type, starting from which the query is executed', 'graphql-server');
     }
 
