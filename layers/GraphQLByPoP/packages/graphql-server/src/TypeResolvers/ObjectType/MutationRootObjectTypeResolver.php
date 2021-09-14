@@ -20,7 +20,13 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     public function getSchemaTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Mutation type, starting from which mutations are executed. Available when \'nested mutations\' is disabled', 'graphql-server');
+        /**
+         * Not needed anymore since duplicating Root entries into QueryRoot and MutationRoot
+         * when injecting them via "addEntriesForFields"
+         * @see ...
+         */
+        // return $this->translationAPI->__('Mutation type, starting from which mutations are executed. Available when \'nested mutations\' is disabled', 'graphql-server');
+        return $this->translationAPI->__('Mutation type, starting from which mutations are executed', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null

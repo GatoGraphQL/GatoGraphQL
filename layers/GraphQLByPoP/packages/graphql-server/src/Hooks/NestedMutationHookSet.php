@@ -25,12 +25,23 @@ class NestedMutationHookSet extends AbstractHookSet
             5
         );
 
-        $this->hooksAPI->addFilter(
-            RootObjectTypeResolver::HOOK_DESCRIPTION,
-            array($this, 'getRootTypeDescription')
-        );
+        /**
+         * Not needed anymore since duplicating Root entries into QueryRoot and MutationRoot
+         * when injecting them via "addEntriesForFields"
+         * @see ...
+         */
+        // $this->hooksAPI->addFilter(
+        //     RootObjectTypeResolver::HOOK_DESCRIPTION,
+        //     array($this, 'getRootTypeDescription')
+        // );
     }
 
+    /**
+     * Not needed anymore since duplicating Root entries into QueryRoot and MutationRoot
+     * when injecting them via "addEntriesForFields"
+     * @see ...
+     * @deprecated
+     */
     public function getRootTypeDescription(string $description): string
     {
         return sprintf(

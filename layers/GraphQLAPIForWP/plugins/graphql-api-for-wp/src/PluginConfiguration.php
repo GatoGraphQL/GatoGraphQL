@@ -604,6 +604,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             $componentClassConfiguration[\PoP\Engine\Component::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
             /**
              * Not needed anymore since duplicating Root entries into QueryRoot and MutationRoot
+             * when injecting them via "addEntriesForFields"
              * @see ...
              */
             // // Print the full schema, including all fields for Root, QueryRoot and MutationRoot
