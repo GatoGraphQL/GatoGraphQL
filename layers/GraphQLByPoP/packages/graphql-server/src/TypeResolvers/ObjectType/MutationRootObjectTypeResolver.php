@@ -81,6 +81,6 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
     ): bool {
         return
             in_array($fieldName, $this->objectTypeResolverMandatoryFields)
-            || $objectTypeFieldResolver->resolveFieldMutationResolverClass($this, $fieldName) !== null;
+            || $objectTypeFieldResolver->getFieldMutationResolverClass($this, $fieldName) !== null;
     }
 }

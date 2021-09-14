@@ -141,7 +141,7 @@ The definition of a field for the schema, and its resolution, is split into a mu
 - `isSchemaFieldResponseNonNullable`
 - `getImplementedInterfaceTypeFieldResolverClasses`
 - `getFieldTypeResolverClass`
-- `resolveFieldMutationResolverClass`
+- `getFieldMutationResolverClass`
 
 Finally, the functions from the `UserService` must be resolved for the particular CMS. This is how it's done for WordPress:
 
