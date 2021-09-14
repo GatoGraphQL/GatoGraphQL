@@ -35,7 +35,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
         return QueryRootTypeDataLoader::class;
     }
 
-    protected function isFieldNameConditionSatisfiedForSchema(
+    public function isFieldNameConditionSatisfiedForSchema(
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         string $fieldName
     ): bool {

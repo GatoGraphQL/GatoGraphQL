@@ -35,7 +35,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         return MutationRootTypeDataLoader::class;
     }
 
-    protected function isFieldNameConditionSatisfiedForSchema(
+    public function isFieldNameConditionSatisfiedForSchema(
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         string $fieldName
     ): bool {
