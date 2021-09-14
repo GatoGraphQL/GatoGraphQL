@@ -10,4 +10,7 @@ services:
 
     PoP\AccessControl\Services\AccessControlManagerInterface:
         class: GraphQLByPoP\GraphQLServer\Overrides\AccessControl\AccessControlManager
+
+    PoP\CacheControl\Manager\CacheControlManagerInterface:
+        class: GraphQLByPoP\GraphQLServer\Overrides\CacheControl\CacheControlManager
         
