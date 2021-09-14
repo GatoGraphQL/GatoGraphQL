@@ -96,7 +96,12 @@ class AccessControlManager extends UpstreamAccessControlManager
                 continue;
             }
             // If it has a MutationResolver for that field then add entry for MutationRoot
-            if ($rootObjectTypeResolver->getFieldMutationResolverClass($fieldName) !== null) {
+            $isFieldAMutation = $rootObjectTypeResolver->isFieldAMutation($fieldName);
+            // Make sure the field has a FieldResolver. If not, ignore
+            if ($isFieldAMutation === null) {
+                continue;
+            }
+            if ($isFieldAMutation) {
                 $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;
                 $additionalFieldEntries[] = $rootFieldEntry;
                 continue;
