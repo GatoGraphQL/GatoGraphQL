@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use Exception;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
@@ -119,18 +120,37 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     final public function getUniqueFieldOutputKey(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $field,
-        ?object $object = null
+        object $object,
     ): string {
         $typeOutputName = null;
-        if ($relationalTypeResolver instanceof UnionTypeResolverInterface && $object !== null) {
+        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
             // Obtain the typeOutputName from the target ObjectTypeResolver
             $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
-            if ($targetObjectTypeResolver !== null) {
-                $typeOutputName = $targetObjectTypeResolver->getTypeOutputName();
+            if ($targetObjectTypeResolver === null) {
+                throw new Exception(
+                    sprintf(
+                        $this->translationAPI->__('The Union Type \'%s\' does not provide a target ObjectTypeResolver for the object', 'component-model'),
+                        $relationalTypeResolver->getTypeOutputName()
+                    )
+                );
             }
+            return $this->getUniqueFieldOutputKeyByObjectTypeResolver(
+                $targetObjectTypeResolver,
+                $field
+            );
         }
         return $this->getUniqueFieldOutputKeyByTypeOutputName(
             $typeOutputName ?? $relationalTypeResolver->getTypeOutputName(),
+            $field
+        );
+    }
+
+    final public function getUniqueFieldOutputKeyByObjectTypeResolver(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $field,
+    ): string {
+        return $this->getUniqueFieldOutputKeyByTypeOutputName(
+            $objectTypeResolver->getTypeOutputName(),
             $field
         );
     }
@@ -139,8 +159,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     {
         /** @var RelationalTypeResolverInterface */
         $relationalTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
-        return $this->getUniqueFieldOutputKey(
-            $relationalTypeResolver,
+        return $this->getUniqueFieldOutputKeyByTypeOutputName(
+            $relationalTypeResolver->getTypeOutputName(),
             $field
         );
     }

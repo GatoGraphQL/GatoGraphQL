@@ -27,7 +27,11 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
     public function getUniqueFieldOutputKey(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $field,
-        ?object $object = null
+        object $object,
+    ): string;
+    public function getUniqueFieldOutputKeyByObjectTypeResolver(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $field,
     ): string;
     public function getUniqueFieldOutputKeyByTypeResolverClass(string $typeResolverClass, string $field): string;
     public function getUniqueFieldOutputKeyByTypeOutputName(string $dbKey, string $field): string;
