@@ -8,6 +8,7 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeRe
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\AccessControl\Services\AccessControlManager as UpstreamAccessControlManager;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 class AccessControlManager extends UpstreamAccessControlManager
 {
@@ -45,7 +46,6 @@ class AccessControlManager extends UpstreamAccessControlManager
             return $this->overriddenFieldEntries[$group];
         }
         $fieldEntries = parent::getEntriesForFields($group);
-
         if ($rootFieldEntries = $this->filterRootEntriesForFields($fieldEntries)) {
             $fieldEntries = array_merge(
                 $fieldEntries,
