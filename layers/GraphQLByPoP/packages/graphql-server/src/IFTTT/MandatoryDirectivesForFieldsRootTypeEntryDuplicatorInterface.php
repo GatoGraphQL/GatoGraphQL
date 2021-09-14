@@ -20,7 +20,10 @@ interface MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
      * The duplicated entry is duplicated as is, just changing what class it applies to.
      * Then it can be an entry for anything: Access Control, Cache Control, or any other.
      * 
+     * @param boolean $forceBothTypes Define if to always add it to both QueryRoot and MutationRoot, without checking if the field belongs to one or the other
+     *                                This is needed when calling this function before the Schema has been configured, i.e. before finding FieldResolvers for each Type
+     * 
      * @return array The same array $fieldEntries + appended entries for QueryRoot and MutationRoot
      */
-    public function maybeAppendAdditionalRootEntriesForFields(array $fieldEntries): array;
+    public function maybeAppendAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes = false): array;
 }

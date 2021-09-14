@@ -38,9 +38,12 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
      * The duplicated entry is duplicated as is, just changing what class it applies to.
      * Then it can be an entry for anything: Access Control, Cache Control, or any other.
      * 
+     * @param boolean $forceBothTypes Define if to always add it to both QueryRoot and MutationRoot, without checking if the field belongs to one or the other
+     *                                This is needed when calling this function before the Schema has been configured, i.e. before finding FieldResolvers for each Type
+     * 
      * @return array The same array $fieldEntries + appended entries for QueryRoot and MutationRoot
      */
-    public function maybeAppendAdditionalRootEntriesForFields(array $fieldEntries): array
+    public function maybeAppendAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes = false): array
     {
         // With Nested Mutations there's no need to duplicate Root entries
         $vars = ApplicationState::getVars();
@@ -51,11 +54,11 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         // Duplicate the Root entries into QueryRoot and/or MutationRoot
         return array_merge(
             $fieldEntries,
-            $this->getAdditionalRootEntriesForFields($fieldEntries)
+            $this->getAdditionalRootEntriesForFields($fieldEntries, $forceBothTypes)
         );
     }
 
-    protected function getAdditionalRootEntriesForFields(array $fieldEntries): array
+    protected function getAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes): array
     {
         // Get the entries assigned to Root
         $rootFieldEntries = $this->filterRootEntriesForFields($fieldEntries);
@@ -70,7 +73,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
         foreach ($rootFieldEntries as $rootFieldEntry) {
             $fieldName = $rootFieldEntry[1];
-            if (in_array($fieldName, $this->objectTypeResolverMandatoryFields)) {
+            if ($forceBothTypes || in_array($fieldName, $this->objectTypeResolverMandatoryFields)) {
                 $rootFieldEntry[0] = QueryRootObjectTypeResolver::class;
                 $additionalFieldEntries[] = $rootFieldEntry;
                 $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;
