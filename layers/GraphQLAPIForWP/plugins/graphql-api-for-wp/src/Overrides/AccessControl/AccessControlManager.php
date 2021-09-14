@@ -74,6 +74,9 @@ class AccessControlManager extends UpstreamAccessControlManager
      * Otherwise, the field is added to MutationRoot if it has a MutationResolver,
      * or to QueryRoot otherwise.
      * 
+     * The duplicated entry is duplicated as is, just changing what class it applies to.
+     * Then it can be an entry for anything: Access Control, Cache Control, or any other.
+     * 
      * @param array $rootFieldEntries Entries where the class is set to Root
      */
     protected function getAdditionalRootEntriesForFields(array $rootFieldEntries): array
