@@ -9,16 +9,16 @@ use PoP\AccessControl\Services\AccessControlManager as UpstreamAccessControlMana
 
 class AccessControlManager extends UpstreamAccessControlManager
 {
-    public function __construct(
-        protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator,
-    ) {
-    }
-
     /**
      * @var array<string, array>
      */
     protected array $overriddenFieldEntries = [];
     
+    public function __construct(
+        protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator,
+    ) {
+    }
+
     public function addEntriesForFields(string $group, array $fieldEntries): void
     {
         parent::addEntriesForFields($group, $fieldEntries);
