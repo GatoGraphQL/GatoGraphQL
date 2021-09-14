@@ -17,5 +17,5 @@ interface IFTTTRootTypeEntryDuplicatorServiceInterface
      * The duplicated entry is duplicated as is, just changing what class it applies to.
      * Then it can be an entry for anything: Access Control, Cache Control, or any other.
      */
-    public function getAdditionalRootEntriesForFields(array $fieldEntries): array;
+    public function appendAdditionalRootEntriesForFields(array $fieldEntries): array;
 }
