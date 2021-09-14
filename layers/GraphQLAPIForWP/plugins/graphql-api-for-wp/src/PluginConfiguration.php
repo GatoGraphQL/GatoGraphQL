@@ -605,7 +605,8 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             /**
              * Not needed anymore since duplicating Root entries into QueryRoot and MutationRoot
              * when injecting them via "addEntriesForFields"
-             * @see ...
+             * 
+             * @see https://github.com/leoloso/PoP/pull/1045
              */
             // // Print the full schema, including all fields for Root, QueryRoot and MutationRoot
             // // This is needed for the Field(/Directive) Printout, so that ACLs still work after toggling Nested mutations

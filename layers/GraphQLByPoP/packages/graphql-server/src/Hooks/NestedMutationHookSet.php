@@ -28,7 +28,8 @@ class NestedMutationHookSet extends AbstractHookSet
         /**
          * Not needed anymore since duplicating Root entries into QueryRoot and MutationRoot
          * when injecting them via "addEntriesForFields"
-         * @see ...
+         * 
+         * @see https://github.com/leoloso/PoP/pull/1045
          */
         // $this->hooksAPI->addFilter(
         //     RootObjectTypeResolver::HOOK_DESCRIPTION,
@@ -39,7 +40,8 @@ class NestedMutationHookSet extends AbstractHookSet
     /**
      * Not needed anymore since duplicating Root entries into QueryRoot and MutationRoot
      * when injecting them via "addEntriesForFields"
-     * @see ...
+     * 
+     * @see https://github.com/leoloso/PoP/pull/1045
      */
     // public function getRootTypeDescription(string $description): string
     // {
