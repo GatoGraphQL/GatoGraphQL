@@ -15,7 +15,7 @@ class CacheControlManager extends UpstreamCacheControlManager
         protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator,
     ) {
     }
-    
+
     public function addEntriesForFields(array $fieldEntries): void
     {
         parent::addEntriesForFields($fieldEntries);
@@ -28,7 +28,7 @@ class CacheControlManager extends UpstreamCacheControlManager
      * Add additional entries: whenever Root is used,
      * duplicate it also for both QueryRoot and MutationRoot,
      * so that the user needs to set the configuration only once.
-     * 
+     *
      * Add this logic when retrieving the entries because by then
      * the container is compiled and we can access the RootObjectTypeResolver
      * instance. In contrast, `addEntriesForFields` can be called

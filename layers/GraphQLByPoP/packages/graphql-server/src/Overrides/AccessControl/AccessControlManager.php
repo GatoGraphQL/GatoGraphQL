@@ -13,7 +13,7 @@ class AccessControlManager extends UpstreamAccessControlManager
      * @var array<string, array>
      */
     protected array $overriddenFieldEntries = [];
-    
+
     public function __construct(
         protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator,
     ) {
@@ -31,7 +31,7 @@ class AccessControlManager extends UpstreamAccessControlManager
      * Add additional entries: whenever Root is used,
      * duplicate it also for both QueryRoot and MutationRoot,
      * so that the user needs to set the configuration only once.
-     * 
+     *
      * Add this logic when retrieving the entries because by then
      * the container is compiled and we can access the RootObjectTypeResolver
      * instance. In contrast, `addEntriesForFields` can be called
@@ -46,7 +46,7 @@ class AccessControlManager extends UpstreamAccessControlManager
         $this->overriddenFieldEntries[$group] = $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator->maybeAppendAdditionalRootEntriesForFields(
             parent::getEntriesForFields($group)
         );
-        
+
         return $this->overriddenFieldEntries[$group];
     }
 }

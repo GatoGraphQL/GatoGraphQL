@@ -24,7 +24,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     /**
      * List of fieldNames that are mandatory to all ObjectTypeResolvers
-     * 
+     *
      * @var string[]
      */
     protected array $objectTypeResolverMandatoryFields;
