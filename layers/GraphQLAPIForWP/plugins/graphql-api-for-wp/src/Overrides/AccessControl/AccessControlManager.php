@@ -7,12 +7,17 @@ namespace GraphQLAPI\GraphQLAPI\Overrides\AccessControl;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\AccessControl\Services\AccessControlManager as UpstreamAccessControlManager;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 class AccessControlManager extends UpstreamAccessControlManager
 {
+    public function __construct(
+        protected InstanceManagerInterface $instanceManager,
+    ) {
+    }
+
     /**
      * @var array<string, array>
      */
@@ -86,10 +91,8 @@ class AccessControlManager extends UpstreamAccessControlManager
     {
         $additionalFieldEntries = [];
 
-        $instanceManager = InstanceManagerFacade::getInstance();
-
         /** @var RootObjectTypeResolver */
-        $rootObjectTypeResolver = $instanceManager->getInstance(RootObjectTypeResolver::class);
+        $rootObjectTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
 
         foreach ($rootFieldEntries as $rootFieldEntry) {
             $fieldName = $rootFieldEntry[1];
