@@ -43,8 +43,5 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistry
 
-    GraphQLAPI\GraphQLAPI\IFTTT\IFTTTRootTypeEntryDuplicatorServiceInterface:
-        class: \GraphQLAPI\GraphQLAPI\IFTTT\IFTTTRootTypeEntryDuplicatorService
-
     GraphQLAPI\GraphQLAPI\Services\:
         resource: ../src/Services/*

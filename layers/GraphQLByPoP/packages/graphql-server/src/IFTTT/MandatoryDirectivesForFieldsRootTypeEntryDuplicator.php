@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\IFTTT;
+namespace GraphQLByPoP\GraphQLServer\IFTTT;
 
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
@@ -10,7 +10,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
-class IFTTTRootTypeEntryDuplicatorService implements IFTTTRootTypeEntryDuplicatorServiceInterface
+class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
 {
     public function __construct(
         protected InstanceManagerInterface $instanceManager,

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Overrides\AccessControl;
 
-use GraphQLAPI\GraphQLAPI\IFTTT\IFTTTRootTypeEntryDuplicatorServiceInterface;
+use GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface;
 use PoP\AccessControl\Services\AccessControlManager as UpstreamAccessControlManager;
 
 class AccessControlManager extends UpstreamAccessControlManager
 {
     public function __construct(
-        protected IFTTTRootTypeEntryDuplicatorServiceInterface $iftttRootTypeEntryDuplicatorService,
+        protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator,
     ) {
     }
 
@@ -44,7 +44,7 @@ class AccessControlManager extends UpstreamAccessControlManager
         }
 
         $fieldEntries = parent::getEntriesForFields($group);
-        $fieldEntries = $this->iftttRootTypeEntryDuplicatorService->maybeAppendAdditionalRootEntriesForFields($fieldEntries);
+        $fieldEntries = $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator->maybeAppendAdditionalRootEntriesForFields($fieldEntries);
 
         $this->overriddenFieldEntries[$group] = $fieldEntries;
         return $this->overriddenFieldEntries[$group];

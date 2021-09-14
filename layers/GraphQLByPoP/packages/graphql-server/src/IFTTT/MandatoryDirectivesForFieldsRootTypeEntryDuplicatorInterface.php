@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\IFTTT;
+namespace GraphQLByPoP\GraphQLServer\IFTTT;
 
-interface IFTTTRootTypeEntryDuplicatorServiceInterface
+interface MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
 {
     /**
      * This function appends entries only when Nested Mutations is disabled,
