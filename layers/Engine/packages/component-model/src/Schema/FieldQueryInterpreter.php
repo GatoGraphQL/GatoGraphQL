@@ -112,7 +112,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      *
      * In this case, the value of the excerpt would override the value of the title,
      * since they both have fieldOutputKey "title".
-     * 
+     *
      * If the TypeResolver is of Union type, because the data for the object
      * is stored under the target ObjectTypeResolver, then the unique field name
      * must be retrieved against the target ObjectTypeResolver
