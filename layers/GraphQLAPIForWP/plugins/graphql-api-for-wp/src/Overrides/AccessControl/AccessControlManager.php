@@ -44,7 +44,7 @@ class AccessControlManager extends UpstreamAccessControlManager
         }
 
         $fieldEntries = parent::getEntriesForFields($group);
-        $fieldEntries = $this->iftttRootTypeEntryDuplicatorService->appendAdditionalRootEntriesForFields($fieldEntries);
+        $fieldEntries = $this->iftttRootTypeEntryDuplicatorService->maybeAppendAdditionalRootEntriesForFields($fieldEntries);
 
         $this->overriddenFieldEntries[$group] = $fieldEntries;
         return $this->overriddenFieldEntries[$group];

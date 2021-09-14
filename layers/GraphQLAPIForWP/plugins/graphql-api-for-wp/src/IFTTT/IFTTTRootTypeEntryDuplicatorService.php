@@ -18,8 +18,11 @@ class IFTTTRootTypeEntryDuplicatorService implements IFTTTRootTypeEntryDuplicato
     }
 
     /**
+     * This function appends entries only when Nested Mutations is disabled,
+     * so that we have a QueryRoot and MutationRoot types.
+     * 
      * For each of the entries assigned to Root (RootObjectTypeResolver::class),
-     * add an additional QueryRoot and/or MutationRoot.
+     * add a corresponding additional entry for QueryRoot and/or MutationRoot.
      * 
      * Fields "id", "self" and "__typename" can belong to both types.
      * Otherwise, the field is added to MutationRoot if it has a MutationResolver,
@@ -30,7 +33,7 @@ class IFTTTRootTypeEntryDuplicatorService implements IFTTTRootTypeEntryDuplicato
      * 
      * @return array The same array $fieldEntries + appended entries for QueryRoot and MutationRoot
      */
-    public function appendAdditionalRootEntriesForFields(array $fieldEntries): array
+    public function maybeAppendAdditionalRootEntriesForFields(array $fieldEntries): array
     {
         // With Nested Mutations there's no need to duplicate Root entries
         $vars = ApplicationState::getVars();
