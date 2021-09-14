@@ -516,7 +516,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                     $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponent_typeResolver_class);
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
-                    // @see https://github.com/leoloso/PoP/issues/1049
+                    // @see https://github.com/leoloso/PoP/issues/1050
                     $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByTypeResolverClass($typeResolver_class, $subcomponent_data_field);
                     $ret[$subcomponent_data_field_outputkey] = $subcomponent_typeResolver->getTypeOutputName();
                 }
@@ -528,7 +528,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                         $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponentTypeResolverClass);
                         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                         // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
-                        // @see https://github.com/leoloso/PoP/issues/1049
+                        // @see https://github.com/leoloso/PoP/issues/1050
                         $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByTypeResolverClass($typeResolver_class, $conditionalDataField);
                         $ret[$subcomponent_data_field_outputkey] = $subcomponent_typeResolver->getTypeOutputName();
                     }
@@ -569,7 +569,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $dbkeys = $this->getDatabaseKeys($module, $props);
             foreach ($dbkeys as $field => $dbkey) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
-                // @see https://github.com/leoloso/PoP/issues/1049
+                // @see https://github.com/leoloso/PoP/issues/1050
                 $field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByTypeResolverClass($typeResolver_class, $field);
                 $ret[implode('.', array_merge($path, [$field_outputkey]))] = $dbkey;
             }
@@ -582,7 +582,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $this->moduleFilterManager->prepareForPropagation($module, $props);
             foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
-                // @see https://github.com/leoloso/PoP/issues/1049
+                // @see https://github.com/leoloso/PoP/issues/1050
                 $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByTypeResolverClass($typeResolver_class, $subcomponent_data_field);
                 // Only modules which do not load data
                 $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) {
@@ -595,7 +595,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
                 foreach ($dataFieldTypeResolverOptionsConditionalSubmodules as $conditionalDataField => $subcomponent_modules) {
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
-                    // @see https://github.com/leoloso/PoP/issues/1049
+                    // @see https://github.com/leoloso/PoP/issues/1050
                     $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByTypeResolverClass($typeResolver_class, $conditionalDataField);
                     // Only modules which do not load data
                     $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) {
