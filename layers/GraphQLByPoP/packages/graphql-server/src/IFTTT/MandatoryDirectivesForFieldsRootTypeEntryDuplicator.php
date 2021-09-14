@@ -13,10 +13,15 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
 {
+    /** @var string[] */
+    protected array $objectTypeResolverMandatoryFields;
+    
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
-        protected TypeResolverHelperInterface $typeResolverHelper
+        TypeResolverHelperInterface $typeResolverHelper
     ) {
+        /** Fields "id", "self" and "__typename" belong to both QueryRoot and MutationRoot */
+        $this->objectTypeResolverMandatoryFields = $typeResolverHelper->getObjectTypeResolverMandatoryFields();
     }
 
     /**
@@ -60,15 +65,12 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         
         $additionalFieldEntries = [];
         
-        /** Fields "id", "self" and "__typename" belong to both QueryRoot and MutationRoot */
-        $objectTypeResolverMandatoryFields = $this->typeResolverHelper->getObjectTypeResolverMandatoryFields();
-
         /** @var RootObjectTypeResolver */
         $rootObjectTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
 
         foreach ($rootFieldEntries as $rootFieldEntry) {
             $fieldName = $rootFieldEntry[1];
-            if (in_array($fieldName, $objectTypeResolverMandatoryFields)) {
+            if (in_array($fieldName, $this->objectTypeResolverMandatoryFields)) {
                 $rootFieldEntry[0] = QueryRootObjectTypeResolver::class;
                 $additionalFieldEntries[] = $rootFieldEntry;
                 $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;
