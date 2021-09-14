@@ -93,8 +93,9 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         // 1. Unpack all elements of the array into a property for each
         // By making the property "propertyName:key", the "key" can be extracted and passed under expression `%key%` to the function
         foreach ($idsDataFields as $id => $dataFields) {
+            $object = $objectIDItems[$id];
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
 
                 // Validate that the property exists
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
@@ -178,7 +179,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $fieldSkipOutputIfNull,
                         $fieldDirectives
                     );
-                    $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $arrayItemProperty);
+                    $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $arrayItemProperty, $object);
                     // Place into the current object
                     $dbItems[(string)$id][$arrayItemPropertyOutputKey] = $value;
                     // Place it into list of fields to process
@@ -190,8 +191,9 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         $this->regenerateAndExecuteFunction($relationalTypeResolver, $objectIDItems, $arrayItemIdsProperties, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // 3. Composer the array from the results for each array item
         foreach ($idsDataFields as $id => $dataFields) {
+            $object = $objectIDItems[$id];
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
                 $value = $isValueInDBItems ?
                     $dbItems[(string)$id][$fieldOutputKey] :
@@ -226,7 +228,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $fieldDirectives
                     );
                     // Place the result of executing the function on the array item
-                    $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $arrayItemProperty);
+                    $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $arrayItemProperty, $object);
                     $arrayItemValue = $dbItems[(string)$id][$arrayItemPropertyOutputKey];
                     // Remove this temporary property from $dbItems
                     unset($dbItems[(string)$id][$arrayItemPropertyOutputKey]);
@@ -273,7 +275,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
 
     protected function addExpressionsForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        $id,
+        string | int $id,
         string $field,
         array &$objectIDItems,
         array &$dbItems,
@@ -290,7 +292,8 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         // First let the parent add $value, then also add $key, which can be deduced from the fieldOutputKey
         parent::addExpressionsForObject($relationalTypeResolver, $id, $field, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
-        $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field);
+        $object = $objectIDItems[$id];
+        $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
         $arrayItemPropertyElems = $this->extractElementsFromArrayItemProperty($arrayItemPropertyOutputKey);
         $key = $arrayItemPropertyElems[1];
         $this->addExpressionForObject($id, 'key', $key, $messages);
