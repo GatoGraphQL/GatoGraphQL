@@ -46,11 +46,7 @@ class AccessControlManager extends UpstreamAccessControlManager
         }
         $fieldEntries = parent::getEntriesForFields($group);
 
-        // Find all entries set to Root
-        if ($rootFieldEntries = array_filter(
-            $fieldEntries,
-            fn (array $fieldEntry) => $fieldEntry[0] === RootObjectTypeResolver::class
-        )) {
+        if ($rootFieldEntries = $this->filterRootEntriesForFields($fieldEntries)) {
             $fieldEntries = array_merge(
                 $fieldEntries,
                 $this->getAdditionalRootEntriesForFields($rootFieldEntries)
@@ -59,6 +55,17 @@ class AccessControlManager extends UpstreamAccessControlManager
 
         $this->overriddenFieldEntries[$group] = $fieldEntries;
         return $this->overriddenFieldEntries[$group];
+    }
+
+    /**
+     * Filter the entries set to Root
+     */
+    protected function filterRootEntriesForFields(array $fieldEntries): array
+    {
+        return array_filter(
+            $fieldEntries,
+            fn (array $fieldEntry) => $fieldEntry[0] === RootObjectTypeResolver::class
+        );
     }
 
     /**
