@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\Overrides\Services\DataStructureFormatters;
+namespace GraphQLByPoP\GraphQLServer\Overrides\DataStructureFormatters;
 
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\Feedback\Tokens;
