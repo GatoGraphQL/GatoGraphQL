@@ -42,11 +42,9 @@ class AccessControlManager extends UpstreamAccessControlManager
         if (isset($this->overriddenFieldEntries[$group])) {
             return $this->overriddenFieldEntries[$group];
         }
-
-        $fieldEntries = parent::getEntriesForFields($group);
-        $fieldEntries = $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator->maybeAppendAdditionalRootEntriesForFields($fieldEntries);
-
-        $this->overriddenFieldEntries[$group] = $fieldEntries;
+        $this->overriddenFieldEntries[$group] = $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator->maybeAppendAdditionalRootEntriesForFields(
+            parent::getEntriesForFields($group)
+        );
         return $this->overriddenFieldEntries[$group];
     }
 }
