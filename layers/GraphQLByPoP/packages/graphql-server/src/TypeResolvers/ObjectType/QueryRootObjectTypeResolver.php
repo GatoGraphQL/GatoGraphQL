@@ -42,6 +42,6 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
         return
             // Fields "queryRoot" and "mutationRoot" are helpers, must not be ported to QueryRoot
             !in_array($fieldName, ['queryRoot', 'mutationRoot'])
-            && $objectTypeFieldResolver->resolveFieldMutationResolverClass($this, $fieldName) === null;
+            && $objectTypeFieldResolver->getFieldMutationResolverClass($this, $fieldName) === null;
     }
 }

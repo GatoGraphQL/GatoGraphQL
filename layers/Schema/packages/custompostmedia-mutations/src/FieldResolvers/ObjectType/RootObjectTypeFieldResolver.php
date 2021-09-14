@@ -104,7 +104,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
     }
 
-    public function resolveFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'setFeaturedImageOnCustomPost':
@@ -113,7 +113,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return RemoveFeaturedImageOnCustomPostMutationResolver::class;
         }
 
-        return parent::resolveFieldMutationResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

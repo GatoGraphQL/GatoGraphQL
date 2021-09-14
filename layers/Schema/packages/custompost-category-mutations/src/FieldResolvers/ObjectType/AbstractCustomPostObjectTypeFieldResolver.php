@@ -118,14 +118,14 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return $fieldArgs;
     }
 
-    public function resolveFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
             case 'setCategories':
                 return $this->getTypeMutationResolverClass();
         }
 
-        return parent::resolveFieldMutationResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
