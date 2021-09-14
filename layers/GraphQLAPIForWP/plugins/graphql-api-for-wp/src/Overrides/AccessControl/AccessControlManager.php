@@ -8,6 +8,7 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeRe
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\AccessControl\Services\AccessControlManager as UpstreamAccessControlManager;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 class AccessControlManager extends UpstreamAccessControlManager
@@ -42,10 +43,17 @@ class AccessControlManager extends UpstreamAccessControlManager
      */
     public function getEntriesForFields(string $group): array
     {
+        $fieldEntries = parent::getEntriesForFields($group);
+
+        // With Nested Mutations there's no need to duplicate Root entries
+        $vars = ApplicationState::getVars();
+        if ($vars['nested-mutations-enabled']) {
+            return $fieldEntries;
+        }
+
         if (isset($this->overriddenFieldEntries[$group])) {
             return $this->overriddenFieldEntries[$group];
         }
-        $fieldEntries = parent::getEntriesForFields($group);
         if ($rootFieldEntries = $this->filterRootEntriesForFields($fieldEntries)) {
             $fieldEntries = array_merge(
                 $fieldEntries,
