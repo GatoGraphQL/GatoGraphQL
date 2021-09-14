@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\IFTTT;
 
+use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -14,6 +15,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 {
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
+        protected TypeResolverHelperInterface $typeResolverHelper
     ) {
     }
 
@@ -57,13 +59,16 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         }
         
         $additionalFieldEntries = [];
+        
+        /** Fields "id", "self" and "__typename" belong to both QueryRoot and MutationRoot */
+        $objectTypeResolverMandatoryFields = $this->typeResolverHelper->getObjectTypeResolverMandatoryFields();
 
         /** @var RootObjectTypeResolver */
         $rootObjectTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
 
         foreach ($rootFieldEntries as $rootFieldEntry) {
             $fieldName = $rootFieldEntry[1];
-            if (in_array($fieldName, ['id', 'self', '__typename'])) {
+            if (in_array($fieldName, $objectTypeResolverMandatoryFields)) {
                 $rootFieldEntry[0] = QueryRootObjectTypeResolver::class;
                 $additionalFieldEntries[] = $rootFieldEntry;
                 $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;

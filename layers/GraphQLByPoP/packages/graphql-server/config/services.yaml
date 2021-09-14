@@ -33,3 +33,6 @@ services:
 
     GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface:
         class: \GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicator
+
+    GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface:
+        class: \GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelper
