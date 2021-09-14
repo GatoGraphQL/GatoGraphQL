@@ -348,7 +348,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return null;
     }
 
-    public function getTargetObjectTypeResolver(object $object): ?RelationalTypeResolverInterface
+    public function getTargetObjectTypeResolver(object $object): ?ObjectTypeResolverInterface
     {
         if ($typeResolverPicker = $this->getTargetObjectTypeResolverPicker($object)) {
             $objectTypeResolverClass = $typeResolverPicker->getObjectTypeResolverClass();
