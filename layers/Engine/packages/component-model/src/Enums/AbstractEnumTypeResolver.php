@@ -60,7 +60,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         return $this->uppercaseValueMappings;
     }
 
-    public function getEnumDescriptions(): array
+    public function getEnumValueDescriptions(): array
     {
         return [];
     }

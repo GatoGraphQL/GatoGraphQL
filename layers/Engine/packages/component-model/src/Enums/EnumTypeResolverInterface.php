@@ -17,7 +17,7 @@ interface EnumTypeResolverInterface extends TypeResolverInterface
     /**
      * @return array<string,string> Key: enum, Value: description
      */
-    public function getEnumDescriptions(): array;
+    public function getEnumValueDescriptions(): array;
     /**
      * Enable to output the enum values in UPPERCASE,
      * even if those values are handled as lowercase
