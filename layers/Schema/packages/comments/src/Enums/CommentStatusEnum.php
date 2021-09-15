@@ -28,7 +28,7 @@ class CommentStatusEnum extends AbstractEnumTypeResolver
     /**
      * @return array<string,string> Key: enum, Value: description
      */
-    public function getDescriptions(): array
+    public function getEnumDescriptions(): array
     {
         return [
             CommentStatus::APPROVE => $this->translationAPI->__('Approved comment', 'comments'),
