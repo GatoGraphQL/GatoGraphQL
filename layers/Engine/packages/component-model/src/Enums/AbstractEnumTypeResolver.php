@@ -37,7 +37,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             $uppercaseValueMappings = $this->getUppercaseValueMappings();
             return $uppercaseValueMappings[$inputEnumValue] ?? null;
         }
-        if (in_array($inputEnumValue, $this->getValues())) {
+        if (in_array($inputEnumValue, $this->getEnumValues())) {
             return $inputEnumValue;
         }
         return null;
@@ -53,7 +53,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     {
         if ($this->uppercaseValueMappings === null) {
             $this->uppercaseValueMappings = [];
-            foreach ($this->getValues() as $value) {
+            foreach ($this->getEnumValues() as $value) {
                 $this->uppercaseValueMappings[strtoupper($value)] = $value;
             }
         }
