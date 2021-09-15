@@ -16,6 +16,17 @@ interface EnumTypeResolverInterface extends TypeResolverInterface
      * @return array<string,string> Key: enum, Value: description
      */
     public function getDescriptions(): array;
+    /**
+     * Enable to output the enum values in UPPERCASE,
+     * even if those values are handled as lowercase
+     */
     public function outputEnumValueInUppercase(): bool;
+    /**
+     * The input may in in UPPERCASE while the enum value in the app
+     * is stored in lowercase, then convert from one to the other.
+     *
+     * @param string $inputEnumValue The input enum value, possibly as UPPERCASE
+     * @return string|null The found enum value, or `null` if it doesn't exist
+     */
     public function getEnumValueFromInput(string $inputEnumValue): ?string;
 }

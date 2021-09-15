@@ -8,8 +8,17 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements EnumTypeResolverInterface
 {
+    /**
+     * Provide a mapping of enum values from uppercase to real value,
+     * as entries: [VALUE => value]
+     *
+     * @return array<string,string>|null
+     */
     protected ?array $uppercaseValueMappings = null;
 
+    /**
+     * By default, output the enum value in UPPERCASE
+     */
     public function outputEnumValueInUppercase(): bool
     {
         return true;
@@ -34,13 +43,19 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         return null;
     }
 
+    /**
+     * Provide a mapping of enum values from uppercase to real value,
+     * as entries: [VALUE => value]
+     *
+     * @return array<string,string>
+     */
     protected function getUppercaseValueMappings(): array
     {
         if ($this->uppercaseValueMappings === null) {
-            $this->uppercaseValueMappings = array_map(
-                'strtoupper',
-                $this->getValues()
-            );
+            $this->uppercaseValueMappings = [];
+            foreach ($this->getValues() as $value) {
+                $this->uppercaseValueMappings[strtoupper($value)] = $value;
+            }
         }
         return $this->uppercaseValueMappings;
     }
