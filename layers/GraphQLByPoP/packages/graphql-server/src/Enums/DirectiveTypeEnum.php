@@ -19,13 +19,6 @@ class DirectiveTypeEnum extends AbstractEnumTypeResolver
      */
     public function getValues(): array
     {
-        return array_map(
-            'strtoupper',
-            $this->getCoreValues()
-        );
-    }
-    public function getCoreValues(): ?array
-    {
         return array_merge(
             [
                 DirectiveTypes::QUERY,

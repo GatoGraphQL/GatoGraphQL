@@ -107,7 +107,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                     $directiveTypeEnum = $this->instanceManager->getInstance(DirectiveTypeEnum::class);
                     // Convert the enum from uppercase (as exposed in the API) to lowercase (as is its real value)
                     $ofTypes = array_map(
-                        [$directiveTypeEnum, 'getCoreValue'],
+                        fn (string $enumValue) => $directiveTypeEnum->getEnumValueFromInput($enumValue),
                         $ofTypes
                     );
                     $directiveRegistry = DirectiveRegistryFacade::getInstance();
