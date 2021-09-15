@@ -25,6 +25,9 @@ class CommentStatusEnum extends AbstractEnumTypeResolver
             CommentStatus::TRASH,
         ];
     }
+    /**
+     * @return array<string,string> Key: enum, Value: description
+     */
     public function getDescriptions(): array
     {
         return [

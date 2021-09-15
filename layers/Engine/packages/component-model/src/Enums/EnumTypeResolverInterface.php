@@ -12,6 +12,9 @@ interface EnumTypeResolverInterface extends TypeResolverInterface
      * @return string[]
      */
     public function getValues(): array;
+    /**
+     * @return array<string,string> Key: enum, Value: description
+     */
     public function getDescriptions(): array;
     public function getCoreValues(): ?array;
     public function getCoreValue(string $enumValue): ?string;
