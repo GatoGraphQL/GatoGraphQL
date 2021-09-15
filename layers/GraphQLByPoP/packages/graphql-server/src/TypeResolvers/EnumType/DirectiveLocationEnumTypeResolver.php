@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\Enums;
+namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\DirectiveLocations;
 
-class DirectiveLocationEnum extends AbstractEnumTypeResolver
+class DirectiveLocationEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\Enums;
+namespace PoP\API\TypeResolvers\EnumType;
 
-use PoPSchema\CustomPosts\Types\Status;
+use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class CustomPostStatusEnum extends AbstractEnumTypeResolver
+class SchemaFieldShapeEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'CustomPostStatus';
+        return 'SchemaOutputShape';
     }
     /**
      * @return string[]
@@ -19,10 +19,8 @@ class CustomPostStatusEnum extends AbstractEnumTypeResolver
     public function getEnumValues(): array
     {
         return [
-            Status::PUBLISHED,
-            Status::PENDING,
-            Status::DRAFT,
-            Status::TRASH,
+            SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
+            SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED,
         ];
     }
 
