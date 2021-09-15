@@ -43,7 +43,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         }
     }
 
-    public function outputEnumNameInUppercase(): bool
+    public function outputEnumValueInUppercase(): bool
     {
         return true;
     }
