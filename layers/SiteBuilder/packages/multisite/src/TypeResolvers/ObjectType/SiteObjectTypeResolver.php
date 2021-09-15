@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\TypeResolvers\ObjectType;
 
-use PoP\Multisite\RelationalTypeDataLoaders\ObjectType\SiteTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
+use PoP\Multisite\ObjectModels\Site;
+use PoP\Multisite\RelationalTypeDataLoaders\ObjectType\SiteTypeDataLoader;
 
 class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {
@@ -21,6 +22,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getID(object $object): string | int | null
     {
+        /** @var Site */
         $site = $object;
         return $site->getID();
     }

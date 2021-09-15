@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractIntrospectionObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\ObjectModels\EnumValue;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaDefinitionReferenceTypeDataLoader;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractIntrospectionObjectTypeResolver;
 
 class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
@@ -21,6 +22,7 @@ class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
 
     public function getID(object $object): string | int | null
     {
+        /** @var EnumValue */
         $enumValue = $object;
         return $enumValue->getID();
     }

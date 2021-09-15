@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Multisite\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Multisite\ObjectModels\Site;
 
 trait SiteObjectTypeFieldResolverTrait
 {
@@ -18,6 +19,7 @@ trait SiteObjectTypeFieldResolverTrait
         array $fieldArgs = []
     ): bool {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        /** @var Site */
         $site = $object;
         // Only for the current site. For other sites must be implemented through a "multisite" package
         // The parent class will return the correct value. That's why if it is not the current site, then already return the expected error

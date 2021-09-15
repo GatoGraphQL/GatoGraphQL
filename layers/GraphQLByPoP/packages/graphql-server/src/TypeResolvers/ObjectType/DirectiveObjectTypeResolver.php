@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
+use GraphQLByPoP\GraphQLServer\ObjectModels\Directive;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaDefinitionReferenceTypeDataLoader;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractIntrospectionObjectTypeResolver;
 
@@ -21,6 +22,7 @@ class DirectiveObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
 
     public function getID(object $object): string | int | null
     {
+        /** @var Directive */
         $directive = $object;
         return $directive->getID();
     }
