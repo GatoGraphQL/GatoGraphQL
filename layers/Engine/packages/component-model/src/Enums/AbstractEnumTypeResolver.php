@@ -12,9 +12,15 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      * Provide a mapping of enum values from uppercase to real value,
      * as entries: [VALUE => value]
      *
-     * @return array<string,string>|null
+     * @var array<string,string>|null
      */
     protected ?array $uppercaseValueMappings = null;
+    /**
+     * Description for all enum values (which have a description)
+     * 
+     * @var array<string,string>|null
+     */
+    protected ?array $enumValueDescriptions = null;
 
     /**
      * By default, output the enum value in UPPERCASE
@@ -60,7 +66,23 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         return $this->uppercaseValueMappings;
     }
 
+    /**
+     * Description for all enum values (which have a description)
+     * 
+     * @return array<string,string> Key: enum, Value: description
+     */
     final public function getEnumValueDescriptions(): array
+    {
+        if ($this->enumValueDescriptions === null) {
+            $this->enumValueDescriptions = $this->doGetEnumValueDescriptions();
+        }
+        return $this->enumValueDescriptions;
+    }
+
+    /**
+     * @return array<string,string> Key: enum, Value: description
+     */
+    private function doGetEnumValueDescriptions(): array
     {
         $enumValueDescriptions = [];
         foreach ($this->getEnumValues() as $enumValue) {
