@@ -8,3 +8,6 @@ services:
 
     PoP\API\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PoP\API\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

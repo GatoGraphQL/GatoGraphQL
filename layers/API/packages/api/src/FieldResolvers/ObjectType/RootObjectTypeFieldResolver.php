@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace PoP\API\FieldResolvers\ObjectType;
 
 use PoP\API\Cache\CacheTypes;
-use PoP\Engine\Cache\CacheUtils;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Enums\SchemaFieldShapeEnum;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
 use PoP\API\Facades\PersistedQueryManagerFacade;
 use PoP\API\Schema\SchemaDefinition;
+use PoP\API\TypeResolvers\EnumType\SchemaFieldShapeEnumTypeResolver;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -65,9 +66,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'fullSchema':
                 /**
-                 * @var SchemaFieldShapeEnum
+                 * @var SchemaFieldShapeEnumTypeResolver
                  */
-                $schemaOutputShapeEnum = $this->instanceManager->getInstance(SchemaFieldShapeEnum::class);
+                $schemaOutputShapeEnumTypeResolver = $this->instanceManager->getInstance(SchemaFieldShapeEnumTypeResolver::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -85,9 +86,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                                 SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
                                 SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED
                             ),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $schemaOutputShapeEnum->getTypeName(),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $schemaOutputShapeEnumTypeResolver->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $schemaOutputShapeEnum
+                                $schemaOutputShapeEnumTypeResolver
                             ),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
                         ],

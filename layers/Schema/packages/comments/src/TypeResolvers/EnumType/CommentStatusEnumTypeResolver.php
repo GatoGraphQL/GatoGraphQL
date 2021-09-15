@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\Enums;
+namespace PoPSchema\Comments\TypeResolvers\EnumType;
 
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class CommentStatusEnum extends AbstractEnumTypeResolver
+class CommentStatusEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
@@ -33,7 +33,7 @@ class CommentStatusEnum extends AbstractEnumTypeResolver
     {
         return null;
     }
-    
+
     /**
      * Description for a specific enum value
      */

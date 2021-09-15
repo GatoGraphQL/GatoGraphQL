@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutations\MutationResolvers;
 
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPostMutations\Facades\CustomPostTypeMutationAPIFacade;
 use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
+use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
 {
@@ -121,12 +122,12 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // Validate that the status is valid
         $instanceManager = InstanceManagerFacade::getInstance();
         /**
-         * @var CustomPostStatusEnum
+         * @var CustomPostStatusEnumTypeResolver
          */
-        $customPostStatusEnum = $instanceManager->getInstance(CustomPostStatusEnum::class);
+        $customPostStatusEnumTypeResolver = $instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
         if (isset($form_data[MutationInputProperties::STATUS])) {
             $status = $form_data[MutationInputProperties::STATUS];
-            if (!in_array($status, $customPostStatusEnum->getEnumValues())) {
+            if (!in_array($status, $customPostStatusEnumTypeResolver->getEnumValues())) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('Status \'%s\' is not supported', 'custompost-mutations'),
                     $status

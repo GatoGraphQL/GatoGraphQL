@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveLocationEnum;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveLocationEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -65,10 +66,10 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'locations':
                 /**
-                 * @var DirectiveLocationEnum
+                 * @var DirectiveLocationEnumTypeResolver
                  */
-                $directiveLocationEnum = $this->instanceManager->getInstance(DirectiveLocationEnum::class);
-                return $directiveLocationEnum->getTypeName();
+                $directiveLocationEnumTypeResolver = $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class);
+                return $directiveLocationEnumTypeResolver->getTypeName();
         }
         return null;
     }
@@ -78,10 +79,10 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'locations':
                 /**
-                 * @var DirectiveLocationEnum
+                 * @var DirectiveLocationEnumTypeResolver
                  */
-                $directiveLocationEnum = $this->instanceManager->getInstance(DirectiveLocationEnum::class);
-                return $directiveLocationEnum->getEnumValues();
+                $directiveLocationEnumTypeResolver = $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class);
+                return $directiveLocationEnumTypeResolver->getEnumValues();
         }
         return null;
     }

@@ -1,13 +1,15 @@
 <?php
-use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\Enums\CustomPostModeratedStatusEnum;
 use PoPSchema\EverythingElse\Enums\CustomPostUnmoderatedStatusEnum;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
+use PoPSchema\EverythingElse\TypeResolvers\EnumType\CustomPostModeratedStatusEnumTypeResolver;
+use PoPSchema\EverythingElse\TypeResolvers\EnumType\CustomPostUnmoderatedStatusEnumTypeResolver;
 
 class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -114,22 +116,22 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS:
                 /**
-                 * @var CustomPostModeratedStatusEnum
+                 * @var CustomPostModeratedStatusEnumTypeResolver
                  */
-                $customPostModeratedStatusEnum = $instanceManager->getInstance(CustomPostModeratedStatusEnum::class);
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostModeratedStatusEnum->getTypeName();
+                $customPostModeratedStatusEnumTypeResolver = $instanceManager->getInstance(CustomPostModeratedStatusEnumTypeResolver::class);
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostModeratedStatusEnumTypeResolver->getTypeName();
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $customPostModeratedStatusEnum
+                    $customPostModeratedStatusEnumTypeResolver
                 );
                 break;
             case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
                 /**
-                 * @var CustomPostUnmoderatedStatusEnum
+                 * @var CustomPostUnmoderatedStatusEnumTypeResolver
                  */
-                $customPostUnmoderatedStatusEnum = $instanceManager->getInstance(CustomPostUnmoderatedStatusEnum::class);
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostUnmoderatedStatusEnum->getTypeName();
+                $customPostUnmoderatedStatusEnumTypeResolver = $instanceManager->getInstance(CustomPostUnmoderatedStatusEnumTypeResolver::class);
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostUnmoderatedStatusEnumTypeResolver->getTypeName();
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $customPostUnmoderatedStatusEnum
+                    $customPostUnmoderatedStatusEnumTypeResolver
                 );
                 break;
         }

@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\EverythingElse\Enums;
+namespace PoPSchema\EverythingElse\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class MemberStatusEnum extends AbstractEnumTypeResolver
+class MemberTagEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'MemberStatus';
+        return 'MemberTag';
     }
     /**
      * @return string[]
      */
     public function getEnumValues(): array
     {
-        return array_keys((new \GD_URE_FormInput_MultiMemberStatus())->getAllValues());
+        return array_keys((new \GD_URE_FormInput_FilterMemberTags())->getAllValues());
     }
 }

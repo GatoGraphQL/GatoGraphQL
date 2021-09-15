@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\ComponentModel\Feedback\Tokens;
-use PoP\Engine\Enums\FieldFeedbackTypeEnum;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\Engine\Enums\FieldFeedbackTargetEnum;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\Enums\FieldFeedbackTargetEnum;
+use PoP\Engine\Enums\FieldFeedbackTypeEnum;
+use PoP\Engine\TypeResolvers\EnumType\FieldFeedbackTargetEnumTypeResolver;
+use PoP\Engine\TypeResolvers\EnumType\FieldFeedbackTypeEnumTypeResolver;
 
 class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -134,13 +136,13 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
     public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         /**
-         * @var FieldFeedbackTypeEnum
+         * @var FieldFeedbackTypeEnumTypeResolver
          */
-        $fieldFeedbackTypeEnum = $this->instanceManager->getInstance(FieldFeedbackTypeEnum::class);
+        $fieldFeedbackTypeEnumTypeResolver = $this->instanceManager->getInstance(FieldFeedbackTypeEnumTypeResolver::class);
         /**
-         * @var FieldFeedbackTargetEnum
+         * @var FieldFeedbackTargetEnumTypeResolver
          */
-        $fieldFeedbackTargetEnum = $this->instanceManager->getInstance(FieldFeedbackTargetEnum::class);
+        $fieldFeedbackTargetEnumTypeResolver = $this->instanceManager->getInstance(FieldFeedbackTargetEnumTypeResolver::class);
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'message',
@@ -152,9 +154,9 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
                 SchemaDefinition::ARGNAME_NAME => 'type',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The type of feedback', 'engine'),
-                SchemaDefinition::ARGNAME_ENUM_NAME => $fieldFeedbackTypeEnum->getTypeName(),
+                SchemaDefinition::ARGNAME_ENUM_NAME => $fieldFeedbackTypeEnumTypeResolver->getTypeName(),
                 SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $fieldFeedbackTypeEnum
+                    $fieldFeedbackTypeEnumTypeResolver
                 ),
                 SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultFeedbackType(),
             ],
@@ -162,9 +164,9 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
                 SchemaDefinition::ARGNAME_NAME => 'target',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The target for the feedback', 'engine'),
-                SchemaDefinition::ARGNAME_ENUM_NAME => $fieldFeedbackTargetEnum->getTypeName(),
+                SchemaDefinition::ARGNAME_ENUM_NAME => $fieldFeedbackTargetEnumTypeResolver->getTypeName(),
                 SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $fieldFeedbackTargetEnum
+                    $fieldFeedbackTargetEnumTypeResolver
                 ),
                 SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultFeedbackTarget(),
             ],

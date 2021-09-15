@@ -2,25 +2,27 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\Enums;
+namespace PoPSchema\Comments\TypeResolvers\EnumType;
 
-use PoP\API\Schema\SchemaDefinition;
+use PoPSchema\Comments\Constants\CommentTypes;
 use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class SchemaFieldShapeEnum extends AbstractEnumTypeResolver
+class CommentTypeEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'SchemaOutputShape';
+        return 'CommentType';
     }
+
     /**
      * @return string[]
      */
     public function getEnumValues(): array
     {
         return [
-            SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
-            SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED,
+            CommentTypes::COMMENT,
+            CommentTypes::TRACKBACK,
+            CommentTypes::PINGBACK,
         ];
     }
 

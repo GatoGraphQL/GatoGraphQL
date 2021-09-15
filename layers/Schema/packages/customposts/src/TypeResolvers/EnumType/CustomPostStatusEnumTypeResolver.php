@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\Enums;
+namespace PoPSchema\CustomPosts\TypeResolvers\EnumType;
 
-use PoPSchema\Comments\Constants\CommentTypes;
+use PoPSchema\CustomPosts\Types\Status;
 use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class CommentTypeEnum extends AbstractEnumTypeResolver
+class CustomPostStatusEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'CommentType';
+        return 'CustomPostStatus';
     }
 
     /**
@@ -20,9 +20,10 @@ class CommentTypeEnum extends AbstractEnumTypeResolver
     public function getEnumValues(): array
     {
         return [
-            CommentTypes::COMMENT,
-            CommentTypes::TRACKBACK,
-            CommentTypes::PINGBACK,
+            Status::PUBLISHED,
+            Status::PENDING,
+            Status::DRAFT,
+            Status::TRASH,
         ];
     }
 

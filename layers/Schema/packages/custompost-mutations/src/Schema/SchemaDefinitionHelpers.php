@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\Schema;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
+use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 
 class SchemaDefinitionHelpers
 {
@@ -31,9 +32,9 @@ class SchemaDefinitionHelpers
             $translationAPI = TranslationAPIFacade::getInstance();
             $instanceManager = InstanceManagerFacade::getInstance();
             /**
-             * @var CustomPostStatusEnum
+             * @var CustomPostStatusEnumTypeResolver
              */
-            $customPostStatusEnum = $instanceManager->getInstance(CustomPostStatusEnum::class);
+            $customPostStatusEnumTypeResolver = $instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
             $schemaFieldDefinition = array_merge(
                 $addCustomPostID ? [
                     [
@@ -58,9 +59,9 @@ class SchemaDefinitionHelpers
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::STATUS,
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                         SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The status of the custom post', 'custompost-mutations'),
-                        SchemaDefinition::ARGNAME_ENUM_NAME => $customPostStatusEnum->getTypeName(),
+                        SchemaDefinition::ARGNAME_ENUM_NAME => $customPostStatusEnumTypeResolver->getTypeName(),
                         SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                            $customPostStatusEnum
+                            $customPostStatusEnumTypeResolver
                         ),
                     ],
                 ]

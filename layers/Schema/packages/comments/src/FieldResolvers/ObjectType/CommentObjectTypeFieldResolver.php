@@ -22,6 +22,7 @@ use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Enums\CommentStatusEnum;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
@@ -225,10 +226,10 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         switch ($fieldName) {
             case 'status':
                 /**
-                 * @var CommentStatusEnum
+                 * @var CommentStatusEnumTypeResolver
                  */
-                $commentStatusEnum = $this->instanceManager->getInstance(CommentStatusEnum::class);
-                return $commentStatusEnum->getTypeName();
+                $commentStatusEnumTypeResolver = $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
+                return $commentStatusEnumTypeResolver->getTypeName();
         }
         return null;
     }
@@ -238,10 +239,10 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         switch ($fieldName) {
             case 'status':
                 /**
-                 * @var CommentStatusEnum
+                 * @var CommentStatusEnumTypeResolver
                  */
-                $commentStatusEnum = $this->instanceManager->getInstance(CommentStatusEnum::class);
-                return $commentStatusEnum->getEnumValues();
+                $commentStatusEnumTypeResolver = $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
+                return $commentStatusEnumTypeResolver->getEnumValues();
         }
         return null;
     }
@@ -251,10 +252,10 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         switch ($fieldName) {
             case 'status':
                 /**
-                 * @var CommentStatusEnum
+                 * @var CommentStatusEnumTypeResolver
                  */
-                $commentStatusEnum = $this->instanceManager->getInstance(CommentStatusEnum::class);
-                return $commentStatusEnum->getEnumValueDescriptions();
+                $commentStatusEnumTypeResolver = $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
+                return $commentStatusEnumTypeResolver->getEnumValueDescriptions();
         }
         return null;
     }

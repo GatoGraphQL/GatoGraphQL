@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\EverythingElse\Enums;
+namespace PoPSchema\EverythingElse\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class SocialMediaProviderEnum extends AbstractEnumTypeResolver
+class SocialMediaProviderEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {

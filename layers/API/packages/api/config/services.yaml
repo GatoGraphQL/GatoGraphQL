@@ -32,6 +32,3 @@ services:
 
     PoP\API\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
-
-    PoP\API\Enums\:
-        resource: '../src/Enums/*'

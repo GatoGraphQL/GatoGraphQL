@@ -8,6 +8,7 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
@@ -41,12 +42,12 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 // Remove any status that is not in the Enum
                 if ($value) {
                     /**
-                     * @var CustomPostStatusEnum
+                     * @var CustomPostStatusEnumTypeResolver
                      */
-                    $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
+                    $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
                     $value = array_intersect(
                         $value,
-                        $customPostStatusEnum->getEnumValues()
+                        $customPostStatusEnumTypeResolver->getEnumValues()
                     );
                     // If no status is valid, do not set, as to not override the default value
                     if ($value) {

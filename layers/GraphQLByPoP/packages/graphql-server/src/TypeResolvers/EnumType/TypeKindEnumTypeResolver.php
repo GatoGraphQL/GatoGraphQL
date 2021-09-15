@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\Enums;
+namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeKinds;
 
-class TypeKindEnum extends AbstractEnumTypeResolver
+class TypeKindEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {

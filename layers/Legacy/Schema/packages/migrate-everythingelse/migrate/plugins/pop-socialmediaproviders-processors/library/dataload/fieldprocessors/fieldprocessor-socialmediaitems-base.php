@@ -1,12 +1,13 @@
 <?php
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\EverythingElse\Enums\SocialMediaProviderEnum;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\EverythingElse\Enums\SocialMediaProviderEnum;
+use PoPSchema\EverythingElse\TypeResolvers\EnumType\SocialMediaProviderEnumTypeResolver;
 
 abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems extends AbstractObjectTypeFieldResolver
 {
@@ -54,18 +55,18 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
         switch ($fieldName) {
             case 'shareURL':
                 /**
-                 * @var SocialMediaProviderEnum
+                 * @var SocialMediaProviderEnumTypeResolver
                  */
-                $socialMediaProviderEnum = $instanceManager->getInstance(SocialMediaProviderEnum::class);
+                $socialMediaProviderEnumTypeResolver = $instanceManager->getInstance(SocialMediaProviderEnumTypeResolver::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'provider',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $socialMediaProviderEnum->getTypeName(),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $socialMediaProviderEnumTypeResolver->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $socialMediaProviderEnum
+                                $socialMediaProviderEnumTypeResolver
                             ),
                             SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('What provider service to get the URL from', ''),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
@@ -104,10 +105,10 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
                     return $title;
                 }
                 /**
-                 * @var SocialMediaProviderEnum
+                 * @var SocialMediaProviderEnumTypeResolver
                  */
-                $socialMediaProviderEnum = $instanceManager->getInstance(SocialMediaProviderEnum::class);
-                $providerURLs = $socialMediaProviderEnum->getEnumValues();
+                $socialMediaProviderEnumTypeResolver = $instanceManager->getInstance(SocialMediaProviderEnumTypeResolver::class);
+                $providerURLs = $socialMediaProviderEnumTypeResolver->getEnumValues();
                 return $this->getShareUrl($url, $title, $providerURLs[$fieldArgs['provider']]);
         }
 
