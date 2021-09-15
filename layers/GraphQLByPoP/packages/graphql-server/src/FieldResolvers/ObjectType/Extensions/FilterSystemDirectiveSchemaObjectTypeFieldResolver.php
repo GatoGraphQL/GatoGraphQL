@@ -71,7 +71,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only directives of provided types', 'graphql-api'),
                             SchemaDefinition::ARGNAME_ENUM_NAME => $directiveTypeEnum->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $directiveTypeEnum->getEnumValues()
+                                $directiveTypeEnum
                             ),
                         ],
                     ]

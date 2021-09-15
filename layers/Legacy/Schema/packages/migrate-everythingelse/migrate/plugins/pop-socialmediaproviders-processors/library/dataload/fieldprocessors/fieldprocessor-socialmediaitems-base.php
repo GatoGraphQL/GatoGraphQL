@@ -65,7 +65,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                             SchemaDefinition::ARGNAME_ENUM_NAME => $socialMediaProviderEnum->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                array_keys($socialMediaProviderEnum->getEnumValues())
+                                $socialMediaProviderEnum
                             ),
                             SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('What provider service to get the URL from', ''),
                             SchemaDefinition::ARGNAME_MANDATORY => true,

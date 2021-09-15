@@ -119,7 +119,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
                 $customPostModeratedStatusEnum = $instanceManager->getInstance(CustomPostModeratedStatusEnum::class);
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostModeratedStatusEnum->getTypeName();
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $customPostModeratedStatusEnum->getEnumValues()
+                    $customPostModeratedStatusEnum
                 );
                 break;
             case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
@@ -129,7 +129,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
                 $customPostUnmoderatedStatusEnum = $instanceManager->getInstance(CustomPostUnmoderatedStatusEnum::class);
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostUnmoderatedStatusEnum->getTypeName();
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $customPostUnmoderatedStatusEnum->getEnumValues()
+                    $customPostUnmoderatedStatusEnum
                 );
                 break;
         }
