@@ -50,7 +50,7 @@ class SchemaHelpers
     public static function convertToSchemaFieldArgEnumValueDefinitions(
         EnumTypeResolverInterface $enumTypeResolver,
     ): array {
-        $enumValues = $enumTypeResolver->getEnumValues();
+        $enumValues = $enumTypeResolver->getEnumOutputValues();
         $enumValueDescriptions = $enumTypeResolver->getEnumValueDescriptions();
         $enumValueDefinitions = [];
         // Create an array representing the enumValue definition

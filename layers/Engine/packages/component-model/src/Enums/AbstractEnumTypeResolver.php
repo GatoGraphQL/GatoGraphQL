@@ -29,6 +29,20 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     {
         return true;
     }
+    
+    /**
+     * The values in the enum as they must be output (eg: in UPPERCASE)
+     * 
+     * @return string[]
+     */
+    final public function getEnumOutputValues(): array
+    {
+        if ($this->outputEnumValueInUppercase()) {
+            $uppercaseValueMappings = $this->getUppercaseValueMappings();
+            return array_keys($uppercaseValueMappings);
+        }
+        return $this->getEnumValues();
+    }
 
     /**
      * The input may in in UPPERCASE while the enum value in the app
