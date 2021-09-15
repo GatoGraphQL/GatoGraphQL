@@ -33,7 +33,7 @@ class CommentStatusEnumTypeResolver extends AbstractEnumTypeResolver
     {
         return null;
     }
-    
+
     /**
      * Description for a specific enum value
      */

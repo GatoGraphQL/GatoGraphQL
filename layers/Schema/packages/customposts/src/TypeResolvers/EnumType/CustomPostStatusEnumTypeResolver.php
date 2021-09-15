@@ -13,7 +13,7 @@ class CustomPostStatusEnumTypeResolver extends AbstractEnumTypeResolver
     {
         return 'CustomPostStatus';
     }
-    
+
     /**
      * @return string[]
      */
