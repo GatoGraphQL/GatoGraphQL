@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\API\Enums;
 
 use PoP\API\Schema\SchemaDefinition;
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class SchemaFieldShapeEnum extends AbstractEnum
+class SchemaFieldShapeEnum extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {

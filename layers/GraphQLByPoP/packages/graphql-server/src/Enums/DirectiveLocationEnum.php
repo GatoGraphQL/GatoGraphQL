@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Enums;
 
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\DirectiveLocations;
 
-class DirectiveLocationEnum extends AbstractEnum
+class DirectiveLocationEnum extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {

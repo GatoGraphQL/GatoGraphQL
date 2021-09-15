@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\Enums;
 
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class CustomPostModeratedStatusEnum extends AbstractEnum
+class CustomPostModeratedStatusEnum extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {

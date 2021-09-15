@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Enums;
 
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class FieldFeedbackTargetEnum extends AbstractEnum
+class FieldFeedbackTargetEnum extends AbstractEnumTypeResolver
 {
     public const DB = 'db';
     public const SCHEMA = 'schema';

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\Enums;
 
 use PoPSchema\Comments\Constants\CommentTypes;
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class CommentTypeEnum extends AbstractEnum
+class CommentTypeEnum extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {

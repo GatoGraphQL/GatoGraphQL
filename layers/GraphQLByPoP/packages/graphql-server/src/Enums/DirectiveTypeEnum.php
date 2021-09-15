@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Enums;
 
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 
-class DirectiveTypeEnum extends AbstractEnum
+class DirectiveTypeEnum extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {

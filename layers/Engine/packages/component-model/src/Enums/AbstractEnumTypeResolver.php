@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractEnum extends AbstractTypeResolver implements EnumInterface
+abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements EnumTypeResolverInterface
 {
     /**
      * Validate that, if the enum provides core values,

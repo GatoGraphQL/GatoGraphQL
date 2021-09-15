@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\Enums;
 
 use PoPSchema\CustomPosts\Types\Status;
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class CustomPostStatusEnum extends AbstractEnum
+class CustomPostStatusEnum extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {

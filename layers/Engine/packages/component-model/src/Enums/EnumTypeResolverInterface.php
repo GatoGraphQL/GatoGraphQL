@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Enums;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-interface EnumInterface extends TypeResolverInterface
+interface EnumTypeResolverInterface extends TypeResolverInterface
 {
     public function getValues(): array;
     public function getCoreValues(): ?array;

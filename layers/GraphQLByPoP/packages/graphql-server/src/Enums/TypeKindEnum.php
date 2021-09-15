@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Enums;
 
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeKinds;
 
-class TypeKindEnum extends AbstractEnum
+class TypeKindEnum extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {

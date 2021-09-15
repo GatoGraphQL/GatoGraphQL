@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\Enums;
 
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class CustomPostContentFormatEnum extends AbstractEnum
+class CustomPostContentFormatEnum extends AbstractEnumTypeResolver
 {
     public const HTML = 'HTML';
     public const PLAIN_TEXT = 'PLAIN_TEXT';
