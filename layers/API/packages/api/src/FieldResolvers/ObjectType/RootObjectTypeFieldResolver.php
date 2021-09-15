@@ -87,7 +87,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                             ),
                             SchemaDefinition::ARGNAME_ENUM_NAME => $schemaOutputShapeEnum->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $schemaOutputShapeEnum->getValues()
+                                $schemaOutputShapeEnum->getEnumValues()
                             ),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
                         ],

@@ -241,7 +241,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                  * @var CommentStatusEnum
                  */
                 $commentStatusEnum = $this->instanceManager->getInstance(CommentStatusEnum::class);
-                return $commentStatusEnum->getValues();
+                return $commentStatusEnum->getEnumValues();
         }
         return null;
     }

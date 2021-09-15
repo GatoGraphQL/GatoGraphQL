@@ -126,7 +126,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $customPostStatusEnum = $instanceManager->getInstance(CustomPostStatusEnum::class);
         if (isset($form_data[MutationInputProperties::STATUS])) {
             $status = $form_data[MutationInputProperties::STATUS];
-            if (!in_array($status, $customPostStatusEnum->getValues())) {
+            if (!in_array($status, $customPostStatusEnum->getEnumValues())) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('Status \'%s\' is not supported', 'custompost-mutations'),
                     $status

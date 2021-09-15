@@ -149,7 +149,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
                 $commentTypeEnum = $this->instanceManager->getInstance(CommentTypeEnum::class);
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $commentTypeEnum->getTypeName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $commentTypeEnum->getValues()
+                    $commentTypeEnum->getEnumValues()
                 );
                 break;
             case self::MODULE_FILTERINPUT_COMMENT_STATUS:
@@ -159,7 +159,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
                 $commentStatusEnum = $this->instanceManager->getInstance(CommentStatusEnum::class);
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $commentStatusEnum->getTypeName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $commentStatusEnum->getValues(),
+                    $commentStatusEnum->getEnumValues(),
                     $commentStatusEnum->getEnumDescriptions()
                 );
                 break;

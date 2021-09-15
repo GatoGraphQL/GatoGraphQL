@@ -139,7 +139,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
                 $memberPrivilegeEnum = $instanceManager->getInstance(MemberPrivilegeEnum::class);
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $memberPrivilegeEnum->getTypeName();
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $memberPrivilegeEnum->getValues()
+                    $memberPrivilegeEnum->getEnumValues()
                 );
                 break;
             case self::MODULE_URE_FILTERINPUT_MEMBERTAGS:
@@ -149,7 +149,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
                 $memberTagEnum = $instanceManager->getInstance(MemberTagEnum::class);
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $memberTagEnum->getTypeName();
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $memberTagEnum->getValues()
+                    $memberTagEnum->getEnumValues()
                 );
                 break;
             case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
@@ -159,7 +159,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
                 $memberStatusEnum = $instanceManager->getInstance(MemberStatusEnum::class);
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $memberStatusEnum->getTypeName();
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $memberStatusEnum->getValues()
+                    $memberStatusEnum->getEnumValues()
                 );
                 break;
         }

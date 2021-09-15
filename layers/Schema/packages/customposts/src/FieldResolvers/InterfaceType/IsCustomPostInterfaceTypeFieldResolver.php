@@ -163,7 +163,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The format of the content', 'customposts'),
                             SchemaDefinition::ARGNAME_ENUM_NAME => $customPostContentFormatEnum->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $customPostContentFormatEnum->getValues()
+                                $customPostContentFormatEnum->getEnumValues()
                             ),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultContentFormatValue(),
                         ],
@@ -210,7 +210,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
                  */
                 $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
                 return array_merge(
-                    $customPostStatusEnum->getValues(),
+                    $customPostStatusEnum->getEnumValues(),
                     [
                         /**
                          * @todo Extract to documentation before deleting this code
