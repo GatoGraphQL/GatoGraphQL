@@ -17,7 +17,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     protected ?array $outputValueToValueMappings = null;
     /**
      * Description for all enum values (which have a description)
-     * 
+     *
      * @var array<string,string>|null
      */
     protected ?array $enumValueDescriptions = null;
@@ -29,10 +29,10 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     {
         return 'strtoupper';
     }
-    
+
     /**
      * The values in the enum as they must be output (eg: in UPPERCASE)
-     * 
+     *
      * @return string[]
      */
     final public function getEnumOutputValues(): array
@@ -83,10 +83,10 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         }
         return $enumValue;
     }
-    
+
     /**
      * Description for all enum values (which have a description)
-     * 
+     *
      * @return array<string,string> Key: enum, Value: description
      */
     final public function getEnumValueDescriptions(): array

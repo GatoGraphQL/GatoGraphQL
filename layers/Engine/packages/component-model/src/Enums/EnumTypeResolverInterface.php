@@ -10,19 +10,19 @@ interface EnumTypeResolverInterface extends TypeResolverInterface
 {
     /**
      * The values in the enum
-     * 
+     *
      * @return string[]
      */
     public function getEnumValues(): array;
     /**
      * The values in the enum as they must be output (eg: in UPPERCASE)
-     * 
+     *
      * @return string[]
      */
     public function getEnumOutputValues(): array;
     /**
      * Description for all enum values (which have a description)
-     * 
+     *
      * @return array<string,string> Key: enum, Value: description
      */
     public function getEnumValueDescriptions(): array;
