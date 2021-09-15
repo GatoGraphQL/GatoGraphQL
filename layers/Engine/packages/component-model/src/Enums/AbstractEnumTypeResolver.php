@@ -43,6 +43,11 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         }
     }
 
+    public function outputEnumNameInUppercase(): bool
+    {
+        return true;
+    }
+
     /**
      * Allow the enum to deal with 2 values: the one exposed on the API,
      * and the real one that needs be provided to the application.
