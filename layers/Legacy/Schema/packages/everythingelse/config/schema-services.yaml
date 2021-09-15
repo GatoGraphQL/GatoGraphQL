@@ -5,3 +5,6 @@ services:
 
     PoPSchema\EverythingElse\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PoPSchema\EverythingElse\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

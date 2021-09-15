@@ -15,6 +15,3 @@ services:
 
     PoPSchema\Comments\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'
-
-    PoPSchema\Comments\Enums\:
-        resource: '../src/Enums/*'

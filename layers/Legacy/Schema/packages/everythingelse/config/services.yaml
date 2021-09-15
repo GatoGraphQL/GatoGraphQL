@@ -3,6 +3,3 @@ services:
         public: true
         autowire: true
         autoconfigure: true
-
-    PoPSchema\EverythingElse\Enums\:
-        resource: '../src/Enums/*'
