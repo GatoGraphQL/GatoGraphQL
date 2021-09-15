@@ -18,6 +18,4 @@ interface EnumTypeResolverInterface extends TypeResolverInterface
     public function getDescriptions(): array;
     public function outputEnumValueInUppercase(): bool;
     public function getEnumValueFromInput(string $inputEnumValue): ?string;
-    public function getCoreValues(): ?array;
-    public function getCoreValue(string $enumValue): ?string;
 }
