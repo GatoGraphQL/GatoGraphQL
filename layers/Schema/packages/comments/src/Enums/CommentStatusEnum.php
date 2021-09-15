@@ -25,6 +25,15 @@ class CommentStatusEnum extends AbstractEnumTypeResolver
             CommentStatus::TRASH,
         ];
     }
+
+    /**
+     * Use the original values
+     */
+    public function getOutputEnumValueCallable(): ?callable
+    {
+        return null;
+    }
+    
     /**
      * Description for a specific enum value
      */

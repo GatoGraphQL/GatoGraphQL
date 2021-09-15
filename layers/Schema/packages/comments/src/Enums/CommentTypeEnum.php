@@ -13,6 +13,7 @@ class CommentTypeEnum extends AbstractEnumTypeResolver
     {
         return 'CommentType';
     }
+
     /**
      * @return string[]
      */
@@ -23,5 +24,13 @@ class CommentTypeEnum extends AbstractEnumTypeResolver
             CommentTypes::TRACKBACK,
             CommentTypes::PINGBACK,
         ];
+    }
+
+    /**
+     * Use the original values
+     */
+    public function getOutputEnumValueCallable(): ?callable
+    {
+        return null;
     }
 }
