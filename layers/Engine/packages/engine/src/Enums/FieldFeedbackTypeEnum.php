@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Enums;
 
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class FieldFeedbackTypeEnum extends AbstractEnum
+class FieldFeedbackTypeEnum extends AbstractEnumTypeResolver
 {
     public const WARNING = 'warning';
     public const DEPRECATION = 'deprecation';
     public const NOTICE = 'notice';
 
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'FieldFeedbackType';
     }
-    public function getValues(): array
+    /**
+     * @return string[]
+     */
+    public function getEnumValues(): array
     {
         return [
             self::WARNING,

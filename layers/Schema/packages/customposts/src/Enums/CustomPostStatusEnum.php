@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\Enums;
 
 use PoPSchema\CustomPosts\Types\Status;
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class CustomPostStatusEnum extends AbstractEnum
+class CustomPostStatusEnum extends AbstractEnumTypeResolver
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'CustomPostStatus';
     }
-    public function getValues(): array
+    /**
+     * @return string[]
+     */
+    public function getEnumValues(): array
     {
         return [
             Status::PUBLISHED,
@@ -21,5 +24,13 @@ class CustomPostStatusEnum extends AbstractEnum
             Status::DRAFT,
             Status::TRASH,
         ];
+    }
+
+    /**
+     * Use the original values
+     */
+    public function getOutputEnumValueCallable(): ?callable
+    {
+        return null;
     }
 }

@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\Enums;
 
 use PoPSchema\Comments\Constants\CommentStatus;
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class CommentStatusEnum extends AbstractEnum
+class CommentStatusEnum extends AbstractEnumTypeResolver
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'CommentStatus';
     }
-    public function getValues(): array
+    /**
+     * @return string[]
+     */
+    public function getEnumValues(): array
     {
         return [
             CommentStatus::APPROVE,
@@ -22,13 +25,17 @@ class CommentStatusEnum extends AbstractEnum
             CommentStatus::TRASH,
         ];
     }
-    public function getDescriptions(): array
+    /**
+     * Description for a specific enum value
+     */
+    public function getEnumValueDescription(string $enumValue): ?string
     {
-        return [
+        return match ($enumValue) {
             CommentStatus::APPROVE => $this->translationAPI->__('Approved comment', 'comments'),
             CommentStatus::HOLD => $this->translationAPI->__('Onhold comment', 'comments'),
             CommentStatus::SPAM => $this->translationAPI->__('Spam comment', 'comments'),
             CommentStatus::TRASH => $this->translationAPI->__('Trashed comment', 'comments'),
-        ];
+            default => parent::getEnumValueDescription($enumValue),
+        };
     }
 }

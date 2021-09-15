@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Enums;
 
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\DirectiveLocations;
 
-class DirectiveLocationEnum extends AbstractEnum
+class DirectiveLocationEnum extends AbstractEnumTypeResolver
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'DirectiveLocation';
     }
-    public function getValues(): array
+    /**
+     * @return string[]
+     */
+    public function getEnumValues(): array
     {
         return [
             DirectiveLocations::QUERY,

@@ -46,7 +46,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                     $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
                     $value = array_intersect(
                         $value,
-                        $customPostStatusEnum->getValues()
+                        $customPostStatusEnum->getEnumValues()
                     );
                     // If no status is valid, do not set, as to not override the default value
                     if ($value) {

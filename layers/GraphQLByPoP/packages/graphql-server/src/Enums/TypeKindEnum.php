@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Enums;
 
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeKinds;
 
-class TypeKindEnum extends AbstractEnum
+class TypeKindEnum extends AbstractEnumTypeResolver
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'TypeKind';
     }
-    public function getValues(): array
+    /**
+     * @return string[]
+     */
+    public function getEnumValues(): array
     {
         return [
             TypeKinds::SCALAR,

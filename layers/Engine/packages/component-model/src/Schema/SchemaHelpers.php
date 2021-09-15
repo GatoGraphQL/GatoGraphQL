@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\ComponentModel\Enums\EnumTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -47,9 +48,10 @@ class SchemaHelpers
     }
 
     public static function convertToSchemaFieldArgEnumValueDefinitions(
-        array $enumValues,
-        array $enumDescriptions = [],
+        EnumTypeResolverInterface $enumTypeResolver,
     ): array {
+        $enumValues = $enumTypeResolver->getEnumOutputValues();
+        $enumValueDescriptions = $enumTypeResolver->getEnumValueDescriptions();
         $enumValueDefinitions = [];
         // Create an array representing the enumValue definition
         // Since only the enumValues were defined, these have no description/deprecated data, so no need to add these either
@@ -57,7 +59,7 @@ class SchemaHelpers
             $enumValueDefinitions[$enumValue] = [
                 SchemaDefinition::ARGNAME_NAME => $enumValue,
             ];
-            if ($description = $enumDescriptions[$enumValue] ?? null) {
+            if ($description = $enumValueDescriptions[$enumValue] ?? null) {
                 $enumValueDefinitions[$enumValue][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
             }
         }

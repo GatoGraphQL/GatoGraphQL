@@ -115,9 +115,9 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
                  * @var CustomPostStatusEnum
                  */
                 $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostStatusEnum->getName();
+                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostStatusEnum->getTypeName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $customPostStatusEnum->getValues()
+                    $customPostStatusEnum
                 );
                 break;
         }

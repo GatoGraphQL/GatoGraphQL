@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\Enums;
 
 use PoPSchema\Comments\Constants\CommentTypes;
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class CommentTypeEnum extends AbstractEnum
+class CommentTypeEnum extends AbstractEnumTypeResolver
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'CommentType';
     }
-    public function getValues(): array
+    /**
+     * @return string[]
+     */
+    public function getEnumValues(): array
     {
         return [
             CommentTypes::COMMENT,

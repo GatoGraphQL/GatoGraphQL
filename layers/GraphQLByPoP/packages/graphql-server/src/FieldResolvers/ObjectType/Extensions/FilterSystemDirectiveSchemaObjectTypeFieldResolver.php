@@ -69,9 +69,9 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                             SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only directives of provided types', 'graphql-api'),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $directiveTypeEnum->getName(),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $directiveTypeEnum->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $directiveTypeEnum->getValues()
+                                $directiveTypeEnum
                             ),
                         ],
                     ]
@@ -107,7 +107,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                     $directiveTypeEnum = $this->instanceManager->getInstance(DirectiveTypeEnum::class);
                     // Convert the enum from uppercase (as exposed in the API) to lowercase (as is its real value)
                     $ofTypes = array_map(
-                        [$directiveTypeEnum, 'getCoreValue'],
+                        fn (string $enumValue) => $directiveTypeEnum->getEnumValueFromInput($enumValue),
                         $ofTypes
                     );
                     $directiveRegistry = DirectiveRegistryFacade::getInstance();

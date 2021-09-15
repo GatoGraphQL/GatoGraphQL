@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\Enums;
 
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class MemberStatusEnum extends AbstractEnum
+class MemberStatusEnum extends AbstractEnumTypeResolver
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'MemberStatus';
     }
-    public function getValues(): array
+    /**
+     * @return string[]
+     */
+    public function getEnumValues(): array
     {
         return array_keys((new \GD_URE_FormInput_MultiMemberStatus())->getAllValues());
     }

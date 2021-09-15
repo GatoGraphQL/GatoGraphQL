@@ -153,9 +153,9 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
                 SchemaDefinition::ARGNAME_NAME => 'type',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The type of feedback', 'engine'),
-                SchemaDefinition::ARGNAME_ENUM_NAME => $fieldFeedbackTypeEnum->getName(),
+                SchemaDefinition::ARGNAME_ENUM_NAME => $fieldFeedbackTypeEnum->getTypeName(),
                 SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $fieldFeedbackTypeEnum->getValues()
+                    $fieldFeedbackTypeEnum
                 ),
                 SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultFeedbackType(),
             ],
@@ -163,9 +163,9 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
                 SchemaDefinition::ARGNAME_NAME => 'target',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The target for the feedback', 'engine'),
-                SchemaDefinition::ARGNAME_ENUM_NAME => $fieldFeedbackTargetEnum->getName(),
+                SchemaDefinition::ARGNAME_ENUM_NAME => $fieldFeedbackTargetEnum->getTypeName(),
                 SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $fieldFeedbackTargetEnum->getValues()
+                    $fieldFeedbackTargetEnum
                 ),
                 SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultFeedbackTarget(),
             ],

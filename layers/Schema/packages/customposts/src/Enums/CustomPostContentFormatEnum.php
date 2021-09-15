@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\Enums;
 
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class CustomPostContentFormatEnum extends AbstractEnum
+class CustomPostContentFormatEnum extends AbstractEnumTypeResolver
 {
     public const HTML = 'HTML';
     public const PLAIN_TEXT = 'PLAIN_TEXT';
 
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'CustomPostContentFormat';
     }
-    public function getValues(): array
+    /**
+     * @return string[]
+     */
+    public function getEnumValues(): array
     {
         return [
             self::HTML,

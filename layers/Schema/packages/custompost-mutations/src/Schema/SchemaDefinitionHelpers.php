@@ -58,9 +58,9 @@ class SchemaDefinitionHelpers
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::STATUS,
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                         SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The status of the custom post', 'custompost-mutations'),
-                        SchemaDefinition::ARGNAME_ENUM_NAME => $customPostStatusEnum->getName(),
+                        SchemaDefinition::ARGNAME_ENUM_NAME => $customPostStatusEnum->getTypeName(),
                         SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                            $customPostStatusEnum->getValues()
+                            $customPostStatusEnum
                         ),
                     ],
                 ]

@@ -4,20 +4,23 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\Enums;
 
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class SocialMediaProviderEnum extends AbstractEnum
+class SocialMediaProviderEnum extends AbstractEnumTypeResolver
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'SocialMediaProvider';
     }
-    public function getValues(): array
+    /**
+     * @return string[]
+     */
+    public function getEnumValues(): array
     {
         return [
-            'facebook' => \GD_SOCIALMEDIA_PROVIDER_FACEBOOK,
-            'linkedin' => \GD_SOCIALMEDIA_PROVIDER_LINKEDIN,
-            'twitter' => \GD_SOCIALMEDIA_PROVIDER_TWITTER,
+            \GD_SOCIALMEDIA_PROVIDER_FACEBOOK,
+            \GD_SOCIALMEDIA_PROVIDER_LINKEDIN,
+            \GD_SOCIALMEDIA_PROVIDER_TWITTER,
         ];
     }
 }

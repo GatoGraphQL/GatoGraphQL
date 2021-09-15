@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace PoP\API\Enums;
 
 use PoP\API\Schema\SchemaDefinition;
-use PoP\ComponentModel\Enums\AbstractEnum;
+use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
 
-class SchemaFieldShapeEnum extends AbstractEnum
+class SchemaFieldShapeEnum extends AbstractEnumTypeResolver
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'SchemaOutputShape';
     }
-    public function getValues(): array
+    /**
+     * @return string[]
+     */
+    public function getEnumValues(): array
     {
         return [
             SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
