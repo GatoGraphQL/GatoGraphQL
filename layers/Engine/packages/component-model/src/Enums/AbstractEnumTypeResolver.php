@@ -60,8 +60,26 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         return $this->uppercaseValueMappings;
     }
 
-    public function getEnumValueDescriptions(): array
+    final public function getEnumValueDescriptions(): array
     {
-        return [];
+        $enumValueDescriptions = [];
+        foreach ($this->getEnumValues() as $enumValue) {
+            $enumValueDescription = $this->getEnumValueDescription($enumValue);
+            if ($enumValueDescription !== null) {
+                $enumValueDescriptions[$enumValue] = $enumValueDescription;
+            }
+        }
+        return $enumValueDescriptions;
+    }
+
+    /**
+     * By default, no description
+     *
+     * @param string $enumValue
+     * @return string|null
+     */
+    public function getEnumValueDescription(string $enumValue): ?string
+    {
+        return null;
     }
 }
