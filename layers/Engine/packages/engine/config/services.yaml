@@ -38,9 +38,6 @@ services:
     PoP\Engine\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
-    PoP\Engine\Enums\:
-        resource: '../src/Enums/*'
-
     PoP\Engine\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
