@@ -13,7 +13,7 @@ class SocialMediaProviderEnum extends AbstractEnumTypeResolver
         return 'SocialMediaProvider';
     }
     /**
-     * @return array<int|float|bool|string>
+     * @return string[]
      */
     public function getValues(): array
     {

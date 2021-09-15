@@ -9,10 +9,10 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 interface EnumTypeResolverInterface extends TypeResolverInterface
 {
     /**
-     * @return array<int|float|bool|string>
+     * @return string[]
      */
     public function getValues(): array;
+    public function getDescriptions(): array;
     public function getCoreValues(): ?array;
     public function getCoreValue(string $enumValue): ?string;
-    public function getDescriptions(): array;
 }

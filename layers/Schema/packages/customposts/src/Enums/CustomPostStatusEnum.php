@@ -14,7 +14,7 @@ class CustomPostStatusEnum extends AbstractEnumTypeResolver
         return 'CustomPostStatus';
     }
     /**
-     * @return array<int|float|bool|string>
+     * @return string[]
      */
     public function getValues(): array
     {

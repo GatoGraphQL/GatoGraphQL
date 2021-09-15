@@ -14,7 +14,7 @@ class DirectiveLocationEnum extends AbstractEnumTypeResolver
         return 'DirectiveLocation';
     }
     /**
-     * @return array<int|float|bool|string>
+     * @return string[]
      */
     public function getValues(): array
     {

@@ -14,7 +14,7 @@ class SchemaFieldShapeEnum extends AbstractEnumTypeResolver
         return 'SchemaOutputShape';
     }
     /**
-     * @return array<int|float|bool|string>
+     * @return string[]
      */
     public function getValues(): array
     {

@@ -13,7 +13,7 @@ class MemberStatusEnum extends AbstractEnumTypeResolver
         return 'MemberStatus';
     }
     /**
-     * @return array<int|float|bool|string>
+     * @return string[]
      */
     public function getValues(): array
     {
