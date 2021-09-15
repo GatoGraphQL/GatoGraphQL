@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Enums;
 
-interface EnumInterface
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+
+interface EnumInterface extends TypeResolverInterface
 {
     // These 5 values are calculated, based on the other ones
     public function getName(): string;

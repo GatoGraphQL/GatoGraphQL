@@ -5,20 +5,34 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Enums;
 
 use Exception;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractEnum implements EnumInterface
+abstract class AbstractEnum extends AbstractTypeResolver implements EnumInterface
 {
     /**
      * Validate that, if the enum provides core values,
      * these have the same number of elements as the values
      */
     public function __construct(
-        protected SchemaNamespacingServiceInterface $schemaNamespacingService,
-        protected TranslationAPIInterface $translationAPI,
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $schemaNamespacingService,
+            $schemaDefinitionService,
+        );
         if (!is_null($this->getCoreValues()) && count($this->getCoreValues()) != count($this->getValues())) {
             throw new Exception(
                 sprintf(
