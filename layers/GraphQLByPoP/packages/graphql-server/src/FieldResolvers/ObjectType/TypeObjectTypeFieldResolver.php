@@ -12,6 +12,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasPossibleTypesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\InputObjectType;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\TypeKindEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\EnumValueObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
@@ -82,10 +83,10 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'kind':
                 /**
-                 * @var TypeKindEnum
+                 * @var TypeKindEnumTypeResolver
                  */
-                $typeKindEnum = $this->instanceManager->getInstance(TypeKindEnum::class);
-                return $typeKindEnum->getTypeName();
+                $typeKindEnumTypeResolver = $this->instanceManager->getInstance(TypeKindEnumTypeResolver::class);
+                return $typeKindEnumTypeResolver->getTypeName();
         }
         return null;
     }
@@ -95,10 +96,10 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'kind':
                 /**
-                 * @var TypeKindEnum
+                 * @var TypeKindEnumTypeResolver
                  */
-                $typeKindEnum = $this->instanceManager->getInstance(TypeKindEnum::class);
-                return $typeKindEnum->getEnumValues();
+                $typeKindEnumTypeResolver = $this->instanceManager->getInstance(TypeKindEnumTypeResolver::class);
+                return $typeKindEnumTypeResolver->getEnumValues();
         }
         return null;
     }

@@ -11,6 +11,8 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostContentFormatEnumTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
@@ -107,9 +109,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         switch ($fieldName) {
             case 'isStatus':
                 /**
-                 * @var CustomPostStatusEnum
+                 * @var CustomPostStatusEnumTypeResolver
                  */
-                $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
+                $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -117,7 +119,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
                             SchemaDefinition::ARGNAME_NAME => 'status',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The status to check if the post has', 'customposts'),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $customPostStatusEnum->getTypeName(),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $customPostStatusEnumTypeResolver->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => [
                                 Status::PUBLISHED => [
                                     SchemaDefinition::ARGNAME_NAME => Status::PUBLISHED,
@@ -151,9 +153,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
 
             case 'content':
                 /**
-                 * @var CustomPostContentFormatEnum
+                 * @var CustomPostContentFormatEnumTypeResolver
                  */
-                $customPostContentFormatEnum = $this->instanceManager->getInstance(CustomPostContentFormatEnum::class);
+                $customPostContentFormatEnumTypeResolver = $this->instanceManager->getInstance(CustomPostContentFormatEnumTypeResolver::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -161,9 +163,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
                             SchemaDefinition::ARGNAME_NAME => 'format',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The format of the content', 'customposts'),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $customPostContentFormatEnum->getTypeName(),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $customPostContentFormatEnumTypeResolver->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $customPostContentFormatEnum
+                                $customPostContentFormatEnumTypeResolver
                             ),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultContentFormatValue(),
                         ],
@@ -193,10 +195,10 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         switch ($fieldName) {
             case 'status':
                 /**
-                 * @var CustomPostStatusEnum
+                 * @var CustomPostStatusEnumTypeResolver
                  */
-                $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
-                return $customPostStatusEnum->getTypeName();
+                $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+                return $customPostStatusEnumTypeResolver->getTypeName();
         }
         return null;
     }
@@ -206,11 +208,11 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         switch ($fieldName) {
             case 'status':
                 /**
-                 * @var CustomPostStatusEnum
+                 * @var CustomPostStatusEnumTypeResolver
                  */
-                $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
+                $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
                 return array_merge(
-                    $customPostStatusEnum->getEnumValues(),
+                    $customPostStatusEnumTypeResolver->getEnumValues(),
                     [
                         /**
                          * @todo Extract to documentation before deleting this code

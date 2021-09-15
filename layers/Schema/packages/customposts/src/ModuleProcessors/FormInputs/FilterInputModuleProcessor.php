@@ -14,6 +14,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
 
@@ -112,12 +113,12 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS:
                 /**
-                 * @var CustomPostStatusEnum
+                 * @var CustomPostStatusEnumTypeResolver
                  */
-                $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostStatusEnum->getTypeName();
+                $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostStatusEnumTypeResolver->getTypeName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $customPostStatusEnum
+                    $customPostStatusEnumTypeResolver
                 );
                 break;
         }

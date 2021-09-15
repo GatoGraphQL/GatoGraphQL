@@ -16,6 +16,8 @@ use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\Enums\CommentStatusEnum;
 use PoPSchema\Comments\Enums\CommentTypeEnum;
 use PoPSchema\Comments\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
+use PoPSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -144,22 +146,22 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_COMMENT_TYPES:
                 /**
-                 * @var CommentTypeEnum
+                 * @var CommentTypeEnumTypeResolver
                  */
-                $commentTypeEnum = $this->instanceManager->getInstance(CommentTypeEnum::class);
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $commentTypeEnum->getTypeName();
+                $commentTypeEnumTypeResolver = $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
+                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $commentTypeEnumTypeResolver->getTypeName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $commentTypeEnum
+                    $commentTypeEnumTypeResolver
                 );
                 break;
             case self::MODULE_FILTERINPUT_COMMENT_STATUS:
                 /**
-                 * @var CommentStatusEnum
+                 * @var CommentStatusEnumTypeResolver
                  */
-                $commentStatusEnum = $this->instanceManager->getInstance(CommentStatusEnum::class);
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $commentStatusEnum->getTypeName();
+                $commentStatusEnumTypeResolver = $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
+                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $commentStatusEnumTypeResolver->getTypeName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $commentStatusEnum
+                    $commentStatusEnumTypeResolver
                 );
                 break;
         }
