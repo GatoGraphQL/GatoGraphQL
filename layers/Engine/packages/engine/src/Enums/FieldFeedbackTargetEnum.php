@@ -18,7 +18,7 @@ class FieldFeedbackTargetEnum extends AbstractEnumTypeResolver
     /**
      * @return string[]
      */
-    public function getValues(): array
+    public function getEnumValues(): array
     {
         return [
             self::DB,

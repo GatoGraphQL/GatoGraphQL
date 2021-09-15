@@ -15,7 +15,7 @@ class CustomPostUnmoderatedStatusEnum extends AbstractEnumTypeResolver
     /**
      * @return string[]
      */
-    public function getValues(): array
+    public function getEnumValues(): array
     {
         return array_keys((new \GD_FormInput_UnmoderatedStatus())->getAllValues());
     }

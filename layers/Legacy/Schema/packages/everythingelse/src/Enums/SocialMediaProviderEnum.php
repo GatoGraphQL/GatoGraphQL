@@ -15,7 +15,7 @@ class SocialMediaProviderEnum extends AbstractEnumTypeResolver
     /**
      * @return string[]
      */
-    public function getValues(): array
+    public function getEnumValues(): array
     {
         return [
             'facebook' => \GD_SOCIALMEDIA_PROVIDER_FACEBOOK,

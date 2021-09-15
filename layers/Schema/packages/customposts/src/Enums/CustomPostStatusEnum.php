@@ -16,7 +16,7 @@ class CustomPostStatusEnum extends AbstractEnumTypeResolver
     /**
      * @return string[]
      */
-    public function getValues(): array
+    public function getEnumValues(): array
     {
         return [
             Status::PUBLISHED,
