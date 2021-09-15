@@ -25,9 +25,9 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     /**
      * By default, output the enum value in UPPERCASE
      */
-    public function outputEnumValueInUppercase(): bool
+    public function getOutputEnumValueCallable(): ?callable
     {
-        return true;
+        return 'strtoupper';
     }
     
     /**
@@ -37,11 +37,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     final public function getEnumOutputValues(): array
     {
-        if ($this->outputEnumValueInUppercase()) {
-            $uppercaseValueMappings = $this->getUppercaseValueMappings();
-            return array_keys($uppercaseValueMappings);
-        }
-        return $this->getEnumValues();
+        $uppercaseValueMappings = $this->getUppercaseValueMappings();
+        return array_keys($uppercaseValueMappings);
     }
 
     /**
@@ -53,14 +50,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     final public function getEnumValueFromInput(string $inputEnumValue): ?string
     {
-        if ($this->outputEnumValueInUppercase()) {
-            $uppercaseValueMappings = $this->getUppercaseValueMappings();
-            return $uppercaseValueMappings[$inputEnumValue] ?? null;
-        }
-        if (in_array($inputEnumValue, $this->getEnumValues())) {
-            return $inputEnumValue;
-        }
-        return null;
+        $uppercaseValueMappings = $this->getUppercaseValueMappings();
+        return $uppercaseValueMappings[$inputEnumValue] ?? null;
     }
 
     /**
@@ -69,17 +60,30 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      *
      * @return array<string,string>
      */
-    protected function getUppercaseValueMappings(): array
+    private function getUppercaseValueMappings(): array
     {
         if ($this->uppercaseValueMappings === null) {
             $this->uppercaseValueMappings = [];
-            foreach ($this->getEnumValues() as $value) {
-                $this->uppercaseValueMappings[strtoupper($value)] = $value;
+            foreach ($this->getEnumValues() as $enumValue) {
+                $this->uppercaseValueMappings[$this->getOutputEnumValue($enumValue)] = $enumValue;
             }
         }
         return $this->uppercaseValueMappings;
     }
 
+    /**
+     * Transform the enum value to its output, or return
+     * the same enum value if there is no callable provided
+     */
+    private function getOutputEnumValue(string $enumValue): string
+    {
+        $outputEnumValueCallable = $this->getOutputEnumValueCallable();
+        if ($this->getOutputEnumValueCallable() !== null) {
+            return $outputEnumValueCallable($enumValue);
+        }
+        return $enumValue;
+    }
+    
     /**
      * Description for all enum values (which have a description)
      * 

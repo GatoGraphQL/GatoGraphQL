@@ -31,10 +31,11 @@ interface EnumTypeResolverInterface extends TypeResolverInterface
      */
     public function getEnumValueDescription(string $enumValue): ?string;
     /**
-     * Enable to output the enum values in UPPERCASE,
-     * even if those values are handled as lowercase
+     * Enable to output the enum values in UPPERCASE
+     * (even if those values are handled as lowercase)
+     * or some different format, through a custom callable
      */
-    public function outputEnumValueInUppercase(): bool;
+    public function getOutputEnumValueCallable(): ?callable;
     /**
      * The input may in in UPPERCASE while the enum value in the app
      * is stored in lowercase, then convert from one to the other.
