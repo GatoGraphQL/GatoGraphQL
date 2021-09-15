@@ -68,7 +68,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  * @var DirectiveLocationEnum
                  */
                 $directiveLocationEnum = $this->instanceManager->getInstance(DirectiveLocationEnum::class);
-                return $directiveLocationEnum->getName();
+                return $directiveLocationEnum->getTypeName();
         }
         return null;
     }

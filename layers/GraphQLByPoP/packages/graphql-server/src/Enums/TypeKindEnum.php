@@ -9,7 +9,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\TypeKinds;
 
 class TypeKindEnum extends AbstractEnum
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'TypeKind';
     }

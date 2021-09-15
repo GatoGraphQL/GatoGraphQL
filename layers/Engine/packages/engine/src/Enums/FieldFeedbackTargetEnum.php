@@ -11,7 +11,7 @@ class FieldFeedbackTargetEnum extends AbstractEnum
     public const DB = 'db';
     public const SCHEMA = 'schema';
 
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'FieldFeedbackTarget';
     }

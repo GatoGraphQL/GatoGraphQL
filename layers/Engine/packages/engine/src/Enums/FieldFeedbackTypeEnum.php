@@ -12,7 +12,7 @@ class FieldFeedbackTypeEnum extends AbstractEnum
     public const DEPRECATION = 'deprecation';
     public const NOTICE = 'notice';
 
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'FieldFeedbackType';
     }

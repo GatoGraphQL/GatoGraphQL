@@ -8,7 +8,7 @@ use PoP\ComponentModel\Enums\AbstractEnum;
 
 class CustomPostUnmoderatedStatusEnum extends AbstractEnum
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'CustomPostUnmoderatedStatus';
     }

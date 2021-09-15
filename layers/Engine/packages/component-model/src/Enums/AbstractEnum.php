@@ -8,7 +8,6 @@ use Exception;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -37,39 +36,12 @@ abstract class AbstractEnum extends AbstractTypeResolver implements EnumInterfac
             throw new Exception(
                 sprintf(
                     $this->translationAPI->__('Enum \'%s\' (in class \'%s\') must return the same number of elements in function `getCoreValues()` as in `getValues()`', 'component-model'),
-                    $this->getName(),
+                    $this->getTypeName(),
                     get_called_class()
                 )
             );
         }
     }
-    final public function getName(): string
-    {
-        return $this->getMaybeNamespacedName();
-    }
-    public function getNamespace(): string
-    {
-        return $this->schemaNamespacingService->getSchemaNamespace(get_called_class());
-    }
-    final public function getNamespacedName(): string
-    {
-        return $this->schemaNamespacingService->getSchemaNamespacedName(
-            $this->getNamespace(),
-            $this->getEnumName()
-        );
-    }
-    final public function getMaybeNamespacedName(): string
-    {
-        $vars = ApplicationState::getVars();
-        return $vars['namespace-types-and-interfaces'] ?
-            $this->getNamespacedName() :
-            $this->getEnumName();
-    }
-
-    /**
-     * Enum name
-     */
-    abstract protected function getEnumName(): string;
 
     /**
      * Allow the enum to deal with 2 values: the one exposed on the API,

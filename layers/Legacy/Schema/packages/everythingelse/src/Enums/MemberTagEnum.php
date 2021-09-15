@@ -8,7 +8,7 @@ use PoP\ComponentModel\Enums\AbstractEnum;
 
 class MemberTagEnum extends AbstractEnum
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'MemberTag';
     }

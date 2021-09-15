@@ -63,7 +63,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
                         [
                             SchemaDefinition::ARGNAME_NAME => 'provider',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $socialMediaProviderEnum->getName(),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $socialMediaProviderEnum->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                                 array_keys($socialMediaProviderEnum->getValues())
                             ),

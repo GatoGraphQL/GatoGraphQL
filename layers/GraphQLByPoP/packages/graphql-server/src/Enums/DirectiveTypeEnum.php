@@ -10,7 +10,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 
 class DirectiveTypeEnum extends AbstractEnum
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'DirectiveType';
     }

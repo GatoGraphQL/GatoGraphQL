@@ -85,7 +85,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  * @var TypeKindEnum
                  */
                 $typeKindEnum = $this->instanceManager->getInstance(TypeKindEnum::class);
-                return $typeKindEnum->getName();
+                return $typeKindEnum->getTypeName();
         }
         return null;
     }

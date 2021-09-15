@@ -117,7 +117,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
                             SchemaDefinition::ARGNAME_NAME => 'status',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The status to check if the post has', 'customposts'),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $customPostStatusEnum->getName(),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $customPostStatusEnum->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => [
                                 Status::PUBLISHED => [
                                     SchemaDefinition::ARGNAME_NAME => Status::PUBLISHED,
@@ -161,7 +161,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
                             SchemaDefinition::ARGNAME_NAME => 'format',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The format of the content', 'customposts'),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $customPostContentFormatEnum->getName(),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $customPostContentFormatEnum->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                                 $customPostContentFormatEnum->getValues()
                             ),
@@ -196,7 +196,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
                  * @var CustomPostStatusEnum
                  */
                 $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
-                return $customPostStatusEnum->getName();
+                return $customPostStatusEnum->getTypeName();
         }
         return null;
     }

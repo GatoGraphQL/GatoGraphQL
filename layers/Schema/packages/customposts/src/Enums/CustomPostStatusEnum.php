@@ -9,7 +9,7 @@ use PoP\ComponentModel\Enums\AbstractEnum;
 
 class CustomPostStatusEnum extends AbstractEnum
 {
-    protected function getEnumName(): string
+    public function getTypeName(): string
     {
         return 'CustomPostStatus';
     }
