@@ -14,7 +14,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      *
      * @var array<string,string>|null
      */
-    protected ?array $uppercaseValueMappings = null;
+    protected ?array $outputValueToValueMappings = null;
     /**
      * Description for all enum values (which have a description)
      * 
@@ -37,8 +37,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     final public function getEnumOutputValues(): array
     {
-        $uppercaseValueMappings = $this->getUppercaseValueMappings();
-        return array_keys($uppercaseValueMappings);
+        $outputValueToValueMappings = $this->getUppercaseValueMappings();
+        return array_keys($outputValueToValueMappings);
     }
 
     /**
@@ -50,8 +50,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     final public function getEnumValueFromInput(string $inputEnumValue): ?string
     {
-        $uppercaseValueMappings = $this->getUppercaseValueMappings();
-        return $uppercaseValueMappings[$inputEnumValue] ?? null;
+        $outputValueToValueMappings = $this->getUppercaseValueMappings();
+        return $outputValueToValueMappings[$inputEnumValue] ?? null;
     }
 
     /**
@@ -62,13 +62,13 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     private function getUppercaseValueMappings(): array
     {
-        if ($this->uppercaseValueMappings === null) {
-            $this->uppercaseValueMappings = [];
+        if ($this->outputValueToValueMappings === null) {
+            $this->outputValueToValueMappings = [];
             foreach ($this->getEnumValues() as $enumValue) {
-                $this->uppercaseValueMappings[$this->getOutputEnumValue($enumValue)] = $enumValue;
+                $this->outputValueToValueMappings[$this->getOutputEnumValue($enumValue)] = $enumValue;
             }
         }
-        return $this->uppercaseValueMappings;
+        return $this->outputValueToValueMappings;
     }
 
     /**
@@ -78,7 +78,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     private function getOutputEnumValue(string $enumValue): string
     {
         $outputEnumValueCallable = $this->getOutputEnumValueCallable();
-        if ($this->getOutputEnumValueCallable() !== null) {
+        if ($outputEnumValueCallable !== null) {
             return $outputEnumValueCallable($enumValue);
         }
         return $enumValue;
