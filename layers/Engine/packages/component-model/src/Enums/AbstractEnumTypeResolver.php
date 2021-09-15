@@ -9,8 +9,8 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements EnumTypeResolverInterface
 {
     /**
-     * Provide a mapping of enum values from uppercase to real value,
-     * as entries: [VALUE => value]
+     * Provide a mapping of enum values from output to real value,
+     * such as entries [VALUE => value] for "uppercase" output
      *
      * @var array<string,string>|null
      */
@@ -37,7 +37,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     final public function getEnumOutputValues(): array
     {
-        $outputValueToValueMappings = $this->getUppercaseValueMappings();
+        $outputValueToValueMappings = $this->getOutputValueToValueMappings();
         return array_keys($outputValueToValueMappings);
     }
 
@@ -50,7 +50,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     final public function getEnumValueFromInput(string $inputEnumValue): ?string
     {
-        $outputValueToValueMappings = $this->getUppercaseValueMappings();
+        $outputValueToValueMappings = $this->getOutputValueToValueMappings();
         return $outputValueToValueMappings[$inputEnumValue] ?? null;
     }
 
@@ -60,7 +60,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      *
      * @return array<string,string>
      */
-    private function getUppercaseValueMappings(): array
+    private function getOutputValueToValueMappings(): array
     {
         if ($this->outputValueToValueMappings === null) {
             $this->outputValueToValueMappings = [];
