@@ -23,4 +23,12 @@ class SchemaFieldShapeEnum extends AbstractEnumTypeResolver
             SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED,
         ];
     }
+
+    /**
+     * Use the original values
+     */
+    public function getOutputEnumValueCallable(): ?callable
+    {
+        return null;
+    }
 }
