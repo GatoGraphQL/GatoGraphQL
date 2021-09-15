@@ -13,6 +13,9 @@ class CommentStatusEnum extends AbstractEnumTypeResolver
     {
         return 'CommentStatus';
     }
+    /**
+     * @return array<int|float|bool|string>
+     */
     public function getValues(): array
     {
         return [

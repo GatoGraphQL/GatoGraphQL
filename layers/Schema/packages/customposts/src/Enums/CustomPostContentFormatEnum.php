@@ -15,6 +15,9 @@ class CustomPostContentFormatEnum extends AbstractEnumTypeResolver
     {
         return 'CustomPostContentFormat';
     }
+    /**
+     * @return array<int|float|bool|string>
+     */
     public function getValues(): array
     {
         return [

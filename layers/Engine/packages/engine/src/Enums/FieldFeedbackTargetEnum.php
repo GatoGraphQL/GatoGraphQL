@@ -15,6 +15,9 @@ class FieldFeedbackTargetEnum extends AbstractEnumTypeResolver
     {
         return 'FieldFeedbackTarget';
     }
+    /**
+     * @return array<int|float|bool|string>
+     */
     public function getValues(): array
     {
         return [

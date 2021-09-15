@@ -8,6 +8,9 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 interface EnumTypeResolverInterface extends TypeResolverInterface
 {
+    /**
+     * @return array<int|float|bool|string>
+     */
     public function getValues(): array;
     public function getCoreValues(): ?array;
     public function getCoreValue(string $enumValue): ?string;

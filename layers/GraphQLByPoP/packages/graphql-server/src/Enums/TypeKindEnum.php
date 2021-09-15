@@ -13,6 +13,9 @@ class TypeKindEnum extends AbstractEnumTypeResolver
     {
         return 'TypeKind';
     }
+    /**
+     * @return array<int|float|bool|string>
+     */
     public function getValues(): array
     {
         return [

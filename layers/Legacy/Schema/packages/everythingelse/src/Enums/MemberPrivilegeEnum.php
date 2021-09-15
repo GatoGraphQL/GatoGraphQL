@@ -12,6 +12,9 @@ class MemberPrivilegeEnum extends AbstractEnumTypeResolver
     {
         return 'MemberPrivilege';
     }
+    /**
+     * @return array<int|float|bool|string>
+     */
     public function getValues(): array
     {
         return array_keys((new \GD_URE_FormInput_FilterMemberPrivileges())->getAllValues());
