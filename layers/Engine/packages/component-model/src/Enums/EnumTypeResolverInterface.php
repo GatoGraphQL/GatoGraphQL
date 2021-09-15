@@ -9,6 +9,8 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 interface EnumTypeResolverInterface extends TypeResolverInterface
 {
     /**
+     * The values in the enum
+     * 
      * @return string[]
      */
     public function getEnumValues(): array;
