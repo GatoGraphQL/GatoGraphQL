@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Enums;
+namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 

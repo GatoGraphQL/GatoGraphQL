@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
-use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
+use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 
 class DirectiveTypeEnumTypeResolver extends AbstractEnumTypeResolver

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\TypeResolvers\EnumType;
 
 use PoPSchema\Comments\Constants\CommentStatus;
-use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
+use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
 class CommentStatusEnumTypeResolver extends AbstractEnumTypeResolver
 {
