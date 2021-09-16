@@ -23,6 +23,9 @@ class IPScalarTypeResolver extends AbstractScalarTypeResolver
         if ($error = $this->validateIsNotArrayOrObject($inputValue)) {
             return $error;
         }
+        if ($error = $this->validateFilterVar($inputValue, \FILTER_VALIDATE_IP)) {
+            return $error;
+        }
         return $inputValue;
     }
 }

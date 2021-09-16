@@ -23,6 +23,9 @@ class URLScalarTypeResolver extends AbstractScalarTypeResolver
         if ($error = $this->validateIsNotArrayOrObject($inputValue)) {
             return $error;
         }
+        if ($error = $this->validateFilterVar($inputValue, \FILTER_VALIDATE_URL)) {
+            return $error;
+        }
         return $inputValue;
     }
 }
