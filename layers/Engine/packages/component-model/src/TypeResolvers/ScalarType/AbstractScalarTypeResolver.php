@@ -25,6 +25,15 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         );
     }
 
+    protected function getDefaultErrorMessage(mixed $inputValue): string
+    {
+        return sprintf(
+            $this->translationAPI->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
+            $inputValue,
+            $this->getMaybeNamespacedTypeName(),
+        );
+    }
+
     protected function validateIsNotArrayOrObject(mixed $inputValue): ?Error
     {
         // Fail if passing an array for unsupporting types
