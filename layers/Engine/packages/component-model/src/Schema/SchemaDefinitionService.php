@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class SchemaDefinitionService implements SchemaDefinitionServiceInterface
@@ -14,11 +15,19 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
         return $typeResolver->getMaybeNamespacedTypeName();
     }
     /**
-     * The `mixed` type is a wildcard type,
+     * The `AnyScalar` type is a wildcard type,
      * representing *any* type (string, int, bool, etc)
      */
     public function getDefaultType(): string
     {
         return SchemaDefinition::TYPE_ANY_SCALAR;
+    }
+    /**
+     * The `AnyScalar` type is a wildcard type,
+     * representing *any* type (string, int, bool, etc)
+     */
+    public function getDefaultTypeResolverClass(): string
+    {
+        return AnyScalarScalarTypeResolver::class;
     }
 }

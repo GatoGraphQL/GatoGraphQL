@@ -14,4 +14,9 @@ interface SchemaDefinitionServiceInterface
      * When not defined, the default type will be used.
      */
     public function getDefaultType(): string;
+    /**
+     * Field types, and field/directive argument types are mandatory.
+     * When not defined, the default type will be used.
+     */
+    public function getDefaultTypeResolverClass(): string;
 }

@@ -200,7 +200,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldTypeResolverClass($fieldName);
         }
-        return AnyScalarScalarTypeResolver::class;
+        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
+        return $schemaDefinitionService->getDefaultTypeResolverClass();
     }
 
     /**
