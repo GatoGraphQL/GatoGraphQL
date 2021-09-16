@@ -544,11 +544,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         $fieldTypeResolverClass = $schemaDefinitionResolver->getFieldTypeResolverClass($objectTypeResolver, $fieldName);
         if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
-            $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);
+            $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
         } elseif (SchemaHelpers::isEnumFieldTypeResolverClass($fieldTypeResolverClass)) {
-            $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);
+            $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
             $type = SchemaDefinition::TYPE_ENUM;
             $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $fieldTypeResolver->getMaybeNamespacedTypeName();
         } else {
