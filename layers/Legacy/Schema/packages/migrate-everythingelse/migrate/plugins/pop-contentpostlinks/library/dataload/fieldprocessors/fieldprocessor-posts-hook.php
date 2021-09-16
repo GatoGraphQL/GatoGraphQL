@@ -75,6 +75,8 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
+    // @todo: Migrate to returning an EnumTypeResolverClass in getFieldTypeResolverClass, then delete this function
+    //        Until then, this logic is not working (this function is not invoked anymore)
     protected function getSchemaDefinitionEnumName(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
@@ -89,6 +91,8 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
         return null;
     }
 
+    // @todo: Migrate to returning an EnumTypeResolverClass in getFieldTypeResolverClass, then delete this function
+    //        Until then, this logic is not working (this function is not invoked anymore)
     protected function getSchemaDefinitionEnumValues(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
     {
         switch ($fieldName) {

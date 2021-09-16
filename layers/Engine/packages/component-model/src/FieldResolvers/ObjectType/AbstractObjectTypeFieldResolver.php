@@ -283,26 +283,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
     }
 
-    protected function getSchemaDefinitionEnumName(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
-    {
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValueDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
-    {
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValueDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
-    {
-        return null;
-    }
-
     public function isGlobal(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         return false;

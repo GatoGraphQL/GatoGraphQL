@@ -3,11 +3,14 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
-use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
 use PoPSchema\EverythingElse\Enums\MemberTagEnum;
+use PoPSchema\EverythingElse\Enums\TypeResolver;
+use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberPrivilegeEnumTypeResolver;
+use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberStatusEnumTypeResolver;
+use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberTagEnumTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
@@ -32,7 +35,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'memberstatus' => SchemaDefinition::TYPE_ENUM,
@@ -41,10 +44,10 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
             'isCommunity' => SchemaDefinition::TYPE_BOOL,
             'hasActiveCommunities' => SchemaDefinition::TYPE_BOOL,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'hasActiveCommunities'
@@ -53,11 +56,11 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
             'activeCommunities'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -69,43 +72,24 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
             'activeCommunities' => $translationAPI->__('', ''),
             'hasActiveCommunities' => $translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    protected function getSchemaDefinitionEnumName(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        switch ($fieldName) {
-            case 'memberstatus':
-            case 'memberprivileges':
-            case 'membertags':
-                $inputEnumClasses = [
-                    'memberstatus' => MemberStatusEnum::class,
-                    'memberprivileges' => MemberPrivilegeEnum::class,
-                    'membertags' => MemberTagEnum::class,
-                ];
-                $enum = $instanceManager->getInstance($inputEnumClasses[$fieldName]);
-                return $enum->getName();
-        }
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValues(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        switch ($fieldName) {
-            case 'memberstatus':
-            case 'memberprivileges':
-            case 'membertags':
-                $inputEnumClasses = [
-                    'memberstatus' => MemberStatusEnum::class,
-                    'memberprivileges' => MemberPrivilegeEnum::class,
-                    'membertags' => MemberTagEnum::class,
-                ];
-                $enum = $instanceManager->getInstance($inputEnumClasses[$fieldName]);
-                return $enum->getValues();
-        }
-        return null;
+        return match ($fieldName) {
+            'communities',
+            'activeCommunities'
+                => UserObjectTypeResolver::class,
+            'memberstatus'
+                => MemberStatusEnumTypeResolver::class,
+            'memberprivileges'
+                => MemberPrivilegeEnumTypeResolver::class,
+            'membertags'
+                => MemberTagEnumTypeResolver::class,
+            default
+                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+        };
     }
 
     /**
@@ -115,7 +99,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
         array $fieldArgs = [],
@@ -128,53 +112,42 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
         switch ($fieldName) {
             case 'memberstatus':
                 // All status for all communities
-                $status = \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+                $status = \PoPSchema\UserMeta\Utils::getUserMeta($objectTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
 
                 // Filter status for only this community: the logged in user
                 return gdUreCommunityMembershipstatusFilterbycurrentcommunity($status);
 
             case 'memberprivileges':
                 // All privileges for all communities
-                $privileges = \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
+                $privileges = \PoPSchema\UserMeta\Utils::getUserMeta($objectTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
 
                 // Filter privileges for only this community: the logged in user
                 return gdUreCommunityMembershipstatusFilterbycurrentcommunity($privileges);
 
             case 'membertags':
                 // All privileges for all communities
-                $tags = \PoPSchema\UserMeta\Utils::getUserMeta($relationalTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
+                $tags = \PoPSchema\UserMeta\Utils::getUserMeta($objectTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
 
                 // Filter privileges for only this community: the logged in user
                 return gdUreCommunityMembershipstatusFilterbycurrentcommunity($tags);
 
             case 'isCommunity':
-                return gdUreIsCommunity($relationalTypeResolver->getID($user)) ? true : null;
+                return gdUreIsCommunity($objectTypeResolver->getID($user)) ? true : null;
 
             case 'communities':
                 // Return only the communities where the user's been accepted as a member
-                return gdUreGetCommunities($relationalTypeResolver->getID($user));
+                return gdUreGetCommunities($objectTypeResolver->getID($user));
 
             case 'activeCommunities':
                 // Return only the communities where the user's been accepted as a member
-                return gdUreGetCommunitiesStatusActive($relationalTypeResolver->getID($user));
+                return gdUreGetCommunitiesStatusActive($objectTypeResolver->getID($user));
 
             case 'hasActiveCommunities':
-                $communities = $relationalTypeResolver->resolveValue($object, 'activeCommunities', $variables, $expressions, $options);
+                $communities = $objectTypeResolver->resolveValue($object, 'activeCommunities', $variables, $expressions, $options);
                 return !empty($communities);
         }
 
-        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'communities':
-            case 'activeCommunities':
-                return UserObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

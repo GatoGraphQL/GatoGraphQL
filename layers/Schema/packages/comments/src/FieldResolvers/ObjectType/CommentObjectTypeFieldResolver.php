@@ -218,43 +218,20 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         return $errors;
     }
 
-    protected function getSchemaDefinitionEnumName(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        switch ($fieldName) {
-            case 'status':
-                /**
-                 * @var CommentStatusEnumTypeResolver
-                 */
-                $commentStatusEnumTypeResolver = $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
-                return $commentStatusEnumTypeResolver->getTypeName();
-        }
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
-    {
-        switch ($fieldName) {
-            case 'status':
-                /**
-                 * @var CommentStatusEnumTypeResolver
-                 */
-                $commentStatusEnumTypeResolver = $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
-                return $commentStatusEnumTypeResolver->getEnumValues();
-        }
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValueDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
-    {
-        switch ($fieldName) {
-            case 'status':
-                /**
-                 * @var CommentStatusEnumTypeResolver
-                 */
-                $commentStatusEnumTypeResolver = $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
-                return $commentStatusEnumTypeResolver->getEnumValueDescriptions();
-        }
-        return null;
+        return match ($fieldName) {
+            'customPost'
+                => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
+            'parent',
+            'responses',
+            'responsesForAdmin'
+                => CommentObjectTypeResolver::class,
+            'status'
+                => CommentStatusEnumTypeResolver::class,
+            default
+                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+        };
     }
 
     /**
@@ -327,20 +304,5 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'customPost':
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
-
-            case 'parent':
-            case 'responses':
-            case 'responsesForAdmin':
-                return CommentObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

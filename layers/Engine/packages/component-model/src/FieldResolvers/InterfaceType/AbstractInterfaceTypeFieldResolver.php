@@ -244,24 +244,4 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             );
         }
     }
-
-    protected function getSchemaDefinitionEnumName(string $fieldName): ?string
-    {
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValues(string $fieldName): ?array
-    {
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValueDeprecationDescriptions(string $fieldName): ?array
-    {
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValueDescriptions(string $fieldName): ?array
-    {
-        return null;
-    }
 }

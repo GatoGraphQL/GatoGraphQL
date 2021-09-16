@@ -74,32 +74,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    protected function getSchemaDefinitionEnumName(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'kind':
-                /**
-                 * @var TypeKindEnumTypeResolver
-                 */
-                $typeKindEnumTypeResolver = $this->instanceManager->getInstance(TypeKindEnumTypeResolver::class);
-                return $typeKindEnumTypeResolver->getTypeName();
-        }
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
-    {
-        switch ($fieldName) {
-            case 'kind':
-                /**
-                 * @var TypeKindEnumTypeResolver
-                 */
-                $typeKindEnumTypeResolver = $this->instanceManager->getInstance(TypeKindEnumTypeResolver::class);
-                return $typeKindEnumTypeResolver->getEnumValues();
-        }
-        return null;
-    }
-
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
@@ -137,6 +111,25 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
 
         return $schemaFieldArgs;
+    }
+
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    {
+        return match ($fieldName) {
+            'fields' => 
+                FieldObjectTypeResolver::class,
+            'interfaces',
+            'possibleTypes',
+            'ofType' => 
+                TypeObjectTypeResolver::class,
+            'enumValues' => 
+                EnumValueObjectTypeResolver::class,
+            'inputFields' => 
+                InputValueObjectTypeResolver::class,
+            'kind'
+                => TypeKindEnumTypeResolver::class,
+            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+        };
     }
 
     /**
@@ -210,22 +203,5 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'fields':
-                return FieldObjectTypeResolver::class;
-            case 'interfaces':
-            case 'possibleTypes':
-            case 'ofType':
-                return TypeObjectTypeResolver::class;
-            case 'enumValues':
-                return EnumValueObjectTypeResolver::class;
-            case 'inputFields':
-                return InputValueObjectTypeResolver::class;
-        }
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

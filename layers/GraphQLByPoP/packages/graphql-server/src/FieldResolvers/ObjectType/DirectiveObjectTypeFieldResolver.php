@@ -58,32 +58,6 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    protected function getSchemaDefinitionEnumName(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'locations':
-                /**
-                 * @var DirectiveLocationEnumTypeResolver
-                 */
-                $directiveLocationEnumTypeResolver = $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class);
-                return $directiveLocationEnumTypeResolver->getTypeName();
-        }
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
-    {
-        switch ($fieldName) {
-            case 'locations':
-                /**
-                 * @var DirectiveLocationEnumTypeResolver
-                 */
-                $directiveLocationEnumTypeResolver = $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class);
-                return $directiveLocationEnumTypeResolver->getEnumValues();
-        }
-        return null;
-    }
-
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $descriptions = [
@@ -94,6 +68,15 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'isRepeatable' => $this->translationAPI->__('Can the directive be executed more than once in the same field?', 'graphql-server'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+    }
+
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    {
+        return match ($fieldName) {
+            'args' => InputValueObjectTypeResolver::class,
+            'locations' => DirectiveLocationEnumTypeResolver::class,
+            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+        };
     }
 
     /**
@@ -127,14 +110,5 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'args':
-                return InputValueObjectTypeResolver::class;
-        }
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }
