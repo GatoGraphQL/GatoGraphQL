@@ -36,9 +36,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
             'excerpt' => SchemaDefinition::TYPE_STRING,
             'content' => SchemaDefinition::TYPE_STRING,
             'linkcontent' => SchemaDefinition::TYPE_STRING,
-            'linkaccess' => SchemaDefinition::TYPE_ENUM,
             'linkAccessByName' => SchemaDefinition::TYPE_STRING,
-            'linkcategories' => SchemaDefinition::TYPE_ENUM,
             'linkCategoriesByName' => SchemaDefinition::TYPE_STRING,
             'hasLinkCategories' => SchemaDefinition::TYPE_BOOL,
         ];

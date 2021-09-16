@@ -53,7 +53,6 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     {
         $types = [
             'content' => SchemaDefinition::TYPE_STRING,
-            'status' => SchemaDefinition::TYPE_ENUM,
             'isStatus' => SchemaDefinition::TYPE_BOOL,
             'date' => SchemaDefinition::TYPE_DATE,
             'modified' => SchemaDefinition::TYPE_DATE,

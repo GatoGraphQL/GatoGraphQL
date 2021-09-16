@@ -48,11 +48,8 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
         $types = [
             'editUserMembershipURL' => SchemaDefinition::TYPE_URL,
             'communityMembersURL' => SchemaDefinition::TYPE_URL,
-            'memberstatus' => SchemaDefinition::TYPE_ENUM,
             'memberStatusByName' => SchemaDefinition::TYPE_STRING,
-            'memberprivileges' => SchemaDefinition::TYPE_ENUM,
             'memberPrivilegesByName' => SchemaDefinition::TYPE_STRING,
-            'membertags' => SchemaDefinition::TYPE_ENUM,
             'memberTagsByName' => SchemaDefinition::TYPE_STRING,
             'icon' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,

@@ -38,7 +38,6 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'name' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
-            'locations' => SchemaDefinition::TYPE_ENUM,
             'isRepeatable' => SchemaDefinition::TYPE_BOOL,
             default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };

@@ -49,7 +49,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'kind' => SchemaDefinition::TYPE_ENUM,
             'name' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
             'extensions' => SchemaDefinition::TYPE_OBJECT,

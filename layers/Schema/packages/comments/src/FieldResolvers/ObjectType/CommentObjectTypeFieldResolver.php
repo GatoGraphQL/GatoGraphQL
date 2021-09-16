@@ -94,7 +94,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'customPostID' => SchemaDefinition::TYPE_ID,
             'approved' => SchemaDefinition::TYPE_BOOL,
             'type' => SchemaDefinition::TYPE_STRING,
-            'status' => SchemaDefinition::TYPE_ENUM,
             'date' => SchemaDefinition::TYPE_DATE,
             'responseCount' => SchemaDefinition::TYPE_INT,
             'responseCountForAdmin' => SchemaDefinition::TYPE_INT,

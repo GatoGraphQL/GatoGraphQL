@@ -38,9 +38,6 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'memberstatus' => SchemaDefinition::TYPE_ENUM,
-            'memberprivileges' => SchemaDefinition::TYPE_ENUM,
-            'membertags' => SchemaDefinition::TYPE_ENUM,
             'isCommunity' => SchemaDefinition::TYPE_BOOL,
             'hasActiveCommunities' => SchemaDefinition::TYPE_BOOL,
         ];
