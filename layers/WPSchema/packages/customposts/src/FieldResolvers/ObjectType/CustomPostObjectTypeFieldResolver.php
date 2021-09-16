@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -38,7 +39,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'isSticky' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'isSticky' => BooleanScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

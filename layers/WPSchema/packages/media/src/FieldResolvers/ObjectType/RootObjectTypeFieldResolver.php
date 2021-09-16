@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Media\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -72,7 +73,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'imageSizeNames' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'imageSizeNames' => StringScalarTypeResolver::class,
             'mediaItemBySlug' => MediaObjectTypeResolver::class,
             default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };

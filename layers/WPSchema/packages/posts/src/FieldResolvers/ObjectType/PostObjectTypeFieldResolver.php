@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Posts\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -38,7 +39,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'postFormat' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'postFormat' => StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
