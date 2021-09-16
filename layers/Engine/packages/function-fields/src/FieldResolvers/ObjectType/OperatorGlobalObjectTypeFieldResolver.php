@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FunctionFields\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -53,7 +54,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => \PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver::class,
+                => MixedScalarTypeResolver::class,
             default
                 => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };

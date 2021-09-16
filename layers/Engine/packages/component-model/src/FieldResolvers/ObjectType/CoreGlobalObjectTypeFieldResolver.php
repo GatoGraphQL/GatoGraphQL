@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -26,11 +28,11 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'typeName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'namespace' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'qualifiedTypeName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'isType' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'implements' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'typeName' => StringScalarTypeResolver::class,
+            'namespace' => StringScalarTypeResolver::class,
+            'qualifiedTypeName' => StringScalarTypeResolver::class,
+            'isType' => BooleanScalarTypeResolver::class,
+            'implements' => BooleanScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

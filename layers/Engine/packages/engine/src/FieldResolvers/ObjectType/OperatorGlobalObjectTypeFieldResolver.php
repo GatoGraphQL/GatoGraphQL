@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
 use ArgumentCountError;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
@@ -44,18 +45,18 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'if' => \PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver::class,
+            'if' => MixedScalarTypeResolver::class,
             'not' => SchemaDefinition::TYPE_BOOL,
             'and' => SchemaDefinition::TYPE_BOOL,
             'or' => SchemaDefinition::TYPE_BOOL,
             'equals' => SchemaDefinition::TYPE_BOOL,
             'empty' => SchemaDefinition::TYPE_BOOL,
             'isNull' => SchemaDefinition::TYPE_BOOL,
-            'var' => \PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver::class,
+            'var' => MixedScalarTypeResolver::class,
             'context' => SchemaDefinition::TYPE_OBJECT,
-            'extract' => \PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver::class,
+            'extract' => MixedScalarTypeResolver::class,
             'time' => SchemaDefinition::TYPE_INT,
-            'echo' => \PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver::class,
+            'echo' => MixedScalarTypeResolver::class,
             'sprintf' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
