@@ -1369,7 +1369,7 @@ class Engine implements EngineInterface
             $database_key = $relationalTypeResolver->getTypeOutputName();
 
             // Execute the typeResolver for all combined ids
-            $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationDBDeprecations = $iterationDBNotices = $iterationDBTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
+            $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationObjectDeprecations = $iterationObjectNotices = $iterationObjectTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $objectIDItems = $relationalTypeResolver->fillObjects(
                 $ids_data_fields,
@@ -1380,9 +1380,9 @@ class Engine implements EngineInterface
                 $messages,
                 $iterationObjectErrors,
                 $iterationObjectWarnings,
-                $iterationDBDeprecations,
-                $iterationDBNotices,
-                $iterationDBTraces,
+                $iterationObjectDeprecations,
+                $iterationObjectNotices,
+                $iterationObjectTraces,
                 $iterationSchemaErrors,
                 $iterationSchemaWarnings,
                 $iterationSchemaDeprecations,
@@ -1448,22 +1448,22 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
-            if ($iterationDBDeprecations) {
-                $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationDBDeprecations, true, $relationalTypeResolver);
+            if ($iterationObjectDeprecations) {
+                $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationObjectDeprecations, true, $relationalTypeResolver);
                 foreach ($dbNameDeprecationEntries as $dbname => $entries) {
                     $objectDeprecations[$dbname] ??= [];
                     $this->addDatasetToDatabase($objectDeprecations[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
-            if ($iterationDBNotices) {
-                $dbNameNoticeEntries = $this->moveEntriesUnderDBName($iterationDBNotices, true, $relationalTypeResolver);
+            if ($iterationObjectNotices) {
+                $dbNameNoticeEntries = $this->moveEntriesUnderDBName($iterationObjectNotices, true, $relationalTypeResolver);
                 foreach ($dbNameNoticeEntries as $dbname => $entries) {
                     $objectNotices[$dbname] ??= [];
                     $this->addDatasetToDatabase($objectNotices[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
-            if ($iterationDBTraces) {
-                $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationDBTraces, true, $relationalTypeResolver);
+            if ($iterationObjectTraces) {
+                $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationObjectTraces, true, $relationalTypeResolver);
                 foreach ($dbNameTraceEntries as $dbname => $entries) {
                     $objectTraces[$dbname] ??= [];
                     $this->addDatasetToDatabase($objectTraces[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
