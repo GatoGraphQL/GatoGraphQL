@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\API\FieldResolvers\ObjectType;
 
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
-use PoP\API\Enums\SchemaFieldShapeEnum;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
 use PoP\API\Facades\PersistedQueryManagerFacade;
 use PoP\API\Schema\SchemaDefinition;
@@ -39,7 +39,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'fullSchema' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
+            'fullSchema' => ObjectScalarTypeResolver::class,
             default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
