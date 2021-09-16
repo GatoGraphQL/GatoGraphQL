@@ -12,13 +12,14 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
@@ -40,6 +41,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     use AttachableExtensionTrait;
     use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
+    use EnumTypeSchemaDefinitionResolverTrait;
 
     /**
      * @var array<string, array>
@@ -255,7 +257,50 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
             $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
+            return;
         }
+        
+        $this->addSchemaDefinitionForEnumField($schemaDefinition, $objectTypeResolver, $fieldName);
+    }
+
+    /**
+     * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
+     */
+    protected function addSchemaDefinitionForEnumField(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
+    {
+        $enumValues = $this->getSchemaDefinitionEnumValues($objectTypeResolver, $fieldName);
+        if (!is_null($enumValues)) {
+            $enumValueDeprecationDescriptions = $this->getSchemaDefinitionEnumValueDeprecationDescriptions($objectTypeResolver, $fieldName) ?? [];
+            $enumValueDescriptions = $this->getSchemaDefinitionEnumValueDescriptions($objectTypeResolver, $fieldName) ?? [];
+            $enumName = $this->getSchemaDefinitionEnumName($objectTypeResolver, $fieldName);
+            $this->doAddSchemaDefinitionEnumValuesForField(
+                $schemaDefinition,
+                $enumValues,
+                $enumValueDeprecationDescriptions,
+                $enumValueDescriptions,
+                $enumName
+            );
+        }
+    }
+
+    protected function getSchemaDefinitionEnumName(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    {
+        return null;
+    }
+
+    protected function getSchemaDefinitionEnumValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    {
+        return null;
+    }
+
+    protected function getSchemaDefinitionEnumValueDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    {
+        return null;
+    }
+
+    protected function getSchemaDefinitionEnumValueDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    {
+        return null;
     }
 
     public function isGlobal(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
