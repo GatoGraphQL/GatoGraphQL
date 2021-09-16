@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -71,11 +71,16 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'myCommentCount' => SchemaDefinition::TYPE_INT,
-            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+            'myCommentCount'
+                => IntScalarTypeResolver::class,
+            'myComments',
+            'myComment'
+                => CommentObjectTypeResolver::class,
+            default
+                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 
@@ -205,16 +210,5 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'myComments':
-            case 'myComment':
-                return CommentObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

@@ -39,11 +39,6 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
         return [];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldType($fieldName);
-    }
-
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldTypeModifiers($fieldName);

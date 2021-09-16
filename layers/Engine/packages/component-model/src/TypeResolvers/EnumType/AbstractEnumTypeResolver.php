@@ -120,9 +120,6 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
 
     /**
      * By default, no description
-     *
-     * @param string $enumValue
-     * @return string|null
      */
     public function getEnumValueDescription(string $enumValue): ?string
     {

@@ -25,12 +25,16 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'members':
+                return UserObjectTypeResolver::class;
+        }
         $types = [
-            'hasMembers' => SchemaDefinition::TYPE_BOOL,
+            'hasMembers' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -77,16 +81,6 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'members':
-                return UserObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }
 

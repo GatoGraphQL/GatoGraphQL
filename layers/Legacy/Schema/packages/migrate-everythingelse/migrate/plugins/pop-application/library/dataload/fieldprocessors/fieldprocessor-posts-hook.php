@@ -53,19 +53,20 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'favicon' => SchemaDefinition::TYPE_OBJECT,
-            'thumb' => SchemaDefinition::TYPE_OBJECT,
-            'thumbFullSrc' => SchemaDefinition::TYPE_URL,
-            'topics' => SchemaDefinition::TYPE_STRING,
-            'hasTopics' => SchemaDefinition::TYPE_BOOL,
-            'appliesto' => SchemaDefinition::TYPE_STRING,
-            'hasAppliesto' => SchemaDefinition::TYPE_BOOL,
-            'hasUserpostactivity' => SchemaDefinition::TYPE_BOOL,
-            'userPostActivityCount' => SchemaDefinition::TYPE_INT,
-            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+            'favicon' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
+            'thumb' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
+            'thumbFullSrc' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'topics' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'hasTopics' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'appliesto' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'hasAppliesto' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'hasUserpostactivity' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'userPostActivityCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'authors' => UserObjectTypeResolver::class,
+            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 
@@ -222,16 +223,6 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'authors':
-                return UserObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }
 

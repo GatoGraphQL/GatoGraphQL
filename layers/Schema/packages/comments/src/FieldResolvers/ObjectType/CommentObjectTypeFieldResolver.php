@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -84,21 +91,37 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
-        $types = [
-            'content' => SchemaDefinition::TYPE_STRING,
-            'authorName' => SchemaDefinition::TYPE_STRING,
-            'authorURL' => SchemaDefinition::TYPE_URL,
-            'authorEmail' => SchemaDefinition::TYPE_EMAIL,
-            'customPostID' => SchemaDefinition::TYPE_ID,
-            'approved' => SchemaDefinition::TYPE_BOOL,
-            'type' => SchemaDefinition::TYPE_STRING,
-            'date' => SchemaDefinition::TYPE_DATE,
-            'responseCount' => SchemaDefinition::TYPE_INT,
-            'responseCountForAdmin' => SchemaDefinition::TYPE_INT,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'content',
+            'authorName',
+            'type'
+                => StringScalarTypeResolver::class,
+            'authorURL'
+                => URLScalarTypeResolver::class,
+            'authorEmail'
+                => EmailScalarTypeResolver::class,
+            'customPostID'
+                => IDScalarTypeResolver::class,
+            'approved'
+                => BooleanScalarTypeResolver::class,
+            'date'
+                => DateScalarTypeResolver::class,
+            'responseCount',
+            'responseCountForAdmin'
+                => IntScalarTypeResolver::class,
+            'customPost'
+                => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
+            'parent',
+            'responses',
+            'responsesForAdmin'
+                => CommentObjectTypeResolver::class,
+            'status'
+                => CommentStatusEnumTypeResolver::class,
+            default
+                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -215,22 +238,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 break;
         }
         return $errors;
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        return match ($fieldName) {
-            'customPost'
-                => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
-            'parent',
-            'responses',
-            'responsesForAdmin'
-                => CommentObjectTypeResolver::class,
-            'status'
-                => CommentStatusEnumTypeResolver::class,
-            default
-                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
-        };
     }
 
     /**

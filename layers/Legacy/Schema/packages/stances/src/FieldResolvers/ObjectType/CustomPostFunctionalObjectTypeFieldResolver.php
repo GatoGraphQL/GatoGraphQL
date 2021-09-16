@@ -43,22 +43,22 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'addStanceURL' => SchemaDefinition::TYPE_URL,
-            'loggedInUserStances' => SchemaDefinition::TYPE_INT,
-            'hasLoggedInUserStances' => SchemaDefinition::TYPE_BOOL,
-            'editStanceURL' => SchemaDefinition::TYPE_URL,
-            'postStancesProURL' => SchemaDefinition::TYPE_URL,
-            'postStancesNeutralURL' => SchemaDefinition::TYPE_URL,
-            'postStancesAgainstURL' => SchemaDefinition::TYPE_URL,
-            'createStanceButtonLazy' => SchemaDefinition::TYPE_ID,
-            'stancesLazy' => SchemaDefinition::TYPE_ID,
-            'stanceName' => SchemaDefinition::TYPE_STRING,
-            'catName' => SchemaDefinition::TYPE_STRING,
+            'addStanceURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'loggedInUserStances' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'hasLoggedInUserStances' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'editStanceURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'postStancesProURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'postStancesNeutralURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'postStancesAgainstURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'createStanceButtonLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'stancesLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'stanceName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'catName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

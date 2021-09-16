@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
 use ArgumentCountError;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
@@ -13,6 +14,10 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Misc\Extract;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
@@ -41,24 +46,24 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'if' => SchemaDefinition::TYPE_MIXED,
-            'not' => SchemaDefinition::TYPE_BOOL,
-            'and' => SchemaDefinition::TYPE_BOOL,
-            'or' => SchemaDefinition::TYPE_BOOL,
-            'equals' => SchemaDefinition::TYPE_BOOL,
-            'empty' => SchemaDefinition::TYPE_BOOL,
-            'isNull' => SchemaDefinition::TYPE_BOOL,
-            'var' => SchemaDefinition::TYPE_MIXED,
-            'context' => SchemaDefinition::TYPE_OBJECT,
-            'extract' => SchemaDefinition::TYPE_MIXED,
-            'time' => SchemaDefinition::TYPE_INT,
-            'echo' => SchemaDefinition::TYPE_MIXED,
-            'sprintf' => SchemaDefinition::TYPE_STRING,
+            'if' => MixedScalarTypeResolver::class,
+            'not' => BooleanScalarTypeResolver::class,
+            'and' => BooleanScalarTypeResolver::class,
+            'or' => BooleanScalarTypeResolver::class,
+            'equals' => BooleanScalarTypeResolver::class,
+            'empty' => BooleanScalarTypeResolver::class,
+            'isNull' => BooleanScalarTypeResolver::class,
+            'var' => MixedScalarTypeResolver::class,
+            'context' => ObjectScalarTypeResolver::class,
+            'extract' => MixedScalarTypeResolver::class,
+            'time' => IntScalarTypeResolver::class,
+            'echo' => MixedScalarTypeResolver::class,
+            'sprintf' => StringScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

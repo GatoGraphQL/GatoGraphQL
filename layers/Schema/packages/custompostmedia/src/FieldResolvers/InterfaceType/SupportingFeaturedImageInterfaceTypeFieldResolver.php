@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMedia\FieldResolvers\InterfaceType;
 
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -27,13 +29,17 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         ];
     }
 
-    public function getSchemaFieldType(string $fieldName): string
+    public function getFieldTypeResolverClass(string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'featuredImage':
+                return MediaObjectTypeResolver::class;
+        }
         $types = [
-            'hasFeaturedImage' => SchemaDefinition::TYPE_BOOL,
-            'featuredImage' => SchemaDefinition::TYPE_ID,
+            'hasFeaturedImage' => BooleanScalarTypeResolver::class,
+            'featuredImage' => IDScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int
@@ -54,15 +60,5 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
             'featuredImage' => $this->translationAPI->__('Featured image from the custom post', 'custompostmedia'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
-    }
-
-    public function getFieldTypeResolverClass(string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'featuredImage':
-                return MediaObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($fieldName);
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -42,13 +44,19 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'postCategory':
+            case 'postCategoryBySlug':
+            case 'postCategories':
+                return PostCategoryObjectTypeResolver::class;
+        }
         $types = [
-            'postCategoryCount' => SchemaDefinition::TYPE_INT,
-            'postCategoryNames' => SchemaDefinition::TYPE_STRING,
+            'postCategoryCount' => IntScalarTypeResolver::class,
+            'postCategoryNames' => StringScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -174,17 +182,5 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'postCategory':
-            case 'postCategoryBySlug':
-            case 'postCategories':
-                return PostCategoryObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

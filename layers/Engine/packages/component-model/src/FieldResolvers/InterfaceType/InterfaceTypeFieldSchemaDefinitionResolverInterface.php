@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 interface InterfaceTypeFieldSchemaDefinitionResolverInterface
 {
     public function getFieldNamesToResolve(): array;
-    public function getSchemaFieldType(string $fieldName): string;
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int;
     public function getSchemaFieldDescription(string $fieldName): ?string;
     public function getSchemaFieldArgs(string $fieldName): array;

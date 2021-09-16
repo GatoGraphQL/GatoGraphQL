@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\FieldResolvers\ObjectType;
 
+use PoP\Engine\FunctionAPIFactory;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Multisite\ObjectModels\Site;
 
@@ -18,7 +19,7 @@ trait SiteObjectTypeFieldResolverTrait
         string $fieldName,
         array $fieldArgs = []
     ): bool {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsengineapi = FunctionAPIFactory::getInstance();
         /** @var Site */
         $site = $object;
         // Only for the current site. For other sites must be implemented through a "multisite" package

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\FieldResolvers\ObjectType;
 
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -69,23 +73,23 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'src' => SchemaDefinition::TYPE_URL,
-            'srcSet' => SchemaDefinition::TYPE_STRING,
-            'width' => SchemaDefinition::TYPE_INT,
-            'height' => SchemaDefinition::TYPE_INT,
-            'sizes' => SchemaDefinition::TYPE_STRING,
-            'title' => SchemaDefinition::TYPE_STRING,
-            'caption' => SchemaDefinition::TYPE_STRING,
-            'altText' => SchemaDefinition::TYPE_STRING,
-            'description' => SchemaDefinition::TYPE_STRING,
-            'date' => SchemaDefinition::TYPE_DATE,
-            'modified' => SchemaDefinition::TYPE_DATE,
-            'mimeType' => SchemaDefinition::TYPE_STRING,
+            'src' => URLScalarTypeResolver::class,
+            'srcSet' => StringScalarTypeResolver::class,
+            'width' => IntScalarTypeResolver::class,
+            'height' => IntScalarTypeResolver::class,
+            'sizes' => StringScalarTypeResolver::class,
+            'title' => StringScalarTypeResolver::class,
+            'caption' => StringScalarTypeResolver::class,
+            'altText' => StringScalarTypeResolver::class,
+            'description' => StringScalarTypeResolver::class,
+            'date' => DateScalarTypeResolver::class,
+            'modified' => DateScalarTypeResolver::class,
+            'mimeType' => StringScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

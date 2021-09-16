@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Users\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -60,14 +61,14 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'nicename' => SchemaDefinition::TYPE_STRING,
-            'nickname' => SchemaDefinition::TYPE_STRING,
-            'locale' => SchemaDefinition::TYPE_STRING,
-            'registeredDate' => SchemaDefinition::TYPE_STRING,
-            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+            'nicename' => StringScalarTypeResolver::class,
+            'nickname' => StringScalarTypeResolver::class,
+            'locale' => StringScalarTypeResolver::class,
+            'registeredDate' => StringScalarTypeResolver::class,
+            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 

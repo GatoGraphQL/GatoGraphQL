@@ -9,8 +9,6 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
     /**
      * The entities from the WordPress data model (Post, User, Comment, etc)
      * are considered the canonical source, so they do not need to be namespaced.
-     *
-     * @return string
      */
     protected function getSchemaNamespace(): string
     {
@@ -30,6 +28,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPSchema\CommentMeta\Component::class,
             \PoPSchema\CommentMutations\Component::class,
             \PoPSchema\Comments\Component::class,
+            \PoPSchema\SchemaCommons\Component::class,
             \PoPSchema\CustomPostMedia\Component::class,
             \PoPSchema\CustomPostMedia\Component::class,
             \PoPSchema\CustomPostMediaMutations\Component::class,

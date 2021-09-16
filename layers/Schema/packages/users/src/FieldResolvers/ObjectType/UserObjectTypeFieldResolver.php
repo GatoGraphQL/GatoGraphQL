@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -73,19 +76,19 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'username' => SchemaDefinition::TYPE_STRING,
-            'name' => SchemaDefinition::TYPE_STRING,
-            'displayName' => SchemaDefinition::TYPE_STRING,
-            'firstName' => SchemaDefinition::TYPE_STRING,
-            'lastName' => SchemaDefinition::TYPE_STRING,
-            'email' => SchemaDefinition::TYPE_EMAIL,
-            'description' => SchemaDefinition::TYPE_STRING,
-            'websiteURL' => SchemaDefinition::TYPE_URL,
+            'username' => StringScalarTypeResolver::class,
+            'name' => StringScalarTypeResolver::class,
+            'displayName' => StringScalarTypeResolver::class,
+            'firstName' => StringScalarTypeResolver::class,
+            'lastName' => StringScalarTypeResolver::class,
+            'email' => EmailScalarTypeResolver::class,
+            'description' => StringScalarTypeResolver::class,
+            'websiteURL' => URLScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

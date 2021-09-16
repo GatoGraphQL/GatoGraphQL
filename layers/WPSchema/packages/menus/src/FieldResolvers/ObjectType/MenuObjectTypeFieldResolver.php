@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -30,17 +32,17 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'name',
             'slug',
             'locations'
-                => SchemaDefinition::TYPE_STRING,
+                => StringScalarTypeResolver::class,
             'count'
-                => SchemaDefinition::TYPE_INT,
+                => IntScalarTypeResolver::class,
             default
-                => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 

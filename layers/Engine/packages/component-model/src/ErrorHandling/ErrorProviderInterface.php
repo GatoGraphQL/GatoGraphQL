@@ -29,9 +29,6 @@ interface ErrorProviderInterface
 
     /**
      * Return an error to indicate that a non-nullable field is returning a `null` value
-     *
-     * @param string $fieldName
-     * @return Error
      */
     public function getNonNullableFieldError(string $fieldName): Error;
     public function getMustNotBeArrayFieldError(string $fieldName, array $value): Error;

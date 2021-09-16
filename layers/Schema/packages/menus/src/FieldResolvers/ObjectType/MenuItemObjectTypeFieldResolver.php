@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -70,21 +73,25 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'children':
+                return MenuItemObjectTypeResolver::class;
+        }
         $types = [
-            'localURLPath' => SchemaDefinition::TYPE_STRING,
-            'label' => SchemaDefinition::TYPE_STRING,
-            'title' => SchemaDefinition::TYPE_STRING,
-            'url' => SchemaDefinition::TYPE_URL,
-            'classes' => SchemaDefinition::TYPE_STRING,
-            'target' => SchemaDefinition::TYPE_STRING,
-            'description' => SchemaDefinition::TYPE_STRING,
-            'objectID' => SchemaDefinition::TYPE_ID,
-            'parentID' => SchemaDefinition::TYPE_ID,
-            'linkRelationship' => SchemaDefinition::TYPE_STRING,
+            'localURLPath' => StringScalarTypeResolver::class,
+            'label' => StringScalarTypeResolver::class,
+            'title' => StringScalarTypeResolver::class,
+            'url' => URLScalarTypeResolver::class,
+            'classes' => StringScalarTypeResolver::class,
+            'target' => StringScalarTypeResolver::class,
+            'description' => StringScalarTypeResolver::class,
+            'objectID' => IDScalarTypeResolver::class,
+            'parentID' => IDScalarTypeResolver::class,
+            'linkRelationship' => StringScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -156,15 +163,5 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'children':
-                return MenuItemObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

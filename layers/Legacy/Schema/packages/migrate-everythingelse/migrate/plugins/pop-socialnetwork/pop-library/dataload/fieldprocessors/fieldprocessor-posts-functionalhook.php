@@ -31,20 +31,20 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-			'recommendPostURL' => SchemaDefinition::TYPE_URL,
-            'unrecommendPostURL' => SchemaDefinition::TYPE_URL,
-            'recommendPostCountPlus1' => SchemaDefinition::TYPE_INT,
-            'upvotePostURL' => SchemaDefinition::TYPE_URL,
-            'undoUpvotePostURL' => SchemaDefinition::TYPE_URL,
-            'upvotePostCountPlus1' => SchemaDefinition::TYPE_INT,
-            'downvotePostURL' => SchemaDefinition::TYPE_URL,
-            'undoDownvotePostURL' => SchemaDefinition::TYPE_URL,
-            'downvotePostCountPlus1' => SchemaDefinition::TYPE_INT,
+			'recommendPostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'unrecommendPostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'recommendPostCountPlus1' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'upvotePostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'undoUpvotePostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'upvotePostCountPlus1' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'downvotePostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'undoDownvotePostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'downvotePostCountPlus1' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

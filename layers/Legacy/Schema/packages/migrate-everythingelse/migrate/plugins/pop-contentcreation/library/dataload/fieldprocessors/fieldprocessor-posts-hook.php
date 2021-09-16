@@ -32,15 +32,16 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'titleEdit' => SchemaDefinition::TYPE_STRING,
-            'contentEditor' => SchemaDefinition::TYPE_STRING,
-            'contentEdit' => SchemaDefinition::TYPE_STRING,
-            'editURL' => SchemaDefinition::TYPE_URL,
-            'deleteURL' => SchemaDefinition::TYPE_URL,
-            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+            'titleEdit' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'contentEditor' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'contentEdit' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'editURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'deleteURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'coauthors' => UserObjectTypeResolver::class,
+            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 
@@ -125,16 +126,6 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'coauthors':
-                return UserObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }
 
