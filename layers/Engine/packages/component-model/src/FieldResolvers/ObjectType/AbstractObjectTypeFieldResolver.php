@@ -555,7 +555,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $fieldTypeResolver->getMaybeNamespacedTypeName();
         } else {
             // Scalar type
+            // @todo: Delete the 1st line, uncomment 2nd line
             $type = $schemaDefinitionResolver->getSchemaFieldType($objectTypeResolver, $fieldName);
+            // $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
         }
         $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
 
