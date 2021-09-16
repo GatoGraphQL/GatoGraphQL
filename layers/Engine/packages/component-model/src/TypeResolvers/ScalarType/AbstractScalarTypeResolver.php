@@ -29,11 +29,13 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     {
         // Fail if passing an array for unsupporting types
         if (is_array($inputValue) || is_object($inputValue)) {
-            return $this->getError(sprintf(
-                $this->translationAPI->__('An %s cannot be casted to type \'%s\'', 'component-model'),
-                is_array($inputValue) ? 'array' : 'object',
-                $this->getMaybeNamespacedTypeName()
-            ));
+            return $this->getError(
+                sprintf(
+                    $this->translationAPI->__('An %s cannot be casted to type \'%s\'', 'component-model'),
+                    is_array($inputValue) ? 'array' : 'object',
+                    $this->getMaybeNamespacedTypeName()
+                )
+            );
         }
         return null;
     }
@@ -42,11 +44,13 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     {
         $valid = filter_var($inputValue, $filter);
         if ($valid === false) {
-            return $this->getError(sprintf(
-                $this->translationAPI->__('The format for \'%s\' is not right for type \'%s\'', 'component-model'),
-                $inputValue,
-                $this->getMaybeNamespacedTypeName()
-            ));
+            return $this->getError(
+                sprintf(
+                    $this->translationAPI->__('The format for \'%s\' is not right for type \'%s\'', 'component-model'),
+                    $inputValue,
+                    $this->getMaybeNamespacedTypeName()
+                )
+            );
         }
         return null;
     }
