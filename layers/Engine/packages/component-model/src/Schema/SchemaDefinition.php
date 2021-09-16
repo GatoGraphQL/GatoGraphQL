@@ -100,7 +100,7 @@ class SchemaDefinition
      * through an array on the server-side via PHP. The distinction is important,
      * because an `array` is not a type in GraphQL, but an `object` can be, as a custom scalar
      */
-    const TYPE_OBJECT = 'object';
+    const TYPE_OBJECT = 'Object';
 
     /**
      * This custom scalar type comprises the 5 built-in scalar types by GraphQL
@@ -111,7 +111,7 @@ class SchemaDefinition
      * Because it comprises the Object type, this custom scalar type can
      * also be represented through an array on the server-side via PHP.
      */
-    const TYPE_MIXED = 'mixed';
+    const TYPE_MIXED = 'Mixed';
 
     /**
      * This custom scalar type comprises the 2 atomic types by GraphQL:
