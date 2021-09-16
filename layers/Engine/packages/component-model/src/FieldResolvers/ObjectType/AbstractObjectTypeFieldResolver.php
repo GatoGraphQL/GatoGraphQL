@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\CheckpointSets\CheckpointSets;
+use PoP\ComponentModel\Enums\EnumTypeResolverInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
@@ -268,17 +269,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected function addSchemaDefinitionForEnumField(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
     {
-        $enumValues = $this->getSchemaDefinitionEnumValues($objectTypeResolver, $fieldName);
-        if (!is_null($enumValues)) {
-            $enumValueDeprecationDescriptions = $this->getSchemaDefinitionEnumValueDeprecationDescriptions($objectTypeResolver, $fieldName) ?? [];
-            $enumValueDescriptions = $this->getSchemaDefinitionEnumValueDescriptions($objectTypeResolver, $fieldName) ?? [];
-            $enumName = $this->getSchemaDefinitionEnumName($objectTypeResolver, $fieldName);
+        $fieldTypeResolverClass = $this->getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        if (SchemaHelpers::isEnumFieldTypeResolverClass($fieldTypeResolverClass)) {
+            /** @var EnumTypeResolverInterface */
+            $fieldEnumTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
             $this->doAddSchemaDefinitionEnumValuesForField(
                 $schemaDefinition,
-                $enumValues,
-                $enumValueDeprecationDescriptions,
-                $enumValueDescriptions,
-                $enumName
+                $fieldEnumTypeResolver->getEnumValues(),
+                $fieldEnumTypeResolver->getEnumValueDeprecationMessages(),
+                $fieldEnumTypeResolver->getEnumValueDescriptions(),
+                $fieldEnumTypeResolver->getMaybeNamespacedTypeName()
             );
         }
     }
