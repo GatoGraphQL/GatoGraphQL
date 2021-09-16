@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\TypeResolvers\EnumType;
 
-use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
+use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
 class MemberPrivilegeEnumTypeResolver extends AbstractEnumTypeResolver
 {

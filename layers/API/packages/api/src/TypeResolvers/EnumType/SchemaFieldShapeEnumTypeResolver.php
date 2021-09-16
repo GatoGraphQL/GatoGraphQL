@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\TypeResolvers\EnumType;
 
 use PoP\API\Schema\SchemaDefinition;
-use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
+use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
 class SchemaFieldShapeEnumTypeResolver extends AbstractEnumTypeResolver
 {

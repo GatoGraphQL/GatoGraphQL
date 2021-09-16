@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeResolvers\EnumType;
 
 use PoPSchema\CustomPosts\Types\Status;
-use PoP\ComponentModel\Enums\AbstractEnumTypeResolver;
+use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
 class CustomPostStatusEnumTypeResolver extends AbstractEnumTypeResolver
 {
