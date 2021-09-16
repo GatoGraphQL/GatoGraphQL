@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
+use DateTime;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 
 /**
@@ -22,6 +24,34 @@ class DateScalarTypeResolver extends AbstractScalarTypeResolver
     {
         if ($error = $this->validateIsNotArrayOrObject($inputValue)) {
             return $error;
+        }
+
+        if (!is_string($inputValue)) {
+            return new Error(
+                'date-cast',
+                sprintf(
+                    $this->translationAPI->__('Type \'%s\' must be provided as a string', 'component-model'),
+                    $this->getMaybeNamespacedTypeName()
+                )
+            );
+        }
+
+        /**
+         * Validate that the format is 'Y-m-d'
+         * 
+         * @see https://stackoverflow.com/a/13194398
+         */
+        $format = 'Y-m-d';
+        $dt = DateTime::createFromFormat($format, $inputValue);
+        if ($dt === false || array_sum($dt::getLastErrors())) {
+            return new Error(
+                'date-cast',
+                sprintf(
+                    $this->translationAPI->__('Type \'%s\' must be provided with format \'%s\'', 'component-model'),
+                    $this->getMaybeNamespacedTypeName(),
+                    $format
+                )
+            );
         }
         return $inputValue;
     }
