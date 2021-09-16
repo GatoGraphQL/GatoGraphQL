@@ -28,6 +28,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPSchema\CommentMeta\Component::class,
             \PoPSchema\CommentMutations\Component::class,
             \PoPSchema\Comments\Component::class,
+            \PoPSchema\SchemaCommons\Component::class,
             \PoPSchema\CustomPostMedia\Component::class,
             \PoPSchema\CustomPostMedia\Component::class,
             \PoPSchema\CustomPostMediaMutations\Component::class,
