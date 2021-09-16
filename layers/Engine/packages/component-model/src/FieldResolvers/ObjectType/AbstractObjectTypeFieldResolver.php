@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\CheckpointSets\CheckpointSets;
-use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
@@ -30,8 +29,11 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -543,15 +545,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If we found a resolver for this fieldName, get all its properties from it
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         $fieldTypeResolverClass = $schemaDefinitionResolver->getFieldTypeResolverClass($objectTypeResolver, $fieldName);
-        if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
-            $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
+        /** @var TypeResolverInterface */
+        $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
+        if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
-        } elseif (SchemaHelpers::isEnumFieldTypeResolverClass($fieldTypeResolverClass)) {
-            $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
+        } elseif ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
             $type = SchemaDefinition::TYPE_ENUM;
             $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $fieldTypeResolver->getMaybeNamespacedTypeName();
         } else {
+            // Scalar type
             $type = $schemaDefinitionResolver->getSchemaFieldType($objectTypeResolver, $fieldName);
         }
         $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
