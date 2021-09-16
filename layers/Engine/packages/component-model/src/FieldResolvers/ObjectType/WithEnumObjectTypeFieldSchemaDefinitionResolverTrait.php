@@ -34,7 +34,7 @@ trait WithEnumObjectTypeFieldSchemaDefinitionResolverTrait
     /**
      * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
      */
-    protected function addSchemaDefinitionEnumValuesForField(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
+    protected function addSchemaDefinitionForEnumField(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
     {
         $enumValues = $this->getSchemaDefinitionEnumValues($objectTypeResolver, $fieldName);
         if (!is_null($enumValues)) {
@@ -55,6 +55,6 @@ trait WithEnumObjectTypeFieldSchemaDefinitionResolverTrait
     {
         parent::addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
 
-        $this->addSchemaDefinitionEnumValuesForField($schemaDefinition, $objectTypeResolver, $fieldName);
+        $this->addSchemaDefinitionForEnumField($schemaDefinition, $objectTypeResolver, $fieldName);
     }
 }
