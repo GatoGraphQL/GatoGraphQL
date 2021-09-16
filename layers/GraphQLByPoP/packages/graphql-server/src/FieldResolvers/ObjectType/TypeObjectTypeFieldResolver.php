@@ -115,15 +115,15 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'fields' => 
+            'fields' =>
                 FieldObjectTypeResolver::class,
             'interfaces',
             'possibleTypes',
-            'ofType' => 
+            'ofType' =>
                 TypeObjectTypeResolver::class,
-            'enumValues' => 
+            'enumValues' =>
                 EnumValueObjectTypeResolver::class,
-            'inputFields' => 
+            'inputFields' =>
                 InputValueObjectTypeResolver::class,
             'kind'
                 => TypeKindEnumTypeResolver::class,

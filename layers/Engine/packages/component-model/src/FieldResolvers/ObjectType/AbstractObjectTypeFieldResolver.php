@@ -260,7 +260,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
             return;
         }
-        
+
         $this->addSchemaDefinitionForEnumField($schemaDefinition, $objectTypeResolver, $fieldName);
     }
 
