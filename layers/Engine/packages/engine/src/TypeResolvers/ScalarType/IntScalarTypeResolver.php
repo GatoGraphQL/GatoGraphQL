@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ScalarType;
 
+use CastToType;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 
 /**
@@ -23,6 +24,17 @@ class IntScalarTypeResolver extends AbstractScalarTypeResolver
         if ($error = $this->validateIsNotArrayOrObject($inputValue)) {
             return $error;
         }
-        return $inputValue;
+
+        $castInputValue = CastToType::_int($inputValue);
+        if ($castInputValue === null) {
+            return $this->getError(
+                sprintf(
+                    $this->translationAPI->__('Cannot cast from \'%s\' for type \'%s\'', 'component-model'),
+                    $inputValue,
+                    $this->getMaybeNamespacedTypeName(),
+                )
+            );
+        }
+        return (int) $castInputValue;
     }
 }
