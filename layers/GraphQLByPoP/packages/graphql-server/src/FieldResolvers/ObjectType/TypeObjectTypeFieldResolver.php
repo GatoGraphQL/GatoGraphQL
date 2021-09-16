@@ -112,7 +112,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $schemaFieldArgs;
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'fields' =>

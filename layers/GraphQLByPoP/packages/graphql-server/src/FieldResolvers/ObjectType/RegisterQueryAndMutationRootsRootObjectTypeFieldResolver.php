@@ -57,7 +57,7 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         switch ($fieldName) {
             case 'queryRoot':

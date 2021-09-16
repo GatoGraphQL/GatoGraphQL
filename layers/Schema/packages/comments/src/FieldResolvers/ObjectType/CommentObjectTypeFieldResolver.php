@@ -217,7 +217,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         return $errors;
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'customPost'

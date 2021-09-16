@@ -69,7 +69,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'args' => InputValueObjectTypeResolver::class,

@@ -72,7 +72,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): bool;
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string;
     public function getFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
     public function resolveSchemaValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
     /**

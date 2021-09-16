@@ -12,7 +12,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function getSchemaFieldDescription(string $fieldName): ?string;
     public function getSchemaFieldArgs(string $fieldName): array;
     public function getSchemaFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string;
-    public function getFieldTypeResolverClass(string $fieldName): ?string;
+    public function getFieldTypeResolverClass(string $fieldName): string;
     /**
      * Validate the constraints for a field argument
      *
