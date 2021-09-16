@@ -16,6 +16,9 @@ class AnyScalarScalarTypeResolver extends AbstractScalarTypeResolver
      */
     public function coerceValue(mixed $inputValue): mixed
     {
+        if ($error = $this->validateIsNotArrayOrObject($inputValue)) {
+            return $error;
+        }
         return $inputValue;
     }
 }
