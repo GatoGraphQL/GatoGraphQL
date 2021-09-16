@@ -9,6 +9,7 @@ use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -21,6 +22,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 {
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
+    use EnumTypeSchemaDefinitionResolverTrait;
 
     /**
      * @var InterfaceTypeResolverInterface[]|null
@@ -217,6 +219,49 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $fieldName);
+            return;
         }
+
+        $this->addSchemaDefinitionForEnumField($schemaDefinition, $fieldName);
+    }
+
+    /**
+     * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
+     */
+    protected function addSchemaDefinitionForEnumField(array &$schemaDefinition, string $fieldName): void
+    {
+        $enumValues = $this->getSchemaDefinitionEnumValues($fieldName);
+        if (!is_null($enumValues)) {
+            $enumValueDeprecationDescriptions = $this->getSchemaDefinitionEnumValueDeprecationDescriptions($fieldName) ?? [];
+            $enumValueDescriptions = $this->getSchemaDefinitionEnumValueDescriptions($fieldName) ?? [];
+            $enumName = $this->getSchemaDefinitionEnumName($fieldName);
+            $this->doAddSchemaDefinitionEnumValuesForField(
+                $schemaDefinition,
+                $enumValues,
+                $enumValueDeprecationDescriptions,
+                $enumValueDescriptions,
+                $enumName
+            );
+        }
+    }
+
+    protected function getSchemaDefinitionEnumName(string $fieldName): ?string
+    {
+        return null;
+    }
+
+    protected function getSchemaDefinitionEnumValues(string $fieldName): ?array
+    {
+        return null;
+    }
+
+    protected function getSchemaDefinitionEnumValueDeprecationDescriptions(string $fieldName): ?array
+    {
+        return null;
+    }
+
+    protected function getSchemaDefinitionEnumValueDescriptions(string $fieldName): ?array
+    {
+        return null;
     }
 }
