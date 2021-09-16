@@ -23,6 +23,6 @@ class StringScalarTypeResolver extends AbstractScalarTypeResolver
         if ($error = $this->validateIsNotArrayOrObject($inputValue)) {
             return $error;
         }
-        return $inputValue;
+        return (string) $inputValue;
     }
 }
