@@ -513,14 +513,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If we found a resolver for this fieldName, get all its properties from it
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         $fieldTypeResolverClass = $schemaDefinitionResolver->getFieldTypeResolverClass($objectTypeResolver, $fieldName);
-        $isRelationalFieldTypeResolverClass = SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass);
-        if ($isRelationalFieldTypeResolverClass
+        $isRelationalFieldType = SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass);
+        if ($isRelationalFieldType
             || SchemaHelpers::isEnumFieldTypeResolverClass($fieldTypeResolverClass)
         ) {
             $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
 
-            if ($isRelationalFieldTypeResolverClass) {
+            if ($isRelationalFieldType) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
             }
         } else {
