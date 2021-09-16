@@ -12,7 +12,6 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
@@ -43,7 +42,6 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'name' => StringScalarTypeResolver::class,
             'description' => StringScalarTypeResolver::class,
-            'type' => StringScalarTypeResolver::class,
             'isDeprecated' => BooleanScalarTypeResolver::class,
             'deprecationReason' => StringScalarTypeResolver::class,
             'extensions' => ObjectScalarTypeResolver::class,
