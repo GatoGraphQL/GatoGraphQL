@@ -21,6 +21,12 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      * @var array<string,string>|null
      */
     protected ?array $enumValueDescriptions = null;
+    /**
+     * Deprecation message for all enum values (which are deprecated)
+     *
+     * @var array<string,string> Key: enum value, Value: deprecation message
+     */
+    protected ?array $enumValueDeprecationMessages = null;
 
     /**
      * By default, output the enum value in UPPERCASE
@@ -87,7 +93,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     /**
      * Description for all enum values (which have a description)
      *
-     * @return array<string,string> Key: enum, Value: description
+     * @return array<string,string> Key: enum value, Value: description
      */
     final public function getEnumValueDescriptions(): array
     {
@@ -98,7 +104,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     }
 
     /**
-     * @return array<string,string> Key: enum, Value: description
+     * @return array<string,string> Key: enum value, Value: description
      */
     private function doGetEnumValueDescriptions(): array
     {
@@ -119,6 +125,42 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      * @return string|null
      */
     public function getEnumValueDescription(string $enumValue): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Deprecation message for all enum values (which are deprecated)
+     *
+     * @return array<string,string> Key: enum value, Value: deprecation message
+     */
+    final public function getEnumValueDeprecationMessages(): array
+    {
+        if ($this->enumValueDeprecationMessages === null) {
+            $this->enumValueDeprecationMessages = $this->doGetEnumValueDeprecationMessages();
+        }
+        return $this->enumValueDeprecationMessages;
+    }
+
+    /**
+     * @return array<string,string> Key: enum value, Value: deprecation message
+     */
+    private function doGetEnumValueDeprecationMessages(): array
+    {
+        $enumValueDeprecationMessages = [];
+        foreach ($this->getEnumValues() as $enumValue) {
+            $enumValueDeprecationMessage = $this->getEnumValueDeprecationMessage($enumValue);
+            if ($enumValueDeprecationMessage !== null) {
+                $enumValueDeprecationMessages[$enumValue] = $enumValueDeprecationMessage;
+            }
+        }
+        return $enumValueDeprecationMessages;
+    }
+
+    /**
+     * Deprecation message for a specific enum value
+     */
+    public function getEnumValueDeprecationMessage(string $enumValue): ?string
     {
         return null;
     }
