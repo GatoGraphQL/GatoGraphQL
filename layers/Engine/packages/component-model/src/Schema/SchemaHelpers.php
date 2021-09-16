@@ -114,6 +114,13 @@ class SchemaHelpers
         return $enumValueDefinitions;
     }
 
+    private static function getFieldTypeResolver(string $fieldTypeResolverClass): TypeResolverInterface
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var TypeResolverInterface */
+        return $instanceManager->getInstance($fieldTypeResolverClass);
+    }
+
     /**
      * Indicate if a FieldObjectTypeResolver class is of the Relational type
      */
@@ -122,9 +129,17 @@ class SchemaHelpers
         if ($fieldTypeResolverClass === null) {
             return null;
         }
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var TypeResolverInterface */
-        $fieldTypeResolver = $instanceManager->getInstance($fieldTypeResolverClass);
-        return $fieldTypeResolver instanceof RelationalTypeResolverInterface;
+        return self::getFieldTypeResolver($fieldTypeResolverClass) instanceof RelationalTypeResolverInterface;
+    }
+
+    /**
+     * Indicate if a FieldObjectTypeResolver class is of the Enum type
+     */
+    public static function isEnumFieldTypeResolverClass(?string $fieldTypeResolverClass): ?bool
+    {
+        if ($fieldTypeResolverClass === null) {
+            return null;
+        }
+        return self::getFieldTypeResolver($fieldTypeResolverClass) instanceof EnumTypeResolverInterface;
     }
 }
