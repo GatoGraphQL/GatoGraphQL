@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Events\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\FieldResolvers\ObjectType\WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -15,8 +14,6 @@ use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 
 class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    use WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

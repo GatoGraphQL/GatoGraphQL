@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\WithEnumInterfaceTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
-use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostContentFormatEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
@@ -20,8 +18,6 @@ use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModulePro
 
 class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
 {
-    use WithEnumInterfaceTypeFieldSchemaDefinitionResolverTrait;
-
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -57,7 +53,6 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     {
         $types = [
             'content' => SchemaDefinition::TYPE_STRING,
-            'status' => SchemaDefinition::TYPE_ENUM,
             'isStatus' => SchemaDefinition::TYPE_BOOL,
             'date' => SchemaDefinition::TYPE_DATE,
             'modified' => SchemaDefinition::TYPE_DATE,
@@ -190,72 +185,11 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         return CustomPostContentFormatEnum::HTML;
     }
 
-    protected function getSchemaDefinitionEnumName(string $fieldName): ?string
+    public function getFieldTypeResolverClass(string $fieldName): ?string
     {
-        switch ($fieldName) {
-            case 'status':
-                /**
-                 * @var CustomPostStatusEnumTypeResolver
-                 */
-                $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
-                return $customPostStatusEnumTypeResolver->getTypeName();
-        }
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValues(string $fieldName): ?array
-    {
-        switch ($fieldName) {
-            case 'status':
-                /**
-                 * @var CustomPostStatusEnumTypeResolver
-                 */
-                $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
-                return array_merge(
-                    $customPostStatusEnumTypeResolver->getEnumValues(),
-                    [
-                        /**
-                         * @todo Extract to documentation before deleting this code
-                         */
-                        // 'trashed',
-                    ]
-                );
-        }
-        return null;
-    }
-
-    /**
-     * @todo Extract to documentation before deleting this code
-     */
-    // protected function getSchemaDefinitionEnumValueDeprecationDescriptions(string $fieldName): ?array
-    // {
-    //     switch ($fieldName) {
-    //         case 'status':
-    //             return [
-    //                 'trashed' => sprintf(
-    //                     $this->translationAPI->__('Using \'%s\' instead', 'customposts'),
-    //                     Status::TRASH
-    //                 ),
-    //             ];
-    //     }
-    //     return null;
-    // }
-
-    protected function getSchemaDefinitionEnumValueDescriptions(string $fieldName): ?array
-    {
-        switch ($fieldName) {
-            case 'status':
-                return [
-                    Status::PUBLISHED => $this->translationAPI->__('Published content', 'customposts'),
-                    Status::PENDING => $this->translationAPI->__('Pending content', 'customposts'),
-                    Status::DRAFT => $this->translationAPI->__('Draft content', 'customposts'),
-                    Status::TRASH => $this->translationAPI->__('Trashed content', 'customposts'),
-                    /**
-                     * @todo Extract to documentation before deleting this code
-                     */
-                    // 'trashed' => $this->translationAPI->__('Trashed content', 'customposts'),
-                ];
-        }
-        return null;
+        return match ($fieldName) {
+            'status' => CustomPostStatusEnumTypeResolver::class,
+            default => parent::getFieldTypeResolverClass($fieldName),
+        };
     }
 }

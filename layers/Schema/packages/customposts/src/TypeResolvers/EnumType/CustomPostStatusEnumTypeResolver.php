@@ -26,4 +26,15 @@ class CustomPostStatusEnumTypeResolver extends AbstractEnumTypeResolver
             Status::TRASH,
         ];
     }
+
+    public function getEnumValueDescription(string $enumValue): ?string
+    {
+        return match ($enumValue) {
+            Status::PUBLISHED => $this->translationAPI->__('Published content', 'customposts'),
+            Status::PENDING => $this->translationAPI->__('Pending content', 'customposts'),
+            Status::DRAFT => $this->translationAPI->__('Draft content', 'customposts'),
+            Status::TRASH => $this->translationAPI->__('Trashed content', 'customposts'),
+            default => parent::getEnumValueDeprecationMessage($enumValue),
+        };
+    }
 }

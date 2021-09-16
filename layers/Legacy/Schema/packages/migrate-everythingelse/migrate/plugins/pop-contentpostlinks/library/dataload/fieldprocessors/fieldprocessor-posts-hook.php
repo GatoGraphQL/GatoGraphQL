@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\FieldResolvers\ObjectType\WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -10,8 +9,6 @@ use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
 {
-    use WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -39,9 +36,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
             'excerpt' => SchemaDefinition::TYPE_STRING,
             'content' => SchemaDefinition::TYPE_STRING,
             'linkcontent' => SchemaDefinition::TYPE_STRING,
-            'linkaccess' => SchemaDefinition::TYPE_ENUM,
             'linkAccessByName' => SchemaDefinition::TYPE_STRING,
-            'linkcategories' => SchemaDefinition::TYPE_ENUM,
             'linkCategoriesByName' => SchemaDefinition::TYPE_STRING,
             'hasLinkCategories' => SchemaDefinition::TYPE_BOOL,
         ];
@@ -78,6 +73,8 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
     }
 
+    // @todo: Migrate to returning an EnumTypeResolverClass in getFieldTypeResolverClass, then delete this function
+    //        Until then, this logic is not working (this function is not invoked anymore)
     protected function getSchemaDefinitionEnumName(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
@@ -92,6 +89,8 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
         return null;
     }
 
+    // @todo: Migrate to returning an EnumTypeResolverClass in getFieldTypeResolverClass, then delete this function
+    //        Until then, this logic is not working (this function is not invoked anymore)
     protected function getSchemaDefinitionEnumValues(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?array
     {
         switch ($fieldName) {

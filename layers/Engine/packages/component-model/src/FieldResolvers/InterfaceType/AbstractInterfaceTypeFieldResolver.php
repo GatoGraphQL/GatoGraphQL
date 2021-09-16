@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\Enums\EnumTypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
@@ -21,6 +24,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 {
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
+    use EnumTypeSchemaDefinitionResolverTrait;
 
     /**
      * @var InterfaceTypeResolverInterface[]|null
@@ -217,6 +221,28 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $fieldName);
+            return;
+        }
+
+        $this->addSchemaDefinitionForEnumField($schemaDefinition, $fieldName);
+    }
+
+    /**
+     * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
+     */
+    protected function addSchemaDefinitionForEnumField(array &$schemaDefinition, string $fieldName): void
+    {
+        $fieldTypeResolverClass = $this->getFieldTypeResolverClass($fieldName);
+        if (SchemaHelpers::isEnumFieldTypeResolverClass($fieldTypeResolverClass)) {
+            /** @var EnumTypeResolverInterface */
+            $fieldEnumTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
+            $this->doAddSchemaDefinitionEnumValuesForField(
+                $schemaDefinition,
+                $fieldEnumTypeResolver->getEnumValues(),
+                $fieldEnumTypeResolver->getEnumValueDeprecationMessages(),
+                $fieldEnumTypeResolver->getEnumValueDescriptions(),
+                $fieldEnumTypeResolver->getMaybeNamespacedTypeName()
+            );
         }
     }
 }

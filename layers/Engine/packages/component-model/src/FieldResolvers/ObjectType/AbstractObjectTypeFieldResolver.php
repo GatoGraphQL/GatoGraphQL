@@ -7,18 +7,20 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\CheckpointSets\CheckpointSets;
+use PoP\ComponentModel\Enums\EnumTypeResolverInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
@@ -40,6 +42,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     use AttachableExtensionTrait;
     use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
+    use EnumTypeSchemaDefinitionResolverTrait;
 
     /**
      * @var array<string, array>
@@ -255,6 +258,28 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
             $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
+            return;
+        }
+
+        $this->addSchemaDefinitionForEnumField($schemaDefinition, $objectTypeResolver, $fieldName);
+    }
+
+    /**
+     * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
+     */
+    protected function addSchemaDefinitionForEnumField(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
+    {
+        $fieldTypeResolverClass = $this->getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        if (SchemaHelpers::isEnumFieldTypeResolverClass($fieldTypeResolverClass)) {
+            /** @var EnumTypeResolverInterface */
+            $fieldEnumTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
+            $this->doAddSchemaDefinitionEnumValuesForField(
+                $schemaDefinition,
+                $fieldEnumTypeResolver->getEnumValues(),
+                $fieldEnumTypeResolver->getEnumValueDeprecationMessages(),
+                $fieldEnumTypeResolver->getEnumValueDescriptions(),
+                $fieldEnumTypeResolver->getMaybeNamespacedTypeName()
+            );
         }
     }
 
@@ -514,9 +539,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         $fieldTypeResolverClass = $schemaDefinitionResolver->getFieldTypeResolverClass($objectTypeResolver, $fieldName);
         if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
             $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
+            $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
+        } elseif (SchemaHelpers::isEnumFieldTypeResolverClass($fieldTypeResolverClass)) {
+            $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);
+            $type = SchemaDefinition::TYPE_ENUM;
+            $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $fieldTypeResolver->getMaybeNamespacedTypeName();
         } else {
             $type = $schemaDefinitionResolver->getSchemaFieldType($objectTypeResolver, $fieldName);
         }
