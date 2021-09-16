@@ -34,7 +34,7 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'hasLocation' => SchemaDefinition::TYPE_BOOL,
+            'hasLocation' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }

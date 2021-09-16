@@ -27,7 +27,7 @@ class PoP_Volunteering_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'volunteerURL' => SchemaDefinition::TYPE_URL,
+            'volunteerURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

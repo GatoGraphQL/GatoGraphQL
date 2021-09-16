@@ -41,24 +41,24 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'if' => SchemaDefinition::TYPE_MIXED,
+            'if' => \PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver::class,
             'not' => SchemaDefinition::TYPE_BOOL,
             'and' => SchemaDefinition::TYPE_BOOL,
             'or' => SchemaDefinition::TYPE_BOOL,
             'equals' => SchemaDefinition::TYPE_BOOL,
             'empty' => SchemaDefinition::TYPE_BOOL,
             'isNull' => SchemaDefinition::TYPE_BOOL,
-            'var' => SchemaDefinition::TYPE_MIXED,
+            'var' => \PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver::class,
             'context' => SchemaDefinition::TYPE_OBJECT,
-            'extract' => SchemaDefinition::TYPE_MIXED,
+            'extract' => \PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver::class,
             'time' => SchemaDefinition::TYPE_INT,
-            'echo' => SchemaDefinition::TYPE_MIXED,
+            'echo' => \PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver::class,
             'sprintf' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

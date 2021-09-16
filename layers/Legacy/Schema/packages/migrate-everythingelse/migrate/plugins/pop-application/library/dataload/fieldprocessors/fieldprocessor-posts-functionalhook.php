@@ -36,14 +36,14 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-			'multilayoutKeys' => SchemaDefinition::TYPE_STRING,
-            'latestcountsTriggerValues' => SchemaDefinition::TYPE_STRING,
-            'catsByName' => SchemaDefinition::TYPE_STRING,
-            'commentsLazy' => SchemaDefinition::TYPE_ID,
-            'noheadercommentsLazy' => SchemaDefinition::TYPE_ID,
-            'addCommentURL' => SchemaDefinition::TYPE_URL,
-            'topicsByName' => SchemaDefinition::TYPE_STRING,
-            'appliestoByName' => SchemaDefinition::TYPE_STRING,
+			'multilayoutKeys' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'latestcountsTriggerValues' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'catsByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'commentsLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'noheadercommentsLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'addCommentURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'topicsByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'appliestoByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

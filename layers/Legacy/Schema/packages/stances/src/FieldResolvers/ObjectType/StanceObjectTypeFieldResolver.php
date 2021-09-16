@@ -42,13 +42,13 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'categories' => SchemaDefinition::TYPE_ID,
-            'catSlugs' => SchemaDefinition::TYPE_STRING,
-            'stance' => SchemaDefinition::TYPE_INT,
-            'title' => SchemaDefinition::TYPE_STRING,
-            'excerpt' => SchemaDefinition::TYPE_STRING,
-            'content' => SchemaDefinition::TYPE_STRING,
-            'hasStanceTarget' => SchemaDefinition::TYPE_BOOL,
+            'categories' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'catSlugs' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'stance' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'title' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'excerpt' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'content' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'hasStanceTarget' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

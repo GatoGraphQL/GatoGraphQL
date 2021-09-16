@@ -46,14 +46,14 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'editUserMembershipURL' => SchemaDefinition::TYPE_URL,
-            'communityMembersURL' => SchemaDefinition::TYPE_URL,
-            'memberStatusByName' => SchemaDefinition::TYPE_STRING,
-            'memberPrivilegesByName' => SchemaDefinition::TYPE_STRING,
-            'memberTagsByName' => SchemaDefinition::TYPE_STRING,
-            'icon' => SchemaDefinition::TYPE_STRING,
-            'url' => SchemaDefinition::TYPE_URL,
-            'message' => SchemaDefinition::TYPE_STRING,
+            'editUserMembershipURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'communityMembersURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'memberStatusByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'memberPrivilegesByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'memberTagsByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'icon' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'url' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'message' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

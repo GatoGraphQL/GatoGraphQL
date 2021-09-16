@@ -25,7 +25,7 @@ class GD_WSL_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolv
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-			'url' => SchemaDefinition::TYPE_URL,
+			'url' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

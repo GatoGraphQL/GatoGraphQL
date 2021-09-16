@@ -63,10 +63,10 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'nicename' => SchemaDefinition::TYPE_STRING,
-            'nickname' => SchemaDefinition::TYPE_STRING,
-            'locale' => SchemaDefinition::TYPE_STRING,
-            'registeredDate' => SchemaDefinition::TYPE_STRING,
+            'nicename' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'nickname' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'locale' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'registeredDate' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }

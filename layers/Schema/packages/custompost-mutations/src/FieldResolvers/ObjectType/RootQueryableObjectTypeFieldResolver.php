@@ -46,7 +46,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'myCustomPostCount' => SchemaDefinition::TYPE_INT,
+            'myCustomPostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

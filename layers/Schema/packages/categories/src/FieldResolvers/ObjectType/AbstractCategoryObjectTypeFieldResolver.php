@@ -38,9 +38,9 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'name' => SchemaDefinition::TYPE_STRING,
-            'description' => SchemaDefinition::TYPE_STRING,
-            'count' => SchemaDefinition::TYPE_INT,
+            'name' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'count' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

@@ -29,8 +29,8 @@ trait RolesObjectTypeFieldResolverTrait
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'roles' => SchemaDefinition::TYPE_STRING,
-            'capabilities' => SchemaDefinition::TYPE_STRING,
+            'roles' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'capabilities' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

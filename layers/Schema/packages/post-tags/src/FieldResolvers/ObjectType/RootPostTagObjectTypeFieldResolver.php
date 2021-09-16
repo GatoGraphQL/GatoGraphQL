@@ -45,8 +45,8 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'postTagCount' => SchemaDefinition::TYPE_INT,
-            'postTagNames' => SchemaDefinition::TYPE_STRING,
+            'postTagCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'postTagNames' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

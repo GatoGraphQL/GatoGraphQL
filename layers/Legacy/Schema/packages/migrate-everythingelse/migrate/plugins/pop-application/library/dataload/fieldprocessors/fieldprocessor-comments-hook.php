@@ -29,8 +29,8 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-			'contentClipped' => SchemaDefinition::TYPE_STRING,
-            'replycommentURL' => SchemaDefinition::TYPE_URL,
+			'contentClipped' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'replycommentURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

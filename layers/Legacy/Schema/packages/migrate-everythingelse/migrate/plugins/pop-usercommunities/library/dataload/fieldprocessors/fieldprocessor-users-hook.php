@@ -38,8 +38,8 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'isCommunity' => SchemaDefinition::TYPE_BOOL,
-            'hasActiveCommunities' => SchemaDefinition::TYPE_BOOL,
+            'isCommunity' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'hasActiveCommunities' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

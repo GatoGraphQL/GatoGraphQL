@@ -28,7 +28,7 @@ class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'commentsURL' => SchemaDefinition::TYPE_URL,
+            'commentsURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

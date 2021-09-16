@@ -27,8 +27,8 @@ class GD_ApplicationProcessors_DataLoad_ObjectTypeFieldResolver_Posts extends Ab
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-			'highlightsLazy' => SchemaDefinition::TYPE_ID,
-            'referencedbyLazy' => SchemaDefinition::TYPE_ID,
+			'highlightsLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'referencedbyLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

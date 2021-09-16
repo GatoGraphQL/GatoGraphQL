@@ -71,8 +71,8 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'userCount' => SchemaDefinition::TYPE_INT,
-            'userCountForAdmin' => SchemaDefinition::TYPE_INT,
+            'userCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'userCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

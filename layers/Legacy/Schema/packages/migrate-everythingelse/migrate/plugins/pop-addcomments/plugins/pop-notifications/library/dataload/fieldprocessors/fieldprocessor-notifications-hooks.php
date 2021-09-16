@@ -38,10 +38,10 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'commentObjectID' => SchemaDefinition::TYPE_ID,
-            'icon' => SchemaDefinition::TYPE_STRING,
-            'url' => SchemaDefinition::TYPE_URL,
-            'message' => SchemaDefinition::TYPE_STRING,
+            'commentObjectID' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'icon' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'url' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'message' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }

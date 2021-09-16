@@ -39,7 +39,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'fullSchema' => SchemaDefinition::TYPE_OBJECT,
+            'fullSchema' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
             default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }

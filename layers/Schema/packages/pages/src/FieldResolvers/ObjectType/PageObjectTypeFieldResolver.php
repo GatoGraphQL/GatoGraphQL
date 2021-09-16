@@ -63,8 +63,8 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'childPageCount' => SchemaDefinition::TYPE_INT,
-            'childPageCountForAdmin' => SchemaDefinition::TYPE_INT,
+            'childPageCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'childPageCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

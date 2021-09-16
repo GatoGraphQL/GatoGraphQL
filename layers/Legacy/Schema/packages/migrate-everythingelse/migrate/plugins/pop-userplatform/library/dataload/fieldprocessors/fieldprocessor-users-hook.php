@@ -35,17 +35,17 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'shortDescription' => SchemaDefinition::TYPE_STRING,
-            'title' => SchemaDefinition::TYPE_STRING,
-            'displayEmail' => SchemaDefinition::TYPE_EMAIL,
-            'contact' => SchemaDefinition::TYPE_STRING,
-            'hasContact' => SchemaDefinition::TYPE_BOOL,
-            'facebook' => SchemaDefinition::TYPE_URL,
-            'twitter' => SchemaDefinition::TYPE_URL,
-            'linkedin' => SchemaDefinition::TYPE_URL,
-            'youtube' => SchemaDefinition::TYPE_URL,
-            'instagram' => SchemaDefinition::TYPE_URL,
-            'isProfile' => SchemaDefinition::TYPE_BOOL,
+            'shortDescription' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'title' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'displayEmail' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver::class,
+            'contact' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'hasContact' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'facebook' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'twitter' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'linkedin' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'youtube' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'instagram' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'isProfile' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

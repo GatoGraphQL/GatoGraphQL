@@ -42,10 +42,10 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
-            'areCommentsOpen' => SchemaDefinition::TYPE_BOOL,
-            'hasComments' => SchemaDefinition::TYPE_BOOL,
-            'commentCount' => SchemaDefinition::TYPE_INT,
-            'commentCountForAdmin' => SchemaDefinition::TYPE_INT,
+            'areCommentsOpen' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'hasComments' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'commentCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'commentCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }

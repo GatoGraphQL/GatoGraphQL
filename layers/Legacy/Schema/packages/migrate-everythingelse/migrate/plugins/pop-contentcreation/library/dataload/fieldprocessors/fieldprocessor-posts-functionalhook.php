@@ -27,7 +27,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extend
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-			'flagURL' => SchemaDefinition::TYPE_URL,
+			'flagURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

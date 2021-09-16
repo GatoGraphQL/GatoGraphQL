@@ -29,7 +29,7 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'endpoint' => SchemaDefinition::TYPE_URL,
+            'endpoint' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

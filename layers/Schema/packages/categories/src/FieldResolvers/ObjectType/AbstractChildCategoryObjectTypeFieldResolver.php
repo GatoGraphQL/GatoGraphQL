@@ -34,8 +34,8 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'childCategoryCount' => SchemaDefinition::TYPE_INT,
-            'childCategoryNames' => SchemaDefinition::TYPE_STRING,
+            'childCategoryCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'childCategoryNames' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

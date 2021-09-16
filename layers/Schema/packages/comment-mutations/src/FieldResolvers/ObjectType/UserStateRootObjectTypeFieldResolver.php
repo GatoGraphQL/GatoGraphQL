@@ -74,7 +74,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'myCommentCount' => SchemaDefinition::TYPE_INT,
+            'myCommentCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }

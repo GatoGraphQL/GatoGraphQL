@@ -26,11 +26,11 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'typeName' => SchemaDefinition::TYPE_STRING,
-            'namespace' => SchemaDefinition::TYPE_STRING,
-            'qualifiedTypeName' => SchemaDefinition::TYPE_STRING,
-            'isType' => SchemaDefinition::TYPE_BOOL,
-            'implements' => SchemaDefinition::TYPE_BOOL,
+            'typeName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'namespace' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'qualifiedTypeName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'isType' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'implements' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

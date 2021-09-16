@@ -21,7 +21,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'loggedInUserID' => SchemaDefinition::TYPE_ID,
+            'loggedInUserID' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

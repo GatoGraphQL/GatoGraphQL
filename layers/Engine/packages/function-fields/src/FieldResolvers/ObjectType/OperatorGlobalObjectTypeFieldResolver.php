@@ -33,7 +33,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'divide'
@@ -53,9 +53,9 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => SchemaDefinition::TYPE_MIXED,
+                => \PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver::class,
             default
-                => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 

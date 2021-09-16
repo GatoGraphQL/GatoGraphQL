@@ -72,18 +72,18 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'src' => SchemaDefinition::TYPE_URL,
-            'srcSet' => SchemaDefinition::TYPE_STRING,
-            'width' => SchemaDefinition::TYPE_INT,
-            'height' => SchemaDefinition::TYPE_INT,
-            'sizes' => SchemaDefinition::TYPE_STRING,
-            'title' => SchemaDefinition::TYPE_STRING,
-            'caption' => SchemaDefinition::TYPE_STRING,
-            'altText' => SchemaDefinition::TYPE_STRING,
-            'description' => SchemaDefinition::TYPE_STRING,
-            'date' => SchemaDefinition::TYPE_DATE,
-            'modified' => SchemaDefinition::TYPE_DATE,
-            'mimeType' => SchemaDefinition::TYPE_STRING,
+            'src' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'srcSet' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'width' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'height' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'sizes' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'title' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'caption' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'altText' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'date' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
+            'modified' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
+            'mimeType' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

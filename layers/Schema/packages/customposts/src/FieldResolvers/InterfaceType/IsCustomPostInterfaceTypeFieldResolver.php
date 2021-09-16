@@ -52,13 +52,13 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
-            'content' => SchemaDefinition::TYPE_STRING,
-            'isStatus' => SchemaDefinition::TYPE_BOOL,
-            'date' => SchemaDefinition::TYPE_DATE,
-            'modified' => SchemaDefinition::TYPE_DATE,
-            'title' => SchemaDefinition::TYPE_STRING,
-            'excerpt' => SchemaDefinition::TYPE_STRING,
-            'customPostType' => SchemaDefinition::TYPE_STRING,
+            'content' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'isStatus' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'date' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
+            'modified' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
+            'title' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'excerpt' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'customPostType' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }

@@ -27,7 +27,7 @@ class PoP_EventLinksCreation_DataLoad_FunctionalObjectTypeFieldResolver extends 
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-			'addEventLinkURL' => SchemaDefinition::TYPE_URL,
+			'addEventLinkURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

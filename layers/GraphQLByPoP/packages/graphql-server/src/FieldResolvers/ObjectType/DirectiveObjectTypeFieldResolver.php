@@ -36,9 +36,9 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'name' => SchemaDefinition::TYPE_STRING,
-            'description' => SchemaDefinition::TYPE_STRING,
-            'isRepeatable' => SchemaDefinition::TYPE_BOOL,
+            'name' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'isRepeatable' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }

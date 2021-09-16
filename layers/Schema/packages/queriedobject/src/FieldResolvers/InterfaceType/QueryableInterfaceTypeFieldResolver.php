@@ -30,9 +30,9 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
-            'url' => SchemaDefinition::TYPE_URL,
-            'urlPath' => SchemaDefinition::TYPE_STRING,
-            'slug' => SchemaDefinition::TYPE_STRING,
+            'url' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'urlPath' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'slug' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }

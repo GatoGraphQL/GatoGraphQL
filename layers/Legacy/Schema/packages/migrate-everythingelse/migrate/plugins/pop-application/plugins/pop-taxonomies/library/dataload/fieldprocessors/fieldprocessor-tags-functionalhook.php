@@ -24,7 +24,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObje
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-			'mentionQueryby' => SchemaDefinition::TYPE_STRING,
+			'mentionQueryby' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

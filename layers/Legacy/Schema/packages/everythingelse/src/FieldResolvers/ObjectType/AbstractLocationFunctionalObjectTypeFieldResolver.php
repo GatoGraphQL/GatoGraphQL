@@ -27,7 +27,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'locationsmapURL' => SchemaDefinition::TYPE_URL,
+            'locationsmapURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

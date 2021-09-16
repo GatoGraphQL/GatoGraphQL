@@ -49,9 +49,9 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'name' => SchemaDefinition::TYPE_STRING,
-            'description' => SchemaDefinition::TYPE_STRING,
-            'extensions' => SchemaDefinition::TYPE_OBJECT,
+            'name' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'extensions' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
             default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }

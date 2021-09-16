@@ -31,8 +31,8 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'src' => SchemaDefinition::TYPE_STRING,
-            'size' => SchemaDefinition::TYPE_INT,
+            'src' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'size' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

@@ -72,7 +72,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'imageSizeNames' => SchemaDefinition::TYPE_STRING,
+            'imageSizeNames' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }

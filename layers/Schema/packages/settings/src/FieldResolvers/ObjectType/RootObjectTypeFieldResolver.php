@@ -37,7 +37,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'option' => SchemaDefinition::TYPE_ANY_SCALAR,
+            'option' => \PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

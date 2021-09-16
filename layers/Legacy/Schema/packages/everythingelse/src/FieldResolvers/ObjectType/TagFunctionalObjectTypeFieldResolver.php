@@ -32,10 +32,10 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'symbol' => SchemaDefinition::TYPE_STRING,
-            'symbolnamedescription' => SchemaDefinition::TYPE_STRING,
-            'namedescription' => SchemaDefinition::TYPE_STRING,
-            'symbolname' => SchemaDefinition::TYPE_STRING,
+            'symbol' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'symbolnamedescription' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'namedescription' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'symbolname' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

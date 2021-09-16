@@ -31,8 +31,8 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'domain' => SchemaDefinition::TYPE_STRING,
-            'host' => SchemaDefinition::TYPE_STRING,
+            'domain' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'host' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

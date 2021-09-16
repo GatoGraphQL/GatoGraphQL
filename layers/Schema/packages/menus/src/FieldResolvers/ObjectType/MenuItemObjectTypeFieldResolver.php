@@ -73,16 +73,16 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'localURLPath' => SchemaDefinition::TYPE_STRING,
-            'label' => SchemaDefinition::TYPE_STRING,
-            'title' => SchemaDefinition::TYPE_STRING,
-            'url' => SchemaDefinition::TYPE_URL,
-            'classes' => SchemaDefinition::TYPE_STRING,
-            'target' => SchemaDefinition::TYPE_STRING,
-            'description' => SchemaDefinition::TYPE_STRING,
-            'objectID' => SchemaDefinition::TYPE_ID,
-            'parentID' => SchemaDefinition::TYPE_ID,
-            'linkRelationship' => SchemaDefinition::TYPE_STRING,
+            'localURLPath' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'label' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'title' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'url' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'classes' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'target' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'objectID' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'parentID' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'linkRelationship' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

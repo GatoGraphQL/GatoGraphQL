@@ -28,7 +28,7 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'hasMembers' => SchemaDefinition::TYPE_BOOL,
+            'hasMembers' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

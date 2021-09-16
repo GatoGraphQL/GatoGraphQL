@@ -25,7 +25,7 @@ class PoP_Volunteering_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'volunteersNeeded' => SchemaDefinition::TYPE_BOOL,
+            'volunteersNeeded' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

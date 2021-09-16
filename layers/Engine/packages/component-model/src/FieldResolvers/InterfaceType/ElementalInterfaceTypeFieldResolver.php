@@ -28,7 +28,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getSchemaFieldType(string $fieldName): string
     {
         return match ($fieldName) {
-            'id' => SchemaDefinition::TYPE_ID,
+            'id' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
             default => parent::getSchemaFieldType($fieldName),
         };
     }

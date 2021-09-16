@@ -36,9 +36,9 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'name',
             'slug',
             'locations'
-                => SchemaDefinition::TYPE_STRING,
+                => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'count'
-                => SchemaDefinition::TYPE_INT,
+                => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             default
                 => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };

@@ -32,8 +32,8 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'name' => SchemaDefinition::TYPE_STRING,
-            'capabilities' => SchemaDefinition::TYPE_STRING,
+            'name' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'capabilities' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

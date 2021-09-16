@@ -33,8 +33,8 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'tagCount' => SchemaDefinition::TYPE_INT,
-            'tagNames' => SchemaDefinition::TYPE_STRING,
+            'tagCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'tagNames' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

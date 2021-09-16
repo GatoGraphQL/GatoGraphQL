@@ -44,8 +44,8 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'customPostCount' => SchemaDefinition::TYPE_INT,
-            'customPostCountForAdmin' => SchemaDefinition::TYPE_INT,
+            'customPostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'customPostCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

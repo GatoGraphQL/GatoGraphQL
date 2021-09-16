@@ -68,8 +68,8 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'genericCustomPostCount' => SchemaDefinition::TYPE_INT,
-            'genericCustomPostCountForAdmin' => SchemaDefinition::TYPE_INT,
+            'genericCustomPostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'genericCustomPostCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

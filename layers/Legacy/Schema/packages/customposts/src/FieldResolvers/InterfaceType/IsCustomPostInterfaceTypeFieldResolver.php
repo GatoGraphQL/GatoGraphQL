@@ -30,7 +30,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
-            'datetime' => SchemaDefinition::TYPE_DATE,
+            'datetime' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }

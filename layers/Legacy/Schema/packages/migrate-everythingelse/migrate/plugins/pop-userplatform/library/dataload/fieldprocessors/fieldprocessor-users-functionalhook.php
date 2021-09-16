@@ -27,9 +27,9 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'shortDescriptionFormatted' => SchemaDefinition::TYPE_STRING,
-            'contactSmall' => SchemaDefinition::TYPE_STRING,
-            'userPreferences' => SchemaDefinition::TYPE_STRING,
+            'shortDescriptionFormatted' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'contactSmall' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'userPreferences' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

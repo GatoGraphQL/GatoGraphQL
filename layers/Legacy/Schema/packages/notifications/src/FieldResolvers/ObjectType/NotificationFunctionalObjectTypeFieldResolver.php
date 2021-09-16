@@ -29,7 +29,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'multilayoutKeys' => SchemaDefinition::TYPE_STRING,
+            'multilayoutKeys' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

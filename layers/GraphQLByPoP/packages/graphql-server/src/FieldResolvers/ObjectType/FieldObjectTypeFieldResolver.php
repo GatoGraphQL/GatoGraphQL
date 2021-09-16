@@ -38,12 +38,12 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'name' => SchemaDefinition::TYPE_STRING,
-            'description' => SchemaDefinition::TYPE_STRING,
-            'type' => SchemaDefinition::TYPE_STRING,
-            'isDeprecated' => SchemaDefinition::TYPE_BOOL,
-            'deprecationReason' => SchemaDefinition::TYPE_STRING,
-            'extensions' => SchemaDefinition::TYPE_OBJECT,
+            'name' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'type' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'isDeprecated' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'deprecationReason' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'extensions' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
             default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }

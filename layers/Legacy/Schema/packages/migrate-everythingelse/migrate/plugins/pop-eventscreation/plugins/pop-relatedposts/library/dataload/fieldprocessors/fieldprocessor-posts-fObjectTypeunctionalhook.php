@@ -27,7 +27,7 @@ class PoP_EventsCreation_DataLoad_FunctionalObjectTypeFieldResolver extends Abst
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-			'addEventURL' => SchemaDefinition::TYPE_URL,
+			'addEventURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

@@ -47,12 +47,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'roles' => SchemaDefinition::TYPE_STRING,
-            'capabilities' => SchemaDefinition::TYPE_STRING,
-            'hasRole' => SchemaDefinition::TYPE_BOOL,
-            'hasAnyRole' => SchemaDefinition::TYPE_BOOL,
-            'hasCapability' => SchemaDefinition::TYPE_BOOL,
-            'hasAnyCapability' => SchemaDefinition::TYPE_BOOL,
+            'roles' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'capabilities' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'hasRole' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'hasAnyRole' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'hasCapability' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'hasAnyCapability' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

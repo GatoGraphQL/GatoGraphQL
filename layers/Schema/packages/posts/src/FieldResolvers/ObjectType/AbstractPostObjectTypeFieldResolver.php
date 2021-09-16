@@ -43,8 +43,8 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'postCount' => SchemaDefinition::TYPE_INT,
-            'postCountForAdmin' => SchemaDefinition::TYPE_INT,
+            'postCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'postCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

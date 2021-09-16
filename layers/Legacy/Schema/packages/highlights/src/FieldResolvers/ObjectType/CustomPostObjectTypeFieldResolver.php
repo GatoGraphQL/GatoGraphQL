@@ -36,8 +36,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match($fieldName) {
-            'hasHighlights' => SchemaDefinition::TYPE_BOOL,
-            'highlightsCount' => SchemaDefinition::TYPE_INT,
+            'hasHighlights' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'highlightsCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }

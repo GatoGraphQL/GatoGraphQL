@@ -87,16 +87,16 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'content' => SchemaDefinition::TYPE_STRING,
-            'authorName' => SchemaDefinition::TYPE_STRING,
-            'authorURL' => SchemaDefinition::TYPE_URL,
-            'authorEmail' => SchemaDefinition::TYPE_EMAIL,
-            'customPostID' => SchemaDefinition::TYPE_ID,
-            'approved' => SchemaDefinition::TYPE_BOOL,
-            'type' => SchemaDefinition::TYPE_STRING,
-            'date' => SchemaDefinition::TYPE_DATE,
-            'responseCount' => SchemaDefinition::TYPE_INT,
-            'responseCountForAdmin' => SchemaDefinition::TYPE_INT,
+            'content' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'authorName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'authorURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'authorEmail' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver::class,
+            'customPostID' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'approved' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'type' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'date' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
+            'responseCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'responseCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

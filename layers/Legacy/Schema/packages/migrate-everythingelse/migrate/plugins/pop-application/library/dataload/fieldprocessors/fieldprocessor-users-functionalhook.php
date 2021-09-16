@@ -29,10 +29,10 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-			'multilayoutKeys' => SchemaDefinition::TYPE_STRING,
-            'mentionQueryby' => SchemaDefinition::TYPE_STRING,
-            'descriptionFormatted' => SchemaDefinition::TYPE_STRING,
-            'excerpt' => SchemaDefinition::TYPE_STRING,
+			'multilayoutKeys' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'mentionQueryby' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'descriptionFormatted' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'excerpt' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }

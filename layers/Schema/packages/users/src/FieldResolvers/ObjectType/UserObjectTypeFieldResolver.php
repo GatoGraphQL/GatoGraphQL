@@ -76,14 +76,14 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'username' => SchemaDefinition::TYPE_STRING,
-            'name' => SchemaDefinition::TYPE_STRING,
-            'displayName' => SchemaDefinition::TYPE_STRING,
-            'firstName' => SchemaDefinition::TYPE_STRING,
-            'lastName' => SchemaDefinition::TYPE_STRING,
-            'email' => SchemaDefinition::TYPE_EMAIL,
-            'description' => SchemaDefinition::TYPE_STRING,
-            'websiteURL' => SchemaDefinition::TYPE_URL,
+            'username' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'name' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'displayName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'firstName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'lastName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'email' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver::class,
+            'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'websiteURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
