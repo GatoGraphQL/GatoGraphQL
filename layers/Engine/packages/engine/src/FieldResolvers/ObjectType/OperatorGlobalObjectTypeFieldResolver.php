@@ -14,6 +14,10 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Misc\Extract;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
@@ -46,18 +50,18 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         $types = [
             'if' => MixedScalarTypeResolver::class,
-            'not' => SchemaDefinition::TYPE_BOOL,
-            'and' => SchemaDefinition::TYPE_BOOL,
-            'or' => SchemaDefinition::TYPE_BOOL,
-            'equals' => SchemaDefinition::TYPE_BOOL,
-            'empty' => SchemaDefinition::TYPE_BOOL,
-            'isNull' => SchemaDefinition::TYPE_BOOL,
+            'not' => BooleanScalarTypeResolver::class,
+            'and' => BooleanScalarTypeResolver::class,
+            'or' => BooleanScalarTypeResolver::class,
+            'equals' => BooleanScalarTypeResolver::class,
+            'empty' => BooleanScalarTypeResolver::class,
+            'isNull' => BooleanScalarTypeResolver::class,
             'var' => MixedScalarTypeResolver::class,
-            'context' => SchemaDefinition::TYPE_OBJECT,
+            'context' => ObjectScalarTypeResolver::class,
             'extract' => MixedScalarTypeResolver::class,
-            'time' => SchemaDefinition::TYPE_INT,
+            'time' => IntScalarTypeResolver::class,
             'echo' => MixedScalarTypeResolver::class,
-            'sprintf' => SchemaDefinition::TYPE_STRING,
+            'sprintf' => StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
