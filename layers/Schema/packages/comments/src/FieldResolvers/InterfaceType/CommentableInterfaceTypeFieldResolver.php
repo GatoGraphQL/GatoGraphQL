@@ -41,6 +41,11 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
 
     public function getFieldTypeResolverClass(string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'comments':
+            case 'commentsForAdmin':
+                return CommentObjectTypeResolver::class;
+        }
         $types = [
             'areCommentsOpen' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'hasComments' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
@@ -173,16 +178,5 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                 break;
         }
         return $errors;
-    }
-
-    public function getFieldTypeResolverClass(string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'comments':
-            case 'commentsForAdmin':
-                return CommentObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($fieldName);
     }
 }

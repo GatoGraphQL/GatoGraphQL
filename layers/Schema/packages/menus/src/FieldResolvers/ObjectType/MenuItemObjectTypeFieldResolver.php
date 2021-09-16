@@ -72,6 +72,10 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'children':
+                return MenuItemObjectTypeResolver::class;
+        }
         $types = [
             'localURLPath' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'label' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -156,15 +160,5 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'children':
-                return MenuItemObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

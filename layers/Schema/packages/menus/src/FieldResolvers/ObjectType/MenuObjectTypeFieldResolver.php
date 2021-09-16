@@ -61,6 +61,10 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'items':
+                return MenuItemObjectTypeResolver::class;
+        }
         $types = [
             'itemDataEntries' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
         ];
@@ -196,15 +200,5 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         // It will never reach here, so return anything
         return 0;
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'items':
-                return MenuItemObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

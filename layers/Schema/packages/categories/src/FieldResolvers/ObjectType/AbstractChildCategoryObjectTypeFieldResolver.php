@@ -33,6 +33,10 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'childCategory':
+                return $this->getCategoryTypeResolverClass();
+        }
         $types = [
             'childCategoryCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'childCategoryNames' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -159,15 +163,5 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'childCategory':
-                return $this->getCategoryTypeResolverClass();
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

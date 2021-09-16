@@ -43,6 +43,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'startDateReadable' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'daterange' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
             'daterangetime' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
+            'locations' => LocationObjectTypeResolver::class,
             default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
@@ -140,15 +141,5 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'locations':
-                return LocationObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

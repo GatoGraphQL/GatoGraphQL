@@ -29,6 +29,10 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
 
     public function getFieldTypeResolverClass(string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'featuredImage':
+                return MediaObjectTypeResolver::class;
+        }
         $types = [
             'hasFeaturedImage' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'featuredImage' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
@@ -54,15 +58,5 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
             'featuredImage' => $this->translationAPI->__('Featured image from the custom post', 'custompostmedia'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
-    }
-
-    public function getFieldTypeResolverClass(string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'featuredImage':
-                return MediaObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($fieldName);
     }
 }

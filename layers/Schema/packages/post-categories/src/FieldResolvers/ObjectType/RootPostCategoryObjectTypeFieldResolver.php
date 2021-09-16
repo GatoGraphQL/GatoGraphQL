@@ -44,6 +44,12 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'postCategory':
+            case 'postCategoryBySlug':
+            case 'postCategories':
+                return PostCategoryObjectTypeResolver::class;
+        }
         $types = [
             'postCategoryCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'postCategoryNames' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -174,17 +180,5 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'postCategory':
-            case 'postCategoryBySlug':
-            case 'postCategories':
-                return PostCategoryObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

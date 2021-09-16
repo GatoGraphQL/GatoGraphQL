@@ -89,6 +89,10 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'user':
+                return UserObjectTypeResolver::class;
+        }
         $types = [
             'action' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'objectType' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -330,15 +334,5 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'user':
-                return UserObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

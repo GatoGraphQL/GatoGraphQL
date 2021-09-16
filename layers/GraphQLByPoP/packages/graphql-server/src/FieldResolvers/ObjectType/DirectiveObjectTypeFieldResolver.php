@@ -39,6 +39,8 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'name' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'isRepeatable' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'args' => InputValueObjectTypeResolver::class,
+            'locations' => DirectiveLocationEnumTypeResolver::class,
             default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
@@ -67,15 +69,6 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'isRepeatable' => $this->translationAPI->__('Can the directive be executed more than once in the same field?', 'graphql-server'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        return match ($fieldName) {
-            'args' => InputValueObjectTypeResolver::class,
-            'locations' => DirectiveLocationEnumTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
-        };
     }
 
     /**

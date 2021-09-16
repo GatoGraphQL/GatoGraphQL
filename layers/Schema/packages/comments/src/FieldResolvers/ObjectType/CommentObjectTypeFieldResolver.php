@@ -86,17 +86,36 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        return match ($fieldName) {
+            'content',
+            'authorName',
+            'type'
+                => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'authorURL'
+                => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'authorEmail'
+                => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver::class,
+            'customPostID'
+                => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'approved'
+                => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'date'
+                => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
+            'responseCount',
+            'responseCountForAdmin'
+                => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'customPost'
+                => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
+            'parent',
+            'responses',
+            'responsesForAdmin'
+                => CommentObjectTypeResolver::class,
+            'status'
+                => CommentStatusEnumTypeResolver::class,
+            default
+                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+        };
         $types = [
-            'content' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'authorName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'authorURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'authorEmail' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver::class,
-            'customPostID' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
-            'approved' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'type' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'date' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
-            'responseCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'responseCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
@@ -215,22 +234,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 break;
         }
         return $errors;
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        return match ($fieldName) {
-            'customPost'
-                => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
-            'parent',
-            'responses',
-            'responsesForAdmin'
-                => CommentObjectTypeResolver::class,
-            'status'
-                => CommentStatusEnumTypeResolver::class,
-            default
-                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
-        };
     }
 
     /**

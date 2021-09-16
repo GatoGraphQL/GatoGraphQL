@@ -67,6 +67,15 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'genericCustomPost':
+            case 'genericCustomPostBySlug':
+            case 'genericCustomPosts':
+            case 'genericCustomPostForAdmin':
+            case 'genericCustomPostBySlugForAdmin':
+            case 'genericCustomPostsForAdmin':
+                return GenericCustomPostObjectTypeResolver::class;
+        }
         $types = [
             'genericCustomPostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'genericCustomPostCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
@@ -243,20 +252,5 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'genericCustomPost':
-            case 'genericCustomPostBySlug':
-            case 'genericCustomPosts':
-            case 'genericCustomPostForAdmin':
-            case 'genericCustomPostBySlugForAdmin':
-            case 'genericCustomPostsForAdmin':
-                return GenericCustomPostObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

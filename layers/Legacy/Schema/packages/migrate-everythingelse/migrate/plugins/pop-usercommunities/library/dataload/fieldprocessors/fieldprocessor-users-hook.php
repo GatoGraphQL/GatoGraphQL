@@ -37,11 +37,23 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
-        $types = [
-            'isCommunity' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'hasActiveCommunities' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'isCommunity'
+                => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'hasActiveCommunities'
+                => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'communities',
+            'activeCommunities'
+                => UserObjectTypeResolver::class,
+            'memberstatus'
+                => MemberStatusEnumTypeResolver::class,
+            'memberprivileges'
+                => MemberPrivilegeEnumTypeResolver::class,
+            'membertags'
+                => MemberTagEnumTypeResolver::class,
+            default
+                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -70,23 +82,6 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
             'hasActiveCommunities' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        return match ($fieldName) {
-            'communities',
-            'activeCommunities'
-                => UserObjectTypeResolver::class,
-            'memberstatus'
-                => MemberStatusEnumTypeResolver::class,
-            'memberprivileges'
-                => MemberPrivilegeEnumTypeResolver::class,
-            'membertags'
-                => MemberTagEnumTypeResolver::class,
-            default
-                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
-        };
     }
 
     /**

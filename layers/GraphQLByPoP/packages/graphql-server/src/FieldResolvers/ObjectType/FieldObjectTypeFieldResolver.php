@@ -44,6 +44,8 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'isDeprecated' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'deprecationReason' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'extensions' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
+            'args' => InputValueObjectTypeResolver::class,
+            'type' => TypeObjectTypeResolver::class,
             default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
@@ -112,16 +114,5 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'args':
-                return InputValueObjectTypeResolver::class;
-            case 'type':
-                return TypeObjectTypeResolver::class;
-        }
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

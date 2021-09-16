@@ -42,6 +42,11 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'posts':
+            case 'postsForAdmin':
+                return PostObjectTypeResolver::class;
+        }
         $types = [
             'postCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'postCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
@@ -182,16 +187,5 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'posts':
-            case 'postsForAdmin':
-                return PostObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

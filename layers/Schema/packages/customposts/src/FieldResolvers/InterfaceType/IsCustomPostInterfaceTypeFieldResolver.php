@@ -51,16 +51,22 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
 
     public function getFieldTypeResolverClass(string $fieldName): string
     {
-        $types = [
-            'content' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'isStatus' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'date' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
-            'modified' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
-            'title' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'excerpt' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'customPostType' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
+        return match ($fieldName) {
+            'isStatus'
+                => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'date',
+            'modified'
+                => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
+            'content',
+            'title',
+            'excerpt',
+            'customPostType'
+                => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'status'
+                => CustomPostStatusEnumTypeResolver::class,
+            default
+                => parent::getFieldTypeResolverClass($fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int
@@ -183,13 +189,5 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     public function getDefaultContentFormatValue(): string
     {
         return CustomPostContentFormatEnum::HTML;
-    }
-
-    public function getFieldTypeResolverClass(string $fieldName): string
-    {
-        return match ($fieldName) {
-            'status' => CustomPostStatusEnumTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($fieldName),
-        };
     }
 }

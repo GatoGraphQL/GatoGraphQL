@@ -32,6 +32,10 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'tags':
+                return $this->getTagTypeResolverClass();
+        }
         $types = [
             'tagCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'tagNames' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -143,15 +147,5 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'tags':
-                return $this->getTagTypeResolverClass();
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

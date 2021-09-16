@@ -37,6 +37,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'name' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'defaultValue' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'type' => TypeObjectTypeResolver::class,
             default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
@@ -93,14 +94,5 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'type':
-                return TypeObjectTypeResolver::class;
-        }
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

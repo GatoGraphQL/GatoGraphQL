@@ -44,6 +44,12 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'postTag':
+            case 'postTagBySlug':
+            case 'postTags':
+                return PostTagObjectTypeResolver::class;
+        }
         $types = [
             'postTagCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'postTagNames' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -174,17 +180,5 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'postTag':
-            case 'postTagBySlug':
-            case 'postTags':
-                return PostTagObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

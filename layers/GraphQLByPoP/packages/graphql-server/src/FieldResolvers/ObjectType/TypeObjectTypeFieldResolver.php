@@ -49,9 +49,24 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
-            'name' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'extensions' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
+            'name'
+                => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'description'
+                => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'extensions'
+                => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
+            'fields'
+                => FieldObjectTypeResolver::class,
+            'interfaces',
+            'possibleTypes',
+            'ofType'
+                => TypeObjectTypeResolver::class,
+            'enumValues'
+                => EnumValueObjectTypeResolver::class,
+            'inputFields'
+                => InputValueObjectTypeResolver::class,
+            'kind'
+                => TypeKindEnumTypeResolver::class,
             default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
@@ -110,25 +125,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
 
         return $schemaFieldArgs;
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        return match ($fieldName) {
-            'fields' =>
-                FieldObjectTypeResolver::class,
-            'interfaces',
-            'possibleTypes',
-            'ofType' =>
-                TypeObjectTypeResolver::class,
-            'enumValues' =>
-                EnumValueObjectTypeResolver::class,
-            'inputFields' =>
-                InputValueObjectTypeResolver::class,
-            'kind'
-                => TypeKindEnumTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
-        };
     }
 
     /**

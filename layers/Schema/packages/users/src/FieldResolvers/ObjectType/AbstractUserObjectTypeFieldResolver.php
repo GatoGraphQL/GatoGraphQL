@@ -70,6 +70,11 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'users':
+            case 'usersForAdmin':
+                return UserObjectTypeResolver::class;
+        }
         $types = [
             'userCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'userCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
@@ -192,16 +197,5 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'users':
-            case 'usersForAdmin':
-                return UserObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

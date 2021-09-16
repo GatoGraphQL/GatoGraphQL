@@ -43,6 +43,11 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'customPosts':
+            case 'customPostsForAdmin':
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
+        }
         $types = [
             'customPostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'customPostCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
@@ -195,16 +200,5 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'customPosts':
-            case 'customPostsForAdmin':
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }

@@ -73,6 +73,15 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
 
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
+        switch ($fieldName) {
+            case 'page':
+            case 'pageBySlug':
+            case 'pages':
+            case 'pageForAdmin':
+            case 'pageBySlugForAdmin':
+            case 'pagesForAdmin':
+                return PageObjectTypeResolver::class;
+        }
         $types = [
             'pageCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'pageCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
@@ -221,20 +230,5 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
-    {
-        switch ($fieldName) {
-            case 'page':
-            case 'pageBySlug':
-            case 'pages':
-            case 'pageForAdmin':
-            case 'pageBySlugForAdmin':
-            case 'pagesForAdmin':
-                return PageObjectTypeResolver::class;
-        }
-
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }
