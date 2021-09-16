@@ -116,11 +116,11 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         );
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         // TODO: If we are running PHP 7.4, the properties may be typed,
         // so we can already get the type through reflection. Implement this!
-        return parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

@@ -35,14 +35,14 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match($fieldName) {
             'title' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'excerpt' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'content' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'highlightedPostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 

@@ -31,7 +31,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
 			'recommendPostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
@@ -44,7 +44,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
             'undoDownvotePostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'downvotePostCountPlus1' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

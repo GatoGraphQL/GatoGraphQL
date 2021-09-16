@@ -35,12 +35,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'isSticky' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

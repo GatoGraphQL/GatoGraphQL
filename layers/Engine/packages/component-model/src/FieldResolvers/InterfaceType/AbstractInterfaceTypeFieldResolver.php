@@ -144,7 +144,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return null;
     }
 
-    public function getSchemaFieldType(string $fieldName): string
+    public function getFieldTypeResolverClass(string $fieldName): string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {

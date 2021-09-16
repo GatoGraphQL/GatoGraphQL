@@ -29,7 +29,7 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'symbol' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -37,7 +37,7 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
             'namedescription' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'symbolname' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

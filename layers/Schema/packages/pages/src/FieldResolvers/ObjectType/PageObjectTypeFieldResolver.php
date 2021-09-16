@@ -60,13 +60,13 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'childPageCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'childPageCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

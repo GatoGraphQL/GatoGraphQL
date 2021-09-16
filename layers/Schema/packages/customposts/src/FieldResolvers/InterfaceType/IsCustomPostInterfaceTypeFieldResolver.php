@@ -49,7 +49,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         ];
     }
 
-    public function getSchemaFieldType(string $fieldName): string
+    public function getFieldTypeResolverClass(string $fieldName): string
     {
         $types = [
             'content' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -60,7 +60,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'excerpt' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'customPostType' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int

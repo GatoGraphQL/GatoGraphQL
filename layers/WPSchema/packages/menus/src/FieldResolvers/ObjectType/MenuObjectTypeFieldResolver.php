@@ -30,7 +30,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'name',
@@ -40,7 +40,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'count'
                 => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             default
-                => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 

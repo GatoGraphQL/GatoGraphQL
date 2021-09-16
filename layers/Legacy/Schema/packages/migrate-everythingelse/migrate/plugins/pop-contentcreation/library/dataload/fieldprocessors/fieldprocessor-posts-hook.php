@@ -32,7 +32,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'titleEdit' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -40,7 +40,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
             'contentEdit' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'editURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'deleteURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 

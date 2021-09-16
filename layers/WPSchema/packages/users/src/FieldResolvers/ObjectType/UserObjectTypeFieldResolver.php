@@ -60,14 +60,14 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'nicename' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'nickname' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'locale' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'registeredDate' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 

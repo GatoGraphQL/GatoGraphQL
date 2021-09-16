@@ -49,12 +49,12 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
     /**
      * Change the type from mixed to string
      */
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'echoStr' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     /**

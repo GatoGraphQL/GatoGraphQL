@@ -30,14 +30,14 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
             'recommendPostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'upvotePostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'downvotePostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

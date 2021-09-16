@@ -28,7 +28,7 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
 			'contactPerson' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -37,7 +37,7 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
             'organizationcategories' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'hasOrganizationDetails' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

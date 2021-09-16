@@ -26,13 +26,13 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         ];
     }
 
-    public function getSchemaFieldType(string $fieldName): string
+    public function getFieldTypeResolverClass(string $fieldName): string
     {
         $types = [
             'metaValue' => \PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarTypeResolver::class,
             'metaValues' => \PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int

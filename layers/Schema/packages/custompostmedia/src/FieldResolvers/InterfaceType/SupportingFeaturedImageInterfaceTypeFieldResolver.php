@@ -27,13 +27,13 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         ];
     }
 
-    public function getSchemaFieldType(string $fieldName): string
+    public function getFieldTypeResolverClass(string $fieldName): string
     {
         $types = [
             'hasFeaturedImage' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'featuredImage' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int

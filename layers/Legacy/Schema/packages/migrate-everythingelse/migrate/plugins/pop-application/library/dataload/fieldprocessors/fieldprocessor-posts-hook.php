@@ -53,7 +53,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'favicon' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
@@ -65,7 +65,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
             'hasAppliesto' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'hasUserpostactivity' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'userPostActivityCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 

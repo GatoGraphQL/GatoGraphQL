@@ -35,7 +35,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'name' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -44,7 +44,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'isDeprecated' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'deprecationReason' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'extensions' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
-            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 

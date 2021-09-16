@@ -74,12 +74,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ];
     }
 
-    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'commentCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'commentCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
     }
 
