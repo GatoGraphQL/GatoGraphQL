@@ -14,14 +14,6 @@ class AnyScalarScalarTypeResolver extends AbstractScalarTypeResolver
     /**
      * Accept anything and everything
      */
-    public function serialize(mixed $scalarValue): string|int|float|bool|array
-    {
-        return $scalarValue;
-    }
-
-    /**
-     * Accept anything and everything
-     */
     public function coerceValue(mixed $inputValue): mixed
     {
         return $inputValue;

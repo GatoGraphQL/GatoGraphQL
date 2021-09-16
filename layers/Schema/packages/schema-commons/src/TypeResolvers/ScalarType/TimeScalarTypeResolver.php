@@ -17,11 +17,6 @@ class TimeScalarTypeResolver extends AbstractScalarTypeResolver
     {
         return 'Time';
     }
-    
-    public function serialize(mixed $scalarValue): string|int|float|bool|array
-    {
-        return $scalarValue;
-    }
 
     public function coerceValue(mixed $inputValue): mixed
     {

@@ -17,11 +17,6 @@ class DateScalarTypeResolver extends AbstractScalarTypeResolver
     {
         return 'Date';
     }
-    
-    public function serialize(mixed $scalarValue): string|int|float|bool|array
-    {
-        return $scalarValue;
-    }
 
     public function coerceValue(mixed $inputValue): mixed
     {
