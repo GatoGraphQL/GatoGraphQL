@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ScalarType;
 
+use CastToType;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 
 /**
@@ -23,6 +24,25 @@ class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
         if ($error = $this->validateIsNotArrayOrObject($inputValue)) {
             return $error;
         }
-        return $inputValue;
+
+        /**
+         * Watch out! In Library CastToType, an empty string is not false, but it's NULL
+         * But for us it must be false, since calling query ?query=and([true,false]) gets transformed to the $field string "[1,]"
+         */
+        if ($inputValue === '') {
+            return false;
+        }
+
+        $castInputValue = CastToType::_bool($inputValue);
+        if ($castInputValue === null) {
+            return $this->getError(
+                sprintf(
+                    $this->translationAPI->__('Cannot cast from \'%s\' for type \'%s\'', 'component-model'),
+                    $inputValue,
+                    $this->getMaybeNamespacedTypeName(),
+                )
+            );
+        }
+        return (bool) $castInputValue;
     }
 }
