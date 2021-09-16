@@ -9,8 +9,6 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
     /**
      * The entities from the WordPress data model (Post, User, Comment, etc)
      * are considered the canonical source, so they do not need to be namespaced.
-     *
-     * @return string
      */
     protected function getSchemaNamespace(): string
     {
