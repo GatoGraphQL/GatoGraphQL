@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -78,9 +79,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'commentCount'
-                => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+                => IntScalarTypeResolver::class,
             'commentCountForAdmin'
-                => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+                => IntScalarTypeResolver::class,
             'comment',
             'comments',
             'commentForAdmin',

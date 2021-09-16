@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -29,8 +30,8 @@ trait RolesObjectTypeFieldResolverTrait
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'roles' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'capabilities' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'roles' => StringScalarTypeResolver::class,
+            'capabilities' => StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

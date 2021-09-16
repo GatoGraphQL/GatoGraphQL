@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -47,12 +49,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'roles' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'capabilities' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'hasRole' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'hasAnyRole' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'hasCapability' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'hasAnyCapability' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'roles' => StringScalarTypeResolver::class,
+            'capabilities' => StringScalarTypeResolver::class,
+            'hasRole' => BooleanScalarTypeResolver::class,
+            'hasAnyRole' => BooleanScalarTypeResolver::class,
+            'hasCapability' => BooleanScalarTypeResolver::class,
+            'hasAnyCapability' => BooleanScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -76,8 +77,8 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
                 return UserObjectTypeResolver::class;
         }
         $types = [
-            'userCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'userCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'userCount' => IntScalarTypeResolver::class,
+            'userCountForAdmin' => IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

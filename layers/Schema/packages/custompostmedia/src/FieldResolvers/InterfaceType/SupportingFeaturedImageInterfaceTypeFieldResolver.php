@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMedia\FieldResolvers\InterfaceType;
 
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -34,8 +36,8 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
                 return MediaObjectTypeResolver::class;
         }
         $types = [
-            'hasFeaturedImage' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'featuredImage' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+            'hasFeaturedImage' => BooleanScalarTypeResolver::class,
+            'featuredImage' => IDScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
     }

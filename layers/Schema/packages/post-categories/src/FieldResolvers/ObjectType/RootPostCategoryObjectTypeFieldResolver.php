@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -51,8 +53,8 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
                 return PostCategoryObjectTypeResolver::class;
         }
         $types = [
-            'postCategoryCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'postCategoryNames' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'postCategoryCount' => IntScalarTypeResolver::class,
+            'postCategoryNames' => StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

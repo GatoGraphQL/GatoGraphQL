@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Meta\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -29,8 +30,8 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldTypeResolverClass(string $fieldName): string
     {
         $types = [
-            'metaValue' => \PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarTypeResolver::class,
-            'metaValues' => \PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarTypeResolver::class,
+            'metaValue' => AnyScalarTypeResolver::class,
+            'metaValues' => AnyScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
     }

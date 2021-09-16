@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -90,20 +97,20 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'content',
             'authorName',
             'type'
-                => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+                => StringScalarTypeResolver::class,
             'authorURL'
-                => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+                => URLScalarTypeResolver::class,
             'authorEmail'
-                => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver::class,
+                => EmailScalarTypeResolver::class,
             'customPostID'
-                => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
+                => IDScalarTypeResolver::class,
             'approved'
-                => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+                => BooleanScalarTypeResolver::class,
             'date'
-                => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
+                => DateScalarTypeResolver::class,
             'responseCount',
             'responseCountForAdmin'
-                => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+                => IntScalarTypeResolver::class,
             'customPost'
                 => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
             'parent',

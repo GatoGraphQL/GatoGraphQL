@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -76,14 +79,14 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'username' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'name' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'displayName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'firstName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'lastName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'email' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver::class,
-            'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'websiteURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'username' => StringScalarTypeResolver::class,
+            'name' => StringScalarTypeResolver::class,
+            'displayName' => StringScalarTypeResolver::class,
+            'firstName' => StringScalarTypeResolver::class,
+            'lastName' => StringScalarTypeResolver::class,
+            'email' => EmailScalarTypeResolver::class,
+            'description' => StringScalarTypeResolver::class,
+            'websiteURL' => URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

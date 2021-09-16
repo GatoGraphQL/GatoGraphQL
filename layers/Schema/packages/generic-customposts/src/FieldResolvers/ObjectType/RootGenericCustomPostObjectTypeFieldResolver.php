@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\GenericCustomPosts\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -77,8 +78,8 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
                 return GenericCustomPostObjectTypeResolver::class;
         }
         $types = [
-            'genericCustomPostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'genericCustomPostCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'genericCustomPostCount' => IntScalarTypeResolver::class,
+            'genericCustomPostCountForAdmin' => IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

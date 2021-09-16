@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\InterfaceType;
 
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
@@ -47,10 +48,10 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                 return CommentObjectTypeResolver::class;
         }
         $types = [
-            'areCommentsOpen' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'hasComments' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'commentCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'commentCountForAdmin' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'areCommentsOpen' => BooleanScalarTypeResolver::class,
+            'hasComments' => BooleanScalarTypeResolver::class,
+            'commentCount' => IntScalarTypeResolver::class,
+            'commentCountForAdmin' => IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
     }

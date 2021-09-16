@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\FieldResolvers\ObjectType;
 
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -72,18 +76,18 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
-            'src' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'srcSet' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'width' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'height' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'sizes' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'title' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'caption' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'altText' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'date' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
-            'modified' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
-            'mimeType' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'src' => URLScalarTypeResolver::class,
+            'srcSet' => StringScalarTypeResolver::class,
+            'width' => IntScalarTypeResolver::class,
+            'height' => IntScalarTypeResolver::class,
+            'sizes' => StringScalarTypeResolver::class,
+            'title' => StringScalarTypeResolver::class,
+            'caption' => StringScalarTypeResolver::class,
+            'altText' => StringScalarTypeResolver::class,
+            'description' => StringScalarTypeResolver::class,
+            'date' => DateScalarTypeResolver::class,
+            'modified' => DateScalarTypeResolver::class,
+            'mimeType' => StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }

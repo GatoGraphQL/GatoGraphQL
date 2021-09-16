@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -77,16 +80,16 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return MenuItemObjectTypeResolver::class;
         }
         $types = [
-            'localURLPath' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'label' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'title' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'url' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'classes' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'target' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'description' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'objectID' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
-            'parentID' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
-            'linkRelationship' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'localURLPath' => StringScalarTypeResolver::class,
+            'label' => StringScalarTypeResolver::class,
+            'title' => StringScalarTypeResolver::class,
+            'url' => URLScalarTypeResolver::class,
+            'classes' => StringScalarTypeResolver::class,
+            'target' => StringScalarTypeResolver::class,
+            'description' => StringScalarTypeResolver::class,
+            'objectID' => IDScalarTypeResolver::class,
+            'parentID' => IDScalarTypeResolver::class,
+            'linkRelationship' => StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
