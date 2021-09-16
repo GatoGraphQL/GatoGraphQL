@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractNestableType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\EnumType;
@@ -50,11 +52,11 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'name'
-                => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+                => StringScalarTypeResolver::class,
             'description'
-                => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+                => StringScalarTypeResolver::class,
             'extensions'
-                => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
+                => ObjectScalarTypeResolver::class,
             'fields'
                 => FieldObjectTypeResolver::class,
             'interfaces',

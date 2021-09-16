@@ -48,7 +48,7 @@ class Argument extends AbstractAst
     }
 
     /**
-     * @return \GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\ValueInterface
+     * @return ValueInterface
      */
     public function getValue()
     {
