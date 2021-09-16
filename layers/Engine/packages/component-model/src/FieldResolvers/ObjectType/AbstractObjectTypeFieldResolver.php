@@ -31,7 +31,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -236,7 +236,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldTypeResolverClass($objectTypeResolver, $fieldName);
         }
-        return AnyScalarTypeResolver::class;
+        return AnyScalarScalarTypeResolver::class;
     }
 
     /**

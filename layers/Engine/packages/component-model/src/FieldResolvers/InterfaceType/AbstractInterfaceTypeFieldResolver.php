@@ -15,7 +15,7 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -200,7 +200,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldTypeResolverClass($fieldName);
         }
-        return AnyScalarTypeResolver::class;
+        return AnyScalarScalarTypeResolver::class;
     }
 
     /**
