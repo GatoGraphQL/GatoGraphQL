@@ -1672,14 +1672,11 @@ class Engine implements EngineInterface
                 $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponent_typeResolver_class) {
-                $subcomponentTypeResolver = $this->instanceManager->getInstance($subcomponent_typeResolver_class);
-                if (!($subcomponentTypeResolver instanceof RelationalTypeResolverInterface)) {
-                    continue;
-                }
                 // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
                 $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
                 $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];
                 if ($subcomponent_data_fields || $subcomponent_conditional_data_fields) {
+                    $subcomponentTypeResolver = $this->instanceManager->getInstance($subcomponent_typeResolver_class);
                     $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
                     $subcomponent_already_loaded_ids_data_fields = array();
