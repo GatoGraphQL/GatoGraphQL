@@ -27,14 +27,6 @@ class CommentStatusEnumTypeResolver extends AbstractEnumTypeResolver
     }
 
     /**
-     * Use the original values
-     */
-    public function getOutputEnumValueCallable(): ?callable
-    {
-        return null;
-    }
-
-    /**
      * Description for a specific enum value
      */
     public function getEnumValueDescription(string $enumValue): ?string

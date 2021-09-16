@@ -29,11 +29,11 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     protected ?array $enumValueDeprecationMessages = null;
 
     /**
-     * By default, output the enum value in UPPERCASE
+     * By default, use the original values
      */
     public function getOutputEnumValueCallable(): ?callable
     {
-        return 'strtoupper';
+        return null;
     }
 
     /**
