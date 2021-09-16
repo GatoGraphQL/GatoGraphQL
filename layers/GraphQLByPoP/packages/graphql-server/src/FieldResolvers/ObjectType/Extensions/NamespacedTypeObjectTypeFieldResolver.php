@@ -7,15 +7,12 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractType;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\FieldResolvers\ObjectType\WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    use WithEnumObjectTypeFieldSchemaDefinitionResolverTrait;
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
