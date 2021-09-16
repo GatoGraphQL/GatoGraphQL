@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 
 /**
  * GraphQL Built-in Scalar
- * 
+ *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Built-in-Scalars
  */
 class IDScalarTypeResolver extends AbstractScalarTypeResolver
@@ -20,7 +20,7 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
 
     /**
      * From the GraphQL spec, for section "ID > Input Coercion":
-     * 
+     *
      *   When expected as an input type, any string (such as "4")
      *   or integer (such as 4 or -4) input value should be coerced to ID
      *   as appropriate for the ID formats a given GraphQL service expects.
@@ -36,7 +36,7 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
         }
         /**
          * Type ID in GraphQL spec: only String or Int allowed.
-         * 
+         *
          * @see https://spec.graphql.org/draft/#sec-ID.Input-Coercion
          */
         if (is_float($inputValue) || is_bool($inputValue)) {

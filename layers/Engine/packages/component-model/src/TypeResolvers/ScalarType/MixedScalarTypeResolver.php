@@ -10,7 +10,7 @@ class MixedScalarTypeResolver extends AbstractScalarTypeResolver
     {
         return 'Mixed';
     }
-    
+
     /**
      * Accept anything and everything
      */

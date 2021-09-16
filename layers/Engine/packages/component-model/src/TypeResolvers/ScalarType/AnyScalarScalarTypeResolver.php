@@ -10,7 +10,7 @@ class AnyScalarScalarTypeResolver extends AbstractScalarTypeResolver
     {
         return 'AnyScalar';
     }
-    
+
     /**
      * Accept anything and everything, other than arrays and objects
      */

@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 
 /**
  * GraphQL Custom Scalar
- * 
+ *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Custom-Scalars
  */
 class DateScalarTypeResolver extends AbstractScalarTypeResolver
@@ -36,7 +36,7 @@ class DateScalarTypeResolver extends AbstractScalarTypeResolver
 
         /**
          * Validate that the format is 'Y-m-d'
-         * 
+         *
          * @see https://stackoverflow.com/a/13194398
          */
         $format = 'Y-m-d';

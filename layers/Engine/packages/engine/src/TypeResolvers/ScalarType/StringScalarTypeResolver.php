@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 
 /**
  * GraphQL Built-in Scalar
- * 
+ *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Built-in-Scalars
  */
 class StringScalarTypeResolver extends AbstractScalarTypeResolver
