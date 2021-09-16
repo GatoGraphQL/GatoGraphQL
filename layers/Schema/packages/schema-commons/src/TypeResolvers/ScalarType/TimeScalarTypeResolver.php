@@ -26,13 +26,7 @@ class TimeScalarTypeResolver extends AbstractScalarTypeResolver
 
         $castInputValue = strtotime($inputValue);
         if ($castInputValue === false) {
-            return $this->getError(
-                sprintf(
-                    $this->translationAPI->__('Cannot cast from \'%s\' for type \'%s\'', 'component-model'),
-                    $inputValue,
-                    $this->getMaybeNamespacedTypeName(),
-                )
-            );
+            return $this->getError($this->getDefaultErrorMessage($inputValue));
         }
         return $castInputValue;
     }

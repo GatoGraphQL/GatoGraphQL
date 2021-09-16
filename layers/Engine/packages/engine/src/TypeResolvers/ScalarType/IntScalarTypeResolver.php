@@ -27,13 +27,7 @@ class IntScalarTypeResolver extends AbstractScalarTypeResolver
 
         $castInputValue = CastToType::_int($inputValue);
         if ($castInputValue === null) {
-            return $this->getError(
-                sprintf(
-                    $this->translationAPI->__('Cannot cast from \'%s\' for type \'%s\'', 'component-model'),
-                    $inputValue,
-                    $this->getMaybeNamespacedTypeName(),
-                )
-            );
+            return $this->getError($this->getDefaultErrorMessage($inputValue));
         }
         return (int) $castInputValue;
     }
