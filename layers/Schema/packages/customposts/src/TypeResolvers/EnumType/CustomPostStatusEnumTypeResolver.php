@@ -26,12 +26,4 @@ class CustomPostStatusEnumTypeResolver extends AbstractEnumTypeResolver
             Status::TRASH,
         ];
     }
-
-    /**
-     * Use the original values
-     */
-    public function getOutputEnumValueCallable(): ?callable
-    {
-        return null;
-    }
 }

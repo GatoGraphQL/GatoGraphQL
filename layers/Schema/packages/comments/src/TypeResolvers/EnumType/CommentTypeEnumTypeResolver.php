@@ -25,12 +25,4 @@ class CommentTypeEnumTypeResolver extends AbstractEnumTypeResolver
             CommentTypes::PINGBACK,
         ];
     }
-
-    /**
-     * Use the original values
-     */
-    public function getOutputEnumValueCallable(): ?callable
-    {
-        return null;
-    }
 }

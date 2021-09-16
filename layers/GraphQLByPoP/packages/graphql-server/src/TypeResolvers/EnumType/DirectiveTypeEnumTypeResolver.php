@@ -29,4 +29,12 @@ class DirectiveTypeEnumTypeResolver extends AbstractEnumTypeResolver
             ] : [],
         );
     }
+
+    /**
+     * Output the enum value in UPPERCASE
+     */
+    public function getOutputEnumValueCallable(): ?callable
+    {
+        return 'strtoupper';
+    }
 }
