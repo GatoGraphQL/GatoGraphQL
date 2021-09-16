@@ -122,9 +122,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             default
                 => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
         };
-        $types = [
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
