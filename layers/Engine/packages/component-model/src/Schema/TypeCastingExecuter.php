@@ -166,7 +166,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             case SchemaDefinition::TYPE_BOOL:
                 // Watch out! In Library CastToType, an empty string is not false, but it's NULL
                 // But for us it must be false, since calling query ?query=and([true,false]) gets transformed to the $field string "[1,]"
-                if ($value == '') {
+                if ($value === '') {
                     return false;
                 }
                 $converted = CastToType::_bool($value);

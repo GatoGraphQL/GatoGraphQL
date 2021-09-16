@@ -75,7 +75,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         switch ($fieldName) {
             case 'createPost':

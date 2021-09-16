@@ -56,7 +56,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }
 
-    public function getFieldTypeResolverClass(string $fieldName): ?string
+    public function getFieldTypeResolverClass(string $fieldName): string
     {
         switch ($fieldName) {
             case 'featuredImage':

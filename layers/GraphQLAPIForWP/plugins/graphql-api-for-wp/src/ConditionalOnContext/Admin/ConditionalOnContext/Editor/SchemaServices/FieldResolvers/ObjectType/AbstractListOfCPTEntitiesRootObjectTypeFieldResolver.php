@@ -79,7 +79,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     public function getFieldTypeResolverClass(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
-    ): ?string {
+    ): string {
         return CustomPostObjectTypeResolver::class;
     }
 }

@@ -198,7 +198,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return 0;
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         switch ($fieldName) {
             case 'items':

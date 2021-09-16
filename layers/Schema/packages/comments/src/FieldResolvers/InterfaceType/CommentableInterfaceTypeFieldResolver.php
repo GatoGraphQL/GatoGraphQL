@@ -175,7 +175,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         return $errors;
     }
 
-    public function getFieldTypeResolverClass(string $fieldName): ?string
+    public function getFieldTypeResolverClass(string $fieldName): string
     {
         switch ($fieldName) {
             case 'comments':

@@ -185,7 +185,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         return CustomPostContentFormatEnum::HTML;
     }
 
-    public function getFieldTypeResolverClass(string $fieldName): ?string
+    public function getFieldTypeResolverClass(string $fieldName): string
     {
         return match ($fieldName) {
             'status' => CustomPostStatusEnumTypeResolver::class,
