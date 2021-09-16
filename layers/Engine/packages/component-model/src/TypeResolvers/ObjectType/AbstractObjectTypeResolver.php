@@ -393,7 +393,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                     Tokens::MESSAGE => $deprecation,
                                 ];
                             }
-                            $this->feedbackMessageStore->addDBDeprecations($objectDeprecations);
+                            $this->feedbackMessageStore->addObjectDeprecations($objectDeprecations);
                         }
                     }
                     if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {
