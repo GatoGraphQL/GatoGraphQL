@@ -18,6 +18,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
+use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
@@ -401,14 +402,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     }
 
                     // Resolve the value. If the field resolver throws an Exception,
-                    // catch it and return the equivalent GraphQL error
+                    // catch it and return the equivalent GraphQL error so that it
+                    // fails gracefully in production (but not on development!)
                     try {
                         $value = $objectTypeFieldResolver->resolveValue($this, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
                     } catch (Exception $e) {
+                        if (RootEnvironment::isApplicationEnvironmentDev()) {
+                            throw $e;
+                        }
                         return new Error(
                             'exception',
                             sprintf(
-                                $this->translationAPI->__('Resolving field \'%s\' produced an exception, with message: \'%s\'', 'component-model'),
+                                $this->translationAPI->__('Resolving field \'%s\' produced an exception, with message: \'%s\'. Please contact the admin.', 'component-model'),
                                 $field,
                                 $e->getMessage()
                             )
