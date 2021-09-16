@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
  * 
  * @see https://spec.graphql.org/draft/#sec-Scalars.Built-in-Scalars
  */
-class BooleanTypeResolver extends AbstractScalarTypeResolver
+class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {

@@ -11,11 +11,11 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
  * 
  * @see https://spec.graphql.org/draft/#sec-Scalars.Built-in-Scalars
  */
-class IntTypeResolver extends AbstractScalarTypeResolver
+class StringScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'Int';
+        return 'String';
     }
     
     public function serialize(mixed $scalarValue): string|int|float|bool|array
