@@ -10,6 +10,8 @@ use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\FloatScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
@@ -38,14 +40,14 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'divide'
-                => SchemaDefinition::TYPE_FLOAT,
+                => FloatScalarTypeResolver::class,
             'concat',
             'arrayJoin',
             'arrayAsQueryStr',
             'upperCase',
             'lowerCase',
             'titleCase'
-                => SchemaDefinition::TYPE_STRING,
+                => StringScalarTypeResolver::class,
             'arrayRandom',
             'arrayItem',
             'arraySearch',
