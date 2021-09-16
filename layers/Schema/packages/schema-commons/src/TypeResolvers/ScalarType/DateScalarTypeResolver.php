@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
 use DateTime;
-use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 
 /**
@@ -27,13 +26,10 @@ class DateScalarTypeResolver extends AbstractScalarTypeResolver
         }
 
         if (!is_string($inputValue)) {
-            return new Error(
-                'date-cast',
-                sprintf(
-                    $this->translationAPI->__('Type \'%s\' must be provided as a string', 'component-model'),
-                    $this->getMaybeNamespacedTypeName()
-                )
-            );
+            return $this->getError(sprintf(
+                $this->translationAPI->__('Type \'%s\' must be provided as a string', 'component-model'),
+                $this->getMaybeNamespacedTypeName()
+            ));
         }
 
         /**
@@ -44,14 +40,11 @@ class DateScalarTypeResolver extends AbstractScalarTypeResolver
         $format = 'Y-m-d';
         $dt = DateTime::createFromFormat($format, $inputValue);
         if ($dt === false || array_sum($dt::getLastErrors())) {
-            return new Error(
-                'date-cast',
-                sprintf(
-                    $this->translationAPI->__('Type \'%s\' must be provided with format \'%s\'', 'component-model'),
-                    $this->getMaybeNamespacedTypeName(),
-                    $format
-                )
-            );
+            return $this->getError(sprintf(
+                $this->translationAPI->__('Type \'%s\' must be provided with format \'%s\'', 'component-model'),
+                $this->getMaybeNamespacedTypeName(),
+                $format
+            ));
         }
         return $inputValue;
     }

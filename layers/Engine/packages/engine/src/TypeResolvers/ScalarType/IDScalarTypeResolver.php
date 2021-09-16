@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ScalarType;
 
-use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 
 /**
@@ -30,10 +29,10 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
          * @see https://spec.graphql.org/draft/#sec-ID.Input-Coercion
          */
         if (is_float($inputValue) || is_bool($inputValue)) {
-            return new Error(
-                'id-cast',
-                $this->translationAPI->__('Type ID in GraphQL spec: only String or Int allowed', 'component-model')
-            );
+            return $this->getError(sprintf(
+                $this->translationAPI->__('Only strings or integers are allowed for type \'%s\'', 'component-model'),
+                $this->getMaybeNamespacedTypeName()
+            ));
         }
         return $inputValue;
     }
