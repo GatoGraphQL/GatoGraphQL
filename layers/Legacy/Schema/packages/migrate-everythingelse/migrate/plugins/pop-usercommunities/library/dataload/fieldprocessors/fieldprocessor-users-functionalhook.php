@@ -2,7 +2,7 @@
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
@@ -26,7 +26,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
 			'editMembershipURL' => SchemaDefinition::TYPE_URL,
@@ -35,10 +35,10 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
             'memberPrivilegesByName' => SchemaDefinition::TYPE_STRING,
             'memberTagsByName' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'memberStatusByName',
@@ -46,11 +46,11 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
             'memberTagsByName'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -60,7 +60,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
             'memberPrivilegesByName' => $translationAPI->__('', ''),
             'memberTagsByName' => $translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -70,7 +70,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
         array $fieldArgs = [],
@@ -81,13 +81,13 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
         $user = $object;
         switch ($fieldName) {
             case 'editMembershipURL':
-                return gdUreEditMembershipUrl($relationalTypeResolver->getID($user));
+                return gdUreEditMembershipUrl($objectTypeResolver->getID($user));
 
             case 'editMemberStatusInlineURL':
-                return gdUreEditMembershipUrl($relationalTypeResolver->getID($user), true);
+                return gdUreEditMembershipUrl($objectTypeResolver->getID($user), true);
 
             case 'memberStatusByName':
-                $selected = $relationalTypeResolver->resolveValue($user, 'memberstatus', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($user, 'memberstatus', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -95,7 +95,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
                 return $status->getSelectedValue();
 
             case 'memberPrivilegesByName':
-                $selected = $relationalTypeResolver->resolveValue($user, 'memberprivileges', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($user, 'memberprivileges', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -103,7 +103,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
                 return $privileges->getSelectedValue();
 
             case 'memberTagsByName':
-                $selected = $relationalTypeResolver->resolveValue($user, 'membertags', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($user, 'membertags', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -111,7 +111,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
                 return $tags->getSelectedValue();
         }
 
-        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 

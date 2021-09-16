@@ -5,7 +5,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
@@ -32,7 +32,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         return match ($fieldName) {
             'titleEdit' => SchemaDefinition::TYPE_STRING,
@@ -40,19 +40,19 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
             'contentEdit' => SchemaDefinition::TYPE_STRING,
             'editURL' => SchemaDefinition::TYPE_URL,
             'deleteURL' => SchemaDefinition::TYPE_URL,
-            default => parent::getSchemaFieldType($relationalTypeResolver, $fieldName),
+            default => parent::getSchemaFieldType($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'coauthors' => SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -63,7 +63,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
             'deleteURL' => $translationAPI->__('', ''),
             'coauthors' => $translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -73,7 +73,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
         array $fieldArgs = [],
@@ -87,31 +87,31 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
         switch ($fieldName) {
 
             case 'titleEdit':
-                if (gdCurrentUserCanEdit($relationalTypeResolver->getID($post))) {
+                if (gdCurrentUserCanEdit($objectTypeResolver->getID($post))) {
                     return $customPostTypeAPI->getTitle($post);
                 }
                 return '';
 
             case 'contentEditor':
-                if (gdCurrentUserCanEdit($relationalTypeResolver->getID($post))) {
-                   return $cmseditpostsapi->getPostEditorContent($relationalTypeResolver->getID($post));
+                if (gdCurrentUserCanEdit($objectTypeResolver->getID($post))) {
+                   return $cmseditpostsapi->getPostEditorContent($objectTypeResolver->getID($post));
                 }
                 return '';
 
             case 'contentEdit':
-                if (gdCurrentUserCanEdit($relationalTypeResolver->getID($post))) {
+                if (gdCurrentUserCanEdit($objectTypeResolver->getID($post))) {
                     return $customPostTypeAPI->getContent($post);
                 }
                 return '';
 
             case 'editURL':
-                return urldecode($cmseditpostsapi->getEditPostLink($relationalTypeResolver->getID($post)));
+                return urldecode($cmseditpostsapi->getEditPostLink($objectTypeResolver->getID($post)));
 
             case 'deleteURL':
-                return $cmseditpostsapi->getDeletePostLink($relationalTypeResolver->getID($post));
+                return $cmseditpostsapi->getDeletePostLink($objectTypeResolver->getID($post));
 
             case 'coauthors':
-                $authors = $relationalTypeResolver->resolveValue($object, FieldQueryInterpreterFacade::getInstance()->getField('authors', $fieldArgs), $variables, $expressions, $options);
+                $authors = $objectTypeResolver->resolveValue($object, FieldQueryInterpreterFacade::getInstance()->getField('authors', $fieldArgs), $variables, $expressions, $options);
 
                 // This function only makes sense when the user is logged in
                 $vars = ApplicationState::getVars();
@@ -124,17 +124,17 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
                 return $authors;
         }
 
-        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         switch ($fieldName) {
             case 'coauthors':
                 return UserObjectTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($relationalTypeResolver, $fieldName);
+        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
     }
 }
 

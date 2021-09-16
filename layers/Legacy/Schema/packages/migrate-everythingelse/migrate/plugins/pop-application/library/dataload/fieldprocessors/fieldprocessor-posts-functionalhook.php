@@ -4,7 +4,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -33,7 +33,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
         ];
     }
 
-    public function getSchemaFieldType(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): string
+    public function getSchemaFieldType(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
     {
         $types = [
 			'multilayoutKeys' => SchemaDefinition::TYPE_STRING,
@@ -45,10 +45,10 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
             'topicsByName' => SchemaDefinition::TYPE_STRING,
             'appliestoByName' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($relationalTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($objectTypeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'multilayoutKeys',
@@ -60,11 +60,11 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
             'appliestoByName'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($relationalTypeResolver, $fieldName),
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -77,7 +77,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
             'topicsByName' => $translationAPI->__('', ''),
             'appliestoByName' => $translationAPI->__('', ''),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($relationalTypeResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
     /**
@@ -87,7 +87,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
      * @param array<string, mixed> $options
      */
     public function resolveValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
         array $fieldArgs = [],
@@ -102,17 +102,17 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 return HooksAPIFacade::getInstance()->applyFilters(
                     'PoP_Application:TypeResolver_Posts:multilayout-keys',
                     array(
-                        strtolower($relationalTypeResolver->getTypeName()),
+                        strtolower($objectTypeResolver->getTypeName()),
                     ),
-                    $relationalTypeResolver->getID($post),
-                    $relationalTypeResolver
+                    $objectTypeResolver->getID($post),
+                    $objectTypeResolver
                 );
 
             case 'latestcountsTriggerValues':
                 $value = array();
-                $type = strtolower($relationalTypeResolver->getTypeName());
+                $type = strtolower($objectTypeResolver->getTypeName());
                 // If it has categories, use it. Otherwise, only use the post type
-                if ($cats = $relationalTypeResolver->resolveValue($post, 'categories', $variables, $expressions, $options)) {
+                if ($cats = $objectTypeResolver->resolveValue($post, 'categories', $variables, $expressions, $options)) {
                     foreach ($cats as $cat) {
                         $value[] = $type.'-'.$cat;
                     }
@@ -123,7 +123,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
 
          // Needed for using handlebars helper "compare" to compare a category id in a buttongroup, which is taken as a string, inside a list of cats, which must then also be strings
             case 'catsByName':
-                $cats = $relationalTypeResolver->resolveValue($post, 'categories', $variables, $expressions, $options);
+                $cats = $objectTypeResolver->resolveValue($post, 'categories', $variables, $expressions, $options);
                 $value = array();
                 foreach ($cats as $cat) {
                     $value[] = strval($cat);
@@ -138,11 +138,11 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                 $post_name = $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST])->getName([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST]);
                 return GeneralUtils::addQueryArgs([
-                    $post_name => $relationalTypeResolver->getID($post),
+                    $post_name => $objectTypeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
 
             case 'topicsByName':
-                $selected = $relationalTypeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -150,7 +150,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 return $categories->getSelectedValue();
 
             case 'appliestoByName':
-                $selected = $relationalTypeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
                 );
@@ -158,7 +158,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 return $appliesto->getSelectedValue();
         }
 
-        return parent::resolveValue($relationalTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
 
