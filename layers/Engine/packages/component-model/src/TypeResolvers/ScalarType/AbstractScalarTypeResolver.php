@@ -21,12 +21,27 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     {
         // Fail if passing an array for unsupporting types
         if (is_array($inputValue) || is_object($inputValue)) {
-            $entity = is_array($inputValue) ? 'array' : 'object';
             return new Error(
-                sprintf('%s-cast', $entity),
+                sprintf('%s-cast', $this->getTypeName()),
                 sprintf(
                     $this->translationAPI->__('An %s cannot be casted to type \'%s\'', 'component-model'),
-                    $entity,
+                    is_array($inputValue) ? 'array' : 'object',
+                    $this->getMaybeNamespacedTypeName()
+                )
+            );
+        }
+        return null;
+    }
+
+    protected function validateFilterVar(mixed $inputValue, int $filter): ?Error
+    {
+        $valid = filter_var($inputValue, $filter);
+        if ($valid === false) {
+            return new Error(
+                sprintf('%s-cast', $this->getTypeName()),
+                sprintf(
+                    $this->translationAPI->__('The format for \'%s\' is not right for type \'%s\'', 'component-model'),
+                    $inputValue,
                     $this->getMaybeNamespacedTypeName()
                 )
             );
