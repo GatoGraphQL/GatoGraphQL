@@ -12,7 +12,7 @@ class AnyScalarScalarTypeResolver extends AbstractScalarTypeResolver
     }
     
     /**
-     * Accept anything and everything
+     * Accept anything and everything, other than arrays and objects
      */
     public function coerceValue(mixed $inputValue): mixed
     {
