@@ -30,7 +30,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return UnionTypeHelpers::getUnionTypeCollectionName(parent::getTypeOutputName());
     }
 
-    public function getSchemaTypeInterfaceTypeResolverClass(): ?string
+    public function getSchemaTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface
     {
         return null;
     }
@@ -279,15 +279,14 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
          */
         if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
             // Validate that all typeResolvers implement the required interface
-            if ($interfaceTypeResolverClass = $this->getSchemaTypeInterfaceTypeResolverClass()) {
+            if ($interfaceTypeResolver = $this->getSchemaTypeInterfaceTypeResolver()) {
                 $objectTypeResolvers = $this->getObjectTypeResolversFromPickers($objectTypeResolverPickers);
+                $interfaceTypeResolverClass = get_class($interfaceTypeResolver);
                 $notImplementingInterfaceTypeResolvers = array_filter(
                     $objectTypeResolvers,
                     fn (ObjectTypeResolverInterface $objectTypeResolver) => !in_array($interfaceTypeResolverClass, $objectTypeResolver->getAllImplementedInterfaceTypeResolverClasses())
                 );
                 if ($notImplementingInterfaceTypeResolvers) {
-                    /** @var InterfaceTypeResolverInterface */
-                    $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
                     throw new Exception(
                         sprintf(
                             $this->translationAPI->__('Union Type \'%s\' is defined to implement interface \'%s\', hence its Type members must also satisfy this interface, but the following ones do not: \'%s\'', 'component-model'),
@@ -415,9 +414,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
             // If it returns an interface as type, add it to the schemaDefinition
-            if ($interfaceTypeResolverClass = $this->getSchemaTypeInterfaceTypeResolverClass()) {
-                /** @var InterfaceTypeResolverInterface */
-                $interfaceTypeResolver = $this->instanceManager->getInstance($interfaceTypeResolverClass);
+            if ($interfaceTypeResolver = $this->getSchemaTypeInterfaceTypeResolver()) {
                 $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_RESULTS_IMPLEMENT_INTERFACE] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
             }
         }
