@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\RelationalTypeDataLoaders\UnionType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\AbstractRelationalTypeDataLoader;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 abstract class AbstractUnionTypeDataLoader extends AbstractRelationalTypeDataLoader
 {
-    abstract protected function getUnionTypeResolverClass(): string;
+    abstract protected function getUnionTypeResolver(): UnionTypeResolverInterface;
 
     /**
      * Iterate through all unionTypes and delegate to each resolving the IDs each of them can resolve
      */
     public function getObjects(array $ids): array
     {
-        $unionTypeResolverClass = $this->getUnionTypeResolverClass();
-        $unionTypeResolver = $this->instanceManager->getInstance($unionTypeResolverClass);
+        $unionTypeResolver = $this->getUnionTypeResolver();
         $objectIDTargetTypeResolvers = $unionTypeResolver->getObjectIDTargetTypeResolvers($ids);
         // Organize all IDs by same resolverClass
         $typeResolverClassObjectIDs = [];
