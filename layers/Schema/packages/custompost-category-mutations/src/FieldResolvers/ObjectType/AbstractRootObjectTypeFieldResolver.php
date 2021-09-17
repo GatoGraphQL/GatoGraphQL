@@ -51,7 +51,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         switch ($fieldName) {
             case $this->getSetCategoriesFieldName():
-                $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
+                $categoryTypeResolverClass = $this->getCategoryTypeResolver();
                 /** @var TypeResolverInterface */
                 $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
                 return [

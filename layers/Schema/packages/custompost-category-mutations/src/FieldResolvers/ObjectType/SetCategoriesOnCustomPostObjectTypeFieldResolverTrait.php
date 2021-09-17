@@ -9,7 +9,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 trait SetCategoriesOnCustomPostObjectTypeFieldResolverTrait
 {
     abstract protected function getCustomPostTypeResolverClass(): string;
-    abstract protected function getCategoryTypeResolverClass(): string;
+    abstract protected function getCategoryTypeResolver(): string;
     abstract protected function getTypeMutationResolverClass(): string;
 
     protected function getEntityName(): string

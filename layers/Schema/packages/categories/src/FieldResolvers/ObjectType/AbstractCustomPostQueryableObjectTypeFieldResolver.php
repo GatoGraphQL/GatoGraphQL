@@ -37,7 +37,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     {
         switch ($fieldName) {
             case 'categories':
-                return $this->getCategoryTypeResolverClass();
+                return $this->getCategoryTypeResolver();
         }
         $types = [
             'categoryCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),

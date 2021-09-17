@@ -56,7 +56,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         switch ($fieldName) {
             case 'setCategories':
-                $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
+                $categoryTypeResolverClass = $this->getCategoryTypeResolver();
                 /** @var TypeResolverInterface */
                 $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
                 return [

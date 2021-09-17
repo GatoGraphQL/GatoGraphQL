@@ -41,7 +41,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         switch ($fieldName) {
             case 'parentCategory':
-                return $this->getCategoryTypeResolverClass();
+                return $this->getCategoryTypeResolver();
         }
         $types = [
             'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),

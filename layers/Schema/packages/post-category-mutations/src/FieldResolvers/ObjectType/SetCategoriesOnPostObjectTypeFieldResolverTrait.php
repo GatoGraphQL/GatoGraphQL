@@ -21,7 +21,7 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
         return SetCategoriesOnPostMutationResolver::class;
     }
 
-    protected function getCategoryTypeResolverClass(): string
+    protected function getCategoryTypeResolver(): string
     {
         return PostCategoryObjectTypeResolver::class;
     }

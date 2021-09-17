@@ -24,7 +24,7 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
         return $postTypeAPI->getPostCustomPostType();
     }
 
-    protected function getCategoryTypeResolverClass(): string
+    protected function getCategoryTypeResolver(): string
     {
         return PostCategoryObjectTypeResolver::class;
     }
