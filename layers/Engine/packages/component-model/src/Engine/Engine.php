@@ -1667,16 +1667,16 @@ class Engine implements EngineInterface
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
             // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
-            $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field);
-            if (!$subcomponent_typeResolver_class && $relationalTypeResolver != $targetObjectTypeResolver) {
-                $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
+            $subcomponentTypeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field);
+            if ($subcomponentTypeResolver === null && $relationalTypeResolver != $targetObjectTypeResolver) {
+                $subcomponentTypeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
             }
-            if ($subcomponent_typeResolver_class) {
+            if ($subcomponentTypeResolver !== null) {
+                $subcomponent_typeResolver_class = get_class($subcomponentTypeResolver);
                 // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
                 $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
                 $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];
                 if ($subcomponent_data_fields || $subcomponent_conditional_data_fields) {
-                    $subcomponentTypeResolver = $this->instanceManager->getInstance($subcomponent_typeResolver_class);
                     $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
                     $subcomponent_already_loaded_ids_data_fields = array();
