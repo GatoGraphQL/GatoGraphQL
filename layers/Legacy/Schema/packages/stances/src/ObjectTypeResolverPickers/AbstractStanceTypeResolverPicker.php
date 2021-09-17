@@ -4,15 +4,21 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\ObjectTypeResolverPickers;
 
+use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
 use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
-use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 
 class AbstractStanceTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    public function getObjectTypeResolverClass(): string
+    public function __construct(
+        protected StanceObjectTypeResolver $stanceObjectTypeResolver,
+    ) {        
+    }
+    
+    public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {
-        return StanceObjectTypeResolver::class;
+        return $this->stanceObjectTypeResolver;
     }
 
     public function isInstanceOfType(object $object): bool
