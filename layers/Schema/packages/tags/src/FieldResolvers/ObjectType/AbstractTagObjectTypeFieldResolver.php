@@ -40,9 +40,9 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'name' => StringScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'count' => IntScalarTypeResolver::class,
+            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'count' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

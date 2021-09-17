@@ -42,10 +42,10 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'title' => StringScalarTypeResolver::class,
-            'excerpt' => StringScalarTypeResolver::class,
-            'content' => StringScalarTypeResolver::class,
-            'highlightedPostURL' => URLScalarTypeResolver::class,
+            'title' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'excerpt' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'content' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'highlightedPostURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
             'highlightedpost' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

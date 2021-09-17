@@ -25,8 +25,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'getJSON' => ObjectScalarTypeResolver::class,
-            'getAsyncJSON' => ObjectScalarTypeResolver::class,
+            'getJSON' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
+            'getAsyncJSON' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

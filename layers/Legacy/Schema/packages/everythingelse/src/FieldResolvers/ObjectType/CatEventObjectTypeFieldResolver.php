@@ -35,8 +35,8 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'catSlugs' => StringScalarTypeResolver::class,
-            'catName' => StringScalarTypeResolver::class,
+            'catSlugs' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'catName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

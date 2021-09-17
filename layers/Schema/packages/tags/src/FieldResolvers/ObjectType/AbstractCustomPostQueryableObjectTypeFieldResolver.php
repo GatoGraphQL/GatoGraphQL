@@ -39,8 +39,8 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
                 return $this->getTagTypeResolverClass();
         }
         $types = [
-            'tagCount' => IntScalarTypeResolver::class,
-            'tagNames' => StringScalarTypeResolver::class,
+            'tagCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'tagNames' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

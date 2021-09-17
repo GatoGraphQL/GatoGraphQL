@@ -80,14 +80,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'commentCount'
-                => IntScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
             'commentCountForAdmin'
-                => IntScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
             'comment',
             'comments',
             'commentForAdmin',
             'commentsForAdmin'
-                => CommentObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(CommentObjectTypeResolver::class),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

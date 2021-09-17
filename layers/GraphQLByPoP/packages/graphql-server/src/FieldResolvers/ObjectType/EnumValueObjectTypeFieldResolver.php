@@ -36,10 +36,10 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'name' => StringScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'isDeprecated' => BooleanScalarTypeResolver::class,
-            'deprecationReason' => StringScalarTypeResolver::class,
+            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'isDeprecated' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'deprecationReason' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

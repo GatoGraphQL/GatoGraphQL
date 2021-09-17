@@ -34,8 +34,8 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'name' => StringScalarTypeResolver::class,
-            'capabilities' => StringScalarTypeResolver::class,
+            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'capabilities' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

@@ -81,16 +81,16 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return MenuItemObjectTypeResolver::class;
         }
         $types = [
-            'localURLPath' => StringScalarTypeResolver::class,
-            'label' => StringScalarTypeResolver::class,
-            'title' => StringScalarTypeResolver::class,
-            'url' => URLScalarTypeResolver::class,
-            'classes' => StringScalarTypeResolver::class,
-            'target' => StringScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'objectID' => IDScalarTypeResolver::class,
-            'parentID' => IDScalarTypeResolver::class,
-            'linkRelationship' => StringScalarTypeResolver::class,
+            'localURLPath' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'label' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'title' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'url' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'classes' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'target' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'objectID' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
+            'parentID' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
+            'linkRelationship' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

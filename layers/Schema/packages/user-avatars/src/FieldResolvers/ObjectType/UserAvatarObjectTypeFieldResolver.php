@@ -34,8 +34,8 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'src' => StringScalarTypeResolver::class,
-            'size' => IntScalarTypeResolver::class,
+            'src' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'size' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

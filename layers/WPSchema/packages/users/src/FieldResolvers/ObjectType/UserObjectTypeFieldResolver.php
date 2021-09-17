@@ -65,10 +65,10 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'nicename' => StringScalarTypeResolver::class,
-            'nickname' => StringScalarTypeResolver::class,
-            'locale' => StringScalarTypeResolver::class,
-            'registeredDate' => StringScalarTypeResolver::class,
+            'nicename' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'nickname' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'locale' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'registeredDate' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

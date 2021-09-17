@@ -50,8 +50,8 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
                 return PostObjectTypeResolver::class;
         }
         $types = [
-            'postCount' => IntScalarTypeResolver::class,
-            'postCountForAdmin' => IntScalarTypeResolver::class,
+            'postCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'postCountForAdmin' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

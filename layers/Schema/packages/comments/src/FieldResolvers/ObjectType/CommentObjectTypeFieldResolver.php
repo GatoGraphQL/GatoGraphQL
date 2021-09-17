@@ -98,28 +98,28 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'content',
             'authorName',
             'type'
-                => StringScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
             'authorURL'
-                => URLScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
             'authorEmail'
-                => EmailScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(EmailScalarTypeResolver::class),
             'customPostID'
-                => IDScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
             'approved'
-                => BooleanScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
             'date'
-                => DateScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
             'responseCount',
             'responseCountForAdmin'
-                => IntScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
             'customPost'
                 => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
             'parent',
             'responses',
             'responsesForAdmin'
-                => CommentObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(CommentObjectTypeResolver::class),
             'status'
-                => CommentStatusEnumTypeResolver::class,
+                => $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

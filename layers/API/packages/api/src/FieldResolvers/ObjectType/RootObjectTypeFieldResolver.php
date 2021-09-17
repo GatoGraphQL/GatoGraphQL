@@ -40,7 +40,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'fullSchema' => ObjectScalarTypeResolver::class,
+            'fullSchema' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

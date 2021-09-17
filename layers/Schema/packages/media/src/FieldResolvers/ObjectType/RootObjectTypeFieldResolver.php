@@ -89,7 +89,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return MediaObjectTypeResolver::class;
         }
         $types = [
-            'mediaItemCount' => IntScalarTypeResolver::class,
+            'mediaItemCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

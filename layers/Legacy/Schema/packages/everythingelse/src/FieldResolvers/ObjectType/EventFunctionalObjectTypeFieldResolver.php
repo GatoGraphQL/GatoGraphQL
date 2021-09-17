@@ -34,8 +34,8 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'multilayoutKeys' => StringScalarTypeResolver::class,
-            'latestcountsTriggerValues' => StringScalarTypeResolver::class,
+            'multilayoutKeys' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'latestcountsTriggerValues' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

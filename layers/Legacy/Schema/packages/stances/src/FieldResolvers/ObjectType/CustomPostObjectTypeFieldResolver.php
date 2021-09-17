@@ -45,10 +45,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return StanceObjectTypeResolver::class;
         }
         $types = [
-            'hasStances' => BooleanScalarTypeResolver::class,
-            'stanceProCount' => IntScalarTypeResolver::class,
-            'stanceNeutralCount' => IntScalarTypeResolver::class,
-            'stanceAgainstCount' => IntScalarTypeResolver::class,
+            'hasStances' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'stanceProCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'stanceNeutralCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'stanceAgainstCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

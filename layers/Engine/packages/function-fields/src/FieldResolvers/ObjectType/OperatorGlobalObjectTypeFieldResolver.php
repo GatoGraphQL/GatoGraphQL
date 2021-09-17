@@ -41,14 +41,14 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'divide'
-                => FloatScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(FloatScalarTypeResolver::class),
             'concat',
             'arrayJoin',
             'arrayAsQueryStr',
             'upperCase',
             'lowerCase',
             'titleCase'
-                => StringScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
             'arrayRandom',
             'arrayItem',
             'arraySearch',
@@ -57,7 +57,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => MixedScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(MixedScalarTypeResolver::class),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

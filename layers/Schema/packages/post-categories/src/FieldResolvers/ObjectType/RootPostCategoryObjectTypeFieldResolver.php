@@ -54,8 +54,8 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
                 return PostCategoryObjectTypeResolver::class;
         }
         $types = [
-            'postCategoryCount' => IntScalarTypeResolver::class,
-            'postCategoryNames' => StringScalarTypeResolver::class,
+            'postCategoryCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'postCategoryNames' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

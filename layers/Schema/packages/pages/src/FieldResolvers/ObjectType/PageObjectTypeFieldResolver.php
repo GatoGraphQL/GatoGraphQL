@@ -71,8 +71,8 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return PageObjectTypeResolver::class;
         }
         $types = [
-            'childPageCount' => IntScalarTypeResolver::class,
-            'childPageCountForAdmin' => IntScalarTypeResolver::class,
+            'childPageCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'childPageCountForAdmin' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

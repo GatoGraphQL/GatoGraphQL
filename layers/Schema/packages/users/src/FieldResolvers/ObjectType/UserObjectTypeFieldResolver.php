@@ -80,14 +80,14 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'username' => StringScalarTypeResolver::class,
-            'name' => StringScalarTypeResolver::class,
-            'displayName' => StringScalarTypeResolver::class,
-            'firstName' => StringScalarTypeResolver::class,
-            'lastName' => StringScalarTypeResolver::class,
-            'email' => EmailScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'websiteURL' => URLScalarTypeResolver::class,
+            'username' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'displayName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'firstName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'lastName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'email' => $this->instanceManager->getInstance(EmailScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'websiteURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

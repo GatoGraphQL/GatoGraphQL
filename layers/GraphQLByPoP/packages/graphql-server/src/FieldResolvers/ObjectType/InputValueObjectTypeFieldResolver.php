@@ -36,10 +36,10 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => StringScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'defaultValue' => StringScalarTypeResolver::class,
-            'type' => TypeObjectTypeResolver::class,
+            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'defaultValue' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'type' => $this->instanceManager->getInstance(TypeObjectTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

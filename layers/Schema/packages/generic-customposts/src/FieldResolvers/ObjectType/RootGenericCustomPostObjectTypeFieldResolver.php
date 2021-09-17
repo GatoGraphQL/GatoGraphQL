@@ -79,8 +79,8 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
                 return GenericCustomPostObjectTypeResolver::class;
         }
         $types = [
-            'genericCustomPostCount' => IntScalarTypeResolver::class,
-            'genericCustomPostCountForAdmin' => IntScalarTypeResolver::class,
+            'genericCustomPostCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'genericCustomPostCountForAdmin' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

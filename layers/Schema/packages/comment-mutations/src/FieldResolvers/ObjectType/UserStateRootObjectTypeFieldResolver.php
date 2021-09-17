@@ -76,10 +76,10 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     {
         return match ($fieldName) {
             'myCommentCount'
-                => IntScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
             'myComments',
             'myComment'
-                => CommentObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(CommentObjectTypeResolver::class),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

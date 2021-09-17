@@ -32,7 +32,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'datetime' => DateScalarTypeResolver::class,
+            'datetime' => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }

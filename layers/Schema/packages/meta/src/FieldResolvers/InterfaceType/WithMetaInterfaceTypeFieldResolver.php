@@ -31,8 +31,8 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'metaValue' => AnyScalarScalarTypeResolver::class,
-            'metaValues' => AnyScalarScalarTypeResolver::class,
+            'metaValue' => $this->instanceManager->getInstance(AnyScalarScalarTypeResolver::class),
+            'metaValues' => $this->instanceManager->getInstance(AnyScalarScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }

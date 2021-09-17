@@ -53,23 +53,23 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'name'
-                => StringScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
             'description'
-                => StringScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
             'extensions'
-                => ObjectScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
             'fields'
-                => FieldObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(FieldObjectTypeResolver::class),
             'interfaces',
             'possibleTypes',
             'ofType'
-                => TypeObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(TypeObjectTypeResolver::class),
             'enumValues'
-                => EnumValueObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(EnumValueObjectTypeResolver::class),
             'inputFields'
-                => InputValueObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(InputValueObjectTypeResolver::class),
             'kind'
-                => TypeKindEnumTypeResolver::class,
+                => $this->instanceManager->getInstance(TypeKindEnumTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

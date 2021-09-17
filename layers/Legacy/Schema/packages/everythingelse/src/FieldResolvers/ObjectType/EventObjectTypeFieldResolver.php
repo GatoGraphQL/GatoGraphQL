@@ -41,12 +41,12 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'dates' => StringScalarTypeResolver::class,
-            'times' => StringScalarTypeResolver::class,
-            'startDateReadable' => StringScalarTypeResolver::class,
-            'daterange' => ObjectScalarTypeResolver::class,
-            'daterangetime' => ObjectScalarTypeResolver::class,
-            'locations' => LocationObjectTypeResolver::class,
+            'dates' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'times' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'startDateReadable' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'daterange' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
+            'daterangetime' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
+            'locations' => $this->instanceManager->getInstance(LocationObjectTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

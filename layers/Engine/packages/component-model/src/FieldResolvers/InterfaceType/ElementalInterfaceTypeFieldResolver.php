@@ -29,7 +29,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'id' => IDScalarTypeResolver::class,
+            'id' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }

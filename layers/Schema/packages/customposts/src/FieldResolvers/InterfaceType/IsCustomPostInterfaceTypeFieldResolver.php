@@ -57,17 +57,17 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     {
         return match ($fieldName) {
             'isStatus'
-                => BooleanScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
             'date',
             'modified'
-                => DateScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
             'content',
             'title',
             'excerpt',
             'customPostType'
-                => StringScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
             'status'
-                => CustomPostStatusEnumTypeResolver::class,
+                => $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class),
             default
                 => parent::getFieldTypeResolver($fieldName),
         };

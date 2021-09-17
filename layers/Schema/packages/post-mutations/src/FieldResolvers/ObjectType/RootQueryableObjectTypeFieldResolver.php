@@ -52,7 +52,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
                 return PostObjectTypeResolver::class;
         }
         $types = [
-            'myPostCount' => IntScalarTypeResolver::class,
+            'myPostCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

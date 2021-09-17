@@ -40,8 +40,8 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
                 return $this->getCategoryTypeResolverClass();
         }
         $types = [
-            'childCategoryCount' => IntScalarTypeResolver::class,
-            'childCategoryNames' => StringScalarTypeResolver::class,
+            'childCategoryCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'childCategoryNames' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

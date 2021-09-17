@@ -74,8 +74,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'imageSizeNames' => StringScalarTypeResolver::class,
-            'mediaItemBySlug' => MediaObjectTypeResolver::class,
+            'imageSizeNames' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'mediaItemBySlug' => $this->instanceManager->getInstance(MediaObjectTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

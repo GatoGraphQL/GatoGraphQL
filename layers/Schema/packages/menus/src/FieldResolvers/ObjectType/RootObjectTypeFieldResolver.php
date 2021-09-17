@@ -53,7 +53,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return MenuObjectTypeResolver::class;
         }
         $types = [
-            'menuCount' => IntScalarTypeResolver::class,
+            'menuCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

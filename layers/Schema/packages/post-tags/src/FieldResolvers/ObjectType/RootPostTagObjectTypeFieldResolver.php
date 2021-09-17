@@ -54,8 +54,8 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
                 return PostTagObjectTypeResolver::class;
         }
         $types = [
-            'postTagCount' => IntScalarTypeResolver::class,
-            'postTagNames' => StringScalarTypeResolver::class,
+            'postTagCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'postTagNames' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

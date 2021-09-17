@@ -41,13 +41,13 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => StringScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'isDeprecated' => BooleanScalarTypeResolver::class,
-            'deprecationReason' => StringScalarTypeResolver::class,
-            'extensions' => ObjectScalarTypeResolver::class,
-            'args' => InputValueObjectTypeResolver::class,
-            'type' => TypeObjectTypeResolver::class,
+            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'isDeprecated' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'deprecationReason' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'extensions' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
+            'args' => $this->instanceManager->getInstance(InputValueObjectTypeResolver::class),
+            'type' => $this->instanceManager->getInstance(TypeObjectTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

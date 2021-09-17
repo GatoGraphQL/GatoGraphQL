@@ -40,9 +40,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'hasHighlights' => BooleanScalarTypeResolver::class,
-            'highlightsCount' => IntScalarTypeResolver::class,
-            'highlights' => HighlightObjectTypeResolver::class,
+            'hasHighlights' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'highlightsCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'highlights' => $this->instanceManager->getInstance(HighlightObjectTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

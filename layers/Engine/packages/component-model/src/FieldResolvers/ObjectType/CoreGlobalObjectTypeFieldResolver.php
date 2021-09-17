@@ -29,11 +29,11 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'typeName' => StringScalarTypeResolver::class,
-            'namespace' => StringScalarTypeResolver::class,
-            'qualifiedTypeName' => StringScalarTypeResolver::class,
-            'isType' => BooleanScalarTypeResolver::class,
-            'implements' => BooleanScalarTypeResolver::class,
+            'typeName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'namespace' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'qualifiedTypeName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'isType' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'implements' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

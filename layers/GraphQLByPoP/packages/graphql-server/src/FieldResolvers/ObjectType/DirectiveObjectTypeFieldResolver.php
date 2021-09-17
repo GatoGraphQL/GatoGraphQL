@@ -39,11 +39,11 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => StringScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'isRepeatable' => BooleanScalarTypeResolver::class,
-            'args' => InputValueObjectTypeResolver::class,
-            'locations' => DirectiveLocationEnumTypeResolver::class,
+            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'isRepeatable' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'args' => $this->instanceManager->getInstance(InputValueObjectTypeResolver::class),
+            'locations' => $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

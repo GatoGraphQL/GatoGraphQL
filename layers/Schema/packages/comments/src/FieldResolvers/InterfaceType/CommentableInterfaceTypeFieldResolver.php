@@ -49,10 +49,10 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                 return CommentObjectTypeResolver::class;
         }
         $types = [
-            'areCommentsOpen' => BooleanScalarTypeResolver::class,
-            'hasComments' => BooleanScalarTypeResolver::class,
-            'commentCount' => IntScalarTypeResolver::class,
-            'commentCountForAdmin' => IntScalarTypeResolver::class,
+            'areCommentsOpen' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'hasComments' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'commentCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'commentCountForAdmin' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }

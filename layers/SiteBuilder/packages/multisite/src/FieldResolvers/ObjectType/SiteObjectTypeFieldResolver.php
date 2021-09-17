@@ -33,8 +33,8 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'domain' => StringScalarTypeResolver::class,
-            'host' => StringScalarTypeResolver::class,
+            'domain' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'host' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

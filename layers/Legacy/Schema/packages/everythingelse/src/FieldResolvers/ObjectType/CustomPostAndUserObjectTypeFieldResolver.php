@@ -36,8 +36,8 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'hasLocation' => BooleanScalarTypeResolver::class,
-            'location' => LocationObjectTypeResolver::class,
+            'hasLocation' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'location' => $this->instanceManager->getInstance(LocationObjectTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

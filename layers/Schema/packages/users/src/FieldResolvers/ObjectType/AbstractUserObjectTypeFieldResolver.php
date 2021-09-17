@@ -78,8 +78,8 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
                 return UserObjectTypeResolver::class;
         }
         $types = [
-            'userCount' => IntScalarTypeResolver::class,
-            'userCountForAdmin' => IntScalarTypeResolver::class,
+            'userCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'userCountForAdmin' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

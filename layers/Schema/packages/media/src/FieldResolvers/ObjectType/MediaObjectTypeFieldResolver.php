@@ -77,18 +77,18 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'src' => URLScalarTypeResolver::class,
-            'srcSet' => StringScalarTypeResolver::class,
-            'width' => IntScalarTypeResolver::class,
-            'height' => IntScalarTypeResolver::class,
-            'sizes' => StringScalarTypeResolver::class,
-            'title' => StringScalarTypeResolver::class,
-            'caption' => StringScalarTypeResolver::class,
-            'altText' => StringScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'date' => DateScalarTypeResolver::class,
-            'modified' => DateScalarTypeResolver::class,
-            'mimeType' => StringScalarTypeResolver::class,
+            'src' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'srcSet' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'width' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'height' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'sizes' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'title' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'caption' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'altText' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'date' => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
+            'modified' => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
+            'mimeType' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

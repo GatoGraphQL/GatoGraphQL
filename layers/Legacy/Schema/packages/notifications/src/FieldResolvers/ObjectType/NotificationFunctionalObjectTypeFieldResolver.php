@@ -31,7 +31,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'multilayoutKeys' => StringScalarTypeResolver::class,
+            'multilayoutKeys' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

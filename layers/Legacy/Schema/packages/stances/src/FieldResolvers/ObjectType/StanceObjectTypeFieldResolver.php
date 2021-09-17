@@ -52,13 +52,13 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
         $types = [
-            'categories' => IDScalarTypeResolver::class,
-            'catSlugs' => StringScalarTypeResolver::class,
-            'stance' => IntScalarTypeResolver::class,
-            'title' => StringScalarTypeResolver::class,
-            'excerpt' => StringScalarTypeResolver::class,
-            'content' => StringScalarTypeResolver::class,
-            'hasStanceTarget' => BooleanScalarTypeResolver::class,
+            'categories' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
+            'catSlugs' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'stance' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'title' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'excerpt' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'content' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'hasStanceTarget' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

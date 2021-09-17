@@ -53,17 +53,17 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'addStanceURL' => URLScalarTypeResolver::class,
-            'loggedInUserStances' => IntScalarTypeResolver::class,
-            'hasLoggedInUserStances' => BooleanScalarTypeResolver::class,
-            'editStanceURL' => URLScalarTypeResolver::class,
-            'postStancesProURL' => URLScalarTypeResolver::class,
-            'postStancesNeutralURL' => URLScalarTypeResolver::class,
-            'postStancesAgainstURL' => URLScalarTypeResolver::class,
-            'createStanceButtonLazy' => IDScalarTypeResolver::class,
-            'stancesLazy' => IDScalarTypeResolver::class,
-            'stanceName' => StringScalarTypeResolver::class,
-            'catName' => StringScalarTypeResolver::class,
+            'addStanceURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'loggedInUserStances' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'hasLoggedInUserStances' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'editStanceURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'postStancesProURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'postStancesNeutralURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'postStancesAgainstURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'createStanceButtonLazy' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
+            'stancesLazy' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
+            'stanceName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'catName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

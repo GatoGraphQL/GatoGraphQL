@@ -51,8 +51,8 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
         $types = [
-            'customPostCount' => IntScalarTypeResolver::class,
-            'customPostCountForAdmin' => IntScalarTypeResolver::class,
+            'customPostCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'customPostCountForAdmin' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
