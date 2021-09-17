@@ -29,7 +29,7 @@ use PoP\FieldQuery\QueryUtils;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 
-abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver implements RelationalTypeResolverInterface
+abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver implements RelationalTypeResolverInterface, ConcreteTypeResolverInterface
 {
     use ExcludeFieldNamesFromSchemaTypeResolverTrait;
 

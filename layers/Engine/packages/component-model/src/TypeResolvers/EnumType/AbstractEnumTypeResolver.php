@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 
-abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements EnumTypeResolverInterface
+abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements EnumTypeResolverInterface, ConcreteTypeResolverInterface
 {
     /**
      * Provide a mapping of enum values from output to real value,
