@@ -183,14 +183,14 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * By default, the field is a scalar of type AnyScalar
      */
-    public function getFieldTypeResolverClass(string $fieldName): string
+    public function getFieldTypeResolver(string $fieldName): string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldTypeResolverClass($fieldName);
+            return $schemaDefinitionResolver->getFieldTypeResolver($fieldName);
         }
         $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        return $schemaDefinitionService->getDefaultTypeResolverClass();
+        return $schemaDefinitionService->getDefaultTypeResolver();
     }
 
     /**

@@ -229,7 +229,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $schemaDefinitionResolver->getFieldTypeResolverClass($objectTypeResolver, $fieldName);
         }
         $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        return $schemaDefinitionService->getDefaultTypeResolverClass();
+        return $schemaDefinitionService->getDefaultTypeResolver();
     }
 
     /**
