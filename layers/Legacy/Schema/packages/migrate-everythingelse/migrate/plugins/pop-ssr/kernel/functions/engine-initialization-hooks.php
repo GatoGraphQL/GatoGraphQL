@@ -181,7 +181,7 @@ class PoP_SSR_EngineInitialization_Hooks
         $data['dbData'] = $dynamicdatabases;
     }
 
-    protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, $typeResolver_class, array $data_properties)
+    protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, $relationalTypeResolverClass, array $data_properties)
     {
         if ($data_properties['data-fields'] ?? null) {
             $instanceManager = InstanceManagerFacade::getInstance();
@@ -193,7 +193,7 @@ class PoP_SSR_EngineInitialization_Hooks
             /**
              * @var RelationalTypeResolverInterface
              */
-            $relationalTypeResolver = $instanceManager->getInstance($typeResolver_class);
+            $relationalTypeResolver = $instanceManager->getInstance($relationalTypeResolverClass);
             $database_key = $relationalTypeResolver->getTypeOutputName();
 
             // Allow plugins to split the object into several databases, not just "primary". Eg: "userstate", by PoP User Login
