@@ -42,7 +42,6 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
         protected DateScalarTypeResolver $dateScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
