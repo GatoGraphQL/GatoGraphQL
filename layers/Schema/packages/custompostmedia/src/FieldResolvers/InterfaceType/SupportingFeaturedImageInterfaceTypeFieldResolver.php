@@ -65,7 +65,6 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         $types = [
             'featuredImage' => $this->mediaObjectTypeResolver,
             'hasFeaturedImage' => $this->booleanScalarTypeResolver,
-            'featuredImage' => $this->idScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }
