@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+
 interface InterfaceTypeFieldSchemaDefinitionResolverInterface
 {
     public function getFieldNamesToResolve(): array;
