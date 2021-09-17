@@ -113,7 +113,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'responseCountForAdmin'
                 => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
             'customPost'
-                => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
+                => $this->instanceManager->getInstance(CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class)),
             'parent',
             'responses',
             'responsesForAdmin'
