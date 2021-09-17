@@ -80,7 +80,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'self':
-                return $this->instanceManager->getInstance($objectTypeResolver->getSelfFieldTypeResolverClass());
+                return $objectTypeResolver;
         }
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
