@@ -76,10 +76,10 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
 
     abstract protected function getFieldCustomPostType(string $fieldName): string;
 
-    public function getFieldTypeResolverClass(
+    public function getFieldTypeResolver(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
-    ): string {
-        return CustomPostObjectTypeResolver::class;
+    ): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface {
+        return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
     }
 }

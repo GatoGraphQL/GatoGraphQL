@@ -323,10 +323,10 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function getFieldTypeResolverClass(
+    public function getFieldTypeResolver(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
-    ): string {
+    ): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
         return $aliasedObjectTypeFieldResolver->getFieldTypeResolver(
             $objectTypeResolver,

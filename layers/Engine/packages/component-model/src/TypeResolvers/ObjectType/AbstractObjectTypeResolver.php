@@ -257,7 +257,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return [];
     }
 
-    public function getFieldTypeResolverClass(string $field): ?string
+    public function getFieldTypeResolver(string $field): ?\PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
