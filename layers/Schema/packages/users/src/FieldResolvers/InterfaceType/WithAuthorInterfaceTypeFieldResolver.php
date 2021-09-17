@@ -27,7 +27,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
-        protected UserObjectTypeResolver $UserObjectTypeResolver,
+        protected UserObjectTypeResolver $userObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -75,7 +75,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
     {
         switch ($fieldName) {
             case 'author':
-                return $this->UserObjectTypeResolver;
+                return $this->userObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($fieldName);

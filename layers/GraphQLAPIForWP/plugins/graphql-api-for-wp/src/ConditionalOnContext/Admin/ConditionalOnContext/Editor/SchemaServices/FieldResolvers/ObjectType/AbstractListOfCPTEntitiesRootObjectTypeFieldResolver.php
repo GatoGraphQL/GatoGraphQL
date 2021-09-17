@@ -36,7 +36,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected CustomPostObjectTypeResolver $CustomPostObjectTypeResolver,
+        protected CustomPostObjectTypeResolver $customPostObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -106,6 +106,6 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ConcreteTypeResolverInterface {
-        return $this->CustomPostObjectTypeResolver;
+        return $this->customPostObjectTypeResolver;
     }
 }

@@ -28,7 +28,7 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected UserObjectTypeResolver $UserObjectTypeResolver,
+        protected UserObjectTypeResolver $userObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -91,7 +91,7 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
     {
         switch ($fieldName) {
             case 'me':
-                return $this->UserObjectTypeResolver;
+                return $this->userObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

@@ -35,7 +35,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
         protected ObjectScalarTypeResolver $objectScalarTypeResolver,
-        protected MenuItemObjectTypeResolver $MenuItemObjectTypeResolver,
+        protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -66,7 +66,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'items' => $this->MenuItemObjectTypeResolver,
+            'items' => $this->menuItemObjectTypeResolver,
             'itemDataEntries' => $this->objectScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

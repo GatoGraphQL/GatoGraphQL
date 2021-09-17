@@ -29,7 +29,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected LocationObjectTypeResolver $LocationObjectTypeResolver,
+        protected LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -100,7 +100,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'locations':
-                return $this->LocationObjectTypeResolver;
+                return $this->locationObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

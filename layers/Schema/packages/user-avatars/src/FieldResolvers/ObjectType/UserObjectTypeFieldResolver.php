@@ -34,7 +34,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         protected UserAvatarTypeAPIInterface $userAvatarTypeAPI,
         protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
-        protected UserAvatarObjectTypeResolver $UserAvatarObjectTypeResolver,
+        protected UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -131,7 +131,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'avatar':
-                return $this->UserAvatarObjectTypeResolver;
+                return $this->userAvatarObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

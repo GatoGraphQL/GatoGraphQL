@@ -44,7 +44,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         SemverHelperServiceInterface $semverHelperService,
         protected IntScalarTypeResolver $intScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected PostCategoryObjectTypeResolver $PostCategoryObjectTypeResolver,
+        protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -81,7 +81,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             case 'postCategory':
             case 'postCategoryBySlug':
             case 'postCategories':
-                return $this->PostCategoryObjectTypeResolver;
+                return $this->postCategoryObjectTypeResolver;
         }
         $types = [
             'postCategoryCount' => $this->intScalarTypeResolver,

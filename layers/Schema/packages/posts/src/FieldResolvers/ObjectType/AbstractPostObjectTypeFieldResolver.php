@@ -40,7 +40,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected PostObjectTypeResolver $PostObjectTypeResolver,
+        protected PostObjectTypeResolver $postObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -76,7 +76,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         switch ($fieldName) {
             case 'posts':
             case 'postsForAdmin':
-                return $this->PostObjectTypeResolver;
+                return $this->postObjectTypeResolver;
         }
         $types = [
             'postCount' => $this->intScalarTypeResolver,

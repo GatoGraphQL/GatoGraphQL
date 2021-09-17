@@ -31,7 +31,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected CommentTypeAPIInterface $commentTypeAPI,
-        protected CommentObjectTypeResolver $CommentObjectTypeResolver,
+        protected CommentObjectTypeResolver $commentObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -128,7 +128,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'reply':
-                return $this->CommentObjectTypeResolver;
+                return $this->commentObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

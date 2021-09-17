@@ -34,7 +34,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected MediaObjectTypeResolver $mediaTypeResolver,
-        protected CustomPostUnionTypeResolver $CustomPostUnionTypeResolver,
+        protected CustomPostUnionTypeResolver $customPostUnionTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -123,7 +123,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldName) {
             case 'setFeaturedImageOnCustomPost':
             case 'removeFeaturedImageFromCustomPost':
-                return $this->CustomPostUnionTypeResolver;
+                return $this->customPostUnionTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

@@ -30,7 +30,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected PageObjectTypeResolver $PageObjectTypeResolver,
+        protected PageObjectTypeResolver $pageObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -136,7 +136,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         switch ($fieldName) {
             case 'pageByPath':
             case 'pageByPathForAdmin':
-                return $this->PageObjectTypeResolver;
+                return $this->pageObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

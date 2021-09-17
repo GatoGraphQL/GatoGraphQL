@@ -44,7 +44,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
         SemverHelperServiceInterface $semverHelperService,
         protected IntScalarTypeResolver $intScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected PostTagObjectTypeResolver $PostTagObjectTypeResolver,
+        protected PostTagObjectTypeResolver $postTagObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -81,7 +81,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
             case 'postTag':
             case 'postTagBySlug':
             case 'postTags':
-                return $this->PostTagObjectTypeResolver;
+                return $this->postTagObjectTypeResolver;
         }
         $types = [
             'postTagCount' => $this->intScalarTypeResolver,

@@ -44,7 +44,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected PostObjectTypeResolver $PostObjectTypeResolver,
+        protected PostObjectTypeResolver $postObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -78,7 +78,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         switch ($fieldName) {
             case 'myPosts':
             case 'myPost':
-                return $this->PostObjectTypeResolver;
+                return $this->postObjectTypeResolver;
         }
         $types = [
             'myPostCount' => $this->intScalarTypeResolver,

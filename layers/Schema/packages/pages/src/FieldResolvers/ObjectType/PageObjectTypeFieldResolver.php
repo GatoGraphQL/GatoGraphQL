@@ -40,7 +40,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected PageObjectTypeResolver $PageObjectTypeResolver,
+        protected PageObjectTypeResolver $pageObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -97,7 +97,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'parentPage':
             case 'childPages':
             case 'childPagesForAdmin':
-                return $this->PageObjectTypeResolver;
+                return $this->pageObjectTypeResolver;
         }
         $types = [
             'childPageCount' => $this->intScalarTypeResolver,
