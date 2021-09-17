@@ -179,21 +179,17 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function initModelProps(array $module, array &$props): void
     {
         // Set property "succeeding-typeResolver" on every module, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
-        if ($typeResolver_class = $this->getRelationalTypeResolverClass($module)) {
-            $this->setProp($module, $props, 'succeeding-typeResolver', $typeResolver_class);
+        if ($relationalTypeResolver = $this->getRelationalTypeResolver($module)) {
+            $this->setProp($module, $props, 'succeeding-typeResolver', $relationalTypeResolver);
         } else {
             // Get the prop assigned to the module by its ancestor
-            $typeResolver_class = $this->getProp($module, $props, 'succeeding-typeResolver');
+            $relationalTypeResolver = $this->getProp($module, $props, 'succeeding-typeResolver');
         }
-        if ($typeResolver_class) {
+        if ($relationalTypeResolver !== null) {
             // Set the property "succeeding-typeResolver" on all descendants: the same typeResolver for all submodules, and the explicit one (or get the default one for "*") for relational objects
             foreach ($this->getSubmodules($module) as $submodule) {
-                $this->setProp($submodule, $props, 'succeeding-typeResolver', $typeResolver_class);
+                $this->setProp($submodule, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
-            /**
-             * @var RelationalTypeResolverInterface
-             */
-            $relationalTypeResolver = $this->instanceManager->getInstance($typeResolver_class);
             foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
                 if ($subcomponent_typeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
                     $subcomponent_typeResolver_class = get_class($subcomponent_typeResolver);
@@ -204,7 +200,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             }
             foreach ($this->getConditionalOnDataFieldSubmodules($module) as $conditionDataField => $conditionalSubmodules) {
                 foreach ($conditionalSubmodules as $conditionalSubmodule) {
-                    $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $typeResolver_class);
+                    $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $relationalTypeResolver);
                 }
             }
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
@@ -495,11 +491,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function getDatabaseKeys(array $module, array &$props): array
     {
         $ret = array();
-        if ($typeResolver_class = $this->getRelationalTypeResolverClass($module)) {
-            /**
-             * @var RelationalTypeResolverInterface
-             */
-            $relationalTypeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
+        if ($relationalTypeResolver = $this->getRelationalTypeResolver($module)) {
             if ($dbkey = $relationalTypeResolver->getTypeOutputName()) {
                 // Place it under "id" because it is for fetching the current object from the DB, which is found through dbObject.id
                 $ret['id'] = $dbkey;
@@ -507,11 +499,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // This prop is set for both dataloading and non-dataloading modules
-        if ($typeResolver_class = $this->getProp($module, $props, 'succeeding-typeResolver')) {
-            /**
-             * @var RelationalTypeResolverInterface
-             */
-            $relationalTypeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
+        if ($relationalTypeResolver = $this->getProp($module, $props, 'succeeding-typeResolver')) {
+            $typeResolver_class = get_class($relationalTypeResolver);
             foreach (array_keys($this->getDomainSwitchingSubmodules($module)) as $subcomponent_data_field) {
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
                 if ($subcomponent_typeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
@@ -565,7 +554,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected function addToDatasetDatabaseKeys(array $module, array &$props, $path, &$ret)
     {
         // Add the current module's dbkeys
-        if ($typeResolver_class = $this->getRelationalTypeResolverClass($module)) {
+        if ($relationalTypeResolver = $this->getRelationalTypeResolver($module)) {
+            $typeResolver_class = get_class($relationalTypeResolver);
             $dbkeys = $this->getDatabaseKeys($module, $props);
             foreach ($dbkeys as $field => $dbkey) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
@@ -578,7 +568,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // Propagate to all submodules which have no typeResolver
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
-        if ($typeResolver_class = $this->getProp($module, $props, 'succeeding-typeResolver')) {
+        if ($relationalTypeResolver = $this->getProp($module, $props, 'succeeding-typeResolver')) {
+            $typeResolver_class = get_class($relationalTypeResolver);
             $this->moduleFilterManager->prepareForPropagation($module, $props);
             foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
@@ -641,14 +632,14 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return array();
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
         return null;
     }
 
     public function moduleLoadsData(array $module): bool
     {
-        return !is_null($this->getRelationalTypeResolverClass($module));
+        return $this->getRelationalTypeResolver($module) !== null;
     }
 
     public function startDataloadingSection(array $module): bool

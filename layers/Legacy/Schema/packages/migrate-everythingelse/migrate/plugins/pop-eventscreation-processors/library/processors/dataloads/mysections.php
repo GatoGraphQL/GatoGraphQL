@@ -118,7 +118,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYEVENTS_TABLE_EDIT:
@@ -130,7 +130,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
                 return EventObjectTypeResolver::class;
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

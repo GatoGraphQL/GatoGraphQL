@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_UpdateUserDataloadsBase extends PoP_Module_P
         return $vars['global-userstate']['current-user-id'];
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return UserObjectTypeResolver::class;
     }

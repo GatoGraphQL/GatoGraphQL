@@ -33,7 +33,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
         switch ($module[1]) {
@@ -43,6 +43,6 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
                 return $graphQLSchemaDefinitionService->getMutationRootTypeResolverClass();
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 }

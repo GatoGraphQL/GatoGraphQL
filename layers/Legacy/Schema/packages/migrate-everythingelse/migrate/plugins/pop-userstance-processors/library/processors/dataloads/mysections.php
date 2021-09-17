@@ -62,7 +62,7 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
         return $format ?? parent::getFormat($module);
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYSTANCES_TABLE_EDIT:
@@ -70,7 +70,7 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
                 return StanceObjectTypeResolver::class;
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

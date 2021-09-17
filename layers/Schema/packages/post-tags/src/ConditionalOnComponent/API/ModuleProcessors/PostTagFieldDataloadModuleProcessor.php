@@ -9,7 +9,7 @@ use PoPSchema\Tags\ConditionalOnComponent\API\ModuleProcessors\AbstractFieldData
 
 class PostTagFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAG:
@@ -17,6 +17,6 @@ class PostTagFieldDataloadModuleProcessor extends AbstractFieldDataloadModulePro
                 return PostTagObjectTypeResolver::class;
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 }

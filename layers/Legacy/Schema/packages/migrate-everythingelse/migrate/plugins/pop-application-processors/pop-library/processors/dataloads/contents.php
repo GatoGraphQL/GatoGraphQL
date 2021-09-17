@@ -135,7 +135,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:
@@ -153,7 +153,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
                 return PageObjectTypeResolver::class;
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 }
 

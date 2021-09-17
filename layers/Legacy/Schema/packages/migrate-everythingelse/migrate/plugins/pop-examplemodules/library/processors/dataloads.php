@@ -70,7 +70,7 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_LATESTPOSTS:
@@ -90,7 +90,7 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
                 return PageObjectTypeResolver::class;
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array

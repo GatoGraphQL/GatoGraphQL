@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+
 interface ModuleProcessorInterface
 {
     public function getModulesToProcess(): array;
@@ -34,7 +36,7 @@ interface ModuleProcessorInterface
     public function getDatasetDatabaseKeys(array $module, array &$props): array;
     public function getDatasource(array $module, array &$props): string;
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array;
-    public function getRelationalTypeResolverClass(array $module): ?string;
+    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface;
     public function getComponentMutationResolverBridgeClass(array $module): ?string;
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void;
     public function getDataFields(array $module, array &$props): array;

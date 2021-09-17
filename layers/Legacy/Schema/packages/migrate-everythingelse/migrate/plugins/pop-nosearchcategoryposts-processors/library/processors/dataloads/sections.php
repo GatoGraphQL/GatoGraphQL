@@ -4448,7 +4448,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return PostObjectTypeResolver::class;
     }

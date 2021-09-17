@@ -107,7 +107,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP:
@@ -115,7 +115,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
                 return UserObjectTypeResolver::class;
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

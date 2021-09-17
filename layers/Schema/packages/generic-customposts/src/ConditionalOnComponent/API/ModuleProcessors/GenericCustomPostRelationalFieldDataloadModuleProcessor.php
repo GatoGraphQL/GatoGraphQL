@@ -29,7 +29,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
         );
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
@@ -37,7 +37,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
                 return GenericCustomPostObjectTypeResolver::class;
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

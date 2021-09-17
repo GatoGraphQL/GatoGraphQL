@@ -3,7 +3,7 @@ use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 
 abstract class PoP_Module_Processor_PageContentDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return PageObjectTypeResolver::class;
     }

@@ -41,7 +41,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER:
@@ -50,7 +50,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
                 return UserObjectTypeResolver::class;
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string
