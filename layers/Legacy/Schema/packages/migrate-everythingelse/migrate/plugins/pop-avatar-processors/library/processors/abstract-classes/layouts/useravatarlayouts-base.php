@@ -39,7 +39,7 @@ abstract class PoP_Module_Processor_UserAvatarLayoutsBase extends PoPEngine_Quer
 
         $ret['url-field'] = $this->getUrlField($module);
         $ret['avatar'] = array(
-            'name' => FieldQueryInterpreterFacade::getInstance()->getUniqueFieldOutputKeyByTypeResolverClass(
+            'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($module, $props, 'succeeding-typeResolver'),
                 $avatar_field
             ),
