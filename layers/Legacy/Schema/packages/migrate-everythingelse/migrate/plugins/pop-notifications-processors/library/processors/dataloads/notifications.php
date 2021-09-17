@@ -43,7 +43,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
-                return NotificationObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
         }
         
         return parent::getRelationalTypeResolver($module);

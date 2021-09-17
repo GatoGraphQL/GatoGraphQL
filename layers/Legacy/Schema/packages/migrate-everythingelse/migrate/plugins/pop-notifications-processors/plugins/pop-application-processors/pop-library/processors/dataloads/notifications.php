@@ -130,7 +130,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         switch ($module[1]) {
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
-                return NotificationObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

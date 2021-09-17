@@ -71,7 +71,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
             case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
-                return NotificationObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

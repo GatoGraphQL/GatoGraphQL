@@ -140,17 +140,17 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:
             case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_TAG_CONTENT:
-                return PostTagObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_SINGLE_CONTENT:
             case self::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case self::MODULE_DATALOAD_PAGE_CONTENT:
-                return PageObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PageObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

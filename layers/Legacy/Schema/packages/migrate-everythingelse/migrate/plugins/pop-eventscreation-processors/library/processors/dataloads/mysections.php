@@ -127,7 +127,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
             case self::MODULE_DATALOAD_MYPASTEVENTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW:
-                return EventObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

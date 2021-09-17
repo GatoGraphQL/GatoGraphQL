@@ -97,7 +97,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:
-                return CustomPostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

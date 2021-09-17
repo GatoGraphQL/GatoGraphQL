@@ -77,17 +77,17 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
             case self::MODULE_EXAMPLE_SINGLE:
-                return CustomPostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
 
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
 
             case self::MODULE_EXAMPLE_TAGDESCRIPTION:
-                return PostTagObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
 
             case self::MODULE_EXAMPLE_PAGE:
             case self::MODULE_EXAMPLE_HOMESTATICPAGE:
-                return PageObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PageObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

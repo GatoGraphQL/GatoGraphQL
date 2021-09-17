@@ -648,7 +648,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_LIST:
-                return EventObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

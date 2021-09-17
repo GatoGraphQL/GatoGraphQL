@@ -12,6 +12,6 @@ abstract class PoP_Module_Processor_UpdateUserDataloadsBase extends PoP_Module_P
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        return UserObjectTypeResolver::class;
+        return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 }

@@ -167,7 +167,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_STANCE_CREATE:
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                return StanceObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

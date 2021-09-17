@@ -148,7 +148,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
             case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
             case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

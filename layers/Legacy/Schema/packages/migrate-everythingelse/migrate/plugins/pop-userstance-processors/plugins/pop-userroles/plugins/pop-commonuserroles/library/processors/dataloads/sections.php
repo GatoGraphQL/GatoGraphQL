@@ -184,7 +184,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
             case self::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST:
             case self::MODULE_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL:
             case self::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL:
-                return StanceObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

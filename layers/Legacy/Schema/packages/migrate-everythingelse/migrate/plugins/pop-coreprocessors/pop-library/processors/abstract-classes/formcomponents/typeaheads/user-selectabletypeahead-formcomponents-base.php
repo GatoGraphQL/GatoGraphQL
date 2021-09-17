@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase ex
 
     public function getTriggerTypeResolverClass(array $module): ?string
     {
-        return UserObjectTypeResolver::class;
+        return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 
     public function getTriggerSubmodule(array $module): ?array

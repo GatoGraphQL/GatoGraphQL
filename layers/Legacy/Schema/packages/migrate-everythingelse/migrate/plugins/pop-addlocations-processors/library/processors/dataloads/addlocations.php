@@ -103,7 +103,7 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION:
-                return LocationObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

@@ -47,7 +47,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

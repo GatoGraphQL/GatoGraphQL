@@ -558,7 +558,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        return PostObjectTypeResolver::class;
+        return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
     public function initModelProps(array $module, array &$props): void
