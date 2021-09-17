@@ -38,6 +38,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -93,10 +94,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'fullSchema':
-                /**
-                 * @var SchemaFieldShapeEnumTypeResolver
-                 */
-                $schemaOutputShapeEnumTypeResolver = $this->instanceManager->getInstance(SchemaFieldShapeEnumTypeResolver::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -114,9 +111,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                                 SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
                                 SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED
                             ),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $schemaOutputShapeEnumTypeResolver->getTypeName(),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $this->schemaOutputShapeEnumTypeResolver->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $schemaOutputShapeEnumTypeResolver
+                                $this->schemaOutputShapeEnumTypeResolver
                             ),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
                         ],
