@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\MenusWP\TypeAPIs;
 
-use PoPSchema\Menus\TypeAPIs\MenuItemTypeAPIInterface;
 use WP_Post;
 
-abstract class MenuItemTypeAPI implements MenuItemTypeAPIInterface
+abstract class MenuItemTypeAPI
 {
     /**
      * MenuItem is the CPT 'nav_menu_item'
