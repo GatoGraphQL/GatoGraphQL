@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\TypeResolvers\ObjectType;
 
-interface TagObjectTypeResolverInterface {
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
+interface TagObjectTypeResolverInterface extends ObjectTypeResolverInterface
+{
 }

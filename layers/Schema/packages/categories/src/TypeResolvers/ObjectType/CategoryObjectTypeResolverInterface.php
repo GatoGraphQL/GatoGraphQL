@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\TypeResolvers\ObjectType;
 
-interface CategoryObjectTypeResolverInterface
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+
+interface CategoryObjectTypeResolverInterface extends ObjectTypeResolverInterface
 {
 }
