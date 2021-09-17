@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostCategoryMutations\Hooks;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
@@ -36,10 +37,10 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         array $fieldArgs,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,
-        ?string $entityTypeResolverClass
+        ?ConcreteTypeResolverInterface $entityTypeResolver
     ): array {
         // Only for the specific CPT
-        if ($entityTypeResolverClass !== $this->getCustomPostTypeResolverClass()) {
+        if ($entityTypeResolver === null || get_class($entityTypeResolver) !== $this->getCustomPostTypeResolverClass()) {
             return $fieldArgs;
         }
         $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();

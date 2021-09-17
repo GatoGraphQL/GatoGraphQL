@@ -34,7 +34,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                     $objectTypeResolver,
                     $fieldName,
                     false,
-                    get_class($this->getFieldTypeResolver($objectTypeResolver, $fieldName))
+                    $this->getFieldTypeResolver($objectTypeResolver, $fieldName)
                 );
         }
         return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
