@@ -14,6 +14,7 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -38,7 +39,8 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
-        TypeResolverHelperInterface $typeResolverHelper
+        TypeResolverHelperInterface $typeResolverHelper,
+        RootObjectTypeResolver $rootObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -49,6 +51,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $rootObjectTypeResolver,
         );
         $this->objectTypeResolverMandatoryFields = $typeResolverHelper->getObjectTypeResolverMandatoryFields();
     }
