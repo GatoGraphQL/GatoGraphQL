@@ -9,6 +9,6 @@ use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInte
 
 trait CategoryAPIRequestedContractTrait
 {
-    abstract protected function getCategoryTypeAPI(): CategoryTypeAPIInterface;
-    abstract protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
+    abstract public function getCategoryTypeAPI(): CategoryTypeAPIInterface;
+    abstract public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
 }

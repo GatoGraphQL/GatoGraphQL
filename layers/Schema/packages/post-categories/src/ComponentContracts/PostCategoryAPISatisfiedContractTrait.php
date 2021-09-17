@@ -12,12 +12,12 @@ use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeReso
 
 trait PostCategoryAPISatisfiedContractTrait
 {
-    protected function getCategoryTypeAPI(): CategoryTypeAPIInterface
+    public function getCategoryTypeAPI(): CategoryTypeAPIInterface
     {
         return PostCategoryTypeAPIFacade::getInstance();
     }
 
-    protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
+    public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         return $instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
