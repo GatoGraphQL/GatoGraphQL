@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Pages\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -102,7 +103,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'pageByPath':

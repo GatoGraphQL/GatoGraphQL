@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Pages\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -36,7 +37,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
             'menuOrder' => IntScalarTypeResolver::class,
