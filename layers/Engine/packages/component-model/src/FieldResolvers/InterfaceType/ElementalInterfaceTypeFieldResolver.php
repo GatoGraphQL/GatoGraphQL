@@ -25,7 +25,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         ];
     }
 
-    public function getFieldTypeResolverClass(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
             'id' => IDScalarTypeResolver::class,

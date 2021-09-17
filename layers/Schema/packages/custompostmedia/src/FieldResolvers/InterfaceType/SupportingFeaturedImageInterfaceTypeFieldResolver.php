@@ -29,7 +29,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         ];
     }
 
-    public function getFieldTypeResolverClass(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'featuredImage':

@@ -42,7 +42,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }
 
-    public function getFieldTypeResolverClass(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'author':

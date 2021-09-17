@@ -11,7 +11,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function getSchemaFieldDescription(string $fieldName): ?string;
     public function getSchemaFieldArgs(string $fieldName): array;
     public function getSchemaFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string;
-    public function getFieldTypeResolverClass(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+    public function getFieldTypeResolver(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
     /**
      * Validate the constraints for a field argument
      *

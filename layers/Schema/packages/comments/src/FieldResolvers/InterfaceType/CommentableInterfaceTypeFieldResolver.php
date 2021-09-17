@@ -40,7 +40,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         ];
     }
 
-    public function getFieldTypeResolverClass(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'comments':
