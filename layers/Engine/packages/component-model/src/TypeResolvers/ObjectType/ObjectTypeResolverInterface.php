@@ -22,4 +22,5 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
     public function getFieldTypeResolver(string $field): ?ConcreteTypeResolverInterface;
     public function getFieldMutationResolverClass(string $field): ?string;
     public function isFieldAMutation(string $field): ?bool;
+    public function getAllMandatoryDirectivesForFields(): array;
 }

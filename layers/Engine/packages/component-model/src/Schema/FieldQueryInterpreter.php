@@ -160,16 +160,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         string $field,
     ): array {
         $uniqueFieldOutputKeys = [];
-        $targetObjectTypeResolvers = [];
-        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
-            foreach ($relationalTypeResolver->getTargetObjectTypeResolverClasses() as $targetObjectTypeResolverClass) {
-                $targetObjectTypeResolvers[] = $this->instanceManager->getInstance($targetObjectTypeResolverClass);
-            }
-        } else {
-            $targetObjectTypeResolvers[] = $relationalTypeResolver;
-        }
+        /** @var ObjectTypeResolverInterface[] */
+        $targetObjectTypeResolvers = $relationalTypeResolver instanceof UnionTypeResolverInterface ?
+            $relationalTypeResolver->getTargetObjectTypeResolvers()
+            : [$relationalTypeResolver];
+
         foreach ($targetObjectTypeResolvers as $targetObjectTypeResolver) {
-            $uniqueFieldOutputKeys[$targetObjectTypeResolver->getTypeName] = $this->getUniqueFieldOutputKeyByObjectTypeResolver(
+            $uniqueFieldOutputKeys[$targetObjectTypeResolver->getTypeName()] = $this->getUniqueFieldOutputKeyByObjectTypeResolver(
                 $targetObjectTypeResolver,
                 $field
             );

@@ -72,12 +72,9 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'customPosts':
-            case 'customPostsForAdmin':
-                return $this->instanceManager->getInstance(CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class));
-        }
         $types = [
+            'customPosts' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
+            'customPostsForAdmin' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'customPostCount' => $this->intScalarTypeResolver,
             'customPostCountForAdmin' => $this->intScalarTypeResolver,
         ];

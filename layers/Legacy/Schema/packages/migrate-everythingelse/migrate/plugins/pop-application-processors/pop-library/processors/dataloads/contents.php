@@ -147,7 +147,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
             case self::MODULE_DATALOAD_SINGLE_CONTENT:
             case self::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT:
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
 
             case self::MODULE_DATALOAD_PAGE_CONTENT:
                 return $this->instanceManager->getInstance(PageObjectTypeResolver::class);

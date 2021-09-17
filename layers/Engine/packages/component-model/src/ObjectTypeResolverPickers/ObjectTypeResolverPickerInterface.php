@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ObjectTypeResolverPickers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 interface ObjectTypeResolverPickerInterface extends AttachableExtensionInterface
 {
@@ -16,7 +17,7 @@ interface ObjectTypeResolverPickerInterface extends AttachableExtensionInterface
      * @return string[]
      */
     public function getUnionTypeResolverClassesToAttachTo(): array;
-    public function getObjectTypeResolverClass(): string;
+    public function getObjectTypeResolver(): ObjectTypeResolverInterface;
     public function isIDOfType(string | int $objectID): bool;
     public function isInstanceOfType(object $object): bool;
 }

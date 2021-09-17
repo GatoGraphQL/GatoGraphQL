@@ -6,6 +6,6 @@ abstract class PoP_Module_Processor_PostTriggerLayoutFormComponentValuesBase ext
 {
     public function getTriggerTypeResolverClass(array $module): ?string
     {
-        return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
+        return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
     }
 }

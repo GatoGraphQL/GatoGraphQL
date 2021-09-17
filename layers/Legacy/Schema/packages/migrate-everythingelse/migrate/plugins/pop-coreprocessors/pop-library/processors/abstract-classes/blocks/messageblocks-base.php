@@ -31,7 +31,7 @@ abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Process
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
+        return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
     }
 
     // function initModelProps(array $module, array &$props) {

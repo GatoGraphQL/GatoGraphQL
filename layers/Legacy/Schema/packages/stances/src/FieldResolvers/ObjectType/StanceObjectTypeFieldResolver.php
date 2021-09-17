@@ -78,11 +78,8 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'stancetarget':
-                return $this->instanceManager->getInstance(CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class));
-        }
         $types = [
+            'stancetarget' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'categories' => $this->idScalarTypeResolver,
             'catSlugs' => $this->stringScalarTypeResolver,
             'stance' => $this->intScalarTypeResolver,

@@ -84,19 +84,17 @@ class UnionTypeHelpers
      * - If there are none types, return `null`. As a consequence,
      *   the ID is returned as a field, not as a connection
      */
-    public static function getUnionOrTargetObjectTypeResolverClass(string $unionTypeResolverClass): ?string
+    public static function getUnionOrTargetObjectTypeResolver(UnionTypeResolverInterface $unionTypeResolver): ?UnionTypeResolverInterface
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $unionTypeResolver = $instanceManager->getInstance($unionTypeResolverClass);
-        $targetTypeResolverClasses = $unionTypeResolver->getTargetObjectTypeResolverClasses();
-        if ($targetTypeResolverClasses) {
+        $targetTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
+        if ($targetTypeResolvers) {
             // By configuration: If there is only 1 item, return only that one
             if (ComponentConfiguration::useSingleTypeInsteadOfUnionType()) {
-                return count($targetTypeResolverClasses) == 1 ?
-                    $targetTypeResolverClasses[0] :
-                    $unionTypeResolverClass;
+                return count($targetTypeResolvers) == 1 ?
+                    $targetTypeResolvers[0] :
+                    $unionTypeResolver;
             }
-            return $unionTypeResolverClass;
+            return $unionTypeResolver;
         }
         return null;
     }
