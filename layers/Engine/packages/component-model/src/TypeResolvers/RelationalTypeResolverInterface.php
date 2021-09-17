@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 
-interface RelationalTypeResolverInterface extends TypeResolverInterface
+interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
 {
     /**
      * All objects MUST have an ID. `null` is supported for the UnionTypeResolver,

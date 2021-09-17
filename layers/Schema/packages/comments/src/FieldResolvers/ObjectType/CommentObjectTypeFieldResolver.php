@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
@@ -91,36 +92,36 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
             'content',
             'authorName',
             'type'
-                => StringScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
             'authorURL'
-                => URLScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
             'authorEmail'
-                => EmailScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(EmailScalarTypeResolver::class),
             'customPostID'
-                => IDScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
             'approved'
-                => BooleanScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
             'date'
-                => DateScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
             'responseCount',
             'responseCountForAdmin'
-                => IntScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
             'customPost'
-                => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
+                => $this->instanceManager->getInstance(CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class)),
             'parent',
             'responses',
             'responsesForAdmin'
-                => CommentObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(CommentObjectTypeResolver::class),
             'status'
-                => CommentStatusEnumTypeResolver::class,
+                => $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class),
             default
-                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

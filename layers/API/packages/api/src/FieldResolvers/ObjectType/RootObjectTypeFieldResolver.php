@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
@@ -36,11 +37,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'fullSchema' => ObjectScalarTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            'fullSchema' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaTypeDataLoader;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
@@ -127,15 +128,15 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case '__schema':
-                return SchemaObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
             case '__type':
-                return TypeObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
         }
 
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -31,17 +32,17 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'tags':
-                return $this->getTagTypeResolverClass();
+                return $this->getTagTypeResolver();
         }
         $types = [
-            'tagCount' => IntScalarTypeResolver::class,
-            'tagNames' => StringScalarTypeResolver::class,
+            'tagCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'tagNames' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

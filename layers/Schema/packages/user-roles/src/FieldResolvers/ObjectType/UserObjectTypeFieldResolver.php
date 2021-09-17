@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -46,17 +47,17 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'roles' => StringScalarTypeResolver::class,
-            'capabilities' => StringScalarTypeResolver::class,
-            'hasRole' => BooleanScalarTypeResolver::class,
-            'hasAnyRole' => BooleanScalarTypeResolver::class,
-            'hasCapability' => BooleanScalarTypeResolver::class,
-            'hasAnyCapability' => BooleanScalarTypeResolver::class,
+            'roles' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'capabilities' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'hasRole' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'hasAnyRole' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'hasCapability' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'hasAnyCapability' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

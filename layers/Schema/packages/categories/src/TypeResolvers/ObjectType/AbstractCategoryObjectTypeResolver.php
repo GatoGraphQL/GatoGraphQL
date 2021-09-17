@@ -7,7 +7,7 @@ namespace PoPSchema\Categories\TypeResolvers\ObjectType;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeResolver;
 
-abstract class AbstractCategoryObjectTypeResolver extends AbstractTaxonomyObjectTypeResolver
+abstract class AbstractCategoryObjectTypeResolver extends AbstractTaxonomyObjectTypeResolver implements CategoryObjectTypeResolverInterface
 {
     use CategoryAPIRequestedContractTrait;
 

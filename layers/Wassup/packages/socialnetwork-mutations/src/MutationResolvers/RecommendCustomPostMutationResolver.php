@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoPSchema\UserMeta\Utils;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
@@ -19,7 +20,7 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user has not already recommended this post
-            $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_RECOMMENDSPOSTS);
+            $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_RECOMMENDSPOSTS);
             if (in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('You have already recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
@@ -53,7 +54,7 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
         $target_id = $form_data['target_id'];
 
         // Update value
-        \PoPSchema\UserMeta\Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_RECOMMENDSPOSTS, $target_id);
+        Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_RECOMMENDSPOSTS, $target_id);
         \PoPSchema\CustomPostMeta\Utils::addCustomPostMeta($target_id, \GD_METAKEY_POST_RECOMMENDEDBY, $user_id);
 
         // Update the counter

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -18,6 +19,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
@@ -256,7 +258,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return [];
     }
 
-    public function getFieldTypeResolverClass(string $field): ?string
+    public function getFieldTypeResolver(string $field): ?ConcreteTypeResolverInterface
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
@@ -264,7 +266,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            return $objectTypeFieldResolvers[0]->getFieldTypeResolverClass($this, $fieldName);
+            return $objectTypeFieldResolvers[0]->getFieldTypeResolver($this, $fieldName);
         }
 
         return null;
@@ -640,9 +642,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Add subfield schema if it is deep, and this typeResolver has not been processed yet
         if ($options['deep'] ?? null) {
             // If this field is relational, then add its own schema
-            $fieldTypeResolverClass = $this->getFieldTypeResolverClass($fieldName);
-            if (SchemaHelpers::isRelationalFieldTypeResolverClass($fieldTypeResolverClass)) {
-                $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
+            $fieldTypeResolver = $this->getFieldTypeResolver($fieldName);
+            if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
                 $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] = $fieldTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
             }
         }

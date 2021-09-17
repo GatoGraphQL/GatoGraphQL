@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoPSchema\UserMeta\Utils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -31,7 +32,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         // $maybe_new_communities = array_diff($communities, $previous_communities);
         $new_communities = array();
 
-        $status = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+        $status = Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
 
         // Check all the $maybe_new_communities and double check they are not banned
         foreach ($communities as $maybe_new_community) {
@@ -43,7 +44,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         }
 
         // Set the new communities
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
 
         // Set the privileges/tags for the new communities
         gdUreUserAddnewcommunities($user_id, $new_communities);
@@ -79,7 +80,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     {
         $warnings = [];
         $user_id = $form_data['user_id'];
-        $status = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+        $status = Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
         $communities = $form_data['communities'];
         $banned_communities = array();
 

@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostCategoryMutations\Hooks;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
+use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
@@ -36,15 +39,13 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         array $fieldArgs,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,
-        ?string $entityTypeResolverClass
+        ?ConcreteTypeResolverInterface $entityTypeResolver
     ): array {
         // Only for the specific CPT
-        if ($entityTypeResolverClass !== $this->getCustomPostTypeResolverClass()) {
+        if ($entityTypeResolver === null || get_class($entityTypeResolver) !== get_class($this->getCustomPostTypeResolver())) {
             return $fieldArgs;
         }
-        $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
-        /** @var TypeResolverInterface */
-        $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
+        $categoryTypeResolver = $this->getCategoryTypeResolver();
         $fieldArgs[] = [
             SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,
             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
@@ -57,8 +58,8 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         return $fieldArgs;
     }
 
-    abstract protected function getCustomPostTypeResolverClass(): string;
-    abstract protected function getCategoryTypeResolverClass(): string;
+    abstract protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface;
+    abstract protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
 
     public function maybeSetCategories(int | string $customPostID, array $form_data): void
     {

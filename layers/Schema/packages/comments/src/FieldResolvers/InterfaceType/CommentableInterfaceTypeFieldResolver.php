@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
@@ -40,20 +41,20 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         ];
     }
 
-    public function getFieldTypeResolverClass(string $fieldName): string
+    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'comments':
             case 'commentsForAdmin':
-                return CommentObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
         }
         $types = [
-            'areCommentsOpen' => BooleanScalarTypeResolver::class,
-            'hasComments' => BooleanScalarTypeResolver::class,
-            'commentCount' => IntScalarTypeResolver::class,
-            'commentCountForAdmin' => IntScalarTypeResolver::class,
+            'areCommentsOpen' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'hasComments' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'commentCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'commentCountForAdmin' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int

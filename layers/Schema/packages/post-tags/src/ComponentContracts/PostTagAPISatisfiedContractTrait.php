@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\ComponentContracts;
 
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 
 trait PostTagAPISatisfiedContractTrait
 {
@@ -15,8 +17,9 @@ trait PostTagAPISatisfiedContractTrait
         return PostTagTypeAPIFacade::getInstance();
     }
 
-    protected function getTagTypeResolverClass(): string
+    protected function getTagTypeResolver(): TagObjectTypeResolverInterface
     {
-        return PostTagObjectTypeResolver::class;
+        $instanceManager = InstanceManagerFacade::getInstance();
+        return $instanceManager->getInstance(PostTagObjectTypeResolver::class);
     }
 }

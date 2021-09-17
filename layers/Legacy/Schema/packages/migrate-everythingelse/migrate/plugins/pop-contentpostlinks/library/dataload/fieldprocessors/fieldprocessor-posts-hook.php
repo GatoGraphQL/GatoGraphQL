@@ -30,7 +30,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
             'excerpt' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -40,7 +40,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
             'linkCategoriesByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'hasLinkCategories' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -73,7 +73,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
     }
 
-    // @todo: Migrate to returning an EnumTypeResolverClass in getFieldTypeResolverClass, then delete this function
+    // @todo: Migrate to returning an EnumTypeResolverClass in getFieldTypeResolver, then delete this function
     //        Until then, this logic is not working (this function is not invoked anymore)
     protected function getSchemaDefinitionEnumName(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
@@ -89,7 +89,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
         return null;
     }
 
-    // @todo: Migrate to returning an EnumTypeResolverClass in getFieldTypeResolverClass, then delete this function
+    // @todo: Migrate to returning an EnumTypeResolverClass in getFieldTypeResolver, then delete this function
     //        Until then, this logic is not working (this function is not invoked anymore)
     protected function getSchemaDefinitionEnumValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {

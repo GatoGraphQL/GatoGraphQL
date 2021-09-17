@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Engine\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 
 abstract class AbstractEmailInviteMutationResolverBridge extends AbstractComponentMutationResolverBridge
@@ -35,7 +36,7 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         }
 
         $vars = ApplicationState::getVars();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsengineapi = FunctionAPIFactory::getInstance();
         if (PoP_FormUtils::useLoggedinuserData() && $vars['global-userstate']['is-user-logged-in']) {
             $user_id = $vars['global-userstate']['current-user-id'];
             $sender_name = $cmsengineapi->getUserDisplayName($user_id);

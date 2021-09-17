@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\EditUsers\HelperAPIFactory;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateUserMutationResolver;
@@ -34,7 +35,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
 
     public function getFormData(): array
     {
-        $cmseditusershelpers = \PoP\EditUsers\HelperAPIFactory::getInstance();
+        $cmseditusershelpers = HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['is-user-logged-in'] ? $vars['global-userstate']['current-user-id'] : '';

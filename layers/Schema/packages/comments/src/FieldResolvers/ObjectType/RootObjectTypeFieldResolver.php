@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
@@ -75,20 +76,20 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
             'commentCount'
-                => IntScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
             'commentCountForAdmin'
-                => IntScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
             'comment',
             'comments',
             'commentForAdmin',
             'commentsForAdmin'
-                => CommentObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(CommentObjectTypeResolver::class),
             default
-                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

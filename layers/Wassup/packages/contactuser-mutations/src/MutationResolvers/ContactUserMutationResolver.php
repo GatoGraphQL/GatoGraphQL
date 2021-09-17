@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUserMutations\MutationResolvers;
 
+use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -60,7 +61,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
 
     protected function doExecute($form_data)
     {
-        $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
+        $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $websitename = $cmsapplicationapi->getSiteName();
         $subject = sprintf(
             $this->translationAPI->__('[%s]: %s', 'pop-genericforms'),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
+use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UnsubscribeFromTagMutationResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
@@ -22,7 +23,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
     public function getSuccessString(string | int $result_id): ?string
     {
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
+        $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
         $tag = $postTagTypeAPI->getTag($result_id);
         return sprintf(
             $this->translationAPI->__('You have unsubscribed from <em><strong>%s</strong></em>.', 'pop-coreprocessors'),

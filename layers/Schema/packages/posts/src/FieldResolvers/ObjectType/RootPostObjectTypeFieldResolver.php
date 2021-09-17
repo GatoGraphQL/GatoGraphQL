@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
@@ -112,16 +113,16 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'post':
             case 'postForAdmin':
             case 'postBySlug':
             case 'postBySlugForAdmin':
-                return PostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
         }
 
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

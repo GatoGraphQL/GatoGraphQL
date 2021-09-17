@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
@@ -73,25 +74,25 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'children':
-                return MenuItemObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(MenuItemObjectTypeResolver::class);
         }
         $types = [
-            'localURLPath' => StringScalarTypeResolver::class,
-            'label' => StringScalarTypeResolver::class,
-            'title' => StringScalarTypeResolver::class,
-            'url' => URLScalarTypeResolver::class,
-            'classes' => StringScalarTypeResolver::class,
-            'target' => StringScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'objectID' => IDScalarTypeResolver::class,
-            'parentID' => IDScalarTypeResolver::class,
-            'linkRelationship' => StringScalarTypeResolver::class,
+            'localURLPath' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'label' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'title' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'url' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'classes' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'target' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'objectID' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
+            'parentID' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
+            'linkRelationship' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

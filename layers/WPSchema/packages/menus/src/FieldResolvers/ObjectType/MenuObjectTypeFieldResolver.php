@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -32,17 +33,17 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
             'name',
             'slug',
             'locations'
-                => StringScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
             'count'
-                => IntScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
             default
-                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

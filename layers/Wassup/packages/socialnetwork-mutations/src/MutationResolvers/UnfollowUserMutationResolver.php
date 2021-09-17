@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoPSchema\UserMeta\Utils;
 use PoP\ComponentModel\State\ApplicationState;
 
 class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationResolver
@@ -17,7 +18,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user does currently follow that user
-            $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
+            $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('You were not following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
@@ -50,13 +51,13 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
         $target_id = $form_data['target_id'];
 
         // Update values
-        \PoPSchema\UserMeta\Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS, $target_id);
-        \PoPSchema\UserMeta\Utils::deleteUserMeta($target_id, \GD_METAKEY_PROFILE_FOLLOWEDBY, $user_id);
+        Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS, $target_id);
+        Utils::deleteUserMeta($target_id, \GD_METAKEY_PROFILE_FOLLOWEDBY, $user_id);
 
         // Update the counter
-        $count = \PoPSchema\UserMeta\Utils::getUserMeta($target_id, \GD_METAKEY_PROFILE_FOLLOWERSCOUNT, true);
+        $count = Utils::getUserMeta($target_id, \GD_METAKEY_PROFILE_FOLLOWERSCOUNT, true);
         $count = $count ? $count : 0;
-        \PoPSchema\UserMeta\Utils::updateUserMeta($target_id, \GD_METAKEY_PROFILE_FOLLOWERSCOUNT, ($count - 1), true);
+        Utils::updateUserMeta($target_id, \GD_METAKEY_PROFILE_FOLLOWERSCOUNT, ($count - 1), true);
 
         return parent::update($form_data);
     }

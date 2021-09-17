@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoPSchema\UserMeta\Utils;
+use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
@@ -18,10 +20,10 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user is currently subscribed to that tag
-            $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
+            $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if (!in_array($target_id, $value)) {
                 $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-                $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
+                $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
                 $tag = $postTagTypeAPI->getTag($target_id);
                 $errors[] = sprintf(
                     $this->translationAPI->__('You had not subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
@@ -48,7 +50,7 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
         $target_id = $form_data['target_id'];
 
         // Update value
-        \PoPSchema\UserMeta\Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, $target_id);
+        Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, $target_id);
         \PoPSchema\TaxonomyMeta\Utils::deleteTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBEDBY, $user_id);
 
         // Update the counter

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoPSchema\UserMeta\Utils;
 class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileMutationResolver
 {
     use CreateUpdateIndividualProfileMutationResolverTrait;
@@ -20,6 +21,6 @@ class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileM
     {
         parent::createupdateuser($user_id, $form_data);
 
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $form_data['individualinterests']);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $form_data['individualinterests']);
     }
 }

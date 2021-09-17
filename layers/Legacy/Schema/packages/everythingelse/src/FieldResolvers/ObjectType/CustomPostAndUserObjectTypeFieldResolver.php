@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -31,12 +33,12 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'hasLocation' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'location' => LocationObjectTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            'hasLocation' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'location' => $this->instanceManager->getInstance(LocationObjectTypeResolver::class),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

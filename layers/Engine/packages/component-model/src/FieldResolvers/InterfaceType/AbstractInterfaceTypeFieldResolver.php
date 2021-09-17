@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
@@ -183,14 +184,14 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * By default, the field is a scalar of type AnyScalar
      */
-    public function getFieldTypeResolverClass(string $fieldName): string
+    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldTypeResolverClass($fieldName);
+            return $schemaDefinitionResolver->getFieldTypeResolver($fieldName);
         }
         $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        return $schemaDefinitionService->getDefaultTypeResolverClass();
+        return $schemaDefinitionService->getDefaultTypeResolver();
     }
 
     /**
@@ -226,10 +227,10 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      */
     protected function addSchemaDefinitionForEnumField(array &$schemaDefinition, string $fieldName): void
     {
-        $fieldTypeResolverClass = $this->getFieldTypeResolverClass($fieldName);
-        if (SchemaHelpers::isEnumFieldTypeResolverClass($fieldTypeResolverClass)) {
+        $fieldTypeResolver = $this->getFieldTypeResolver($fieldName);
+        if ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
             /** @var EnumTypeResolverInterface */
-            $fieldEnumTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
+            $fieldEnumTypeResolver = $fieldTypeResolver;
             $this->doAddSchemaDefinitionEnumValuesForField(
                 $schemaDefinition,
                 $fieldEnumTypeResolver->getEnumValues(),

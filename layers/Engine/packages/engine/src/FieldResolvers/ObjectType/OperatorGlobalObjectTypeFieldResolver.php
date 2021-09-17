@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
 use ArgumentCountError;
 use PoP\ComponentModel\ErrorHandling\Error;
@@ -46,24 +47,24 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'if' => MixedScalarTypeResolver::class,
-            'not' => BooleanScalarTypeResolver::class,
-            'and' => BooleanScalarTypeResolver::class,
-            'or' => BooleanScalarTypeResolver::class,
-            'equals' => BooleanScalarTypeResolver::class,
-            'empty' => BooleanScalarTypeResolver::class,
-            'isNull' => BooleanScalarTypeResolver::class,
-            'var' => MixedScalarTypeResolver::class,
-            'context' => ObjectScalarTypeResolver::class,
-            'extract' => MixedScalarTypeResolver::class,
-            'time' => IntScalarTypeResolver::class,
-            'echo' => MixedScalarTypeResolver::class,
-            'sprintf' => StringScalarTypeResolver::class,
+            'if' => $this->instanceManager->getInstance(MixedScalarTypeResolver::class),
+            'not' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'and' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'or' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'equals' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'empty' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'isNull' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'var' => $this->instanceManager->getInstance(MixedScalarTypeResolver::class),
+            'context' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
+            'extract' => $this->instanceManager->getInstance(MixedScalarTypeResolver::class),
+            'time' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'echo' => $this->instanceManager->getInstance(MixedScalarTypeResolver::class),
+            'sprintf' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

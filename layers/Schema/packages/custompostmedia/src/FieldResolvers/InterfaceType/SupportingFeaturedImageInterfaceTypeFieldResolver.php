@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMedia\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
@@ -29,17 +30,17 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         ];
     }
 
-    public function getFieldTypeResolverClass(string $fieldName): string
+    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'featuredImage':
-                return MediaObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
         }
         $types = [
-            'hasFeaturedImage' => BooleanScalarTypeResolver::class,
-            'featuredImage' => IDScalarTypeResolver::class,
+            'hasFeaturedImage' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'featuredImage' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\HighlightMutations\MutationResolverBridges;
 
+use PoPSchema\CustomPostMeta\Utils;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpdateCustomPostMutationResolverBridge;
@@ -44,7 +45,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
         $status = $customPostTypeAPI->getStatus($result_id);
         if ($status == Status::PUBLISHED) {
             // Give a link to the referenced post to the stance, and force it to get it from the server again
-            $highlighted = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($result_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
+            $highlighted = Utils::getCustomPostMeta($result_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
             $success_string = sprintf(
                 $this->translationAPI->__('<a href="%s" %s>Click here to view it</a>.', 'poptheme-wassup'),
                 $customPostTypeAPI->getPermalink($highlighted),

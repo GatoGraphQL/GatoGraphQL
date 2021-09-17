@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -29,15 +32,15 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'symbol' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'symbolnamedescription' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'namedescription' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'symbolname' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'symbol' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'symbolnamedescription' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'namedescription' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'symbolname' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
@@ -66,7 +69,7 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
+        $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
         $tag = $object;
         switch ($fieldName) {
             case 'symbol':

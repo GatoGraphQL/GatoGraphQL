@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FunctionFields\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
@@ -36,18 +37,18 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
             'divide'
-                => FloatScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(FloatScalarTypeResolver::class),
             'concat',
             'arrayJoin',
             'arrayAsQueryStr',
             'upperCase',
             'lowerCase',
             'titleCase'
-                => StringScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
             'arrayRandom',
             'arrayItem',
             'arraySearch',
@@ -56,9 +57,9 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => MixedScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(MixedScalarTypeResolver::class),
             default
-                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

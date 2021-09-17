@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoPSchema\UserRoles\FunctionAPIFactory;
+use PoPSchema\UserMeta\Utils;
 trait CreateUpdateIndividualProfileMutationResolverTrait
 {
     protected function createuser($form_data)
@@ -15,7 +17,7 @@ trait CreateUpdateIndividualProfileMutationResolverTrait
     protected function commonuserrolesCreateuser($user_id, $form_data)
     {
         // Add the extra User Role
-        $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
+        $cmsuserrolesapi = FunctionAPIFactory::getInstance();
         $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_INDIVIDUAL);
     }
 
@@ -26,6 +28,6 @@ trait CreateUpdateIndividualProfileMutationResolverTrait
     }
     protected function commonuserrolesCreateupdateuser($user_id, $form_data)
     {
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $form_data['individualinterests']);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $form_data['individualinterests']);
     }
 }

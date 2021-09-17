@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -35,19 +38,19 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'stances':
-                return StanceObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
         }
         $types = [
-            'hasStances' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'stanceProCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'stanceNeutralCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'stanceAgainstCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'hasStances' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'stanceProCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'stanceNeutralCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'stanceAgainstCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Meta\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -27,13 +28,13 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         ];
     }
 
-    public function getFieldTypeResolverClass(string $fieldName): string
+    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'metaValue' => AnyScalarScalarTypeResolver::class,
-            'metaValues' => AnyScalarScalarTypeResolver::class,
+            'metaValue' => $this->instanceManager->getInstance(AnyScalarScalarTypeResolver::class),
+            'metaValues' => $this->instanceManager->getInstance(AnyScalarScalarTypeResolver::class),
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int

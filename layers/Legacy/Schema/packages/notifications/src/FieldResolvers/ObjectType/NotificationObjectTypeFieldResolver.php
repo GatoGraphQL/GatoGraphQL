@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\IPScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -87,41 +94,41 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'user':
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
         $types = [
-            'action' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'objectType' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'objectSubtype' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'objectName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'objectID' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
-            'userID' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
-            'websiteURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'userCaps' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'histIp' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\IPScalarTypeResolver::class,
-            'histTime' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
-            'histTimeNogmt' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
-            'histTimeReadable' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'status' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'isStatusRead' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'isStatusNotRead' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'markAsReadURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'markAsUnreadURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'icon' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'url' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'target' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'message' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'isPostNotification' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'isUserNotification' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'isCommentNotification' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'isTaxonomyNotification' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'isAction' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'action' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'objectType' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'objectSubtype' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'objectName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'objectID' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
+            'userID' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
+            'websiteURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'userCaps' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'histIp' => $this->instanceManager->getInstance(IPScalarTypeResolver::class),
+            'histTime' => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
+            'histTimeNogmt' => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
+            'histTimeReadable' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'status' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'isStatusRead' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'isStatusNotRead' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'markAsReadURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'markAsUnreadURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'icon' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'url' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'target' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'message' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'isPostNotification' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'isUserNotification' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'isCommentNotification' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'isTaxonomyNotification' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'isAction' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

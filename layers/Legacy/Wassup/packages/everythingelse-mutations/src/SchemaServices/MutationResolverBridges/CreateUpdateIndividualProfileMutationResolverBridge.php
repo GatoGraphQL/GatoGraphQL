@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Application\HelperAPIFactory;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateIndividualProfileMutationResolver;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateWithCommunityIndividualProfileMutationResolver;
 
@@ -50,7 +51,7 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
     }
     protected function getCommonuserrolesFormData()
     {
-        $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
+        $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
         $individualinterests = $this->moduleProcessorManager->getProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
         return array(

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
+use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
@@ -29,7 +30,7 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
 
     protected function doExecute($form_data)
     {
-        $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
+        $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $to = \PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $subject = sprintf(
             $this->translationAPI->__('[%s]: %s', 'pop-genericforms'),

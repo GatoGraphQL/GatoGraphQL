@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostTagMutations\Hooks;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 
@@ -35,10 +37,10 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         array $fieldArgs,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,
-        ?string $entityTypeResolverClass
+        ?ConcreteTypeResolverInterface $entityTypeResolver
     ): array {
         // Only for the specific CPT
-        if ($entityTypeResolverClass !== $this->getCustomPostTypeResolverClass()) {
+        if ($entityTypeResolver === null || get_class($entityTypeResolver) !== get_class($this->getCustomPostTypeResolver())) {
             return $fieldArgs;
         }
         $fieldArgs[] = [
@@ -50,7 +52,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         return $fieldArgs;
     }
 
-    abstract protected function getCustomPostTypeResolverClass(): string;
+    abstract protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface;
 
     public function maybeSetTags(int | string $customPostID, array $form_data): void
     {

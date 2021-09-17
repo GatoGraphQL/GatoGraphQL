@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
@@ -37,17 +38,17 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => StringScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'isDeprecated' => BooleanScalarTypeResolver::class,
-            'deprecationReason' => StringScalarTypeResolver::class,
-            'extensions' => ObjectScalarTypeResolver::class,
-            'args' => InputValueObjectTypeResolver::class,
-            'type' => TypeObjectTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'isDeprecated' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'deprecationReason' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'extensions' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
+            'args' => $this->instanceManager->getInstance(InputValueObjectTypeResolver::class),
+            'type' => $this->instanceManager->getInstance(TypeObjectTypeResolver::class),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

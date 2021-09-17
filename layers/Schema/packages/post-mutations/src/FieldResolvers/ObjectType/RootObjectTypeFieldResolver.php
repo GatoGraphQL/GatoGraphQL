@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
@@ -57,7 +58,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     $objectTypeResolver,
                     $fieldName,
                     $addCustomPostIDConfig[$fieldName],
-                    PostObjectTypeResolver::class
+                    $this->instanceManager->getInstance(PostObjectTypeResolver::class)
                 );
         }
         return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
@@ -75,14 +76,14 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'createPost':
             case 'updatePost':
-                return PostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
         }
 
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

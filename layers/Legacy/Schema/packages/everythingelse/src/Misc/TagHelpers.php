@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\Misc;
 
+use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
@@ -23,7 +24,7 @@ class TagHelpers
     public static function getTagSymbolNameDescription($tag)
     {
         $cmstaxonomiesresolver = PostTagTypeAPIFacade::getInstance();
-        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
+        $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
         $value = $applicationtaxonomyapi->getTagSymbolName($tag);
 
         // If there's a description, then use it

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
+use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
@@ -73,7 +74,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 
     protected function doExecute(array $newsletter_data)
     {
-        $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
+        $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $to = \PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $subject = sprintf(
             $this->translationAPI->__('[%s]: Newsletter unsubscription', 'pop-genericforms'),

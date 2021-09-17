@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\VolunteerMutations\MutationResolvers;
 
+use PoP\Application\FunctionAPIFactory;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
@@ -49,7 +50,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
 
     protected function doExecute($form_data)
     {
-        $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
+        $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $post_title = $customPostTypeAPI->getTitle($form_data['target-id']);
         $subject = sprintf(

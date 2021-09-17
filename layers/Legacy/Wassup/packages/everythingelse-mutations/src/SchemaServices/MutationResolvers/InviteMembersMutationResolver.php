@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\HooksAPIInterface;
@@ -25,7 +26,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
     
     protected function getEmailContent($form_data)
     {
-        $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
+        $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         // The user must be always logged in, so we will have the user_id
         $user_id = $form_data['user_id'];
 

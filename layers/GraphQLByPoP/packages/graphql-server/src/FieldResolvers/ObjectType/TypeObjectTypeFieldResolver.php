@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractNestableType;
@@ -48,28 +49,28 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
             'name'
-                => StringScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
             'description'
-                => StringScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
             'extensions'
-                => ObjectScalarTypeResolver::class,
+                => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
             'fields'
-                => FieldObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(FieldObjectTypeResolver::class),
             'interfaces',
             'possibleTypes',
             'ofType'
-                => TypeObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(TypeObjectTypeResolver::class),
             'enumValues'
-                => EnumValueObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(EnumValueObjectTypeResolver::class),
             'inputFields'
-                => InputValueObjectTypeResolver::class,
+                => $this->instanceManager->getInstance(InputValueObjectTypeResolver::class),
             'kind'
-                => TypeKindEnumTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+                => $this->instanceManager->getInstance(TypeKindEnumTypeResolver::class),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

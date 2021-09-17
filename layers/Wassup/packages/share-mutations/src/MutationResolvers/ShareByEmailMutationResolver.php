@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ShareMutations\MutationResolvers;
 
+use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
@@ -42,7 +43,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
 
     protected function doExecute($form_data)
     {
-        $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
+        $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $subject = sprintf(
             $this->translationAPI->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),

@@ -7,7 +7,7 @@ namespace PoPSchema\Tags\TypeResolvers\ObjectType;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
 use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeResolver;
 
-abstract class AbstractTagObjectTypeResolver extends AbstractTaxonomyObjectTypeResolver
+abstract class AbstractTagObjectTypeResolver extends AbstractTaxonomyObjectTypeResolver implements TagObjectTypeResolverInterface
 {
     use TagAPIRequestedContractTrait;
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
@@ -323,12 +324,12 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function getFieldTypeResolverClass(
+    public function getFieldTypeResolver(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
-    ): string {
+    ): ConcreteTypeResolverInterface {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
-        return $aliasedObjectTypeFieldResolver->getFieldTypeResolverClass(
+        return $aliasedObjectTypeFieldResolver->getFieldTypeResolver(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );

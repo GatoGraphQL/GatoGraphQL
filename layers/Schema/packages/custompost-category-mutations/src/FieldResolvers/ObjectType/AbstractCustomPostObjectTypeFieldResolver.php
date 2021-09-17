@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -18,7 +19,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            $this->getCustomPostTypeResolverClass(),
+            get_class($this->getCustomPostTypeResolver()),
         ];
     }
 
@@ -55,9 +56,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         switch ($fieldName) {
             case 'setCategories':
-                $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
-                /** @var TypeResolverInterface */
-                $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
+                $categoryTypeResolver = $this->getCategoryTypeResolver();
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,
@@ -128,13 +127,13 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'setCategories':
-                return $this->getCustomPostTypeResolverClass();
+                return $this->getCustomPostTypeResolver();
         }
 
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

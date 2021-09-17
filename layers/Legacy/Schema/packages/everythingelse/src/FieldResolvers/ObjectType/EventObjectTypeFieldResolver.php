@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -35,16 +38,16 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'dates' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'times' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'startDateReadable' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'daterange' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
-            'daterangetime' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
-            'locations' => LocationObjectTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            'dates' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'times' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'startDateReadable' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'daterange' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
+            'daterangetime' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
+            'locations' => $this->instanceManager->getInstance(LocationObjectTypeResolver::class),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

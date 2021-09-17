@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
@@ -76,19 +77,19 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'username' => StringScalarTypeResolver::class,
-            'name' => StringScalarTypeResolver::class,
-            'displayName' => StringScalarTypeResolver::class,
-            'firstName' => StringScalarTypeResolver::class,
-            'lastName' => StringScalarTypeResolver::class,
-            'email' => EmailScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'websiteURL' => URLScalarTypeResolver::class,
+            'username' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'displayName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'firstName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'lastName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'email' => $this->instanceManager->getInstance(EmailScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'websiteURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

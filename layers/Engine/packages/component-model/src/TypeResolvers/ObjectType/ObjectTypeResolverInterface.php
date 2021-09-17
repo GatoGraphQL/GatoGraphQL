@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
@@ -19,7 +20,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
     public function resolveSchemaValidationErrorDescriptions(string $field, array &$variables = null): array;
     public function resolveSchemaValidationWarningDescriptions(string $field, array &$variables = null): array;
     public function resolveSchemaDeprecationDescriptions(string $field, array &$variables = null): array;
-    public function getFieldTypeResolverClass(string $field): ?string;
+    public function getFieldTypeResolver(string $field): ?ConcreteTypeResolverInterface;
     public function getFieldMutationResolverClass(string $field): ?string;
     public function isFieldAMutation(string $field): ?bool;
 }

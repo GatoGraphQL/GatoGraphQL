@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Directive;
@@ -35,15 +36,15 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => StringScalarTypeResolver::class,
-            'description' => StringScalarTypeResolver::class,
-            'isRepeatable' => BooleanScalarTypeResolver::class,
-            'args' => InputValueObjectTypeResolver::class,
-            'locations' => DirectiveLocationEnumTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'isRepeatable' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'args' => $this->instanceManager->getInstance(InputValueObjectTypeResolver::class),
+            'locations' => $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

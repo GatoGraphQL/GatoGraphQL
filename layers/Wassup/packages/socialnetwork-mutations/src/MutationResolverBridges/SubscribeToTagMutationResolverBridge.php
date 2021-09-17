@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
+use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\SubscribeToTagMutationResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
@@ -21,7 +22,7 @@ class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValu
 
     public function getSuccessString(string | int $result_id): ?string
     {
-        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
+        $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $tag = $postTagTypeAPI->getTag($result_id);
         return sprintf(

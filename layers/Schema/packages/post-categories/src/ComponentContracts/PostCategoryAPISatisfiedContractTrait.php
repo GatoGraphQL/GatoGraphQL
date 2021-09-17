@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\ComponentContracts;
 
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
+use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 
 trait PostCategoryAPISatisfiedContractTrait
 {
@@ -15,8 +17,9 @@ trait PostCategoryAPISatisfiedContractTrait
         return PostCategoryTypeAPIFacade::getInstance();
     }
 
-    protected function getCategoryTypeResolverClass(): string
+    protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
-        return PostCategoryObjectTypeResolver::class;
+        $instanceManager = InstanceManagerFacade::getInstance();
+        return $instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
 }

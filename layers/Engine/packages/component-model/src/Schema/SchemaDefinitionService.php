@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class SchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
+    public function __construct(protected InstanceManagerInterface $instanceManager)
+    {
+    }
+
     public function getTypeSchemaKey(TypeResolverInterface $typeResolver): string
     {
         // By default, use the type name
@@ -26,8 +32,8 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
      * The `AnyScalar` type is a wildcard type,
      * representing *any* type (string, int, bool, etc)
      */
-    public function getDefaultTypeResolverClass(): string
+    public function getDefaultTypeResolver(): ConcreteTypeResolverInterface
     {
-        return AnyScalarScalarTypeResolver::class;
+        return $this->instanceManager->getInstance(AnyScalarScalarTypeResolver::class);
     }
 }

@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPostMutations\Schema;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -23,7 +24,7 @@ class SchemaDefinitionHelpers
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,
         bool $addCustomPostID,
-        ?string $entityTypeResolverClass = null
+        ?ConcreteTypeResolverInterface $entityTypeResolver = null
     ): array {
         $key = get_class($relationalTypeResolver) . '-' . $fieldName;
         if (!isset(self::$schemaFieldArgsCache[$key])) {
@@ -70,7 +71,7 @@ class SchemaDefinitionHelpers
                 $schemaFieldDefinition,
                 $relationalTypeResolver,
                 $fieldName,
-                $entityTypeResolverClass
+                $entityTypeResolver
             );
         }
         return self::$schemaFieldArgsCache[$key];

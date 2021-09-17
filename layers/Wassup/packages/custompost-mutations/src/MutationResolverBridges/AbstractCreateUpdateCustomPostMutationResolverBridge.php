@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 
+use PoP\EditPosts\HelperAPIFactory;
 use PoPSchema\Posts\Constants\InputNames;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -50,7 +51,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 
         $editor = $this->getEditorInput();
         if ($editor !== null) {
-            $cmseditpostshelpers = \PoP\EditPosts\HelperAPIFactory::getInstance();
+            $cmseditpostshelpers = HelperAPIFactory::getInstance();
             $form_data[MutationInputProperties::CONTENT] = trim($cmseditpostshelpers->kses(stripslashes($this->moduleProcessorManager->getProcessor($editor)->getValue($editor))));
         }
 
