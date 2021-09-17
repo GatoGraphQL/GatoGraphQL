@@ -20,26 +20,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-    ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-        );
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

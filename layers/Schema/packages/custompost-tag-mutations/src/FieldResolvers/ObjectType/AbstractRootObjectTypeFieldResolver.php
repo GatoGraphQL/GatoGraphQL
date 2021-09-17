@@ -23,26 +23,6 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 {
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-    ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-        );
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
