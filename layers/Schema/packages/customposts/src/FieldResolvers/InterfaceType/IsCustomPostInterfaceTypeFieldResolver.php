@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -52,7 +53,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         ];
     }
 
-    public function getFieldTypeResolver(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
             'isStatus'

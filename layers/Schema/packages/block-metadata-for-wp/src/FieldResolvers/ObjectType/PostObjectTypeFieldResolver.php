@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\BlockMetadataWP\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use Leoloso\BlockMetadata\Data;
 use Leoloso\BlockMetadata\Metadata;
@@ -29,7 +30,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
             'blockMetadata' => ObjectScalarTypeResolver::class,

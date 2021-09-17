@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
@@ -91,7 +92,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
             'content',

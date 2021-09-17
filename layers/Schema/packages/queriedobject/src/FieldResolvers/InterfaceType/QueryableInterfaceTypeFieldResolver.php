@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\QueriedObject\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
@@ -29,7 +30,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         ];
     }
 
-    public function getFieldTypeResolver(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
             'url' => URLScalarTypeResolver::class,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
@@ -40,7 +41,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         ];
     }
 
-    public function getFieldTypeResolver(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'comments':

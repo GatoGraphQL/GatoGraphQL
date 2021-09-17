@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractReflectionPropertyObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -30,7 +31,7 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
      *
      * @see https://github.com/getpop/component-model/issues/1
      */
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
             'name' => StringScalarTypeResolver::class,

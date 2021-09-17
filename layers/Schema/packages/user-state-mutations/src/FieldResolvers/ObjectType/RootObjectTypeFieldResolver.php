@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
@@ -73,7 +74,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'loginUser':

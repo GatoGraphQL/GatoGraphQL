@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Users\TypeResolvers\InterfaceType\WithAuthorInterfaceTypeResolver;
@@ -42,7 +43,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }
 
-    public function getFieldTypeResolver(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'author':
