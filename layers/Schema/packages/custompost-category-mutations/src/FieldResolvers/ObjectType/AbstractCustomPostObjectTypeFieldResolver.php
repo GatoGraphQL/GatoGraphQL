@@ -56,9 +56,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         switch ($fieldName) {
             case 'setCategories':
-                $categoryTypeResolverClass = $this->getCategoryTypeResolver();
-                /** @var TypeResolverInterface */
-                $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
+                $categoryTypeResolver = $this->getCategoryTypeResolver();
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,

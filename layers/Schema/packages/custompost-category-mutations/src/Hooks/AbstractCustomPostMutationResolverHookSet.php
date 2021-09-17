@@ -9,6 +9,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
+use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
@@ -43,9 +44,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if ($entityTypeResolver === null || get_class($entityTypeResolver) !== $this->getCustomPostTypeResolverClass()) {
             return $fieldArgs;
         }
-        $categoryTypeResolverClass = $this->getCategoryTypeResolver();
-        /** @var TypeResolverInterface */
-        $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
+        $categoryTypeResolver = $this->getCategoryTypeResolver();
         $fieldArgs[] = [
             SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,
             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
@@ -59,7 +58,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     }
 
     abstract protected function getCustomPostTypeResolverClass(): string;
-    abstract protected function getCategoryTypeResolver(): string;
+    abstract protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
 
     public function maybeSetCategories(int | string $customPostID, array $form_data): void
     {

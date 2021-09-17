@@ -51,9 +51,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         switch ($fieldName) {
             case $this->getSetCategoriesFieldName():
-                $categoryTypeResolverClass = $this->getCategoryTypeResolver();
-                /** @var TypeResolverInterface */
-                $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
+                $categoryTypeResolver = $this->getCategoryTypeResolver();
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CUSTOMPOST_ID,

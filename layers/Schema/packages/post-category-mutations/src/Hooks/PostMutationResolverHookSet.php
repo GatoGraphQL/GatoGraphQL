@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategoryMutations\Hooks;
 
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
+use PoPSchema\PostCategoryMutations\Facades\PostCategoryTypeMutationAPIFacade;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPSchema\PostCategoryMutations\Facades\PostCategoryTypeMutationAPIFacade;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
@@ -24,9 +26,10 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
         return $postTypeAPI->getPostCustomPostType();
     }
 
-    protected function getCategoryTypeResolver(): string
+    protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
-        return PostCategoryObjectTypeResolver::class;
+        $instanceManager = InstanceManagerFacade::getInstance();
+        return $instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
 
     protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface
