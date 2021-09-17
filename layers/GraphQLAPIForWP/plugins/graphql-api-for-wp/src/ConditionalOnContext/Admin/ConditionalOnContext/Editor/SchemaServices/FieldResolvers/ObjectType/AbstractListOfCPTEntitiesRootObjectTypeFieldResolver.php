@@ -28,9 +28,6 @@ use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
  */
 abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    /**
-     * @return string[]
-     */
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
