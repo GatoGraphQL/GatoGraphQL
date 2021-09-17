@@ -26,7 +26,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      * but `extractFieldArguments` expects an ObjectTypeResolver
      */
     protected RootObjectTypeResolver $rootTypeResolver;
-    
+
     public function __construct(?string $directive = null)
     {
         parent::__construct($directive);

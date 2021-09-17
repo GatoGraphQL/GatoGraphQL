@@ -30,7 +30,7 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
-    
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,

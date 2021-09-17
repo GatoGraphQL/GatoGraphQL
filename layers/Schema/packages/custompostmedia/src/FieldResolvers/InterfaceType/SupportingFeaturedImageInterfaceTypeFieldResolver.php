@@ -44,7 +44,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
             $typeRegistry,
         );
     }
-    
+
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [

@@ -45,7 +45,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             $semverHelperService,
         );
     }
-    
+
     public function getFieldNamesToResolve(): array
     {
         return [

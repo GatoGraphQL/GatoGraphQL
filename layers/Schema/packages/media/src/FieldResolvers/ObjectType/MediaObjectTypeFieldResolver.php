@@ -40,7 +40,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         protected URLScalarTypeResolver $urlScalarTypeResolver,
         protected IntScalarTypeResolver $intScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected DateScalarTypeResolver $dateScalarTypeResolver,        
+        protected DateScalarTypeResolver $dateScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,

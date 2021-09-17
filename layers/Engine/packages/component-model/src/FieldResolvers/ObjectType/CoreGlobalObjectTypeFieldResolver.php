@@ -43,7 +43,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             $semverHelperService,
         );
     }
-    
+
     public function getFieldNamesToResolve(): array
     {
         return [

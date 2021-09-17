@@ -49,7 +49,6 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         protected ObjectScalarTypeResolver $objectScalarTypeResolver,
         protected IntScalarTypeResolver $intScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
-        
     ) {
         parent::__construct(
             $translationAPI,

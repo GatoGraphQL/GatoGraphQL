@@ -51,7 +51,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
             $typeRegistry,
         );
     }
-    
+
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
