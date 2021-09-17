@@ -52,6 +52,15 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected CommentTypeAPIInterface $commentTypeAPI,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected URLScalarTypeResolver $urlScalarTypeResolver,
+        protected EmailScalarTypeResolver $emailScalarTypeResolver,
+        protected IDScalarTypeResolver $idScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected DateScalarTypeResolver $dateScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected CommentObjectTypeResolver $commentObjectTypeResolver,
+        protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -98,28 +107,28 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'content',
             'authorName',
             'type'
-                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+                => $this->stringScalarTypeResolver,
             'authorURL'
-                => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+                => $this->urlScalarTypeResolver,
             'authorEmail'
-                => $this->instanceManager->getInstance(EmailScalarTypeResolver::class),
+                => $this->emailScalarTypeResolver,
             'customPostID'
-                => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
+                => $this->idScalarTypeResolver,
             'approved'
-                => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+                => $this->booleanScalarTypeResolver,
             'date'
-                => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
+                => $this->dateScalarTypeResolver,
             'responseCount',
             'responseCountForAdmin'
-                => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+                => $this->intScalarTypeResolver,
             'customPost'
                 => $this->instanceManager->getInstance(CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class)),
             'parent',
             'responses',
             'responsesForAdmin'
-                => $this->instanceManager->getInstance(CommentObjectTypeResolver::class),
+                => $this->commentObjectTypeResolver,
             'status'
-                => $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class),
+                => $this->commentStatusEnumTypeResolver,
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

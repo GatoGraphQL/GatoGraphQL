@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
@@ -18,6 +25,29 @@ use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 
 class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
+        protected LocationObjectTypeResolver $locationObjectTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -41,12 +71,12 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'dates' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'times' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'startDateReadable' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'daterange' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
-            'daterangetime' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
-            'locations' => $this->instanceManager->getInstance(LocationObjectTypeResolver::class),
+            'dates' => $this->stringScalarTypeResolver,
+            'times' => $this->stringScalarTypeResolver,
+            'startDateReadable' => $this->stringScalarTypeResolver,
+            'daterange' => $this->objectScalarTypeResolver,
+            'daterangetime' => $this->objectScalarTypeResolver,
+            'locations' => $this->locationObjectTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

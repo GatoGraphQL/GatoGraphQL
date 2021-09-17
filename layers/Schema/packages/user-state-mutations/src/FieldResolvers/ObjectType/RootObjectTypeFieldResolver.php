@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -16,6 +23,27 @@ use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected UserObjectTypeResolver $userObjectTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -79,7 +107,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldName) {
             case 'loginUser':
             case 'logoutUser':
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+                return $this->userObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

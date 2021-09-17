@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
@@ -20,6 +27,28 @@ use PoP\API\ComponentConfiguration as APIComponentConfiguration;
  */
 class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
+        protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -62,9 +91,9 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     {
         switch ($fieldName) {
             case 'queryRoot':
-                return $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
+                return $this->queryRootObjectTypeResolver;
             case 'mutationRoot':
-                return $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
+                return $this->mutationRootObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

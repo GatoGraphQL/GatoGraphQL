@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\FilterInputProcessors;
 
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
@@ -17,6 +18,16 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public const FILTERINPUT_CUSTOMPOSTTYPES = 'filterinput-customposttypes';
     public const FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
+
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
+    ) {
+        parent::__construct(
+            $instanceManager,
+        );
+    }
+
 
     public function getFilterInputsToProcess(): array
     {
@@ -41,13 +52,9 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
             case self::FILTERINPUT_CUSTOMPOSTSTATUS:
                 // Remove any status that is not in the Enum
                 if ($value) {
-                    /**
-                     * @var CustomPostStatusEnumTypeResolver
-                     */
-                    $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
                     $value = array_intersect(
                         $value,
-                        $customPostStatusEnumTypeResolver->getEnumValues()
+                        $this->customPostStatusEnumTypeResolver->getEnumValues()
                     );
                     // If no status is valid, do not set, as to not override the default value
                     if ($value) {

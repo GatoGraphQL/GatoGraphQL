@@ -43,6 +43,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected MediaTypeAPIInterface $mediaTypeAPI,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected MediaObjectTypeResolver $mediaObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -86,10 +88,10 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldName) {
             case 'mediaItems':
             case 'mediaItem':
-                return $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+                return $this->mediaObjectTypeResolver;
         }
         $types = [
-            'mediaItemCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'mediaItemCount' => $this->intScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

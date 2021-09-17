@@ -42,6 +42,13 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected CommentTypeAPIInterface $commentTypeAPI,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected DateScalarTypeResolver $dateScalarTypeResolver,
+        protected IDScalarTypeResolver $idScalarTypeResolver,
+        protected IPScalarTypeResolver $ipScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected URLScalarTypeResolver $urlScalarTypeResolver,
+        protected UserObjectTypeResolver $userObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -96,37 +103,34 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'user':
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
-        }
         $types = [
-            'action' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'objectType' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'objectSubtype' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'objectName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'objectID' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
-            'userID' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
-            'websiteURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
-            'userCaps' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'histIp' => $this->instanceManager->getInstance(IPScalarTypeResolver::class),
-            'histTime' => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
-            'histTimeNogmt' => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
-            'histTimeReadable' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'status' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'isStatusRead' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'isStatusNotRead' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'markAsReadURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
-            'markAsUnreadURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
-            'icon' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'url' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
-            'target' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'message' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'isPostNotification' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'isUserNotification' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'isCommentNotification' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'isTaxonomyNotification' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'isAction' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'user' => $this->userObjectTypeResolver,
+            'action' => $this->stringScalarTypeResolver,
+            'objectType' => $this->stringScalarTypeResolver,
+            'objectSubtype' => $this->stringScalarTypeResolver,
+            'objectName' => $this->stringScalarTypeResolver,
+            'objectID' => $this->idScalarTypeResolver,
+            'userID' => $this->idScalarTypeResolver,
+            'websiteURL' => $this->urlScalarTypeResolver,
+            'userCaps' => $this->stringScalarTypeResolver,
+            'histIp' => $this->ipScalarTypeResolver,
+            'histTime' => $this->dateScalarTypeResolver,
+            'histTimeNogmt' => $this->dateScalarTypeResolver,
+            'histTimeReadable' => $this->stringScalarTypeResolver,
+            'status' => $this->stringScalarTypeResolver,
+            'isStatusRead' => $this->booleanScalarTypeResolver,
+            'isStatusNotRead' => $this->booleanScalarTypeResolver,
+            'markAsReadURL' => $this->urlScalarTypeResolver,
+            'markAsUnreadURL' => $this->urlScalarTypeResolver,
+            'icon' => $this->stringScalarTypeResolver,
+            'url' => $this->urlScalarTypeResolver,
+            'target' => $this->stringScalarTypeResolver,
+            'message' => $this->stringScalarTypeResolver,
+            'isPostNotification' => $this->booleanScalarTypeResolver,
+            'isUserNotification' => $this->booleanScalarTypeResolver,
+            'isCommentNotification' => $this->booleanScalarTypeResolver,
+            'isTaxonomyNotification' => $this->booleanScalarTypeResolver,
+            'isAction' => $this->booleanScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

@@ -4,22 +4,49 @@ declare(strict_types=1);
 
 namespace PoPSchema\Meta\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
 
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
+        TypeRegistryInterface $typeRegistry,
+        protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $nameResolver,
+            $cmsService,
+            $schemaNamespacingService,
+            $typeRegistry,
+        );
+    }
+
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
             WithMetaInterfaceTypeResolver::class,
         ];
     }
-
     public function getFieldNamesToImplement(): array
     {
         return [
@@ -31,8 +58,8 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'metaValue' => $this->instanceManager->getInstance(AnyScalarScalarTypeResolver::class),
-            'metaValues' => $this->instanceManager->getInstance(AnyScalarScalarTypeResolver::class),
+            'metaValue' => $this->anyScalarScalarTypeResolver,
+            'metaValues' => $this->anyScalarScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }

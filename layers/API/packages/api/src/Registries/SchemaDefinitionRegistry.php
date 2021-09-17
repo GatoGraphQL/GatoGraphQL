@@ -25,6 +25,7 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected TranslationAPIInterface $translationAPI,
         protected InstanceManagerInterface $instanceManager,
+        protected RootObjectTypeResolver $rootTypeResolver,
     ) {
     }
 
@@ -74,12 +75,8 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
             }
             // If either not using cache, or using but the value had not been cached, then calculate the value
             if ($schemaDefinition === null) {
-                /**
-                 * @var RootObjectTypeResolver
-                 */
-                $rootTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
                 $root = RootObjectFacade::getInstance();
-                $schemaDefinition = $rootTypeResolver->resolveValue(
+                $schemaDefinition = $this->rootTypeResolver->resolveValue(
                     $root,
                     $this->fieldQueryInterpreter->getField('fullSchema', $fieldArgs ?? []),
                     null,
@@ -92,7 +89,7 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
                     $error = $schemaDefinition;
                     // Store the error, and reset the definition to empty
                     $this->feedbackMessageStore->addSchemaError(
-                        $rootTypeResolver->getTypeOutputName(),
+                        $this->rootTypeResolver->getTypeOutputName(),
                         'fullSchema',
                         sprintf(
                             $this->translationAPI->__('Retrieving the schema data via Introspection failed: \'%s\'. Please contact the admin.', 'pop-component-model'),

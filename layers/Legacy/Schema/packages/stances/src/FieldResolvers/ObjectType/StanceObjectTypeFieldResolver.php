@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -24,6 +31,30 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected IDScalarTypeResolver $idScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -52,13 +83,13 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $this->instanceManager->getInstance(CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class));
         }
         $types = [
-            'categories' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
-            'catSlugs' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'stance' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
-            'title' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'excerpt' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'content' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'hasStanceTarget' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'categories' => $this->idScalarTypeResolver,
+            'catSlugs' => $this->stringScalarTypeResolver,
+            'stance' => $this->intScalarTypeResolver,
+            'title' => $this->stringScalarTypeResolver,
+            'excerpt' => $this->stringScalarTypeResolver,
+            'content' => $this->stringScalarTypeResolver,
+            'hasStanceTarget' => $this->booleanScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

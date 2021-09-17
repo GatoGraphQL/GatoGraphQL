@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
@@ -26,6 +33,31 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected IDScalarTypeResolver $idScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected URLScalarTypeResolver $urlScalarTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -53,17 +85,17 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'addStanceURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
-            'loggedInUserStances' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
-            'hasLoggedInUserStances' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'editStanceURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
-            'postStancesProURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
-            'postStancesNeutralURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
-            'postStancesAgainstURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
-            'createStanceButtonLazy' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
-            'stancesLazy' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
-            'stanceName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'catName' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'addStanceURL' => $this->urlScalarTypeResolver,
+            'loggedInUserStances' => $this->intScalarTypeResolver,
+            'hasLoggedInUserStances' => $this->booleanScalarTypeResolver,
+            'editStanceURL' => $this->urlScalarTypeResolver,
+            'postStancesProURL' => $this->urlScalarTypeResolver,
+            'postStancesNeutralURL' => $this->urlScalarTypeResolver,
+            'postStancesAgainstURL' => $this->urlScalarTypeResolver,
+            'createStanceButtonLazy' => $this->idScalarTypeResolver,
+            'stancesLazy' => $this->idScalarTypeResolver,
+            'stanceName' => $this->stringScalarTypeResolver,
+            'catName' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

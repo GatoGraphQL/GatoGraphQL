@@ -4,19 +4,52 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 
-use GraphQLByPoP\GraphQLServer\Enums\DirectiveTypeEnum;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\SchemaObjectTypeFieldResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveTypeEnumTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        TypeObjectTypeResolver $typeObjectTypeResolver,
+        DirectiveObjectTypeResolver $directiveObjectTypeResolver,
+        protected DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+            $typeObjectTypeResolver,
+            $directiveObjectTypeResolver,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -59,10 +92,6 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'directives':
-                /**
-                 * @var DirectiveTypeEnumTypeResolver
-                 */
-                $directiveTypeEnumTypeResolver = $this->instanceManager->getInstance(DirectiveTypeEnumTypeResolver::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -71,9 +100,9 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                             SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only directives of provided types', 'graphql-api'),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $directiveTypeEnumTypeResolver->getTypeName(),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $this->directiveTypeEnumTypeResolver->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $directiveTypeEnumTypeResolver
+                                $this->directiveTypeEnumTypeResolver
                             ),
                         ],
                     ]
@@ -104,13 +133,9 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
             case 'directives':
                 $directiveIDs = $schema->getDirectiveIDs();
                 if ($ofTypes = $fieldArgs['ofTypes'] ?? null) {
-                    /**
-                     * @var DirectiveTypeEnumTypeResolver
-                     */
-                    $directiveTypeEnumTypeResolver = $this->instanceManager->getInstance(DirectiveTypeEnumTypeResolver::class);
                     // Convert the enum from uppercase (as exposed in the API) to lowercase (as is its real value)
                     $ofTypes = array_map(
-                        fn (string $enumValue) => $directiveTypeEnumTypeResolver->getEnumValueFromInput($enumValue),
+                        fn (string $enumValue) => $this->directiveTypeEnumTypeResolver->getEnumValueFromInput($enumValue),
                         $ofTypes
                     );
                     $directiveRegistry = DirectiveRegistryFacade::getInstance();

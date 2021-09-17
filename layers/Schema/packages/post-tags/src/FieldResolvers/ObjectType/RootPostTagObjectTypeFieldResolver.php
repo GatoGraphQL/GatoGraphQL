@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -26,6 +33,29 @@ use PoPSchema\Tags\ComponentConfiguration;
 class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected PostTagObjectTypeResolver $postTagObjectTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -51,11 +81,11 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
             case 'postTag':
             case 'postTagBySlug':
             case 'postTags':
-                return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+                return $this->postTagObjectTypeResolver;
         }
         $types = [
-            'postTagCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
-            'postTagNames' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'postTagCount' => $this->intScalarTypeResolver,
+            'postTagNames' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

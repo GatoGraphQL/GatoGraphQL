@@ -32,7 +32,8 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected DateFormatterInterface $dateFormatter
+        protected DateFormatterInterface $dateFormatter,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -65,10 +66,10 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'nicename' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'nickname' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'locale' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'registeredDate' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'nicename' => $this->stringScalarTypeResolver,
+            'nickname' => $this->stringScalarTypeResolver,
+            'locale' => $this->stringScalarTypeResolver,
+            'registeredDate' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

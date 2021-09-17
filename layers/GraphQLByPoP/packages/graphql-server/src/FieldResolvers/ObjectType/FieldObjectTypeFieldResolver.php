@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
@@ -18,6 +25,31 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
+        protected InputValueObjectTypeResolver $inputValueObjectTypeResolver,
+        protected TypeObjectTypeResolver $typeObjectTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -41,13 +73,13 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'isDeprecated' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'deprecationReason' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'extensions' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
-            'args' => $this->instanceManager->getInstance(InputValueObjectTypeResolver::class),
-            'type' => $this->instanceManager->getInstance(TypeObjectTypeResolver::class),
+            'name' => $this->stringScalarTypeResolver,
+            'description' => $this->stringScalarTypeResolver,
+            'isDeprecated' => $this->booleanScalarTypeResolver,
+            'deprecationReason' => $this->stringScalarTypeResolver,
+            'extensions' => $this->objectScalarTypeResolver,
+            'args' => $this->inputValueObjectTypeResolver,
+            'type' => $this->typeObjectTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

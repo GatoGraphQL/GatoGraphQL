@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
@@ -16,6 +23,28 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -50,12 +79,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'roles' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'capabilities' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'hasRole' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'hasAnyRole' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'hasCapability' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'hasAnyCapability' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+            'roles' => $this->stringScalarTypeResolver,
+            'capabilities' => $this->stringScalarTypeResolver,
+            'hasRole' => $this->booleanScalarTypeResolver,
+            'hasAnyRole' => $this->booleanScalarTypeResolver,
+            'hasCapability' => $this->booleanScalarTypeResolver,
+            'hasAnyCapability' => $this->booleanScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

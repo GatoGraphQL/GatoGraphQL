@@ -11,7 +11,6 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\Users\FieldResolvers\ObjectType\AbstractUserObjectTypeFieldResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolver
@@ -144,7 +143,7 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
             case 'user':
             case 'userByUsername':
             case 'userByEmail':
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+                return $this->userObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

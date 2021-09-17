@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
@@ -20,6 +27,29 @@ use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected StanceObjectTypeResolver $stanceObjectTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -40,15 +70,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'stances':
-                return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
-        }
         $types = [
-            'hasStances' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'stanceProCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
-            'stanceNeutralCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
-            'stanceAgainstCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'stances' => $this->stanceObjectTypeResolver,
+            'hasStances' => $this->booleanScalarTypeResolver,
+            'stanceProCount' => $this->intScalarTypeResolver,
+            'stanceNeutralCount' => $this->intScalarTypeResolver,
+            'stanceAgainstCount' => $this->intScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

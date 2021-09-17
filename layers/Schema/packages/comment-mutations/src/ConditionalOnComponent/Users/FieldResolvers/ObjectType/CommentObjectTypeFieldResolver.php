@@ -9,6 +9,10 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -16,6 +20,11 @@ use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface as UserCommentTypeAPIInterface;
 use PoPSchema\Comments\FieldResolvers\ObjectType\CommentObjectTypeFieldResolver as UpstreamCommentObjectTypeFieldResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 /**
@@ -32,6 +41,15 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         CommentTypeAPIInterface $commentTypeAPI,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        URLScalarTypeResolver $urlScalarTypeResolver,
+        EmailScalarTypeResolver $emailScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        DateScalarTypeResolver $dateScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        CommentObjectTypeResolver $commentObjectTypeResolver,
+        CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
         protected UserCommentTypeAPIInterface $userCommentTypeAPI,
         protected UserTypeAPIInterface $userTypeAPI,
     ) {
@@ -44,6 +62,15 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
             $cmsService,
             $semverHelperService,
             $commentTypeAPI,
+            $stringScalarTypeResolver,
+            $urlScalarTypeResolver,
+            $emailScalarTypeResolver,
+            $idScalarTypeResolver,
+            $booleanScalarTypeResolver,
+            $dateScalarTypeResolver,
+            $intScalarTypeResolver,
+            $commentObjectTypeResolver,
+            $commentStatusEnumTypeResolver,
         );
     }
 

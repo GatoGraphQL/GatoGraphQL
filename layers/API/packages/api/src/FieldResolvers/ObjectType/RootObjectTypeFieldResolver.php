@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\API\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use PoP\API\Cache\CacheTypes;
@@ -23,6 +30,28 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver,
+        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -40,7 +69,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'fullSchema' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
+            'fullSchema' => $this->objectScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -66,10 +95,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
         switch ($fieldName) {
             case 'fullSchema':
-                /**
-                 * @var SchemaFieldShapeEnumTypeResolver
-                 */
-                $schemaOutputShapeEnumTypeResolver = $this->instanceManager->getInstance(SchemaFieldShapeEnumTypeResolver::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -87,9 +112,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                                 SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
                                 SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED
                             ),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $schemaOutputShapeEnumTypeResolver->getTypeName(),
+                            SchemaDefinition::ARGNAME_ENUM_NAME => $this->schemaOutputShapeEnumTypeResolver->getTypeName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $schemaOutputShapeEnumTypeResolver
+                                $this->schemaOutputShapeEnumTypeResolver
                             ),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
                         ],

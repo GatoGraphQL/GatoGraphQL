@@ -4,14 +4,42 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\ElementalInterfaceTypeResolver;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
+        TypeRegistryInterface $typeRegistry,
+        protected IDScalarTypeResolver $idScalarTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $nameResolver,
+            $cmsService,
+            $schemaNamespacingService,
+            $typeRegistry,
+        );
+    }
+
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -29,7 +57,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'id' => $this->instanceManager->getInstance(IDScalarTypeResolver::class),
+            'id' => $this->idScalarTypeResolver,
             default => parent::getFieldTypeResolver($fieldName),
         };
     }

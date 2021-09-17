@@ -4,18 +4,48 @@ declare(strict_types=1);
 
 namespace PoP\FunctionFields\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\TypeResolvers\ScalarType\FloatScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected FloatScalarTypeResolver $floatScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected MixedScalarTypeResolver $mixedScalarTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -41,14 +71,14 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'divide'
-                => $this->instanceManager->getInstance(FloatScalarTypeResolver::class),
+                => $this->floatScalarTypeResolver,
             'concat',
             'arrayJoin',
             'arrayAsQueryStr',
             'upperCase',
             'lowerCase',
             'titleCase'
-                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+                => $this->stringScalarTypeResolver,
             'arrayRandom',
             'arrayItem',
             'arraySearch',
@@ -57,7 +87,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => $this->instanceManager->getInstance(MixedScalarTypeResolver::class),
+                => $this->mixedScalarTypeResolver,
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
@@ -26,6 +33,33 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
+        protected FieldObjectTypeResolver $fieldObjectTypeResolver,
+        protected TypeObjectTypeResolver $typeObjectTypeResolver,
+        protected EnumValueObjectTypeResolver $enumValueObjectTypeResolver,
+        protected InputValueObjectTypeResolver $inputValueObjectTypeResolver,
+        protected TypeKindEnumTypeResolver $typeKindEnumTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -53,23 +87,23 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'name'
-                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+                => $this->stringScalarTypeResolver,
             'description'
-                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+                => $this->stringScalarTypeResolver,
             'extensions'
-                => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),
+                => $this->objectScalarTypeResolver,
             'fields'
-                => $this->instanceManager->getInstance(FieldObjectTypeResolver::class),
+                => $this->fieldObjectTypeResolver,
             'interfaces',
             'possibleTypes',
             'ofType'
-                => $this->instanceManager->getInstance(TypeObjectTypeResolver::class),
+                => $this->typeObjectTypeResolver,
             'enumValues'
-                => $this->instanceManager->getInstance(EnumValueObjectTypeResolver::class),
+                => $this->enumValueObjectTypeResolver,
             'inputFields'
-                => $this->instanceManager->getInstance(InputValueObjectTypeResolver::class),
+                => $this->inputValueObjectTypeResolver,
             'kind'
-                => $this->instanceManager->getInstance(TypeKindEnumTypeResolver::class),
+                => $this->typeKindEnumTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
