@@ -29,13 +29,6 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 
 class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
 {
-    public function getInterfaceTypeResolverClassesToAttachTo(): array
-    {
-        return [
-            IsCustomPostInterfaceTypeResolver::class,
-        ];
-    }
-
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -46,6 +39,10 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         TypeRegistryInterface $typeRegistry,
         protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         protected CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver,
+        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
+        protected DateScalarTypeResolver $DateScalarTypeResolver,
+        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected CustomPostStatusEnumTypeResolver $CustomPostStatusEnumTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -56,6 +53,13 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             $schemaNamespacingService,
             $typeRegistry,
         );
+    }
+    
+    public function getInterfaceTypeResolverClassesToAttachTo(): array
+    {
+        return [
+            IsCustomPostInterfaceTypeResolver::class,
+        ];
     }
 
     public function getImplementedInterfaceTypeFieldResolverClasses(): array
@@ -86,17 +90,17 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     {
         return match ($fieldName) {
             'isStatus'
-                => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
+                => $this->BooleanScalarTypeResolver,
             'date',
             'modified'
-                => $this->instanceManager->getInstance(DateScalarTypeResolver::class),
+                => $this->DateScalarTypeResolver,
             'content',
             'title',
             'excerpt',
             'customPostType'
-                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+                => $this->StringScalarTypeResolver,
             'status'
-                => $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class),
+                => $this->CustomPostStatusEnumTypeResolver,
             default
                 => parent::getFieldTypeResolver($fieldName),
         };

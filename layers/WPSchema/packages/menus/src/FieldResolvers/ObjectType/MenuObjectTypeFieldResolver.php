@@ -31,6 +31,8 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected IntScalarTypeResolver $IntScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -66,9 +68,9 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'name',
             'slug',
             'locations'
-                => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+                => $this->StringScalarTypeResolver,
             'count'
-                => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+                => $this->IntScalarTypeResolver,
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

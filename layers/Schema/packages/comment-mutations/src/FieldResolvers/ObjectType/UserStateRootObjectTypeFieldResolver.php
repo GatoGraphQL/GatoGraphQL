@@ -44,6 +44,8 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected CommentTypeAPIInterface $commentTypeAPI,
+        protected IntScalarTypeResolver $IntScalarTypeResolver,
+        protected CommentObjectTypeResolver $CommentObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -76,10 +78,10 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     {
         return match ($fieldName) {
             'myCommentCount'
-                => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+                => $this->IntScalarTypeResolver,
             'myComments',
             'myComment'
-                => $this->instanceManager->getInstance(CommentObjectTypeResolver::class),
+                => $this->CommentObjectTypeResolver,
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
