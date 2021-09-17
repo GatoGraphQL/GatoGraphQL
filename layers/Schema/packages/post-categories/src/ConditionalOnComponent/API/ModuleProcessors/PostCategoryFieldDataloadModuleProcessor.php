@@ -11,6 +11,7 @@ use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -32,6 +33,7 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
         NameResolverInterface $nameResolver,
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
+        protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -48,12 +50,12 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
         );
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
-                return PostCategoryObjectTypeResolver::class;
+                return $this->postCategoryObjectTypeResolver;
         }
 
         return parent::getRelationalTypeResolver($module);

@@ -14,6 +14,7 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -40,6 +41,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
         NameResolverInterface $nameResolver,
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
+        protected PostObjectTypeResolver $postObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -63,11 +65,11 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
         );
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
-                return PostObjectTypeResolver::class;
+                return $this->postObjectTypeResolver;
         }
 
         return parent::getRelationalTypeResolver($module);

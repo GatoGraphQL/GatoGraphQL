@@ -13,6 +13,7 @@ use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -47,6 +48,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
         NameResolverInterface $nameResolver,
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
+        protected CustomPostUnionTypeResolver $customPostUnionTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -88,7 +90,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST:
@@ -96,7 +98,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
-                return CustomPostUnionTypeResolver::class;
+                return $this->customPostUnionTypeResolver;
         }
 
         return parent::getRelationalTypeResolver($module);

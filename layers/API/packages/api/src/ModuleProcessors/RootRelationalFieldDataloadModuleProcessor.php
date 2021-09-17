@@ -12,9 +12,10 @@ use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Engine\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\Engine\ObjectModels\Root;
+use PoP\Engine\Schema\SchemaDefinitionServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -35,6 +36,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         NameResolverInterface $nameResolver,
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
+        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
         parent::__construct(
             $translationAPI,
@@ -67,12 +69,11 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ROOT:
-                $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-                return $schemaDefinitionService->getRootTypeResolverClass();
+                return $this->schemaDefinitionService->getRootTypeResolverClass();
         }
 
         return parent::getRelationalTypeResolver($module);

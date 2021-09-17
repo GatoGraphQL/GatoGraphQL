@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ModuleProcessors;
 
-use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
+use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -15,6 +15,7 @@ use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -37,6 +38,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         NameResolverInterface $nameResolver,
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
+        protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ) {
         parent::__construct(
             $translationAPI,
@@ -72,14 +74,13 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
-        $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT:
-                return $graphQLSchemaDefinitionService->getQueryRootTypeResolverClass();
+                return $this->graphQLSchemaDefinitionService->getQueryRootTypeResolverClass();
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
-                return $graphQLSchemaDefinitionService->getMutationRootTypeResolverClass();
+                return $this->graphQLSchemaDefinitionService->getMutationRootTypeResolverClass();
         }
 
         return parent::getRelationalTypeResolver($module);

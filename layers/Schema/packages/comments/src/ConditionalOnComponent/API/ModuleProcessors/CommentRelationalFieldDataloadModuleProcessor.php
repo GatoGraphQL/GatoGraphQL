@@ -13,6 +13,7 @@ use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -36,6 +37,7 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
         NameResolverInterface $nameResolver,
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
+        protected CommentObjectTypeResolver $commentObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -59,11 +61,11 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
         );
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS:
-                return CommentObjectTypeResolver::class;
+                return $this->commentObjectTypeResolver;
         }
 
         return parent::getRelationalTypeResolver($module);

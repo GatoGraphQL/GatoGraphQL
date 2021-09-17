@@ -13,6 +13,7 @@ use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -43,6 +44,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         NameResolverInterface $nameResolver,
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
+        protected UserObjectTypeResolver $userObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -80,13 +82,13 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
-                return UserObjectTypeResolver::class;
+                return $this->userObjectTypeResolver;
         }
 
         return parent::getRelationalTypeResolver($module);

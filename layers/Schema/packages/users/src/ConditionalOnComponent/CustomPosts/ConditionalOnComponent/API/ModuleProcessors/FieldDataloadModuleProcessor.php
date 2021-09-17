@@ -14,6 +14,7 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -37,6 +38,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         NameResolverInterface $nameResolver,
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
+        protected CustomPostObjectTypeResolver $customPostObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -60,11 +62,11 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         );
     }
 
-    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
-                return CustomPostObjectTypeResolver::class;
+                return $this->customPostObjectTypeResolver;
         }
 
         return parent::getRelationalTypeResolver($module);
