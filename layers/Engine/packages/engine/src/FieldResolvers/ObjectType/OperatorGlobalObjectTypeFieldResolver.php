@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
 use ArgumentCountError;
 use PoP\ComponentModel\ErrorHandling\Error;
@@ -46,7 +47,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
             'if' => MixedScalarTypeResolver::class,

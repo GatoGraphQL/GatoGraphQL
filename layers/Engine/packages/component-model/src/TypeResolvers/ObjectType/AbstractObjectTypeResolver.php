@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -257,7 +258,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return [];
     }
 
-    public function getFieldTypeResolver(string $field): ?\PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(string $field): ?ConcreteTypeResolverInterface
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {

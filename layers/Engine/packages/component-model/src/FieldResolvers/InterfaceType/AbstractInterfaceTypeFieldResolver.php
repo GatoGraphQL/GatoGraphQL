@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
@@ -183,7 +184,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * By default, the field is a scalar of type AnyScalar
      */
-    public function getFieldTypeResolver(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
