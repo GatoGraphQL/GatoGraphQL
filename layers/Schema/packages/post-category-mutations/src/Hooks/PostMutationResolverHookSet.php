@@ -8,6 +8,7 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPSchema\PostCategoryMutations\Facades\PostCategoryTypeMutationAPIFacade;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
@@ -15,9 +16,10 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
-    protected function getCustomPostTypeResolverClass(): string
+    protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface
     {
-        return PostObjectTypeResolver::class;
+        $instanceManager = InstanceManagerFacade::getInstance();
+        return $instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
     protected function getCustomPostType(): string

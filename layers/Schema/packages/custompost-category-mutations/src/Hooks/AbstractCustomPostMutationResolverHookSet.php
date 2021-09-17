@@ -15,6 +15,7 @@ use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutatio
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
@@ -41,7 +42,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         ?ConcreteTypeResolverInterface $entityTypeResolver
     ): array {
         // Only for the specific CPT
-        if ($entityTypeResolver === null || get_class($entityTypeResolver) !== $this->getCustomPostTypeResolverClass()) {
+        if ($entityTypeResolver === null || get_class($entityTypeResolver) !== get_class($this->getCustomPostTypeResolver())) {
             return $fieldArgs;
         }
         $categoryTypeResolver = $this->getCategoryTypeResolver();
@@ -57,7 +58,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         return $fieldArgs;
     }
 
-    abstract protected function getCustomPostTypeResolverClass(): string;
+    abstract protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface;
     abstract protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
 
     public function maybeSetCategories(int | string $customPostID, array $form_data): void

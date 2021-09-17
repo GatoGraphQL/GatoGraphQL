@@ -92,7 +92,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         switch ($fieldName) {
             case $this->getSetTagsFieldName():
-                return $this->getCustomPostTypeResolverClass();
+                return $this->getCustomPostTypeResolver();
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

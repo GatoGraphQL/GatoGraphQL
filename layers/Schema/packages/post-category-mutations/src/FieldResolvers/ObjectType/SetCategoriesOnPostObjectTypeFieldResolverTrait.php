@@ -7,15 +7,17 @@ namespace PoPSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPSchema\PostCategoryMutations\MutationResolvers\SetCategoriesOnPostMutationResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 {
-    protected function getCustomPostTypeResolverClass(): string
+    protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface
     {
-        return PostObjectTypeResolver::class;
+        $instanceManager = InstanceManagerFacade::getInstance();
+        return $instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
     protected function getTypeMutationResolverClass(): string

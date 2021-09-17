@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagMutations\Hooks;
 
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
@@ -12,9 +13,9 @@ use PoPSchema\PostTagMutations\Facades\PostTagTypeMutationAPIFacade;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
-    protected function getCustomPostTypeResolverClass(): string
+    protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface
     {
-        return PostObjectTypeResolver::class;
+        return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
     protected function getCustomPostType(): string

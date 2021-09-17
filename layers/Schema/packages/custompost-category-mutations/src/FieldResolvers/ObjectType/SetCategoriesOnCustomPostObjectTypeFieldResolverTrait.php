@@ -6,10 +6,11 @@ namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 
 trait SetCategoriesOnCustomPostObjectTypeFieldResolverTrait
 {
-    abstract protected function getCustomPostTypeResolverClass(): string;
+    abstract protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface;
     abstract protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
     abstract protected function getTypeMutationResolverClass(): string;
 
