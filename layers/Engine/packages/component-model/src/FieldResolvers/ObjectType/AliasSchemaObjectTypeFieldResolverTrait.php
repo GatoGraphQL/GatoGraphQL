@@ -328,7 +328,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         string $fieldName
     ): string {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
-        return $aliasedObjectTypeFieldResolver->getFieldTypeResolverClass(
+        return $aliasedObjectTypeFieldResolver->getFieldTypeResolver(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );

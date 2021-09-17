@@ -226,7 +226,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getFieldTypeResolver($objectTypeResolver, $fieldName);
         }
         $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
         return $schemaDefinitionService->getDefaultTypeResolver();
@@ -266,10 +266,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected function addSchemaDefinitionForEnumField(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
     {
-        $fieldTypeResolverClass = $this->getFieldTypeResolverClass($objectTypeResolver, $fieldName);
-        if (SchemaHelpers::isEnumFieldTypeResolverClass($fieldTypeResolverClass)) {
-            /** @var EnumTypeResolverInterface */
-            $fieldEnumTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
+        $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
+        if ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
+            $fieldEnumTypeResolver = $fieldTypeResolver;
             $this->doAddSchemaDefinitionEnumValuesForField(
                 $schemaDefinition,
                 $fieldEnumTypeResolver->getEnumValues(),
@@ -534,9 +533,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         // If we found a resolver for this fieldName, get all its properties from it
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
-        $fieldTypeResolverClass = $schemaDefinitionResolver->getFieldTypeResolverClass($objectTypeResolver, $fieldName);
-        /** @var TypeResolverInterface */
-        $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
+        $fieldTypeResolver = $schemaDefinitionResolver->getFieldTypeResolver($objectTypeResolver, $fieldName);
         if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
