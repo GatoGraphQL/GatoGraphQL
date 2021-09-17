@@ -55,11 +55,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected ?array $interfaceTypeFieldResolverClasses = null;
 
-    public function getSelfFieldTypeResolverClass(): string
-    {
-        return get_called_class();
-    }
-
     /**
      * Watch out! This function will be overridden for the UnionTypeResolver
      *
