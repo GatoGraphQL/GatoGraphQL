@@ -45,6 +45,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected SchemaDefinitionServiceInterface $schemaDefinitionService,
+        protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
     ) {
     }
 
@@ -131,8 +132,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
         } elseif (ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
             // Additionally append the QueryRoot and MutationRoot to the schema
-            $queryRootTypeResolverClass = QueryRootObjectTypeResolver::class;
-            $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getTypeResolverTypeSchemaKey($queryRootTypeResolverClass);
+            $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getTypeResolverTypeSchemaKey($this->queryRootObjectTypeResolver);
             // Remove the fields connecting from Root to QueryRoot and MutationRoot
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['queryRoot']);
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['mutationRoot']);
