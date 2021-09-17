@@ -712,7 +712,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $schemaObjectTypeFieldResolvers = [];
 
         // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver
-        $class = $this->getTypeResolverClassToCalculateSchema();
+        $class = get_class($this->getTypeResolverToCalculateSchema());
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         do {
             /** @var ObjectTypeFieldResolverInterface[] */
@@ -851,7 +851,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $objectTypeFieldResolvers = [];
         // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver
-        $class = $this->getTypeResolverClassToCalculateSchema();
+        $class = get_class($this->getTypeResolverToCalculateSchema());
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         do {
             // All the Units and their priorities for this class level
@@ -893,7 +893,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $fieldNames = [];
 
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
-        $class = $this->getTypeResolverClassToCalculateSchema();
+        $class = get_class($this->getTypeResolverToCalculateSchema());
         do {
             /** @var ObjectTypeFieldResolverInterface[] */
             $attachedObjectTypeFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);

@@ -783,7 +783,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          */
         $classes = array_merge(
             [
-                $this->getTypeResolverClassToCalculateSchema(),
+                get_class($this->getTypeResolverToCalculateSchema()),
             ],
             $this->getAllImplementedInterfaceTypeResolverClasses()
         );
@@ -1260,9 +1260,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $directiveResolverInstances;
     }
 
-    protected function getTypeResolverClassToCalculateSchema(): string
+    protected function getTypeResolverToCalculateSchema(): RelationalTypeResolverInterface
     {
-        return get_called_class();
+        return $this;
     }
 
     protected function calculateFieldDirectiveNameResolvers(): array
@@ -1273,7 +1273,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Directives can also be attached to the interface implemented by this typeResolver
         $classes = array_merge(
             [
-                $this->getTypeResolverClassToCalculateSchema(),
+                get_class($this->getTypeResolverToCalculateSchema()),
             ],
             $this->getAllImplementedInterfaceTypeResolverClasses()
         );
