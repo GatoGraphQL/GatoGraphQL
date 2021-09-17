@@ -9,6 +9,6 @@ use PoPSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 
 trait TagAPIRequestedContractTrait
 {
-    abstract protected function getTagTypeAPI(): TagTypeAPIInterface;
-    abstract protected function getTagTypeResolver(): TagObjectTypeResolverInterface;
+    abstract public function getTagTypeAPI(): TagTypeAPIInterface;
+    abstract public function getTagTypeResolver(): TagObjectTypeResolverInterface;
 }

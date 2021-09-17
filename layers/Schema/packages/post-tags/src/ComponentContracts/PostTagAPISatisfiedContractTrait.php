@@ -12,12 +12,12 @@ use PoPSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 
 trait PostTagAPISatisfiedContractTrait
 {
-    protected function getTagTypeAPI(): TagTypeAPIInterface
+    public function getTagTypeAPI(): TagTypeAPIInterface
     {
         return PostTagTypeAPIFacade::getInstance();
     }
 
-    protected function getTagTypeResolver(): TagObjectTypeResolverInterface
+    public function getTagTypeResolver(): TagObjectTypeResolverInterface
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         return $instanceManager->getInstance(PostTagObjectTypeResolver::class);
