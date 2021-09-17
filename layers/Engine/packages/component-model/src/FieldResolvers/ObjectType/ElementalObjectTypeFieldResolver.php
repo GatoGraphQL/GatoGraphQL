@@ -81,6 +81,6 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'self':
                 return $objectTypeResolver->getSelfFieldTypeResolverClass();
         }
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

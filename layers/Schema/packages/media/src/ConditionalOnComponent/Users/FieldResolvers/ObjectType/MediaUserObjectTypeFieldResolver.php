@@ -94,6 +94,6 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return UserObjectTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

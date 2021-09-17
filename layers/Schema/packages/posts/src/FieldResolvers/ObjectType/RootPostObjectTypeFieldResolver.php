@@ -122,6 +122,6 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
                 return PostObjectTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

@@ -73,6 +73,6 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return LocationObjectTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

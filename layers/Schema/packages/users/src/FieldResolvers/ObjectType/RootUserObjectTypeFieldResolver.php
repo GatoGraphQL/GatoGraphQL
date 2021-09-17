@@ -146,6 +146,6 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
                 return UserObjectTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

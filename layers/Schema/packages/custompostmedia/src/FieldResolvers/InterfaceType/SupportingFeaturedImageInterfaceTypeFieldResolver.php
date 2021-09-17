@@ -39,7 +39,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
             'hasFeaturedImage' => BooleanScalarTypeResolver::class,
             'featuredImage' => IDScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int

@@ -36,7 +36,7 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
         return match ($fieldName) {
             'hasLocation' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'location' => LocationObjectTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

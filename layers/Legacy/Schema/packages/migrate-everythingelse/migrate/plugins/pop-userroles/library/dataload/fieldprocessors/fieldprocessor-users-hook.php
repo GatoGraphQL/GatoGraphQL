@@ -34,7 +34,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
             'role' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'hasRole' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

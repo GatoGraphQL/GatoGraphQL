@@ -43,7 +43,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $types = [
             'roleNames' => StringScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

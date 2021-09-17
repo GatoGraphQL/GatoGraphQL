@@ -39,7 +39,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'hasHighlights' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
             'highlightsCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'highlights' => HighlightObjectTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

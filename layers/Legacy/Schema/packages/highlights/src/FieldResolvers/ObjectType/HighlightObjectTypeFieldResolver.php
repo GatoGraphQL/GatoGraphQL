@@ -43,7 +43,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'content' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'highlightedPostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'highlightedpost' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

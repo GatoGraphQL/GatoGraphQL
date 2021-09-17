@@ -80,7 +80,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             'myComment'
                 => CommentObjectTypeResolver::class,
             default
-                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

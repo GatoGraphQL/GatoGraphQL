@@ -53,7 +53,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
             'commentCount' => IntScalarTypeResolver::class,
             'commentCountForAdmin' => IntScalarTypeResolver::class,
         ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolverClass($fieldName);
+        return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int

@@ -57,7 +57,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
             'memberstatus' => MemberStatusEnumTypeResolver::class,
             'memberprivileges' => MemberPrivilegeEnumTypeResolver::class,
             'membertags' => MemberTagEnumTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

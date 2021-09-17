@@ -49,6 +49,6 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
                 return UserObjectTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($fieldName);
+        return parent::getFieldTypeResolver($fieldName);
     }
 }

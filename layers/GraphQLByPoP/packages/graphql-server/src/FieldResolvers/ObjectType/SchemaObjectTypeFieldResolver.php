@@ -129,6 +129,6 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return DirectiveObjectTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

@@ -101,6 +101,6 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
                 return $this->getCustomPostTypeResolverClass();
         }
 
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

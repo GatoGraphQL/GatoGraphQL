@@ -43,7 +43,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'isRepeatable' => BooleanScalarTypeResolver::class,
             'args' => InputValueObjectTypeResolver::class,
             'locations' => DirectiveLocationEnumTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

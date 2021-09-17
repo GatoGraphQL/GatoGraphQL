@@ -39,7 +39,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => StringScalarTypeResolver::class,
             'defaultValue' => StringScalarTypeResolver::class,
             'type' => TypeObjectTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

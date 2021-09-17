@@ -47,7 +47,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'extensions' => ObjectScalarTypeResolver::class,
             'args' => InputValueObjectTypeResolver::class,
             'type' => TypeObjectTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

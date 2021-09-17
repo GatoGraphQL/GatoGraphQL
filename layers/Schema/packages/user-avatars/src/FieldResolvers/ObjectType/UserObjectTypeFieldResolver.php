@@ -132,6 +132,6 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return UserAvatarObjectTypeResolver::class;
         }
 
-        return parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 }

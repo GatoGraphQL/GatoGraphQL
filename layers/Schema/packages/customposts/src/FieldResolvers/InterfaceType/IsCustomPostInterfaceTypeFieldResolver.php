@@ -68,7 +68,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'status'
                 => CustomPostStatusEnumTypeResolver::class,
             default
-                => parent::getFieldTypeResolverClass($fieldName),
+                => parent::getFieldTypeResolver($fieldName),
         };
     }
 

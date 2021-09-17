@@ -42,7 +42,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'count'
                 => IntScalarTypeResolver::class,
             default
-                => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

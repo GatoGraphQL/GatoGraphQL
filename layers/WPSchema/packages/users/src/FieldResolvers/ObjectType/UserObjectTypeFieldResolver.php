@@ -68,7 +68,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'nickname' => StringScalarTypeResolver::class,
             'locale' => StringScalarTypeResolver::class,
             'registeredDate' => StringScalarTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

@@ -69,7 +69,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 => InputValueObjectTypeResolver::class,
             'kind'
                 => TypeKindEnumTypeResolver::class,
-            default => parent::getFieldTypeResolverClass($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
