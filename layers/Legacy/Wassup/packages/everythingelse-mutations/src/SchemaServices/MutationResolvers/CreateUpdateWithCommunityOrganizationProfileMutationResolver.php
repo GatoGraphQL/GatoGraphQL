@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoPSchema\UserRoles\FunctionAPIFactory;
 class CreateUpdateWithCommunityOrganizationProfileMutationResolver extends CreateUpdateWithCommunityProfileMutationResolver
 {
     use CreateUpdateOrganizationProfileMutationResolverTrait;
@@ -14,7 +15,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolver extends Creat
         $this->commonuserrolesCreateupdateuser($user_id, $form_data);
 
         // Is community?
-        $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
+        $cmsuserrolesapi = FunctionAPIFactory::getInstance();
         if ($form_data['is_community'] ?? null) {
             $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_COMMUNITY);
         } else {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Application\HelperAPIFactory;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateWithCommunityOrganizationProfileMutationResolver;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateOrganizationProfileMutationResolver;
 
@@ -56,7 +57,7 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
     }
     protected function getCommonuserrolesFormData()
     {
-        $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
+        $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
         $organizationtypes = $this->moduleProcessorManager->getProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
         $organizationcategories = $this->moduleProcessorManager->getProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);

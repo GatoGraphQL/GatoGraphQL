@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\EditUsers\FunctionAPIFactory;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -132,7 +133,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     protected function executeUpdateuser($user_data)
     {
-        $cmseditusersapi = \PoP\EditUsers\FunctionAPIFactory::getInstance();
+        $cmseditusersapi = FunctionAPIFactory::getInstance();
         return $cmseditusersapi->updateUser($user_data);
     }
 
@@ -158,7 +159,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     protected function executeCreateuser($user_data)
     {
-        $cmseditusersapi = \PoP\EditUsers\FunctionAPIFactory::getInstance();
+        $cmseditusersapi = FunctionAPIFactory::getInstance();
         return $cmseditusersapi->insertUser($user_data);
     }
 

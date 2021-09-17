@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoPSchema\UserMeta\Utils;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolver
@@ -45,16 +46,16 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         parent::createupdateuser($user_id, $form_data);
 
         // Last Edited: needed for the user thumbprint
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, ComponentModelComponentInfo::get('time'));
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, ComponentModelComponentInfo::get('time'));
 
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, $form_data['display_email'], true, true);
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $form_data['short_description'], true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, $form_data['display_email'], true, true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $form_data['short_description'], true);
 
         // Comment Leo 05/12/2016: LinkedIn is removed from AgendaUrbana, however we don't check for the condition here, so it will still save null
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, $form_data['facebook'], true);
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TWITTER, $form_data['twitter'], true);
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LINKEDIN, $form_data['linkedin'], true);
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_YOUTUBE, $form_data['youtube'], true);
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, $form_data['instagram'], true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, $form_data['facebook'], true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TWITTER, $form_data['twitter'], true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LINKEDIN, $form_data['linkedin'], true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_YOUTUBE, $form_data['youtube'], true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, $form_data['instagram'], true);
     }
 }

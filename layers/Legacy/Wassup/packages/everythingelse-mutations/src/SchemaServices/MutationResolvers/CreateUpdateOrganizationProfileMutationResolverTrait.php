@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoPSchema\UserRoles\FunctionAPIFactory;
+use PoPSchema\UserMeta\Utils;
 trait CreateUpdateOrganizationProfileMutationResolverTrait
 {
     protected function createuser($form_data)
@@ -15,7 +17,7 @@ trait CreateUpdateOrganizationProfileMutationResolverTrait
     protected function commonuserrolesCreateuser($user_id, $form_data)
     {
         // Add the extra User Role
-        $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
+        $cmsuserrolesapi = FunctionAPIFactory::getInstance();
         $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_ORGANIZATION);
     }
 
@@ -26,9 +28,9 @@ trait CreateUpdateOrganizationProfileMutationResolverTrait
     }
     protected function commonuserrolesCreateupdateuser($user_id, $form_data)
     {
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES, $form_data['organizationtypes']);
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES, $form_data['organizationcategories']);
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTPERSON, $form_data['contact_person'], true);
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, $form_data['contact_number'], true);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES, $form_data['organizationtypes']);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES, $form_data['organizationcategories']);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTPERSON, $form_data['contact_person'], true);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, $form_data['contact_number'], true);
     }
 }
