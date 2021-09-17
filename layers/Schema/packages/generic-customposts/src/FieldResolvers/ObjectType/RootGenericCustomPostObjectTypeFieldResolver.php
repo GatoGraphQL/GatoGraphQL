@@ -47,6 +47,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected GenericCustomPostObjectTypeResolver $GenericCustomPostObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -104,7 +105,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             case 'genericCustomPostForAdmin':
             case 'genericCustomPostBySlugForAdmin':
             case 'genericCustomPostsForAdmin':
-                return $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+                return $this->GenericCustomPostObjectTypeResolver;
         }
         $types = [
             'genericCustomPostCount' => $this->intScalarTypeResolver,

@@ -35,6 +35,8 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected QueryRootObjectTypeResolver $QueryRootObjectTypeResolver,
+        protected MutationRootObjectTypeResolver $MutationRootObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -89,9 +91,9 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     {
         switch ($fieldName) {
             case 'queryRoot':
-                return $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
+                return $this->QueryRootObjectTypeResolver;
             case 'mutationRoot':
-                return $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
+                return $this->MutationRootObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

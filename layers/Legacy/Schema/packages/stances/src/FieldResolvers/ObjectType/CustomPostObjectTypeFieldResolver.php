@@ -37,6 +37,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
         protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected StanceObjectTypeResolver $StanceObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -69,11 +70,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'stances':
-                return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
-        }
         $types = [
+            'stances' => $this->StanceObjectTypeResolver,
             'hasStances' => $this->booleanScalarTypeResolver,
             'stanceProCount' => $this->intScalarTypeResolver,
             'stanceNeutralCount' => $this->intScalarTypeResolver,

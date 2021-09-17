@@ -31,6 +31,8 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected TypeObjectTypeResolver $TypeObjectTypeResolver,
+        protected DirectiveObjectTypeResolver $DirectiveObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -152,9 +154,9 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'subscriptionType':
             case 'types':
             case 'type':
-                return $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+                return $this->TypeObjectTypeResolver;
             case 'directives':
-                return $this->instanceManager->getInstance(DirectiveObjectTypeResolver::class);
+                return $this->DirectiveObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

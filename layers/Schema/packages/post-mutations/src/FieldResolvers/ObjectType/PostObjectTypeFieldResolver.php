@@ -30,6 +30,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected PostObjectTypeResolver $PostObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -71,7 +72,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     {
         switch ($fieldName) {
             case 'update':
-                return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+                return $this->PostObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

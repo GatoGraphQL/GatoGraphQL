@@ -39,6 +39,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         protected URLScalarTypeResolver $urlScalarTypeResolver,
         protected IDScalarTypeResolver $idScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected MenuItemObjectTypeResolver $MenuItemObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -79,11 +80,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'children':
-                return $this->instanceManager->getInstance(MenuItemObjectTypeResolver::class);
-        }
         $types = [
+            'children' => $this->MenuItemObjectTypeResolver,
             'localURLPath' => $this->stringScalarTypeResolver,
             'label' => $this->stringScalarTypeResolver,
             'title' => $this->stringScalarTypeResolver,

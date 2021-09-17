@@ -39,6 +39,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         TypeRegistryInterface $typeRegistry,
         protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
         protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected CommentObjectTypeResolver $CommentObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -72,12 +73,9 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'comments':
-            case 'commentsForAdmin':
-                return $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
-        }
         $types = [
+            'comments' => $this->CommentObjectTypeResolver,
+            'commentsForAdmin' => $this->CommentObjectTypeResolver,
             'areCommentsOpen' => $this->booleanScalarTypeResolver,
             'hasComments' => $this->booleanScalarTypeResolver,
             'commentCount' => $this->intScalarTypeResolver,

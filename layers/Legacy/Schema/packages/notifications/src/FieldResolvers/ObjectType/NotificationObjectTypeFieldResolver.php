@@ -48,6 +48,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         protected IPScalarTypeResolver $ipScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
         protected URLScalarTypeResolver $urlScalarTypeResolver,
+        protected UserObjectTypeResolver $UserObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -102,11 +103,8 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'user':
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
-        }
         $types = [
+            'user' => $this->UserObjectTypeResolver,
             'action' => $this->stringScalarTypeResolver,
             'objectType' => $this->stringScalarTypeResolver,
             'objectSubtype' => $this->stringScalarTypeResolver,

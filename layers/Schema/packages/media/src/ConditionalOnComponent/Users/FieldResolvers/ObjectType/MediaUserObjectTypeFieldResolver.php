@@ -30,6 +30,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected UserMediaTypeAPIInterface $userMediaTypeAPI,
+        protected UserObjectTypeResolver $UserObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -92,7 +93,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'author':
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+                return $this->UserObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

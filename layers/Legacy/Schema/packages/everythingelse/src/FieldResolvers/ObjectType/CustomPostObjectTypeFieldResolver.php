@@ -29,6 +29,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected LocationObjectTypeResolver $LocationObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -99,7 +100,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'locations':
-                return $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
+                return $this->LocationObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

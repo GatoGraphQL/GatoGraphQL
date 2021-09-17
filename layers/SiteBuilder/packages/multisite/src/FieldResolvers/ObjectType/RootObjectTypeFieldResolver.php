@@ -30,6 +30,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected SiteObjectTypeResolver $SiteObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -108,7 +109,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'sites':
             case 'site':
-                return $this->instanceManager->getInstance(SiteObjectTypeResolver::class);
+                return $this->SiteObjectTypeResolver;
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
