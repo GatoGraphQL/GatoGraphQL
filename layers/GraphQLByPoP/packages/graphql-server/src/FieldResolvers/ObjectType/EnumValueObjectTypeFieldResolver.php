@@ -31,6 +31,8 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
+        protected StringScalarTypeResolver $StringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -63,10 +65,10 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'isDeprecated' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'deprecationReason' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'name' => $this->StringScalarTypeResolver,
+            'description' => $this->StringScalarTypeResolver,
+            'isDeprecated' => $this->BooleanScalarTypeResolver,
+            'deprecationReason' => $this->StringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

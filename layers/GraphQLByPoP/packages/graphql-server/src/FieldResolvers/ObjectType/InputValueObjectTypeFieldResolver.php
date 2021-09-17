@@ -31,6 +31,8 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected TypeObjectTypeResolver $TypeObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -63,10 +65,10 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'defaultValue' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'type' => $this->instanceManager->getInstance(TypeObjectTypeResolver::class),
+            'name' => $this->StringScalarTypeResolver,
+            'description' => $this->StringScalarTypeResolver,
+            'defaultValue' => $this->StringScalarTypeResolver,
+            'type' => $this->TypeObjectTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

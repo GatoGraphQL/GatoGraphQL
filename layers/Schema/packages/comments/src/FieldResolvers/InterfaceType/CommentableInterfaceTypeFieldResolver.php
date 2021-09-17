@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\InterfaceType;
 
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeResolvers\InterfaceType\CommentableInterfaceTypeResolver;
@@ -22,6 +29,28 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
 {
     use WithLimitFieldArgResolverTrait;
 
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
+        TypeRegistryInterface $typeRegistry,
+        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
+        protected IntScalarTypeResolver $IntScalarTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $nameResolver,
+            $cmsService,
+            $schemaNamespacingService,
+            $typeRegistry,
+        );
+    }
+    
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -49,10 +78,10 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                 return $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
         }
         $types = [
-            'areCommentsOpen' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'hasComments' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'commentCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
-            'commentCountForAdmin' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
+            'areCommentsOpen' => $this->BooleanScalarTypeResolver,
+            'hasComments' => $this->BooleanScalarTypeResolver,
+            'commentCount' => $this->IntScalarTypeResolver,
+            'commentCountForAdmin' => $this->IntScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }

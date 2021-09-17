@@ -29,6 +29,7 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected StringScalarTypeResolver $StringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -61,8 +62,8 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'capabilities' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'name' => $this->StringScalarTypeResolver,
+            'capabilities' => $this->StringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

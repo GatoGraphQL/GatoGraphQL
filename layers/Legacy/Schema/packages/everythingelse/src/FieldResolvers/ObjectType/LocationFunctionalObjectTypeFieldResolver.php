@@ -31,6 +31,7 @@ class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected URLScalarTypeResolver $URLScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -60,7 +61,7 @@ class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'mapURL' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'mapURL' => $this->URLScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

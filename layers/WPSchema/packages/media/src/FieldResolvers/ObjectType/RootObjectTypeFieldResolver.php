@@ -35,6 +35,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected MediaTypeAPIInterface $mediaTypeAPI,
+        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected MediaObjectTypeResolver $MediaObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -74,8 +76,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'imageSizeNames' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'mediaItemBySlug' => $this->instanceManager->getInstance(MediaObjectTypeResolver::class),
+            'imageSizeNames' => $this->StringScalarTypeResolver,
+            'mediaItemBySlug' => $this->MediaObjectTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

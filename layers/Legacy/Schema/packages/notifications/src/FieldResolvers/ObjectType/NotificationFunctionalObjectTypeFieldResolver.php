@@ -29,6 +29,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected StringScalarTypeResolver $StringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -58,7 +59,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'multilayoutKeys' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'multilayoutKeys' => $this->StringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

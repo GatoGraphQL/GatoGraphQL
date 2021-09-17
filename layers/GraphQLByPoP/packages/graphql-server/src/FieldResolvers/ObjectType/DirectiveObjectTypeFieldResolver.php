@@ -33,6 +33,10 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
+        protected InputValueObjectTypeResolver $InputValueObjectTypeResolver,
+        protected DirectiveLocationEnumTypeResolver $DirectiveLocationEnumTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -66,11 +70,11 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'description' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'isRepeatable' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'args' => $this->instanceManager->getInstance(InputValueObjectTypeResolver::class),
-            'locations' => $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class),
+            'name' => $this->StringScalarTypeResolver,
+            'description' => $this->StringScalarTypeResolver,
+            'isRepeatable' => $this->BooleanScalarTypeResolver,
+            'args' => $this->InputValueObjectTypeResolver,
+            'locations' => $this->DirectiveLocationEnumTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

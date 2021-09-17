@@ -29,6 +29,7 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected URLScalarTypeResolver $URLScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -58,7 +59,7 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'endpoint' => $this->instanceManager->getInstance(URLScalarTypeResolver::class),
+            'endpoint' => $this->URLScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

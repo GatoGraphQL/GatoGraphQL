@@ -42,6 +42,8 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected IntScalarTypeResolver $IntScalarTypeResolver,
+        protected StringScalarTypeResolver $StringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -81,8 +83,8 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
                 return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
         }
         $types = [
-            'postTagCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),
-            'postTagNames' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'postTagCount' => $this->IntScalarTypeResolver,
+            'postTagNames' => $this->StringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

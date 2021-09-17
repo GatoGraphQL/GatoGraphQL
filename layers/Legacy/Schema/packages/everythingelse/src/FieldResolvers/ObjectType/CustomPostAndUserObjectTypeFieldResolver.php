@@ -32,6 +32,8 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
+        protected LocationObjectTypeResolver $LocationObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -63,8 +65,8 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'hasLocation' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),
-            'location' => $this->instanceManager->getInstance(LocationObjectTypeResolver::class),
+            'hasLocation' => $this->BooleanScalarTypeResolver,
+            'location' => $this->LocationObjectTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
