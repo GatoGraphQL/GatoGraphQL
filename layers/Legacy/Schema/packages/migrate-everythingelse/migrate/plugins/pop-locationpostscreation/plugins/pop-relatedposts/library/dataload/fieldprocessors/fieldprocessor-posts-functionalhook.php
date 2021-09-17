@@ -23,7 +23,7 @@ class PoP_LocationPostsCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
 			'addLocationPostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,

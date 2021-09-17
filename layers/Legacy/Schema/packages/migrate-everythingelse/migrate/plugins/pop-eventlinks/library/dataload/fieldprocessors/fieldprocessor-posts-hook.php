@@ -23,7 +23,7 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFie
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
             'excerpt' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,

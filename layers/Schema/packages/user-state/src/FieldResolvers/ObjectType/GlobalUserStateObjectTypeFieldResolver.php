@@ -19,7 +19,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
             'loggedInUserID' => IDScalarTypeResolver::class,

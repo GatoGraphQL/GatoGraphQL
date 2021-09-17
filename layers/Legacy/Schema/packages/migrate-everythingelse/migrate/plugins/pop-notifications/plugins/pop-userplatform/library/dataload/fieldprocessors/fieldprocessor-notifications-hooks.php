@@ -24,7 +24,7 @@ class PoP_Notifications_UserPlatform_DataLoad_ObjectTypeFieldResolver_Notificati
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
             'icon' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,

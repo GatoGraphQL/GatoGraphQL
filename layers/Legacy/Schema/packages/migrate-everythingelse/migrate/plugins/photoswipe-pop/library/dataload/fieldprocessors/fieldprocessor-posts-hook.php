@@ -23,7 +23,7 @@ class PS_POP_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFi
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
 			'thumbFullDimensions' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,

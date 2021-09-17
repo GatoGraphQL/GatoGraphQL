@@ -116,7 +116,7 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         );
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         // TODO: If we are running PHP 7.4, the properties may be typed,
         // so we can already get the type through reflection. Implement this!

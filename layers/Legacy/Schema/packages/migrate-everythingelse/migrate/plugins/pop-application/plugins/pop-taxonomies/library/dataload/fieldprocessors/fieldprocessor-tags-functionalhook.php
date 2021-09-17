@@ -21,7 +21,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObje
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
 			'mentionQueryby' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,

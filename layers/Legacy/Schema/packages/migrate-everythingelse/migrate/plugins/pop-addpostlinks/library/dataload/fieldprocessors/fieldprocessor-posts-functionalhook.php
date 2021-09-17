@@ -22,7 +22,7 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
 			'isLinkEmbeddable' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,

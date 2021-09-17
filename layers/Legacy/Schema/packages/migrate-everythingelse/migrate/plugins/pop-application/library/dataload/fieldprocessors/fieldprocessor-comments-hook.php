@@ -26,7 +26,7 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
 			'contentClipped' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,

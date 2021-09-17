@@ -28,7 +28,7 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
 			'contactPerson' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,

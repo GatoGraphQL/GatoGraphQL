@@ -30,7 +30,7 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
      *
      * @see https://github.com/getpop/component-model/issues/1
      */
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
             'name' => StringScalarTypeResolver::class,

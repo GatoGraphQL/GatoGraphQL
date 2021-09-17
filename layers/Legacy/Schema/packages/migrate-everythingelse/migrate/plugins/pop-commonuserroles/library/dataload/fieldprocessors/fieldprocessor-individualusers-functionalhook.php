@@ -24,7 +24,7 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalIndividualUsers e
         ];
     }
 
-    public function getFieldTypeResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): string
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         $types = [
 			'individualInterestsByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
