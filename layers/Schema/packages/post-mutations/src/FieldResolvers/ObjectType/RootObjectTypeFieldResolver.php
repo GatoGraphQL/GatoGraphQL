@@ -86,7 +86,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     $objectTypeResolver,
                     $fieldName,
                     $addCustomPostIDConfig[$fieldName],
-                    $this->instanceManager->getInstance(PostObjectTypeResolver::class)
+                    $this->postObjectTypeResolver
                 );
         }
         return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
