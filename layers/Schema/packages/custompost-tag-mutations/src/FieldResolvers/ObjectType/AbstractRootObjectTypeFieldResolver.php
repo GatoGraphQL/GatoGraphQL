@@ -12,7 +12,7 @@ use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
-abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
 
