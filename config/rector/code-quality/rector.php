@@ -40,6 +40,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::SKIP, [
         '*/migrate-*',
         '*/vendor/*',
+        '*/node_modules/*',
     ]);
 
     // /**
