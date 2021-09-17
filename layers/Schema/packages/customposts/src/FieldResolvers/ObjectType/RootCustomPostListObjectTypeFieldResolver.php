@@ -115,7 +115,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
             case 'customPostBySlug':
             case 'customPostForAdmin':
             case 'customPostBySlugForAdmin':
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return $this->instanceManager->getInstance(CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class));
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
