@@ -184,7 +184,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTS_SCROLLMAP:
@@ -196,15 +196,15 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             case self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
-                return EventObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
             case self::MODULE_DATALOAD_USERS_SCROLLMAP:
             case self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

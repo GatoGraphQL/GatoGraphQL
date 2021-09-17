@@ -5,10 +5,22 @@ declare(strict_types=1);
 namespace PoPSchema\Users\ConditionalOnComponent\API\ModuleProcessors;
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
+use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\Users\ModuleProcessors\UserFilterInputContainerModuleProcessor;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
@@ -19,6 +31,35 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     public const MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT = 'dataload-relationalfields-usercount';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST = 'dataload-relationalfields-adminuserlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT = 'dataload-relationalfields-adminusercount';
+
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        ModulePathHelpersInterface $modulePathHelpers,
+        ModuleFilterManagerInterface $moduleFilterManager,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
+        CMSServiceInterface $cmsService,
+        NameResolverInterface $nameResolver,
+        DataloadHelperServiceInterface $dataloadHelperService,
+        RequestHelperServiceInterface $requestHelperService,
+        protected UserObjectTypeResolver $userObjectTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $modulePathHelpers,
+            $moduleFilterManager,
+            $moduleProcessorManager,
+            $cmsService,
+            $nameResolver,
+            $dataloadHelperService,
+            $requestHelperService,
+        );
+    }
 
     public function getModulesToProcess(): array
     {
@@ -41,16 +82,16 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
-                return UserObjectTypeResolver::class;
+                return $this->userObjectTypeResolver;
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

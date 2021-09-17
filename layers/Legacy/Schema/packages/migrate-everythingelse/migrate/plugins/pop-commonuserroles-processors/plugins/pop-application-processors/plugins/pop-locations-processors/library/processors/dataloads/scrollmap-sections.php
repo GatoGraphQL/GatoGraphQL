@@ -77,15 +77,15 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP:
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLLMAP:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

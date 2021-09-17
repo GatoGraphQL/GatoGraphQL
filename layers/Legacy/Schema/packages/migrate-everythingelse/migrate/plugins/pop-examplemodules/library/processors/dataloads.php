@@ -70,27 +70,27 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_LATESTPOSTS:
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
             case self::MODULE_EXAMPLE_SINGLE:
-                return CustomPostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
 
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
 
             case self::MODULE_EXAMPLE_TAGDESCRIPTION:
-                return PostTagObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
 
             case self::MODULE_EXAMPLE_PAGE:
             case self::MODULE_EXAMPLE_HOMESTATICPAGE:
-                return PageObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PageObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array

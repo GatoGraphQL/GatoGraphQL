@@ -39,9 +39,9 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         return null;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        return CustomPostObjectTypeResolver::class;
+        return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

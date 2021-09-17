@@ -161,16 +161,16 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATE:
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                return StanceObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

@@ -119,15 +119,15 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
         return null;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTLINK_UPDATE:
             case self::MODULE_DATALOAD_EVENTLINK_CREATE:
-                return EventObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 }
 

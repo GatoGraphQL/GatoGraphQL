@@ -64,15 +64,15 @@ class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_P
         return $format ?? parent::getFormat($module);
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYHIGHLIGHTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW:
-                return HighlightObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

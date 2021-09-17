@@ -160,15 +160,15 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return null;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

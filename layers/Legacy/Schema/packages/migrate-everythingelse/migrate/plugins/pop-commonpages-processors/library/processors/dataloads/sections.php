@@ -41,17 +41,17 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         return $inner_modules[$module[1]] ?? null;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_LIST:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_FULLVIEW:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function getDatasource(array $module, array &$props): string

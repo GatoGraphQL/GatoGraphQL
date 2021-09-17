@@ -121,22 +121,22 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FOLLOWSUSERS:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_UPVOTESPOSTS:
             case self::MODULE_DATALOAD_RECOMMENDSPOSTS:
             case self::MODULE_DATALOAD_DOWNVOTESPOSTS:
-                return CustomPostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_SUBSCRIBESTOTAGS:
-                return PostTagObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

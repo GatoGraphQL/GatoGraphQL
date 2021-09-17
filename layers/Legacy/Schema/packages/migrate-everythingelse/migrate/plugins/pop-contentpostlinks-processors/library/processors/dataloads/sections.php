@@ -282,7 +282,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LINKS_TYPEAHEAD:
@@ -303,10 +303,10 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST:
-                return CustomPostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

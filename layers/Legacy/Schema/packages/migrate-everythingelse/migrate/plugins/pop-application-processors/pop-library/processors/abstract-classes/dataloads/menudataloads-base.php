@@ -38,8 +38,8 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        return MenuObjectTypeResolver::class;
+        return $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
     }
 }

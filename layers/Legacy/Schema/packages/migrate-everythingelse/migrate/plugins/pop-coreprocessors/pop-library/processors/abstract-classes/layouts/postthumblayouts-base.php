@@ -92,11 +92,9 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
         $ret['url-field'] = $this->getUrlField($module);
         $ret['thumb'] = array(
-            'name' => FieldQueryInterpreterFacade::getInstance()->getUniqueFieldOutputKeyByTypeResolverClass(
+            'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($module, $props, 'succeeding-typeResolver'),
                 $this->getThumbField($module, $props))
         );

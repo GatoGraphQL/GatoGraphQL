@@ -35,7 +35,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
         switch ($fieldName) {
             case 'taggedusers':
             case 'recommendedby':
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
         $types = [
             'recommendPostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,

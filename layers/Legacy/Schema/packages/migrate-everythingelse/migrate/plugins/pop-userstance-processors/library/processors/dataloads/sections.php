@@ -796,7 +796,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCES_TYPEAHEAD:
@@ -870,10 +870,10 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST:
             case self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL:
             case self::MODULE_DATALOAD_TAGSTANCES_CAROUSEL:
-                return StanceObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

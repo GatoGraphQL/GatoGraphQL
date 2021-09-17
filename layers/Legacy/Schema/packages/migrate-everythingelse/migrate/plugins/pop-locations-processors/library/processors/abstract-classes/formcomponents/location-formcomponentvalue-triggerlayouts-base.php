@@ -5,6 +5,6 @@ abstract class PoP_Module_Processor_LocationTriggerLayoutFormComponentValuesBase
 {
     public function getTriggerTypeResolverClass(array $module): ?string
     {
-        return LocationObjectTypeResolver::class;
+        return $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
     }
 }

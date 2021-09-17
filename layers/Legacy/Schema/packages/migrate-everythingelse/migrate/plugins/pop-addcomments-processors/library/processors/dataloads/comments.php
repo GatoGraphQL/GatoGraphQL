@@ -1,7 +1,8 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSitesWassup\CommentMutations\MutationResolverBridges\AddCommentToCustomPostMutationResolverBridge;
 
 class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_DataloadsBase
@@ -107,15 +108,15 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_COMMENTS_SCROLL:
             case self::MODULE_DATALOAD_ADDCOMMENT:
-                return \PoPSchema\Comments\CommentObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void

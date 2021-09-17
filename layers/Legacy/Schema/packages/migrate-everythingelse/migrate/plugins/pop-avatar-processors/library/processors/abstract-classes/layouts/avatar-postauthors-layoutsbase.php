@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_PostAuthorAvatarLayoutsBase extends PoPEngin
         $avatar_field = PoP_AvatarFoundationManagerFactory::getInstance()->getAvatarField($avatar_size);
 
         $ret['avatar'] = array(
-            'name' => FieldQueryInterpreterFacade::getInstance()->getUniqueFieldOutputKeyByTypeResolverClass(
+            'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($module, $props, 'succeeding-typeResolver'),
                 $avatar_field
             ),

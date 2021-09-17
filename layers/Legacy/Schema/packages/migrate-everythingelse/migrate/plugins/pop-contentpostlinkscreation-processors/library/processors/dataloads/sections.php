@@ -97,16 +97,16 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads extends P
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW:
-                return CustomPostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

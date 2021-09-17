@@ -10,31 +10,43 @@ use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements GraphQLSchemaDefinitionServiceInterface
 {
+    /**
+     * Can't use autowiring or it produces a circular reference exception
+     */
+    protected ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
+    protected ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
+
     public function getQueryRootTypeSchemaKey(): string
     {
-        $queryTypeResolverClass = $this->getQueryRootTypeResolverClass();
-        return $this->getTypeResolverTypeSchemaKey($queryTypeResolverClass);
+        $queryTypeResolver = $this->getQueryRootTypeResolver();
+        return $this->getTypeResolverTypeSchemaKey($queryTypeResolver);
     }
 
     /**
      * If nested mutations are enabled, use "Root".
      * Otherwise, use "Query"
      */
-    public function getQueryRootTypeResolverClass(): string
+    public function getQueryRootTypeResolver(): ObjectTypeResolverInterface
     {
         $vars = ApplicationState::getVars();
-        return $vars['nested-mutations-enabled'] ?
-            $this->getRootTypeResolverClass()
-            : QueryRootObjectTypeResolver::class;
+        if ($vars['nested-mutations-enabled']) {
+            return $this->getRootTypeResolver();
+        }
+
+        if ($this->queryRootObjectTypeResolver === null) {
+            $this->queryRootObjectTypeResolver = $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
+        }
+        return $this->queryRootObjectTypeResolver;
     }
 
     public function getMutationRootTypeSchemaKey(): ?string
     {
-        if ($mutationTypeResolverClass = $this->getMutationRootTypeResolverClass()) {
-            return $this->getTypeResolverTypeSchemaKey($mutationTypeResolverClass);
+        if ($mutationTypeResolver = $this->getMutationRootTypeResolver()) {
+            return $this->getTypeResolverTypeSchemaKey($mutationTypeResolver);
         }
         return null;
     }
@@ -43,21 +55,26 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
      * If nested mutations are enabled, use "Root".
      * Otherwise, use "Mutation"
      */
-    public function getMutationRootTypeResolverClass(): ?string
+    public function getMutationRootTypeResolver(): ?ObjectTypeResolverInterface
     {
         if (!APIComponentConfiguration::enableMutations()) {
             return null;
         }
         $vars = ApplicationState::getVars();
-        return $vars['nested-mutations-enabled'] ?
-            $this->getRootTypeResolverClass()
-            : MutationRootObjectTypeResolver::class;
+        if ($vars['nested-mutations-enabled']) {
+            return $this->getRootTypeResolver();
+        }
+
+        if ($this->mutationRootObjectTypeResolver === null) {
+            $this->mutationRootObjectTypeResolver = $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
+        }
+        return $this->mutationRootObjectTypeResolver;
     }
 
     public function getSubscriptionRootTypeSchemaKey(): ?string
     {
-        if ($subscriptionTypeResolverClass = $this->getSubscriptionRootTypeResolverClass()) {
-            return $this->getTypeResolverTypeSchemaKey($subscriptionTypeResolverClass);
+        if ($subscriptionTypeResolver = $this->getSubscriptionRootTypeResolver()) {
+            return $this->getTypeResolverTypeSchemaKey($subscriptionTypeResolver);
         }
         return null;
     }
@@ -65,7 +82,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     /**
      * @todo Implement
      */
-    public function getSubscriptionRootTypeResolverClass(): ?string
+    public function getSubscriptionRootTypeResolver(): ?ObjectTypeResolverInterface
     {
         return null;
     }

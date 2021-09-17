@@ -64,15 +64,15 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
     // }
 
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR:
             case self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
-                return EventObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

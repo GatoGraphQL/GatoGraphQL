@@ -5,6 +5,6 @@ abstract class PoP_Module_Processor_UserTriggerLayoutFormComponentValuesBase ext
 {
     public function getTriggerTypeResolverClass(array $module): ?string
     {
-        return UserObjectTypeResolver::class;
+        return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 }

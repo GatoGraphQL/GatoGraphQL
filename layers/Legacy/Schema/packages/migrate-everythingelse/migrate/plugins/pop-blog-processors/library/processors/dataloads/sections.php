@@ -702,7 +702,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_POSTS_TYPEAHEAD:
@@ -723,13 +723,13 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_LIST:
-                return PostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_TAGS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_TAGS_SCROLL_LIST:
             case self::MODULE_DATALOAD_TAGS_TYPEAHEAD:
             case self::MODULE_DATALOAD_TAGS_MENTIONS:
-                return PostTagObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_CONTENT_TYPEAHEAD:
             case self::MODULE_DATALOAD_CONTENT_SCROLL_NAVIGATOR:
@@ -778,10 +778,10 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLL_LIST:
             case self::MODULE_DATALOAD_USERS_SCROLL_LIST:
             case self::MODULE_DATALOAD_USERS_CAROUSEL:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function getImmutableHeaddatasetmoduleDataProperties(array $module, array &$props): array

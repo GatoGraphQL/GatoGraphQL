@@ -46,14 +46,14 @@ abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_
 
             $ret['avatars'] = array(
                 'sm' => array(
-                    'name' => FieldQueryInterpreterFacade::getInstance()->getUniqueFieldOutputKeyByTypeResolverClass(
+                    'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                         $this->getProp($module, $props, 'succeeding-typeResolver'),
                         $avatar_field_sm
                     ),
                     'size' => $avatar_size_sm
                 ),
                 'md' => array(
-                    'name' => FieldQueryInterpreterFacade::getInstance()->getUniqueFieldOutputKeyByTypeResolverClass(
+                    'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                         $this->getProp($module, $props, 'succeeding-typeResolver'),
                         $avatar_field_md
                     ),

@@ -109,15 +109,15 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
         return GD_DataLoad_QueryInputOutputHandler_NotificationList::class;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
-                return NotificationObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

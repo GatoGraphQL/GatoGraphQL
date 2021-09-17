@@ -110,14 +110,14 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
         return null;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_VOLUNTEER:
-                return CustomPostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 }
 

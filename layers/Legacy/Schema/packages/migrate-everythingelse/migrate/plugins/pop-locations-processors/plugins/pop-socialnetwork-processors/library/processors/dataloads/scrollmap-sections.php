@@ -139,7 +139,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
@@ -148,10 +148,10 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
             case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
             case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     public function initModelProps(array $module, array &$props): void

@@ -115,15 +115,15 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return $ret;
     }
 
-    public function getRelationalTypeResolverClass(array $module): ?string
+    public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolverClass($module);
+        return parent::getRelationalTypeResolver($module);
     }
 
     protected function getCheckpointmessageModule(array $module)
