@@ -6,14 +6,9 @@ namespace PoP\Engine\Schema;
 
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinitionService as ComponentModelSchemaDefinitionService;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class SchemaDefinitionService extends ComponentModelSchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
-    public function __construct(protected InstanceManagerInterface $instanceManager)
-    {
-    }
-
     public function getTypeResolverTypeSchemaKey(string $typeResolverClass): string
     {
         $relationalTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
