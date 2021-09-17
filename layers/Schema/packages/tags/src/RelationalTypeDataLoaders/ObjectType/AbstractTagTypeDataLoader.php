@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\RelationalTypeDataLoaders\ObjectType;
 
-use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
+use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
+abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableDataLoader implements TagAPIRequestedContractInterface
 {
-    use TagAPIRequestedContractTrait;
-
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
