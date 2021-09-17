@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -24,10 +26,10 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'locationsmapURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'locationsmapURL' => URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

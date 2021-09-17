@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -28,10 +30,10 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'addhighlightURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'addhighlightURL' => URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers\ObjectType;
 
+use PoPSchema\CustomPostMeta\Utils;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -60,13 +62,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $post = $object;
         switch ($fieldName) {
             case 'locations':
-                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_LOCATIONS) ?? [];
+                return Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_LOCATIONS) ?? [];
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'locations':

@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\EditPosts\FunctionAPIFactory;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
@@ -43,20 +50,20 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'addStanceURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'loggedInUserStances' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'hasLoggedInUserStances' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'editStanceURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'postStancesProURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'postStancesNeutralURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'postStancesAgainstURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
-            'createStanceButtonLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
-            'stancesLazy' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
-            'stanceName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'catName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'addStanceURL' => URLScalarTypeResolver::class,
+            'loggedInUserStances' => IntScalarTypeResolver::class,
+            'hasLoggedInUserStances' => BooleanScalarTypeResolver::class,
+            'editStanceURL' => URLScalarTypeResolver::class,
+            'postStancesProURL' => URLScalarTypeResolver::class,
+            'postStancesNeutralURL' => URLScalarTypeResolver::class,
+            'postStancesAgainstURL' => URLScalarTypeResolver::class,
+            'createStanceButtonLazy' => IDScalarTypeResolver::class,
+            'stancesLazy' => IDScalarTypeResolver::class,
+            'stanceName' => StringScalarTypeResolver::class,
+            'catName' => StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
@@ -108,7 +115,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     ): mixed {
         $post = $object;
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
+        $cmseditpostsapi = FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'addStanceURL':
                 $routes = array(

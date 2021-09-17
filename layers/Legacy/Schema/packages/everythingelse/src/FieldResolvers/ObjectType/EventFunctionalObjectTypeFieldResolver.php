@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -29,11 +31,11 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'multilayoutKeys' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'latestcountsTriggerValues' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'multilayoutKeys' => StringScalarTypeResolver::class,
+            'latestcountsTriggerValues' => StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

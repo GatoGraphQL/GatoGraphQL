@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoPSchema\CustomPostMeta\Utils;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -33,11 +37,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'hasHighlights' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'highlightsCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'hasHighlights' => BooleanScalarTypeResolver::class,
+            'highlightsCount' => IntScalarTypeResolver::class,
             'highlights' => HighlightObjectTypeResolver::class,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -90,7 +94,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     'limit' => -1, // Bring all the results
                     'meta-query' => [
                         [
-                            'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_HIGHLIGHTEDPOST),
+                            'key' => Utils::getMetaKey(GD_METAKEY_POST_HIGHLIGHTEDPOST),
                             'value' => $objectTypeResolver->getID($customPost),
                         ],
                     ],

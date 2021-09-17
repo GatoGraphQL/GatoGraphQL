@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\SiteBuilderAPI\Helpers\APIUtils;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -26,10 +28,10 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'endpoint' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'endpoint' => URLScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -29,13 +32,13 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'symbol' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'symbolnamedescription' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'namedescription' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'symbolname' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
+            'symbol' => StringScalarTypeResolver::class,
+            'symbolnamedescription' => StringScalarTypeResolver::class,
+            'namedescription' => StringScalarTypeResolver::class,
+            'symbolname' => StringScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
@@ -66,7 +69,7 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
+        $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
         $tag = $object;
         switch ($fieldName) {
             case 'symbol':

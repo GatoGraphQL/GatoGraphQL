@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoPSchema\CustomPostMeta\Utils;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -35,13 +39,13 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'title' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'excerpt' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'content' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'highlightedPostURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
+            'title' => StringScalarTypeResolver::class,
+            'excerpt' => StringScalarTypeResolver::class,
+            'content' => StringScalarTypeResolver::class,
+            'highlightedPostURL' => URLScalarTypeResolver::class,
             'highlightedpost' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -105,7 +109,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $value;
 
             case 'highlightedpost':
-                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($highlight), GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
+                return Utils::getCustomPostMeta($objectTypeResolver->getID($highlight), GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
 
             case 'highlightedPostURL':
                 $highlightedPost = $objectTypeResolver->resolveValue($highlight, 'highlightedpost', $variables, $expressions, $options);

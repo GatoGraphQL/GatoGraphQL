@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -35,17 +38,17 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'stances':
                 return StanceObjectTypeResolver::class;
         }
         $types = [
-            'hasStances' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-            'stanceProCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'stanceNeutralCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'stanceAgainstCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
+            'hasStances' => BooleanScalarTypeResolver::class,
+            'stanceProCount' => IntScalarTypeResolver::class,
+            'stanceNeutralCount' => IntScalarTypeResolver::class,
+            'stanceAgainstCount' => IntScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

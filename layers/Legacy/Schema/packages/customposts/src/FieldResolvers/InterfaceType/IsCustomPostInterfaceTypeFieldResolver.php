@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
@@ -27,10 +29,10 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
         );
     }
 
-    public function getFieldTypeResolver(string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'datetime' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver::class,
+            'datetime' => DateScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }

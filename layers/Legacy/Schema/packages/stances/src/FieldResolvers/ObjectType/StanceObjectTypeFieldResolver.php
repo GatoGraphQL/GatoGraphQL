@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoPSchema\CustomPostMeta\Utils;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -39,20 +45,20 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         switch ($fieldName) {
             case 'stancetarget':
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
         $types = [
-            'categories' => \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver::class,
-            'catSlugs' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'stance' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-            'title' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'excerpt' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'content' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-            'hasStanceTarget' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
+            'categories' => IDScalarTypeResolver::class,
+            'catSlugs' => StringScalarTypeResolver::class,
+            'stance' => IntScalarTypeResolver::class,
+            'title' => StringScalarTypeResolver::class,
+            'excerpt' => StringScalarTypeResolver::class,
+            'content' => StringScalarTypeResolver::class,
+            'hasStanceTarget' => BooleanScalarTypeResolver::class,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
@@ -142,7 +148,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $value;
 
             case 'stancetarget':
-                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($stance), GD_METAKEY_POST_STANCETARGET, true);
+                return Utils::getCustomPostMeta($objectTypeResolver->getID($stance), GD_METAKEY_POST_STANCETARGET, true);
 
             case 'hasStanceTarget':
                 // Cannot use !is_null because getCustomPostMeta returns "" when there's no entry, instead of null
