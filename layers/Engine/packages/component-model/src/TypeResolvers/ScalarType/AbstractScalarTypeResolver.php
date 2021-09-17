@@ -6,9 +6,8 @@ namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 
-abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implements ScalarTypeResolverInterface, ConcreteTypeResolverInterface
+abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implements ScalarTypeResolverInterface
 {
     /**
      * By default, the value is serialized as is
