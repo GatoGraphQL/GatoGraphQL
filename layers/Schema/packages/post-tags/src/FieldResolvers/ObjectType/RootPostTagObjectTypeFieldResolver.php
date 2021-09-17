@@ -27,6 +27,26 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
 {
     use WithLimitFieldArgResolverTrait;
 
+    public function __construct(
+        \PoP\Translation\TranslationAPIInterface $translationAPI,
+        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        \PoP\ComponentModel\Schema\FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        \PoP\LooseContracts\NameResolverInterface $nameResolver,
+        \PoP\Engine\CMS\CMSServiceInterface $cmsService,
+        \PoP\ComponentModel\HelperServices\SemverHelperServiceInterface $semverHelperService,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
