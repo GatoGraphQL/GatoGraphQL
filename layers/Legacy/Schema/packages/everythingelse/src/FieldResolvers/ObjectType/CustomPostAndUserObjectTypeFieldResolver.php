@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -18,13 +25,13 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     public function __construct(
-        \PoP\Translation\TranslationAPIInterface $translationAPI,
-        \PoP\Hooks\HooksAPIInterface $hooksAPI,
-        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
-        \PoP\ComponentModel\Schema\FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        \PoP\LooseContracts\NameResolverInterface $nameResolver,
-        \PoP\Engine\CMS\CMSServiceInterface $cmsService,
-        \PoP\ComponentModel\HelperServices\SemverHelperServiceInterface $semverHelperService,
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
     ) {
         parent::__construct(
             $translationAPI,
