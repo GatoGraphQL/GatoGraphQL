@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor\SchemaServices\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -79,7 +80,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     public function getFieldTypeResolver(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
-    ): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface {
+    ): ConcreteTypeResolverInterface {
         return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
     }
 }
