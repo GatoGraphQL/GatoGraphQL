@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\RelationalTypeDataLoaders\ObjectType;
 
-use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
+use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-abstract class AbstractCategoryTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
+abstract class AbstractCategoryTypeDataLoader extends AbstractObjectTypeQueryableDataLoader implements CategoryAPIRequestedContractInterface
 {
-    use CategoryAPIRequestedContractTrait;
-
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
