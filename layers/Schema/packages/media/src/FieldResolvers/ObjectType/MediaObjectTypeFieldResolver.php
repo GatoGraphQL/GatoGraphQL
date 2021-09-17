@@ -37,10 +37,10 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         SemverHelperServiceInterface $semverHelperService,
         protected MediaTypeAPIInterface $mediaTypeAPI,
         protected DateFormatterInterface $dateFormatter,
-        protected URLScalarTypeResolver $URLScalarTypeResolver,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected DateScalarTypeResolver $DateScalarTypeResolver,        
+        protected URLScalarTypeResolver $urlScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected DateScalarTypeResolver $dateScalarTypeResolver,        
     ) {
         parent::__construct(
             $translationAPI,
@@ -81,18 +81,18 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'src' => $this->URLScalarTypeResolver,
-            'srcSet' => $this->StringScalarTypeResolver,
-            'width' => $this->IntScalarTypeResolver,
-            'height' => $this->IntScalarTypeResolver,
-            'sizes' => $this->StringScalarTypeResolver,
-            'title' => $this->StringScalarTypeResolver,
-            'caption' => $this->StringScalarTypeResolver,
-            'altText' => $this->StringScalarTypeResolver,
-            'description' => $this->StringScalarTypeResolver,
-            'date' => $this->DateScalarTypeResolver,
-            'modified' => $this->DateScalarTypeResolver,
-            'mimeType' => $this->StringScalarTypeResolver,
+            'src' => $this->urlScalarTypeResolver,
+            'srcSet' => $this->stringScalarTypeResolver,
+            'width' => $this->intScalarTypeResolver,
+            'height' => $this->intScalarTypeResolver,
+            'sizes' => $this->stringScalarTypeResolver,
+            'title' => $this->stringScalarTypeResolver,
+            'caption' => $this->stringScalarTypeResolver,
+            'altText' => $this->stringScalarTypeResolver,
+            'description' => $this->stringScalarTypeResolver,
+            'date' => $this->dateScalarTypeResolver,
+            'modified' => $this->dateScalarTypeResolver,
+            'mimeType' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

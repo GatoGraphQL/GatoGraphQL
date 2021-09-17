@@ -37,8 +37,8 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
-        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -78,10 +78,10 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                 return $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
         }
         $types = [
-            'areCommentsOpen' => $this->BooleanScalarTypeResolver,
-            'hasComments' => $this->BooleanScalarTypeResolver,
-            'commentCount' => $this->IntScalarTypeResolver,
-            'commentCountForAdmin' => $this->IntScalarTypeResolver,
+            'areCommentsOpen' => $this->booleanScalarTypeResolver,
+            'hasComments' => $this->booleanScalarTypeResolver,
+            'commentCount' => $this->intScalarTypeResolver,
+            'commentCountForAdmin' => $this->intScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }

@@ -30,7 +30,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -68,7 +68,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'menuOrder' => $this->IntScalarTypeResolver,
+            'menuOrder' => $this->intScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

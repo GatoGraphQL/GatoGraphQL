@@ -29,7 +29,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -52,7 +52,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'isUserLoggedIn' => $this->BooleanScalarTypeResolver,
+            'isUserLoggedIn' => $this->booleanScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

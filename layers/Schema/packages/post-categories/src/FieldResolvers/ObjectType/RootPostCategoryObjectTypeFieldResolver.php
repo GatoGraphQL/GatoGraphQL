@@ -42,8 +42,8 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -83,8 +83,8 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
                 return $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
         }
         $types = [
-            'postCategoryCount' => $this->IntScalarTypeResolver,
-            'postCategoryNames' => $this->StringScalarTypeResolver,
+            'postCategoryCount' => $this->intScalarTypeResolver,
+            'postCategoryNames' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

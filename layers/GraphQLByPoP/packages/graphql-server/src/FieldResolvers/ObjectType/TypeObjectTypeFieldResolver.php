@@ -41,13 +41,13 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected ObjectScalarTypeResolver $ObjectScalarTypeResolver,
-        protected FieldObjectTypeResolver $FieldObjectTypeResolver,
-        protected TypeObjectTypeResolver $TypeObjectTypeResolver,
-        protected EnumValueObjectTypeResolver $EnumValueObjectTypeResolver,
-        protected InputValueObjectTypeResolver $InputValueObjectTypeResolver,
-        protected TypeKindEnumTypeResolver $TypeKindEnumTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
+        protected FieldObjectTypeResolver $fieldObjectTypeResolver,
+        protected TypeObjectTypeResolver $typeObjectTypeResolver,
+        protected EnumValueObjectTypeResolver $enumValueObjectTypeResolver,
+        protected InputValueObjectTypeResolver $inputValueObjectTypeResolver,
+        protected TypeKindEnumTypeResolver $typeKindEnumTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -87,23 +87,23 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'name'
-                => $this->StringScalarTypeResolver,
+                => $this->stringScalarTypeResolver,
             'description'
-                => $this->StringScalarTypeResolver,
+                => $this->stringScalarTypeResolver,
             'extensions'
-                => $this->ObjectScalarTypeResolver,
+                => $this->objectScalarTypeResolver,
             'fields'
-                => $this->FieldObjectTypeResolver,
+                => $this->fieldObjectTypeResolver,
             'interfaces',
             'possibleTypes',
             'ofType'
-                => $this->TypeObjectTypeResolver,
+                => $this->typeObjectTypeResolver,
             'enumValues'
-                => $this->EnumValueObjectTypeResolver,
+                => $this->enumValueObjectTypeResolver,
             'inputFields'
-                => $this->InputValueObjectTypeResolver,
+                => $this->inputValueObjectTypeResolver,
             'kind'
-                => $this->TypeKindEnumTypeResolver,
+                => $this->typeKindEnumTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

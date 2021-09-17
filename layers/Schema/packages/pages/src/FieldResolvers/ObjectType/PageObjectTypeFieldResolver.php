@@ -39,7 +39,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -99,8 +99,8 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return $this->instanceManager->getInstance(PageObjectTypeResolver::class);
         }
         $types = [
-            'childPageCount' => $this->IntScalarTypeResolver,
-            'childPageCountForAdmin' => $this->IntScalarTypeResolver,
+            'childPageCount' => $this->intScalarTypeResolver,
+            'childPageCountForAdmin' => $this->intScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

@@ -35,8 +35,8 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected URLScalarTypeResolver $URLScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -71,10 +71,10 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'title' => $this->StringScalarTypeResolver,
-            'excerpt' => $this->StringScalarTypeResolver,
-            'content' => $this->StringScalarTypeResolver,
-            'highlightedPostURL' => $this->URLScalarTypeResolver,
+            'title' => $this->stringScalarTypeResolver,
+            'excerpt' => $this->stringScalarTypeResolver,
+            'content' => $this->stringScalarTypeResolver,
+            'highlightedPostURL' => $this->urlScalarTypeResolver,
             'highlightedpost' => $this->instanceManager->getInstance(CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class)),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

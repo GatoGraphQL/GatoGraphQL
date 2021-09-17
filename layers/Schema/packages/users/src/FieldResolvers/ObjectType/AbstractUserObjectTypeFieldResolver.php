@@ -40,7 +40,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected UserTypeAPIInterface $userTypeAPI,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -79,8 +79,8 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
         $types = [
-            'userCount' => $this->IntScalarTypeResolver,
-            'userCountForAdmin' => $this->IntScalarTypeResolver,
+            'userCount' => $this->intScalarTypeResolver,
+            'userCountForAdmin' => $this->intScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

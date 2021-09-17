@@ -34,9 +34,9 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected UserTypeAPIInterface $userTypeAPI,
-        protected EmailScalarTypeResolver $EmailScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected URLScalarTypeResolver $URLScalarTypeResolver,
+        protected EmailScalarTypeResolver $emailScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -83,14 +83,14 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'username' => $this->StringScalarTypeResolver,
-            'name' => $this->StringScalarTypeResolver,
-            'displayName' => $this->StringScalarTypeResolver,
-            'firstName' => $this->StringScalarTypeResolver,
-            'lastName' => $this->StringScalarTypeResolver,
-            'email' => $this->EmailScalarTypeResolver,
-            'description' => $this->StringScalarTypeResolver,
-            'websiteURL' => $this->URLScalarTypeResolver,
+            'username' => $this->stringScalarTypeResolver,
+            'name' => $this->stringScalarTypeResolver,
+            'displayName' => $this->stringScalarTypeResolver,
+            'firstName' => $this->stringScalarTypeResolver,
+            'lastName' => $this->stringScalarTypeResolver,
+            'email' => $this->emailScalarTypeResolver,
+            'description' => $this->stringScalarTypeResolver,
+            'websiteURL' => $this->urlScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

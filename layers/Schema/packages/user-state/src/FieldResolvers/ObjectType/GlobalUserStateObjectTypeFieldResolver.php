@@ -28,7 +28,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected IDScalarTypeResolver $IDScalarTypeResolver,
+        protected IDScalarTypeResolver $idScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -51,7 +51,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'loggedInUserID' => $this->IDScalarTypeResolver,
+            'loggedInUserID' => $this->idScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

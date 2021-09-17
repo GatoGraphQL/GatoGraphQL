@@ -27,7 +27,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
-        protected IDScalarTypeResolver $IDScalarTypeResolver,
+        protected IDScalarTypeResolver $idScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -57,7 +57,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'id' => $this->IDScalarTypeResolver,
+            'id' => $this->idScalarTypeResolver,
             default => parent::getFieldTypeResolver($fieldName),
         };
     }

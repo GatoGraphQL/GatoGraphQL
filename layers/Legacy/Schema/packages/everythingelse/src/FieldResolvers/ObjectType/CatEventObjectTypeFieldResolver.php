@@ -32,7 +32,7 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -63,8 +63,8 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'catSlugs' => $this->StringScalarTypeResolver,
-            'catName' => $this->StringScalarTypeResolver,
+            'catSlugs' => $this->stringScalarTypeResolver,
+            'catName' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

@@ -33,11 +33,11 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected ObjectScalarTypeResolver $ObjectScalarTypeResolver,
-        protected InputValueObjectTypeResolver $InputValueObjectTypeResolver,
-        protected TypeObjectTypeResolver $TypeObjectTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
+        protected InputValueObjectTypeResolver $inputValueObjectTypeResolver,
+        protected TypeObjectTypeResolver $typeObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -73,13 +73,13 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => $this->StringScalarTypeResolver,
-            'description' => $this->StringScalarTypeResolver,
-            'isDeprecated' => $this->BooleanScalarTypeResolver,
-            'deprecationReason' => $this->StringScalarTypeResolver,
-            'extensions' => $this->ObjectScalarTypeResolver,
-            'args' => $this->InputValueObjectTypeResolver,
-            'type' => $this->TypeObjectTypeResolver,
+            'name' => $this->stringScalarTypeResolver,
+            'description' => $this->stringScalarTypeResolver,
+            'isDeprecated' => $this->booleanScalarTypeResolver,
+            'deprecationReason' => $this->stringScalarTypeResolver,
+            'extensions' => $this->objectScalarTypeResolver,
+            'args' => $this->inputValueObjectTypeResolver,
+            'type' => $this->typeObjectTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

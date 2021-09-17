@@ -31,7 +31,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -62,8 +62,8 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'multilayoutKeys' => $this->StringScalarTypeResolver,
-            'latestcountsTriggerValues' => $this->StringScalarTypeResolver,
+            'multilayoutKeys' => $this->stringScalarTypeResolver,
+            'latestcountsTriggerValues' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

@@ -39,7 +39,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -78,8 +78,8 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
                 return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
         }
         $types = [
-            'postCount' => $this->IntScalarTypeResolver,
-            'postCountForAdmin' => $this->IntScalarTypeResolver,
+            'postCount' => $this->intScalarTypeResolver,
+            'postCountForAdmin' => $this->intScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

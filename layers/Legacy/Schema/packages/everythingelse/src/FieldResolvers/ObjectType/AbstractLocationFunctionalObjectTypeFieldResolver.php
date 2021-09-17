@@ -29,7 +29,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected URLScalarTypeResolver $URLScalarTypeResolver,
+        protected URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -57,7 +57,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'locationsmapURL' => $this->URLScalarTypeResolver,
+            'locationsmapURL' => $this->urlScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

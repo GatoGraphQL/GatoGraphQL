@@ -31,8 +31,8 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -79,12 +79,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'roles' => $this->StringScalarTypeResolver,
-            'capabilities' => $this->StringScalarTypeResolver,
-            'hasRole' => $this->BooleanScalarTypeResolver,
-            'hasAnyRole' => $this->BooleanScalarTypeResolver,
-            'hasCapability' => $this->BooleanScalarTypeResolver,
-            'hasAnyCapability' => $this->BooleanScalarTypeResolver,
+            'roles' => $this->stringScalarTypeResolver,
+            'capabilities' => $this->stringScalarTypeResolver,
+            'hasRole' => $this->booleanScalarTypeResolver,
+            'hasAnyRole' => $this->booleanScalarTypeResolver,
+            'hasCapability' => $this->booleanScalarTypeResolver,
+            'hasAnyCapability' => $this->booleanScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

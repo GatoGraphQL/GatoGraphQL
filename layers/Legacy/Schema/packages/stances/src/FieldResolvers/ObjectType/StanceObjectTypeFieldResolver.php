@@ -39,10 +39,10 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected IDScalarTypeResolver $IDScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
-        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
+        protected IDScalarTypeResolver $idScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -83,13 +83,13 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $this->instanceManager->getInstance(CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class));
         }
         $types = [
-            'categories' => $this->IDScalarTypeResolver,
-            'catSlugs' => $this->StringScalarTypeResolver,
-            'stance' => $this->IntScalarTypeResolver,
-            'title' => $this->StringScalarTypeResolver,
-            'excerpt' => $this->StringScalarTypeResolver,
-            'content' => $this->StringScalarTypeResolver,
-            'hasStanceTarget' => $this->BooleanScalarTypeResolver,
+            'categories' => $this->idScalarTypeResolver,
+            'catSlugs' => $this->stringScalarTypeResolver,
+            'stance' => $this->intScalarTypeResolver,
+            'title' => $this->stringScalarTypeResolver,
+            'excerpt' => $this->stringScalarTypeResolver,
+            'content' => $this->stringScalarTypeResolver,
+            'hasStanceTarget' => $this->booleanScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

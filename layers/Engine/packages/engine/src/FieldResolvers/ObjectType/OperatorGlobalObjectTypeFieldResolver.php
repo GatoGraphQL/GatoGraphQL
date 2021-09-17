@@ -44,11 +44,11 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected MixedScalarTypeResolver $MixedScalarTypeResolver,
-        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
-        protected ObjectScalarTypeResolver $ObjectScalarTypeResolver,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected MixedScalarTypeResolver $mixedScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
         
     ) {
         parent::__construct(
@@ -84,19 +84,19 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'if' => $this->MixedScalarTypeResolver,
-            'not' => $this->BooleanScalarTypeResolver,
-            'and' => $this->BooleanScalarTypeResolver,
-            'or' => $this->BooleanScalarTypeResolver,
-            'equals' => $this->BooleanScalarTypeResolver,
-            'empty' => $this->BooleanScalarTypeResolver,
-            'isNull' => $this->BooleanScalarTypeResolver,
-            'var' => $this->MixedScalarTypeResolver,
-            'context' => $this->ObjectScalarTypeResolver,
-            'extract' => $this->MixedScalarTypeResolver,
-            'time' => $this->IntScalarTypeResolver,
-            'echo' => $this->MixedScalarTypeResolver,
-            'sprintf' => $this->StringScalarTypeResolver,
+            'if' => $this->mixedScalarTypeResolver,
+            'not' => $this->booleanScalarTypeResolver,
+            'and' => $this->booleanScalarTypeResolver,
+            'or' => $this->booleanScalarTypeResolver,
+            'equals' => $this->booleanScalarTypeResolver,
+            'empty' => $this->booleanScalarTypeResolver,
+            'isNull' => $this->booleanScalarTypeResolver,
+            'var' => $this->mixedScalarTypeResolver,
+            'context' => $this->objectScalarTypeResolver,
+            'extract' => $this->mixedScalarTypeResolver,
+            'time' => $this->intScalarTypeResolver,
+            'echo' => $this->mixedScalarTypeResolver,
+            'sprintf' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

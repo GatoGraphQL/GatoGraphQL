@@ -30,8 +30,8 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -66,9 +66,9 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'name' => $this->StringScalarTypeResolver,
-            'description' => $this->StringScalarTypeResolver,
-            'count' => $this->IntScalarTypeResolver,
+            'name' => $this->stringScalarTypeResolver,
+            'description' => $this->stringScalarTypeResolver,
+            'count' => $this->intScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

@@ -31,9 +31,9 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected FloatScalarTypeResolver $FloatScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected MixedScalarTypeResolver $MixedScalarTypeResolver,
+        protected FloatScalarTypeResolver $floatScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected MixedScalarTypeResolver $mixedScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -71,14 +71,14 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'divide'
-                => $this->FloatScalarTypeResolver,
+                => $this->floatScalarTypeResolver,
             'concat',
             'arrayJoin',
             'arrayAsQueryStr',
             'upperCase',
             'lowerCase',
             'titleCase'
-                => $this->StringScalarTypeResolver,
+                => $this->stringScalarTypeResolver,
             'arrayRandom',
             'arrayItem',
             'arraySearch',
@@ -87,7 +87,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => $this->MixedScalarTypeResolver,
+                => $this->mixedScalarTypeResolver,
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

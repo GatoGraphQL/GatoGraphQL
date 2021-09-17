@@ -28,7 +28,7 @@ class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected URLScalarTypeResolver $URLScalarTypeResolver,
+        protected URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -58,7 +58,7 @@ class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'commentsURL' => $this->URLScalarTypeResolver,
+            'commentsURL' => $this->urlScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

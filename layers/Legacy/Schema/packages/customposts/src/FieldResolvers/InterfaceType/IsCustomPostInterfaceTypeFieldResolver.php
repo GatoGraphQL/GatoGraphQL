@@ -27,7 +27,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
-        protected DateScalarTypeResolver $DateScalarTypeResolver,
+        protected DateScalarTypeResolver $dateScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -60,7 +60,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'datetime' => $this->DateScalarTypeResolver,
+            'datetime' => $this->dateScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }

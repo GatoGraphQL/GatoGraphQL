@@ -28,7 +28,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
-        protected AnyScalarScalarTypeResolver $AnyScalarScalarTypeResolver,
+        protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -58,8 +58,8 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'metaValue' => $this->AnyScalarScalarTypeResolver,
-            'metaValues' => $this->AnyScalarScalarTypeResolver,
+            'metaValue' => $this->anyScalarScalarTypeResolver,
+            'metaValues' => $this->anyScalarScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }

@@ -38,8 +38,8 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -68,8 +68,8 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
                 return $this->getCategoryTypeResolver();
         }
         $types = [
-            'categoryCount' => $this->IntScalarTypeResolver,
-            'categoryNames' => $this->StringScalarTypeResolver,
+            'categoryCount' => $this->intScalarTypeResolver,
+            'categoryNames' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

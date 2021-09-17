@@ -30,7 +30,7 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -63,10 +63,10 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'symbol' => $this->StringScalarTypeResolver,
-            'symbolnamedescription' => $this->StringScalarTypeResolver,
-            'namedescription' => $this->StringScalarTypeResolver,
-            'symbolname' => $this->StringScalarTypeResolver,
+            'symbol' => $this->stringScalarTypeResolver,
+            'symbolnamedescription' => $this->stringScalarTypeResolver,
+            'namedescription' => $this->stringScalarTypeResolver,
+            'symbolname' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

@@ -30,7 +30,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected MixedScalarTypeResolver $MixedScalarTypeResolver,
+        protected MixedScalarTypeResolver $mixedScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -53,7 +53,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'getSelfProp' => $this->MixedScalarTypeResolver,
+            'getSelfProp' => $this->mixedScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

@@ -30,8 +30,8 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
-        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
-        protected IDScalarTypeResolver $IDScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected IDScalarTypeResolver $idScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -66,8 +66,8 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
                 return $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
         }
         $types = [
-            'hasFeaturedImage' => $this->BooleanScalarTypeResolver,
-            'featuredImage' => $this->IDScalarTypeResolver,
+            'hasFeaturedImage' => $this->booleanScalarTypeResolver,
+            'featuredImage' => $this->idScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }

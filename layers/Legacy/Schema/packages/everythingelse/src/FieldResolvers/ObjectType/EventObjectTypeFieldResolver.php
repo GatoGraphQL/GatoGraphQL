@@ -33,9 +33,9 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected ObjectScalarTypeResolver $ObjectScalarTypeResolver,
-        protected LocationObjectTypeResolver $LocationObjectTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
+        protected LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -71,12 +71,12 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'dates' => $this->StringScalarTypeResolver,
-            'times' => $this->StringScalarTypeResolver,
-            'startDateReadable' => $this->StringScalarTypeResolver,
-            'daterange' => $this->ObjectScalarTypeResolver,
-            'daterangetime' => $this->ObjectScalarTypeResolver,
-            'locations' => $this->LocationObjectTypeResolver,
+            'dates' => $this->stringScalarTypeResolver,
+            'times' => $this->stringScalarTypeResolver,
+            'startDateReadable' => $this->stringScalarTypeResolver,
+            'daterange' => $this->objectScalarTypeResolver,
+            'daterangetime' => $this->objectScalarTypeResolver,
+            'locations' => $this->locationObjectTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

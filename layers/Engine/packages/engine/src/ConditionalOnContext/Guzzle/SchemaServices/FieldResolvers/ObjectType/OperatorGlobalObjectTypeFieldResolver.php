@@ -29,7 +29,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected ObjectScalarTypeResolver $ObjectScalarTypeResolver,
+        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -53,8 +53,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'getJSON' => $this->ObjectScalarTypeResolver,
-            'getAsyncJSON' => $this->ObjectScalarTypeResolver,
+            'getJSON' => $this->objectScalarTypeResolver,
+            'getAsyncJSON' => $this->objectScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

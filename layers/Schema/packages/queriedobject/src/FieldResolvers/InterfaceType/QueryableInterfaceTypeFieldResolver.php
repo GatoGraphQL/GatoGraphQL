@@ -29,8 +29,8 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
-        protected URLScalarTypeResolver $URLScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected URLScalarTypeResolver $urlScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -62,9 +62,9 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'url' => $this->URLScalarTypeResolver,
-            'urlPath' => $this->StringScalarTypeResolver,
-            'slug' => $this->StringScalarTypeResolver,
+            'url' => $this->urlScalarTypeResolver,
+            'urlPath' => $this->stringScalarTypeResolver,
+            'slug' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
     }

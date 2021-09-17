@@ -41,11 +41,11 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
-        protected IDScalarTypeResolver $IDScalarTypeResolver,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected URLScalarTypeResolver $URLScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected IDScalarTypeResolver $idScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -85,17 +85,17 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'addStanceURL' => $this->URLScalarTypeResolver,
-            'loggedInUserStances' => $this->IntScalarTypeResolver,
-            'hasLoggedInUserStances' => $this->BooleanScalarTypeResolver,
-            'editStanceURL' => $this->URLScalarTypeResolver,
-            'postStancesProURL' => $this->URLScalarTypeResolver,
-            'postStancesNeutralURL' => $this->URLScalarTypeResolver,
-            'postStancesAgainstURL' => $this->URLScalarTypeResolver,
-            'createStanceButtonLazy' => $this->IDScalarTypeResolver,
-            'stancesLazy' => $this->IDScalarTypeResolver,
-            'stanceName' => $this->StringScalarTypeResolver,
-            'catName' => $this->StringScalarTypeResolver,
+            'addStanceURL' => $this->urlScalarTypeResolver,
+            'loggedInUserStances' => $this->intScalarTypeResolver,
+            'hasLoggedInUserStances' => $this->booleanScalarTypeResolver,
+            'editStanceURL' => $this->urlScalarTypeResolver,
+            'postStancesProURL' => $this->urlScalarTypeResolver,
+            'postStancesNeutralURL' => $this->urlScalarTypeResolver,
+            'postStancesAgainstURL' => $this->urlScalarTypeResolver,
+            'createStanceButtonLazy' => $this->idScalarTypeResolver,
+            'stancesLazy' => $this->idScalarTypeResolver,
+            'stanceName' => $this->stringScalarTypeResolver,
+            'catName' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

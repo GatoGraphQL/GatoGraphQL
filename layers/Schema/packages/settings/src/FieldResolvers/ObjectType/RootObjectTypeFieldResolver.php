@@ -29,7 +29,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected AnyScalarScalarTypeResolver $AnyScalarScalarTypeResolver,
+        protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -67,7 +67,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'option' => $this->AnyScalarScalarTypeResolver,
+            'option' => $this->anyScalarScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

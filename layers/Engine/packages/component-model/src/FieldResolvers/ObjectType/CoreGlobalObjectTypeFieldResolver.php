@@ -30,8 +30,8 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -58,11 +58,11 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'typeName' => $this->StringScalarTypeResolver,
-            'namespace' => $this->StringScalarTypeResolver,
-            'qualifiedTypeName' => $this->StringScalarTypeResolver,
-            'isType' => $this->BooleanScalarTypeResolver,
-            'implements' => $this->BooleanScalarTypeResolver,
+            'typeName' => $this->stringScalarTypeResolver,
+            'namespace' => $this->stringScalarTypeResolver,
+            'qualifiedTypeName' => $this->stringScalarTypeResolver,
+            'isType' => $this->booleanScalarTypeResolver,
+            'implements' => $this->booleanScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

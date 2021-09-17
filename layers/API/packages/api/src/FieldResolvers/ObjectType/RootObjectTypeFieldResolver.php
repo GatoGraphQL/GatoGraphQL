@@ -39,7 +39,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver,
-        protected ObjectScalarTypeResolver $ObjectScalarTypeResolver,
+        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -69,7 +69,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'fullSchema' => $this->ObjectScalarTypeResolver,
+            'fullSchema' => $this->objectScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

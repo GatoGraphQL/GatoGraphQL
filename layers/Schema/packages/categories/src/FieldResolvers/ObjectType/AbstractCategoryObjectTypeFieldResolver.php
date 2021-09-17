@@ -30,8 +30,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -71,9 +71,9 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
                 return $this->getCategoryTypeResolver();
         }
         $types = [
-            'name' => $this->StringScalarTypeResolver,
-            'description' => $this->StringScalarTypeResolver,
-            'count' => $this->IntScalarTypeResolver,
+            'name' => $this->stringScalarTypeResolver,
+            'description' => $this->stringScalarTypeResolver,
+            'count' => $this->intScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

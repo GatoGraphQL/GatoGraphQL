@@ -40,7 +40,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
-        protected IntScalarTypeResolver $IntScalarTypeResolver,
+        protected IntScalarTypeResolver $intScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -79,8 +79,8 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
                 return $this->instanceManager->getInstance(CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class));
         }
         $types = [
-            'customPostCount' => $this->IntScalarTypeResolver,
-            'customPostCountForAdmin' => $this->IntScalarTypeResolver,
+            'customPostCount' => $this->intScalarTypeResolver,
+            'customPostCountForAdmin' => $this->intScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

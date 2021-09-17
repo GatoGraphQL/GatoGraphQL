@@ -30,7 +30,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -68,7 +68,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $types = [
-            'isSticky' => $this->BooleanScalarTypeResolver,
+            'isSticky' => $this->booleanScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

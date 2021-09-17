@@ -36,9 +36,9 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
         protected CMSHelperServiceInterface $cmsHelperService,
-        protected URLScalarTypeResolver $URLScalarTypeResolver,
-        protected IDScalarTypeResolver $IDScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
+        protected URLScalarTypeResolver $urlScalarTypeResolver,
+        protected IDScalarTypeResolver $idScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -84,16 +84,16 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $this->instanceManager->getInstance(MenuItemObjectTypeResolver::class);
         }
         $types = [
-            'localURLPath' => $this->StringScalarTypeResolver,
-            'label' => $this->StringScalarTypeResolver,
-            'title' => $this->StringScalarTypeResolver,
-            'url' => $this->URLScalarTypeResolver,
-            'classes' => $this->StringScalarTypeResolver,
-            'target' => $this->StringScalarTypeResolver,
-            'description' => $this->StringScalarTypeResolver,
-            'objectID' => $this->IDScalarTypeResolver,
-            'parentID' => $this->IDScalarTypeResolver,
-            'linkRelationship' => $this->StringScalarTypeResolver,
+            'localURLPath' => $this->stringScalarTypeResolver,
+            'label' => $this->stringScalarTypeResolver,
+            'title' => $this->stringScalarTypeResolver,
+            'url' => $this->urlScalarTypeResolver,
+            'classes' => $this->stringScalarTypeResolver,
+            'target' => $this->stringScalarTypeResolver,
+            'description' => $this->stringScalarTypeResolver,
+            'objectID' => $this->idScalarTypeResolver,
+            'parentID' => $this->idScalarTypeResolver,
+            'linkRelationship' => $this->stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }

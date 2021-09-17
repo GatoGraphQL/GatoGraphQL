@@ -39,10 +39,10 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         TypeRegistryInterface $typeRegistry,
         protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         protected CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver,
-        protected BooleanScalarTypeResolver $BooleanScalarTypeResolver,
-        protected DateScalarTypeResolver $DateScalarTypeResolver,
-        protected StringScalarTypeResolver $StringScalarTypeResolver,
-        protected CustomPostStatusEnumTypeResolver $CustomPostStatusEnumTypeResolver,
+        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected DateScalarTypeResolver $dateScalarTypeResolver,
+        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -54,7 +54,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             $typeRegistry,
         );
     }
-    
+
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -90,17 +90,17 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     {
         return match ($fieldName) {
             'isStatus'
-                => $this->BooleanScalarTypeResolver,
+                => $this->booleanScalarTypeResolver,
             'date',
             'modified'
-                => $this->DateScalarTypeResolver,
+                => $this->dateScalarTypeResolver,
             'content',
             'title',
             'excerpt',
             'customPostType'
-                => $this->StringScalarTypeResolver,
+                => $this->stringScalarTypeResolver,
             'status'
-                => $this->CustomPostStatusEnumTypeResolver,
+                => $this->customPostStatusEnumTypeResolver,
             default
                 => parent::getFieldTypeResolver($fieldName),
         };
