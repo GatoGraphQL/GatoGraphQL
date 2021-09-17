@@ -13,9 +13,9 @@ abstract class AbstractPageTypeResolverPicker extends AbstractObjectTypeResolver
 {
     public function __construct(
         protected PageObjectTypeResolver $pageObjectTypeResolver,
-    ) {        
+    ) {
     }
-    
+
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {
         return $this->pageObjectTypeResolver;

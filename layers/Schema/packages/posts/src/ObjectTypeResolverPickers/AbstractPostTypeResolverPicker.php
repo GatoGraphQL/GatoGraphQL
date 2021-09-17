@@ -13,9 +13,9 @@ abstract class AbstractPostTypeResolverPicker extends AbstractObjectTypeResolver
 {
     public function __construct(
         protected PostObjectTypeResolver $postObjectTypeResolver,
-    ) {        
+    ) {
     }
-    
+
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {
         return $this->postObjectTypeResolver;

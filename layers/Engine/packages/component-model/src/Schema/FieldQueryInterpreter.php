@@ -163,7 +163,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $targetObjectTypeResolvers = $relationalTypeResolver instanceof UnionTypeResolverInterface ?
             $relationalTypeResolver->getTargetObjectTypeResolvers()
             : [$relationalTypeResolver];
-            
+
         foreach ($targetObjectTypeResolvers as $targetObjectTypeResolver) {
             $uniqueFieldOutputKeys[$targetObjectTypeResolver->getTypeName] = $this->getUniqueFieldOutputKeyByObjectTypeResolver(
                 $targetObjectTypeResolver,

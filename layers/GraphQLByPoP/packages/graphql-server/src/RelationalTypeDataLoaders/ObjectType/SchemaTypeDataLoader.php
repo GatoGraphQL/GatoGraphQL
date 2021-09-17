@@ -30,7 +30,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
             $nameResolver,
         );
     }
-    
+
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {
         return $this->schemaObjectTypeResolver;
