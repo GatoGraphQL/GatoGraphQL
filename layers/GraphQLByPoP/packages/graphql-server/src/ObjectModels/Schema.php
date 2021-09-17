@@ -189,11 +189,8 @@ class Schema
          */
         $vars = ApplicationState::getVars();
         if (!$vars['nested-mutations-enabled']) {
-            $instanceManager = InstanceManagerFacade::getInstance();
             $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-            $rootTypeResolverClass = $schemaDefinitionService->getRootTypeResolverClass();
-            /** @var TypeResolverInterface */
-            $rootTypeResolver = $instanceManager->getInstance($rootTypeResolverClass);
+            $rootTypeResolver = $schemaDefinitionService->getRootTypeResolver();
             $resolvableTypes = array_filter(
                 $resolvableTypes,
                 fn (AbstractType $objectType) => $objectType->getName() != $rootTypeResolver->getTypeName()
