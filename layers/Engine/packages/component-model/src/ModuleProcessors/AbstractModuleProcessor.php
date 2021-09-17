@@ -195,7 +195,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
              */
             $relationalTypeResolver = $this->instanceManager->getInstance($typeResolver_class);
             foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
-                if ($subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
+                if ($subcomponent_typeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
+                    $subcomponent_typeResolver_class = get_class($subcomponent_typeResolver);
                     foreach ($subcomponent_modules as $subcomponent_module) {
                         $this->setProp($subcomponent_module, $props, 'succeeding-typeResolver', $subcomponent_typeResolver_class);
                     }
@@ -208,7 +209,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             }
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
                 foreach ($dataFieldTypeResolverOptionsConditionalSubmodules as $conditionalDataField => $conditionalSubmodules) {
-                    if ($subcomponentTypeResolverClass = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
+                    if ($subcomponentTypeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
+                        $subcomponentTypeResolverClass = get_class($subcomponentTypeResolver);
                         foreach ($conditionalSubmodules as $conditionalSubmodule) {
                             $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $subcomponentTypeResolverClass);
                         }
@@ -512,8 +514,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $relationalTypeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
             foreach (array_keys($this->getDomainSwitchingSubmodules($module)) as $subcomponent_data_field) {
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
-                if ($subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
-                    $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponent_typeResolver_class);
+                if ($subcomponent_typeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
@@ -524,8 +525,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
                 foreach (array_keys($dataFieldTypeResolverOptionsConditionalSubmodules) as $conditionalDataField) {
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
-                    if ($subcomponentTypeResolverClass = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
-                        $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponentTypeResolverClass);
+                    if ($subcomponent_typeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
                         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                         // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                         // @see https://github.com/leoloso/PoP/issues/1050

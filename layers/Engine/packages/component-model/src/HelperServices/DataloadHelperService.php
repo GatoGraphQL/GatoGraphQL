@@ -29,7 +29,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
      * ObjectTypeResolverInterface, to make it easy within the application to check
      * for this result without checking in advance what's the typeResolver
      */
-    public function getTypeResolverClassFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, string $subcomponent_data_field): ?string
+    public function getTypeResolverFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, string $subcomponent_data_field): ?RelationalTypeResolverInterface
     {
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
@@ -44,7 +44,8 @@ class DataloadHelperService implements DataloadHelperServiceInterface
 
         // If this field doesn't have a typeResolver, show a schema error
         $subcomponentFieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($subcomponent_data_field);
-        if ($subcomponentFieldTypeResolver === null
+        if (
+            $subcomponentFieldTypeResolver === null
             || !($subcomponentFieldTypeResolver instanceof RelationalTypeResolverInterface)
         ) {
             // But if there are no ObjectTypeFieldResolvers, then skip adding an error here, since that error will have been added already
@@ -65,7 +66,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             }
             return null;
         }
-        return get_class($subcomponentFieldTypeResolver);
+        return $subcomponentFieldTypeResolver;
     }
 
     /**
