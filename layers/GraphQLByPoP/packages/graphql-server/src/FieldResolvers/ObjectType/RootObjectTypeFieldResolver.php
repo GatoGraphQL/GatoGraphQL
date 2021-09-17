@@ -132,9 +132,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case '__schema':
-                return SchemaObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
             case '__type':
-                return TypeObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

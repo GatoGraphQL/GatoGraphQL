@@ -63,7 +63,7 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
     {
         switch ($fieldName) {
             case 'me':
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

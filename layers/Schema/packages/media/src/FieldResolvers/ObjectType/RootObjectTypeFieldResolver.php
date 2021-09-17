@@ -86,7 +86,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldName) {
             case 'mediaItems':
             case 'mediaItem':
-                return MediaObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
         }
         $types = [
             'mediaItemCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),

@@ -79,7 +79,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldName) {
             case 'loginUser':
             case 'logoutUser':
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

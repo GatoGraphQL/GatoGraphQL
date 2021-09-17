@@ -44,7 +44,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     {
         switch ($fieldName) {
             case 'update':
-                return PostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

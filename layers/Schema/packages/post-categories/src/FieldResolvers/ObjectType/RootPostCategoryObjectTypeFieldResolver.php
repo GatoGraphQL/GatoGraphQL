@@ -51,7 +51,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             case 'postCategory':
             case 'postCategoryBySlug':
             case 'postCategories':
-                return PostCategoryObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
         }
         $types = [
             'postCategoryCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),

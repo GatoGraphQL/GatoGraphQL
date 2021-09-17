@@ -49,7 +49,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         switch ($fieldName) {
             case 'myPosts':
             case 'myPost':
-                return PostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
         }
         $types = [
             'myPostCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),

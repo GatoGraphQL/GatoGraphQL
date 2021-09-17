@@ -98,7 +98,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     {
         switch ($fieldName) {
             case 'user':
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
         $types = [
             'action' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),

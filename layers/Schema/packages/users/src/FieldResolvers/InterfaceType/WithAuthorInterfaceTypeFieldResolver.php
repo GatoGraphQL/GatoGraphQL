@@ -47,7 +47,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
     {
         switch ($fieldName) {
             case 'author':
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($fieldName);

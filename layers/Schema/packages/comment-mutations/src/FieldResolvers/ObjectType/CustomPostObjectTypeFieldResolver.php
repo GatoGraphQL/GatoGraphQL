@@ -98,7 +98,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'addComment':
-                return CommentObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

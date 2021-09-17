@@ -47,7 +47,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         switch ($fieldName) {
             case 'posts':
             case 'postsForAdmin':
-                return PostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
         }
         $types = [
             'postCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),

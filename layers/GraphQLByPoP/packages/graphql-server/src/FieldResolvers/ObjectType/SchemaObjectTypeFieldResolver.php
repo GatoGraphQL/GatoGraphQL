@@ -125,9 +125,9 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'subscriptionType':
             case 'types':
             case 'type':
-                return TypeObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
             case 'directives':
-                return DirectiveObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(DirectiveObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

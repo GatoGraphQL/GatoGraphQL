@@ -46,7 +46,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         switch ($fieldName) {
             case 'comments':
             case 'commentsForAdmin':
-                return CommentObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
         }
         $types = [
             'areCommentsOpen' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),

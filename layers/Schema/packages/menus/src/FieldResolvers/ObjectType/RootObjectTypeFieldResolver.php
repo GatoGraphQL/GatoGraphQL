@@ -50,7 +50,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldName) {
             case 'menu':
             case 'menus':
-                return MenuObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
         }
         $types = [
             'menuCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),

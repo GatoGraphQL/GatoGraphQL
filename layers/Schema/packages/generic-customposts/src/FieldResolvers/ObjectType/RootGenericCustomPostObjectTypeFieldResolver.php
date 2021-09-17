@@ -76,7 +76,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             case 'genericCustomPostForAdmin':
             case 'genericCustomPostBySlugForAdmin':
             case 'genericCustomPostsForAdmin':
-                return GenericCustomPostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
         }
         $types = [
             'genericCustomPostCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),

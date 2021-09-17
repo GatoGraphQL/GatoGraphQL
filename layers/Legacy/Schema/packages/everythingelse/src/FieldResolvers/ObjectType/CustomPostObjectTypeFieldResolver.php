@@ -72,7 +72,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'locations':
-                return LocationObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

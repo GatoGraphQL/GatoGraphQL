@@ -65,7 +65,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'items':
-                return MenuItemObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(MenuItemObjectTypeResolver::class);
         }
         $types = [
             'itemDataEntries' => $this->instanceManager->getInstance(ObjectScalarTypeResolver::class),

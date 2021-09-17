@@ -122,7 +122,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldName) {
             case 'setFeaturedImageOnCustomPost':
             case 'removeFeaturedImageFromCustomPost':
-                return CustomPostUnionTypeResolver::class;
+                return $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

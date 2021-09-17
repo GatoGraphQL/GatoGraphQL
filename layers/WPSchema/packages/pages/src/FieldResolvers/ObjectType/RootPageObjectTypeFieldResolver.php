@@ -108,7 +108,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         switch ($fieldName) {
             case 'pageByPath':
             case 'pageByPathForAdmin':
-                return PageObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PageObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

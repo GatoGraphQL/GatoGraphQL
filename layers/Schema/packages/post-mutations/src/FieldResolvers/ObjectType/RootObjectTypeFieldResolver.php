@@ -81,7 +81,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'createPost':
             case 'updatePost':
-                return PostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

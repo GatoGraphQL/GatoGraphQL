@@ -34,7 +34,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
     {
         switch ($fieldName) {
             case 'featuredImage':
-                return MediaObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
         }
         $types = [
             'hasFeaturedImage' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),

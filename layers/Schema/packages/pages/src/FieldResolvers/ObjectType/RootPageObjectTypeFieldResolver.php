@@ -82,7 +82,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
             case 'pageForAdmin':
             case 'pageBySlugForAdmin':
             case 'pagesForAdmin':
-                return PageObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PageObjectTypeResolver::class);
         }
         $types = [
             'pageCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),

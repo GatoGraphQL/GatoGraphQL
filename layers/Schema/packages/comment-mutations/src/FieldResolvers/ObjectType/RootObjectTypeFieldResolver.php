@@ -69,7 +69,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldName) {
             case 'addCommentToCustomPost':
             case 'replyComment':
-                return CommentObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

@@ -144,7 +144,7 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
             case 'user':
             case 'userByUsername':
             case 'userByEmail':
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

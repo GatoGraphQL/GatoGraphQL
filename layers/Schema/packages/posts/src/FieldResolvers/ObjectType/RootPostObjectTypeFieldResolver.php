@@ -120,7 +120,7 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
             case 'postForAdmin':
             case 'postBySlug':
             case 'postBySlugForAdmin':
-                return PostObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

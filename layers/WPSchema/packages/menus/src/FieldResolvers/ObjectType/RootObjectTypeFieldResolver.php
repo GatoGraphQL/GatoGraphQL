@@ -106,7 +106,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldName) {
             case 'menuByLocation':
             case 'menuBySlug':
-                return MenuObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

@@ -127,7 +127,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'reply':
-                return CommentObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

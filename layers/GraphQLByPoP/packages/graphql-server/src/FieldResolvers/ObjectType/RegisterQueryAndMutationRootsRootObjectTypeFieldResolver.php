@@ -62,9 +62,9 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     {
         switch ($fieldName) {
             case 'queryRoot':
-                return QueryRootObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
             case 'mutationRoot':
-                return MutationRootObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

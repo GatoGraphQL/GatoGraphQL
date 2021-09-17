@@ -81,7 +81,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'sites':
             case 'site':
-                return SiteObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(SiteObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

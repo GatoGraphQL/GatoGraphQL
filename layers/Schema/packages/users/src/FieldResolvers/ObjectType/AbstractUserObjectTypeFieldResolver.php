@@ -75,7 +75,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         switch ($fieldName) {
             case 'users':
             case 'usersForAdmin':
-                return UserObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
         $types = [
             'userCount' => $this->instanceManager->getInstance(IntScalarTypeResolver::class),

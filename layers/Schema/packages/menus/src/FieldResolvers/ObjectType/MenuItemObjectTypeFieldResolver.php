@@ -78,7 +78,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'children':
-                return MenuItemObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(MenuItemObjectTypeResolver::class);
         }
         $types = [
             'localURLPath' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),

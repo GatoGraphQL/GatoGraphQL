@@ -130,7 +130,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'avatar':
-                return UserAvatarObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(UserAvatarObjectTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);

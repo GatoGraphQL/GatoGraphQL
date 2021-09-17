@@ -42,7 +42,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         switch ($fieldName) {
             case 'stances':
-                return StanceObjectTypeResolver::class;
+                return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
         }
         $types = [
             'hasStances' => $this->instanceManager->getInstance(BooleanScalarTypeResolver::class),

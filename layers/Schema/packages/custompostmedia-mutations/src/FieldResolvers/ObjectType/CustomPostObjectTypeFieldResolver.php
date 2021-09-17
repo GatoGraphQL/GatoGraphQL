@@ -158,7 +158,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'setFeaturedImage':
             case 'removeFeaturedImage':
-                return CustomPostUnionTypeResolver::class;
+                return $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
         }
 
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
