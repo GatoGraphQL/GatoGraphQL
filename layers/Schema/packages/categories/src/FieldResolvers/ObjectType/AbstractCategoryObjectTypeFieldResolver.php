@@ -10,13 +10,11 @@ use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
+use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractInterface;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 
-abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements CategoryAPIRequestedContractInterface
 {
-    use CategoryAPIRequestedContractTrait;
-
     public function getImplementedInterfaceTypeFieldResolverClasses(): array
     {
         return [

@@ -7,8 +7,8 @@ namespace PoPSchema\Tags\ComponentContracts;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 
-trait TagAPIRequestedContractTrait
+interface TagAPIRequestedContractInterface
 {
-    abstract protected function getTagTypeAPI(): TagTypeAPIInterface;
-    abstract protected function getTagTypeResolver(): TagObjectTypeResolverInterface;
+    public function getTagTypeAPI(): TagTypeAPIInterface;
+    public function getTagTypeResolver(): TagObjectTypeResolverInterface;
 }

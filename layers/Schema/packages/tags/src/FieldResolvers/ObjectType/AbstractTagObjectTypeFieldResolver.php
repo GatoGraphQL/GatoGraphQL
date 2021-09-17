@@ -8,16 +8,13 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
-use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
+use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractInterface;
 
-abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements TagAPIRequestedContractInterface
 {
-    use TagAPIRequestedContractTrait;
-
     public function getImplementedInterfaceTypeFieldResolverClasses(): array
     {
         return [

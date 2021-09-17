@@ -14,18 +14,18 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 {
-    protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface
+    public function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         return $instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
-    protected function getTypeMutationResolverClass(): string
+    public function getTypeMutationResolverClass(): string
     {
         return SetCategoriesOnPostMutationResolver::class;
     }
 
-    protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
+    public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         return $instanceManager->getInstance(PostCategoryObjectTypeResolver::class);

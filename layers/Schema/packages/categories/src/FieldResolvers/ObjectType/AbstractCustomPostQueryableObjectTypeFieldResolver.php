@@ -12,16 +12,15 @@ use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Categories\ComponentConfiguration;
-use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
+use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractInterface;
 use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
-abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements CategoryAPIRequestedContractInterface
 {
-    use CategoryAPIRequestedContractTrait;
     use WithLimitFieldArgResolverTrait;
 
     public function getFieldNamesToResolve(): array

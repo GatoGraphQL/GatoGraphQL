@@ -11,7 +11,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
-abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
 

@@ -16,11 +16,10 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\Tags\ComponentConfiguration;
-use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
+use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractInterface;
 
-abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements TagAPIRequestedContractInterface
 {
-    use TagAPIRequestedContractTrait;
     use WithLimitFieldArgResolverTrait;
 
     public function getFieldNamesToResolve(): array
