@@ -40,7 +40,7 @@ class PoP_RelatedPosts_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
                 => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'references',
             'referencedby'
-                => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolverClass(CustomPostUnionTypeResolver::class),
+                => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
