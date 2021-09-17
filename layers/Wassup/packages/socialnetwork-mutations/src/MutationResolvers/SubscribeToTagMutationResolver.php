@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoPSchema\UserMeta\Utils;
+use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
@@ -18,10 +20,10 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user has not already subscribed to this tag
-            $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
+            $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if (in_array($target_id, $value)) {
                 $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-                $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
+                $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
                 $tag = $postTagTypeAPI->getTag($target_id);
                 $errors[] = sprintf(
                     $this->translationAPI->__('You have already subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
@@ -48,7 +50,7 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
         $target_id = $form_data['target_id'];
 
         // Update value
-        \PoPSchema\UserMeta\Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, $target_id);
+        Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, $target_id);
         \PoPSchema\TaxonomyMeta\Utils::addTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBEDBY, $user_id);
 
         // Update the counter

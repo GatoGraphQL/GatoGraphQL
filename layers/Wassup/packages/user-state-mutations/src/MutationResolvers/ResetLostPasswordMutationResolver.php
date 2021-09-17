@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use PoP\UserAccount\FunctionAPIFactory;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -59,7 +60,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         $code = $form_data[MutationInputProperties::CODE];
         $pwd = $form_data[MutationInputProperties::PASSWORD];
 
-        $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
+        $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         $decoded = MutationResolverUtils::decodeLostPasswordCode($code);
         $rp_key = $decoded['key'];
         $rp_login = $decoded['login'];

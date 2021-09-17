@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Application\PostsFunctionAPIFactory;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 abstract class AbstractRecommendOrUnrecommendCustomPostMutationResolver extends AbstractCustomPostUpdateUserMetaValueMutationResolver
@@ -11,7 +12,7 @@ abstract class AbstractRecommendOrUnrecommendCustomPostMutationResolver extends 
     protected function eligible($post)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
+        $cmsapplicationpostsapi = PostsFunctionAPIFactory::getInstance();
         $eligible = in_array($customPostTypeAPI->getCustomPostType($post), $cmsapplicationpostsapi->getAllcontentPostTypes());
         return $this->hooksAPI->applyFilters('GD_RecommendUnrecommendPost:eligible', $eligible, $post);
     }

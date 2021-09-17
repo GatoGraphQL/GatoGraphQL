@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
+use PoPSchema\CustomPostMeta\Utils;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
@@ -138,7 +139,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
 
         // Topics
         if (\PoP_ApplicationProcessors_Utils::addCategories()) {
-            \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_CATEGORIES, $form_data[MutationInputProperties::TOPICS]);
+            Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_CATEGORIES, $form_data[MutationInputProperties::TOPICS]);
         }
 
         // Only if the Volunteering is enabled
@@ -146,13 +147,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
             if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                 // Volunteers Needed?
                 if (isset($form_data[MutationInputProperties::VOLUNTEERSNEEDED])) {
-                    \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_VOLUNTEERSNEEDED, $form_data[MutationInputProperties::VOLUNTEERSNEEDED], true, true);
+                    Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_VOLUNTEERSNEEDED, $form_data[MutationInputProperties::VOLUNTEERSNEEDED], true, true);
                 }
             }
         }
 
         if (\PoP_ApplicationProcessors_Utils::addAppliesto()) {
-            \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_APPLIESTO, $form_data[MutationInputProperties::APPLIESTO]);
+            Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_APPLIESTO, $form_data[MutationInputProperties::APPLIESTO]);
         }
     }
 
@@ -229,7 +230,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         parent::createUpdateCustomPost($form_data, $customPostID);
 
         if (isset($form_data[MutationInputProperties::REFERENCES])) {
-            \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_REFERENCES, $form_data[MutationInputProperties::REFERENCES]);
+            Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_REFERENCES, $form_data[MutationInputProperties::REFERENCES]);
         }
     }
 
@@ -238,7 +239,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         $log = parent::getUpdateCustomPostDataLog($customPostID, $form_data);
 
         if (isset($form_data[MutationInputProperties::REFERENCES])) {
-            $previous_references = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($customPostID, GD_METAKEY_POST_REFERENCES);
+            $previous_references = Utils::getCustomPostMeta($customPostID, GD_METAKEY_POST_REFERENCES);
             $log['new-references'] = array_diff($form_data[MutationInputProperties::REFERENCES], $previous_references);
         }
 

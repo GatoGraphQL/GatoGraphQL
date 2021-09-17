@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\HighlightMutations\MutationResolvers;
 
+use PoPSchema\CustomPostMeta\Utils;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
@@ -45,7 +46,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
     {
         parent::createAdditionals($post_id, $form_data);
 
-        \PoPSchema\CustomPostMeta\Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $form_data['highlightedpost'], true);
+        Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $form_data['highlightedpost'], true);
 
         // Allow to create a Notification
         $this->hooksAPI->doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $form_data);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use PoP\UserAccount\FunctionAPIFactory;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -24,7 +25,7 @@ class LoginMutationResolver extends UpstreamLoginMutationResolver
 
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
     {
-        $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
+        $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         return sprintf(
             $this->translationAPI->__('You are already logged in as <a href="%s">%s</a>, <a href="%s">logout</a>?', 'user-state-mutations'),
             $this->userTypeAPI->getUserURL($user_id),

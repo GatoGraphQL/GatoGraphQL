@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
+use PoP\EditPosts\FunctionAPIFactory;
+use PoPSchema\CustomPostMeta\Utils;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Types\Status;
@@ -54,7 +56,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         parent::validateCreateContent($errors, $form_data);
 
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
+        $cmseditpostsapi = FunctionAPIFactory::getInstance();
         // For the Stance, there can be at most 1 post for:
         // - Each article: each referenced $post_id
         // - General Thought: only one without a $post_id, set through the homepage
@@ -119,7 +121,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         parent::createAdditionals($post_id, $form_data);
 
         if ($target = $form_data['stancetarget']) {
-            \PoPSchema\CustomPostMeta\Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, $target, true);
+            Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, $target, true);
         }
 
         // Allow for URE to add the AuthorRole meta value

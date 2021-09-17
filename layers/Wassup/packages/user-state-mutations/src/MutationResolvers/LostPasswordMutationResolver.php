@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
@@ -30,7 +31,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     {
         $code = MutationResolverUtils::getLostPasswordCode($key, $user_login);
         $cmsService = CMSServiceFacade::getInstance();
-        $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
+        $cmsapplicationapi = FunctionAPIFactory::getInstance();
 
         // $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         // $input_name = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE])->getName([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE]);
@@ -123,7 +124,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         // $site_name = wp_specialchars_decode($cmsapplicationapi->getSiteName(), ENT_QUOTES);
         // $title = sprintf($this->translationAPI->__('[%s] Password Reset'), $site_name);
         $user_id = $this->userTypeAPI->getUserId($user);
-        $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
+        $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $title = sprintf($this->translationAPI->__('[%s] Password Reset'), $cmsapplicationapi->getSiteName());
         $title = $this->hooksAPI->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
         $message = $this->retrievePasswordMessage($key, $user_login, $user_id);
