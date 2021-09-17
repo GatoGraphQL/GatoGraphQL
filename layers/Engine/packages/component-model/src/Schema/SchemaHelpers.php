@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class SchemaHelpers
 {
@@ -112,34 +109,5 @@ class SchemaHelpers
             }
         }
         return $enumValueDefinitions;
-    }
-
-    private static function getFieldTypeResolver(string $fieldTypeResolverClass): TypeResolverInterface
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var TypeResolverInterface */
-        return $instanceManager->getInstance($fieldTypeResolverClass);
-    }
-
-    /**
-     * Indicate if a FieldObjectTypeResolver class is of the Relational type
-     */
-    public static function isRelationalFieldTypeResolverClass(?string $fieldTypeResolverClass): ?bool
-    {
-        if ($fieldTypeResolverClass === null) {
-            return null;
-        }
-        return self::getFieldTypeResolver($fieldTypeResolverClass) instanceof RelationalTypeResolverInterface;
-    }
-
-    /**
-     * Indicate if a FieldObjectTypeResolver class is of the Enum type
-     */
-    public static function isEnumFieldTypeResolverClass(?string $fieldTypeResolverClass): ?bool
-    {
-        if ($fieldTypeResolverClass === null) {
-            return null;
-        }
-        return self::getFieldTypeResolver($fieldTypeResolverClass) instanceof EnumTypeResolverInterface;
     }
 }
