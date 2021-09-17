@@ -5,12 +5,23 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\ModuleProcessors\FormInputs;
 
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
+use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\Enums\CommentStatusEnum;
@@ -28,6 +39,36 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS = 'filterinput-exclude-custompost-ids';
     public const MODULE_FILTERINPUT_COMMENT_TYPES = 'filterinput-comment-types';
     public const MODULE_FILTERINPUT_COMMENT_STATUS = 'filterinput-comment-status';
+
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        ModulePathHelpersInterface $modulePathHelpers,
+        ModuleFilterManagerInterface $moduleFilterManager,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
+        CMSServiceInterface $cmsService,
+        NameResolverInterface $nameResolver,
+        DataloadHelperServiceInterface $dataloadHelperService,
+        RequestHelperServiceInterface $requestHelperService,
+        protected CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver,
+        protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $modulePathHelpers,
+            $moduleFilterManager,
+            $moduleProcessorManager,
+            $cmsService,
+            $nameResolver,
+            $dataloadHelperService,
+            $requestHelperService,
+        );
+    }
 
     public function getModulesToProcess(): array
     {
@@ -145,23 +186,15 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_COMMENT_TYPES:
-                /**
-                 * @var CommentTypeEnumTypeResolver
-                 */
-                $commentTypeEnumTypeResolver = $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $commentTypeEnumTypeResolver->getTypeName();
+                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $this->commentTypeEnumTypeResolver->getTypeName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $commentTypeEnumTypeResolver
+                    $this->commentTypeEnumTypeResolver
                 );
                 break;
             case self::MODULE_FILTERINPUT_COMMENT_STATUS:
-                /**
-                 * @var CommentStatusEnumTypeResolver
-                 */
-                $commentStatusEnumTypeResolver = $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $commentStatusEnumTypeResolver->getTypeName();
+                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $this->commentStatusEnumTypeResolver->getTypeName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $commentStatusEnumTypeResolver
+                    $this->commentStatusEnumTypeResolver
                 );
                 break;
         }

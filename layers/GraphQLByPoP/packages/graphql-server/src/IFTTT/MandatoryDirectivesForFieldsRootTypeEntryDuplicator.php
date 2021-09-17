@@ -18,6 +18,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
+        protected RootObjectTypeResolver $rootObjectTypeResolver,
         TypeResolverHelperInterface $typeResolverHelper
     ) {
         /** Fields "id", "self" and "__typename" belong to both QueryRoot and MutationRoot */
@@ -68,9 +69,6 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
         $additionalFieldEntries = [];
 
-        /** @var RootObjectTypeResolver */
-        $rootObjectTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
-
         foreach ($rootFieldEntries as $rootFieldEntry) {
             $fieldName = $rootFieldEntry[1];
             if ($forceBothTypes || in_array($fieldName, $this->objectTypeResolverMandatoryFields)) {
@@ -81,7 +79,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
                 continue;
             }
             // If it has a MutationResolver for that field then add entry for MutationRoot
-            $isFieldAMutation = $rootObjectTypeResolver->isFieldAMutation($fieldName);
+            $isFieldAMutation = $this->rootObjectTypeResolver->isFieldAMutation($fieldName);
             // Make sure the field has a FieldResolver. If not, ignore
             if ($isFieldAMutation === null) {
                 continue;

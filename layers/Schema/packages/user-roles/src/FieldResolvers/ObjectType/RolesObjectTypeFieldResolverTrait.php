@@ -30,9 +30,10 @@ trait RolesObjectTypeFieldResolverTrait
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
+        $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
         $types = [
-            'roles' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
-            'capabilities' => $this->instanceManager->getInstance(StringScalarTypeResolver::class),
+            'roles' => $stringScalarTypeResolver,
+            'capabilities' => $stringScalarTypeResolver,
         ];
         return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
