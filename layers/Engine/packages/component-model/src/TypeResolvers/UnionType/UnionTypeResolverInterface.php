@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
@@ -22,7 +23,7 @@ interface UnionTypeResolverInterface extends RelationalTypeResolverInterface
      * @return ObjectTypeResolverInterface[]
      */
     public function getTargetObjectTypeResolvers(): array;
-    public function getSchemaTypeInterfaceTypeResolverClass(): ?string;
+    public function getSchemaTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface;
     /**
      * @return ObjectTypeResolverPickerInterface[]
      */
