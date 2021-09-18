@@ -1563,19 +1563,23 @@ class Engine implements EngineInterface
                         // If it's a unionTypeResolver, get the typeResolver for each object
                         // to obtain the subcomponent typeResolver
                         /** @var UnionTypeResolverInterface $relationalTypeResolver */
-                        $objectTypeResolvers = $relationalTypeResolver->getObjectIDTargetTypeResolvers($objectTypeResolver_ids);
-                        $iterationTypeResolverIDs = [];
+                        $targetObjectTypeResolvers = $relationalTypeResolver->getObjectIDTargetTypeResolvers($objectTypeResolver_ids);
+                        $iterationObjectTypeResolverNameDataItems = [];
                         foreach ($objectTypeResolver_ids as $id) {
                             // If there's no resolver, it's an error: the ID can't be processed by anyone
-                            if ($objectTypeResolver = $objectTypeResolvers[(string)$id]) {
-                                $objectTypeResolverClass = get_class($objectTypeResolver);
-                                $iterationTypeResolverIDs[$objectTypeResolverClass][] = $id;
+                            if ($targetObjectTypeResolver = $targetObjectTypeResolvers[(string)$id] ?? null) {
+                                $objectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
+                                $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName] ??= [
+                                    'targetObjectTypeResolver' => $targetObjectTypeResolver,
+                                    'objectIDs' => [],
+                                ];
+                                $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName]['objectIDs'][] = $id;
                             }
                         }
-                        foreach ($iterationTypeResolverIDs as $targetObjectTypeResolverClass => $targetIDs) {
-                            /** @var ObjectTypeResolverInterface */
-                            $targetObjectTypeResolver = $this->instanceManager->getInstance($targetObjectTypeResolverClass);
-                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetIDs, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $targetObjectIDItems);
+                        foreach ($iterationObjectTypeResolverNameDataItems as $iterationObjectTypeResolverName => $iterationObjectTypeResolverDataItems) {
+                            $targetObjectTypeResolver = $iterationObjectTypeResolverDataItems['targetObjectTypeResolver'];
+                            $targetObjectIDs = $iterationObjectTypeResolverDataItems['objectIDs'];
+                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $targetObjectIDItems);
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
