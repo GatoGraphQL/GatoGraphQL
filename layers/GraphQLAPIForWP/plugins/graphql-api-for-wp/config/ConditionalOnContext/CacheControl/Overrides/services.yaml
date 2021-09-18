@@ -6,4 +6,4 @@ services:
 
     # Override service, to disable caching when doing a preview
     PoP\CacheControl\Managers\CacheControlEngineInterface:
-        class: \GraphQLAPI\GraphQLAPI\ConditionalOnContext\CacheControl\Overrides\Services\Managers\CacheControlEngine
+        class: \GraphQLAPI\GraphQLAPI\ConditionalOnContext\CacheControl\Overrides\Managers\CacheControlEngine

@@ -24,9 +24,7 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
             $validateIsUserLoggedInForDirectivesDirectiveResolver->getDirectiveName()
         );
         // Add the mapping
-        foreach ($this->getDirectiveResolverClasses() as $needValidateIsUserLoggedInDirectiveResolverClass) {
-            /** @var DirectiveResolverInterface */
-            $needValidateIsUserLoggedInDirectiveResolver = $this->instanceManager->getInstance($needValidateIsUserLoggedInDirectiveResolverClass);
+        foreach ($this->getDirectiveResolvers() as $needValidateIsUserLoggedInDirectiveResolver) {
             $mandatoryDirectivesForDirectives[$needValidateIsUserLoggedInDirectiveResolver->getDirectiveName()] = [
                 $validateIsUserLoggedInDirective,
             ];
@@ -34,9 +32,9 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
         return $mandatoryDirectivesForDirectives;
     }
     /**
-     * Provide the classes for all the directiveResolverClasses that need the "validateIsUserLoggedIn" directive
+     * Provide the classes for all the directiveResolvers that need the "validateIsUserLoggedIn" directive
      *
-     * @return string[]
+     * @return DirectiveResolverInterface[]
      */
-    abstract protected function getDirectiveResolverClasses(): array;
+    abstract protected function getDirectiveResolvers(): array;
 }

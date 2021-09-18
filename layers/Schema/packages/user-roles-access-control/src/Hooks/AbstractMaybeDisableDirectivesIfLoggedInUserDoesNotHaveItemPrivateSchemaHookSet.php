@@ -12,7 +12,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
     /**
      * @var string[]|null
      */
-    protected ?array $directiveResolverClasses;
+    protected ?array $directiveResolverClasses = null;
 
     protected function enabled(): bool
     {
@@ -28,6 +28,8 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
 
     /**
      * Remove directiveName "translate" if the user is not logged in
+     *
+     * @return string[]
      */
     protected function getDirectiveResolverClasses(): array
     {

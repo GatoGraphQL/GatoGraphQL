@@ -79,21 +79,10 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
     /**
      * Affected directives
      *
-     * @return string[]
-     */
-    abstract protected function getDirectiveResolverClasses(): array;
-    /**
-     * Affected directives
-     *
      * @return DirectiveResolverInterface[]
      */
-    protected function getDirectiveResolvers(): array
-    {
-        return array_map(
-            fn (string $directiveResolverClass) => $this->instanceManager->getInstance($directiveResolverClass),
-            $this->getDirectiveResolverClasses()
-        );
-    }
+    abstract protected function getDirectiveResolvers(): array;
+
     /**
      * Decide if to remove the directiveNames
      */

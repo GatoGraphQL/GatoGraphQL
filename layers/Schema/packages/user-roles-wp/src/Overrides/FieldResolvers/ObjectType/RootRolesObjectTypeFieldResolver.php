@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\Overrides\FieldResolvers\ObjectType;
 
-class RootRolesObjectTypeFieldResolver extends \PoPSchema\UserRoles\FieldResolvers\ObjectType\RootRolesObjectTypeFieldResolver
+use PoPSchema\UserRoles\FieldResolvers\ObjectType\RootRolesObjectTypeFieldResolver as UpstreamRootRolesObjectTypeFieldResolver;
+
+class RootRolesObjectTypeFieldResolver extends UpstreamRootRolesObjectTypeFieldResolver
 {
     use RolesObjectTypeFieldResolverTrait;
 }
