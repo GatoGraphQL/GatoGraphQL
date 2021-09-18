@@ -21,6 +21,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
         ModuleRegistryInterface $moduleRegistry,
         protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
         protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
+        protected GraphQLRequestVarsHooks $graphQLRequestVarsHooks,
     ) {
         parent::__construct(
             $instanceManager,
@@ -60,18 +61,15 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     {
         [&$vars] = $vars_in_array;
 
-        /** @var GraphQLRequestVarsHooks */
-        $graphQLAPIRequestHookSet = $this->instanceManager->getInstance(GraphQLRequestVarsHooks::class);
-
         // The Persisted Query is also standard GraphQL
-        $graphQLAPIRequestHookSet->setStandardGraphQLVars($vars);
+        $this->graphQLRequestVarsHooks->setStandardGraphQLVars($vars);
 
         // Remove the VarsHookSet from the GraphQLRequest, so it doesn't process the GraphQL query
         // Otherwise it will add error "The query in the body is empty"
         /**
          * @var callable
          */
-        $action = [$graphQLAPIRequestHookSet, 'addVars'];
+        $action = [$this->graphQLRequestVarsHooks, 'addVars'];
         \remove_action(
             'ApplicationState:addVars',
             $action,
