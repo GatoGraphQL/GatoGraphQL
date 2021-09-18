@@ -550,7 +550,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return $ret;
     }
 
-    protected function addToDatasetDatabaseKeys(array $module, array &$props, $path, &$ret)
+    public function addToDatasetDatabaseKeys(array $module, array &$props, array $path, array &$ret): void
     {
         // Add the current module's dbkeys
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($module)) {
@@ -749,7 +749,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         );
     }
 
-    protected function addDatasetmoduletreeSectionFlattenedModules(&$ret, array $module)
+    public function addDatasetmoduletreeSectionFlattenedModules(&$ret, array $module): void
     {
         $ret[] = $module;
 
@@ -1088,7 +1088,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                         $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
 
                         // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
-                        if (!$submodule_processor->startDataloadingSection($submodule, $props[$moduleFullName][Props::SUBMODULES])) {
+                        if (!$submodule_processor->startDataloadingSection($submodule)) {
                             if ($submodule_ret = $submodule_processor->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES])) {
                                 // Chain the "data-fields" from the sublevels under the current "conditional-data-fields"
                                 // Move from "data-fields" to "conditional-data-fields"
@@ -1133,7 +1133,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
 
                 // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
-                if (!$submodule_processor->startDataloadingSection($submodule, $props[$moduleFullName][Props::SUBMODULES])) {
+                if (!$submodule_processor->startDataloadingSection($submodule)) {
                     if ($submodule_ret = $submodule_processor->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(

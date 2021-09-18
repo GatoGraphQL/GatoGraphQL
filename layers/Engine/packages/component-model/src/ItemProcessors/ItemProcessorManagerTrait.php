@@ -16,25 +16,10 @@ trait ItemProcessorManagerTrait
      * @var array<string, array>
      */
     private array $overridingClasses = [];
+
     /**
-     * @var array<string, object>
+     * @deprecated Use the Service Container instead
      */
-    private array $itemFullNameProcessorInstances = [];
-
-    public function getLoadedItemFullNameProcessorInstances()
-    {
-        return $this->itemFullNameProcessorInstances;
-    }
-
-    public function getLoadedItems()
-    {
-        // Return a list of all loaded items
-        return array_map(
-            [ProcessorItemUtils::class, 'getItemFromFullName'],
-            array_keys($this->itemFullNameProcessorInstances)
-        );
-    }
-
     public function overrideProcessorClass(string $overrideClass, string $withClass, array $forItemNames): void
     {
         foreach ($forItemNames as $forItemName) {
@@ -42,14 +27,14 @@ trait ItemProcessorManagerTrait
         }
     }
 
-    protected function hasItemBeenLoaded(array $item)
+    protected function hasItemBeenLoaded(array $item): bool
     {
         $itemProcessorClass = $item[0];
         $itemName = $item[1];
         return isset($this->processors[$itemProcessorClass][$itemName]);
     }
 
-    public function getItemProcessor(array $item)
+    public function getItemProcessor(array $item): mixed
     {
         $itemProcessorClass = $item[0];
         $itemName = $item[1];
@@ -67,17 +52,8 @@ trait ItemProcessorManagerTrait
             $instanceManager = InstanceManagerFacade::getInstance();
             $processorInstance = $instanceManager->getInstance($itemProcessorClass);
             $this->processors[$itemProcessorClass][$itemName] = $processorInstance;
-
-            // Keep a copy of what instance was generated for which item;
-            $itemFullName = ProcessorItemUtils::getItemFullName($item);
-            $this->itemFullNameProcessorInstances[$itemFullName] = $processorInstance;
         }
 
         return $this->processors[$itemProcessorClass][$itemName];
-    }
-
-    public function getProcessor(array $item)
-    {
-        return $this->getItemProcessor($item);
     }
 }

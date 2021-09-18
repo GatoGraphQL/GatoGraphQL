@@ -11,14 +11,14 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const DOING_POST = 'doing-post';
 
-    public function getCheckpointsToProcess()
+    public function getCheckpointsToProcess(): array
     {
         return array(
             [self::class, self::DOING_POST],
         );
     }
 
-    public function process(array $checkpoint)
+    public function validateCheckpoint(array $checkpoint): ?Error
     {
         switch ($checkpoint[1]) {
             case self::DOING_POST:
@@ -28,6 +28,6 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
                 break;
         }
 
-        return parent::process($checkpoint);
+        return parent::validateCheckpoint($checkpoint);
     }
 }

@@ -1,11 +1,54 @@
 <?php
-use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerTrait;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerTrait;
+use PoP\ComponentModel\ItemProcessors\ProcessorItemUtils;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
-class PoP_ResourceLoaderProcessorManager {
+class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManagerInterface {
 
-	use ItemProcessorManagerTrait;
+	use ItemProcessorManagerTrait {
+		getItemProcessor as upstreamGetItemProcessor;
+	}
+
+    /**
+     * @var array<string, object>
+     */
+    private array $itemFullNameProcessorInstances = [];
+
+    public function getLoadedItems(): array
+    {
+        // Return a list of all loaded items
+        return array_map(
+            [ProcessorItemUtils::class, 'getItemFromFullName'],
+            array_keys($this->itemFullNameProcessorInstances)
+        );
+    }
+
+    public function getLoadedItemFullNameProcessorInstances(): array
+    {
+        return $this->itemFullNameProcessorInstances;
+    }
+
+    public function getItemProcessor(array $item): mixed
+    {
+		$hasItemBeenLoaded = $this->hasItemBeenLoaded($item);
+        
+		$processorInstance = $this->upstreamGetItemProcessor($item);
+
+        // Return the reference to the ItemProcessor instance, and created first if it doesn't exist
+        if (!$hasItemBeenLoaded) {
+            // Keep a copy of what instance was generated for which item;
+            $itemFullName = ProcessorItemUtils::getItemFullName($item);
+            $this->itemFullNameProcessorInstances[$itemFullName] = $processorInstance;
+        }
+
+        return $processorInstance;
+    }
+
+    public function getProcessor(array $item): PoP_ResourceLoaderProcessor
+    {
+        return $this->getItemProcessor($item);
+    }
     
     public function getLoadedResourceFullNameProcessorInstances() 
     {

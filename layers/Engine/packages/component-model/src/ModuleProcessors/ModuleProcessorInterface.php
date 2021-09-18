@@ -71,4 +71,8 @@ interface ModuleProcessorInterface
     public function getModelSupplementaryDbobjectdata(array $module, array &$props): array;
     public function getMutableonrequestSupplementaryDbobjectdataModuletree(array $module, array &$props): array;
     public function getMutableonrequestSupplementaryDbobjectdata(array $module, array &$props): array;
+    public function moduleLoadsData(array $module): bool;
+    public function startDataloadingSection(array $module): bool;
+    public function addToDatasetDatabaseKeys(array $module, array &$props, array $path, array &$ret): void;
+    public function addDatasetmoduletreeSectionFlattenedModules(&$ret, array $module): void;
 }

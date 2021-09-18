@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\HelperServices;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -78,6 +78,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         foreach ($moduleValues as $moduleValue) {
             $module = $moduleValue['module'];
             $value = $moduleValue['value'];
+            /** @var FormComponentModuleProcessorInterface */
             $moduleprocessor = $this->moduleProcessorManager->getProcessor($module);
             $args[$moduleprocessor->getName($module)] = $value;
         }

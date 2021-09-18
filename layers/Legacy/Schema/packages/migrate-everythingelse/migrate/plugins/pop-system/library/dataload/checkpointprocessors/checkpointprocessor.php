@@ -7,7 +7,7 @@ class PoPSystem_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
     public const CHECKPOINT_SYSTEMACCESSKEYVALID = 'system-checkpoint-systemaccesskeyvalid';
     public const CHECKPOINT_SYSTEMACCESSIPVALID = 'system-checkpoint-systemaccessipvalid';
 
-    public function getCheckpointsToProcess()
+    public function getCheckpointsToProcess(): array
     {
         return array(
             [self::class, self::CHECKPOINT_SYSTEMACCESSKEYVALID],
@@ -15,7 +15,7 @@ class PoPSystem_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function process(array $checkpoint)
+    public function validateCheckpoint(array $checkpoint): ?Error
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_SYSTEMACCESSKEYVALID:
@@ -55,7 +55,7 @@ class PoPSystem_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
                 break;
         }
 
-        return parent::process($checkpoint);
+        return parent::validateCheckpoint($checkpoint);
     }
 }
 

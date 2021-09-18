@@ -9,4 +9,9 @@ use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerTrait;
 class FilterInputProcessorManager implements FilterInputProcessorManagerInterface
 {
     use ItemProcessorManagerTrait;
+
+    public function getProcessor(array $item): FilterInputProcessorInterface
+    {
+        return $this->getItemProcessor($item);
+    }
 }

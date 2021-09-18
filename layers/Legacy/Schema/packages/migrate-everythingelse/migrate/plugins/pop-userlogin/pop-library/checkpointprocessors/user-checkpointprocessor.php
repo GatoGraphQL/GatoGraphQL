@@ -8,14 +8,14 @@ class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointPr
 {
     public const CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR = 'checkpoint-loggedinuser-isadministrator';
 
-    public function getCheckpointsToProcess()
+    public function getCheckpointsToProcess(): array
     {
         return array(
             [self::class, self::CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR],
         );
     }
 
-    public function process(array $checkpoint)
+    public function validateCheckpoint(array $checkpoint): ?Error
     {
         $vars = ApplicationState::getVars();
         switch ($checkpoint[1]) {
@@ -28,7 +28,7 @@ class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointPr
                 break;
         }
 
-        return parent::process($checkpoint);
+        return parent::validateCheckpoint($checkpoint);
     }
 }
 

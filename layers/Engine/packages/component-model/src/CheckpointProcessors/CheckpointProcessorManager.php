@@ -9,4 +9,9 @@ use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerTrait;
 class CheckpointProcessorManager implements CheckpointProcessorManagerInterface
 {
     use ItemProcessorManagerTrait;
+
+    public function getProcessor(array $item): CheckpointProcessorInterface
+    {
+        return $this->getItemProcessor($item);
+    }
 }
