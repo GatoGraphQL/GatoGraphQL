@@ -71,4 +71,5 @@ interface ModuleProcessorInterface
     public function getModelSupplementaryDbobjectdata(array $module, array &$props): array;
     public function getMutableonrequestSupplementaryDbobjectdataModuletree(array $module, array &$props): array;
     public function getMutableonrequestSupplementaryDbobjectdata(array $module, array &$props): array;
+    public function moduleLoadsData(array $module): bool;
 }
