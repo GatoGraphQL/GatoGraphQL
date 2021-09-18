@@ -15,7 +15,7 @@ class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMu
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected SaveDefinitionFileMutationResolver $SaveDefinitionFileMutationResolver,
+        protected SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMu
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->SaveDefinitionFileMutationResolver;
+        return $this->saveDefinitionFileMutationResolver;
     }
 
     public function getSuccessString(string | int $result_id): ?string

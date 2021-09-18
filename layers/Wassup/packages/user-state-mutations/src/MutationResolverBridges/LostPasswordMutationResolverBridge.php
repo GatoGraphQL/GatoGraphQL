@@ -18,7 +18,7 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected LostPasswordMutationResolver $LostPasswordMutationResolver,
+        protected LostPasswordMutationResolver $lostPasswordMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -30,13 +30,13 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->LostPasswordMutationResolver;
+        return $this->lostPasswordMutationResolver;
     }
 
     public function getFormData(): array
     {
         return [
-            MutationInputProperties::USERNAME_OR_EMAIL => $this->moduleProcessorManager->getProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME])->getValue([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME]),
+            MutationInputProperties::USERNAME_OR_EMAIL => $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_LoginTextFormInputs::class, \PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME])->getValue([\PoP_Module_Processor_LoginTextFormInputs::class, \PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME]),
         ];
     }
 

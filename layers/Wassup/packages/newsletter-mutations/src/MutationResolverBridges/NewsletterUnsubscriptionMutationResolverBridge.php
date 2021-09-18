@@ -6,7 +6,7 @@ namespace PoPSitesWassup\NewsletterMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
-use PoPSitesWassup\NewsletterMutations\MutationResolver\NewsletterUnsubscriptionMutationResolver;
+use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterUnsubscriptionMutationResolver;
 
 class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
@@ -15,7 +15,7 @@ class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormCompone
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected NewsletterUnsubscriptionMutationResolver $NewsletterUnsubscriptionMutationResolver,
+        protected NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormCompone
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->NewsletterUnsubscriptionMutationResolver;
+        return $this->newsletterUnsubscriptionMutationResolver;
     }
 
     public function getFormData(): array

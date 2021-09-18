@@ -15,7 +15,7 @@ class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBrid
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected LogoutMutationResolver $LogoutMutationResolver,
+        protected LogoutMutationResolver $logoutMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBrid
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->LogoutMutationResolver;
+        return $this->logoutMutationResolver;
     }
 
     public function getFormData(): array

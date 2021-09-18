@@ -15,7 +15,7 @@ class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationRe
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected ShareByEmailMutationResolver $ShareByEmailMutationResolver,
+        protected ShareByEmailMutationResolver $shareByEmailMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationRe
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->ShareByEmailMutationResolver;
+        return $this->shareByEmailMutationResolver;
     }
 
     public function getFormData(): array

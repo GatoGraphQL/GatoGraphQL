@@ -26,6 +26,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
         protected UserTypeAPIInterface $userTypeAPI,
+        protected GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -62,8 +63,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->GravityFormsAddEntryToFormMutationResolver;
-        protected GravityFormsAddEntryToFormMutationResolver $GravityFormsAddEntryToFormMutationResolver,
+        return $this->gravityFormsAddEntryToFormMutationResolver;
     }
 
     /**

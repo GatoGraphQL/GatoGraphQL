@@ -16,7 +16,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected FileUploadPictureMutationResolver $FileUploadPictureMutationResolver,
+        protected FileUploadPictureMutationResolver $fileUploadPictureMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -28,7 +28,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->FileUploadPictureMutationResolver;
+        return $this->fileUploadPictureMutationResolver;
     }
     protected function onlyExecuteWhenDoingPost(): bool
     {

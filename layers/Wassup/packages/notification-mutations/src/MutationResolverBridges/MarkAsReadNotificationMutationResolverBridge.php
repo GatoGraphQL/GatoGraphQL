@@ -14,7 +14,7 @@ class MarkAsReadNotificationMutationResolverBridge extends AbstractMarkAsReadOrU
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected MarkAsReadNotificationMutationResolver $MarkAsReadNotificationMutationResolver,
+        protected MarkAsReadNotificationMutationResolver $markAsReadNotificationMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -26,7 +26,7 @@ class MarkAsReadNotificationMutationResolverBridge extends AbstractMarkAsReadOrU
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->MarkAsReadNotificationMutationResolver;
+        return $this->markAsReadNotificationMutationResolver;
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

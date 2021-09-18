@@ -15,7 +15,7 @@ class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpda
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UnrecommendCustomPostMutationResolver $UnrecommendCustomPostMutationResolver,
+        protected UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpda
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->UnrecommendCustomPostMutationResolver;
+        return $this->unrecommendCustomPostMutationResolver;
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

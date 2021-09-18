@@ -17,7 +17,7 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected EditMembershipMutationResolver $EditMembershipMutationResolver,
+        protected EditMembershipMutationResolver $editMembershipMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -29,7 +29,7 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->EditMembershipMutationResolver;
+        return $this->editMembershipMutationResolver;
     }
 
     public function getFormData(): array

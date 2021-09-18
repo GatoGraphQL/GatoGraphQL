@@ -16,7 +16,7 @@ class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridg
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected LoginMutationResolver $LoginMutationResolver,
+        protected LoginMutationResolver $loginMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -28,7 +28,7 @@ class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridg
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->LoginMutationResolver;
+        return $this->loginMutationResolver;
     }
 
     public function getFormData(): array

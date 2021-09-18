@@ -17,7 +17,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected CreateUpdateUserMutationResolver $CreateUpdateUserMutationResolver,
+        protected CreateUpdateUserMutationResolver $createUpdateUserMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -29,7 +29,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->CreateUpdateUserMutationResolver;
+        return $this->createUpdateUserMutationResolver;
     }
 
     public function getSuccessString(string | int $result_id): ?string

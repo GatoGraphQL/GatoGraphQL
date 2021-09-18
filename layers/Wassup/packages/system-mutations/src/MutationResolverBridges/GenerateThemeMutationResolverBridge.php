@@ -15,7 +15,7 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected GenerateThemeMutationResolver $GenerateThemeMutationResolver,
+        protected GenerateThemeMutationResolver $generateThemeMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->GenerateThemeMutationResolver;
+        return $this->generateThemeMutationResolver;
     }
     public function getSuccessString(string | int $result_id): ?string
     {

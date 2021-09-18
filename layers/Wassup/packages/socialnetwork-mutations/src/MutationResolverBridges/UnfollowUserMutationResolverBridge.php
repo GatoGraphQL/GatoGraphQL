@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UnfollowUserMutationResolver;
 
 class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMutationResolverBridge
@@ -14,19 +15,21 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UnfollowUserMutationResolver $UnfollowUserMutationResolver,
+        UserTypeAPIInterface $userTypeAPI,
+        protected UnfollowUserMutationResolver $unfollowUserMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
             $translationAPI,
             $instanceManager,
             $mutationResolutionManager,
+            $userTypeAPI,
         );
     }
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->UnfollowUserMutationResolver;
+        return $this->unfollowUserMutationResolver;
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

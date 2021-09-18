@@ -15,7 +15,7 @@ class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateU
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected DownvoteCustomPostMutationResolver $DownvoteCustomPostMutationResolver,
+        protected DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateU
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->DownvoteCustomPostMutationResolver;
+        return $this->downvoteCustomPostMutationResolver;
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

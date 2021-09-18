@@ -7,6 +7,7 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateOrganizationProfileMutationResolver;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateProfileMutationResolver;
 
 class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
 {
@@ -17,19 +18,21 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
+        protected CreateUpdateOrganizationProfileMutationResolver $createUpdateOrganizationProfileMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
             $translationAPI,
             $instanceManager,
             $mutationResolutionManager,
+            $createUpdateProfileMutationResolver,
         );
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->CreateUpdateOrganizationProfileMutationResolver;
-        protected CreateUpdateOrganizationProfileMutationResolver $CreateUpdateOrganizationProfileMutationResolver,
+        return $this->createUpdateOrganizationProfileMutationResolver;
     }
 
     private function getFormInputs()

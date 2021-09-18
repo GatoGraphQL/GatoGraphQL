@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPSitesWassup\NewsletterMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoPSitesWassup\NewsletterMutations\MutationResolver\NewsletterSubscriptionMutationResolver;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
+use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterSubscriptionMutationResolver;
 
 class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
@@ -15,7 +15,7 @@ class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponent
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected NewsletterSubscriptionMutationResolver $NewsletterSubscriptionMutationResolver,
+        protected NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponent
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->NewsletterSubscriptionMutationResolver;
+        return $this->newsletterSubscriptionMutationResolver;
     }
 
     public function getFormData(): array

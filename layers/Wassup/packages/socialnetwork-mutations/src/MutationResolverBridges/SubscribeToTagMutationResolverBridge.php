@@ -16,7 +16,7 @@ class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValu
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected SubscribeToTagMutationResolver $SubscribeToTagMutationResolver,
+        protected SubscribeToTagMutationResolver $subscribeToTagMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -28,7 +28,7 @@ class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValu
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->SubscribeToTagMutationResolver;
+        return $this->subscribeToTagMutationResolver;
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

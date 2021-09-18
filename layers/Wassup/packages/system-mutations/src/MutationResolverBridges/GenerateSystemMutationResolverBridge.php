@@ -15,7 +15,7 @@ class GenerateSystemMutationResolverBridge extends AbstractSystemComponentMutati
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected GenerateSystemMutationResolver $GenerateSystemMutationResolver,
+        protected GenerateSystemMutationResolver $generateSystemMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class GenerateSystemMutationResolverBridge extends AbstractSystemComponentMutati
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->GenerateSystemMutationResolver;
+        return $this->generateSystemMutationResolver;
     }
     public function getSuccessString(string | int $result_id): ?string
     {

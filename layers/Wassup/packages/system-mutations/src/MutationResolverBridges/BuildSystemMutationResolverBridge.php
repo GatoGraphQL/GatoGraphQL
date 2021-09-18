@@ -15,7 +15,7 @@ class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationR
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected BuildSystemMutationResolver $BuildSystemMutationResolver,
+        protected BuildSystemMutationResolver $buildSystemMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationR
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->BuildSystemMutationResolver;
+        return $this->buildSystemMutationResolver;
     }
     public function getSuccessString(string | int $result_id): ?string
     {

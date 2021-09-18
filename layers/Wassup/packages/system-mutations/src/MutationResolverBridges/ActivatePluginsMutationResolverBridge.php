@@ -15,7 +15,7 @@ class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutat
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected ActivatePluginsMutationResolver $ActivatePluginsMutationResolver,
+        protected ActivatePluginsMutationResolver $activatePluginsMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutat
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->ActivatePluginsMutationResolver;
+        return $this->activatePluginsMutationResolver;
     }
 
     public function getSuccessString(string | int $result_ids): ?string

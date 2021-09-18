@@ -16,7 +16,7 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected MarkAllAsReadNotificationMutationResolver $MarkAllAsReadNotificationMutationResolver,
+        protected MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -28,7 +28,7 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->MarkAllAsReadNotificationMutationResolver;
+        return $this->markAllAsReadNotificationMutationResolver;
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

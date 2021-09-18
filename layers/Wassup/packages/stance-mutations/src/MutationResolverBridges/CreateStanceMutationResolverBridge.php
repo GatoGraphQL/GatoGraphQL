@@ -14,7 +14,7 @@ class CreateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutat
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected CreateStanceMutationResolver $CreateStanceMutationResolver,
+        protected CreateStanceMutationResolver $createStanceMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -26,7 +26,7 @@ class CreateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutat
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->CreateStanceMutationResolver;
+        return $this->createStanceMutationResolver;
     }
 
     protected function isUpdate(): bool

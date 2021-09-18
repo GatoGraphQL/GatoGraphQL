@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoPSitesWassup\NotificationMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoPSitesWassup\NotificationMutations\MutationResolvers\MarkAsUnreadNotificationMutationResolver;
+
 class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge
 {
     public function __construct(
@@ -12,7 +14,7 @@ class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadO
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected MarkAsUnreadNotificationMutationResolver $MarkAsUnreadNotificationMutationResolver,
+        protected MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -24,7 +26,7 @@ class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadO
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->MarkAsUnreadNotificationMutationResolver;
+        return $this->markAsUnreadNotificationMutationResolver;
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

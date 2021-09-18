@@ -14,7 +14,7 @@ class UpdateHighlightMutationResolverBridge extends AbstractCreateUpdateHighligh
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UpdateHighlightMutationResolver $UpdateHighlightMutationResolver,
+        protected UpdateHighlightMutationResolver $updateHighlightMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -26,7 +26,7 @@ class UpdateHighlightMutationResolverBridge extends AbstractCreateUpdateHighligh
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->UpdateHighlightMutationResolver;
+        return $this->updateHighlightMutationResolver;
     }
 
     protected function isUpdate(): bool

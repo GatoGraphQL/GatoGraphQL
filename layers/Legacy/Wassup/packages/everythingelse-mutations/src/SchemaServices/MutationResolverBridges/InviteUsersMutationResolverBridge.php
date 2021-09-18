@@ -14,7 +14,7 @@ class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResol
         \PoP\Translation\TranslationAPIInterface $translationAPI,
         \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected InviteUsersMutationResolver $InviteUsersMutationResolver,
+        protected InviteUsersMutationResolver $inviteUsersMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -26,6 +26,6 @@ class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResol
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->InviteUsersMutationResolver;
+        return $this->inviteUsersMutationResolver;
     }
 }
