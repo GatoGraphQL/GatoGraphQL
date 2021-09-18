@@ -10,6 +10,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -26,6 +27,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
         TypeRegistryInterface $typeRegistry,
         DirectiveRegistryInterface $directiveRegistry,
         protected AccessControlBlock $accessControlBlock,
+        protected BlockHelpers $blockHelpers,
     ) {
         parent::__construct(
             $hooksAPI,
