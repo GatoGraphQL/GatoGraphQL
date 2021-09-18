@@ -711,7 +711,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // We are given a toplevel. Iterate through all the pageSections, and obtain their resources
         $methods = array();
         $entry_processor = $moduleprocessor_manager->getProcessor($entryModule);
-        $entry_processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessordecorator($entry_processor);
+        $entry_processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($entry_processor);
 
         // Get the Handlebars list of resources needed for that pageSection
         $templateResources = $entry_processor->getTemplateResourcesMergedmoduletree($entryModule, $entry_model_props);

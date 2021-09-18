@@ -19,7 +19,7 @@ class PoP_ResourceLoader_ProcessorHooks {
 		if (PoP_ResourceLoader_ServerUtils::includeResourcesInBody()) {
 
 	        global $pop_resourcemoduledecoratorprocessor_manager;
-			if ($resources = $pop_resourcemoduledecoratorprocessor_manager->getProcessordecorator($processor)->getResources($module, $props)) {
+			if ($resources = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor)->getResources($module, $props)) {
 				
 				$immutable_settings[GD_JS_RESOURCES] = $resources;
 			}

@@ -17,7 +17,7 @@ class PoP_UserStateModuleDecoratorProcessorHooks
 
     public function addHeaddatasetmoduleDataProperties($ret_in_array, array $module, $props_in_array, $processor)
     {
-        $processoruserstatedecorator = PoP_UserStateModuleDecoratorProcessorManagerFactory::getInstance()->getProcessordecorator($processor);
+        $processoruserstatedecorator = PoP_UserStateModuleDecoratorProcessorManagerFactory::getInstance()->getProcessorDecorator($processor);
 
         // If the block requires user state, but the current page does not, then make the block be lazy-loaded
         // Only when first loading the page.

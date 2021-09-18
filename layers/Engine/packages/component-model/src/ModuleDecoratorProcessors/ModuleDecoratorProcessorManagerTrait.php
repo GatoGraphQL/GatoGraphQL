@@ -13,32 +13,32 @@ trait ModuleDecoratorProcessorManagerTrait
     /**
      * @var array<string, mixed>
      */
-    public array $processordecorators = [];
+    public array $processorDecorators = [];
 
-    public function getProcessordecorator($processor)
+    public function getProcessorDecorator($processor)
     {
-        $processordecorator = null;
+        $processorDecorator = null;
 
-        // If there's already a processordecorator for this module, then return it
-        $processor_classname = get_class($processor);
-        $processordecorator = $this->processordecorators[$processor_classname];
+        // If there's already a processorDecorator for this module, then return it
+        $processorClass = get_class($processor);
+        $processorDecorator = $this->processorDecorators[$processorClass];
 
         // If not, build a new one from the settings, and assign it under the current processor
-        if (!$processordecorator) {
+        if (!$processorDecorator) {
             do {
-                if ($processordecorator_classname = $this->settings[$processor_classname] ?? null) {
-                    $processordecorator = new $processordecorator_classname($processor);
-                    $this->processordecorators[$processor_classname] = $processordecorator;
+                if ($processorDecoratorClass = $this->settings[$processorClass] ?? null) {
+                    $processorDecorator = new $processorDecoratorClass($processor);
+                    $this->processorDecorators[$processorClass] = $processorDecorator;
                     break;
                 }
-            } while ($processor_classname = get_parent_class($processor_classname));
+            } while ($processorClass = get_parent_class($processorClass));
         }
 
-        return $processordecorator;
+        return $processorDecorator;
     }
 
-    public function add($processor_classname, $processordecorator_classname)
+    public function add($processorClass, $processorDecoratorClass)
     {
-        $this->settings[$processor_classname] = $processordecorator_classname;
+        $this->settings[$processorClass] = $processorDecoratorClass;
     }
 }

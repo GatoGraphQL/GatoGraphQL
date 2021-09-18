@@ -51,7 +51,7 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 			$helperCalculations = &$helper_calculations_in_array[0];
 
 			$processor = $moduleprocessor_manager->getProcessor($module);
-			$processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessordecorator($processor);
+			$processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
 			
 			// Do array_merge because it may already contain data from doing 'extra-uris'
 			// Then, "templates" and "module-resources" are all the values required by the current URI and all the extra ones

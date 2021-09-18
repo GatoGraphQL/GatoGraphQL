@@ -593,7 +593,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
                             global $pop_resourcemoduledecoratorprocessor_manager;
                             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                             $processor = $moduleprocessor_manager->getProcessor($entryModule);
-                            $processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessordecorator($processor);
+                            $processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
                             self::$dynamic_module_resources = $processorresourcedecorator->getDynamicResourcesMergedmoduletree($entryModule, $props);
 
                             // And store them on the cache

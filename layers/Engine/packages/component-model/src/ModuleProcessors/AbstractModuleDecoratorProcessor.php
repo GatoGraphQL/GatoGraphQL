@@ -22,7 +22,7 @@ abstract class AbstractModuleDecoratorProcessor implements ModuleDecoratorProces
     final protected function getModuleProcessordecorator(array $module)
     {
         $processor = $this->getDecoratedmoduleProcessor($module);
-        return $this->getModuledecoratorprocessorManager()->getProcessordecorator($processor);
+        return $this->getModuledecoratorprocessorManager()->getProcessorDecorator($processor);
     }
 
     final protected function getDecoratedmoduleProcessor(array $module)
