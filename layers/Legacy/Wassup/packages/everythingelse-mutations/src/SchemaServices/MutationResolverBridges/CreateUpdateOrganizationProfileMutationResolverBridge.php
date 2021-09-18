@@ -7,7 +7,6 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 use Exception;
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\CreateUpdateProfileMutationResolverBridgeTrait;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateOrganizationProfileMutationResolver;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateProfileMutationResolver;
 

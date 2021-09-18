@@ -6,7 +6,6 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\FunctionAPIFactory;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 abstract class AbstractEmailInviteMutationResolverBridge extends AbstractComponentMutationResolverBridge
