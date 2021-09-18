@@ -1,8 +1,9 @@
 <?php
+use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
+use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
+use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoP\ComponentModel\State\ApplicationState;
 
 class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -58,14 +59,14 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
         return $format ?? parent::getFormat($module);
     }
 
-    public function getQueryInputOutputHandlerClass(array $module): ?string
+    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
-                return ListQueryInputOutputHandler::class;
+                return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface

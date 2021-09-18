@@ -1,11 +1,12 @@
 <?php
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
+use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
+use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
+use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
 {
@@ -60,7 +61,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
         return parent::getRelationalTypeResolver($module);
     }
 
-    public function getQueryInputOutputHandlerClass(array $module): ?string
+    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
@@ -72,10 +73,10 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST:
-                return ListQueryInputOutputHandler::class;
+                return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array

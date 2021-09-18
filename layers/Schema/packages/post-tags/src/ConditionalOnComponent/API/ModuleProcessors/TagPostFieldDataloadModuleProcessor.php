@@ -12,6 +12,7 @@ use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
+use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -42,6 +43,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         protected PostObjectTypeResolver $postObjectTypeResolver,
+        protected ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
         parent::__construct(
             $translationAPI,
@@ -75,14 +77,14 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
         return parent::getRelationalTypeResolver($module);
     }
 
-    public function getQueryInputOutputHandlerClass(array $module): ?string
+    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
-                return ListQueryInputOutputHandler::class;
+                return $this->listQueryInputOutputHandler;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array

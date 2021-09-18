@@ -12,6 +12,7 @@ use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
+use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
@@ -44,6 +45,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
+        protected ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
         parent::__construct(
             $translationAPI,
@@ -81,15 +83,15 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
         return parent::getRelationalTypeResolver($module);
     }
 
-    public function getQueryInputOutputHandlerClass(array $module): ?string
+    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
-                return ListQueryInputOutputHandler::class;
+                return $this->listQueryInputOutputHandler;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     public function getFilterSubmodule(array $module): ?array

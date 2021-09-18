@@ -1,5 +1,6 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\RedirectQueryInputOutputHandler;
+use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\SettingsMutationResolverBridge;
 
 class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_DataloadsBase
@@ -41,14 +42,14 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
         return parent::getComponentMutationResolverBridge($module);
     }
 
-    public function getQueryInputOutputHandlerClass(array $module): ?string
+    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SETTINGS:
-                return RedirectQueryInputOutputHandler::class;
+                return $this->instanceManager->getInstance(RedirectQueryInputOutputHandler::class);
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     protected function getInnerSubmodules(array $module): array

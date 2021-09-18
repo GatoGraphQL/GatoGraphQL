@@ -1,7 +1,8 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
+use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 
 class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -49,14 +50,14 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         return parent::getRelationalTypeResolver($module);
     }
 
-    public function getQueryInputOutputHandlerClass(array $module): ?string
+    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
-                return GD_DataLoad_QueryInputOutputHandler_LatestNotificationList::class;
+                return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_LatestNotificationList::class);
         }
         
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 }
 

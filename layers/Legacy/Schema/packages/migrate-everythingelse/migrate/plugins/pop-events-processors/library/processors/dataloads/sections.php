@@ -1,10 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -551,7 +552,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getQueryInputOutputHandlerClass(array $module): ?string
+    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDAR_NAVIGATOR:
@@ -562,10 +563,10 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP:
             case self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDAR:
             case self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP:
-                return GD_DataLoad_QueryInputOutputHandler_Calendar::class;
+                return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_Calendar::class);
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array

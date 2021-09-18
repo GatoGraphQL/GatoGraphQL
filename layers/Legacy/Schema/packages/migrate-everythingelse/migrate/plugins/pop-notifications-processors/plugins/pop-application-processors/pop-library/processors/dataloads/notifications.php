@@ -1,9 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
+use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 
 class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -114,15 +115,15 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return parent::getFeedbackmessageModule($module);
     }
 
-    public function getQueryInputOutputHandlerClass(array $module): ?string
+    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
-                return GD_DataLoad_QueryInputOutputHandler_NotificationList::class;
+                return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_NotificationList::class);
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
