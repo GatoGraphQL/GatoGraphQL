@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostsWP\Overrides\RelationalTypeDataLoaders\UnionType;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\CustomPostTypeDataLoader;
+use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader as UpstreamCustomPostUnionTypeDataLoader;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostTypeResolverPickerInterface;
-use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader as UpstreamCustomPostUnionTypeDataLoader;
 
 /**
  * In the context of WordPress, "Custom Posts" are all posts (eg: posts, pages, attachments, events, etc)
@@ -61,13 +62,14 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
             $targetTypeResolverPicker = $this->customPostUnionTypeResolver->getTargetObjectTypeResolverPicker($customPost);
             if (
                 // If `null`, no picker handles this type, then do nothing
-                is_null($targetTypeResolverPicker)
+                $targetTypeResolverPicker === null
                 // Needs be an instance of this interface, or do nothing
                 || !($targetTypeResolverPicker instanceof CustomPostTypeResolverPickerInterface)
             ) {
                 continue;
             }
             // Add the Custom Post Type as the key, which can uniquely identify the picker
+            /** @var ObjectTypeResolverPickerInterface $targetTypeResolverPicker */
             $customPostType = $targetTypeResolverPicker->getCustomPostType();
             $customPostID = $customPostTypeAPI->getID($customPost);
             $customPostTypeTypeResolverPickers[$customPostType] = $targetTypeResolverPicker;
