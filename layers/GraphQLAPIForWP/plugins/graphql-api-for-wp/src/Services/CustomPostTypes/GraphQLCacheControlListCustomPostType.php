@@ -4,12 +4,31 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
 {
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        CPTUtils $cptUtils,
+        protected CacheControlBlock $cacheControlBlock,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $userAuthorization,
+            $cptUtils,
+        );
+    }
+
     /**
      * Custom Post Type name
      */
@@ -67,12 +86,8 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
      */
     protected function getGutenbergTemplate(): array
     {
-        /**
-         * @var CacheControlBlock
-         */
-        $cacheControlBlock = $this->instanceManager->getInstance(CacheControlBlock::class);
         return [
-            [$cacheControlBlock->getBlockFullName()],
+            [$this->cacheControlBlock->getBlockFullName()],
         ];
     }
 }

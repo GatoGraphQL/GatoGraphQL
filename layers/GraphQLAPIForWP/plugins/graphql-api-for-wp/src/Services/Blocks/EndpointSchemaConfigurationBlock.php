@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\EndpointBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * SchemaConfiguration block
@@ -23,6 +28,24 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT = 0;
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE = -1;
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT = -2;
+
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        GeneralUtils $generalUtils,
+        EditorHelpers $editorHelpers,
+        protected BlockRenderingHelpers $blockRenderingHelpers,
+        protected CPTUtils $cptUtils,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $userAuthorization,
+            $generalUtils,
+            $editorHelpers,
+        );
+    }
 
     protected function getBlockName(): string
     {
@@ -84,21 +107,17 @@ EOF;
         } elseif ($schemaConfigurationID > 0) {
             $schemaConfigurationObject = \get_post($schemaConfigurationID);
             if (!is_null($schemaConfigurationObject)) {
-                /** @var BlockRenderingHelpers */
-                $blockRenderingHelpers = $this->instanceManager->getInstance(BlockRenderingHelpers::class);
-                /** @var CPTUtils */
-                $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
-                $schemaConfigurationDescription = $cptUtils->getCustomPostDescription($schemaConfigurationObject);
+                $schemaConfigurationDescription = $this->cptUtils->getCustomPostDescription($schemaConfigurationObject);
                 $permalink = \get_permalink($schemaConfigurationObject->ID);
                 $schemaConfigurationContent = ($permalink ?
                     \sprintf(
                         '<code><a href="%s">%s</a></code>',
                         $permalink,
-                        $blockRenderingHelpers->getCustomPostTitle($schemaConfigurationObject)
+                        $this->blockRenderingHelpers->getCustomPostTitle($schemaConfigurationObject)
                     ) :
                     \sprintf(
                         '<code>%s</code>',
-                        $blockRenderingHelpers->getCustomPostTitle($schemaConfigurationObject)
+                        $this->blockRenderingHelpers->getCustomPostTitle($schemaConfigurationObject)
                     )
                 ) . ($schemaConfigurationDescription ?
                     '<br/><small>' . $schemaConfigurationDescription . '</small>'

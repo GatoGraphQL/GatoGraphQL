@@ -4,14 +4,26 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\UserMeta\Utils;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\DownvoteCustomPostMutationResolver;
 
 class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomPostMutationResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+
     public function validateErrors(array $form_data): ?array
     {
         $errors = parent::validateErrors($form_data);
@@ -60,12 +72,7 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
         // Had the user already executed the opposite (Up-vote => Down-vote, etc), then undo it
         $opposite = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
         if (in_array($target_id, $opposite)) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /**
-             * @var DownvoteCustomPostMutationResolver
-             */
-            $opposite_instance = $instanceManager->getInstance(DownvoteCustomPostMutationResolver::class);
-            $opposite_instance->executeMutation($form_data);
+            $this->downvoteCustomPostMutationResolver->executeMutation($form_data);
         }
 
         return parent::update($form_data);

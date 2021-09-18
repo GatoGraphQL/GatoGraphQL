@@ -9,26 +9,35 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
 abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
 {
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        BlockHelpers $blockHelpers,
+        protected EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $blockHelpers,
+        );
+    }
+
     /**
      * Extract the Schema Configuration ID from the block stored in the post
      */
     protected function getSchemaConfigurationID(int $customPostID): ?int
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var EndpointSchemaConfigurationBlock
-         */
-        $block = $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
-        $schemaConfigurationBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $schemaConfigurationBlockDataItem = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $customPostID,
-            $block
+            $this->endpointSchemaConfigurationBlock
         );
         // If there was no schema configuration, then the default one has been selected
         // It is not saved in the DB, because it has been set as the default value in

@@ -24,6 +24,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
         protected UserAuthorizationInterface $userAuthorization,
         protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
         protected PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor,
+        protected PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock,
     ) {
         parent::__construct(
             $instanceManager,
@@ -56,11 +57,6 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
          * 2. The final block, completing the missing attributes from its parent
          */
         if ($graphQLQueryPost->post_parent) {
-            /**
-             * @var PersistedQueryEndpointGraphiQLBlock
-             */
-            $graphiQLBlock = $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
-
             // Check if the user is authorized to see the content
             $ancestorContent = null;
             if ($this->userAuthorization->canAccessSchemaEditor()) {
@@ -87,10 +83,10 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
                         PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $inheritedGraphQLVariables,
                     ];
                     // Add the new rendering to the output, and a description for each
-                    $ancestorContent = $graphiQLBlock->renderBlock($inheritedGraphQLBlockAttributes, '');
+                    $ancestorContent = $this->persistedQueryEndpointGraphiQLBlock->renderBlock($inheritedGraphQLBlockAttributes, '');
                 }
             } else {
-                $ancestorContent = $graphiQLBlock->renderUnauthorizedAccess();
+                $ancestorContent = $this->persistedQueryEndpointGraphiQLBlock->renderUnauthorizedAccess();
             }
             if (!is_null($ancestorContent)) {
                 $content = sprintf(

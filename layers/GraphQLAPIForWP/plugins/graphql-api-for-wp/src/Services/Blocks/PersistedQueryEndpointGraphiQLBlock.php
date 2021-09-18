@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
-
 /**
  * GraphiQL block for Persisted Queries
  */
@@ -22,9 +20,7 @@ class PersistedQueryEndpointGraphiQLBlock extends AbstractGraphiQLBlock implemen
      */
     protected function getAdminGraphQLEndpoint(): string
     {
-        /** @var EditorHelpers */
-        $editorHelpers = $this->instanceManager->getInstance(EditorHelpers::class);
-        if ($persistedQueryEndpointCustomPostID = $editorHelpers->getEditingPostID()) {
+        if ($persistedQueryEndpointCustomPostID = $this->editorHelpers->getEditingPostID()) {
             return $this->endpointHelpers->getAdminPersistedQueryGraphQLEndpoint(
                 $persistedQueryEndpointCustomPostID,
                 true

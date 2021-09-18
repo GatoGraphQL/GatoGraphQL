@@ -4,16 +4,39 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use PoP\ComponentModel\Misc\GeneralUtils;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
-use PoP\CacheControl\Facades\CacheControlManagerFacade;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
+use PoP\CacheControl\Facades\CacheControlManagerFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\Hooks\HooksAPIInterface;
 
 class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        TypeRegistryInterface $typeRegistry,
+        DirectiveRegistryInterface $directiveRegistry,
+        protected CacheControlBlock $cacheControlBlock,
+        protected BlockHelpers $blockHelpers,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $instanceManager,
+            $moduleRegistry,
+            $typeRegistry,
+            $directiveRegistry,
+        );
+    }
+
     public function isServiceEnabled(): bool
     {
         // Only execute for GET operations
@@ -35,15 +58,9 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
      */
     protected function doExecuteSchemaConfiguration(int $cclPostID): void
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var CacheControlBlock
-         */
-        $block = $this->instanceManager->getInstance(CacheControlBlock::class);
-        $cclBlockItems = $blockHelpers->getBlocksOfTypeFromCustomPost(
+        $cclBlockItems = $this->blockHelpers->getBlocksOfTypeFromCustomPost(
             $cclPostID,
-            $block
+            $this->cacheControlBlock
         );
         $cacheControlManager = CacheControlManagerFacade::getInstance();
         // The "Cache Control" type contains the fields/directives and the max-age

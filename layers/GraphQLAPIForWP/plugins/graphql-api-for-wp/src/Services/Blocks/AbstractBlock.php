@@ -31,6 +31,8 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
         protected UserAuthorizationInterface $userAuthorization,
+        protected GeneralUtils $generalUtils,
+        protected EditorHelpers $editorHelpers,
     ) {
     }
 
@@ -143,9 +145,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
      */
     final protected function getBlockLocalizationName(): string
     {
-        /** @var GeneralUtils */
-        $generalUtils = $this->instanceManager->getInstance(GeneralUtils::class);
-        return $generalUtils->dashesToCamelCase($this->getBlockRegistrationName());
+        return $this->generalUtils->dashesToCamelCase($this->getBlockRegistrationName());
     }
     /**
      * Block class name: wp-block-namespace-blockName
@@ -261,9 +261,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
          */
         if (\is_admin()) {
             if ($postTypes = $this->getAllowedPostTypes()) {
-                /** @var EditorHelpers */
-                $editorHelpers = $this->instanceManager->getInstance(EditorHelpers::class);
-                if (!in_array($editorHelpers->getEditingPostType(), $postTypes)) {
+                if (!in_array($this->editorHelpers->getEditingPostType(), $postTypes)) {
                     return;
                 }
             }

@@ -19,7 +19,8 @@ class VarsHookSet extends AbstractHookSet
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry
+        protected ModuleRegistryInterface $moduleRegistry,
+        protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -58,10 +59,8 @@ class VarsHookSet extends AbstractHookSet
             // By setting explicit allowed datastructures, we avoid the empty one
             // being processed /?scheme=api <= native API
             // If ever need to support REST or another format, add a hook here
-            /** @var GraphQLDataStructureFormatter */
-            $graphQLDataStructureFormatter = $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
             $allowedDataStructures = [
-                $graphQLDataStructureFormatter->getName(),
+                $this->graphQLDataStructureFormatter->getName(),
             ];
             if (
                 // If single endpoint not enabled

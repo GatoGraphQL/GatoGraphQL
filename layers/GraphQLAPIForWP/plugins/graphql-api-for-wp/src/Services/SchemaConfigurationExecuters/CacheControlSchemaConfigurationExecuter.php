@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCacheControlListBlock;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\CacheControlGraphQLQueryConfigurator;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * It is applied only to PersistedQuery
@@ -18,11 +19,13 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
+        BlockHelpers $blockHelpers,
         protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
     ) {
         parent::__construct(
             $instanceManager,
             $moduleRegistry,
+            $blockHelpers,
         );
     }
 

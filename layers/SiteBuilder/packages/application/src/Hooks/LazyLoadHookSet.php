@@ -25,6 +25,7 @@ class LazyLoadHookSet extends AbstractHookSet
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         protected RequestHelperServiceInterface $requestHelperService,
+        protected Lazy $lazy,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -74,8 +75,6 @@ class LazyLoadHookSet extends AbstractHookSet
     public function end($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine)
     {
         $helperCalculations = &$helperCalculations_in_array[0];
-        /** @var Lazy */
-        $lazy = $this->instanceManager->getInstance(Lazy::class);
 
         // Fetch the lazy-loaded data using the Background URL load
         if ($helperCalculations['has-lazy-load'] ?? null) {
@@ -86,7 +85,7 @@ class LazyLoadHookSet extends AbstractHookSet
                         DataOutputItems::MODULE_DATA,
                         DataOutputItems::DATABASES,
                     ],
-                    ModuleFilterManager::URLPARAM_MODULEFILTER => $lazy->getName(),
+                    ModuleFilterManager::URLPARAM_MODULEFILTER => $this->lazy->getName(),
                     Params::ACTIONS . '[]' => Actions::LOADLAZY,
                 ],
                 $this->requestHelperService->getCurrentURL()

@@ -23,7 +23,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         InstanceManagerInterface $instanceManager,
         protected MenuPageHelper $menuPageHelper,
         protected ModuleRegistryInterface $moduleRegistry,
-        protected UserAuthorizationInterface $userAuthorization
+        protected UserAuthorizationInterface $userAuthorization,
+        protected SettingsMenuPage $settingsMenuPage,
     ) {
         parent::__construct(
             $instanceManager,
@@ -62,21 +63,17 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $modulesMenuPage->setHookName($hookName);
         }
 
-        /**
-         * @var SettingsMenuPage
-         */
-        $settingsMenuPage = $this->instanceManager->getInstance(SettingsMenuPage::class);
         if (
             $hookName = \add_submenu_page(
                 $this->getMenuName(),
                 __('Settings', 'graphql-api'),
                 __('Settings', 'graphql-api'),
                 'manage_options',
-                $settingsMenuPage->getScreenID(),
-                [$settingsMenuPage, 'print']
+                $this->settingsMenuPage->getScreenID(),
+                [$this->settingsMenuPage, 'print']
             )
         ) {
-            $settingsMenuPage->setHookName($hookName);
+            $this->settingsMenuPage->setHookName($hookName);
         }
 
         if ($this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {

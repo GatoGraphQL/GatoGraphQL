@@ -4,12 +4,35 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
 abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaConfigBlock
 {
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        GeneralUtils $generalUtils,
+        EditorHelpers $editorHelpers,
+        protected BlockRenderingHelpers $blockRenderingHelpers,
+        protected CPTUtils $cptUtils,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $userAuthorization,
+            $generalUtils,
+            $editorHelpers,
+        );
+    }
+
     abstract protected function getAttributeName(): string;
 
     abstract protected function getCustomPostType(): string;
@@ -32,10 +55,6 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
 EOF;
         $postContentElems = $foundPostListIDs = [];
         if ($postListIDs = $attributes[$this->getAttributeName()] ?? []) {
-            /** @var BlockRenderingHelpers */
-            $blockRenderingHelpers = $this->instanceManager->getInstance(BlockRenderingHelpers::class);
-            /** @var CPTUtils */
-            $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
             /**
              * @var WP_Post[]
              */
@@ -51,17 +70,17 @@ EOF;
             ]);
             foreach ($postObjects as $postObject) {
                 $foundPostListIDs[] = $postObject->ID;
-                $postDescription = $cptUtils->getCustomPostDescription($postObject);
+                $postDescription = $this->cptUtils->getCustomPostDescription($postObject);
                 $permalink = \get_permalink($postObject->ID);
                 $postContentElems[] = ($permalink ?
                     \sprintf(
                         '<code><a href="%s">%s</a></code>',
                         $permalink,
-                        $blockRenderingHelpers->getCustomPostTitle($postObject)
+                        $this->blockRenderingHelpers->getCustomPostTitle($postObject)
                     ) :
                     \sprintf(
                         '<code>%s</code>',
-                        $blockRenderingHelpers->getCustomPostTitle($postObject)
+                        $this->blockRenderingHelpers->getCustomPostTitle($postObject)
                     )
                 ) . ($postDescription ?
                     '<br/><small>' . $postDescription . '</small>'

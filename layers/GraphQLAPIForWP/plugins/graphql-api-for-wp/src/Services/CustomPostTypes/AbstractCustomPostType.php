@@ -23,7 +23,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
-        protected UserAuthorizationInterface $userAuthorization
+        protected UserAuthorizationInterface $userAuthorization,
+        protected CPTUtils $cptUtils,
     ) {
     }
     /**
@@ -197,9 +198,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                  */
                 $post = \get_post($post_id);
                 if (!is_null($post)) {
-                    /** @var CPTUtils */
-                    $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
-                    echo $cptUtils->getCustomPostDescription($post);
+                    echo $this->cptUtils->getCustomPostDescription($post);
                 }
                 break;
         }
@@ -271,9 +270,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $customPost = $vars['routing-state']['queried-object'];
             // Make sure there is a post (eg: it has not been deleted)
             if ($customPost !== null) {
-                /** @var CPTUtils */
-                $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
-                if ($excerpt = $cptUtils->getCustomPostDescription($customPost)) {
+                if ($excerpt = $this->cptUtils->getCustomPostDescription($customPost)) {
                     $content = \sprintf(
                         \__('<p class="%s"><strong>Description: </strong>%s</p>'),
                         $this->getAlignClass(),

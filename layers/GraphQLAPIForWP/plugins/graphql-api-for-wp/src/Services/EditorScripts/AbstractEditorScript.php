@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\AbstractScript;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Base class for a Gutenberg script.
@@ -17,6 +20,19 @@ use GraphQLAPI\GraphQLAPI\Services\Scripts\AbstractScript;
 abstract class AbstractEditorScript extends AbstractScript
 {
     use HasDocumentationScriptTrait;
+
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        GeneralUtils $generalUtils,
+        protected EditorHelpers $editorHelpers,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $generalUtils,
+        );
+    }
 
     /**
      * Pass localized data to the block
@@ -82,9 +98,7 @@ abstract class AbstractEditorScript extends AbstractScript
          */
         if (\is_admin()) {
             if ($postTypes = $this->getAllowedPostTypes()) {
-                /** @var EditorHelpers */
-                $editorHelpers = $this->instanceManager->getInstance(EditorHelpers::class);
-                if (!in_array($editorHelpers->getEditingPostType(), $postTypes)) {
+                if (!in_array($this->editorHelpers->getEditingPostType(), $postTypes)) {
                     return;
                 }
             }

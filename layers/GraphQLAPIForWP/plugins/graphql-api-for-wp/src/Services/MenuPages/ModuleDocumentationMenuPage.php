@@ -12,7 +12,6 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractDocsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use InvalidArgumentException;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
@@ -26,7 +25,8 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
         InstanceManagerInterface $instanceManager,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,
-        protected ModuleRegistryInterface $moduleRegistry
+        protected ModuleRegistryInterface $moduleRegistry,
+        protected ModulesMenuPage $modulesMenuPage,
     ) {
         parent::__construct(
             $instanceManager,
@@ -37,12 +37,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 
     public function getMenuPageSlug(): string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /**
-         * @var ModulesMenuPage
-         */
-        $modulesMenuPage = $instanceManager->getInstance(ModulesMenuPage::class);
-        return $modulesMenuPage->getMenuPageSlug();
+        return $this->modulesMenuPage->getMenuPageSlug();
     }
 
     /**

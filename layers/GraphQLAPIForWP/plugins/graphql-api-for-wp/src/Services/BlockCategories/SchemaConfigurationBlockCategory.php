@@ -5,10 +5,20 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class SchemaConfigurationBlockCategory extends AbstractBlockCategory
 {
     public const SCHEMA_CONFIGURATION_BLOCK_CATEGORY = 'graphql-api-schema-config';
+
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
+    ) {
+        parent::__construct(
+            $instanceManager,
+        );
+    }
 
     /**
      * Custom Post Type for which to enable the block category
@@ -17,10 +27,8 @@ class SchemaConfigurationBlockCategory extends AbstractBlockCategory
      */
     public function getCustomPostTypes(): array
     {
-        /** @var GraphQLSchemaConfigurationCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
         return [
-            $customPostTypeService->getCustomPostType(),
+            $this->graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
         ];
     }
 

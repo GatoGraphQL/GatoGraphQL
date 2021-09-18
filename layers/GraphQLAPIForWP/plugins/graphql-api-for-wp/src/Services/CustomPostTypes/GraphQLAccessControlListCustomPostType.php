@@ -4,13 +4,34 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\AccessControlRuleBlockRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
 {
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        CPTUtils $cptUtils,
+        protected AccessControlBlock $accessControlBlock,
+        protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $userAuthorization,
+            $cptUtils,
+        );
+    }
+
     /**
      * Custom Post Type name
      */
@@ -68,12 +89,8 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
      */
     protected function getGutenbergTemplate(): array
     {
-        /**
-         * @var AccessControlBlock
-         */
-        $aclBlock = $this->instanceManager->getInstance(AccessControlBlock::class);
         return [
-            [$aclBlock->getBlockFullName()],
+            [$this->accessControlBlock->getBlockFullName()],
         ];
     }
 
@@ -84,15 +101,10 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
      */
     protected function getGutenbergBlocksForCustomPostType(): array
     {
-        /**
-         * @var AccessControlBlock
-         */
-        $aclBlock = $this->instanceManager->getInstance(AccessControlBlock::class);
-        $accessControlRuleBlockRegistry = AccessControlRuleBlockRegistryFacade::getInstance();
-        $aclNestedBlocks = $accessControlRuleBlockRegistry->getAccessControlRuleBlocks();
+        $aclNestedBlocks = $this->accessControlRuleBlockRegistry->getAccessControlRuleBlocks();
         return array_merge(
             [
-                $aclBlock->getBlockFullName(),
+                $this->accessControlBlock->getBlockFullName(),
             ],
             array_map(
                 fn ($aclNestedBlock) => $aclNestedBlock->getBlockFullName(),

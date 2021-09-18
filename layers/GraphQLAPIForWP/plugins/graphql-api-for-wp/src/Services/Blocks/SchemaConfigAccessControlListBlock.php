@@ -5,7 +5,14 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Cache Control block
@@ -15,6 +22,27 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS = 'accessControlLists';
+
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        GeneralUtils $generalUtils,
+        EditorHelpers $editorHelpers,
+        BlockRenderingHelpers $blockRenderingHelpers,
+        CPTUtils $cptUtils,
+        protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $userAuthorization,
+            $generalUtils,
+            $editorHelpers,
+            $blockRenderingHelpers,
+            $cptUtils,
+        );
+    }
 
     protected function getBlockName(): string
     {
@@ -38,9 +66,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
 
     protected function getCustomPostType(): string
     {
-        /** @var GraphQLAccessControlListCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLAccessControlListCustomPostType::class);
-        return $customPostTypeService->getCustomPostType();
+        return $this->graphQLAccessControlListCustomPostType->getCustomPostType();
     }
 
     protected function getHeader(): string

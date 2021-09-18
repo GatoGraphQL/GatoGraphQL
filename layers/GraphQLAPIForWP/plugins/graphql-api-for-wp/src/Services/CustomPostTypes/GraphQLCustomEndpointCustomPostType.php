@@ -18,6 +18,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CustomEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -30,6 +31,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
+        CPTUtils $cptUtils,
         HooksAPIInterface $hooksAPI,
         BlockHelpers $blockHelpers,
         protected EndpointBlockRegistryInterface $endpointBlockRegistry,
@@ -41,6 +43,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
             $instanceManager,
             $moduleRegistry,
             $userAuthorization,
+            $cptUtils,
             $hooksAPI,
             $blockHelpers,
         );

@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorInterface
@@ -14,6 +15,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
+        protected BlockHelpers $blockHelpers,
     ) {
     }
 

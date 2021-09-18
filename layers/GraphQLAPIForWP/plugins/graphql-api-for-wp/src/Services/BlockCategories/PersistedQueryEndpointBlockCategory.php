@@ -5,10 +5,20 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
 {
     public const PERSISTED_QUERY_ENDPOINT_BLOCK_CATEGORY = 'graphql-api-persisted-query';
+
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
+    ) {
+        parent::__construct(
+            $instanceManager,
+        );
+    }
 
     /**
      * Custom Post Type for which to enable the block category
@@ -17,10 +27,8 @@ class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
      */
     public function getCustomPostTypes(): array
     {
-        /** @var GraphQLPersistedQueryEndpointCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
         return [
-            $customPostTypeService->getCustomPostType(),
+            $this->graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
         ];
     }
 

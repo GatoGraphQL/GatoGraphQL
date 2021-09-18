@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
+use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 
@@ -11,12 +12,14 @@ class MarkdownContentParser extends AbstractContentParser implements MarkdownCon
 {
     public function __construct(
         RequestHelperServiceInterface $requestHelperService,
+        LocaleHelper $localeHelper,
         protected MarkdownConvertorInterface $markdownConvertorInterface,
         ?string $baseDir = null,
         ?string $baseURL = null,
     ) {
         parent::__construct(
             $requestHelperService,
+            $localeHelper,
             $baseDir,
             $baseURL,
         );

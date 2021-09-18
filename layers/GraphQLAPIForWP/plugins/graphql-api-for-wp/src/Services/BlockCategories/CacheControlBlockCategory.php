@@ -5,10 +5,20 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class CacheControlBlockCategory extends AbstractBlockCategory
 {
     public const CACHE_CONTROL_BLOCK_CATEGORY = 'graphql-api-cache-control';
+
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
+    ) {
+        parent::__construct(
+            $instanceManager,
+        );
+    }
 
     /**
      * Custom Post Type for which to enable the block category
@@ -17,10 +27,8 @@ class CacheControlBlockCategory extends AbstractBlockCategory
      */
     public function getCustomPostTypes(): array
     {
-        /** @var GraphQLCacheControlListCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLCacheControlListCustomPostType::class);
         return [
-            $customPostTypeService->getCustomPostType(),
+            $this->graphQLCacheControlListCustomPostType->getCustomPostType(),
         ];
     }
 

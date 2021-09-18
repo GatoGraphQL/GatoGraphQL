@@ -20,6 +20,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
         protected SingleEndpointSchemaConfigurator $endpointSchemaConfigurator,
+        protected GraphQLEndpointHandler $graphQLEndpointHandler,
     ) {
         parent::__construct(
             $instanceManager,
@@ -32,9 +33,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     protected function getCustomPostID(): ?int
     {
         // Only enable it when executing a query against the single endpoint
-        /** @var GraphQLEndpointHandler */
-        $graphQLEndpointHandler = $this->instanceManager->getInstance(GraphQLEndpointHandler::class);
-        if (!$graphQLEndpointHandler->isEndpointRequested()) {
+        if (!$this->graphQLEndpointHandler->isEndpointRequested()) {
             return null;
         }
         return $this->getUserSettingSchemaConfigurationID();

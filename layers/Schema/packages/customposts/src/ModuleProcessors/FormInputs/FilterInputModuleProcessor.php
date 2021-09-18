@@ -9,6 +9,7 @@ use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
@@ -48,6 +49,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         NameResolverInterface $nameResolver,
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
+        ModulePaths $modulePaths,
         protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
     ) {
         parent::__construct(
@@ -62,6 +64,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             $nameResolver,
             $dataloadHelperService,
             $requestHelperService,
+            $modulePaths,
         );
     }
 

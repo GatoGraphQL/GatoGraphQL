@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
+use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Components required to edit a GraphQL Persisted Query CPT
@@ -14,6 +18,21 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpoint
 class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
+
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        GeneralUtils $generalUtils,
+        EditorHelpers $editorHelpers,
+        protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $generalUtils,
+            $editorHelpers,
+        );
+    }
 
     /**
      * Block name
@@ -67,12 +86,10 @@ class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
      */
     protected function getAllowedPostTypes(): array
     {
-        /** @var GraphQLPersistedQueryEndpointCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                $customPostTypeService->getCustomPostType(),
+                $this->graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
             ]
         );
     }

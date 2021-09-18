@@ -14,6 +14,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
+        protected BlockHelpers $blockHelpers,
     ) {
     }
 
@@ -22,13 +23,11 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
      */
     protected function getSchemaConfigBlockDataItem(int $schemaConfigurationID): ?array
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var AbstractBlock
          */
         $block = $this->instanceManager->getInstance($this->getBlockClass());
-        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        return $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block
         );

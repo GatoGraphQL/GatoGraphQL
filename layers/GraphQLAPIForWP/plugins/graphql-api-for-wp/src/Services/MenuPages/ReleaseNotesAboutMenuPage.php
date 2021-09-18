@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Release notes menu page
@@ -14,14 +16,22 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
 
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        MenuPageHelper $menuPageHelper,
+        EndpointHelpers $endpointHelpers,
+        protected AboutMenuPage $aboutMenuPage,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $menuPageHelper,
+            $endpointHelpers
+        );
+    }
+
     public function getMenuPageSlug(): string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /**
-         * @var AboutMenuPage
-         */
-        $modulesMenuPage = $instanceManager->getInstance(AboutMenuPage::class);
-        return $modulesMenuPage->getMenuPageSlug();
+        return $this->aboutMenuPage->getMenuPageSlug();
     }
 
     /**

@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
 use WP_Post;
@@ -22,6 +23,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
+        CPTUtils $cptUtils,
         protected HooksAPIInterface $hooksAPI,
         protected BlockHelpers $blockHelpers,
     ) {
@@ -29,6 +31,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             $instanceManager,
             $moduleRegistry,
             $userAuthorization,
+            $cptUtils,
         );
     }
 

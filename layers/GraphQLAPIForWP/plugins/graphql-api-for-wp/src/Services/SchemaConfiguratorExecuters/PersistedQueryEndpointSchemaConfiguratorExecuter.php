@@ -13,7 +13,8 @@ class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCP
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator
+        protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator,
+        protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
     ) {
         parent::__construct(
             $instanceManager,
@@ -22,9 +23,7 @@ class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCP
 
     protected function getCustomPostType(): string
     {
-        /** @var GraphQLPersistedQueryEndpointCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
-        return $customPostTypeService->getCustomPostType();
+        return $this->graphQLPersistedQueryEndpointCustomPostType->getCustomPostType();
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
