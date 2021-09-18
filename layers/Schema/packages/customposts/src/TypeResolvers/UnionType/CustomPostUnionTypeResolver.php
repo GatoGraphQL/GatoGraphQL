@@ -19,6 +19,11 @@ use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTyp
 
 class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 {
+    /**
+     * Can't inject in constructor because of a circular reference
+     */
+    protected ?CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader = null;
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -29,7 +34,6 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         protected InterfaceTypeResolverInterface $interfaceTypeResolver,
-        protected CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -55,6 +59,9 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
+        if ($this->customPostUnionTypeDataLoader === null) {
+            $this->customPostUnionTypeDataLoader = $this->instanceManager->getInstance(CustomPostUnionTypeDataLoader::class);
+        }
         return $this->customPostUnionTypeDataLoader;
     }
 
