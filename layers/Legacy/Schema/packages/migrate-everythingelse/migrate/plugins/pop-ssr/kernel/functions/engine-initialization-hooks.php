@@ -169,10 +169,11 @@ class PoP_SSR_EngineInitialization_Hooks
 
                     // The data_properties has a unique key as the typeResolver
                     reset($block_typeResolver_data_properties);
-                    $block_typeResolver_class = key($block_typeResolver_data_properties);
-                    $block_data_properties = $block_typeResolver_data_properties[$block_typeResolver_class];
+                    $block_typeResolver_name = key($block_typeResolver_data_properties);
+                    $block_typeResolver = $block_typeResolver_data_properties[$block_typeResolver_name]['resolver'];
+                    $block_data_properties = $block_typeResolver_data_properties[$block_typeResolver_name]['properties'];
 
-                    $this->addDynamicDatabaseEntries($data, $dynamicdatabases, $block_dataset, $block_typeResolver_class, $block_data_properties);
+                    $this->addDynamicDatabaseEntries($data, $dynamicdatabases, $block_dataset, $block_typeResolver, $block_data_properties);
                 }
             }
         }
@@ -181,7 +182,7 @@ class PoP_SSR_EngineInitialization_Hooks
         $data['dbData'] = $dynamicdatabases;
     }
 
-    protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, $relationalTypeResolverClass, array $data_properties)
+    protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, RelationalTypeResolverInterface $subcomponentTypeResolver, array $data_properties)
     {
         if ($data_properties['data-fields'] ?? null) {
             $instanceManager = InstanceManagerFacade::getInstance();
@@ -190,10 +191,6 @@ class PoP_SSR_EngineInitialization_Hooks
             $databases = $data['dbData'];
 
             // Obtain the data from the database, copy it to the dynamic database
-            /**
-             * @var RelationalTypeResolverInterface
-             */
-            $relationalTypeResolver = $instanceManager->getInstance($relationalTypeResolverClass);
             $database_key = $relationalTypeResolver->getTypeOutputName();
 
             // Allow plugins to split the object into several databases, not just "primary". Eg: "userstate", by PoP User Login
@@ -229,8 +226,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
                     // If it is a union type data resolver, then we must add the converted type on each ID
                     $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
-                    if ($subcomponent_typeResolver_class = $dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
-                        $subcomponentTypeResolver = $instanceManager->getInstance((string)$subcomponent_typeResolver_class);
+                    if ($subcomponentTypeResolver = $dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
                         $typeObjectIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($objectIDs);
                         if (is_null($typeObjectIDs)) {
                             $isUnionType = false;
@@ -258,7 +254,7 @@ class PoP_SSR_EngineInitialization_Hooks
                             );
                         }
 
-                        $this->addDynamicDatabaseEntries($data, $dynamicdatabases, $subcomponent_dataset, $subcomponent_typeResolver_class, $subcomponent_data_properties);
+                        $this->addDynamicDatabaseEntries($data, $dynamicdatabases, $subcomponent_dataset, $subcomponentTypeResolver, $subcomponent_data_properties);
                     }
                 }
             }
