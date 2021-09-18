@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
-abstract class AbstractPostTypeResolverPicker extends AbstractObjectTypeResolverPicker
+abstract class AbstractPostObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     public function __construct(
         protected PostObjectTypeResolver $postObjectTypeResolver,

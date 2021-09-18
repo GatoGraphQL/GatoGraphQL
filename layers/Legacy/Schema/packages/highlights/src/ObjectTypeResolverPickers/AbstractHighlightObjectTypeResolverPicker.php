@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
 use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 
-class AbstractHighlightTypeResolverPicker extends AbstractObjectTypeResolverPicker
+abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     public function __construct(
         protected HighlightObjectTypeResolver $highlightObjectTypeResolver,
