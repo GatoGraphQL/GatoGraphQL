@@ -73,9 +73,9 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_POST_CREATE:
-                return CreatePostMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(CreatePostMutationResolverBridge::class);
             case self::MODULE_DATALOAD_POST_UPDATE:
-                return UpdatePostMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(UpdatePostMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

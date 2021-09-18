@@ -35,7 +35,7 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SETTINGS:
-                return SettingsMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(SettingsMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

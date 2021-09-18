@@ -93,9 +93,9 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTLINK_CREATE:
-                return CreateEventLinkMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(CreateEventLinkMutationResolverBridge::class);
             case self::MODULE_DATALOAD_EVENTLINK_UPDATE:
-                return UpdateEventLinkMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(UpdateEventLinkMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

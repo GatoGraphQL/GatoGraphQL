@@ -41,7 +41,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_ADDCOMMENT:
-                return AddCommentToCustomPostMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

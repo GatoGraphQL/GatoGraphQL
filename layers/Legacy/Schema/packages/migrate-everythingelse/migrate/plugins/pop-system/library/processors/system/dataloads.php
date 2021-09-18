@@ -38,13 +38,13 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadModulePr
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_BUILD:
-                return BuildSystemMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(BuildSystemMutationResolverBridge::class);
 
             case self::MODULE_DATALOADACTION_SYSTEM_GENERATE:
-                return GenerateSystemMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(GenerateSystemMutationResolverBridge::class);
 
             case self::MODULE_DATALOADACTION_SYSTEM_INSTALL:
-                return InstallSystemMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(InstallSystemMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

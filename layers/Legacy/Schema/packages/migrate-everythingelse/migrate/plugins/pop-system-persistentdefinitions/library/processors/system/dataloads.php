@@ -29,7 +29,7 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
-                return SaveDefinitionFileMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(SaveDefinitionFileMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

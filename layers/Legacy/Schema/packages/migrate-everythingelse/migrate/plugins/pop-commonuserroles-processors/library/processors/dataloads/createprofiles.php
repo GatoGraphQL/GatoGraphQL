@@ -43,15 +43,15 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE:
                 if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
-                    return CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge::class;
+                    return $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge::class);
                 }
-                return CreateUpdateOrganizationProfileMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(CreateUpdateOrganizationProfileMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE:
                 if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
-                    return CreateUpdateWithCommunityIndividualProfileMutationResolverBridge::class;
+                    return $this->instanceManager->getInstance(CreateUpdateWithCommunityIndividualProfileMutationResolverBridge::class);
                 }
-                return CreateUpdateIndividualProfileMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(CreateUpdateIndividualProfileMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

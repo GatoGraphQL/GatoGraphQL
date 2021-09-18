@@ -118,10 +118,10 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
                 // 2. Update the avatar, on the POST operation
                 $moduleAtts = (count($module) >= 3) ? $module[2] : null;
                 if ($moduleAtts && $moduleAtts['executeupdate']) {
-                    return UpdateUserAvatarMutationResolverBridge::class;
+                    return $this->instanceManager->getInstance(UpdateUserAvatarMutationResolverBridge::class);
                 }
 
-                return FileUploadPictureMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(FileUploadPictureMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

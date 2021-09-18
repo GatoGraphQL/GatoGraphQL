@@ -40,7 +40,7 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CREATELOCATION:
-                return CreateLocationMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(CreateLocationMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

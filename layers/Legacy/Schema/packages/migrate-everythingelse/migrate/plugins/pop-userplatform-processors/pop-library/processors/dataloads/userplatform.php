@@ -47,13 +47,13 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
-                return ChangeUserPasswordMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(ChangeUserPasswordMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_MYPREFERENCES:
-                return UpdateMyPreferencesMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(UpdateMyPreferencesMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_INVITENEWUSERS:
-                return InviteUsersMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(InviteUsersMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

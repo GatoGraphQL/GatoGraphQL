@@ -48,13 +48,13 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_INVITENEWMEMBERS:
-                return InviteMembersMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(InviteMembersMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
-                return EditMembershipMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(EditMembershipMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
-                return UpdateMyCommunitiesMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(UpdateMyCommunitiesMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);
