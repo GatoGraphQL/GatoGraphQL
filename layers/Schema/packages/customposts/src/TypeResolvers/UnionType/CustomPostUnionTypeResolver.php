@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeResolvers\UnionType;
 
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -52,7 +53,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         return $this->translationAPI->__('Union of \'custom post\' type resolvers', 'customposts');
     }
 
-    public function getRelationalTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
         return CustomPostUnionTypeDataLoader::class;
     }

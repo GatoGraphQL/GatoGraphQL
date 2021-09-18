@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuItemTypeDataLoader;
@@ -27,7 +28,7 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
         return $menuItem->id;
     }
 
-    public function getRelationalTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
         return MenuItemTypeDataLoader::class;
     }

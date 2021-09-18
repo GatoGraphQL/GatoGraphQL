@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
@@ -37,7 +38,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         return $root->getID();
     }
 
-    public function getRelationalTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
         return RootTypeDataLoader::class;
     }

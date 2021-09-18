@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoPSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostTypeDataLoader;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 
@@ -19,7 +20,7 @@ class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
         return $this->translationAPI->__('Representation of a post', 'posts');
     }
 
-    public function getRelationalTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
         return PostTypeDataLoader::class;
     }

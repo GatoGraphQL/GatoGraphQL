@@ -604,8 +604,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Obtain the data for the required object IDs
         $objectIDItems = [];
         $ids = $this->getIDsToQuery($ids_data_fields);
-        $typeDataLoaderClass = $this->getRelationalTypeDataLoaderClass();
-        $typeDataLoader = $this->instanceManager->getInstance($typeDataLoaderClass);
+        $typeDataLoader = $this->getRelationalTypeDataLoader();
         // If any ID cannot be resolved, the object will be null
         $objects = array_filter($typeDataLoader->getObjects($ids));
         foreach ($objects as $object) {
