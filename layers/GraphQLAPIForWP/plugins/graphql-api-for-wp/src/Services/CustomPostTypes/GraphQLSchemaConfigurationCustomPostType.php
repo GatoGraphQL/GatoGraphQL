@@ -10,6 +10,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
@@ -20,12 +21,14 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
+        CPTUtils $cptUtils,
         protected SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry
     ) {
         parent::__construct(
             $instanceManager,
             $moduleRegistry,
             $userAuthorization,
+            $cptUtils,
         );
     }
 
