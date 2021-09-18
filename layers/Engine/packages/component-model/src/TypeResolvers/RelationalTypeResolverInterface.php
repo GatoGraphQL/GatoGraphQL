@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 
@@ -16,7 +17,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * @return string|int|null the ID of the passed object, or `null` if there is no resolver to handle it (for the UnionTypeResolver)
      */
     public function getID(object $object): string | int | null;
-    public function getRelationalTypeDataLoaderClass(): string;
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface;
     /**
      * @return string[]
      */

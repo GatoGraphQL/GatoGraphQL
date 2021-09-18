@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ObjectType;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
@@ -16,6 +25,29 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
     use ReservedNameTypeResolverTrait;
 
     public const HOOK_DESCRIPTION = __CLASS__ . ':description';
+
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        ErrorProviderInterface $errorProvider,
+        protected RootTypeDataLoader $rootTypeDataLoader,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $schemaNamespacingService,
+            $schemaDefinitionService,
+            $feedbackMessageStore,
+            $fieldQueryInterpreter,
+            $errorProvider,
+        );
+    }
 
     public function getTypeName(): string
     {
@@ -37,9 +69,9 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         return $root->getID();
     }
 
-    public function getRelationalTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return RootTypeDataLoader::class;
+        return $this->rootTypeDataLoader;
     }
 
     protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])

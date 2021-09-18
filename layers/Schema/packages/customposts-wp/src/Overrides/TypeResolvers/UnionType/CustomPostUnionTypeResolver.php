@@ -17,7 +17,7 @@ class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
     public function getObjectIDTargetTypeResolvers(array $ids): array
     {
         $objectIDTargetTypeResolvers = [];
-        $customPostUnionTypeDataLoader = $this->instanceManager->getInstance($this->getRelationalTypeDataLoaderClass());
+        $customPostUnionTypeDataLoader = $this->getRelationalTypeDataLoader();
         // If any ID cannot be resolved, the object will be null
         if ($customPosts = array_filter($customPostUnionTypeDataLoader->getObjects($ids))) {
             foreach ($customPosts as $customPost) {

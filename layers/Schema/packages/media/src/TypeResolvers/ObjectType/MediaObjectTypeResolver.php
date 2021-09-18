@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -28,6 +29,7 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         protected MediaTypeAPIInterface $mediaTypeAPI,
+        protected MediaTypeDataLoader $mediaTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -57,8 +59,8 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->mediaTypeAPI->getMediaItemID($media);
     }
 
-    public function getRelationalTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return MediaTypeDataLoader::class;
+        return $this->mediaTypeDataLoader;
     }
 }

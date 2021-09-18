@@ -27,8 +27,7 @@ abstract class AbstractUnionTypeDataLoader extends AbstractRelationalTypeDataLoa
         $objects = [];
         foreach ($typeResolverClassObjectIDs as $targetTypeResolverClass => $objectIDs) {
             $targetTypeResolver = $this->instanceManager->getInstance($targetTypeResolverClass);
-            $targetTypeDataLoaderClass = $targetTypeResolver->getRelationalTypeDataLoaderClass();
-            $targetTypeDataLoader = $this->instanceManager->getInstance($targetTypeDataLoaderClass);
+            $targetTypeDataLoader = $targetTypeResolver->getRelationalTypeDataLoader();
             $objects = array_merge(
                 $objects,
                 $targetTypeDataLoader->getObjects($objectIDs)

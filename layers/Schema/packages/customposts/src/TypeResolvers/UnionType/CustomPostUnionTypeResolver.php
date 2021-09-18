@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeResolvers\UnionType;
 
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -15,10 +16,14 @@ use PoP\ComponentModel\TypeResolvers\UnionType\AbstractUnionTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader;
-use PoPSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
 
 class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 {
+    /**
+     * Can't inject in constructor because of a circular reference
+     */
+    protected ?CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader = null;
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -52,9 +57,12 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         return $this->translationAPI->__('Union of \'custom post\' type resolvers', 'customposts');
     }
 
-    public function getRelationalTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return CustomPostUnionTypeDataLoader::class;
+        if ($this->customPostUnionTypeDataLoader === null) {
+            $this->customPostUnionTypeDataLoader = $this->instanceManager->getInstance(CustomPostUnionTypeDataLoader::class);
+        }
+        return $this->customPostUnionTypeDataLoader;
     }
 
     public function getSchemaTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\MutationRootTypeDataLoader;
@@ -41,6 +42,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         ErrorProviderInterface $errorProvider,
         TypeResolverHelperInterface $typeResolverHelper,
         RootObjectTypeResolver $rootObjectTypeResolver,
+        protected MutationRootTypeDataLoader $mutationRootTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -73,9 +75,9 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         return $mutationRoot->getID();
     }
 
-    public function getRelationalTypeDataLoaderClass(): string
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return MutationRootTypeDataLoader::class;
+        return $this->mutationRootTypeDataLoader;
     }
 
     public function isFieldNameConditionSatisfiedForSchema(

@@ -10,6 +10,7 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
+use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
@@ -121,8 +122,8 @@ trait QueryDataModuleProcessorTrait
         }
 
         $relationalTypeResolver = $this->getRelationalTypeResolver($module);
-        $typeDataLoaderClass = $relationalTypeResolver->getRelationalTypeDataLoaderClass();
-        $typeDataLoader = $instanceManager->getInstance($typeDataLoaderClass);
+        /** @var ObjectTypeQueryableDataLoaderInterface */
+        $typeDataLoader = $relationalTypeResolver->getRelationalTypeDataLoader();
         return $typeDataLoader->findIDs($data_properties);
     }
 
