@@ -30,7 +30,7 @@ class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMu
             $userTypeAPI,
         );
     }
-    
+
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->followUserMutationResolver;

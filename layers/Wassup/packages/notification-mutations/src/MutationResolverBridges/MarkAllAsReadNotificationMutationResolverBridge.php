@@ -29,7 +29,7 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
             $mutationResolutionManager,
         );
     }
-    
+
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->markAllAsReadNotificationMutationResolver;

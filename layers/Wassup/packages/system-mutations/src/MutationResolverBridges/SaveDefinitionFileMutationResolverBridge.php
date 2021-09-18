@@ -28,7 +28,7 @@ class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMu
             $mutationResolutionManager,
         );
     }
-    
+
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->saveDefinitionFileMutationResolver;

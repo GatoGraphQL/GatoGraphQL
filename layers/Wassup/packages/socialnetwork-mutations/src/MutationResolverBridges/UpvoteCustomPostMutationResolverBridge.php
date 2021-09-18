@@ -28,7 +28,7 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
             $mutationResolutionManager,
         );
     }
-    
+
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->upvoteCustomPostMutationResolver;

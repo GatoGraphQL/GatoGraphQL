@@ -28,7 +28,7 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
             $mutationResolutionManager,
         );
     }
-    
+
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->createOrUpdateStanceMutationResolver;

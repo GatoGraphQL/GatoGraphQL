@@ -28,7 +28,7 @@ class ContactUsMutationResolverBridge extends AbstractFormComponentMutationResol
             $mutationResolutionManager,
         );
     }
-    
+
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->contactUsMutationResolver;

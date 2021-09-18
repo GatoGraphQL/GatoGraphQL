@@ -28,7 +28,7 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
             $mutationResolutionManager,
         );
     }
-    
+
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->generateThemeMutationResolver;

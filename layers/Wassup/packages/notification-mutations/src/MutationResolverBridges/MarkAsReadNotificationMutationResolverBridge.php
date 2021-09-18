@@ -27,7 +27,7 @@ class MarkAsReadNotificationMutationResolverBridge extends AbstractMarkAsReadOrU
             $mutationResolutionManager,
         );
     }
-    
+
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->markAsReadNotificationMutationResolver;
