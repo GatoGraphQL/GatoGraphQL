@@ -14,6 +14,7 @@ class UpdatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkM
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected UpdatePostLinkMutationResolver $UpdatePostLinkMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -26,7 +27,6 @@ class UpdatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkM
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->UpdatePostLinkMutationResolver;
-        protected UpdatePostLinkMutationResolver $UpdatePostLinkMutationResolver,
     }
 
     protected function isUpdate(): bool

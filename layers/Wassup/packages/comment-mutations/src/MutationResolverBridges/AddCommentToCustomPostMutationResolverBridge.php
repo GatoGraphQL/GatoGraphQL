@@ -16,6 +16,7 @@ class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMuta
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected AddCommentToCustomPostMutationResolver $AddCommentToCustomPostMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -28,7 +29,6 @@ class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMuta
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->AddCommentToCustomPostMutationResolver;
-        protected AddCommentToCustomPostMutationResolver $AddCommentToCustomPostMutationResolver,
     }
 
     public function getFormData(): array

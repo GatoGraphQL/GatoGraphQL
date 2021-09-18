@@ -15,6 +15,7 @@ class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutation
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected FlagCustomPostMutationResolver $FlagCustomPostMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +28,6 @@ class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutation
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->FlagCustomPostMutationResolver;
-        protected FlagCustomPostMutationResolver $FlagCustomPostMutationResolver,
     }
 
     public function getFormData(): array

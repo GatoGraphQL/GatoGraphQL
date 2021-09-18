@@ -15,6 +15,7 @@ class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResol
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected VolunteerMutationResolver $VolunteerMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +28,6 @@ class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResol
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->VolunteerMutationResolver;
-        protected VolunteerMutationResolver $VolunteerMutationResolver,
     }
 
     public function getFormData(): array

@@ -15,6 +15,7 @@ class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormCompone
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected NewsletterUnsubscriptionMutationResolver $NewsletterUnsubscriptionMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +28,6 @@ class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormCompone
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->NewsletterUnsubscriptionMutationResolver;
-        protected NewsletterUnsubscriptionMutationResolver $NewsletterUnsubscriptionMutationResolver,
     }
 
     public function getFormData(): array

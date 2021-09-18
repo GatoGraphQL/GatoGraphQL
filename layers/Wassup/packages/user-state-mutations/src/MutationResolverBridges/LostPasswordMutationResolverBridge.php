@@ -18,6 +18,7 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected LostPasswordMutationResolver $LostPasswordMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -30,7 +31,6 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->LostPasswordMutationResolver;
-        protected LostPasswordMutationResolver $LostPasswordMutationResolver,
     }
 
     public function getFormData(): array

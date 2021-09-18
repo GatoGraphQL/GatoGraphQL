@@ -15,6 +15,7 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected CreateUpdateProfileMutationResolver $CreateUpdateProfileMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +28,6 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->CreateUpdateProfileMutationResolver;
-        protected CreateUpdateProfileMutationResolver $CreateUpdateProfileMutationResolver,
     }
 
     public function getFormData(): array

@@ -15,6 +15,7 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected UpvoteCustomPostMutationResolver $UpvoteCustomPostMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +28,6 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->UpvoteCustomPostMutationResolver;
-        protected UpvoteCustomPostMutationResolver $UpvoteCustomPostMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

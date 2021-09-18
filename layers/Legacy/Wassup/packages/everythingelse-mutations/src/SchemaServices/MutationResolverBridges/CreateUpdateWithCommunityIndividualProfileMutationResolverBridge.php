@@ -14,6 +14,7 @@ class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends C
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected CreateUpdateWithCommunityIndividualProfileMutationResolver $CreateUpdateWithCommunityIndividualProfileMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -26,6 +27,5 @@ class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends C
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->CreateUpdateWithCommunityIndividualProfileMutationResolver;
-        protected CreateUpdateWithCommunityIndividualProfileMutationResolver $CreateUpdateWithCommunityIndividualProfileMutationResolver,
     }
 }

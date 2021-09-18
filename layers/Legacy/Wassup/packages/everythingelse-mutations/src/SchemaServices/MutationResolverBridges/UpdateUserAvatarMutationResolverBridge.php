@@ -16,6 +16,7 @@ class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationRe
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected UpdateUserAvatarMutationResolver $UpdateUserAvatarMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -28,7 +29,6 @@ class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationRe
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->UpdateUserAvatarMutationResolver;
-        protected UpdateUserAvatarMutationResolver $UpdateUserAvatarMutationResolver,
     }
 
     public function getFormData(): array

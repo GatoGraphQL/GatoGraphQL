@@ -15,6 +15,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolverBridge extends Abstrac
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected GravityFormsNewsletterUnsubscriptionMutationResolver $GravityFormsNewsletterUnsubscriptionMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +28,6 @@ class GravityFormsNewsletterUnsubscriptionMutationResolverBridge extends Abstrac
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->GravityFormsNewsletterUnsubscriptionMutationResolver;
-        protected GravityFormsNewsletterUnsubscriptionMutationResolver $GravityFormsNewsletterUnsubscriptionMutationResolver,
     }
 
     public function getFormData(): array

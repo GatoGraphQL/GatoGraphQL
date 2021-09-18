@@ -14,6 +14,7 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected UnfollowUserMutationResolver $UnfollowUserMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -26,7 +27,6 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->UnfollowUserMutationResolver;
-        protected UnfollowUserMutationResolver $UnfollowUserMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

@@ -16,6 +16,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
         protected \PoP\Translation\TranslationAPIInterface $translationAPI,
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected UnsubscribeFromTagMutationResolver $UnsubscribeFromTagMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -28,7 +29,6 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->UnsubscribeFromTagMutationResolver;
-        protected UnsubscribeFromTagMutationResolver $UnsubscribeFromTagMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
