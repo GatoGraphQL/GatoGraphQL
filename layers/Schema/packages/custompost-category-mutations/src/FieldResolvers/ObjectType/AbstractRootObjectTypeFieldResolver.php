@@ -93,7 +93,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         switch ($fieldName) {
             case $this->getSetCategoriesFieldName():
-                return $this->getTypeMutationResolverClass();
+                return $this->getSetCategoriesMutationResolver();
         }
 
         return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);

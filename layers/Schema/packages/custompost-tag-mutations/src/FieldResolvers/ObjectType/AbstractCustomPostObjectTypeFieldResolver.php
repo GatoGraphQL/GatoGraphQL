@@ -123,7 +123,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         switch ($fieldName) {
             case 'setTags':
-                return $this->getTypeMutationResolverClass();
+                return $this->getSetTagsMutationResolver();
         }
 
         return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);
