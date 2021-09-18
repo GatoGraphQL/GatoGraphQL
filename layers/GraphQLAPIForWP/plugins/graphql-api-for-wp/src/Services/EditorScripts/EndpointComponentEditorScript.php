@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Components required to edit a GraphQL endpoint CPT
@@ -14,6 +17,19 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPo
 class EndpointComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
+
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        EditorHelpers $editorHelpers,
+        protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $editorHelpers,
+        );
+    }
 
     /**
      * Block name
@@ -67,12 +83,10 @@ class EndpointComponentEditorScript extends AbstractEditorScript
      */
     protected function getAllowedPostTypes(): array
     {
-        /** @var GraphQLCustomEndpointCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                $customPostTypeService->getCustomPostType(),
+                $this->graphQLCustomEndpointCustomPostType->getCustomPostType(),
             ]
         );
     }
