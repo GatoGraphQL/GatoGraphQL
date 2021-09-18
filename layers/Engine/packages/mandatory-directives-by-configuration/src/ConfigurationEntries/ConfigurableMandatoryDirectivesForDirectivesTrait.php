@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+
 trait ConfigurableMandatoryDirectivesForDirectivesTrait
 {
     /**
@@ -30,6 +33,20 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
     protected function getRequiredEntryValue(): ?string
     {
         return null;
+    }
+
+    /**
+     * Affected directives
+     *
+     * @return DirectiveResolverInterface[]
+     */
+    protected function getDirectiveResolvers(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        return array_map(
+            fn (string $directiveResolverClass) => $instanceManager->getInstance($directiveResolverClass),
+            $this->getDirectiveResolverClasses()
+        );
     }
 
     /**
