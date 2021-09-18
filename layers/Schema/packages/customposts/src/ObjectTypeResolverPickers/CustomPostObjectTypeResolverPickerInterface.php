@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPosts\ObjectTypeResolverPickers;
 
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 
-interface CustomPostTypeResolverPickerInterface extends ObjectTypeResolverPickerInterface
+interface CustomPostObjectTypeResolverPickerInterface extends ObjectTypeResolverPickerInterface
 {
     /**
      * Get the post type of the Type (eg: Post is "post", Media is "attachment", etc)
