@@ -10,7 +10,7 @@ class ModuleProcessorManager implements ModuleProcessorManagerInterface
 {
     use ItemProcessorManagerTrait;
 
-    public function getProcessor(array $item)
+    public function getProcessor(array $item): ModuleProcessorInterface
     {
         return $this->getItemProcessor($item);
     }
