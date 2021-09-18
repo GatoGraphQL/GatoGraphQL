@@ -3,7 +3,7 @@ use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerTrait;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
-class PoP_ResourceLoaderProcessorManager {
+class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManagerInterface {
 
 	use ItemProcessorManagerTrait;
 
@@ -12,7 +12,7 @@ class PoP_ResourceLoaderProcessorManager {
      */
     private array $itemFullNameProcessorInstances = [];
 
-    public function getLoadedItems()
+    public function getLoadedItems(): array
     {
         // Return a list of all loaded items
         return array_map(
@@ -21,12 +21,12 @@ class PoP_ResourceLoaderProcessorManager {
         );
     }
 
-    public function getLoadedItemFullNameProcessorInstances()
+    public function getLoadedItemFullNameProcessorInstances(): array
     {
         return $this->itemFullNameProcessorInstances;
     }
 
-    public function getProcessor(array $item)
+    public function getProcessor(array $item): PoP_ResourceLoaderProcessor
     {
         return $this->getItemProcessor($item);
     }
