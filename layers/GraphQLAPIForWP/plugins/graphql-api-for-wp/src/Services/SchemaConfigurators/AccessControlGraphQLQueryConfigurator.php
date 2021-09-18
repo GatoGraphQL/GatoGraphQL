@@ -6,14 +6,36 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\AccessControlRuleBlockRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\Hooks\HooksAPIInterface;
 
 class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGraphQLQueryConfigurator
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        TypeRegistryInterface $typeRegistry,
+        DirectiveRegistryInterface $directiveRegistry,
+        protected AccessControlBlock $accessControlBlock,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $instanceManager,
+            $moduleRegistry,
+            $typeRegistry,
+            $directiveRegistry,
+        );
+    }
+    
     /**
      * @var array<string, bool>|null
      */
@@ -64,13 +86,9 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
      */
     protected function doExecuteSchemaConfiguration(int $aclPostID): void
     {
-        /**
-         * @var AccessControlBlock
-         */
-        $block = $this->instanceManager->getInstance(AccessControlBlock::class);
         $aclBlockItems = $this->blockHelpers->getBlocksOfTypeFromCustomPost(
             $aclPostID,
-            $block
+            $this->accessControlBlock
         );
         $accessControlManager = AccessControlManagerFacade::getInstance();
         // The "Access Control" type contains the fields/directives
