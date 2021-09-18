@@ -274,7 +274,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            return $objectTypeFieldResolvers[0]->getFieldMutationResolverClass($this, $fieldName);
+            return $objectTypeFieldResolvers[0]->getFieldMutationResolver($this, $fieldName);
         }
 
         return null;
@@ -288,8 +288,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            $fieldMutationResolverClass = $objectTypeFieldResolvers[0]->getFieldMutationResolverClass($this, $fieldName);
-            return $fieldMutationResolverClass !== null;
+            $fieldMutationResolver = $objectTypeFieldResolvers[0]->getFieldMutationResolver($this, $fieldName);
+            return $fieldMutationResolver !== null;
         }
 
         return null;

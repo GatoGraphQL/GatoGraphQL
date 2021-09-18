@@ -56,7 +56,7 @@ class NestedMutationHookSet extends AbstractHookSet
                 $objectTypeResolver !== $graphQLSchemaDefinitionService->getRootTypeResolver()
                 && $objectTypeResolver !== $graphQLSchemaDefinitionService->getMutationRootTypeResolver()
             )
-            && $objectTypeFieldResolver->getFieldMutationResolverClass($objectTypeResolver, $fieldName) !== null
+            && $objectTypeFieldResolver->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null
         ) {
             return false;
         }
