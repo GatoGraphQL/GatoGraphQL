@@ -29,6 +29,7 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         protected MediaTypeAPIInterface $mediaTypeAPI,
+        protected MediaTypeDataLoader $mediaTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -60,6 +61,6 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return MediaTypeDataLoader::class;
+        return $this->mediaTypeDataLoader;
     }
 }

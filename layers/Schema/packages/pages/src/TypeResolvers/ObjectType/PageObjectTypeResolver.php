@@ -28,6 +28,7 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        protected PageTypeDataLoader $pageTypeDataLoader,
         protected PageTypeAPIInterface $pageTypeAPI,
     ) {
         parent::__construct(
@@ -60,6 +61,6 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return PageTypeDataLoader::class;
+        return $this->pageTypeDataLoader;
     }
 }

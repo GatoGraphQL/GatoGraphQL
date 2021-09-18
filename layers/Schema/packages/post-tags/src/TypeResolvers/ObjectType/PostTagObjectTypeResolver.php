@@ -30,6 +30,7 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        protected PostTagTypeDataLoader $postTagTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -55,6 +56,6 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return PostTagTypeDataLoader::class;
+        return $this->postTagTypeDataLoader;
     }
 }

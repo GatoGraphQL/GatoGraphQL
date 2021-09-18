@@ -29,6 +29,7 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         protected CommentTypeAPIInterface $commentTypeAPI,
+        protected CommentTypeDataLoader $commentTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -60,6 +61,6 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return CommentTypeDataLoader::class;
+        return $this->commentTypeDataLoader;
     }
 }

@@ -35,6 +35,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        protected RootTypeDataLoader $rootTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -70,7 +71,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return RootTypeDataLoader::class;
+        return $this->rootTypeDataLoader;
     }
 
     protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])

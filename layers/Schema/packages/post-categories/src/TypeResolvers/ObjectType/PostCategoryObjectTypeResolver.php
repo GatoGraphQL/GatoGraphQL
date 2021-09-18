@@ -30,6 +30,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        protected PostCategoryTypeDataLoader $postCategoryTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -55,6 +56,6 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return PostCategoryTypeDataLoader::class;
+        return $this->postCategoryTypeDataLoader;
     }
 }

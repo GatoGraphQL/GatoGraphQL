@@ -28,6 +28,7 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        protected StanceTypeDataLoader $stanceTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -59,6 +60,6 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return StanceTypeDataLoader::class;
+        return $this->stanceTypeDataLoader;
     }
 }

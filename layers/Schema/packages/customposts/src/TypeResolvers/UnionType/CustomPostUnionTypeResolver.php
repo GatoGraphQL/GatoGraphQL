@@ -30,6 +30,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         protected InterfaceTypeResolverInterface $interfaceTypeResolver,
+        protected CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -55,7 +56,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return CustomPostUnionTypeDataLoader::class;
+        return $this->customPostUnionTypeDataLoader;
     }
 
     public function getSchemaTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface

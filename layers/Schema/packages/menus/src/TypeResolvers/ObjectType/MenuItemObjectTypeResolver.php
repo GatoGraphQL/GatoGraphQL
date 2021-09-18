@@ -28,6 +28,7 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        protected MenuItemTypeDataLoader $menuItemTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -60,6 +61,6 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return MenuItemTypeDataLoader::class;
+        return $this->menuItemTypeDataLoader;
     }
 }

@@ -33,6 +33,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         protected RootObjectTypeResolver $rootObjectTypeResolver,
+        protected QueryRootTypeDataLoader $queryRootTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -66,7 +67,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return QueryRootTypeDataLoader::class;
+        return $this->queryRootTypeDataLoader;
     }
 
     public function isFieldNameConditionSatisfiedForSchema(

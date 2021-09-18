@@ -27,6 +27,7 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        protected GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -52,6 +53,6 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return GenericCustomPostTypeDataLoader::class;
+        return $this->genericCustomPostTypeDataLoader;
     }
 }

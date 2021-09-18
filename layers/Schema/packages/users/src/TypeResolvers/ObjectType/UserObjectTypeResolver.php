@@ -29,6 +29,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         protected UserTypeAPIInterface $userTypeAPI,
+        protected UserTypeDataLoader $userTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -60,6 +61,6 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return UserTypeDataLoader::class;
+        return $this->userTypeDataLoader;
     }
 }

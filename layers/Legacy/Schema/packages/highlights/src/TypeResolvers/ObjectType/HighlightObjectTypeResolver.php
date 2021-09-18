@@ -28,6 +28,7 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        protected HighlightTypeDataLoader $highlightTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -59,6 +60,6 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return HighlightTypeDataLoader::class;
+        return $this->highlightTypeDataLoader;
     }
 }

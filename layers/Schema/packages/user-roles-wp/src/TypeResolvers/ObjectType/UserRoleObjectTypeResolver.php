@@ -27,6 +27,7 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        protected UserRoleTypeDataLoader $userRoleTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -58,6 +59,6 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return UserRoleTypeDataLoader::class;
+        return $this->userRoleTypeDataLoader;
     }
 }

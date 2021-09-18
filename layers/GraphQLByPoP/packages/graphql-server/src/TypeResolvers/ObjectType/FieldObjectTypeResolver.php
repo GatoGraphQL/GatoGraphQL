@@ -28,6 +28,7 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -60,6 +61,6 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return SchemaDefinitionReferenceTypeDataLoader::class;
+        return $this->schemaDefinitionReferenceTypeDataLoader;
     }
 }

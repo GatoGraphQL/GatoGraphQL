@@ -42,6 +42,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         ErrorProviderInterface $errorProvider,
         TypeResolverHelperInterface $typeResolverHelper,
         RootObjectTypeResolver $rootObjectTypeResolver,
+        protected MutationRootTypeDataLoader $mutationRootTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -76,7 +77,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return MutationRootTypeDataLoader::class;
+        return $this->mutationRootTypeDataLoader;
     }
 
     public function isFieldNameConditionSatisfiedForSchema(

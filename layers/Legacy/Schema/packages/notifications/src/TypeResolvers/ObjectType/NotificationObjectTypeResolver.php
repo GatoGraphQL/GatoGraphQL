@@ -27,6 +27,7 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        protected NotificationTypeDataLoader $notificationTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -58,6 +59,6 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
     {
-        return NotificationTypeDataLoader::class;
+        return $this->notificationTypeDataLoader;
     }
 }
