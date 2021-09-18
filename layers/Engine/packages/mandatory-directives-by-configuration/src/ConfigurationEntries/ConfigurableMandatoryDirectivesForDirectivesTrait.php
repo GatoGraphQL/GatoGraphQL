@@ -40,7 +40,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
      *
      * @return DirectiveResolverInterface[]
      */
-    protected function getDirectiveResolvers(): array
+    final protected function getDirectiveResolvers(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         return array_map(
