@@ -35,7 +35,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
         return $mandatoryDirectivesForDirectives;
     }
     /**
-     * Provide the classes for all the directiveResolverClasses that need the "validateIsUserLoggedIn" directive
+     * Provide the DirectiveResolvers that need the "validateIsUserLoggedIn" directive
      * 
      * @return DirectiveResolverInterface[]
      */
@@ -67,7 +67,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
         return $mandatoryDirectivesForFields;
     }
     /**
-     * Provide the classes for all the directiveResolverClasses that need the "validateIsUserLoggedIn" directive
+     * Provide the fields that need the "validateIsUserLoggedIn" directive
      */
     protected function getFieldNames(): array
     {

@@ -34,7 +34,7 @@ class GlobalValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolve
     }
 
     /**
-     * Provide the classes for all the directiveResolverClasses that need the "validateIsUserLoggedIn" directive
+     * Provide the DirectiveResolvers that need the "validateIsUserLoggedIn" directive
      * 
      * @return DirectiveResolverInterface[]
      */
