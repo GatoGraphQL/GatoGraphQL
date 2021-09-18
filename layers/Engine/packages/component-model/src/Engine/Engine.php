@@ -998,21 +998,18 @@ class Engine implements EngineInterface
                 // Execute at the very beginning, so the result of the execution can also be fetched later below
                 // (Eg: creation of a new location => retrieving its data / Adding a new comment)
                 // Pass data_properties so these can also be modified (eg: set id of newly created Location)
-                if ($componentMutationResolverBridgeClass = $processor->getComponentMutationResolverBridgeClass($module)) {
-                    if ($processor->shouldExecuteMutation($module, $props)) {
-                        // Validate that the actionexecution must be triggered through its own checkpoints
-                        $execute = true;
-                        $mutation_checkpoint_validation = null;
-                        if ($mutation_checkpoints = $data_properties[DataLoading::ACTION_EXECUTION_CHECKPOINTS] ?? null) {
-                            // Check if the module fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
-                            $mutation_checkpoint_validation = $this->validateCheckpoints($mutation_checkpoints);
-                            $execute = !GeneralUtils::isError($mutation_checkpoint_validation);
-                        }
-
-                        if ($execute) {
-                            $componentMutationResolverBridge = $this->instanceManager->getInstance($componentMutationResolverBridgeClass);
-                            $executed = $componentMutationResolverBridge->execute($data_properties);
-                        }
+                $componentMutationResolverBridge = $processor->getComponentMutationResolverBridge($module);
+                if ($componentMutationResolverBridge !== null && $processor->shouldExecuteMutation($module, $props)) {
+                    // Validate that the actionexecution must be triggered through its own checkpoints
+                    $execute = true;
+                    $mutation_checkpoint_validation = null;
+                    if ($mutation_checkpoints = $data_properties[DataLoading::ACTION_EXECUTION_CHECKPOINTS] ?? null) {
+                        // Check if the module fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
+                        $mutation_checkpoint_validation = $this->validateCheckpoints($mutation_checkpoints);
+                        $execute = !GeneralUtils::isError($mutation_checkpoint_validation);
+                    }
+                    if ($execute) {
+                        $executed = $componentMutationResolverBridge->execute($data_properties);
                     }
                 }
 
