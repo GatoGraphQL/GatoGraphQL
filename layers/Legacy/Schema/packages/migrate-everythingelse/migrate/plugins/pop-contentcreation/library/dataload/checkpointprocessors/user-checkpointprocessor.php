@@ -7,7 +7,7 @@ class GD_ContentCreation_Dataload_UserCheckpointProcessor extends AbstractCheckp
     public const CHECKPOINT_USERCANEDIT = 'checkpoint-usercanedit';
     public const CHECKPOINT_EDITPOSTNONCE = 'checkpoint-editpostnonce';
 
-    public function getCheckpointsToProcess()
+    public function getCheckpointsToProcess(): array
     {
         return array(
             [self::class, self::CHECKPOINT_USERCANEDIT],

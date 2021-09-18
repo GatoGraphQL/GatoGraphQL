@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\CheckpointProcessors;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 
 class MutationCheckpointProcessor extends AbstractCheckpointProcessor
@@ -14,7 +13,7 @@ class MutationCheckpointProcessor extends AbstractCheckpointProcessor
     public const HOOK_MUTATIONS_NOT_SUPPORTED_ERROR_MSG = __CLASS__ . ':MutationsNotSupportedErrorMsg';
     public const ENABLED_MUTATIONS = 'enabled-mutations';
 
-    public function getCheckpointsToProcess()
+    public function getCheckpointsToProcess(): array
     {
         return array(
             [self::class, self::ENABLED_MUTATIONS],

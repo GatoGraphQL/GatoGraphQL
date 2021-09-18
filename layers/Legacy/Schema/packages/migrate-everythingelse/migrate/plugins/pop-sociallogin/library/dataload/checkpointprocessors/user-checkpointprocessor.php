@@ -6,7 +6,7 @@ class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
 {
     public const CHECKPOINT_NONSOCIALLOGINUSER = 'wsl-checkpoint-nonsocialloginuser';
 
-    public function getCheckpointsToProcess()
+    public function getCheckpointsToProcess(): array
     {
         return array(
             [self::class, self::CHECKPOINT_NONSOCIALLOGINUSER],

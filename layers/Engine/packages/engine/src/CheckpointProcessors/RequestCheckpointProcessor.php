@@ -11,7 +11,7 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const DOING_POST = 'doing-post';
 
-    public function getCheckpointsToProcess()
+    public function getCheckpointsToProcess(): array
     {
         return array(
             [self::class, self::DOING_POST],

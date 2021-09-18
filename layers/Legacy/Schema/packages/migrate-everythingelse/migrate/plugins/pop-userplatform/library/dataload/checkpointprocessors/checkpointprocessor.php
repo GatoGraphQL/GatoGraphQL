@@ -7,7 +7,7 @@ class PoPCore_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
     public const CHECKPOINT_PROFILEACCESS = 'checkpoint-profileaccess';
     public const CHECKPOINT_PROFILEACCESS_SUBMIT = 'checkpoint-profileaccess-submit';
 
-    public function getCheckpointsToProcess()
+    public function getCheckpointsToProcess(): array
     {
         return array(
             [self::class, self::CHECKPOINT_PROFILEACCESS],

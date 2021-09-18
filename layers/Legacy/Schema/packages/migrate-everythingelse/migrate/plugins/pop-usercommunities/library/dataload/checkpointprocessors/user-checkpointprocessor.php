@@ -10,7 +10,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
     public const CHECKPOINT_EDITINGCOMMUNITYMEMBER = 'checkpoint-editingcommunitymember';
     public const CHECKPOINT_EDITMEMBERSHIPNONCE = 'checkpoint-editmembershipnonce';
 
-    public function getCheckpointsToProcess()
+    public function getCheckpointsToProcess(): array
     {
         return array(
             [self::class, self::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY],

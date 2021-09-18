@@ -13,7 +13,7 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
     public const USERLOGGEDIN = 'userloggedin';
     public const USERNOTLOGGEDIN = 'usernotloggedin';
 
-    public function getCheckpointsToProcess()
+    public function getCheckpointsToProcess(): array
     {
         return array(
             [self::class, self::USERLOGGEDIN],

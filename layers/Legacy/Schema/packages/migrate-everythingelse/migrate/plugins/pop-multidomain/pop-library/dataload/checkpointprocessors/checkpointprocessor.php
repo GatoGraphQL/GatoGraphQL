@@ -4,7 +4,7 @@ use PoP\ComponentModel\ErrorHandling\Error;
 
 class PoP_MultiDomain_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public function getCheckpointsToProcess()
+    public function getCheckpointsToProcess(): array
     {
         return array(
             [PoP_Domain_Dataload_CheckpointProcessor::class, PoP_Domain_Dataload_CheckpointProcessor::CHECKPOINT_DOMAINVALID],
