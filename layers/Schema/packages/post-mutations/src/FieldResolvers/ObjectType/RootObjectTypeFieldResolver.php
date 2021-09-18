@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 
-use PoP\Translation\TranslationAPIInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
@@ -32,6 +33,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected PostObjectTypeResolver $postObjectTypeResolver,
+        protected CreatePostMutationResolver $createPostMutationResolver,
+        protected UpdatePostMutationResolver $updatePostMutationResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -92,16 +95,18 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
+    public function getFieldMutationResolver(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName
+    ): ?MutationResolverInterface {
         switch ($fieldName) {
             case 'createPost':
-                return CreatePostMutationResolver::class;
+                return $this->createPostMutationResolver;
             case 'updatePost':
-                return UpdatePostMutationResolver::class;
+                return $this->updatePostMutationResolver;
         }
 
-        return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

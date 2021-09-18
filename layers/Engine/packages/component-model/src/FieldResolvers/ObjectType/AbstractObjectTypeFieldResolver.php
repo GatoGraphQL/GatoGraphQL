@@ -428,11 +428,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
         }
         // If a MutationResolver is declared, let it resolve the value
-        if ($mutationResolverClass = $this->getFieldMutationResolverClass($objectTypeResolver, $fieldName)) {
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
+        if ($mutationResolver !== null) {
             // Validate on the schema?
             if (!$this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
-                /** @var MutationResolverInterface */
-                $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
                 return $mutationResolver->validateErrors($fieldArgs);
             }
         }
@@ -596,7 +595,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
             }
         }
-        if (!is_null($this->getFieldMutationResolverClass($objectTypeResolver, $fieldName))) {
+        if ($this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null) {
             $schemaDefinition[SchemaDefinition::ARGNAME_FIELD_IS_MUTATION] = true;
         }
 
@@ -685,9 +684,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
         }
         // If a MutationResolver is declared, let it resolve the value
-        if ($mutationResolverClass = $this->getFieldMutationResolverClass($objectTypeResolver, $fieldName)) {
-            /** @var MutationResolverInterface */
-            $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
+        if ($mutationResolver !== null) {
             return $mutationResolver->validateWarnings($fieldArgs);
         }
         return $warnings;
@@ -716,7 +714,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         array $fieldArgs = []
     ): ?array {
         // Check that mutations can be executed
-        if ($this->getFieldMutationResolverClass($objectTypeResolver, $fieldName)) {
+        if ($this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null) {
             return CheckpointSets::CAN_EXECUTE_MUTATIONS;
         }
         return null;
@@ -760,19 +758,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         // If a MutationResolver is declared, let it resolve the value
-        if ($mutationResolverClass = $this->getFieldMutationResolverClass($objectTypeResolver, $fieldName)) {
-            // Validate on the object?
-            if ($this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
-                /** @var MutationResolverInterface */
-                $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
-                $mutationFieldArgs = $this->getFieldArgsToExecuteMutation(
-                    $fieldArgs,
-                    $objectTypeResolver,
-                    $object,
-                    $fieldName
-                );
-                return $mutationResolver->validateErrors($mutationFieldArgs);
-            }
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
+        if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
+            // Validate on the object
+            $mutationFieldArgs = $this->getFieldArgsToExecuteMutation(
+                $fieldArgs,
+                $objectTypeResolver,
+                $object,
+                $fieldName
+            );
+            return $mutationResolver->validateErrors($mutationFieldArgs);
         }
 
         return null;
@@ -805,9 +800,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         array $options = []
     ): mixed {
         // If a MutationResolver is declared, let it resolve the value
-        if ($mutationResolverClass = $this->getFieldMutationResolverClass($objectTypeResolver, $fieldName)) {
-            /** @var MutationResolverInterface */
-            $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
+        if ($mutationResolver !== null) {
             $mutationFieldArgs = $this->getFieldArgsToExecuteMutation(
                 $fieldArgs,
                 $objectTypeResolver,
@@ -828,8 +822,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $fieldArgs;
     }
 
-    public function getFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
+    public function getFieldMutationResolver(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName
+    ): ?MutationResolverInterface {
         return null;
     }
 }

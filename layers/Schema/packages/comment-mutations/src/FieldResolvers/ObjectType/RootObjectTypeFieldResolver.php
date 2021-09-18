@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\Translation\TranslationAPIInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
+use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
+use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -31,6 +32,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         protected CommentObjectTypeResolver $commentObjectTypeResolver,
+        protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -81,15 +83,17 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
+    public function getFieldMutationResolver(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName
+    ): ?MutationResolverInterface {
         switch ($fieldName) {
             case 'addCommentToCustomPost':
             case 'replyComment':
-                return AddCommentToCustomPostMutationResolver::class;
+                return $this->addCommentToCustomPostMutationResolver;
         }
 
-        return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

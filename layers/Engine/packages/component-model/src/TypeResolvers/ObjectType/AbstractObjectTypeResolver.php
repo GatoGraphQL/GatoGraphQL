@@ -14,6 +14,7 @@ use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFa
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
@@ -266,7 +267,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return null;
     }
 
-    public function getFieldMutationResolverClass(string $field): ?string
+    public function getFieldMutationResolver(string $field): ?MutationResolverInterface
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
@@ -274,7 +275,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            return $objectTypeFieldResolvers[0]->getFieldMutationResolverClass($this, $fieldName);
+            return $objectTypeFieldResolvers[0]->getFieldMutationResolver($this, $fieldName);
         }
 
         return null;
@@ -288,8 +289,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            $fieldMutationResolverClass = $objectTypeFieldResolvers[0]->getFieldMutationResolverClass($this, $fieldName);
-            return $fieldMutationResolverClass !== null;
+            $fieldMutationResolver = $objectTypeFieldResolvers[0]->getFieldMutationResolver($this, $fieldName);
+            return $fieldMutationResolver !== null;
         }
 
         return null;

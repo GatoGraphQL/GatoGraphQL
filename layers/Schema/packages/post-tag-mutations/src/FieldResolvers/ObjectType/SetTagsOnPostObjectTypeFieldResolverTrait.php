@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostTagMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
@@ -18,9 +19,10 @@ trait SetTagsOnPostObjectTypeFieldResolverTrait
         return $instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
-    public function getTypeMutationResolverClass(): string
+    public function getSetTagsMutationResolver(): MutationResolverInterface
     {
-        return SetTagsOnPostMutationResolver::class;
+        $instanceManager = InstanceManagerFacade::getInstance();
+        return $instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
     }
 
     protected function getEntityName(): string

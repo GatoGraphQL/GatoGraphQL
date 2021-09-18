@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
@@ -20,9 +21,10 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
         return $instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
-    public function getTypeMutationResolverClass(): string
+    public function getSetCategoriesMutationResolver(): MutationResolverInterface
     {
-        return SetCategoriesOnPostMutationResolver::class;
+        $instanceManager = InstanceManagerFacade::getInstance();
+        return $instanceManager->getInstance(SetCategoriesOnPostMutationResolver::class);
     }
 
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
