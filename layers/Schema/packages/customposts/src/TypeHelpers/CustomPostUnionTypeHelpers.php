@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPosts\TypeHelpers;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoPSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostTypeResolverPickerInterface;
 
@@ -19,19 +20,18 @@ class CustomPostUnionTypeHelpers
     /**
      * Obtain the post types from all member typeResolvers
      */
-    public static function getTargetObjectTypeResolverCustomPostTypes(string $unionTypeResolverClass): array
+    public static function getTargetObjectTypeResolverCustomPostTypes(?UnionTypeResolverInterface $unionTypeResolver = null): array
     {
-        $customPostTypes = [];
         $instanceManager = InstanceManagerFacade::getInstance();
-        $unionTypeResolver = $instanceManager->getInstance($unionTypeResolverClass);
-        $typeResolverPickers = $unionTypeResolver->getObjectTypeResolverPickers();
-        foreach ($typeResolverPickers as $typeResolverPicker) {
-            // The picker should implement interface CustomPostTypeResolverPickerInterface
-            if ($typeResolverPicker instanceof CustomPostTypeResolverPickerInterface) {
-                $customPostTypes[] = $typeResolverPicker->getCustomPostType();
-            }
-        }
-        return $customPostTypes;
+        $unionTypeResolver ??= $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+        $customPostObjectTypeResolverPickers = array_filter(
+            $unionTypeResolver->getObjectTypeResolverPickers(),
+            fn (ObjectTypeResolverPickerInterface $objectTypeResolverPicker) => $objectTypeResolverPicker instanceof CustomPostTypeResolverPickerInterface
+        );
+        return array_map(
+            fn (CustomPostTypeResolverPickerInterface $customPostObjectTypeResolverPicker) => $customPostObjectTypeResolverPicker->getCustomPostType(),
+            $customPostObjectTypeResolverPickers
+        );
     }
 
     /**

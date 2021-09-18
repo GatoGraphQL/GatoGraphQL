@@ -141,9 +141,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => [
                 Status::PUBLISHED,
             ],
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(
-                CustomPostUnionTypeResolver::class
-            ),
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(),
             default => null,
         };
     }

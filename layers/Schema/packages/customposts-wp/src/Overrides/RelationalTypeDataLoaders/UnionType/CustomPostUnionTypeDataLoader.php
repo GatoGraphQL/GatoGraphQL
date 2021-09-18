@@ -41,7 +41,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
         $query = $this->customPostTypeDataLoader->getQueryToRetrieveObjectsForIDs($ids);
 
         // From all post types from the member typeResolvers
-        $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(CustomPostUnionTypeResolver::class);
+        $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes();
 
         return $query;
     }
