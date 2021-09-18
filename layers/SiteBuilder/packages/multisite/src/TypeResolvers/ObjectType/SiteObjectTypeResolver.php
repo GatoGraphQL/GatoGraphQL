@@ -41,7 +41,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return 'Site';

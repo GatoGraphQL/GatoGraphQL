@@ -41,7 +41,7 @@ class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return '__Type';

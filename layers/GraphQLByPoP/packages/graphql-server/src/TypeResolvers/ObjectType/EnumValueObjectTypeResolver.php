@@ -41,7 +41,7 @@ class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return '__EnumValue';

@@ -40,7 +40,7 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return 'UserRole';

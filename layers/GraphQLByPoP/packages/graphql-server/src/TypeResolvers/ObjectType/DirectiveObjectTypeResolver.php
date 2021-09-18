@@ -41,7 +41,7 @@ class DirectiveObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return '__Directive';

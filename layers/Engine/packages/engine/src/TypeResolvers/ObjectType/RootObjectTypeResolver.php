@@ -48,7 +48,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return 'Root';

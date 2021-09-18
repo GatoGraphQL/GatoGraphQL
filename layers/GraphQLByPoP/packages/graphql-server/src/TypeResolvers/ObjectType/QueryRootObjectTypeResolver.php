@@ -47,7 +47,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
             $rootObjectTypeResolver,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return 'QueryRoot';

@@ -41,7 +41,7 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return '__Schema';

@@ -41,7 +41,7 @@ class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolv
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return '__InputValue';

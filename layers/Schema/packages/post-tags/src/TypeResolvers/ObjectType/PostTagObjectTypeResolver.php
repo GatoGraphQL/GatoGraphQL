@@ -43,7 +43,7 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return 'PostTag';

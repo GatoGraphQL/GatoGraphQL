@@ -41,7 +41,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return 'UserAvatar';

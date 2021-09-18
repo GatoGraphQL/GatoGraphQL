@@ -41,7 +41,7 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return '__Field';

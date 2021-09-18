@@ -41,7 +41,7 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return 'MenuItem';

@@ -40,7 +40,7 @@ class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return 'Post';

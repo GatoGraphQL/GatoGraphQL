@@ -43,7 +43,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return 'PostCategory';

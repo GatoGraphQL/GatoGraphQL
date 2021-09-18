@@ -40,7 +40,7 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
             $errorProvider,
         );
     }
-    
+
     public function getTypeName(): string
     {
         return 'GenericCustomPost';
