@@ -9,7 +9,7 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\RecommendCustomPostM
 
 class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return RecommendCustomPostMutationResolver::class;
     }

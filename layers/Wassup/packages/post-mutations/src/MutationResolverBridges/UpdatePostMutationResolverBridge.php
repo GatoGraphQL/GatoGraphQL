@@ -8,7 +8,7 @@ use PoPSitesWassup\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 
 class UpdatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return UpdatePostMutationResolver::class;
     }

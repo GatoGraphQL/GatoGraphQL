@@ -12,7 +12,7 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
 {
     use CreateUpdateProfileMutationResolverBridgeTrait;
 
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return CreateUpdateIndividualProfileMutationResolver::class;
     }

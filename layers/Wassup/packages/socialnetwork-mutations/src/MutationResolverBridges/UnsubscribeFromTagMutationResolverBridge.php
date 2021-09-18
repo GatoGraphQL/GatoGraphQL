@@ -10,7 +10,7 @@ use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMetaValueMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return UnsubscribeFromTagMutationResolver::class;
     }

@@ -8,7 +8,7 @@ use PoPSitesWassup\NotificationMutations\MutationResolvers\MarkAsReadNotificatio
 
 class MarkAsReadNotificationMutationResolverBridge extends AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return MarkAsReadNotificationMutationResolver::class;
     }

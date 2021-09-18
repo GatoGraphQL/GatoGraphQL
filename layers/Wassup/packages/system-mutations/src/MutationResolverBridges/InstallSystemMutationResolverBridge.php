@@ -9,7 +9,7 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 
 class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return InstallSystemMutationResolver::class;
     }

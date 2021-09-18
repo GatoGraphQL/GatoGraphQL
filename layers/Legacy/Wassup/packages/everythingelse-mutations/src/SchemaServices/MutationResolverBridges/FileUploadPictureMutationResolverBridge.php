@@ -10,7 +10,7 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\File
 
 class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return FileUploadPictureMutationResolver::class;
     }

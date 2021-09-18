@@ -8,7 +8,7 @@ use PoPSitesWassup\StanceMutations\MutationResolvers\UpdateStanceMutationResolve
 
 class UpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return UpdateStanceMutationResolver::class;
     }

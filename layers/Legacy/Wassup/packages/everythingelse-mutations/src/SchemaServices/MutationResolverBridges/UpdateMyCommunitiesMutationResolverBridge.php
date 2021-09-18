@@ -11,7 +11,7 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Upda
 
 class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return UpdateMyCommunitiesMutationResolver::class;
     }

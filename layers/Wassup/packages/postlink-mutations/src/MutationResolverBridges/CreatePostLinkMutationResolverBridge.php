@@ -8,7 +8,7 @@ use PoPSitesWassup\PostLinkMutations\MutationResolvers\CreatePostLinkMutationRes
 
 class CreatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return CreatePostLinkMutationResolver::class;
     }

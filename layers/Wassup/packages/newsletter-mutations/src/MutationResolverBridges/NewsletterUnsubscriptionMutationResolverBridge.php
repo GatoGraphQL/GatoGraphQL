@@ -9,7 +9,7 @@ use PoPSitesWassup\NewsletterMutations\MutationResolver\NewsletterUnsubscription
 
 class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return NewsletterUnsubscriptionMutationResolver::class;
     }

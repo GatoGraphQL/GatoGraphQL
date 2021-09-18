@@ -8,7 +8,7 @@ use PoPSitesWassup\HighlightMutations\MutationResolvers\UpdateHighlightMutationR
 
 class UpdateHighlightMutationResolverBridge extends AbstractCreateUpdateHighlightMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return UpdateHighlightMutationResolver::class;
     }

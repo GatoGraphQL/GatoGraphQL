@@ -6,7 +6,7 @@ namespace PoPSitesWassup\NotificationMutations\MutationResolverBridges;
 
 class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return MarkAsUnreadNotificationMutationResolver::class;
     }

@@ -9,7 +9,7 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 
 class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return GenerateThemeMutationResolver::class;
     }

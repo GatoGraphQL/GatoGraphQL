@@ -10,7 +10,7 @@ use PoPSitesWassup\UserStateMutations\MutationResolvers\ResetLostPasswordMutatio
 
 class ResetLostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
     {
         return ResetLostPasswordMutationResolver::class;
     }
