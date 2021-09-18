@@ -62,8 +62,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $typeDBObjectIDOrIDs = [];
         foreach ($objectIDs as $objectID) {
             // Make sure there is a resolver for this object. If there is none, return the same ID
-            $targetObjectTypeResolver = $objectIDTargetObjectTypeResolvers[$objectID];
-            if (!is_null($targetObjectTypeResolver)) {
+            $targetObjectTypeResolver = $objectIDTargetObjectTypeResolvers[$objectID] ?? null;
+            if ($targetObjectTypeResolver !== null) {
                 $typeDBObjectIDOrIDs[] = UnionTypeHelpers::getObjectComposedTypeAndID(
                     $targetObjectTypeResolver,
                     $objectID
@@ -85,7 +85,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     /**
      * @param array<string|int> $ids
-     * @return array<string|int,ObjectTypeResolverInterface>
+     * @return array<string|int,ObjectTypeResolverInterface|null>
      */
     public function getObjectIDTargetTypeResolvers(array $ids): array
     {
@@ -94,7 +94,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     /**
      * @param array<string|int> $ids
-     * @return array<string|int,ObjectTypeResolverInterface>
+     * @return array<string|int,ObjectTypeResolverInterface|null>
      */
     private function recursiveGetObjectIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
     {

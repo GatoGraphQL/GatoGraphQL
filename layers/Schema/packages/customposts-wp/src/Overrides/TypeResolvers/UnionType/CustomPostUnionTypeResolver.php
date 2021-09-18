@@ -15,7 +15,7 @@ class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
      * we obtain all the types from executing a single query against the DB.
      *
      * @param array<string|int> $ids
-     * @return array<string|int,ObjectTypeResolverInterface>
+     * @return array<string|int,ObjectTypeResolverInterface|null>
      */
     public function getObjectIDTargetTypeResolvers(array $ids): array
     {
