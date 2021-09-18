@@ -33,7 +33,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaRelationalTypeR
         return $this->accessControlManager->getEntriesForFields(AccessControlGroups::CAPABILITIES);
     }
 
-    protected function getValidateCapabilityDirectiveResolverClass(): string
+    protected function getValidateCapabilityDirectiveResolver(): string
     {
         return ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::class;
     }

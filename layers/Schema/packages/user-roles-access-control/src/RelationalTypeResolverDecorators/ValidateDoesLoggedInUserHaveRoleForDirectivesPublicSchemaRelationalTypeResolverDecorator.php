@@ -32,7 +32,7 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaRelationalTypeRes
         return $this->accessControlManager->getEntriesForDirectives(AccessControlGroups::ROLES);
     }
 
-    protected function getValidateRoleDirectiveResolverClass(): string
+    protected function getValidateRoleDirectiveResolver(): string
     {
         return ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver::class;
     }

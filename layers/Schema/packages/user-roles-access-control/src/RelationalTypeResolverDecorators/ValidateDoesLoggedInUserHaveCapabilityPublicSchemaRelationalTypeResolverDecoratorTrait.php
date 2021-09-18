@@ -18,7 +18,7 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
     {
         $capabilities = $entryValue;
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $directiveResolverClass = $this->getValidateCapabilityDirectiveResolverClass();
+        $directiveResolverClass = $this->getValidateCapabilityDirectiveResolver();
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DirectiveResolverInterface */
         $directiveResolver = $instanceManager->getInstance($directiveResolverClass);
@@ -34,5 +34,5 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
         ];
     }
 
-    abstract protected function getValidateCapabilityDirectiveResolverClass(): string;
+    abstract protected function getValidateCapabilityDirectiveResolver(): string;
 }

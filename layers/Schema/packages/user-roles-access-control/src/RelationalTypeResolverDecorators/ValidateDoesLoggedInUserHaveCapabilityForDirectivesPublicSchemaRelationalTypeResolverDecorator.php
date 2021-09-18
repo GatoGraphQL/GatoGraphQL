@@ -32,7 +32,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaRelationalT
         return $this->accessControlManager->getEntriesForDirectives(AccessControlGroups::CAPABILITIES);
     }
 
-    protected function getValidateCapabilityDirectiveResolverClass(): string
+    protected function getValidateCapabilityDirectiveResolver(): string
     {
         return ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver::class;
     }

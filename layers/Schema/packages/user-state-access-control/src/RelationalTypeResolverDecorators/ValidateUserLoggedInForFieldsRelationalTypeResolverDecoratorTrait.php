@@ -13,7 +13,7 @@ trait ValidateUserLoggedInForFieldsRelationalTypeResolverDecoratorTrait
     {
         return UserStates::IN == $entryValue;
     }
-    protected function getValidateUserStateDirectiveResolverClass(): string
+    protected function getValidateUserStateDirectiveResolver(): string
     {
         return ValidateIsUserLoggedInDirectiveResolver::class;
     }

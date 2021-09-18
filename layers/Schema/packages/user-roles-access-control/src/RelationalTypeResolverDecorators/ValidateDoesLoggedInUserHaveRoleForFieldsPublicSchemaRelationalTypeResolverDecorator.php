@@ -33,7 +33,7 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
         return $this->accessControlManager->getEntriesForFields(AccessControlGroups::ROLES);
     }
 
-    protected function getValidateRoleDirectiveResolverClass(): string
+    protected function getValidateRoleDirectiveResolver(): string
     {
         return ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::class;
     }
