@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInForDirectivesDirectiveResolver;
 
@@ -13,8 +15,9 @@ trait ValidateUserNotLoggedInForDirectivesRelationalTypeResolverDecoratorTrait
     {
         return UserStates::OUT;
     }
-    protected function getValidateUserStateDirectiveResolverClass(): string
+    protected function getValidateUserStateDirectiveResolver(): DirectiveResolverInterface
     {
-        return ValidateIsUserNotLoggedInForDirectivesDirectiveResolver::class;
+        $instanceManager = InstanceManagerFacade::getInstance();
+        return $instanceManager->getInstance(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver::class);
     }
 }

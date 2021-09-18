@@ -10,6 +10,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractPublicSchemaRelationalTypeResolverDecorator;
 use PoP\AccessControl\RelationalTypeResolverDecorators\ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoPSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
 
 class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
@@ -21,6 +22,7 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected AccessControlManagerInterface $accessControlManager,
+        protected ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver,
     ) {
         parent::__construct(
             $instanceManager,
@@ -33,8 +35,8 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
         return $this->accessControlManager->getEntriesForFields(AccessControlGroups::ROLES);
     }
 
-    protected function getValidateRoleDirectiveResolverClass(): string
+    protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface
     {
-        return ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::class;
+        return $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
     }
 }

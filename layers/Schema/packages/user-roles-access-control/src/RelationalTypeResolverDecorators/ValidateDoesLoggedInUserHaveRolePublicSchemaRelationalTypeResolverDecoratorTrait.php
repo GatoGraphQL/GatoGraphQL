@@ -19,10 +19,7 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
     {
         $roles = $entryValue;
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $directiveResolverClass = $this->getValidateRoleDirectiveResolverClass();
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var DirectiveResolverInterface */
-        $directiveResolver = $instanceManager->getInstance($directiveResolverClass);
+        $directiveResolver = $this->getValidateRoleDirectiveResolver();
         $directiveName = $directiveResolver->getDirectiveName();
         $validateDoesLoggedInUserHaveAnyRoleDirective = $fieldQueryInterpreter->getDirective(
             $directiveName,
@@ -35,5 +32,5 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
         ];
     }
 
-    abstract protected function getValidateRoleDirectiveResolverClass(): string;
+    abstract protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface;
 }

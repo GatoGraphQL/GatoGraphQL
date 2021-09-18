@@ -14,9 +14,7 @@ trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDeco
     {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
-        $validateUserStateDirectiveResolverClass = $this->getValidateUserStateDirectiveResolverClass();
-        /** @var DirectiveResolverInterface */
-        $validateUserStateDirectiveResolver = $instanceManager->getInstance($validateUserStateDirectiveResolverClass);
+        $validateUserStateDirectiveResolver = $this->getValidateUserStateDirectiveResolver();
         $validateUserStateDirectiveName = $validateUserStateDirectiveResolver->getDirectiveName();
         $validateUserStateDirective = $fieldQueryInterpreter->getDirective(
             $validateUserStateDirectiveName
@@ -26,5 +24,5 @@ trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDeco
         ];
     }
 
-    abstract protected function getValidateUserStateDirectiveResolverClass(): string;
+    abstract protected function getValidateUserStateDirectiveResolver(): DirectiveResolverInterface;
 }
