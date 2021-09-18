@@ -14,7 +14,7 @@ interface CheckpointProcessorInterface
     public function getCheckpointsToProcess(): array;
 
     /**
-     * @return boolean `true` if successful, `false` otherwise
+     * @return Error|null `null` if successful, or Error with a descriptive error message otherwise
      */
     public function validateCheckpoint(array $checkpoint): ?Error;
 }
