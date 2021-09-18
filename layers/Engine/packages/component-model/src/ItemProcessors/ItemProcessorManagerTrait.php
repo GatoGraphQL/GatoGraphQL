@@ -16,24 +16,6 @@ trait ItemProcessorManagerTrait
      * @var array<string, array>
      */
     private array $overridingClasses = [];
-    /**
-     * @var array<string, object>
-     */
-    private array $itemFullNameProcessorInstances = [];
-
-    public function getLoadedItemFullNameProcessorInstances()
-    {
-        return $this->itemFullNameProcessorInstances;
-    }
-
-    public function getLoadedItems()
-    {
-        // Return a list of all loaded items
-        return array_map(
-            [ProcessorItemUtils::class, 'getItemFromFullName'],
-            array_keys($this->itemFullNameProcessorInstances)
-        );
-    }
 
     public function overrideProcessorClass(string $overrideClass, string $withClass, array $forItemNames): void
     {

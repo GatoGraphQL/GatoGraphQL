@@ -7,6 +7,25 @@ class PoP_ResourceLoaderProcessorManager {
 
 	use ItemProcessorManagerTrait;
 
+    /**
+     * @var array<string, object>
+     */
+    private array $itemFullNameProcessorInstances = [];
+
+    public function getLoadedItems()
+    {
+        // Return a list of all loaded items
+        return array_map(
+            [ProcessorItemUtils::class, 'getItemFromFullName'],
+            array_keys($this->itemFullNameProcessorInstances)
+        );
+    }
+
+    public function getLoadedItemFullNameProcessorInstances()
+    {
+        return $this->itemFullNameProcessorInstances;
+    }
+
     public function getProcessor(array $item)
     {
         return $this->getItemProcessor($item);
