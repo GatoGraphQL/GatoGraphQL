@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
@@ -27,17 +28,14 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * The specific `DirectiveResolver` class that is being aliased
      */
-    abstract protected function getAliasedDirectiveResolverClass(): string;
+    abstract protected function getAliasedDirectiveResolver(): DirectiveResolverInterface;
 
     /**
      * Aliased `DirectiveResolver` instance
      */
     protected function getAliasedDirectiveResolverInstance(): AbstractDirectiveResolver
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        return $instanceManager->getInstance(
-            $this->getAliasedDirectiveResolverClass()
-        );
+        return $this->getAliasedDirectiveResolver();
     }
 
     /**
