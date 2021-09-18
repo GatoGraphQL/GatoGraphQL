@@ -7,13 +7,46 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 
 /**
  * ObjectTypeFieldResolver for the Custom Post Types from this plugin
  */
 class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEntitiesRootObjectTypeFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        CustomPostObjectTypeResolver $customPostObjectTypeResolver,
+        protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
+        protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
+        protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+            $customPostObjectTypeResolver,
+        );
+    }
+
     /**
      * @return string[]
      */
@@ -38,16 +71,10 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
 
     protected function getFieldCustomPostType(string $fieldName): string
     {
-        /** @var GraphQLAccessControlListCustomPostType */
-        $accessControlListCustomPostTypeService = $this->instanceManager->getInstance(GraphQLAccessControlListCustomPostType::class);
-        /** @var GraphQLCacheControlListCustomPostType */
-        $cacheControlListCustomPostTypeService = $this->instanceManager->getInstance(GraphQLCacheControlListCustomPostType::class);
-        /** @var GraphQLSchemaConfigurationCustomPostType */
-        $schemaConfigurationCustomPostTypeService = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
         return match ($fieldName) {
-            'accessControlLists' => $accessControlListCustomPostTypeService->getCustomPostType(),
-            'cacheControlLists' => $cacheControlListCustomPostTypeService->getCustomPostType(),
-            'schemaConfigurations' => $schemaConfigurationCustomPostTypeService->getCustomPostType(),
+            'accessControlLists' => $this->graphQLAccessControlListCustomPostType->getCustomPostType(),
+            'cacheControlLists' => $this->graphQLCacheControlListCustomPostType->getCustomPostType(),
+            'schemaConfigurations' => $this->graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
             default => '', // It will never reach here
         };
     }
