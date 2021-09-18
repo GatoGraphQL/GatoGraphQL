@@ -10,9 +10,12 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\AccessControl\Schema\SchemaModes;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\Translation\TranslationAPIInterface;
 use WP_Post;
 
 class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -24,6 +27,19 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
     public const PUBLIC_PRIVATE_SCHEMA = Plugin::NAMESPACE . '\public-private-schema';
     public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
+
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        TranslationAPIInterface $translationAPI,
+        protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $translationAPI,
+        );
+    }
 
     /**
      * Setting options
@@ -149,14 +165,12 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             $possibleValues = [
                 ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'graphql-api'),
             ];
-            /** @var GraphQLSchemaConfigurationCustomPostType */
-            $customPostTypeService = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
             /**
              * @var WP_Post[]
              */
             $customPosts = \get_posts([
                 'posts_per_page' => -1,
-                'post_type' => $customPostTypeService->getCustomPostType(),
+                'post_type' => $this->graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
                 'post_status' => 'publish',
             ]);
             if (!empty($customPosts)) {

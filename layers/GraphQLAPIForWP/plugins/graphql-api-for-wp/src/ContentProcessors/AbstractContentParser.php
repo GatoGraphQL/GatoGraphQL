@@ -9,7 +9,6 @@ use GraphQLAPI\GraphQLAPI\PluginConstants;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use InvalidArgumentException;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
 
@@ -26,6 +25,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function __construct(
         protected RequestHelperServiceInterface $requestHelperService,
+        protected LocaleHelper $localeHelper,
         ?string $baseDir = null,
         ?string $baseURL = null,
     ) {
@@ -102,10 +102,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function getLocalizedFileDir(): string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var LocaleHelper */
-        $localeHelper = $instanceManager->getInstance(LocaleHelper::class);
-        return $this->getFileDir($localeHelper->getLocaleLanguage());
+        return $this->getFileDir($this->localeHelper->getLocaleLanguage());
     }
 
     /**

@@ -6,23 +6,33 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\
 
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\Clients\AdminGraphiQLWithExplorerClient;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage as UpstreamGraphiQLMenuPage;
 use PoP\API\Schema\QueryInputs;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * GraphiQL with Explorer page
  */
 class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 {
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        MenuPageHelper $menuPageHelper,
+        EndpointHelpers $endpointHelpers,
+        protected AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $menuPageHelper,
+            $endpointHelpers
+        );
+    }
+
     protected function getGraphiQLWithExplorerClientHTML(): string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /**
-         * @var AdminGraphiQLWithExplorerClient
-         */
-        $client = $instanceManager->getInstance(AdminGraphiQLWithExplorerClient::class);
-        return $client->getClientHTML();
+        return $this->adminGraphiQLWithExplorerClient->getClientHTML();
     }
 
     public function print(): void
