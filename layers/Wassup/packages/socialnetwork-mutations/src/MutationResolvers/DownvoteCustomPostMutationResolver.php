@@ -54,11 +54,6 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
         $this->hooksAPI->doAction('gd_downvotepost', $target_id, $form_data);
     }
 
-    protected function getOppositeInstance()
-    {
-        return new \GD_UndoUpvotePost();
-    }
-
     protected function update($form_data): string | int
     {
         $vars = ApplicationState::getVars();
