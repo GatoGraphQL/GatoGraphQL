@@ -10,9 +10,18 @@ use PoPSitesWassup\NewsletterMutations\MutationResolver\NewsletterUnsubscription
 
 class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return NewsletterUnsubscriptionMutationResolver::class;
+        return $this->NewsletterUnsubscriptionMutationResolver;
+        protected NewsletterUnsubscriptionMutationResolve $NewsletterUnsubscriptionMutationResolver,
     }
 
     public function getFormData(): array

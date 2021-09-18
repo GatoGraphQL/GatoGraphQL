@@ -10,9 +10,18 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 
 class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return GenerateThemeMutationResolver::class;
+        return $this->GenerateThemeMutationResolver;
+        protected GenerateThemeMutationResolve $GenerateThemeMutationResolver,
     }
     public function getSuccessString(string | int $result_id): ?string
     {

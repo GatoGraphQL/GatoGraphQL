@@ -10,9 +10,18 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Crea
 
 class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return CreateUpdateProfileMutationResolver::class;
+        return $this->CreateUpdateProfileMutationResolver;
+        protected CreateUpdateProfileMutationResolve $CreateUpdateProfileMutationResolver,
     }
 
     public function getFormData(): array

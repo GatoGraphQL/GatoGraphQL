@@ -10,9 +10,18 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 
 class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return LogoutMutationResolver::class;
+        return $this->LogoutMutationResolver;
+        protected LogoutMutationResolve $LogoutMutationResolver,
     }
 
     public function getFormData(): array

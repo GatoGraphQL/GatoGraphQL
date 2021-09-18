@@ -11,9 +11,18 @@ use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 
 class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return AddCommentToCustomPostMutationResolver::class;
+        return $this->AddCommentToCustomPostMutationResolver;
+        protected AddCommentToCustomPostMutationResolve $AddCommentToCustomPostMutationResolver,
     }
 
     public function getFormData(): array

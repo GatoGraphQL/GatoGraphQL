@@ -9,9 +9,18 @@ use PoPSitesWassup\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 
 class UpdatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return UpdatePostMutationResolver::class;
+        return $this->UpdatePostMutationResolver;
+        protected UpdatePostMutationResolve $UpdatePostMutationResolver,
     }
 
     protected function isUpdate(): bool

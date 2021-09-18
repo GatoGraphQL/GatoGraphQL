@@ -62,7 +62,8 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return GravityFormsAddEntryToFormMutationResolver::class;
+        return $this->GravityFormsAddEntryToFormMutationResolver;
+        protected GravityFormsAddEntryToFormMutationResolve $GravityFormsAddEntryToFormMutationResolver,
     }
 
     /**

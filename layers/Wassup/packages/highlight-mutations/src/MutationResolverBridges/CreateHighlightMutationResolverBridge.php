@@ -9,9 +9,18 @@ use PoPSitesWassup\HighlightMutations\MutationResolvers\CreateHighlightMutationR
 
 class CreateHighlightMutationResolverBridge extends AbstractCreateUpdateHighlightMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return CreateHighlightMutationResolver::class;
+        return $this->CreateHighlightMutationResolver;
+        protected CreateHighlightMutationResolve $CreateHighlightMutationResolver,
     }
 
     protected function isUpdate(): bool

@@ -12,13 +12,11 @@ use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
-
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected TranslationAPIInterface $translationAPI,

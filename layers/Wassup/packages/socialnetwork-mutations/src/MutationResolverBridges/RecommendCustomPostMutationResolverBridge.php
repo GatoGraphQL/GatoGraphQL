@@ -10,9 +10,18 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\RecommendCustomPostM
 
 class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return RecommendCustomPostMutationResolver::class;
+        return $this->RecommendCustomPostMutationResolver;
+        protected RecommendCustomPostMutationResolve $RecommendCustomPostMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

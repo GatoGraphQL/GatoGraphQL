@@ -10,9 +10,18 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\DownvoteCustomPostMu
 
 class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return DownvoteCustomPostMutationResolver::class;
+        return $this->DownvoteCustomPostMutationResolver;
+        protected DownvoteCustomPostMutationResolve $DownvoteCustomPostMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

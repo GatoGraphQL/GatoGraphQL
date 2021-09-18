@@ -5,16 +5,25 @@ declare(strict_types=1);
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
 use PoP\Application\HelperAPIFactory;
-use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateWithCommunityOrganizationProfileMutationResolver;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateOrganizationProfileMutationResolver;
 
 class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
 {
     use CreateUpdateProfileMutationResolverBridgeTrait;
 
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+
+    public function getMutationResolver(): MutationResolverInterface
     {
-        return CreateUpdateOrganizationProfileMutationResolver::class;
+        return $this->CreateUpdateOrganizationProfileMutationResolver;
+        protected CreateUpdateOrganizationProfileMutationResolve $CreateUpdateOrganizationProfileMutationResolver,
     }
 
     private function getFormInputs()

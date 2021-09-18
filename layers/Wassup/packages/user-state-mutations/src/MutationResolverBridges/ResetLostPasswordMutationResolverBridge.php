@@ -11,9 +11,18 @@ use PoPSitesWassup\UserStateMutations\MutationResolvers\ResetLostPasswordMutatio
 
 class ResetLostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return ResetLostPasswordMutationResolver::class;
+        return $this->ResetLostPasswordMutationResolver;
+        protected ResetLostPasswordMutationResolve $ResetLostPasswordMutationResolver,
     }
 
     public function getFormData(): array

@@ -11,9 +11,18 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 
 class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return LoginMutationResolver::class;
+        return $this->LoginMutationResolver;
+        protected LoginMutationResolve $LoginMutationResolver,
     }
 
     public function getFormData(): array

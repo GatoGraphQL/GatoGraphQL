@@ -12,9 +12,18 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Crea
 
 class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return CreateUpdateUserMutationResolver::class;
+        return $this->CreateUpdateUserMutationResolver;
+        protected CreateUpdateUserMutationResolve $CreateUpdateUserMutationResolver,
     }
 
     public function getSuccessString(string | int $result_id): ?string

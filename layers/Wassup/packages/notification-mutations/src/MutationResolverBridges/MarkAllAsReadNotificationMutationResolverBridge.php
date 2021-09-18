@@ -11,9 +11,18 @@ use PoPSitesWassup\NotificationMutations\MutationResolvers\MarkAllAsReadNotifica
 
 class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return MarkAllAsReadNotificationMutationResolver::class;
+        return $this->MarkAllAsReadNotificationMutationResolver;
+        protected MarkAllAsReadNotificationMutationResolve $MarkAllAsReadNotificationMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

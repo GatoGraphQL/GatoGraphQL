@@ -10,9 +10,18 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 
 class ContactUsMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return ContactUsMutationResolver::class;
+        return $this->ContactUsMutationResolver;
+        protected ContactUsMutationResolve $ContactUsMutationResolver,
     }
 
     public function getFormData(): array

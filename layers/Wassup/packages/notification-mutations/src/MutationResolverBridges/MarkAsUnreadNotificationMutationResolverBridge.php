@@ -7,9 +7,18 @@ namespace PoPSitesWassup\NotificationMutations\MutationResolverBridges;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge
 {
+    public function __construct(
+        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
+        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+    
     public function getMutationResolver(): MutationResolverInterface
     {
-        return MarkAsUnreadNotificationMutationResolver::class;
+        return $this->MarkAsUnreadNotificationMutationResolver;
+        protected MarkAsUnreadNotificationMutationResolve $MarkAsUnreadNotificationMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
