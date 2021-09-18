@@ -97,9 +97,9 @@ class Engine implements EngineInterface
 
     /**
      * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
-     * @var array<string,array<string|int,array<string,mixed>>>>
+     * @var array<string,array<string,mixed>>
      */
-    protected array $typeResolverClass_ids_data_fields = [];
+    protected array $relationalTypeResolverNameIDsDataFields = [];
 
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
@@ -192,10 +192,10 @@ class Engine implements EngineInterface
             return $this->extra_routes;
         }
 
-        $this->extra_routes = array();
+        $this->extra_routes = [];
 
         if (Environment::enableExtraRoutesByParams()) {
-            $this->extra_routes = $_REQUEST[Params::EXTRA_ROUTES] ?? array();
+            $this->extra_routes = $_REQUEST[Params::EXTRA_ROUTES] ?? [];
             $this->extra_routes = is_array($this->extra_routes) ? $this->extra_routes : array($this->extra_routes);
         }
 
@@ -226,7 +226,7 @@ class Engine implements EngineInterface
         $this->hooksAPI->doAction('\PoP\ComponentModel\Engine:beginning');
 
         // Process the request and obtain the results
-        $this->data = $this->helperCalculations = array();
+        $this->data = $this->helperCalculations = [];
         $this->processAndGenerateData();
 
         // See if there are extra URIs to be processed in this same request
@@ -303,8 +303,8 @@ class Engine implements EngineInterface
 
         // If there is no cached one, or not using the cache, generate the props and cache it
         if ($model_props === null) {
-            $model_props = array();
-            $processor->initModelPropsModuletree($module, $model_props, array(), array());
+            $model_props = [];
+            $processor->initModelPropsModuletree($module, $model_props, [], []);
 
             if ($useCache) {
                 $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_PROPS, $model_props);
@@ -320,7 +320,7 @@ class Engine implements EngineInterface
         $processor = $this->moduleProcessorManager->getProcessor($module);
 
         // The input $props is the model_props. We add, on object, the mutableonrequest props, resulting in a "static + mutableonrequest" props object
-        $processor->initRequestPropsModuletree($module, $props, array(), array());
+        $processor->initRequestPropsModuletree($module, $props, [], []);
 
         return $props;
     }
@@ -404,25 +404,25 @@ class Engine implements EngineInterface
         // if ($data['modulesettings'] ?? null) {
 
         //     $data['modulesettings']['combinedstate'] = array_merge_recursive(
-        //         $data['modulesettings']['immutable'] ?? array()
-        //         $data['modulesettings']['mutableonmodel'] ?? array()
-        //         $data['modulesettings']['mutableonrequest'] ?? array(),
+        //         $data['modulesettings']['immutable'] ?? []
+        //         $data['modulesettings']['mutableonmodel'] ?? []
+        //         $data['modulesettings']['mutableonrequest'] ?? [],
         //     );
         // }
         // if ($data['moduledata'] ?? null) {
 
         //     $data['moduledata']['combinedstate'] = array_merge_recursive(
-        //         $data['moduledata']['immutable'] ?? array()
-        //         $data['moduledata']['mutableonmodel'] ?? array()
-        //         $data['moduledata']['mutableonrequest'] ?? array(),
+        //         $data['moduledata']['immutable'] ?? []
+        //         $data['moduledata']['mutableonmodel'] ?? []
+        //         $data['moduledata']['mutableonrequest'] ?? [],
         //     );
         // }
         // if ($data['datasetmoduledata'] ?? null) {
 
         //     $data['datasetmoduledata']['combinedstate'] = array_merge_recursive(
-        //         $data['datasetmoduledata']['immutable'] ?? array()
-        //         $data['datasetmoduledata']['mutableonmodel'] ?? array()
-        //         $data['datasetmoduledata']['mutableonrequest'] ?? array(),
+        //         $data['datasetmoduledata']['immutable'] ?? []
+        //         $data['datasetmoduledata']['mutableonmodel'] ?? []
+        //         $data['datasetmoduledata']['mutableonrequest'] ?? [],
         //     );
         // }
 
@@ -467,7 +467,7 @@ class Engine implements EngineInterface
             $useCache = $this->persistentCache !== null;
         }
 
-        $ret = array();
+        $ret = [];
 
         $processor = $this->moduleProcessorManager->getProcessor($module);
 
@@ -527,7 +527,7 @@ class Engine implements EngineInterface
         $not_excluded_module_sets = $this->moduleFilterManager->getNotExcludedModuleSets();
         if (!is_null($not_excluded_module_sets)) {
             // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: self::MODULE_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::MODULE_BLOCK_USERAVATAR_UPDATE)
-            $filteredsettings = array();
+            $filteredsettings = [];
             foreach ($not_excluded_module_sets as $modules) {
                 $filteredsettings[] = array_map(
                     [ModuleUtils::class, 'getModuleOutputName'],
@@ -548,7 +548,7 @@ class Engine implements EngineInterface
     {
         return $this->hooksAPI->applyFilters(
             '\PoP\ComponentModel\Engine:session-meta',
-            array()
+            []
         );
     }
 
@@ -561,7 +561,7 @@ class Engine implements EngineInterface
     }
     public function getSiteMeta(): array
     {
-        $meta = array();
+        $meta = [];
         if ($this->addSiteMeta()) {
             $vars = ApplicationState::getVars();
             $meta[Params::VERSION] = $vars['version'];
@@ -590,25 +590,29 @@ class Engine implements EngineInterface
     }
 
     private function combineIDsDatafields(
-        array &$typeResolver_ids_data_fields,
-        string $relationalTypeResolverClass,
+        array &$relationalTypeResolverNameIDsDataFields,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $relationalTypeResolverName,
         array $ids,
         array $data_fields,
         array $conditional_data_fields = []
     ): void {
-        $typeResolver_ids_data_fields[$relationalTypeResolverClass] = $typeResolver_ids_data_fields[$relationalTypeResolverClass] ?? array();
+        $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverName] ??= [
+            'relationalTypeResolver' => $relationalTypeResolver,
+            'idsDataFields' => [],
+        ];
         foreach ($ids as $id) {
             // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
-            $typeResolver_ids_data_fields[$relationalTypeResolverClass][(string)$id]['direct'] = $typeResolver_ids_data_fields[$relationalTypeResolverClass][(string)$id]['direct'] ?? array('id');
-            $typeResolver_ids_data_fields[$relationalTypeResolverClass][(string)$id]['direct'] = array_values(array_unique(array_merge(
-                $typeResolver_ids_data_fields[$relationalTypeResolverClass][(string)$id]['direct'],
+            $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverName]['idsDataFields'][(string)$id]['direct'] ??= ['id'];
+            $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverName]['idsDataFields'][(string)$id]['direct'] = array_values(array_unique(array_merge(
+                $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverName]['idsDataFields'][(string)$id]['direct'],
                 $data_fields
             )));
             // The conditional data fields have the condition data fields, as key, and the list of conditional data fields to load if the condition one is successful, as value
-            $typeResolver_ids_data_fields[$relationalTypeResolverClass][(string)$id]['conditional'] = $typeResolver_ids_data_fields[$relationalTypeResolverClass][(string)$id]['conditional'] ?? array();
+            $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverName]['idsDataFields'][(string)$id]['conditional'] ??= [];
             foreach ($conditional_data_fields as $conditionDataField => $conditionalDataFields) {
-                $typeResolver_ids_data_fields[$relationalTypeResolverClass][(string)$id]['conditional'][$conditionDataField] = array_merge(
-                    $typeResolver_ids_data_fields[$relationalTypeResolverClass][(string)$id]['conditional'][$conditionDataField] ?? [],
+                $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverName]['idsDataFields'][(string)$id]['conditional'][$conditionDataField] = array_merge(
+                    $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverName]['idsDataFields'][(string)$id]['conditional'][$conditionDataField] ?? [],
                     $conditionalDataFields
                 );
             }
@@ -629,7 +633,7 @@ class Engine implements EngineInterface
             // array_merge_recursive doesn't work as expected (it merges 2 hashmap arrays into an array, so then I manually do a foreach instead)
             foreach ($dataitems as $id => $dbobject_values) {
                 if (!isset($database[$dbKey][(string)$id])) {
-                    $database[$dbKey][(string)$id] = array();
+                    $database[$dbKey][(string)$id] = [];
                 }
 
                 $database[$dbKey][(string)$id] = array_merge(
@@ -657,8 +661,8 @@ class Engine implements EngineInterface
         if ($isUnionTypeResolver) {
             /** @var UnionTypeResolverInterface $relationalTypeResolver */
             // Get the actual type for each entity, and add the entry there
-            $convertedTypeResolverClassDataItems = $convertedTypeResolverClassDBKeys = [];
-            $noTypeResolverDataItems = [];
+            $targetObjectTypeResolverNameResolvers = $targetObjectTypeResolverNameDataItems = $targetObjectTypeResolverNameDBKeys = [];
+            $noTargetObjectTypeResolverDataItems = [];
             foreach ($dataitems as $objectID => $dataItem) {
                 // Obtain the type of the object
                 $exists = false;
@@ -672,24 +676,25 @@ class Engine implements EngineInterface
                             $objectID
                         ) = UnionTypeHelpers::extractDBObjectTypeAndID($objectID);
 
-                        $convertedTypeResolverClass = get_class($targetObjectTypeResolver);
-                        $convertedTypeResolverClassDataItems[$convertedTypeResolverClass][$objectID] = $dataItem;
-                        $convertedTypeResolverClassDBKeys[$convertedTypeResolverClass] = $objectDBKey;
+                        $targetObjectTypeResolverName = $targetObjectTypeResolver->getTypeOutputName();
+                        $targetObjectTypeResolverNameResolvers[$targetObjectTypeResolverName] = $targetObjectTypeResolver;
+                        $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName] = $objectDBKey;
+                        $targetObjectTypeResolverNameDataItems[$targetObjectTypeResolverName][$objectID] = $dataItem;
                     }
                 }
                 if (!$exists && $addEntryIfError) {
                     // If the UnionTypeResolver doesn't have a type to process the dataItem, show the error under its own ID
-                    $noTypeResolverDataItems[$objectID] = $dataItem;
+                    $noTargetObjectTypeResolverDataItems[$objectID] = $dataItem;
                 }
             }
-            foreach ($convertedTypeResolverClassDataItems as $convertedTypeResolverClass => $convertedDataItems) {
-                $convertedTypeResolver = $this->instanceManager->getInstance($convertedTypeResolverClass);
-                $convertedDBKey = $convertedTypeResolverClassDBKeys[$convertedTypeResolverClass];
-                $this->addDatasetToDatabase($database, $convertedTypeResolver, $convertedDBKey, $convertedDataItems, $objectIDItems, $addEntryIfError);
+            foreach ($targetObjectTypeResolverNameDataItems as $targetObjectTypeResolverName => $convertedDataItems) {
+                $targetObjectTypeResolver = $targetObjectTypeResolverNameResolvers[$targetObjectTypeResolverName];
+                $targetObjectTypeDBKey = $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName];
+                $this->addDatasetToDatabase($database, $targetObjectTypeResolver, $targetObjectTypeDBKey, $convertedDataItems, $objectIDItems, $addEntryIfError);
             }
             // Add the errors under the UnionTypeResolver key
-            if ($noTypeResolverDataItems) {
-                $this->doAddDatasetToDatabase($database, $dbKey, $noTypeResolverDataItems);
+            if ($noTargetObjectTypeResolverDataItems) {
+                $this->doAddDatasetToDatabase($database, $dbKey, $noTargetObjectTypeResolverDataItems);
             }
         } else {
             $this->doAddDatasetToDatabase($database, $dbKey, $dataitems);
@@ -698,8 +703,8 @@ class Engine implements EngineInterface
 
     protected function getInterreferencedModuleFullpaths(array $module, array &$props): array
     {
-        $paths = array();
-        $this->addInterreferencedModuleFullpaths($paths, array(), $module, $props);
+        $paths = [];
+        $this->addInterreferencedModuleFullpaths($paths, [], $module, $props);
         return $paths;
     }
 
@@ -717,7 +722,7 @@ class Engine implements EngineInterface
             // If the current module loads data, then add its path to the list
             if ($interreferenced_modulepath = $processor->getDataFeedbackInterreferencedModulepath($module, $props)) {
                 $referenced_modulepath = $this->modulePathHelpers->stringifyModulePath($interreferenced_modulepath);
-                $paths[$referenced_modulepath] = $paths[$referenced_modulepath] ?? array();
+                $paths[$referenced_modulepath] = $paths[$referenced_modulepath] ?? [];
                 $paths[$referenced_modulepath][] = array_merge(
                     $module_path,
                     array(
@@ -748,8 +753,8 @@ class Engine implements EngineInterface
 
     protected function getDataloadingModuleFullpaths(array $module, array &$props): array
     {
-        $paths = array();
-        $this->addDataloadingModuleFullpaths($paths, array(), $module, $props);
+        $paths = [];
+        $this->addDataloadingModuleFullpaths($paths, [], $module, $props);
         return $paths;
     }
 
@@ -808,7 +813,7 @@ class Engine implements EngineInterface
 
             // If the path doesn't exist, create it
             if (!isset($array_pointer[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')])) {
-                $array_pointer[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] = array();
+                $array_pointer[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] = [];
             }
 
             // The pointer is the location in the array where the value will be set
@@ -854,18 +859,18 @@ class Engine implements EngineInterface
         $dataoutputitems = $vars['dataoutputitems'];
         $add_meta = in_array(DataOutputItems::META, $dataoutputitems);
 
-        $immutable_moduledata = $mutableonmodel_moduledata = $mutableonrequest_moduledata = array();
-        $immutable_datasetmoduledata = $mutableonmodel_datasetmoduledata = $mutableonrequest_datasetmoduledata = array();
+        $immutable_moduledata = $mutableonmodel_moduledata = $mutableonrequest_moduledata = [];
+        $immutable_datasetmoduledata = $mutableonmodel_datasetmoduledata = $mutableonrequest_datasetmoduledata = [];
         if ($add_meta) {
-            $immutable_datasetmodulemeta = $mutableonmodel_datasetmodulemeta = $mutableonrequest_datasetmodulemeta = array();
+            $immutable_datasetmodulemeta = $mutableonmodel_datasetmodulemeta = $mutableonrequest_datasetmodulemeta = [];
         }
-        $this->dbdata = array();
+        $this->dbdata = [];
 
         // Save all the BACKGROUND_LOAD urls to send back to the browser, to load immediately again (needed to fetch non-cacheable data-fields)
-        $this->backgroundload_urls = array();
+        $this->backgroundload_urls = [];
 
         // Load under global key (shared by all pagesections / blocks)
-        $this->typeResolverClass_ids_data_fields = array();
+        $this->relationalTypeResolverNameIDsDataFields = [];
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         $this->hooksAPI->doAction(
@@ -988,8 +993,8 @@ class Engine implements EngineInterface
             $module_path_key = $this->getModulePathKey($module_path, $module);
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
-            $dataset_meta = $objectIDs = $typeDBObjectIDs = array();
-            $mutation_checkpoint_validation = $executed = $dbObjectIDOrIDs = $typeDBObjectIDOrIDs = $relationalTypeResolverClass = null;
+            $dataset_meta = $objectIDs = $typeDBObjectIDs = [];
+            $mutation_checkpoint_validation = $executed = $dbObjectIDOrIDs = $typeDBObjectIDOrIDs = $relationalTypeResolverName = null;
             if ($load_data) {
                 // ------------------------------------------
                 // Action Executers
@@ -1021,7 +1026,7 @@ class Engine implements EngineInterface
                 if ($load_data) {
                     $relationalTypeResolver = $processor->getRelationalTypeResolver($module);
                     $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
-                    $relationalTypeResolverClass = get_class($relationalTypeResolver);
+                    $relationalTypeResolverName = get_class($relationalTypeResolver);
                     // ------------------------------------------
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
@@ -1038,14 +1043,14 @@ class Engine implements EngineInterface
                     $typeDBObjectIDs = is_array($typeDBObjectIDOrIDs) ? $typeDBObjectIDOrIDs : array($typeDBObjectIDOrIDs);
 
                     // Store the ids under $data under key dataload_name => id
-                    $data_fields = $data_properties['data-fields'] ?? array();
-                    $conditional_data_fields = $data_properties['conditional-data-fields'] ?? array();
-                    $this->combineIDsDatafields($this->typeResolverClass_ids_data_fields, $relationalTypeResolverClass, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
+                    $data_fields = $data_properties['data-fields'] ?? [];
+                    $conditional_data_fields = $data_properties['conditional-data-fields'] ?? [];
+                    $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $relationalTypeResolver, $relationalTypeResolverName, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
 
                     // Add the IDs to the possibly-already produced IDs for this typeResolver
-                    $this->initializeTypeResolverEntry($this->dbdata, $relationalTypeResolverClass, $module_path_key);
-                    $this->dbdata[$relationalTypeResolverClass][$module_path_key]['ids'] = array_merge(
-                        $this->dbdata[$relationalTypeResolverClass][$module_path_key]['ids'],
+                    $this->initializeTypeResolverEntry($this->dbdata, $relationalTypeResolverName, $module_path_key);
+                    $this->dbdata[$relationalTypeResolverName][$module_path_key]['ids'] = array_merge(
+                        $this->dbdata[$relationalTypeResolverName][$module_path_key]['ids'],
                         $typeDBObjectIDs
                     );
 
@@ -1054,7 +1059,7 @@ class Engine implements EngineInterface
                     // Before checking below if the checkpoint failed or if the block content must not be loaded.
                     // Eg: Locations Map for the Create Individual Profile: it allows to pre-select locations,
                     // these ones must be fetched even if the block has a static typeResolver
-                    // If it has extend, add those ids under its relationalTypeResolverClass
+                    // If it has extend, add those ids under its relationalTypeResolverName
                     $dataload_extend_settings = $processor->getModelSupplementaryDbobjectdataModuletree($module, $model_props);
                     if ($datasource == DataSources::MUTABLEONREQUEST) {
                         $dataload_extend_settings = array_merge_recursive(
@@ -1062,20 +1067,21 @@ class Engine implements EngineInterface
                             $processor->getMutableonrequestSupplementaryDbobjectdataModuletree($module, $props)
                         );
                     }
-                    foreach ($dataload_extend_settings as $extend_typeResolver_class => $extend_data_properties) {
+                    foreach ($dataload_extend_settings as $extendTypeResolverName => $extend_data_properties) {
                          // Get the info for the subcomponent typeResolver
-                        $extend_data_fields = $extend_data_properties['data-fields'] ? $extend_data_properties['data-fields'] : array();
-                        $extend_conditional_data_fields = $extend_data_properties['conditional-data-fields'] ? $extend_data_properties['conditional-data-fields'] : array();
+                        $extend_data_fields = $extend_data_properties['data-fields'] ? $extend_data_properties['data-fields'] : [];
+                        $extend_conditional_data_fields = $extend_data_properties['conditional-data-fields'] ? $extend_data_properties['conditional-data-fields'] : [];
                         $extend_ids = $extend_data_properties['ids'];
+                        $extend_typeResolver = $extend_data_properties['resolver'];
 
-                        $this->combineIDsDatafields($this->typeResolverClass_ids_data_fields, $extend_typeResolver_class, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
+                        $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $extend_typeResolver, $extendTypeResolverName, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
 
                         // This is needed to add the typeResolver-extend IDs, for if nobody else creates an entry for this typeResolver
-                        $this->initializeTypeResolverEntry($this->dbdata, $extend_typeResolver_class, $module_path_key);
+                        $this->initializeTypeResolverEntry($this->dbdata, $extendTypeResolverName, $module_path_key);
                     }
 
                     // Keep iterating for its subcomponents
-                    $this->integrateSubcomponentDataProperties($this->dbdata, $data_properties, $relationalTypeResolverClass, $module_path_key);
+                    $this->integrateSubcomponentDataProperties($this->dbdata, $data_properties, $relationalTypeResolverName, $module_path_key);
                 }
             }
 
@@ -1174,7 +1180,7 @@ class Engine implements EngineInterface
         $this->moduleFilterManager->neverExclude(false);
         $this->modulePathManager->setPropagationCurrentPath();
 
-        $ret = array();
+        $ret = [];
 
         if (in_array(DataOutputItems::MODULE_DATA, $dataoutputitems)) {
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
@@ -1224,18 +1230,18 @@ class Engine implements EngineInterface
                 // If everything is combined, then it belongs under "mutableonrequest"
                 if (
                     $combined_moduledata = array_merge_recursive(
-                        $immutable_moduledata ?? array(),
-                        $mutableonmodel_moduledata ?? array(),
-                        $mutableonrequest_moduledata ?? array()
+                        $immutable_moduledata ?? [],
+                        $mutableonmodel_moduledata ?? [],
+                        $mutableonrequest_moduledata ?? []
                     )
                 ) {
                     $ret['moduledata'] = $has_extra_routes ? array($current_uri => $combined_moduledata) : $combined_moduledata;
                 }
                 if (
                     $combined_datasetmoduledata = array_merge_recursive(
-                        $immutable_datasetmoduledata ?? array(),
-                        $mutableonmodel_datasetmoduledata ?? array(),
-                        $mutableonrequest_datasetmoduledata ?? array()
+                        $immutable_datasetmoduledata ?? [],
+                        $mutableonmodel_datasetmoduledata ?? [],
+                        $mutableonrequest_datasetmoduledata ?? []
                     )
                 ) {
                     $ret['datasetmoduledata'] = $has_extra_routes ? array($current_uri => $combined_datasetmoduledata) : $combined_datasetmoduledata;
@@ -1243,9 +1249,9 @@ class Engine implements EngineInterface
                 if ($add_meta) {
                     if (
                         $combined_datasetmodulemeta = array_merge_recursive(
-                            $immutable_datasetmodulemeta ?? array(),
-                            $mutableonmodel_datasetmodulemeta ?? array(),
-                            $mutableonrequest_datasetmodulemeta ?? array()
+                            $immutable_datasetmodulemeta ?? [],
+                            $mutableonmodel_datasetmodulemeta ?? [],
+                            $mutableonrequest_datasetmodulemeta ?? []
                         )
                     ) {
                         $ret['datasetmodulemeta'] = $has_extra_routes ? array($current_uri => $combined_datasetmodulemeta) : $combined_datasetmodulemeta;
@@ -1320,14 +1326,14 @@ class Engine implements EngineInterface
         $vars = ApplicationState::getVars();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $objectTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = array();
-        $this->nocache_fields = array();
+        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = $objectErrors = $objectWarnings = $objectDeprecations = $objectNotices = $objectTraces = $schemaErrors = $schemaWarnings = $schemaDeprecations = $schemaNotices = $schemaTraces = [];
+        $this->nocache_fields = [];
         // $format = $vars['format'];
         // $route = $vars['route'];
 
         // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
         // but we need to avoid fetching those DB objects that were already fetched in a previous iteration
-        $already_loaded_ids_data_fields = array();
+        $already_loaded_ids_data_fields = [];
 
         // The variables come from $vars
         $variables = $vars['variables'];
@@ -1335,15 +1341,16 @@ class Engine implements EngineInterface
         $messages = [];
 
         // Iterate while there are dataloaders with data to be processed
-        while (!empty($this->typeResolverClass_ids_data_fields)) {
+        while (!empty($this->relationalTypeResolverNameIDsDataFields)) {
             // Move the pointer to the first element, and get it
-            reset($this->typeResolverClass_ids_data_fields);
-            $relationalTypeResolverClass = key($this->typeResolverClass_ids_data_fields);
-            $ids_data_fields = $this->typeResolverClass_ids_data_fields[$relationalTypeResolverClass];
+            reset($this->relationalTypeResolverNameIDsDataFields);
+            $relationalTypeResolverName = key($this->relationalTypeResolverNameIDsDataFields);
+            $relationalTypeResolver = $this->relationalTypeResolverNameIDsDataFields[$relationalTypeResolverName]['relationalTypeResolver'];
+            $ids_data_fields = $this->relationalTypeResolverNameIDsDataFields[$relationalTypeResolverName]['idsDataFields'];
 
             // Remove the typeResolver element from the array, so it doesn't process it anymore
             // Do it immediately, so that subcomponents can load new IDs for this current typeResolver (eg: posts => related)
-            unset($this->typeResolverClass_ids_data_fields[$relationalTypeResolverClass]);
+            unset($this->relationalTypeResolverNameIDsDataFields[$relationalTypeResolverName]);
 
             // If no ids to execute, then skip
             if (empty($ids_data_fields)) {
@@ -1351,21 +1358,19 @@ class Engine implements EngineInterface
             }
 
             // Store the loaded IDs/fields in an object, to avoid fetching them again in later iterations on the same typeResolver
-            $already_loaded_ids_data_fields[$relationalTypeResolverClass] = $already_loaded_ids_data_fields[$relationalTypeResolverClass] ?? array();
+            $already_loaded_ids_data_fields[$relationalTypeResolverName] = $already_loaded_ids_data_fields[$relationalTypeResolverName] ?? [];
             foreach ($ids_data_fields as $id => $data_fields) {
-                $already_loaded_ids_data_fields[$relationalTypeResolverClass][(string)$id] = array_merge(
-                    $already_loaded_ids_data_fields[$relationalTypeResolverClass][(string)$id] ?? [],
+                $already_loaded_ids_data_fields[$relationalTypeResolverName][(string)$id] = array_merge(
+                    $already_loaded_ids_data_fields[$relationalTypeResolverName][(string)$id] ?? [],
                     $data_fields['direct'],
                     array_keys($data_fields['conditional'])
                 );
             }
 
-            /** @var RelationalTypeResolverInterface */
-            $relationalTypeResolver = $this->instanceManager->getInstance((string)$relationalTypeResolverClass);
             $database_key = $relationalTypeResolver->getTypeOutputName();
 
             // Execute the typeResolver for all combined ids
-            $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationObjectDeprecations = $iterationObjectNotices = $iterationObjectTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = array();
+            $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationObjectDeprecations = $iterationObjectNotices = $iterationObjectTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = [];
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $objectIDItems = $relationalTypeResolver->fillObjects(
                 $ids_data_fields,
@@ -1397,14 +1402,15 @@ class Engine implements EngineInterface
             // By splitting the results into state-full and state-less, we can split all functionality
             // into cacheable and non-cacheable,
             // thus caching most of the website even for logged-in users
+            /** @phpstan-ignore-next-line */
             if ($iterationDBItems) {
                 // Conditional data fields: Store the loaded IDs/fields in an object,
                 // to avoid fetching them again in later iterations on the same typeResolver
                 // To find out if they were loaded, validate against the DBObject, to see if it has those properties
                 foreach ($ids_data_fields as $id => $data_fields) {
                     foreach ($data_fields['conditional'] as $conditionDataField => $conditionalDataFields) {
-                        $already_loaded_ids_data_fields[$relationalTypeResolverClass][(string)$id] = array_merge(
-                            $already_loaded_ids_data_fields[$relationalTypeResolverClass][(string)$id] ?? [],
+                        $already_loaded_ids_data_fields[$relationalTypeResolverName][(string)$id] = array_merge(
+                            $already_loaded_ids_data_fields[$relationalTypeResolverName][(string)$id] ?? [],
                             array_intersect(
                                 $conditionalDataFields,
                                 array_keys($iterationDBItems[(string)$id])
@@ -1430,6 +1436,7 @@ class Engine implements EngineInterface
                     }
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationObjectErrors) {
                 $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationObjectErrors, true, $relationalTypeResolver);
                 foreach ($dbNameErrorEntries as $dbname => $entries) {
@@ -1437,6 +1444,7 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationObjectWarnings) {
                 $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationObjectWarnings, true, $relationalTypeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $entries) {
@@ -1444,6 +1452,7 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationObjectDeprecations) {
                 $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationObjectDeprecations, true, $relationalTypeResolver);
                 foreach ($dbNameDeprecationEntries as $dbname => $entries) {
@@ -1451,6 +1460,7 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectDeprecations[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationObjectNotices) {
                 $dbNameNoticeEntries = $this->moveEntriesUnderDBName($iterationObjectNotices, true, $relationalTypeResolver);
                 foreach ($dbNameNoticeEntries as $dbname => $entries) {
@@ -1458,6 +1468,7 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectNotices[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationObjectTraces) {
                 $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationObjectTraces, true, $relationalTypeResolver);
                 foreach ($dbNameTraceEntries as $dbname => $entries) {
@@ -1487,6 +1498,7 @@ class Engine implements EngineInterface
                     $storeSchemaWarnings
                 );
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationSchemaWarnings) {
                 $iterationSchemaWarnings = array_intersect_key($iterationSchemaWarnings, array_unique(array_map('serialize', $iterationSchemaWarnings)));
                 $dbNameSchemaWarningEntries = $this->moveEntriesUnderDBName($iterationSchemaWarnings, false, $relationalTypeResolver);
@@ -1497,6 +1509,7 @@ class Engine implements EngineInterface
                     );
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationSchemaDeprecations) {
                 $iterationSchemaDeprecations = array_intersect_key($iterationSchemaDeprecations, array_unique(array_map('serialize', $iterationSchemaDeprecations)));
                 $dbNameSchemaDeprecationEntries = $this->moveEntriesUnderDBName($iterationSchemaDeprecations, false, $relationalTypeResolver);
@@ -1507,6 +1520,7 @@ class Engine implements EngineInterface
                     );
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationSchemaNotices) {
                 $iterationSchemaNotices = array_intersect_key($iterationSchemaNotices, array_unique(array_map('serialize', $iterationSchemaNotices)));
                 $dbNameSchemaNoticeEntries = $this->moveEntriesUnderDBName($iterationSchemaNotices, false, $relationalTypeResolver);
@@ -1517,6 +1531,7 @@ class Engine implements EngineInterface
                     );
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationSchemaTraces) {
                 $iterationSchemaTraces = array_intersect_key($iterationSchemaTraces, array_unique(array_map('serialize', $iterationSchemaTraces)));
                 $dbNameSchemaTraceEntries = $this->moveEntriesUnderDBName($iterationSchemaTraces, false, $relationalTypeResolver);
@@ -1530,11 +1545,11 @@ class Engine implements EngineInterface
 
             // Important: query like this: obtain keys first instead of iterating directly on array,
             // because it will keep adding elements
-            $typeResolver_dbdata = $this->dbdata[$relationalTypeResolverClass];
+            $typeResolver_dbdata = $this->dbdata[$relationalTypeResolverName];
             foreach (array_keys($typeResolver_dbdata) as $module_path_key) {
-                $typeResolver_data = &$this->dbdata[$relationalTypeResolverClass][$module_path_key];
+                $typeResolver_data = &$this->dbdata[$relationalTypeResolverName][$module_path_key];
 
-                unset($this->dbdata[$relationalTypeResolverClass][$module_path_key]);
+                unset($this->dbdata[$relationalTypeResolverName][$module_path_key]);
 
                 // Check if it has subcomponents, and then bring this data
                 if ($subcomponents_data_properties = $typeResolver_data['subcomponents']) {
@@ -1568,7 +1583,7 @@ class Engine implements EngineInterface
                         foreach ($objectTypeResolver_ids as $id) {
                             // If there's no resolver, it's an error: the ID can't be processed by anyone
                             if ($targetObjectTypeResolver = $targetObjectTypeResolvers[(string)$id] ?? null) {
-                                $objectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
+                                $objectTypeResolverName = $targetObjectTypeResolver->getTypeOutputName();
                                 $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName] ??= [
                                     'targetObjectTypeResolver' => $targetObjectTypeResolver,
                                     'objectIDs' => [],
@@ -1590,7 +1605,7 @@ class Engine implements EngineInterface
             // }
         }
 
-        $ret = array();
+        $ret = [];
 
         // Executing the following query will produce duplicates on SchemaWarnings:
         // ?query=posts(limit:3.5).title,posts(limit:extract(posts(limit:4.5),saraza)).title
@@ -1672,16 +1687,16 @@ class Engine implements EngineInterface
                 $subcomponentTypeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponentTypeResolver !== null) {
-                $subcomponent_typeResolver_class = get_class($subcomponentTypeResolver);
+                $subcomponentTypeResolverName = $subcomponentTypeResolver->getTypeOutputName();
                 // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
                 $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
                 $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];
                 if ($subcomponent_data_fields || $subcomponent_conditional_data_fields) {
                     $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
-                    $subcomponent_already_loaded_ids_data_fields = array();
-                    if ($already_loaded_ids_data_fields && ($already_loaded_ids_data_fields[$subcomponent_typeResolver_class] ?? null)) {
-                        $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponent_typeResolver_class];
+                    $subcomponent_already_loaded_ids_data_fields = [];
+                    if ($already_loaded_ids_data_fields && ($already_loaded_ids_data_fields[$subcomponentTypeResolverName] ?? null)) {
+                        $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponentTypeResolverName];
                     }
                     $subcomponentIDs = [];
                     foreach ($typeResolver_ids as $id) {
@@ -1775,20 +1790,20 @@ class Engine implements EngineInterface
                             // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
                             // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
                             // if ($id_subcomponent_data_fields) {
-                            $this->combineIDsDatafields($this->typeResolverClass_ids_data_fields, $subcomponent_typeResolver_class, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
+                            $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeResolverName, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
                             // }
                         }
-                        $this->initializeTypeResolverEntry($this->dbdata, $subcomponent_typeResolver_class, $module_path_key);
-                        $this->dbdata[$subcomponent_typeResolver_class][$module_path_key]['ids'] = array_merge(
-                            $this->dbdata[$subcomponent_typeResolver_class][$module_path_key]['ids'] ?? [],
+                        $this->initializeTypeResolverEntry($this->dbdata, $subcomponentTypeResolverName, $module_path_key);
+                        $this->dbdata[$subcomponentTypeResolverName][$module_path_key]['ids'] = array_merge(
+                            $this->dbdata[$subcomponentTypeResolverName][$module_path_key]['ids'] ?? [],
                             $field_ids
                         );
-                        $this->integrateSubcomponentDataProperties($this->dbdata, $subcomponent_data_properties, $subcomponent_typeResolver_class, $module_path_key);
+                        $this->integrateSubcomponentDataProperties($this->dbdata, $subcomponent_data_properties, $subcomponentTypeResolverName, $module_path_key);
                     }
 
-                    if ($this->dbdata[$subcomponent_typeResolver_class][$module_path_key] ?? null) {
-                        $this->dbdata[$subcomponent_typeResolver_class][$module_path_key]['ids'] = array_unique($this->dbdata[$subcomponent_typeResolver_class][$module_path_key]['ids']);
-                        $this->dbdata[$subcomponent_typeResolver_class][$module_path_key]['data-fields'] = array_unique($this->dbdata[$subcomponent_typeResolver_class][$module_path_key]['data-fields']);
+                    if ($this->dbdata[$subcomponentTypeResolverName][$module_path_key] ?? null) {
+                        $this->dbdata[$subcomponentTypeResolverName][$module_path_key]['ids'] = array_unique($this->dbdata[$subcomponentTypeResolverName][$module_path_key]['ids']);
+                        $this->dbdata[$subcomponentTypeResolverName][$module_path_key]['data-fields'] = array_unique($this->dbdata[$subcomponentTypeResolverName][$module_path_key]['data-fields']);
                     }
                 }
             }
@@ -1809,7 +1824,7 @@ class Engine implements EngineInterface
             } elseif ($dboutputmode == DatabasesOutputModes::COMBINED) {
                 // Filter to make sure there are entries
                 if ($entries = array_filter($entries)) {
-                    $combined_databases = array();
+                    $combined_databases = [];
                     foreach ($entries as $database_name => $database) {
                         // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
                         foreach ($database as $database_key => $dbItems) {
@@ -1841,7 +1856,7 @@ class Engine implements EngineInterface
             } elseif ($dboutputmode == DatabasesOutputModes::COMBINED) {
                 // Filter to make sure there are entries
                 if ($entries = array_filter($entries)) {
-                    $combined_databases = array();
+                    $combined_databases = [];
                     foreach ($entries as $database_name => $database) {
                         $combined_databases = array_merge_recursive(
                             $combined_databases,
@@ -1875,7 +1890,7 @@ class Engine implements EngineInterface
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
                     $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
-                    $moduledata[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] = $moduledata[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] ?? array();
+                    $moduledata[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] = $moduledata[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] ?? [];
                     $moduledata = &$moduledata[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')];
                 }
                 // Merge the feedback in
@@ -1889,14 +1904,14 @@ class Engine implements EngineInterface
 
     private function initializeTypeResolverEntry(
         array &$dbdata,
-        string $relationalTypeResolverClass,
+        string $relationalTypeResolverName,
         string $module_path_key
     ): void {
-        if (!isset($dbdata[$relationalTypeResolverClass][$module_path_key])) {
-            $dbdata[$relationalTypeResolverClass][$module_path_key] = array(
-                'ids' => array(),
-                'data-fields' => array(),
-                'subcomponents' => array(),
+        if (!isset($dbdata[$relationalTypeResolverName][$module_path_key])) {
+            $dbdata[$relationalTypeResolverName][$module_path_key] = array(
+                'ids' => [],
+                'data-fields' => [],
+                'subcomponents' => [],
             );
         }
     }
@@ -1904,15 +1919,15 @@ class Engine implements EngineInterface
     private function integrateSubcomponentDataProperties(
         array &$dbdata,
         array $data_properties,
-        string $relationalTypeResolverClass,
+        string $relationalTypeResolverName,
         string $module_path_key
     ): void {
         // Process the subcomponents
         // If it has subcomponents, bring its data to, after executing getData on the primary typeResolver, execute getData also on the subcomponent typeResolver
         if ($subcomponents_data_properties = $data_properties['subcomponents'] ?? null) {
             // Merge them into the data
-            $dbdata[$relationalTypeResolverClass][$module_path_key]['subcomponents'] = array_merge_recursive(
-                $dbdata[$relationalTypeResolverClass][$module_path_key]['subcomponents'] ?? array(),
+            $dbdata[$relationalTypeResolverName][$module_path_key]['subcomponents'] = array_merge_recursive(
+                $dbdata[$relationalTypeResolverName][$module_path_key]['subcomponents'] ?? [],
                 $subcomponents_data_properties
             );
         }
