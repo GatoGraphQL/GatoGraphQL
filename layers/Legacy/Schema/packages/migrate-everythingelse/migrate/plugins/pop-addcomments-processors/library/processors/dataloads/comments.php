@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSitesWassup\CommentMutations\MutationResolverBridges\AddCommentToCustomPostMutationResolverBridge;
@@ -47,11 +48,11 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getComponentMutationResolverBridge($module);
     }
 
-    public function getQueryInputOutputHandlerClass(array $module): ?string
+    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_COMMENTS_SCROLL:
-                return GD_DataLoad_QueryInputOutputHandler_CommentList::class;
+                return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_CommentList::class);
         }
 
         return parent::getQueryInputOutputHandler($module);

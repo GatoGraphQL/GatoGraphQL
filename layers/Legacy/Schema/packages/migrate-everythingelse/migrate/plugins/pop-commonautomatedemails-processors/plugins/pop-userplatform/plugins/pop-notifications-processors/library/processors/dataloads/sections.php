@@ -1,10 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 
 class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase
 {
@@ -104,9 +105,9 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
         return $ret;
     }
 
-    public function getQueryInputOutputHandlerClass(array $module): ?string
+    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
-        return GD_DataLoad_QueryInputOutputHandler_NotificationList::class;
+        return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_NotificationList::class);
     }
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
