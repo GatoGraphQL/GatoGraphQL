@@ -27,7 +27,7 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
     /**
      * @return array<string, mixed>|null
      */
-    public function execute(array &$data_properties): ?array
+    public function executeMutation(array &$data_properties): ?array
     {
         $executed = parent::execute($data_properties);
         if ($executed && is_array($executed) && $executed[ResponseConstants::SUCCESS]) {

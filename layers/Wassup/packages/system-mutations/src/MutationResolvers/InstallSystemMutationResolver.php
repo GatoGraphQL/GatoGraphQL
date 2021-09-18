@@ -9,7 +9,7 @@ use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 
 class InstallSystemMutationResolver extends AbstractMutationResolver
 {
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         // Save the new version on the DB
         update_option('PoP:version', ApplicationInfoFacade::getInstance()->getVersion());

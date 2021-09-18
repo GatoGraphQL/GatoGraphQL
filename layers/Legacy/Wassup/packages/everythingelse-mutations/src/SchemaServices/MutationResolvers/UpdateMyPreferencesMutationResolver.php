@@ -9,7 +9,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class UpdateMyPreferencesMutationResolver extends AbstractMutationResolver
 {
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         $user_id = $form_data['user_id'];
         Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $form_data['userPreferences']);

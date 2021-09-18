@@ -23,7 +23,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         );
     }
     
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         $user_id = $form_data['user_id'];
 

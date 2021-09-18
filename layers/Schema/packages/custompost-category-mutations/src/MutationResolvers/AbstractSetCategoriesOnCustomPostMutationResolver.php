@@ -12,7 +12,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
         $postCategoryIDs = $form_data[MutationInputProperties::CATEGORY_IDS];

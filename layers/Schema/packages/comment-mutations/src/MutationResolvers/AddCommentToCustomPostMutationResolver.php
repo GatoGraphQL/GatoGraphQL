@@ -116,7 +116,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $this->commentTypeMutationAPI->insertComment($comment_data);
     }
 
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         $comment_data = $this->getCommentData($form_data);
         $comment_id = $this->insertComment($comment_data);

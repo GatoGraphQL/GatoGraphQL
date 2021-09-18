@@ -39,7 +39,7 @@ class LoginMutationResolver extends AbstractMutationResolver
         return $this->translationAPI->__('You are already logged in', 'user-state-mutations');
     }
 
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         // If the user is already logged in, then return the error
         $userTypeAPI = UserTypeAPIFacade::getInstance();

@@ -1009,7 +1009,7 @@ class Engine implements EngineInterface
                         $execute = !GeneralUtils::isError($mutation_checkpoint_validation);
                     }
                     if ($execute) {
-                        $executed = $componentMutationResolverBridge->execute($data_properties);
+                        $executed = $componentMutationResolverBridge->executeMutation($data_properties);
                     }
                 }
 

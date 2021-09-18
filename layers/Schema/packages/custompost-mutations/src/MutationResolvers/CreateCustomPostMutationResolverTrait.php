@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPostMutations\MutationResolvers;
 
 trait CreateCustomPostMutationResolverTrait
 {
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         return $this->create($form_data);
     }

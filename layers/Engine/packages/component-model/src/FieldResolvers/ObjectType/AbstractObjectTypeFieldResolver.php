@@ -808,7 +808,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $object,
                 $fieldName
             );
-            return $mutationResolver->execute($mutationFieldArgs);
+            return $mutationResolver->executeMutation($mutationFieldArgs);
         }
         return null;
     }

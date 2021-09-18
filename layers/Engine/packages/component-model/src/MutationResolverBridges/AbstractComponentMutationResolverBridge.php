@@ -54,7 +54,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     /**
      * @return array<string, mixed>|null
      */
-    public function execute(array &$data_properties): ?array
+    public function executeMutation(array &$data_properties): ?array
     {
         if ($this->onlyExecuteWhenDoingPost() && 'POST' !== $_SERVER['REQUEST_METHOD']) {
             return null;
@@ -87,7 +87,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             $warningTypeKey = $warningTypeKeys[$errorType];
             $return[$warningTypeKey] = $warnings;
         }
-        $result_id = $mutationResolver->execute($form_data);
+        $result_id = $mutationResolver->executeMutation($form_data);
         if (GeneralUtils::isError($result_id)) {
             /** @var Error */
             $error = $result_id;

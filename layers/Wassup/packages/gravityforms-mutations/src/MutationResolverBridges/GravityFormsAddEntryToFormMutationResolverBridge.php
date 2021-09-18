@@ -68,7 +68,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
      * @param array<string, mixed> $data_properties
      * @return array<string, mixed>
      */
-    public function execute(array &$data_properties): ?array
+    public function executeMutation(array &$data_properties): ?array
     {
         // $mutationResolverClass = $this->getMutationResolverClass();
         // /** @var MutationResolverInterface */
@@ -83,7 +83,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         //         $errorcodes = $errors;
         //     }
         // }
-        // $execution_response = $mutationResolver->execute($errorstrings, $errorcodes, $form_data);
+        // $execution_response = $mutationResolver->executeMutation($errorstrings, $errorcodes, $form_data);
         $executed = parent::execute($data_properties);
 
         $execution_response = $this->mutationResolutionManager->getResult($this);
