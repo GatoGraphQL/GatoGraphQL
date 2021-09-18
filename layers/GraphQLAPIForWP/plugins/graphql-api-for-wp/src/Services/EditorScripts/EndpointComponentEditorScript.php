@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -21,12 +22,14 @@ class EndpointComponentEditorScript extends AbstractEditorScript
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
+        GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
         protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
         parent::__construct(
             $instanceManager,
             $moduleRegistry,
+            $generalUtils,
             $editorHelpers,
         );
     }

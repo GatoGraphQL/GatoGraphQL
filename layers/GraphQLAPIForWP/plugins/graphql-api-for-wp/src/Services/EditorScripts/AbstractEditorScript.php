@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\AbstractScript;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -23,11 +24,13 @@ abstract class AbstractEditorScript extends AbstractScript
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
+        GeneralUtils $generalUtils,
         protected EditorHelpers $editorHelpers,
     ) {
         parent::__construct(
             $instanceManager,
             $moduleRegistry,
+            $generalUtils,
         );
     }
 
