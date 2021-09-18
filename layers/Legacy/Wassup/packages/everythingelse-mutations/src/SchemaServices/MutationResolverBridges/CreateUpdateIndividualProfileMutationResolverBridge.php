@@ -4,17 +4,36 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use Exception;
 use PoP\Application\HelperAPIFactory;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateIndividualProfileMutationResolver;
-use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateWithCommunityIndividualProfileMutationResolver;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateProfileMutationResolver;
 
 class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
 {
     use CreateUpdateProfileMutationResolverBridgeTrait;
 
-    public function getMutationResolverClass(): string
+    public function __construct(
+        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        \PoP\Translation\TranslationAPIInterface $translationAPI,
+        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
+        protected CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+            $mutationResolutionManager,
+            $createUpdateProfileMutationResolver
+        );
+    }
+
+    public function getMutationResolver(): MutationResolverInterface
     {
-        return CreateUpdateIndividualProfileMutationResolver::class;
+        return $this->createUpdateIndividualProfileMutationResolver;
     }
 
     private function getFormInputs()

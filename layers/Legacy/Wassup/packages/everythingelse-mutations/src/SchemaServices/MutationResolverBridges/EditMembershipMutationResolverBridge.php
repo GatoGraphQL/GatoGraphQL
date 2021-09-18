@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSchema\Users\Constants\InputNames;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
@@ -11,9 +16,24 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Edit
 
 class EditMembershipMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        MutationResolutionManagerInterface $mutationResolutionManager,
+        protected EditMembershipMutationResolver $editMembershipMutationResolver,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+            $mutationResolutionManager,
+        );
+    }
+    
+    public function getMutationResolver(): MutationResolverInterface
     {
-        return EditMembershipMutationResolver::class;
+        return $this->editMembershipMutationResolver;
     }
 
     public function getFormData(): array

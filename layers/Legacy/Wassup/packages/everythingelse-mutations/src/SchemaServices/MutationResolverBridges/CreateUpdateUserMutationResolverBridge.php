@@ -4,16 +4,37 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\EditUsers\HelperAPIFactory;
-use PoP\ComponentModel\State\ApplicationState;
+use Exception;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\EditUsers\HelperAPIFactory;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateUserMutationResolver;
 
 class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        MutationResolutionManagerInterface $mutationResolutionManager,
+        protected CreateUpdateUserMutationResolver $createUpdateUserMutationResolver,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+            $mutationResolutionManager,
+        );
+    }
+    
+    public function getMutationResolver(): MutationResolverInterface
     {
-        return CreateUpdateUserMutationResolver::class;
+        return $this->createUpdateUserMutationResolver;
     }
 
     public function getSuccessString(string | int $result_id): ?string
@@ -27,7 +48,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
             return sprintf(
                 $this->translationAPI->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
                 getAuthorProfileUrl($vars['global-userstate']['current-user-id']),
-                PoP_Application_Utils::getPreviewTarget(),
+                \PoP_Application_Utils::getPreviewTarget(),
                 $this->hooksAPI->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
             );
         }
@@ -51,7 +72,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
             'user_url' => trim($this->moduleProcessorManager->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
         );
 
-        if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
+        if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $form_data['captcha'] = $this->moduleProcessorManager->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
         }
 
@@ -95,7 +116,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
             'user_url' => null,
         );
 
-        if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
+        if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $form_inputs['captcha'] = null;
         }
 

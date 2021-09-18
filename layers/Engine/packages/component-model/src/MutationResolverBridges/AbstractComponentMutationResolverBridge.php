@@ -12,13 +12,11 @@ use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
-
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected TranslationAPIInterface $translationAPI,
@@ -59,9 +57,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         if ($this->onlyExecuteWhenDoingPost() && 'POST' !== $_SERVER['REQUEST_METHOD']) {
             return null;
         }
-        $mutationResolverClass = $this->getMutationResolverClass();
-        /** @var MutationResolverInterface */
-        $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
+        $mutationResolver = $this->getMutationResolver();
         $form_data = $this->getFormData();
         $return = [];
         // Validate errors
