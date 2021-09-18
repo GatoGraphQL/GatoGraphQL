@@ -37,7 +37,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
             $directiveRegistry,
         );
     }
-    
+
     /**
      * @var array<string, bool>|null
      */

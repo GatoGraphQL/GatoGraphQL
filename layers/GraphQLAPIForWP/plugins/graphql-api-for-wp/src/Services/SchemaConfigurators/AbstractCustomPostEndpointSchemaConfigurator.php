@@ -29,7 +29,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
             $blockHelpers,
         );
     }
-    
+
     /**
      * Extract the Schema Configuration ID from the block stored in the post
      */

@@ -15,7 +15,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
 {
     public function __construct(
         protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
-    ) {  
+    ) {
     }
     /**
      * Initialize the endpoints

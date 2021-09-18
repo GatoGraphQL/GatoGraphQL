@@ -31,7 +31,7 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
             $cptUtils,
         );
     }
-    
+
     /**
      * Custom Post Type name
      */

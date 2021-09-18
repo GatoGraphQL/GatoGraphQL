@@ -36,7 +36,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
             $directiveRegistry,
         );
     }
-    
+
     public function isServiceEnabled(): bool
     {
         // Only execute for GET operations

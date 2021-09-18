@@ -75,7 +75,7 @@ class LazyLoadHookSet extends AbstractHookSet
     public function end($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine)
     {
         $helperCalculations = &$helperCalculations_in_array[0];
-        
+
         // Fetch the lazy-loaded data using the Background URL load
         if ($helperCalculations['has-lazy-load'] ?? null) {
             $url = GeneralUtils::addQueryArgs(
