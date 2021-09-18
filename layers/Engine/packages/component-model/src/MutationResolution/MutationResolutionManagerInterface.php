@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolution;
 
+use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
+
 interface MutationResolutionManagerInterface
 {
     public function clearResults(): void;
 
-    public function setResult(string $class, mixed $result): void;
+    public function setResult(ComponentMutationResolverBridgeInterface $componentMutationResolverBridge, mixed $result): void;
 
-    public function getResult(string $class): mixed;
+    public function getResult(ComponentMutationResolverBridgeInterface $componentMutationResolverBridge): mixed;
 }

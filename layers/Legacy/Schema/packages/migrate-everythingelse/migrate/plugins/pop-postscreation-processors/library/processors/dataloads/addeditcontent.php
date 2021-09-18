@@ -69,16 +69,16 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
         return parent::isUpdate($module);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_POST_CREATE:
-                return CreatePostMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(CreatePostMutationResolverBridge::class);
             case self::MODULE_DATALOAD_POST_UPDATE:
-                return UpdatePostMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(UpdatePostMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     public function initModelProps(array $module, array &$props): void

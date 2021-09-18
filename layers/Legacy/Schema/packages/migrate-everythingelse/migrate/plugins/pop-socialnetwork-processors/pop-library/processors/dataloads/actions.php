@@ -66,7 +66,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $executers = array(
             self::MODULE_DATALOADACTION_FOLLOWUSER => FollowUserMutationResolverBridge::class,
@@ -84,7 +84,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             return $executer;
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     // function getActionexecutionCheckpointConfiguration(array $module, array &$props) {
@@ -183,7 +183,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
                 $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
-                if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridgeClass($module))) {
+                if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridge($module))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
                 } else {
                     $data_properties[DataloadingConstants::SKIPDATALOAD] = true;

@@ -44,20 +44,20 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_INVITENEWMEMBERS:
-                return InviteMembersMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(InviteMembersMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
-                return EditMembershipMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(EditMembershipMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
-                return UpdateMyCommunitiesMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(UpdateMyCommunitiesMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     protected function getInnerSubmodules(array $module): array

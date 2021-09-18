@@ -43,20 +43,20 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
-                return ChangeUserPasswordMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(ChangeUserPasswordMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_MYPREFERENCES:
-                return UpdateMyPreferencesMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(UpdateMyPreferencesMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_INVITENEWUSERS:
-                return InviteUsersMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(InviteUsersMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     public function getJsmethods(array $module, array &$props)

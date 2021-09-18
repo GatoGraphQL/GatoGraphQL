@@ -37,7 +37,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $actionexecuters = array(
             self::MODULE_DATALOAD_NEWSLETTER => NewsletterSubscriptionMutationResolverBridge::class,
@@ -47,7 +47,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
             return $actionexecuter;
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     protected function getFeedbackmessageModule(array $module)

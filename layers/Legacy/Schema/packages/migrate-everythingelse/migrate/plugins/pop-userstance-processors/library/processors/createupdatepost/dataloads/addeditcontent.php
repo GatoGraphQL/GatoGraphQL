@@ -64,19 +64,19 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getFeedbackmessageModule($module);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATE:
-                return CreateStanceMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(CreateStanceMutationResolverBridge::class);
             case self::MODULE_DATALOAD_STANCE_UPDATE:
-                return UpdateStanceMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(UpdateStanceMutationResolverBridge::class);
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                return CreateOrUpdateStanceMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(CreateOrUpdateStanceMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     protected function getInnerSubmodules(array $module): array

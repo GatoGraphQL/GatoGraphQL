@@ -64,23 +64,23 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
         return $ret;
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOGIN:
-                return LoginMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(LoginMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_LOSTPWD:
-                return LostPasswordMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(LostPasswordMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_LOSTPWDRESET:
-                return ResetLostPasswordMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(ResetLostPasswordMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_LOGOUT:
-                return LogoutMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(LogoutMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     protected function getFeedbackmessageModule(array $module)

@@ -109,7 +109,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return parent::getDataloadSource($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
@@ -118,13 +118,13 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
                 // 2. Update the avatar, on the POST operation
                 $moduleAtts = (count($module) >= 3) ? $module[2] : null;
                 if ($moduleAtts && $moduleAtts['executeupdate']) {
-                    return UpdateUserAvatarMutationResolverBridge::class;
+                    return $this->instanceManager->getInstance(UpdateUserAvatarMutationResolverBridge::class);
                 }
 
-                return FileUploadPictureMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(FileUploadPictureMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     public function shouldExecuteMutation(array $module, array &$props): bool

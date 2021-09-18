@@ -89,16 +89,16 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         parent::initModelProps($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENT_CREATE:
-                return CreateEventMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(CreateEventMutationResolverBridge::class);
             case self::MODULE_DATALOAD_EVENT_UPDATE:
-                return UpdateEventMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(UpdateEventMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array

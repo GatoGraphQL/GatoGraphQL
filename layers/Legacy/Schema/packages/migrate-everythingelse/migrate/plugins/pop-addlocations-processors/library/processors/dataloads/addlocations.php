@@ -36,14 +36,14 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CREATELOCATION:
-                return CreateLocationMutationResolverBridge::class;
+                return $this->instanceManager->getInstance(CreateLocationMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void
@@ -53,7 +53,7 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION:
                 $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
-                if ($target_id = $gd_dataload_actionexecution_manager->getResult(CreateLocationMutationResolverBridge::class)) {
+                if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->instanceManager->getInstance(CreateLocationMutationResolverBridge::class))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
                 } else {
                     $data_properties[DataloadingConstants::SKIPDATALOAD] = true;

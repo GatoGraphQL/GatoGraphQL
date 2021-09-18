@@ -28,7 +28,7 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
         $executed = parent::execute($data_properties);
         if ($executed !== null && $executed[ResponseConstants::SUCCESS]) {
             // Add the result from the MutationResolver as hard redirect
-            $redirect_to = $this->mutationResolutionManager->getResult(get_called_class());
+            $redirect_to = $this->mutationResolutionManager->getResult($this);
             $executed[GD_DATALOAD_QUERYHANDLERRESPONSE_HARDREDIRECT] = $redirect_to;
         }
         return $executed;

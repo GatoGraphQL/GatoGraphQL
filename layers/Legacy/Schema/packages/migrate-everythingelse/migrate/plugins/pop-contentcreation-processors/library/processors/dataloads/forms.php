@@ -46,7 +46,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
         return parent::validateCaptcha($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $actionexecuters = array(
             self::MODULE_DATALOAD_FLAG => FlagCustomPostMutationResolverBridge::class,
@@ -55,7 +55,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
             return $actionexecuter;
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     protected function getFeedbackmessageModule(array $module)
