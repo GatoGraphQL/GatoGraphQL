@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
 use PoP\CacheControl\Facades\CacheControlManagerFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -25,6 +26,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
         TypeRegistryInterface $typeRegistry,
         DirectiveRegistryInterface $directiveRegistry,
         protected CacheControlBlock $cacheControlBlock,
+        protected BlockHelpers $blockHelpers,
     ) {
         parent::__construct(
             $hooksAPI,
