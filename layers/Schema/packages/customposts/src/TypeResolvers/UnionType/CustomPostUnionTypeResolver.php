@@ -16,7 +16,6 @@ use PoP\ComponentModel\TypeResolvers\UnionType\AbstractUnionTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader;
-use PoPSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
 
 class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 {
