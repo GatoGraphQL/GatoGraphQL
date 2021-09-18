@@ -1026,7 +1026,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // Add the actionpath too
-        if ($this->getComponentMutationResolverBridgeClass($module)) {
+        if ($this->getComponentMutationResolverBridge($module) !== null) {
             $ret = GeneralUtils::addQueryArgs([
                 Params::ACTION_PATH => $stringified_module_propagation_current_path,
             ], $ret);
