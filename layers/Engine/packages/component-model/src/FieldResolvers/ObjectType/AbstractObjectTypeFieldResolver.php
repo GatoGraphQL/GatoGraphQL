@@ -822,8 +822,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $fieldArgs;
     }
 
-    public function getFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
+    public function getFieldMutationResolver(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName
+    ): ?MutationResolverInterface {
         return null;
     }
 }

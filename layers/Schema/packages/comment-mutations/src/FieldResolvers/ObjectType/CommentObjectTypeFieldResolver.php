@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -32,6 +33,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         protected CommentTypeAPIInterface $commentTypeAPI,
         protected CommentObjectTypeResolver $commentObjectTypeResolver,
+        protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -114,14 +116,16 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $fieldArgs;
     }
 
-    public function getFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
+    public function getFieldMutationResolver(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName
+    ): ?MutationResolverInterface {
         switch ($fieldName) {
             case 'reply':
-                return AddCommentToCustomPostMutationResolver::class;
+                return $this->addCommentToCustomPostMutationResolver;
         }
 
-        return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
@@ -35,6 +36,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SemverHelperServiceInterface $semverHelperService,
         protected MediaObjectTypeResolver $mediaTypeResolver,
         protected CustomPostUnionTypeResolver $customPostUnionTypeResolver,
+        protected SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver,
+        protected RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -106,16 +109,18 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldMutationResolverClass(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
+    public function getFieldMutationResolver(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName
+    ): ?MutationResolverInterface {
         switch ($fieldName) {
             case 'setFeaturedImageOnCustomPost':
-                return SetFeaturedImageOnCustomPostMutationResolver::class;
+                return $this->setFeaturedImageOnCustomPostMutationResolver;
             case 'removeFeaturedImageFromCustomPost':
-                return RemoveFeaturedImageOnCustomPostMutationResolver::class;
+                return $this->removeFeaturedImageOnCustomPostMutationResolver;
         }
 
-        return parent::getFieldMutationResolverClass($objectTypeResolver, $fieldName);
+        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
