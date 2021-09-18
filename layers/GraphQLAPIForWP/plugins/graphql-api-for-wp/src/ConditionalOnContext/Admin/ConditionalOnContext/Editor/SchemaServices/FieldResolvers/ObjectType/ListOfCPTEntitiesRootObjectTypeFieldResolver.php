@@ -31,6 +31,9 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
         CustomPostObjectTypeResolver $customPostObjectTypeResolver,
+        protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
+        protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
+        protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,        
     ) {
         parent::__construct(
             $translationAPI,
@@ -68,16 +71,10 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
 
     protected function getFieldCustomPostType(string $fieldName): string
     {
-        /** @var GraphQLAccessControlListCustomPostType */
-        $accessControlListCustomPostTypeService = $this->instanceManager->getInstance(GraphQLAccessControlListCustomPostType::class);
-        /** @var GraphQLCacheControlListCustomPostType */
-        $cacheControlListCustomPostTypeService = $this->instanceManager->getInstance(GraphQLCacheControlListCustomPostType::class);
-        /** @var GraphQLSchemaConfigurationCustomPostType */
-        $schemaConfigurationCustomPostTypeService = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
         return match ($fieldName) {
-            'accessControlLists' => $accessControlListCustomPostTypeService->getCustomPostType(),
-            'cacheControlLists' => $cacheControlListCustomPostTypeService->getCustomPostType(),
-            'schemaConfigurations' => $schemaConfigurationCustomPostTypeService->getCustomPostType(),
+            'accessControlLists' => $this->graphQLAccessControlListCustomPostType->getCustomPostType(),
+            'cacheControlLists' => $this->graphQLCacheControlListCustomPostType->getCustomPostType(),
+            'schemaConfigurations' => $this->graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
             default => '', // It will never reach here
         };
     }

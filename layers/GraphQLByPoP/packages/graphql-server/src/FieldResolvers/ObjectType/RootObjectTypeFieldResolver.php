@@ -35,6 +35,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         protected SchemaObjectTypeResolver $schemaObjectTypeResolver,
         protected TypeObjectTypeResolver $typeObjectTypeResolver,
+        protected SchemaTypeDataLoader $schemaTypeDataLoader,
     ) {
         parent::__construct(
             $translationAPI,
@@ -145,11 +146,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return $schemaID;
                 }
                 // Obtain the instance of the schema
-                /**
-                 * @var SchemaTypeDataLoader
-                 */
-                $schemaTypeDataLoader = $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
-                $schemaInstances = $schemaTypeDataLoader->getObjects([$schemaID]);
+                $schemaInstances = $this->schemaTypeDataLoader->getObjects([$schemaID]);
                 $schema = $schemaInstances[0];
                 return $schema->getTypeID($fieldArgs['name']);
         }
