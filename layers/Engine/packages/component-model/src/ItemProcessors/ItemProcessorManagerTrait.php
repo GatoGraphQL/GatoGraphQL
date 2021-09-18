@@ -27,14 +27,14 @@ trait ItemProcessorManagerTrait
         }
     }
 
-    protected function hasItemBeenLoaded(array $item)
+    protected function hasItemBeenLoaded(array $item): bool
     {
         $itemProcessorClass = $item[0];
         $itemName = $item[1];
         return isset($this->processors[$itemProcessorClass][$itemName]);
     }
 
-    public function getItemProcessor(array $item)
+    public function getItemProcessor(array $item): mixed
     {
         $itemProcessorClass = $item[0];
         $itemName = $item[1];

@@ -10,6 +10,5 @@ interface CheckpointProcessorManagerInterface
      * @deprecated Use the Service Container instead
      */
     public function overrideProcessorClass(string $overrideClass, string $withClass, array $forItemNames): void;
-    public function getItemProcessor(array $item);
     public function getProcessor(array $item);
 }
