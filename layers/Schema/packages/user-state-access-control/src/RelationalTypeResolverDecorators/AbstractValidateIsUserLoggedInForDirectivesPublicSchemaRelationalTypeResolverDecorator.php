@@ -23,7 +23,7 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
             $fieldQueryInterpreter,
         );
     }
-    
+
     /**
      * Verify that the user is logged in before checking the roles/capabilities
      */

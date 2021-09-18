@@ -24,7 +24,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
             $fieldQueryInterpreter,
         );
     }
-    
+
     /**
      * Verify that the user is logged in before checking the roles/capabilities
      */

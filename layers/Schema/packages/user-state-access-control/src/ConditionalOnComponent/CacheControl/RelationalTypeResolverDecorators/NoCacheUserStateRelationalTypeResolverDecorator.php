@@ -30,7 +30,7 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
             $fieldQueryInterpreter,
         );
     }
-    
+
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {
         return [

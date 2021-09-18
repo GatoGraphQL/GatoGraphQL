@@ -24,7 +24,7 @@ abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPubl
             $accessControlManager,
         );
     }
-    
+
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $disableAccessDirective = $this->fieldQueryInterpreter->getDirective(
