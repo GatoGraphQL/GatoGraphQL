@@ -28,7 +28,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
-        EditorHelpers $gditorHelpers,
+        EditorHelpers $editorHelpers,
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,
         protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
@@ -38,7 +38,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
             $moduleRegistry,
             $userAuthorization,
             $generalUtils,
-            $gditorHelpers,
+            $editorHelpers,
             $blockRenderingHelpers,
             $cptUtils,
         );

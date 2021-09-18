@@ -20,7 +20,7 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
-        EditorHelpers $gditorHelpers,
+        EditorHelpers $editorHelpers,
         protected BlockRenderingHelpers $blockRenderingHelpers,
         protected CPTUtils $cptUtils,
     ) {
@@ -29,7 +29,7 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
             $moduleRegistry,
             $userAuthorization,
             $generalUtils,
-            $gditorHelpers,
+            $editorHelpers,
         );
     }
 

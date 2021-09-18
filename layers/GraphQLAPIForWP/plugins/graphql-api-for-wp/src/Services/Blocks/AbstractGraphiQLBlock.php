@@ -29,7 +29,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
-        EditorHelpers $gditorHelpers,
+        EditorHelpers $editorHelpers,
         protected EndpointHelpers $endpointHelpers,
     ) {
         parent::__construct(
@@ -37,7 +37,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
             $moduleRegistry,
             $userAuthorization,
             $generalUtils,
-            $gditorHelpers,
+            $editorHelpers,
         );
     }
 

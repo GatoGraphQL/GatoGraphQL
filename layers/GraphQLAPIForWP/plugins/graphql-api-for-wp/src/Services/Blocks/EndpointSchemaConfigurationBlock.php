@@ -34,7 +34,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
-        EditorHelpers $gditorHelpers,
+        EditorHelpers $editorHelpers,
         protected BlockRenderingHelpers $blockRenderingHelpers,
         protected CPTUtils $cptUtils,
     ) {
@@ -43,7 +43,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
             $moduleRegistry,
             $userAuthorization,
             $generalUtils,
-            $gditorHelpers,
+            $editorHelpers,
         );
     }
 

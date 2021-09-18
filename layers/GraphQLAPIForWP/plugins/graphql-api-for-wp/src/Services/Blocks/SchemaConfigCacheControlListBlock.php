@@ -28,7 +28,7 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
-        EditorHelpers $gditorHelpers,
+        EditorHelpers $editorHelpers,
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,
         protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
@@ -38,7 +38,7 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
             $moduleRegistry,
             $userAuthorization,
             $generalUtils,
-            $gditorHelpers,
+            $editorHelpers,
             $blockRenderingHelpers,
             $cptUtils,
         );

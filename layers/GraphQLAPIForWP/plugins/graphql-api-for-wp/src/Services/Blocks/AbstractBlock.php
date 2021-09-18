@@ -32,7 +32,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
         protected ModuleRegistryInterface $moduleRegistry,
         protected UserAuthorizationInterface $userAuthorization,
         protected GeneralUtils $generalUtils,
-        protected EditorHelpers $gditorHelpers,
+        protected EditorHelpers $editorHelpers,
     ) {
     }
 

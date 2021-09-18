@@ -39,6 +39,8 @@ trait ContainerBuilderFactoryTrait
         $cacheSetupSuccess = true;
         $containerClass = $containerNamespace = null;
 
+        // @todo TESTING, DON'T COMMIT!!!
+        static::$cacheContainerConfiguration = false;
         if (static::$cacheContainerConfiguration) {
             /**
              * Code copied from Symfony FilesystemAdapter
