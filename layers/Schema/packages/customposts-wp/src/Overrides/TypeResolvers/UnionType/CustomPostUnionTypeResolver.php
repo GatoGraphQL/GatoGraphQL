@@ -12,7 +12,10 @@ class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
      * Overriding function to provide optimization:
      * instead of calling ->isIDOfType on each object (as in parent function),
      * in which case we must make a DB call for each result,
-     * we obtain all the types from executing a single query against the DB
+     * we obtain all the types from executing a single query against the DB.
+     *
+     * @param array<string|int> $ids
+     * @return array<string|int,ObjectTypeResolverInterface[]>
      */
     public function getObjectIDTargetTypeResolvers(array $ids): array
     {

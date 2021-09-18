@@ -83,11 +83,19 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return true;
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string|int,ObjectTypeResolverInterface[]>
+     */
     public function getObjectIDTargetTypeResolvers(array $ids): array
     {
         return $this->recursiveGetObjectIDTargetTypeResolvers($this, $ids);
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string|int,ObjectTypeResolverInterface[]>
+     */
     private function recursiveGetObjectIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
     {
         if (!$ids) {
@@ -103,7 +111,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 if ($targetObjectTypeResolver = $relationalTypeResolver->getObjectTypeResolverForObject($objectID)) {
                     $targetObjectTypeName = $targetObjectTypeResolver->getNamespacedTypeName();
                     $targetTypeResolverNameDataItems[$targetObjectTypeName] ??= [
-                        'resolver' => $targetObjectTypeResolver,
+                        'targetObjectTypeResolver' => $targetObjectTypeResolver,
                         'objectIDs' => [],
                     ];
                     $targetTypeResolverNameDataItems[$targetObjectTypeName]['objectIDs'][] = $objectID;
@@ -112,7 +120,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 }
             }
             foreach ($targetTypeResolverNameDataItems as $targetObjectTypeName => $targetTypeResolverDataItems) {
-                $targetObjectTypeResolver = $targetTypeResolverDataItems['resolver'];
+                $targetObjectTypeResolver = $targetTypeResolverDataItems['targetObjectTypeResolver'];
                 $objectIDs = $targetTypeResolverDataItems['objectIDs'];
                 $targetObjectIDTargetTypeResolvers = $this->recursiveGetObjectIDTargetTypeResolvers(
                     $targetObjectTypeResolver,
