@@ -97,7 +97,7 @@ class Engine implements EngineInterface
 
     /**
      * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
-     * @var array<string,array<array<string|int,array<string,mixed>>>>>
+     * @var array<string,array<string,mixed>>
      */
     protected array $relationalTypeResolverNameIDsDataFields = [];
 
@@ -1402,6 +1402,7 @@ class Engine implements EngineInterface
             // By splitting the results into state-full and state-less, we can split all functionality
             // into cacheable and non-cacheable,
             // thus caching most of the website even for logged-in users
+            /** @phpstan-ignore-next-line */
             if ($iterationDBItems) {
                 // Conditional data fields: Store the loaded IDs/fields in an object,
                 // to avoid fetching them again in later iterations on the same typeResolver
@@ -1435,6 +1436,7 @@ class Engine implements EngineInterface
                     }
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationObjectErrors) {
                 $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationObjectErrors, true, $relationalTypeResolver);
                 foreach ($dbNameErrorEntries as $dbname => $entries) {
@@ -1442,6 +1444,7 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectErrors[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationObjectWarnings) {
                 $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationObjectWarnings, true, $relationalTypeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $entries) {
@@ -1449,6 +1452,7 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectWarnings[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationObjectDeprecations) {
                 $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationObjectDeprecations, true, $relationalTypeResolver);
                 foreach ($dbNameDeprecationEntries as $dbname => $entries) {
@@ -1456,6 +1460,7 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectDeprecations[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationObjectNotices) {
                 $dbNameNoticeEntries = $this->moveEntriesUnderDBName($iterationObjectNotices, true, $relationalTypeResolver);
                 foreach ($dbNameNoticeEntries as $dbname => $entries) {
@@ -1463,6 +1468,7 @@ class Engine implements EngineInterface
                     $this->addDatasetToDatabase($objectNotices[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationObjectTraces) {
                 $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationObjectTraces, true, $relationalTypeResolver);
                 foreach ($dbNameTraceEntries as $dbname => $entries) {
@@ -1492,6 +1498,7 @@ class Engine implements EngineInterface
                     $storeSchemaWarnings
                 );
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationSchemaWarnings) {
                 $iterationSchemaWarnings = array_intersect_key($iterationSchemaWarnings, array_unique(array_map('serialize', $iterationSchemaWarnings)));
                 $dbNameSchemaWarningEntries = $this->moveEntriesUnderDBName($iterationSchemaWarnings, false, $relationalTypeResolver);
@@ -1502,6 +1509,7 @@ class Engine implements EngineInterface
                     );
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationSchemaDeprecations) {
                 $iterationSchemaDeprecations = array_intersect_key($iterationSchemaDeprecations, array_unique(array_map('serialize', $iterationSchemaDeprecations)));
                 $dbNameSchemaDeprecationEntries = $this->moveEntriesUnderDBName($iterationSchemaDeprecations, false, $relationalTypeResolver);
@@ -1512,6 +1520,7 @@ class Engine implements EngineInterface
                     );
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationSchemaNotices) {
                 $iterationSchemaNotices = array_intersect_key($iterationSchemaNotices, array_unique(array_map('serialize', $iterationSchemaNotices)));
                 $dbNameSchemaNoticeEntries = $this->moveEntriesUnderDBName($iterationSchemaNotices, false, $relationalTypeResolver);
@@ -1522,6 +1531,7 @@ class Engine implements EngineInterface
                     );
                 }
             }
+            /** @phpstan-ignore-next-line */
             if ($iterationSchemaTraces) {
                 $iterationSchemaTraces = array_intersect_key($iterationSchemaTraces, array_unique(array_map('serialize', $iterationSchemaTraces)));
                 $dbNameSchemaTraceEntries = $this->moveEntriesUnderDBName($iterationSchemaTraces, false, $relationalTypeResolver);
