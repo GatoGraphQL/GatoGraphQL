@@ -25,7 +25,7 @@ class GlobalValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolve
             $fieldQueryInterpreter,
         );
     }
-    
+
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -35,7 +35,7 @@ class GlobalValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolve
 
     /**
      * Provide the DirectiveResolvers that need the "validateIsUserLoggedIn" directive
-     * 
+     *
      * @return DirectiveResolverInterface[]
      */
     protected function getDirectiveResolvers(): array
