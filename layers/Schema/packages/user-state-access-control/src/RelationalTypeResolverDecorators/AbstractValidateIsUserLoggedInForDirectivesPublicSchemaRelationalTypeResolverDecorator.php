@@ -6,22 +6,33 @@ namespace PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractPublicSchemaRelationalTypeResolverDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
 
 abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
 {
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $fieldQueryInterpreter,
+        );
+    }
+
     /**
      * Verify that the user is logged in before checking the roles/capabilities
      */
     public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $mandatoryDirectivesForDirectives = [];
-        /** @var DirectiveResolverInterface */
-        $validateIsUserLoggedInForDirectivesDirectiveResolver = $this->instanceManager->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
         // This is the required "validateIsUserLoggedIn" directive
         $validateIsUserLoggedInDirective = $this->fieldQueryInterpreter->getDirective(
-            $validateIsUserLoggedInForDirectivesDirectiveResolver->getDirectiveName()
+            $this->validateIsUserLoggedInForDirectivesDirectiveResolver->getDirectiveName()
         );
         // Add the mapping
         foreach ($this->getDirectiveResolvers() as $needValidateIsUserLoggedInDirectiveResolver) {
