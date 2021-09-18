@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FilterInput;
 
 use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 
 class FilterInputHelper
 {
-    public static function getFilterInputName(array $filterInput): string
+    public static function getFilterInputName(array $filterInputModule): string
     {
-        $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
+        $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
         /** @var FormComponentModuleProcessorInterface */
-        $filterInputProcessor = $filterInputProcessorManager->getProcessor($filterInput);
-        return $filterInputProcessor->getName($filterInput);
+        $filterInputModuleProcessor = $moduleProcessorManager->getProcessor($filterInputModule);
+        return $filterInputModuleProcessor->getName($filterInputModule);
     }
 }
