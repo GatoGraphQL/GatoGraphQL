@@ -69,10 +69,11 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
                 continue;
             }
             // Add the Custom Post Type as the key, which can uniquely identify the picker
-            /** @var ObjectTypeResolverPickerInterface $targetTypeResolverPicker */
-            $customPostType = $targetTypeResolverPicker->getCustomPostType();
+            /** @var CustomPostTypeResolverPickerInterface */
+            $targetCustomPostTypeResolverPicker = $targetTypeResolverPicker;
+            $customPostType = $targetCustomPostTypeResolverPicker->getCustomPostType();
             $customPostID = $customPostTypeAPI->getID($customPost);
-            $customPostTypeTypeResolverPickers[$customPostType] = $targetTypeResolverPicker;
+            $customPostTypeTypeResolverPickers[$customPostType] = $targetCustomPostTypeResolverPicker;
             $customPostTypeItemCustomPosts[$customPostType][$customPostID] = $customPost;
         }
         // Cast all objects from the same type in a single query
