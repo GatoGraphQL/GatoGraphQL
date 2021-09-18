@@ -9,4 +9,9 @@ use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerTrait;
 class ModuleProcessorManager implements ModuleProcessorManagerInterface
 {
     use ItemProcessorManagerTrait;
+
+    public function getProcessor(array $item)
+    {
+        return $this->getItemProcessor($item);
+    }
 }

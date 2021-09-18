@@ -75,9 +75,4 @@ trait ItemProcessorManagerTrait
 
         return $this->processors[$itemProcessorClass][$itemName];
     }
-
-    public function getProcessor(array $item)
-    {
-        return $this->getItemProcessor($item);
-    }
 }

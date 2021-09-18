@@ -6,6 +6,11 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 class PoP_ResourceLoaderProcessorManager {
 
 	use ItemProcessorManagerTrait;
+
+    public function getProcessor(array $item)
+    {
+        return $this->getItemProcessor($item);
+    }
     
     public function getLoadedResourceFullNameProcessorInstances() 
     {
