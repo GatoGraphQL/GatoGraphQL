@@ -52,10 +52,6 @@ trait ItemProcessorManagerTrait
             $instanceManager = InstanceManagerFacade::getInstance();
             $processorInstance = $instanceManager->getInstance($itemProcessorClass);
             $this->processors[$itemProcessorClass][$itemName] = $processorInstance;
-
-            // Keep a copy of what instance was generated for which item;
-            $itemFullName = ProcessorItemUtils::getItemFullName($item);
-            $this->itemFullNameProcessorInstances[$itemFullName] = $processorInstance;
         }
 
         return $this->processors[$itemProcessorClass][$itemName];
