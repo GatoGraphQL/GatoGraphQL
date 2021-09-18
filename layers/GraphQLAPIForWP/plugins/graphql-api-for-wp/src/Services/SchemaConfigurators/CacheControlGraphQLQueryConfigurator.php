@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use PoP\CacheControl\Facades\CacheControlManagerFacade;
@@ -35,13 +34,11 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
      */
     protected function doExecuteSchemaConfiguration(int $cclPostID): void
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var CacheControlBlock
          */
         $block = $this->instanceManager->getInstance(CacheControlBlock::class);
-        $cclBlockItems = $blockHelpers->getBlocksOfTypeFromCustomPost(
+        $cclBlockItems = $this->blockHelpers->getBlocksOfTypeFromCustomPost(
             $cclPostID,
             $block
         );

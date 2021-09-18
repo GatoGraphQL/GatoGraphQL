@@ -9,7 +9,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
@@ -65,13 +64,11 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
      */
     protected function doExecuteSchemaConfiguration(int $aclPostID): void
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var AccessControlBlock
          */
         $block = $this->instanceManager->getInstance(AccessControlBlock::class);
-        $aclBlockItems = $blockHelpers->getBlocksOfTypeFromCustomPost(
+        $aclBlockItems = $this->blockHelpers->getBlocksOfTypeFromCustomPost(
             $aclPostID,
             $block
         );

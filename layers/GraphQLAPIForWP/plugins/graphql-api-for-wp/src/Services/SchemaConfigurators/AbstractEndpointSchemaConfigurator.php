@@ -14,6 +14,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
+        protected BlockHelpers $blockHelpers,
     ) {
     }
 

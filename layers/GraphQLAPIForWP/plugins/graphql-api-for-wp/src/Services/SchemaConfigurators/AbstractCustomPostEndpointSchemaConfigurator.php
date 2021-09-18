@@ -10,7 +10,6 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use WP_Post;
 
 abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
@@ -20,13 +19,11 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
      */
     protected function getSchemaConfigurationID(int $customPostID): ?int
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var EndpointSchemaConfigurationBlock
          */
         $block = $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
-        $schemaConfigurationBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $schemaConfigurationBlockDataItem = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $customPostID,
             $block
         );
