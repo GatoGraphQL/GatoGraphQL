@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateAccessControl\ConditionalOnComponent\CacheControl\RelationalTypeResolverDecorators;
 
 use PoP\CacheControl\Helpers\CacheControlHelper;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\AbstractRelationalTypeResolverDecorator;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;

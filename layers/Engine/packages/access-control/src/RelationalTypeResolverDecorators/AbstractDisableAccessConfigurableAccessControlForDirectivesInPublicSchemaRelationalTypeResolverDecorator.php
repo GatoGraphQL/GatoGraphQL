@@ -7,7 +7,6 @@ namespace PoP\AccessControl\RelationalTypeResolverDecorators;
 use PoP\AccessControl\DirectiveResolvers\DisableAccessForDirectivesDirectiveResolver;
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 
