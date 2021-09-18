@@ -13,7 +13,7 @@ class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
         );
     }
 
-    public function process(array $checkpoint)
+    public function validateCheckpoint(array $checkpoint): ?Error
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_NONSOCIALLOGINUSER:
@@ -23,7 +23,7 @@ class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
                 break;
         }
 
-        return parent::process($checkpoint);
+        return parent::validateCheckpoint($checkpoint);
     }
 }
 

@@ -17,7 +17,7 @@ class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
         );
     }
 
-    public function process(array $checkpoint)
+    public function validateCheckpoint(array $checkpoint): ?Error
     {
         $vars = ApplicationState::getVars();
         $current_user_id = $vars['global-userstate']['current-user-id'];
@@ -35,7 +35,7 @@ class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
                 break;
         }
 
-        return parent::process($checkpoint);
+        return parent::validateCheckpoint($checkpoint);
     }
 }
 

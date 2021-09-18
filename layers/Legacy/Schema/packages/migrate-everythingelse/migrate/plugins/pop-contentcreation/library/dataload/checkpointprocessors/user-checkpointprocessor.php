@@ -15,7 +15,7 @@ class GD_ContentCreation_Dataload_UserCheckpointProcessor extends AbstractCheckp
         );
     }
 
-    public function process(array $checkpoint)
+    public function validateCheckpoint(array $checkpoint): ?Error
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_USERCANEDIT:
@@ -35,7 +35,7 @@ class GD_ContentCreation_Dataload_UserCheckpointProcessor extends AbstractCheckp
                 break;
         }
 
-        return parent::process($checkpoint);
+        return parent::validateCheckpoint($checkpoint);
     }
 }
 

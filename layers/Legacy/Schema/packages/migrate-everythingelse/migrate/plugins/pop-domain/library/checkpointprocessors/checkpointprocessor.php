@@ -13,7 +13,7 @@ class PoP_Domain_Dataload_CheckpointProcessor extends AbstractCheckpointProcesso
         );
     }
 
-    public function process(array $checkpoint)
+    public function validateCheckpoint(array $checkpoint): ?Error
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_DOMAINVALID:
@@ -25,7 +25,7 @@ class PoP_Domain_Dataload_CheckpointProcessor extends AbstractCheckpointProcesso
                 break;
         }
 
-        return parent::process($checkpoint);
+        return parent::validateCheckpoint($checkpoint);
     }
 }
 

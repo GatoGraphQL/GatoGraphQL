@@ -21,7 +21,7 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function process(array $checkpoint)
+    public function validateCheckpoint(array $checkpoint): ?Error
     {
         $vars = ApplicationState::getVars();
         switch ($checkpoint[1]) {
@@ -38,6 +38,6 @@ class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
                 break;
         }
 
-        return parent::process($checkpoint);
+        return parent::validateCheckpoint($checkpoint);
     }
 }

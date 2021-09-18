@@ -19,7 +19,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
         );
     }
 
-    public function process(array $checkpoint)
+    public function validateCheckpoint(array $checkpoint): ?Error
     {
         $vars = ApplicationState::getVars();
         $current_user_id = $vars['global-userstate']['current-user-id'];
@@ -52,7 +52,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
                 break;
         }
 
-        return parent::process($checkpoint);
+        return parent::validateCheckpoint($checkpoint);
     }
 }
 

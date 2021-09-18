@@ -18,7 +18,7 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function process(array $checkpoint)
+    public function validateCheckpoint(array $checkpoint): ?Error
     {
         switch ($checkpoint[1]) {
             case self::DOING_POST:
@@ -28,6 +28,6 @@ class RequestCheckpointProcessor extends AbstractCheckpointProcessor
                 break;
         }
 
-        return parent::process($checkpoint);
+        return parent::validateCheckpoint($checkpoint);
     }
 }
