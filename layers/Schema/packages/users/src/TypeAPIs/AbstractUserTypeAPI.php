@@ -6,7 +6,6 @@ namespace PoPSchema\Users\TypeAPIs;
 
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
-use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
@@ -14,7 +13,6 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected CMSHelperServiceInterface $cmsHelperService,
-        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
     ) {
     }
 

@@ -4,8 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface:
-        class: \PoPSchema\QueriedObject\Helpers\QueriedObjectHelperService
-
     PoPSchema\QueriedObject\Hooks\:
         resource: '../src/Hooks/*'

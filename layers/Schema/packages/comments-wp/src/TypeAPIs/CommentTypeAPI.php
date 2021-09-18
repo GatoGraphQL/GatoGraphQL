@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\CommentsWP\TypeAPIs;
 
 use PoP\Hooks\HooksAPIInterface;
-use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Comment;
@@ -32,7 +30,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
-        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
     ) {
         $this->popToCMSCommentStatusConversion = array_flip($this->cmsToPoPCommentStatusConversion);
     }
