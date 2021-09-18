@@ -6,9 +6,7 @@ namespace PoPSchema\TagsWP\TypeAPIs;
 
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
-use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Tags\ComponentConfiguration;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -24,7 +22,6 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected CMSHelperServiceInterface $cmsHelperService,
-        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
     ) {
     }
 

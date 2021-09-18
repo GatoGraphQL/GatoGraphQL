@@ -6,14 +6,12 @@ namespace PoPSchema\CustomPosts\TypeAPIs;
 
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
-use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 
 abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected CMSHelperServiceInterface $cmsHelperService,
-        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
     ) {
     }
 

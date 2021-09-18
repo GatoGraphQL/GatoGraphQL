@@ -7,9 +7,7 @@ namespace PoPSchema\CategoriesWP\TypeAPIs;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\HooksAPIInterface;
-use PoPSchema\Categories\ComponentConfiguration;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -27,7 +25,6 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected CMSHelperServiceInterface $cmsHelperService,
-        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
     ) {
     }
 
