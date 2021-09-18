@@ -4,16 +4,41 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
-use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
-use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
-use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\QueryRootTypeDataLoader;
+use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 
 class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObjectTypeResolver
 {
     use ReservedNameTypeResolverTrait;
 
+    public function __construct(
+        \PoP\Translation\TranslationAPIInterface $translationAPI,
+        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        \PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface $schemaNamespacingService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Schema\FeedbackMessageStoreInterface $feedbackMessageStore,
+        \PoP\ComponentModel\Schema\FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        \PoP\ComponentModel\ErrorHandling\ErrorProviderInterface $errorProvider,
+        protected RootObjectTypeResolver $rootObjectTypeResolver,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $schemaNamespacingService,
+            $schemaDefinitionService,
+            $feedbackMessageStore,
+            $fieldQueryInterpreter,
+            $errorProvider,
+            $rootObjectTypeResolver,
+        );
+    }
+    
     public function getTypeName(): string
     {
         return 'QueryRoot';
