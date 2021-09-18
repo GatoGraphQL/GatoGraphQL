@@ -62,8 +62,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $typeDBObjectIDOrIDs = [];
         foreach ($objectIDs as $objectID) {
             // Make sure there is a resolver for this object. If there is none, return the same ID
-            $targetObjectTypeResolver = $objectIDTargetObjectTypeResolvers[$objectID];
-            if (!is_null($targetObjectTypeResolver)) {
+            $targetObjectTypeResolver = $objectIDTargetObjectTypeResolvers[$objectID] ?? null;
+            if ($targetObjectTypeResolver !== null) {
                 $typeDBObjectIDOrIDs[] = UnionTypeHelpers::getObjectComposedTypeAndID(
                     $targetObjectTypeResolver,
                     $objectID
@@ -83,11 +83,19 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return true;
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string|int,ObjectTypeResolverInterface|null>
+     */
     public function getObjectIDTargetTypeResolvers(array $ids): array
     {
         return $this->recursiveGetObjectIDTargetTypeResolvers($this, $ids);
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,ObjectTypeResolverInterface|null>
+     */
     private function recursiveGetObjectIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
     {
         if (!$ids) {
@@ -103,7 +111,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 if ($targetObjectTypeResolver = $relationalTypeResolver->getObjectTypeResolverForObject($objectID)) {
                     $targetObjectTypeName = $targetObjectTypeResolver->getNamespacedTypeName();
                     $targetTypeResolverNameDataItems[$targetObjectTypeName] ??= [
-                        'resolver' => $targetObjectTypeResolver,
+                        'targetObjectTypeResolver' => $targetObjectTypeResolver,
                         'objectIDs' => [],
                     ];
                     $targetTypeResolverNameDataItems[$targetObjectTypeName]['objectIDs'][] = $objectID;
@@ -112,7 +120,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 }
             }
             foreach ($targetTypeResolverNameDataItems as $targetObjectTypeName => $targetTypeResolverDataItems) {
-                $targetObjectTypeResolver = $targetTypeResolverDataItems['resolver'];
+                $targetObjectTypeResolver = $targetTypeResolverDataItems['targetObjectTypeResolver'];
                 $objectIDs = $targetTypeResolverDataItems['objectIDs'];
                 $targetObjectIDTargetTypeResolvers = $this->recursiveGetObjectIDTargetTypeResolvers(
                     $targetObjectTypeResolver,
@@ -123,8 +131,10 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 }
             }
         } else {
+            /** @var ObjectTypeResolverInterface */
+            $objectTypeResolver = $relationalTypeResolver;
             foreach ($ids as $objectID) {
-                $objectIDTargetTypeResolvers[(string)$objectID] = $relationalTypeResolver;
+                $objectIDTargetTypeResolvers[(string)$objectID] = $objectTypeResolver;
             }
         }
         return $objectIDTargetTypeResolvers;
