@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\ObjectTypeResolverPickers;
 
-interface CustomPostTypeResolverPickerInterface extends \PoPSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostTypeResolverPickerInterface
+use PoPSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface as UpstreamCustomPostObjectTypeResolverPickerInterface;
+
+interface CustomPostObjectTypeResolverPickerInterface extends UpstreamCustomPostObjectTypeResolverPickerInterface
 {
     /**
      * Maybe cast the object of type `WP_Post` returned by function `get_posts`, to a different object type

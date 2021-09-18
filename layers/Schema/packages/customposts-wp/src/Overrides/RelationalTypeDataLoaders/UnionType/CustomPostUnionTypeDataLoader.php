@@ -13,7 +13,7 @@ use PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\CustomPostTypeDat
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader as UpstreamCustomPostUnionTypeDataLoader;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoPSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostTypeResolverPickerInterface;
+use PoPSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
 
 /**
  * In the context of WordPress, "Custom Posts" are all posts (eg: posts, pages, attachments, events, etc)
@@ -64,12 +64,12 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
                 // If `null`, no picker handles this type, then do nothing
                 $targetTypeResolverPicker === null
                 // Needs be an instance of this interface, or do nothing
-                || !($targetTypeResolverPicker instanceof CustomPostTypeResolverPickerInterface)
+                || !($targetTypeResolverPicker instanceof CustomPostObjectTypeResolverPickerInterface)
             ) {
                 continue;
             }
             // Add the Custom Post Type as the key, which can uniquely identify the picker
-            /** @var CustomPostTypeResolverPickerInterface */
+            /** @var CustomPostObjectTypeResolverPickerInterface */
             $targetCustomPostTypeResolverPicker = $targetTypeResolverPicker;
             $customPostType = $targetCustomPostTypeResolverPicker->getCustomPostType();
             $customPostID = $customPostTypeAPI->getID($customPost);
@@ -94,7 +94,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
                 $targetTypeResolverPicker = $this->customPostUnionTypeResolver->getTargetObjectTypeResolverPicker($customPost);
                 if (
                     is_null($targetTypeResolverPicker)
-                    || !($targetTypeResolverPicker instanceof CustomPostTypeResolverPickerInterface)
+                    || !($targetTypeResolverPicker instanceof CustomPostObjectTypeResolverPickerInterface)
                 ) {
                     return $customPost;
                 }
