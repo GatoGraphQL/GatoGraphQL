@@ -59,9 +59,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         if ($this->onlyExecuteWhenDoingPost() && 'POST' !== $_SERVER['REQUEST_METHOD']) {
             return null;
         }
-        $mutationResolverClass = $this->getMutationResolverClass();
-        /** @var MutationResolverInterface */
-        $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
+        $mutationResolver = $this->getMutationResolver();
         $form_data = $this->getFormData();
         $return = [];
         // Validate errors
