@@ -12,11 +12,11 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Chan
 class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     public function __construct(
-        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
-        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
-        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
-        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected ChangeUserPasswordMutationResolver $ChangeUserPasswordMutationResolver,
+        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        \PoP\Translation\TranslationAPIInterface $translationAPI,
+        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -28,7 +28,7 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->ChangeUserPasswordMutationResolver;
+        return $this->changeUserPasswordMutationResolver;
     }
 
     public function getFormData(): array

@@ -7,29 +7,32 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateIndividualProfileMutationResolver;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateProfileMutationResolver;
 
 class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
 {
     use CreateUpdateProfileMutationResolverBridgeTrait;
 
     public function __construct(
-        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
-        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
-        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
-        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        \PoP\Translation\TranslationAPIInterface $translationAPI,
+        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
+        protected CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
             $translationAPI,
             $instanceManager,
             $mutationResolutionManager,
+            $createUpdateProfileMutationResolver
         );
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->CreateUpdateIndividualProfileMutationResolver;
-        protected CreateUpdateIndividualProfileMutationResolver $CreateUpdateIndividualProfileMutationResolver,
+        return $this->createUpdateIndividualProfileMutationResolver;
     }
 
     private function getFormInputs()

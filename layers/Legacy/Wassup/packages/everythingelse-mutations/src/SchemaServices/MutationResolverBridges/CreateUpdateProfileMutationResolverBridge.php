@@ -11,11 +11,11 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Crea
 class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     public function __construct(
-        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
-        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
-        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
-        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
-        protected CreateUpdateProfileMutationResolver $CreateUpdateProfileMutationResolver,
+        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        \PoP\Translation\TranslationAPIInterface $translationAPI,
+        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        protected CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -27,7 +27,7 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->CreateUpdateProfileMutationResolver;
+        return $this->createUpdateProfileMutationResolver;
     }
 
     public function getFormData(): array

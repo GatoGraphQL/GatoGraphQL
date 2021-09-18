@@ -11,10 +11,10 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
     public function __construct(
-        protected \PoP\Hooks\HooksAPIInterface $hooksAPI,
-        protected \PoP\Translation\TranslationAPIInterface $translationAPI,
-        protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
-        protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        \PoP\Translation\TranslationAPIInterface $translationAPI,
+        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
         protected BuildSystemMutationResolver $BuildSystemMutationResolver,
     ) {
         parent::__construct(
