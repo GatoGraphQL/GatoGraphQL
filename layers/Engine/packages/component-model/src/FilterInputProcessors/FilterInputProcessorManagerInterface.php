@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FilterInputProcessors;
 
-use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerInterface;
-
-interface FilterInputProcessorManagerInterface extends ItemProcessorManagerInterface
+interface FilterInputProcessorManagerInterface
 {
+    public function getLoadedItemFullNameProcessorInstances();
+    public function getLoadedItems();
+    public function overrideProcessorClass(string $overrideClass, string $withClass, array $forItemNames): void;
+    public function getItemProcessor(array $item);
+    public function getProcessor(array $item);
 }

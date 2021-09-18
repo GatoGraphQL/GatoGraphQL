@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ItemProcessors;
-
-abstract class AbstractItemProcessorManager implements ItemProcessorManagerInterface
+abstract class AbstractItemProcessorManager
 {
     use ItemProcessorManagerTrait;
 }
