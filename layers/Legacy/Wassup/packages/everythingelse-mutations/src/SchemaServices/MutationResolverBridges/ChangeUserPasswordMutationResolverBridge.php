@@ -17,6 +17,12 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
         protected \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
         protected \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
     ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+            $mutationResolutionManager,
+        );
     }
     
     public function getMutationResolver(): MutationResolverInterface
