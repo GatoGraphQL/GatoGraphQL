@@ -1,6 +1,7 @@
 <?php
-use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 
 abstract class Abstract_PoP_TrendingTags_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -13,9 +14,9 @@ abstract class Abstract_PoP_TrendingTags_Module_Processor_SectionDataloads exten
         return $cmstrendingtagsapi->getTrendingHashtagIds($days, $query_args['limit'], $query_args['offset']);
     }
 
-    public function getQueryInputOutputHandlerClass(array $module): ?string
+    public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
-        return \PoP\TrendingTags\QueryInputOutputHandler_TrendingTagList::class;
+        return $this->instanceManager->getInstance(\PoP\TrendingTags\QueryInputOutputHandler_TrendingTagList::class);
     }
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
