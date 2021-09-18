@@ -8,6 +8,8 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class PersistedQueryEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaConfigurator
@@ -15,11 +17,15 @@ class PersistedQueryEndpointSchemaConfigurator extends AbstractCustomPostEndpoin
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
+        BlockHelpers $blockHelpers,
+        EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
         protected PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $persistedQueryEndpointSchemaConfigurationExecuterRegistry
     ) {
         parent::__construct(
             $instanceManager,
             $moduleRegistry,
+            $blockHelpers,
+            $endpointSchemaConfigurationBlock,
         );
     }
 
