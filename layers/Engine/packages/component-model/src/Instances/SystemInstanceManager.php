@@ -8,8 +8,6 @@ use PoP\Root\Container\SystemContainerBuilderFactory;
 
 class SystemInstanceManager implements InstanceManagerInterface
 {
-    use InstanceManagerTrait;
-
     public function getInstance(string $class): object
     {
         $containerBuilder = SystemContainerBuilderFactory::getInstance();
