@@ -97,9 +97,9 @@ class Engine implements EngineInterface
 
     /**
      * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
-     * @var array<string,array<string|int,array<string,mixed>>>>
+     * @var array<string,array<array<string|int,array<string,mixed>>>>>
      */
-    protected array $typeResolverClass_ids_data_fields = [];
+    protected array $relationalTypeResolverNameIDsDataFields = [];
 
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
@@ -865,7 +865,7 @@ class Engine implements EngineInterface
         $this->backgroundload_urls = array();
 
         // Load under global key (shared by all pagesections / blocks)
-        $this->typeResolverClass_ids_data_fields = array();
+        $this->relationalTypeResolverNameIDsDataFields = array();
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         $this->hooksAPI->doAction(
@@ -1040,7 +1040,7 @@ class Engine implements EngineInterface
                     // Store the ids under $data under key dataload_name => id
                     $data_fields = $data_properties['data-fields'] ?? array();
                     $conditional_data_fields = $data_properties['conditional-data-fields'] ?? array();
-                    $this->combineIDsDatafields($this->typeResolverClass_ids_data_fields, $relationalTypeResolverClass, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
+                    $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $relationalTypeResolverClass, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
 
                     // Add the IDs to the possibly-already produced IDs for this typeResolver
                     $this->initializeTypeResolverEntry($this->dbdata, $relationalTypeResolverClass, $module_path_key);
@@ -1068,7 +1068,7 @@ class Engine implements EngineInterface
                         $extend_conditional_data_fields = $extend_data_properties['conditional-data-fields'] ? $extend_data_properties['conditional-data-fields'] : array();
                         $extend_ids = $extend_data_properties['ids'];
 
-                        $this->combineIDsDatafields($this->typeResolverClass_ids_data_fields, $extend_typeResolver_class, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
+                        $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $extend_typeResolver_class, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
 
                         // This is needed to add the typeResolver-extend IDs, for if nobody else creates an entry for this typeResolver
                         $this->initializeTypeResolverEntry($this->dbdata, $extend_typeResolver_class, $module_path_key);
@@ -1335,15 +1335,15 @@ class Engine implements EngineInterface
         $messages = [];
 
         // Iterate while there are dataloaders with data to be processed
-        while (!empty($this->typeResolverClass_ids_data_fields)) {
+        while (!empty($this->relationalTypeResolverNameIDsDataFields)) {
             // Move the pointer to the first element, and get it
-            reset($this->typeResolverClass_ids_data_fields);
-            $relationalTypeResolverClass = key($this->typeResolverClass_ids_data_fields);
-            $ids_data_fields = $this->typeResolverClass_ids_data_fields[$relationalTypeResolverClass];
+            reset($this->relationalTypeResolverNameIDsDataFields);
+            $relationalTypeResolverClass = key($this->relationalTypeResolverNameIDsDataFields);
+            $ids_data_fields = $this->relationalTypeResolverNameIDsDataFields[$relationalTypeResolverClass];
 
             // Remove the typeResolver element from the array, so it doesn't process it anymore
             // Do it immediately, so that subcomponents can load new IDs for this current typeResolver (eg: posts => related)
-            unset($this->typeResolverClass_ids_data_fields[$relationalTypeResolverClass]);
+            unset($this->relationalTypeResolverNameIDsDataFields[$relationalTypeResolverClass]);
 
             // If no ids to execute, then skip
             if (empty($ids_data_fields)) {
@@ -1775,7 +1775,7 @@ class Engine implements EngineInterface
                             // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
                             // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
                             // if ($id_subcomponent_data_fields) {
-                            $this->combineIDsDatafields($this->typeResolverClass_ids_data_fields, $subcomponent_typeResolver_class, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
+                            $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $subcomponent_typeResolver_class, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
                             // }
                         }
                         $this->initializeTypeResolverEntry($this->dbdata, $subcomponent_typeResolver_class, $module_path_key);
