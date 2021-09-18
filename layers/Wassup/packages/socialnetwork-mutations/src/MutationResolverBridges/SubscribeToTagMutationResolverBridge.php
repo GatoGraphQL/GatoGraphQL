@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\SubscribeToTagMutationResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValueMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return SubscribeToTagMutationResolver::class;
     }

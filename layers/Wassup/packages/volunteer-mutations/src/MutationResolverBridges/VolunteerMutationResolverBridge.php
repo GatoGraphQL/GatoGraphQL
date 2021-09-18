@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\VolunteerMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\VolunteerMutations\MutationResolvers\VolunteerMutationResolver;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
 
 class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return VolunteerMutationResolver::class;
     }

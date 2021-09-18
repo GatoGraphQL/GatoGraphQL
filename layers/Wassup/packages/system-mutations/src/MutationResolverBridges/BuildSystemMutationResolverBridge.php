@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\SystemMutations\MutationResolvers\BuildSystemMutationResolver;
 use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemComponentMutationResolverBridge;
 
 class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return BuildSystemMutationResolver::class;
     }

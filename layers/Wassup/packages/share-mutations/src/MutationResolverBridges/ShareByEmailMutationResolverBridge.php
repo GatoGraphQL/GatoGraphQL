@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ShareMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\ShareMutations\MutationResolvers\ShareByEmailMutationResolver;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
 
 class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return ShareByEmailMutationResolver::class;
     }

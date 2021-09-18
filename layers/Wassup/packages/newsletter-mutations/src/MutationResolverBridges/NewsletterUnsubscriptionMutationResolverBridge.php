@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
 use PoPSitesWassup\NewsletterMutations\MutationResolver\NewsletterUnsubscriptionMutationResolver;
 
 class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return NewsletterUnsubscriptionMutationResolver::class;
     }

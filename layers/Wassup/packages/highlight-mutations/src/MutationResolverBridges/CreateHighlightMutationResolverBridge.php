@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\HighlightMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\HighlightMutations\MutationResolvers\CreateHighlightMutationResolver;
 
 class CreateHighlightMutationResolverBridge extends AbstractCreateUpdateHighlightMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return CreateHighlightMutationResolver::class;
     }

@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\LoginMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 
 class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return LoginMutationResolver::class;
     }

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 
 class UpdatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return UpdatePostMutationResolver::class;
     }

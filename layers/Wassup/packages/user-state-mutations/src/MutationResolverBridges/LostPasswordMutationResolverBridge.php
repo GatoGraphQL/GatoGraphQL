@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\MutationInputProperties;
@@ -12,7 +13,7 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 
 class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return LostPasswordMutationResolver::class;
     }

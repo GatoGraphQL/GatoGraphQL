@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSitesWassup\NotificationMutations\MutationResolvers\MarkAllAsReadNotificationMutationResolver;
 
 class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return MarkAllAsReadNotificationMutationResolver::class;
     }

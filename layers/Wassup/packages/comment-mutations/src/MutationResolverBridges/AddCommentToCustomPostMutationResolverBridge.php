@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CommentMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 
 class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return AddCommentToCustomPostMutationResolver::class;
     }

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolver;
 
 class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return CreateOrUpdateStanceMutationResolver::class;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
@@ -59,7 +60,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         }
     }
 
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return GravityFormsAddEntryToFormMutationResolver::class;
     }
