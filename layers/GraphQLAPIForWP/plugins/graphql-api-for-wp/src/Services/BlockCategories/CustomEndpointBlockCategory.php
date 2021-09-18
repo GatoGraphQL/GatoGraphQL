@@ -5,10 +5,20 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class CustomEndpointBlockCategory extends AbstractBlockCategory
 {
     public const CUSTOM_ENDPOINT_BLOCK_CATEGORY = 'graphql-api-endpoint';
+
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+    ) {
+        parent::__construct(
+            $instanceManager,
+        );
+    }
 
     /**
      * Custom Post Type for which to enable the block category
@@ -17,10 +27,8 @@ class CustomEndpointBlockCategory extends AbstractBlockCategory
      */
     public function getCustomPostTypes(): array
     {
-        /** @var GraphQLCustomEndpointCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
         return [
-            $customPostTypeService->getCustomPostType(),
+            $this->graphQLCustomEndpointCustomPostType->getCustomPostType(),
         ];
     }
 
