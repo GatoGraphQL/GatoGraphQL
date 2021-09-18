@@ -70,20 +70,6 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
      */
     public function executeMutation(array &$data_properties): ?array
     {
-        // $mutationResolverClass = $this->getMutationResolverClass();
-        // /** @var MutationResolverInterface */
-        // $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
-        // $form_data = $this->getFormData();
-        // $errorstrings = $errorcodes = array();
-        // if ($errors = $mutationResolver->validateErrors($form_data)) {
-        //     $errorType = $mutationResolver->getErrorType();
-        //     if ($errorType == ErrorTypes::DESCRIPTIONS) {
-        //         $errorstrings = $errors;
-        //     } elseif ($errorType == ErrorTypes::CODES) {
-        //         $errorcodes = $errors;
-        //     }
-        // }
-        // $execution_response = $mutationResolver->executeMutation($errorstrings, $errorcodes, $form_data);
         $executed = parent::executeMutation($data_properties);
 
         $execution_response = $this->mutationResolutionManager->getResult($this);
