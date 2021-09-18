@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ShareMutations\MutationResolverBridges;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\ShareMutations\MutationResolvers\ShareByEmailMutationResolver;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
@@ -11,10 +15,10 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     public function __construct(
-        \PoP\Hooks\HooksAPIInterface $hooksAPI,
-        \PoP\Translation\TranslationAPIInterface $translationAPI,
-        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
-        \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        MutationResolutionManagerInterface $mutationResolutionManager,
         protected ShareByEmailMutationResolver $shareByEmailMutationResolver,
     ) {
         parent::__construct(
