@@ -126,7 +126,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_ADDCOMMENT:
                 $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
-                if ($comment_id = $gd_dataload_actionexecution_manager->getResult(AddCommentToCustomPostMutationResolverBridge::class)) {
+                if ($comment_id = $gd_dataload_actionexecution_manager->getResult($this->instanceManager->getInstance(AddCommentToCustomPostMutationResolverBridge::class))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($comment_id);
                 } else {
                     $data_properties[DataloadingConstants::SKIPDATALOAD] = true;

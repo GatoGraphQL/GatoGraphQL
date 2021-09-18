@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolution;
 
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\Hooks\HooksAPIInterface;
 
 class MutationResolutionManager implements MutationResolutionManagerInterface
@@ -28,20 +29,13 @@ class MutationResolutionManager implements MutationResolutionManagerInterface
         $this->results = [];
     }
 
-    public function setResult(string $class, mixed $result): void
+    public function setResult(ComponentMutationResolverBridgeInterface $componentMutationResolverBridge, mixed $result): void
     {
-        $this->results[$class] = $result;
+        $this->results[get_class($componentMutationResolverBridge)] = $result;
     }
 
-    public function getResult(string $class): mixed
+    public function getResult(ComponentMutationResolverBridgeInterface $componentMutationResolverBridge): mixed
     {
-        /**
-         * Calling `setResult` uses get_called_class(), so if the class was overriden,
-         * it uses that one, but `getResult` uses the original class, so they will mismatch!
-         * To avoid this problem, get the actual implementation class for this class
-         */
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $class = $instanceManager->getInstanceClass($class);
-        return $this->results[$class];
+        return $this->results[get_class($componentMutationResolverBridge)];
     }
 }

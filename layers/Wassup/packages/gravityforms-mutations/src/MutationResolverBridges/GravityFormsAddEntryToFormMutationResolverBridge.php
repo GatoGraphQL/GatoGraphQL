@@ -86,7 +86,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // $execution_response = $mutationResolver->execute($errorstrings, $errorcodes, $form_data);
         $executed = parent::execute($data_properties);
 
-        $execution_response = $this->mutationResolutionManager->getResult(get_called_class());
+        $execution_response = $this->mutationResolutionManager->getResult($this);
 
         // These are the Strings to use to return the errors: This is how they must be used to return errors / success
         // (Eg: in Gravity Forms confirmations)
