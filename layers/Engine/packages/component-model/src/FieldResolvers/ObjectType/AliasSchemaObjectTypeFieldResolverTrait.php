@@ -33,18 +33,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     /**
      * The specific `ObjectTypeFieldResolver` class that is being aliased
      */
-    abstract protected function getAliasedObjectTypeFieldResolverClass(): string;
-
-    /**
-     * Aliased `ObjectTypeFieldResolver` instance
-     */
-    protected function getAliasedObjectTypeFieldResolverInstance(): AbstractObjectTypeFieldResolver
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        return $instanceManager->getInstance(
-            $this->getAliasedObjectTypeFieldResolverClass()
-        );
-    }
+    abstract protected function getAliasedObjectTypeFieldResolver(): AbstractObjectTypeFieldResolver;
 
     /**
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
@@ -52,7 +41,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function isGlobal(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->isGlobal(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
@@ -65,7 +54,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->decideCanProcessBasedOnVersionConstraint(
             $objectTypeResolver
         );
@@ -77,7 +66,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): bool
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveCanProcess(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName),
@@ -91,7 +80,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function resolveSchemaValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveSchemaValidationErrorDescriptions(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName),
@@ -105,7 +94,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function resolveSchemaValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveSchemaValidationDeprecationDescriptions(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName),
@@ -119,7 +108,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function resolveSchemaValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveSchemaValidationWarningDescriptions(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName),
@@ -140,7 +129,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         string $fieldName,
         array $fieldArgs = []
     ): bool {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveCanProcessObject(
             $objectTypeResolver,
             $object,
@@ -161,7 +150,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         string $fieldName,
         array $fieldArgs = []
     ): ?array {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getValidationErrorDescriptions(
             $objectTypeResolver,
             $object,
@@ -176,7 +165,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function skipAddingToSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->skipAddingToSchemaDefinition(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
@@ -189,7 +178,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getSchemaFieldTypeModifiers(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
@@ -202,7 +191,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getSchemaFieldDescription(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
@@ -215,7 +204,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getSchemaFieldArgs(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
@@ -228,7 +217,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function getSchemaFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getSchemaFieldDeprecationDescription(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName),
@@ -246,7 +235,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->validateFieldArgument(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName),
@@ -261,7 +250,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function addSchemaDefinitionForField(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         $aliasedObjectTypeFieldResolver->addSchemaDefinitionForField(
             $schemaDefinition,
             $objectTypeResolver,
@@ -275,7 +264,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->enableOrderedSchemaFieldArgs(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
@@ -288,7 +277,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function getSchemaFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getSchemaFieldVersion(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
@@ -308,7 +297,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveValue(
             $objectTypeResolver,
             $object,
@@ -328,7 +317,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ConcreteTypeResolverInterface {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolverInstance();
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getFieldTypeResolver(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
