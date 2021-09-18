@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
+use Exception;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateProfileMutationResolver;
 
 class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutationResolverBridge
