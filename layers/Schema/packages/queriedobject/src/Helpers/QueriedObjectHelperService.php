@@ -6,10 +6,6 @@ namespace PoPSchema\QueriedObject\Helpers;
 
 use PoP\Engine\CMS\CMSServiceInterface;
 
-// use PoP\ComponentModel\Feedback\Tokens;
-// use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
-// use PoP\Translation\Facades\TranslationAPIFacade;
-
 class QueriedObjectHelperService implements QueriedObjectHelperServiceInterface
 {
     public function __construct(

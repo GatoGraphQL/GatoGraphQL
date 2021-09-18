@@ -18,8 +18,8 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
         });
         // 2. Boot once it has parsed the WP_Query, so that the requested post/user/etc
         // is already processed and available. Only hook available is "wp"
-        // Watch out: "wp" doesn't trigger in the admin()! Hence, in that case,
-        // use "wp_loaded" instead
+        // Watch out: "wp" doesn't trigger in the admin()!
+        // Hence, in that case, use "wp_loaded" instead
         $this->hooksAPI->addAction(\is_admin() ? 'wp_loaded' : 'wp', function () {
             $this->hooksAPI->doAction('popcms:boot');
         });
