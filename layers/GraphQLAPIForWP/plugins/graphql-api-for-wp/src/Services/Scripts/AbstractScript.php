@@ -22,6 +22,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
+        protected GeneralUtils $generalUtils,
     ) {
     }
 
@@ -78,9 +79,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
      */
     final protected function getScriptLocalizationName(): string
     {
-        /** @var GeneralUtils */
-        $generalUtils = $this->instanceManager->getInstance(GeneralUtils::class);
-        return $generalUtils->dashesToCamelCase($this->getScriptName());
+        return $this->generalUtils->dashesToCamelCase($this->getScriptName());
     }
 
     /**

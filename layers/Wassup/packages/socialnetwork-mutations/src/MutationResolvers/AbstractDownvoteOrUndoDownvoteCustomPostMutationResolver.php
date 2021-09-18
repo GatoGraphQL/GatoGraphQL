@@ -11,7 +11,7 @@ abstract class AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver extends 
     protected function eligible($post)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $eligible = in_array($customPostTypeAPI->getCustomPostType($post), PoP_SocialNetwork_Utils::getUpdownvotePostTypes());
+        $eligible = in_array($customPostTypeAPI->getCustomPostType($post), \PoP_SocialNetwork_Utils::getUpdownvotePostTypes());
         return $this->hooksAPI->applyFilters('GD_UpdownvoteUndoUpdownvotePost:eligible', $eligible, $post);
     }
 

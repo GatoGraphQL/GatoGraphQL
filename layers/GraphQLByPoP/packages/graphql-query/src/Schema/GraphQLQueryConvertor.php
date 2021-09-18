@@ -22,8 +22,6 @@ use GraphQLByPoP\GraphQLParser\Validator\RequestValidator\RequestValidator;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
 use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use InvalidArgumentException;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
@@ -37,6 +35,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         protected TranslationAPIInterface $translationAPI,
         protected FeedbackMessageStoreInterface $feedbackMessageStore,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected IncludeDirectiveResolver $includeDirectiveResolver,
     ) {
     }
 
@@ -326,12 +325,9 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      */
     protected function restrainFieldsByTypeOrInterface(array $fragmentFieldPaths, string $fragmentModel): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var DirectiveResolverInterface */
-        $includeDirectiveResolver = $instanceManager->getInstance(IncludeDirectiveResolver::class);
         // Create the <include> directive, if the fragment references the type or interface
         $includeDirective = $this->fieldQueryInterpreter->composeFieldDirective(
-            $includeDirectiveResolver->getDirectiveName(),
+            $this->includeDirectiveResolver->getDirectiveName(),
             $this->fieldQueryInterpreter->getFieldArgsAsString([
                 'if' => $this->fieldQueryInterpreter->getField(
                     'or',

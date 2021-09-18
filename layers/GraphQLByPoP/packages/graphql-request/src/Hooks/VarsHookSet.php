@@ -28,6 +28,7 @@ class VarsHookSet extends AbstractHookSet
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         protected QueryRetrieverInterface $queryRetrieverInterface,
+        protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -80,9 +81,7 @@ class VarsHookSet extends AbstractHookSet
         // Set always. It will be overriden below
         $vars['standard-graphql'] = false;
 
-        /** @var GraphQLDataStructureFormatter */
-        $graphQLDataStructureFormatter = $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
-        if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $graphQLDataStructureFormatter->getName()) {
+        if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $this->graphQLDataStructureFormatter->getName()) {
             $this->processURLParamVars($vars);
         }
     }
