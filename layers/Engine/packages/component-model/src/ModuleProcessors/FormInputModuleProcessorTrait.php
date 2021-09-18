@@ -42,8 +42,8 @@ trait FormInputModuleProcessorTrait
         $inputName = $this->getName($module);
         if (!isset($this->formInputs[$inputName])) {
             $options = $this->getInputOptions($module);
-            $input_class = $this->getInputClass($module);
-            $this->formInputs[$inputName] = new $input_class($options);
+            $inputClass = $this->getInputClass($module);
+            $this->formInputs[$inputName] = new $inputClass($options);
         }
         return $this->formInputs[$inputName];
     }
