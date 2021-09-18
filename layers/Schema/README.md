@@ -56,9 +56,9 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     return $this->userService->getUserID($user);
   }
 
-  public function getRelationalTypeDataLoaderClass(): string
+  public function getRelationalTypeDataLoader(): string
   {
-    return UserTypeDataLoader::class;
+    return $this->instanceManager->getInstance(UserTypeDataLoader::class);
   }
 }
 ```
