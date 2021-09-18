@@ -9,6 +9,7 @@ use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
@@ -39,6 +40,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         NameResolverInterface $nameResolver,
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
+        ModulePaths $modulePaths,
         protected PostObjectTypeResolver $postObjectTypeResolver,
         protected ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
@@ -54,6 +56,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
             $nameResolver,
             $dataloadHelperService,
             $requestHelperService,
+            $modulePaths,
         );
     }
 

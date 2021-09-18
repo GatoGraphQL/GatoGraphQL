@@ -54,6 +54,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         protected NameResolverInterface $nameResolver,
         protected DataloadHelperServiceInterface $dataloadHelperService,
         protected RequestHelperServiceInterface $requestHelperService,
+        protected ModulePaths $modulePaths,
     ) {
     }
 
@@ -993,14 +994,12 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getDataloadSource(array $module, array &$props): string
     {
-        /** @var ModulePaths */
-        $modulePaths = $this->instanceManager->getInstance(ModulePaths::class);
         // Because a component can interact with itself by adding ?modulepaths=...,
         // then, by default, we simply set the dataload source to point to itself!
         $stringified_module_propagation_current_path = $this->modulePathHelpers->getStringifiedModulePropagationCurrentPath($module);
         $ret = GeneralUtils::addQueryArgs(
             [
-                ModuleFilterManager::URLPARAM_MODULEFILTER => $modulePaths->getName(),
+                ModuleFilterManager::URLPARAM_MODULEFILTER => $this->modulePaths->getName(),
                 ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
             ],
             $this->requestHelperService->getCurrentURL()
