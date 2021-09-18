@@ -85,7 +85,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     /**
      * @param array<string|int> $ids
-     * @return array<string|int,ObjectTypeResolverInterface[]>
+     * @return array<string|int,ObjectTypeResolverInterface>
      */
     public function getObjectIDTargetTypeResolvers(array $ids): array
     {
@@ -94,7 +94,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     /**
      * @param array<string|int> $ids
-     * @return array<string|int,ObjectTypeResolverInterface[]>
+     * @return array<string|int,ObjectTypeResolverInterface>
      */
     private function recursiveGetObjectIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
     {
