@@ -28,11 +28,19 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public const PUBLIC_PRIVATE_SCHEMA = Plugin::NAMESPACE . '\public-private-schema';
     public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
 
+    /**
+     * Make all properties nullable, becase the ModuleRegistry is registered
+     * in the SystemContainer, where there are no typeResolvers so it will be null,
+     * and in the ApplicationContainer, from where the "Modules" page is resolved
+     * and which does have all the typeResolvers.
+     * Function `getDescription` will only be accessed from the Application Container,
+     * so the properties will not be null in that situation.
+     */
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         TranslationAPIInterface $translationAPI,
-        protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
+        protected ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ) {
         parent::__construct(
             $instanceManager,
@@ -165,12 +173,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             $possibleValues = [
                 ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'graphql-api'),
             ];
+            /** @var GraphQLSchemaConfigurationCustomPostType */
+            $graphQLSchemaConfigurationCustomPostType = $this->graphQLSchemaConfigurationCustomPostType;
             /**
              * @var WP_Post[]
              */
             $customPosts = \get_posts([
                 'posts_per_page' => -1,
-                'post_type' => $this->graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+                'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
                 'post_status' => 'publish',
             ]);
             if (!empty($customPosts)) {
