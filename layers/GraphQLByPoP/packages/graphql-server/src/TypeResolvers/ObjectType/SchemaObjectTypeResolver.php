@@ -19,28 +19,10 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractIntrospectionObj
 
 class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        protected SchemaTypeDataLoader $schemaTypeDataLoader,
-    ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-        );
-    }
+    /**
+     * Can't inject in constructor because of a circular reference
+     */
+    protected ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
 
     public function getTypeName(): string
     {
@@ -61,6 +43,9 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
+        if ($this->schemaTypeDataLoader === null) {
+            $this->schemaTypeDataLoader = $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
+        }
         return $this->schemaTypeDataLoader;
     }
 }
