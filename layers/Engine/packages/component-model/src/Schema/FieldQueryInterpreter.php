@@ -308,9 +308,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         ?array &$schemaWarnings = null,
     ): array {
         $variablesHash = $this->getVariablesHash($variables);
-        if (!isset($this->extractedDirectiveArgumentsCache[get_class($relationalTypeResolver)][$fieldDirective][$variablesHash])) {
+        $relationalTypeResolverClass = get_class($relationalTypeResolver);
+        if (!isset($this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash])) {
             $fieldSchemaWarnings = $fieldSchemaErrors = [];
-            $this->extractedDirectiveArgumentsCache[get_class($relationalTypeResolver)][$fieldDirective][$variablesHash] = $this->doExtractDirectiveArguments(
+            $this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash] = $this->doExtractDirectiveArguments(
                 $directiveResolver,
                 $relationalTypeResolver,
                 $fieldDirective,
@@ -318,23 +319,23 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $fieldSchemaErrors,
                 $fieldSchemaWarnings,
             );
-            $this->extractedDirectiveArgumentErrorsCache[get_class($relationalTypeResolver)][$fieldDirective][$variablesHash] = $fieldSchemaErrors;
-            $this->extractedDirectiveArgumentWarningsCache[get_class($relationalTypeResolver)][$fieldDirective][$variablesHash] = $fieldSchemaWarnings;
+            $this->extractedDirectiveArgumentErrorsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash] = $fieldSchemaErrors;
+            $this->extractedDirectiveArgumentWarningsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash] = $fieldSchemaWarnings;
         }
         // Integrate the errors/warnings too
         if ($schemaErrors !== null) {
             $schemaErrors = array_merge(
                 $schemaErrors,
-                $this->extractedDirectiveArgumentErrorsCache[get_class($relationalTypeResolver)][$fieldDirective][$variablesHash]
+                $this->extractedDirectiveArgumentErrorsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash]
             );
         }
         if ($schemaWarnings !== null) {
             $schemaWarnings = array_merge(
                 $schemaWarnings,
-                $this->extractedDirectiveArgumentWarningsCache[get_class($relationalTypeResolver)][$fieldDirective][$variablesHash]
+                $this->extractedDirectiveArgumentWarningsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash]
             );
         }
-        return $this->extractedDirectiveArgumentsCache[get_class($relationalTypeResolver)][$fieldDirective][$variablesHash];
+        return $this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash];
     }
 
     protected function doExtractDirectiveArguments(
@@ -1192,10 +1193,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     protected function getDirectiveArgumentNameTypes(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        if (!isset($this->directiveArgumentNameTypesCache[get_class($directiveResolver)][get_class($relationalTypeResolver)])) {
-            $this->directiveArgumentNameTypesCache[get_class($directiveResolver)][get_class($relationalTypeResolver)] = $this->doGetDirectiveArgumentNameTypes($directiveResolver, $relationalTypeResolver);
+        $relationalTypeResolverClass = get_class($relationalTypeResolver);
+        $directiveResolverClass = get_class($directiveResolver);
+        if (!isset($this->directiveArgumentNameTypesCache[$directiveResolverClass][$relationalTypeResolverClass])) {
+            $this->directiveArgumentNameTypesCache[$directiveResolverClass][$relationalTypeResolverClass] = $this->doGetDirectiveArgumentNameTypes($directiveResolver, $relationalTypeResolver);
         }
-        return $this->directiveArgumentNameTypesCache[get_class($directiveResolver)][get_class($relationalTypeResolver)];
+        return $this->directiveArgumentNameTypesCache[$directiveResolverClass][$relationalTypeResolverClass];
     }
 
     protected function doGetDirectiveArgumentNameTypes(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -1212,10 +1215,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     protected function getDirectiveArgumentNameDefaultValues(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        if (!isset($this->directiveArgumentNameDefaultValuesCache[get_class($directiveResolver)][get_class($relationalTypeResolver)])) {
-            $this->directiveArgumentNameDefaultValuesCache[get_class($directiveResolver)][get_class($relationalTypeResolver)] = $this->doGetDirectiveArgumentNameDefaultValues($directiveResolver, $relationalTypeResolver);
+        $relationalTypeResolverClass = get_class($relationalTypeResolver);
+        $directiveResolverClass = get_class($directiveResolver);
+        if (!isset($this->directiveArgumentNameDefaultValuesCache[$directiveResolverClass][$relationalTypeResolverClass])) {
+            $this->directiveArgumentNameDefaultValuesCache[$directiveResolverClass][$relationalTypeResolverClass] = $this->doGetDirectiveArgumentNameDefaultValues($directiveResolver, $relationalTypeResolver);
         }
-        return $this->directiveArgumentNameDefaultValuesCache[get_class($directiveResolver)][get_class($relationalTypeResolver)];
+        return $this->directiveArgumentNameDefaultValuesCache[$directiveResolverClass][$relationalTypeResolverClass];
     }
 
     protected function doGetDirectiveArgumentNameDefaultValues(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -1247,12 +1252,14 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     protected function getDirectiveSchemaDefinitionArgs(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        if (!isset($this->directiveSchemaDefinitionArgsCache[get_class($directiveResolver)][get_class($relationalTypeResolver)])) {
+        $relationalTypeResolverClass = get_class($relationalTypeResolver);
+        $directiveResolverClass = get_class($directiveResolver);
+        if (!isset($this->directiveSchemaDefinitionArgsCache[$directiveResolverClass][$relationalTypeResolverClass])) {
             $directiveSchemaDefinition = $directiveResolver->getSchemaDefinitionForDirective($relationalTypeResolver);
             $directiveSchemaDefinitionArgs = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? [];
-            $this->directiveSchemaDefinitionArgsCache[get_class($directiveResolver)][get_class($relationalTypeResolver)] = $directiveSchemaDefinitionArgs;
+            $this->directiveSchemaDefinitionArgsCache[$directiveResolverClass][$relationalTypeResolverClass] = $directiveSchemaDefinitionArgs;
         }
-        return $this->directiveSchemaDefinitionArgsCache[get_class($directiveResolver)][get_class($relationalTypeResolver)];
+        return $this->directiveSchemaDefinitionArgsCache[$directiveResolverClass][$relationalTypeResolverClass];
     }
 
     protected function getFieldArgumentNameTypes(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
