@@ -33,7 +33,7 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
         CustomPostObjectTypeResolver $customPostObjectTypeResolver,
         protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
         protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
-        protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,        
+        protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ) {
         parent::__construct(
             $translationAPI,
@@ -46,7 +46,7 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
             $customPostObjectTypeResolver,
         );
     }
-    
+
     /**
      * @return string[]
      */
