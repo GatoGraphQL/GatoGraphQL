@@ -17,6 +17,9 @@ trait ItemProcessorManagerTrait
      */
     private array $overridingClasses = [];
 
+    /**
+     * @deprecated Use the Service Container instead
+     */
     public function overrideProcessorClass(string $overrideClass, string $withClass, array $forItemNames): void
     {
         foreach ($forItemNames as $forItemName) {
