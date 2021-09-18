@@ -10,6 +10,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
@@ -33,6 +34,7 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
         NameResolverInterface $nameResolver,
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
+        ListQueryInputOutputHandler $listQueryInputOutputHandler,
         protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ) {
         parent::__construct(
@@ -47,6 +49,7 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
             $nameResolver,
             $dataloadHelperService,
             $requestHelperService,
+            $listQueryInputOutputHandler,
         );
     }
 
