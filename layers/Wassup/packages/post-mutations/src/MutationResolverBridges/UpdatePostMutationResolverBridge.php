@@ -26,7 +26,7 @@ class UpdatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationR
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->UpdatePostMutationResolver;
-        protected UpdatePostMutationResolve $UpdatePostMutationResolver,
+        protected UpdatePostMutationResolver $UpdatePostMutationResolver,
     }
 
     protected function isUpdate(): bool

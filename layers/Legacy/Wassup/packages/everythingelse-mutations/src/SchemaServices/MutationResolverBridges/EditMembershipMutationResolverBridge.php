@@ -29,7 +29,7 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->EditMembershipMutationResolver;
-        protected EditMembershipMutationResolve $EditMembershipMutationResolver,
+        protected EditMembershipMutationResolver $EditMembershipMutationResolver,
     }
 
     public function getFormData(): array

@@ -27,7 +27,7 @@ class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpda
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->UnrecommendCustomPostMutationResolver;
-        protected UnrecommendCustomPostMutationResolve $UnrecommendCustomPostMutationResolver,
+        protected UnrecommendCustomPostMutationResolver $UnrecommendCustomPostMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

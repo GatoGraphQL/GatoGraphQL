@@ -28,7 +28,7 @@ class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValu
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->SubscribeToTagMutationResolver;
-        protected SubscribeToTagMutationResolve $SubscribeToTagMutationResolver,
+        protected SubscribeToTagMutationResolver $SubscribeToTagMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

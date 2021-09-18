@@ -27,7 +27,7 @@ class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateU
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->DownvoteCustomPostMutationResolver;
-        protected DownvoteCustomPostMutationResolve $DownvoteCustomPostMutationResolver,
+        protected DownvoteCustomPostMutationResolver $DownvoteCustomPostMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

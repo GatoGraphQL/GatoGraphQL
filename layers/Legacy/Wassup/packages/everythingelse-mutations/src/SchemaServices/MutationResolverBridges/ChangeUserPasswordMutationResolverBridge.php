@@ -28,7 +28,7 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->ChangeUserPasswordMutationResolver;
-        protected ChangeUserPasswordMutationResolve $ChangeUserPasswordMutationResolver,
+        protected ChangeUserPasswordMutationResolver $ChangeUserPasswordMutationResolver,
     }
 
     public function getFormData(): array

@@ -26,7 +26,7 @@ class CreateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutat
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->CreateStanceMutationResolver;
-        protected CreateStanceMutationResolve $CreateStanceMutationResolver,
+        protected CreateStanceMutationResolver $CreateStanceMutationResolver,
     }
 
     protected function isUpdate(): bool

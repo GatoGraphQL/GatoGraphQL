@@ -29,7 +29,7 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->CreateUpdateOrganizationProfileMutationResolver;
-        protected CreateUpdateOrganizationProfileMutationResolve $CreateUpdateOrganizationProfileMutationResolver,
+        protected CreateUpdateOrganizationProfileMutationResolver $CreateUpdateOrganizationProfileMutationResolver,
     }
 
     private function getFormInputs()

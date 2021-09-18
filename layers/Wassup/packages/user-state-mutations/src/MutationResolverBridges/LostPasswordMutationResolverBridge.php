@@ -30,7 +30,7 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->LostPasswordMutationResolver;
-        protected LostPasswordMutationResolve $LostPasswordMutationResolver,
+        protected LostPasswordMutationResolver $LostPasswordMutationResolver,
     }
 
     public function getFormData(): array

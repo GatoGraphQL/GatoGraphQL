@@ -26,7 +26,7 @@ class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMu
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->FollowUserMutationResolver;
-        protected FollowUserMutationResolve $FollowUserMutationResolver,
+        protected FollowUserMutationResolver $FollowUserMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

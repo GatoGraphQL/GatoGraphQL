@@ -27,7 +27,7 @@ class ContactUserMutationResolverBridge extends AbstractFormComponentMutationRes
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->ContactUserMutationResolver;
-        protected ContactUserMutationResolve $ContactUserMutationResolver,
+        protected ContactUserMutationResolver $ContactUserMutationResolver,
     }
 
     public function getFormData(): array

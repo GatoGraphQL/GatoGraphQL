@@ -28,7 +28,7 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->SettingsMutationResolver;
-        protected SettingsMutationResolve $SettingsMutationResolver,
+        protected SettingsMutationResolver $SettingsMutationResolver,
     }
 
     public function getFormData(): array

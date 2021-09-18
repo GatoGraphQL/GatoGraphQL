@@ -28,7 +28,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->UnsubscribeFromTagMutationResolver;
-        protected UnsubscribeFromTagMutationResolve $UnsubscribeFromTagMutationResolver,
+        protected UnsubscribeFromTagMutationResolver $UnsubscribeFromTagMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

@@ -28,7 +28,7 @@ class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutatio
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->UpdateMyPreferencesMutationResolver;
-        protected UpdateMyPreferencesMutationResolve $UpdateMyPreferencesMutationResolver,
+        protected UpdateMyPreferencesMutationResolver $UpdateMyPreferencesMutationResolver,
     }
 
     public function getFormData(): array

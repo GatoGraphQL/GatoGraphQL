@@ -27,7 +27,7 @@ class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResol
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->VolunteerMutationResolver;
-        protected VolunteerMutationResolve $VolunteerMutationResolver,
+        protected VolunteerMutationResolver $VolunteerMutationResolver,
     }
 
     public function getFormData(): array

@@ -27,7 +27,7 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->GenerateThemeMutationResolver;
-        protected GenerateThemeMutationResolve $GenerateThemeMutationResolver,
+        protected GenerateThemeMutationResolver $GenerateThemeMutationResolver,
     }
     public function getSuccessString(string | int $result_id): ?string
     {

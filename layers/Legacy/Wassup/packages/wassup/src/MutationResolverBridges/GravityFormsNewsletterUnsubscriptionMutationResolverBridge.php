@@ -27,7 +27,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolverBridge extends Abstrac
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->GravityFormsNewsletterUnsubscriptionMutationResolver;
-        protected GravityFormsNewsletterUnsubscriptionMutationResolve $GravityFormsNewsletterUnsubscriptionMutationResolver,
+        protected GravityFormsNewsletterUnsubscriptionMutationResolver $GravityFormsNewsletterUnsubscriptionMutationResolver,
     }
 
     public function getFormData(): array

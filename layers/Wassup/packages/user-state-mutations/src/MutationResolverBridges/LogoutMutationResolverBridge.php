@@ -27,7 +27,7 @@ class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBrid
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->LogoutMutationResolver;
-        protected LogoutMutationResolve $LogoutMutationResolver,
+        protected LogoutMutationResolver $LogoutMutationResolver,
     }
 
     public function getFormData(): array

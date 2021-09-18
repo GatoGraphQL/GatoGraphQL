@@ -29,7 +29,7 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->UpdateMyCommunitiesMutationResolver;
-        protected UpdateMyCommunitiesMutationResolve $UpdateMyCommunitiesMutationResolver,
+        protected UpdateMyCommunitiesMutationResolver $UpdateMyCommunitiesMutationResolver,
     }
 
     public function getFormData(): array

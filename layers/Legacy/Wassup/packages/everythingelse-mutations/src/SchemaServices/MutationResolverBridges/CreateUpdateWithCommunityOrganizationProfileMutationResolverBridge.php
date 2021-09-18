@@ -26,7 +26,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->CreateUpdateWithCommunityOrganizationProfileMutationResolver;
-        protected CreateUpdateWithCommunityOrganizationProfileMutationResolve $CreateUpdateWithCommunityOrganizationProfileMutationResolver,
+        protected CreateUpdateWithCommunityOrganizationProfileMutationResolver $CreateUpdateWithCommunityOrganizationProfileMutationResolver,
     }
 
     private function getFormInputs()

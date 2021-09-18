@@ -27,7 +27,7 @@ class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationR
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->BuildSystemMutationResolver;
-        protected BuildSystemMutationResolve $BuildSystemMutationResolver,
+        protected BuildSystemMutationResolver $BuildSystemMutationResolver,
     }
     public function getSuccessString(string | int $result_id): ?string
     {

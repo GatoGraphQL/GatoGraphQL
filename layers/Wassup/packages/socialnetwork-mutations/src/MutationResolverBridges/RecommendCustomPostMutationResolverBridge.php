@@ -27,7 +27,7 @@ class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdate
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->RecommendCustomPostMutationResolver;
-        protected RecommendCustomPostMutationResolve $RecommendCustomPostMutationResolver,
+        protected RecommendCustomPostMutationResolver $RecommendCustomPostMutationResolver,
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

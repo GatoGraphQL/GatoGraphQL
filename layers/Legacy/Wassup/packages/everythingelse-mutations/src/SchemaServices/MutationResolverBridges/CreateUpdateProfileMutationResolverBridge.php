@@ -27,7 +27,7 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->CreateUpdateProfileMutationResolver;
-        protected CreateUpdateProfileMutationResolve $CreateUpdateProfileMutationResolver,
+        protected CreateUpdateProfileMutationResolver $CreateUpdateProfileMutationResolver,
     }
 
     public function getFormData(): array

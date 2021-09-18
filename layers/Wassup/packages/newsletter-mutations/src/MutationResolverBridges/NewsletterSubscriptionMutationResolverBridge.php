@@ -27,7 +27,7 @@ class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponent
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->NewsletterSubscriptionMutationResolver;
-        protected NewsletterSubscriptionMutationResolve $NewsletterSubscriptionMutationResolver,
+        protected NewsletterSubscriptionMutationResolver $NewsletterSubscriptionMutationResolver,
     }
 
     public function getFormData(): array

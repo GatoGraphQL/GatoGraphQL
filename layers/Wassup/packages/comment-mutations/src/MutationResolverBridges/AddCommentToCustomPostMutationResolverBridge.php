@@ -28,7 +28,7 @@ class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMuta
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->AddCommentToCustomPostMutationResolver;
-        protected AddCommentToCustomPostMutationResolve $AddCommentToCustomPostMutationResolver,
+        protected AddCommentToCustomPostMutationResolver $AddCommentToCustomPostMutationResolver,
     }
 
     public function getFormData(): array
