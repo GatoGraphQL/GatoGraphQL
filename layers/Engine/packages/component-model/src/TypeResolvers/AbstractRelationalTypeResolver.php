@@ -547,12 +547,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 if ($directiveSupportedFieldNames && !in_array($fieldName, $directiveSupportedFieldNames)) {
                     continue;
                 }
-                $directiveClass = get_class($directiveResolver);
+                $directiveResolverClass = get_class($directiveResolver);
                 // Get the instance from the cache if it exists, or create it if not
-                if (!isset($this->directiveResolverInstanceCache[$directiveClass][$fieldDirective])) {
-                    $this->directiveResolverInstanceCache[$directiveClass][$fieldDirective] = new $directiveClass($fieldDirective);
+                if (!isset($this->directiveResolverInstanceCache[$directiveResolverClass][$fieldDirective])) {
+                    $this->directiveResolverInstanceCache[$directiveResolverClass][$fieldDirective] = new $directiveResolverClass($fieldDirective);
                 }
-                $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveClass][$fieldDirective];
+                $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$fieldDirective];
                 // Check if this instance can process the directive
                 if ($maybeDirectiveResolverInstance->resolveCanProcess($this, $directiveName, $directiveArgs, $field, $variables)) {
                     $fieldDirectiveResolverInstances[$field] = $maybeDirectiveResolverInstance;
