@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
 use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
-class AbstractStanceTypeResolverPicker extends AbstractObjectTypeResolverPicker
+abstract class AbstractStanceObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     public function __construct(
         protected StanceObjectTypeResolver $stanceObjectTypeResolver,

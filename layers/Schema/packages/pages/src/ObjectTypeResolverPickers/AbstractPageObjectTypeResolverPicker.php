@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 
-abstract class AbstractPageTypeResolverPicker extends AbstractObjectTypeResolverPicker
+abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     public function __construct(
         protected PageObjectTypeResolver $pageObjectTypeResolver,

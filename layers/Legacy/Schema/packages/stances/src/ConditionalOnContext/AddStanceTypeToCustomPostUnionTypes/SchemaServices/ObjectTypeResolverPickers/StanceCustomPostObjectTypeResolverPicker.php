@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\Stances\ConditionalOnContext\AddStanceTypeToCustomPostUnionTypes\SchemaServices\ObjectTypeResolverPickers;
 
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoPSchema\Stances\ObjectTypeResolverPickers\AbstractStanceTypeResolverPicker;
+use PoPSchema\Stances\ObjectTypeResolverPickers\AbstractStanceObjectTypeResolverPicker;
 
-class StanceCustomPostTypeResolverPicker extends AbstractStanceTypeResolverPicker
+class StanceCustomPostObjectTypeResolverPicker extends AbstractStanceObjectTypeResolverPicker
 {
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
