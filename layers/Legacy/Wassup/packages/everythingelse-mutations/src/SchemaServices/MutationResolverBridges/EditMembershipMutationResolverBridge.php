@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSchema\Users\Constants\InputNames;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
@@ -11,7 +12,7 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Edit
 
 class EditMembershipMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function getMutationResolver(): \PoP\ComponentModel\MutationResolvers\MutationResolverInterface
+    public function getMutationResolver(): MutationResolverInterface
     {
         return EditMembershipMutationResolver::class;
     }
