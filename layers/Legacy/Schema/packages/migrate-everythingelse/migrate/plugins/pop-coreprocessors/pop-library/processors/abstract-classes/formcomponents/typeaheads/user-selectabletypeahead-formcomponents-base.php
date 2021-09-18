@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 abstract class PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase extends PoP_Module_Processor_SelectableTypeaheadFormComponentsBase
@@ -8,7 +9,7 @@ abstract class PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase ex
         return GD_AVATAR_SIZE_40;
     }
 
-    public function getTriggerTypeResolverClass(array $module): ?string
+    public function getTriggerRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
         return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }

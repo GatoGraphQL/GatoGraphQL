@@ -1,8 +1,9 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
 {
@@ -30,7 +31,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         return $ret;
     }
 
-    public function getTriggerTypeResolverClass(array $module): ?string
+    public function getTriggerRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
         return null;
     }
@@ -91,9 +92,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         // // Initialize typeahead value for replicable/webplatform
         // if ($this->getProp($module, $props, 'replicable')) {
 
-        $instanceManager = InstanceManagerFacade::getInstance();
-        if ($triggerTypeResolverClass = $this->getTriggerTypeResolverClass($module)) {
-            $triggerTypeResolver = $instanceManager->getInstance((string)$triggerTypeResolverClass);
+        if ($triggerTypeResolver = $this->getTriggerRelationalTypeResolver($module)) {
             $database_key = $triggerTypeResolver->getTypeOutputName();
 
             // Needed to execute fillInput on the typeahead input to get the value from the request
@@ -134,9 +133,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $instanceManager = InstanceManagerFacade::getInstance();
-        if ($triggerTypeResolverClass = $this->getTriggerTypeResolverClass($module)) {
-            $triggerTypeResolver = $instanceManager->getInstance($triggerTypeResolverClass);
+        if ($triggerTypeResolver = $this->getTriggerRelationalTypeResolver($module)) {
             $ret['dbkey'] = $triggerTypeResolver->getTypeOutputName();
         }
 
@@ -214,7 +211,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 
             // Extend the dataload ids
             return array(
-                $this->getTriggerTypeResolverClass($module) => array(
+                $this->getTriggerRelationalTypeResolver($module)->getTypeName() => array(
                     'ids' => $value,
                     'data-fields' => $trigger_data_properties['data-fields'],
                 ),

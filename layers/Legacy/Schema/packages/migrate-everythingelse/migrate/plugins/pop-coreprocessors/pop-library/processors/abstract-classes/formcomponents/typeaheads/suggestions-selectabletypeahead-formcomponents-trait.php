@@ -109,10 +109,10 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                     $ret[GD_JS_SUBMODULEOUTPUTNAMES]['suggestions-layout'] = ModuleUtils::getModuleOutputName($suggestions_layout);
 
                     // Load the typeResolver from the trigger, for the suggestions
-                    $instanceManager = InstanceManagerFacade::getInstance();
                     $trigger_layout = $this->getTriggerLayoutSubmodule($module);
-                    $suggestions_typeResolver_class = $moduleprocessor_manager->getProcessor($trigger_layout)->getTriggerTypeResolverClass($trigger_layout);
-                    $suggestions_typeResolver = $instanceManager->getInstance($suggestions_typeResolver_class);
+                    /** @var \PoP_Module_Processor_TriggerLayoutFormComponentValuesBase */
+                    $triggerModuleProcessor = $moduleprocessor_manager->getProcessor($trigger_layout);
+                    $suggestions_typeResolver = $triggerModuleProcessor->getTriggerRelationalTypeResolver($trigger_layout);
                     $ret['dbkeys']['suggestions'] = $suggestions_typeResolver->getTypeOutputName();
                 }
                 if ($suggestions_fontawesome = $this->getSuggestionsFontawesome($module, $props)) {
@@ -144,11 +144,13 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                     // The Typeahead set the data-settings under 'typeahead-trigger'
                     $moduleFullName = ModuleUtils::getModuleFullName($module);
                     $data_properties = $moduleprocessor_manager->getProcessor($trigger_layout)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_layout, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
-                    $suggestions_typeResolver_class = $moduleprocessor_manager->getProcessor($trigger_layout)->getTriggerTypeResolverClass($trigger_layout);
+                    /** @var \PoP_Module_Processor_TriggerLayoutFormComponentValuesBase */
+                    $triggerModuleProcessor = $moduleprocessor_manager->getProcessor($trigger_layout);
+                    $suggestions_typeResolver = $triggerModuleProcessor->getTriggerRelationalTypeResolver($trigger_layout);
 
                     // Extend the dataload ids
                     return array(
-                        $suggestions_typeResolver_class => array(
+                        $suggestions_typeResolver->getTypeName() => array(
                             'ids' => $suggestions,
                             'data-fields' => $data_properties['data-fields'],
                         ),
