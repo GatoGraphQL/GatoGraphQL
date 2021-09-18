@@ -48,7 +48,7 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
                 return RedirectQueryInputOutputHandler::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     protected function getInnerSubmodules(array $module): array

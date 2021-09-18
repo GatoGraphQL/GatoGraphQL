@@ -89,7 +89,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
                 return ListQueryInputOutputHandler::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     public function getFilterSubmodule(array $module): ?array

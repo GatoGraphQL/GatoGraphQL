@@ -565,7 +565,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 return GD_DataLoad_QueryInputOutputHandler_Calendar::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array

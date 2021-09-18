@@ -56,7 +56,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
                 return GD_DataLoad_QueryInputOutputHandler_LatestNotificationList::class;
         }
         
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 }
 

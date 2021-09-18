@@ -54,7 +54,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
                 return GD_DataLoad_QueryInputOutputHandler_CommentList::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     public function getFilterSubmodule(array $module): ?array

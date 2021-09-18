@@ -52,7 +52,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
             return GD_DataLoad_QueryInputOutputHandler_AddPost::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void

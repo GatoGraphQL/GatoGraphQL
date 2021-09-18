@@ -75,7 +75,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
                 return ListQueryInputOutputHandler::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array

@@ -78,7 +78,7 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
                 return ListQueryInputOutputHandler::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     public function getFilterSubmodule(array $module): ?array

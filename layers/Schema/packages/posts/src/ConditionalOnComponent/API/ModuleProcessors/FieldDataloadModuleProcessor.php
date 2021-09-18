@@ -104,7 +104,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
                 return ListQueryInputOutputHandler::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     public function getFilterSubmodule(array $module): ?array

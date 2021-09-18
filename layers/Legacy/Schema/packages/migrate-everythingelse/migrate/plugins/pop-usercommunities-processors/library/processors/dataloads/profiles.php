@@ -178,7 +178,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
                 return GD_DataLoad_QueryInputOutputHandler_EditMembership::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     public function initModelProps(array $module, array &$props): void

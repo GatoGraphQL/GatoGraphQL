@@ -122,7 +122,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
                 return GD_DataLoad_QueryInputOutputHandler_NotificationList::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface

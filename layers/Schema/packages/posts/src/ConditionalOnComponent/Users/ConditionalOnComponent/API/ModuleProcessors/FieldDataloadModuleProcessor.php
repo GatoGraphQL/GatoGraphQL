@@ -79,7 +79,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
                 return ListQueryInputOutputHandler::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array

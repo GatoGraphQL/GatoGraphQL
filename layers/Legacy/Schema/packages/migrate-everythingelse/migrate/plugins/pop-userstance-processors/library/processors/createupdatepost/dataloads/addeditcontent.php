@@ -181,7 +181,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                 return GD_DataLoad_QueryInputOutputHandler_AddPost::class;
         }
 
-        return parent::getQueryInputOutputHandlerClass($module);
+        return parent::getQueryInputOutputHandler($module);
     }
 
     public function getImmutableJsconfiguration(array $module, array &$props): array
