@@ -7,4 +7,5 @@ namespace PoP\ComponentModel\Instances;
 interface InstanceManagerInterface
 {
     public function getInstance(string $class): object;
+    public function hasInstance(string $class): bool;
 }
