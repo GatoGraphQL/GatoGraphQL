@@ -40,7 +40,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
                 $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
-                if ($hist_ids = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridgeClass($module))) {
+                if ($hist_ids = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridge($module))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = $hist_ids;
                 } else {
                     $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
