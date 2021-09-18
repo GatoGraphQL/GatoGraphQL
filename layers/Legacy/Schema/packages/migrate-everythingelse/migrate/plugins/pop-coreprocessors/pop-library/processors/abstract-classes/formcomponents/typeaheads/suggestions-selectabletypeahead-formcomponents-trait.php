@@ -150,7 +150,8 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
 
                     // Extend the dataload ids
                     return array(
-                        $suggestions_typeResolver->getTypeName() => array(
+                        $suggestions_typeResolver->getTypeOutputName() => array(
+                            'resolver' => $suggestions_typeResolver,
                             'ids' => $suggestions,
                             'data-fields' => $data_properties['data-fields'],
                         ),
