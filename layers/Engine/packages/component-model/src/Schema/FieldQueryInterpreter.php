@@ -184,16 +184,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         );
     }
 
-    final public function getUniqueFieldOutputKeyByTypeResolverClass(string $typeResolverClass, string $field): string
-    {
-        /** @var RelationalTypeResolverInterface */
-        $relationalTypeResolver = $this->instanceManager->getInstance($typeResolverClass);
-        return $this->getUniqueFieldOutputKeyByTypeOutputName(
-            $relationalTypeResolver->getTypeOutputName(),
-            $field
-        );
-    }
-
     /**
      * Obtain a unique fieldOutputKey for the field, for the type.
      * This is to avoid overriding a previous value with the same alias,
