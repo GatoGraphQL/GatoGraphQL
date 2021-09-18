@@ -113,10 +113,9 @@ trait QueryDataModuleProcessorTrait
             );
         }
 
-        if ($queryHandlerClass = $this->getQueryInputOutputHandlerClass($module)) {
-            // Allow the queryhandler to override/normalize the query args
-            $queryhandler = $instanceManager->getInstance((string)$queryHandlerClass);
-            $queryhandler->prepareQueryArgs($data_properties[DataloadingConstants::QUERYARGS]);
+        if ($queryHandler = $this->getQueryInputOutputHandler($module)) {
+            // Allow the queryHandler to override/normalize the query args
+            $queryHandler->prepareQueryArgs($data_properties[DataloadingConstants::QUERYARGS]);
         }
 
         $relationalTypeResolver = $this->getRelationalTypeResolver($module);
@@ -129,17 +128,14 @@ trait QueryDataModuleProcessorTrait
     {
         $ret = parent::getDatasetmeta($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
-        if ($queryHandlerClass = $this->getQueryInputOutputHandlerClass($module)) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            $queryhandler = $instanceManager->getInstance((string)$queryHandlerClass);
-
-            if ($query_state = $queryhandler->getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
+        if ($queryHandler = $this->getQueryInputOutputHandler($module)) {
+            if ($query_state = $queryHandler->getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
                 $ret['querystate'] = $query_state;
             }
-            if ($query_params = $queryhandler->getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
+            if ($query_params = $queryHandler->getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
                 $ret['queryparams'] = $query_params;
             }
-            if ($query_result = $queryhandler->getQueryResult($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
+            if ($query_result = $queryHandler->getQueryResult($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
                 $ret['queryresult'] = $query_result;
             }
         }
