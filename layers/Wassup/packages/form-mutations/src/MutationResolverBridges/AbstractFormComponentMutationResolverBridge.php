@@ -29,14 +29,14 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
         }
 
         // return $this->executeForm($data_properties);
-        return parent::execute($data_properties);
+        return parent::executeMutation($data_properties);
     }
 
     protected function validateCaptcha($data_properties)
     {
         // Check if Captcha validation is needed
         if ($data_properties[GD_DATALOAD_QUERYHANDLERPROPERTY_FORM_VALIDATECAPTCHA]) {
-            $captcha = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA])->getValue([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
+            $captcha = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA])->getValue([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
             return \GD_Captcha::validate($captcha);
         }
 

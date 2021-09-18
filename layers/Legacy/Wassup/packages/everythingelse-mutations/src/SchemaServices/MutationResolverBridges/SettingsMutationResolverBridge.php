@@ -25,7 +25,7 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
      */
     public function executeMutation(array &$data_properties): ?array
     {
-        $executed = parent::execute($data_properties);
+        $executed = parent::executeMutation($data_properties);
         if ($executed !== null && $executed[ResponseConstants::SUCCESS]) {
             // Add the result from the MutationResolver as hard redirect
             $redirect_to = $this->mutationResolutionManager->getResult($this);

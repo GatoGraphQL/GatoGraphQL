@@ -29,7 +29,7 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
      */
     public function executeMutation(array &$data_properties): ?array
     {
-        $executed = parent::execute($data_properties);
+        $executed = parent::executeMutation($data_properties);
         if ($executed && is_array($executed) && $executed[ResponseConstants::SUCCESS]) {
             // Redirect to the "Reset password" page
             $executed[GD_DATALOAD_QUERYHANDLERRESPONSE_SOFTREDIRECT] = RouteUtils::getRouteURL(POP_USERLOGIN_ROUTE_LOSTPWDRESET);

@@ -31,7 +31,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
      */
     public function executeMutation(array &$data_properties): ?array
     {
-        parent::execute($data_properties);
+        parent::executeMutation($data_properties);
         return null;
     }
 }
