@@ -17,6 +17,7 @@ abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPubl
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         AccessControlManagerInterface $accessControlManager,
+        protected DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver,
     ) {
         parent::__construct(
             $instanceManager,
@@ -27,10 +28,8 @@ abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPubl
     
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
-        /** @var DirectiveResolverInterface */
-        $disableAccessForDirectivesDirectiveResolver = $this->instanceManager->getInstance(DisableAccessForDirectivesDirectiveResolver::class);
         $disableAccessDirective = $this->fieldQueryInterpreter->getDirective(
-            $disableAccessForDirectivesDirectiveResolver->getDirectiveName()
+            $this->disableAccessForDirectivesDirectiveResolver->getDirectiveName()
         );
         return [
             $disableAccessDirective,

@@ -16,6 +16,7 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
     public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver,
     ) {
         parent::__construct(
             $instanceManager,
@@ -29,11 +30,9 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
     public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $mandatoryDirectivesForDirectives = [];
-        /** @var DirectiveResolverInterface */
-        $validateIsUserLoggedInForDirectivesDirectiveResolver = $this->instanceManager->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
         // This is the required "validateIsUserLoggedIn" directive
         $validateIsUserLoggedInDirective = $this->fieldQueryInterpreter->getDirective(
-            $validateIsUserLoggedInForDirectivesDirectiveResolver->getDirectiveName()
+            $this->validateIsUserLoggedInForDirectivesDirectiveResolver->getDirectiveName()
         );
         // Add the mapping
         foreach ($this->getDirectiveResolvers() as $needValidateIsUserLoggedInDirectiveResolver) {

@@ -17,6 +17,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
     public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver,
     ) {
         parent::__construct(
             $instanceManager,
@@ -31,11 +32,9 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
     {
         $mandatoryDirectivesForDirectives = [];
         if ($directiveResolvers = $this->getDirectiveResolvers()) {
-            /** @var DirectiveResolverInterface */
-            $validateIsUserLoggedInDirectiveResolver = $this->instanceManager->getInstance(ValidateIsUserLoggedInDirectiveResolver::class);
             // This is the required "validateIsUserLoggedIn" directive
             $validateIsUserLoggedInDirective = $this->fieldQueryInterpreter->getDirective(
-                $validateIsUserLoggedInDirectiveResolver->getDirectiveName()
+                $this->validateIsUserLoggedInDirectiveResolver->getDirectiveName()
             );
             // Add the mapping
             foreach ($directiveResolvers as $needValidateIsUserLoggedInDirectiveResolver) {
@@ -63,11 +62,9 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
     {
         $mandatoryDirectivesForFields = [];
         if ($fieldNames = $this->getFieldNames()) {
-            /** @var DirectiveResolverInterface */
-            $validateIsUserLoggedInDirectiveResolver = $this->instanceManager->getInstance(ValidateIsUserLoggedInDirectiveResolver::class);
             // This is the required "validateIsUserLoggedIn" directive
             $validateIsUserLoggedInDirective = $this->fieldQueryInterpreter->getDirective(
-                $validateIsUserLoggedInDirectiveResolver->getDirectiveName()
+                $this->validateIsUserLoggedInDirectiveResolver->getDirectiveName()
             );
             // Add the mapping
             foreach ($fieldNames as $fieldName) {

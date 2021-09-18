@@ -21,6 +21,10 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
     public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver,
+        protected ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver,
+        protected ValidateIsUserNotLoggedInDirectiveResolver $validateIsUserNotLoggedInDirectiveResolver,
+        protected ValidateIsUserNotLoggedInForDirectivesDirectiveResolver $validateIsUserNotLoggedInForDirectivesDirectiveResolver,
     ) {
         parent::__construct(
             $instanceManager,
@@ -41,25 +45,17 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
     public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $noCacheControlDirective = CacheControlHelper::getNoCacheDirective();
-        /** @var DirectiveResolverInterface */
-        $validateIsUserLoggedInDirectiveResolver = $this->instanceManager->getInstance(ValidateIsUserLoggedInDirectiveResolver::class);
-        /** @var DirectiveResolverInterface */
-        $validateIsUserLoggedInForDirectivesDirectiveResolver = $this->instanceManager->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
-        /** @var DirectiveResolverInterface */
-        $validateIsUserNotLoggedInDirectiveResolver = $this->instanceManager->getInstance(ValidateIsUserNotLoggedInDirectiveResolver::class);
-        /** @var DirectiveResolverInterface */
-        $validateIsUserNotLoggedInForDirectivesDirectiveResolver = $this->instanceManager->getInstance(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver::class);
         return [
-            $validateIsUserLoggedInDirectiveResolver->getDirectiveName() => [
+            $this->validateIsUserLoggedInDirectiveResolver->getDirectiveName() => [
                 $noCacheControlDirective,
             ],
-            $validateIsUserLoggedInForDirectivesDirectiveResolver->getDirectiveName() => [
+            $this->validateIsUserLoggedInForDirectivesDirectiveResolver->getDirectiveName() => [
                 $noCacheControlDirective,
             ],
-            $validateIsUserNotLoggedInDirectiveResolver->getDirectiveName() => [
+            $this->validateIsUserNotLoggedInDirectiveResolver->getDirectiveName() => [
                 $noCacheControlDirective,
             ],
-            $validateIsUserNotLoggedInForDirectivesDirectiveResolver->getDirectiveName() => [
+            $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver->getDirectiveName() => [
                 $noCacheControlDirective,
             ],
         ];
