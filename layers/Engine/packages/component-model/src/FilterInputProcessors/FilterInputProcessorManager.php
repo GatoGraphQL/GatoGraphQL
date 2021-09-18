@@ -10,7 +10,7 @@ class FilterInputProcessorManager implements FilterInputProcessorManagerInterfac
 {
     use ItemProcessorManagerTrait;
 
-    public function getProcessor(array $item)
+    public function getProcessor(array $item): FilterInputProcessorInterface
     {
         return $this->getItemProcessor($item);
     }
