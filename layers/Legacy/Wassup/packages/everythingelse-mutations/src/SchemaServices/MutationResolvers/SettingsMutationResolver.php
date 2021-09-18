@@ -25,7 +25,7 @@ class SettingsMutationResolver extends AbstractMutationResolver
         ];
     }
 
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $cmsService = CMSServiceFacade::getInstance();

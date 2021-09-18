@@ -12,7 +12,7 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
         $customPostMediaTypeMutationAPI = CustomPostMediaTypeMutationAPIFacade::getInstance();

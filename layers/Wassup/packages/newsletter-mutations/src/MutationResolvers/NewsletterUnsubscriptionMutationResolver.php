@@ -94,7 +94,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         // return GFAPI::delete_entry($newsletter_data['entry-id']);
     }
 
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         $newsletter_data = $this->getNewsletterData($form_data);
         $result = $this->doExecute($newsletter_data);

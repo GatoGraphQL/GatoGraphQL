@@ -34,7 +34,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         return false;
     }
 
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         // Plugins needed by the website. Check the website version, if it's the one indicated,
         // then proceed to install the required plugin

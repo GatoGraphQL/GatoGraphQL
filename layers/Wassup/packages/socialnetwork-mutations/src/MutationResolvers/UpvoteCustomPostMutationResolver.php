@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoPSchema\UserMeta\Utils;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoPSchema\UserMeta\Utils;
+use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\DownvoteCustomPostMutationResolver;
 
 class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomPostMutationResolver
 {
@@ -64,7 +65,7 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
              * @var DownvoteCustomPostMutationResolver
              */
             $opposite_instance = $instanceManager->getInstance(DownvoteCustomPostMutationResolver::class);
-            $opposite_instance->execute($form_data);
+            $opposite_instance->executeMutation($form_data);
         }
 
         return parent::update($form_data);

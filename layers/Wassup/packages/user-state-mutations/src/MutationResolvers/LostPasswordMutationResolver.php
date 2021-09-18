@@ -98,7 +98,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         $user_login = $form_data[MutationInputProperties::USER_LOGIN];

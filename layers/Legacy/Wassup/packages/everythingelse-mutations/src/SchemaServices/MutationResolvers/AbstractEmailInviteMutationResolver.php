@@ -11,7 +11,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResolver
 {
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         $emails = $form_data['emails'];
         // Remove the invalid emails

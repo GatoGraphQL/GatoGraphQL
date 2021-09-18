@@ -9,7 +9,7 @@ interface ComponentMutationResolverBridgeInterface
     /**
      * @return array<string, mixed>|null
      */
-    public function execute(array &$data_properties): ?array;
+    public function executeMutation(array &$data_properties): ?array;
     public function getMutationResolverClass(): string;
     public function getFormData(): array;
 }

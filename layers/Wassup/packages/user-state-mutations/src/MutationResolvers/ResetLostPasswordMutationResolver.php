@@ -55,7 +55,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         }
         return $errorcodes;
     }
-    public function execute(array $form_data): mixed
+    public function executeMutation(array $form_data): mixed
     {
         $code = $form_data[MutationInputProperties::CODE];
         $pwd = $form_data[MutationInputProperties::PASSWORD];
