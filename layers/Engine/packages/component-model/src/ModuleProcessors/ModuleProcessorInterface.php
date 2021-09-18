@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface ModuleProcessorInterface
@@ -37,7 +38,7 @@ interface ModuleProcessorInterface
     public function getDatasource(array $module, array &$props): string;
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array;
     public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface;
-    public function getComponentMutationResolverBridgeClass(array $module): ?string;
+    public function getComponentMutationResolverBridge(array $module): ?ComponentMutationResolverBridgeInterface;
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void;
     public function getDataFields(array $module, array &$props): array;
     public function getDomainSwitchingSubmodules(array $module): array;

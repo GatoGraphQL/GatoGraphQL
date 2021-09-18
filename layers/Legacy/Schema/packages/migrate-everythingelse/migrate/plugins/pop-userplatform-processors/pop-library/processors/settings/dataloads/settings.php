@@ -31,14 +31,14 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SETTINGS:
                 return SettingsMutationResolverBridge::class;
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

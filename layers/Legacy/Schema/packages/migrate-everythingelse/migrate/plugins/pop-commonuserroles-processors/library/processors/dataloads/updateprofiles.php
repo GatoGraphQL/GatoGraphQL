@@ -27,7 +27,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE:
@@ -43,7 +43,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
                 return CreateUpdateIndividualProfileMutationResolverBridge::class;
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     protected function getInnerSubmodules(array $module): array

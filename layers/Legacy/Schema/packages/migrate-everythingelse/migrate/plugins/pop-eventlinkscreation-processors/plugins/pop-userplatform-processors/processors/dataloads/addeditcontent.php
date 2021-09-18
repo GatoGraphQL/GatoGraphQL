@@ -89,7 +89,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
         parent::initModelProps($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTLINK_CREATE:
@@ -98,7 +98,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
                 return UpdateEventLinkMutationResolverBridge::class;
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array

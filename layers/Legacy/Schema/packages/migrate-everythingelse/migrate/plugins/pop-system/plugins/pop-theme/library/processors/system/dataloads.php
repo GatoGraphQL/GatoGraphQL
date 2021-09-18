@@ -26,14 +26,14 @@ class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadMo
         return parent::shouldExecuteMutation($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_GENERATETHEME:
                 return GenerateThemeMutationResolverBridge::class;
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 }
 

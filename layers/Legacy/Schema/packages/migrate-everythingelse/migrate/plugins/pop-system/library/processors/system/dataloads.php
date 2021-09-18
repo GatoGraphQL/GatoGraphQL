@@ -34,7 +34,7 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadModulePr
         return parent::shouldExecuteMutation($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_BUILD:
@@ -47,7 +47,7 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadModulePr
                 return InstallSystemMutationResolverBridge::class;
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 }
 

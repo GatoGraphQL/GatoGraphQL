@@ -25,14 +25,14 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
         return parent::shouldExecuteMutation($module, $props);
     }
 
-    public function getComponentMutationResolverBridgeClass(array $module): ?string
+    public function getComponentMutationResolverBridge(array $module): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
                 return SaveDefinitionFileMutationResolverBridge::class;
         }
 
-        return parent::getComponentMutationResolverBridgeClass($module);
+        return parent::getComponentMutationResolverBridge($module);
     }
 }
 
