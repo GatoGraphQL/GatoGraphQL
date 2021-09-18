@@ -676,7 +676,7 @@ class Engine implements EngineInterface
                             $objectID
                         ) = UnionTypeHelpers::extractDBObjectTypeAndID($objectID);
 
-                        $targetObjectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
+                        $targetObjectTypeResolverName = $targetObjectTypeResolver->getTypeOutputName();
                         $targetObjectTypeResolverNameResolvers[$targetObjectTypeResolverName] = $targetObjectTypeResolver;
                         $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName] = $objectDBKey;
                         $targetObjectTypeResolverNameDataItems[$targetObjectTypeResolverName][$objectID] = $dataItem;
@@ -1572,7 +1572,7 @@ class Engine implements EngineInterface
                         foreach ($objectTypeResolver_ids as $id) {
                             // If there's no resolver, it's an error: the ID can't be processed by anyone
                             if ($targetObjectTypeResolver = $targetObjectTypeResolvers[(string)$id] ?? null) {
-                                $objectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
+                                $objectTypeResolverName = $targetObjectTypeResolver->getTypeOutputName();
                                 $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName] ??= [
                                     'targetObjectTypeResolver' => $targetObjectTypeResolver,
                                     'objectIDs' => [],
@@ -1676,7 +1676,7 @@ class Engine implements EngineInterface
                 $subcomponentTypeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponentTypeResolver !== null) {
-                $subcomponentTypeResolverName = $subcomponentTypeResolver->getNamespacedTypeName();
+                $subcomponentTypeResolverName = $subcomponentTypeResolver->getTypeOutputName();
                 // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
                 $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
                 $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];
