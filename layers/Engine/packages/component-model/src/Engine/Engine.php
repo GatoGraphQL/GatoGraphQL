@@ -661,8 +661,8 @@ class Engine implements EngineInterface
         if ($isUnionTypeResolver) {
             /** @var UnionTypeResolverInterface $relationalTypeResolver */
             // Get the actual type for each entity, and add the entry there
-            $convertedTypeResolverClassDataItems = $convertedTypeResolverClassDBKeys = [];
-            $noTypeResolverDataItems = [];
+            $targetObjectTypeResolverNameResolvers = $targetObjectTypeResolverNameDataItems = $targetObjectTypeResolverNameDBKeys = [];
+            $noTargetObjectTypeResolverDataItems = [];
             foreach ($dataitems as $objectID => $dataItem) {
                 // Obtain the type of the object
                 $exists = false;
@@ -676,24 +676,25 @@ class Engine implements EngineInterface
                             $objectID
                         ) = UnionTypeHelpers::extractDBObjectTypeAndID($objectID);
 
-                        $convertedTypeResolverClass = get_class($targetObjectTypeResolver);
-                        $convertedTypeResolverClassDataItems[$convertedTypeResolverClass][$objectID] = $dataItem;
-                        $convertedTypeResolverClassDBKeys[$convertedTypeResolverClass] = $objectDBKey;
+                        $targetObjectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
+                        $targetObjectTypeResolverNameResolvers[$targetObjectTypeResolverName] = $targetObjectTypeResolver;
+                        $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName] = $objectDBKey;
+                        $targetObjectTypeResolverNameDataItems[$targetObjectTypeResolverName][$objectID] = $dataItem;
                     }
                 }
                 if (!$exists && $addEntryIfError) {
                     // If the UnionTypeResolver doesn't have a type to process the dataItem, show the error under its own ID
-                    $noTypeResolverDataItems[$objectID] = $dataItem;
+                    $noTargetObjectTypeResolverDataItems[$objectID] = $dataItem;
                 }
             }
-            foreach ($convertedTypeResolverClassDataItems as $convertedTypeResolverClass => $convertedDataItems) {
-                $convertedTypeResolver = $this->instanceManager->getInstance($convertedTypeResolverClass);
-                $convertedDBKey = $convertedTypeResolverClassDBKeys[$convertedTypeResolverClass];
-                $this->addDatasetToDatabase($database, $convertedTypeResolver, $convertedDBKey, $convertedDataItems, $objectIDItems, $addEntryIfError);
+            foreach ($targetObjectTypeResolverNameDataItems as $targetObjectTypeResolverName => $convertedDataItems) {
+                $targetObjectTypeResolver = $targetObjectTypeResolverNameResolvers[$targetObjectTypeResolverName];
+                $targetObjectTypeDBKey = $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName];
+                $this->addDatasetToDatabase($database, $targetObjectTypeResolver, $targetObjectTypeDBKey, $convertedDataItems, $objectIDItems, $addEntryIfError);
             }
             // Add the errors under the UnionTypeResolver key
-            if ($noTypeResolverDataItems) {
-                $this->doAddDatasetToDatabase($database, $dbKey, $noTypeResolverDataItems);
+            if ($noTargetObjectTypeResolverDataItems) {
+                $this->doAddDatasetToDatabase($database, $dbKey, $noTargetObjectTypeResolverDataItems);
             }
         } else {
             $this->doAddDatasetToDatabase($database, $dbKey, $dataitems);
