@@ -65,7 +65,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
         return $queryRoot->getID();
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->queryRootTypeDataLoader;
     }

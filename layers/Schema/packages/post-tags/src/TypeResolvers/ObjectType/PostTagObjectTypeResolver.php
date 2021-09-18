@@ -54,7 +54,7 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
         return $this->translationAPI->__('Representation of a tag, added to a post', 'post-tags');
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->postTagTypeDataLoader;
     }

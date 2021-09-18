@@ -59,7 +59,7 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         return $schema->getID();
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->schemaTypeDataLoader;
     }

@@ -59,7 +59,7 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
         return $menuTypeAPI->getMenuID($menu);
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->menuTypeDataLoader;
     }

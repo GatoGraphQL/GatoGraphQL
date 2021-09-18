@@ -58,7 +58,7 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
         return $highlightTypeAPI->getID($object);
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->highlightTypeDataLoader;
     }

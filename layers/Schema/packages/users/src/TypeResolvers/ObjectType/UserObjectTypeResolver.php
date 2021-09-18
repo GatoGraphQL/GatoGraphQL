@@ -59,7 +59,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->userTypeAPI->getUserId($user);
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->userTypeDataLoader;
     }

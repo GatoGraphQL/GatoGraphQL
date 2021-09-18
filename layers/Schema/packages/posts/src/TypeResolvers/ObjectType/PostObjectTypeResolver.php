@@ -51,7 +51,7 @@ class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
         return $this->translationAPI->__('Representation of a post', 'posts');
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->postTypeDataLoader;
     }

@@ -58,7 +58,7 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
         return $stanceTypeAPI->getID($object);
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->stanceTypeDataLoader;
     }

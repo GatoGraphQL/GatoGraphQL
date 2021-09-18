@@ -59,7 +59,7 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         return $field->getID();
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->schemaDefinitionReferenceTypeDataLoader;
     }

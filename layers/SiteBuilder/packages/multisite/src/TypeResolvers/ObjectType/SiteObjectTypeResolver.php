@@ -59,7 +59,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
         return $site->getID();
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->siteTypeDataLoader;
     }

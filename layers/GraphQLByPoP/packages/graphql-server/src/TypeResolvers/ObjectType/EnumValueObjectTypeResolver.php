@@ -59,7 +59,7 @@ class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
         return $enumValue->getID();
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->schemaDefinitionReferenceTypeDataLoader;
     }

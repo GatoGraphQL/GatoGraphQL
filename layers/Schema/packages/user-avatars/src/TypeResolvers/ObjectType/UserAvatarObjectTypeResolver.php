@@ -59,7 +59,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
         return $userAvatar->id;
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->userAvatarTypeDataLoader;
     }

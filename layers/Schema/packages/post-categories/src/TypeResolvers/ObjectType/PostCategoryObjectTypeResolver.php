@@ -54,7 +54,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
         return $this->translationAPI->__('Representation of a category, added to a post', 'post-categories');
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->postCategoryTypeDataLoader;
     }

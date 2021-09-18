@@ -59,7 +59,7 @@ class DirectiveObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
         return $directive->getID();
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->schemaDefinitionReferenceTypeDataLoader;
     }

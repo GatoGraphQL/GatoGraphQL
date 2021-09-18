@@ -57,7 +57,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         return $this->translationAPI->__('Union of \'custom post\' type resolvers', 'customposts');
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         if ($this->customPostUnionTypeDataLoader === null) {
             $this->customPostUnionTypeDataLoader = $this->instanceManager->getInstance(CustomPostUnionTypeDataLoader::class);

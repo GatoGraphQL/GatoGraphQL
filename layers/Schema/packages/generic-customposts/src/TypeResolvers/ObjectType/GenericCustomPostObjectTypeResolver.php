@@ -51,7 +51,7 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
         return $this->translationAPI->__('Any custom post, with or without its own type for the schema', 'customposts');
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->genericCustomPostTypeDataLoader;
     }

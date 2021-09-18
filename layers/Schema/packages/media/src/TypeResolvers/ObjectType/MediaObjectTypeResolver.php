@@ -59,7 +59,7 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->mediaTypeAPI->getMediaItemID($media);
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->mediaTypeDataLoader;
     }

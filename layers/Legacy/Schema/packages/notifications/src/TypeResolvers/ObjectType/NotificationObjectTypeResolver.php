@@ -57,7 +57,7 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
         return $notification->histid;
     }
 
-    public function getRelationalTypeDataLoaderClass(): RelationalTypeDataLoaderInterface
+    public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->notificationTypeDataLoader;
     }
