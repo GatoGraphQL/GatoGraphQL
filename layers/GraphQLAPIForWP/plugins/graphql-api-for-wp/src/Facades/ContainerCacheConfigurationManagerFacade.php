@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\ManageOptionsUserAuthorizationScheme;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
+use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManager;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManager;
 
@@ -43,7 +44,8 @@ class ContainerCacheConfigurationManagerFacade
                 $userAuthorization,
             );
             $endpointHelpers = new EndpointHelpers($menu, $moduleRegistry);
-            self::$instance = new ContainerCacheConfigurationManager($endpointHelpers);
+            $userSettingsManager = new UserSettingsManager();
+            self::$instance = new ContainerCacheConfigurationManager($endpointHelpers, $userSettingsManager);
         }
         return self::$instance;
     }

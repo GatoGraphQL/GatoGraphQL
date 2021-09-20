@@ -17,7 +17,7 @@ use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 abstract class AbstractCacheConfigurationManager implements CacheConfigurationManagerInterface
 {
     public function __construct(
-        protected EndpointHelpers $endpointHelpers
+        protected EndpointHelpers $endpointHelpers,
         protected UserSettingsManagerInterface $userSettingsManager,
     ) {
     }
