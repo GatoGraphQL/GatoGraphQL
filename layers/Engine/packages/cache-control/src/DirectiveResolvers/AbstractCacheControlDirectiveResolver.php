@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
     protected CacheControlEngineInterface $cacheControlEngine;
-    
+
     protected function initializeServices(): void
     {
         parent::initializeServices();
