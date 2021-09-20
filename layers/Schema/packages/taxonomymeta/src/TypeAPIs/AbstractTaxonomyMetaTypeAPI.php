@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomyMeta\TypeAPIs;
 
-use PoPSchema\SchemaCommons\Facades\Services\AllowOrDenySettingsServiceFacade;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\TaxonomyMeta\ComponentConfiguration;
 use PoPSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
@@ -15,7 +14,7 @@ abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterfa
         protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
     ) {
     }
-    
+
     final public function getTaxonomyTermMeta(string | int $termID, string $key, bool $single = false): mixed
     {
         /**
