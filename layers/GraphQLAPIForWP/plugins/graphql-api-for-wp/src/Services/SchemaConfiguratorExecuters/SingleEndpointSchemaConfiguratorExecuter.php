@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SingleEndpointSchemaConfigurator;
+use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers\GraphQLEndpointHandler;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -21,6 +22,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         protected ModuleRegistryInterface $moduleRegistry,
         protected SingleEndpointSchemaConfigurator $endpointSchemaConfigurator,
         protected GraphQLEndpointHandler $graphQLEndpointHandler,
+        protected UserSettingsManagerInterface $userSettingsManager,
     ) {
         parent::__construct(
             $instanceManager,
@@ -44,8 +46,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
      */
     protected function getUserSettingSchemaConfigurationID(): ?int
     {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $schemaConfigurationID = $userSettingsManager->getSetting(
+        $schemaConfigurationID = $this->userSettingsManager->getSetting(
             SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
             ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT
         );

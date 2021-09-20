@@ -8,17 +8,18 @@ use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentCon
 use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractDynamicType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
+use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use PoP\API\Facades\SchemaDefinitionRegistryFacade;
+use PoP\API\Registries\SchemaDefinitionRegistryInterface;
+use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -28,6 +29,7 @@ use PoP\Translation\TranslationAPIInterface;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
 {
+    protected CacheInterface $persistentCache;
     /**
      * @var array<string, mixed>
      */
@@ -46,7 +48,10 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         protected TranslationAPIInterface $translationAPI,
         protected SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
+        protected SchemaDefinitionRegistryInterface $schemaDefinitionRegistry,
+        protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ) {
+        $this->persistentCache = PersistentCacheFacade::getInstance();
     }
 
     /**
@@ -75,7 +80,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
             // Attempt to retrieve from the cache, if enabled
             if ($useCache = APIComponentConfiguration::useSchemaDefinitionCache()) {
-                $persistentCache = PersistentCacheFacade::getInstance();
                 // Use different caches for the normal and namespaced schemas,
                 // or it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
                 $vars = ApplicationState::getVars();
@@ -91,16 +95,15 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 $cacheKey = hash('md5', json_encode($cacheKeyComponents));
             }
             if ($useCache) {
-                if ($persistentCache->hasCache($cacheKey, $cacheType)) {
-                    $this->fullSchemaDefinition = $persistentCache->getCache($cacheKey, $cacheType);
+                if ($this->persistentCache->hasCache($cacheKey, $cacheType)) {
+                    $this->fullSchemaDefinition = $this->persistentCache->getCache($cacheKey, $cacheType);
                 }
             }
 
             // If either not using cache, or using but the value had not been cached, then calculate the value
             if ($this->fullSchemaDefinition === null) {
                 // Get the schema definitions
-                $schemaDefinitionRegistry = SchemaDefinitionRegistryFacade::getInstance();
-                $this->fullSchemaDefinition = $schemaDefinitionRegistry->getSchemaDefinition($fieldArgs);
+                $this->fullSchemaDefinition = $this->schemaDefinitionRegistry->getSchemaDefinition($fieldArgs);
 
                 // If the schemaDefinition is null, it failed generating it. Then do nothing
                 if ($this->fullSchemaDefinition === null) {
@@ -112,7 +115,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
                 // Store in the cache
                 if ($useCache) {
-                    $persistentCache->storeCache($cacheKey, $cacheType, $this->fullSchemaDefinition);
+                    $this->persistentCache->storeCache($cacheKey, $cacheType, $this->fullSchemaDefinition);
                 }
             }
         }
@@ -125,14 +128,13 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $enableNestedMutations = $vars['nested-mutations-enabled'];
         $exposeSchemaIntrospectionFieldInSchema = ComponentConfiguration::exposeSchemaIntrospectionFieldInSchema();
 
-        $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
-        $rootTypeSchemaKey = $graphQLSchemaDefinitionService->getRootTypeSchemaKey();
+        $rootTypeSchemaKey = $this->graphQLSchemaDefinitionService->getRootTypeSchemaKey();
         $queryRootTypeSchemaKey = null;
         if (!$enableNestedMutations) {
-            $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
+            $queryRootTypeSchemaKey = $this->graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
         } elseif (ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
             // Additionally append the QueryRoot and MutationRoot to the schema
-            $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getTypeResolverTypeSchemaKey($this->queryRootObjectTypeResolver);
+            $queryRootTypeSchemaKey = $this->graphQLSchemaDefinitionService->getTypeResolverTypeSchemaKey($this->queryRootObjectTypeResolver);
             // Remove the fields connecting from Root to QueryRoot and MutationRoot
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['queryRoot']);
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['mutationRoot']);
