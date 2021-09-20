@@ -5,13 +5,25 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 
 abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
+    public function __construct(
+        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
+        \PoP\LooseContracts\NameResolverInterface $nameResolver,
+        protected ModuleProcessorManagerInterface $moduleProcessorManager,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $instanceManager,
+            $nameResolver,
+        );
+    }
+    
     /**
      * @return mixed[]
      */
@@ -24,14 +36,14 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
 
     protected function getPagenumberParam($query_args)
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'GD_Dataloader_List:query:pagenumber',
             $query_args[Params::PAGE_NUMBER]
         );
     }
     protected function getLimitParam($query_args)
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'GD_Dataloader_List:query:limit',
             $query_args[Params::LIMIT]
         );
@@ -50,14 +62,13 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         $query = $this->getQuery($query_args);
 
         // Allow URE to modify the role, limiting selected users and excluding others, like 'subscriber'
-        $query = HooksAPIFacade::getInstance()->applyFilters(self::class . ':gd_dataload_query', $query, $data_properties);
+        $query = $this->hooksAPI->applyFilters(self::class . ':gd_dataload_query', $query, $data_properties);
 
         // Apply filtering of the data
         if ($filtering_modules = $data_properties[DataloadingConstants::QUERYARGSFILTERINGMODULES] ?? null) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             foreach ($filtering_modules as $module) {
                 /** @var FilterDataModuleProcessorInterface */
-                $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($module);
+                $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
                 $filterDataModuleProcessor->filterHeadmoduleDataloadQueryArgs($module, $query);
             }
         }
@@ -118,7 +129,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         }
 
         // Allow CoAuthors Plus to modify the query to add the coauthors
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             $this->getQueryHookName(),
             $query,
             $query_args

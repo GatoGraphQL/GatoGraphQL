@@ -11,6 +11,7 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\CustomPostTypeDataLoader;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader as UpstreamCustomPostUnionTypeDataLoader;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
@@ -27,6 +28,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
         NameResolverInterface $nameResolver,
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
         protected CustomPostTypeDataLoader $customPostTypeDataLoader,
+        protected CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -53,7 +55,6 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
         // After executing `get_posts` it returns a list of custom posts of class WP_Post,
         // without converting the object to its own post type (eg: EM_Event for an "event" custom post type)
         // Cast the custom posts to their own classes
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         // Group all the customPosts by targetResolverPicker,
         // so that their casting can be executed in a single query per type
         $customPostTypeTypeResolverPickers = [];
@@ -72,7 +73,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
             /** @var CustomPostObjectTypeResolverPickerInterface */
             $targetCustomPostTypeResolverPicker = $targetTypeResolverPicker;
             $customPostType = $targetCustomPostTypeResolverPicker->getCustomPostType();
-            $customPostID = $customPostTypeAPI->getID($customPost);
+            $customPostID = $this->customPostTypeAPI->getID($customPost);
             $customPostTypeTypeResolverPickers[$customPostType] = $targetCustomPostTypeResolverPicker;
             $customPostTypeItemCustomPosts[$customPostType][$customPostID] = $customPost;
         }
@@ -85,12 +86,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
 
         // Replace each custom post with its casted object
         $customPosts = array_map(
-            function (
-                $customPost
-            ) use (
-                $customPostTypeAPI,
-                $castedCustomPosts
-            ) {
+            function (object $customPost) use ($castedCustomPosts) {
                 $targetTypeResolverPicker = $this->customPostUnionTypeResolver->getTargetObjectTypeResolverPicker($customPost);
                 if (
                     is_null($targetTypeResolverPicker)
@@ -99,7 +95,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
                     return $customPost;
                 }
                 $customPostType = $targetTypeResolverPicker->getCustomPostType();
-                $customPostID = $customPostTypeAPI->getID($customPost);
+                $customPostID = $this->customPostTypeAPI->getID($customPost);
                 return $castedCustomPosts[$customPostType][$customPostID];
             },
             $customPosts
