@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CommentMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoPSchema\CommentMutations\ComponentConfiguration;
 
@@ -14,6 +14,11 @@ use PoPSchema\CommentMutations\ComponentConfiguration;
  */
 class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
 {
+    public function __construct(
+        protected TranslationAPIInterface $translationAPI,
+    ) {
+    }
+
     public function insertComment(array $comment_data): string | int | Error
     {
         // Convert the parameters
@@ -57,10 +62,9 @@ class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
         }
         $commentID = \wp_insert_comment($comment_data);
         if ($commentID === false) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             return new Error(
                 'insert-comment-error',
-                $translationAPI->__('Could not create the comment', 'comment-mutations-wp')
+                $this->translationAPI->__('Could not create the comment', 'comment-mutations-wp')
             );
         }
         return $commentID;
