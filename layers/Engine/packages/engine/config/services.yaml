@@ -14,8 +14,8 @@ services:
         arguments:
             $cacheItemPool: '@memory_cache_item_pool'
 
-    PoP\Engine\ObjectModels\Root:
-        class: \PoP\Engine\ObjectModels\Root
+    PoP\Engine\ObjectModels\RootObject:
+        class: \PoP\Engine\ObjectModels\RootObject
 
     PoP\Engine\CMS\CMSHelperServiceInterface:
         class: \PoP\Engine\CMS\CMSHelperService

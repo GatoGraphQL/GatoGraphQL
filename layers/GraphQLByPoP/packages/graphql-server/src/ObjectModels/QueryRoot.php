@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use PoP\Engine\ObjectModels\Root;
+use PoP\Engine\ObjectModels\RootObject;
 
-class QueryRoot extends Root
+class QueryRoot extends RootObject
 {
 }

@@ -16,10 +16,9 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoP\Engine\ObjectModels\Root;
+use PoP\Engine\ObjectModels\RootObject;
 use PoP\Engine\RelationalTypeDataLoaders\ObjectType\RootTypeDataLoader;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 
@@ -73,7 +72,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getID(object $object): string | int | null
     {
-        /** @var Root */
+        /** @var RootObject */
         $root = $object;
         return $root->getID();
     }

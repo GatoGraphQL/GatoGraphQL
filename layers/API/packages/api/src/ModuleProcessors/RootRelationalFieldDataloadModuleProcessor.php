@@ -15,7 +15,7 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Engine\ObjectModels\Root;
+use PoP\Engine\ObjectModels\RootObject;
 use PoP\Engine\Schema\SchemaDefinitionServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -67,7 +67,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ROOT:
-                return Root::ID;
+                return RootObject::ID;
         }
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }
