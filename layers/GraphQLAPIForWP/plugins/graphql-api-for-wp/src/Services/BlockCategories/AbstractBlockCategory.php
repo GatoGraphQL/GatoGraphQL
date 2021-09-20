@@ -9,7 +9,7 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use WP_Block_Editor_Context;
 use WP_Post;
 
-abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedService
+abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedService implements BlockCategoryInterface
 {
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
