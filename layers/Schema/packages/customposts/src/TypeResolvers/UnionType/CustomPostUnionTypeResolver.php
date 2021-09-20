@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeResolvers\UnionType;
 
+use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -33,9 +36,9 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
-        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
-        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
-        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
+        DataloadingEngineInterface $dataloadingEngine,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
+        DirectivePipelineServiceInterface $directivePipelineService,
         protected InterfaceTypeResolverInterface $interfaceTypeResolver,
     ) {
         parent::__construct(

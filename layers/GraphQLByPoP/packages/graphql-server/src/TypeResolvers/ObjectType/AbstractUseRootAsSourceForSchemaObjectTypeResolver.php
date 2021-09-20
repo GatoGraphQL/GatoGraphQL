@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
@@ -31,9 +34,9 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
-        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
-        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
-        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
+        DataloadingEngineInterface $dataloadingEngine,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
+        DirectivePipelineServiceInterface $directivePipelineService,
         protected RootObjectTypeResolver $rootObjectTypeResolver,
     ) {
         parent::__construct(

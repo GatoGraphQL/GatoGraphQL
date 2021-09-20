@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
@@ -40,9 +43,9 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
-        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
-        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
-        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
+        DataloadingEngineInterface $dataloadingEngine,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
+        DirectivePipelineServiceInterface $directivePipelineService,
         TypeResolverHelperInterface $typeResolverHelper,
         RootObjectTypeResolver $rootObjectTypeResolver,
         protected MutationRootTypeDataLoader $mutationRootTypeDataLoader,
