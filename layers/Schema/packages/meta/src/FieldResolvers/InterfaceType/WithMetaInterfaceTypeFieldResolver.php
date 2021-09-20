@@ -8,6 +8,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldRe
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -28,6 +29,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
     ) {
         parent::__construct(
@@ -38,6 +40,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             $cmsService,
             $schemaNamespacingService,
             $typeRegistry,
+            $schemaDefinitionService,
         );
     }
 

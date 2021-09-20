@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
@@ -20,12 +21,14 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
         protected CommentTypeAPIInterface $commentTypeAPI,
     ) {
         parent::__construct(
             $hooksAPI,
             $instanceManager,
             $nameResolver,
+            $moduleProcessorManager,
         );
     }
 

@@ -7,6 +7,7 @@ namespace PoPSchema\Users\FieldResolvers\InterfaceType;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -27,6 +28,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected UserObjectTypeResolver $userObjectTypeResolver,
     ) {
         parent::__construct(
@@ -37,6 +39,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
             $cmsService,
             $schemaNamespacingService,
             $typeRegistry,
+            $schemaDefinitionService,
         );
     }
 

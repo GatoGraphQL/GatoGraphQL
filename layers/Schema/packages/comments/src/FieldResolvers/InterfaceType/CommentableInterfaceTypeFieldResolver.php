@@ -8,6 +8,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInter
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -37,6 +38,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
         protected IntScalarTypeResolver $intScalarTypeResolver,
         protected CommentObjectTypeResolver $commentObjectTypeResolver,
@@ -49,6 +51,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
             $cmsService,
             $schemaNamespacingService,
             $typeRegistry,
+            $schemaDefinitionService,
         );
     }
 

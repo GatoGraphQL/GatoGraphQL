@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace PoPSchema\Media\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
@@ -18,12 +19,14 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
         protected MediaTypeAPIInterface $mediaTypeAPI,
     ) {
         parent::__construct(
             $hooksAPI,
             $instanceManager,
             $nameResolver,
+            $moduleProcessorManager,
         );
     }
 

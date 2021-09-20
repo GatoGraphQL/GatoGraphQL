@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -27,6 +28,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected IDScalarTypeResolver $idScalarTypeResolver,
     ) {
         parent::__construct(
@@ -37,6 +39,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
             $cmsService,
             $schemaNamespacingService,
             $typeRegistry,
+            $schemaDefinitionService,
         );
     }
 
