@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use PoP\AccessControl\Schema\SchemaModes;
-use PoP\AccessControl\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
+use PoP\AccessControl\ComponentConfiguration;
+use PoP\AccessControl\Schema\SchemaModes;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Access Control block
@@ -19,14 +25,31 @@ class AccessControlBlock extends AbstractControlBlock
 
     public const ATTRIBUTE_NAME_SCHEMA_MODE = 'schemaMode';
 
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        GeneralUtils $generalUtils,
+        EditorHelpers $editorHelpers,
+        protected AccessControlBlockCategory $accessControlBlockCategory,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $userAuthorization,
+            $generalUtils,
+            $editorHelpers,
+        );
+    }
+
     protected function getBlockName(): string
     {
         return 'access-control';
     }
 
-    protected function getBlockCategoryClass(): ?string
+    protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return AccessControlBlockCategory::class;
+        return $this->accessControlBlockCategory;
     }
 
     protected function registerEditorCSS(): bool

@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryEndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
@@ -31,6 +32,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
         protected EndpointHelpers $endpointHelpers,
+        protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {
         parent::__construct(
             $instanceManager,
@@ -46,9 +48,9 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
         return 'graphiql';
     }
 
-    protected function getBlockCategoryClass(): ?string
+    protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return PersistedQueryEndpointBlockCategory::class;
+        return $this->persistedQueryEndpointBlockCategory;
     }
 
     protected function isDynamicBlock(): bool

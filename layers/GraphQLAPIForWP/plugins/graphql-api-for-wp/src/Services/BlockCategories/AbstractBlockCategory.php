@@ -6,14 +6,18 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Block_Editor_Context;
 use WP_Post;
 
-abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedService
+abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedService implements BlockCategoryInterface
 {
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-    ) {
+    protected InstanceManagerInterface $instanceManager;
+
+    #[Required]
+    public function autowireAbstractBlockCategory(InstanceManagerInterface $instanceManager)
+    {
+        $this->instanceManager = $instanceManager;
     }
 
     final public function initialize(): void

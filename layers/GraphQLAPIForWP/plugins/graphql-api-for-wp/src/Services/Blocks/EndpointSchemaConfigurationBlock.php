@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\EndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
@@ -37,6 +38,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         EditorHelpers $editorHelpers,
         protected BlockRenderingHelpers $blockRenderingHelpers,
         protected CPTUtils $cptUtils,
+        protected EndpointBlockCategory $endpointBlockCategory,
     ) {
         parent::__construct(
             $instanceManager,
@@ -57,9 +59,9 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         return 180;
     }
 
-    protected function getBlockCategoryClass(): ?string
+    protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return EndpointBlockCategory::class;
+        return $this->endpointBlockCategory;
     }
 
     protected function isDynamicBlock(): bool

@@ -6,18 +6,19 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaConfigurationBlockCategory extends AbstractBlockCategory
 {
     public const SCHEMA_CONFIGURATION_BLOCK_CATEGORY = 'graphql-api-schema-config';
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
+    protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
+
+    #[Required]
+    public function autowireSchemaConfigurationBlockCategory(
+        GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ) {
-        parent::__construct(
-            $instanceManager,
-        );
+        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
     }
 
     /**

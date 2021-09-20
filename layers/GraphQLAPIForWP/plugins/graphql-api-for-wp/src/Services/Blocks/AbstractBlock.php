@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use Error;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**
  * Base class for a Gutenberg block, within a multi-block plugin.
@@ -192,16 +193,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
         return $this->getPluginDir() . '/blocks/' . $this->getBlockName();
     }
 
-    protected function getBlockCategory(): ?AbstractBlockCategory
-    {
-        if ($blockCategoryClass = $this->getBlockCategoryClass()) {
-            $blockCategory = $this->instanceManager->getInstance($blockCategoryClass);
-            return $blockCategory;
-        }
-        return null;
-    }
-
-    protected function getBlockCategoryClass(): ?string
+    protected function getBlockCategory(): ?BlockCategoryInterface
     {
         return null;
     }
