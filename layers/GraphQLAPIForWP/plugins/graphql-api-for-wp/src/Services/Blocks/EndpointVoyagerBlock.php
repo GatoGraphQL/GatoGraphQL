@@ -29,7 +29,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
         return 120;
     }
 
-    protected function getBlockCategory(): ?string
+    protected function getBlockCategory(): ?BlockCategoryInterface
     {
         return CustomEndpointBlockCategory::class;
     }

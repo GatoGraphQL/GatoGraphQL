@@ -25,7 +25,7 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
         return 160;
     }
 
-    protected function getBlockCategory(): ?string
+    protected function getBlockCategory(): ?BlockCategoryInterface
     {
         return CustomEndpointBlockCategory::class;
     }

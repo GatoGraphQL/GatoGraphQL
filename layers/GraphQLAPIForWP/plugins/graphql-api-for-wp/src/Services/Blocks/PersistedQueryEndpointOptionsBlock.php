@@ -44,7 +44,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
         return 'en';
     }
 
-    protected function getBlockCategory(): ?string
+    protected function getBlockCategory(): ?BlockCategoryInterface
     {
         return PersistedQueryEndpointBlockCategory::class;
     }

@@ -24,7 +24,7 @@ class AccessControlBlock extends AbstractControlBlock
         return 'access-control';
     }
 
-    protected function getBlockCategory(): ?string
+    protected function getBlockCategory(): ?BlockCategoryInterface
     {
         return AccessControlBlockCategory::class;
     }

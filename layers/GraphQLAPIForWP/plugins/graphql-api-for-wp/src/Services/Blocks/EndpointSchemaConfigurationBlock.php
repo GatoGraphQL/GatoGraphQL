@@ -57,7 +57,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         return 180;
     }
 
-    protected function getBlockCategory(): ?string
+    protected function getBlockCategory(): ?BlockCategoryInterface
     {
         return EndpointBlockCategory::class;
     }

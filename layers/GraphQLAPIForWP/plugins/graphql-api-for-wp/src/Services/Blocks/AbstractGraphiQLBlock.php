@@ -46,7 +46,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
         return 'graphiql';
     }
 
-    protected function getBlockCategory(): ?string
+    protected function getBlockCategory(): ?BlockCategoryInterface
     {
         return PersistedQueryEndpointBlockCategory::class;
     }
