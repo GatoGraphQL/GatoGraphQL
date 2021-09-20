@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\DirectivePipeline\DirectivePipelineServiceFacade;
@@ -23,6 +24,14 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
      * Use a value that can't be part of a fieldName, that's legible, and that conveys the meaning of sublevel. The value "." is adequate
      */
     public const PROPERTY_SEPARATOR = '.';
+
+    protected DirectivePipelineServiceInterface $directivePipelineService;
+
+    protected function initializeServices(): void
+    {
+        parent::initializeServices();
+        $this->directivePipelineService = DirectivePipelineServiceFacade::getInstance();
+    }
 
     public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
@@ -220,8 +229,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 },
                 $this->nestedDirectivePipelineData
             );
-            $directivePipelineService = DirectivePipelineServiceFacade::getInstance();
-            $nestedDirectivePipeline = $directivePipelineService->getDirectivePipeline($directiveResolverInstances);
+            $nestedDirectivePipeline = $this->directivePipelineService->getDirectivePipeline($directiveResolverInstances);
             // Fill the idsDataFields for each directive in the pipeline
             $pipelineArrayItemIdsProperties = [];
             for ($i = 0; $i < count($directiveResolverInstances); $i++) {
