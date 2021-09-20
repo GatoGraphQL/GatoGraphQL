@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
 use PoPSchema\UserMeta\Utils;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver
@@ -15,7 +14,6 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
             $vars = ApplicationState::getVars();
-            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $user_id = $vars['global-userstate']['current-user-id'];
             $target_id = $form_data['target_id'];
 
@@ -24,7 +22,7 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('You had not down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $customPostTypeAPI->getTitle($target_id)
+                    $this->customPostTypeAPI->getTitle($target_id)
                 );
             }
         }

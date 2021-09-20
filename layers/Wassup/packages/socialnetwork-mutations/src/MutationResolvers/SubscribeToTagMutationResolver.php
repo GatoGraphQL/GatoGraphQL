@@ -22,9 +22,8 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
             // Check that the logged in user has not already subscribed to this tag
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if (in_array($target_id, $value)) {
-                $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
                 $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
-                $tag = $postTagTypeAPI->getTag($target_id);
+                $tag = $this->postTagTypeAPI->getTag($target_id);
                 $errors[] = sprintf(
                     $this->translationAPI->__('You have already subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $applicationtaxonomyapi->getTagSymbolName($tag)

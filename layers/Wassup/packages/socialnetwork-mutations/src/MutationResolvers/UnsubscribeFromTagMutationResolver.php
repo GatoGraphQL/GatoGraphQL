@@ -22,9 +22,8 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
             // Check that the logged in user is currently subscribed to that tag
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if (!in_array($target_id, $value)) {
-                $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
                 $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
-                $tag = $postTagTypeAPI->getTag($target_id);
+                $tag = $this->postTagTypeAPI->getTag($target_id);
                 $errors[] = sprintf(
                     $this->translationAPI->__('You had not subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $applicationtaxonomyapi->getTagSymbolName($tag)

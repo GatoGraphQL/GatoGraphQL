@@ -15,7 +15,6 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
             $vars = ApplicationState::getVars();
-            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $user_id = $vars['global-userstate']['current-user-id'];
             $target_id = $form_data['target_id'];
 
@@ -24,7 +23,7 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('You had not up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $customPostTypeAPI->getTitle($target_id)
+                    $this->customPostTypeAPI->getTitle($target_id)
                 );
             }
         }
