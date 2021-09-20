@@ -865,15 +865,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Sort the found units by their priority, and then add to the stack of all units, for all classes
             // Higher priority means they execute first!
             array_multisort($classTypeResolverPriorities, SORT_DESC, SORT_NUMERIC, $classObjectTypeFieldResolvers);
-            $objectTypeFieldResolvers = array_merge(
-                $objectTypeFieldResolvers,
-                $classObjectTypeFieldResolvers
-            );
+            // Add under class as to mimick `array_unique` for object
+            foreach ($classObjectTypeFieldResolvers as $classObjectTypeFieldResolver) {
+                $objectTypeFieldResolvers[get_class($classObjectTypeFieldResolver)] = $classObjectTypeFieldResolver;
+            }
             // Continue iterating for the class parents
         } while ($class = get_parent_class($class));
 
         // Return all the units that resolve the fieldName
-        return $objectTypeFieldResolvers;
+        return array_values($objectTypeFieldResolvers);
     }
 
     protected function calculateFieldNamesToResolve(): array
