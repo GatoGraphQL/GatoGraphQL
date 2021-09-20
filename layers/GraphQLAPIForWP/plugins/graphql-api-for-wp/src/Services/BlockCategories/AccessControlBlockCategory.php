@@ -6,19 +6,19 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class AccessControlBlockCategory extends AbstractBlockCategory
 {
     public const ACCESS_CONTROL_BLOCK_CATEGORY = 'graphql-api-access-control';
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
+    protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
+
+    #[Required]
+    public function autowireAccessControlBlockCategory(
+        GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
     ) {
-        parent::__construct(
-            $instanceManager,
-        );
+        $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
     }
 
     /**

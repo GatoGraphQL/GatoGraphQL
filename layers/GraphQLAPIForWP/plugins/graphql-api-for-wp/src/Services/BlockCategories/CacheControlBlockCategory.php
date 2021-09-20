@@ -6,18 +6,19 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CacheControlBlockCategory extends AbstractBlockCategory
 {
     public const CACHE_CONTROL_BLOCK_CATEGORY = 'graphql-api-cache-control';
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
+    protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType;
+
+    #[Required]
+    public function autowireCacheControlBlockCategory(
+        GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
     ) {
-        parent::__construct(
-            $instanceManager,
-        );
+        $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
     }
 
     /**

@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
@@ -29,6 +30,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
+        SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,
         protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
@@ -39,6 +41,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
             $userAuthorization,
             $generalUtils,
             $editorHelpers,
+            $schemaConfigurationBlockCategory,
             $blockRenderingHelpers,
             $cptUtils,
         );
