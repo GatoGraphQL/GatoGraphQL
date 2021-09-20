@@ -81,12 +81,21 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * This is because they need to be registered, so that all directives
      * can be displayed in the GraphQL API's Access Control Lists
      */
-    public function __construct(?string $directive = null)
+    final public function __construct(?string $directive = null)
     {
         // If the directive is not provided, then it directly the directive name
         // This allows to instantiate the directive through the DependencyInjection component
         $this->directive = $directive ?? $this->getDirectiveName();
-        // Obtain these services directly from the container, instead of using autowiring
+
+        // Obtain services directly from the container, instead of using autowiring
+        $this->initializeServices();
+    }
+
+    /**
+     * Obtain services directly from the container, instead of using autowiring
+     */
+    protected function initializeServices(): void
+    {
         $this->translationAPI = TranslationAPIFacade::getInstance();
         $this->hooksAPI = HooksAPIFacade::getInstance();
         $this->instanceManager = InstanceManagerFacade::getInstance();
