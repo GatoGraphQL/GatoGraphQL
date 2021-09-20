@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -31,6 +33,8 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected PostObjectTypeResolver $postObjectTypeResolver,
         protected UpdatePostMutationResolver $updatePostMutationResolver,
     ) {
@@ -42,6 +46,8 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

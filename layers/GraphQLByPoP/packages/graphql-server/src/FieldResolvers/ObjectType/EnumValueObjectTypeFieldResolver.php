@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -31,6 +33,8 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
@@ -42,6 +46,8 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

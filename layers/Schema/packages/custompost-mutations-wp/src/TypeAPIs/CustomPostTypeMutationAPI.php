@@ -5,16 +5,22 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Engine\Facades\ErrorHandling\ErrorHelperFacade;
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
+use PoP\Engine\ErrorHandling\ErrorHelperInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
+use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
+    public function __construct(
+        protected TranslationAPIInterface $translationAPI,
+        protected ErrorHelperInterface $errorHelper,
+    ) {
+    }
+
     protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array &$query): void
     {
         // Convert the parameters
@@ -50,14 +56,12 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         $postIDOrError = \wp_insert_post($data);
         // If the returned ID is 0, the creation failed
         if ($postIDOrError === 0) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             return new Error(
                 'add-custompost-error',
-                $translationAPI->__('Could not create the custom post', 'custompost-mutations-wp')
+                $this->translationAPI->__('Could not create the custom post', 'custompost-mutations-wp')
             );
         }
-        $errorHelper = ErrorHelperFacade::getInstance();
-        return $errorHelper->returnResultOrConvertError($postIDOrError);
+        return $this->errorHelper->returnResultOrConvertError($postIDOrError);
     }
     /**
      * @param array<string, mixed> $data
@@ -68,8 +72,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
         $postIDOrError = \wp_update_post($data);
-        $errorHelper = ErrorHelperFacade::getInstance();
-        return $errorHelper->returnResultOrConvertError($postIDOrError);
+        return $this->errorHelper->returnResultOrConvertError($postIDOrError);
     }
     public function canUserEditCustomPost(string | int $userID, string | int $customPostID): bool
     {

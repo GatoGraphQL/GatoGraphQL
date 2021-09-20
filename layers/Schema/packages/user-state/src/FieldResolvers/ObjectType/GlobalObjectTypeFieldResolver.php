@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -29,6 +31,8 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
         parent::__construct(
@@ -39,6 +43,8 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

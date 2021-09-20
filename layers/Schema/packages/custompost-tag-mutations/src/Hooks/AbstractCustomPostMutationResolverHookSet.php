@@ -4,19 +4,36 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostTagMutations\Hooks;
 
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
+
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
@@ -57,8 +74,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     public function maybeSetTags(int | string $customPostID, array $form_data): void
     {
         // Only for that specific CPT
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        if ($customPostTypeAPI->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
+        if ($this->customPostTypeAPI->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
         if (!isset($form_data[MutationInputProperties::TAGS])) {

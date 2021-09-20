@@ -4,16 +4,46 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
-use PoPSchema\CustomPostMeta\Utils;
-use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
+use PoPSchema\CustomPostMeta\Utils;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver as UpstreamAbstractCreateUpdateCustomPostMutationResolver;
+use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
+use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 
-abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver
+abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAbstractCreateUpdateCustomPostMutationResolver
 {
     public const VALIDATECATEGORIESTYPE_ATLEASTONE = 1;
     public const VALIDATECATEGORIESTYPE_EXACTLYONE = 2;
+
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
+        NameResolverInterface $nameResolver,
+        UserRoleTypeAPIInterface $userRoleTypeAPI,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
+        CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
+        protected PostCategoryTypeAPIInterface $postCategoryTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $customPostStatusEnumTypeResolver,
+            $nameResolver,
+            $userRoleTypeAPI,
+            $customPostTypeAPI,
+            $customPostTypeMutationAPI,
+        );
+    }
 
     protected function supportsTitle()
     {
@@ -112,9 +142,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
 
         $customPostID = $form_data[MutationInputProperties::ID];
 
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-
-        if (!in_array($customPostTypeAPI->getStatus($customPostID), array(Status::DRAFT, Status::PENDING, Status::PUBLISHED))) {
+        if (!in_array($this->customPostTypeAPI->getStatus($customPostID), array(Status::DRAFT, Status::PENDING, Status::PUBLISHED))) {
             $errors[] = $this->translationAPI->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }
@@ -162,7 +190,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         if (!$categories) {
             return $categories;
         }
-        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         // If the categories are nested under other categories, ask if to add those too
         if ($this->addParentCategories()) {
             // Use a while, to also check if the parent category has a parent itself
@@ -171,7 +198,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
                 $catID = $categories[$i];
                 $i++;
 
-                if ($parentCatID = $postCategoryTypeAPI->getCategoryParentID($catID)) {
+                if ($parentCatID = $this->postCategoryTypeAPI->getCategoryParentID($catID)) {
                     $categories[] = $parentCatID;
                 }
             }

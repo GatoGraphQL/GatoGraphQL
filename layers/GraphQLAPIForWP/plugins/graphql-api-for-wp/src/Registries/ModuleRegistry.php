@@ -4,12 +4,20 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
-use InvalidArgumentException;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
+use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use InvalidArgumentException;
 
 class ModuleRegistry implements ModuleRegistryInterface
 {
+    protected UserSettingsManagerInterface $userSettingsManager;
+
+    public function __construct()
+    {
+        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
+    }
+
     /**
      * @var ModuleResolverInterface[]
      */
@@ -111,9 +119,8 @@ class ModuleRegistry implements ModuleRegistryInterface
         }
         $moduleID = $moduleResolver->getID($module);
         // Check if the value has been saved on the DB
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        if ($userSettingsManager->hasSetModuleEnabled($moduleID)) {
-            return $userSettingsManager->isModuleEnabled($moduleID);
+        if ($this->userSettingsManager->hasSetModuleEnabled($moduleID)) {
+            return $this->userSettingsManager->isModuleEnabled($moduleID);
         }
         // Get the default value from the resolver
         return $moduleResolver->isEnabledByDefault($module);

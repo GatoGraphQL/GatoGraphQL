@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\ConditionalOnContext\Guzzle\SchemaServices\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -29,6 +31,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected ObjectScalarTypeResolver $objectScalarTypeResolver,
     ) {
         parent::__construct(
@@ -39,6 +43,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

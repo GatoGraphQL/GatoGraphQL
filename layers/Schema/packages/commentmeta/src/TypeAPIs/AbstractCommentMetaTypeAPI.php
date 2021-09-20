@@ -6,10 +6,15 @@ namespace PoPSchema\CommentMeta\TypeAPIs;
 
 use PoPSchema\CommentMeta\ComponentConfiguration;
 use PoPSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
-use PoPSchema\SchemaCommons\Facades\Services\AllowOrDenySettingsServiceFacade;
+use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
 {
+    public function __construct(
+        protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
+    ) {
+    }
+
     final public function getCommentMeta(string | int $commentID, string $key, bool $single = false): mixed
     {
         /**
@@ -18,8 +23,7 @@ abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
          */
         $entries = ComponentConfiguration::getCommentMetaEntries();
         $behavior = ComponentConfiguration::getCommentMetaBehavior();
-        $allowOrDenySettingsService = AllowOrDenySettingsServiceFacade::getInstance();
-        if (!$allowOrDenySettingsService->isEntryAllowed($key, $entries, $behavior)) {
+        if (!$this->allowOrDenySettingsService->isEntryAllowed($key, $entries, $behavior)) {
             return null;
         }
         return $this->doGetCommentMeta($commentID, $key, $single);

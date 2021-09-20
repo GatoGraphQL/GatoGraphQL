@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
-use PoP\Translation\TranslationAPIInterface;
-use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -31,8 +34,11 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
         protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        protected UserRoleTypeAPIInterface $userRoleTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -42,6 +48,8 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 
@@ -199,24 +207,23 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
         $user = $object;
         switch ($fieldName) {
             case 'roles':
-                return $userRoleTypeAPI->getUserRoles($user);
+                return $this->userRoleTypeAPI->getUserRoles($user);
             case 'capabilities':
-                return $userRoleTypeAPI->getUserCapabilities($user);
+                return $this->userRoleTypeAPI->getUserCapabilities($user);
             case 'hasRole':
-                $userRoles = $userRoleTypeAPI->getUserRoles($user);
+                $userRoles = $this->userRoleTypeAPI->getUserRoles($user);
                 return in_array($fieldArgs['role'], $userRoles);
             case 'hasAnyRole':
-                $userRoles = $userRoleTypeAPI->getUserRoles($user);
+                $userRoles = $this->userRoleTypeAPI->getUserRoles($user);
                 return !empty(array_intersect($fieldArgs['roles'], $userRoles));
             case 'hasCapability':
-                $userCapabilities = $userRoleTypeAPI->getUserCapabilities($user);
+                $userCapabilities = $this->userRoleTypeAPI->getUserCapabilities($user);
                 return in_array($fieldArgs['capability'], $userCapabilities);
             case 'hasAnyCapability':
-                $userCapabilities = $userRoleTypeAPI->getUserCapabilities($user);
+                $userCapabilities = $this->userRoleTypeAPI->getUserCapabilities($user);
                 return !empty(array_intersect($fieldArgs['capabilities'], $userCapabilities));
         }
 

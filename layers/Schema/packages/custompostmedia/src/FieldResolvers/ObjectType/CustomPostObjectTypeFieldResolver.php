@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMedia\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -27,6 +29,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI,
     ) {
         parent::__construct(
@@ -37,6 +41,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

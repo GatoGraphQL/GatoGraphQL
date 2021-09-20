@@ -5,18 +5,35 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\API\Schema\FieldQueryConvertorInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
-use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
-use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
 use PoPSchema\Categories\Routing\RouteNatures as CategoryRouteNatures;
-use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostCategories\ComponentConfiguration;
+use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
+use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
+use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        RESTDataStructureFormatter $restDataStructureFormatter,
+        FieldQueryConvertorInterface $fieldQueryConvertor,
+        protected PostCategoryTypeAPIInterface $postCategoryTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $restDataStructureFormatter,
+            $fieldQueryConvertor,
+        );
+    }
+
     protected function getInitialRESTFields(): string
     {
         return 'id|name|count|url';
@@ -29,7 +46,6 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
         $vars = ApplicationState::getVars();
-        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         $ret[CategoryRouteNatures::CATEGORY][] = [
             'module' => [
                 PostCategoryFieldDataloadModuleProcessor::class,
@@ -44,7 +60,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->restDataStructureFormatter->getName(),
                 'routing-state' => [
-                    'taxonomy-name' => $postCategoryTypeAPI->getPostCategoryTaxonomyName(),
+                    'taxonomy-name' => $this->postCategoryTypeAPI->getPostCategoryTaxonomyName(),
                 ],
             ],
         ];
@@ -59,7 +75,6 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
         $vars = ApplicationState::getVars();
-        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         $routemodules = array(
             ComponentConfiguration::getPostCategoriesRoute() => [
                 PostCategoryFieldDataloadModuleProcessor::class,
@@ -98,7 +113,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                     'scheme' => APISchemes::API,
                     'datastructure' => $this->restDataStructureFormatter->getName(),
                     'routing-state' => [
-                        'taxonomy-name' => $postCategoryTypeAPI->getPostCategoryTaxonomyName(),
+                        'taxonomy-name' => $this->postCategoryTypeAPI->getPostCategoryTaxonomyName(),
                     ],
                 ],
             ];

@@ -245,7 +245,6 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     protected function calculateTypeResolverPickers()
     {
-        $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         $class = get_called_class();
         $objectTypeResolverPickers = [];
@@ -253,7 +252,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             // All the pickers and their priorities for this class level
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
             /** @var ObjectTypeResolverPickerInterface[] */
-            $attachedTypeResolverPickers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_RESOLVER_PICKERS));
+            $attachedTypeResolverPickers = array_reverse($this->attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_RESOLVER_PICKERS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
                 fn (ObjectTypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getPriorityToAttachToClasses(),
@@ -410,8 +409,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])
     {
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // Properties
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAME] = $this->getMaybeNamespacedTypeName();
@@ -442,8 +440,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     {
         parent::processFlatShapeSchemaDefinition($options);
 
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // Replace the UnionTypeResolver's types with their typeNames
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_POSSIBLE_TYPES] = array_keys(

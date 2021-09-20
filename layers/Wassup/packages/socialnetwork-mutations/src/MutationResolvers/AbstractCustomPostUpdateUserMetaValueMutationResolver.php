@@ -4,11 +4,24 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\Posts\Constants\InputNames;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+
     protected function eligible($post)
     {
         return true;
@@ -21,8 +34,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
             $target_id = $form_data['target_id'];
 
             // Make sure the post exists
-            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $target = $customPostTypeAPI->getCustomPost($target_id);
+            $target = $this->customPostTypeAPI->getCustomPost($target_id);
             if (!$target) {
                 $errors[] = $this->translationAPI->__('The requested post does not exist.', 'pop-coreprocessors');
             } else {

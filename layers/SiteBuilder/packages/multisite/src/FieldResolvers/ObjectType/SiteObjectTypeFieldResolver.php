@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -30,6 +32,8 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         parent::__construct(
@@ -40,6 +44,8 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

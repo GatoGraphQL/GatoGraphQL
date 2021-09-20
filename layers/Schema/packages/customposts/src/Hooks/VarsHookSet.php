@@ -4,15 +4,31 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\Hooks;
 
-use PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes;
-use PoP\Hooks\AbstractHookSet;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoPSchema\CustomPosts\Routing\RouteNatures;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes;
+use PoPSchema\CustomPosts\Routing\RouteNatures;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 
 class VarsHookSet extends AbstractHookSet
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
+
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
@@ -66,9 +82,8 @@ class VarsHookSet extends AbstractHookSet
 
         // Attributes needed to match the RouteModuleProcessor vars conditions
         if ($nature == RouteNatures::CUSTOMPOST) {
-            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $customPostID = $vars['routing-state']['queried-object-id'];
-            $vars['routing-state']['queried-object-post-type'] = $customPostTypeAPI->getCustomPostType($customPostID);
+            $vars['routing-state']['queried-object-post-type'] = $this->customPostTypeAPI->getCustomPostType($customPostID);
         }
     }
 }

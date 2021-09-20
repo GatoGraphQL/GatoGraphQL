@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
+use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
@@ -24,17 +25,20 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     public const FORM_ORIGIN = 'form-origin';
     public const SETTINGS_FIELD = 'graphql-api-settings';
 
+    protected UserSettingsManagerInterface $userSettingsManager;
+
     public function __construct(
         InstanceManagerInterface $instanceManager,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,
-        protected ModuleRegistryInterface $moduleRegistry
+        protected ModuleRegistryInterface $moduleRegistry,
     ) {
         parent::__construct(
             $instanceManager,
             $menuPageHelper,
             $endpointHelpers
         );
+        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 
     public function getMenuPageSlug(): string
@@ -73,8 +77,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 \flush_rewrite_rules();
 
                 // Update the timestamp
-                $userSettingsManager = UserSettingsManagerFacade::getInstance();
-                $userSettingsManager->storeContainerTimestamp();
+                $this->userSettingsManager->storeContainerTimestamp();
             }
         );
 
@@ -247,8 +250,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function printWithTabs(): bool
     {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        return $userSettingsManager->getSetting(
+        return $this->userSettingsManager->getSetting(
             PluginManagementFunctionalityModuleResolver::GENERAL,
             PluginManagementFunctionalityModuleResolver::OPTION_PRINT_SETTINGS_WITH_TABS
         );
@@ -368,8 +370,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function getOptionValue(string $module, string $option): mixed
     {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        return $userSettingsManager->getSetting($module, $option);
+        return $this->userSettingsManager->getSetting($module, $option);
     }
 
     /**

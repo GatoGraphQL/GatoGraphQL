@@ -4,12 +4,28 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\Hooks;
 
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Categories\Routing\RouteNatures;
-use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 
 class VarsHookSet extends AbstractHookSet
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected TaxonomyTypeAPIInterface $taxonomyTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
+
     protected function init(): void
     {
         $this->hooksAPI->addAction(
@@ -29,9 +45,8 @@ class VarsHookSet extends AbstractHookSet
         // Save the name of the taxonomy as an attribute,
         // needed to match the RouteModuleProcessor vars conditions
         if ($nature == RouteNatures::CATEGORY) {
-            $taxonomyTypeAPI = TaxonomyTypeAPIFacade::getInstance();
             $termObjectID = $vars['routing-state']['queried-object-id'];
-            $vars['routing-state']['taxonomy-name'] = $taxonomyTypeAPI->getTermTaxonomyName($termObjectID);
+            $vars['routing-state']['taxonomy-name'] = $this->taxonomyTypeAPI->getTermTaxonomyName($termObjectID);
         }
     }
 }

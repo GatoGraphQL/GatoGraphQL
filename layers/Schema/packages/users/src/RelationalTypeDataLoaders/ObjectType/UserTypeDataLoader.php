@@ -4,13 +4,32 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\RelationalTypeDataLoaders\ObjectType;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        NameResolverInterface $nameResolver,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
+        protected UserTypeAPIInterface $userTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $instanceManager,
+            $nameResolver,
+            $moduleProcessorManager,
+        );
+    }
+
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
@@ -36,8 +55,7 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = []): array
     {
-        $userTypeAPI = UserTypeAPIFacade::getInstance();
-        return $userTypeAPI->getUsers($query, $options);
+        return $this->userTypeAPI->getUsers($query, $options);
     }
 
     public function executeQueryIDs($query): array

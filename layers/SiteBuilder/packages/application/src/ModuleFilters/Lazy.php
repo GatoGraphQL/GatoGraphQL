@@ -6,6 +6,7 @@ namespace PoP\Application\ModuleFilters;
 
 use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Application\ModuleProcessors\ModuleProcessorInterface;
 
 class Lazy extends AbstractModuleFilter
 {
@@ -17,8 +18,8 @@ class Lazy extends AbstractModuleFilter
     public function excludeModule(array $module, array &$props): bool
     {
         // Exclude if it is not lazy
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($module);
+        /** @var ModuleProcessorInterface */
+        $processor = $this->moduleProcessorManager->getProcessor($module);
         return !$processor->isLazyload($module, $props);
     }
 }

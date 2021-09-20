@@ -5,19 +5,32 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMediaMutations\MutationResolvers;
 
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeMutationAPIFacade;
+use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+
     use ValidateUserLoggedInMutationResolverTrait;
 
     public function executeMutation(array $form_data): mixed
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
         $mediaItemID = $form_data[MutationInputProperties::MEDIA_ITEM_ID];
-        $customPostMediaTypeMutationAPI = CustomPostMediaTypeMutationAPIFacade::getInstance();
-        $customPostMediaTypeMutationAPI->setFeaturedImage($customPostID, $mediaItemID);
+        $this->customPostMediaTypeMutationAPI->setFeaturedImage($customPostID, $mediaItemID);
         return $customPostID;
     }
 

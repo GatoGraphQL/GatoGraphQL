@@ -5,18 +5,35 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\API\Schema\FieldQueryConvertorInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
-use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostTags\ComponentConfiguration;
+use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
+use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        RESTDataStructureFormatter $restDataStructureFormatter,
+        FieldQueryConvertorInterface $fieldQueryConvertor,
+        protected PostTagTypeAPIInterface $postTagTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $restDataStructureFormatter,
+            $fieldQueryConvertor,
+        );
+    }
+
     protected function getInitialRESTFields(): string
     {
         return 'id|name|count|url';
@@ -29,7 +46,6 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
         $vars = ApplicationState::getVars();
-        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $ret[TagRouteNatures::TAG][] = [
             'module' => [
                 PostTagFieldDataloadModuleProcessor::class,
@@ -44,7 +60,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->restDataStructureFormatter->getName(),
                 'routing-state' => [
-                    'taxonomy-name' => $postTagTypeAPI->getPostTagTaxonomyName(),
+                    'taxonomy-name' => $this->postTagTypeAPI->getPostTagTaxonomyName(),
                 ],
             ],
         ];
@@ -59,7 +75,6 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
         $vars = ApplicationState::getVars();
-        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $routemodules = array(
             ComponentConfiguration::getPostTagsRoute() => [
                 PostTagFieldDataloadModuleProcessor::class,
@@ -98,7 +113,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                     'scheme' => APISchemes::API,
                     'datastructure' => $this->restDataStructureFormatter->getName(),
                     'routing-state' => [
-                        'taxonomy-name' => $postTagTypeAPI->getPostTagTaxonomyName(),
+                        'taxonomy-name' => $this->postTagTypeAPI->getPostTagTaxonomyName(),
                     ],
                 ],
             ];

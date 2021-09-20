@@ -27,4 +27,3 @@ services:
     GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage:
         class: ~
         autoconfigure: false
-

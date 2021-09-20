@@ -13,8 +13,7 @@ class ContainerCacheConfigurationManager extends AbstractCacheConfigurationManag
      */
     protected function getTimestamp(): int
     {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        return $userSettingsManager->getContainerTimestamp();
+        return $this->userSettingsManager->getContainerTimestamp();
     }
 
     /**

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\BlockMetadataWP\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -31,6 +33,8 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected ObjectScalarTypeResolver $objectScalarTypeResolver,
     ) {
         parent::__construct(
@@ -41,6 +45,8 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

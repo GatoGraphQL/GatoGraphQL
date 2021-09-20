@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -25,9 +28,12 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        DataloadingEngineInterface $dataloadingEngine,
+        DirectivePipelineServiceInterface $directivePipelineService,
         protected UserTypeAPIInterface $userTypeAPI,
         protected UserTypeDataLoader $userTypeDataLoader,
     ) {
@@ -37,9 +43,12 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
             $instanceManager,
             $schemaNamespacingService,
             $schemaDefinitionService,
+            $attachableExtensionManager,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $directivePipelineService,
         );
     }
 

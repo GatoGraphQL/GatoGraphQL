@@ -6,7 +6,6 @@ namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
 use PoP\EditPosts\FunctionAPIFactory;
 use PoPSchema\CustomPostMeta\Utils;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -20,13 +19,12 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     {
         if ($form_data['stancetarget'] ?? null) {
             // Check that the referenced post exists
-            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $referenced = $customPostTypeAPI->getCustomPost($form_data['stancetarget']);
+            $referenced = $this->customPostTypeAPI->getCustomPost($form_data['stancetarget']);
             if (!$referenced) {
                 $errors[] = $this->translationAPI->__('The referenced post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($customPostTypeAPI->getStatus($referenced) != Status::PUBLISHED) {
+                if ($this->customPostTypeAPI->getStatus($referenced) != Status::PUBLISHED) {
                     $errors[] = $this->translationAPI->__('The referenced post is not published yet', 'poptheme-wassup');
                 }
             }
@@ -55,7 +53,6 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     {
         parent::validateCreateContent($errors, $form_data);
 
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmseditpostsapi = FunctionAPIFactory::getInstance();
         // For the Stance, there can be at most 1 post for:
         // - Each article: each referenced $post_id
@@ -79,7 +76,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
 
         // Stances are unique, just 1 per person/article.
         // Check if there is a Stance for the given post. If there is, it's an error, can't create a second Stance.
-        if ($stances = $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+        if ($stances = $this->customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
             $stance_id = $stances[0];
             $error = sprintf(
                 $this->translationAPI->__('You have already added your %s', 'pop-userstance'),
@@ -89,8 +86,8 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
                 $error = sprintf(
                     $this->translationAPI->__('%s after reading “<a href="%s">%s</a>”', 'pop-userstance'),
                     $error,
-                    $customPostTypeAPI->getPermalink($referenced_id),
-                    $customPostTypeAPI->getTitle($referenced_id)
+                    $this->customPostTypeAPI->getPermalink($referenced_id),
+                    $this->customPostTypeAPI->getTitle($referenced_id)
                 );
             }
             $errors[] = sprintf(

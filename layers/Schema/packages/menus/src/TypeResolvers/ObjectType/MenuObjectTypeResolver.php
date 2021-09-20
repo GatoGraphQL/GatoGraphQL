@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -16,6 +19,7 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuTypeDataLoader;
+use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 
 class MenuObjectTypeResolver extends AbstractObjectTypeResolver
 {
@@ -25,10 +29,14 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        DataloadingEngineInterface $dataloadingEngine,
+        DirectivePipelineServiceInterface $directivePipelineService,
         protected MenuTypeDataLoader $menuTypeDataLoader,
+        protected MenuTypeAPIInterface $menuTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -36,9 +44,12 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
             $instanceManager,
             $schemaNamespacingService,
             $schemaDefinitionService,
+            $attachableExtensionManager,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $directivePipelineService,
         );
     }
 
@@ -54,9 +65,8 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getID(object $object): string | int | null
     {
-        $menuTypeAPI = MenuTypeAPIFacade::getInstance();
         $menu = $object;
-        return $menuTypeAPI->getMenuID($menu);
+        return $this->menuTypeAPI->getMenuID($menu);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -5,30 +5,39 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\ConditionalOnComponent\API\RouteModuleProcessors;
 
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
-use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostTags\ComponentConfiguration;
+use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
+use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
+use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        protected PostTagTypeAPIInterface $postTagTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+        );
+    }
+
     /**
      * @return array<string, array<array>>
      */
     public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
-        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $ret[TagRouteNatures::TAG][] = [
             'module' => [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing-state' => [
-                    'taxonomy-name' => $postTagTypeAPI->getPostTagTaxonomyName(),
+                    'taxonomy-name' => $this->postTagTypeAPI->getPostTagTaxonomyName(),
                 ],
             ],
         ];
@@ -41,7 +50,6 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
-        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $routemodules = array(
             ComponentConfiguration::getPostTagsRoute() => [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST],
         );
@@ -62,7 +70,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'routing-state' => [
-                        'taxonomy-name' => $postTagTypeAPI->getPostTagTaxonomyName(),
+                        'taxonomy-name' => $this->postTagTypeAPI->getPostTagTaxonomyName(),
                     ],
                 ],
             ];

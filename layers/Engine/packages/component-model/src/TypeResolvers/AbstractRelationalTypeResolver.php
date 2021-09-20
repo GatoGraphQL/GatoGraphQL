@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
-use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
-use PoP\ComponentModel\Facades\DirectivePipeline\DirectivePipelineServiceFacade;
-use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -71,9 +71,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
         protected FeedbackMessageStoreInterface $feedbackMessageStore,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected ErrorProviderInterface $errorProvider,
+        protected DataloadingEngineInterface $dataloadingEngine,
+        protected DirectivePipelineServiceInterface $directivePipelineService,
     ) {
         parent::__construct(
             $translationAPI,
@@ -81,6 +84,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $instanceManager,
             $schemaNamespacingService,
             $schemaDefinitionService,
+            $attachableExtensionManager,
         );
     }
 
@@ -128,12 +132,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     */
     protected function getMandatoryDirectives()
     {
-        $dataloadingEngine = DataloadingEngineFacade::getInstance();
         return array_map(
             function ($directiveResolver) {
                 return $this->fieldQueryInterpreter->listFieldDirective($directiveResolver->getDirectiveName());
             },
-            $dataloadingEngine->getMandatoryDirectiveResolvers()
+            $this->dataloadingEngine->getMandatoryDirectiveResolvers()
         );
     }
 
@@ -801,14 +804,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     protected function calculateAllRelationalTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass(string $class): array
     {
-        $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $typeResolverDecorators = [];
 
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         do {
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
             /** @var RelationalTypeResolverDecoratorInterface[] */
-            $attachedRelationalTypeResolverDecorators = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS));
+            $attachedRelationalTypeResolverDecorators = array_reverse($this->attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
                 fn (RelationalTypeResolverDecoratorInterface $typeResolverDecorator) => $typeResolverDecorator->getPriorityToAttachToClasses(),
@@ -972,7 +974,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $directivePipelineService = DirectivePipelineServiceFacade::getInstance();
         // Iterate while there are directives with data to be processed
         while (!empty($this->fieldDirectiveIDFields)) {
             $fieldDirectiveIDFields = $this->fieldDirectiveIDFields;
@@ -1093,7 +1094,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directivePipelineSchemaErrors = $directivePipelineIDObjectErrors = [];
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
-            $directivePipeline = $directivePipelineService->getDirectivePipeline($directiveResolverInstances);
+            $directivePipeline = $this->directivePipelineService->getDirectivePipeline($directiveResolverInstances);
             $directivePipeline->resolveDirectivePipeline(
                 $this,
                 $pipelineIDsDataFields,
@@ -1266,7 +1267,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     protected function calculateFieldDirectiveNameResolvers(): array
     {
-        $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $directiveNameResolvers = [];
 
         // Directives can also be attached to the interface implemented by this typeResolver
@@ -1281,7 +1281,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             do {
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
                 /** @var DirectiveResolverInterface[] */
-                $attachedDirectiveResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::DIRECTIVE_RESOLVERS));
+                $attachedDirectiveResolvers = array_reverse($this->attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::DIRECTIVE_RESOLVERS));
                 // Order them by priority: higher priority are evaluated first
                 $extensionPriorities = array_map(
                     fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->getPriorityToAttachToClasses(),

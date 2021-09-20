@@ -9,14 +9,14 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
-use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\CustomPostMutations\Facades\CustomPostTypeMutationAPIFacade;
 use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
@@ -32,6 +32,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
+        protected NameResolverInterface $nameResolver,
+        protected UserRoleTypeAPIInterface $userRoleTypeAPI,
+        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+        protected CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -91,15 +95,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             return;
         }
 
-        $nameResolver = NameResolverFacade::getInstance();
 
         // Validate user permission
-        $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
         $userID = $vars['global-userstate']['current-user-id'];
-        $editCustomPostsCapability = $nameResolver->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
+        $editCustomPostsCapability = $this->nameResolver->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
         if (
-            !$userRoleTypeAPI->userCan(
+            !$this->userRoleTypeAPI->userCan(
                 $userID,
                 $editCustomPostsCapability
             )
@@ -110,9 +112,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
         // Check if the user can publish custom posts
         if (isset($form_data[MutationInputProperties::STATUS]) && $form_data[MutationInputProperties::STATUS] == Status::PUBLISHED) {
-            $publishCustomPostsCapability = $nameResolver->getName(LooseContractSet::NAME_PUBLISH_CUSTOMPOSTS_CAPABILITY);
+            $publishCustomPostsCapability = $this->nameResolver->getName(LooseContractSet::NAME_PUBLISH_CUSTOMPOSTS_CAPABILITY);
             if (
-                !$userRoleTypeAPI->userCan(
+                !$this->userRoleTypeAPI->userCan(
                     $userID,
                     $publishCustomPostsCapability
                 )
@@ -176,8 +178,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             return;
         }
 
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $post = $customPostTypeAPI->getCustomPost($customPostID);
+        $post = $this->customPostTypeAPI->getCustomPost($customPostID);
         if (!$post) {
             $errors[] = sprintf(
                 $this->translationAPI->__('There is no entity with ID \'%s\'', 'custompost-mutations'),
@@ -187,10 +188,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         // Check that the user has access to the edited custom post
-        $customPostTypeMutationAPI = CustomPostTypeMutationAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
         $userID = $vars['global-userstate']['current-user-id'];
-        if (!$customPostTypeMutationAPI->canUserEditCustomPost($userID, $customPostID)) {
+        if (!$this->customPostTypeMutationAPI->canUserEditCustomPost($userID, $customPostID)) {
             $errors[] = sprintf(
                 $this->translationAPI->__('You don\'t have permission to edit custom post with ID \'%s\'', 'custompost-mutations'),
                 $customPostID
@@ -254,8 +254,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function executeUpdateCustomPost(array $data): string | int | null | Error
     {
-        $customPostTypeMutationAPI = CustomPostTypeMutationAPIFacade::getInstance();
-        return $customPostTypeMutationAPI->updateCustomPost($data);
+        return $this->customPostTypeMutationAPI->updateCustomPost($data);
     }
 
     protected function createUpdateCustomPost(array $form_data, int | string $customPostID): void
@@ -264,9 +263,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     protected function getUpdateCustomPostDataLog(int | string $customPostID, array $form_data): array
     {
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $log = array(
-            'previous-status' => $customPostTypeAPI->getStatus($customPostID),
+            'previous-status' => $this->customPostTypeAPI->getStatus($customPostID),
         );
 
         return $log;
@@ -314,8 +312,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function executeCreateCustomPost(array $data): string | int | null | Error
     {
-        $customPostTypeMutationAPI = CustomPostTypeMutationAPIFacade::getInstance();
-        return $customPostTypeMutationAPI->createCustomPost($data);
+        return $this->customPostTypeMutationAPI->createCustomPost($data);
     }
 
     /**

@@ -7,6 +7,7 @@ namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\HooksAPIInterface;
@@ -20,6 +21,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         protected UserTypeAPIInterface $userTypeAPI,
+        protected CMSServiceInterface $cmsService,
     ) {
         parent::__construct(
             $translationAPI,
@@ -30,10 +32,9 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     public function retrievePasswordMessage($key, $user_login, $user_id)
     {
         $code = MutationResolverUtils::getLostPasswordCode($key, $user_login);
-        $cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
 
-        // $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        // protected ModuleProcessorManagerInterface $moduleprocessor_manager,
         // $input_name = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE])->getName([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE]);
         $input_name = POP_INPUTNAME_CODE;
         $link = GeneralUtils::addQueryArgs([
@@ -44,7 +45,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
             '<p>%s</p><br/>',
             sprintf(
                 $this->translationAPI->__('Someone requested that the password be reset for your account on <a href="%s">%s</a>. If this was a mistake, or if it was not you who requested the password reset, just ignore this email and nothing will happen.', 'pop-application'),
-                GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL()),
+                GeneralUtils::maybeAddTrailingSlash($this->cmsService->getHomeURL()),
                 $cmsapplicationapi->getSiteName()
             )
         );

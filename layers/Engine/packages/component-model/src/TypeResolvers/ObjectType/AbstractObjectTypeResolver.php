@@ -10,7 +10,6 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
@@ -709,7 +708,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     protected function calculateAllObjectTypeFieldResolvers(): array
     {
-        $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $schemaObjectTypeFieldResolvers = [];
 
         // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver
@@ -717,7 +715,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         do {
             /** @var ObjectTypeFieldResolverInterface[] */
-            $attachedObjectTypeFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);
+            $attachedObjectTypeFieldResolvers = $this->attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);
             foreach ($attachedObjectTypeFieldResolvers as $objectTypeFieldResolver) {
                 // Process the fields which have not been processed yet
                 $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
@@ -849,7 +847,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
         $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
 
-        $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $objectTypeFieldResolvers = [];
         // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver
         $class = get_class($this->getTypeResolverToCalculateSchema());
@@ -861,7 +858,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
             /** @var ObjectTypeFieldResolverInterface[] */
-            $attachedObjectTypeFieldResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS));
+            $attachedObjectTypeFieldResolvers = array_reverse($this->attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS));
             foreach ($attachedObjectTypeFieldResolvers as $objectTypeFieldResolver) {
                 $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
                 if (in_array($fieldName, $extensionFieldNames)) {
@@ -889,15 +886,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     protected function calculateFieldNamesToResolve(): array
     {
-        $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
-
         $fieldNames = [];
 
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         $class = get_class($this->getTypeResolverToCalculateSchema());
         do {
             /** @var ObjectTypeFieldResolverInterface[] */
-            $attachedObjectTypeFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);
+            $attachedObjectTypeFieldResolvers = $this->attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);
             foreach ($attachedObjectTypeFieldResolvers as $objectTypeFieldResolver) {
                 $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
                 $fieldNames = array_merge(

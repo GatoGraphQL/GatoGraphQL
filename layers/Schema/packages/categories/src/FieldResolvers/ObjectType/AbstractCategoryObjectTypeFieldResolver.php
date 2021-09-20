@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -30,6 +32,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
         protected IntScalarTypeResolver $intScalarTypeResolver,
     ) {
@@ -41,6 +45,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

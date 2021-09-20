@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -29,9 +32,12 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        DataloadingEngineInterface $dataloadingEngine,
+        DirectivePipelineServiceInterface $directivePipelineService,
         protected RootObjectTypeResolver $rootObjectTypeResolver,
         protected QueryRootTypeDataLoader $queryRootTypeDataLoader,
     ) {
@@ -41,9 +47,12 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
             $instanceManager,
             $schemaNamespacingService,
             $schemaDefinitionService,
+            $attachableExtensionManager,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $directivePipelineService,
             $rootObjectTypeResolver,
         );
     }

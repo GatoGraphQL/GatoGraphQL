@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -28,6 +30,8 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected UserObjectTypeResolver $userObjectTypeResolver,
     ) {
         parent::__construct(
@@ -38,6 +42,8 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

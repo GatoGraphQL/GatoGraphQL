@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -20,8 +21,10 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
+use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemObjectTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -33,9 +36,12 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
         protected ObjectScalarTypeResolver $objectScalarTypeResolver,
         protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
+        protected MenuTypeAPIInterface $menuTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -45,6 +51,8 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 
@@ -121,12 +129,11 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $menuTypeAPI = MenuTypeAPIFacade::getInstance();
         $menu = $object;
         switch ($fieldName) {
             case 'itemDataEntries':
                 $isFlat = $fieldArgs['flat'] ?? false;
-                $menuItems = $menuTypeAPI->getMenuItems($menu);
+                $menuItems = $this->menuTypeAPI->getMenuItems($menu);
                 $entries = array();
                 if ($menuItems) {
                     foreach ($menuItems as $menuItem) {
@@ -167,7 +174,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 }
                 return $arrangedEntries;
             case 'items':
-                $menuItems = $menuTypeAPI->getMenuItems($menu);
+                $menuItems = $this->menuTypeAPI->getMenuItems($menu);
 
                 // Save the MenuItems on the dynamic registry
                 foreach ($menuItems as $menuItem) {

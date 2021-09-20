@@ -8,6 +8,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInter
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -37,6 +38,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         protected CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver,
         protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
@@ -51,6 +53,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             $cmsService,
             $schemaNamespacingService,
             $typeRegistry,
+            $schemaDefinitionService,
         );
     }
 

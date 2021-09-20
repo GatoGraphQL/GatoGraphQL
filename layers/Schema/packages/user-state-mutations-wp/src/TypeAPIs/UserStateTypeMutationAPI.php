@@ -6,8 +6,8 @@ namespace PoPSchema\UserStateMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Facades\ErrorHandling\ErrorHelperFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Engine\ErrorHandling\ErrorHelperInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 /**
@@ -15,6 +15,12 @@ use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
  */
 class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
+    public function __construct(
+        protected TranslationAPIInterface $translationAPI,
+        protected ErrorHelperInterface $errorHelper,
+    ) {
+    }
+
     /**
      * @return mixed Result or Error
      */
@@ -35,8 +41,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
         $result = \wp_signon($credentials);
 
         // If it is an error, convert from WP_Error to Error
-        $errorHelper = ErrorHelperFacade::getInstance();
-        $result = $errorHelper->returnResultOrConvertError($result);
+        $result = $this->errorHelper->returnResultOrConvertError($result);
 
         // Set the current user already, so that it already says "user logged in" for the toplevel feedback
         if (GeneralUtils::isError($result)) {
@@ -54,13 +59,12 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
     protected function maybeChangeErrorMessage(Error $error, array $credentials): Error
     {
         // Transform the error message from WordPress
-        $translationAPI = TranslationAPIFacade::getInstance();
         $errorCode = $error->getCode();
         if ($errorCode === 'incorrect_password') {
             return new Error(
                 'incorrect_password',
                 sprintf(
-                    $translationAPI->__('The password you entered for the username \'%s\' is incorrect.', 'user-state-mutations'),
+                    $this->translationAPI->__('The password you entered for the username \'%s\' is incorrect.', 'user-state-mutations'),
                     $credentials['user_login']
                 )
             );

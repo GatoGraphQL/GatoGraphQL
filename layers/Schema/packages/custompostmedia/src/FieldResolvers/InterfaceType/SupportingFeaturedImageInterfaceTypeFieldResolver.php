@@ -8,6 +8,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldRe
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -30,6 +31,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
         protected IDScalarTypeResolver $idScalarTypeResolver,
         protected MediaObjectTypeResolver $mediaObjectTypeResolver,
@@ -42,6 +44,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
             $cmsService,
             $schemaNamespacingService,
             $typeRegistry,
+            $schemaDefinitionService,
         );
     }
 

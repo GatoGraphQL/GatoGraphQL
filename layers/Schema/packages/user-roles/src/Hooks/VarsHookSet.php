@@ -4,15 +4,32 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\Hooks;
 
-use PoPSchema\UserRoles\Constants\ModelInstanceComponentTypes;
-use PoP\Hooks\AbstractHookSet;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\Users\Routing\RouteNatures;
+use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\UserRoles\Constants\ModelInstanceComponentTypes;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoPSchema\Users\Routing\RouteNatures;
 
 class VarsHookSet extends AbstractHookSet
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected UserRoleTypeAPIInterface $userRoleTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
+
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
@@ -35,9 +52,8 @@ class VarsHookSet extends AbstractHookSet
                     )
                 );
                 if (in_array(ModelInstanceComponentTypes::USER_ROLE, $component_types)) {
-                    $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
                     /** @var string */
-                    $userRole = $userRoleTypeAPI->getTheUserRole($user_id);
+                    $userRole = $this->userRoleTypeAPI->getTheUserRole($user_id);
                     $components[] = $this->translationAPI->__('user role:', 'pop-engine') . $userRole;
                 }
                 break;

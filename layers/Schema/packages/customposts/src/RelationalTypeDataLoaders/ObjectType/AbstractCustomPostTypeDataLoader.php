@@ -4,14 +4,33 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        NameResolverInterface $nameResolver,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
+        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $instanceManager,
+            $nameResolver,
+            $moduleProcessorManager,
+        );
+    }
+
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
@@ -22,8 +41,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
 
     public function executeQuery($query, array $options = []): array
     {
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        return $customPostTypeAPI->getCustomPosts($query, $options);
+        return $this->customPostTypeAPI->getCustomPosts($query, $options);
     }
 
     protected function getOrderbyDefault()

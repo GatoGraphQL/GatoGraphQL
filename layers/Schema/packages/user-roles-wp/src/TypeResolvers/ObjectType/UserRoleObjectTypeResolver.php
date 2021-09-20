@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -24,9 +27,12 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        DataloadingEngineInterface $dataloadingEngine,
+        DirectivePipelineServiceInterface $directivePipelineService,
         protected UserRoleTypeDataLoader $userRoleTypeDataLoader,
     ) {
         parent::__construct(
@@ -35,9 +41,12 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
             $instanceManager,
             $schemaNamespacingService,
             $schemaDefinitionService,
+            $attachableExtensionManager,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $directivePipelineService,
         );
     }
 

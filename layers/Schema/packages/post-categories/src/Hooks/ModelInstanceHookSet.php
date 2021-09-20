@@ -4,16 +4,33 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\Hooks;
 
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\Routing\RouteNatures;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
-use PoPSchema\Posts\Facades\PostTypeAPIFacade;
+use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
 class ModelInstanceHookSet extends AbstractHookSet
 {
     public const HOOK_VARY_MODEL_INSTANCE_BY_CATEGORY = __CLASS__ . ':vary-model-instance-by-category';
+
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected PostTypeAPIInterface $postTypeAPI,
+        protected PostCategoryTypeAPIInterface $postCategoryTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
 
     protected function init(): void
     {
@@ -28,12 +45,10 @@ class ModelInstanceHookSet extends AbstractHookSet
         $vars = ApplicationState::getVars();
         $nature = $vars['nature'];
 
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-
         // Properties specific to each nature
         if (
             $nature == RouteNatures::CUSTOMPOST
-            && $vars['routing-state']['queried-object-post-type'] == $postTypeAPI->getPostCustomPostType()
+            && $vars['routing-state']['queried-object-post-type'] == $this->postTypeAPI->getPostCustomPostType()
         ) {
             // Single may depend on its post_type and category
             // Post and Event may be different
@@ -46,10 +61,9 @@ class ModelInstanceHookSet extends AbstractHookSet
                 )
             ) {
                 $postID = $vars['routing-state']['queried-object-id'];
-                $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
                 $categories = [];
-                foreach ($postCategoryTypeAPI->getCustomPostCategories($postID) as $cat) {
-                    $categories[] = $postCategoryTypeAPI->getCategorySlug($cat) . $postCategoryTypeAPI->getCategoryID($cat);
+                foreach ($this->postCategoryTypeAPI->getCustomPostCategories($postID) as $cat) {
+                    $categories[] = $this->postCategoryTypeAPI->getCategorySlug($cat) . $this->postCategoryTypeAPI->getCategoryID($cat);
                 }
                 $components[] = $this->translationAPI->__('categories:', 'post-categories') . implode('.', $categories);
             }

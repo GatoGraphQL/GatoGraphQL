@@ -5,12 +5,25 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
 use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
+use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
+use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ModuleFilters\ModulePaths;
+use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
@@ -19,6 +32,37 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     use FormMultipleInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_DATES = 'filterinput-dates';
+
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        ModulePathHelpersInterface $modulePathHelpers,
+        ModuleFilterManagerInterface $moduleFilterManager,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
+        CMSServiceInterface $cmsService,
+        NameResolverInterface $nameResolver,
+        DataloadHelperServiceInterface $dataloadHelperService,
+        RequestHelperServiceInterface $requestHelperService,
+        ModulePaths $modulePaths,
+        protected FormInputHelperServiceInterface $formInputHelperService,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $modulePathHelpers,
+            $moduleFilterManager,
+            $moduleProcessorManager,
+            $cmsService,
+            $nameResolver,
+            $dataloadHelperService,
+            $requestHelperService,
+            $modulePaths,
+        );
+    }
 
     public function getModulesToProcess(): array
     {
@@ -56,7 +100,6 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
     {
         // Replace the "date" item with "date-from" and "date-to"
-        $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_DATES:
                 $name = $this->getName($module);
@@ -70,7 +113,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
                 // Add the other elements, using the original documantation as placeholder
                 $schemaDefinitionItems[] = array_merge(
                     [
-                        SchemaDefinition::ARGNAME_NAME => $formInputHelperService->getMultipleInputName($name, $subnames[0]),
+                        SchemaDefinition::ARGNAME_NAME => $this->formInputHelperService->getMultipleInputName($name, $subnames[0]),
                     ],
                     $schemaDefinition,
                     [
@@ -82,7 +125,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
                 );
                 $schemaDefinitionItems[] = array_merge(
                     [
-                        SchemaDefinition::ARGNAME_NAME => $formInputHelperService->getMultipleInputName($name, $subnames[1]),
+                        SchemaDefinition::ARGNAME_NAME => $this->formInputHelperService->getMultipleInputName($name, $subnames[1]),
                     ],
                     $schemaDefinition,
                     [
@@ -106,15 +149,14 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
 
     public function getSchemaFilterInputDescription(array $module): ?string
     {
-        $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_DATES:
                 $name = $this->getName($module);
                 $subnames = $this->getInputOptions($module)['subnames'];
                 return sprintf(
                     $this->translationAPI->__('Search for elements between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\', in format \'%s\'', 'pop-engine'),
-                    $formInputHelperService->getMultipleInputName($name, $subnames[0]),
-                    $formInputHelperService->getMultipleInputName($name, $subnames[1]),
+                    $this->formInputHelperService->getMultipleInputName($name, $subnames[0]),
+                    $this->formInputHelperService->getMultipleInputName($name, $subnames[1]),
                     $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat'))
                 );
         }

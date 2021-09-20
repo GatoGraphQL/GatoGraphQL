@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
-use PoP\CacheControl\Facades\CacheControlManagerFacade;
+use PoP\CacheControl\Managers\CacheControlManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
@@ -27,6 +27,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
         DirectiveRegistryInterface $directiveRegistry,
         protected CacheControlBlock $cacheControlBlock,
         protected BlockHelpers $blockHelpers,
+        protected CacheControlManagerInterface $cacheControlManager,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -62,7 +63,6 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
             $cclPostID,
             $this->cacheControlBlock
         );
-        $cacheControlManager = CacheControlManagerFacade::getInstance();
         // The "Cache Control" type contains the fields/directives and the max-age
         foreach ($cclBlockItems as $cclBlockItem) {
             $maxAge = $cclBlockItem['attrs'][CacheControlBlock::ATTRIBUTE_NAME_CACHE_CONTROL_MAX_AGE] ?? null;
@@ -77,7 +77,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
                             )
                         )
                     ) {
-                        $cacheControlManager->addEntriesForFields(
+                        $this->cacheControlManager->addEntriesForFields(
                             $entriesForFields
                         );
                     }
@@ -93,7 +93,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
                             )
                         ))
                     ) {
-                        $cacheControlManager->addEntriesForDirectives(
+                        $this->cacheControlManager->addEntriesForDirectives(
                             $entriesForDirectives
                         );
                     }

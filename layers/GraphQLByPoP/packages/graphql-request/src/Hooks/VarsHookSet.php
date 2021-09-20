@@ -5,16 +5,19 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLRequest\Hooks;
 
 use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
+use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use GraphQLByPoP\GraphQLRequest\Facades\GraphQLPersistedQueryManagerFacade;
+use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\API\Schema\QueryInputs;
 use PoP\API\State\ApplicationStateUtils;
 use PoP\ComponentModel\CheckpointProcessors\MutationCheckpointProcessor;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Hooks\AbstractHookSet;
@@ -29,6 +32,9 @@ class VarsHookSet extends AbstractHookSet
         InstanceManagerInterface $instanceManager,
         protected QueryRetrieverInterface $queryRetrieverInterface,
         protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
+        protected GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager,
+        protected FeedbackMessageStoreInterface $feedbackMessageStore,
+        protected GraphQLQueryConvertorInterface $graphQLQueryConvertor,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -104,8 +110,7 @@ class VarsHookSet extends AbstractHookSet
         }
         // If the "query" param is set, this case is already handled in API package
         // Unless it is a persisted query for GraphQL, then deal with it here
-        $graphQLPersistedQueryManager = GraphQLPersistedQueryManagerFacade::getInstance();
-        $isGraphQLPersistedQuery = isset($_REQUEST[QueryInputs::QUERY]) && $graphQLPersistedQueryManager->isPersistedQuery($_REQUEST[QueryInputs::QUERY]);
+        $isGraphQLPersistedQuery = isset($_REQUEST[QueryInputs::QUERY]) && $this->graphQLPersistedQueryManager->isPersistedQuery($_REQUEST[QueryInputs::QUERY]);
         if (
             !isset($_REQUEST[QueryInputs::QUERY])
             || ComponentConfiguration::disableGraphQLAPIForPoP()
@@ -121,9 +126,9 @@ class VarsHookSet extends AbstractHookSet
                 $graphQLQuery = $variables = $operationName = null;
                 // Get the query name, and extract the query from the PersistedQueryManager
                 $query = $_REQUEST[QueryInputs::QUERY] ?? '';
-                $queryName = $graphQLPersistedQueryManager->getPersistedQueryName($query);
-                if ($graphQLPersistedQueryManager->hasPersistedQuery($queryName)) {
-                    $graphQLQuery = $graphQLPersistedQueryManager->getPersistedQuery($queryName);
+                $queryName = $this->graphQLPersistedQueryManager->getPersistedQueryName($query);
+                if ($this->graphQLPersistedQueryManager->hasPersistedQuery($queryName)) {
+                    $graphQLQuery = $this->graphQLPersistedQueryManager->getPersistedQuery($queryName);
                 }
             } else {
                 list(
@@ -144,11 +149,10 @@ class VarsHookSet extends AbstractHookSet
                 // since the "field ... does not exist" already takes care of it,
                 // here for GraphQL and also for PoP.
                 // Show error only for the other cases
-                $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
                 $errorMessage = $disablePoPQuery ?
                     $this->translationAPI->__('No query was provided. (The body has no query, and the query provided as a URL param is ignored because of configuration)', 'graphql-request')
                     : $this->translationAPI->__('The query in the body is empty', 'graphql-request');
-                $feedbackMessageStore->addQueryError($errorMessage);
+                $this->feedbackMessageStore->addQueryError($errorMessage);
             }
         }
     }
@@ -161,11 +165,10 @@ class VarsHookSet extends AbstractHookSet
         // Take the existing variables from $vars, so they must be set in advance
         $variables = $vars['variables'] ?? [];
         // Convert from GraphQL syntax to Field Query syntax
-        $graphQLQueryConvertor = GraphQLQueryConvertorFacade::getInstance();
         list(
             $operationType,
             $fieldQuery
-        ) = $graphQLQueryConvertor->convertFromGraphQLToFieldQuery(
+        ) = $this->graphQLQueryConvertor->convertFromGraphQLToFieldQuery(
             $graphQLQuery,
             $variables,
             ComponentConfiguration::enableMultipleQueryExecution(),

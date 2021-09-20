@@ -12,6 +12,7 @@ use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
+use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\ComponentModel\Constants\Params;
 use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -45,6 +46,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         protected FeedbackMessageStoreInterface $feedbackMessageStore,
         protected QueryParserInterface $queryParser,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected PersistedFragmentManagerInterface $persistedFragmentManager,
     ) {
     }
 
@@ -453,8 +455,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
 
     protected function getFragmentsFromCatalogue(): array
     {
-        $fragmentCatalogueManager = PersistedFragmentManagerFacade::getInstance();
-        return $fragmentCatalogueManager->getPersistedFragments();
+        return $this->persistedFragmentManager->getPersistedFragments();
     }
 
     protected function getFragmentsFromRequest(): array

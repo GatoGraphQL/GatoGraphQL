@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 
 /**
  * Module List Table Action
@@ -21,6 +22,13 @@ class ModuleListTableAction extends AbstractListTableAction
      */
     private array $mutatedModuleIDs = [];
     private bool $mutatedEnabled = false;
+
+    protected UserSettingsManagerInterface $userSettingsManager;
+
+    public function __construct()
+    {
+        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
+    }
 
     /**
      * If executing an operation, print a success message
@@ -143,12 +151,11 @@ class ModuleListTableAction extends AbstractListTableAction
      */
     protected function setModulesEnabledValue(array $moduleIDs, bool $isEnabled): void
     {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $moduleIDValues = [];
         foreach ($moduleIDs as $moduleID) {
             $moduleIDValues[$moduleID] = $isEnabled;
         }
-        $userSettingsManager->setModulesEnabled($moduleIDValues);
+        $this->userSettingsManager->setModulesEnabled($moduleIDValues);
 
         // Flags to indicate that data was mutated, which and how
         $this->mutatedModuleIDs = $moduleIDs;
@@ -162,8 +169,7 @@ class ModuleListTableAction extends AbstractListTableAction
                 \flush_rewrite_rules();
 
                 // Update the timestamp
-                $userSettingsManager = UserSettingsManagerFacade::getInstance();
-                $userSettingsManager->storeContainerTimestamp();
+                $this->userSettingsManager->storeContainerTimestamp();
             },
             PHP_INT_MAX
         );

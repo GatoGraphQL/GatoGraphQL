@@ -10,6 +10,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPSchema\PostCategoryMutations\Facades\PostCategoryTypeMutationAPIFacade;
@@ -22,6 +23,7 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
         protected PostObjectTypeResolver $postObjectTypeResolver,
         protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
         protected PostTypeAPIInterface $postTypeAPI,
@@ -30,6 +32,7 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
             $hooksAPI,
             $translationAPI,
             $instanceManager,
+            $customPostTypeAPI,
         );
     }
 

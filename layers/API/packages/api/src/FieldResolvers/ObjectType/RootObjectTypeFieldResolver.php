@@ -4,32 +4,36 @@ declare(strict_types=1);
 
 namespace PoP\API\FieldResolvers\ObjectType;
 
-use PoP\Translation\TranslationAPIInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
-use PoP\API\Facades\PersistedFragmentManagerFacade;
-use PoP\API\Facades\PersistedQueryManagerFacade;
+use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
+use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\TypeResolvers\EnumType\SchemaFieldShapeEnumTypeResolver;
+use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Cache\CacheUtils;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected CacheInterface $persistentCache;
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -38,9 +42,14 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver,
         protected ObjectScalarTypeResolver $objectScalarTypeResolver,
+        protected PersistedFragmentManagerInterface $fragmentCatalogueManager,
+        protected PersistedQueryManagerInterface $queryCatalogueManager,
     ) {
+        $this->persistentCache = PersistentCacheFacade::getInstance();
         parent::__construct(
             $translationAPI,
             $hooksAPI,
@@ -49,6 +58,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 
@@ -160,7 +171,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'fullSchema':
                 // Attempt to retrieve from the cache, if enabled
                 if ($useCache = ComponentConfiguration::useSchemaDefinitionCache()) {
-                    $persistentCache = PersistentCacheFacade::getInstance();
                     // Use different caches for the normal and namespaced schemas, or
                     // it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
                     $cacheType = CacheTypes::FULLSCHEMA_DEFINITION;
@@ -170,19 +180,18 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 }
                 $schemaDefinition = null;
                 if ($useCache) {
-                    if ($persistentCache->hasCache($cacheKey, $cacheType)) {
-                        $schemaDefinition = $persistentCache->getCache($cacheKey, $cacheType);
+                    if ($this->persistentCache->hasCache($cacheKey, $cacheType)) {
+                        $schemaDefinition = $this->persistentCache->getCache($cacheKey, $cacheType);
                     }
                 }
                 if ($schemaDefinition === null) {
-                    $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
                     $stackMessages = [
                         'processed' => [],
                     ];
                     $generalMessages = [
                         'processed' => [],
                     ];
-                    $rootTypeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($objectTypeResolver);
+                    $rootTypeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($objectTypeResolver);
                     // Normalize properties in $fieldArgs with their defaults
                     // By default make it deep. To avoid it, must pass argument (deep:false)
                     // By default, use the "flat" shape
@@ -242,18 +251,16 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     }
 
                     // Add the Fragment Catalogue
-                    $fragmentCatalogueManager = PersistedFragmentManagerFacade::getInstance();
-                    $persistedFragments = $fragmentCatalogueManager->getPersistedFragmentsForSchema();
+                    $persistedFragments = $this->fragmentCatalogueManager->getPersistedFragmentsForSchema();
                     $schemaDefinition[SchemaDefinition::ARGNAME_PERSISTED_FRAGMENTS] = $persistedFragments;
 
                     // Add the Query Catalogue
-                    $queryCatalogueManager = PersistedQueryManagerFacade::getInstance();
-                    $persistedQueries = $queryCatalogueManager->getPersistedQueriesForSchema();
+                    $persistedQueries = $this->queryCatalogueManager->getPersistedQueriesForSchema();
                     $schemaDefinition[SchemaDefinition::ARGNAME_PERSISTED_QUERIES] = $persistedQueries;
 
                     // Store in the cache
                     if ($useCache) {
-                        $persistentCache->storeCache($cacheKey, $cacheType, $schemaDefinition);
+                        $this->persistentCache->storeCache($cacheKey, $cacheType, $schemaDefinition);
                     }
                 }
 

@@ -7,6 +7,7 @@ namespace PoP\API\Registries;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Registries\SchemaDefinitionRegistryInterface;
+use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -14,19 +15,23 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\Cache\CacheUtils;
-use PoP\Engine\ObjectFacades\RootObjectFacade;
+use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Translation\TranslationAPIInterface;
 
 class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
 {
+    protected CacheInterface $persistentCache;
+
     public function __construct(
         protected FeedbackMessageStoreInterface $feedbackMessageStore,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected TranslationAPIInterface $translationAPI,
         protected InstanceManagerInterface $instanceManager,
         protected RootObjectTypeResolver $rootTypeResolver,
+        protected Root $root,
     ) {
+        $this->persistentCache = PersistentCacheFacade::getInstance();
     }
 
     /**
@@ -59,7 +64,6 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
         if (!array_key_exists($key, $this->schemaInstances)) {
             // Attempt to retrieve from the cache, if enabled
             if ($useCache = ComponentConfiguration::useSchemaDefinitionCache()) {
-                $persistentCache = PersistentCacheFacade::getInstance();
                 // Use different caches for the normal and namespaced schemas,  or
                 // it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
                 $cacheType = CacheTypes::SCHEMA_DEFINITION;
@@ -69,15 +73,14 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
             }
             $schemaDefinition = null;
             if ($useCache) {
-                if ($persistentCache->hasCache($cacheKey, $cacheType)) {
-                    $schemaDefinition = $persistentCache->getCache($cacheKey, $cacheType);
+                if ($this->persistentCache->hasCache($cacheKey, $cacheType)) {
+                    $schemaDefinition = $this->persistentCache->getCache($cacheKey, $cacheType);
                 }
             }
             // If either not using cache, or using but the value had not been cached, then calculate the value
             if ($schemaDefinition === null) {
-                $root = RootObjectFacade::getInstance();
                 $schemaDefinition = $this->rootTypeResolver->resolveValue(
-                    $root,
+                    $this->root,
                     $this->fieldQueryInterpreter->getField('fullSchema', $fieldArgs ?? []),
                     null,
                     null,
@@ -100,7 +103,7 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
                     $schemaDefinition = null;
                 } elseif ($useCache) {
                     // Store in the cache
-                    $persistentCache->storeCache($cacheKey, $cacheType, $schemaDefinition);
+                    $this->persistentCache->storeCache($cacheKey, $cacheType, $schemaDefinition);
                 }
             }
             // Assign to in-memory cache

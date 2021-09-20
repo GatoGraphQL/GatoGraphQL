@@ -5,30 +5,40 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\ConditionalOnComponent\API\RouteModuleProcessors;
 
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
-use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
-use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
 use PoPSchema\Categories\Routing\RouteNatures as CategoryRouteNatures;
-use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostCategories\ComponentConfiguration;
+use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
+use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
+use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        protected PostCategoryTypeAPIInterface $postCategoryTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+        );
+    }
+
     /**
      * @return array<string, array<array>>
      */
     public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
-        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         $ret[CategoryRouteNatures::CATEGORY][] = [
             'module' => [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY],
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing-state' => [
-                    'taxonomy-name' => $postCategoryTypeAPI->getPostCategoryTaxonomyName(),
+                    'taxonomy-name' => $this->postCategoryTypeAPI->getPostCategoryTaxonomyName(),
                 ],
             ],
         ];
@@ -41,7 +51,6 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
-        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         $routemodules = array(
             ComponentConfiguration::getPostCategoriesRoute() => [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
         );
@@ -62,7 +71,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'routing-state' => [
-                        'taxonomy-name' => $postCategoryTypeAPI->getPostCategoryTaxonomyName(),
+                        'taxonomy-name' => $this->postCategoryTypeAPI->getPostCategoryTaxonomyName(),
                     ],
                 ],
             ];

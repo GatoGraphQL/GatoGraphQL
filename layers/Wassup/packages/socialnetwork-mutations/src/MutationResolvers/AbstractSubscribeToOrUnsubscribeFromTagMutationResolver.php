@@ -4,10 +4,23 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 
 abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected PostTagTypeAPIInterface $postTagTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+
     public function validateErrors(array $form_data): ?array
     {
         $errors = parent::validateErrors($form_data);
@@ -15,8 +28,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
             $target_id = $form_data['target_id'];
 
             // Make sure the post exists
-            $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-            $target = $postTagTypeAPI->getTag($target_id);
+            $target = $this->postTagTypeAPI->getTag($target_id);
             if (!$target) {
                 $errors[] = $this->translationAPI->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
             }

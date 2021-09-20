@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UpvoteCustomPostMutationResolver;
 
 class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
@@ -19,6 +20,7 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
         protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
     ) {
         parent::__construct(
@@ -26,6 +28,7 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
             $translationAPI,
             $instanceManager,
             $mutationResolutionManager,
+            $customPostTypeAPI,
         );
     }
 
@@ -41,10 +44,9 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
 
     public function getSuccessString(string | int $result_id): ?string
     {
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         return sprintf(
             $this->translationAPI->__('You have up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $customPostTypeAPI->getTitle($result_id)
+            $this->customPostTypeAPI->getTitle($result_id)
         );
     }
 }

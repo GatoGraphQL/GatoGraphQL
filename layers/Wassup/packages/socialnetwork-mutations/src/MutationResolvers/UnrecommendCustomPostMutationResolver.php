@@ -15,7 +15,6 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
             $vars = ApplicationState::getVars();
-            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $user_id = $vars['global-userstate']['current-user-id'];
             $target_id = $form_data['target_id'];
 
@@ -24,7 +23,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('You had not recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $customPostTypeAPI->getTitle($target_id)
+                    $this->customPostTypeAPI->getTitle($target_id)
                 );
             }
         }

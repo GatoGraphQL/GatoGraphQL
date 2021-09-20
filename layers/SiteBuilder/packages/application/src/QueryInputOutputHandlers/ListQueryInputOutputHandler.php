@@ -4,20 +4,25 @@ declare(strict_types=1);
 
 namespace PoP\Application\QueryInputOutputHandlers;
 
+use PoP\Application\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
-use PoP\Application\ModuleProcessors\DataloadingConstants;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler
 {
+    public function __construct(
+        protected CMSServiceInterface $cmsService,
+    ) {
+    }
+
     protected function getLimit()
     {
-        $cmsService = CMSServiceFacade::getInstance();
-        return $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit'));
+        return $this->cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit'));
     }
 
     public function getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array

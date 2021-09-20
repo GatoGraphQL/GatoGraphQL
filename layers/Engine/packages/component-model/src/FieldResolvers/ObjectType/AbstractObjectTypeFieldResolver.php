@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\CheckpointSets\CheckpointSets;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
@@ -27,8 +25,10 @@ use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -62,6 +62,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         protected NameResolverInterface $nameResolver,
         protected CMSServiceInterface $cmsService,
         protected SemverHelperServiceInterface $semverHelperService,
+        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
+        protected EngineInterface $engine,
     ) {
         parent::__construct(
             $translationAPI,
@@ -226,8 +228,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldTypeResolver($objectTypeResolver, $fieldName);
         }
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        return $schemaDefinitionService->getDefaultTypeResolver();
+        return $this->schemaDefinitionService->getDefaultTypeResolver();
     }
 
     /**
@@ -745,8 +746,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     ): ?array {
         // Can perform validation through checkpoints
         if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
-            $engine = EngineFacade::getInstance();
-            $validation = $engine->validateCheckpoints($checkpoints);
+            $validation = $this->engine->validateCheckpoints($checkpoints);
             if (GeneralUtils::isError($validation)) {
                 $error = $validation;
                 $errorMessage = $error->getMessageOrCode();

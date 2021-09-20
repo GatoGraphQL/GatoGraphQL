@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomyMeta\TypeAPIs;
 
+use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\TaxonomyMeta\ComponentConfiguration;
 use PoPSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
-use PoPSchema\SchemaCommons\Facades\Services\AllowOrDenySettingsServiceFacade;
 
 abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
 {
+    public function __construct(
+        protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
+    ) {
+    }
+
     final public function getTaxonomyTermMeta(string | int $termID, string $key, bool $single = false): mixed
     {
         /**
@@ -18,8 +23,7 @@ abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterfa
          */
         $entries = ComponentConfiguration::getTaxonomyMetaEntries();
         $behavior = ComponentConfiguration::getTaxonomyMetaBehavior();
-        $allowOrDenySettingsService = AllowOrDenySettingsServiceFacade::getInstance();
-        if (!$allowOrDenySettingsService->isEntryAllowed($key, $entries, $behavior)) {
+        if (!$this->allowOrDenySettingsService->isEntryAllowed($key, $entries, $behavior)) {
             return null;
         }
         return $this->doGetTaxonomyMeta($termID, $key, $single);

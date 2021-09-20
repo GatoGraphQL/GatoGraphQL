@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
+use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
@@ -23,6 +23,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
         protected SchemaObjectTypeResolver $schemaObjectTypeResolver,
+        protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -50,7 +51,6 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
 
     protected function &getSchemaDefinition(string $id): ?array
     {
-        $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
-        return $schemaDefinitionReferenceRegistry->getFullSchemaDefinition();
+        return $this->schemaDefinitionReferenceRegistry->getFullSchemaDefinition();
     }
 }

@@ -4,17 +4,51 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\QueryableObjectTypeFieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements QueryableObjectTypeFieldSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
+
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
+        protected ModuleProcessorManagerInterface $moduleProcessorManager,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
+        );
+    }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
@@ -76,9 +110,8 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     {
         // If there is a filter, and it has many filterInputs, then by default we'd rather not enable ordering
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             /** @var FilterInputContainerModuleProcessorInterface */
-            $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($filterDataloadingModule);
+            $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
             if (count($filterDataModuleProcessor->getFilterInputModules($filterDataloadingModule)) > 1) {
                 return false;
             }
@@ -107,9 +140,8 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     {
         $filteringQueryArgs = [];
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             /** @var FilterDataModuleProcessorInterface */
-            $filterDataModuleProcessor = $moduleprocessor_manager->getProcessor($filterDataloadingModule);
+            $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
             $filterDataModuleProcessor->filterHeadmoduleDataloadQueryArgs($filterDataloadingModule, $filteringQueryArgs, $fieldArgs);
         }
         return $filteringQueryArgs;

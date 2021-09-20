@@ -4,28 +4,32 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use WP_Post;
-use WP_Block_Editor_Context;
-use GraphQLAPI\GraphQLAPI\Services\Menus\AbstractMenu;
-use PoP\ComponentModel\State\ApplicationState;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Services\Menus\AbstractMenu;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
+use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use WP_Block_Editor_Context;
+use WP_Post;
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
+    protected UserSettingsManagerInterface $userSettingsManager;
+
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
         protected UserAuthorizationInterface $userAuthorization,
         protected CPTUtils $cptUtils,
     ) {
+        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
     /**
      * Add the hook to initialize the different post types
@@ -126,8 +130,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                     if ($post->post_status == 'auto-draft') {
                         return;
                     }
-                    $userSettingsManager = UserSettingsManagerFacade::getInstance();
-                    $userSettingsManager->storeOperationalTimestamp();
+                    $this->userSettingsManager->storeOperationalTimestamp();
                 },
                 10,
                 2

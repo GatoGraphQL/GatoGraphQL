@@ -8,12 +8,26 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserState\State\ApplicationStateUtils;
-use PoPSchema\UserStateMutations\Facades\UserStateTypeMutationAPIFacade;
+use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class LoginMutationResolver extends AbstractMutationResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected UserTypeAPIInterface $userTypeAPI,
+        protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+
     public function validateErrors(array $form_data): ?array
     {
         $errors = [];
@@ -42,23 +56,20 @@ class LoginMutationResolver extends AbstractMutationResolver
     public function executeMutation(array $form_data): mixed
     {
         // If the user is already logged in, then return the error
-        $userTypeAPI = UserTypeAPIFacade::getInstance();
-        $userStateTypeMutationAPI = UserStateTypeMutationAPIFacade::getInstance();
-
         $username_or_email = $form_data[MutationInputProperties::USERNAME_OR_EMAIL];
         $pwd = $form_data[MutationInputProperties::PASSWORD];
 
         // Find out if it was a username or an email that was provided
         $is_email = strpos($username_or_email, '@');
         if ($is_email) {
-            $user = $userTypeAPI->getUserByEmail($username_or_email);
+            $user = $this->userTypeAPI->getUserByEmail($username_or_email);
             if (!$user) {
                 return new Error(
                     'no-user',
                     $this->translationAPI->__('There is no user registered with that email address.')
                 );
             }
-            $username = $userTypeAPI->getUserLogin($user);
+            $username = $this->userTypeAPI->getUserLogin($user);
         } else {
             $username = $username_or_email;
         }
@@ -68,7 +79,7 @@ class LoginMutationResolver extends AbstractMutationResolver
             'password' => $pwd,
             'remember' => true,
         );
-        $loginResult = $userStateTypeMutationAPI->login($credentials);
+        $loginResult = $this->userStateTypeMutationAPI->login($credentials);
 
         if (GeneralUtils::isError($loginResult)) {
             return $loginResult;
@@ -79,7 +90,7 @@ class LoginMutationResolver extends AbstractMutationResolver
         // Modify the routing-state with the newly logged in user info
         ApplicationStateUtils::setUserStateVars(ApplicationState::$vars);
 
-        $userID = $userTypeAPI->getUserId($user);
+        $userID = $this->userTypeAPI->getUserId($user);
         $this->hooksAPI->doAction('gd:user:loggedin', $userID);
         return $userID;
     }

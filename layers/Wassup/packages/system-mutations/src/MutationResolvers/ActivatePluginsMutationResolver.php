@@ -5,16 +5,31 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
+use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected CMSServiceInterface $cmsService,
+        protected ApplicationInfoInterface $applicationInfo,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code
     private function runActivatePlugin($plugin)
     {
-        $cmsService = CMSServiceFacade::getInstance();
-        $current = $cmsService->getOption('active_plugins');
+        $current = $this->cmsService->getOption('active_plugins');
         // @todo Rename package!
         // `plugin_basename` is a WordPress function,
         // so this package must be called "system-mutations-wp",
@@ -44,7 +59,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         );
 
         // Iterate all plugins and check what version they require to be installed. If it matches the current version => activate
-        $version = ApplicationInfoFacade::getInstance()->getVersion();
+        $version = $this->applicationInfo->getVersion();
         $activated = [];
         foreach ($plugin_version as $plugin => $activate_version) {
             if ($activate_version == $version) {

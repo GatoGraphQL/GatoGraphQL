@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -35,6 +37,8 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
     ) {
@@ -46,6 +50,8 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

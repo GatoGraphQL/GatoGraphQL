@@ -5,11 +5,24 @@ declare(strict_types=1);
 namespace PoPSitesWassup\FlagMutations\MutationResolvers;
 
 use PoP\Application\FunctionAPIFactory;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 
 class FlagCustomPostMutationResolver extends AbstractMutationResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+
     public function validateErrors(array $form_data): ?array
     {
         $errors = [];
@@ -31,8 +44,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
             $errors[] = $this->translationAPI->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
-            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $target = $customPostTypeAPI->getCustomPost($form_data['target-id']);
+            $target = $this->customPostTypeAPI->getCustomPost($form_data['target-id']);
             if (!$target) {
                 $errors[] = $this->translationAPI->__('The requested post does not exist.', 'pop-genericforms');
             }
@@ -51,8 +63,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
     protected function doExecute($form_data)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
+        $to = \PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $subject = sprintf(
             $this->translationAPI->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
@@ -80,7 +91,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
         ) . sprintf(
             $placeholder,
             $this->translationAPI->__('Post title', 'pop-genericforms'),
-            $customPostTypeAPI->getTitle($form_data['target-id'])
+            $this->customPostTypeAPI->getTitle($form_data['target-id'])
         ) . sprintf(
             $placeholder,
             $this->translationAPI->__('Why flag', 'pop-genericforms'),

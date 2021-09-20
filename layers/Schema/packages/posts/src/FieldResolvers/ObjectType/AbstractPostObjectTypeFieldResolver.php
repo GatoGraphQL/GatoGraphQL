@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -21,6 +24,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
+use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -39,8 +43,12 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
         protected IntScalarTypeResolver $intScalarTypeResolver,
         protected PostObjectTypeResolver $postObjectTypeResolver,
+        protected PostTypeAPIInterface $postTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -50,6 +58,9 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
+            $moduleProcessorManager,
         );
     }
 
@@ -202,7 +213,6 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
             $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
@@ -210,11 +220,11 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         switch ($fieldName) {
             case 'posts':
             case 'postsForAdmin':
-                return $postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'postCount':
             case 'postCountForAdmin':
-                return $postTypeAPI->getPostCount($query);
+                return $this->postTypeAPI->getPostCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

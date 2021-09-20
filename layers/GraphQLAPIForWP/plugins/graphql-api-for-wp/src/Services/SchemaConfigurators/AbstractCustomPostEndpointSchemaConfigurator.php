@@ -12,11 +12,14 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
 abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
 {
+    protected UserSettingsManagerInterface $userSettingsManager;
+
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
@@ -28,6 +31,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
             $moduleRegistry,
             $blockHelpers,
         );
+        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -77,8 +81,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
      */
     protected function getUserSettingSchemaConfigurationID(): ?int
     {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $schemaConfigurationID = $userSettingsManager->getSetting(
+        $schemaConfigurationID = $this->userSettingsManager->getSetting(
             SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
             ModuleSettingOptions::DEFAULT_VALUE
         );

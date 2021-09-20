@@ -5,17 +5,33 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
+use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class NestedMutationHookSet extends AbstractHookSet
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
+
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
@@ -49,12 +65,11 @@ class NestedMutationHookSet extends AbstractHookSet
         $objectTypeResolver = $objectTypeOrInterfaceTypeResolver;
         /** @var ObjectTypeFieldResolverInterface */
         $objectTypeFieldResolver = $objectTypeOrInterfaceTypeFieldResolver;
-        $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
         if (
             $include
             && (
-                $objectTypeResolver !== $graphQLSchemaDefinitionService->getRootTypeResolver()
-                && $objectTypeResolver !== $graphQLSchemaDefinitionService->getMutationRootTypeResolver()
+                $objectTypeResolver !== $this->graphQLSchemaDefinitionService->getRootTypeResolver()
+                && $objectTypeResolver !== $this->graphQLSchemaDefinitionService->getMutationRootTypeResolver()
             )
             && $objectTypeFieldResolver->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null
         ) {

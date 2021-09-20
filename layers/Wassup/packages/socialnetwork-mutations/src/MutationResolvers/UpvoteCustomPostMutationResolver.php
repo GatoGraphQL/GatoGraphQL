@@ -8,6 +8,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\UserMeta\Utils;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\DownvoteCustomPostMutationResolver;
 
@@ -16,11 +17,13 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
         protected DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver,
     ) {
         parent::__construct(
             $translationAPI,
             $hooksAPI,
+            $customPostTypeAPI,
         );
     }
 
@@ -29,7 +32,6 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
             $vars = ApplicationState::getVars();
-            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $user_id = $vars['global-userstate']['current-user-id'];
             $target_id = $form_data['target_id'];
 
@@ -38,7 +40,7 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
             if (in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('You have already up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $customPostTypeAPI->getTitle($target_id)
+                    $this->customPostTypeAPI->getTitle($target_id)
                 );
             }
         }

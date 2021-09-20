@@ -4,18 +4,38 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 
-use PoP\EditPosts\HelperAPIFactory;
-use PoPSchema\Posts\Constants\InputNames;
-use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSitesWassup\CustomPostMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
-use PoP\ComponentModel\MutationResolverBridges\AbstractCRUDComponentMutationResolverBridge;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
+use PoP\ComponentModel\MutationResolverBridges\AbstractCRUDComponentMutationResolverBridge;
+use PoP\EditPosts\HelperAPIFactory;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\Posts\Constants\InputNames;
+use PoPSitesWassup\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends AbstractCRUDComponentMutationResolverBridge
 {
     public const HOOK_FORM_DATA_CREATE_OR_UPDATE = __CLASS__ . ':form-data-create-or-update';
+
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        MutationResolutionManagerInterface $mutationResolutionManager,
+        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+            $mutationResolutionManager,
+        );
+    }
 
     protected function modifyDataProperties(array &$data_properties, string | int $result_id): void
     {
@@ -87,13 +107,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         if (defined('POP_VOLUNTEERING_INITIALIZED')) {
             if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                 if ($this->volunteer()) {
-                    $form_data[MutationInputProperties::VOLUNTEERSNEEDED] = $this->moduleProcessorManager->getProcessor([\GD_Custom_Module_Processor_SelectFormInputs::class, \GD_Custom_Module_Processor_SelectFormInputs::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT])->getValue([\GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT]);
+                    $form_data[MutationInputProperties::VOLUNTEERSNEEDED] = $this->moduleProcessorManager->getProcessor([\GD_Custom_Module_Processor_SelectFormInputs::class, \GD_Custom_Module_Processor_SelectFormInputs::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT])->getValue([\GD_Custom_Module_Processor_SelectFormInputs::class, \GD_Custom_Module_Processor_SelectFormInputs::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT]);
                 }
             }
         }
 
         if (\PoP_ApplicationProcessors_Utils::addAppliesto()) {
-            $appliesto = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_APPLIESTO])->getValue([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_APPLIESTO]);
+            $appliesto = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_APPLIESTO])->getValue([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_APPLIESTO]);
             $form_data[MutationInputProperties::APPLIESTO] = $appliesto ?? array();
         }
 
@@ -156,12 +176,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 
     public function getSuccessString(string | int $result_id): ?string
     {
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $status = $customPostTypeAPI->getStatus($result_id);
+        $status = $this->customPostTypeAPI->getStatus($result_id);
         if ($status == Status::PUBLISHED) {
             $success_string = sprintf(
                 $this->translationAPI->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
-                $customPostTypeAPI->getPermalink($result_id),
+                $this->customPostTypeAPI->getPermalink($result_id),
                 getReloadurlLinkattrs()
             );
         } elseif ($status == Status::DRAFT) {

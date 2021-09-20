@@ -19,8 +19,7 @@ class Page extends AbstractModuleFilter
     {
 
         // Exclude until reaching the pageSection
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($module);
+        $processor = $this->moduleProcessorManager->getProcessor($module);
         return !($processor instanceof PageInterface);
     }
 }
