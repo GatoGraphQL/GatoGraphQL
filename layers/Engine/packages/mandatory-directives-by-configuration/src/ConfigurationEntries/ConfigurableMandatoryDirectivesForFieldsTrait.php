@@ -33,16 +33,13 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
 
     /**
      * Configuration entries
-     * 
-     * @param InterfaceTypeResolverInterface[] $interfaceTypeResolvers
      */
     final protected function getEntries(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         string $fieldName
     ): array {
-        return $this->getMatchingEntries(
-            $this->getConfigurationEntries(),
+        return $this->getEntriesByTypeAndInterfaces(
             $objectTypeOrInterfaceTypeResolver,
             /**
              * Pass the list of all the interfaces implemented by the objectTypeOrInterfaceTypeFieldResolver,
@@ -52,6 +49,24 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
              * on the InterfaceTypeFieldResolver once again, so we'd get a recursion.
              */
             $objectTypeOrInterfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers(),
+            $fieldName
+        );
+    }
+
+    /**
+     * Configuration entries
+     * 
+     * @param InterfaceTypeResolverInterface[] $interfaceTypeResolvers
+     */
+    final protected function getEntriesByTypeAndInterfaces(
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        array $interfaceTypeResolvers,
+        string $fieldName
+    ): array {
+        return $this->getMatchingEntries(
+            $this->getConfigurationEntries(),
+            $objectTypeOrInterfaceTypeResolver,
+            $interfaceTypeResolvers,
             $fieldName
         );
     }

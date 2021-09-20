@@ -38,7 +38,7 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
                 fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => in_array($fieldName, $interfaceTypeResolver->getFieldNamesToImplement()),
             ));
             foreach (
-                $this->getEntries(
+                $this->getEntriesByTypeAndInterfaces(
                     $objectTypeResolver,
                     $interfaceTypeResolversForField,
                     $fieldName
