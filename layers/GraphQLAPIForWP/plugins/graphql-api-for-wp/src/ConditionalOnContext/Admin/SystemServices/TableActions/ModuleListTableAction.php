@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions;
 
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 
 /**
@@ -22,9 +23,11 @@ class ModuleListTableAction extends AbstractListTableAction
     private array $mutatedModuleIDs = [];
     private bool $mutatedEnabled = false;
 
-    public function __construct(
-        protected UserSettingsManagerInterface $userSettingsManager,
-    ) {
+    protected UserSettingsManagerInterface $userSettingsManager;
+
+    public function __construct()
+    {
+        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 
     /**

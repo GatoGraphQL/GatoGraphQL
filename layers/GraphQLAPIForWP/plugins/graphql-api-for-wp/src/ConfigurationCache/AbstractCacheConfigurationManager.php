@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
@@ -16,10 +17,12 @@ use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
  */
 abstract class AbstractCacheConfigurationManager implements CacheConfigurationManagerInterface
 {
+    protected UserSettingsManagerInterface $userSettingsManager;
+    
     public function __construct(
         protected EndpointHelpers $endpointHelpers,
-        protected UserSettingsManagerInterface $userSettingsManager,
     ) {
+        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 
     /**

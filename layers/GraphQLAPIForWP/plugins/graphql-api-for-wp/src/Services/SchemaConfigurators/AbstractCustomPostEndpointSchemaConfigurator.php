@@ -18,18 +18,20 @@ use WP_Post;
 
 abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
 {
+    protected UserSettingsManagerInterface $userSettingsManager;
+
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         BlockHelpers $blockHelpers,
         protected EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
-        protected UserSettingsManagerInterface $userSettingsManager,
     ) {
         parent::__construct(
             $instanceManager,
             $moduleRegistry,
             $blockHelpers,
         );
+        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 
     /**

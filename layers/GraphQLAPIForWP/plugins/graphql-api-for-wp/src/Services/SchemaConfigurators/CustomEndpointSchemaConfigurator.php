@@ -10,7 +10,6 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaConfigurator
@@ -20,7 +19,6 @@ class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaC
         ModuleRegistryInterface $moduleRegistry,
         BlockHelpers $blockHelpers,
         EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
-        UserSettingsManagerInterface $userSettingsManager,
         protected EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
     ) {
         parent::__construct(
@@ -28,7 +26,6 @@ class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaC
             $moduleRegistry,
             $blockHelpers,
             $endpointSchemaConfigurationBlock,
-            $userSettingsManager,
         );
     }
 
