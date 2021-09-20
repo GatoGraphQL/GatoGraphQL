@@ -14,6 +14,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeMutationAPIFacade;
+use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 class CustomPostMutationResolverHookSet extends AbstractHookSet
@@ -22,7 +23,8 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected MediaObjectTypeResolver $mediaTypeResolver
+        protected MediaObjectTypeResolver $mediaTypeResolver,
+        protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -68,12 +70,11 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
      */
     public function setOrRemoveFeaturedImage(int | string $customPostID, array $form_data): void
     {
-        $customPostMediaTypeMutationAPI = CustomPostMediaTypeMutationAPIFacade::getInstance();
         if (isset($form_data[MutationInputProperties::FEATUREDIMAGE_ID])) {
             if ($featuredImageID = $form_data[MutationInputProperties::FEATUREDIMAGE_ID]) {
-                $customPostMediaTypeMutationAPI->setFeaturedImage($customPostID, $featuredImageID);
+                $this->customPostMediaTypeMutationAPI->setFeaturedImage($customPostID, $featuredImageID);
             } else {
-                $customPostMediaTypeMutationAPI->removeFeaturedImage($customPostID);
+                $this->customPostMediaTypeMutationAPI->removeFeaturedImage($customPostID);
             }
         }
     }

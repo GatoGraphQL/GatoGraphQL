@@ -7,12 +7,13 @@ namespace PoPSchema\PostTagMutations\Hooks;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
-use PoPSchema\Posts\Facades\PostTypeAPIFacade;
+use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPSchema\PostTagMutations\Facades\PostTagTypeMutationAPIFacade;
+use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
@@ -20,12 +21,16 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
         protected PostObjectTypeResolver $postObjectTypeResolver,
+        protected PostTypeAPIInterface $postTypeAPI,
+        protected PostTagTypeMutationAPIInterface $postTagTypeMutationAPI,
     ) {
         parent::__construct(
             $hooksAPI,
             $translationAPI,
             $instanceManager,
+            $customPostTypeAPI,
         );
     }
 
@@ -36,12 +41,11 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
 
     protected function getCustomPostType(): string
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        return $postTypeAPI->getPostCustomPostType();
+        return $this->postTypeAPI->getPostCustomPostType();
     }
 
     protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface
     {
-        return PostTagTypeMutationAPIFacade::getInstance();
+        return $this->postTagTypeMutationAPI;
     }
 }
