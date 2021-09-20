@@ -31,10 +31,7 @@ abstract class AbstractModuleDecoratorProcessor implements ModuleDecoratorProces
         return $moduleprocessor_manager->getProcessor($module);
     }
 
-    protected function getModuledecoratorprocessorManager()
-    {
-        return null;
-    }
+    abstract protected function getModuledecoratorprocessorManager();
 
     //-------------------------------------------------
     // PUBLIC Functions

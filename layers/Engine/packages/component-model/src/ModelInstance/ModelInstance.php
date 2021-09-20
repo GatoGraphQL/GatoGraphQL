@@ -9,6 +9,7 @@ use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Definitions\DefinitionManagerInterface;
 
 class ModelInstance implements ModelInstanceInterface
 {
@@ -19,7 +20,8 @@ class ModelInstance implements ModelInstanceInterface
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
-        protected ApplicationInfoInterface $applicationInfo
+        protected ApplicationInfoInterface $applicationInfo,
+        protected DefinitionManagerInterface $definitionManager,
     ) {
     }
 
@@ -50,7 +52,7 @@ class ModelInstance implements ModelInstanceInterface
         // Comment Leo 05/04/2017: Also add the module-definition type, for 2 reasons:
         // 1. It allows to create the 2 versions (DEV/PROD) of the configuration files, to compare/debug them side by side
         // 2. It allows to switch from DEV/PROD without having to delete the pop-cache
-        if ($definitionResolvers = DefinitionManagerFacade::getInstance()->getDefinitionResolvers()) {
+        if ($definitionResolvers = $this->definitionManager->getDefinitionResolvers()) {
             $resolvers = [];
             foreach ($definitionResolvers as $group => $resolverInstance) {
                 $resolvers[] = $group . '-' . get_class($resolverInstance);
