@@ -13,6 +13,8 @@ use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class LogoutMutationResolver extends AbstractMutationResolver
 {
+    use ValidateUserLoggedInMutationResolverTrait;
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -23,8 +25,6 @@ class LogoutMutationResolver extends AbstractMutationResolver
             $hooksAPI,
         );
     }
-
-    use ValidateUserLoggedInMutationResolverTrait;
 
     public function validateErrors(array $form_data): ?array
     {

@@ -7,12 +7,13 @@ namespace PoPSchema\CustomPostMediaMutations\MutationResolvers;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeMutationAPIFacade;
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
 {
+    use ValidateUserLoggedInMutationResolverTrait;
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -23,8 +24,6 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
             $hooksAPI,
         );
     }
-
-    use ValidateUserLoggedInMutationResolverTrait;
 
     public function executeMutation(array $form_data): mixed
     {

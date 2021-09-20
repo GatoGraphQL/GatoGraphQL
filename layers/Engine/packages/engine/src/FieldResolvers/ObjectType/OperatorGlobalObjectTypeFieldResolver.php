@@ -406,7 +406,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 return $this->getSafeVars();
             case 'extract':
                 try {
-                    return OperatorHelpers::getPointerToArrayItemUnderPath($fieldArgs['object'], $fieldArgs['path']);
+                    $pointerToArrayItemUnderPath = OperatorHelpers::getPointerToArrayItemUnderPath($fieldArgs['object'], $fieldArgs['path']);
                 } catch (Exception $e) {
                     return $this->errorProvider->getError(
                         $fieldName,
@@ -414,6 +414,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                         $e->getMessage()
                     );
                 }
+                return $pointerToArrayItemUnderPath;
             case 'time':
                 return time();
             case 'echo':

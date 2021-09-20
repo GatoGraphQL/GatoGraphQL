@@ -12,6 +12,8 @@ use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationR
 
 abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutationResolver
 {
+    use ValidateUserLoggedInMutationResolverTrait;
+
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -21,8 +23,6 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $hooksAPI,
         );
     }
-
-    use ValidateUserLoggedInMutationResolverTrait;
 
     public function executeMutation(array $form_data): mixed
     {
