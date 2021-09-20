@@ -102,8 +102,7 @@ abstract class AbstractModuleProcessor extends \PoP\ConfigurationComponentModel\
     public function queriesExternalDomain(array $module, array &$props): bool
     {
         if ($sources = $this->getDataloadMultidomainSources($module, $props)) {
-            $cmsService = CMSServiceFacade::getInstance();
-            $domain = $cmsService->getSiteURL();
+            $domain = $this->cmsService->getSiteURL();
             foreach ($sources as $source) {
                 if (substr($source, 0, strlen($domain)) != $domain) {
                     return true;
