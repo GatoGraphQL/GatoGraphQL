@@ -29,7 +29,7 @@ class SetupCortexHookSet extends AbstractHookSet
             $instanceManager,
         );
     }
-    
+
     protected function init(): void
     {
         $this->hooksAPI->addAction(

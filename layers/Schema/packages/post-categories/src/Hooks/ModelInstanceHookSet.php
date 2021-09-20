@@ -17,7 +17,7 @@ use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 class ModelInstanceHookSet extends AbstractHookSet
 {
     public const HOOK_VARY_MODEL_INSTANCE_BY_CATEGORY = __CLASS__ . ':vary-model-instance-by-category';
-    
+
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
