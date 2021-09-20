@@ -55,7 +55,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
 
     /**
      * Configuration entries
-     * 
+     *
      * @param InterfaceTypeResolverInterface[] $interfaceTypeResolvers
      */
     final protected function getEntriesByTypeAndInterfaces(
@@ -73,7 +73,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
 
     /**
      * Filter all the entries from the list which apply to the passed typeResolver and fieldName
-     * 
+     *
      * @param InterfaceTypeResolverInterface[] $interfaceTypeResolvers
      */
     final protected function getMatchingEntries(
