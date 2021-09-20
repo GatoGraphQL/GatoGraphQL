@@ -88,8 +88,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         parent::addSchemaDefinition($stackMessages, $generalMessages, $options);
 
         // Only in the root we output the operators and helpers
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // Add the directives (global)
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES] = [];

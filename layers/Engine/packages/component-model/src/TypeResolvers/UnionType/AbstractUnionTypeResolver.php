@@ -409,8 +409,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])
     {
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // Properties
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAME] = $this->getMaybeNamespacedTypeName();
@@ -441,8 +440,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     {
         parent::processFlatShapeSchemaDefinition($options);
 
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // Replace the UnionTypeResolver's types with their typeNames
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_POSSIBLE_TYPES] = array_keys(
