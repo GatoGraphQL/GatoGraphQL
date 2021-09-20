@@ -29,7 +29,7 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
         return 140;
     }
 
-    protected function getBlockCategoryClass(): ?string
+    protected function getBlockCategory(): ?string
     {
         return CustomEndpointBlockCategory::class;
     }

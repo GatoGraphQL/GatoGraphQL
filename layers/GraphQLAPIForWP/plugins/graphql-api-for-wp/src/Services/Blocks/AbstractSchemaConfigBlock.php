@@ -13,7 +13,7 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
         return true;
     }
 
-    protected function getBlockCategoryClass(): ?string
+    protected function getBlockCategory(): ?string
     {
         return SchemaConfigurationBlockCategory::class;
     }

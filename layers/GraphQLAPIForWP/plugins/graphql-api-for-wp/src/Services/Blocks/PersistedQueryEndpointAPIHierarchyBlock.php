@@ -57,7 +57,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
         return 'en';
     }
 
-    protected function getBlockCategoryClass(): ?string
+    protected function getBlockCategory(): ?string
     {
         return PersistedQueryEndpointBlockCategory::class;
     }

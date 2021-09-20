@@ -22,7 +22,7 @@ class CacheControlBlock extends AbstractControlBlock
         return 'cache-control';
     }
 
-    protected function getBlockCategoryClass(): ?string
+    protected function getBlockCategory(): ?string
     {
         return CacheControlBlockCategory::class;
     }
