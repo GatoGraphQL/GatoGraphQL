@@ -1,5 +1,5 @@
 <?php
 
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\Engine\Facades\Engine\EngineFacade;
 $engine = EngineFacade::getInstance();
 $engine->outputResponse();
