@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
-use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
+use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRootObject;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 
 class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
@@ -16,7 +16,7 @@ class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected QueryRoot $queryRoot,
+        protected QueryRootObject $queryRootObject,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -28,7 +28,7 @@ class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
     public function getObjects(array $ids): array
     {
         return [
-            $this->queryRoot,
+            $this->queryRootObject,
         ];
     }
 }

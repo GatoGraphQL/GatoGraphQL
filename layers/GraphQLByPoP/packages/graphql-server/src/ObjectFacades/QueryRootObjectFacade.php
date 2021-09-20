@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectFacades;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
+use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRootObject;
 use PoP\Root\Container\ContainerBuilderFactory;
 
 class QueryRootObjectFacade
 {
-    public static function getInstance(): QueryRoot
+    public static function getInstance(): QueryRootObject
     {
         $containerBuilderFactory = ContainerBuilderFactory::getInstance();
-        return $containerBuilderFactory->get(QueryRoot::class);
+        return $containerBuilderFactory->get(QueryRootObject::class);
     }
 }

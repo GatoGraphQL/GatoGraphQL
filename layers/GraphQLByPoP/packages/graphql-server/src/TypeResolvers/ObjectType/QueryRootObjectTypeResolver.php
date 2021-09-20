@@ -15,7 +15,7 @@ use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
-use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
+use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRootObject;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\QueryRootTypeDataLoader;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
@@ -69,7 +69,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 
     public function getID(object $object): string | int | null
     {
-        /** @var QueryRoot */
+        /** @var QueryRootObject */
         $queryRoot = $object;
         return $queryRoot->getID();
     }

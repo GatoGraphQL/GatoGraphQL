@@ -6,6 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\Engine\ObjectModels\RootObject;
 
-class QueryRoot extends RootObject
+class QueryRootObject extends RootObject
 {
 }
