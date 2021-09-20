@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\AccessControlRuleBlockRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use PoP\AccessControl\Facades\AccessControlManagerFacade;
+use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
@@ -28,6 +28,8 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
         DirectiveRegistryInterface $directiveRegistry,
         protected AccessControlBlock $accessControlBlock,
         protected BlockHelpers $blockHelpers,
+        protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
+        protected AccessControlManagerInterface $accessControlManager,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -58,8 +60,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
         // Lazy load
         if (is_null($this->aclRuleBlockNameEnabled)) {
             // Obtain the block names from the block classes
-            $accessControlRuleBlockRegistry = AccessControlRuleBlockRegistryFacade::getInstance();
-            $aclRuleBlocks = $accessControlRuleBlockRegistry->getAccessControlRuleBlocks();
+            $aclRuleBlocks = $this->accessControlRuleBlockRegistry->getAccessControlRuleBlocks();
             $this->aclRuleBlockNameEnabled = [];
             foreach ($aclRuleBlocks as $block) {
                 $this->aclRuleBlockNameEnabled[$block->getBlockFullName()] = $block->isServiceEnabled();
@@ -92,7 +93,6 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
             $aclPostID,
             $this->accessControlBlock
         );
-        $accessControlManager = AccessControlManagerFacade::getInstance();
         // The "Access Control" type contains the fields/directives
         foreach ($aclBlockItems as $aclBlockItem) {
             // The rule to apply is contained inside the nested blocks
@@ -135,7 +135,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                                     )
                                 )
                             ) {
-                                $accessControlManager->addEntriesForFields(
+                                $this->accessControlManager->addEntriesForFields(
                                     $accessControlGroup,
                                     $entriesForFields
                                 );
@@ -156,7 +156,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                                     )
                                 ))
                             ) {
-                                $accessControlManager->addEntriesForDirectives(
+                                $this->accessControlManager->addEntriesForDirectives(
                                     $accessControlGroup,
                                     $entriesForDirectives
                                 );
