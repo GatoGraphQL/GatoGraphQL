@@ -18,7 +18,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
     protected UserSettingsManagerInterface $userSettingsManager;
-    
+
     public function __construct(
         InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,

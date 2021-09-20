@@ -13,8 +13,8 @@ class ModuleRegistry implements ModuleRegistryInterface
 {
     protected UserSettingsManagerInterface $userSettingsManager;
 
-    public function __construct(
-    ) {
+    public function __construct()
+    {
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 

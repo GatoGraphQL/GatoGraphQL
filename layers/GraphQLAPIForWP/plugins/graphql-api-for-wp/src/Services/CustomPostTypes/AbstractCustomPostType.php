@@ -22,7 +22,7 @@ use WP_Post;
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
     protected UserSettingsManagerInterface $userSettingsManager;
-    
+
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,

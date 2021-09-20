@@ -10,9 +10,9 @@ abstract class AbstractModuleFilter implements ModuleFilterInterface
 {
     public function __construct(
         protected ModuleProcessorManagerInterface $moduleProcessorManager,
-    ) {        
+    ) {
     }
-    
+
     public function excludeModule(array $module, array &$props): bool
     {
         return false;

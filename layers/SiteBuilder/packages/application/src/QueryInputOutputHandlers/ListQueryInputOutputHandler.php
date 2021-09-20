@@ -18,9 +18,8 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
     public function __construct(
         protected CMSServiceInterface $cmsService,
     ) {
-        
     }
-    
+
     protected function getLimit()
     {
         return $this->cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit'));
