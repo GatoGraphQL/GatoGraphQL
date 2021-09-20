@@ -52,7 +52,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @var string[]|null
      */
-    protected ?array $interfaceTypeFieldResolverClasses = null;
+    protected ?array $interfaceTypeFieldResolvers = null;
 
     /**
      * Watch out! This function will be overridden for the UnionTypeResolver
@@ -740,37 +740,29 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final protected function getAllImplementedInterfaceTypeFieldResolvers(): array
     {
-        return array_map(
-            fn (string $interfaceTypeFieldResolverClass) => $this->instanceManager->getInstance($interfaceTypeFieldResolverClass),
-            $this->getAllImplementedInterfaceTypeFieldResolverClasses()
-        );
-    }
-
-    final protected function getAllImplementedInterfaceTypeFieldResolverClasses(): array
-    {
-        if ($this->interfaceTypeFieldResolverClasses === null) {
-            $this->interfaceTypeFieldResolverClasses = $this->calculateAllImplementedInterfaceTypeFieldResolverClasses();
+        if ($this->interfaceTypeFieldResolvers === null) {
+            $this->interfaceTypeFieldResolvers = $this->calculateAllImplementedInterfaceTypeFieldResolverClasses();
         }
-        return $this->interfaceTypeFieldResolverClasses;
+        return $this->interfaceTypeFieldResolvers;
     }
 
     private function calculateAllImplementedInterfaceTypeFieldResolverClasses(): array
     {
-        $interfaceTypeFieldResolverClasses = [];
+        $interfaceTypeFieldResolvers = [];
         $processedObjectTypeFieldResolverClasses = [];
         foreach ($this->getAllObjectTypeFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
                 $objectTypeFieldResolverClass = get_class($objectTypeFieldResolver);
                 if (!in_array($objectTypeFieldResolverClass, $processedObjectTypeFieldResolverClasses)) {
                     $processedObjectTypeFieldResolverClasses[] = $objectTypeFieldResolverClass;
-                    $interfaceTypeFieldResolverClasses = array_merge(
-                        $interfaceTypeFieldResolverClasses,
+                    $interfaceTypeFieldResolvers = array_merge(
+                        $interfaceTypeFieldResolvers,
                         $objectTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers()
                     );
                 }
             }
         }
-        return array_values(array_unique($interfaceTypeFieldResolverClasses));
+        return array_values(array_unique($interfaceTypeFieldResolvers));
     }
 
     /**
