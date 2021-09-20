@@ -33,7 +33,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
             $fieldQueryConvertor,
         );
     }
-    
+
     protected function getInitialRESTFields(): string
     {
         return 'id|name|count|url';

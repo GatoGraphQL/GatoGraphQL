@@ -15,7 +15,7 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
         protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
     ) {
     }
-    
+
     final public function getOption(string $name): mixed
     {
         /**

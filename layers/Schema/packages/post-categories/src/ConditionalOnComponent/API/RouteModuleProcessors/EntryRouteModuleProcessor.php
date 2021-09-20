@@ -26,7 +26,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             $hooksAPI,
         );
     }
-    
+
     /**
      * @return array<string, array<array>>
      */

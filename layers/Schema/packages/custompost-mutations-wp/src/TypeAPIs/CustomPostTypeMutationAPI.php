@@ -20,7 +20,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         protected ErrorHelperInterface $errorHelper,
     ) {
     }
-    
+
     protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array &$query): void
     {
         // Convert the parameters

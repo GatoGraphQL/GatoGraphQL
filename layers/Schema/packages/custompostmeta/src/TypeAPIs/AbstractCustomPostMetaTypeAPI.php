@@ -15,7 +15,7 @@ abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInt
         protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
     ) {
     }
-    
+
     final public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
     {
         /**

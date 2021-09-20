@@ -15,7 +15,7 @@ abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
         protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
     ) {
     }
-    
+
     final public function getUserMeta(string | int $userID, string $key, bool $single = false): mixed
     {
         /**

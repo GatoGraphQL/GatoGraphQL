@@ -20,7 +20,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
         protected ErrorHelperInterface $errorHelper,
     ) {
     }
-    
+
     /**
      * @return mixed Result or Error
      */
