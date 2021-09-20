@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -31,8 +33,8 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
-        \PoP\ComponentModel\Engine\EngineInterface $engine,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected TypeObjectTypeResolver $typeObjectTypeResolver,
         protected DirectiveObjectTypeResolver $directiveObjectTypeResolver,
     ) {

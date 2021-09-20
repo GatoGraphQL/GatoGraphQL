@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -26,8 +28,8 @@ class CustomPostUserListObjectTypeFieldResolver extends AbstractCustomPostListOb
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
-        \PoP\ComponentModel\Engine\EngineInterface $engine,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         IntScalarTypeResolver $intScalarTypeResolver,
     ) {
         parent::__construct(

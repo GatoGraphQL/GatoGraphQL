@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\API\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
@@ -40,8 +42,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
-        \PoP\ComponentModel\Engine\EngineInterface $engine,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
         protected SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver,
         protected ObjectScalarTypeResolver $objectScalarTypeResolver,
         protected PersistedFragmentManagerInterface $fragmentCatalogueManager,
