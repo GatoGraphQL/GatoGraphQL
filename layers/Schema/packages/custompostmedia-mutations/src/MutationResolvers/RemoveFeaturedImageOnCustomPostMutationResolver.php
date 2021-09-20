@@ -10,6 +10,16 @@ use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationR
 
 class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
 {
+    public function __construct(
+        \PoP\Translation\TranslationAPIInterface $translationAPI,
+        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+    
     use ValidateUserLoggedInMutationResolverTrait;
 
     public function executeMutation(array $form_data): mixed

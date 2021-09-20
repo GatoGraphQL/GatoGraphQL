@@ -10,6 +10,16 @@ use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {
+    public function __construct(
+        \PoP\Translation\TranslationAPIInterface $translationAPI,
+        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+    
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code
     private function runActivatePlugin($plugin)
     {

@@ -11,6 +11,16 @@ use PoPSchema\UserStateMutations\Facades\UserStateTypeMutationAPIFacade;
 
 class LogoutMutationResolver extends AbstractMutationResolver
 {
+    public function __construct(
+        \PoP\Translation\TranslationAPIInterface $translationAPI,
+        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+    
     use ValidateUserLoggedInMutationResolverTrait;
 
     public function validateErrors(array $form_data): ?array
