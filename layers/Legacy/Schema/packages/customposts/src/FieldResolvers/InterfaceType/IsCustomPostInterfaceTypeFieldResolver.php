@@ -7,15 +7,18 @@ namespace PoPSchema\CustomPosts\FieldResolvers\InterfaceType;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 
 class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldResolver
 {
@@ -27,7 +30,11 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        URLScalarTypeResolver $urlScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
         protected DateScalarTypeResolver $dateScalarTypeResolver,
+        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -37,13 +44,16 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
             $cmsService,
             $schemaNamespacingService,
             $typeRegistry,
+            $schemaDefinitionService,
+            $urlScalarTypeResolver,
+            $stringScalarTypeResolver,
         );
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            QueryableInterfaceTypeFieldResolver::class,
+            $this->queryableInterfaceTypeFieldResolver,
         ];
     }
 
