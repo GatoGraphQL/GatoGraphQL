@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 
 interface FieldResolverInterface extends AttachableExtensionInterface
 {
@@ -24,9 +25,9 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      */
     public function getPartiallyImplementedInterfaceTypeResolverClasses(): array;
     /**
-     * A list of classes of all the interfaces the fieldResolver implements
-     *
-     * @return string[]
+     * The interfaces the fieldResolver implements
+     * 
+     * @return InterfaceTypeFieldResolverInterface[]
      */
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array;
+    public function getImplementedInterfaceTypeFieldResolvers(): array;
 }

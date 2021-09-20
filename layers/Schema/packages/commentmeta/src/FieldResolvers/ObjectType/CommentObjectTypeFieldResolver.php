@@ -32,6 +32,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         protected CommentMetaTypeAPIInterface $commentMetaAPI,
+        protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -53,10 +54,10 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            WithMetaInterfaceTypeFieldResolver::class,
+            $this->withMetaInterfaceTypeFieldResolver,
         ];
     }
 

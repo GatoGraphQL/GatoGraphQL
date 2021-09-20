@@ -32,6 +32,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         protected CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI,
+        protected SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -53,10 +54,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            SupportingFeaturedImageInterfaceTypeFieldResolver::class,
+            $this->supportingFeaturedImageInterfaceTypeFieldResolver,
         ];
     }
 

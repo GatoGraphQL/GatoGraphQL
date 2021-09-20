@@ -36,6 +36,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         EngineInterface $engine,
         protected IntScalarTypeResolver $intScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -50,10 +51,10 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         );
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            QueryableInterfaceTypeFieldResolver::class,
+            $this->queryableInterfaceTypeFieldResolver,
         ];
     }
 

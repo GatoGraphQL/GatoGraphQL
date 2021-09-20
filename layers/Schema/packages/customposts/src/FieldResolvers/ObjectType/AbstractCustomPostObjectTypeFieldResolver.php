@@ -35,6 +35,8 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         EngineInterface $engine,
         protected CustomPostTypeAPIInterface $customPostTypeAPI,
         protected DateFormatterInterface $dateFormatter,
+        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
+        protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -54,11 +56,11 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return [];
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            QueryableInterfaceTypeFieldResolver::class,
-            IsCustomPostInterfaceTypeFieldResolver::class,
+            $this->queryableInterfaceTypeFieldResolver,
+            $this->isCustomPostInterfaceTypeFieldResolver,
         ];
     }
 

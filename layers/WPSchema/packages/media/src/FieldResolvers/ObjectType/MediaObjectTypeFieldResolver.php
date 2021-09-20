@@ -36,7 +36,8 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
         protected CMSHelperServiceInterface $cmsHelperService,
-        protected DateFormatterInterface $dateFormatter
+        protected DateFormatterInterface $dateFormatter,
+        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -59,10 +60,10 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            QueryableInterfaceTypeFieldResolver::class,
+            $this->queryableInterfaceTypeFieldResolver,
         ];
     }
 

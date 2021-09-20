@@ -69,7 +69,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         foreach ($this->getAllInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
             $implementedInterfaceTypeFieldResolverClasses = array_merge(
                 $implementedInterfaceTypeFieldResolverClasses,
-                $interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolverClasses()
+                $interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers()
             );
         }
         $implementedInterfaceTypeFieldResolverClasses = array_values(array_unique($implementedInterfaceTypeFieldResolverClasses));
@@ -193,7 +193,10 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
                     // The interfaces implemented by the InterfaceTypeFieldResolver can have, themselves, InterfaceTypeFieldResolvers attached to them
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
-                        $interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolverClasses()
+                        array_map(
+                            'get_class',
+                            $interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers()
+                        ),
                     )));
                 }
                 // Otherwise, continue iterating for the class parents

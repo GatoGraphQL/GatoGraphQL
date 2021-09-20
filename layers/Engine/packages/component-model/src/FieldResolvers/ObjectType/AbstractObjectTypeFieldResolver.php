@@ -77,7 +77,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $this->getObjectTypeResolverClassesToAttachTo();
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [];
     }
@@ -112,12 +112,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final public function getPartiallyImplementedInterfaceTypeResolverClasses(): array
     {
         $interfaceTypeResolverClasses = [];
-        foreach ($this->getImplementedInterfaceTypeFieldResolverClasses() as $interfaceTypeFieldResolverClass) {
-            /** @var InterfaceTypeFieldResolverInterface */
-            $interfaceTypeFieldResolver = $this->instanceManager->getInstance($interfaceTypeFieldResolverClass);
+        foreach ($this->getImplementedInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
             $interfaceTypeResolverClasses = array_merge(
                 $interfaceTypeResolverClasses,
-                $interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
+                $interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers()
             );
         }
         return array_values(array_unique($interfaceTypeResolverClasses));
@@ -171,14 +169,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?string {
-        foreach ($this->getImplementedInterfaceTypeFieldResolverClasses() as $implementedInterfaceTypeFieldResolverClass) {
-            /** @var InterfaceTypeFieldResolverInterface */
-            $implementedInterfaceTypeFieldResolver = $this->instanceManager->getInstance($implementedInterfaceTypeFieldResolverClass);
-            ;
+        foreach ($this->getImplementedInterfaceTypeFieldResolvers() as $implementedInterfaceTypeFieldResolver) {
             if (!in_array($fieldName, $implementedInterfaceTypeFieldResolver->getFieldNamesToImplement())) {
                 continue;
             }
-            return $implementedInterfaceTypeFieldResolverClass;
+            return $implementedInterfaceTypeFieldResolver;
         }
         return null;
     }
@@ -290,12 +285,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function getInterfaceTypeFieldResolvers(): array
     {
-        return array_map(
-            function (string $class) {
-                return $this->instanceManager->getInstance($class);
-            },
-            $this->getImplementedInterfaceTypeFieldResolverClasses()
-        );
+        return $this->getImplementedInterfaceTypeFieldResolvers();
     }
 
     /**

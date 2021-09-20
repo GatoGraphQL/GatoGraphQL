@@ -33,6 +33,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         protected CustomPostUserTypeAPIInterface $customPostUserTypeAPI,
+        protected WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -54,10 +55,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            WithAuthorInterfaceTypeFieldResolver::class,
+            $this->withAuthorInterfaceTypeFieldResolver,
         ];
     }
 

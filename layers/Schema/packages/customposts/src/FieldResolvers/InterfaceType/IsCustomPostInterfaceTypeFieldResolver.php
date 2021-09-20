@@ -44,6 +44,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
         protected DateScalarTypeResolver $dateScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -64,10 +65,10 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            QueryableInterfaceTypeFieldResolver::class,
+            $this->queryableInterfaceTypeFieldResolver,
         ];
     }
 

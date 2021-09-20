@@ -765,7 +765,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $processedObjectTypeFieldResolverClasses[] = $objectTypeFieldResolverClass;
                     $interfaceTypeFieldResolverClasses = array_merge(
                         $interfaceTypeFieldResolverClasses,
-                        $objectTypeFieldResolver->getImplementedInterfaceTypeFieldResolverClasses()
+                        $objectTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers()
                     );
                 }
             }

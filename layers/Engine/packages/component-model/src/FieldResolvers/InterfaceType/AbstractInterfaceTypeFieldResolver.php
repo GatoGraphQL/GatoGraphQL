@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
@@ -63,7 +64,12 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return $this->getFieldNamesToImplement();
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    /**
+     * The interfaces the fieldResolver implements
+     * 
+     * @return InterfaceTypeFieldResolverInterface[]
+     */
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [];
     }
@@ -132,14 +138,11 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      */
     protected function getInterfaceTypeFieldSchemaDefinitionResolverClass(string $fieldName): ?string
     {
-        foreach ($this->getImplementedInterfaceTypeFieldResolverClasses() as $implementedInterfaceTypeFieldResolverClass) {
-            /** @var InterfaceTypeFieldResolverInterface */
-            $implementedInterfaceTypeFieldResolver = $this->instanceManager->getInstance($implementedInterfaceTypeFieldResolverClass);
-            ;
+        foreach ($this->getImplementedInterfaceTypeFieldResolvers() as $implementedInterfaceTypeFieldResolver) {
             if (!in_array($fieldName, $implementedInterfaceTypeFieldResolver->getFieldNamesToImplement())) {
                 continue;
             }
-            return $implementedInterfaceTypeFieldResolverClass;
+            return $implementedInterfaceTypeFieldResolver;
         }
         return null;
     }

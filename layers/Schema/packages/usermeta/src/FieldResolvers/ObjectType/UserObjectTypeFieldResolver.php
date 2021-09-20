@@ -32,6 +32,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         protected UserMetaTypeAPIInterface $userMetaAPI,
+        protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -53,10 +54,10 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            WithMetaInterfaceTypeFieldResolver::class,
+            $this->withMetaInterfaceTypeFieldResolver,
         ];
     }
 
