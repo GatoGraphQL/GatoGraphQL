@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\RelationalTypeDataLoaders\ObjectType;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostTypeDataLoader;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 
 class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
     public function __construct(
-        \PoP\Hooks\HooksAPIInterface $hooksAPI,
-        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
-        \PoP\LooseContracts\NameResolverInterface $nameResolver,
-        \PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface $moduleProcessorManager,
-        \PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface $customPostTypeAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        NameResolverInterface $nameResolver,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
         protected PageTypeAPIInterface $pageTypeAPI,
     ) {
         parent::__construct(

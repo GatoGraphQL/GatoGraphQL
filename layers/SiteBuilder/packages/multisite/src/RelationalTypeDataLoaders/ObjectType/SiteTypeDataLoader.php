@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\RelationalTypeDataLoaders\ObjectType;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\Engine\FunctionAPIFactory;
 use PoP\Multisite\ObjectModels\Site;
@@ -11,9 +14,9 @@ use PoP\Multisite\ObjectModels\Site;
 class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     public function __construct(
-        \PoP\Hooks\HooksAPIInterface $hooksAPI,
-        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
-        \PoP\LooseContracts\NameResolverInterface $nameResolver,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        NameResolverInterface $nameResolver,
         protected Site $site,
     ) {
         parent::__construct(

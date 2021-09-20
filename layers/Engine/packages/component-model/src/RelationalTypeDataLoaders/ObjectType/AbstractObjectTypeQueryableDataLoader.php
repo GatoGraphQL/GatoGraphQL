@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
@@ -12,9 +15,9 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
     public function __construct(
-        \PoP\Hooks\HooksAPIInterface $hooksAPI,
-        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
-        \PoP\LooseContracts\NameResolverInterface $nameResolver,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        NameResolverInterface $nameResolver,
         protected ModuleProcessorManagerInterface $moduleProcessorManager,
     ) {
         parent::__construct(

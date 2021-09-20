@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
@@ -13,10 +17,10 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     public function __construct(
-        \PoP\Hooks\HooksAPIInterface $hooksAPI,
-        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
-        \PoP\LooseContracts\NameResolverInterface $nameResolver,
-        \PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface $moduleProcessorManager,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        NameResolverInterface $nameResolver,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
         protected CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         parent::__construct(
