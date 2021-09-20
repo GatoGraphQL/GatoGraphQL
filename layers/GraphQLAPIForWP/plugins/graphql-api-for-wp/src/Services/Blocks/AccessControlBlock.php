@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
@@ -30,6 +31,7 @@ class AccessControlBlock extends AbstractControlBlock
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
+        protected AccessControlBlockCategory $accessControlBlockCategory,
     ) {
         parent::__construct(
             $instanceManager,
@@ -47,7 +49,7 @@ class AccessControlBlock extends AbstractControlBlock
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return AccessControlBlockCategory::class;
+        return $this->accessControlBlockCategory;
     }
 
     protected function registerEditorCSS(): bool

@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CustomEndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
@@ -25,6 +26,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
+        protected CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
         parent::__construct(
             $instanceManager,
@@ -52,7 +54,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return CustomEndpointBlockCategory::class;
+        return $this->customEndpointBlockCategory;
     }
 
     protected function isDynamicBlock(): bool

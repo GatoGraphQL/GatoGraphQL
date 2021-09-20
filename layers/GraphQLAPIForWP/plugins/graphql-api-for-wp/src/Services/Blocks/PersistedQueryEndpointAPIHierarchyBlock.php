@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryEndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
@@ -31,6 +32,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
+        protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {
         parent::__construct(
             $instanceManager,
@@ -80,7 +82,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return PersistedQueryEndpointBlockCategory::class;
+        return $this->persistedQueryEndpointBlockCategory;
     }
 
     /**

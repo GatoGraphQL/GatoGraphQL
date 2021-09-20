@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CustomEndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
@@ -26,6 +27,7 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
+        protected CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
         parent::__construct(
             $instanceManager,
@@ -48,6 +50,6 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return CustomEndpointBlockCategory::class;
+        return $this->customEndpointBlockCategory;
     }
 }

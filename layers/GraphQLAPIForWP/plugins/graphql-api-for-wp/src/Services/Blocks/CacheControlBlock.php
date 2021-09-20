@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CacheControlBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
@@ -28,6 +29,7 @@ class CacheControlBlock extends AbstractControlBlock
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
+        protected CacheControlBlockCategory $cacheControlBlockCategory,
     ) {
         parent::__construct(
             $instanceManager,
@@ -45,7 +47,7 @@ class CacheControlBlock extends AbstractControlBlock
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return CacheControlBlockCategory::class;
+        return $this->cacheControlBlockCategory;
     }
 
     protected function registerCommonStyleCSS(): bool
