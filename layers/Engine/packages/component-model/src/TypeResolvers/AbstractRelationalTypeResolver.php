@@ -787,7 +787,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             [
                 get_class($this->getTypeResolverToCalculateSchema()),
             ],
-            $this->getAllImplementedInterfaceTypeResolverClasses()
+            array_map(
+                'get_class',
+                $this->getAllImplementedInterfaceTypeResolvers()
+            )
         );
         foreach ($classes as $class) {
             $typeResolverDecorators = array_merge(
@@ -1274,7 +1277,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             [
                 get_class($this->getTypeResolverToCalculateSchema()),
             ],
-            $this->getAllImplementedInterfaceTypeResolverClasses()
+            array_map(
+                'get_class',
+                $this->getAllImplementedInterfaceTypeResolvers()
+            )
         );
         foreach ($classes as $class) {
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
@@ -1301,16 +1307,5 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $directiveNameResolvers = $this->filterDirectiveNameResolvers($directiveNameResolvers);
 
         return $directiveNameResolvers;
-    }
-
-    /**
-     * @return string[]
-     */
-    final public function getAllImplementedInterfaceTypeResolverClasses(): array
-    {
-        return array_map(
-            'get_class',
-            $this->getAllImplementedInterfaceTypeResolvers()
-        );
     }
 }
