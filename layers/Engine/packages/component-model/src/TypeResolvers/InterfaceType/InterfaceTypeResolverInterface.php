@@ -37,12 +37,6 @@ interface InterfaceTypeResolverInterface extends TypeResolverInterface
      */
     public function getAllInterfaceTypeFieldResolvers(): array;
     /**
-     * Produce an array of all the attached ObjectTypeFieldResolverInterface classes
-     *
-     * @return string[]
-     */
-    public function getAllInterfaceTypeFieldResolverClasses(): array;
-    /**
      * Interfaces "partially" implemented by this Interface
      *
      * @return InterfaceTypeResolverInterface[]
