@@ -741,12 +741,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final protected function getAllImplementedInterfaceTypeFieldResolvers(): array
     {
         if ($this->interfaceTypeFieldResolvers === null) {
-            $this->interfaceTypeFieldResolvers = $this->calculateAllImplementedInterfaceTypeFieldResolverClasses();
+            $this->interfaceTypeFieldResolvers = $this->calculateAllImplementedInterfaceTypeFieldResolvers();
         }
         return $this->interfaceTypeFieldResolvers;
     }
 
-    private function calculateAllImplementedInterfaceTypeFieldResolverClasses(): array
+    /**
+     * @return InterfaceTypeFieldResolverInterface[]
+     */
+    private function calculateAllImplementedInterfaceTypeFieldResolvers(): array
     {
         $interfaceTypeFieldResolvers = [];
         $processedObjectTypeFieldResolverClasses = [];
