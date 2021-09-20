@@ -9,7 +9,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
-use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
+use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRootObject;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\MutationRootTypeDataLoader;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
@@ -79,7 +79,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     public function getID(object $object): string | int | null
     {
-        /** @var MutationRoot */
+        /** @var MutationRootObject */
         $mutationRoot = $object;
         return $mutationRoot->getID();
     }

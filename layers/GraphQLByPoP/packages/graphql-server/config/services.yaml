@@ -25,8 +25,8 @@ services:
     GraphQLByPoP\GraphQLServer\ObjectModels\QueryRootObject:
         class: \GraphQLByPoP\GraphQLServer\ObjectModels\QueryRootObject
 
-    GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot:
-        class: \GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot
+    GraphQLByPoP\GraphQLServer\ObjectModels\MutationRootObject:
+        class: \GraphQLByPoP\GraphQLServer\ObjectModels\MutationRootObject
 
     GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface:
         class: \GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicator

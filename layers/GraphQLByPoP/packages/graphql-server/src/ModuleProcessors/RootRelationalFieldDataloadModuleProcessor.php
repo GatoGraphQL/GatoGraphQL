@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ModuleProcessors;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
+use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRootObject;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRootObject;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
@@ -72,7 +72,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
             case self::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT:
                 return QueryRootObject::ID;
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
-                return MutationRoot::ID;
+                return MutationRootObject::ID;
         }
         return parent::getObjectIDOrIDs($module, $props, $data_properties);
     }

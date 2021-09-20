@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
-use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
+use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRootObject;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 
 class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
@@ -16,7 +16,7 @@ class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected MutationRoot $mutationRoot,
+        protected MutationRootObject $mutationRoot,
     ) {
         parent::__construct(
             $hooksAPI,
