@@ -32,6 +32,7 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         protected TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI,
+        protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -53,10 +54,10 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            WithMetaInterfaceTypeFieldResolver::class,
+            $this->withMetaInterfaceTypeFieldResolver,
         ];
     }
 

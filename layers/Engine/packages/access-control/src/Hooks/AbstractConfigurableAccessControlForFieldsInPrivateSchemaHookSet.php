@@ -32,20 +32,17 @@ abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet 
 
     /**
      * Remove fieldName "roles" if the user is not logged in
-     *
-     * @param string[] $interfaceTypeResolverClasses
      */
     protected function removeFieldName(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
-        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         // Obtain all entries for the current combination of [typeResolver or interfaceTypeResolverClass]/fieldName
         foreach (
             $this->getEntries(
                 $objectTypeOrInterfaceTypeResolver,
-                $interfaceTypeResolverClasses,
+                $objectTypeOrInterfaceTypeFieldResolver,
                 $fieldName
             ) as $entry
         ) {

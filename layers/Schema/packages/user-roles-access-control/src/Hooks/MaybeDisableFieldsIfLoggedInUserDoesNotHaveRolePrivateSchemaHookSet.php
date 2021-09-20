@@ -47,7 +47,6 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extend
     protected function removeFieldName(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
-        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         // If the user is not logged in, then remove the field
@@ -60,7 +59,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extend
         if (
             $matchingEntries = $this->getEntries(
                 $objectTypeOrInterfaceTypeResolver,
-                $interfaceTypeResolverClasses,
+                $objectTypeOrInterfaceTypeFieldResolver,
                 $fieldName
             )
         ) {

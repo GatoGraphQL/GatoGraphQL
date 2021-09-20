@@ -36,6 +36,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         EngineInterface $engine,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
         protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -50,10 +51,10 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         );
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            QueryableInterfaceTypeFieldResolver::class,
+            $this->queryableInterfaceTypeFieldResolver,
         ];
     }
 

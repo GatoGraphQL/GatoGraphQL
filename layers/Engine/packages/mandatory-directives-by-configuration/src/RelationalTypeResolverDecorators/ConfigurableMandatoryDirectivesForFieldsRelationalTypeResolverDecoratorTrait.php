@@ -37,14 +37,10 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
                 $interfaceTypeResolvers,
                 fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => in_array($fieldName, $interfaceTypeResolver->getFieldNamesToImplement()),
             ));
-            $interfaceTypeResolverClassesForField = array_map(
-                'get_class',
-                $interfaceTypeResolversForField
-            );
             foreach (
-                $this->getEntries(
+                $this->getEntriesByTypeAndInterfaces(
                     $objectTypeResolver,
-                    $interfaceTypeResolverClassesForField,
+                    $interfaceTypeResolversForField,
                     $fieldName
                 ) as $entry
             ) {

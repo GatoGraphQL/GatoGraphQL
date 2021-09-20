@@ -293,7 +293,13 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 $interfaceTypeResolverClass = get_class($interfaceTypeResolver);
                 $notImplementingInterfaceTypeResolvers = array_filter(
                     $objectTypeResolvers,
-                    fn (ObjectTypeResolverInterface $objectTypeResolver) => !in_array($interfaceTypeResolverClass, $objectTypeResolver->getAllImplementedInterfaceTypeResolverClasses())
+                    fn (ObjectTypeResolverInterface $objectTypeResolver) => !in_array(
+                        $interfaceTypeResolverClass,
+                        array_map(
+                            'get_class',
+                            $objectTypeResolver->getAllImplementedInterfaceTypeResolvers()
+                        )
+                    )
                 );
                 if ($notImplementingInterfaceTypeResolvers) {
                     throw new Exception(

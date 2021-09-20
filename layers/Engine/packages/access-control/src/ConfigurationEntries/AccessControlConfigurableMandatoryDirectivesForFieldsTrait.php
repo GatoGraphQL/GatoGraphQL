@@ -18,11 +18,13 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
 
     /**
      * Filter all the entries from the list which apply to the passed typeResolver and fieldName
+     *
+     * @param InterfaceTypeResolverInterface[] $interfaceTypeResolvers
      */
     final protected function getMatchingEntries(
         array $entryList,
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
-        array $interfaceTypeResolverClasses,
+        array $interfaceTypeResolvers,
         string $fieldName
     ): array {
         /**
@@ -35,11 +37,15 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
             return $this->getUpstreamMatchingEntries(
                 $entryList,
                 $objectTypeOrInterfaceTypeResolver,
-                $interfaceTypeResolverClasses,
+                $interfaceTypeResolvers,
                 $fieldName
             );
         }
         $objectTypeOrInterfaceTypeResolverClass = get_class($objectTypeOrInterfaceTypeResolver);
+        $interfaceTypeResolverClasses = array_map(
+            'get_class',
+            $interfaceTypeResolvers
+        );
         $individualControlSchemaMode = $this->getSchemaMode();
         $matchNullControlEntry = $this->doesSchemaModeProcessNullControlEntry();
         return array_filter(

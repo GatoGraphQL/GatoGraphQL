@@ -36,6 +36,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
         protected CommentTypeAPIInterface $commentTypeAPI,
+        protected CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -58,10 +59,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            CommentableInterfaceTypeFieldResolver::class,
+            $this->commentableInterfaceTypeFieldResolver,
         ];
     }
 

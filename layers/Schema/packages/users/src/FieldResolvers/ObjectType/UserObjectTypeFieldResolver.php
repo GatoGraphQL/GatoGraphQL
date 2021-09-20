@@ -41,6 +41,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         protected EmailScalarTypeResolver $emailScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
         protected URLScalarTypeResolver $urlScalarTypeResolver,
+        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
         parent::__construct(
             $translationAPI,
@@ -62,10 +63,10 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolverClasses(): array
+    public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            QueryableInterfaceTypeFieldResolver::class,
+            $this->queryableInterfaceTypeFieldResolver,
         ];
     }
 

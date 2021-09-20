@@ -45,31 +45,21 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
 
         // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
         // Also pass the Interfaces defining the field
-        $interfaceTypeResolverClasses = $objectTypeOrInterfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses();
         $fieldNames = array_filter(
             $fieldNames,
             fn ($fieldName) => $this->isFieldNameResolvedByObjectTypeFieldResolver(
                 $objectTypeOrInterfaceTypeResolver,
                 $objectTypeOrInterfaceTypeFieldResolver,
                 $fieldName,
-                $interfaceTypeResolverClasses,
             )
         );
         return $fieldNames;
     }
 
-    /**
-     * $interfaceTypeResolverClasses is the list of all the interfaces implemented
-     * by the objectTypeOrInterfaceTypeFieldResolver, and not only those ones containing the fieldName.
-     * This is because otherwise we'd need to call `$interfaceTypeResolver->getFieldNamesToImplement()`
-     * to find out the list of Interfaces containing $fieldName, however this function relies
-     * on the InterfaceTypeFieldResolver once again, so we'd get a recursion.
-     */
     protected function isFieldNameResolvedByObjectTypeFieldResolver(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
-        string $fieldName,
-        array $interfaceTypeResolverClasses
+        string $fieldName
     ): bool {
         // Execute 2 filters: a generic one, and a specific one
         if (
@@ -78,7 +68,6 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
                 true,
                 $objectTypeOrInterfaceTypeResolver,
                 $objectTypeOrInterfaceTypeFieldResolver,
-                $interfaceTypeResolverClasses,
                 $fieldName
             )
         ) {
@@ -87,7 +76,6 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
                 true,
                 $objectTypeOrInterfaceTypeResolver,
                 $objectTypeOrInterfaceTypeFieldResolver,
-                $interfaceTypeResolverClasses,
                 $fieldName
             );
         }

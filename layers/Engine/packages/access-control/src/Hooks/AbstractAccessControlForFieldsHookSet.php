@@ -67,7 +67,6 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
         bool $include,
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
-        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         // Because there may be several hooks chained, if any of them has already rejected the field, then already return that response
@@ -79,7 +78,6 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
         return !$this->removeFieldName(
             $objectTypeOrInterfaceTypeResolver,
             $objectTypeOrInterfaceTypeFieldResolver,
-            $interfaceTypeResolverClasses,
             $fieldName,
         );
     }
@@ -93,7 +91,6 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
     protected function removeFieldName(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
-        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         return true;

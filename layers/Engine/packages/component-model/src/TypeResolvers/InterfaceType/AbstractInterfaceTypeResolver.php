@@ -28,9 +28,9 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      */
     private array $fieldNamesResolvedByInterfaceTypeFieldResolver = [];
     /**
-     * @var string[]|null
+     * @var InterfaceTypeFieldResolverInterface[]|null
      */
-    protected ?array $interfaceTypeFieldResolverClasses = null;
+    protected ?array $interfaceTypeFieldResolvers = null;
 
     /**
      * The list of the fieldNames to implement in the Interface,
@@ -61,44 +61,25 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     /**
      * Interfaces "partially" implemented by this Interface
      *
-     * @return string[]
-     */
-    public function getPartiallyImplementedInterfaceTypeResolverClasses(): array
-    {
-        $implementedInterfaceTypeFieldResolverClasses = [];
-        foreach ($this->getAllInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
-            $implementedInterfaceTypeFieldResolverClasses = array_merge(
-                $implementedInterfaceTypeFieldResolverClasses,
-                $interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolverClasses()
-            );
-        }
-        $implementedInterfaceTypeFieldResolverClasses = array_values(array_unique($implementedInterfaceTypeFieldResolverClasses));
-        /** @var InterfaceTypeFieldResolverInterface[] */
-        $implementedInterfaceTypeFieldResolvers = array_map(
-            fn (string $interfaceTypeFieldResolverClass) => $this->instanceManager->getInstance($interfaceTypeFieldResolverClass),
-            $implementedInterfaceTypeFieldResolverClasses
-        );
-        $implementedInterfaceTypeResolverClasses = [];
-        foreach ($implementedInterfaceTypeFieldResolvers as $implementedInterfaceTypeFieldResolver) {
-            $implementedInterfaceTypeResolverClasses = array_merge(
-                $implementedInterfaceTypeResolverClasses,
-                $implementedInterfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
-            );
-        }
-        return array_values(array_unique($implementedInterfaceTypeResolverClasses));
-    }
-
-    /**
-     * Interfaces "partially" implemented by this Interface
-     *
      * @return InterfaceTypeResolverInterface[]
      */
     public function getPartiallyImplementedInterfaceTypeResolvers(): array
     {
-        return array_map(
-            fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
-            $this->getPartiallyImplementedInterfaceTypeResolverClasses()
-        );
+        $implementedInterfaceTypeFieldResolvers = [];
+        foreach ($this->getAllInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
+            // Add under class as to mimick `array_unique` for object
+            foreach ($interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers() as $implementedInterfaceTypeFieldResolver) {
+                $implementedInterfaceTypeFieldResolvers[get_class($implementedInterfaceTypeFieldResolver)] = $implementedInterfaceTypeFieldResolver;
+            }
+        }
+        $implementedInterfaceTypeResolvers = [];
+        foreach ($implementedInterfaceTypeFieldResolvers as $implementedInterfaceTypeFieldResolver) {
+            // Add under class as to mimick `array_unique` for object
+            foreach ($implementedInterfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers() as $partiallyImplementedInterfaceTypeResolver) {
+                $implementedInterfaceTypeResolvers[get_class($partiallyImplementedInterfaceTypeResolver)] = $partiallyImplementedInterfaceTypeResolver;
+            }
+        }
+        return array_values($implementedInterfaceTypeResolvers);
     }
 
     /**
@@ -108,44 +89,17 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      */
     public function getAllInterfaceTypeFieldResolvers(): array
     {
-        return array_map(
-            fn (string $interfaceTypeFieldResolverClass) => $this->instanceManager->getInstance($interfaceTypeFieldResolverClass),
-            $this->getAllInterfaceTypeFieldResolverClasses()
-        );
-    }
-
-    /**
-     * Produce an array of all the attached ObjectTypeFieldResolverInterfaces
-     *
-     * @return string[]
-     */
-    public function getAllInterfaceTypeFieldResolverClasses(): array
-    {
-        if ($this->interfaceTypeFieldResolverClasses === null) {
-            $this->interfaceTypeFieldResolverClasses = [];
-            foreach ($this->getAllInterfaceTypeFieldResolverClassesByField() as $fieldName => $interfaceTypeFieldResolverClasses) {
-                $this->interfaceTypeFieldResolverClasses = array_merge(
-                    $this->interfaceTypeFieldResolverClasses,
-                    $interfaceTypeFieldResolverClasses
-                );
+        if ($this->interfaceTypeFieldResolvers === null) {
+            $interfaceTypeFieldResolvers = [];
+            foreach ($this->getAllInterfaceTypeFieldResolversByField() as $fieldName => $interfaceTypeFieldResolversByField) {
+                // Add under class as to mimick `array_unique` for object
+                foreach ($interfaceTypeFieldResolversByField as $interfaceTypeFieldResolver) {
+                    $interfaceTypeFieldResolvers[get_class($interfaceTypeFieldResolver)] = $interfaceTypeFieldResolver;
+                }
             }
-            $this->interfaceTypeFieldResolverClasses = array_values(array_unique($this->interfaceTypeFieldResolverClasses));
+            $this->interfaceTypeFieldResolvers = array_values($interfaceTypeFieldResolvers);
         }
-        return $this->interfaceTypeFieldResolverClasses;
-    }
-
-    /**
-     * Produce an array of all the interface's fieldNames and, for each,
-     * a list of all the InterfaceTypeFieldResolver classes
-     *
-     * @return array<string, string[]>
-     */
-    final public function getAllInterfaceTypeFieldResolverClassesByField(): array
-    {
-        return array_map(
-            fn (array $interfaceTypeFieldResolvers) => array_map('get_class', $interfaceTypeFieldResolvers),
-            $this->getAllInterfaceTypeFieldResolversByField()
-        );
+        return $this->interfaceTypeFieldResolvers;
     }
 
     /**
@@ -193,7 +147,10 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
                     // The interfaces implemented by the InterfaceTypeFieldResolver can have, themselves, InterfaceTypeFieldResolvers attached to them
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
-                        $interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolverClasses()
+                        array_map(
+                            'get_class',
+                            $interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers()
+                        ),
                     )));
                 }
                 // Otherwise, continue iterating for the class parents
