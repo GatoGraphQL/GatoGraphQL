@@ -20,7 +20,7 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
             $hooksAPI,
         );
     }
-    
+
     public function validateErrors(array $form_data): ?array
     {
         $errors = [];

@@ -19,7 +19,7 @@ class GravityFormsAddEntryToFormMutationResolver extends AbstractMutationResolve
             $hooksAPI,
         );
     }
-    
+
     public function executeMutation(array $form_data): mixed
     {
         // $execution_response = do_shortcode('[gravityform id="'.$form_id.'" title="false" description="false" ajax="false"]');

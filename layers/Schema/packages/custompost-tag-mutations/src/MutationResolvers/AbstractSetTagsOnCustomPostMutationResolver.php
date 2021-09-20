@@ -21,7 +21,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $hooksAPI,
         );
     }
-    
+
     use ValidateUserLoggedInMutationResolverTrait;
 
     public function executeMutation(array $form_data): mixed

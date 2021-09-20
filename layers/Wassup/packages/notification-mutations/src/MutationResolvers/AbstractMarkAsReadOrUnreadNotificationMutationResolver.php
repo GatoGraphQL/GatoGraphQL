@@ -19,7 +19,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
             $hooksAPI,
         );
     }
-    
+
     public function validateErrors(array $form_data): ?array
     {
         $errors = [];

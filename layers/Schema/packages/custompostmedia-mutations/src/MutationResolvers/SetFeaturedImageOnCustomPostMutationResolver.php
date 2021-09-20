@@ -23,7 +23,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
             $hooksAPI,
         );
     }
-    
+
     use ValidateUserLoggedInMutationResolverTrait;
 
     public function executeMutation(array $form_data): mixed

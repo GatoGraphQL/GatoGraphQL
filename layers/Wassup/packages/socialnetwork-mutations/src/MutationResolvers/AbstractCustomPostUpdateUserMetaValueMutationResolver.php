@@ -21,7 +21,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
             $hooksAPI,
         );
     }
-    
+
     protected function eligible($post)
     {
         return true;

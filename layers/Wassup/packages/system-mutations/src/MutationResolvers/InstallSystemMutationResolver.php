@@ -20,7 +20,7 @@ class InstallSystemMutationResolver extends AbstractMutationResolver
             $hooksAPI,
         );
     }
-    
+
     public function executeMutation(array $form_data): mixed
     {
         // Save the new version on the DB

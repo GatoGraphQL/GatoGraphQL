@@ -21,7 +21,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $hooksAPI,
         );
     }
-    
+
     use ValidateUserLoggedInMutationResolverTrait;
 
     public function executeMutation(array $form_data): mixed

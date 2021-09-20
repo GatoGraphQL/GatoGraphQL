@@ -19,7 +19,7 @@ class MarkAllAsReadNotificationMutationResolver extends AbstractMutationResolver
             $hooksAPI,
         );
     }
-    
+
     protected function additionals($form_data)
     {
         $this->hooksAPI->doAction('GD_NotificationMarkAllAsRead:additionals', $form_data);

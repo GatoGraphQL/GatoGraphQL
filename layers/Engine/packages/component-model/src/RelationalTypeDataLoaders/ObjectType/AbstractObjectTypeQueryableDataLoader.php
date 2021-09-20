@@ -26,7 +26,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
             $nameResolver,
         );
     }
-    
+
     /**
      * @return mixed[]
      */

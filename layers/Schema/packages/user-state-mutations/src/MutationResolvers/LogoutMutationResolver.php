@@ -23,7 +23,7 @@ class LogoutMutationResolver extends AbstractMutationResolver
             $hooksAPI,
         );
     }
-    
+
     use ValidateUserLoggedInMutationResolverTrait;
 
     public function validateErrors(array $form_data): ?array

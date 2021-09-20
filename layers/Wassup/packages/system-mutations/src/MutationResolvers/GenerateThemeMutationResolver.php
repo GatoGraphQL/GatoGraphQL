@@ -19,7 +19,7 @@ class GenerateThemeMutationResolver extends AbstractMutationResolver
             $hooksAPI,
         );
     }
-    
+
     public function executeMutation(array $form_data): mixed
     {
         $this->hooksAPI->doAction('PoP:system-generate:theme');

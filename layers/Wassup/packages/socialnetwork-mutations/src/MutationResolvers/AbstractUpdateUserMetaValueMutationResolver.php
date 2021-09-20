@@ -19,7 +19,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
             $hooksAPI,
         );
     }
-    
+
     public function validateErrors(array $form_data): ?array
     {
         $errors = [];
