@@ -31,6 +31,8 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected ObjectScalarTypeResolver $objectScalarTypeResolver,
     ) {
         parent::__construct(
@@ -41,6 +43,8 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

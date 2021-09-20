@@ -29,6 +29,8 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected UserMediaTypeAPIInterface $userMediaTypeAPI,
         protected UserObjectTypeResolver $userObjectTypeResolver,
     ) {
@@ -40,6 +42,8 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

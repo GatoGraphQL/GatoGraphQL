@@ -8,6 +8,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFiel
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -20,6 +21,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -39,7 +41,11 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
         protected IntScalarTypeResolver $intScalarTypeResolver,
+        protected CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -49,6 +55,9 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
+            $moduleProcessorManager,
         );
     }
 
@@ -210,7 +219,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
             $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
@@ -218,11 +226,11 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostsForAdmin':
-                return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'customPostCount':
             case 'customPostCountForAdmin':
-                return $customPostTypeAPI->getCustomPostCount($query);
+                return $this->customPostTypeAPI->getCustomPostCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

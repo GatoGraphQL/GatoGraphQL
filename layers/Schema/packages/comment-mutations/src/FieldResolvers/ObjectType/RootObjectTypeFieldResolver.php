@@ -7,6 +7,7 @@ namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -31,6 +32,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
         protected CommentObjectTypeResolver $commentObjectTypeResolver,
         protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {
@@ -42,6 +46,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
+            $moduleProcessorManager,
         );
     }
 

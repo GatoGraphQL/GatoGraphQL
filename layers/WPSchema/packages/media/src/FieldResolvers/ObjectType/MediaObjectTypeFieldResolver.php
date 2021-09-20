@@ -7,6 +7,7 @@ namespace PoPWPSchema\Media\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
@@ -29,6 +30,9 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
         protected CMSHelperServiceInterface $cmsHelperService,
         protected DateFormatterInterface $dateFormatter
     ) {
@@ -40,6 +44,9 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
+            $moduleProcessorManager,
         );
     }
 

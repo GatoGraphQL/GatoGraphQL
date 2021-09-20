@@ -31,6 +31,8 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected TypeObjectTypeResolver $typeObjectTypeResolver,
         protected DirectiveObjectTypeResolver $directiveObjectTypeResolver,
     ) {
@@ -42,6 +44,8 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

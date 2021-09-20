@@ -32,6 +32,8 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected UserAvatarTypeAPIInterface $userAvatarTypeAPI,
         protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
         protected UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,
@@ -44,6 +46,8 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

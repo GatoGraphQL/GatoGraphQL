@@ -30,6 +30,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
         protected IntScalarTypeResolver $intScalarTypeResolver,
     ) {
@@ -41,6 +43,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

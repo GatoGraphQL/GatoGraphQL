@@ -28,6 +28,8 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected UserObjectTypeResolver $userObjectTypeResolver,
     ) {
         parent::__construct(
@@ -38,6 +40,8 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

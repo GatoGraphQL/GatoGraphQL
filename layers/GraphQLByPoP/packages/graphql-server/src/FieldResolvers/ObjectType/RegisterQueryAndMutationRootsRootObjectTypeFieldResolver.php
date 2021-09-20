@@ -35,6 +35,8 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
     ) {
@@ -46,6 +48,8 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

@@ -31,6 +31,8 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected CommentTypeAPIInterface $commentTypeAPI,
         protected CommentObjectTypeResolver $commentObjectTypeResolver,
         protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
@@ -43,6 +45,8 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

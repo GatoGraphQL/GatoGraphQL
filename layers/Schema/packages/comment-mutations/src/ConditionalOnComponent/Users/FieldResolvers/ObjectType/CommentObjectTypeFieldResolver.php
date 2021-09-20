@@ -61,6 +61,8 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
             $commentTypeAPI,
             $stringScalarTypeResolver,
             $urlScalarTypeResolver,

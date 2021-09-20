@@ -96,14 +96,13 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'post':
             case 'postBySlug':
             case 'postForAdmin':
             case 'postBySlugForAdmin':
-                if ($posts = $postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($posts = $this->postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
                 return null;

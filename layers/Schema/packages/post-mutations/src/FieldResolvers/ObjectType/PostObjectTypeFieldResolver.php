@@ -31,6 +31,8 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected PostObjectTypeResolver $postObjectTypeResolver,
         protected UpdatePostMutationResolver $updatePostMutationResolver,
     ) {
@@ -42,6 +44,8 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

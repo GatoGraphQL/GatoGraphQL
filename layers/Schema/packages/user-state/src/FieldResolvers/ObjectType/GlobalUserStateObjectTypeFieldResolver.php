@@ -28,6 +28,8 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected IDScalarTypeResolver $idScalarTypeResolver,
     ) {
         parent::__construct(
@@ -38,6 +40,8 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

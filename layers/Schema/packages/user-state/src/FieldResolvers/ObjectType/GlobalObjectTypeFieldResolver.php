@@ -29,6 +29,8 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
         parent::__construct(
@@ -39,6 +41,8 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

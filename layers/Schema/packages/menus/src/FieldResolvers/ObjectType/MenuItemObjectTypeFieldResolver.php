@@ -34,6 +34,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
         protected CMSHelperServiceInterface $cmsHelperService,
         protected URLScalarTypeResolver $urlScalarTypeResolver,
@@ -49,6 +51,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 

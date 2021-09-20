@@ -26,6 +26,8 @@ class CustomPostUserListObjectTypeFieldResolver extends AbstractCustomPostListOb
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         IntScalarTypeResolver $intScalarTypeResolver,
     ) {
         parent::__construct(
@@ -36,6 +38,8 @@ class CustomPostUserListObjectTypeFieldResolver extends AbstractCustomPostListOb
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
             $intScalarTypeResolver,
         );
     }

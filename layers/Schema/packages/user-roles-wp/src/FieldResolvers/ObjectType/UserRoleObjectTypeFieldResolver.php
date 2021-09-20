@@ -29,6 +29,8 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
+        \PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface $schemaDefinitionService,
+        \PoP\ComponentModel\Engine\EngineInterface $engine,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         parent::__construct(
@@ -39,6 +41,8 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
             $nameResolver,
             $cmsService,
             $semverHelperService,
+            $schemaDefinitionService,
+            $engine,
         );
     }
 
