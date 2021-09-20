@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Overrides\ConfigurationCache;
 
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ConfigurationCache\AbstractCacheConfigurationManager;
 
 class OperationalCacheConfigurationManager extends AbstractCacheConfigurationManager
@@ -14,8 +13,7 @@ class OperationalCacheConfigurationManager extends AbstractCacheConfigurationMan
      */
     protected function getTimestamp(): int
     {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        return $userSettingsManager->getOperationalTimestamp();
+        return $this->userSettingsManager->getOperationalTimestamp();
     }
 
     /**
