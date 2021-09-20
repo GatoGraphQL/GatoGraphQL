@@ -28,11 +28,11 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
         DirectivePipelineServiceInterface $directivePipelineService,
         protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ) {
@@ -42,11 +42,11 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
             $instanceManager,
             $schemaNamespacingService,
             $schemaDefinitionService,
+            $attachableExtensionManager,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
             $dataloadingEngine,
-            $attachableExtensionManager,
             $directivePipelineService,
         );
     }

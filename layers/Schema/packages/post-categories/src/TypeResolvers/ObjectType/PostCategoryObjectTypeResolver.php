@@ -30,11 +30,11 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
         DirectivePipelineServiceInterface $directivePipelineService,
         protected PostCategoryTypeDataLoader $postCategoryTypeDataLoader,
     ) {
@@ -44,11 +44,11 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
             $instanceManager,
             $schemaNamespacingService,
             $schemaDefinitionService,
+            $attachableExtensionManager,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
             $dataloadingEngine,
-            $attachableExtensionManager,
             $directivePipelineService,
         );
     }

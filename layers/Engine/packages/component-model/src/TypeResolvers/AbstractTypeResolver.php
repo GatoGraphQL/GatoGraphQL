@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
@@ -25,6 +26,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         protected InstanceManagerInterface $instanceManager,
         protected SchemaNamespacingServiceInterface $schemaNamespacingService,
         protected SchemaDefinitionServiceInterface $schemaDefinitionService,
+        protected AttachableExtensionManagerInterface $attachableExtensionManager,
     ) {
     }
 

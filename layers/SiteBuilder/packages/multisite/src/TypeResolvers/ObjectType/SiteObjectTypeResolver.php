@@ -28,11 +28,11 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
         DirectivePipelineServiceInterface $directivePipelineService,
         protected SiteTypeDataLoader $siteTypeDataLoader,
     ) {
@@ -42,11 +42,11 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
             $instanceManager,
             $schemaNamespacingService,
             $schemaDefinitionService,
+            $attachableExtensionManager,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
             $dataloadingEngine,
-            $attachableExtensionManager,
             $directivePipelineService,
         );
     }

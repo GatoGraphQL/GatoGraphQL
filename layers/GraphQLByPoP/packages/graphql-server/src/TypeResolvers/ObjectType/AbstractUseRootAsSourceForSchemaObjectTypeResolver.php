@@ -31,11 +31,11 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
         DirectivePipelineServiceInterface $directivePipelineService,
         protected RootObjectTypeResolver $rootObjectTypeResolver,
     ) {
@@ -45,11 +45,11 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
             $instanceManager,
             $schemaNamespacingService,
             $schemaDefinitionService,
+            $attachableExtensionManager,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
             $dataloadingEngine,
-            $attachableExtensionManager,
             $directivePipelineService,
         );
     }

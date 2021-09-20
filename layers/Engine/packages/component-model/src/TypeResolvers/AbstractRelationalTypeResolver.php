@@ -71,11 +71,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
         protected FeedbackMessageStoreInterface $feedbackMessageStore,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected ErrorProviderInterface $errorProvider,
         protected DataloadingEngineInterface $dataloadingEngine,
-        protected AttachableExtensionManagerInterface $attachableExtensionManager,
         protected DirectivePipelineServiceInterface $directivePipelineService,
     ) {
         parent::__construct(
@@ -84,6 +84,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $instanceManager,
             $schemaNamespacingService,
             $schemaDefinitionService,
+            $attachableExtensionManager,
         );
     }
 

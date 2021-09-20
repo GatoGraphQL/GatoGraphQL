@@ -33,11 +33,11 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         InstanceManagerInterface $instanceManager,
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
+        AttachableExtensionManagerInterface $attachableExtensionManager,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
         DirectivePipelineServiceInterface $directivePipelineService,
         protected InterfaceTypeResolverInterface $interfaceTypeResolver,
     ) {
@@ -47,11 +47,11 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
             $instanceManager,
             $schemaNamespacingService,
             $schemaDefinitionService,
+            $attachableExtensionManager,
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
             $dataloadingEngine,
-            $attachableExtensionManager,
             $directivePipelineService,
         );
     }
