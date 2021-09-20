@@ -62,8 +62,7 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
     protected function isFieldNameResolvedByObjectTypeFieldResolver(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
-        string $fieldName,
-        array $interfaceTypeResolverClasses,
+        string $fieldName
     ): bool {
         if (
             $objectTypeOrInterfaceTypeFieldResolver instanceof ObjectTypeFieldResolverInterface
@@ -74,8 +73,7 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
         return parent::isFieldNameResolvedByObjectTypeFieldResolver(
             $objectTypeOrInterfaceTypeResolver,
             $objectTypeOrInterfaceTypeFieldResolver,
-            $fieldName,
-            $interfaceTypeResolverClasses
+            $fieldName
         );
     }
 }
