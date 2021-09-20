@@ -27,9 +27,9 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      */
     protected RootObjectTypeResolver $rootTypeResolver;
 
-    public function __construct(?string $directive = null)
+    protected function initializeServices(): void
     {
-        parent::__construct($directive);
+        parent::initializeServices();
         $this->rootTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
     }
 
