@@ -38,7 +38,7 @@ class NestedMutationHookSet extends AbstractHookSet
             HookHelpers::getHookNameToFilterField(),
             array($this, 'maybeFilterFieldName'),
             10,
-            5
+            4
         );
     }
 
@@ -51,7 +51,6 @@ class NestedMutationHookSet extends AbstractHookSet
         bool $include,
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
-        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         $vars = ApplicationState::getVars();

@@ -38,14 +38,13 @@ abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet 
     protected function removeFieldName(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
-        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         // Obtain all entries for the current combination of [typeResolver or interfaceTypeResolverClass]/fieldName
         foreach (
             $this->getEntries(
                 $objectTypeOrInterfaceTypeResolver,
-                $interfaceTypeResolverClasses,
+                $objectTypeOrInterfaceTypeFieldResolver,
                 $fieldName
             ) as $entry
         ) {

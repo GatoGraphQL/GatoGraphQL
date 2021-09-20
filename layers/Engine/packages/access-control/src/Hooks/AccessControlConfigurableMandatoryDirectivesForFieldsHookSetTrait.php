@@ -16,7 +16,6 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
         bool $include,
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
-        array $interfaceTypeResolverClasses,
         string $fieldName
     ): bool {
         /**
@@ -29,7 +28,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
             if (
                 empty($this->getEntries(
                     $objectTypeOrInterfaceTypeResolver,
-                    $interfaceTypeResolverClasses,
+                    $objectTypeOrInterfaceTypeFieldResolver,
                     $fieldName
                 ))
             ) {
@@ -44,7 +43,6 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
             $include,
             $objectTypeOrInterfaceTypeResolver,
             $objectTypeOrInterfaceTypeFieldResolver,
-            $interfaceTypeResolverClasses,
             $fieldName
         );
     }
