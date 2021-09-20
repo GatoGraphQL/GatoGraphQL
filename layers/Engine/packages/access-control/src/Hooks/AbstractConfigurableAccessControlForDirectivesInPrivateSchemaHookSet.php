@@ -19,6 +19,7 @@ abstract class AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHook
         AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getEntries insteadof ConfigurableMandatoryDirectivesForDirectivesTrait;
         AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getConfigurationEntries insteadof ConfigurableMandatoryDirectivesForDirectivesTrait;
         AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getRequiredEntryValue insteadof ConfigurableMandatoryDirectivesForDirectivesTrait;
+        AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getDirectiveResolvers insteadof ConfigurableMandatoryDirectivesForDirectivesTrait;
         AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getDirectiveResolverClasses insteadof ConfigurableMandatoryDirectivesForDirectivesTrait;
     }
 

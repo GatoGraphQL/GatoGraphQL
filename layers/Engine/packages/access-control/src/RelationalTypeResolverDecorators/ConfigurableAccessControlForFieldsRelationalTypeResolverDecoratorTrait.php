@@ -18,6 +18,7 @@ trait ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait
         AccessControlConfigurableMandatoryDirectivesForFieldsTrait::getConfigurationEntries insteadof ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTrait;
         AccessControlConfigurableMandatoryDirectivesForFieldsTrait::getEntries insteadof ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTrait;
         AccessControlConfigurableMandatoryDirectivesForFieldsTrait::getFieldNames insteadof ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTrait;
+        AccessControlConfigurableMandatoryDirectivesForFieldsTrait::getEntriesByTypeAndInterfaces insteadof ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTrait;
     }
 
     public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool
