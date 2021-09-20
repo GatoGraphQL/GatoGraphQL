@@ -19,6 +19,12 @@ use PoP\FieldQuery\QuerySyntax;
 
 abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
+    protected function initializeServices(): void
+    {
+        parent::initializeServices();
+        $this->directivePipelineService = DirectivePipelineServiceFacade::getInstance();
+    }
+
     /**
      * Use a value that can't be part of a fieldName, that's legible, and that conveys the meaning of sublevel. The value "." is adequate
      */
@@ -220,8 +226,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 },
                 $this->nestedDirectivePipelineData
             );
-            $directivePipelineService = DirectivePipelineServiceFacade::getInstance();
-            $nestedDirectivePipeline = $directivePipelineService->getDirectivePipeline($directiveResolverInstances);
+            $nestedDirectivePipeline = $this->directivePipelineService->getDirectivePipeline($directiveResolverInstances);
             // Fill the idsDataFields for each directive in the pipeline
             $pipelineArrayItemIdsProperties = [];
             for ($i = 0; $i < count($directiveResolverInstances); $i++) {

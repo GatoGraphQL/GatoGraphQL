@@ -12,6 +12,12 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
+    protected function initializeServices(): void
+    {
+        parent::initializeServices();
+        $this->cacheControlEngine = CacheControlEngineFacade::getInstance();
+    }
+
     public function getDirectiveName(): string
     {
         return 'cacheControl';
@@ -143,8 +149,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         // If it was provided as a directiveArg, use that value. Otherwise, use the one from the class
         $maxAge = $this->directiveArgsForSchema['maxAge'] ?? $this->getMaxAge();
         if (!is_null($maxAge)) {
-            $cacheControlEngine = CacheControlEngineFacade::getInstance();
-            $cacheControlEngine->addMaxAge($maxAge);
+            $this->cacheControlEngine->addMaxAge($maxAge);
         }
     }
 

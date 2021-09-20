@@ -12,6 +12,12 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveReso
 
 class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
+    protected function initializeServices(): void
+    {
+        parent::initializeServices();
+        $this->userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
+    }
+
     public function getDirectiveName(): string
     {
         return 'validateDoesLoggedInUserHaveAnyRole';
@@ -26,9 +32,8 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         }
 
         $roles = $this->directiveArgsForSchema['roles'];
-        $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
         $userID = $vars['global-userstate']['current-user-id'];
-        $userRoles = $userRoleTypeAPI->getUserRoles($userID);
+        $userRoles = $this->userRoleTypeAPI->getUserRoles($userID);
         return !empty(array_intersect($roles, $userRoles));
     }
 

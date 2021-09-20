@@ -11,14 +11,19 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
+    protected function initializeServices(): void
+    {
+        parent::initializeServices();
+        $this->engine = EngineFacade::getInstance();
+    }
+
     /**
      * Validate checkpoints
      */
     protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $checkpointSet = $this->getValidationCheckpointSet($relationalTypeResolver);
-        $engine = EngineFacade::getInstance();
-        $validation = $engine->validateCheckpoints($checkpointSet);
+        $validation = $this->engine->validateCheckpoints($checkpointSet);
         return !GeneralUtils::isError($validation);
     }
 
