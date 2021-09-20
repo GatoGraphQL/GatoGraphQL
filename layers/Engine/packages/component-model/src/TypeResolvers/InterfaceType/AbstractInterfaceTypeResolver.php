@@ -28,9 +28,9 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      */
     private array $fieldNamesResolvedByInterfaceTypeFieldResolver = [];
     /**
-     * @var string[]|null
+     * @var InterfaceTypeFieldResolverInterface[]|null
      */
-    protected ?array $interfaceTypeFieldResolverClasses = null;
+    protected ?array $interfaceTypeFieldResolvers = null;
 
     /**
      * The list of the fieldNames to implement in the Interface,

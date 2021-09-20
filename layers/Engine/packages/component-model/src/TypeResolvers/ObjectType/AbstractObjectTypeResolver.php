@@ -50,7 +50,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     private array $fieldNamesResolvedByObjectTypeFieldResolver = [];
     /**
-     * @var string[]|null
+     * @var InterfaceTypeFieldResolverInterface[]|null
      */
     protected ?array $interfaceTypeFieldResolvers = null;
 

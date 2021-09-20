@@ -32,8 +32,6 @@ abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet 
 
     /**
      * Remove fieldName "roles" if the user is not logged in
-     *
-     * @param string[] $interfaceTypeResolverClasses
      */
     protected function removeFieldName(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,

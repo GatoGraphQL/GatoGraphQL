@@ -30,6 +30,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
@@ -107,7 +108,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * That's why this function is "partially" implemented: the Interface
      * may be completely implemented or not.
      *
-     * @return string[]
+     * @return InterfaceTypeResolverInterface[]
      */
     final public function getPartiallyImplementedInterfaceTypeResolvers(): array
     {
@@ -154,6 +155,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         string $fieldName
     ): ObjectTypeFieldSchemaDefinitionResolverInterface | InterfaceTypeFieldSchemaDefinitionResolverInterface {
         if ($interfaceTypeFieldSchemaDefinitionResolver = $this->getInterfaceTypeFieldSchemaDefinitionResolver($objectTypeResolver, $fieldName)) {
+            /** @var InterfaceTypeFieldSchemaDefinitionResolverInterface */
             return $interfaceTypeFieldSchemaDefinitionResolver;
         }
         return $this;

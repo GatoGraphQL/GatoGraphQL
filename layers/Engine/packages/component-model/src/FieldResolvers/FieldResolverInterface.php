@@ -27,7 +27,7 @@ interface FieldResolverInterface extends AttachableExtensionInterface
     public function getPartiallyImplementedInterfaceTypeResolvers(): array;
     /**
      * The interfaces the fieldResolver implements
-     * 
+     *
      * @return InterfaceTypeFieldResolverInterface[]
      */
     public function getImplementedInterfaceTypeFieldResolvers(): array;

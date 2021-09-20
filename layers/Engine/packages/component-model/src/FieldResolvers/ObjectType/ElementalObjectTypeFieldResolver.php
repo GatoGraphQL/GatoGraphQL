@@ -46,7 +46,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $engine,
         );
     }
-    
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

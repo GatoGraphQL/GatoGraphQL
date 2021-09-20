@@ -66,7 +66,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 
     /**
      * The interfaces the fieldResolver implements
-     * 
+     *
      * @return InterfaceTypeFieldResolverInterface[]
      */
     public function getImplementedInterfaceTypeFieldResolvers(): array
@@ -130,6 +130,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             if (!in_array($fieldName, $implementedInterfaceTypeFieldResolver->getFieldNamesToImplement())) {
                 continue;
             }
+            /** @var InterfaceTypeFieldSchemaDefinitionResolverInterface */
             return $implementedInterfaceTypeFieldResolver;
         }
         return null;
