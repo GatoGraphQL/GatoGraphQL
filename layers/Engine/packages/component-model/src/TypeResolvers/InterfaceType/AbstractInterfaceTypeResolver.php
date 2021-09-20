@@ -91,14 +91,14 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     public function getAllInterfaceTypeFieldResolvers(): array
     {
         if ($this->interfaceTypeFieldResolvers === null) {
-            $this->interfaceTypeFieldResolvers = [];
-            foreach ($this->getAllInterfaceTypeFieldResolversByField() as $fieldName => $interfaceTypeFieldResolvers) {
-                $this->interfaceTypeFieldResolvers = array_merge(
-                    $this->interfaceTypeFieldResolvers,
-                    $interfaceTypeFieldResolvers
-                );
+            $interfaceTypeFieldResolvers = [];
+            foreach ($this->getAllInterfaceTypeFieldResolversByField() as $fieldName => $interfaceTypeFieldResolversByField) {
+                // Add under class as to mimick `array_unique` for object
+                foreach ($interfaceTypeFieldResolversByField as $interfaceTypeFieldResolver) {
+                    $interfaceTypeFieldResolvers[get_class($interfaceTypeFieldResolver)] = $interfaceTypeFieldResolver;
+                }
             }
-            $this->interfaceTypeFieldResolvers = array_values(array_unique($this->interfaceTypeFieldResolvers));
+            $this->interfaceTypeFieldResolvers = array_values($interfaceTypeFieldResolvers);
         }
         return $this->interfaceTypeFieldResolvers;
     }
