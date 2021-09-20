@@ -30,6 +30,9 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
+        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
+        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
         protected PostTagTypeDataLoader $postTagTypeDataLoader,
     ) {
         parent::__construct(
@@ -41,6 +44,9 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $attachableExtensionManager,
+            $directivePipelineService,
         );
     }
 

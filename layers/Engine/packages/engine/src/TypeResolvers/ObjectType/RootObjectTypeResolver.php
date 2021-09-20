@@ -35,6 +35,9 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
+        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
+        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
         protected RootTypeDataLoader $rootTypeDataLoader,
     ) {
         parent::__construct(
@@ -46,6 +49,9 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $attachableExtensionManager,
+            $directivePipelineService,
         );
     }
 

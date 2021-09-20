@@ -27,6 +27,9 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
+        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
+        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
         protected UserRoleTypeDataLoader $userRoleTypeDataLoader,
     ) {
         parent::__construct(
@@ -38,6 +41,9 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $attachableExtensionManager,
+            $directivePipelineService,
         );
     }
 

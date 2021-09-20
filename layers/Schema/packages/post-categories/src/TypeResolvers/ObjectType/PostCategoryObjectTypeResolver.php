@@ -30,6 +30,9 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
+        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
+        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
         protected PostCategoryTypeDataLoader $postCategoryTypeDataLoader,
     ) {
         parent::__construct(
@@ -41,6 +44,9 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $attachableExtensionManager,
+            $directivePipelineService,
         );
     }
 

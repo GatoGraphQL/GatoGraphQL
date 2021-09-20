@@ -32,6 +32,9 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
+        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
+        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
         protected RootObjectTypeResolver $rootObjectTypeResolver,
         protected QueryRootTypeDataLoader $queryRootTypeDataLoader,
     ) {
@@ -44,6 +47,9 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $attachableExtensionManager,
+            $directivePipelineService,
             $rootObjectTypeResolver,
         );
     }

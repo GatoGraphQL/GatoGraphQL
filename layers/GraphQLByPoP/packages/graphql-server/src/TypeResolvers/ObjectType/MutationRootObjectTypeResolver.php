@@ -40,6 +40,9 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
+        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
+        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
         TypeResolverHelperInterface $typeResolverHelper,
         RootObjectTypeResolver $rootObjectTypeResolver,
         protected MutationRootTypeDataLoader $mutationRootTypeDataLoader,
@@ -53,6 +56,9 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $attachableExtensionManager,
+            $directivePipelineService,
             $rootObjectTypeResolver,
         );
         $this->objectTypeResolverMandatoryFields = $typeResolverHelper->getObjectTypeResolverMandatoryFields();

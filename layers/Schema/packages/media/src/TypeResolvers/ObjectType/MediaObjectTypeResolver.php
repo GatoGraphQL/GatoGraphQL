@@ -28,6 +28,9 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
+        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
+        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
         protected MediaTypeAPIInterface $mediaTypeAPI,
         protected MediaTypeDataLoader $mediaTypeDataLoader,
     ) {
@@ -40,6 +43,9 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $attachableExtensionManager,
+            $directivePipelineService,
         );
     }
 

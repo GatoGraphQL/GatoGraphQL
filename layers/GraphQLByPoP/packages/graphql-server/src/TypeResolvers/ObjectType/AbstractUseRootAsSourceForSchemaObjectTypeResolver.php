@@ -31,6 +31,9 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
+        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
+        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
         protected RootObjectTypeResolver $rootObjectTypeResolver,
     ) {
         parent::__construct(
@@ -42,6 +45,9 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $attachableExtensionManager,
+            $directivePipelineService,
         );
     }
 

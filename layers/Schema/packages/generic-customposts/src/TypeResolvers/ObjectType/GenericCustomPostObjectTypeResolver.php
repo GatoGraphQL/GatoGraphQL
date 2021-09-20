@@ -27,6 +27,9 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
+        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
+        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
         protected GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader,
     ) {
         parent::__construct(
@@ -38,6 +41,9 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $attachableExtensionManager,
+            $directivePipelineService,
         );
     }
 

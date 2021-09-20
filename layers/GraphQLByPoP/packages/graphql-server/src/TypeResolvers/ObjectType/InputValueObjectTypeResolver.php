@@ -28,6 +28,9 @@ class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolv
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        \PoP\ComponentModel\Engine\DataloadingEngineInterface $dataloadingEngine,
+        \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface $attachableExtensionManager,
+        \PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface $directivePipelineService,
         protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ) {
         parent::__construct(
@@ -39,6 +42,9 @@ class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolv
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $dataloadingEngine,
+            $attachableExtensionManager,
+            $directivePipelineService,
         );
     }
 
