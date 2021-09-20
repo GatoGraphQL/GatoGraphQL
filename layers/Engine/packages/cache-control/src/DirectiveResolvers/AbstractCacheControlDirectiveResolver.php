@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
-use PoP\CacheControl\Schema\SchemaDefinition;
-use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\CacheControl\Facades\CacheControlEngineFacade;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\CacheControl\Managers\CacheControlEngineInterface;
+use PoP\CacheControl\Schema\SchemaDefinition;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
+    protected CacheControlEngineInterface $cacheControlEngine;
+    
     protected function initializeServices(): void
     {
         parent::initializeServices();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\DirectivePipeline\DirectivePipelineServiceFacade;
@@ -19,16 +20,18 @@ use PoP\FieldQuery\QuerySyntax;
 
 abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
+    /**
+     * Use a value that can't be part of a fieldName, that's legible, and that conveys the meaning of sublevel. The value "." is adequate
+     */
+    public const PROPERTY_SEPARATOR = '.';
+
+    protected DirectivePipelineServiceInterface $directivePipelineService;
+
     protected function initializeServices(): void
     {
         parent::initializeServices();
         $this->directivePipelineService = DirectivePipelineServiceFacade::getInstance();
     }
-
-    /**
-     * Use a value that can't be part of a fieldName, that's legible, and that conveys the meaning of sublevel. The value "." is adequate
-     */
-    public const PROPERTY_SEPARATOR = '.';
 
     public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {

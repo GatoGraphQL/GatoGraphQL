@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl\DirectiveResolvers;
 
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
+use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 
 class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
+    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+
     protected function initializeServices(): void
     {
         parent::initializeServices();
