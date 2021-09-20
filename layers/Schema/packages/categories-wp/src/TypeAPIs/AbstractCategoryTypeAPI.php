@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
 use PoP\Engine\CMS\CMSHelperServiceInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
@@ -25,6 +26,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected CMSHelperServiceInterface $cmsHelperService,
+        protected CMSServiceInterface $cmsService,
     ) {
     }
 
@@ -191,8 +193,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     public function getCategoryBase()
     {
-        $cmsService = CMSServiceFacade::getInstance();
-        return $cmsService->getOption($this->getCategoryBaseOption());
+        return $this->cmsService->getOption($this->getCategoryBaseOption());
     }
 
     public function setPostCategories($post_id, array $categories, bool $append = false)
