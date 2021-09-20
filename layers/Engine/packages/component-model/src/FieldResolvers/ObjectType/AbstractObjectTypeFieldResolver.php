@@ -92,7 +92,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     {
         $fieldNames = [];
 
-        foreach ($this->getInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
+        foreach ($this->getImplementedInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
             $fieldNames = array_merge(
                 $fieldNames,
                 $interfaceTypeFieldResolver->getFieldNamesToImplement()
@@ -277,16 +277,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function isGlobal(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         return false;
-    }
-
-    /**
-     * Implement all the fieldNames defined in the interfaces
-     *
-     * @return InterfaceTypeFieldResolverInterface[]
-     */
-    public function getInterfaceTypeFieldResolvers(): array
-    {
-        return $this->getImplementedInterfaceTypeFieldResolvers();
     }
 
     /**
