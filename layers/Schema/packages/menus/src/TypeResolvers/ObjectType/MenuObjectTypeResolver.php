@@ -19,6 +19,7 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuTypeDataLoader;
+use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 
 class MenuObjectTypeResolver extends AbstractObjectTypeResolver
 {
@@ -35,6 +36,7 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
         protected MenuTypeDataLoader $menuTypeDataLoader,
+        protected MenuTypeAPIInterface $menuTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -63,9 +65,8 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getID(object $object): string | int | null
     {
-        $menuTypeAPI = MenuTypeAPIFacade::getInstance();
         $menu = $object;
-        return $menuTypeAPI->getMenuID($menu);
+        return $this->menuTypeAPI->getMenuID($menu);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
