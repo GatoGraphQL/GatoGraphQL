@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
 {
     public const PERSISTED_QUERY_ENDPOINT_BLOCK_CATEGORY = 'graphql-api-persisted-query';
-    
+
     protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
 
     #[Required]

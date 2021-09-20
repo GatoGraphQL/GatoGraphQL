@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class SchemaConfigurationBlockCategory extends AbstractBlockCategory
 {
     public const SCHEMA_CONFIGURATION_BLOCK_CATEGORY = 'graphql-api-schema-config';
-    
+
     protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
 
     #[Required]
