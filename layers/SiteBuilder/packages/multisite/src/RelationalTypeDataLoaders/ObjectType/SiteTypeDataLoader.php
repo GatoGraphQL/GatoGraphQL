@@ -9,7 +9,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\Engine\FunctionAPIFactory;
-use PoP\Multisite\ObjectModels\Site;
+use PoP\Multisite\ObjectModels\SiteObject;
 
 class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {
@@ -17,7 +17,7 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected Site $site,
+        protected SiteObject $siteObject,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -32,7 +32,7 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
         $ret = [];
         $cmsengineapi = FunctionAPIFactory::getInstance();
         if (in_array($cmsengineapi->getHost(), $ids)) {
-            $ret[] = $this->site;
+            $ret[] = $this->siteObject;
         }
         return $ret;
     }

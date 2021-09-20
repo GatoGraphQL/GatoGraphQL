@@ -18,8 +18,7 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
-use PoP\Multisite\ObjectFacades\SiteObjectFacade;
-use PoP\Multisite\ObjectModels\Site;
+use PoP\Multisite\ObjectModels\SiteObject;
 use PoP\Multisite\TypeResolvers\ObjectType\SiteObjectTypeResolver;
 use PoP\Translation\TranslationAPIInterface;
 
@@ -36,7 +35,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         protected SiteObjectTypeResolver $siteObjectTypeResolver,
-        protected Site $site,
+        protected SiteObject $siteObject,
     ) {
         parent::__construct(
             $translationAPI,
@@ -62,7 +61,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return [
             'sites',
-            'site',
+            'Object',
         ];
     }
 
@@ -103,10 +102,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'sites':
                 return [
-                    $this->site->getID(),
+                    $this->siteObject->getID(),
                 ];
             case 'site':
-                return $this->site->getID();
+                return $this->siteObject->getID();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

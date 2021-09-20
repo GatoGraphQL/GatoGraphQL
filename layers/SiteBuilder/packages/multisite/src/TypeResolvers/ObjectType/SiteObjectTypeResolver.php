@@ -17,7 +17,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoP\Multisite\ObjectModels\Site;
+use PoP\Multisite\ObjectModels\SiteObject;
 use PoP\Multisite\RelationalTypeDataLoaders\ObjectType\SiteTypeDataLoader;
 
 class SiteObjectTypeResolver extends AbstractObjectTypeResolver
@@ -63,9 +63,9 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getID(object $object): string | int | null
     {
-        /** @var Site */
-        $site = $object;
-        return $site->getID();
+        /** @var SiteObject */
+        $siteObject = $object;
+        return $siteObject->getID();
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

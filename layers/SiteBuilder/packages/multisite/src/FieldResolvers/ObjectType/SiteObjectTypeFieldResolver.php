@@ -19,7 +19,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Multisite\ObjectModels\Site;
+use PoP\Multisite\ObjectModels\SiteObject;
 use PoP\Multisite\TypeResolvers\ObjectType\SiteObjectTypeResolver;
 
 class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -109,7 +109,7 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        /** @var Site */
+        /** @var SiteObject */
         $site = $object;
         switch ($fieldName) {
             case 'domain':

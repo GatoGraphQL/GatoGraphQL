@@ -6,7 +6,7 @@ namespace PoP\Multisite\ObjectModels;
 
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
-class Site
+class SiteObject
 {
     private string $id;
     private string $domain;
