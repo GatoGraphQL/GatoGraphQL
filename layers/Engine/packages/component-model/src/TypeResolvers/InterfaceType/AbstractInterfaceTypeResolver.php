@@ -67,20 +67,19 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     {
         $implementedInterfaceTypeFieldResolvers = [];
         foreach ($this->getAllInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
-            $implementedInterfaceTypeFieldResolvers = array_merge(
-                $implementedInterfaceTypeFieldResolvers,
-                $interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers()
-            );
+            // Add under class as to mimick `array_unique` for object
+            foreach ($interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers() as $implementedInterfaceTypeFieldResolver) {
+                $implementedInterfaceTypeFieldResolvers[get_class($implementedInterfaceTypeFieldResolver)] = $implementedInterfaceTypeFieldResolver;
+            }
         }
-        $implementedInterfaceTypeFieldResolvers = array_values(array_unique($implementedInterfaceTypeFieldResolvers));
         $implementedInterfaceTypeResolvers = [];
         foreach ($implementedInterfaceTypeFieldResolvers as $implementedInterfaceTypeFieldResolver) {
-            $implementedInterfaceTypeResolvers = array_merge(
-                $implementedInterfaceTypeResolvers,
-                $implementedInterfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers()
-            );
+            // Add under class as to mimick `array_unique` for object
+            foreach ($implementedInterfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers() as $partiallyImplementedInterfaceTypeResolver) {
+                $implementedInterfaceTypeResolvers[get_class($partiallyImplementedInterfaceTypeResolver)] = $partiallyImplementedInterfaceTypeResolver;
+            }
         }
-        return array_values(array_unique($implementedInterfaceTypeResolvers));
+        return array_values($implementedInterfaceTypeResolvers);
     }
 
     /**
