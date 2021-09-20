@@ -91,14 +91,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function getFieldNamesFromInterfaces(): array
     {
         $fieldNames = [];
-
         foreach ($this->getImplementedInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
             $fieldNames = array_merge(
                 $fieldNames,
                 $interfaceTypeFieldResolver->getFieldNamesToImplement()
             );
         }
-
         return array_values(array_unique($fieldNames));
     }
 
