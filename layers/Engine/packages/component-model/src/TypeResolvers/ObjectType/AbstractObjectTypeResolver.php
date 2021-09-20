@@ -758,14 +758,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $objectTypeFieldResolverClass = get_class($objectTypeFieldResolver);
                 if (!in_array($objectTypeFieldResolverClass, $processedObjectTypeFieldResolverClasses)) {
                     $processedObjectTypeFieldResolverClasses[] = $objectTypeFieldResolverClass;
-                    $interfaceTypeFieldResolvers = array_merge(
-                        $interfaceTypeFieldResolvers,
-                        $objectTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers()
-                    );
+                    foreach ($objectTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers() as $implementedInterfaceTypeFieldResolver) {
+                        // Add under class as to mimick `array_unique` for object
+                        $interfaceTypeFieldResolvers[get_class($implementedInterfaceTypeFieldResolver)] = $implementedInterfaceTypeFieldResolver;
+                    }
                 }
             }
         }
-        return array_values(array_unique($interfaceTypeFieldResolvers));
+        return array_values($interfaceTypeFieldResolvers);
     }
 
     /**
@@ -786,21 +786,22 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     {
         $interfaceTypeResolvers = [];
         foreach ($this->getAllImplementedInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
-            $interfaceTypeResolvers = array_merge(
-                $interfaceTypeResolvers,
-                $interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers()
-            );
+            foreach ($interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers() as $partiallyImplementedInterfaceTypeResolver) {
+                // Add under class as to mimick `array_unique` for object
+                $interfaceTypeResolvers[get_class($partiallyImplementedInterfaceTypeResolver)] = $partiallyImplementedInterfaceTypeResolver;
+            }
         }
-        $interfaceTypeResolvers = array_values(array_unique($interfaceTypeResolvers));
+        $interfaceTypeResolvers = array_values($interfaceTypeResolvers);
         // Every InterfaceTypeResolver can be injected fields from many InterfaceTypeFieldResolvers
         // Make sure that this typeResolver implements all these InterfaceTypeFieldResolver
         // If not, the type does not fully satisfy the Interface
         $implementedInterfaceTypeFieldResolvers = $this->getAllImplementedInterfaceTypeFieldResolvers();
         return array_filter(
             $interfaceTypeResolvers,
-            fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => array_diff(
+            fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => array_udiff(
                 $interfaceTypeResolver->getAllInterfaceTypeFieldResolvers(),
-                $implementedInterfaceTypeFieldResolvers
+                $implementedInterfaceTypeFieldResolvers,
+                fn (object $a, object $b) => get_class($a) <=> get_class($b)
             ) === [],
         );
     }
