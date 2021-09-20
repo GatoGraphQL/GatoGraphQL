@@ -4,23 +4,25 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
-use PoP\ComponentModel\Engine\EngineInterface;
 use ArgumentCountError;
+use Exception;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Engine\Misc\Extract;
+use PoP\Engine\Misc\OperatorHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -53,6 +55,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         protected ObjectScalarTypeResolver $objectScalarTypeResolver,
         protected IntScalarTypeResolver $intScalarTypeResolver,
         protected StringScalarTypeResolver $stringScalarTypeResolver,
+        protected ErrorProviderInterface $errorProvider,
     ) {
         parent::__construct(
             $translationAPI,
@@ -402,7 +405,15 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'context':
                 return $this->getSafeVars();
             case 'extract':
-                return Extract::getDataFromPath($fieldName, $fieldArgs['object'], $fieldArgs['path']);
+                try {
+                    return OperatorHelpers::getPointerToArrayItemUnderPath($fieldArgs['object'], $fieldArgs['path']);
+                } catch (Exception $e) {
+                    return $this->errorProvider->getError(
+                        $fieldName,
+                        'path-not-reachable',
+                        $e->getMessage()
+                    );
+                }
             case 'time':
                 return time();
             case 'echo':
