@@ -109,16 +109,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      *
      * @return string[]
      */
-    final public function getPartiallyImplementedInterfaceTypeResolverClasses(): array
+    final public function getPartiallyImplementedInterfaceTypeResolvers(): array
     {
-        $interfaceTypeResolverClasses = [];
+        $interfaceTypeResolvers = [];
         foreach ($this->getImplementedInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
-            $interfaceTypeResolverClasses = array_merge(
-                $interfaceTypeResolverClasses,
+            $interfaceTypeResolvers = array_merge(
+                $interfaceTypeResolvers,
                 $interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers()
             );
         }
-        return array_values(array_unique($interfaceTypeResolverClasses));
+        return array_values(array_unique($interfaceTypeResolvers));
     }
 
     /**
@@ -146,26 +146,25 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * By default, the resolver is this same object, unless function
-     * `getInterfaceTypeFieldSchemaDefinitionResolverClass` is
+     * `getInterfaceTypeFieldSchemaDefinitionResolver` is
      * implemented
      */
     protected function doGetSchemaDefinitionResolver(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ObjectTypeFieldSchemaDefinitionResolverInterface | InterfaceTypeFieldSchemaDefinitionResolverInterface {
-        if ($interfaceTypeFieldSchemaDefinitionResolverClass = $this->getInterfaceTypeFieldSchemaDefinitionResolverClass($objectTypeResolver, $fieldName)) {
-            /** @var InterfaceTypeFieldSchemaDefinitionResolverInterface */
-            return $this->instanceManager->getInstance($interfaceTypeFieldSchemaDefinitionResolverClass);
+        if ($interfaceTypeFieldSchemaDefinitionResolver = $this->getInterfaceTypeFieldSchemaDefinitionResolver($objectTypeResolver, $fieldName)) {
+            return $interfaceTypeFieldSchemaDefinitionResolver;
         }
         return $this;
     }
 
     /**
-     * Retrieve the class of some InterfaceTypeFieldSchemaDefinitionResolverInterface
+     * Retrieve the InterfaceTypeFieldSchemaDefinitionResolverInterface
      * By default, if the ObjectTypeFieldResolver implements an interface,
      * it is used as SchemaDefinitionResolver for the matching fields
      */
-    protected function getInterfaceTypeFieldSchemaDefinitionResolverClass(
+    protected function getInterfaceTypeFieldSchemaDefinitionResolver(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?string {

@@ -45,12 +45,6 @@ interface InterfaceTypeResolverInterface extends TypeResolverInterface
     /**
      * Interfaces "partially" implemented by this Interface
      *
-     * @return string[]
-     */
-    public function getPartiallyImplementedInterfaceTypeResolverClasses(): array;
-    /**
-     * Interfaces "partially" implemented by this Interface
-     *
      * @return InterfaceTypeResolverInterface[]
      */
     public function getPartiallyImplementedInterfaceTypeResolvers(): array;

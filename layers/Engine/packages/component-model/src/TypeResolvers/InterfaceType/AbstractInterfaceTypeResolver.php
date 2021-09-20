@@ -61,44 +61,26 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     /**
      * Interfaces "partially" implemented by this Interface
      *
-     * @return string[]
-     */
-    public function getPartiallyImplementedInterfaceTypeResolverClasses(): array
-    {
-        $implementedInterfaceTypeFieldResolverClasses = [];
-        foreach ($this->getAllInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
-            $implementedInterfaceTypeFieldResolverClasses = array_merge(
-                $implementedInterfaceTypeFieldResolverClasses,
-                $interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers()
-            );
-        }
-        $implementedInterfaceTypeFieldResolverClasses = array_values(array_unique($implementedInterfaceTypeFieldResolverClasses));
-        /** @var InterfaceTypeFieldResolverInterface[] */
-        $implementedInterfaceTypeFieldResolvers = array_map(
-            fn (string $interfaceTypeFieldResolverClass) => $this->instanceManager->getInstance($interfaceTypeFieldResolverClass),
-            $implementedInterfaceTypeFieldResolverClasses
-        );
-        $implementedInterfaceTypeResolverClasses = [];
-        foreach ($implementedInterfaceTypeFieldResolvers as $implementedInterfaceTypeFieldResolver) {
-            $implementedInterfaceTypeResolverClasses = array_merge(
-                $implementedInterfaceTypeResolverClasses,
-                $implementedInterfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
-            );
-        }
-        return array_values(array_unique($implementedInterfaceTypeResolverClasses));
-    }
-
-    /**
-     * Interfaces "partially" implemented by this Interface
-     *
      * @return InterfaceTypeResolverInterface[]
      */
     public function getPartiallyImplementedInterfaceTypeResolvers(): array
     {
-        return array_map(
-            fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
-            $this->getPartiallyImplementedInterfaceTypeResolverClasses()
-        );
+        $implementedInterfaceTypeFieldResolvers = [];
+        foreach ($this->getAllInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
+            $implementedInterfaceTypeFieldResolvers = array_merge(
+                $implementedInterfaceTypeFieldResolvers,
+                $interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers()
+            );
+        }
+        $implementedInterfaceTypeFieldResolvers = array_values(array_unique($implementedInterfaceTypeFieldResolvers));
+        $implementedInterfaceTypeResolvers = [];
+        foreach ($implementedInterfaceTypeFieldResolvers as $implementedInterfaceTypeFieldResolver) {
+            $implementedInterfaceTypeResolvers = array_merge(
+                $implementedInterfaceTypeResolvers,
+                $implementedInterfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers()
+            );
+        }
+        return array_values(array_unique($implementedInterfaceTypeResolvers));
     }
 
     /**

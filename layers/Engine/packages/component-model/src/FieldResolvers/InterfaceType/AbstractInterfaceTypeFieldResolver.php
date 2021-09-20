@@ -107,36 +107,24 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
 
     /**
-     * @return string[]
-     */
-    final public function getPartiallyImplementedInterfaceTypeResolverClasses(): array
-    {
-        return array_map(
-            'get_class',
-            $this->getPartiallyImplementedInterfaceTypeResolvers()
-        );
-    }
-
-    /**
      * By default, the resolver is this same object, unless function
-     * `getInterfaceTypeFieldSchemaDefinitionResolverClass` is
+     * `getInterfaceTypeFieldSchemaDefinitionResolver` is
      * implemented
      */
     protected function getSchemaDefinitionResolver(string $fieldName): InterfaceTypeFieldSchemaDefinitionResolverInterface
     {
-        if ($interfaceTypeFieldSchemaDefinitionResolverClass = $this->getInterfaceTypeFieldSchemaDefinitionResolverClass($fieldName)) {
-            /** @var InterfaceTypeFieldSchemaDefinitionResolverInterface */
-            return $this->instanceManager->getInstance($interfaceTypeFieldSchemaDefinitionResolverClass);
+        if ($interfaceTypeFieldSchemaDefinitionResolver = $this->getInterfaceTypeFieldSchemaDefinitionResolver($fieldName)) {
+            return $interfaceTypeFieldSchemaDefinitionResolver;
         }
         return $this;
     }
 
     /**
-     * Retrieve the class of some InterfaceTypeFieldSchemaDefinitionResolverInterface
+     * Retrieve the InterfaceTypeFieldSchemaDefinitionResolverInterface
      * By default, if the InterfaceTypeFieldResolver implements an interface,
      * it is used as SchemaDefinitionResolver for the matching fields
      */
-    protected function getInterfaceTypeFieldSchemaDefinitionResolverClass(string $fieldName): ?string
+    protected function getInterfaceTypeFieldSchemaDefinitionResolver(string $fieldName): ?InterfaceTypeFieldSchemaDefinitionResolverInterface
     {
         foreach ($this->getImplementedInterfaceTypeFieldResolvers() as $implementedInterfaceTypeFieldResolver) {
             if (!in_array($fieldName, $implementedInterfaceTypeFieldResolver->getFieldNamesToImplement())) {

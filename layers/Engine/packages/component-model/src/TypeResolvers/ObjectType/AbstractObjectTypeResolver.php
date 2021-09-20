@@ -789,27 +789,23 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     private function calculateAllImplementedInterfaceTypeResolvers(): array
     {
-        $interfaceTypeResolverClasses = [];
+        $interfaceTypeResolvers = [];
         foreach ($this->getAllImplementedInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
-            $interfaceTypeResolverClasses = array_merge(
-                $interfaceTypeResolverClasses,
-                $interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolverClasses()
+            $interfaceTypeResolvers = array_merge(
+                $interfaceTypeResolvers,
+                $interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers()
             );
         }
-        $interfaceTypeResolverClasses = array_values(array_unique($interfaceTypeResolverClasses));
+        $interfaceTypeResolvers = array_values(array_unique($interfaceTypeResolvers));
         // Every InterfaceTypeResolver can be injected fields from many InterfaceTypeFieldResolvers
         // Make sure that this typeResolver implements all these InterfaceTypeFieldResolver
         // If not, the type does not fully satisfy the Interface
-        $interfaceTypeResolvers = array_map(
-            fn (string $interfaceTypeResolverClass) => $this->instanceManager->getInstance($interfaceTypeResolverClass),
-            $interfaceTypeResolverClasses
-        );
-        $implementedInterfaceTypeFieldResolverClasses = $this->getAllImplementedInterfaceTypeFieldResolverClasses();
+        $implementedInterfaceTypeFieldResolvers = $this->getAllImplementedInterfaceTypeFieldResolvers();
         return array_filter(
             $interfaceTypeResolvers,
             fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => array_diff(
-                $interfaceTypeResolver->getAllInterfaceTypeFieldResolverClasses(),
-                $implementedInterfaceTypeFieldResolverClasses
+                $interfaceTypeResolver->getAllInterfaceTypeFieldResolvers(),
+                $implementedInterfaceTypeFieldResolvers
             ) === [],
         );
     }

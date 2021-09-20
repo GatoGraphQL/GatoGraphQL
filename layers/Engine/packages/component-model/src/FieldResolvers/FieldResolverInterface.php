@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 
 interface FieldResolverInterface extends AttachableExtensionInterface
 {
@@ -21,9 +22,9 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      * That's why this function is "partially" implemented: the Interface
      * may be completely implemented or not.
      *
-     * @return string[]
+     * @return InterfaceTypeResolverInterface[]
      */
-    public function getPartiallyImplementedInterfaceTypeResolverClasses(): array;
+    public function getPartiallyImplementedInterfaceTypeResolvers(): array;
     /**
      * The interfaces the fieldResolver implements
      * 
