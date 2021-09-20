@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostTagMutations\MutationResolvers;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
@@ -11,8 +13,8 @@ use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationR
 abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutationResolver
 {
     public function __construct(
-        \PoP\Translation\TranslationAPIInterface $translationAPI,
-        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
     ) {
         parent::__construct(
             $translationAPI,

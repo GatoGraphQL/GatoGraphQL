@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUsMutations\MutationResolvers;
 
+use PoP\Translation\TranslationAPIInterface;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -11,8 +13,8 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 class ContactUsMutationResolver extends AbstractMutationResolver
 {
     public function __construct(
-        \PoP\Translation\TranslationAPIInterface $translationAPI,
-        \PoP\Hooks\HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
     ) {
         parent::__construct(
             $translationAPI,
