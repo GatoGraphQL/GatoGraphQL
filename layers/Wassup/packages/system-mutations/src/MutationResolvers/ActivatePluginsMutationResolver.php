@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
+use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
@@ -17,6 +18,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         protected CMSServiceInterface $cmsService,
+        protected ApplicationInfoInterface $applicationInfo,
     ) {
         parent::__construct(
             $translationAPI,
@@ -57,7 +59,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         );
 
         // Iterate all plugins and check what version they require to be installed. If it matches the current version => activate
-        $version = ApplicationInfoFacade::getInstance()->getVersion();
+        $version = $this->applicationInfo->getVersion();
         $activated = [];
         foreach ($plugin_version as $plugin => $activate_version) {
             if ($activate_version == $version) {
