@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\APIClients;
 
-use PoP\API\Configuration\Request;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-
 trait ClientTrait
 {
     private ?string $clientHTMLCache = null;
