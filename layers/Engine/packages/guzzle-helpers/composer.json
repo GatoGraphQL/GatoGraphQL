@@ -165,7 +165,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/component-model": "^0.8.8",
+        "getpop/component-model": "^0.9",
         "guzzlehttp/guzzle": "~6.3"
     },
     "require-dev": {
