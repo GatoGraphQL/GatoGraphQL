@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateIndividualProfileMutationResolver;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateProfileMutationResolver;
@@ -12,10 +16,10 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Crea
 class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends CreateUpdateIndividualProfileMutationResolverBridge
 {
     public function __construct(
-        \PoP\Hooks\HooksAPIInterface $hooksAPI,
-        \PoP\Translation\TranslationAPIInterface $translationAPI,
-        \PoP\ComponentModel\Instances\InstanceManagerInterface $instanceManager,
-        \PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface $mutationResolutionManager,
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        MutationResolutionManagerInterface $mutationResolutionManager,
         CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
         CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver,
         protected CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver,
