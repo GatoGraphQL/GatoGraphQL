@@ -37,12 +37,13 @@ class ContainerCacheConfigurationManagerFacade
             $moduleRegistry = new ModuleRegistry();
             $userAuthorizationSchemeRegistry = new UserAuthorizationSchemeRegistry();
             $userAuthorizationSchemeRegistry->addUserAuthorizationScheme(new ManageOptionsUserAuthorizationScheme());
-            $userAuthorization = new UserAuthorization($userAuthorizationSchemeRegistry);
-            $menu = new PluginMenu(
-                $instanceManager,
-                $userAuthorization,
-            );
-            $endpointHelpers = new EndpointHelpers($menu, $moduleRegistry);
+            $userAuthorization = new UserAuthorization();
+            $userAuthorization->autowireUserAuthorization($userAuthorizationSchemeRegistry);
+            $menu = new PluginMenu();
+            $menu->autowireAbstractMenu($instanceManager);
+            $menu->autowirePluginMenu($userAuthorization);
+            $endpointHelpers = new EndpointHelpers();
+            $endpointHelpers->autowireEndpointHelpers($menu, $moduleRegistry);
             self::$instance = new ContainerCacheConfigurationManager($endpointHelpers);
         }
         return self::$instance;

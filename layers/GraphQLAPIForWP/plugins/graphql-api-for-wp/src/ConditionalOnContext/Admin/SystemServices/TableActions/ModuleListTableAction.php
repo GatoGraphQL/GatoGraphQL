@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableA
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Module List Table Action
@@ -25,7 +26,8 @@ class ModuleListTableAction extends AbstractListTableAction
 
     protected UserSettingsManagerInterface $userSettingsManager;
 
-    public function __construct()
+    #[Required]
+    public function autowireModuleListTableAction()
     {
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }

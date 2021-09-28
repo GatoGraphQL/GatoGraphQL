@@ -23,11 +23,6 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     protected SingleEndpointSchemaConfigurator $endpointSchemaConfigurator;
     protected GraphQLEndpointHandler $graphQLEndpointHandler;
 
-    public function __construct()
-    {
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
-    }
-    
     #[Required]
     public function autowireSingleEndpointSchemaConfiguratorExecuter(
         ModuleRegistryInterface $moduleRegistry,
@@ -37,6 +32,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         $this->moduleRegistry = $moduleRegistry;
         $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
         $this->graphQLEndpointHandler = $graphQLEndpointHandler;
+        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 
     /**

@@ -8,12 +8,14 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use InvalidArgumentException;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ModuleRegistry implements ModuleRegistryInterface
 {
     protected UserSettingsManagerInterface $userSettingsManager;
 
-    public function __construct()
+    #[Required]
+    public function autowireAbstractCacheConfigurationManager()
     {
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
