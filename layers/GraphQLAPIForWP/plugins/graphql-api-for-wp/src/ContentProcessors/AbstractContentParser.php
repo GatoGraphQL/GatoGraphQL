@@ -34,10 +34,6 @@ abstract class AbstractContentParser implements ContentParserInterface
         $this->setBaseURL($baseURL);
     }
 
-    /**
-     * @param string|null $baseDir Where to look for the documentation
-     * @param string|null $baseURL URL for the documentation
-     */
     #[Required]
     public function autowireAbstractContentParser(
         RequestHelperServiceInterface $requestHelperService,
