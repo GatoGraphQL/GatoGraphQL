@@ -17,12 +17,6 @@ class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends C
 {
     protected CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
-        CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver,
         CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver,
     ) {
         $this->createUpdateWithCommunityIndividualProfileMutationResolver = $createUpdateWithCommunityIndividualProfileMutationResolver;

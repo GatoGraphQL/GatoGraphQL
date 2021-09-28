@@ -24,17 +24,6 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected SiteTypeDataLoader $siteTypeDataLoader;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
         SiteTypeDataLoader $siteTypeDataLoader,
     ) {
         $this->siteTypeDataLoader = $siteTypeDataLoader;

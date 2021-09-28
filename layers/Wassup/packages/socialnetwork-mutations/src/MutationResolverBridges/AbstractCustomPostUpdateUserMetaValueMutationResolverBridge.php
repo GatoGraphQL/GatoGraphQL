@@ -15,10 +15,6 @@ abstract class AbstractCustomPostUpdateUserMetaValueMutationResolverBridge exten
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;

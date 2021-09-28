@@ -18,9 +18,6 @@ class VarsHookSet extends AbstractHookSet
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;

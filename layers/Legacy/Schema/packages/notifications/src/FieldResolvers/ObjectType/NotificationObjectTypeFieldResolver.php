@@ -42,13 +42,6 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     protected UserObjectTypeResolver $userObjectTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
         CommentTypeAPIInterface $commentTypeAPI,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         DateScalarTypeResolver $dateScalarTypeResolver,

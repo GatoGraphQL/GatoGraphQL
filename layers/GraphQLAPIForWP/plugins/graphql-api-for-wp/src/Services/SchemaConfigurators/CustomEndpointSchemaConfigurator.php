@@ -16,10 +16,6 @@ class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaC
 {
     protected EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        BlockHelpers $blockHelpers,
-        EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
         EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
     ) {
         $this->endpointSchemaConfigurationExecuterRegistry = $endpointSchemaConfigurationExecuterRegistry;

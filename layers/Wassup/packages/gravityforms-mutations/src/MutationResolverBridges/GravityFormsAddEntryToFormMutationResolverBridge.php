@@ -23,10 +23,6 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     protected GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver;
 
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         UserTypeAPIInterface $userTypeAPI,
         GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver,
     ) {

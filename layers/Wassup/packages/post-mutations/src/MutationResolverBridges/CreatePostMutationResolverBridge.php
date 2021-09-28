@@ -15,10 +15,6 @@ class CreatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationR
 {
     protected CreatePostMutationResolver $createPostMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         CreatePostMutationResolver $createPostMutationResolver,
     ) {
         $this->createPostMutationResolver = $createPostMutationResolver;

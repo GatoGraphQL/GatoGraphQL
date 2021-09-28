@@ -23,8 +23,6 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
     protected PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor;
     protected PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
         UserAuthorizationInterface $userAuthorization,
         GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,

@@ -23,9 +23,6 @@ abstract class AbstractEditorScript extends AbstractScript
     protected EditorHelpers $editorHelpers;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
     ) {
         $this->editorHelpers = $editorHelpers;

@@ -34,18 +34,6 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ModulePathHelpersInterface $modulePathHelpers,
-        ModuleFilterManagerInterface $moduleFilterManager,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CMSServiceInterface $cmsService,
-        NameResolverInterface $nameResolver,
-        DataloadHelperServiceInterface $dataloadHelperService,
-        RequestHelperServiceInterface $requestHelperService,
-        ModulePaths $modulePaths,
         PostObjectTypeResolver $postObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {

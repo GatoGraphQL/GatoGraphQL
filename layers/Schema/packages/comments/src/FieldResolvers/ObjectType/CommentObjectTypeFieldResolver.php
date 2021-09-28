@@ -59,16 +59,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     protected DateFormatterInterface $dateFormatter;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
         CommentTypeAPIInterface $commentTypeAPI,
         StringScalarTypeResolver $stringScalarTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,

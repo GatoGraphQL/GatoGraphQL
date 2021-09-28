@@ -25,10 +25,6 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
     protected CustomPostTypeDataLoader $customPostTypeDataLoader;
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        CustomPostUnionTypeResolver $customPostUnionTypeResolver,
         CustomPostTypeDataLoader $customPostTypeDataLoader,
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {

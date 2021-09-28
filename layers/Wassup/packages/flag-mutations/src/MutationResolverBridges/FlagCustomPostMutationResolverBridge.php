@@ -16,10 +16,6 @@ class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutation
 {
     protected FlagCustomPostMutationResolver $flagCustomPostMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         FlagCustomPostMutationResolver $flagCustomPostMutationResolver,
     ) {
         $this->flagCustomPostMutationResolver = $flagCustomPostMutationResolver;

@@ -16,11 +16,6 @@ class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
     protected PageTypeAPIInterface $pageTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
         PageTypeAPIInterface $pageTypeAPI,
     ) {
         $this->pageTypeAPI = $pageTypeAPI;

@@ -25,11 +25,6 @@ class CacheControlBlock extends AbstractControlBlock
     protected CacheControlBlockCategory $cacheControlBlockCategory;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
         CacheControlBlockCategory $cacheControlBlockCategory,
     ) {
         $this->cacheControlBlockCategory = $cacheControlBlockCategory;

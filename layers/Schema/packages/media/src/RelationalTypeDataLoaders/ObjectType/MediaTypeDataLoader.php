@@ -17,10 +17,6 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected MediaTypeAPIInterface $mediaTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
         MediaTypeAPIInterface $mediaTypeAPI,
     ) {
         $this->mediaTypeAPI = $mediaTypeAPI;

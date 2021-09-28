@@ -14,9 +14,6 @@ class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
     ) {
         $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;

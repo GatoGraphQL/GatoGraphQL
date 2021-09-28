@@ -38,9 +38,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      * so the properties will not be null in that situation.
      */
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        TranslationAPIInterface $translationAPI,
         ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ) {
         $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;

@@ -18,12 +18,6 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
 {
     protected CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
-        CreateUpdateOrganizationProfileMutationResolver $createUpdateOrganizationProfileMutationResolver,
         CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver,
     ) {
         $this->createUpdateWithCommunityOrganizationProfileMutationResolver = $createUpdateWithCommunityOrganizationProfileMutationResolver;

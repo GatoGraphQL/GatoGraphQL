@@ -22,9 +22,6 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
     protected EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        BlockHelpers $blockHelpers,
         EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
     ) {
         $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;

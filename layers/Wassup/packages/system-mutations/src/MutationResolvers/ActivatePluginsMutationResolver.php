@@ -17,8 +17,6 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     protected CMSServiceInterface $cmsService;
     protected ApplicationInfoInterface $applicationInfo;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
         CMSServiceInterface $cmsService,
         ApplicationInfoInterface $applicationInfo,
     ) {

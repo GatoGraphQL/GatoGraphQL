@@ -16,11 +16,6 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
 {
     protected SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
         SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
     ) {
         $this->schemaConfigurationBlockCategory = $schemaConfigurationBlockCategory;

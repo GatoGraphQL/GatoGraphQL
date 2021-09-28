@@ -19,9 +19,6 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter impl
     protected CustomEndpointGraphiQLClient $customEndpointGraphiQLClient;
     protected GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
         CustomEndpointGraphiQLClient $customEndpointGraphiQLClient,
         GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator,
     ) {

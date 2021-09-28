@@ -24,15 +24,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI;
     protected SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
         CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI,
         SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver,
     ) {

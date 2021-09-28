@@ -21,7 +21,6 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
     ) {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;

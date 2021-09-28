@@ -15,10 +15,6 @@ class UpdatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkM
 {
     protected UpdatePostLinkMutationResolver $updatePostLinkMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         UpdatePostLinkMutationResolver $updatePostLinkMutationResolver,
     ) {
         $this->updatePostLinkMutationResolver = $updatePostLinkMutationResolver;

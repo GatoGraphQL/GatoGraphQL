@@ -16,10 +16,6 @@ class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationR
 {
     protected BuildSystemMutationResolver $buildSystemMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         BuildSystemMutationResolver $buildSystemMutationResolver,
     ) {
         $this->buildSystemMutationResolver = $buildSystemMutationResolver;

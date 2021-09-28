@@ -16,8 +16,6 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
     protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ) {
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;

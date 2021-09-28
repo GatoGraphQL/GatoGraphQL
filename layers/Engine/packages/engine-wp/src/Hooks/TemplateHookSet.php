@@ -15,9 +15,6 @@ class TemplateHookSet extends AbstractHookSet
 {
     protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         ApplicationStateHelperServiceInterface $applicationStateHelperService,
     ) {
         $this->applicationStateHelperService = $applicationStateHelperService;

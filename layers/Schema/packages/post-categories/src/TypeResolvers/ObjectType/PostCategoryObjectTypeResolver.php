@@ -26,17 +26,6 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
     protected PostCategoryTypeDataLoader $postCategoryTypeDataLoader;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
         PostCategoryTypeDataLoader $postCategoryTypeDataLoader,
     ) {
         $this->postCategoryTypeDataLoader = $postCategoryTypeDataLoader;

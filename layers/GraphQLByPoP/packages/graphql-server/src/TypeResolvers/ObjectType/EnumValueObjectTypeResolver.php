@@ -24,17 +24,6 @@ class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
 {
     protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
         SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ) {
         $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;

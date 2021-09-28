@@ -19,10 +19,6 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected CommentTypeAPIInterface $commentTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
         CommentTypeAPIInterface $commentTypeAPI,
     ) {
         $this->commentTypeAPI = $commentTypeAPI;

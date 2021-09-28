@@ -18,9 +18,6 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
     protected AboutMenuPage $aboutMenuPage;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        MenuPageHelper $menuPageHelper,
-        EndpointHelpers $endpointHelpers,
         AboutMenuPage $aboutMenuPage,
     ) {
         $this->aboutMenuPage = $aboutMenuPage;

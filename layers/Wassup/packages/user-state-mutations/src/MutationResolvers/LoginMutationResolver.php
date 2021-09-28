@@ -14,8 +14,6 @@ class LoginMutationResolver extends UpstreamLoginMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;

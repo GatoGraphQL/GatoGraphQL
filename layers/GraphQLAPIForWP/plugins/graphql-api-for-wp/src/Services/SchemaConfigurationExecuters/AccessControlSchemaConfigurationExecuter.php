@@ -15,9 +15,6 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
 {
     protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        BlockHelpers $blockHelpers,
         AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
     ) {
         $this->accessControlGraphQLQueryConfigurator = $accessControlGraphQLQueryConfigurator;

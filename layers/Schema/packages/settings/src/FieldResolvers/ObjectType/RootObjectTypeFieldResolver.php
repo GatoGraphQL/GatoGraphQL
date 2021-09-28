@@ -27,15 +27,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
     protected SettingsTypeAPIInterface $settingsTypeAPI;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
         SettingsTypeAPIInterface $settingsTypeAPI,
     ) {

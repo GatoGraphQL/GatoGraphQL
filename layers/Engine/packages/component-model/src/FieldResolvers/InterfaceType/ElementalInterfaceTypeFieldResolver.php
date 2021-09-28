@@ -22,14 +22,6 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
 {
     protected IDScalarTypeResolver $idScalarTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        TypeRegistryInterface $typeRegistry,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
         IDScalarTypeResolver $idScalarTypeResolver,
     ) {
         $this->idScalarTypeResolver = $idScalarTypeResolver;

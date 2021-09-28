@@ -24,17 +24,6 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected UserAvatarTypeDataLoader $userAvatarTypeDataLoader;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
         UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
     ) {
         $this->userAvatarTypeDataLoader = $userAvatarTypeDataLoader;

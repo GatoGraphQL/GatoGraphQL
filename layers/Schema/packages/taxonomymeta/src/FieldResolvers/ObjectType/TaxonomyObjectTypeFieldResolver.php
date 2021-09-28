@@ -24,15 +24,6 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI;
     protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
         TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {

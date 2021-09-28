@@ -27,8 +27,6 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     protected UserTypeAPIInterface $userTypeAPI;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
         CommentTypeAPIInterface $commentTypeAPI,
         CommentTypeMutationAPIInterface $commentTypeMutationAPI,
         UserTypeAPIInterface $userTypeAPI,

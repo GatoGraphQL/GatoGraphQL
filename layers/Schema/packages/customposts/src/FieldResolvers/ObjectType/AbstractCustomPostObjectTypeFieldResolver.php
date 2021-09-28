@@ -28,15 +28,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
         CustomPostTypeAPIInterface $customPostTypeAPI,
         DateFormatterInterface $dateFormatter,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,

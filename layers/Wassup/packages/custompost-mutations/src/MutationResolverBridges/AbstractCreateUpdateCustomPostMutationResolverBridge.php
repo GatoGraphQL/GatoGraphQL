@@ -24,10 +24,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;

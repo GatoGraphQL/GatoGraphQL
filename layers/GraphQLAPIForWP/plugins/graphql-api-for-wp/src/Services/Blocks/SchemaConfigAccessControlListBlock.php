@@ -26,14 +26,6 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
     protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
-        BlockRenderingHelpers $blockRenderingHelpers,
-        CPTUtils $cptUtils,
         GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
     ) {
         $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;

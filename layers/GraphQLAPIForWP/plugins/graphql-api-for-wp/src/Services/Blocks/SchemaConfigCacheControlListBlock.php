@@ -26,14 +26,6 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
     protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
-        BlockRenderingHelpers $blockRenderingHelpers,
-        CPTUtils $cptUtils,
         GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
     ) {
         $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;

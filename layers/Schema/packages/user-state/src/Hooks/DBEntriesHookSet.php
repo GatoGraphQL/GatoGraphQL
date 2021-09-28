@@ -14,9 +14,6 @@ class DBEntriesHookSet extends AbstractHookSet
 {
     protected GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver
     ) {
         $this->globalObjectTypeFieldResolver = $globalObjectTypeFieldResolver;

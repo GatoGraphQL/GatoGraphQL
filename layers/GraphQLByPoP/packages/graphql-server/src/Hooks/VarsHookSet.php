@@ -19,9 +19,6 @@ class VarsHookSet extends AbstractHookSet
 {
     protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
     ) {
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;

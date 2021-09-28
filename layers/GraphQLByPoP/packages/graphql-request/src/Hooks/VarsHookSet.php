@@ -32,9 +32,6 @@ class VarsHookSet extends AbstractHookSet
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected GraphQLQueryConvertorInterface $graphQLQueryConvertor;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         QueryRetrieverInterface $queryRetrieverInterface,
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
         GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager,

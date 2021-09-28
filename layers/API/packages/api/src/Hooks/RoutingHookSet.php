@@ -19,9 +19,6 @@ class RoutingHookSet extends AbstractHookSet
     protected CMSServiceInterface $cmsService;
     protected RequestHelperServiceInterface $requestHelperService;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         CMSServiceInterface $cmsService,
         RequestHelperServiceInterface $requestHelperService,
     ) {

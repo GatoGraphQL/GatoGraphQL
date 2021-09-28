@@ -34,11 +34,6 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     protected EndpointBlockCategory $endpointBlockCategory;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,
         EndpointBlockCategory $endpointBlockCategory,

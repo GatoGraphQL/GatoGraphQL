@@ -34,8 +34,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         NameResolverInterface $nameResolver,
         UserRoleTypeAPIInterface $userRoleTypeAPI,

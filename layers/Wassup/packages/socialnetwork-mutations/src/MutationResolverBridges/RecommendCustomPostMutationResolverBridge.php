@@ -17,11 +17,6 @@ class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdate
 {
     protected RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
         RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver,
     ) {
         $this->recommendCustomPostMutationResolver = $recommendCustomPostMutationResolver;

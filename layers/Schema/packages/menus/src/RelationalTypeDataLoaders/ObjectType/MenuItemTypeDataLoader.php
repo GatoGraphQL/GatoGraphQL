@@ -14,9 +14,6 @@ class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
     ) {
         $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;

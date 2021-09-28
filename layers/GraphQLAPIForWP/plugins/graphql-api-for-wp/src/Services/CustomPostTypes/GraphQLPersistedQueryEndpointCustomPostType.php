@@ -32,12 +32,6 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     protected PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        CPTUtils $cptUtils,
-        HooksAPIInterface $hooksAPI,
-        BlockHelpers $blockHelpers,
         PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
         PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface,
         PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface,

@@ -25,11 +25,6 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry;
     protected AccessControlManagerInterface $accessControlManager;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        TypeRegistryInterface $typeRegistry,
-        DirectiveRegistryInterface $directiveRegistry,
         AccessControlBlock $accessControlBlock,
         BlockHelpers $blockHelpers,
         AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,

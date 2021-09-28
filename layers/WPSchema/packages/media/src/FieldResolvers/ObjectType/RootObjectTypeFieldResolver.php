@@ -33,16 +33,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected MediaObjectTypeResolver $mediaObjectTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
         MediaTypeAPIInterface $mediaTypeAPI,
         StringScalarTypeResolver $stringScalarTypeResolver,
         MediaObjectTypeResolver $mediaObjectTypeResolver,

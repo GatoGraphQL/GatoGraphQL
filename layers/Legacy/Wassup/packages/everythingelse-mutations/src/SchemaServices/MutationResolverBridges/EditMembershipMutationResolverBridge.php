@@ -18,10 +18,6 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
 {
     protected EditMembershipMutationResolver $editMembershipMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         EditMembershipMutationResolver $editMembershipMutationResolver,
     ) {
         $this->editMembershipMutationResolver = $editMembershipMutationResolver;

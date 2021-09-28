@@ -19,10 +19,6 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
     protected UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver;
     protected PostTagTypeAPIInterface $postTagTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver,
         PostTagTypeAPIInterface $postTagTypeAPI,
     ) {

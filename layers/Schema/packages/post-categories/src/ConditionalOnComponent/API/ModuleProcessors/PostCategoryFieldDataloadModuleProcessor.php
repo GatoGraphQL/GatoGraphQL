@@ -25,19 +25,6 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
 {
     protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ModulePathHelpersInterface $modulePathHelpers,
-        ModuleFilterManagerInterface $moduleFilterManager,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CMSServiceInterface $cmsService,
-        NameResolverInterface $nameResolver,
-        DataloadHelperServiceInterface $dataloadHelperService,
-        RequestHelperServiceInterface $requestHelperService,
-        ModulePaths $modulePaths,
-        ListQueryInputOutputHandler $listQueryInputOutputHandler,
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ) {
         $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;

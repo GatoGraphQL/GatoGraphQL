@@ -15,10 +15,6 @@ abstract class AbstractUserUpdateUserMetaValueMutationResolverBridge extends Abs
 {
     protected UserTypeAPIInterface $userTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;

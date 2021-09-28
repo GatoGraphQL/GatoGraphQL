@@ -38,9 +38,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,

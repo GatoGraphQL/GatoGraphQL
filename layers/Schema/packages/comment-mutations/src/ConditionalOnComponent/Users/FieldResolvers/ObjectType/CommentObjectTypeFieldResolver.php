@@ -39,27 +39,6 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     protected UserCommentTypeAPIInterface $userCommentTypeAPI;
     protected UserTypeAPIInterface $userTypeAPI;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CommentTypeAPIInterface $commentTypeAPI,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-        EmailScalarTypeResolver $emailScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        DateScalarTypeResolver $dateScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        CommentObjectTypeResolver $commentObjectTypeResolver,
-        CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
-        DateFormatterInterface $dateFormatter,
         UserCommentTypeAPIInterface $userCommentTypeAPI,
         UserTypeAPIInterface $userTypeAPI,
     ) {

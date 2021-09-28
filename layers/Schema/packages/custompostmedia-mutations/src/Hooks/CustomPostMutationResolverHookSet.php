@@ -22,9 +22,6 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
     protected MediaObjectTypeResolver $mediaTypeResolver;
     protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         MediaObjectTypeResolver $mediaTypeResolver,
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ) {

@@ -19,7 +19,6 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
     protected PostTagTypeAPIInterface $postTagTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
         PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
         $this->postTagTypeAPI = $postTagTypeAPI;

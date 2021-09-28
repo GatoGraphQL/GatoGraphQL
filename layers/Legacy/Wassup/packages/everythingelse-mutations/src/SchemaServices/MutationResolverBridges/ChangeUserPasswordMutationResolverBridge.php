@@ -17,10 +17,6 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
 {
     protected ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver,
     ) {
         $this->changeUserPasswordMutationResolver = $changeUserPasswordMutationResolver;

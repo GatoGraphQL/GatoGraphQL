@@ -22,11 +22,6 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
     protected CustomEndpointBlockCategory $customEndpointBlockCategory;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
         CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
         $this->customEndpointBlockCategory = $customEndpointBlockCategory;

@@ -14,9 +14,6 @@ class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected QueryRoot $queryRoot;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
         QueryRoot $queryRoot,
     ) {
         $this->queryRoot = $queryRoot;

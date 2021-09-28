@@ -16,10 +16,6 @@ class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationRe
 {
     protected ShareByEmailMutationResolver $shareByEmailMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         ShareByEmailMutationResolver $shareByEmailMutationResolver,
     ) {
         $this->shareByEmailMutationResolver = $shareByEmailMutationResolver;

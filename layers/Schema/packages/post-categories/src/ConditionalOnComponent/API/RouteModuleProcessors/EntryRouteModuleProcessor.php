@@ -20,7 +20,6 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;

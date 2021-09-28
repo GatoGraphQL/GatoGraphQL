@@ -14,9 +14,6 @@ class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected Root $root;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
         Root $root,
     ) {
         $this->root = $root;

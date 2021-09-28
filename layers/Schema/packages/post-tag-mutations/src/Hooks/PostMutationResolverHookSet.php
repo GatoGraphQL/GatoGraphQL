@@ -21,10 +21,6 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
     protected PostTypeAPIInterface $postTypeAPI;
     protected PostTagTypeMutationAPIInterface $postTagTypeMutationAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
         PostObjectTypeResolver $postObjectTypeResolver,
         PostTypeAPIInterface $postTypeAPI,
         PostTagTypeMutationAPIInterface $postTagTypeMutationAPI,

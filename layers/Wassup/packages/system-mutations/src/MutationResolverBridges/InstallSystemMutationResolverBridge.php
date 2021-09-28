@@ -16,10 +16,6 @@ class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutatio
 {
     protected InstallSystemMutationResolver $installSystemMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         InstallSystemMutationResolver $installSystemMutationResolver,
     ) {
         $this->installSystemMutationResolver = $installSystemMutationResolver;

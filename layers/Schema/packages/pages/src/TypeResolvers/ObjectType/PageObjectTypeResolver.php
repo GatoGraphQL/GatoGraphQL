@@ -26,18 +26,6 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     protected PageTypeDataLoader $pageTypeDataLoader;
     protected PageTypeAPIInterface $pageTypeAPI;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
         PageTypeDataLoader $pageTypeDataLoader,
         PageTypeAPIInterface $pageTypeAPI,
     ) {

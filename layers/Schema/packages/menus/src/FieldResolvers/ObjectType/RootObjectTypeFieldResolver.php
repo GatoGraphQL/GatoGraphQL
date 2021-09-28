@@ -34,16 +34,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected MenuObjectTypeResolver $menuObjectTypeResolver;
     protected MenuTypeAPIInterface $menuTypeAPI;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
         IntScalarTypeResolver $intScalarTypeResolver,
         MenuObjectTypeResolver $menuObjectTypeResolver,
         MenuTypeAPIInterface $menuTypeAPI,

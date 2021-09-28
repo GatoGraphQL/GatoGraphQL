@@ -14,9 +14,6 @@ class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected MenuTypeAPIInterface $menuTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
         MenuTypeAPIInterface $menuTypeAPI,
     ) {
         $this->menuTypeAPI = $menuTypeAPI;

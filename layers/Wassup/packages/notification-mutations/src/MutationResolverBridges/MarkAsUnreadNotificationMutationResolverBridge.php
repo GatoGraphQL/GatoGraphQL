@@ -15,10 +15,6 @@ class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadO
 {
     protected MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver,
     ) {
         $this->markAsUnreadNotificationMutationResolver = $markAsUnreadNotificationMutationResolver;

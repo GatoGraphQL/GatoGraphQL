@@ -29,9 +29,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected ModuleRegistryInterface $moduleRegistry;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        MenuPageHelper $menuPageHelper,
-        EndpointHelpers $endpointHelpers,
         ModuleRegistryInterface $moduleRegistry,
     ) {
         $this->moduleRegistry = $moduleRegistry;

@@ -16,11 +16,6 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
     protected PostTypeAPIInterface $postTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
         PostTypeAPIInterface $postTypeAPI,
     ) {
         $this->postTypeAPI = $postTypeAPI;

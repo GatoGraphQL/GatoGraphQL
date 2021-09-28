@@ -15,10 +15,6 @@ class CreateHighlightMutationResolverBridge extends AbstractCreateUpdateHighligh
 {
     protected CreateHighlightMutationResolver $createHighlightMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         CreateHighlightMutationResolver $createHighlightMutationResolver,
     ) {
         $this->createHighlightMutationResolver = $createHighlightMutationResolver;

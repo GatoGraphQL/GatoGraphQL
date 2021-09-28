@@ -22,14 +22,6 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
 {
     protected UserObjectTypeResolver $userObjectTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        TypeRegistryInterface $typeRegistry,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
         UserObjectTypeResolver $userObjectTypeResolver,
     ) {
         $this->userObjectTypeResolver = $userObjectTypeResolver;

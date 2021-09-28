@@ -23,11 +23,6 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
     protected BlockHelpers $blockHelpers;
     protected CacheControlManagerInterface $cacheControlManager;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        TypeRegistryInterface $typeRegistry,
-        DirectiveRegistryInterface $directiveRegistry,
         CacheControlBlock $cacheControlBlock,
         BlockHelpers $blockHelpers,
         CacheControlManagerInterface $cacheControlManager,

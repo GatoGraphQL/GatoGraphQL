@@ -30,24 +30,8 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
     protected LooseContractManagerInterface $looseContractManager;
     protected CacheControlEngineInterface $cacheControlEngine;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        DataStructureManagerInterface $dataStructureManager,
-        InstanceManagerInterface $instanceManager,
-        ModelInstanceInterface $modelInstance,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        ModulePathHelpersInterface $modulePathHelpers,
-        ModulePathManagerInterface $modulePathManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ModuleFilterManagerInterface $moduleFilterManager,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CheckpointProcessorManagerInterface $checkpointProcessorManager,
-        DataloadHelperServiceInterface $dataloadHelperService,
-        EntryModuleManagerInterface $entryModuleManager,
-        RequestHelperServiceInterface $requestHelperService,
         LooseContractManagerInterface $looseContractManager,
-        CacheControlEngineInterface $cacheControlEngine,
-        ?CacheInterface $persistentCache = null
+        CacheControlEngineInterface $cacheControlEngine
     ) {
         $this->looseContractManager = $looseContractManager;
         $this->cacheControlEngine = $cacheControlEngine;

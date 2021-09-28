@@ -12,11 +12,7 @@ class MarkdownContentParser extends AbstractContentParser implements MarkdownCon
 {
     protected MarkdownConvertorInterface $markdownConvertorInterface;
     public function __construct(
-        RequestHelperServiceInterface $requestHelperService,
-        LocaleHelper $localeHelper,
         MarkdownConvertorInterface $markdownConvertorInterface,
-        ?string $baseDir = null,
-        ?string $baseURL = null,
     ) {
         $this->markdownConvertorInterface = $markdownConvertorInterface;
         }

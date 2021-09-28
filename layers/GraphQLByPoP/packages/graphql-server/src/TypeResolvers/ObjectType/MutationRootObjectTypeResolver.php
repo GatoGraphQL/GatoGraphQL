@@ -36,19 +36,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
     protected MutationRootTypeDataLoader $mutationRootTypeDataLoader;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
         TypeResolverHelperInterface $typeResolverHelper,
-        RootObjectTypeResolver $rootObjectTypeResolver,
         MutationRootTypeDataLoader $mutationRootTypeDataLoader,
     ) {
         $this->mutationRootTypeDataLoader = $mutationRootTypeDataLoader;

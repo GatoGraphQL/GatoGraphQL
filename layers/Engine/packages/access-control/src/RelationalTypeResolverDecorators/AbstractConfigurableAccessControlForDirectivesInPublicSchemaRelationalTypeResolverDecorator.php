@@ -14,8 +14,6 @@ abstract class AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelat
     protected AccessControlManagerInterface $accessControlManager;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
         AccessControlManagerInterface $accessControlManager,
     ) {
         $this->accessControlManager = $accessControlManager;

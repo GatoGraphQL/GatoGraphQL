@@ -27,13 +27,6 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected LocationObjectTypeResolver $locationObjectTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {

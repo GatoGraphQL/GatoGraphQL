@@ -18,10 +18,6 @@ class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator im
 {
     protected EndpointGraphiQLBlock $endpointGraphiQLBlock;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        BlockHelpers $blockHelpers,
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
         EndpointGraphiQLBlock $endpointGraphiQLBlock,
     ) {
         $this->endpointGraphiQLBlock = $endpointGraphiQLBlock;

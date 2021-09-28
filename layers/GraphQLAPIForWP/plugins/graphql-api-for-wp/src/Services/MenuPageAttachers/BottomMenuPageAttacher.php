@@ -24,7 +24,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected UserAuthorizationInterface $userAuthorization;
     protected SettingsMenuPage $settingsMenuPage;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
         MenuPageHelper $menuPageHelper,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,

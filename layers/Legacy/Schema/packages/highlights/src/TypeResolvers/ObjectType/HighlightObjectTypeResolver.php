@@ -21,14 +21,6 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected HighlightTypeDataLoader $highlightTypeDataLoader;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
         HighlightTypeDataLoader $highlightTypeDataLoader,
     ) {
         $this->highlightTypeDataLoader = $highlightTypeDataLoader;

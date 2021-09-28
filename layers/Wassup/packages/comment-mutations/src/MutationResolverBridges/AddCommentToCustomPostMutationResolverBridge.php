@@ -17,10 +17,6 @@ class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMuta
 {
     protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {
         $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;

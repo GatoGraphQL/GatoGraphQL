@@ -13,8 +13,6 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
     protected EngineInterface $engine;
     public function __construct(
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
         EngineInterface $engine,
     ) {
         $this->engine = $engine;

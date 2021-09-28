@@ -28,11 +28,6 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
     protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {
         $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;

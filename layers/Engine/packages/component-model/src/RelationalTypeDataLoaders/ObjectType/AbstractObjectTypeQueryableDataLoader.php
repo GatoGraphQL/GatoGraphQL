@@ -16,9 +16,6 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
 {
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ) {
         $this->moduleProcessorManager = $moduleProcessorManager;

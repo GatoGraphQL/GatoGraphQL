@@ -18,8 +18,6 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
     protected BlockHelpers $blockHelpers;
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
         BlockHelpers $blockHelpers,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {

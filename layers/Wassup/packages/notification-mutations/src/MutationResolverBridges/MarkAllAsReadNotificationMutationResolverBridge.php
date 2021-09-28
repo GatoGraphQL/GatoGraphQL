@@ -17,10 +17,6 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
 {
     protected MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver,
     ) {
         $this->markAllAsReadNotificationMutationResolver = $markAllAsReadNotificationMutationResolver;

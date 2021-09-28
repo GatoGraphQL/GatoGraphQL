@@ -15,9 +15,6 @@ class MainContentModuleHookSet extends AbstractHookSet
 {
     protected MainContentModule $mainContentModule;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         MainContentModule $mainContentModule
     ) {
         $this->mainContentModule = $mainContentModule;

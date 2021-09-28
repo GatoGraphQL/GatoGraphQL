@@ -20,8 +20,6 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers;
     protected GraphQLRequestVarsHooks $graphQLRequestVarsHooks;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
         GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
         GraphQLRequestVarsHooks $graphQLRequestVarsHooks,

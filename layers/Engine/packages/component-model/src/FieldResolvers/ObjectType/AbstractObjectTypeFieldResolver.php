@@ -62,9 +62,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected EngineInterface $engine;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,

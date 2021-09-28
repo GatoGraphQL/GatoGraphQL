@@ -16,10 +16,6 @@ class GenerateSystemMutationResolverBridge extends AbstractSystemComponentMutati
 {
     protected GenerateSystemMutationResolver $generateSystemMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         GenerateSystemMutationResolver $generateSystemMutationResolver,
     ) {
         $this->generateSystemMutationResolver = $generateSystemMutationResolver;

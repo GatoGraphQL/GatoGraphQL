@@ -15,8 +15,6 @@ abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
 {
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;

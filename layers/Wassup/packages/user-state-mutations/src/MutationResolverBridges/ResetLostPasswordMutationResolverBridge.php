@@ -17,10 +17,6 @@ class ResetLostPasswordMutationResolverBridge extends AbstractComponentMutationR
 {
     protected ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver,
     ) {
         $this->resetLostPasswordMutationResolver = $resetLostPasswordMutationResolver;

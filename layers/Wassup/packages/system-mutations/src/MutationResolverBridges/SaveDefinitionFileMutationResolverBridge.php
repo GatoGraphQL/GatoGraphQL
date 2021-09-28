@@ -16,10 +16,6 @@ class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMu
 {
     protected SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver,
     ) {
         $this->saveDefinitionFileMutationResolver = $saveDefinitionFileMutationResolver;

@@ -39,15 +39,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected PersistedQueryManagerInterface $queryCatalogueManager;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
         SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         PersistedFragmentManagerInterface $fragmentCatalogueManager,

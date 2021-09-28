@@ -16,11 +16,6 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
 {
     protected UnfollowUserMutationResolver $unfollowUserMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        UserTypeAPIInterface $userTypeAPI,
         UnfollowUserMutationResolver $unfollowUserMutationResolver,
     ) {
         $this->unfollowUserMutationResolver = $unfollowUserMutationResolver;

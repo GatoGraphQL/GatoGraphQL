@@ -18,10 +18,6 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;

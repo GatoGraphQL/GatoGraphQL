@@ -21,9 +21,6 @@ class ModelInstanceHookSet extends AbstractHookSet
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         PostTypeAPIInterface $postTypeAPI,
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {

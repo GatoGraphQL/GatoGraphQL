@@ -37,14 +37,6 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        TypeRegistryInterface $typeRegistry,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,

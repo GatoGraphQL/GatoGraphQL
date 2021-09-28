@@ -20,14 +20,6 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected NotificationTypeDataLoader $notificationTypeDataLoader;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
         NotificationTypeDataLoader $notificationTypeDataLoader,
     ) {
         $this->notificationTypeDataLoader = $notificationTypeDataLoader;

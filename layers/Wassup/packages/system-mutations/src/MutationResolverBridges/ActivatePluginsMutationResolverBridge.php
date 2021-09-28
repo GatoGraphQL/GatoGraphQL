@@ -16,10 +16,6 @@ class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutat
 {
     protected ActivatePluginsMutationResolver $activatePluginsMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         ActivatePluginsMutationResolver $activatePluginsMutationResolver,
     ) {
         $this->activatePluginsMutationResolver = $activatePluginsMutationResolver;

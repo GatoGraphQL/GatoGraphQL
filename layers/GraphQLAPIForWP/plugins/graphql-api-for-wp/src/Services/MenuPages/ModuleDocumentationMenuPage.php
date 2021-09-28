@@ -24,9 +24,6 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
     protected ModulesMenuPage $modulesMenuPage;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        MenuPageHelper $menuPageHelper,
-        EndpointHelpers $endpointHelpers,
         ModuleRegistryInterface $moduleRegistry,
         ModulesMenuPage $modulesMenuPage,
     ) {

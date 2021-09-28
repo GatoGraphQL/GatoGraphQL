@@ -17,11 +17,6 @@ class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateU
 {
     protected DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
         DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver,
     ) {
         $this->downvoteCustomPostMutationResolver = $downvoteCustomPostMutationResolver;

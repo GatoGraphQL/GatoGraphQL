@@ -21,9 +21,6 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
 
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
         SchemaObjectTypeResolver $schemaObjectTypeResolver,
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ) {

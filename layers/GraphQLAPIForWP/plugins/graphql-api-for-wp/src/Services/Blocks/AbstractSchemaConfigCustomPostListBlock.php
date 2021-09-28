@@ -19,12 +19,6 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
     protected BlockRenderingHelpers $blockRenderingHelpers;
     protected CPTUtils $cptUtils;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,
     ) {

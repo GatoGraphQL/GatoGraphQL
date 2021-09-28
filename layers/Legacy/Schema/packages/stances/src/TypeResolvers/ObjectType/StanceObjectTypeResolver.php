@@ -21,14 +21,6 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected StanceTypeDataLoader $stanceTypeDataLoader;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
         StanceTypeDataLoader $stanceTypeDataLoader,
     ) {
         $this->stanceTypeDataLoader = $stanceTypeDataLoader;

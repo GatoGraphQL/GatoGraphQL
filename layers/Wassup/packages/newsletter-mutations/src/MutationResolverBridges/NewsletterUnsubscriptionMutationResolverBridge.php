@@ -16,10 +16,6 @@ class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormCompone
 {
     protected NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver,
     ) {
         $this->newsletterUnsubscriptionMutationResolver = $newsletterUnsubscriptionMutationResolver;

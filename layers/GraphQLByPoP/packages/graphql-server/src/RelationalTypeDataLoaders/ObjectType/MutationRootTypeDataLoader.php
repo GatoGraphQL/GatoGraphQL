@@ -14,9 +14,6 @@ class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected MutationRoot $mutationRoot;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
         MutationRoot $mutationRoot,
     ) {
         $this->mutationRoot = $mutationRoot;

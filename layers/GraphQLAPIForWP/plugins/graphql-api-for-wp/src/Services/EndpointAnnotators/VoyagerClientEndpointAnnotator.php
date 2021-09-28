@@ -18,10 +18,6 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
 {
     protected EndpointVoyagerBlock $endpointVoyagerBlock;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        BlockHelpers $blockHelpers,
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
         EndpointVoyagerBlock $endpointVoyagerBlock,
     ) {
         $this->endpointVoyagerBlock = $endpointVoyagerBlock;

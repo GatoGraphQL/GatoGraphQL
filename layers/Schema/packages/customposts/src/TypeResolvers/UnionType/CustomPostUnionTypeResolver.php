@@ -29,17 +29,6 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
     protected InterfaceTypeResolverInterface $interfaceTypeResolver;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
         InterfaceTypeResolverInterface $interfaceTypeResolver,
     ) {
         $this->interfaceTypeResolver = $interfaceTypeResolver;

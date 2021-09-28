@@ -19,9 +19,6 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
     protected CustomEndpointVoyagerClient $customEndpointVoyagerClient;
     protected VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
         CustomEndpointVoyagerClient $customEndpointVoyagerClient,
         VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter,
     ) {

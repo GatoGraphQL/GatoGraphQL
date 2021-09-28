@@ -19,10 +19,6 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
     protected AccessControlBlock $accessControlBlock;
     protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        CPTUtils $cptUtils,
         AccessControlBlock $accessControlBlock,
         AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
     ) {

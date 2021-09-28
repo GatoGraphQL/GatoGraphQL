@@ -16,10 +16,6 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
 {
     protected GenerateThemeMutationResolver $generateThemeMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         GenerateThemeMutationResolver $generateThemeMutationResolver,
     ) {
         $this->generateThemeMutationResolver = $generateThemeMutationResolver;

@@ -30,17 +30,6 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     protected DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver;
     protected DirectiveRegistryInterface $directiveRegistry;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        TypeObjectTypeResolver $typeObjectTypeResolver,
-        DirectiveObjectTypeResolver $directiveObjectTypeResolver,
         DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
         DirectiveRegistryInterface $directiveRegistry,
     ) {

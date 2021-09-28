@@ -25,9 +25,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     protected AbstractMainPluginConfiguration $pluginConfiguration;
 
     public function __construct(
-        string $pluginFile, /** The main plugin file */
-        string $pluginVersion,
-        ?string $pluginName = null,
         AbstractMainPluginConfiguration $pluginConfiguration,
     ) {
         $this->pluginConfiguration = $pluginConfiguration;

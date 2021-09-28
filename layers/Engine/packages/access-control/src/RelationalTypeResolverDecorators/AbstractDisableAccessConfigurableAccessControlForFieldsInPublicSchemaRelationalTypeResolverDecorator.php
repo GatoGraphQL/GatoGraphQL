@@ -14,9 +14,6 @@ abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSc
 {
     protected DisableAccessDirectiveResolver $disableAccessDirectiveResolver;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        AccessControlManagerInterface $accessControlManager,
         DisableAccessDirectiveResolver $disableAccessDirectiveResolver,
     ) {
         $this->disableAccessDirectiveResolver = $disableAccessDirectiveResolver;

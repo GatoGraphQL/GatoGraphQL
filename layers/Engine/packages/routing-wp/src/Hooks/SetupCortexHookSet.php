@@ -19,9 +19,6 @@ class SetupCortexHookSet extends AbstractHookSet
 {
     protected RoutingManagerInterface $routingManager;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         RoutingManagerInterface $routingManager,
     ) {
         $this->routingManager = $routingManager;

@@ -28,15 +28,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected SiteObjectTypeResolver $siteObjectTypeResolver;
     protected Site $site;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
         SiteObjectTypeResolver $siteObjectTypeResolver,
         Site $site,
     ) {

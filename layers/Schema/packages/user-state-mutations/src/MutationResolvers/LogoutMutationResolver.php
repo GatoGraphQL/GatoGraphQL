@@ -17,8 +17,6 @@ class LogoutMutationResolver extends AbstractMutationResolver
     protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
         UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
     ) {
         $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;

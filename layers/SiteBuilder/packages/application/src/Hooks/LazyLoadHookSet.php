@@ -23,9 +23,6 @@ class LazyLoadHookSet extends AbstractHookSet
     protected RequestHelperServiceInterface $requestHelperService;
     protected Lazy $lazy;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         RequestHelperServiceInterface $requestHelperService,
         Lazy $lazy,
     ) {

@@ -23,14 +23,6 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
 {
     protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        TypeRegistryInterface $typeRegistry,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
     ) {
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;

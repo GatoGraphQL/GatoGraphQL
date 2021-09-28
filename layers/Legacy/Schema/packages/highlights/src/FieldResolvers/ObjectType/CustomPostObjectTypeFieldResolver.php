@@ -32,13 +32,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected HighlightObjectTypeResolver $highlightObjectTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
         HighlightObjectTypeResolver $highlightObjectTypeResolver,

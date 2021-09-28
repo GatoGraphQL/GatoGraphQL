@@ -19,8 +19,6 @@ class LoginMutationResolver extends AbstractMutationResolver
     protected UserTypeAPIInterface $userTypeAPI;
     protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
         UserTypeAPIInterface $userTypeAPI,
         UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
     ) {

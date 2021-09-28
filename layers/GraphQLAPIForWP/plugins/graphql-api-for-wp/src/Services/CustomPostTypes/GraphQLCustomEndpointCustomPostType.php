@@ -32,12 +32,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     protected CustomEndpointOptionsBlock $customEndpointOptionsBlock;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        CPTUtils $cptUtils,
-        HooksAPIInterface $hooksAPI,
-        BlockHelpers $blockHelpers,
         EndpointBlockRegistryInterface $endpointBlockRegistry,
         CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
         CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface,

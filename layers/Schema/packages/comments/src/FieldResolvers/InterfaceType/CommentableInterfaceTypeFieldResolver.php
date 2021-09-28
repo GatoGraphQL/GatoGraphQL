@@ -34,14 +34,6 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
 
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        TypeRegistryInterface $typeRegistry,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
         CommentObjectTypeResolver $commentObjectTypeResolver,

@@ -14,7 +14,6 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
     protected EndpointHelpers $endpointHelpers;
     protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
         EndpointHelpers $endpointHelpers,
         PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator
     ) {

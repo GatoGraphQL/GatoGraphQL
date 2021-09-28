@@ -15,10 +15,6 @@ class UpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutat
 {
     protected UpdateStanceMutationResolver $updateStanceMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         UpdateStanceMutationResolver $updateStanceMutationResolver,
     ) {
         $this->updateStanceMutationResolver = $updateStanceMutationResolver;

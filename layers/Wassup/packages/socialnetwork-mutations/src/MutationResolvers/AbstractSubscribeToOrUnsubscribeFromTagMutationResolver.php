@@ -12,8 +12,6 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
 {
     protected PostTagTypeAPIInterface $postTagTypeAPI;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
         PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
         $this->postTagTypeAPI = $postTagTypeAPI;

@@ -18,10 +18,6 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
 {
     protected UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver,
     ) {
         $this->updateMyCommunitiesMutationResolver = $updateMyCommunitiesMutationResolver;

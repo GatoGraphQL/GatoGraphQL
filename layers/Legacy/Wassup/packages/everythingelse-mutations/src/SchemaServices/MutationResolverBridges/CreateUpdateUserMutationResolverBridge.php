@@ -19,10 +19,6 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
 {
     protected CreateUpdateUserMutationResolver $createUpdateUserMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         CreateUpdateUserMutationResolver $createUpdateUserMutationResolver,
     ) {
         $this->createUpdateUserMutationResolver = $createUpdateUserMutationResolver;

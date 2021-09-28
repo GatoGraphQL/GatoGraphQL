@@ -17,9 +17,6 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
 {
     protected AccessControlManagerInterface $accessControlManager;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         AccessControlManagerInterface $accessControlManager
     ) {
         $this->accessControlManager = $accessControlManager;

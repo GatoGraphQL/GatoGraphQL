@@ -20,11 +20,6 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
     protected CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver;
 
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
         CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver,
     ) {
         $this->createUpdateIndividualProfileMutationResolver = $createUpdateIndividualProfileMutationResolver;

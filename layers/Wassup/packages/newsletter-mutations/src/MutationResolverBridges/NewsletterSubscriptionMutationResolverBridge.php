@@ -16,10 +16,6 @@ class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponent
 {
     protected NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver,
     ) {
         $this->newsletterSubscriptionMutationResolver = $newsletterSubscriptionMutationResolver;

@@ -26,17 +26,6 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
     protected MenuTypeDataLoader $menuTypeDataLoader;
     protected MenuTypeAPIInterface $menuTypeAPI;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
         MenuTypeDataLoader $menuTypeDataLoader,
         MenuTypeAPIInterface $menuTypeAPI,
     ) {

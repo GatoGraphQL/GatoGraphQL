@@ -31,15 +31,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
     protected SchemaTypeDataLoader $schemaTypeDataLoader;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
         SchemaObjectTypeResolver $schemaObjectTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,
         SchemaTypeDataLoader $schemaTypeDataLoader,

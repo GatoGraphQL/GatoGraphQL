@@ -14,7 +14,6 @@ class PluginMenu extends AbstractMenu
 {
     protected UserAuthorizationInterface $userAuthorization;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
         UserAuthorizationInterface $userAuthorization
     ) {
         $this->userAuthorization = $userAuthorization;

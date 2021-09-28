@@ -25,14 +25,6 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        TypeRegistryInterface $typeRegistry,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
         URLScalarTypeResolver $urlScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ) {

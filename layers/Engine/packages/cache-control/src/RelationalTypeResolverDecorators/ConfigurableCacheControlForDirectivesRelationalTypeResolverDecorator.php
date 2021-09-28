@@ -16,8 +16,6 @@ class ConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator exten
     protected CacheControlManagerInterface $cacheControlManager;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
         CacheControlManagerInterface $cacheControlManager,
     ) {
         $this->cacheControlManager = $cacheControlManager;

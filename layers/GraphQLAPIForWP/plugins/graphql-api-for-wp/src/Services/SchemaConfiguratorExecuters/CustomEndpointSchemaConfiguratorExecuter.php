@@ -14,7 +14,6 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
     protected CustomEndpointSchemaConfigurator $endpointSchemaConfigurator;
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
         CustomEndpointSchemaConfigurator $endpointSchemaConfigurator,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {

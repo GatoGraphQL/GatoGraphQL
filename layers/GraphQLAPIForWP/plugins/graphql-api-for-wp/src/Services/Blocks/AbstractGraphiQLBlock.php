@@ -28,11 +28,6 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
         EndpointHelpers $endpointHelpers,
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {

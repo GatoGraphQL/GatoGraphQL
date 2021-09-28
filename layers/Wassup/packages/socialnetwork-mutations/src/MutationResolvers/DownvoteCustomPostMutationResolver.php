@@ -16,9 +16,6 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
 {
     protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
         UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
     ) {
         $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;

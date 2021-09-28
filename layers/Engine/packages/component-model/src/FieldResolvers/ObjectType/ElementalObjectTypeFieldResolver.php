@@ -24,15 +24,6 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
         ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
     ) {
         $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;

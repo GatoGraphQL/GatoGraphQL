@@ -35,16 +35,6 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     protected CustomPostObjectTypeResolver $customPostObjectTypeResolver;
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
         CustomPostObjectTypeResolver $customPostObjectTypeResolver,
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {

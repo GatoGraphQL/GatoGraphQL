@@ -17,9 +17,6 @@ class HeadModuleHookSet extends AbstractHookSet
 {
     protected HeadModule $headModule;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         HeadModule $headModule
     ) {
         $this->headModule = $headModule;

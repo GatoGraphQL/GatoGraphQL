@@ -17,10 +17,6 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected UserTypeAPIInterface $userTypeAPI;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;

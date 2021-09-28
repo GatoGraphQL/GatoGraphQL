@@ -19,14 +19,6 @@ abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUp
 {
     protected PostTypeAPIInterface $postTypeAPI;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        NameResolverInterface $nameResolver,
-        UserRoleTypeAPIInterface $userRoleTypeAPI,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
-        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
         PostTypeAPIInterface $postTypeAPI,
     ) {
         $this->postTypeAPI = $postTypeAPI;

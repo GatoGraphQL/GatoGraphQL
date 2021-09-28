@@ -24,18 +24,6 @@ class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     protected PostTypeDataLoader $postTypeDataLoader;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
         PostTypeDataLoader $postTypeDataLoader,
     ) {
         $this->postTypeDataLoader = $postTypeDataLoader;

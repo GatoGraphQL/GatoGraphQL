@@ -20,8 +20,6 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     protected UserTypeAPIInterface $userTypeAPI;
     protected CMSServiceInterface $cmsService;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
         UserTypeAPIInterface $userTypeAPI,
         CMSServiceInterface $cmsService,
     ) {

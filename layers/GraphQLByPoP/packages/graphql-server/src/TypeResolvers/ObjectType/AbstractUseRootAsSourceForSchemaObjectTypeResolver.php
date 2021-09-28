@@ -27,17 +27,6 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
 {
     protected RootObjectTypeResolver $rootObjectTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
         RootObjectTypeResolver $rootObjectTypeResolver,
     ) {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;

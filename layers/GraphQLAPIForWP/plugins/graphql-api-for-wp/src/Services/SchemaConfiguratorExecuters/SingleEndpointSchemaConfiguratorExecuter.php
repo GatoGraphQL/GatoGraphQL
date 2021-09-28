@@ -23,7 +23,6 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     protected GraphQLEndpointHandler $graphQLEndpointHandler;
 
     public function __construct(
-        InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         SingleEndpointSchemaConfigurator $endpointSchemaConfigurator,
         GraphQLEndpointHandler $graphQLEndpointHandler,

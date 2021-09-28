@@ -17,11 +17,6 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
 {
     protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
         UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
     ) {
         $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;

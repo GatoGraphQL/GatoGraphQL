@@ -15,9 +15,6 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected Site $site;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
         Site $site,
     ) {
         $this->site = $site;

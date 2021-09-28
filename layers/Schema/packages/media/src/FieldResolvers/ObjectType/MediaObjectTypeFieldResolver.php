@@ -37,16 +37,6 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected DateScalarTypeResolver $dateScalarTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
         MediaTypeAPIInterface $mediaTypeAPI,
         DateFormatterInterface $dateFormatter,
         URLScalarTypeResolver $urlScalarTypeResolver,

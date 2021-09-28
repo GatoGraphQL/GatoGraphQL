@@ -22,10 +22,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     protected HooksAPIInterface $hooksAPI;
     protected BlockHelpers $blockHelpers;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        CPTUtils $cptUtils,
         HooksAPIInterface $hooksAPI,
         BlockHelpers $blockHelpers,
     ) {

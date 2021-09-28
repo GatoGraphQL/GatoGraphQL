@@ -18,9 +18,6 @@ class ModulePathsHookSet extends AbstractHookSet
 {
     protected ModulePaths $modulePaths;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
         ModulePaths $modulePaths
     ) {
         $this->modulePaths = $modulePaths;

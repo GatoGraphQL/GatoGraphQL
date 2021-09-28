@@ -17,10 +17,6 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
 {
     protected FileUploadPictureMutationResolver $fileUploadPictureMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         FileUploadPictureMutationResolver $fileUploadPictureMutationResolver,
     ) {
         $this->fileUploadPictureMutationResolver = $fileUploadPictureMutationResolver;

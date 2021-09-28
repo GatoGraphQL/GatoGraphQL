@@ -18,9 +18,6 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
 {
     protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        BlockHelpers $blockHelpers,
         CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
     ) {
         $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;

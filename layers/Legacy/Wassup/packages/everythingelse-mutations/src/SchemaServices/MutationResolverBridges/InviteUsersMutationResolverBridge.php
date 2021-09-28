@@ -15,10 +15,6 @@ class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResol
 {
     protected InviteUsersMutationResolver $inviteUsersMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         InviteUsersMutationResolver $inviteUsersMutationResolver,
     ) {
         $this->inviteUsersMutationResolver = $inviteUsersMutationResolver;

@@ -16,10 +16,6 @@ class ContactUsMutationResolverBridge extends AbstractFormComponentMutationResol
 {
     protected ContactUsMutationResolver $contactUsMutationResolver;
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
         ContactUsMutationResolver $contactUsMutationResolver,
     ) {
         $this->contactUsMutationResolver = $contactUsMutationResolver;

@@ -14,7 +14,6 @@ class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCP
     protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator;
     protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
         PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator,
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
     ) {

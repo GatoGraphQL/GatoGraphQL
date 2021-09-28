@@ -27,14 +27,6 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
     protected IDScalarTypeResolver $idScalarTypeResolver;
     protected MediaObjectTypeResolver $mediaObjectTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        TypeRegistryInterface $typeRegistry,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
         MediaObjectTypeResolver $mediaObjectTypeResolver,

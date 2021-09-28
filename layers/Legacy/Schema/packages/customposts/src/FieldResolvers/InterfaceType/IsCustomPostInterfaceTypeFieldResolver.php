@@ -25,16 +25,6 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     protected DateScalarTypeResolver $dateScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        TypeRegistryInterface $typeRegistry,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
         DateScalarTypeResolver $dateScalarTypeResolver,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {

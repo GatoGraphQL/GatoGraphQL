@@ -30,15 +30,6 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
     protected UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver;
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
         UserAvatarTypeAPIInterface $userAvatarTypeAPI,
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
         UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,

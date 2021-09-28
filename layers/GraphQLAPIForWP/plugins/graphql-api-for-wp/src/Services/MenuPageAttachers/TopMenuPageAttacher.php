@@ -19,7 +19,6 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected GraphiQLMenuPage $graphiQLMenuPage;
     protected GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage;
     public function __construct(
-        InstanceManagerInterface $instanceManager,
         MenuPageHelper $menuPageHelper,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
