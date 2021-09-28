@@ -6,10 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\GetterSetterObjects\BlockAttributes;
 
 class PersistedQueryEndpointAPIHierarchyBlockAttributes
 {
-    protected bool $inheritQuery;
-    public function __construct(bool $inheritQuery)
-    {
-        $this->inheritQuery = $inheritQuery;
+    public function __construct(
+        protected bool $inheritQuery,
+    ) {
     }
 
     public function isInheritQuery(): bool
