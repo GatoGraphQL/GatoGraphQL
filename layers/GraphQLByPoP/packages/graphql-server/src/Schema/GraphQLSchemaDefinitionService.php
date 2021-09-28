@@ -4,21 +4,26 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\Schema\SchemaDefinitionService;
-use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
+use PoP\API\ComponentConfiguration as APIComponentConfiguration;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\Schema\SchemaDefinitionService;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements GraphQLSchemaDefinitionServiceInterface
 {
-    /**
-     * Can't use autowiring or it produces a circular reference exception
-     */
-    protected ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
-    protected ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
+    protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
+    protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver;
+
+    #[Required]
+    public function autowireGraphQLSchemaDefinitionService(QueryRootObjectTypeResolver $queryRootObjectTypeResolver, MutationRootObjectTypeResolver $mutationRootObjectTypeResolver)
+    {
+        $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
+        $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
+    }
 
     public function getQueryRootTypeSchemaKey(): string
     {
@@ -37,9 +42,6 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
             return $this->getRootTypeResolver();
         }
 
-        if ($this->queryRootObjectTypeResolver === null) {
-            $this->queryRootObjectTypeResolver = $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
-        }
         return $this->queryRootObjectTypeResolver;
     }
 
@@ -65,9 +67,6 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
             return $this->getRootTypeResolver();
         }
 
-        if ($this->mutationRootObjectTypeResolver === null) {
-            $this->mutationRootObjectTypeResolver = $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
-        }
         return $this->mutationRootObjectTypeResolver;
     }
 

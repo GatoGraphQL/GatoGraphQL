@@ -12,16 +12,14 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class SchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
-    /**
-     * Can't use autowiring or it produces a circular reference exception
-     */
-    protected ?AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver = null;
+    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    public function autowireSchemaDefinitionService(InstanceManagerInterface $instanceManager)
+    public function autowireSchemaDefinitionService(InstanceManagerInterface $instanceManager, AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver)
     {
         $this->instanceManager = $instanceManager;
+        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
     }
 
     public function getTypeSchemaKey(TypeResolverInterface $typeResolver): string
@@ -43,9 +41,6 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
      */
     public function getDefaultTypeResolver(): ConcreteTypeResolverInterface
     {
-        if ($this->anyScalarScalarTypeResolver === null) {
-            $this->anyScalarScalarTypeResolver = $this->instanceManager->getInstance(AnyScalarScalarTypeResolver::class);
-        }
         return $this->anyScalarScalarTypeResolver;
     }
 }
