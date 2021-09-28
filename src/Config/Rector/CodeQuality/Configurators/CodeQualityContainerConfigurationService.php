@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\CodeQuality\Configurators;
 
-use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
-use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
-
 class CodeQualityContainerConfigurationService extends AbstractCodeQualityContainerConfigurationService
 {
-    public function configureContainer(): void
+    /**
+     * @return string[]
+     */
+    protected function getPaths(): array
     {
-        parent::configureContainer();
-        
-        $services = $this->containerConfigurator->services();
-        $services->set(RemoveUselessParamTagRector::class);
-        $services->set(RemoveUselessReturnTagRector::class);
-        // $services->set(DowngradePropertyPromotionRector::class);
+        return [
+            $this->rootDirectory . '/layers/Wassup/packages/*/src/*',
+            $this->rootDirectory . '/layers/GraphQLByPoP/packages/*/src/*',
+            $this->rootDirectory . '/layers/APIDemoSite/packages/*/src/*',
+            $this->rootDirectory . '/layers/GraphQLAPIForWP/plugins/*/src/*',
+            $this->rootDirectory . '/layers/Engine/packages/*/src/*',
+        ];
     }
 }

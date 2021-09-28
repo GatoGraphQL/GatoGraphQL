@@ -6,11 +6,18 @@ namespace PoP\PoP\Config\Rector\CodeQuality\Configurators;
 
 use PoP\PoP\Config\Rector\Downgrade\Configurators\AbstractContainerConfigurationService;
 use Rector\Core\Configuration\Option;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 
 abstract class AbstractCodeQualityContainerConfigurationService extends AbstractContainerConfigurationService
 {
     public function configureContainer(): void
-    {
+    {        
+        $services = $this->containerConfigurator->services();
+        $services->set(RemoveUselessParamTagRector::class);
+        $services->set(RemoveUselessReturnTagRector::class);
+        // $services->set(DowngradePropertyPromotionRector::class);
+
         $parameters = $this->containerConfigurator->parameters();
         $parameters->set(Option::AUTO_IMPORT_NAMES, true);
         $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
