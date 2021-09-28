@@ -48,7 +48,7 @@ abstract class AbstractCodeQualityContainerConfigurationService extends Abstract
     {
         return [
             $this->rootDirectory . '/src/*',
-            // $this->rootDirectory . '/layers/*',
+            $this->rootDirectory . '/layers/*',
         ];
     }
 
