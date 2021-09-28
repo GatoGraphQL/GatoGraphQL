@@ -19,7 +19,6 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
 {
     use CreateUpdateProfileMutationResolverBridgeTrait;
     protected CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver;
-
     
     #[Required]
     public function autowireCreateUpdateIndividualProfileMutationResolverBridge(
