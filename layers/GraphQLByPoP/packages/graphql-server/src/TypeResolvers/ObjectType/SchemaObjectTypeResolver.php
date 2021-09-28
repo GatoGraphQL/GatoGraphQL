@@ -4,17 +4,21 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
-use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaTypeDataLoader;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractIntrospectionObjectTypeResolver;
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
-    /**
-     * Can't inject in constructor because of a circular reference
-     */
-    protected ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
+    protected SchemaTypeDataLoader $schemaTypeDataLoader;
+
+    #[Required]
+    public function autowireSchemaObjectTypeResolver(SchemaTypeDataLoader $schemaTypeDataLoader)
+    {
+        $this->schemaTypeDataLoader = $schemaTypeDataLoader;
+    }
 
     public function getTypeName(): string
     {
@@ -35,9 +39,6 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        if ($this->schemaTypeDataLoader === null) {
-            $this->schemaTypeDataLoader = $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
-        }
         return $this->schemaTypeDataLoader;
     }
 }
