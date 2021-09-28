@@ -11,12 +11,10 @@ namespace PoP\API\Schema;
  */
 class FieldQuerySet
 {
-    protected array $requestedFieldQuery;
-    protected array $executableFieldQuery;
-    public function __construct(array $requestedFieldQuery, array $executableFieldQuery)
-    {
-        $this->requestedFieldQuery = $requestedFieldQuery;
-        $this->executableFieldQuery = $executableFieldQuery;
+    public function __construct(
+        protected array $requestedFieldQuery,
+        protected array $executableFieldQuery
+    ) {
     }
 
     public function getRequestedFieldQuery(): array
