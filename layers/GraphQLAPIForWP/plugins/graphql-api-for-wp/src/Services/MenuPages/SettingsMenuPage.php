@@ -27,7 +27,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
     protected UserSettingsManagerInterface $userSettingsManager;
     protected ModuleRegistryInterface $moduleRegistry;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireSettingsMenuPage(

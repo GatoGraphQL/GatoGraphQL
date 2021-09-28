@@ -37,7 +37,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
     protected PersistedQueryManagerInterface $queryCatalogueManager;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireRootObjectTypeFieldResolver(

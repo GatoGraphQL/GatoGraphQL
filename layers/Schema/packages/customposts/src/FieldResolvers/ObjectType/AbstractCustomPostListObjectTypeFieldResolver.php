@@ -34,7 +34,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     use WithLimitFieldArgResolverTrait;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractCustomPostListObjectTypeFieldResolver(

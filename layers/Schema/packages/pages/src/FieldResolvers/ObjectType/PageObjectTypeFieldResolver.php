@@ -37,7 +37,6 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected PageObjectTypeResolver $pageObjectTypeResolver;
     protected PageTypeAPIInterface $pageTypeAPI;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowirePageObjectTypeFieldResolver(

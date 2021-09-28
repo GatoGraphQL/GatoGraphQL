@@ -14,7 +14,6 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
 {
     use ValidateUserLoggedInMutationResolverTrait;
     protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireRemoveFeaturedImageOnCustomPostMutationResolver(

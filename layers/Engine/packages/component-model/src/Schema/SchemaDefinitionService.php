@@ -16,7 +16,6 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
      */
     protected ?AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver = null;
     protected InstanceManagerInterface $instanceManager;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireSchemaDefinitionService(InstanceManagerInterface $instanceManager)

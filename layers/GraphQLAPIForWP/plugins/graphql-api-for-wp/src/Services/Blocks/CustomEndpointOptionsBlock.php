@@ -21,7 +21,6 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
 {
     use MainPluginBlockTrait;
     protected CustomEndpointBlockCategory $customEndpointBlockCategory;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireCustomEndpointOptionsBlock(

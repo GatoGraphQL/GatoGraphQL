@@ -28,7 +28,6 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
     protected InstanceManagerInterface $instanceManager;
     protected RootObjectTypeResolver $rootTypeResolver;
     protected Root $root;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireSchemaDefinitionRegistry(

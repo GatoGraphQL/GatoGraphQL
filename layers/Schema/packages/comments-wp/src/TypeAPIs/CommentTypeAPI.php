@@ -28,7 +28,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
     protected array $popToCMSCommentStatusConversion;
     protected HooksAPIInterface $hooksAPI;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireCommentTypeAPI(

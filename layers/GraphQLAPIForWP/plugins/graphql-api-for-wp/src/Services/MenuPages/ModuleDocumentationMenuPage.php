@@ -22,7 +22,6 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
     use PluginMarkdownContentRetrieverTrait;
     protected ModuleRegistryInterface $moduleRegistry;
     protected ModulesMenuPage $modulesMenuPage;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireModuleDocumentationMenuPage(

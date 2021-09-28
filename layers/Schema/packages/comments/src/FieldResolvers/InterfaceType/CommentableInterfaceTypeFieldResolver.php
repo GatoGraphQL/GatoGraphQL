@@ -32,7 +32,6 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireCommentableInterfaceTypeFieldResolver(

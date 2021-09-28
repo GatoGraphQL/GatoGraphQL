@@ -16,7 +16,6 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
     protected HooksAPIInterface $hooksAPI;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireMenuTypeAPI(HooksAPIInterface $hooksAPI)

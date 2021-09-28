@@ -29,7 +29,6 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     use RolesObjectTypeFieldResolverTrait;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected UserRoleTypeAPIInterface $userRoleTypeAPI;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireRootRolesObjectTypeFieldResolver(

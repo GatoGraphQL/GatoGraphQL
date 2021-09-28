@@ -26,7 +26,6 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     public const ATTRIBUTE_NAME_VARIABLES = 'variables';
     protected EndpointHelpers $endpointHelpers;
     protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractGraphiQLBlock(

@@ -14,7 +14,6 @@ class AccessControlManager extends UpstreamAccessControlManager
      */
     protected array $overriddenFieldEntries = [];
     protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireGraphQLServerAccessControlManager(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator)

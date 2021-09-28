@@ -60,7 +60,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected SemverHelperServiceInterface $semverHelperService;
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     protected EngineInterface $engine;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractObjectTypeFieldResolver(

@@ -26,7 +26,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     protected ModuleRegistryInterface $moduleRegistry;
     protected UserAuthorizationInterface $userAuthorization;
     protected CPTUtils $cptUtils;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractCustomPostType(

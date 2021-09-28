@@ -37,7 +37,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
     protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireFilterInputModuleProcessor(

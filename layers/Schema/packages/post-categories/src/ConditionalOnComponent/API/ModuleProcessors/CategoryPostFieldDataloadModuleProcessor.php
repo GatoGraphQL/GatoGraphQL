@@ -32,7 +32,6 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
     public const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST = 'dataload-relationalfields-categorypostlist';
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireCategoryPostFieldDataloadModuleProcessor(

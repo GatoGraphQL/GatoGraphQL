@@ -41,7 +41,6 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireRootPostCategoryObjectTypeFieldResolver(

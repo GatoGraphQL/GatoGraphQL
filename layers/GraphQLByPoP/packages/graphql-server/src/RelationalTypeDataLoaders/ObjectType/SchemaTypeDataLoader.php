@@ -19,7 +19,6 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     use UseObjectDictionaryTypeDataLoaderTrait;
     protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
     protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireSchemaTypeDataLoader(

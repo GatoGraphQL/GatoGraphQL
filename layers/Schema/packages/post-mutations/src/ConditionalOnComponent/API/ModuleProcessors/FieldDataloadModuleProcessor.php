@@ -32,7 +32,6 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     public const MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT = 'dataload-relationalfields-mypostcount';
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireFieldDataloadModuleProcessor(

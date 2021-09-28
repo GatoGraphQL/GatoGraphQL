@@ -16,7 +16,6 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaRelationalT
 {
     use ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait;
     protected ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaRelationalTypeResolverDecorator(

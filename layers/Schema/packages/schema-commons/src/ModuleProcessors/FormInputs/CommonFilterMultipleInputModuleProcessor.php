@@ -33,7 +33,6 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
 
     public const MODULE_FILTERINPUT_DATES = 'filterinput-dates';
     protected FormInputHelperServiceInterface $formInputHelperService;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireCommonFilterMultipleInputModuleProcessor(

@@ -21,7 +21,6 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     public const HOOK_FORM_FIELDNAMES = __CLASS__ . ':form-fieldnames';
     protected UserTypeAPIInterface $userTypeAPI;
     protected GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireGravityFormsAddEntryToFormMutationResolverBridge(

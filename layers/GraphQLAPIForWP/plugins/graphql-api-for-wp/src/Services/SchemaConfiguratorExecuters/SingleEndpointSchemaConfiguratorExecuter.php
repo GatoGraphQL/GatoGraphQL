@@ -21,7 +21,6 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     protected ModuleRegistryInterface $moduleRegistry;
     protected SingleEndpointSchemaConfigurator $endpointSchemaConfigurator;
     protected GraphQLEndpointHandler $graphQLEndpointHandler;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireSingleEndpointSchemaConfiguratorExecuter(

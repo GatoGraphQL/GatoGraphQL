@@ -34,7 +34,6 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     use WithLimitFieldArgResolverTrait;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractCustomPostQueryableObjectTypeFieldResolver(

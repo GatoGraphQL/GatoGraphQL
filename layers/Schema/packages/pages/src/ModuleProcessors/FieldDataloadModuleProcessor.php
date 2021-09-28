@@ -27,7 +27,6 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
 
     public const MODULE_DATALOAD_RELATIONALFIELDS_PAGE = 'dataload-relationalfields-page';
     protected PageObjectTypeResolver $pageObjectTypeResolver;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireFieldDataloadModuleProcessor(

@@ -69,7 +69,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected ErrorProviderInterface $errorProvider;
     protected DataloadingEngineInterface $dataloadingEngine;
     protected DirectivePipelineServiceInterface $directivePipelineService;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractRelationalTypeResolver(

@@ -53,7 +53,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected DataloadHelperServiceInterface $dataloadHelperService;
     protected RequestHelperServiceInterface $requestHelperService;
     protected ModulePaths $modulePaths;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractModuleProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths)

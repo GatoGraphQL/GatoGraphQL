@@ -13,7 +13,6 @@ abstract class AbstractConfigurableAccessControlForFieldsInPublicSchemaRelationa
 {
     use ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait;
     protected AccessControlManagerInterface $accessControlManager;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator(

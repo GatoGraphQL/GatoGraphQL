@@ -14,7 +14,6 @@ class ConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator exten
 {
     use ConfigurableCacheControlRelationalTypeResolverDecoratorTrait;
     protected CacheControlManagerInterface $cacheControlManager;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator(

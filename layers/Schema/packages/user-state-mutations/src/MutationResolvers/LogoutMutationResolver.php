@@ -15,7 +15,6 @@ class LogoutMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
     protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireLogoutMutationResolver(

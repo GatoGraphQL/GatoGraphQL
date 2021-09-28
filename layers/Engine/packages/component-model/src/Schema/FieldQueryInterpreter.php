@@ -95,7 +95,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     private array $fieldsByTypeAndFieldOutputKey = [];
     protected TypeCastingExecuterInterface $typeCastingExecuter;
     protected InstanceManagerInterface $instanceManager;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireComponentModelFieldQueryInterpreter(

@@ -20,7 +20,6 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     protected InstanceManagerInterface $instanceManager;
     protected MenuPageHelper $menuPageHelper;
     protected EndpointHelpers $endpointHelpers;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractMenuPage(InstanceManagerInterface $instanceManager, MenuPageHelper $menuPageHelper, EndpointHelpers $endpointHelpers)

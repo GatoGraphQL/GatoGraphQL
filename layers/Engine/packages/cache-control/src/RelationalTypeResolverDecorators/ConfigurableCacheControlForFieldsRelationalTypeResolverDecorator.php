@@ -14,7 +14,6 @@ class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends A
 {
     use ConfigurableCacheControlRelationalTypeResolverDecoratorTrait;
     protected CacheControlManagerInterface $cacheControlManager;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireConfigurableCacheControlForFieldsRelationalTypeResolverDecorator(

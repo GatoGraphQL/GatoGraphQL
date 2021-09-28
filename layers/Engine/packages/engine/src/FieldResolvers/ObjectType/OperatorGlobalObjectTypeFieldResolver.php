@@ -45,7 +45,6 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected ErrorProviderInterface $errorProvider;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireOperatorGlobalObjectTypeFieldResolver(

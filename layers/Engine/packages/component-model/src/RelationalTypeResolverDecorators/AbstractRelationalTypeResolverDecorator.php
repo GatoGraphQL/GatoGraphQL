@@ -16,7 +16,6 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
     use AttachableExtensionTrait;
     protected InstanceManagerInterface $instanceManager;
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractRelationalTypeResolverDecorator(InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter)

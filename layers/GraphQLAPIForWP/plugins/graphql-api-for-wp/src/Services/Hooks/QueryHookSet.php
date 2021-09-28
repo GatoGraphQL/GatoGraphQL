@@ -19,7 +19,6 @@ class QueryHookSet extends AbstractHookSet
 {
     public const NON_EXISTING_ID = "non-existing";
     protected CustomPostTypeRegistryInterface $customPostTypeRegistry;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireQueryHookSet(

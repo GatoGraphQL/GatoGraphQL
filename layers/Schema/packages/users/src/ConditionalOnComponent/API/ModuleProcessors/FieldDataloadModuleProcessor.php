@@ -35,7 +35,6 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT = 'dataload-relationalfields-adminusercount';
     protected UserObjectTypeResolver $userObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireFieldDataloadModuleProcessor(

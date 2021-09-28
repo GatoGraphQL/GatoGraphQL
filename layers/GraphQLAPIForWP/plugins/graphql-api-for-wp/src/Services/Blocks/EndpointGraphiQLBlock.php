@@ -20,7 +20,6 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
     protected CustomEndpointBlockCategory $customEndpointBlockCategory;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireEndpointGraphiQLBlock(

@@ -42,7 +42,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_COMMENT_STATUS = 'filterinput-comment-status';
     protected CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver;
     protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireFilterInputModuleProcessor(

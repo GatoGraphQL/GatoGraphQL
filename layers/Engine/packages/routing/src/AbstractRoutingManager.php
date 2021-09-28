@@ -15,7 +15,6 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
      */
     private ?array $routes = null;
     protected HooksAPIInterface $hooksAPI;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractRoutingManager(HooksAPIInterface $hooksAPI)

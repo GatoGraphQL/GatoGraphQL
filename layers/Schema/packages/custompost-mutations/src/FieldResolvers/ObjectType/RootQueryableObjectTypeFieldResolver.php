@@ -41,7 +41,6 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     use WithLimitFieldArgResolverTrait;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected CustomPostTypeAPIInterface $postTypeAPI;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireRootQueryableObjectTypeFieldResolver(

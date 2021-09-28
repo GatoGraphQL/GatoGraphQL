@@ -14,7 +14,6 @@ class Cache implements CacheInterface
     use ReplaceCurrentExecutionDataWithPlaceholdersTrait;
     protected CacheItemPoolInterface $cacheItemPool;
     protected ModelInstanceInterface $modelInstance;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireCache(CacheItemPoolInterface $cacheItemPool, ModelInstanceInterface $modelInstance)

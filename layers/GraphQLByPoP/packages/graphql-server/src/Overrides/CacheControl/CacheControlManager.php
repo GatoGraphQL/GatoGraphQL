@@ -11,7 +11,6 @@ class CacheControlManager extends UpstreamCacheControlManager
 {
     protected ?array $overriddenFieldEntries = null;
     protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireGraphQLServerCacheControlManager(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator)

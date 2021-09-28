@@ -21,7 +21,6 @@ abstract class AbstractEditorScript extends AbstractScript
 {
     use HasDocumentationScriptTrait;
     protected EditorHelpers $editorHelpers;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractEditorScript(

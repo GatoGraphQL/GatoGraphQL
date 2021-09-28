@@ -44,7 +44,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver;
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireRootGenericCustomPostObjectTypeFieldResolver(

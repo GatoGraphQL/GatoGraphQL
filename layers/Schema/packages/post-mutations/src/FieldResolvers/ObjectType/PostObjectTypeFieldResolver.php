@@ -26,7 +26,6 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     use UserStateObjectTypeFieldResolverTrait;
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected UpdatePostMutationResolver $updatePostMutationResolver;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowirePostObjectTypeFieldResolver(

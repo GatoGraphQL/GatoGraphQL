@@ -24,7 +24,6 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
 
     public const ATTRIBUTE_NAME_CACHE_CONTROL_LISTS = 'cacheControlLists';
     protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireSchemaConfigCacheControlListBlock(

@@ -32,7 +32,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
     protected UserAuthorizationInterface $userAuthorization;
     protected GeneralUtils $generalUtils;
     protected EditorHelpers $editorHelpers;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractBlock(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers)

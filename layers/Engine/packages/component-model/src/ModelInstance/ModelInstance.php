@@ -20,7 +20,6 @@ class ModelInstance implements ModelInstanceInterface
     protected HooksAPIInterface $hooksAPI;
     protected ApplicationInfoInterface $applicationInfo;
     protected DefinitionManagerInterface $definitionManager;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireModelInstance(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager)

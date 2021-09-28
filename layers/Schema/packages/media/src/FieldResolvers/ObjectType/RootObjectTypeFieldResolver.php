@@ -39,7 +39,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected MediaTypeAPIInterface $mediaTypeAPI;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected MediaObjectTypeResolver $mediaObjectTypeResolver;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireRootObjectTypeFieldResolver(

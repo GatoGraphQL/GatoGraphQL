@@ -58,7 +58,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     protected TranslationAPIInterface $translationAPI;
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected QueryParserInterface $queryParser;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireFieldQueryInterpreter(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser)

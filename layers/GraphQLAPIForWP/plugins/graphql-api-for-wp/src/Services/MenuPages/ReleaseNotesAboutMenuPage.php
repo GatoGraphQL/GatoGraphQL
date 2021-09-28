@@ -16,7 +16,6 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
     protected AboutMenuPage $aboutMenuPage;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireReleaseNotesAboutMenuPage(

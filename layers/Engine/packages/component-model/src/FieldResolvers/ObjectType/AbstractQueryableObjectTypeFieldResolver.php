@@ -25,7 +25,6 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
 {
     use QueryableFieldResolverTrait;
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractQueryableObjectTypeFieldResolver(

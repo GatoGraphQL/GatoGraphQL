@@ -34,7 +34,6 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT = 'dataload-relationalfields-admingenericcustompostcount';
     protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireGenericCustomPostRelationalFieldDataloadModuleProcessor(

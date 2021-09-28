@@ -16,7 +16,6 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
     protected ?array $restFields = null;
     protected RESTDataStructureFormatter $restDataStructureFormatter;
     protected FieldQueryConvertorInterface $fieldQueryConvertor;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractRESTEntryRouteModuleProcessor(

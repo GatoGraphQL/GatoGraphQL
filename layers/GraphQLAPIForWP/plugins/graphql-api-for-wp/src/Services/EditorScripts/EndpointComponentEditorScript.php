@@ -19,7 +19,6 @@ class EndpointComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireEndpointComponentEditorScript(

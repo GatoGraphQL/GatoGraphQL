@@ -19,7 +19,6 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
     use ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait;
     protected AccessControlManagerInterface $accessControlManager;
     protected ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolverDecorator(

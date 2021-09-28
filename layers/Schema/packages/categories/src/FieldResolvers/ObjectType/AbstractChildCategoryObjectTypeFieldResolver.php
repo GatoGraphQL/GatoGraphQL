@@ -34,7 +34,6 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     use WithLimitFieldArgResolverTrait;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
-
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractChildCategoryObjectTypeFieldResolver(
