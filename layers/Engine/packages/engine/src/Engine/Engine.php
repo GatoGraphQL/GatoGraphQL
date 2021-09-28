@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Engine;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
@@ -31,7 +32,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     protected LooseContractManagerInterface $looseContractManager;
     protected CacheControlEngineInterface $cacheControlEngine;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireEngineEngine(
         LooseContractManagerInterface $looseContractManager,
         CacheControlEngineInterface $cacheControlEngine

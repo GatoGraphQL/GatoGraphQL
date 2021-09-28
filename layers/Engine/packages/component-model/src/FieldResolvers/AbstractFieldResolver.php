@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -16,7 +17,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface
     protected HooksAPIInterface $hooksAPI;
     protected InstanceManagerInterface $instanceManager;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractFieldResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager)
     {
         $this->translationAPI = $translationAPI;

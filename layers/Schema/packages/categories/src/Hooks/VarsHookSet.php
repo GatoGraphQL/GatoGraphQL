@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
@@ -15,7 +16,7 @@ class VarsHookSet extends AbstractHookSet
 {
     protected TaxonomyTypeAPIInterface $taxonomyTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireVarsHookSet(
         TaxonomyTypeAPIInterface $taxonomyTypeAPI,
     ) {

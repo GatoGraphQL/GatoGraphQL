@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -21,7 +22,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
     protected UserSettingsManagerInterface $userSettingsManager;
     protected EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractCustomPostEndpointSchemaConfigurator(
         EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
     ) {

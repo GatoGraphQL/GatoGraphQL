@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\RESTAPI\RouteModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\RESTAPI\Helpers\HookHelpers;
 use PoP\API\Schema\FieldQueryConvertorInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -17,7 +18,7 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
     protected RESTDataStructureFormatter $restDataStructureFormatter;
     protected FieldQueryConvertorInterface $fieldQueryConvertor;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractRESTEntryRouteModuleProcessor(
         RESTDataStructureFormatter $restDataStructureFormatter,
         FieldQueryConvertorInterface $fieldQueryConvertor

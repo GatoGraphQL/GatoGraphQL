@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\ModuleProcessors\FormInputs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -38,7 +39,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
     protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireFilterInputModuleProcessor(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
     ) {

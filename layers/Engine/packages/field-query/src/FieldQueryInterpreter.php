@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\QueryParsing\QueryParserInterface;
 
@@ -59,7 +60,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected QueryParserInterface $queryParser;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireFieldQueryInterpreter(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser)
     {
         $this->translationAPI = $translationAPI;

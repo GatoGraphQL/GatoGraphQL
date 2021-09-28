@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Translation\TranslationAPIInterface;
 use CastToType;
@@ -13,7 +14,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
 {
     private TranslationAPIInterface $translationAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireTypeCastingExecuter(TranslationAPIInterface $translationAPI)
     {
         $this->translationAPI = $translationAPI;

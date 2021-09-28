@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor\SchemaServices\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
@@ -30,7 +31,7 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType;
     protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireListOfCPTEntitiesRootObjectTypeFieldResolver(
         GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
         GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,

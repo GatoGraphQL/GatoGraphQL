@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -25,7 +26,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry;
     protected AccessControlManagerInterface $accessControlManager;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAccessControlGraphQLQueryConfigurator(
         AccessControlBlock $accessControlBlock,
         BlockHelpers $blockHelpers,

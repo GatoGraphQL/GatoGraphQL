@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\QueriedObject\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
@@ -15,7 +16,7 @@ class ApplicationStateHookSet extends AbstractHookSet
 {
     protected CMSRoutingStateServiceInterface $cmsRoutingStateService;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireApplicationStateHookSet(
         CMSRoutingStateServiceInterface $cmsRoutingStateService,
     ) {

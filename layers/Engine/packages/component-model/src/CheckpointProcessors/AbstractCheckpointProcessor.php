@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\CheckpointProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -13,7 +14,7 @@ abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterfa
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractCheckpointProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI)
     {
         $this->translationAPI = $translationAPI;

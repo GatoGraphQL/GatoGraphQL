@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -23,7 +24,7 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected UserRoleTypeDataLoader $userRoleTypeDataLoader;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireUserRoleObjectTypeResolver(
         UserRoleTypeDataLoader $userRoleTypeDataLoader,
     ) {

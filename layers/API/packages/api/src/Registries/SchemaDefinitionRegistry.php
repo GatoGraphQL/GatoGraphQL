@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Registries;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Registries\SchemaDefinitionRegistryInterface;
@@ -29,7 +30,7 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
     protected RootObjectTypeResolver $rootTypeResolver;
     protected Root $root;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireSchemaDefinitionRegistry(
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,

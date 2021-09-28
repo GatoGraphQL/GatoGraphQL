@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
@@ -96,7 +97,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected TypeCastingExecuterInterface $typeCastingExecuter;
     protected InstanceManagerInterface $instanceManager;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireComponentModelFieldQueryInterpreter(
         TypeCastingExecuterInterface $typeCastingExecuter,
         InstanceManagerInterface $instanceManager,

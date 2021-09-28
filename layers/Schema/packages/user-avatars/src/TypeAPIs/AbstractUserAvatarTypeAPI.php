@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 
 abstract class AbstractUserAvatarTypeAPI implements UserAvatarTypeAPIInterface
 {
     protected HooksAPIInterface $hooksAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractUserAvatarTypeAPI(HooksAPIInterface $hooksAPI)
     {
         $this->hooksAPI = $hooksAPI;

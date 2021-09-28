@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
@@ -37,7 +38,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */    
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireSchemaConfigurationFunctionalityModuleResolver(
         ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ) {

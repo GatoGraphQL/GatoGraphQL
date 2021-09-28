@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\SchemaObjectTypeFieldResolver;
@@ -30,7 +31,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     protected DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver;
     protected DirectiveRegistryInterface $directiveRegistry;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireFilterSystemDirectiveSchemaObjectTypeFieldResolver(
         DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
         DirectiveRegistryInterface $directiveRegistry,

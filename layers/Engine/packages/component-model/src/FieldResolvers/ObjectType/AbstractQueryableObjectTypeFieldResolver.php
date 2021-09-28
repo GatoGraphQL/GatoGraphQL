@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\QueryableObjectTypeFieldSchemaDefinitionResolverInterface;
@@ -26,7 +27,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     use QueryableFieldResolverTrait;
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractQueryableObjectTypeFieldResolver(
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ) {

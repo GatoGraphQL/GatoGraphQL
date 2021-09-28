@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\GraphiQLExplorerInAdminClient\Overrides\Services\MenuPages;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\Clients\AdminGraphiQLWithExplorerClient;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
@@ -19,7 +20,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 {
     protected AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireGraphQLAPIGraphiQLMenuPage(
         AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient,
     ) {

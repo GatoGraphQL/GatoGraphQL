@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\ConditionalOnComponent\API\ModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -34,7 +35,7 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     protected PostTagObjectTypeResolver $postTagObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractFieldDataloadModuleProcessor(
         PostTagObjectTypeResolver $postTagObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,

@@ -10,12 +10,13 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireInviteMembersMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ) {

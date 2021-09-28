@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\VolunteerMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -16,7 +17,7 @@ class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResol
 {
     protected VolunteerMutationResolver $volunteerMutationResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireVolunteerMutationResolverBridge(
         VolunteerMutationResolver $volunteerMutationResolver,
     ) {

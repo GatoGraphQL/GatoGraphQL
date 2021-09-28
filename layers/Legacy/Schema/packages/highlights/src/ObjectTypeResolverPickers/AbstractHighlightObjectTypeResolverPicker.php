@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\ObjectTypeResolverPickers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
@@ -13,7 +14,7 @@ abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectT
 {
     protected HighlightObjectTypeResolver $highlightObjectTypeResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractHighlightObjectTypeResolverPicker(HighlightObjectTypeResolver $highlightObjectTypeResolver)
     {
         $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;

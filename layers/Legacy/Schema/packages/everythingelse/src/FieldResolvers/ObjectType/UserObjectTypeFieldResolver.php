@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -23,7 +24,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected LocationObjectTypeResolver $locationObjectTypeResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireUserObjectTypeFieldResolver(
         LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {

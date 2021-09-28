@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
@@ -19,7 +20,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
 {
     protected CreateUpdateUserMutationResolver $createUpdateUserMutationResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCreateUpdateUserMutationResolverBridge(
         CreateUpdateUserMutationResolver $createUpdateUserMutationResolver,
     ) {

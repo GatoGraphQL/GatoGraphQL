@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -37,7 +38,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected TypeRegistryInterface $typeRegistry;
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractInterfaceTypeFieldResolver(
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\HelperServices;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
@@ -15,7 +16,7 @@ class RequestHelperService implements RequestHelperServiceInterface
 {
     protected HooksAPIInterface $hooksAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireRequestHelperService(HooksAPIInterface $hooksAPI)
     {
         $this->hooksAPI = $hooksAPI;

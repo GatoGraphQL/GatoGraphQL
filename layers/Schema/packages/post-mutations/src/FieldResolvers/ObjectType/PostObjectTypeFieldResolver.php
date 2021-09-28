@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -27,7 +28,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected UpdatePostMutationResolver $updatePostMutationResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowirePostObjectTypeFieldResolver(
         PostObjectTypeResolver $postObjectTypeResolver,
         UpdatePostMutationResolver $updatePostMutationResolver,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -27,7 +28,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     protected CommentTypeAPIInterface $commentTypeAPI;
     protected CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCustomPostObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver,

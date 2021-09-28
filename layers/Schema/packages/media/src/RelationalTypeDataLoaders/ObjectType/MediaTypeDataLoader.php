@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
@@ -17,7 +18,7 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected MediaTypeAPIInterface $mediaTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireMediaTypeDataLoader(
         MediaTypeAPIInterface $mediaTypeAPI,
     ) {

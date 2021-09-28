@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -17,7 +18,7 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected UserTypeAPIInterface $userTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireUserTypeDataLoader(
         UserTypeAPIInterface $userTypeAPI,
     ) {

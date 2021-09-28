@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
@@ -24,7 +25,7 @@ class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     protected PostTypeDataLoader $postTypeDataLoader;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowirePostObjectTypeResolver(
         PostTypeDataLoader $postTypeDataLoader,
     ) {

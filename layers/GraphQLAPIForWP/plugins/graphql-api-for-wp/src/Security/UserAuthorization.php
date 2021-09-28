@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Security;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
 use InvalidArgumentException;
@@ -15,7 +16,7 @@ class UserAuthorization implements UserAuthorizationInterface
 {
     protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireUserAuthorization(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry)
     {
         $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;

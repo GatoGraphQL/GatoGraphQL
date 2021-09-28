@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\Clients;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLClientsForWP\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient;
 
@@ -11,7 +12,7 @@ class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
 {
     protected EndpointHelpers $endpointHelpers;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAdminGraphiQLWithExplorerClient(EndpointHelpers $endpointHelpers)
     {
         $this->endpointHelpers = $endpointHelpers;

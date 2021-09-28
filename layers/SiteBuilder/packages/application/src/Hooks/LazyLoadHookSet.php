@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Application\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Application\Constants\Actions;
 use PoP\Application\ModuleFilters\Lazy;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
@@ -23,7 +24,7 @@ class LazyLoadHookSet extends AbstractHookSet
     protected RequestHelperServiceInterface $requestHelperService;
     protected Lazy $lazy;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireLazyLoadHookSet(
         RequestHelperServiceInterface $requestHelperService,
         Lazy $lazy,

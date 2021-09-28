@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -19,7 +20,7 @@ class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValu
     protected SubscribeToTagMutationResolver $subscribeToTagMutationResolver;
     protected PostTagTypeAPIInterface $postTagTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireSubscribeToTagMutationResolverBridge(
         SubscribeToTagMutationResolver $subscribeToTagMutationResolver,
         PostTagTypeAPIInterface $postTagTypeAPI,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ConditionalOnComponent\Users\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -25,7 +26,7 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected CommentTypeAPIInterface $commentTypeAPI;
     protected UserObjectTypeResolver $userObjectTypeResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCommentUserObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         UserObjectTypeResolver $userObjectTypeResolver,

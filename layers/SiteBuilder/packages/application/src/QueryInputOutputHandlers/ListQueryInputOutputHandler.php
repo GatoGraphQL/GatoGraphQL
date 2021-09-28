@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Application\QueryInputOutputHandlers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Constants\DataSources;
@@ -16,8 +17,8 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler as U
 class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 {
     protected CMSServiceInterface $cmsService;
-    
-    #[\Symfony\Contracts\Service\Attribute\Required]
+
+    #[Required]
     public function autowireApplicationListQueryInputOutputHandler(CMSServiceInterface $cmsService)
     {
         $this->cmsService = $cmsService;

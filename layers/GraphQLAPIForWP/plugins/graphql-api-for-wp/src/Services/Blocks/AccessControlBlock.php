@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
@@ -26,7 +27,7 @@ class AccessControlBlock extends AbstractControlBlock
     public const ATTRIBUTE_NAME_SCHEMA_MODE = 'schemaMode';
     protected AccessControlBlockCategory $accessControlBlockCategory;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAccessControlBlock(
         AccessControlBlockCategory $accessControlBlockCategory,
     ) {

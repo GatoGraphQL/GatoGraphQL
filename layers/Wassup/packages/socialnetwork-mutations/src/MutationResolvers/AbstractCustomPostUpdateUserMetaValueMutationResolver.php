@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
@@ -13,7 +14,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractCustomPostUpdateUserMetaValueMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {

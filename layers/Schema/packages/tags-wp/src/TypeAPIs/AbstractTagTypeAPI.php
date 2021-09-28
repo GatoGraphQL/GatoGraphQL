@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\TagsWP\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -21,7 +22,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     protected HooksAPIInterface $hooksAPI;
     protected CMSHelperServiceInterface $cmsHelperService;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractTagTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService)
     {
         $this->hooksAPI = $hooksAPI;

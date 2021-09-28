@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
@@ -19,7 +20,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
 {
     protected AccessControlManagerInterface $accessControlManager;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractAccessControlForFieldsHookSet(
         AccessControlManagerInterface $accessControlManager
     ) {

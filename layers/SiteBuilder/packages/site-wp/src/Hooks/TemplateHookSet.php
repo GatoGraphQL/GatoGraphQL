@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\SiteWP\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\EngineWP\Component;
@@ -15,7 +16,7 @@ class TemplateHookSet extends AbstractHookSet
 {
     protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireTemplateHookSet(
         ApplicationStateHelperServiceInterface $applicationStateHelperService,
     ) {

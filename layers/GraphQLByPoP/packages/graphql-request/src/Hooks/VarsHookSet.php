@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
@@ -32,7 +33,7 @@ class VarsHookSet extends AbstractHookSet
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected GraphQLQueryConvertorInterface $graphQLQueryConvertor;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireVarsHookSet(
         QueryRetrieverInterface $queryRetrieverInterface,
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,

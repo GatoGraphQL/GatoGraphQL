@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentsWP\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\Constants\CommentStatus;
@@ -29,7 +30,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     protected array $popToCMSCommentStatusConversion;
     protected HooksAPIInterface $hooksAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCommentTypeAPI(
         HooksAPIInterface $hooksAPI,
     ) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
@@ -20,7 +21,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     protected UserSettingsManagerInterface $userSettingsManager;
     protected EndpointHelpers $endpointHelpers;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractCacheConfigurationManager(
         EndpointHelpers $endpointHelpers,
     ) {

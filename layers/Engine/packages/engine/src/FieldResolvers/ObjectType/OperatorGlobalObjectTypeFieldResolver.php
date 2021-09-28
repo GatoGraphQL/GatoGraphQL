@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use ArgumentCountError;
 use Exception;
 use PoP\ComponentModel\Engine\EngineInterface;
@@ -46,7 +47,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected ErrorProviderInterface $errorProvider;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireOperatorGlobalObjectTypeFieldResolver(
         MixedScalarTypeResolver $mixedScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,

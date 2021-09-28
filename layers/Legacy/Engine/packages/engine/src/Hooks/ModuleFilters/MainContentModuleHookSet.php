@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -15,7 +16,7 @@ class MainContentModuleHookSet extends AbstractHookSet
 {
     protected MainContentModule $mainContentModule;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireMainContentModuleHookSet(
         MainContentModule $mainContentModule
     ) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
@@ -17,7 +18,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     protected ?AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver = null;
     protected InstanceManagerInterface $instanceManager;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireSchemaDefinitionService(InstanceManagerInterface $instanceManager)
     {
         $this->instanceManager = $instanceManager;

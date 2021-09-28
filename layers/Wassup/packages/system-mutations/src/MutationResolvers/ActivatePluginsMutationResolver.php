@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -17,7 +18,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     protected CMSServiceInterface $cmsService;
     protected ApplicationInfoInterface $applicationInfo;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireActivatePluginsMutationResolver(
         CMSServiceInterface $cmsService,
         ApplicationInfoInterface $applicationInfo,

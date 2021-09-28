@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FileStore\Renderer;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\FileStore\File\AbstractAccessibleRenderableFile;
 use PoP\FileStore\File\AbstractRenderableFileFragment;
 use PoP\FileStore\Store\FileStoreInterface;
@@ -13,7 +14,7 @@ class FileRenderer implements FileRendererInterface
     private FileStoreInterface $fileStore;
     private string $separator = PHP_EOL;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireFileRenderer(FileStoreInterface $fileStore, string $separator = PHP_EOL)
     {
         $this->fileStore = $fileStore;

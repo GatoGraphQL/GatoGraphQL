@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -21,7 +22,7 @@ class NestedMutationHookSet extends AbstractHookSet
 {
     protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireNestedMutationHookSet(
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
@@ -21,7 +22,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     protected UserAuthorizationInterface $userAuthorization;
     protected QueryRetrieverInterface $queryRetrieverInterface;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAdminEndpointResolver(
         UserAuthorizationInterface $userAuthorization,
         QueryRetrieverInterface $queryRetrieverInterface,

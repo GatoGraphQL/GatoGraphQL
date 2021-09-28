@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\ElementalInterfaceTypeFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -24,7 +25,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireElementalObjectTypeFieldResolver(
         ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
     ) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
@@ -22,7 +23,7 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
     public const ATTRIBUTE_NAME_VALUE = 'value';
     protected AccessControlBlockCategory $accessControlBlockCategory;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractAccessControlRuleBlock(
         AccessControlBlockCategory $accessControlBlockCategory,
     ) {

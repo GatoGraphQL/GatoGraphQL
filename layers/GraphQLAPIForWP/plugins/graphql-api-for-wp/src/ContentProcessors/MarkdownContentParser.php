@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -12,7 +13,7 @@ class MarkdownContentParser extends AbstractContentParser implements MarkdownCon
 {
     protected MarkdownConvertorInterface $markdownConvertorInterface;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireMarkdownContentParser(
         MarkdownConvertorInterface $markdownConvertorInterface,
     ) {

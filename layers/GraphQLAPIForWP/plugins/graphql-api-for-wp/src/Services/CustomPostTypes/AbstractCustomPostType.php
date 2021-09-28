@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
@@ -27,7 +28,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     protected UserAuthorizationInterface $userAuthorization;
     protected CPTUtils $cptUtils;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractCustomPostType(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,

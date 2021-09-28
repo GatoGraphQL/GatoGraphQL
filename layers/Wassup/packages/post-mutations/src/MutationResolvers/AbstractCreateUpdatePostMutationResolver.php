@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -19,7 +20,7 @@ abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUp
 {
     protected PostTypeAPIInterface $postTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractCreateUpdatePostMutationResolver(
         PostTypeAPIInterface $postTypeAPI,
     ) {

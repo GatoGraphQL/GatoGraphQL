@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -30,7 +31,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
     public const HOOK_DESCRIPTION = __CLASS__ . ':description';
     protected RootTypeDataLoader $rootTypeDataLoader;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireRootObjectTypeResolver(
         RootTypeDataLoader $rootTypeDataLoader,
     ) {

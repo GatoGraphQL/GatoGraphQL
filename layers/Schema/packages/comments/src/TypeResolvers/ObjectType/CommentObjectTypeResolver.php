@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -25,7 +26,7 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
     protected CommentTypeAPIInterface $commentTypeAPI;
     protected CommentTypeDataLoader $commentTypeDataLoader;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCommentObjectTypeResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentTypeDataLoader $commentTypeDataLoader,

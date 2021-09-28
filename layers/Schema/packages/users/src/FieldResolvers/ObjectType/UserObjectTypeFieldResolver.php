@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -33,7 +34,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireUserObjectTypeFieldResolver(
         UserTypeAPIInterface $userTypeAPI,
         EmailScalarTypeResolver $emailScalarTypeResolver,

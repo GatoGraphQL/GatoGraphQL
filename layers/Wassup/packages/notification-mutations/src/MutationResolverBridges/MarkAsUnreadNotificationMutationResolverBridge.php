@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -15,7 +16,7 @@ class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadO
 {
     protected MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireMarkAsUnreadNotificationMutationResolverBridge(
         MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver,
     ) {

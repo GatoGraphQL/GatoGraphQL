@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\Hooks\HooksAPIInterface;
@@ -14,7 +15,7 @@ class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireMenuItemTypeDataLoader(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
     ) {

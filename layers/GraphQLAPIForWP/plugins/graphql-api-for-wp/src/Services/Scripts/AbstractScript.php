@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Error;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -23,7 +24,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     protected ModuleRegistryInterface $moduleRegistry;
     protected GeneralUtils $generalUtils;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractScript(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils)
     {
         $this->instanceManager = $instanceManager;

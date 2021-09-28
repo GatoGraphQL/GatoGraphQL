@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
@@ -117,7 +118,7 @@ class Engine implements EngineInterface
     protected RequestHelperServiceInterface $requestHelperService;
     protected ?CacheInterface $persistentCache = null;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireEngine(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, DataStructureManagerInterface $dataStructureManager, InstanceManagerInterface $instanceManager, ModelInstanceInterface $modelInstance, FeedbackMessageStoreInterface $feedbackMessageStore, ModulePathHelpersInterface $modulePathHelpers, ModulePathManagerInterface $modulePathManager, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CheckpointProcessorManagerInterface $checkpointProcessorManager, DataloadHelperServiceInterface $dataloadHelperService, EntryModuleManagerInterface $entryModuleManager, RequestHelperServiceInterface $requestHelperService, ?CacheInterface $persistentCache = null)
     {
         $this->translationAPI = $translationAPI;

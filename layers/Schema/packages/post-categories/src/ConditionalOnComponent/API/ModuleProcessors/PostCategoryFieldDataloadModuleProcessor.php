@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -25,7 +26,7 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
 {
     protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowirePostCategoryFieldDataloadModuleProcessor(
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ) {

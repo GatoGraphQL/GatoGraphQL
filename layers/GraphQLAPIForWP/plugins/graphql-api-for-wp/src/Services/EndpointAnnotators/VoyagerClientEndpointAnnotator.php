@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -18,7 +19,7 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
 {
     protected EndpointVoyagerBlock $endpointVoyagerBlock;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireVoyagerClientEndpointAnnotator(
         EndpointVoyagerBlock $endpointVoyagerBlock,
     ) {

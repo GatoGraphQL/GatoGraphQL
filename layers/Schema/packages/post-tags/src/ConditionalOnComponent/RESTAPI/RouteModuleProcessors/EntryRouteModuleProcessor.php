@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\API\Schema\FieldQueryConvertorInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -23,7 +24,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
     protected PostTagTypeAPIInterface $postTagTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireEntryRouteModuleProcessor(
         PostTagTypeAPIInterface $postTagTypeAPI,
     ) {

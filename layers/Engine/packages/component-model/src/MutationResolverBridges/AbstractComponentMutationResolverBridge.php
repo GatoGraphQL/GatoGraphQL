@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ErrorHandling\Error;
@@ -22,7 +23,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     protected InstanceManagerInterface $instanceManager;
     protected MutationResolutionManagerInterface $mutationResolutionManager;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager, MutationResolutionManagerInterface $mutationResolutionManager)
     {
         $this->hooksAPI = $hooksAPI;

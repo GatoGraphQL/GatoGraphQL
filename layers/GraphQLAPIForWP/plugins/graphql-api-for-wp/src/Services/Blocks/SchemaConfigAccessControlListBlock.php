@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -25,7 +26,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
     public const ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS = 'accessControlLists';
     protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireSchemaConfigAccessControlListBlock(
         GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
     ) {

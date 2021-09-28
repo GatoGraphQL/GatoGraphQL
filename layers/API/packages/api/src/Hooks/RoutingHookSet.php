@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -19,7 +20,7 @@ class RoutingHookSet extends AbstractHookSet
     protected CMSServiceInterface $cmsService;
     protected RequestHelperServiceInterface $requestHelperService;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireRoutingHookSet(
         CMSServiceInterface $cmsService,
         RequestHelperServiceInterface $requestHelperService,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -16,7 +17,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
 {
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractObjectTypeQueryableDataLoader(
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ) {

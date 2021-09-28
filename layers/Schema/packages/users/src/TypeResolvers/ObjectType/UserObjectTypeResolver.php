@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -25,7 +26,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     protected UserTypeAPIInterface $userTypeAPI;
     protected UserTypeDataLoader $userTypeDataLoader;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireUserObjectTypeResolver(
         UserTypeAPIInterface $userTypeAPI,
         UserTypeDataLoader $userTypeDataLoader,

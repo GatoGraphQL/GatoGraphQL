@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
@@ -15,7 +16,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
 {
     protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireGraphQLEndpointHandler(GraphQLDataStructureFormatter $graphQLDataStructureFormatter)
     {
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;

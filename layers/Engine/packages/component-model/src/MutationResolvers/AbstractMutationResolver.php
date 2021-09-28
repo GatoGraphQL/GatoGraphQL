@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 
@@ -12,7 +13,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractMutationResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI)
     {
         $this->translationAPI = $translationAPI;

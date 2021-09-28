@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\CustomEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
@@ -14,7 +15,7 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
     protected CustomEndpointSchemaConfigurator $endpointSchemaConfigurator;
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCustomEndpointSchemaConfiguratorExecuter(
         CustomEndpointSchemaConfigurator $endpointSchemaConfigurator,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,

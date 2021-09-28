@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -24,7 +25,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected UserAvatarTypeDataLoader $userAvatarTypeDataLoader;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireUserAvatarObjectTypeResolver(
         UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
     ) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
@@ -26,7 +27,7 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     protected PageTypeDataLoader $pageTypeDataLoader;
     protected PageTypeAPIInterface $pageTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowirePageObjectTypeResolver(
         PageTypeDataLoader $pageTypeDataLoader,
         PageTypeAPIInterface $pageTypeAPI,

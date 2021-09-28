@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\FieldQuery\QueryUtils;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\API\Schema\FieldQuerySet;
@@ -46,7 +47,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected PersistedFragmentManagerInterface $persistedFragmentManager;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireFieldQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager)
     {
         $this->translationAPI = $translationAPI;

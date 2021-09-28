@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -25,7 +26,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     public const VALIDATECATEGORIESTYPE_EXACTLYONE = 2;
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCustomPostMutationsAbstractCreateUpdateCustomPostMutationResolver(
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {

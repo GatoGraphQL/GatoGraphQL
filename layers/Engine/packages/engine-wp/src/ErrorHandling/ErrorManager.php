@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP\ErrorHandling;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Engine\ErrorHandling\AbstractErrorManager;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Translation\TranslationAPIInterface;
@@ -13,7 +14,7 @@ class ErrorManager extends AbstractErrorManager
 {
     protected TranslationAPIInterface $translationAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireErrorManager(TranslationAPIInterface $translationAPI)
     {
         $this->translationAPI = $translationAPI;

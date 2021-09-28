@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
@@ -23,7 +24,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
     protected BlockHelpers $blockHelpers;
     protected CacheControlManagerInterface $cacheControlManager;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCacheControlGraphQLQueryConfigurator(
         CacheControlBlock $cacheControlBlock,
         BlockHelpers $blockHelpers,

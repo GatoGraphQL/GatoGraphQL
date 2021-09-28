@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\GenericCustomPosts\ConditionalOnComponent\API\ModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -35,7 +36,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
     protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireGenericCustomPostRelationalFieldDataloadModuleProcessor(
         GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,

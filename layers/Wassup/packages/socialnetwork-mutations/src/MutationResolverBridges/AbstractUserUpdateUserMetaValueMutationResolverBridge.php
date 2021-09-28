@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -15,7 +16,7 @@ abstract class AbstractUserUpdateUserMetaValueMutationResolverBridge extends Abs
 {
     protected UserTypeAPIInterface $userTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractUserUpdateUserMetaValueMutationResolverBridge(
         UserTypeAPIInterface $userTypeAPI,
     ) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -16,7 +17,7 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
     protected PostTypeAPIInterface $postTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowirePostTypeDataLoader(
         PostTypeAPIInterface $postTypeAPI,
     ) {

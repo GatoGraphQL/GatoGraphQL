@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
@@ -27,7 +28,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     protected EndpointHelpers $endpointHelpers;
     protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractGraphiQLBlock(
         EndpointHelpers $endpointHelpers,
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,

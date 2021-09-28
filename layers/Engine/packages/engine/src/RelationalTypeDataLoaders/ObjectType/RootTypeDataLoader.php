@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -14,7 +15,7 @@ class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected Root $root;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireRootTypeDataLoader(
         Root $root,
     ) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Routing;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Routing\URLParams;
 use PoP\Routing\RoutingUtils;
 use PoP\Hooks\HooksAPIInterface;
@@ -16,7 +17,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
     private ?array $routes = null;
     protected HooksAPIInterface $hooksAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractRoutingManager(HooksAPIInterface $hooksAPI)
     {
         $this->hooksAPI = $hooksAPI;

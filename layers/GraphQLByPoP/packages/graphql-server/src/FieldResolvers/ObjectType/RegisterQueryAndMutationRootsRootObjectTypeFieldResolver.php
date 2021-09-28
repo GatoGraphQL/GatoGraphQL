@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -32,7 +33,7 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
     protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireRegisterQueryAndMutationRootsRootObjectTypeFieldResolver(
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,

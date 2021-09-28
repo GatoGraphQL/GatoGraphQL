@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -25,7 +26,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected CustomPostUserTypeAPIInterface $customPostUserTypeAPI;
     protected WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCustomPostObjectTypeFieldResolver(
         CustomPostUserTypeAPIInterface $customPostUserTypeAPI,
         WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver,

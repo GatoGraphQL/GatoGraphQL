@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use PoP\API\Response\Schemes as APISchemes;
@@ -19,7 +20,7 @@ class VarsHookSet extends AbstractHookSet
 {
     protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireVarsHookSet(
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
     ) {

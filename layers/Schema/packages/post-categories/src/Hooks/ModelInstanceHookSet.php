@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
@@ -20,7 +21,7 @@ class ModelInstanceHookSet extends AbstractHookSet
     protected PostTypeAPIInterface $postTypeAPI;
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireModelInstanceHookSet(
         PostTypeAPIInterface $postTypeAPI,
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,

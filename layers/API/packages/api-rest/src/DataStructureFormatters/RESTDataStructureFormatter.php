@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\RESTAPI\DataStructureFormatters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -13,7 +14,7 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
     protected EngineInterface $engine;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireRESTDataStructureFormatter(
         EngineInterface $engine,
     ) {

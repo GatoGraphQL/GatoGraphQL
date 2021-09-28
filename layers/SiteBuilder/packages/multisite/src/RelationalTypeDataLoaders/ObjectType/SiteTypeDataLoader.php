@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -15,7 +16,7 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected Site $site;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireSiteTypeDataLoader(
         Site $site,
     ) {

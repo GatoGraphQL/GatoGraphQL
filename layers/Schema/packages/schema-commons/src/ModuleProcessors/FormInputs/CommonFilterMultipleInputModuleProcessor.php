@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
@@ -34,7 +35,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     public const MODULE_FILTERINPUT_DATES = 'filterinput-dates';
     protected FormInputHelperServiceInterface $formInputHelperService;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCommonFilterMultipleInputModuleProcessor(
         FormInputHelperServiceInterface $formInputHelperService,
     ) {

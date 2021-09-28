@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -33,7 +34,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
     protected CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractCreateUpdateCustomPostMutationResolver(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         NameResolverInterface $nameResolver,

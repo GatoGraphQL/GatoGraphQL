@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
@@ -16,7 +17,7 @@ class LogoutMutationResolver extends AbstractMutationResolver
     use ValidateUserLoggedInMutationResolverTrait;
     protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireLogoutMutationResolver(
         UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
     ) {

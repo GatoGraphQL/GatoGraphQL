@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -14,7 +15,7 @@ class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected QueryRoot $queryRoot;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireQueryRootTypeDataLoader(
         QueryRoot $queryRoot,
     ) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -25,7 +26,7 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
     use PostTagAPISatisfiedContractTrait;
     protected PostTagTypeDataLoader $postTagTypeDataLoader;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowirePostTagObjectTypeResolver(
         PostTagTypeDataLoader $postTagTypeDataLoader,
     ) {

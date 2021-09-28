@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Engine\CMS;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
 class CMSHelperService implements CMSHelperServiceInterface
 {
     protected CMSServiceInterface $cmsService;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCMSHelperService(CMSServiceInterface $cmsService)
     {
         $this->cmsService = $cmsService;

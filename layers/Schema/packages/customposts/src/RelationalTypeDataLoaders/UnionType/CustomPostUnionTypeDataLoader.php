@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -15,7 +16,7 @@ class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
     protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCustomPostUnionTypeDataLoader(
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
     ) {

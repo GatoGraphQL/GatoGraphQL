@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -20,7 +21,7 @@ class QueryHookSet extends AbstractHookSet
     public const NON_EXISTING_ID = "non-existing";
     protected CustomPostTypeRegistryInterface $customPostTypeRegistry;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireQueryHookSet(
         CustomPostTypeRegistryInterface $customPostTypeRegistry
     ) {

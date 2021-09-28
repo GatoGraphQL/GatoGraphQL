@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -70,7 +71,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected DataloadingEngineInterface $dataloadingEngine;
     protected DirectivePipelineServiceInterface $directivePipelineService;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractRelationalTypeResolver(
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,

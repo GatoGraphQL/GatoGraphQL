@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\ConditionalOnComponent\Users\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -26,7 +27,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected UserMediaTypeAPIInterface $userMediaTypeAPI;
     protected UserObjectTypeResolver $userObjectTypeResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireMediaUserObjectTypeFieldResolver(
         UserMediaTypeAPIInterface $userMediaTypeAPI,
         UserObjectTypeResolver $userObjectTypeResolver,

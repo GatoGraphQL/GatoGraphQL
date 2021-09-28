@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagMutations\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -21,7 +22,7 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
     protected PostTypeAPIInterface $postTypeAPI;
     protected PostTagTypeMutationAPIInterface $postTagTypeMutationAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowirePostMutationResolverHookSet(
         PostObjectTypeResolver $postObjectTypeResolver,
         PostTypeAPIInterface $postTypeAPI,

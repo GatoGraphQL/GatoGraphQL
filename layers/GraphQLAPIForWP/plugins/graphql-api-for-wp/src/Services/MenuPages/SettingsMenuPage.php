@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
@@ -28,7 +29,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected UserSettingsManagerInterface $userSettingsManager;
     protected ModuleRegistryInterface $moduleRegistry;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireSettingsMenuPage(
         ModuleRegistryInterface $moduleRegistry,
     ) {

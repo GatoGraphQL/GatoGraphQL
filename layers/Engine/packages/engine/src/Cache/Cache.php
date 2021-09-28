@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Cache;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\CacheItemInterface;
@@ -14,7 +15,7 @@ class Cache extends UpstreamCache
 {
     protected HooksAPIInterface $hooksAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireEngineCache(
         HooksAPIInterface $hooksAPI,
     ) {

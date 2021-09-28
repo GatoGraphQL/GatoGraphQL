@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FilterInputProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
@@ -20,7 +21,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public const FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
     protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireFilterInputProcessor(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
     ) {

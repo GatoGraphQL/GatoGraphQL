@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Site\Engine;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
@@ -29,7 +30,7 @@ class Engine extends UpstreamEngine
 {
     protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireSiteEngine(
         ApplicationStateHelperServiceInterface $applicationStateHelperService
     ) {

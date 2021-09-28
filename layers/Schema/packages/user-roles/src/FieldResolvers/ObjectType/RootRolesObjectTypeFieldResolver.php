@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -26,7 +27,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     use RolesObjectTypeFieldResolverTrait;
     protected UserRoleTypeAPIInterface $userRoleTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireRootRolesObjectTypeFieldResolver(
         UserRoleTypeAPIInterface $userRoleTypeAPI,
     ) {

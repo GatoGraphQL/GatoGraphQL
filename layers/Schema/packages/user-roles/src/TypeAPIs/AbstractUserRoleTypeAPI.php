@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 
 abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
 {
     protected HooksAPIInterface $hooksAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractUserRoleTypeAPI(HooksAPIInterface $hooksAPI)
     {
         $this->hooksAPI = $hooksAPI;

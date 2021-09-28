@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\MenusWP\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
@@ -17,7 +18,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     public const HOOK_QUERY = __CLASS__ . ':query';
     protected HooksAPIInterface $hooksAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireMenuTypeAPI(HooksAPIInterface $hooksAPI)
     {
         $this->hooksAPI = $hooksAPI;

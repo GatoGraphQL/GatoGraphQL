@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
@@ -22,7 +23,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     protected HooksAPIInterface $hooksAPI;
     protected BlockHelpers $blockHelpers;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractGraphQLEndpointCustomPostType(
         HooksAPIInterface $hooksAPI,
         BlockHelpers $blockHelpers,

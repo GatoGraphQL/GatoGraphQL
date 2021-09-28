@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -24,7 +25,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
 {
     protected IDScalarTypeResolver $idScalarTypeResolver;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireGlobalUserStateObjectTypeFieldResolver(
         IDScalarTypeResolver $idScalarTypeResolver,
     ) {

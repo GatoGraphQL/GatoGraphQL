@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutationsWP\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Engine\ErrorHandling\ErrorHelperInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -18,7 +19,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     protected TranslationAPIInterface $translationAPI;
     protected ErrorHelperInterface $errorHelper;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCustomPostTypeMutationAPI(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper)
     {
         $this->translationAPI = $translationAPI;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
@@ -11,7 +12,7 @@ abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiate
 {
     protected EndpointHelpers $endpointHelpers;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireAbstractEndpointResolver(EndpointHelpers $endpointHelpers)
     {
         $this->endpointHelpers = $endpointHelpers;

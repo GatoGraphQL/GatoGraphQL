@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\GenericCustomPosts\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -45,7 +46,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver;
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireRootGenericCustomPostObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,

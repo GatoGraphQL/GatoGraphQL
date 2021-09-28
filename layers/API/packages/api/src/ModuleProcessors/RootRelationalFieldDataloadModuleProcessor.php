@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -26,7 +27,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
     public const MODULE_DATALOAD_RELATIONALFIELDS_ROOT = 'dataload-relationalfields-root';
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireRootRelationalFieldDataloadModuleProcessor(
         SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {

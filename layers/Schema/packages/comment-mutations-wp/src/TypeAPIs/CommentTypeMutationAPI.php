@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutationsWP\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
@@ -16,7 +17,7 @@ class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
 {
     protected TranslationAPIInterface $translationAPI;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireCommentTypeMutationAPI(TranslationAPIInterface $translationAPI)
     {
         $this->translationAPI = $translationAPI;

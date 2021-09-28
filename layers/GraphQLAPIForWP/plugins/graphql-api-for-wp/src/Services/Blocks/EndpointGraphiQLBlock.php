@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -21,7 +22,7 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
     use OptionsBlockTrait;
     protected CustomEndpointBlockCategory $customEndpointBlockCategory;
     
-    #[\Symfony\Contracts\Service\Attribute\Required]
+    #[Required]
     public function autowireEndpointGraphiQLBlock(
         CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
