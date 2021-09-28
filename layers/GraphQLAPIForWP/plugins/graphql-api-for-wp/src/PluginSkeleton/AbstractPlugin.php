@@ -17,16 +17,12 @@ abstract class AbstractPlugin
 
     protected string $pluginBaseName;
     protected string $pluginName;
-    protected string $pluginFile;
-    protected string $pluginVersion;
 
     public function __construct(
-        string $pluginFile, string $pluginVersion,
+        protected string $pluginFile, /** The main plugin file */
+        protected string $pluginVersion,
         ?string $pluginName = null,
     ) {
-        $this->pluginFile = $pluginFile;
-        /** The main plugin file */
-        $this->pluginVersion = $pluginVersion;
         $this->pluginBaseName = \plugin_basename($pluginFile);
         $this->pluginName = $pluginName ?? $this->pluginBaseName;
     }

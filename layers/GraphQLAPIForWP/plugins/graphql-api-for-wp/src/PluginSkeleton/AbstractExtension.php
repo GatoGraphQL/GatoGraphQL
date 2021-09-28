@@ -21,14 +21,18 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
  */
 abstract class AbstractExtension extends AbstractPlugin
 {
-    protected ?AbstractExtensionConfiguration $extensionConfiguration = null;
-    
-    #[\Symfony\Contracts\Service\Attribute\Required]
-    public function autowireis(
-        ?AbstractExtensionConfiguration $extensionConfiguration = null,
+    public function __construct(
+        string $pluginFile, /** The main plugin file */
+        string $pluginVersion,
+        ?string $pluginName = null,
+        protected ?AbstractExtensionConfiguration $extensionConfiguration = null,
     ) {
-        $this->extensionConfiguration = $extensionConfiguration;
-        }
+        parent::__construct(
+            $pluginFile,
+            $pluginVersion,
+            $pluginName,
+        );
+    }
 
     /**
      * Configure the plugin.
