@@ -18,7 +18,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     protected CMSServiceInterface $cmsService;
     
     #[\Symfony\Contracts\Service\Attribute\Required]
-    public function autowireListQueryInputOutputHandler(CMSServiceInterface $cmsService)
+    public function autowireApplicationListQueryInputOutputHandler(CMSServiceInterface $cmsService)
     {
         $this->cmsService = $cmsService;
     }

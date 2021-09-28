@@ -98,16 +98,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
     
     #[\Symfony\Contracts\Service\Attribute\Required]
-    public function autowireFieldQueryInterpreter(
-        TranslationAPIInterface $translationAPI,
-        UpstreamFeedbackMessageStoreInterface $feedbackMessageStore,
+    public function autowireComponentModelFieldQueryInterpreter(
         TypeCastingExecuterInterface $typeCastingExecuter,
         InstanceManagerInterface $instanceManager,
-        QueryParserInterface $queryParser,
     ) {
         $this->typeCastingExecuter = $typeCastingExecuter;
         $this->instanceManager = $instanceManager;
-        parent::__construct($translationAPI, $feedbackMessageStore, $queryParser);
     }
 
     /**
