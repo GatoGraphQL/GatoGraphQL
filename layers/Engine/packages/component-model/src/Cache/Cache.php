@@ -16,10 +16,14 @@ class Cache implements CacheInterface
     protected CacheItemPoolInterface $cacheItemPool;
     protected ModelInstanceInterface $modelInstance;
     
-    #[Required]
-    public function autowireCache(CacheItemPoolInterface $cacheItemPool, ModelInstanceInterface $modelInstance)
+    public function __construct(CacheItemPoolInterface $cacheItemPool)
     {
         $this->cacheItemPool = $cacheItemPool;
+    }
+    
+    #[Required]
+    public function autowireCache(ModelInstanceInterface $modelInstance)
+    {
         $this->modelInstance = $modelInstance;
     }
 

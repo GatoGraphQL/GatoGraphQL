@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DataStructure;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\DataStructure\DataStructureFormatterInterface;
 use PoP\ComponentModel\State\ApplicationState;
 
@@ -14,12 +13,9 @@ class DataStructureManager implements DataStructureManagerInterface
      * @var array<string, DataStructureFormatterInterface>
      */
     public array $formatters = [];
-    protected DataStructureFormatterInterface $defaultFormatter;
-    
-    #[Required]
-    public function autowireDataStructureManager(DataStructureFormatterInterface $defaultFormatter)
+
+    public function __construct(protected DataStructureFormatterInterface $defaultFormatter)
     {
-        $this->defaultFormatter = $defaultFormatter;
     }
 
     public function addDataStructureFormatter(DataStructureFormatterInterface $formatter): void
