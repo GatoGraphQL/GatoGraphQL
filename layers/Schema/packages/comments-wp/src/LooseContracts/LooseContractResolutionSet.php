@@ -11,13 +11,13 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     protected function resolveContracts(): void
     {
         // Actions
-        $this->hooksAPI->addAction('wp_insert_comment', function ($comment_id, $comment) {
+        $this->hooksAPI->addAction('wp_insert_comment', function ($comment_id, $comment): void {
             $this->hooksAPI->doAction('popcms:insertComment', $comment_id, $comment);
         }, 10, 2);
-        $this->hooksAPI->addAction('spam_comment', function ($comment_id, $comment) {
+        $this->hooksAPI->addAction('spam_comment', function ($comment_id, $comment): void {
             $this->hooksAPI->doAction('popcms:spamComment', $comment_id, $comment);
         }, 10, 2);
-        $this->hooksAPI->addAction('delete_comment', function ($comment_id, $comment) {
+        $this->hooksAPI->addAction('delete_comment', function ($comment_id, $comment): void {
             $this->hooksAPI->doAction('popcms:deleteComment', $comment_id, $comment);
         }, 10, 2);
 

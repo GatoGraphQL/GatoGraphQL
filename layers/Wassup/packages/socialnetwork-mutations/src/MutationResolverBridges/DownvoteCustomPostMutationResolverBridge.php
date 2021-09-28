@@ -21,7 +21,7 @@ class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateU
     #[Required]
     public function autowireDownvoteCustomPostMutationResolverBridge(
         DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver,
-    ) {
+    ): void {
         $this->downvoteCustomPostMutationResolver = $downvoteCustomPostMutationResolver;
     }
 

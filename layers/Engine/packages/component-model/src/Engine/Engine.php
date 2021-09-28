@@ -136,7 +136,7 @@ class Engine implements EngineInterface
         EntryModuleManagerInterface $entryModuleManager,
         RequestHelperServiceInterface $requestHelperService,
         ?CacheInterface $persistentCache = null
-    ) {
+    ): void {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
         $this->dataStructureManager = $dataStructureManager;

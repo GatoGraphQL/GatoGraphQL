@@ -31,7 +31,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     #[Required]
     public function autowireRootPageObjectTypeFieldResolver(
         PageObjectTypeResolver $pageObjectTypeResolver,
-    ) {
+    ): void {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
     }
 

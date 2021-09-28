@@ -17,7 +17,7 @@ abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiate
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    public function autowireAbstractMenuPageAttacher(InstanceManagerInterface $instanceManager)
+    public function autowireAbstractMenuPageAttacher(InstanceManagerInterface $instanceManager): void
     {
         $this->instanceManager = $instanceManager;
     }

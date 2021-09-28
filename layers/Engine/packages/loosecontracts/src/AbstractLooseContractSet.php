@@ -12,7 +12,7 @@ abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiate
     protected LooseContractManagerInterface $looseContractManager;
 
     #[Required]
-    public function autowireAbstractLooseContractSet(LooseContractManagerInterface $looseContractManager)
+    public function autowireAbstractLooseContractSet(LooseContractManagerInterface $looseContractManager): void
     {
         $this->looseContractManager = $looseContractManager;
     }

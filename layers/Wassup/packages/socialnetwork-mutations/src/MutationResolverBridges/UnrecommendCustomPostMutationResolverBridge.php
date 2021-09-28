@@ -21,7 +21,7 @@ class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpda
     #[Required]
     public function autowireUnrecommendCustomPostMutationResolverBridge(
         UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver,
-    ) {
+    ): void {
         $this->unrecommendCustomPostMutationResolver = $unrecommendCustomPostMutationResolver;
     }
 

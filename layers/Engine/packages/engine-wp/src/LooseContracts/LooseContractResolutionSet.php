@@ -13,24 +13,24 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
         // Actions
         // 1. Init comes before boot. We don't have the requested post/user/etc
         // parsed yet, so use with care
-        $this->hooksAPI->addAction('init', function () {
+        $this->hooksAPI->addAction('init', function (): void {
             $this->hooksAPI->doAction('popcms:init');
         });
         // 2. Boot once it has parsed the WP_Query, so that the requested post/user/etc
         // is already processed and available. Only hook available is "wp"
         // Watch out: "wp" doesn't trigger in the admin()!
         // Hence, in that case, use "wp_loaded" instead
-        $this->hooksAPI->addAction(\is_admin() ? 'wp_loaded' : 'wp', function () {
+        $this->hooksAPI->addAction(\is_admin() ? 'wp_loaded' : 'wp', function (): void {
             $this->hooksAPI->doAction('popcms:boot');
         });
-        $this->hooksAPI->addAction('shutdown', function () {
+        $this->hooksAPI->addAction('shutdown', function (): void {
             $this->hooksAPI->doAction('popcms:shutdown');
         });
-        $this->hooksAPI->addAction('activate_plugin', function () {
+        $this->hooksAPI->addAction('activate_plugin', function (): void {
             $this->hooksAPI->doAction('popcms:componentInstalled');
             $this->hooksAPI->doAction('popcms:componentInstalledOrUninstalled');
         });
-        $this->hooksAPI->addAction('deactivate_plugin', function () {
+        $this->hooksAPI->addAction('deactivate_plugin', function (): void {
             $this->hooksAPI->doAction('popcms:componentUninstalled');
             $this->hooksAPI->doAction('popcms:componentInstalledOrUninstalled');
         });

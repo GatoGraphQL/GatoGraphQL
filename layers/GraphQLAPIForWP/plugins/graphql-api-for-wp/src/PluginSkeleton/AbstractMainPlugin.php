@@ -325,7 +325,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
          */
         \add_action(
             'plugins_loaded',
-            function () {
+            function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
@@ -335,7 +335,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         );
         \add_action(
             'plugins_loaded',
-            function () {
+            function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
@@ -345,7 +345,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         );
         \add_action(
             'plugins_loaded',
-            function () {
+            function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
@@ -355,7 +355,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         );
         \add_action(
             'plugins_loaded',
-            function () {
+            function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
@@ -365,7 +365,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         );
         \add_action(
             'plugins_loaded',
-            function () {
+            function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
@@ -375,7 +375,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         );
         \add_action(
             'plugins_loaded',
-            function () {
+            function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
@@ -385,7 +385,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         );
         \add_action(
             'plugins_loaded',
-            function () {
+            function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
@@ -395,7 +395,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         );
         \add_action(
             'plugins_loaded',
-            function () {
+            function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
@@ -405,7 +405,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         );
         \add_action(
             'plugins_loaded',
-            function () {
+            function (): void {
                 $this->handleInitializationException();
             },
             PHP_INT_MAX
@@ -480,7 +480,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             if (RootEnvironment::isApplicationEnvironmentDev()) {
                 throw $this->inititalizationException;
             } else {
-                \add_action('admin_notices', function () {
+                \add_action('admin_notices', function (): void {
                     // Avoid PHPStan error
                     /** @var Exception */
                     $inititalizationException = $this->inititalizationException;

@@ -13,7 +13,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
     protected ModulePathManagerInterface $modulePathManager;
 
     #[Required]
-    public function autowireModulePathHelpers(ModulePathManagerInterface $modulePathManager)
+    public function autowireModulePathHelpers(ModulePathManagerInterface $modulePathManager): void
     {
         $this->modulePathManager = $modulePathManager;
     }

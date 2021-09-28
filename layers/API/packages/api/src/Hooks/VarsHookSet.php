@@ -76,7 +76,7 @@ class VarsHookSet extends AbstractHookSet
         }
     }
 
-    public function addURLParamVars(array $vars_in_array)
+    public function addURLParamVars(array $vars_in_array): void
     {
         // Allow WP API to set the "routing-state" first
         // Each page is an independent configuration
@@ -86,7 +86,7 @@ class VarsHookSet extends AbstractHookSet
         }
     }
 
-    private function addFieldsToVars(array &$vars)
+    private function addFieldsToVars(array &$vars): void
     {
         if (isset($_REQUEST[QueryInputs::QUERY])) {
             $query = $_REQUEST[QueryInputs::QUERY];
@@ -114,7 +114,7 @@ class VarsHookSet extends AbstractHookSet
         return $components;
     }
 
-    private function addFieldsToComponents(&$components)
+    private function addFieldsToComponents(&$components): void
     {
         $vars = ApplicationState::getVars();
         if ($fields = $vars['query'] ?? null) {

@@ -19,7 +19,7 @@ abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
     #[Required]
     public function autowireAbstractClientEndpointExecuter(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-    ) {
+    ): void {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
     }
 

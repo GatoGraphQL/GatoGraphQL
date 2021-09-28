@@ -21,7 +21,7 @@ class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridg
     #[Required]
     public function autowireLoginMutationResolverBridge(
         LoginMutationResolver $loginMutationResolver,
-    ) {
+    ): void {
         $this->loginMutationResolver = $loginMutationResolver;
     }
 

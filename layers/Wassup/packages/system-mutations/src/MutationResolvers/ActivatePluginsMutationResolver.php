@@ -22,7 +22,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     public function autowireActivatePluginsMutationResolver(
         CMSServiceInterface $cmsService,
         ApplicationInfoInterface $applicationInfo,
-    ) {
+    ): void {
         $this->cmsService = $cmsService;
         $this->applicationInfo = $applicationInfo;
     }

@@ -64,7 +64,7 @@ class Plugin extends AbstractMainPlugin
     protected function showReleaseNotesInAdminNotice(): void
     {
         // Load the assets to open in a modal
-        \add_action('admin_enqueue_scripts', function () {
+        \add_action('admin_enqueue_scripts', function (): void {
             /**
              * Hack to open the modal thickbox iframe with the documentation
              */
@@ -76,7 +76,7 @@ class Plugin extends AbstractMainPlugin
             );
         });
         // Add the admin notice
-        \add_action('admin_notices', function () {
+        \add_action('admin_notices', function (): void {
             $instanceManager = InstanceManagerFacade::getInstance();
             /**
              * @var AboutMenuPage

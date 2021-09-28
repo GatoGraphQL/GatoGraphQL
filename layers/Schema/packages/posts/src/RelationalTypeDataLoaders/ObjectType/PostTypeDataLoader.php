@@ -20,7 +20,7 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
     #[Required]
     public function autowirePostTypeDataLoader(
         PostTypeAPIInterface $postTypeAPI,
-    ) {
+    ): void {
         $this->postTypeAPI = $postTypeAPI;
     }
 

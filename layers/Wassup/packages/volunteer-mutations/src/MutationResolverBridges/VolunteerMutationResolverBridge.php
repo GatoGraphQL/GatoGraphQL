@@ -20,7 +20,7 @@ class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResol
     #[Required]
     public function autowireVolunteerMutationResolverBridge(
         VolunteerMutationResolver $volunteerMutationResolver,
-    ) {
+    ): void {
         $this->volunteerMutationResolver = $volunteerMutationResolver;
     }
 

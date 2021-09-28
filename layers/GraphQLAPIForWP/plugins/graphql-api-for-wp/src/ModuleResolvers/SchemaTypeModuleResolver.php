@@ -106,7 +106,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         ?UserAvatarObjectTypeResolver $userAvatarTypeResolver,
         ?UserObjectTypeResolver $userTypeResolver,
         ?CustomPostTypeRegistryInterface $customPostTypeRegistry
-    ) {
+    ): void {
         $this->commentTypeResolver = $commentTypeResolver;
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
         $this->genericCustomPostTypeResolver = $genericCustomPostTypeResolver;

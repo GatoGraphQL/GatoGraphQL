@@ -16,7 +16,7 @@ abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    public function autowireAbstractMenu(InstanceManagerInterface $instanceManager)
+    public function autowireAbstractMenu(InstanceManagerInterface $instanceManager): void
     {
         $this->instanceManager = $instanceManager;
     }

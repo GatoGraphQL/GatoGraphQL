@@ -17,7 +17,7 @@ class CacheControlBlockCategory extends AbstractBlockCategory
     #[Required]
     public function autowireCacheControlBlockCategory(
         GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
-    ) {
+    ): void {
         $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
     }
 

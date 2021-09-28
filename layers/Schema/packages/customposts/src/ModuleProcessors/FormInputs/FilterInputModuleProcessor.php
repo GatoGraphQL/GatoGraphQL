@@ -42,7 +42,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     #[Required]
     public function autowireFilterInputModuleProcessor(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
-    ) {
+    ): void {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
     }
 

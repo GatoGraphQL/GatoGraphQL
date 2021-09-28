@@ -34,7 +34,7 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
     public function autowireCommentRelationalFieldDataloadModuleProcessor(
         CommentObjectTypeResolver $commentObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ) {
+    ): void {
         $this->commentObjectTypeResolver = $commentObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
     }

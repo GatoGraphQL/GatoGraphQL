@@ -12,7 +12,7 @@ class CMSHelperService implements CMSHelperServiceInterface
     protected CMSServiceInterface $cmsService;
 
     #[Required]
-    public function autowireCMSHelperService(CMSServiceInterface $cmsService)
+    public function autowireCMSHelperService(CMSServiceInterface $cmsService): void
     {
         $this->cmsService = $cmsService;
     }

@@ -32,7 +32,7 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
     /**
      * Function to override
      */
-    protected function additionals($target_id, $form_data)
+    protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
         $this->hooksAPI->doAction('gd_undodownvotepost', $target_id, $form_data);

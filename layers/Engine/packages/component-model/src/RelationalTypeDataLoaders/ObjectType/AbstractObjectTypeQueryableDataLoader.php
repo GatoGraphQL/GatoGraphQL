@@ -20,7 +20,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
     #[Required]
     public function autowireAbstractObjectTypeQueryableDataLoader(
         ModuleProcessorManagerInterface $moduleProcessorManager,
-    ) {
+    ): void {
         $this->moduleProcessorManager = $moduleProcessorManager;
     }
 

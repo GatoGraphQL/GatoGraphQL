@@ -17,7 +17,7 @@ class DefinitionPersistenceHookSet extends AbstractHookSet
             array($this, 'maybePersist')
         );
     }
-    public function maybePersist()
+    public function maybePersist(): void
     {
         if (!Environment::disablePersistingDefinitionsOnEachRequest()) {
             DefinitionManagerFacade::getInstance()->maybeStoreDefinitionsPersistently();

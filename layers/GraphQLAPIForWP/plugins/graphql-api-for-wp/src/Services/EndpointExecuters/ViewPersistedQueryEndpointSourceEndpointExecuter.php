@@ -31,7 +31,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
         GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
         PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor,
         PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock,
-    ) {
+    ): void {
         $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
         $this->userAuthorization = $userAuthorization;
         $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;

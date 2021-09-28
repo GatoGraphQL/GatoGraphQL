@@ -17,7 +17,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
     #[Required]
     public function autowireAbstractCustomPostUpdateUserMetaValueMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
-    ) {
+    ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
@@ -52,7 +52,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
         return InputNames::POST_ID;
     }
 
-    protected function additionals($target_id, $form_data)
+    protected function additionals($target_id, $form_data): void
     {
         $this->hooksAPI->doAction('gd_updateusermetavalue:post', $target_id, $form_data);
         parent::additionals($target_id, $form_data);

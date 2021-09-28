@@ -30,7 +30,7 @@ class AccessControlBlock extends AbstractControlBlock
     #[Required]
     public function autowireAccessControlBlock(
         AccessControlBlockCategory $accessControlBlockCategory,
-    ) {
+    ): void {
         $this->accessControlBlockCategory = $accessControlBlockCategory;
     }
 

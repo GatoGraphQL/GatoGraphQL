@@ -27,7 +27,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     #[Required]
     public function autowireUserObjectTypeFieldResolver(
         LocationObjectTypeResolver $locationObjectTypeResolver,
-    ) {
+    ): void {
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
     }
 

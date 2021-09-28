@@ -15,7 +15,7 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
     protected CMSHelperServiceInterface $cmsHelperService;
 
     #[Required]
-    public function autowireAbstractUserTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService)
+    public function autowireAbstractUserTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService): void
     {
         $this->hooksAPI = $hooksAPI;
         $this->cmsHelperService = $cmsHelperService;

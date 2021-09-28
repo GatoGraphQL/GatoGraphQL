@@ -27,7 +27,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     #[Required]
     public function autowireAbstractCreateUpdateCustomPostMutationResolverBridge(
         CustomPostTypeAPIInterface $customPostTypeAPI,
-    ) {
+    ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
 

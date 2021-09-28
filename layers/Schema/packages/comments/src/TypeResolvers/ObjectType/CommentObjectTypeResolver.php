@@ -30,7 +30,7 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
     public function autowireCommentObjectTypeResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentTypeDataLoader $commentTypeDataLoader,
-    ) {
+    ): void {
         $this->commentTypeAPI = $commentTypeAPI;
         $this->commentTypeDataLoader = $commentTypeDataLoader;
     }

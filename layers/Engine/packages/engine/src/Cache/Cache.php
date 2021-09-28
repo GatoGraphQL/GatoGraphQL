@@ -18,14 +18,14 @@ class Cache extends UpstreamCache
     #[Required]
     public function autowireEngineCache(
         HooksAPIInterface $hooksAPI,
-    ) {
+    ): void {
         $this->hooksAPI = $hooksAPI;
 
         // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files
         // This is particularly important for the MEMORY, since we can't set by constants to not use it
         $this->hooksAPI->addAction(
             'popcms:componentInstalledOrUninstalled',
-            function () {
+            function (): void {
                 $this->cacheItemPool->clear();
             }
         );
@@ -33,7 +33,7 @@ class Cache extends UpstreamCache
         // Save all deferred cacheItems
         $this->hooksAPI->addAction(
             'popcms:shutdown',
-            function () {
+            function (): void {
                 $this->cacheItemPool->commit();
             }
         );

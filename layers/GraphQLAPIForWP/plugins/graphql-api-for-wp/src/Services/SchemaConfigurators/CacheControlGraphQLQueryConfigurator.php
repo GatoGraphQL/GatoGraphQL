@@ -29,7 +29,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
         CacheControlBlock $cacheControlBlock,
         BlockHelpers $blockHelpers,
         CacheControlManagerInterface $cacheControlManager,
-    ) {
+    ): void {
         $this->cacheControlBlock = $cacheControlBlock;
         $this->blockHelpers = $blockHelpers;
         $this->cacheControlManager = $cacheControlManager;

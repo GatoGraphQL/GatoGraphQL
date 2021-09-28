@@ -30,7 +30,7 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
     public function autowireMediaObjectTypeResolver(
         MediaTypeAPIInterface $mediaTypeAPI,
         MediaTypeDataLoader $mediaTypeDataLoader,
-    ) {
+    ): void {
         $this->mediaTypeAPI = $mediaTypeAPI;
         $this->mediaTypeDataLoader = $mediaTypeDataLoader;
     }

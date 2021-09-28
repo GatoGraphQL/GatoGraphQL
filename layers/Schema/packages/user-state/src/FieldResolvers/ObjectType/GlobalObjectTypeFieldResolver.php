@@ -29,7 +29,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
     #[Required]
     public function autowireGlobalObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ) {
+    ): void {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
 

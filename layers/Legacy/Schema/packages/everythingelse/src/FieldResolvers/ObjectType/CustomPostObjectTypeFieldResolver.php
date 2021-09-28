@@ -27,7 +27,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     #[Required]
     public function autowireCustomPostObjectTypeFieldResolver(
         LocationObjectTypeResolver $locationObjectTypeResolver,
-    ) {
+    ): void {
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
     }
 

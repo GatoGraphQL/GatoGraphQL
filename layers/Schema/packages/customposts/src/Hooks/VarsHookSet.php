@@ -22,7 +22,7 @@ class VarsHookSet extends AbstractHookSet
     #[Required]
     public function autowireVarsHookSet(
         CustomPostTypeAPIInterface $customPostTypeAPI,
-    ) {
+    ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
 

@@ -33,7 +33,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     #[Required]
     public function autowireCommentTypeAPI(
         HooksAPIInterface $hooksAPI,
-    ) {
+    ): void {
         $this->hooksAPI = $hooksAPI;
         $this->popToCMSCommentStatusConversion = array_flip($this->cmsToPoPCommentStatusConversion);
     }

@@ -8,7 +8,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
 {
-    public function savePicture($user_id, $delete_source = false)
+    public function savePicture($user_id, $delete_source = false): void
     {
         // Avatar
         $gd_fileupload_userphoto = \GD_FileUpload_UserPhotoFactory::getInstance();
@@ -24,7 +24,7 @@ class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
         return $user_id;
     }
 
-    protected function additionals($user_id, $form_data)
+    protected function additionals($user_id, $form_data): void
     {
         $this->hooksAPI->doAction('gd_useravatar_update:additionals', $user_id, $form_data);
     }

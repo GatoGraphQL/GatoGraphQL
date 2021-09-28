@@ -21,7 +21,7 @@ class LogoutMutationResolver extends AbstractMutationResolver
     #[Required]
     public function autowireLogoutMutationResolver(
         UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
-    ) {
+    ): void {
         $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
     }
 

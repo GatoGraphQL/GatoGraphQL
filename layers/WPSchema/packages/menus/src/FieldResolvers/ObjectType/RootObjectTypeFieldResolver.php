@@ -29,7 +29,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         MenuObjectTypeResolver $menuObjectTypeResolver,
-    ) {
+    ): void {
         $this->menuObjectTypeResolver = $menuObjectTypeResolver;
     }
 

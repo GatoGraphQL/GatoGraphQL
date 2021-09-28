@@ -22,7 +22,7 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
     public function autowireAbstractRESTEntryRouteModuleProcessor(
         RESTDataStructureFormatter $restDataStructureFormatter,
         FieldQueryConvertorInterface $fieldQueryConvertor
-    ) {
+    ): void {
         $this->restDataStructureFormatter = $restDataStructureFormatter;
         $this->fieldQueryConvertor = $fieldQueryConvertor;
     }

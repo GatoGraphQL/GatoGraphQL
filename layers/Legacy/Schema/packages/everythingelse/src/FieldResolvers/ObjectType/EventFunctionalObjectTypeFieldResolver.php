@@ -29,7 +29,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     #[Required]
     public function autowireEventFunctionalObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
-    ) {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 

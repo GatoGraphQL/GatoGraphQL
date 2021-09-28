@@ -11,7 +11,7 @@ abstract class AbstractNameResolver implements NameResolverInterface
     protected LooseContractManagerInterface $looseContractManager;
 
     #[Required]
-    public function autowireAbstractNameResolver(LooseContractManagerInterface $looseContractManager)
+    public function autowireAbstractNameResolver(LooseContractManagerInterface $looseContractManager): void
     {
         $this->looseContractManager = $looseContractManager;
     }

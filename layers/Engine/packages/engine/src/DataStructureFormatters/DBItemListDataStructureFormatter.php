@@ -21,7 +21,7 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
         return JSON_FORCE_OBJECT;
     }
 
-    protected function addDBEntries(&$database, &$merged_databases)
+    protected function addDBEntries(&$database, &$merged_databases): void
     {
         foreach ($database as $db_key => $dbobject) {
             foreach ($dbobject as $dbobject_id => $dbobject_data) {

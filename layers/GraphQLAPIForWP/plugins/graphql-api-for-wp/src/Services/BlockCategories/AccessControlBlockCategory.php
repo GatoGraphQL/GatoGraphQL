@@ -17,7 +17,7 @@ class AccessControlBlockCategory extends AbstractBlockCategory
     #[Required]
     public function autowireAccessControlBlockCategory(
         GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
-    ) {
+    ): void {
         $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
     }
 

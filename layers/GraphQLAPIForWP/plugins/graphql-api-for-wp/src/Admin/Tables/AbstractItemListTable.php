@@ -95,7 +95,7 @@ abstract class AbstractItemListTable extends WP_List_Table
      * @return void
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    public function no_items()
+    public function no_items(): void
     {
         _e('No items found.', 'graphql-api');
     }

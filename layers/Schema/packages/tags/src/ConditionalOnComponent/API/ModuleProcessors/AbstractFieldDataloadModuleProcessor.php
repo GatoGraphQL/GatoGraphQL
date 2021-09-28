@@ -39,7 +39,7 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     public function autowireAbstractFieldDataloadModuleProcessor(
         PostTagObjectTypeResolver $postTagObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ) {
+    ): void {
         $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
     }

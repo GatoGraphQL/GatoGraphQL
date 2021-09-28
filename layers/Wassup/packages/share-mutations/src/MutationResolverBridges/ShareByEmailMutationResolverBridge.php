@@ -20,7 +20,7 @@ class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationRe
     #[Required]
     public function autowireShareByEmailMutationResolverBridge(
         ShareByEmailMutationResolver $shareByEmailMutationResolver,
-    ) {
+    ): void {
         $this->shareByEmailMutationResolver = $shareByEmailMutationResolver;
     }
 

@@ -27,7 +27,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     #[Required]
     public function autowireWithMetaInterfaceTypeFieldResolver(
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
-    ) {
+    ): void {
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
     }
 

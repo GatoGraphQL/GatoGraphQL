@@ -40,7 +40,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
         CommentObjectTypeResolver $commentObjectTypeResolver,
-    ) {
+    ): void {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->commentObjectTypeResolver = $commentObjectTypeResolver;

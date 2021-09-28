@@ -20,7 +20,7 @@ class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutation
     #[Required]
     public function autowireFlagCustomPostMutationResolverBridge(
         FlagCustomPostMutationResolver $flagCustomPostMutationResolver,
-    ) {
+    ): void {
         $this->flagCustomPostMutationResolver = $flagCustomPostMutationResolver;
     }
 

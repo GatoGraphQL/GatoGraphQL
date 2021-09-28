@@ -53,7 +53,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         EnumValueObjectTypeResolver $enumValueObjectTypeResolver,
         InputValueObjectTypeResolver $inputValueObjectTypeResolver,
         TypeKindEnumTypeResolver $typeKindEnumTypeResolver,
-    ) {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;

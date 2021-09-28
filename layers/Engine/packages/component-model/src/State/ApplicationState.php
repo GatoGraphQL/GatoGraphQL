@@ -203,7 +203,7 @@ class ApplicationState
         return self::$vars;
     }
 
-    public static function augmentVarsProperties()
+    public static function augmentVarsProperties(): void
     {
         $nature = self::$vars['nature'];
         self::$vars['routing-state']['is-standard'] = $nature == RouteNatures::STANDARD;

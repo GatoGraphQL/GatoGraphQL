@@ -25,7 +25,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         return false;
     }
 
-    protected function validateCaptcha(&$errors, &$form_data)
+    protected function validateCaptcha(&$errors, &$form_data): void
     {
         // Validate the captcha
         $vars = ApplicationState::getVars();

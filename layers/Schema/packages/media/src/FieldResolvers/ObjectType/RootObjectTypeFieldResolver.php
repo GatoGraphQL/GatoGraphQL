@@ -47,7 +47,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         MediaTypeAPIInterface $mediaTypeAPI,
         IntScalarTypeResolver $intScalarTypeResolver,
         MediaObjectTypeResolver $mediaObjectTypeResolver,
-    ) {
+    ): void {
         $this->mediaTypeAPI = $mediaTypeAPI;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;

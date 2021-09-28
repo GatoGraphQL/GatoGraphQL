@@ -70,7 +70,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-    ) {
+    ): void {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->nameResolver = $nameResolver;
         $this->cmsService = $cmsService;

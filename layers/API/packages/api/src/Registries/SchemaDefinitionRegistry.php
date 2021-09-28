@@ -38,7 +38,7 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
         InstanceManagerInterface $instanceManager,
         RootObjectTypeResolver $rootTypeResolver,
         Root $root,
-    ) {
+    ): void {
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->translationAPI = $translationAPI;

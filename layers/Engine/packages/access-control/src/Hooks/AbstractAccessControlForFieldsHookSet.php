@@ -23,7 +23,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
     #[Required]
     public function autowireAbstractAccessControlForFieldsHookSet(
         AccessControlManagerInterface $accessControlManager
-    ) {
+    ): void {
         $this->accessControlManager = $accessControlManager;
     }
 

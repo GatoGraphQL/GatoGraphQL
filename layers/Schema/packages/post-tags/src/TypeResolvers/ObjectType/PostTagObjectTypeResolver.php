@@ -30,7 +30,7 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
     #[Required]
     public function autowirePostTagObjectTypeResolver(
         PostTagTypeDataLoader $postTagTypeDataLoader,
-    ) {
+    ): void {
         $this->postTagTypeDataLoader = $postTagTypeDataLoader;
     }
 

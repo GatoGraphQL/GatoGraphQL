@@ -22,7 +22,7 @@ class Cache implements CacheInterface
     }
 
     #[Required]
-    public function autowireCache(ModelInstanceInterface $modelInstance)
+    public function autowireCache(ModelInstanceInterface $modelInstance): void
     {
         $this->modelInstance = $modelInstance;
     }

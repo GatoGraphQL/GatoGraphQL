@@ -22,7 +22,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
     #[Required]
     public function autowireCreateUpdateWithCommunityOrganizationProfileMutationResolverBridge(
         CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver,
-    ) {
+    ): void {
         $this->createUpdateWithCommunityOrganizationProfileMutationResolver = $createUpdateWithCommunityOrganizationProfileMutationResolver;
     }
     

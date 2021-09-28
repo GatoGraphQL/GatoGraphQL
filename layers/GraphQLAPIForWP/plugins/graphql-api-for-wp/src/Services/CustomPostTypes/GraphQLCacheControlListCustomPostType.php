@@ -20,7 +20,7 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
     #[Required]
     public function autowireGraphQLCacheControlListCustomPostType(
         CacheControlBlock $cacheControlBlock,
-    ) {
+    ): void {
         $this->cacheControlBlock = $cacheControlBlock;
     }
 

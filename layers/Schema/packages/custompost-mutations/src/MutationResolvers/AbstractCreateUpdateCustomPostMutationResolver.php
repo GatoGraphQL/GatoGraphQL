@@ -41,7 +41,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         UserRoleTypeAPIInterface $userRoleTypeAPI,
         CustomPostTypeAPIInterface $customPostTypeAPI,
         CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
-    ) {
+    ): void {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
         $this->nameResolver = $nameResolver;
         $this->userRoleTypeAPI = $userRoleTypeAPI;

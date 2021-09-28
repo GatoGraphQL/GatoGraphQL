@@ -27,7 +27,7 @@ abstract class AbstractEditorScript extends AbstractScript
     #[Required]
     public function autowireAbstractEditorScript(
         EditorHelpers $editorHelpers,
-    ) {
+    ): void {
         $this->editorHelpers = $editorHelpers;
     }
 

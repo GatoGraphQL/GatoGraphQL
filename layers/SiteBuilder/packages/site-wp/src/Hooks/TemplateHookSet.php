@@ -19,7 +19,7 @@ class TemplateHookSet extends AbstractHookSet
     #[Required]
     public function autowireTemplateHookSet(
         ApplicationStateHelperServiceInterface $applicationStateHelperService,
-    ) {
+    ): void {
         $this->applicationStateHelperService = $applicationStateHelperService;
     }
 

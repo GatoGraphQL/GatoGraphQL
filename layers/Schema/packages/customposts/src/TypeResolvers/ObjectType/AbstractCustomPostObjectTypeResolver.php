@@ -26,7 +26,7 @@ abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeRe
     #[Required]
     public function autowireAbstractCustomPostObjectTypeResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
-    ) {
+    ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
 

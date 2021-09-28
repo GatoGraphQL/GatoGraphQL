@@ -57,7 +57,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         SchemaDefinitionRegistryInterface $schemaDefinitionRegistry,
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
-    ) {
+    ): void {
         $this->translationAPI = $translationAPI;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;

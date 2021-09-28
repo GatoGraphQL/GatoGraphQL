@@ -20,7 +20,7 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
     #[Required]
     public function autowireGenerateThemeMutationResolverBridge(
         GenerateThemeMutationResolver $generateThemeMutationResolver,
-    ) {
+    ): void {
         $this->generateThemeMutationResolver = $generateThemeMutationResolver;
     }
 

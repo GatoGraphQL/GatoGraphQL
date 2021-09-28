@@ -32,7 +32,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     #[Required]
     public function autowireSettingsMenuPage(
         ModuleRegistryInterface $moduleRegistry,
-    ) {
+    ): void {
         $this->moduleRegistry = $moduleRegistry;
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
@@ -69,7 +69,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          */
         \add_action(
             "update_option_{$option}",
-            function () {
+            function (): void {
                 \flush_rewrite_rules();
 
                 // Update the timestamp
@@ -82,7 +82,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          */
         \add_action(
             'admin_init',
-            function () {
+            function (): void {
                 $items = $this->getAllItems();
                 foreach ($items as $item) {
                     $settingsFieldForModule = $this->getSettingsFieldForModule($item['id']);
@@ -91,7 +91,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         $settingsFieldForModule,
                         // The empty string ensures the render function won't output a h2.
                         '',
-                        function () {
+                        function (): void {
                         },
                         self::SETTINGS_FIELD
                     );
@@ -99,7 +99,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         \add_settings_field(
                             $itemSetting[Properties::NAME],
                             $itemSetting[Properties::TITLE] ?? '',
-                            function () use ($module, $itemSetting) {
+                            function () use ($module, $itemSetting): void {
                                 $type = $itemSetting[Properties::TYPE] ?? null;
                                 $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                 if (!empty($possibleValues)) {

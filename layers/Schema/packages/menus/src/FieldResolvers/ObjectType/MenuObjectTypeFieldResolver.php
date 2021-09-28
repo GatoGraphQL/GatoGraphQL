@@ -40,7 +40,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
         MenuTypeAPIInterface $menuTypeAPI,
-    ) {
+    ): void {
         $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;

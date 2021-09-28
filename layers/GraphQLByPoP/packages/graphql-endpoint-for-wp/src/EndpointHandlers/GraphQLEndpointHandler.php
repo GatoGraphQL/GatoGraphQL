@@ -17,7 +17,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
 
     #[Required]
-    public function autowireGraphQLEndpointHandler(GraphQLDataStructureFormatter $graphQLDataStructureFormatter)
+    public function autowireGraphQLEndpointHandler(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
     }

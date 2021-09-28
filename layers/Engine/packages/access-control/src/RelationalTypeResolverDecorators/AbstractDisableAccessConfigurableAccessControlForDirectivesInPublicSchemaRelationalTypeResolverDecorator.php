@@ -18,7 +18,7 @@ abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPubl
     #[Required]
     public function autowireAbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator(
         DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver,
-    ) {
+    ): void {
         $this->disableAccessForDirectivesDirectiveResolver = $disableAccessForDirectivesDirectiveResolver;
     }
 

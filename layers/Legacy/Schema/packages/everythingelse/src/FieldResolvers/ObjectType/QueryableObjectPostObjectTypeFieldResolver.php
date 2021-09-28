@@ -27,7 +27,7 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
     #[Required]
     public function autowireQueryableObjectPostObjectTypeFieldResolver(
         URLScalarTypeResolver $urlScalarTypeResolver,
-    ) {
+    ): void {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
     }
 

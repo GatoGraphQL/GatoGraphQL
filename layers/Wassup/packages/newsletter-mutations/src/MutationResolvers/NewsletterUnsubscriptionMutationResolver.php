@@ -55,7 +55,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals($form_data)
+    protected function additionals($form_data): void
     {
         $this->hooksAPI->doAction('pop_unsubscribe_from_newsletter', $form_data);
     }
@@ -70,7 +70,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override by Gravity Forms
      */
-    protected function validateData(&$errors, $newsletter_data)
+    protected function validateData(&$errors, $newsletter_data): void
     {
     }
 

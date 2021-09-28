@@ -53,7 +53,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         StringScalarTypeResolver $stringScalarTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,
         UserObjectTypeResolver $userObjectTypeResolver,
-    ) {
+    ): void {
         $this->commentTypeAPI = $commentTypeAPI;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->dateScalarTypeResolver = $dateScalarTypeResolver;

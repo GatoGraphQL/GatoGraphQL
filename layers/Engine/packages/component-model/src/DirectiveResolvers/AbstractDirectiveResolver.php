@@ -1062,7 +1062,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * Function to override
      */
-    protected function addSchemaDefinitionForDirective(array &$schemaDefinition)
+    protected function addSchemaDefinitionForDirective(array &$schemaDefinition): void
     {
     }
 }

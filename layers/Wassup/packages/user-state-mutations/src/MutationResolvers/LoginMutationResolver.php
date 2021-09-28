@@ -18,7 +18,7 @@ class LoginMutationResolver extends UpstreamLoginMutationResolver
     #[Required]
     public function autowireUserStateMutationsLoginMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
-    ) {
+    ): void {
         $this->userTypeAPI = $userTypeAPI;
     }
 

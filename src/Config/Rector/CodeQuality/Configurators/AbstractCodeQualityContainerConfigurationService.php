@@ -8,15 +8,16 @@ use PoP\PoP\Config\Rector\Downgrade\Configurators\AbstractContainerConfiguration
 use Rector\Core\Configuration\Option;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 
 abstract class AbstractCodeQualityContainerConfigurationService extends AbstractContainerConfigurationService
 {
     public function configureContainer(): void
     {
         $services = $this->containerConfigurator->services();
-        $services->set(RemoveUselessParamTagRector::class);
-        $services->set(RemoveUselessReturnTagRector::class);
-        // $services->set(DowngradePropertyPromotionRector::class);
+        // $services->set(RemoveUselessParamTagRector::class);
+        // $services->set(RemoveUselessReturnTagRector::class);
+        $services->set(AddVoidReturnTypeWhereNoReturnRector::class);
 
         $parameters = $this->containerConfigurator->parameters();
         $parameters->set(Option::AUTO_IMPORT_NAMES, true);

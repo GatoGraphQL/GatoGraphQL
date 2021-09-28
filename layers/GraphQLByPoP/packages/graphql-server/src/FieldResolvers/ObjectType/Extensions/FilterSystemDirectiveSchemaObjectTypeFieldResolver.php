@@ -35,7 +35,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     public function autowireFilterSystemDirectiveSchemaObjectTypeFieldResolver(
         DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
         DirectiveRegistryInterface $directiveRegistry,
-    ) {
+    ): void {
         $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
         $this->directiveRegistry = $directiveRegistry;
     }

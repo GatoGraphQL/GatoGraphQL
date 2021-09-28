@@ -17,7 +17,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
     #[Required]
     public function autowireAbstractUserUpdateUserMetaValueMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
-    ) {
+    ): void {
         $this->userTypeAPI = $userTypeAPI;
     }
 
@@ -41,7 +41,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return InputNames::USER_ID;
     }
 
-    protected function additionals($target_id, $form_data)
+    protected function additionals($target_id, $form_data): void
     {
         $this->hooksAPI->doAction('gd_updateusermetavalue:user', $target_id, $form_data);
         parent::additionals($target_id, $form_data);

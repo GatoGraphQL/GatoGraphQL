@@ -30,7 +30,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
     #[Required]
     public function autowirePostCategoryObjectTypeResolver(
         PostCategoryTypeDataLoader $postCategoryTypeDataLoader,
-    ) {
+    ): void {
         $this->postCategoryTypeDataLoader = $postCategoryTypeDataLoader;
     }
 

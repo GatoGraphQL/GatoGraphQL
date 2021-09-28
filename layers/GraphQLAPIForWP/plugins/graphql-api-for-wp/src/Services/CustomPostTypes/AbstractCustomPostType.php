@@ -34,7 +34,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         CPTUtils $cptUtils,
-    ) {
+    ): void {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
         $this->userAuthorization = $userAuthorization;

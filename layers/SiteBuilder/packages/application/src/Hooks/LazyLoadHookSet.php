@@ -28,7 +28,7 @@ class LazyLoadHookSet extends AbstractHookSet
     public function autowireLazyLoadHookSet(
         RequestHelperServiceInterface $requestHelperService,
         Lazy $lazy,
-    ) {
+    ): void {
         $this->requestHelperService = $requestHelperService;
         $this->lazy = $lazy;
     }
@@ -55,13 +55,13 @@ class LazyLoadHookSet extends AbstractHookSet
         );
     }
 
-    public function start($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array)
+    public function start($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array): void
     {
         $helperCalculations = &$helperCalculations_in_array[0];
         $helperCalculations['has-lazy-load'] = false;
     }
 
-    public function calculateDataloadingModuleData(array $module, $module_props_in_array, $data_properties_in_array, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs, $helperCalculations_in_array)
+    public function calculateDataloadingModuleData(array $module, $module_props_in_array, $data_properties_in_array, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs, $helperCalculations_in_array): void
     {
         $data_properties = &$data_properties_in_array[0];
 
@@ -71,7 +71,7 @@ class LazyLoadHookSet extends AbstractHookSet
         }
     }
 
-    public function end($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine)
+    public function end($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine): void
     {
         $helperCalculations = &$helperCalculations_in_array[0];
 

@@ -18,7 +18,7 @@ class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
     #[Required]
     public function autowireMenuItemTypeDataLoader(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
-    ) {
+    ): void {
         $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
     }
 

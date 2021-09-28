@@ -29,7 +29,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireUserObjectTypeFieldResolver(
         UserMetaTypeAPIInterface $userMetaAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
-    ) {
+    ): void {
         $this->userMetaAPI = $userMetaAPI;
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
     }

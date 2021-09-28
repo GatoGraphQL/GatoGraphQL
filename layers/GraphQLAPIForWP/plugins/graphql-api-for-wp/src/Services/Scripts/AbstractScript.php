@@ -25,7 +25,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     protected GeneralUtils $generalUtils;
 
     #[Required]
-    public function autowireAbstractScript(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils)
+    public function autowireAbstractScript(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils): void
     {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
@@ -190,7 +190,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
          * which calls ScriptModelScriptConfiguration::namespaceTypesAndInterfaces(),
          * which is initialized during "wp"
          */
-        \add_action('wp_print_scripts', function () use ($scriptName) {
+        \add_action('wp_print_scripts', function () use ($scriptName): void {
             if ($localizedData = $this->getLocalizedData()) {
                 \wp_localize_script(
                     $scriptName,

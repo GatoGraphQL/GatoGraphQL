@@ -36,7 +36,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         UserAvatarTypeAPIInterface $userAvatarTypeAPI,
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
         UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,
-    ) {
+    ): void {
         $this->userAvatarTypeAPI = $userAvatarTypeAPI;
         $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
         $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;

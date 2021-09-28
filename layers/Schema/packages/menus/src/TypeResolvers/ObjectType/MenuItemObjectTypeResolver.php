@@ -28,7 +28,7 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
     #[Required]
     public function autowireMenuItemObjectTypeResolver(
         MenuItemTypeDataLoader $menuItemTypeDataLoader,
-    ) {
+    ): void {
         $this->menuItemTypeDataLoader = $menuItemTypeDataLoader;
     }
 

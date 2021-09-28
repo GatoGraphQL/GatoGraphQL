@@ -47,7 +47,7 @@ class Field extends AbstractAst implements FieldInterface
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -63,7 +63,7 @@ class Field extends AbstractAst implements FieldInterface
     /**
      * @param null|string $alias
      */
-    public function setAlias($alias)
+    public function setAlias($alias): void
     {
         $this->alias = $alias;
     }

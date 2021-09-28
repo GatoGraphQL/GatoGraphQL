@@ -32,7 +32,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     #[Required]
     public function autowireFieldDataloadModuleProcessor(
         PageObjectTypeResolver $pageObjectTypeResolver,
-    ) {
+    ): void {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
     }
 

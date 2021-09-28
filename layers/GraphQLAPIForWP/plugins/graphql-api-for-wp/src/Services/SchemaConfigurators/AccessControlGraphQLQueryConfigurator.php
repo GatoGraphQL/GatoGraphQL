@@ -32,7 +32,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
         BlockHelpers $blockHelpers,
         AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
         AccessControlManagerInterface $accessControlManager,
-    ) {
+    ): void {
         $this->accessControlBlock = $accessControlBlock;
         $this->blockHelpers = $blockHelpers;
         $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;

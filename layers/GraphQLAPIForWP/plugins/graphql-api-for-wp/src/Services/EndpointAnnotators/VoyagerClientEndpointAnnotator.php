@@ -22,7 +22,7 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
     #[Required]
     public function autowireVoyagerClientEndpointAnnotator(
         EndpointVoyagerBlock $endpointVoyagerBlock,
-    ) {
+    ): void {
         $this->endpointVoyagerBlock = $endpointVoyagerBlock;
     }
 

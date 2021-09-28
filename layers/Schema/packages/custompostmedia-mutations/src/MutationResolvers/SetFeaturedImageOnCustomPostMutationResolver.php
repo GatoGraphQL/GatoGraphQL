@@ -20,7 +20,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
     #[Required]
     public function autowireSetFeaturedImageOnCustomPostMutationResolver(
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
-    ) {
+    ): void {
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
     }
 

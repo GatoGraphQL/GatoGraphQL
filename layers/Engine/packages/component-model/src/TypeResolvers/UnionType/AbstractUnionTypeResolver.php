@@ -413,7 +413,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return $targetObjectTypeResolver->resolveValue($object, $field, $variables, $expressions, $options);
     }
 
-    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])
+    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): void
     {
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
@@ -442,7 +442,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         }
     }
 
-    protected function processFlatShapeSchemaDefinition(array $options = [])
+    protected function processFlatShapeSchemaDefinition(array $options = []): void
     {
         parent::processFlatShapeSchemaDefinition($options);
 

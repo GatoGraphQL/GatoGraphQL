@@ -8,7 +8,7 @@ use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterUnsubscriptio
 
 class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUnsubscriptionMutationResolver
 {
-    protected function validateData(&$errors, $newsletter_data)
+    protected function validateData(&$errors, $newsletter_data): void
     {
         parent::validateData($errors, $newsletter_data);
 

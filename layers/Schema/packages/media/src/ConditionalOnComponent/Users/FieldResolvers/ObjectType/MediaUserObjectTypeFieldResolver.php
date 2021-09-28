@@ -31,7 +31,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireMediaUserObjectTypeFieldResolver(
         UserMediaTypeAPIInterface $userMediaTypeAPI,
         UserObjectTypeResolver $userObjectTypeResolver,
-    ) {
+    ): void {
         $this->userMediaTypeAPI = $userMediaTypeAPI;
         $this->userObjectTypeResolver = $userObjectTypeResolver;
     }

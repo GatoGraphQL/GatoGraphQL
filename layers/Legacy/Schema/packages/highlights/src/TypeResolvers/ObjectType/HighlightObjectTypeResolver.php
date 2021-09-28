@@ -25,7 +25,7 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
     #[Required]
     public function autowireHighlightObjectTypeResolver(
         HighlightTypeDataLoader $highlightTypeDataLoader,
-    ) {
+    ): void {
         $this->highlightTypeDataLoader = $highlightTypeDataLoader;
     }
     

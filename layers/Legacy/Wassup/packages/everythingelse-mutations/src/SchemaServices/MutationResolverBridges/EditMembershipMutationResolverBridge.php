@@ -22,7 +22,7 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
     #[Required]
     public function autowireEditMembershipMutationResolverBridge(
         EditMembershipMutationResolver $editMembershipMutationResolver,
-    ) {
+    ): void {
         $this->editMembershipMutationResolver = $editMembershipMutationResolver;
     }
     

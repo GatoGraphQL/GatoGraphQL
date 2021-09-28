@@ -46,7 +46,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         IntScalarTypeResolver $intScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         DateScalarTypeResolver $dateScalarTypeResolver,
-    ) {
+    ): void {
         $this->mediaTypeAPI = $mediaTypeAPI;
         $this->dateFormatter = $dateFormatter;
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;

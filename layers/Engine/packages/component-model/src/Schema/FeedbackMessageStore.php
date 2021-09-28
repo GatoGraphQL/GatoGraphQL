@@ -30,7 +30,7 @@ class FeedbackMessageStore extends UpstreamFeedbackMessageStore implements Feedb
      */
     protected array $logEntries = [];
 
-    public function addObjectWarnings(array $objectWarnings)
+    public function addObjectWarnings(array $objectWarnings): void
     {
         foreach ($objectWarnings as $objectID => $objectWarnings) {
             $this->objectWarnings[$objectID] = array_merge(
@@ -39,7 +39,7 @@ class FeedbackMessageStore extends UpstreamFeedbackMessageStore implements Feedb
             );
         }
     }
-    public function addObjectDeprecations(array $objectDeprecations)
+    public function addObjectDeprecations(array $objectDeprecations): void
     {
         foreach ($objectDeprecations as $objectID => $objectDeprecations) {
             $this->objectDeprecations[$objectID] = array_merge(
@@ -48,7 +48,7 @@ class FeedbackMessageStore extends UpstreamFeedbackMessageStore implements Feedb
             );
         }
     }
-    public function addSchemaWarnings(array $schemaWarnings)
+    public function addSchemaWarnings(array $schemaWarnings): void
     {
         $this->schemaWarnings = array_merge(
             $this->schemaWarnings,
@@ -68,7 +68,7 @@ class FeedbackMessageStore extends UpstreamFeedbackMessageStore implements Feedb
         return $objectDeprecations;
     }
 
-    public function addSchemaError(string $dbKey, string $field, string $error)
+    public function addSchemaError(string $dbKey, string $field, string $error): void
     {
         $this->schemaErrors[$dbKey][] = [
             Tokens::PATH => [$field],

@@ -31,7 +31,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         SettingsMenuPage $settingsMenuPage,
-    ) {
+    ): void {
         $this->menuPageHelper = $menuPageHelper;
         $this->moduleRegistry = $moduleRegistry;
         $this->userAuthorization = $userAuthorization;

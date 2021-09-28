@@ -27,7 +27,7 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
     #[Required]
     public function autowireCustomEndpointOptionsBlock(
         CustomEndpointBlockCategory $customEndpointBlockCategory,
-    ) {
+    ): void {
         $this->customEndpointBlockCategory = $customEndpointBlockCategory;
     }
 

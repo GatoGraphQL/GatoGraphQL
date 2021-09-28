@@ -19,7 +19,7 @@ class UpdatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationR
     #[Required]
     public function autowireUpdatePostMutationResolverBridge(
         UpdatePostMutationResolver $updatePostMutationResolver,
-    ) {
+    ): void {
         $this->updatePostMutationResolver = $updatePostMutationResolver;
     }
 

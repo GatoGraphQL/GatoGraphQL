@@ -32,7 +32,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireRootObjectTypeFieldResolver(
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
         SettingsTypeAPIInterface $settingsTypeAPI,
-    ) {
+    ): void {
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
         $this->settingsTypeAPI = $settingsTypeAPI;
     }

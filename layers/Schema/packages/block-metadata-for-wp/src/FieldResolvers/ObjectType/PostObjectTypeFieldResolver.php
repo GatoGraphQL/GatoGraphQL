@@ -31,7 +31,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     #[Required]
     public function autowirePostObjectTypeFieldResolver(
         ObjectScalarTypeResolver $objectScalarTypeResolver,
-    ) {
+    ): void {
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
     }
 

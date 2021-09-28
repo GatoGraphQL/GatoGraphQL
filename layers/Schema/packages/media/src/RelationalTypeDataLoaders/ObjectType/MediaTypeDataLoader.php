@@ -21,7 +21,7 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
     #[Required]
     public function autowireMediaTypeDataLoader(
         MediaTypeAPIInterface $mediaTypeAPI,
-    ) {
+    ): void {
         $this->mediaTypeAPI = $mediaTypeAPI;
     }
 

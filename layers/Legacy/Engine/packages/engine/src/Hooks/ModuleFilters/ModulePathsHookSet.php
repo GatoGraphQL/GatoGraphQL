@@ -22,7 +22,7 @@ class ModulePathsHookSet extends AbstractHookSet
     #[Required]
     public function autowireModulePathsHookSet(
         ModulePaths $modulePaths
-    ) {
+    ): void {
         $this->modulePaths = $modulePaths;
     }
 

@@ -88,42 +88,42 @@ class Request
         $this->setVariables($variables);
     }
 
-    public function addQueries($queries)
+    public function addQueries($queries): void
     {
         foreach ($queries as $query) {
             $this->queries[] = $query;
         }
     }
 
-    public function addMutations($mutations)
+    public function addMutations($mutations): void
     {
         foreach ($mutations as $mutation) {
             $this->mutations[] = $mutation;
         }
     }
 
-    public function addQueryVariables($queryVariables)
+    public function addQueryVariables($queryVariables): void
     {
         foreach ($queryVariables as $queryVariable) {
             $this->queryVariables[] = $queryVariable;
         }
     }
 
-    public function addVariableReferences($variableReferences)
+    public function addVariableReferences($variableReferences): void
     {
         foreach ($variableReferences as $variableReference) {
             $this->variableReferences[] = $variableReference;
         }
     }
 
-    public function addFragmentReferences($fragmentReferences)
+    public function addFragmentReferences($fragmentReferences): void
     {
         foreach ($fragmentReferences as $fragmentReference) {
             $this->fragmentReferences[] = $fragmentReference;
         }
     }
 
-    public function addFragments($fragments)
+    public function addFragments($fragments): void
     {
         foreach ($fragments as $fragment) {
             $this->addFragment($fragment);
@@ -154,7 +154,7 @@ class Request
         return $this->fragments;
     }
 
-    public function addFragment(Fragment $fragment)
+    public function addFragment(Fragment $fragment): void
     {
         $this->fragments[] = $fragment;
     }
@@ -265,7 +265,7 @@ class Request
     /**
      * @param array $queryVariables
      */
-    public function setQueryVariables($queryVariables)
+    public function setQueryVariables($queryVariables): void
     {
         $this->queryVariables = $queryVariables;
     }
@@ -281,7 +281,7 @@ class Request
     /**
      * @param array $fragmentReferences
      */
-    public function setFragmentReferences($fragmentReferences)
+    public function setFragmentReferences($fragmentReferences): void
     {
         $this->fragmentReferences = $fragmentReferences;
     }

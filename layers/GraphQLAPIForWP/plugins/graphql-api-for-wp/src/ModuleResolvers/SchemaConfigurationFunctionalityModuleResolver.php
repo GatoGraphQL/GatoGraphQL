@@ -42,7 +42,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     #[Required]
     public function autowireSchemaConfigurationFunctionalityModuleResolver(
         ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
-    ) {
+    ): void {
         $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
     }
 

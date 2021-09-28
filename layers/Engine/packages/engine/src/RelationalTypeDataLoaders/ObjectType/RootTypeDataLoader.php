@@ -18,7 +18,7 @@ class RootTypeDataLoader extends AbstractObjectTypeDataLoader
     #[Required]
     public function autowireRootTypeDataLoader(
         Root $root,
-    ) {
+    ): void {
         $this->root = $root;
     }
 

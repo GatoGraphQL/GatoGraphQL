@@ -35,7 +35,7 @@ class InputObject extends AbstractAst implements ValueInterface
     /**
      * @param array $value
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->object = $value;
     }

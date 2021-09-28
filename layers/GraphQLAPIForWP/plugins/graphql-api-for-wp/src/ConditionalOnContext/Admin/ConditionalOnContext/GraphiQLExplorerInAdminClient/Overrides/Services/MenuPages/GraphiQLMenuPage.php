@@ -23,7 +23,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
     #[Required]
     public function autowireGraphQLAPIGraphiQLMenuPage(
         AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient,
-    ) {
+    ): void {
         $this->adminGraphiQLWithExplorerClient = $adminGraphiQLWithExplorerClient;
     }
 

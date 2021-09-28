@@ -18,7 +18,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    public function autowireAbstractFieldResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager)
+    public function autowireAbstractFieldResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager): void
     {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;

@@ -33,7 +33,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
         MediaObjectTypeResolver $mediaObjectTypeResolver,
-    ) {
+    ): void {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->idScalarTypeResolver = $idScalarTypeResolver;
         $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;

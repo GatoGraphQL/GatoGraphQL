@@ -46,7 +46,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         DateScalarTypeResolver $dateScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ) {
+    ): void {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
         $this->customPostContentFormatEnumTypeResolver = $customPostContentFormatEnumTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;

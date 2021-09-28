@@ -33,7 +33,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireEnumValueObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
-    ) {
+    ): void {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }

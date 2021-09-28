@@ -23,7 +23,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     #[Required]
     public function autowireEntryRouteModuleProcessor(
         PostTagTypeAPIInterface $postTagTypeAPI,
-    ) {
+    ): void {
         $this->postTagTypeAPI = $postTagTypeAPI;
     }
 

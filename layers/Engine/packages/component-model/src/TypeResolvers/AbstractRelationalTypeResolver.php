@@ -78,7 +78,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-    ) {
+    ): void {
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->errorProvider = $errorProvider;
@@ -887,7 +887,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * Split function, so it can be invoked both from here and from the UnionTypeResolver
      */
-    public function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, $id, array $data_fields)
+    public function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, $id, array $data_fields): void
     {
         $fieldDirectiveCounter = [];
         foreach ($fields as $field) {
@@ -1178,7 +1178,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
     }
 
-    protected function processFlatShapeSchemaDefinition(array $options = [])
+    protected function processFlatShapeSchemaDefinition(array $options = []): void
     {
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 

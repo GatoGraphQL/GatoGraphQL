@@ -20,7 +20,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     #[Required]
     public function autowireDownvoteCustomPostMutationResolver(
         UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
-    ) {
+    ): void {
         $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;
     }
 
@@ -47,7 +47,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     /**
      * Function to override
      */
-    protected function additionals($target_id, $form_data)
+    protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
         $this->hooksAPI->doAction('gd_downvotepost', $target_id, $form_data);

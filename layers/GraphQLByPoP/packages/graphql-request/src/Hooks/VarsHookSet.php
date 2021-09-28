@@ -40,7 +40,7 @@ class VarsHookSet extends AbstractHookSet
         GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         GraphQLQueryConvertorInterface $graphQLQueryConvertor,
-    ) {
+    ): void {
         $this->queryRetrieverInterface = $queryRetrieverInterface;
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
         $this->graphQLPersistedQueryManager = $graphQLPersistedQueryManager;
