@@ -24,14 +24,7 @@ class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
         PageTypeAPIInterface $pageTypeAPI,
     ) {
         $this->pageTypeAPI = $pageTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $moduleProcessorManager,
-            $customPostTypeAPI,
-        );
-    }
+        }
 
     public function executeQuery($query, array $options = []): array
     {

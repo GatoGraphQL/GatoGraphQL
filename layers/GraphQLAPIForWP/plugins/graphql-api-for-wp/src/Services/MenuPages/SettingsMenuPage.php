@@ -35,11 +35,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         ModuleRegistryInterface $moduleRegistry,
     ) {
         $this->moduleRegistry = $moduleRegistry;
-        parent::__construct(
-            $instanceManager,
-            $menuPageHelper,
-            $endpointHelpers
-        );
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 

@@ -49,17 +49,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->commentObjectTypeResolver = $commentObjectTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $cmsService,
-            $schemaNamespacingService,
-            $typeRegistry,
-            $schemaDefinitionService,
-        );
-    }
+        }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

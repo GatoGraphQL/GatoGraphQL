@@ -35,14 +35,7 @@ class AccessControlBlock extends AbstractControlBlock
         AccessControlBlockCategory $accessControlBlockCategory,
     ) {
         $this->accessControlBlockCategory = $accessControlBlockCategory;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
-    }
+        }
 
     protected function getBlockName(): string
     {

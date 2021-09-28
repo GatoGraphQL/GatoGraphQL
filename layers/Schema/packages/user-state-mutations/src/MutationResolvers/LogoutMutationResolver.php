@@ -22,11 +22,7 @@ class LogoutMutationResolver extends AbstractMutationResolver
         UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
     ) {
         $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
-    }
+        }
 
     public function validateErrors(array $form_data): ?array
     {

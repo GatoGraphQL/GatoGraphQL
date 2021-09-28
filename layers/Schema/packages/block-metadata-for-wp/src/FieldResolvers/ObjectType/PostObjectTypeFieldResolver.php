@@ -39,18 +39,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectScalarTypeResolver $objectScalarTypeResolver,
     ) {
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

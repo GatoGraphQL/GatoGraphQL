@@ -67,18 +67,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->enumValueObjectTypeResolver = $enumValueObjectTypeResolver;
         $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
         $this->typeKindEnumTypeResolver = $typeKindEnumTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

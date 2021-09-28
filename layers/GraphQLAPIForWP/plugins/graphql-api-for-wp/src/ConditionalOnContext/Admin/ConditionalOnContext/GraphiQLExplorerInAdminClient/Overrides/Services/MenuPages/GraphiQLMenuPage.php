@@ -25,12 +25,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
         AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient,
     ) {
         $this->adminGraphiQLWithExplorerClient = $adminGraphiQLWithExplorerClient;
-        parent::__construct(
-            $instanceManager,
-            $menuPageHelper,
-            $endpointHelpers
-        );
-    }
+        }
 
     protected function getGraphiQLWithExplorerClientHTML(): string
     {

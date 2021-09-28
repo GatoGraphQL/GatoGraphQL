@@ -37,20 +37,7 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
         UserRoleTypeDataLoader $userRoleTypeDataLoader,
     ) {
         $this->userRoleTypeDataLoader = $userRoleTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
-    }
+        }
 
     public function getTypeName(): string
     {

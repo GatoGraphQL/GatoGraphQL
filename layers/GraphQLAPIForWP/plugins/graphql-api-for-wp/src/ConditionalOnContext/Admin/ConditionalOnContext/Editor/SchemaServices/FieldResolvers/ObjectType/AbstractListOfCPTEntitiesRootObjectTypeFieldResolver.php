@@ -50,19 +50,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     ) {
         $this->customPostObjectTypeResolver = $customPostObjectTypeResolver;
         $this->customPostTypeAPI = $customPostTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

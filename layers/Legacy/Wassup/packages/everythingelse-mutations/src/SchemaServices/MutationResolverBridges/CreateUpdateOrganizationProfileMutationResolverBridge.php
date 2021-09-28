@@ -28,14 +28,7 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
         CreateUpdateOrganizationProfileMutationResolver $createUpdateOrganizationProfileMutationResolver,
     ) {
         $this->createUpdateOrganizationProfileMutationResolver = $createUpdateOrganizationProfileMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-            $createUpdateProfileMutationResolver,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

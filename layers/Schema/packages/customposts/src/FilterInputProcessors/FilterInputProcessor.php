@@ -25,10 +25,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
     ) {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-        parent::__construct(
-            $instanceManager,
-        );
-    }
+        }
 
 
     public function getFilterInputsToProcess(): array

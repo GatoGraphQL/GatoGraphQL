@@ -45,18 +45,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         $this->floatScalarTypeResolver = $floatScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
-    }
+        }
 
     public function getFieldNamesToResolve(): array
     {

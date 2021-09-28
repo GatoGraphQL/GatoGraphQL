@@ -32,12 +32,6 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     ) {
         $this->userTypeAPI = $userTypeAPI;
         $this->gravityFormsAddEntryToFormMutationResolver = $gravityFormsAddEntryToFormMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
         // Execute before $hooksAPI->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);
         if (doingPost()) {
             $this->hooksAPI->addAction(

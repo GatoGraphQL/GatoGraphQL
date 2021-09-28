@@ -42,16 +42,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

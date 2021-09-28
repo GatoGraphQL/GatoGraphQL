@@ -38,14 +38,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     ) {
         $this->endpointHelpers = $endpointHelpers;
         $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
-    }
+        }
 
     protected function getBlockName(): string
     {

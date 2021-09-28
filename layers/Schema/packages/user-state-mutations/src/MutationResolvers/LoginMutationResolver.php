@@ -26,11 +26,7 @@ class LoginMutationResolver extends AbstractMutationResolver
     ) {
         $this->userTypeAPI = $userTypeAPI;
         $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
-    }
+        }
 
     public function validateErrors(array $form_data): ?array
     {

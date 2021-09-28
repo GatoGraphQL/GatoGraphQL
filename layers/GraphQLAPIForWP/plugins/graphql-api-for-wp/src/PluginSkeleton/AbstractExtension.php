@@ -29,12 +29,7 @@ abstract class AbstractExtension extends AbstractPlugin
         ?AbstractExtensionConfiguration $extensionConfiguration = null,
     ) {
         $this->extensionConfiguration = $extensionConfiguration;
-        parent::__construct(
-            $pluginFile,
-            $pluginVersion,
-            $pluginName,
-        );
-    }
+        }
 
     /**
      * Configure the plugin.

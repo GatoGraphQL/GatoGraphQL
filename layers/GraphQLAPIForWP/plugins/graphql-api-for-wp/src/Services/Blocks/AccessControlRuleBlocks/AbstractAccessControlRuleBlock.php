@@ -31,14 +31,7 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
         AccessControlBlockCategory $accessControlBlockCategory,
     ) {
         $this->accessControlBlockCategory = $accessControlBlockCategory;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
-    }
+        }
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {

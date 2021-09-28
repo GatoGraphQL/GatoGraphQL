@@ -33,14 +33,7 @@ class CacheControlBlock extends AbstractControlBlock
         CacheControlBlockCategory $cacheControlBlockCategory,
     ) {
         $this->cacheControlBlockCategory = $cacheControlBlockCategory;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
-    }
+        }
 
     protected function getBlockName(): string
     {

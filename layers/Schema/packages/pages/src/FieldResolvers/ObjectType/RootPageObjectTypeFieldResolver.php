@@ -59,19 +59,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
         $this->pageTypeAPI = $pageTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

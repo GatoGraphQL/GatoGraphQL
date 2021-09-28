@@ -29,12 +29,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
         $this->postTagTypeAPI = $postTagTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $restDataStructureFormatter,
-            $fieldQueryConvertor,
-        );
-    }
+        }
 
     protected function getInitialRESTFields(): string
     {

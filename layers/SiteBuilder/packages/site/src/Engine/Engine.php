@@ -49,27 +49,7 @@ class Engine extends \PoP\Application\Engine\Engine
         ?CacheInterface $persistentCache = null
     ) {
         $this->applicationStateHelperService = $applicationStateHelperService;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $dataStructureManager,
-            $instanceManager,
-            $modelInstance,
-            $feedbackMessageStore,
-            $modulePathHelpers,
-            $modulePathManager,
-            $fieldQueryInterpreter,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $checkpointProcessorManager,
-            $dataloadHelperService,
-            $entryModuleManager,
-            $requestHelperService,
-            $looseContractManager,
-            $cacheControlEngine,
-            $persistentCache,
-        );
-    }
+        }
 
     public function outputResponse(): void
     {

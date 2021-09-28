@@ -51,21 +51,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     ) {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $modulePathHelpers,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $cmsService,
-            $nameResolver,
-            $dataloadHelperService,
-            $requestHelperService,
-            $modulePaths,
-        );
-    }
+        }
 
     public function getModulesToProcess(): array
     {

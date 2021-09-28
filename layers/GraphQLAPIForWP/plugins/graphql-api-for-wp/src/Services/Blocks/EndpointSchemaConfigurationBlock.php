@@ -46,14 +46,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         $this->blockRenderingHelpers = $blockRenderingHelpers;
         $this->cptUtils = $cptUtils;
         $this->endpointBlockCategory = $endpointBlockCategory;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
-    }
+        }
 
     protected function getBlockName(): string
     {

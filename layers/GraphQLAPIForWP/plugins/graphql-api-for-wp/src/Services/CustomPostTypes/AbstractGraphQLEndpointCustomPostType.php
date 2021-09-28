@@ -31,13 +31,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     ) {
         $this->hooksAPI = $hooksAPI;
         $this->blockHelpers = $blockHelpers;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $cptUtils,
-        );
-    }
+        }
 
     /**
      * Whenever this CPT is saved/updated, the timestamp must be regenerated,

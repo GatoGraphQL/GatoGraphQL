@@ -38,17 +38,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     ) {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $cmsService,
-            $schemaNamespacingService,
-            $typeRegistry,
-            $schemaDefinitionService,
-        );
-    }
+        }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

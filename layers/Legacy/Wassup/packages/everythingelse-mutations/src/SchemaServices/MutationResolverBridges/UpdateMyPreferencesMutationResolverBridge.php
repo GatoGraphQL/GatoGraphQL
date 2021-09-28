@@ -24,13 +24,7 @@ class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutatio
         UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver,
     ) {
         $this->updateMyPreferencesMutationResolver = $updateMyPreferencesMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
     
     public function getMutationResolver(): MutationResolverInterface
     {

@@ -42,18 +42,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         $this->directiveObjectTypeResolver = $directiveObjectTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

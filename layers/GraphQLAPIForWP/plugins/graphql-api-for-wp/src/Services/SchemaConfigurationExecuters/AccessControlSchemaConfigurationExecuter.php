@@ -21,12 +21,7 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
         AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
     ) {
         $this->accessControlGraphQLQueryConfigurator = $accessControlGraphQLQueryConfigurator;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $blockHelpers,
-        );
-    }
+        }
 
     public function getEnablingModule(): ?string
     {

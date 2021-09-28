@@ -25,13 +25,7 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
         EndpointVoyagerBlock $endpointVoyagerBlock,
     ) {
         $this->endpointVoyagerBlock = $endpointVoyagerBlock;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $blockHelpers,
-            $graphQLCustomEndpointCustomPostType
-        );
-    }
+        }
 
     public function getEnablingModule(): ?string
     {

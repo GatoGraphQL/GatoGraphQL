@@ -22,13 +22,7 @@ class UpdateHighlightMutationResolverBridge extends AbstractCreateUpdateHighligh
         UpdateHighlightMutationResolver $updateHighlightMutationResolver,
     ) {
         $this->updateHighlightMutationResolver = $updateHighlightMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

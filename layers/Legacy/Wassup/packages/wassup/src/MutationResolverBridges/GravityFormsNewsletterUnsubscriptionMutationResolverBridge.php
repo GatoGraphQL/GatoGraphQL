@@ -23,13 +23,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolverBridge extends Abstrac
         GravityFormsNewsletterUnsubscriptionMutationResolver $gravityFormsNewsletterUnsubscriptionMutationResolver,
     ) {
         $this->gravityFormsNewsletterUnsubscriptionMutationResolver = $gravityFormsNewsletterUnsubscriptionMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
     
     public function getMutationResolver(): MutationResolverInterface
     {

@@ -27,12 +27,7 @@ class RoutingHookSet extends AbstractHookSet
     ) {
         $this->cmsService = $cmsService;
         $this->requestHelperService = $requestHelperService;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

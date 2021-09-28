@@ -25,12 +25,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
         AccessControlManagerInterface $accessControlManager
     ) {
         $this->accessControlManager = $accessControlManager;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     /**
      * Indicate if this hook is enabled

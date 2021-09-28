@@ -49,21 +49,7 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
         $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
         $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
         $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-            $customPostObjectTypeResolver,
-            $customPostTypeAPI,
-        );
-    }
+        }
 
     /**
      * @return string[]

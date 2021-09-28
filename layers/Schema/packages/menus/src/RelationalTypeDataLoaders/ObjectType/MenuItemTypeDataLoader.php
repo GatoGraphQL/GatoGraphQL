@@ -20,12 +20,7 @@ class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
     ) {
         $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
-    }
+        }
 
     public function getObjects(array $ids): array
     {

@@ -19,11 +19,7 @@ class LoginMutationResolver extends UpstreamLoginMutationResolver
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
-    }
+        }
 
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
     {

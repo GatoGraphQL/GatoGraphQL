@@ -51,25 +51,7 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
     ) {
         $this->looseContractManager = $looseContractManager;
         $this->cacheControlEngine = $cacheControlEngine;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $dataStructureManager,
-            $instanceManager,
-            $modelInstance,
-            $feedbackMessageStore,
-            $modulePathHelpers,
-            $modulePathManager,
-            $fieldQueryInterpreter,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $checkpointProcessorManager,
-            $dataloadHelperService,
-            $entryModuleManager,
-            $requestHelperService,
-            $persistentCache,
-        );
-    }
+        }
 
     public function generateData(): void
     {

@@ -24,12 +24,7 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaRelationalTypeRes
         ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver,
     ) {
         $this->validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
-        parent::__construct(
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $accessControlManager,
-        );
-    }
+        }
 
     protected function getConfigurationEntries(): array
     {

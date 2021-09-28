@@ -24,13 +24,7 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         MediaTypeAPIInterface $mediaTypeAPI,
     ) {
         $this->mediaTypeAPI = $mediaTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $moduleProcessorManager,
-        );
-    }
+        }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {

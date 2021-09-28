@@ -33,16 +33,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
         URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-        );
-    }
+        }
 
     protected function getDbobjectIdField()
     {

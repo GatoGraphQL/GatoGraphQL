@@ -24,14 +24,7 @@ class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMu
         FollowUserMutationResolver $followUserMutationResolver,
     ) {
         $this->followUserMutationResolver = $followUserMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-            $userTypeAPI,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

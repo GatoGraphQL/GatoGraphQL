@@ -30,12 +30,7 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
     ) {
         $this->mediaTypeResolver = $mediaTypeResolver;
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

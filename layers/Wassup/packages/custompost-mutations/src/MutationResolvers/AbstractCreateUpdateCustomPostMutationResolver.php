@@ -36,16 +36,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $customPostStatusEnumTypeResolver,
-            $nameResolver,
-            $userRoleTypeAPI,
-            $customPostTypeAPI,
-            $customPostTypeMutationAPI,
-        );
-    }
+        }
 
     protected function supportsTitle()
     {

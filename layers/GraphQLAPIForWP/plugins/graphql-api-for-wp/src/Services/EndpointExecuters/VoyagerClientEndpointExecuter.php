@@ -27,12 +27,7 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
     ) {
         $this->customEndpointVoyagerClient = $customEndpointVoyagerClient;
         $this->voyagerClientEndpointExecuter = $voyagerClientEndpointExecuter;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $graphQLCustomEndpointCustomPostType,
-        );
-    }
+        }
 
     public function getEnablingModule(): ?string
     {

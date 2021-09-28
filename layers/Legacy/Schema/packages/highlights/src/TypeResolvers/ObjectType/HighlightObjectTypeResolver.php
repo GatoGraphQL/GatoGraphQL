@@ -32,17 +32,7 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
         HighlightTypeDataLoader $highlightTypeDataLoader,
     ) {
         $this->highlightTypeDataLoader = $highlightTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-        );
-    }
+        }
     
     public function getTypeName(): string
     {

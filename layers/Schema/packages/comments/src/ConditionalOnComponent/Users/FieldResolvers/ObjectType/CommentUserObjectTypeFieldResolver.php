@@ -39,18 +39,7 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->commentTypeAPI = $commentTypeAPI;
         $this->userObjectTypeResolver = $userObjectTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

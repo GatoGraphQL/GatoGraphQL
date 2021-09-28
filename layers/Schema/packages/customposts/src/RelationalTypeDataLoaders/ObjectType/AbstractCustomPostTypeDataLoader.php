@@ -25,13 +25,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $moduleProcessorManager,
-        );
-    }
+        }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {

@@ -31,17 +31,7 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
         NotificationTypeDataLoader $notificationTypeDataLoader,
     ) {
         $this->notificationTypeDataLoader = $notificationTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-        );
-    }
+        }
     
     public function getTypeName(): string
     {

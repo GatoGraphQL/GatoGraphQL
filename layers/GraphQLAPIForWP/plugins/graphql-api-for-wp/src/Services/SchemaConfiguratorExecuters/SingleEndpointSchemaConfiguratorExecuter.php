@@ -31,9 +31,6 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         $this->moduleRegistry = $moduleRegistry;
         $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
         $this->graphQLEndpointHandler = $graphQLEndpointHandler;
-        parent::__construct(
-            $instanceManager,
-        );
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 

@@ -24,13 +24,7 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $moduleProcessorManager,
-        );
-    }
+        }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {

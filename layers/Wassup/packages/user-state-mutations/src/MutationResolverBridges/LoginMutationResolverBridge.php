@@ -24,13 +24,7 @@ class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridg
         LoginMutationResolver $loginMutationResolver,
     ) {
         $this->loginMutationResolver = $loginMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

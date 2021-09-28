@@ -45,21 +45,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
     ) {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         $this->queryRootTypeDataLoader = $queryRootTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-            $rootObjectTypeResolver,
-        );
-    }
+        }
 
     public function getTypeName(): string
     {

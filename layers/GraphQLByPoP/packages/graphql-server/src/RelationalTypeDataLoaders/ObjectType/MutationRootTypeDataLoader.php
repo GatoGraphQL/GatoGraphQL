@@ -20,12 +20,7 @@ class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
         MutationRoot $mutationRoot,
     ) {
         $this->mutationRoot = $mutationRoot;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
-    }
+        }
 
     public function getObjects(array $ids): array
     {

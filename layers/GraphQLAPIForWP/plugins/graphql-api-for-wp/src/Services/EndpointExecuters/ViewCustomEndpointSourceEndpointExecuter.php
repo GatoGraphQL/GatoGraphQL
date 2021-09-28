@@ -19,11 +19,7 @@ class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpoin
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-        );
-    }
+        }
 
     public function getEnablingModule(): ?string
     {

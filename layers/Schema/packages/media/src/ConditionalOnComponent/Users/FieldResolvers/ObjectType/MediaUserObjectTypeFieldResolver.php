@@ -40,18 +40,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->userMediaTypeAPI = $userMediaTypeAPI;
         $this->userObjectTypeResolver = $userObjectTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

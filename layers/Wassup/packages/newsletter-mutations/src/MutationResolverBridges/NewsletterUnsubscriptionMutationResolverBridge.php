@@ -23,13 +23,7 @@ class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormCompone
         NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver,
     ) {
         $this->newsletterUnsubscriptionMutationResolver = $newsletterUnsubscriptionMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

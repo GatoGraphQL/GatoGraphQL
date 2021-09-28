@@ -19,9 +19,5 @@ abstract class AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelat
         AccessControlManagerInterface $accessControlManager,
     ) {
         $this->accessControlManager = $accessControlManager;
-        parent::__construct(
-            $instanceManager,
-            $fieldQueryInterpreter,
-        );
-    }
+        }
 }

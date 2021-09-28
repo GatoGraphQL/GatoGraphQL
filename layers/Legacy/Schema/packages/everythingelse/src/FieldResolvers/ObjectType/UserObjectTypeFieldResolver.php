@@ -33,16 +33,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

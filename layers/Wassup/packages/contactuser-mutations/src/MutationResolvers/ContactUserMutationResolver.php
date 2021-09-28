@@ -19,11 +19,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
-    }
+        }
 
     public function validateErrors(array $form_data): ?array
     {

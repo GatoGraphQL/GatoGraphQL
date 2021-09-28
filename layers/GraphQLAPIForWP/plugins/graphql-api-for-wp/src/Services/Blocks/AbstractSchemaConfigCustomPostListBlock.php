@@ -30,15 +30,7 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
     ) {
         $this->blockRenderingHelpers = $blockRenderingHelpers;
         $this->cptUtils = $cptUtils;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-            $schemaConfigurationBlockCategory,
-        );
-    }
+        }
 
     abstract protected function getAttributeName(): string;
 

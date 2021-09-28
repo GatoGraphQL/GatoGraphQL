@@ -19,11 +19,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
-    }
+        }
 
     public function validateErrors(array $form_data): ?array
     {

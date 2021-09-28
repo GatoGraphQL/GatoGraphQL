@@ -33,14 +33,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {
         $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
-    }
+        }
 
     protected function getBlockName(): string
     {

@@ -22,13 +22,7 @@ class MarkAsReadNotificationMutationResolverBridge extends AbstractMarkAsReadOrU
         MarkAsReadNotificationMutationResolver $markAsReadNotificationMutationResolver,
     ) {
         $this->markAsReadNotificationMutationResolver = $markAsReadNotificationMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

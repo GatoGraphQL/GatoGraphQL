@@ -24,12 +24,7 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
         AboutMenuPage $aboutMenuPage,
     ) {
         $this->aboutMenuPage = $aboutMenuPage;
-        parent::__construct(
-            $instanceManager,
-            $menuPageHelper,
-            $endpointHelpers
-        );
-    }
+        }
 
     public function getMenuPageSlug(): string
     {

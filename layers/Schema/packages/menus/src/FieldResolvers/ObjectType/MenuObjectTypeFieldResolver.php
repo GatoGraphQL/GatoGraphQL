@@ -51,18 +51,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
         $this->menuTypeAPI = $menuTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

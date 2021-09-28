@@ -39,21 +39,7 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
         GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader,
     ) {
         $this->genericCustomPostTypeDataLoader = $genericCustomPostTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-            $customPostTypeAPI,
-        );
-    }
+        }
 
     public function getTypeName(): string
     {

@@ -28,11 +28,6 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
         EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
     ) {
         $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $blockHelpers,
-        );
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 

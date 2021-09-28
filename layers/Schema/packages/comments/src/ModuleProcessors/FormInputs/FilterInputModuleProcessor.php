@@ -61,21 +61,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     ) {
         $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
         $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $modulePathHelpers,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $cmsService,
-            $nameResolver,
-            $dataloadHelperService,
-            $requestHelperService,
-            $modulePaths,
-        );
-    }
+        }
 
     public function getModulesToProcess(): array
     {

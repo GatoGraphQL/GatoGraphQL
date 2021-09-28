@@ -29,12 +29,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $restDataStructureFormatter,
-            $fieldQueryConvertor,
-        );
-    }
+        }
 
     protected function getInitialRESTFields(): string
     {

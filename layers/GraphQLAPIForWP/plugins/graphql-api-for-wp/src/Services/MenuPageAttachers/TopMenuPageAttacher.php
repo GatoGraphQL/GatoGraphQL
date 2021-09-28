@@ -31,10 +31,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $this->userAuthorization = $userAuthorization;
         $this->graphiQLMenuPage = $graphiQLMenuPage;
         $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
-        parent::__construct(
-            $instanceManager,
-        );
-    }
+        }
 
     /**
      * Before adding the menus for the CPTs

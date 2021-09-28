@@ -28,13 +28,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
     ) {
         $this->unsubscribeFromTagMutationResolver = $unsubscribeFromTagMutationResolver;
         $this->postTagTypeAPI = $postTagTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

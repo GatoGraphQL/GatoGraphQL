@@ -20,10 +20,7 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
     ) {
         $this->endpointHelpers = $endpointHelpers;
         $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
-        parent::__construct(
-            $instanceManager,
-        );
-    }
+        }
 
     /**
      * Initialize the configuration if editing a persisted query

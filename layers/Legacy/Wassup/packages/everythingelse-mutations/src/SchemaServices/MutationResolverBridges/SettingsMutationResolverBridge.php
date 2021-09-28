@@ -24,13 +24,7 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
         SettingsMutationResolver $settingsMutationResolver,
     ) {
         $this->settingsMutationResolver = $settingsMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
     
     public function getMutationResolver(): MutationResolverInterface
     {

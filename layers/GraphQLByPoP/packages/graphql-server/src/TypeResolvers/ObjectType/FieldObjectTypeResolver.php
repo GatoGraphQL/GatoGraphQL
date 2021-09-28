@@ -38,20 +38,7 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ) {
         $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
-    }
+        }
 
     public function getTypeName(): string
     {

@@ -22,13 +22,7 @@ class InviteMembersMutationResolverBridge extends AbstractEmailInviteMutationRes
         InviteMembersMutationResolver $inviteMembersMutationResolver,
     ) {
         $this->inviteMembersMutationResolver = $inviteMembersMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
     
     public function getMutationResolver(): MutationResolverInterface
     {

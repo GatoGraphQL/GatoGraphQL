@@ -120,12 +120,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $this->userAvatarTypeResolver = $userAvatarTypeResolver;
         $this->userTypeResolver = $userTypeResolver;
         $this->customPostTypeRegistry = $customPostTypeRegistry;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $translationAPI,
-        );
-    }
+        }
 
     /**
      * @return string[]

@@ -20,12 +20,7 @@ class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
         QueryRoot $queryRoot,
     ) {
         $this->queryRoot = $queryRoot;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
-    }
+        }
 
     public function getObjects(array $ids): array
     {

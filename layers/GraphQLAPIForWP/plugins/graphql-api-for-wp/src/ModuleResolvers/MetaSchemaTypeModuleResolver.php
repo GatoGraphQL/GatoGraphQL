@@ -62,12 +62,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
         $this->postCategoryTypeResolver = $postCategoryTypeResolver;
         $this->postTypeResolver = $postTypeResolver;
         $this->userTypeResolver = $userTypeResolver;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $translationAPI,
-        );
-    }
+        }
 
     /**
      * @return string[]

@@ -28,13 +28,7 @@ class EndpointComponentEditorScript extends AbstractEditorScript
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $generalUtils,
-            $editorHelpers,
-        );
-    }
+        }
 
     /**
      * Block name

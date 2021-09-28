@@ -21,11 +21,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
         ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver,
     ) {
         $this->validateIsUserLoggedInDirectiveResolver = $validateIsUserLoggedInDirectiveResolver;
-        parent::__construct(
-            $instanceManager,
-            $fieldQueryInterpreter,
-        );
-    }
+        }
 
     /**
      * Verify that the user is logged in before checking the roles/capabilities

@@ -19,13 +19,7 @@ class MarkdownContentParser extends AbstractContentParser implements MarkdownCon
         ?string $baseURL = null,
     ) {
         $this->markdownConvertorInterface = $markdownConvertorInterface;
-        parent::__construct(
-            $requestHelperService,
-            $localeHelper,
-            $baseDir,
-            $baseURL,
-        );
-    }
+        }
 
     /**
      * Parse the file's Markdown into HTML Content

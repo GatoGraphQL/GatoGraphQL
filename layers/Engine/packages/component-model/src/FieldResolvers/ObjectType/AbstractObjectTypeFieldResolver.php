@@ -78,12 +78,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $this->semverHelperService = $semverHelperService;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->engine = $engine;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     final public function getClassesToAttachTo(): array
     {

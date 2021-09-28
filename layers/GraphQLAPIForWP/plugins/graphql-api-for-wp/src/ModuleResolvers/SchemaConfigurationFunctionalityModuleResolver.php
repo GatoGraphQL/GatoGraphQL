@@ -44,12 +44,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ) {
         $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $translationAPI,
-        );
-    }
+        }
 
     /**
      * Setting options

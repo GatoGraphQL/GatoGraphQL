@@ -22,12 +22,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ) {
         $this->moduleProcessorManager = $moduleProcessorManager;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
-    }
+        }
 
     /**
      * @return mixed[]

@@ -29,12 +29,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     ) {
         $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
-    }
+        }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {

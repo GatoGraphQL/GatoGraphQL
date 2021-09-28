@@ -26,13 +26,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
         SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry
     ) {
         $this->schemaConfigBlockRegistry = $schemaConfigBlockRegistry;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $cptUtils,
-        );
-    }
+        }
 
     /**
      * Custom Post Type name

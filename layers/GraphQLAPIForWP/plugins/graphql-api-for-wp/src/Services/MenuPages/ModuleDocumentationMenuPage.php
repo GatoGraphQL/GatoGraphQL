@@ -32,12 +32,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
     ) {
         $this->moduleRegistry = $moduleRegistry;
         $this->modulesMenuPage = $modulesMenuPage;
-        parent::__construct(
-            $instanceManager,
-            $menuPageHelper,
-            $endpointHelpers
-        );
-    }
+        }
 
     public function getMenuPageSlug(): string
     {

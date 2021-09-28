@@ -23,13 +23,7 @@ class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponent
         NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver,
     ) {
         $this->newsletterSubscriptionMutationResolver = $newsletterSubscriptionMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

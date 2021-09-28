@@ -18,10 +18,7 @@ class PluginMenu extends AbstractMenu
         UserAuthorizationInterface $userAuthorization
     ) {
         $this->userAuthorization = $userAuthorization;
-        parent::__construct(
-            $instanceManager,
-        );
-    }
+        }
 
     public function getName(): string
     {

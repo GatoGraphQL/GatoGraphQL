@@ -23,13 +23,7 @@ class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaC
         EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
     ) {
         $this->endpointSchemaConfigurationExecuterRegistry = $endpointSchemaConfigurationExecuterRegistry;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $blockHelpers,
-            $endpointSchemaConfigurationBlock,
-        );
-    }
+        }
 
     /**
      * Only enable the service, if the corresponding module is also enabled

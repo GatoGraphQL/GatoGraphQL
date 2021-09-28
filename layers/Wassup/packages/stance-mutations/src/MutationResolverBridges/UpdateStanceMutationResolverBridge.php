@@ -22,13 +22,7 @@ class UpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutat
         UpdateStanceMutationResolver $updateStanceMutationResolver,
     ) {
         $this->updateStanceMutationResolver = $updateStanceMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

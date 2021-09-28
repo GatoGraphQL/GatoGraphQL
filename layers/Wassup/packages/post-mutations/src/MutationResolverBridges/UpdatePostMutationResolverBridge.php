@@ -22,13 +22,7 @@ class UpdatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationR
         UpdatePostMutationResolver $updatePostMutationResolver,
     ) {
         $this->updatePostMutationResolver = $updatePostMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

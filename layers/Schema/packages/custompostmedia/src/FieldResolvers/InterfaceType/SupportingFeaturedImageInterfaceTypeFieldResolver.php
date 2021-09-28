@@ -42,17 +42,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->idScalarTypeResolver = $idScalarTypeResolver;
         $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $cmsService,
-            $schemaNamespacingService,
-            $typeRegistry,
-            $schemaDefinitionService,
-        );
-    }
+        }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

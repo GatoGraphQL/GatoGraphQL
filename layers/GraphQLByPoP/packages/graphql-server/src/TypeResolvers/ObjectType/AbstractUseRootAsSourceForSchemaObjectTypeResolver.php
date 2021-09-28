@@ -41,20 +41,7 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
         RootObjectTypeResolver $rootObjectTypeResolver,
     ) {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
-    }
+        }
 
     protected function getTypeResolverToCalculateSchema(): RelationalTypeResolverInterface
     {

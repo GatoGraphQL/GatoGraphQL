@@ -41,20 +41,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     ) {
         $this->userTypeAPI = $userTypeAPI;
         $this->userTypeDataLoader = $userTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
-    }
+        }
 
     public function getTypeName(): string
     {

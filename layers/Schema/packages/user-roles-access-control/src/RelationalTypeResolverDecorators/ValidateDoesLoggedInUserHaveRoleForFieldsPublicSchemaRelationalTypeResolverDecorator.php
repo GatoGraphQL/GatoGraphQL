@@ -28,11 +28,7 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
     ) {
         $this->accessControlManager = $accessControlManager;
         $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
-        parent::__construct(
-            $instanceManager,
-            $fieldQueryInterpreter,
-        );
-    }
+        }
 
     protected function getConfigurationEntries(): array
     {

@@ -63,19 +63,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
         $this->customPostTypeAPI = $customPostTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

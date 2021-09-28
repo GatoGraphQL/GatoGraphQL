@@ -37,17 +37,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
         GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
     ) {
         $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-            $schemaConfigurationBlockCategory,
-            $blockRenderingHelpers,
-            $cptUtils,
-        );
-    }
+        }
 
     protected function getBlockName(): string
     {

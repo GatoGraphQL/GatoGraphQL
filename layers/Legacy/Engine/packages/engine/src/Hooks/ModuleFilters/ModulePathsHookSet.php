@@ -24,12 +24,7 @@ class ModulePathsHookSet extends AbstractHookSet
         ModulePaths $modulePaths
     ) {
         $this->modulePaths = $modulePaths;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

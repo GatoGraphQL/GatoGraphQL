@@ -24,14 +24,7 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
         PostTypeAPIInterface $postTypeAPI,
     ) {
         $this->postTypeAPI = $postTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $moduleProcessorManager,
-            $customPostTypeAPI,
-        );
-    }
+        }
 
     public function executeQuery($query, array $options = []): array
     {

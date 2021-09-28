@@ -20,9 +20,5 @@ abstract class AbstractConfigurableAccessControlForFieldsInPublicSchemaRelationa
         AccessControlManagerInterface $accessControlManager,
     ) {
         $this->accessControlManager = $accessControlManager;
-        parent::__construct(
-            $instanceManager,
-            $fieldQueryInterpreter,
-        );
-    }
+        }
 }

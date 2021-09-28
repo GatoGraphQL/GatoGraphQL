@@ -41,22 +41,7 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ) {
         $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $modulePathHelpers,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $cmsService,
-            $nameResolver,
-            $dataloadHelperService,
-            $requestHelperService,
-            $modulePaths,
-            $listQueryInputOutputHandler,
-        );
-    }
+        }
 
     public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {

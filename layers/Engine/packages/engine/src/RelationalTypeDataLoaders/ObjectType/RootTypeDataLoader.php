@@ -20,12 +20,7 @@ class RootTypeDataLoader extends AbstractObjectTypeDataLoader
         Root $root,
     ) {
         $this->root = $root;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
-    }
+        }
 
     public function getObjects(array $ids): array
     {

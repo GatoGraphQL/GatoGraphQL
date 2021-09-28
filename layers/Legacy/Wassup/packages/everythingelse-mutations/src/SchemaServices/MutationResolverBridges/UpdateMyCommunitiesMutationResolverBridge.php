@@ -25,13 +25,7 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
         UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver,
     ) {
         $this->updateMyCommunitiesMutationResolver = $updateMyCommunitiesMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
     
     public function getMutationResolver(): MutationResolverInterface
     {

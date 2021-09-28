@@ -25,11 +25,7 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
     ) {
         $this->blockHelpers = $blockHelpers;
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-        );
-    }
+        }
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {

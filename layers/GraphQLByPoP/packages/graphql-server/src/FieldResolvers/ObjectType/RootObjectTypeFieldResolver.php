@@ -47,18 +47,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         $this->schemaTypeDataLoader = $schemaTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -24,13 +24,7 @@ class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMuta
         AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {
         $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

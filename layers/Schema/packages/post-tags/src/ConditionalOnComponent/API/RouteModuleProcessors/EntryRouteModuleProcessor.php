@@ -23,10 +23,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
         $this->postTagTypeAPI = $postTagTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-        );
-    }
+        }
 
     /**
      * @return array<string, array<array>>

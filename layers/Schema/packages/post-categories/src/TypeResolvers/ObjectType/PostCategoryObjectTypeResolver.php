@@ -40,20 +40,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
         PostCategoryTypeDataLoader $postCategoryTypeDataLoader,
     ) {
         $this->postCategoryTypeDataLoader = $postCategoryTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
-    }
+        }
 
     public function getTypeName(): string
     {

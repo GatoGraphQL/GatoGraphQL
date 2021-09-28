@@ -40,19 +40,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     ) {
         $this->dateScalarTypeResolver = $dateScalarTypeResolver;
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $cmsService,
-            $schemaNamespacingService,
-            $typeRegistry,
-            $schemaDefinitionService,
-            $urlScalarTypeResolver,
-            $stringScalarTypeResolver,
-        );
-    }
+        }
 
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {

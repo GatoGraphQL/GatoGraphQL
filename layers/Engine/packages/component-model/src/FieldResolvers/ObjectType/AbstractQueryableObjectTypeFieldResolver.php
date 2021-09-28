@@ -39,18 +39,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ) {
         $this->moduleProcessorManager = $moduleProcessorManager;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
-    }
+        }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {

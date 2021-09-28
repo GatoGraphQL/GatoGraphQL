@@ -41,20 +41,7 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
     ) {
         $this->mediaTypeAPI = $mediaTypeAPI;
         $this->mediaTypeDataLoader = $mediaTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
-    }
+        }
 
     public function getTypeName(): string
     {

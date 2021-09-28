@@ -23,13 +23,7 @@ class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBrid
         LogoutMutationResolver $logoutMutationResolver,
     ) {
         $this->logoutMutationResolver = $logoutMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

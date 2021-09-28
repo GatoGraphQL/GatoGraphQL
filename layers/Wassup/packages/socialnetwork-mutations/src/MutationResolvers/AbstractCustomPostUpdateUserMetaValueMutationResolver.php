@@ -18,11 +18,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
-    }
+        }
 
     protected function eligible($post)
     {

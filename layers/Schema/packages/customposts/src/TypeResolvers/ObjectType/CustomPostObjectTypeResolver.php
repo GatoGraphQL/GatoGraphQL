@@ -45,21 +45,7 @@ class CustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
         CustomPostTypeDataLoader $customPostTypeDataLoader,
     ) {
         $this->customPostTypeDataLoader = $customPostTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-            $customPostTypeAPI,
-        );
-    }
+        }
 
     public function getTypeName(): string
     {

@@ -20,12 +20,7 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
         UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet,
     ) {
         $this->userCustomPostFilterInputHookSet = $userCustomPostFilterInputHookSet;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

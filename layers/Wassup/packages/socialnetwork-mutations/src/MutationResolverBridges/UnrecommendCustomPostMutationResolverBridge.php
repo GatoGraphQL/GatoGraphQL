@@ -25,14 +25,7 @@ class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpda
         UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver,
     ) {
         $this->unrecommendCustomPostMutationResolver = $unrecommendCustomPostMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-            $customPostTypeAPI,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

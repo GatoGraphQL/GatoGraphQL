@@ -21,12 +21,7 @@ class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
     ) {
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
-    }
+        }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {

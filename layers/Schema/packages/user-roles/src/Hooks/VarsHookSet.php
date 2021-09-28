@@ -25,12 +25,7 @@ class VarsHookSet extends AbstractHookSet
         UserRoleTypeAPIInterface $userRoleTypeAPI,
     ) {
         $this->userRoleTypeAPI = $userRoleTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

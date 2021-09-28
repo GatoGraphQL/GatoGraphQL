@@ -23,13 +23,7 @@ class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResol
         VolunteerMutationResolver $volunteerMutationResolver,
     ) {
         $this->volunteerMutationResolver = $volunteerMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

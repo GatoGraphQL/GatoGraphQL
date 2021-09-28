@@ -46,20 +46,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     ) {
         $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
         $this->directiveRegistry = $directiveRegistry;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $typeObjectTypeResolver,
-            $directiveObjectTypeResolver,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

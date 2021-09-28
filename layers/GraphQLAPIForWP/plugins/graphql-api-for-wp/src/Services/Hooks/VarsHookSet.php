@@ -26,12 +26,7 @@ class VarsHookSet extends AbstractHookSet
     ) {
         $this->moduleRegistry = $moduleRegistry;
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

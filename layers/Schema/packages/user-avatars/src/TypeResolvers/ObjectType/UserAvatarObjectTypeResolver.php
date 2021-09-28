@@ -38,20 +38,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
         UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
     ) {
         $this->userAvatarTypeDataLoader = $userAvatarTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
-    }
+        }
 
     public function getTypeName(): string
     {

@@ -36,18 +36,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
     ) {
         $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -24,12 +24,7 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
         CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
     ) {
         $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $blockHelpers,
-        );
-    }
+        }
 
     /**
      * Only enable the service, if the corresponding module is also enabled

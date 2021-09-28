@@ -18,11 +18,7 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
         EngineInterface $engine,
     ) {
         $this->engine = $engine;
-        parent::__construct(
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-        );
-    }
+        }
 
     public function getName(): string
     {

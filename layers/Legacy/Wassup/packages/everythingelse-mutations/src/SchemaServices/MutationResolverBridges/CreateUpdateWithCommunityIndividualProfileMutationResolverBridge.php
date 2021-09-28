@@ -26,15 +26,7 @@ class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends C
         CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver,
     ) {
         $this->createUpdateWithCommunityIndividualProfileMutationResolver = $createUpdateWithCommunityIndividualProfileMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-            $createUpdateProfileMutationResolver,
-            $createUpdateIndividualProfileMutationResolver,
-        );
-    }
+        }
     
     public function getMutationResolver(): MutationResolverInterface
     {

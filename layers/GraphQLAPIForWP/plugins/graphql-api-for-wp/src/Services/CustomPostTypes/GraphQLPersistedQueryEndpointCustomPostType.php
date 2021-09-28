@@ -47,15 +47,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         $this->persistedQueryEndpointExecuterRegistryInterface = $persistedQueryEndpointExecuterRegistryInterface;
         $this->persistedQueryEndpointAnnotatorRegistryInterface = $persistedQueryEndpointAnnotatorRegistryInterface;
         $this->persistedQueryEndpointOptionsBlock = $persistedQueryEndpointOptionsBlock;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $cptUtils,
-            $hooksAPI,
-            $blockHelpers,
-        );
-    }
+        }
 
     /**
      * Custom Post Type name

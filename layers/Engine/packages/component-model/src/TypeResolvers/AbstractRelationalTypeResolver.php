@@ -88,15 +88,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $this->errorProvider = $errorProvider;
         $this->dataloadingEngine = $dataloadingEngine;
         $this->directivePipelineService = $directivePipelineService;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-        );
-    }
+        }
 
     /**
      * @return array<string,DirectiveResolverInterface[]>

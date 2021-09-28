@@ -25,14 +25,7 @@ class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdate
         RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver,
     ) {
         $this->recommendCustomPostMutationResolver = $recommendCustomPostMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-            $customPostTypeAPI,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

@@ -26,13 +26,7 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         CommentTypeAPIInterface $commentTypeAPI,
     ) {
         $this->commentTypeAPI = $commentTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $moduleProcessorManager,
-        );
-    }
+        }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {

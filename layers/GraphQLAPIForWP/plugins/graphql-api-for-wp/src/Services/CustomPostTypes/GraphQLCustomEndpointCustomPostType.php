@@ -47,15 +47,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         $this->customEndpointExecuterRegistryInterface = $customEndpointExecuterRegistryInterface;
         $this->customEndpointAnnotatorRegistryInterface = $customEndpointAnnotatorRegistryInterface;
         $this->customEndpointOptionsBlock = $customEndpointOptionsBlock;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $cptUtils,
-            $hooksAPI,
-            $blockHelpers,
-        );
-    }
+        }
 
     /**
      * Custom Post Type name

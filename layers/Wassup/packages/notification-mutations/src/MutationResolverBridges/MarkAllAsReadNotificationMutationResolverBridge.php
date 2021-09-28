@@ -24,13 +24,7 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
         MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver,
     ) {
         $this->markAllAsReadNotificationMutationResolver = $markAllAsReadNotificationMutationResolver;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     public function getMutationResolver(): MutationResolverInterface
     {

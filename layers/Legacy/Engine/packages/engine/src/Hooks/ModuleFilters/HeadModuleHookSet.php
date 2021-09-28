@@ -23,12 +23,7 @@ class HeadModuleHookSet extends AbstractHookSet
         HeadModule $headModule
     ) {
         $this->headModule = $headModule;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

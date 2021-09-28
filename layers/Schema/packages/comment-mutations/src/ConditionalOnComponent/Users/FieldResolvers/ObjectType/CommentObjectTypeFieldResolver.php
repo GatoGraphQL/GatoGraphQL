@@ -65,30 +65,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     ) {
         $this->userCommentTypeAPI = $userCommentTypeAPI;
         $this->userTypeAPI = $userTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-            $commentTypeAPI,
-            $stringScalarTypeResolver,
-            $urlScalarTypeResolver,
-            $emailScalarTypeResolver,
-            $idScalarTypeResolver,
-            $booleanScalarTypeResolver,
-            $dateScalarTypeResolver,
-            $intScalarTypeResolver,
-            $commentObjectTypeResolver,
-            $commentStatusEnumTypeResolver,
-            $dateFormatter,
-        );
-    }
+        }
 
     /**
      * Execute before the upstream class

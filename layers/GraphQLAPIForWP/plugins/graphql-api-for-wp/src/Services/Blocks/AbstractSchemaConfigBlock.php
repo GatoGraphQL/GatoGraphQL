@@ -24,14 +24,7 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
         SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
     ) {
         $this->schemaConfigurationBlockCategory = $schemaConfigurationBlockCategory;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
-    }
+        }
 
     protected function isDynamicBlock(): bool
     {

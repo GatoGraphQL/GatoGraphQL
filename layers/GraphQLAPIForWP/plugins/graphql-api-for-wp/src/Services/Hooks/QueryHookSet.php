@@ -27,12 +27,7 @@ class QueryHookSet extends AbstractHookSet
         CustomPostTypeRegistryInterface $customPostTypeRegistry
     ) {
         $this->customPostTypeRegistry = $customPostTypeRegistry;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

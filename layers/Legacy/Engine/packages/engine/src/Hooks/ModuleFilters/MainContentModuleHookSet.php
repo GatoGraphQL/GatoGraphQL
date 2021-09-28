@@ -21,12 +21,7 @@ class MainContentModuleHookSet extends AbstractHookSet
         MainContentModule $mainContentModule
     ) {
         $this->mainContentModule = $mainContentModule;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

@@ -22,13 +22,7 @@ abstract class AbstractUserUpdateUserMetaValueMutationResolverBridge extends Abs
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
-    }
+        }
 
     protected function getRequestKey()
     {

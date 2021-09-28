@@ -31,12 +31,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         AbstractMainPluginConfiguration $pluginConfiguration,
     ) {
         $this->pluginConfiguration = $pluginConfiguration;
-        parent::__construct(
-            $pluginFile,
-            $pluginVersion,
-            $pluginName,
-        );
-    }
+        }
 
     /**
      * Configure the plugin.

@@ -39,14 +39,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
         $this->blockHelpers = $blockHelpers;
         $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;
         $this->accessControlManager = $accessControlManager;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $moduleRegistry,
-            $typeRegistry,
-            $directiveRegistry,
-        );
-    }
+        }
 
     /**
      * @var array<string, bool>|null

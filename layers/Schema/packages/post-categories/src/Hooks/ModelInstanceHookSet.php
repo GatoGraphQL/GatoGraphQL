@@ -29,12 +29,7 @@ class ModelInstanceHookSet extends AbstractHookSet
     ) {
         $this->postTypeAPI = $postTypeAPI;
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

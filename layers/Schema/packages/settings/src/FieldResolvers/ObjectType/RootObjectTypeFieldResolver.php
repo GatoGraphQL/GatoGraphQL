@@ -41,18 +41,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
         $this->settingsTypeAPI = $settingsTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
-    }
+        }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

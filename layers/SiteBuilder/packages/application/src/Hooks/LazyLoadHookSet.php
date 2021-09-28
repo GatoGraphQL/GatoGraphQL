@@ -31,12 +31,7 @@ class LazyLoadHookSet extends AbstractHookSet
     ) {
         $this->requestHelperService = $requestHelperService;
         $this->lazy = $lazy;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

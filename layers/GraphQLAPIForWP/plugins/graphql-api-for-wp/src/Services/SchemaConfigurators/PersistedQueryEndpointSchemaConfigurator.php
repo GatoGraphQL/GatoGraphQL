@@ -23,13 +23,7 @@ class PersistedQueryEndpointSchemaConfigurator extends AbstractCustomPostEndpoin
         PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $persistedQueryEndpointSchemaConfigurationExecuterRegistry
     ) {
         $this->persistedQueryEndpointSchemaConfigurationExecuterRegistry = $persistedQueryEndpointSchemaConfigurationExecuterRegistry;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $blockHelpers,
-            $endpointSchemaConfigurationBlock,
-        );
-    }
+        }
 
     /**
      * Only enable the service, if the corresponding module is also enabled

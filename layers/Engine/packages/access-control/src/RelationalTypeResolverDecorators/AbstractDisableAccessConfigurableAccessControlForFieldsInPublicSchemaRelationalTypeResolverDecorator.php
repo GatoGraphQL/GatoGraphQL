@@ -20,12 +20,7 @@ abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSc
         DisableAccessDirectiveResolver $disableAccessDirectiveResolver,
     ) {
         $this->disableAccessDirectiveResolver = $disableAccessDirectiveResolver;
-        parent::__construct(
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $accessControlManager,
-        );
-    }
+        }
 
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {

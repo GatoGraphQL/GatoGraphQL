@@ -18,11 +18,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
-    }
+        }
 
     public function validateErrors(array $form_data): ?array
     {

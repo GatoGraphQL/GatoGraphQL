@@ -29,12 +29,7 @@ abstract class AbstractEditorScript extends AbstractScript
         EditorHelpers $editorHelpers,
     ) {
         $this->editorHelpers = $editorHelpers;
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $generalUtils,
-        );
-    }
+        }
 
     /**
      * Pass localized data to the block

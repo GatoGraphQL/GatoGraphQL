@@ -21,12 +21,7 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
         Site $site,
     ) {
         $this->site = $site;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
-    }
+        }
 
     public function getObjects(array $ids): array
     {

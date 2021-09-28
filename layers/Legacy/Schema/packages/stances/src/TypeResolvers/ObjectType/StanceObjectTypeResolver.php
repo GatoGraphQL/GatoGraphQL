@@ -32,17 +32,7 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
         StanceTypeDataLoader $stanceTypeDataLoader,
     ) {
         $this->stanceTypeDataLoader = $stanceTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-        );
-    }
+        }
     
     public function getTypeName(): string
     {

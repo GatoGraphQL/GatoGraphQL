@@ -21,12 +21,7 @@ class VarsHookSet extends AbstractHookSet
         TaxonomyTypeAPIInterface $taxonomyTypeAPI,
     ) {
         $this->taxonomyTypeAPI = $taxonomyTypeAPI;
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
-    }
+        }
 
     protected function init(): void
     {

@@ -35,14 +35,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
         $this->cacheControlBlock = $cacheControlBlock;
         $this->blockHelpers = $blockHelpers;
         $this->cacheControlManager = $cacheControlManager;
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $moduleRegistry,
-            $typeRegistry,
-            $directiveRegistry,
-        );
-    }
+        }
 
     public function isServiceEnabled(): bool
     {

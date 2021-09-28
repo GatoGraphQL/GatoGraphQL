@@ -38,20 +38,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
         SiteTypeDataLoader $siteTypeDataLoader,
     ) {
         $this->siteTypeDataLoader = $siteTypeDataLoader;
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
-    }
+        }
 
     public function getTypeName(): string
     {
