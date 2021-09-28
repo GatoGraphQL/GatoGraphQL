@@ -6,13 +6,11 @@ namespace GraphQLAPI\GraphQLAPI\GetterSetterObjects\BlockAttributes;
 
 class PersistedQueryEndpointGraphiQLBlockAttributes
 {
-    protected string $query;
-    protected array $variables;
-    public function __construct(string $query, array $variables)
-    {
-        $this->query = $query;
+    public function __construct(
+        protected string $query,
         /** @var array<string, mixed> */
-        $this->variables = $variables;
+        protected array $variables,
+    ) {
     }
 
     public function getQuery(): string
