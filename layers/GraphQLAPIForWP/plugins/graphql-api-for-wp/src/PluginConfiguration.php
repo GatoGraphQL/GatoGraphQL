@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use PoP\ComponentModel\Component;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Environment;
@@ -539,7 +538,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         $mainPluginURL = (string) MainPluginManager::getConfig('url');
 
         $componentClassConfiguration = [];
-        $componentClassConfiguration[Component::class] = [
+        $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
             /**
              * Enable the schema entity registries, as to retrieve the type/directive resolver classes
              * from the type/directive names, saved in the DB in the ACL/CCL Custom Post Types
@@ -596,7 +595,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
             // Enable the "admin" fields
-            $componentClassConfiguration[Component::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
+            $componentClassConfiguration[\PoP\ComponentModel\Component::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
             // Enable the "self" fields
             $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_SCHEMA] = true;
             // Enable Nested mutations
