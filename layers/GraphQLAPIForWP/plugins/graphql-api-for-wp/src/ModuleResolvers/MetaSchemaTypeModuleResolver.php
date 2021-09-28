@@ -46,8 +46,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
      * and which does have all the typeResolvers.
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
-     */
-    
+     */    
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireMetaSchemaTypeModuleResolver(
         ?CommentObjectTypeResolver $commentTypeResolver,
@@ -61,7 +60,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
         $this->postCategoryTypeResolver = $postCategoryTypeResolver;
         $this->postTypeResolver = $postTypeResolver;
         $this->userTypeResolver = $userTypeResolver;
-        }
+    }
 
     /**
      * @return string[]

@@ -50,7 +50,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->fragmentCatalogueManager = $fragmentCatalogueManager;
         $this->queryCatalogueManager = $queryCatalogueManager;
         $this->persistentCache = PersistentCacheFacade::getInstance();
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
