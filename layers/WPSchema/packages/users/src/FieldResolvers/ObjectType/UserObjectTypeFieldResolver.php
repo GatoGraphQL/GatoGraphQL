@@ -29,7 +29,9 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     protected DateFormatterInterface $dateFormatter;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserObjectTypeFieldResolver(
         DateFormatterInterface $dateFormatter,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ) {

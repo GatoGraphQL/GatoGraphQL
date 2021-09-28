@@ -13,7 +13,9 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDa
 class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected QueryRoot $queryRoot;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireQueryRootTypeDataLoader(
         QueryRoot $queryRoot,
     ) {
         $this->queryRoot = $queryRoot;

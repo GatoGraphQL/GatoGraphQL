@@ -28,7 +28,9 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected LocationObjectTypeResolver $locationObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireEventObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         LocationObjectTypeResolver $locationObjectTypeResolver,

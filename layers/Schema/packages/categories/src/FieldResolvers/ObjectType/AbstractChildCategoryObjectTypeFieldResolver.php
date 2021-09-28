@@ -35,7 +35,9 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractChildCategoryObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
     ) {

@@ -23,7 +23,9 @@ use PoP\Translation\TranslationAPIInterface;
 class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireElementalObjectTypeFieldResolver(
         ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
     ) {
         $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;

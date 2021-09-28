@@ -29,7 +29,9 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
 {
     protected DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver;
     protected DirectiveRegistryInterface $directiveRegistry;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFilterSystemDirectiveSchemaObjectTypeFieldResolver(
         DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
         DirectiveRegistryInterface $directiveRegistry,
     ) {

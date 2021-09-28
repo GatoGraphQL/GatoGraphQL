@@ -25,7 +25,9 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
     use PostTagAPISatisfiedContractTrait;
     protected PostTagTypeDataLoader $postTagTypeDataLoader;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePostTagObjectTypeResolver(
         PostTagTypeDataLoader $postTagTypeDataLoader,
     ) {
         $this->postTagTypeDataLoader = $postTagTypeDataLoader;

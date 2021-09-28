@@ -16,7 +16,9 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected SettingsMutationResolver $settingsMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSettingsMutationResolverBridge(
         SettingsMutationResolver $settingsMutationResolver,
     ) {
         $this->settingsMutationResolver = $settingsMutationResolver;

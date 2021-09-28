@@ -13,7 +13,9 @@ abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeRe
 {
     protected PageObjectTypeResolver $pageObjectTypeResolver;
     protected PageTypeAPIInterface $pageTypeAPI;
-    public function __construct(PageObjectTypeResolver $pageObjectTypeResolver, PageTypeAPIInterface $pageTypeAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractPageObjectTypeResolverPicker(PageObjectTypeResolver $pageObjectTypeResolver, PageTypeAPIInterface $pageTypeAPI)
     {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
         $this->pageTypeAPI = $pageTypeAPI;

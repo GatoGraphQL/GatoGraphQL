@@ -23,7 +23,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected CustomPostMetaTypeAPIInterface $customPostMetaAPI;
     protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostObjectTypeFieldResolver(
         CustomPostMetaTypeAPIInterface $customPostMetaAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {

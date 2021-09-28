@@ -21,7 +21,9 @@ use PoP\Translation\TranslationAPIInterface;
 class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     protected IDScalarTypeResolver $idScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireElementalInterfaceTypeFieldResolver(
         IDScalarTypeResolver $idScalarTypeResolver,
     ) {
         $this->idScalarTypeResolver = $idScalarTypeResolver;

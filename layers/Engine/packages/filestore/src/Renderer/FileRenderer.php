@@ -12,7 +12,9 @@ class FileRenderer implements FileRendererInterface
 {
     private FileStoreInterface $fileStore;
     private string $separator = PHP_EOL;
-    public function __construct(FileStoreInterface $fileStore, string $separator = PHP_EOL)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFileRenderer(FileStoreInterface $fileStore, string $separator = PHP_EOL)
     {
         $this->fileStore = $fileStore;
         $this->separator = $separator;

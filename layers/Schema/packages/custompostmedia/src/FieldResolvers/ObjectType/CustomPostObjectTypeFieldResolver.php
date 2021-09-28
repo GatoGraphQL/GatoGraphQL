@@ -23,7 +23,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI;
     protected SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostObjectTypeFieldResolver(
         CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI,
         SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver,
     ) {

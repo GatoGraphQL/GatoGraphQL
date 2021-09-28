@@ -21,7 +21,9 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
     protected UserSettingsManagerInterface $userSettingsManager;
     protected EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCustomPostEndpointSchemaConfigurator(
         EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
     ) {
         $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;

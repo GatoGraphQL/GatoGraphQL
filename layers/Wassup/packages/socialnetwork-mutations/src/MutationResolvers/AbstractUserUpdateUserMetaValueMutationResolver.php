@@ -12,7 +12,9 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractUserUpdateUserMetaValueMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;

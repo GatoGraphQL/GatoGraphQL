@@ -24,7 +24,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
 {
     protected DateScalarTypeResolver $dateScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireIsCustomPostInterfaceTypeFieldResolver(
         DateScalarTypeResolver $dateScalarTypeResolver,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {

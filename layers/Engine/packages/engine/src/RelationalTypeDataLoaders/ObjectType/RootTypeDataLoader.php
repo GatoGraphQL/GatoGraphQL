@@ -13,7 +13,9 @@ use PoP\Engine\ObjectModels\Root;
 class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected Root $root;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootTypeDataLoader(
         Root $root,
     ) {
         $this->root = $root;

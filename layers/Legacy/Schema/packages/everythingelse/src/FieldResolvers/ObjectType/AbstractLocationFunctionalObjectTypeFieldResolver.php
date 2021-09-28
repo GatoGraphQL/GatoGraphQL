@@ -22,7 +22,9 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected URLScalarTypeResolver $urlScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractLocationFunctionalObjectTypeFieldResolver(
         URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;

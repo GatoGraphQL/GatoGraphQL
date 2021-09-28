@@ -17,7 +17,9 @@ use WP_Post;
 class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface
 {
     protected EndpointVoyagerBlock $endpointVoyagerBlock;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireVoyagerClientEndpointAnnotator(
         EndpointVoyagerBlock $endpointVoyagerBlock,
     ) {
         $this->endpointVoyagerBlock = $endpointVoyagerBlock;

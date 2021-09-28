@@ -29,7 +29,9 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
 {
     protected LooseContractManagerInterface $looseContractManager;
     protected CacheControlEngineInterface $cacheControlEngine;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireEngine(
         LooseContractManagerInterface $looseContractManager,
         CacheControlEngineInterface $cacheControlEngine
     ) {

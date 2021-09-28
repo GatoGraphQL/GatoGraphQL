@@ -27,7 +27,9 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
     public const ATTRIBUTE_NAME_INHERIT_QUERY = 'inheritQuery';
     protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePersistedQueryEndpointAPIHierarchyBlock(
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {
         $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;

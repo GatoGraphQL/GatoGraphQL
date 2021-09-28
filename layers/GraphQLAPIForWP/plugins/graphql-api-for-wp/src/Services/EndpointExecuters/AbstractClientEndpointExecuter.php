@@ -14,7 +14,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
 {
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractClientEndpointExecuter(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;

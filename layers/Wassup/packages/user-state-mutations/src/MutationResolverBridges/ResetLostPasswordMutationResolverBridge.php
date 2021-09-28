@@ -16,7 +16,9 @@ use PoPSitesWassup\UserStateMutations\MutationResolvers\ResetLostPasswordMutatio
 class ResetLostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireResetLostPasswordMutationResolverBridge(
         ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver,
     ) {
         $this->resetLostPasswordMutationResolver = $resetLostPasswordMutationResolver;

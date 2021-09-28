@@ -28,7 +28,9 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
     protected RootObjectTypeResolver $rootObjectTypeResolver;
     protected QueryRootTypeDataLoader $queryRootTypeDataLoader;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireQueryRootObjectTypeResolver(
         RootObjectTypeResolver $rootObjectTypeResolver,
         QueryRootTypeDataLoader $queryRootTypeDataLoader,
     ) {

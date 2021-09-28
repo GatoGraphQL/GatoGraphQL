@@ -24,7 +24,9 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected CommentTypeAPIInterface $commentTypeAPI;
     protected CommentTypeDataLoader $commentTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCommentObjectTypeResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentTypeDataLoader $commentTypeDataLoader,
     ) {

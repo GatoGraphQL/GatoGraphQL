@@ -16,7 +16,9 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {
     protected CMSServiceInterface $cmsService;
     protected ApplicationInfoInterface $applicationInfo;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireActivatePluginsMutationResolver(
         CMSServiceInterface $cmsService,
         ApplicationInfoInterface $applicationInfo,
     ) {

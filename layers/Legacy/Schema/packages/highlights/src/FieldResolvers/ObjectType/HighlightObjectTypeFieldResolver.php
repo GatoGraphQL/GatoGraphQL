@@ -29,7 +29,9 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected URLScalarTypeResolver $urlScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireHighlightObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,
     ) {

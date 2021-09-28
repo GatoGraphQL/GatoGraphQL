@@ -15,7 +15,9 @@ class DataStructureManager implements DataStructureManagerInterface
     public array $formatters = [];
     protected DataStructureFormatterInterface $defaultFormatter;
 
-    public function __construct(DataStructureFormatterInterface $defaultFormatter)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireDataStructureManager(DataStructureFormatterInterface $defaultFormatter)
     {
         $this->defaultFormatter = $defaultFormatter;
     }

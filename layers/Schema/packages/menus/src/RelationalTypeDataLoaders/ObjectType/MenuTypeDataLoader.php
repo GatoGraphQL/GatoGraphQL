@@ -13,7 +13,9 @@ use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected MenuTypeAPIInterface $menuTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMenuTypeDataLoader(
         MenuTypeAPIInterface $menuTypeAPI,
     ) {
         $this->menuTypeAPI = $menuTypeAPI;

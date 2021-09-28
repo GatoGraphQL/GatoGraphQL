@@ -9,7 +9,9 @@ use PoP\Hooks\HooksAPIInterface;
 abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
 {
     protected HooksAPIInterface $hooksAPI;
-    public function __construct(HooksAPIInterface $hooksAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractUserRoleTypeAPI(HooksAPIInterface $hooksAPI)
     {
         $this->hooksAPI = $hooksAPI;
     }

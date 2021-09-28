@@ -25,7 +25,9 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
     use PostCategoryAPISatisfiedContractTrait;
     protected PostCategoryTypeDataLoader $postCategoryTypeDataLoader;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePostCategoryObjectTypeResolver(
         PostCategoryTypeDataLoader $postCategoryTypeDataLoader,
     ) {
         $this->postCategoryTypeDataLoader = $postCategoryTypeDataLoader;

@@ -7,7 +7,9 @@ namespace PoP\Engine\ErrorHandling;
 class ErrorHelper implements ErrorHelperInterface
 {
     protected ErrorManagerInterface $errorManager;
-    public function __construct(ErrorManagerInterface $errorManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireErrorHelper(ErrorManagerInterface $errorManager)
     {
         $this->errorManager = $errorManager;
     }

@@ -20,7 +20,9 @@ use PoPSchema\Highlights\RelationalTypeDataLoaders\ObjectType\HighlightTypeDataL
 class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected HighlightTypeDataLoader $highlightTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireHighlightObjectTypeResolver(
         HighlightTypeDataLoader $highlightTypeDataLoader,
     ) {
         $this->highlightTypeDataLoader = $highlightTypeDataLoader;

@@ -15,7 +15,9 @@ use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterSubscriptionM
 class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     protected NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireNewsletterSubscriptionMutationResolverBridge(
         NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver,
     ) {
         $this->newsletterSubscriptionMutationResolver = $newsletterSubscriptionMutationResolver;

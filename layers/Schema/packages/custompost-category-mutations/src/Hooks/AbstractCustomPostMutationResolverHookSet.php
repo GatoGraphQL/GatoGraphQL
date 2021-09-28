@@ -22,7 +22,9 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverI
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCustomPostMutationResolverHookSet(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;

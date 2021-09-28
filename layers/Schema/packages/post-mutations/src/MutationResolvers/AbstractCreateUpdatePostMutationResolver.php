@@ -17,7 +17,9 @@ use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
     protected PostTypeAPIInterface $postTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCreateUpdatePostMutationResolver(
         PostTypeAPIInterface $postTypeAPI,
     ) {
         $this->postTypeAPI = $postTypeAPI;

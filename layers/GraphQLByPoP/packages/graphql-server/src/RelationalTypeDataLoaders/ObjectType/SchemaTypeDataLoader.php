@@ -20,7 +20,9 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
     protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSchemaTypeDataLoader(
         SchemaObjectTypeResolver $schemaObjectTypeResolver,
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ) {

@@ -33,7 +33,9 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireTagPostFieldDataloadModuleProcessor(
         PostObjectTypeResolver $postObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {

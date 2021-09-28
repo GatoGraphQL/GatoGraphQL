@@ -13,7 +13,9 @@ abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoa
     protected HooksAPIInterface $hooksAPI;
     protected InstanceManagerInterface $instanceManager;
     protected NameResolverInterface $nameResolver;
-    public function __construct(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, NameResolverInterface $nameResolver)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractRelationalTypeDataLoader(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, NameResolverInterface $nameResolver)
     {
         $this->hooksAPI = $hooksAPI;
         $this->instanceManager = $instanceManager;

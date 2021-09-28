@@ -23,7 +23,9 @@ use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractGlobalUserStateObjectT
 class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObjectTypeFieldResolver
 {
     protected IDScalarTypeResolver $idScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGlobalUserStateObjectTypeFieldResolver(
         IDScalarTypeResolver $idScalarTypeResolver,
     ) {
         $this->idScalarTypeResolver = $idScalarTypeResolver;

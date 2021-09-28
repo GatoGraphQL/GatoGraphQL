@@ -26,7 +26,9 @@ use WP_Post;
 class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePostObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

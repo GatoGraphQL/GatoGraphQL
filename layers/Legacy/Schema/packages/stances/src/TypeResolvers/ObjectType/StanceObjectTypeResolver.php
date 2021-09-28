@@ -20,7 +20,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 class StanceObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected StanceTypeDataLoader $stanceTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireStanceObjectTypeResolver(
         StanceTypeDataLoader $stanceTypeDataLoader,
     ) {
         $this->stanceTypeDataLoader = $stanceTypeDataLoader;

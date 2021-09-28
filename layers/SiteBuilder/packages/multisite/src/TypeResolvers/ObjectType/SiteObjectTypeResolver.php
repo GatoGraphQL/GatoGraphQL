@@ -23,7 +23,9 @@ use PoP\Multisite\RelationalTypeDataLoaders\ObjectType\SiteTypeDataLoader;
 class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected SiteTypeDataLoader $siteTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSiteObjectTypeResolver(
         SiteTypeDataLoader $siteTypeDataLoader,
     ) {
         $this->siteTypeDataLoader = $siteTypeDataLoader;

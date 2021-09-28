@@ -17,7 +17,9 @@ use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtil
 class ResetLostPasswordMutationResolver extends AbstractMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireResetLostPasswordMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;

@@ -42,7 +42,9 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     protected PostTagObjectTypeResolver $postTagObjectTypeResolver;
     protected PostTagTypeAPIInterface $postTagTypeAPI;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootPostTagObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         PostTagObjectTypeResolver $postTagObjectTypeResolver,

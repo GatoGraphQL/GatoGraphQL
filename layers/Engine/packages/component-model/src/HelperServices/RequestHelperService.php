@@ -14,7 +14,9 @@ use PoP\Hooks\HooksAPIInterface;
 class RequestHelperService implements RequestHelperServiceInterface
 {
     protected HooksAPIInterface $hooksAPI;
-    public function __construct(HooksAPIInterface $hooksAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRequestHelperService(HooksAPIInterface $hooksAPI)
     {
         $this->hooksAPI = $hooksAPI;
     }

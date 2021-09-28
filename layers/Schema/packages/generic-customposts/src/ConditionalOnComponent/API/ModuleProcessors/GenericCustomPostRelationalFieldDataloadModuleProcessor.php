@@ -35,7 +35,9 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
     protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGenericCustomPostRelationalFieldDataloadModuleProcessor(
         GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {

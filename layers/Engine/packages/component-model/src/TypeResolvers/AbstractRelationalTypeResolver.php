@@ -70,7 +70,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected DataloadingEngineInterface $dataloadingEngine;
     protected DirectivePipelineServiceInterface $directivePipelineService;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractRelationalTypeResolver(
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,

@@ -26,7 +26,9 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     protected CommentTypeMutationAPIInterface $commentTypeMutationAPI;
     protected UserTypeAPIInterface $userTypeAPI;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAddCommentToCustomPostMutationResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentTypeMutationAPIInterface $commentTypeMutationAPI,
         UserTypeAPIInterface $userTypeAPI,

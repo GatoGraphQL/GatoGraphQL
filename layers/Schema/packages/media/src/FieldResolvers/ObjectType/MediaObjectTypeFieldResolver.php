@@ -36,7 +36,9 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected DateScalarTypeResolver $dateScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMediaObjectTypeFieldResolver(
         MediaTypeAPIInterface $mediaTypeAPI,
         DateFormatterInterface $dateFormatter,
         URLScalarTypeResolver $urlScalarTypeResolver,

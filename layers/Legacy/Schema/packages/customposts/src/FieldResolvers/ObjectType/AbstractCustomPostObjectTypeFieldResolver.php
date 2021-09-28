@@ -23,7 +23,9 @@ use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCustomPostObjectTypeFieldResolver(
         IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver,
     ) {
         $this->isCustomPostInterfaceTypeFieldResolver = $isCustomPostInterfaceTypeFieldResolver;

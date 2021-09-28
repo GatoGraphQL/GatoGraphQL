@@ -38,7 +38,9 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected PostTypeAPIInterface $postTypeAPI;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractPostObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         PostObjectTypeResolver $postObjectTypeResolver,
         PostTypeAPIInterface $postTypeAPI,

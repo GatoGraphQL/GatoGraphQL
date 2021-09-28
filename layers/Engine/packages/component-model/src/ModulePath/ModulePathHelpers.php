@@ -10,7 +10,9 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 class ModulePathHelpers implements ModulePathHelpersInterface
 {
     protected ModulePathManagerInterface $modulePathManager;
-    public function __construct(ModulePathManagerInterface $modulePathManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireModulePathHelpers(ModulePathManagerInterface $modulePathManager)
     {
         $this->modulePathManager = $modulePathManager;
     }

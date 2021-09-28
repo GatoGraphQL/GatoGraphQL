@@ -15,7 +15,9 @@ use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
     protected PostTypeAPIInterface $postTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePostTypeDataLoader(
         PostTypeAPIInterface $postTypeAPI,
     ) {
         $this->postTypeAPI = $postTypeAPI;

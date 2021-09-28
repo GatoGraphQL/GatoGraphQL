@@ -18,7 +18,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 {
     protected AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGraphiQLMenuPage(
         AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient,
     ) {
         $this->adminGraphiQLWithExplorerClient = $adminGraphiQLWithExplorerClient;

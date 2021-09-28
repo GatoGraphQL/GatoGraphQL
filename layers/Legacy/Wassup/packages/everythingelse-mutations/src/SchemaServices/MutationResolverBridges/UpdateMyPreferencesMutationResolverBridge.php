@@ -16,7 +16,9 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Upda
 class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUpdateMyPreferencesMutationResolverBridge(
         UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver,
     ) {
         $this->updateMyPreferencesMutationResolver = $updateMyPreferencesMutationResolver;

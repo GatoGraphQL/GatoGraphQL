@@ -24,7 +24,9 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
     protected UserTypeDataLoader $userTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserObjectTypeResolver(
         UserTypeAPIInterface $userTypeAPI,
         UserTypeDataLoader $userTypeDataLoader,
     ) {

@@ -22,7 +22,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected UserRoleTypeDataLoader $userRoleTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserRoleObjectTypeResolver(
         UserRoleTypeDataLoader $userRoleTypeDataLoader,
     ) {
         $this->userRoleTypeDataLoader = $userRoleTypeDataLoader;

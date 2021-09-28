@@ -10,7 +10,9 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiatedService
 {
     protected EndpointHelpers $endpointHelpers;
-    public function __construct(EndpointHelpers $endpointHelpers)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractEndpointResolver(EndpointHelpers $endpointHelpers)
     {
         $this->endpointHelpers = $endpointHelpers;
     }

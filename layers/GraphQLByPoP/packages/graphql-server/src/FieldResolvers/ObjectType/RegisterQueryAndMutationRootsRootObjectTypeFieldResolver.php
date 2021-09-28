@@ -31,7 +31,9 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
 {
     protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
     protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRegisterQueryAndMutationRootsRootObjectTypeFieldResolver(
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
     ) {

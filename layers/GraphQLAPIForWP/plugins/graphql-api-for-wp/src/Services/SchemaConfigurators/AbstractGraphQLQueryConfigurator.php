@@ -21,7 +21,9 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     protected ModuleRegistryInterface $moduleRegistry;
     protected TypeRegistryInterface $typeRegistry;
     protected DirectiveRegistryInterface $directiveRegistry;
-    public function __construct(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirefor(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry)
     {
         $this->hooksAPI = $hooksAPI;
         $this->instanceManager = $instanceManager;

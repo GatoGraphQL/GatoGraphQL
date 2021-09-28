@@ -23,7 +23,9 @@ use PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuItemTypeDataLoader;
 class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected MenuItemTypeDataLoader $menuItemTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMenuItemObjectTypeResolver(
         MenuItemTypeDataLoader $menuItemTypeDataLoader,
     ) {
         $this->menuItemTypeDataLoader = $menuItemTypeDataLoader;

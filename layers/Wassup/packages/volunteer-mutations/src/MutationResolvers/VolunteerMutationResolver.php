@@ -13,7 +13,9 @@ use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 class VolunteerMutationResolver extends AbstractMutationResolver
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireVolunteerMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;

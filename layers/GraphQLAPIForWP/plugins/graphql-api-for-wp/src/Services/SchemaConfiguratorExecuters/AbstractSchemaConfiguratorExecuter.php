@@ -12,7 +12,9 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyInstantiatedService
 {
     protected InstanceManagerInterface $instanceManager;
-    public function __construct(InstanceManagerInterface $instanceManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractSchemaConfiguratorExecuter(InstanceManagerInterface $instanceManager)
     {
         $this->instanceManager = $instanceManager;
     }

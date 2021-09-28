@@ -26,7 +26,9 @@ use WP_Post;
 class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     protected PageObjectTypeResolver $pageObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootPageObjectTypeFieldResolver(
         PageObjectTypeResolver $pageObjectTypeResolver,
     ) {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;

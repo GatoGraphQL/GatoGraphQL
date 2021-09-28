@@ -13,7 +13,9 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator
 {
     protected DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator(
         DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver,
     ) {
         $this->disableAccessForDirectivesDirectiveResolver = $disableAccessForDirectivesDirectiveResolver;

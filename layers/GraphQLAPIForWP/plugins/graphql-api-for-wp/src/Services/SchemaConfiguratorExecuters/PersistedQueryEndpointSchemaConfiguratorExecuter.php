@@ -13,7 +13,9 @@ class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCP
 {
     protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator;
     protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePersistedQueryEndpointSchemaConfiguratorExecuter(
         PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator,
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
     ) {

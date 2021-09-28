@@ -17,7 +17,9 @@ class VarsHookSet extends AbstractHookSet
 {
     protected ModuleRegistryInterface $moduleRegistry;
     protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireVarsHookSet(
         ModuleRegistryInterface $moduleRegistry,
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
     ) {

@@ -15,7 +15,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 abstract class AbstractSchemaConfigBlock extends AbstractBlock implements SchemaConfigEditorBlockServiceTagInterface
 {
     protected SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractSchemaConfigBlock(
         SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
     ) {
         $this->schemaConfigurationBlockCategory = $schemaConfigurationBlockCategory;

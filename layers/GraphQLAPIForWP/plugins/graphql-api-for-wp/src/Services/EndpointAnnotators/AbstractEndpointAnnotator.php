@@ -13,7 +13,9 @@ abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
 {
     protected InstanceManagerInterface $instanceManager;
     protected ModuleRegistryInterface $moduleRegistry;
-    public function __construct(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractEndpointAnnotator(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry)
     {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;

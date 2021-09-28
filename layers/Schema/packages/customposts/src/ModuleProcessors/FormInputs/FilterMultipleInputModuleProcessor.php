@@ -34,7 +34,9 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
     public const MODULE_FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
     protected FormInputHelperServiceInterface $formInputHelperService;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFilterMultipleInputModuleProcessor(
         FormInputHelperServiceInterface $formInputHelperService,
     ) {
         $this->formInputHelperService = $formInputHelperService;

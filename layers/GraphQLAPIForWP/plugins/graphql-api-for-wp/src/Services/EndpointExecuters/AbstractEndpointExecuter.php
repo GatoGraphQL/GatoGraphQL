@@ -13,7 +13,9 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
 {
     protected InstanceManagerInterface $instanceManager;
     protected ModuleRegistryInterface $moduleRegistry;
-    public function __construct(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractEndpointExecuter(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry)
     {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;

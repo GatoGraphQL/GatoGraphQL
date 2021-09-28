@@ -14,7 +14,9 @@ use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 class MainContentModuleHookSet extends AbstractHookSet
 {
     protected MainContentModule $mainContentModule;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMainContentModuleHookSet(
         MainContentModule $mainContentModule
     ) {
         $this->mainContentModule = $mainContentModule;

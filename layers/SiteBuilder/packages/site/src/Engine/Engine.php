@@ -27,7 +27,9 @@ use PoP\Translation\TranslationAPIInterface;
 class Engine extends \PoP\Application\Engine\Engine
 {
     protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireEngine(
         ApplicationStateHelperServiceInterface $applicationStateHelperService
     ) {
         $this->applicationStateHelperService = $applicationStateHelperService;

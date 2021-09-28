@@ -26,7 +26,9 @@ use WP_Post;
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;

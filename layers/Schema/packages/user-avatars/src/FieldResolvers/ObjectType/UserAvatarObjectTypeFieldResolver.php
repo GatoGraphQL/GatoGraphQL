@@ -27,7 +27,9 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserAvatarObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
     ) {

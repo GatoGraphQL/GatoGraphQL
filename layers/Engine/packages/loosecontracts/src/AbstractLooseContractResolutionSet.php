@@ -14,7 +14,9 @@ abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyI
     protected LooseContractManagerInterface $looseContractManager;
     protected NameResolverInterface $nameResolver;
     protected HooksAPIInterface $hooksAPI;
-    public function __construct(LooseContractManagerInterface $looseContractManager, NameResolverInterface $nameResolver, HooksAPIInterface $hooksAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractLooseContractResolutionSet(LooseContractManagerInterface $looseContractManager, NameResolverInterface $nameResolver, HooksAPIInterface $hooksAPI)
     {
         $this->looseContractManager = $looseContractManager;
         $this->nameResolver = $nameResolver;

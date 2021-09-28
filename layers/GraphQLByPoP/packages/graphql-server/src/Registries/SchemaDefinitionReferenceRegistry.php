@@ -49,7 +49,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected SchemaDefinitionRegistryInterface $schemaDefinitionRegistry;
     protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSchemaDefinitionReferenceRegistry(
         TranslationAPIInterface $translationAPI,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,

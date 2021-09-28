@@ -25,7 +25,9 @@ use PoP\Translation\TranslationAPIInterface;
 class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     protected MixedScalarTypeResolver $mixedScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFunctionGlobalObjectTypeFieldResolver(
         MixedScalarTypeResolver $mixedScalarTypeResolver,
     ) {
         $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;

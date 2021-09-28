@@ -25,7 +25,9 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected MenuTypeDataLoader $menuTypeDataLoader;
     protected MenuTypeAPIInterface $menuTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMenuObjectTypeResolver(
         MenuTypeDataLoader $menuTypeDataLoader,
         MenuTypeAPIInterface $menuTypeAPI,
     ) {

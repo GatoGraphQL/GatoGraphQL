@@ -14,7 +14,9 @@ use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 class GraphQLEndpointHandler extends AbstractEndpointHandler
 {
     protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
-    public function __construct(GraphQLDataStructureFormatter $graphQLDataStructureFormatter)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGraphQLEndpointHandler(GraphQLDataStructureFormatter $graphQLDataStructureFormatter)
     {
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
     }

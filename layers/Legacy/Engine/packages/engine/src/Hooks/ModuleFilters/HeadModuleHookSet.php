@@ -16,7 +16,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class HeadModuleHookSet extends AbstractHookSet
 {
     protected HeadModule $headModule;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireHeadModuleHookSet(
         HeadModule $headModule
     ) {
         $this->headModule = $headModule;

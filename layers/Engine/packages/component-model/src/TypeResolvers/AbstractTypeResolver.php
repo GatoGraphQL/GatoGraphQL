@@ -26,7 +26,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     protected AttachableExtensionManagerInterface $attachableExtensionManager;
 
-    public function __construct(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractTypeResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager)
     {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;

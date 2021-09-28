@@ -18,7 +18,9 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected CommentTypeAPIInterface $commentTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCommentTypeDataLoader(
         CommentTypeAPIInterface $commentTypeAPI,
     ) {
         $this->commentTypeAPI = $commentTypeAPI;

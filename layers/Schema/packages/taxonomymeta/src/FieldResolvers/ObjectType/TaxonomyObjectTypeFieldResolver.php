@@ -23,7 +23,9 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI;
     protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireTaxonomyObjectTypeFieldResolver(
         TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {

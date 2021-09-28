@@ -10,7 +10,9 @@ use PoP\Translation\TranslationAPIInterface;
 class QueryParser implements QueryParserInterface
 {
     protected TranslationAPIInterface $translationAPI;
-    public function __construct(TranslationAPIInterface $translationAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireQueryParser(TranslationAPIInterface $translationAPI)
     {
         $this->translationAPI = $translationAPI;
     }

@@ -24,7 +24,9 @@ class ModulePaths extends AbstractModuleFilter
      */
     protected array $backlog_unsettled_paths = [];
     protected ModulePathManagerInterface $modulePathManager;
-    public function __construct(ModulePathManagerInterface $modulePathManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireModulePaths(ModulePathManagerInterface $modulePathManager)
     {
         $this->modulePathManager = $modulePathManager;
     }

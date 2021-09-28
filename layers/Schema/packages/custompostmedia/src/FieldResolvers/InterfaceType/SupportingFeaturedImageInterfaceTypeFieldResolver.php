@@ -26,7 +26,9 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected IDScalarTypeResolver $idScalarTypeResolver;
     protected MediaObjectTypeResolver $mediaObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSupportingFeaturedImageInterfaceTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
         MediaObjectTypeResolver $mediaObjectTypeResolver,

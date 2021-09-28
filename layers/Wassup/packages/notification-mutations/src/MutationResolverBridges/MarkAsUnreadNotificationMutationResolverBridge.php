@@ -14,7 +14,9 @@ use PoPSitesWassup\NotificationMutations\MutationResolvers\MarkAsUnreadNotificat
 class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge
 {
     protected MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMarkAsUnreadNotificationMutationResolverBridge(
         MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver,
     ) {
         $this->markAsUnreadNotificationMutationResolver = $markAsUnreadNotificationMutationResolver;

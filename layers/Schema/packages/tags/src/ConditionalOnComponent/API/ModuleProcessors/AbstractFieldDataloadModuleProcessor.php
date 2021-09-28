@@ -34,7 +34,9 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     protected PostTagObjectTypeResolver $postTagObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractFieldDataloadModuleProcessor(
         PostTagObjectTypeResolver $postTagObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {

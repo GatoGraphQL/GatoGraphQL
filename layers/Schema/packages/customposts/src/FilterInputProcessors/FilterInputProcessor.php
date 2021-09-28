@@ -20,7 +20,9 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public const FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
     protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFilterInputProcessor(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
     ) {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;

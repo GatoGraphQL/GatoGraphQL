@@ -29,7 +29,9 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
     protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType;
     protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireListOfCPTEntitiesRootObjectTypeFieldResolver(
         GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
         GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
         GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,

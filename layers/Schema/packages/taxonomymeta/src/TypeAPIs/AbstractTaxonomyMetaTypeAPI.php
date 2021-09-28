@@ -11,7 +11,9 @@ use PoPSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
 {
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
-    public function __construct(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractTaxonomyMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }

@@ -17,7 +17,9 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Upda
 class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUpdateMyCommunitiesMutationResolverBridge(
         UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver,
     ) {
         $this->updateMyCommunitiesMutationResolver = $updateMyCommunitiesMutationResolver;

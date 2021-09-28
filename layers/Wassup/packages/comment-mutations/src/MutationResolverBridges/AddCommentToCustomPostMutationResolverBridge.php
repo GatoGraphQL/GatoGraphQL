@@ -16,7 +16,9 @@ use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAddCommentToCustomPostMutationResolverBridge(
         AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {
         $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;

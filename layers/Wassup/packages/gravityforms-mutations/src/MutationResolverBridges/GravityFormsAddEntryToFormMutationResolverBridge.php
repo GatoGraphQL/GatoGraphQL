@@ -22,7 +22,9 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     protected UserTypeAPIInterface $userTypeAPI;
     protected GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGravityFormsAddEntryToFormMutationResolverBridge(
         UserTypeAPIInterface $userTypeAPI,
         GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver,
     ) {

@@ -20,7 +20,9 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     protected UserSettingsManagerInterface $userSettingsManager;
     protected EndpointHelpers $endpointHelpers;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCacheConfigurationManager(
         EndpointHelpers $endpointHelpers,
     ) {
         $this->endpointHelpers = $endpointHelpers;

@@ -12,7 +12,9 @@ use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
 {
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
-    public function __construct(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractSettingsTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }

@@ -42,7 +42,9 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected PostTypeAPIInterface $postTypeAPI;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootQueryableObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         PostObjectTypeResolver $postObjectTypeResolver,
         PostTypeAPIInterface $postTypeAPI,

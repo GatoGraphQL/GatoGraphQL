@@ -24,7 +24,9 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireOperatorGlobalObjectTypeFieldResolver(
         ObjectScalarTypeResolver $objectScalarTypeResolver,
     ) {
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;

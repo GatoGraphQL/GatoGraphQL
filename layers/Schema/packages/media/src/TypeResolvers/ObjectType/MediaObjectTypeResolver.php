@@ -24,7 +24,9 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected MediaTypeAPIInterface $mediaTypeAPI;
     protected MediaTypeDataLoader $mediaTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMediaObjectTypeResolver(
         MediaTypeAPIInterface $mediaTypeAPI,
         MediaTypeDataLoader $mediaTypeDataLoader,
     ) {

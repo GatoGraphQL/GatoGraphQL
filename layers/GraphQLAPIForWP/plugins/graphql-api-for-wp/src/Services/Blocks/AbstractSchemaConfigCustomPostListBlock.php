@@ -18,7 +18,9 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
 {
     protected BlockRenderingHelpers $blockRenderingHelpers;
     protected CPTUtils $cptUtils;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractSchemaConfigCustomPostListBlock(
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,
     ) {

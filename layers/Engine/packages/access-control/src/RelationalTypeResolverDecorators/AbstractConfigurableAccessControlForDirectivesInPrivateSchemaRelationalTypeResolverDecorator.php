@@ -13,7 +13,9 @@ abstract class AbstractConfigurableAccessControlForDirectivesInPrivateSchemaRela
     use ConfigurableAccessControlForDirectivesRelationalTypeResolverDecoratorTrait;
     protected AccessControlManagerInterface $accessControlManager;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractConfigurableAccessControlForDirectivesInPrivateSchemaRelationalTypeResolverDecorator(
         AccessControlManagerInterface $accessControlManager,
     ) {
         $this->accessControlManager = $accessControlManager;

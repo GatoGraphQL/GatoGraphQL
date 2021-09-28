@@ -14,7 +14,9 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     protected InstanceManagerInterface $instanceManager;
     protected ModuleRegistryInterface $moduleRegistry;
     protected BlockHelpers $blockHelpers;
-    public function __construct(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractSchemaConfigurationExecuter(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers)
     {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;

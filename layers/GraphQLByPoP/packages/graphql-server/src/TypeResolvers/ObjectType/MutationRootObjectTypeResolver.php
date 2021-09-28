@@ -35,7 +35,9 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
     protected array $objectTypeResolverMandatoryFields;
     protected MutationRootTypeDataLoader $mutationRootTypeDataLoader;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMutationRootObjectTypeResolver(
         TypeResolverHelperInterface $typeResolverHelper,
         MutationRootTypeDataLoader $mutationRootTypeDataLoader,
     ) {

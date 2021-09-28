@@ -18,7 +18,9 @@ use PoP\Translation\TranslationAPIInterface;
 abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHookSet
 {
     protected AccessControlManagerInterface $accessControlManager;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractAccessControlForFieldsHookSet(
         AccessControlManagerInterface $accessControlManager
     ) {
         $this->accessControlManager = $accessControlManager;

@@ -15,7 +15,9 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     protected VolunteerMutationResolver $volunteerMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireVolunteerMutationResolverBridge(
         VolunteerMutationResolver $volunteerMutationResolver,
     ) {
         $this->volunteerMutationResolver = $volunteerMutationResolver;

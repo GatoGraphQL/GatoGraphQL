@@ -18,7 +18,9 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected UserAuthorizationInterface $userAuthorization;
     protected GraphiQLMenuPage $graphiQLMenuPage;
     protected GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireTopMenuPageAttacher(
         MenuPageHelper $menuPageHelper,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,

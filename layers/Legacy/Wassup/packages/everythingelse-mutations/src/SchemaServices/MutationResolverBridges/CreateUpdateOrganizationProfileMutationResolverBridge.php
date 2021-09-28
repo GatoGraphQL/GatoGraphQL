@@ -19,7 +19,9 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
     use CreateUpdateProfileMutationResolverBridgeTrait;
     protected CreateUpdateOrganizationProfileMutationResolver $createUpdateOrganizationProfileMutationResolver;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCreateUpdateOrganizationProfileMutationResolverBridge(
         CreateUpdateOrganizationProfileMutationResolver $createUpdateOrganizationProfileMutationResolver,
     ) {
         $this->createUpdateOrganizationProfileMutationResolver = $createUpdateOrganizationProfileMutationResolver;

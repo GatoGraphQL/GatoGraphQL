@@ -14,7 +14,9 @@ abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaRelation
     use ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait;
     protected AccessControlManagerInterface $accessControlManager;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractConfigurableAccessControlForFieldsInPrivateSchemaRelationalTypeResolverDecorator(
         AccessControlManagerInterface $accessControlManager,
     ) {
         $this->accessControlManager = $accessControlManager;

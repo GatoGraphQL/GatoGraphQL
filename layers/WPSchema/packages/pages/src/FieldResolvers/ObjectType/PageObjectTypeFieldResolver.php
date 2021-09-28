@@ -26,7 +26,9 @@ use WP_Post;
 class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     protected IntScalarTypeResolver $intScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePageObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
     ) {
         $this->intScalarTypeResolver = $intScalarTypeResolver;

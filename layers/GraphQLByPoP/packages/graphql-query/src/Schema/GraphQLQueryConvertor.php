@@ -35,7 +35,9 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected IncludeDirectiveResolver $includeDirectiveResolver;
-    public function __construct(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, IncludeDirectiveResolver $includeDirectiveResolver)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGraphQLQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, IncludeDirectiveResolver $includeDirectiveResolver)
     {
         $this->translationAPI = $translationAPI;
         $this->feedbackMessageStore = $feedbackMessageStore;

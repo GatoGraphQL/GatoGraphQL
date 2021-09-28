@@ -19,7 +19,9 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
     protected CMSServiceInterface $cmsService;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireLostPasswordMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
         CMSServiceInterface $cmsService,
     ) {

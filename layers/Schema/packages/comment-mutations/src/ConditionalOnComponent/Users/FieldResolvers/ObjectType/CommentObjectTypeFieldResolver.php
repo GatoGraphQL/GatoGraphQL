@@ -38,7 +38,9 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
 {
     protected UserCommentTypeAPIInterface $userCommentTypeAPI;
     protected UserTypeAPIInterface $userTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCommentObjectTypeFieldResolver(
         UserCommentTypeAPIInterface $userCommentTypeAPI,
         UserTypeAPIInterface $userTypeAPI,
     ) {

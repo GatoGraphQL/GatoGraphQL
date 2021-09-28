@@ -32,7 +32,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
     protected SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver;
     protected RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostObjectTypeFieldResolver(
         MediaObjectTypeResolver $mediaTypeResolver,
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
         SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver,

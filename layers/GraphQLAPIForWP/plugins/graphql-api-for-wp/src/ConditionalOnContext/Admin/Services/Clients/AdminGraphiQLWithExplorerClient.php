@@ -10,7 +10,9 @@ use GraphQLByPoP\GraphQLClientsForWP\ConditionalOnContext\UseGraphiQLExplorer\Ov
 class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
 {
     protected EndpointHelpers $endpointHelpers;
-    public function __construct(EndpointHelpers $endpointHelpers)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAdminGraphiQLWithExplorerClient(EndpointHelpers $endpointHelpers)
     {
         $this->endpointHelpers = $endpointHelpers;
     }

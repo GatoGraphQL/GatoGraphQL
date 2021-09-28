@@ -16,7 +16,9 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UndoUpvoteCustomPost
 class UndoUpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
     protected UndoUpvoteCustomPostMutationResolver $undoUpvoteCustomPostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUndoUpvoteCustomPostMutationResolverBridge(
         UndoUpvoteCustomPostMutationResolver $undoUpvoteCustomPostMutationResolver,
     ) {
         $this->undoUpvoteCustomPostMutationResolver = $undoUpvoteCustomPostMutationResolver;

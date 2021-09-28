@@ -12,7 +12,9 @@ class FileDefinitionPersistence extends AbstractDefinitionPersistence
 {
     protected FileStoreInterface $fileStore;
     protected AbstractFile $file;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFileDefinitionPersistence(
         FileStoreInterface $fileStore,
         AbstractFile $file
     ) {

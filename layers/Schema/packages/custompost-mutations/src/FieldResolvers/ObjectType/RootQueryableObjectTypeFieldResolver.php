@@ -42,7 +42,9 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected CustomPostTypeAPIInterface $postTypeAPI;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootQueryableObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         CustomPostTypeAPIInterface $postTypeAPI,
     ) {

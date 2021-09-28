@@ -32,7 +32,9 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFieldObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,

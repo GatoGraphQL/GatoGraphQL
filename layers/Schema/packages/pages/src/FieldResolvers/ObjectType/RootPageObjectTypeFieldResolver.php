@@ -41,7 +41,9 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     protected PageObjectTypeResolver $pageObjectTypeResolver;
     protected PageTypeAPIInterface $pageTypeAPI;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootPageObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         PageObjectTypeResolver $pageObjectTypeResolver,
         PageTypeAPIInterface $pageTypeAPI,

@@ -23,7 +23,9 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireTryNewFeaturesPostObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

@@ -15,7 +15,9 @@ use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInDi
 abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
 {
     protected ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDecorator(
         ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver,
     ) {
         $this->validateIsUserLoggedInDirectiveResolver = $validateIsUserLoggedInDirectiveResolver;

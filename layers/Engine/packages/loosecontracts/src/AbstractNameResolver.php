@@ -7,7 +7,9 @@ namespace PoP\LooseContracts;
 abstract class AbstractNameResolver implements NameResolverInterface
 {
     protected LooseContractManagerInterface $looseContractManager;
-    public function __construct(LooseContractManagerInterface $looseContractManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractNameResolver(LooseContractManagerInterface $looseContractManager)
     {
         $this->looseContractManager = $looseContractManager;
     }

@@ -20,7 +20,9 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected TranslationAPIInterface $translationAPI;
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    public function __construct(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, TranslationAPIInterface $translationAPI, ModuleProcessorManagerInterface $moduleProcessorManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireDataloadHelperService(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, TranslationAPIInterface $translationAPI, ModuleProcessorManagerInterface $moduleProcessorManager)
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;

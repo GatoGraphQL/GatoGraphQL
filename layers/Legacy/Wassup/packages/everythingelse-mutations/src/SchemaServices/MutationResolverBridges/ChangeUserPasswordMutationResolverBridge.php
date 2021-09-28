@@ -16,7 +16,9 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Chan
 class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireChangeUserPasswordMutationResolverBridge(
         ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver,
     ) {
         $this->changeUserPasswordMutationResolver = $changeUserPasswordMutationResolver;

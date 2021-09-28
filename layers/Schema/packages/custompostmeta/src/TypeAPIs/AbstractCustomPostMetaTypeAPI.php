@@ -12,7 +12,9 @@ use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
-    public function __construct(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCustomPostMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }

@@ -14,7 +14,9 @@ use PoPSitesWassup\PostMutations\MutationResolvers\CreatePostMutationResolver;
 class CreatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationResolverBridge
 {
     protected CreatePostMutationResolver $createPostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCreatePostMutationResolverBridge(
         CreatePostMutationResolver $createPostMutationResolver,
     ) {
         $this->createPostMutationResolver = $createPostMutationResolver;

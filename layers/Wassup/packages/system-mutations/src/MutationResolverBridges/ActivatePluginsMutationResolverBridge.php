@@ -15,7 +15,9 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
     protected ActivatePluginsMutationResolver $activatePluginsMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireActivatePluginsMutationResolverBridge(
         ActivatePluginsMutationResolver $activatePluginsMutationResolver,
     ) {
         $this->activatePluginsMutationResolver = $activatePluginsMutationResolver;

@@ -22,7 +22,9 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
     public const ATTRIBUTE_NAME_VALUE = 'value';
     protected AccessControlBlockCategory $accessControlBlockCategory;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractAccessControlRuleBlock(
         AccessControlBlockCategory $accessControlBlockCategory,
     ) {
         $this->accessControlBlockCategory = $accessControlBlockCategory;

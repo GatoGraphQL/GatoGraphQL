@@ -19,7 +19,9 @@ use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireEntryRouteModuleProcessor(
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;

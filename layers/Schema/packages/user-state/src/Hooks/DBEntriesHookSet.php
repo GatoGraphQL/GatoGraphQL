@@ -13,7 +13,9 @@ use PoPSchema\UserState\FieldResolvers\ObjectType\GlobalObjectTypeFieldResolver;
 class DBEntriesHookSet extends AbstractHookSet
 {
     protected GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireDBEntriesHookSet(
         GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver
     ) {
         $this->globalObjectTypeFieldResolver = $globalObjectTypeFieldResolver;

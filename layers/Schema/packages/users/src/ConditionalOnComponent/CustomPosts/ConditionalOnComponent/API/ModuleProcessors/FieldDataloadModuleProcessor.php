@@ -30,7 +30,9 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     protected CustomPostObjectTypeResolver $customPostObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFieldDataloadModuleProcessor(
         CustomPostObjectTypeResolver $customPostObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {

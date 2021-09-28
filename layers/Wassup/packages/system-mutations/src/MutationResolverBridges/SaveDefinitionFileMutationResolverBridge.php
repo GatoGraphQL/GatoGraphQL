@@ -15,7 +15,9 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
     protected SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSaveDefinitionFileMutationResolverBridge(
         SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver,
     ) {
         $this->saveDefinitionFileMutationResolver = $saveDefinitionFileMutationResolver;

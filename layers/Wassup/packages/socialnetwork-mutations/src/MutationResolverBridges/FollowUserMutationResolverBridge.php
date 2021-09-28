@@ -15,7 +15,9 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\FollowUserMutationRe
 class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMutationResolverBridge
 {
     protected FollowUserMutationResolver $followUserMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFollowUserMutationResolverBridge(
         FollowUserMutationResolver $followUserMutationResolver,
     ) {
         $this->followUserMutationResolver = $followUserMutationResolver;

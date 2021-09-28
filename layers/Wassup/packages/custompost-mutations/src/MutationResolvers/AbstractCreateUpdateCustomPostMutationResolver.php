@@ -25,7 +25,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     public const VALIDATECATEGORIESTYPE_EXACTLYONE = 2;
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCreateUpdateCustomPostMutationResolver(
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;

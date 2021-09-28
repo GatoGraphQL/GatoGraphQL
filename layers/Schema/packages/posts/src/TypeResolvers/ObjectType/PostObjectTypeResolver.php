@@ -23,7 +23,9 @@ use PoPSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostTypeDataLoader;
 class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     protected PostTypeDataLoader $postTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePostObjectTypeResolver(
         PostTypeDataLoader $postTypeDataLoader,
     ) {
         $this->postTypeDataLoader = $postTypeDataLoader;

@@ -16,7 +16,9 @@ use PoP\LooseContracts\Facades\NameResolverFacade;
 class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler
 {
     protected CMSServiceInterface $cmsService;
-    public function __construct(CMSServiceInterface $cmsService)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireListQueryInputOutputHandler(CMSServiceInterface $cmsService)
     {
         $this->cmsService = $cmsService;
     }

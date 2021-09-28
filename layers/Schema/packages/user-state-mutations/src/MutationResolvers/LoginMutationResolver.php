@@ -18,7 +18,9 @@ class LoginMutationResolver extends AbstractMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
     protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireLoginMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
         UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
     ) {

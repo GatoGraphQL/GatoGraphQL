@@ -33,7 +33,9 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     protected CPTUtils $cptUtils;
     protected EndpointBlockCategory $endpointBlockCategory;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireEndpointSchemaConfigurationBlock(
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,
         EndpointBlockCategory $endpointBlockCategory,

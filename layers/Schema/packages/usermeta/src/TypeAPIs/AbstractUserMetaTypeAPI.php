@@ -12,7 +12,9 @@ use PoPSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
 abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
 {
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
-    public function __construct(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractUserMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }

@@ -13,7 +13,9 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 class PluginMenu extends AbstractMenu
 {
     protected UserAuthorizationInterface $userAuthorization;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePluginMenu(
         UserAuthorizationInterface $userAuthorization
     ) {
         $this->userAuthorization = $userAuthorization;

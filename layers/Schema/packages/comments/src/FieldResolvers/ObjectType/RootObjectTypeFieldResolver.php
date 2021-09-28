@@ -42,7 +42,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         IntScalarTypeResolver $intScalarTypeResolver,
         CommentObjectTypeResolver $commentObjectTypeResolver,

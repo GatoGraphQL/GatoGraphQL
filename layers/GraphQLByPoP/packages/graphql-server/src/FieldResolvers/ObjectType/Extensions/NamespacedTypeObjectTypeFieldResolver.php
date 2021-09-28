@@ -25,7 +25,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireNamespacedTypeObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

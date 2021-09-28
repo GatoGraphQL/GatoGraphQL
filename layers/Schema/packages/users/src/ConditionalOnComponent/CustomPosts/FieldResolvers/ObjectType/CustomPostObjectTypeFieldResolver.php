@@ -24,7 +24,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected CustomPostUserTypeAPIInterface $customPostUserTypeAPI;
     protected WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostObjectTypeFieldResolver(
         CustomPostUserTypeAPIInterface $customPostUserTypeAPI,
         WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver,
     ) {

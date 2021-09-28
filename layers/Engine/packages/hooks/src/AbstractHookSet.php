@@ -14,7 +14,9 @@ abstract class AbstractHookSet extends AbstractAutomaticallyInstantiatedService
     protected HooksAPIInterface $hooksAPI;
     protected TranslationAPIInterface $translationAPI;
     protected InstanceManagerInterface $instanceManager;
-    public function __construct(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractHookSet(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager)
     {
         $this->hooksAPI = $hooksAPI;
         $this->translationAPI = $translationAPI;

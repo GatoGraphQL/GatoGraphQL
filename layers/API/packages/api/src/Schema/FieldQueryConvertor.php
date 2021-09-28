@@ -46,7 +46,9 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected PersistedFragmentManagerInterface $persistedFragmentManager;
 
-    public function __construct(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFieldQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager)
     {
         $this->translationAPI = $translationAPI;
         $this->feedbackMessageStore = $feedbackMessageStore;

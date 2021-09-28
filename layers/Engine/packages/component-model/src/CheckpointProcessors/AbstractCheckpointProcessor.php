@@ -12,7 +12,9 @@ abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterfa
 {
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
-    public function __construct(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCheckpointProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI)
     {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;

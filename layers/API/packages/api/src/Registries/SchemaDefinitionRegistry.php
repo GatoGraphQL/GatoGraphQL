@@ -29,7 +29,9 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
     protected RootObjectTypeResolver $rootTypeResolver;
     protected Root $root;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSchemaDefinitionRegistry(
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         TranslationAPIInterface $translationAPI,

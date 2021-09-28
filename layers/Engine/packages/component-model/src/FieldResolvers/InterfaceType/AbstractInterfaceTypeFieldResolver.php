@@ -37,7 +37,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected TypeRegistryInterface $typeRegistry;
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractInterfaceTypeFieldResolver(
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,

@@ -41,7 +41,9 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     protected UserObjectTypeResolver $userObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireNotificationObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         DateScalarTypeResolver $dateScalarTypeResolver,

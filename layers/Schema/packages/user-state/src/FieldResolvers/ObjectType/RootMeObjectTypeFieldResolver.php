@@ -23,7 +23,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldResolver
 {
     protected UserObjectTypeResolver $userObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootMeObjectTypeFieldResolver(
         UserObjectTypeResolver $userObjectTypeResolver,
     ) {
         $this->userObjectTypeResolver = $userObjectTypeResolver;

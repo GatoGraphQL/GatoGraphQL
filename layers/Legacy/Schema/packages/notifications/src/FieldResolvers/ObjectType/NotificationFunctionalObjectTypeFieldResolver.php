@@ -22,7 +22,9 @@ use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResol
 class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireNotificationFunctionalObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

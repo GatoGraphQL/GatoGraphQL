@@ -12,7 +12,9 @@ use WP_Error;
 class ErrorManager extends AbstractErrorManager
 {
     protected TranslationAPIInterface $translationAPI;
-    public function __construct(TranslationAPIInterface $translationAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireErrorManager(TranslationAPIInterface $translationAPI)
     {
         $this->translationAPI = $translationAPI;
     }

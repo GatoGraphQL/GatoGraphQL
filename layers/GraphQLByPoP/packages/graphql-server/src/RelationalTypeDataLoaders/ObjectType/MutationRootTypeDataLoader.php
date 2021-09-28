@@ -13,7 +13,9 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDa
 class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected MutationRoot $mutationRoot;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMutationRootTypeDataLoader(
         MutationRoot $mutationRoot,
     ) {
         $this->mutationRoot = $mutationRoot;

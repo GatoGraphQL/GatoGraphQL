@@ -29,7 +29,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected CreatePostMutationResolver $createPostMutationResolver;
     protected UpdatePostMutationResolver $updatePostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootObjectTypeFieldResolver(
         PostObjectTypeResolver $postObjectTypeResolver,
         CreatePostMutationResolver $createPostMutationResolver,
         UpdatePostMutationResolver $updatePostMutationResolver,

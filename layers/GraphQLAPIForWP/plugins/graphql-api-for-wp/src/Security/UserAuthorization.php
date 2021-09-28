@@ -14,7 +14,9 @@ use InvalidArgumentException;
 class UserAuthorization implements UserAuthorizationInterface
 {
     protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry;
-    public function __construct(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserAuthorization(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry)
     {
         $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;
     }

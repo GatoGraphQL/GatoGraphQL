@@ -12,7 +12,9 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
 {
     protected HooksAPIInterface $hooksAPI;
     protected CMSHelperServiceInterface $cmsHelperService;
-    public function __construct(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractUserTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService)
     {
         $this->hooksAPI = $hooksAPI;
         $this->cmsHelperService = $cmsHelperService;

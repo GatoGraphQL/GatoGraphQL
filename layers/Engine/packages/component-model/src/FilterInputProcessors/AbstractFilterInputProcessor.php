@@ -9,7 +9,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 abstract class AbstractFilterInputProcessor implements FilterInputProcessorInterface
 {
     protected InstanceManagerInterface $instanceManager;
-    public function __construct(InstanceManagerInterface $instanceManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractFilterInputProcessor(InstanceManagerInterface $instanceManager)
     {
         $this->instanceManager = $instanceManager;
     }

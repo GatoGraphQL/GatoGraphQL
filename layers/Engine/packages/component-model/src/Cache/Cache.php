@@ -15,7 +15,9 @@ class Cache implements CacheInterface
     protected CacheItemPoolInterface $cacheItemPool;
     protected ModelInstanceInterface $modelInstance;
 
-    public function __construct(CacheItemPoolInterface $cacheItemPool, ModelInstanceInterface $modelInstance)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCache(CacheItemPoolInterface $cacheItemPool, ModelInstanceInterface $modelInstance)
     {
         $this->cacheItemPool = $cacheItemPool;
         $this->modelInstance = $modelInstance;

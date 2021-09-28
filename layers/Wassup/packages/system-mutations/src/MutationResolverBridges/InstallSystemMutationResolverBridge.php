@@ -15,7 +15,9 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
     protected InstallSystemMutationResolver $installSystemMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireInstallSystemMutationResolverBridge(
         InstallSystemMutationResolver $installSystemMutationResolver,
     ) {
         $this->installSystemMutationResolver = $installSystemMutationResolver;

@@ -27,7 +27,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected SiteObjectTypeResolver $siteObjectTypeResolver;
     protected Site $site;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootObjectTypeFieldResolver(
         SiteObjectTypeResolver $siteObjectTypeResolver,
         Site $site,
     ) {

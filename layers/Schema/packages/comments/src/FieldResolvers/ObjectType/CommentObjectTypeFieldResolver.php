@@ -58,7 +58,9 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver;
     protected DateFormatterInterface $dateFormatter;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCommentObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         StringScalarTypeResolver $stringScalarTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,

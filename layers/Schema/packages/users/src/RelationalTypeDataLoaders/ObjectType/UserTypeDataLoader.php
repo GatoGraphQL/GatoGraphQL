@@ -16,7 +16,9 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected UserTypeAPIInterface $userTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserTypeDataLoader(
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;

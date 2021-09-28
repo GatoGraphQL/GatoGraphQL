@@ -33,7 +33,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
     protected CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCreateUpdateCustomPostMutationResolver(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         NameResolverInterface $nameResolver,
         UserRoleTypeAPIInterface $userRoleTypeAPI,

@@ -22,7 +22,9 @@ class LazyLoadHookSet extends AbstractHookSet
 {
     protected RequestHelperServiceInterface $requestHelperService;
     protected Lazy $lazy;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireLazyLoadHookSet(
         RequestHelperServiceInterface $requestHelperService,
         Lazy $lazy,
     ) {

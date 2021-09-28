@@ -37,7 +37,9 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected UserObjectTypeResolver $userObjectTypeResolver;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractUserObjectTypeFieldResolver(
         UserTypeAPIInterface $userTypeAPI,
         IntScalarTypeResolver $intScalarTypeResolver,
         UserObjectTypeResolver $userObjectTypeResolver,

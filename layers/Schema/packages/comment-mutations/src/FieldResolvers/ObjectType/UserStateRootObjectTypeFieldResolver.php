@@ -41,7 +41,9 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserStateRootObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         IntScalarTypeResolver $intScalarTypeResolver,
         CommentObjectTypeResolver $commentObjectTypeResolver,

@@ -12,7 +12,9 @@ use DateTime;
 class TypeCastingExecuter implements TypeCastingExecuterInterface
 {
     private TranslationAPIInterface $translationAPI;
-    public function __construct(TranslationAPIInterface $translationAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireTypeCastingExecuter(TranslationAPIInterface $translationAPI)
     {
         $this->translationAPI = $translationAPI;
     }

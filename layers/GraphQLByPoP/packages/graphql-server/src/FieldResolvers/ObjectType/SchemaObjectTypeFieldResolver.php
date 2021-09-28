@@ -27,7 +27,9 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
     protected DirectiveObjectTypeResolver $directiveObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSchemaObjectTypeFieldResolver(
         TypeObjectTypeResolver $typeObjectTypeResolver,
         DirectiveObjectTypeResolver $directiveObjectTypeResolver,
     ) {

@@ -30,7 +30,9 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
     public const HOOK_DESCRIPTION = __CLASS__ . ':description';
     protected RootTypeDataLoader $rootTypeDataLoader;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootObjectTypeResolver(
         RootTypeDataLoader $rootTypeDataLoader,
     ) {
         $this->rootTypeDataLoader = $rootTypeDataLoader;

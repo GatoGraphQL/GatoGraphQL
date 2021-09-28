@@ -24,7 +24,9 @@ use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeReso
 class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {
     protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePostCategoryFieldDataloadModuleProcessor(
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ) {
         $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;

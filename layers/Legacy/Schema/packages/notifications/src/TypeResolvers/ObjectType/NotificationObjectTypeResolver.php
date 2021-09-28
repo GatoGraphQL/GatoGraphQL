@@ -19,7 +19,9 @@ use PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType\NotificationTyp
 class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected NotificationTypeDataLoader $notificationTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireNotificationObjectTypeResolver(
         NotificationTypeDataLoader $notificationTypeDataLoader,
     ) {
         $this->notificationTypeDataLoader = $notificationTypeDataLoader;

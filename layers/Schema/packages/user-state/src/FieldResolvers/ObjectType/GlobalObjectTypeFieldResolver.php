@@ -24,7 +24,9 @@ use PoP\Translation\TranslationAPIInterface;
 class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGlobalObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;

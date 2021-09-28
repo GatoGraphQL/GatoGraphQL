@@ -25,7 +25,9 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     protected PageTypeDataLoader $pageTypeDataLoader;
     protected PageTypeAPIInterface $pageTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePageObjectTypeResolver(
         PageTypeDataLoader $pageTypeDataLoader,
         PageTypeAPIInterface $pageTypeAPI,
     ) {

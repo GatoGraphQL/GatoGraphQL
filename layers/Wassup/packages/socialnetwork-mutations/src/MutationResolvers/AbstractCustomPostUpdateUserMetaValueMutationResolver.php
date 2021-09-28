@@ -12,7 +12,9 @@ use PoPSchema\Posts\Constants\InputNames;
 class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCustomPostUpdateUserMetaValueMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;

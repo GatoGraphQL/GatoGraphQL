@@ -12,7 +12,9 @@ use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 class Cache extends \PoP\ComponentModel\Cache\Cache
 {
     protected HooksAPIInterface $hooksAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCache(
         CacheItemPoolInterface $cacheItemPool,
         HooksAPIInterface $hooksAPI,
         ModelInstanceInterface $modelInstance

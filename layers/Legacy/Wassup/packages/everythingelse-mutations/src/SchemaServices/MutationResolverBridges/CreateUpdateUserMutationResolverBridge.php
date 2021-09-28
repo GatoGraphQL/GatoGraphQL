@@ -18,7 +18,9 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Crea
 class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected CreateUpdateUserMutationResolver $createUpdateUserMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCreateUpdateUserMutationResolverBridge(
         CreateUpdateUserMutationResolver $createUpdateUserMutationResolver,
     ) {
         $this->createUpdateUserMutationResolver = $createUpdateUserMutationResolver;

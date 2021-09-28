@@ -29,7 +29,9 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCommentRelationalFieldDataloadModuleProcessor(
         CommentObjectTypeResolver $commentObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {

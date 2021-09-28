@@ -26,7 +26,9 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
 {
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected LocationObjectTypeResolver $locationObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostAndUserObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {

@@ -20,7 +20,9 @@ class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
     use MainPluginScriptTrait;
     protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePersistedQueryEndpointComponentEditorScript(
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
     ) {
         $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;

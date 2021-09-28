@@ -17,7 +17,9 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
 {
     protected BlockHelpers $blockHelpers;
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractClientEndpointAnnotator(
         BlockHelpers $blockHelpers,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {

@@ -24,7 +24,9 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     protected BlockHelpers $blockHelpers;
     protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry;
     protected AccessControlManagerInterface $accessControlManager;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAccessControlGraphQLQueryConfigurator(
         AccessControlBlock $accessControlBlock,
         BlockHelpers $blockHelpers,
         AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,

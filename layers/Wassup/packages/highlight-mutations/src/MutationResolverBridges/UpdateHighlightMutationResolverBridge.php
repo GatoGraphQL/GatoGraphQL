@@ -14,7 +14,9 @@ use PoPSitesWassup\HighlightMutations\MutationResolvers\UpdateHighlightMutationR
 class UpdateHighlightMutationResolverBridge extends AbstractCreateUpdateHighlightMutationResolverBridge
 {
     protected UpdateHighlightMutationResolver $updateHighlightMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUpdateHighlightMutationResolverBridge(
         UpdateHighlightMutationResolver $updateHighlightMutationResolver,
     ) {
         $this->updateHighlightMutationResolver = $updateHighlightMutationResolver;

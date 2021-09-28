@@ -36,7 +36,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     protected DateScalarTypeResolver $dateScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireIsCustomPostInterfaceTypeFieldResolver(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,

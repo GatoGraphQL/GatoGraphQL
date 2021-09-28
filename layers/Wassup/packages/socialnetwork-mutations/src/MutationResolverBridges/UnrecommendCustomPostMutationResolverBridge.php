@@ -16,7 +16,9 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UnrecommendCustomPos
 class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
     protected UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUnrecommendCustomPostMutationResolverBridge(
         UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver,
     ) {
         $this->unrecommendCustomPostMutationResolver = $unrecommendCustomPostMutationResolver;

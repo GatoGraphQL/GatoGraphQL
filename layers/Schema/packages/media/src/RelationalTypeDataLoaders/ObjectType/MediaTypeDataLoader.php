@@ -16,7 +16,9 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected MediaTypeAPIInterface $mediaTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMediaTypeDataLoader(
         MediaTypeAPIInterface $mediaTypeAPI,
     ) {
         $this->mediaTypeAPI = $mediaTypeAPI;

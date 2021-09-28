@@ -17,7 +17,9 @@ use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 class ModulePathsHookSet extends AbstractHookSet
 {
     protected ModulePaths $modulePaths;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireModulePathsHookSet(
         ModulePaths $modulePaths
     ) {
         $this->modulePaths = $modulePaths;

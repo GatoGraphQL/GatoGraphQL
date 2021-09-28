@@ -27,7 +27,9 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireInputValueObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,
     ) {

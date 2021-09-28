@@ -23,7 +23,9 @@ use PoPSchema\EverythingElse\Misc\TagHelpers;
 class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireTagFunctionalObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

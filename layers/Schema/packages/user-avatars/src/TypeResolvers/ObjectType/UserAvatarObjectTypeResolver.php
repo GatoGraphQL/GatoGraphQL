@@ -23,7 +23,9 @@ use PoPSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType\UserAvatarTypeDat
 class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected UserAvatarTypeDataLoader $userAvatarTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserAvatarObjectTypeResolver(
         UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
     ) {
         $this->userAvatarTypeDataLoader = $userAvatarTypeDataLoader;

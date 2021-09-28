@@ -27,7 +27,9 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireEnumValueObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ) {

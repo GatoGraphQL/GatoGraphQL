@@ -21,7 +21,9 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
 {
     protected HooksAPIInterface $hooksAPI;
     protected BlockHelpers $blockHelpers;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractGraphQLEndpointCustomPostType(
         HooksAPIInterface $hooksAPI,
         BlockHelpers $blockHelpers,
     ) {

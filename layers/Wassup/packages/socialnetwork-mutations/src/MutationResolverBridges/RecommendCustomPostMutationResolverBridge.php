@@ -16,7 +16,9 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\RecommendCustomPostM
 class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
     protected RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRecommendCustomPostMutationResolverBridge(
         RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver,
     ) {
         $this->recommendCustomPostMutationResolver = $recommendCustomPostMutationResolver;

@@ -36,7 +36,9 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     protected ModulePathManagerInterface $modulePathManager;
     protected ModulePathHelpersInterface $modulePathHelpers;
 
-    public function __construct(ModulePathManagerInterface $modulePathManager, ModulePathHelpersInterface $modulePathHelpers)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireModuleFilterManager(ModulePathManagerInterface $modulePathManager, ModulePathHelpersInterface $modulePathHelpers)
     {
         $this->modulePathManager = $modulePathManager;
         $this->modulePathHelpers = $modulePathHelpers;

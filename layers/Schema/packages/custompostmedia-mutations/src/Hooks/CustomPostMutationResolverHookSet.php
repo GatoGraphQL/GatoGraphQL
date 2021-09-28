@@ -21,7 +21,9 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
 {
     protected MediaObjectTypeResolver $mediaTypeResolver;
     protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostMutationResolverHookSet(
         MediaObjectTypeResolver $mediaTypeResolver,
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ) {

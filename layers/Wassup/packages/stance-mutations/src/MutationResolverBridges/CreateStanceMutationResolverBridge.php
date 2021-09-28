@@ -14,7 +14,9 @@ use PoPSitesWassup\StanceMutations\MutationResolvers\CreateStanceMutationResolve
 class CreateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
     protected CreateStanceMutationResolver $createStanceMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCreateStanceMutationResolverBridge(
         CreateStanceMutationResolver $createStanceMutationResolver,
     ) {
         $this->createStanceMutationResolver = $createStanceMutationResolver;

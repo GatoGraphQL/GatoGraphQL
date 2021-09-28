@@ -15,7 +15,9 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     protected FlagCustomPostMutationResolver $flagCustomPostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFlagCustomPostMutationResolverBridge(
         FlagCustomPostMutationResolver $flagCustomPostMutationResolver,
     ) {
         $this->flagCustomPostMutationResolver = $flagCustomPostMutationResolver;

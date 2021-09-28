@@ -95,7 +95,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     protected TypeCastingExecuterInterface $typeCastingExecuter;
     protected InstanceManagerInterface $instanceManager;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFieldQueryInterpreter(
         TranslationAPIInterface $translationAPI,
         UpstreamFeedbackMessageStoreInterface $feedbackMessageStore,
         TypeCastingExecuterInterface $typeCastingExecuter,

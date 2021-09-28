@@ -32,7 +32,9 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
     protected MenuTypeAPIInterface $menuTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMenuObjectTypeFieldResolver(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         MenuItemObjectTypeResolver $menuItemObjectTypeResolver,

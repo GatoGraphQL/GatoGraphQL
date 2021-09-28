@@ -12,7 +12,9 @@ use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 abstract class AbstractStanceObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     protected StanceObjectTypeResolver $stanceObjectTypeResolver;
-    public function __construct(StanceObjectTypeResolver $stanceObjectTypeResolver)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractStanceObjectTypeResolverPicker(StanceObjectTypeResolver $stanceObjectTypeResolver)
     {
         $this->stanceObjectTypeResolver = $stanceObjectTypeResolver;
     }

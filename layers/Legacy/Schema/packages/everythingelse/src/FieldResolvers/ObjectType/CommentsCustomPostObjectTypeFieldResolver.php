@@ -21,7 +21,9 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeR
 class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected URLScalarTypeResolver $urlScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCommentsCustomPostObjectTypeFieldResolver(
         URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;

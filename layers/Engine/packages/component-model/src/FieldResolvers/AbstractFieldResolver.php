@@ -15,7 +15,9 @@ abstract class AbstractFieldResolver implements FieldResolverInterface
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
     protected InstanceManagerInterface $instanceManager;
-    public function __construct(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractFieldResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager)
     {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;

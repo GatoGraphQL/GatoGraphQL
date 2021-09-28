@@ -15,7 +15,9 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     protected ShareByEmailMutationResolver $shareByEmailMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireShareByEmailMutationResolverBridge(
         ShareByEmailMutationResolver $shareByEmailMutationResolver,
     ) {
         $this->shareByEmailMutationResolver = $shareByEmailMutationResolver;

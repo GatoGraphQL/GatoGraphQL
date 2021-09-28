@@ -15,7 +15,9 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UnfollowUserMutation
 class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMutationResolverBridge
 {
     protected UnfollowUserMutationResolver $unfollowUserMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUnfollowUserMutationResolverBridge(
         UnfollowUserMutationResolver $unfollowUserMutationResolver,
     ) {
         $this->unfollowUserMutationResolver = $unfollowUserMutationResolver;

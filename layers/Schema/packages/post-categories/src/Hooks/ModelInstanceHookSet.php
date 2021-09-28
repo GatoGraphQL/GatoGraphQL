@@ -20,7 +20,9 @@ class ModelInstanceHookSet extends AbstractHookSet
     protected PostTypeAPIInterface $postTypeAPI;
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireModelInstanceHookSet(
         PostTypeAPIInterface $postTypeAPI,
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {

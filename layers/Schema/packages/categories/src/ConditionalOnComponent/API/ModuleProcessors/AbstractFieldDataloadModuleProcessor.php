@@ -31,7 +31,9 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     public const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT = 'dataload-relationalfields-categorycount';
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractFieldDataloadModuleProcessor(
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;

@@ -24,7 +24,9 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected CommentTypeAPIInterface $commentTypeAPI;
     protected UserObjectTypeResolver $userObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCommentUserObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         UserObjectTypeResolver $userObjectTypeResolver,
     ) {

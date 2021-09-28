@@ -13,7 +13,9 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
 {
     protected CustomEndpointSchemaConfigurator $endpointSchemaConfigurator;
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomEndpointSchemaConfiguratorExecuter(
         CustomEndpointSchemaConfigurator $endpointSchemaConfigurator,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {

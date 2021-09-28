@@ -21,7 +21,9 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     protected TranslationAPIInterface $translationAPI;
     protected InstanceManagerInterface $instanceManager;
     protected MutationResolutionManagerInterface $mutationResolutionManager;
-    public function __construct(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager, MutationResolutionManagerInterface $mutationResolutionManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager, MutationResolutionManagerInterface $mutationResolutionManager)
     {
         $this->hooksAPI = $hooksAPI;
         $this->translationAPI = $translationAPI;

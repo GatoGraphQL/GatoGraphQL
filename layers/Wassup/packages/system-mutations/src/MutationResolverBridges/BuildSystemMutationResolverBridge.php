@@ -15,7 +15,9 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
     protected BuildSystemMutationResolver $buildSystemMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireBuildSystemMutationResolverBridge(
         BuildSystemMutationResolver $buildSystemMutationResolver,
     ) {
         $this->buildSystemMutationResolver = $buildSystemMutationResolver;

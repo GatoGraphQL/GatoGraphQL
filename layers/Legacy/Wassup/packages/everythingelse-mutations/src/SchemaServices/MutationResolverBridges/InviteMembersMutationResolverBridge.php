@@ -14,7 +14,9 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Invi
 class InviteMembersMutationResolverBridge extends AbstractEmailInviteMutationResolverBridge
 {
     protected InviteMembersMutationResolver $inviteMembersMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireInviteMembersMutationResolverBridge(
         InviteMembersMutationResolver $inviteMembersMutationResolver,
     ) {
         $this->inviteMembersMutationResolver = $inviteMembersMutationResolver;

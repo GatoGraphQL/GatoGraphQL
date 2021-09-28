@@ -12,7 +12,9 @@ use PoP\Translation\TranslationAPIInterface;
 class ErrorProvider implements ErrorProviderInterface
 {
     protected TranslationAPIInterface $translationAPI;
-    public function __construct(TranslationAPIInterface $translationAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireErrorProvider(TranslationAPIInterface $translationAPI)
     {
         $this->translationAPI = $translationAPI;
     }

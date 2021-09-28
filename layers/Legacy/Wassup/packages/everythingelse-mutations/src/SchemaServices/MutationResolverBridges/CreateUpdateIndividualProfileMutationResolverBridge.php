@@ -19,7 +19,9 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
     use CreateUpdateProfileMutationResolverBridgeTrait;
     protected CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCreateUpdateIndividualProfileMutationResolverBridge(
         CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver,
     ) {
         $this->createUpdateIndividualProfileMutationResolver = $createUpdateIndividualProfileMutationResolver;

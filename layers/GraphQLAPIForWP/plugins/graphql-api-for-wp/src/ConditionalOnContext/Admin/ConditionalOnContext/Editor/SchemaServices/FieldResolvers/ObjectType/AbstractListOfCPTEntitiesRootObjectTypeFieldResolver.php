@@ -34,7 +34,9 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
 {
     protected CustomPostObjectTypeResolver $customPostObjectTypeResolver;
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractListOfCPTEntitiesRootObjectTypeFieldResolver(
         CustomPostObjectTypeResolver $customPostObjectTypeResolver,
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {

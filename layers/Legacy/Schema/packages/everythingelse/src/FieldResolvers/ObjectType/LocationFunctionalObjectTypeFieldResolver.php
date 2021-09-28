@@ -24,7 +24,9 @@ use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected URLScalarTypeResolver $urlScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireLocationFunctionalObjectTypeFieldResolver(
         URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;

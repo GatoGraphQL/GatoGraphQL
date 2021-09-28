@@ -18,7 +18,9 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter impl
 {
     protected CustomEndpointGraphiQLClient $customEndpointGraphiQLClient;
     protected GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGraphiQLClientEndpointExecuter(
         CustomEndpointGraphiQLClient $customEndpointGraphiQLClient,
         GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator,
     ) {

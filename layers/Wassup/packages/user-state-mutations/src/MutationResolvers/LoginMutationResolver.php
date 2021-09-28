@@ -13,7 +13,9 @@ use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver as Upst
 class LoginMutationResolver extends UpstreamLoginMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireLoginMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;

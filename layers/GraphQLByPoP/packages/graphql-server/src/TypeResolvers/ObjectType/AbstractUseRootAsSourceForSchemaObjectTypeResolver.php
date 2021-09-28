@@ -26,7 +26,9 @@ use PoP\Translation\TranslationAPIInterface;
 abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends AbstractObjectTypeResolver implements UseRootAsSourceForSchemaObjectTypeResolverInterface
 {
     protected RootObjectTypeResolver $rootObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractUseRootAsSourceForSchemaObjectTypeResolver(
         RootObjectTypeResolver $rootObjectTypeResolver,
     ) {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;

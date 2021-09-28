@@ -30,7 +30,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
     protected SchemaTypeDataLoader $schemaTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootObjectTypeFieldResolver(
         SchemaObjectTypeResolver $schemaObjectTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,
         SchemaTypeDataLoader $schemaTypeDataLoader,

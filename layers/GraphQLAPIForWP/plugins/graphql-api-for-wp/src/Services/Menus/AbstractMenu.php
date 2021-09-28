@@ -13,7 +13,9 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService
 {
     protected InstanceManagerInterface $instanceManager;
-    public function __construct(InstanceManagerInterface $instanceManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractMenu(InstanceManagerInterface $instanceManager)
     {
         $this->instanceManager = $instanceManager;
     }

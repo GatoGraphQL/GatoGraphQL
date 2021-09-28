@@ -19,7 +19,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaDefinitionResolverInterface
 {
     protected InterfaceTypeFieldSchemaDefinitionResolverInterface $interfaceTypeFieldSchemaDefinitionResolver;
-    public function __construct(InterfaceTypeFieldSchemaDefinitionResolverInterface $interfaceTypeFieldSchemaDefinitionResolver)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireInterfaceSchemaDefinitionResolverAdapter(InterfaceTypeFieldSchemaDefinitionResolverInterface $interfaceTypeFieldSchemaDefinitionResolver)
     {
         $this->interfaceTypeFieldSchemaDefinitionResolver = $interfaceTypeFieldSchemaDefinitionResolver;
     }

@@ -27,7 +27,9 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractTagObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,

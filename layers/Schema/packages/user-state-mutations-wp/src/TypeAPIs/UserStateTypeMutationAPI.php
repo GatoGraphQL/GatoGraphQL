@@ -17,7 +17,9 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
     protected TranslationAPIInterface $translationAPI;
     protected ErrorHelperInterface $errorHelper;
-    public function __construct(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserStateTypeMutationAPI(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper)
     {
         $this->translationAPI = $translationAPI;
         $this->errorHelper = $errorHelper;

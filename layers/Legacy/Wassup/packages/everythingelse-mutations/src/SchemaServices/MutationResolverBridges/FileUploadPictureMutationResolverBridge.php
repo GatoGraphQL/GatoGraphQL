@@ -16,7 +16,9 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\File
 class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected FileUploadPictureMutationResolver $fileUploadPictureMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireFileUploadPictureMutationResolverBridge(
         FileUploadPictureMutationResolver $fileUploadPictureMutationResolver,
     ) {
         $this->fileUploadPictureMutationResolver = $fileUploadPictureMutationResolver;

@@ -27,7 +27,9 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     protected EndpointHelpers $endpointHelpers;
     protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractGraphiQLBlock(
         EndpointHelpers $endpointHelpers,
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {

@@ -23,7 +23,9 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
     protected ModuleRegistryInterface $moduleRegistry;
     protected ModulesMenuPage $modulesMenuPage;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireModuleDocumentationMenuPage(
         ModuleRegistryInterface $moduleRegistry,
         ModulesMenuPage $modulesMenuPage,
     ) {

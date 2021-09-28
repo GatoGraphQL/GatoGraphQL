@@ -11,7 +11,9 @@ use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 class EntryModuleManager implements EntryModuleManagerInterface
 {
     protected RouteModuleProcessorManagerInterface $routeModuleProcessorManager;
-    public function __construct(RouteModuleProcessorManagerInterface $routeModuleProcessorManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireEntryModuleManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager)
     {
         $this->routeModuleProcessorManager = $routeModuleProcessorManager;
     }

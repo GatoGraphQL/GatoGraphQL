@@ -22,7 +22,9 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
     protected CacheControlBlock $cacheControlBlock;
     protected BlockHelpers $blockHelpers;
     protected CacheControlManagerInterface $cacheControlManager;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCacheControlGraphQLQueryConfigurator(
         CacheControlBlock $cacheControlBlock,
         BlockHelpers $blockHelpers,
         CacheControlManagerInterface $cacheControlManager,

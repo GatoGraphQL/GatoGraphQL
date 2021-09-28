@@ -26,7 +26,9 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
     public const MODULE_DATALOAD_RELATIONALFIELDS_ROOT = 'dataload-relationalfields-root';
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootRelationalFieldDataloadModuleProcessor(
         SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
         $this->schemaDefinitionService = $schemaDefinitionService;

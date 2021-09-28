@@ -16,7 +16,9 @@ use PoPSitesWassup\NotificationMutations\MutationResolvers\MarkAllAsReadNotifica
 class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMarkAllAsReadNotificationMutationResolverBridge(
         MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver,
     ) {
         $this->markAllAsReadNotificationMutationResolver = $markAllAsReadNotificationMutationResolver;

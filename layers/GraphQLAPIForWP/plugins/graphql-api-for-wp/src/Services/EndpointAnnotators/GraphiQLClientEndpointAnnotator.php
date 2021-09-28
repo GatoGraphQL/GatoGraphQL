@@ -17,7 +17,9 @@ use WP_Post;
 class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface
 {
     protected EndpointGraphiQLBlock $endpointGraphiQLBlock;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGraphiQLClientEndpointAnnotator(
         EndpointGraphiQLBlock $endpointGraphiQLBlock,
     ) {
         $this->endpointGraphiQLBlock = $endpointGraphiQLBlock;

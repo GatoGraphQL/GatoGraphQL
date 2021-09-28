@@ -9,7 +9,9 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 abstract class AbstractModuleFilter implements ModuleFilterInterface
 {
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    public function __construct(ModuleProcessorManagerInterface $moduleProcessorManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractModuleFilter(ModuleProcessorManagerInterface $moduleProcessorManager)
     {
         $this->moduleProcessorManager = $moduleProcessorManager;
     }

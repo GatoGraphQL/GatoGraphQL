@@ -26,7 +26,9 @@ class AccessControlBlock extends AbstractControlBlock
     public const ATTRIBUTE_NAME_SCHEMA_MODE = 'schemaMode';
     protected AccessControlBlockCategory $accessControlBlockCategory;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAccessControlBlock(
         AccessControlBlockCategory $accessControlBlockCategory,
     ) {
         $this->accessControlBlockCategory = $accessControlBlockCategory;

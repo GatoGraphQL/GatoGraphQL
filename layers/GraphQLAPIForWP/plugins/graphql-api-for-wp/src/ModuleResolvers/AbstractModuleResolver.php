@@ -14,7 +14,9 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     protected InstanceManagerInterface $instanceManager;
     protected ModuleRegistryInterface $moduleRegistry;
     protected TranslationAPIInterface $translationAPI;
-    public function __construct(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TranslationAPIInterface $translationAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractModuleResolver(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TranslationAPIInterface $translationAPI)
     {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;

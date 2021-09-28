@@ -22,7 +22,9 @@ use PoPSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireWithMetaInterfaceTypeFieldResolver(
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
     ) {
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;

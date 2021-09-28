@@ -24,7 +24,9 @@ class CacheControlBlock extends AbstractControlBlock
     public const ATTRIBUTE_NAME_CACHE_CONTROL_MAX_AGE = 'cacheControlMaxAge';
     protected CacheControlBlockCategory $cacheControlBlockCategory;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCacheControlBlock(
         CacheControlBlockCategory $cacheControlBlockCategory,
     ) {
         $this->cacheControlBlockCategory = $cacheControlBlockCategory;

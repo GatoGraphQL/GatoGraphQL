@@ -18,7 +18,9 @@ class RoutingHookSet extends AbstractHookSet
 {
     protected CMSServiceInterface $cmsService;
     protected RequestHelperServiceInterface $requestHelperService;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRoutingHookSet(
         CMSServiceInterface $cmsService,
         RequestHelperServiceInterface $requestHelperService,
     ) {

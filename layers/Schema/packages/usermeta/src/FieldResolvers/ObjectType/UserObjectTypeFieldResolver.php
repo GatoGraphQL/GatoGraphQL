@@ -23,7 +23,9 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected UserMetaTypeAPIInterface $userMetaAPI;
     protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserObjectTypeFieldResolver(
         UserMetaTypeAPIInterface $userMetaAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {

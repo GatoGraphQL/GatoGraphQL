@@ -30,7 +30,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected StanceObjectTypeResolver $stanceObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
         StanceObjectTypeResolver $stanceObjectTypeResolver,

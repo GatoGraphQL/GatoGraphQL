@@ -23,7 +23,9 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractIntrospectionObj
 class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
     protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireInputValueObjectTypeResolver(
         SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ) {
         $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;

@@ -20,7 +20,9 @@ use PoP\Translation\TranslationAPIInterface;
 class NestedMutationHookSet extends AbstractHookSet
 {
     protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireNestedMutationHookSet(
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ) {
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;

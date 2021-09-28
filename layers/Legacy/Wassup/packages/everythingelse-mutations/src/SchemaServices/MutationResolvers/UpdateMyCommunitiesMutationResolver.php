@@ -13,7 +13,9 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUpdateMyCommunitiesMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;

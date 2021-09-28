@@ -15,7 +15,9 @@ class AccessControlManager extends UpstreamAccessControlManager
     protected array $overriddenFieldEntries = [];
     protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
 
-    public function __construct(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAccessControlManager(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator)
     {
         $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator = $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
     }

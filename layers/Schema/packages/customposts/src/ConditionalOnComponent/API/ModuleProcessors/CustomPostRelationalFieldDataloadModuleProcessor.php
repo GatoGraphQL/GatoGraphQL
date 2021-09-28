@@ -40,7 +40,9 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
     protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostRelationalFieldDataloadModuleProcessor(
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {

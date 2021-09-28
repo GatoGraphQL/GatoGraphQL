@@ -15,7 +15,9 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected LogoutMutationResolver $logoutMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireLogoutMutationResolverBridge(
         LogoutMutationResolver $logoutMutationResolver,
     ) {
         $this->logoutMutationResolver = $logoutMutationResolver;

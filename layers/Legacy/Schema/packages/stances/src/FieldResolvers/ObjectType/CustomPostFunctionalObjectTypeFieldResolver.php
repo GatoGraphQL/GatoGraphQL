@@ -38,7 +38,9 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected URLScalarTypeResolver $urlScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostFunctionalObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,

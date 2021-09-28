@@ -17,7 +17,9 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCustomPostTypeDataLoader(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;

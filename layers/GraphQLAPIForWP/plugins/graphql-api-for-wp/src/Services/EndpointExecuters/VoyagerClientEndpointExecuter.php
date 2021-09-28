@@ -18,7 +18,9 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
 {
     protected CustomEndpointVoyagerClient $customEndpointVoyagerClient;
     protected VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireVoyagerClientEndpointExecuter(
         CustomEndpointVoyagerClient $customEndpointVoyagerClient,
         VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter,
     ) {

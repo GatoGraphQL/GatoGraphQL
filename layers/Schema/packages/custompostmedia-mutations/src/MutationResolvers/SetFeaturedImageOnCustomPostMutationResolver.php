@@ -15,7 +15,9 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
     use ValidateUserLoggedInMutationResolverTrait;
     protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSetFeaturedImageOnCustomPostMutationResolver(
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ) {
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;

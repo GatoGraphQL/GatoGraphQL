@@ -13,7 +13,9 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
 {
     protected EndpointHelpers $endpointHelpers;
     protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireEditingPersistedQueryEndpointSchemaConfiguratorExecuter(
         EndpointHelpers $endpointHelpers,
         PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator
     ) {

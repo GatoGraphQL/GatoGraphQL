@@ -18,7 +18,9 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
     use WithBlockRegistryCustomPostTypeTrait;
     protected SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGraphQLSchemaConfigurationCustomPostType(
         SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry
     ) {
         $this->schemaConfigBlockRegistry = $schemaConfigBlockRegistry;

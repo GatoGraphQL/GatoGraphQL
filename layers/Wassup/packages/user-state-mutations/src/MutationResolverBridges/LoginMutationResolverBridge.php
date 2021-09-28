@@ -16,7 +16,9 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected LoginMutationResolver $loginMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireLoginMutationResolverBridge(
         LoginMutationResolver $loginMutationResolver,
     ) {
         $this->loginMutationResolver = $loginMutationResolver;

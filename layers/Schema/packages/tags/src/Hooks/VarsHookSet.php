@@ -14,7 +14,9 @@ use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 class VarsHookSet extends AbstractHookSet
 {
     protected TaxonomyTypeAPIInterface $taxonomyTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireVarsHookSet(
         TaxonomyTypeAPIInterface $taxonomyTypeAPI,
     ) {
         $this->taxonomyTypeAPI = $taxonomyTypeAPI;

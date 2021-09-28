@@ -15,7 +15,9 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
     protected GenerateThemeMutationResolver $generateThemeMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGenerateThemeMutationResolverBridge(
         GenerateThemeMutationResolver $generateThemeMutationResolver,
     ) {
         $this->generateThemeMutationResolver = $generateThemeMutationResolver;

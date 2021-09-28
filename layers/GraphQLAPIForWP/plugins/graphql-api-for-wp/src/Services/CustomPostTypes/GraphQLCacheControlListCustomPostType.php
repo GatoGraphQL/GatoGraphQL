@@ -15,7 +15,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
 {
     protected CacheControlBlock $cacheControlBlock;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGraphQLCacheControlListCustomPostType(
         CacheControlBlock $cacheControlBlock,
     ) {
         $this->cacheControlBlock = $cacheControlBlock;

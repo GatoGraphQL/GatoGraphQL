@@ -33,7 +33,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected MenuObjectTypeResolver $menuObjectTypeResolver;
     protected MenuTypeAPIInterface $menuTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         MenuObjectTypeResolver $menuObjectTypeResolver,
         MenuTypeAPIInterface $menuTypeAPI,

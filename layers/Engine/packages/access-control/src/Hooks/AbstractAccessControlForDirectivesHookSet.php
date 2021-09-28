@@ -16,7 +16,9 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
 {
     protected AccessControlManagerInterface $accessControlManager;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractAccessControlForDirectivesHookSet(
         AccessControlManagerInterface $accessControlManager
     ) {
         $this->accessControlManager = $accessControlManager;

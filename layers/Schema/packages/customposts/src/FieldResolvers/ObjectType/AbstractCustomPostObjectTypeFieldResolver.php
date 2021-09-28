@@ -27,7 +27,9 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     protected DateFormatterInterface $dateFormatter;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCustomPostObjectTypeFieldResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
         DateFormatterInterface $dateFormatter,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,

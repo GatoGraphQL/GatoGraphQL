@@ -21,7 +21,9 @@ class ModelInstance implements ModelInstanceInterface
     protected ApplicationInfoInterface $applicationInfo;
     protected DefinitionManagerInterface $definitionManager;
 
-    public function __construct(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireModelInstance(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager)
     {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;

@@ -20,7 +20,9 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected PostTypeAPIInterface $postTypeAPI;
     protected PostTagTypeMutationAPIInterface $postTagTypeMutationAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePostMutationResolverHookSet(
         PostObjectTypeResolver $postObjectTypeResolver,
         PostTypeAPIInterface $postTypeAPI,
         PostTagTypeMutationAPIInterface $postTagTypeMutationAPI,

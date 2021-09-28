@@ -17,7 +17,9 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
     protected InstanceManagerInterface $instanceManager;
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
 
-    public function __construct(InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractRelationalTypeResolverDecorator(InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter)
     {
         $this->instanceManager = $instanceManager;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;

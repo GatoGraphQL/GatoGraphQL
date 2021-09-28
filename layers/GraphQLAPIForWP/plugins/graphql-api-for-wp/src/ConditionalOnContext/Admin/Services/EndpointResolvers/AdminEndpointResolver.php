@@ -21,7 +21,9 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     protected UserAuthorizationInterface $userAuthorization;
     protected QueryRetrieverInterface $queryRetrieverInterface;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAdminEndpointResolver(
         EndpointHelpers $endpointHelpers,
         UserAuthorizationInterface $userAuthorization,
         QueryRetrieverInterface $queryRetrieverInterface,

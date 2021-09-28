@@ -23,7 +23,9 @@ use PoPSchema\GenericCustomPosts\RelationalTypeDataLoaders\ObjectType\GenericCus
 class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     protected GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGenericCustomPostObjectTypeResolver(
         GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader,
     ) {
         $this->genericCustomPostTypeDataLoader = $genericCustomPostTypeDataLoader;

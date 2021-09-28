@@ -31,7 +31,9 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     protected PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface;
     protected PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGraphQLPersistedQueryEndpointCustomPostType(
         PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
         PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface,
         PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface,

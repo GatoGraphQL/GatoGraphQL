@@ -18,7 +18,9 @@ use PoP\Translation\TranslationAPIInterface;
 class SetupCortexHookSet extends AbstractHookSet
 {
     protected RoutingManagerInterface $routingManager;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSetupCortexHookSet(
         RoutingManagerInterface $routingManager,
     ) {
         $this->routingManager = $routingManager;

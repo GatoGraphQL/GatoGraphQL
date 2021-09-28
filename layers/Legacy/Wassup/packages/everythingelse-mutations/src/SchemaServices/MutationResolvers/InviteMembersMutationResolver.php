@@ -14,7 +14,9 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireInviteMembersMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;

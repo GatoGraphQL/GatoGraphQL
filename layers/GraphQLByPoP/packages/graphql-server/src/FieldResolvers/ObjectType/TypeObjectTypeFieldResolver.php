@@ -42,7 +42,9 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected EnumValueObjectTypeResolver $enumValueObjectTypeResolver;
     protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
     protected TypeKindEnumTypeResolver $typeKindEnumTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireTypeObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         FieldObjectTypeResolver $fieldObjectTypeResolver,

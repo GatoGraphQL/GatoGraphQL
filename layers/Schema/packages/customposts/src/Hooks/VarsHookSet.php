@@ -17,7 +17,9 @@ use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 class VarsHookSet extends AbstractHookSet
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireVarsHookSet(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;

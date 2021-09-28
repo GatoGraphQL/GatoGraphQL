@@ -35,7 +35,9 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireStanceObjectTypeFieldResolver(
         IDScalarTypeResolver $idScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,

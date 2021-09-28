@@ -21,7 +21,9 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
     use OptionsBlockTrait;
     protected CustomEndpointBlockCategory $customEndpointBlockCategory;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireEndpointVoyagerBlock(
         CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
         $this->customEndpointBlockCategory = $customEndpointBlockCategory;

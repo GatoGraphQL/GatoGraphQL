@@ -34,7 +34,9 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected IDScalarTypeResolver $idScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMenuItemObjectTypeFieldResolver(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
         CMSHelperServiceInterface $cmsHelperService,
         URLScalarTypeResolver $urlScalarTypeResolver,

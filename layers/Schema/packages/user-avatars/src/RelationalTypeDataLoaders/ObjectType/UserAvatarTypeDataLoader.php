@@ -13,7 +13,9 @@ use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserAvatarTypeDataLoader(
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
     ) {
         $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;

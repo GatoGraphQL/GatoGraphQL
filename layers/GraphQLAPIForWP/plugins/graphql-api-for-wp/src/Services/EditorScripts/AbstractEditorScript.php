@@ -22,7 +22,9 @@ abstract class AbstractEditorScript extends AbstractScript
     use HasDocumentationScriptTrait;
     protected EditorHelpers $editorHelpers;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirefor(
         EditorHelpers $editorHelpers,
     ) {
         $this->editorHelpers = $editorHelpers;

@@ -22,7 +22,9 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeR
 class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected URLScalarTypeResolver $urlScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireQueryableObjectPostObjectTypeFieldResolver(
         URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;

@@ -14,7 +14,9 @@ use PoP\Translation\TranslationAPIInterface;
 class TemplateHookSet extends AbstractHookSet
 {
     protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireTemplateHookSet(
         ApplicationStateHelperServiceInterface $applicationStateHelperService,
     ) {
         $this->applicationStateHelperService = $applicationStateHelperService;

@@ -18,7 +18,9 @@ use PoP\Translation\TranslationAPIInterface;
 class VarsHookSet extends AbstractHookSet
 {
     protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireVarsHookSet(
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
     ) {
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;

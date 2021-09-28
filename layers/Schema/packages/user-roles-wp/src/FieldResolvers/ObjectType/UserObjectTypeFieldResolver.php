@@ -27,7 +27,9 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected UserRoleTypeAPIInterface $userRoleTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         UserRoleTypeAPIInterface $userRoleTypeAPI,
     ) {

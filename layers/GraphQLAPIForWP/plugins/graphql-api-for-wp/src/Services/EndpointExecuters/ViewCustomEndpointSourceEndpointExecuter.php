@@ -13,7 +13,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireViewCustomEndpointSourceEndpointExecuter(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;

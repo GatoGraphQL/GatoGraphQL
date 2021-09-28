@@ -28,7 +28,9 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected CommentTypeAPIInterface $commentTypeAPI;
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
     protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCommentObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentObjectTypeResolver $commentObjectTypeResolver,
         AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,

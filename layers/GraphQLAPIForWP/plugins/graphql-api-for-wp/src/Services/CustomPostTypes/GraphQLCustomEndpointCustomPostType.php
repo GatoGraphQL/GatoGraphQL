@@ -31,7 +31,9 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     protected CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface;
     protected CustomEndpointOptionsBlock $customEndpointOptionsBlock;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireGraphQLCustomEndpointCustomPostType(
         EndpointBlockRegistryInterface $endpointBlockRegistry,
         CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
         CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface,

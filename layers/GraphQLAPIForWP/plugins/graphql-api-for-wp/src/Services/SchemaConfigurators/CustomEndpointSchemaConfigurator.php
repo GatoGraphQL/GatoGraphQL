@@ -15,7 +15,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaConfigurator
 {
     protected EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomEndpointSchemaConfigurator(
         EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
     ) {
         $this->endpointSchemaConfigurationExecuterRegistry = $endpointSchemaConfigurationExecuterRegistry;

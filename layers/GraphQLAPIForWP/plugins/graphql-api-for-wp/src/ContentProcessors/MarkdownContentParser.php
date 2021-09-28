@@ -11,7 +11,9 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {
     protected MarkdownConvertorInterface $markdownConvertorInterface;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMarkdownContentParser(
         MarkdownConvertorInterface $markdownConvertorInterface,
     ) {
         $this->markdownConvertorInterface = $markdownConvertorInterface;

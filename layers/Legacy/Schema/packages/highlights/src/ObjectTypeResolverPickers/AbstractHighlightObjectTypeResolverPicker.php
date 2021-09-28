@@ -12,7 +12,9 @@ use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
     protected HighlightObjectTypeResolver $highlightObjectTypeResolver;
-    public function __construct(HighlightObjectTypeResolver $highlightObjectTypeResolver)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractHighlightObjectTypeResolverPicker(HighlightObjectTypeResolver $highlightObjectTypeResolver)
     {
         $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;
     }

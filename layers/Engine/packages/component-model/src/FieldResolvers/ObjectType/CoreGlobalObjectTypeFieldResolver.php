@@ -26,7 +26,9 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCoreGlobalObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {

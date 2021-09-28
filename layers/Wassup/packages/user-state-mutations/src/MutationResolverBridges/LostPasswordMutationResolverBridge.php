@@ -18,7 +18,9 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected LostPasswordMutationResolver $lostPasswordMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireLostPasswordMutationResolverBridge(
         LostPasswordMutationResolver $lostPasswordMutationResolver,
     ) {
         $this->lostPasswordMutationResolver = $lostPasswordMutationResolver;

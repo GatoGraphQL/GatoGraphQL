@@ -14,7 +14,9 @@ use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
     protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostUnionTypeDataLoader(
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
     ) {
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;

@@ -13,7 +13,9 @@ abstract class AbstractPostObjectTypeResolverPicker extends AbstractObjectTypeRe
 {
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected PostTypeAPIInterface $postTypeAPI;
-    public function __construct(PostObjectTypeResolver $postObjectTypeResolver, PostTypeAPIInterface $postTypeAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractPostObjectTypeResolverPicker(PostObjectTypeResolver $postObjectTypeResolver, PostTypeAPIInterface $postTypeAPI)
     {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->postTypeAPI = $postTypeAPI;

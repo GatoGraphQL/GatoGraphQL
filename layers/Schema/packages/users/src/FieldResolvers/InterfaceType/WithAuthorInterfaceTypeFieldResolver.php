@@ -21,7 +21,9 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     protected UserObjectTypeResolver $userObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireWithAuthorInterfaceTypeFieldResolver(
         UserObjectTypeResolver $userObjectTypeResolver,
     ) {
         $this->userObjectTypeResolver = $userObjectTypeResolver;

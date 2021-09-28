@@ -32,7 +32,9 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserObjectTypeFieldResolver(
         UserTypeAPIInterface $userTypeAPI,
         EmailScalarTypeResolver $emailScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,

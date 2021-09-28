@@ -24,7 +24,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     protected ?Exception $inititalizationException = null;
     protected AbstractMainPluginConfiguration $pluginConfiguration;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractMainPlugin(
         AbstractMainPluginConfiguration $pluginConfiguration,
     ) {
         $this->pluginConfiguration = $pluginConfiguration;

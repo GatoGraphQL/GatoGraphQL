@@ -23,7 +23,9 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected ModuleRegistryInterface $moduleRegistry;
     protected UserAuthorizationInterface $userAuthorization;
     protected SettingsMenuPage $settingsMenuPage;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireBottomMenuPageAttacher(
         MenuPageHelper $menuPageHelper,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,

@@ -26,7 +26,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
     protected SettingsTypeAPIInterface $settingsTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootObjectTypeFieldResolver(
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
         SettingsTypeAPIInterface $settingsTypeAPI,
     ) {

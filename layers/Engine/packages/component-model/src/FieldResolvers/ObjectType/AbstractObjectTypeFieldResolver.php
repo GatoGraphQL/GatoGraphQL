@@ -61,7 +61,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     protected EngineInterface $engine;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractObjectTypeFieldResolver(
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,

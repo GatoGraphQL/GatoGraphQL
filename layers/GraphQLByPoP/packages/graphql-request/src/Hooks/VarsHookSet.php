@@ -31,7 +31,9 @@ class VarsHookSet extends AbstractHookSet
     protected GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager;
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected GraphQLQueryConvertorInterface $graphQLQueryConvertor;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireVarsHookSet(
         QueryRetrieverInterface $queryRetrieverInterface,
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
         GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager,

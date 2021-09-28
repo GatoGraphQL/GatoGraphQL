@@ -19,7 +19,9 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
     protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers;
     protected GraphQLRequestVarsHooks $graphQLRequestVarsHooks;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter(
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
         GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
         GraphQLRequestVarsHooks $graphQLRequestVarsHooks,

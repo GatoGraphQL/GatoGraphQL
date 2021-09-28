@@ -20,7 +20,9 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaRelationalTypeR
     protected AccessControlManagerInterface $accessControlManager;
     protected ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaRelationalTypeResolverDecorator(
         AccessControlManagerInterface $accessControlManager,
         ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver,
     ) {

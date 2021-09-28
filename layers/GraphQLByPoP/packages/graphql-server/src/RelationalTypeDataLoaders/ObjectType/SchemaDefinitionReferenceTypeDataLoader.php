@@ -14,7 +14,9 @@ use PoP\LooseContracts\NameResolverInterface;
 class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSchemaDefinitionReferenceTypeDataLoader(
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ) {
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;

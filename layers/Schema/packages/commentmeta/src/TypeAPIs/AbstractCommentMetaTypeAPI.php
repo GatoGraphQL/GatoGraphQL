@@ -11,7 +11,9 @@ use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
 {
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
-    public function __construct(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCommentMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }

@@ -24,7 +24,9 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeR
 class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected URLScalarTypeResolver $urlScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostFunctionalObjectTypeFieldResolver(
         URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;

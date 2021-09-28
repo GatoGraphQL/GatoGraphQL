@@ -15,7 +15,9 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\DownvoteCustomPostMu
 class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomPostMutationResolver
 {
     protected DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUpvoteCustomPostMutationResolver(
         DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver,
     ) {
         $this->downvoteCustomPostMutationResolver = $downvoteCustomPostMutationResolver;

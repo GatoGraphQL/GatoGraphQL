@@ -28,7 +28,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
     protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootObjectTypeFieldResolver(
         CommentObjectTypeResolver $commentObjectTypeResolver,
         AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {

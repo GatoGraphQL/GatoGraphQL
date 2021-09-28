@@ -24,7 +24,9 @@ use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     protected MenuObjectTypeResolver $menuObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootObjectTypeFieldResolver(
         MenuObjectTypeResolver $menuObjectTypeResolver,
     ) {
         $this->menuObjectTypeResolver = $menuObjectTypeResolver;

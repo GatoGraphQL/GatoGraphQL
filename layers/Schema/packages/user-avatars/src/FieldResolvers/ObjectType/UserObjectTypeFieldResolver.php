@@ -29,7 +29,9 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected UserAvatarTypeAPIInterface $userAvatarTypeAPI;
     protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
     protected UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserObjectTypeFieldResolver(
         UserAvatarTypeAPIInterface $userAvatarTypeAPI,
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
         UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,

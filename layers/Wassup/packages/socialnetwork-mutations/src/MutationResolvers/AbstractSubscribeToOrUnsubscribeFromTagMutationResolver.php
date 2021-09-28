@@ -11,7 +11,9 @@ use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
     protected PostTagTypeAPIInterface $postTagTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractSubscribeToOrUnsubscribeFromTagMutationResolver(
         PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
         $this->postTagTypeAPI = $postTagTypeAPI;

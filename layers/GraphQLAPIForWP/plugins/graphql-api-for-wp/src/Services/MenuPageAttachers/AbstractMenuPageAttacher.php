@@ -14,7 +14,9 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiatedService
 {
     protected InstanceManagerInterface $instanceManager;
-    public function __construct(InstanceManagerInterface $instanceManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractMenuPageAttacher(InstanceManagerInterface $instanceManager)
     {
         $this->instanceManager = $instanceManager;
     }

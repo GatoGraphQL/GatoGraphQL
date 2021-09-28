@@ -22,7 +22,9 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
     protected PostTagTypeAPIInterface $postTagTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireEntryRouteModuleProcessor(
         PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
         $this->postTagTypeAPI = $postTagTypeAPI;

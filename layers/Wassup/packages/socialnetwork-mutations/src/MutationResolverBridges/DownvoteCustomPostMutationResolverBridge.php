@@ -16,7 +16,9 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\DownvoteCustomPostMu
 class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
     protected DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireDownvoteCustomPostMutationResolverBridge(
         DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver,
     ) {
         $this->downvoteCustomPostMutationResolver = $downvoteCustomPostMutationResolver;

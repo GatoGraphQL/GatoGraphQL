@@ -16,7 +16,9 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Upda
 class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUpdateUserAvatarMutationResolverBridge(
         UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver,
     ) {
         $this->updateUserAvatarMutationResolver = $updateUserAvatarMutationResolver;

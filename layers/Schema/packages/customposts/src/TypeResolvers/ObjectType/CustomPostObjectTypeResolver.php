@@ -29,7 +29,9 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeR
 class CustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     protected CustomPostTypeDataLoader $customPostTypeDataLoader;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomPostObjectTypeResolver(
         CustomPostTypeDataLoader $customPostTypeDataLoader,
     ) {
         $this->customPostTypeDataLoader = $customPostTypeDataLoader;

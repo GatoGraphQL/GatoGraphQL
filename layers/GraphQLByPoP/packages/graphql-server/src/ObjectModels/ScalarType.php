@@ -12,7 +12,9 @@ class ScalarType extends AbstractType
     use NonDocumentableTypeTrait;
     protected string $name;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireScalarType(
         array &$fullSchemaDefinition,
         array $schemaDefinitionPath,
         string $name,

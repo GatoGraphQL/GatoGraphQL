@@ -14,7 +14,9 @@ use PoPSitesWassup\PostLinkMutations\MutationResolvers\CreatePostLinkMutationRes
 class CreatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkMutationResolverBridge
 {
     protected CreatePostLinkMutationResolver $createPostLinkMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCreatePostLinkMutationResolverBridge(
         CreatePostLinkMutationResolver $createPostLinkMutationResolver,
     ) {
         $this->createPostLinkMutationResolver = $createPostLinkMutationResolver;

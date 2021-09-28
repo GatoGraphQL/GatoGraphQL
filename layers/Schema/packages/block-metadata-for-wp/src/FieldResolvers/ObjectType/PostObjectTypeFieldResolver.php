@@ -26,7 +26,9 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePostObjectTypeFieldResolver(
         ObjectScalarTypeResolver $objectScalarTypeResolver,
     ) {
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;

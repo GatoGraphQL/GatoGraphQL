@@ -17,7 +17,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface
 {
     protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCacheControlSchemaConfigurationExecuter(
         CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
     ) {
         $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;

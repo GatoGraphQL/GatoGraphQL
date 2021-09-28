@@ -15,7 +15,9 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractObjectTypeQueryableDataLoader(
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ) {
         $this->moduleProcessorManager = $moduleProcessorManager;

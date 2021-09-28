@@ -9,7 +9,9 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 class CMSHelperService implements CMSHelperServiceInterface
 {
     protected CMSServiceInterface $cmsService;
-    public function __construct(CMSServiceInterface $cmsService)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCMSHelperService(CMSServiceInterface $cmsService)
     {
         $this->cmsService = $cmsService;
     }

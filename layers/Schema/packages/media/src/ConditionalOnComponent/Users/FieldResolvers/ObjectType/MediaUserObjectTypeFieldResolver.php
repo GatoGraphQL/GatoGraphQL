@@ -25,7 +25,9 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected UserMediaTypeAPIInterface $userMediaTypeAPI;
     protected UserObjectTypeResolver $userObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMediaUserObjectTypeFieldResolver(
         UserMediaTypeAPIInterface $userMediaTypeAPI,
         UserObjectTypeResolver $userObjectTypeResolver,
     ) {

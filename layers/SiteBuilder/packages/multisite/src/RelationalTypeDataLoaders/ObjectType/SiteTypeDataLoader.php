@@ -14,7 +14,9 @@ use PoP\Multisite\ObjectModels\Site;
 class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected Site $site;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireSiteTypeDataLoader(
         Site $site,
     ) {
         $this->site = $site;

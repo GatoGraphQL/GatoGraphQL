@@ -13,7 +13,9 @@ use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMenuItemTypeDataLoader(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
     ) {
         $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;

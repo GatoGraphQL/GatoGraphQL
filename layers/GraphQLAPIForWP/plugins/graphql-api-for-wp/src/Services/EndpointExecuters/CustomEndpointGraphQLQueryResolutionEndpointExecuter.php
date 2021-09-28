@@ -16,7 +16,9 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
 {
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
     protected QueryRetrieverInterface $queryRetrieverInterface;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCustomEndpointGraphQLQueryResolutionEndpointExecuter(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
         QueryRetrieverInterface $queryRetrieverInterface,
     ) {

@@ -22,7 +22,9 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected LocationObjectTypeResolver $locationObjectTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireUserObjectTypeFieldResolver(
         LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;

@@ -30,7 +30,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected UserObjectTypeResolver $userObjectTypeResolver;
     protected LoginMutationResolver $loginMutationResolver;
     protected LogoutMutationResolver $logoutMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootObjectTypeFieldResolver(
         UserObjectTypeResolver $userObjectTypeResolver,
         LoginMutationResolver $loginMutationResolver,
         LogoutMutationResolver $logoutMutationResolver,

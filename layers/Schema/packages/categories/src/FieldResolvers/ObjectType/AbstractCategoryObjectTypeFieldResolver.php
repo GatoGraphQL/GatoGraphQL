@@ -27,7 +27,9 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractCategoryObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,

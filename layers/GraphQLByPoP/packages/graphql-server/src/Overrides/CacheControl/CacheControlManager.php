@@ -12,7 +12,9 @@ class CacheControlManager extends UpstreamCacheControlManager
     protected ?array $overriddenFieldEntries = null;
     protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
 
-    public function __construct(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCacheControlManager(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator)
     {
         $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator = $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
     }

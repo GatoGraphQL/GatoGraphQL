@@ -9,7 +9,9 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiatedService
 {
     protected LooseContractManagerInterface $looseContractManager;
-    public function __construct(LooseContractManagerInterface $looseContractManager)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractLooseContractSet(LooseContractManagerInterface $looseContractManager)
     {
         $this->looseContractManager = $looseContractManager;
     }

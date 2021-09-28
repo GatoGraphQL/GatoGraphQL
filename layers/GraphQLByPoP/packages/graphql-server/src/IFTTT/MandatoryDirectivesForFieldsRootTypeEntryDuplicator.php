@@ -18,7 +18,9 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
     protected InstanceManagerInterface $instanceManager;
     protected RootObjectTypeResolver $rootObjectTypeResolver;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMandatoryDirectivesForFieldsRootTypeEntryDuplicator(
         InstanceManagerInterface $instanceManager,
         RootObjectTypeResolver $rootObjectTypeResolver,
         TypeResolverHelperInterface $typeResolverHelper

@@ -31,7 +31,9 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
     protected DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireDirectiveObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         InputValueObjectTypeResolver $inputValueObjectTypeResolver,

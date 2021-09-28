@@ -28,7 +28,9 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
     public const MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT = 'dataload-relationalfields-mutationroot';
     protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
 
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireRootRelationalFieldDataloadModuleProcessor(
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ) {
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;

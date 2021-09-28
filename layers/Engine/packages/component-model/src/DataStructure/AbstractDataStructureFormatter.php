@@ -11,7 +11,9 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
 {
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    public function __construct(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireAbstractDataStructureFormatter(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter)
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;

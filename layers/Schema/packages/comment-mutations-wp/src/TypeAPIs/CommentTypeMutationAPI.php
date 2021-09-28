@@ -15,7 +15,9 @@ use PoPSchema\CommentMutations\ComponentConfiguration;
 class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
 {
     protected TranslationAPIInterface $translationAPI;
-    public function __construct(TranslationAPIInterface $translationAPI)
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireCommentTypeMutationAPI(TranslationAPIInterface $translationAPI)
     {
         $this->translationAPI = $translationAPI;
     }

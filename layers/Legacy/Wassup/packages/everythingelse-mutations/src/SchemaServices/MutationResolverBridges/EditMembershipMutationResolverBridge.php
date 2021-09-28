@@ -17,7 +17,9 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Edit
 class EditMembershipMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected EditMembershipMutationResolver $editMembershipMutationResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireEditMembershipMutationResolverBridge(
         EditMembershipMutationResolver $editMembershipMutationResolver,
     ) {
         $this->editMembershipMutationResolver = $editMembershipMutationResolver;

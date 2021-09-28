@@ -14,7 +14,9 @@ use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
 class ApplicationStateHookSet extends AbstractHookSet
 {
     protected CMSRoutingStateServiceInterface $cmsRoutingStateService;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireApplicationStateHookSet(
         CMSRoutingStateServiceInterface $cmsRoutingStateService,
     ) {
         $this->cmsRoutingStateService = $cmsRoutingStateService;

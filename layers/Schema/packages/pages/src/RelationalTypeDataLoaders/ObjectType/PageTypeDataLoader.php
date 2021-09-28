@@ -15,7 +15,9 @@ use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
     protected PageTypeAPIInterface $pageTypeAPI;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowirePageTypeDataLoader(
         PageTypeAPIInterface $pageTypeAPI,
     ) {
         $this->pageTypeAPI = $pageTypeAPI;

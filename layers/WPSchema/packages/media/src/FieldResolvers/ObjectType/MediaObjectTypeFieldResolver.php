@@ -27,7 +27,9 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     protected CMSHelperServiceInterface $cmsHelperService;
     protected DateFormatterInterface $dateFormatter;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    public function __construct(
+    
+    #[\Symfony\Contracts\Service\Attribute\Required]
+    public function autowireMediaObjectTypeFieldResolver(
         CMSHelperServiceInterface $cmsHelperService,
         DateFormatterInterface $dateFormatter,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
