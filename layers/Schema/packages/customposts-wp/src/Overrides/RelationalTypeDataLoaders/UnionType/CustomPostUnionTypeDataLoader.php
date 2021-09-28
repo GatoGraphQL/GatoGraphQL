@@ -26,7 +26,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
     
     #[\Symfony\Contracts\Service\Attribute\Required]
-    public function autowirecan(
+    public function autowireCustomPostsWPCustomPostUnionTypeDataLoader(
         CustomPostTypeDataLoader $customPostTypeDataLoader,
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {

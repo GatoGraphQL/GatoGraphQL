@@ -27,7 +27,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
     
     #[\Symfony\Contracts\Service\Attribute\Required]
-    public function autowireAbstractCreateUpdateCustomPostMutationResolver(
+    public function autowireCustomPostMutationsAbstractCreateUpdateCustomPostMutationResolver(
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;

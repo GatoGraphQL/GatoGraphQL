@@ -15,7 +15,7 @@ class LoginMutationResolver extends UpstreamLoginMutationResolver
     protected UserTypeAPIInterface $userTypeAPI;
     
     #[\Symfony\Contracts\Service\Attribute\Required]
-    public function autowireLoginMutationResolver(
+    public function autowireUserStateMutationsLoginMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;
