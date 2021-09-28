@@ -24,18 +24,26 @@ abstract class AbstractContentParser implements ContentParserInterface
     /**
      * @param string|null $baseDir Where to look for the documentation
      * @param string|null $baseURL URL for the documentation
+     */
+    public function __construct(
+        ?string $baseDir = null,
+        ?string $baseURL = null,
+    ) {
+        $this->setBaseDir($baseDir);
+        $this->setBaseURL($baseURL);
+    }
+
+    /**
+     * @param string|null $baseDir Where to look for the documentation
+     * @param string|null $baseURL URL for the documentation
      */    
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAbstractContentParser(
         RequestHelperServiceInterface $requestHelperService,
         LocaleHelper $localeHelper,
-        ?string $baseDir = null,
-        ?string $baseURL = null,
     ) {
         $this->requestHelperService = $requestHelperService;
         $this->localeHelper = $localeHelper;
-        $this->setBaseDir($baseDir);
-        $this->setBaseURL($baseURL);
     }
 
     /**
