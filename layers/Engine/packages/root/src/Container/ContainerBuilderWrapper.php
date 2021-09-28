@@ -9,10 +9,8 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class ContainerBuilderWrapper implements ContainerBuilderWrapperInterface
 {
-    private ContainerBuilder $containerBuilder;
-    public final function __construct(ContainerBuilder $containerBuilder)
+    final public function __construct(private ContainerBuilder $containerBuilder)
     {
-        $this->containerBuilder = $containerBuilder;
     }
 
     final public function getContainerBuilder(): ContainerBuilder
