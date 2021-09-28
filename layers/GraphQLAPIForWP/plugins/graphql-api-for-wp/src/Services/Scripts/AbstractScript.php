@@ -24,7 +24,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     protected GeneralUtils $generalUtils;
     
     #[\Symfony\Contracts\Service\Attribute\Required]
-    public function autowirefor(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils)
+    public function autowireAbstractScript(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils)
     {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;

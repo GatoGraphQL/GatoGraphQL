@@ -24,7 +24,7 @@ abstract class AbstractEditorScript extends AbstractScript
 
     
     #[\Symfony\Contracts\Service\Attribute\Required]
-    public function autowirefor(
+    public function autowireAbstractEditorScript(
         EditorHelpers $editorHelpers,
     ) {
         $this->editorHelpers = $editorHelpers;
