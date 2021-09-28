@@ -21,13 +21,17 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
 {
     protected UserSettingsManagerInterface $userSettingsManager;
     protected EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock;
+
+    public function __construct()
+    {
+        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
+    }
     
     #[Required]
     public function autowireAbstractCustomPostEndpointSchemaConfigurator(
         EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
     ) {
         $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 
     /**
