@@ -33,7 +33,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    
+
     #[Required]
     public function autowireUserObjectTypeFieldResolver(
         UserTypeAPIInterface $userTypeAPI,

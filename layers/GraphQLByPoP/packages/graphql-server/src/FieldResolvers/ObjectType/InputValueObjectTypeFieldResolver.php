@@ -28,7 +28,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
-    
+
     #[Required]
     public function autowireInputValueObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,

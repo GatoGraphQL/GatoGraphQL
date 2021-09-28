@@ -15,7 +15,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator;
-    
+
     #[Required]
     public function autowireAccessControlSchemaConfigurationExecuter(
         AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,

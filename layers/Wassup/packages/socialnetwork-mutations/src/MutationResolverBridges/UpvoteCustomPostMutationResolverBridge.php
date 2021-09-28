@@ -17,7 +17,7 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UpvoteCustomPostMuta
 class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
     protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
-    
+
     #[Required]
     public function autowireUpvoteCustomPostMutationResolverBridge(
         UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,

@@ -23,7 +23,7 @@ use PoPSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
-    
+
     #[Required]
     public function autowireWithMetaInterfaceTypeFieldResolver(
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,

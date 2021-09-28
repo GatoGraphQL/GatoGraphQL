@@ -38,7 +38,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
     protected PersistedQueryManagerInterface $queryCatalogueManager;
-    
+
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver,

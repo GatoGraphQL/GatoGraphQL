@@ -18,7 +18,7 @@ use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
     protected PostTypeAPIInterface $postTypeAPI;
-    
+
     #[Required]
     public function autowireAbstractCreateUpdatePostMutationResolver(
         PostTypeAPIInterface $postTypeAPI,

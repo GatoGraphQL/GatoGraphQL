@@ -31,7 +31,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected UserObjectTypeResolver $userObjectTypeResolver;
     protected LoginMutationResolver $loginMutationResolver;
     protected LogoutMutationResolver $logoutMutationResolver;
-    
+
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         UserObjectTypeResolver $userObjectTypeResolver,

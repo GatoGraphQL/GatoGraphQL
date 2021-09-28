@@ -17,7 +17,7 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UndoDownvoteCustomPo
 class UndoDownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
     protected UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver;
-    
+
     #[Required]
     public function autowireUndoDownvoteCustomPostMutationResolverBridge(
         UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver,

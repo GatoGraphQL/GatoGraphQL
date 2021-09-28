@@ -16,7 +16,7 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    
+
     #[Required]
     public function autowireAbstractObjectTypeQueryableDataLoader(
         ModuleProcessorManagerInterface $moduleProcessorManager,

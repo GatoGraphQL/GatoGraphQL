@@ -28,7 +28,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected UserRoleTypeAPIInterface $userRoleTypeAPI;
-    
+
     #[Required]
     public function autowireUserObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,

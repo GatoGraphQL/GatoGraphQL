@@ -16,7 +16,7 @@ use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterUnsubscriptio
 class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     protected NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver;
-    
+
     #[Required]
     public function autowireNewsletterUnsubscriptionMutationResolverBridge(
         NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver,

@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace PoP\Engine\ErrorHandling;
 
 use Symfony\Contracts\Service\Attribute\Required;
+
 class ErrorHelper implements ErrorHelperInterface
 {
     protected ErrorManagerInterface $errorManager;
-    
+
     #[Required]
     public function autowireErrorHelper(ErrorManagerInterface $errorManager)
     {

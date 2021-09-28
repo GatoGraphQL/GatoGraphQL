@@ -12,8 +12,9 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 abstract class AbstractConfigurableAccessControlForDirectivesInPrivateSchemaRelationalTypeResolverDecorator extends AbstractPrivateSchemaRelationalTypeResolverDecorator
 {
     use ConfigurableAccessControlForDirectivesRelationalTypeResolverDecoratorTrait;
+
     protected AccessControlManagerInterface $accessControlManager;
-    
+
     #[Required]
     public function autowireAbstractConfigurableAccessControlForDirectivesInPrivateSchemaRelationalTypeResolverDecorator(
         AccessControlManagerInterface $accessControlManager,

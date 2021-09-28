@@ -19,7 +19,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 {
     protected AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient;
-    
+
     #[Required]
     public function autowireGraphQLAPIGraphiQLMenuPage(
         AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient,

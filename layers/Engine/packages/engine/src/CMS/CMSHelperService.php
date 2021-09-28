@@ -10,7 +10,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 class CMSHelperService implements CMSHelperServiceInterface
 {
     protected CMSServiceInterface $cmsService;
-    
+
     #[Required]
     public function autowireCMSHelperService(CMSServiceInterface $cmsService)
     {

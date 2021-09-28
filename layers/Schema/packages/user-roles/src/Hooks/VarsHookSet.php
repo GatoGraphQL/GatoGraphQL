@@ -19,7 +19,7 @@ use PoPSchema\Users\Routing\RouteNatures;
 class VarsHookSet extends AbstractHookSet
 {
     protected UserRoleTypeAPIInterface $userRoleTypeAPI;
-    
+
     #[Required]
     public function autowireVarsHookSet(
         UserRoleTypeAPIInterface $userRoleTypeAPI,

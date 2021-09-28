@@ -18,7 +18,7 @@ use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 class VarsHookSet extends AbstractHookSet
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    
+
     #[Required]
     public function autowireVarsHookSet(
         CustomPostTypeAPIInterface $customPostTypeAPI,

@@ -17,7 +17,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected MediaTypeAPIInterface $mediaTypeAPI;
-    
+
     #[Required]
     public function autowireMediaTypeDataLoader(
         MediaTypeAPIInterface $mediaTypeAPI,

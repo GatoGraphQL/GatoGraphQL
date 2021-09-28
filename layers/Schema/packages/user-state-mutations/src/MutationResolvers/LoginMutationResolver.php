@@ -19,7 +19,7 @@ class LoginMutationResolver extends AbstractMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
     protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
-    
+
     #[Required]
     public function autowireLoginMutationResolver(
         UserTypeAPIInterface $userTypeAPI,

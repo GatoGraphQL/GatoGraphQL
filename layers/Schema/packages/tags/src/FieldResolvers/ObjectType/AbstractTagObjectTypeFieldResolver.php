@@ -28,7 +28,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    
+
     #[Required]
     public function autowireAbstractTagObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,

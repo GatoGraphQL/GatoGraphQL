@@ -16,7 +16,7 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
     protected ActivatePluginsMutationResolver $activatePluginsMutationResolver;
-    
+
     #[Required]
     public function autowireActivatePluginsMutationResolverBridge(
         ActivatePluginsMutationResolver $activatePluginsMutationResolver,

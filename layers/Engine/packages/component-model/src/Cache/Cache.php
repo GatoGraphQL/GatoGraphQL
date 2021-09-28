@@ -13,14 +13,15 @@ use Psr\Cache\CacheItemPoolInterface;
 class Cache implements CacheInterface
 {
     use ReplaceCurrentExecutionDataWithPlaceholdersTrait;
+
     protected CacheItemPoolInterface $cacheItemPool;
     protected ModelInstanceInterface $modelInstance;
-    
+
     public function __construct(CacheItemPoolInterface $cacheItemPool)
     {
         $this->cacheItemPool = $cacheItemPool;
     }
-    
+
     #[Required]
     public function autowireCache(ModelInstanceInterface $modelInstance)
     {

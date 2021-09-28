@@ -18,7 +18,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface
 {
     protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator;
-    
+
     #[Required]
     public function autowireCacheControlSchemaConfigurationExecuter(
         CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator

@@ -28,7 +28,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected SiteObjectTypeResolver $siteObjectTypeResolver;
     protected Site $site;
-    
+
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         SiteObjectTypeResolver $siteObjectTypeResolver,

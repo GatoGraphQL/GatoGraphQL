@@ -14,7 +14,7 @@ use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
-    
+
     #[Required]
     public function autowireUserAvatarTypeDataLoader(
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,

@@ -17,8 +17,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
+
     protected SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry;
-    
+
     #[Required]
     public function autowireGraphQLSchemaConfigurationCustomPostType(
         SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry

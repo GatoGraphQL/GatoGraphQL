@@ -70,7 +70,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected ErrorProviderInterface $errorProvider;
     protected DataloadingEngineInterface $dataloadingEngine;
     protected DirectivePipelineServiceInterface $directivePipelineService;
-    
+
     #[Required]
     public function autowireAbstractRelationalTypeResolver(
         FeedbackMessageStoreInterface $feedbackMessageStore,

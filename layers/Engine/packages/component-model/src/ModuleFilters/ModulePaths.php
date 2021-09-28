@@ -25,7 +25,7 @@ class ModulePaths extends AbstractModuleFilter
      */
     protected array $backlog_unsettled_paths = [];
     protected ModulePathManagerInterface $modulePathManager;
-    
+
     #[Required]
     public function autowireModulePaths(ModulePathManagerInterface $modulePathManager)
     {

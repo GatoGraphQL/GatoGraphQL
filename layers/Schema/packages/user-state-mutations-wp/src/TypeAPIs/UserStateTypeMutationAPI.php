@@ -18,7 +18,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
     protected TranslationAPIInterface $translationAPI;
     protected ErrorHelperInterface $errorHelper;
-    
+
     #[Required]
     public function autowireUserStateTypeMutationAPI(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper)
     {

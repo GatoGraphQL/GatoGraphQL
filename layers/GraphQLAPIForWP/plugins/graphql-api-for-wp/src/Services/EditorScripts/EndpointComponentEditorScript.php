@@ -19,8 +19,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class EndpointComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
+
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
-    
+
     #[Required]
     public function autowireEndpointComponentEditorScript(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,

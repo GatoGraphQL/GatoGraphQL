@@ -14,7 +14,7 @@ abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoa
     protected HooksAPIInterface $hooksAPI;
     protected InstanceManagerInterface $instanceManager;
     protected NameResolverInterface $nameResolver;
-    
+
     #[Required]
     public function autowireAbstractRelationalTypeDataLoader(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, NameResolverInterface $nameResolver)
     {

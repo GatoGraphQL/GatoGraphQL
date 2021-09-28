@@ -16,8 +16,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
+
     protected AboutMenuPage $aboutMenuPage;
-    
+
     #[Required]
     public function autowireReleaseNotesAboutMenuPage(
         AboutMenuPage $aboutMenuPage,

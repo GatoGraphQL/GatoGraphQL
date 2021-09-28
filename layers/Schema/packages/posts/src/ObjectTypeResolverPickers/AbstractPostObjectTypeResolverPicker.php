@@ -14,7 +14,7 @@ abstract class AbstractPostObjectTypeResolverPicker extends AbstractObjectTypeRe
 {
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected PostTypeAPIInterface $postTypeAPI;
-    
+
     #[Required]
     public function autowireAbstractPostObjectTypeResolverPicker(PostObjectTypeResolver $postObjectTypeResolver, PostTypeAPIInterface $postTypeAPI)
     {

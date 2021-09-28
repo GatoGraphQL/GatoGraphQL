@@ -22,7 +22,7 @@ use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeResolver implements CustomPostObjectTypeResolverInterface
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    
+
     #[Required]
     public function autowireAbstractCustomPostObjectTypeResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,

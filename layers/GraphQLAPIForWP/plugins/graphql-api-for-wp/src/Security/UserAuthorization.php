@@ -15,7 +15,7 @@ use InvalidArgumentException;
 class UserAuthorization implements UserAuthorizationInterface
 {
     protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry;
-    
+
     #[Required]
     public function autowireUserAuthorization(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry)
     {

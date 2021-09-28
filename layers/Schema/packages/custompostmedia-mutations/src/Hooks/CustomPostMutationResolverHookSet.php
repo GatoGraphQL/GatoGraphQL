@@ -22,7 +22,7 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
 {
     protected MediaObjectTypeResolver $mediaTypeResolver;
     protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
-    
+
     #[Required]
     public function autowireCustomPostMutationResolverHookSet(
         MediaObjectTypeResolver $mediaTypeResolver,

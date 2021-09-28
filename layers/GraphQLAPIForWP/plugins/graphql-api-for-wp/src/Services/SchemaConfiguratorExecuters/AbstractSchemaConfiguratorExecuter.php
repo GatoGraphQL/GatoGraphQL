@@ -13,7 +13,7 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyInstantiatedService
 {
     protected InstanceManagerInterface $instanceManager;
-    
+
     #[Required]
     public function autowireAbstractSchemaConfiguratorExecuter(InstanceManagerInterface $instanceManager)
     {

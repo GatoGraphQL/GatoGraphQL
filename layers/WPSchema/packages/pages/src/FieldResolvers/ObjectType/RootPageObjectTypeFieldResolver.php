@@ -27,7 +27,7 @@ use WP_Post;
 class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     protected PageObjectTypeResolver $pageObjectTypeResolver;
-    
+
     #[Required]
     public function autowireRootPageObjectTypeFieldResolver(
         PageObjectTypeResolver $pageObjectTypeResolver,

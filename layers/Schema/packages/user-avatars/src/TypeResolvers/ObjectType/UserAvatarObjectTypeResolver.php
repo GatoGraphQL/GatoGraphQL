@@ -24,7 +24,7 @@ use PoPSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType\UserAvatarTypeDat
 class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected UserAvatarTypeDataLoader $userAvatarTypeDataLoader;
-    
+
     #[Required]
     public function autowireUserAvatarObjectTypeResolver(
         UserAvatarTypeDataLoader $userAvatarTypeDataLoader,

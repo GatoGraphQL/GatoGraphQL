@@ -21,7 +21,7 @@ use PoP\Translation\TranslationAPIInterface;
 class NestedMutationHookSet extends AbstractHookSet
 {
     protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
-    
+
     #[Required]
     public function autowireNestedMutationHookSet(
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,

@@ -18,9 +18,10 @@ use PoP\LooseContracts\NameResolverInterface;
 class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     use UseObjectDictionaryTypeDataLoaderTrait;
+
     protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
     protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
-    
+
     #[Required]
     public function autowireSchemaTypeDataLoader(
         SchemaObjectTypeResolver $schemaObjectTypeResolver,

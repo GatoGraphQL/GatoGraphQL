@@ -14,7 +14,7 @@ abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeRe
 {
     protected PageObjectTypeResolver $pageObjectTypeResolver;
     protected PageTypeAPIInterface $pageTypeAPI;
-    
+
     #[Required]
     public function autowireAbstractPageObjectTypeResolverPicker(PageObjectTypeResolver $pageObjectTypeResolver, PageTypeAPIInterface $pageTypeAPI)
     {

@@ -17,7 +17,7 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
 {
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
     protected QueryRetrieverInterface $queryRetrieverInterface;
-    
+
     #[Required]
     public function autowireCustomEndpointGraphQLQueryResolutionEndpointExecuter(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,

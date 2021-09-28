@@ -15,7 +15,7 @@ use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 class VarsHookSet extends AbstractHookSet
 {
     protected TaxonomyTypeAPIInterface $taxonomyTypeAPI;
-    
+
     #[Required]
     public function autowireVarsHookSet(
         TaxonomyTypeAPIInterface $taxonomyTypeAPI,

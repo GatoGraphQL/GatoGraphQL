@@ -30,7 +30,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected UserAvatarTypeAPIInterface $userAvatarTypeAPI;
     protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
     protected UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver;
-    
+
     #[Required]
     public function autowireUserObjectTypeFieldResolver(
         UserAvatarTypeAPIInterface $userAvatarTypeAPI,

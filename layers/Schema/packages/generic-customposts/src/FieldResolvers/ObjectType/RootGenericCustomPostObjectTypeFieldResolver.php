@@ -42,10 +42,11 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver;
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    
+
     #[Required]
     public function autowireRootGenericCustomPostObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,

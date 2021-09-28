@@ -25,7 +25,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
     protected UserTypeDataLoader $userTypeDataLoader;
-    
+
     #[Required]
     public function autowireUserObjectTypeResolver(
         UserTypeAPIInterface $userTypeAPI,

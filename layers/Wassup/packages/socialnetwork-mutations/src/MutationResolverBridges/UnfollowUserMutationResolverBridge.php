@@ -16,7 +16,7 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UnfollowUserMutation
 class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMutationResolverBridge
 {
     protected UnfollowUserMutationResolver $unfollowUserMutationResolver;
-    
+
     #[Required]
     public function autowireUnfollowUserMutationResolverBridge(
         UnfollowUserMutationResolver $unfollowUserMutationResolver,

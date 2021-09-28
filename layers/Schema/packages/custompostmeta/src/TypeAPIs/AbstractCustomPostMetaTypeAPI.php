@@ -13,7 +13,7 @@ use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
-    
+
     #[Required]
     public function autowireAbstractCustomPostMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
     {

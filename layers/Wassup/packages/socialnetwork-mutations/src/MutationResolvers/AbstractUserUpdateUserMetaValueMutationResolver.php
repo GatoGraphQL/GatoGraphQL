@@ -13,7 +13,7 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
-    
+
     #[Required]
     public function autowireAbstractUserUpdateUserMetaValueMutationResolver(
         UserTypeAPIInterface $userTypeAPI,

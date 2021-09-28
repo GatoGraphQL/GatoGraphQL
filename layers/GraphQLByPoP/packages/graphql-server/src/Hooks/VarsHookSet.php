@@ -19,7 +19,7 @@ use PoP\Translation\TranslationAPIInterface;
 class VarsHookSet extends AbstractHookSet
 {
     protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
-    
+
     #[Required]
     public function autowireVarsHookSet(
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,

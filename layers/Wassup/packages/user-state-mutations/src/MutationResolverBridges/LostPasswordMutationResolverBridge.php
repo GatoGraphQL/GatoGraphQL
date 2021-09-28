@@ -19,7 +19,7 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected LostPasswordMutationResolver $lostPasswordMutationResolver;
-    
+
     #[Required]
     public function autowireLostPasswordMutationResolverBridge(
         LostPasswordMutationResolver $lostPasswordMutationResolver,

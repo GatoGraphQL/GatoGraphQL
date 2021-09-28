@@ -32,7 +32,7 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
 {
     protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
     protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver;
-    
+
     #[Required]
     public function autowireRegisterQueryAndMutationRootsRootObjectTypeFieldResolver(
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,

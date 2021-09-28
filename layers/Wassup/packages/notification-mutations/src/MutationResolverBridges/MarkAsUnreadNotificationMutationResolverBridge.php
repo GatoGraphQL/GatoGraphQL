@@ -15,7 +15,7 @@ use PoPSitesWassup\NotificationMutations\MutationResolvers\MarkAsUnreadNotificat
 class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge
 {
     protected MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver;
-    
+
     #[Required]
     public function autowireMarkAsUnreadNotificationMutationResolverBridge(
         MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver,

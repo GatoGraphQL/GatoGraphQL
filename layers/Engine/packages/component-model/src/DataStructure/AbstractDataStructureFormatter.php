@@ -12,7 +12,7 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
 {
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    
+
     #[Required]
     public function autowireAbstractDataStructureFormatter(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter)
     {

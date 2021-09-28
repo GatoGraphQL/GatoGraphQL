@@ -22,7 +22,7 @@ use PoP\Translation\TranslationAPIInterface;
 class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     protected IDScalarTypeResolver $idScalarTypeResolver;
-    
+
     #[Required]
     public function autowireElementalInterfaceTypeFieldResolver(
         IDScalarTypeResolver $idScalarTypeResolver,

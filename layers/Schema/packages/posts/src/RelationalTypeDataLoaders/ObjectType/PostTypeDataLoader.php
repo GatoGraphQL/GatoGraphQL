@@ -16,7 +16,7 @@ use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
     protected PostTypeAPIInterface $postTypeAPI;
-    
+
     #[Required]
     public function autowirePostTypeDataLoader(
         PostTypeAPIInterface $postTypeAPI,

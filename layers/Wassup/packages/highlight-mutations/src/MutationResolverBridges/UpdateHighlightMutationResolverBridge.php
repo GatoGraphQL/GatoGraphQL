@@ -15,7 +15,7 @@ use PoPSitesWassup\HighlightMutations\MutationResolvers\UpdateHighlightMutationR
 class UpdateHighlightMutationResolverBridge extends AbstractCreateUpdateHighlightMutationResolverBridge
 {
     protected UpdateHighlightMutationResolver $updateHighlightMutationResolver;
-    
+
     #[Required]
     public function autowireUpdateHighlightMutationResolverBridge(
         UpdateHighlightMutationResolver $updateHighlightMutationResolver,

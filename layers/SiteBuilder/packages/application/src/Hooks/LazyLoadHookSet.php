@@ -23,7 +23,7 @@ class LazyLoadHookSet extends AbstractHookSet
 {
     protected RequestHelperServiceInterface $requestHelperService;
     protected Lazy $lazy;
-    
+
     #[Required]
     public function autowireLazyLoadHookSet(
         RequestHelperServiceInterface $requestHelperService,

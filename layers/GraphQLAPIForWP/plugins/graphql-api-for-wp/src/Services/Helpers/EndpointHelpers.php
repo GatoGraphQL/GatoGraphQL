@@ -15,7 +15,7 @@ class EndpointHelpers
 {
     protected PluginMenu $pluginMenu;
     protected ModuleRegistryInterface $moduleRegistry;
-    
+
     #[Required]
     public function autowireEndpointHelpers(
         PluginMenu $pluginMenu,

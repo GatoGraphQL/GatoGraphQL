@@ -27,7 +27,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     public const ATTRIBUTE_NAME_VARIABLES = 'variables';
     protected EndpointHelpers $endpointHelpers;
     protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
-    
+
     #[Required]
     public function autowireAbstractGraphiQLBlock(
         EndpointHelpers $endpointHelpers,

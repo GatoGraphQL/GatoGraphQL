@@ -28,7 +28,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
     public const MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT = 'dataload-relationalfields-queryroot';
     public const MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT = 'dataload-relationalfields-mutationroot';
     protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
-    
+
     #[Required]
     public function autowireRootRelationalFieldDataloadModuleProcessor(
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,

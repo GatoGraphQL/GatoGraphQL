@@ -33,7 +33,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected MediaTypeAPIInterface $mediaTypeAPI;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected MediaObjectTypeResolver $mediaObjectTypeResolver;
-    
+
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         MediaTypeAPIInterface $mediaTypeAPI,

@@ -14,7 +14,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator
 {
     protected DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver;
-    
+
     #[Required]
     public function autowireAbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator(
         DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver,

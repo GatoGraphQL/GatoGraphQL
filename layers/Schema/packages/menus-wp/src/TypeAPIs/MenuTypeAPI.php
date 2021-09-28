@@ -17,7 +17,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
     protected HooksAPIInterface $hooksAPI;
-    
+
     #[Required]
     public function autowireMenuTypeAPI(HooksAPIInterface $hooksAPI)
     {

@@ -59,7 +59,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     protected TranslationAPIInterface $translationAPI;
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected QueryParserInterface $queryParser;
-    
+
     #[Required]
     public function autowireFieldQueryInterpreter(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser)
     {

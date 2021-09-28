@@ -24,7 +24,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI;
     protected SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver;
-    
+
     #[Required]
     public function autowireCustomPostObjectTypeFieldResolver(
         CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI,

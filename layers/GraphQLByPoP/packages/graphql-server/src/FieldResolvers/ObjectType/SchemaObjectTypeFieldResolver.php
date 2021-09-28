@@ -28,7 +28,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
     protected DirectiveObjectTypeResolver $directiveObjectTypeResolver;
-    
+
     #[Required]
     public function autowireSchemaObjectTypeFieldResolver(
         TypeObjectTypeResolver $typeObjectTypeResolver,

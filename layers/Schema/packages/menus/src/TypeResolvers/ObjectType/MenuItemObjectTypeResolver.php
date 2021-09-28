@@ -24,7 +24,7 @@ use PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuItemTypeDataLoader;
 class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected MenuItemTypeDataLoader $menuItemTypeDataLoader;
-    
+
     #[Required]
     public function autowireMenuItemObjectTypeResolver(
         MenuItemTypeDataLoader $menuItemTypeDataLoader,

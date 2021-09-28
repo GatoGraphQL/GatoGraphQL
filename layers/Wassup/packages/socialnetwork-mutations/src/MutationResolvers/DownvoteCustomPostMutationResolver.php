@@ -16,7 +16,7 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UpvoteCustomPostMuta
 class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver
 {
     protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
-    
+
     #[Required]
     public function autowireDownvoteCustomPostMutationResolver(
         UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,

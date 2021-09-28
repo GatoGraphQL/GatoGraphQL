@@ -14,7 +14,7 @@ use PoP\Engine\ObjectModels\Root;
 class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected Root $root;
-    
+
     #[Required]
     public function autowireRootTypeDataLoader(
         Root $root,

@@ -32,7 +32,7 @@ class VarsHookSet extends AbstractHookSet
     protected GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager;
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected GraphQLQueryConvertorInterface $graphQLQueryConvertor;
-    
+
     #[Required]
     public function autowireVarsHookSet(
         QueryRetrieverInterface $queryRetrieverInterface,

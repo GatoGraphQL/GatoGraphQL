@@ -26,7 +26,7 @@ use PoP\Multisite\TypeResolvers\ObjectType\SiteObjectTypeResolver;
 class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    
+
     #[Required]
     public function autowireSiteObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,

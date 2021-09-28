@@ -16,7 +16,7 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     protected FlagCustomPostMutationResolver $flagCustomPostMutationResolver;
-    
+
     #[Required]
     public function autowireFlagCustomPostMutationResolverBridge(
         FlagCustomPostMutationResolver $flagCustomPostMutationResolver,

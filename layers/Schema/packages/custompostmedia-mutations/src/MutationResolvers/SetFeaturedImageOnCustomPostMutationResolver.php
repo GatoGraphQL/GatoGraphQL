@@ -14,8 +14,9 @@ use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationR
 class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
+
     protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
-    
+
     #[Required]
     public function autowireSetFeaturedImageOnCustomPostMutationResolver(
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,

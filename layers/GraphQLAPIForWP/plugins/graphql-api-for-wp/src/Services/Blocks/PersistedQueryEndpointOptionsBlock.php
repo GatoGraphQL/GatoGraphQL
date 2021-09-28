@@ -24,7 +24,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
 
     public const ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS = 'acceptVariablesAsURLParams';
     protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
-    
+
     #[Required]
     public function autowirePersistedQueryEndpointOptionsBlock(
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,

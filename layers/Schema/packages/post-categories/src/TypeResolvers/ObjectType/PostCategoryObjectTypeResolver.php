@@ -24,8 +24,9 @@ use PoPSchema\Categories\TypeResolvers\ObjectType\AbstractCategoryObjectTypeReso
 class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 {
     use PostCategoryAPISatisfiedContractTrait;
+
     protected PostCategoryTypeDataLoader $postCategoryTypeDataLoader;
-    
+
     #[Required]
     public function autowirePostCategoryObjectTypeResolver(
         PostCategoryTypeDataLoader $postCategoryTypeDataLoader,

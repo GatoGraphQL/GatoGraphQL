@@ -14,7 +14,7 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 class ContactUserMutationResolver extends AbstractMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
-    
+
     #[Required]
     public function autowireContactUserMutationResolver(
         UserTypeAPIInterface $userTypeAPI,

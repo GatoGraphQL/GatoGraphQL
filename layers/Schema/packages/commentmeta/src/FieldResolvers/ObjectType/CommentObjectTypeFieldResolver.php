@@ -24,7 +24,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected CommentMetaTypeAPIInterface $commentMetaAPI;
     protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
-    
+
     #[Required]
     public function autowireCommentObjectTypeFieldResolver(
         CommentMetaTypeAPIInterface $commentMetaAPI,

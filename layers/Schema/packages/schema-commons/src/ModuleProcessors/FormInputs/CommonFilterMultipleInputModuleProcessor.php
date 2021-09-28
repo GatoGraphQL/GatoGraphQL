@@ -34,7 +34,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
 
     public const MODULE_FILTERINPUT_DATES = 'filterinput-dates';
     protected FormInputHelperServiceInterface $formInputHelperService;
-    
+
     #[Required]
     public function autowireCommonFilterMultipleInputModuleProcessor(
         FormInputHelperServiceInterface $formInputHelperService,

@@ -30,7 +30,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
 {
     protected DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver;
     protected DirectiveRegistryInterface $directiveRegistry;
-    
+
     #[Required]
     public function autowireFilterSystemDirectiveSchemaObjectTypeFieldResolver(
         DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,

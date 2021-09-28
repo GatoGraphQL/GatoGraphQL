@@ -13,7 +13,7 @@ use PoP\Translation\TranslationAPIInterface;
 class ErrorProvider implements ErrorProviderInterface
 {
     protected TranslationAPIInterface $translationAPI;
-    
+
     #[Required]
     public function autowireErrorProvider(TranslationAPIInterface $translationAPI)
     {

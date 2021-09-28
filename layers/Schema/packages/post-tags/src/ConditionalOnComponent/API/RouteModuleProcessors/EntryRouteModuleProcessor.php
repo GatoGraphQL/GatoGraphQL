@@ -19,7 +19,7 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
     protected PostTagTypeAPIInterface $postTagTypeAPI;
-    
+
     #[Required]
     public function autowireEntryRouteModuleProcessor(
         PostTagTypeAPIInterface $postTagTypeAPI,

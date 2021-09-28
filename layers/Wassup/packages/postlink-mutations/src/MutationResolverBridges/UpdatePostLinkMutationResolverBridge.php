@@ -15,7 +15,7 @@ use PoPSitesWassup\PostLinkMutations\MutationResolvers\UpdatePostLinkMutationRes
 class UpdatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkMutationResolverBridge
 {
     protected UpdatePostLinkMutationResolver $updatePostLinkMutationResolver;
-    
+
     #[Required]
     public function autowireUpdatePostLinkMutationResolverBridge(
         UpdatePostLinkMutationResolver $updatePostLinkMutationResolver,

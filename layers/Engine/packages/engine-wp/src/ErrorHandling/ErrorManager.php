@@ -13,7 +13,7 @@ use WP_Error;
 class ErrorManager extends AbstractErrorManager
 {
     protected TranslationAPIInterface $translationAPI;
-    
+
     #[Required]
     public function autowireErrorManager(TranslationAPIInterface $translationAPI)
     {

@@ -12,7 +12,7 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {
     protected MarkdownConvertorInterface $markdownConvertorInterface;
-    
+
     #[Required]
     public function autowireMarkdownContentParser(
         MarkdownConvertorInterface $markdownConvertorInterface,

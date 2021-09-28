@@ -12,7 +12,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
 {
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
-    
+
     #[Required]
     public function autowireAbstractMutationResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI)
     {

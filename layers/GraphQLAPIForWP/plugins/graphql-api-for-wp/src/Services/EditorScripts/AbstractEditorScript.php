@@ -21,8 +21,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 abstract class AbstractEditorScript extends AbstractScript
 {
     use HasDocumentationScriptTrait;
+
     protected EditorHelpers $editorHelpers;
-    
+
     #[Required]
     public function autowireAbstractEditorScript(
         EditorHelpers $editorHelpers,

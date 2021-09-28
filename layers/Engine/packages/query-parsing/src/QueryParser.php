@@ -11,7 +11,7 @@ use PoP\Translation\TranslationAPIInterface;
 class QueryParser implements QueryParserInterface
 {
     protected TranslationAPIInterface $translationAPI;
-    
+
     #[Required]
     public function autowireQueryParser(TranslationAPIInterface $translationAPI)
     {

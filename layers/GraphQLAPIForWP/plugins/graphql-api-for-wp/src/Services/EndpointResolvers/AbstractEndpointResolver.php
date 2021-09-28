@@ -11,7 +11,7 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiatedService
 {
     protected EndpointHelpers $endpointHelpers;
-    
+
     #[Required]
     public function autowireAbstractEndpointResolver(EndpointHelpers $endpointHelpers)
     {

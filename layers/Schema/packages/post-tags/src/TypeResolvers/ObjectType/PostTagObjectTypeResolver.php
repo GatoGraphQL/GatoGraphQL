@@ -24,8 +24,9 @@ use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
 class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 {
     use PostTagAPISatisfiedContractTrait;
+
     protected PostTagTypeDataLoader $postTagTypeDataLoader;
-    
+
     #[Required]
     public function autowirePostTagObjectTypeResolver(
         PostTagTypeDataLoader $postTagTypeDataLoader,

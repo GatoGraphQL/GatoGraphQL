@@ -20,7 +20,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
     protected CMSServiceInterface $cmsService;
-    
+
     #[Required]
     public function autowireLostPasswordMutationResolver(
         UserTypeAPIInterface $userTypeAPI,

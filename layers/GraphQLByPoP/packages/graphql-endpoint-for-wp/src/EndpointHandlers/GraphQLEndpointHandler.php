@@ -15,7 +15,7 @@ use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 class GraphQLEndpointHandler extends AbstractEndpointHandler
 {
     protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
-    
+
     #[Required]
     public function autowireGraphQLEndpointHandler(GraphQLDataStructureFormatter $graphQLDataStructureFormatter)
     {

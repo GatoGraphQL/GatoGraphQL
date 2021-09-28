@@ -17,7 +17,7 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UnrecommendCustomPos
 class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
     protected UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver;
-    
+
     #[Required]
     public function autowireUnrecommendCustomPostMutationResolverBridge(
         UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver,

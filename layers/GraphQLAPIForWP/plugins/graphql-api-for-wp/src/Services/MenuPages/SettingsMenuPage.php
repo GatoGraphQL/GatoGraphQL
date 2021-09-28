@@ -32,7 +32,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     #[Required]
     public function autowireSettingsMenuPage(
         ModuleRegistryInterface $moduleRegistry,
-        ) {
+    ) {
         $this->moduleRegistry = $moduleRegistry;
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }

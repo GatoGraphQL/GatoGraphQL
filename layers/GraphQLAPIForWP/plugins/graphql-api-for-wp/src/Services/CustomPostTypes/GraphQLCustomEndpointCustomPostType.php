@@ -27,11 +27,12 @@ use PoP\Hooks\HooksAPIInterface;
 class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
+
     protected EndpointBlockRegistryInterface $endpointBlockRegistry;
     protected CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface;
     protected CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface;
     protected CustomEndpointOptionsBlock $customEndpointOptionsBlock;
-    
+
     #[Required]
     public function autowireGraphQLCustomEndpointCustomPostType(
         EndpointBlockRegistryInterface $endpointBlockRegistry,

@@ -16,7 +16,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
     protected InstanceManagerInterface $instanceManager;
     protected ModuleRegistryInterface $moduleRegistry;
     protected BlockHelpers $blockHelpers;
-    
+
     #[Required]
     public function autowireAbstractEndpointSchemaConfigurator(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers)
     {

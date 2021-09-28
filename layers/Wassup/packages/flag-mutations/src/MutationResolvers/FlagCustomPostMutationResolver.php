@@ -14,7 +14,7 @@ use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 class FlagCustomPostMutationResolver extends AbstractMutationResolver
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    
+
     #[Required]
     public function autowireFlagCustomPostMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,

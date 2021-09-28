@@ -15,7 +15,7 @@ use PoP\Multisite\ObjectModels\Site;
 class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected Site $site;
-    
+
     #[Required]
     public function autowireSiteTypeDataLoader(
         Site $site,

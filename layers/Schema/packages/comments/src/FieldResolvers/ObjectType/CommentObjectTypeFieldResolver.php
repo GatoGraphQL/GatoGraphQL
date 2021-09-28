@@ -47,6 +47,7 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+
     protected CommentTypeAPIInterface $commentTypeAPI;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected URLScalarTypeResolver $urlScalarTypeResolver;
@@ -58,7 +59,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
     protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver;
     protected DateFormatterInterface $dateFormatter;
-    
+
     #[Required]
     public function autowireCommentObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,

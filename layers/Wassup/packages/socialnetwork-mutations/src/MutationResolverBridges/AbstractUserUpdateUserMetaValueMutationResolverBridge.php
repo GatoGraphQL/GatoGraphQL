@@ -15,7 +15,7 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 abstract class AbstractUserUpdateUserMetaValueMutationResolverBridge extends AbstractUpdateUserMetaValueMutationResolverBridge
 {
     protected UserTypeAPIInterface $userTypeAPI;
-    
+
     #[Required]
     public function autowireAbstractUserUpdateUserMetaValueMutationResolverBridge(
         UserTypeAPIInterface $userTypeAPI,

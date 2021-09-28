@@ -21,7 +21,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected TranslationAPIInterface $translationAPI;
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    
+
     #[Required]
     public function autowireDataloadHelperService(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, TranslationAPIInterface $translationAPI, ModuleProcessorManagerInterface $moduleProcessorManager)
     {

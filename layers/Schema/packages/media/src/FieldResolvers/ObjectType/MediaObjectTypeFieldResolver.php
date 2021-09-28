@@ -37,7 +37,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected DateScalarTypeResolver $dateScalarTypeResolver;
-    
+
     #[Required]
     public function autowireMediaObjectTypeFieldResolver(
         MediaTypeAPIInterface $mediaTypeAPI,

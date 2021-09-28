@@ -61,7 +61,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected SemverHelperServiceInterface $semverHelperService;
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     protected EngineInterface $engine;
-    
+
     #[Required]
     public function autowireAbstractObjectTypeFieldResolver(
         FieldQueryInterpreterInterface $fieldQueryInterpreter,

@@ -17,7 +17,7 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected UserTypeAPIInterface $userTypeAPI;
-    
+
     #[Required]
     public function autowireUserTypeDataLoader(
         UserTypeAPIInterface $userTypeAPI,

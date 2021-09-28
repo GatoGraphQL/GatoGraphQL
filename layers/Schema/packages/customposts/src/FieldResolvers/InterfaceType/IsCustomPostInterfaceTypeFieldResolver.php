@@ -37,7 +37,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     protected DateScalarTypeResolver $dateScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    
+
     #[Required]
     public function autowireIsCustomPostInterfaceTypeFieldResolver(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,

@@ -16,7 +16,7 @@ use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
     protected PageTypeAPIInterface $pageTypeAPI;
-    
+
     #[Required]
     public function autowirePageTypeDataLoader(
         PageTypeAPIInterface $pageTypeAPI,

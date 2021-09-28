@@ -13,7 +13,7 @@ use PoP\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
     protected EngineInterface $engine;
-    
+
     #[Required]
     public function autowireRESTDataStructureFormatter(
         EngineInterface $engine,

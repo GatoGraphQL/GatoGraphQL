@@ -14,7 +14,7 @@ use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
-    
+
     #[Required]
     public function autowireMenuItemTypeDataLoader(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,

@@ -25,7 +25,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
 {
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    
+
     #[Required]
     public function autowireQueryableInterfaceTypeFieldResolver(
         URLScalarTypeResolver $urlScalarTypeResolver,

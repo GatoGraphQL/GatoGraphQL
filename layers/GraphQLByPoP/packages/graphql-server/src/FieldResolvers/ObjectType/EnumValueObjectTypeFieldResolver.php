@@ -28,7 +28,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    
+
     #[Required]
     public function autowireEnumValueObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,

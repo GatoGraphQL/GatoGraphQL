@@ -39,10 +39,11 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 {
     use UserStateObjectTypeFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;
+
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected PostTypeAPIInterface $postTypeAPI;
-    
+
     #[Required]
     public function autowireRootQueryableObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,

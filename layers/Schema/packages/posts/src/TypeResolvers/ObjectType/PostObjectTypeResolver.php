@@ -24,7 +24,7 @@ use PoPSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostTypeDataLoader;
 class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     protected PostTypeDataLoader $postTypeDataLoader;
-    
+
     #[Required]
     public function autowirePostObjectTypeResolver(
         PostTypeDataLoader $postTypeDataLoader,

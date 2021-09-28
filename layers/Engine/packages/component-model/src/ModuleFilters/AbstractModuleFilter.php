@@ -10,7 +10,7 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 abstract class AbstractModuleFilter implements ModuleFilterInterface
 {
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    
+
     #[Required]
     public function autowireAbstractModuleFilter(ModuleProcessorManagerInterface $moduleProcessorManager)
     {

@@ -15,7 +15,7 @@ use PoPSchema\Posts\Constants\InputNames;
 abstract class AbstractCustomPostUpdateUserMetaValueMutationResolverBridge extends AbstractUpdateUserMetaValueMutationResolverBridge
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    
+
     #[Required]
     public function autowireAbstractCustomPostUpdateUserMetaValueMutationResolverBridge(
         CustomPostTypeAPIInterface $customPostTypeAPI,

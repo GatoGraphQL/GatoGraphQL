@@ -13,7 +13,7 @@ use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
 {
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
-    
+
     #[Required]
     public function autowireAbstractSettingsTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
     {

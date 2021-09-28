@@ -14,7 +14,7 @@ use PoP\ComponentModel\Cache\Cache as UpstreamCache;
 class Cache extends UpstreamCache
 {
     protected HooksAPIInterface $hooksAPI;
-    
+
     #[Required]
     public function autowireEngineCache(
         HooksAPIInterface $hooksAPI,

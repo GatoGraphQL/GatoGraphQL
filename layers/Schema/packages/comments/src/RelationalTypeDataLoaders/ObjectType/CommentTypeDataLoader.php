@@ -19,7 +19,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected CommentTypeAPIInterface $commentTypeAPI;
-    
+
     #[Required]
     public function autowireCommentTypeDataLoader(
         CommentTypeAPIInterface $commentTypeAPI,

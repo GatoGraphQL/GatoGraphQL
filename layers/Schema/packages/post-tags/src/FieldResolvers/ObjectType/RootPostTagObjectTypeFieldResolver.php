@@ -38,11 +38,12 @@ use PoPSchema\Tags\ComponentConfiguration;
 class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected PostTagObjectTypeResolver $postTagObjectTypeResolver;
     protected PostTagTypeAPIInterface $postTagTypeAPI;
-    
+
     #[Required]
     public function autowireRootPostTagObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,

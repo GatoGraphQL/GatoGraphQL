@@ -25,7 +25,7 @@ use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     protected MenuObjectTypeResolver $menuObjectTypeResolver;
-    
+
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         MenuObjectTypeResolver $menuObjectTypeResolver,

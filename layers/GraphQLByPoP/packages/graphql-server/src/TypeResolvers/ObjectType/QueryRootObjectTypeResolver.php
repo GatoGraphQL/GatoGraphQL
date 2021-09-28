@@ -26,9 +26,10 @@ use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObjectTypeResolver
 {
     use ReservedNameTypeResolverTrait;
+
     protected RootObjectTypeResolver $rootObjectTypeResolver;
     protected QueryRootTypeDataLoader $queryRootTypeDataLoader;
-    
+
     #[Required]
     public function autowireQueryRootObjectTypeResolver(
         RootObjectTypeResolver $rootObjectTypeResolver,

@@ -23,7 +23,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected UserRoleTypeDataLoader $userRoleTypeDataLoader;
-    
+
     #[Required]
     public function autowireUserRoleObjectTypeResolver(
         UserRoleTypeDataLoader $userRoleTypeDataLoader,

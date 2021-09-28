@@ -24,7 +24,7 @@ use PoPSchema\GenericCustomPosts\RelationalTypeDataLoaders\ObjectType\GenericCus
 class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     protected GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader;
-    
+
     #[Required]
     public function autowireGenericCustomPostObjectTypeResolver(
         GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader,

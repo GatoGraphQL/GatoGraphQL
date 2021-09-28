@@ -27,7 +27,7 @@ use PoP\Translation\TranslationAPIInterface;
 abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends AbstractObjectTypeResolver implements UseRootAsSourceForSchemaObjectTypeResolverInterface
 {
     protected RootObjectTypeResolver $rootObjectTypeResolver;
-    
+
     #[Required]
     public function autowireAbstractUseRootAsSourceForSchemaObjectTypeResolver(
         RootObjectTypeResolver $rootObjectTypeResolver,

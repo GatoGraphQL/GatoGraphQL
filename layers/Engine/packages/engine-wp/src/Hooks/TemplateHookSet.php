@@ -15,7 +15,7 @@ use PoP\Translation\TranslationAPIInterface;
 class TemplateHookSet extends AbstractHookSet
 {
     protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
-    
+
     #[Required]
     public function autowireTemplateHookSet(
         ApplicationStateHelperServiceInterface $applicationStateHelperService,

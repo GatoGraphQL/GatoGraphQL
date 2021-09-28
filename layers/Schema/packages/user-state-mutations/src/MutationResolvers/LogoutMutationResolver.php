@@ -15,8 +15,9 @@ use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 class LogoutMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
+
     protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
-    
+
     #[Required]
     public function autowireLogoutMutationResolver(
         UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,

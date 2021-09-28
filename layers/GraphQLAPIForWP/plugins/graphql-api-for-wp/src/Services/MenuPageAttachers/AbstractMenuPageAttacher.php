@@ -15,7 +15,7 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiatedService
 {
     protected InstanceManagerInterface $instanceManager;
-    
+
     #[Required]
     public function autowireAbstractMenuPageAttacher(InstanceManagerInterface $instanceManager)
     {

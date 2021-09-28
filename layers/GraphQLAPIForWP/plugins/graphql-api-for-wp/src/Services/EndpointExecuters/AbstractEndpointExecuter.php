@@ -14,7 +14,7 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
 {
     protected InstanceManagerInterface $instanceManager;
     protected ModuleRegistryInterface $moduleRegistry;
-    
+
     #[Required]
     public function autowireAbstractEndpointExecuter(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry)
     {

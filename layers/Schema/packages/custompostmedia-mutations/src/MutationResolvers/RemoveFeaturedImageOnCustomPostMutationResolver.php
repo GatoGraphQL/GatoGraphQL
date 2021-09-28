@@ -14,8 +14,9 @@ use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationR
 class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
+
     protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
-    
+
     #[Required]
     public function autowireRemoveFeaturedImageOnCustomPostMutationResolver(
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,

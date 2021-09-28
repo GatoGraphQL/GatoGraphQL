@@ -27,7 +27,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected IDScalarTypeResolver $idScalarTypeResolver;
     protected MediaObjectTypeResolver $mediaObjectTypeResolver;
-    
+
     #[Required]
     public function autowireSupportingFeaturedImageInterfaceTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,

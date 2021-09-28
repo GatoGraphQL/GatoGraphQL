@@ -15,9 +15,10 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 abstract class AbstractRelationalTypeResolverDecorator implements RelationalTypeResolverDecoratorInterface
 {
     use AttachableExtensionTrait;
+
     protected InstanceManagerInterface $instanceManager;
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    
+
     #[Required]
     public function autowireAbstractRelationalTypeResolverDecorator(InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter)
     {

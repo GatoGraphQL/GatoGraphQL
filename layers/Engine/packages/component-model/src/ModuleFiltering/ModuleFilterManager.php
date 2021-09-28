@@ -36,7 +36,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     protected bool $neverExclude = false;
     protected ModulePathManagerInterface $modulePathManager;
     protected ModulePathHelpersInterface $modulePathHelpers;
-    
+
     #[Required]
     public function autowireModuleFilterManager(ModulePathManagerInterface $modulePathManager, ModulePathHelpersInterface $modulePathHelpers)
     {

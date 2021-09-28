@@ -34,7 +34,7 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     public const MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT = 'dataload-relationalfields-tagcount';
     protected PostTagObjectTypeResolver $postTagObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
-    
+
     #[Required]
     public function autowireAbstractFieldDataloadModuleProcessor(
         PostTagObjectTypeResolver $postTagObjectTypeResolver,

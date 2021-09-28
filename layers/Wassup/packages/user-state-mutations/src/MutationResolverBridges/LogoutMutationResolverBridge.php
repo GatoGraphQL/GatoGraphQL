@@ -16,7 +16,7 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected LogoutMutationResolver $logoutMutationResolver;
-    
+
     #[Required]
     public function autowireLogoutMutationResolverBridge(
         LogoutMutationResolver $logoutMutationResolver,

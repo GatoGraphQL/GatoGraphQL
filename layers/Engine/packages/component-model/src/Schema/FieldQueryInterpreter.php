@@ -96,7 +96,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     private array $fieldsByTypeAndFieldOutputKey = [];
     protected TypeCastingExecuterInterface $typeCastingExecuter;
     protected InstanceManagerInterface $instanceManager;
-    
+
     #[Required]
     public function autowireComponentModelFieldQueryInterpreter(
         TypeCastingExecuterInterface $typeCastingExecuter,

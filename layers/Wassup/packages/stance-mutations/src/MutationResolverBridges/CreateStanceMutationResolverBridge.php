@@ -15,7 +15,7 @@ use PoPSitesWassup\StanceMutations\MutationResolvers\CreateStanceMutationResolve
 class CreateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
     protected CreateStanceMutationResolver $createStanceMutationResolver;
-    
+
     #[Required]
     public function autowireCreateStanceMutationResolverBridge(
         CreateStanceMutationResolver $createStanceMutationResolver,

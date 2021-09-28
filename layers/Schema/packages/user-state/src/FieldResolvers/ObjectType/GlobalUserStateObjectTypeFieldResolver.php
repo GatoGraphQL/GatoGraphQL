@@ -24,7 +24,7 @@ use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractGlobalUserStateObjectT
 class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObjectTypeFieldResolver
 {
     protected IDScalarTypeResolver $idScalarTypeResolver;
-    
+
     #[Required]
     public function autowireGlobalUserStateObjectTypeFieldResolver(
         IDScalarTypeResolver $idScalarTypeResolver,

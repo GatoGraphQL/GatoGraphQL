@@ -12,7 +12,7 @@ use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
     protected PostTagTypeAPIInterface $postTagTypeAPI;
-    
+
     #[Required]
     public function autowireAbstractSubscribeToOrUnsubscribeFromTagMutationResolver(
         PostTagTypeAPIInterface $postTagTypeAPI,

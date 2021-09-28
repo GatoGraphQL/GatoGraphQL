@@ -30,7 +30,7 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeR
 class CustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     protected CustomPostTypeDataLoader $customPostTypeDataLoader;
-    
+
     #[Required]
     public function autowireCustomPostObjectTypeResolver(
         CustomPostTypeDataLoader $customPostTypeDataLoader,

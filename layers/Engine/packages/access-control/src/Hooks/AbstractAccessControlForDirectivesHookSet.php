@@ -17,7 +17,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
 {
     protected AccessControlManagerInterface $accessControlManager;
-    
+
     #[Required]
     public function autowireAbstractAccessControlForDirectivesHookSet(
         AccessControlManagerInterface $accessControlManager

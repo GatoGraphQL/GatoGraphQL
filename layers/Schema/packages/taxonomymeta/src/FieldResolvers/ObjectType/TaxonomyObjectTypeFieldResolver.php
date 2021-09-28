@@ -24,7 +24,7 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI;
     protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
-    
+
     #[Required]
     public function autowireTaxonomyObjectTypeFieldResolver(
         TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI,

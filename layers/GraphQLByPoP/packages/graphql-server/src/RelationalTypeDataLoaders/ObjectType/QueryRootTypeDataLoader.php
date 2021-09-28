@@ -14,7 +14,7 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDa
 class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected QueryRoot $queryRoot;
-    
+
     #[Required]
     public function autowireQueryRootTypeDataLoader(
         QueryRoot $queryRoot,

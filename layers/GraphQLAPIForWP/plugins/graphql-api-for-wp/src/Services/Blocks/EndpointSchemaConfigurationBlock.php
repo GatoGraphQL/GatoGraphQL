@@ -33,7 +33,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     protected BlockRenderingHelpers $blockRenderingHelpers;
     protected CPTUtils $cptUtils;
     protected EndpointBlockCategory $endpointBlockCategory;
-    
+
     #[Required]
     public function autowireEndpointSchemaConfigurationBlock(
         BlockRenderingHelpers $blockRenderingHelpers,

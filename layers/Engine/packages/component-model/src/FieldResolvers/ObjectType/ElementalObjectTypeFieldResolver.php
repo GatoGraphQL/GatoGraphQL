@@ -24,7 +24,7 @@ use PoP\Translation\TranslationAPIInterface;
 class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver;
-    
+
     #[Required]
     public function autowireElementalObjectTypeFieldResolver(
         ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,

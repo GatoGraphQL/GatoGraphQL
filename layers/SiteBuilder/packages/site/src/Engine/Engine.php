@@ -29,7 +29,7 @@ use PoP\Application\Engine\Engine as UpstreamEngine;
 class Engine extends UpstreamEngine
 {
     protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
-    
+
     #[Required]
     public function autowireSiteEngine(
         ApplicationStateHelperServiceInterface $applicationStateHelperService

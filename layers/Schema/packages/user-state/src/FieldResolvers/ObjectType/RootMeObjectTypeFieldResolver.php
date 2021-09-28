@@ -24,7 +24,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldResolver
 {
     protected UserObjectTypeResolver $userObjectTypeResolver;
-    
+
     #[Required]
     public function autowireRootMeObjectTypeFieldResolver(
         UserObjectTypeResolver $userObjectTypeResolver,

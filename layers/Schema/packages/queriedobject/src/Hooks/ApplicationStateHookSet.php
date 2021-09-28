@@ -15,7 +15,7 @@ use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
 class ApplicationStateHookSet extends AbstractHookSet
 {
     protected CMSRoutingStateServiceInterface $cmsRoutingStateService;
-    
+
     #[Required]
     public function autowireApplicationStateHookSet(
         CMSRoutingStateServiceInterface $cmsRoutingStateService,

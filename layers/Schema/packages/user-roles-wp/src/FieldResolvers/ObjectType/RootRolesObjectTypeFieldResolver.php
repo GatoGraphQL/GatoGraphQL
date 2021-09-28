@@ -28,9 +28,10 @@ use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use RolesObjectTypeFieldResolverTrait;
+
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected UserRoleTypeAPIInterface $userRoleTypeAPI;
-    
+
     #[Required]
     public function autowireRootRolesObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,

@@ -37,10 +37,11 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+
     protected MediaTypeAPIInterface $mediaTypeAPI;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected MediaObjectTypeResolver $mediaObjectTypeResolver;
-    
+
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         MediaTypeAPIInterface $mediaTypeAPI,

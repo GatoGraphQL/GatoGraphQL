@@ -20,7 +20,7 @@ use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
-    
+
     #[Required]
     public function autowireEntryRouteModuleProcessor(
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,

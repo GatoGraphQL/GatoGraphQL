@@ -24,7 +24,7 @@ use PoP\Multisite\RelationalTypeDataLoaders\ObjectType\SiteTypeDataLoader;
 class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected SiteTypeDataLoader $siteTypeDataLoader;
-    
+
     #[Required]
     public function autowireSiteObjectTypeResolver(
         SiteTypeDataLoader $siteTypeDataLoader,

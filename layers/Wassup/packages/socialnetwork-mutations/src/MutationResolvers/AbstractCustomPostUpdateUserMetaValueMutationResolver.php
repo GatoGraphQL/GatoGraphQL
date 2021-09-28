@@ -13,7 +13,7 @@ use PoPSchema\Posts\Constants\InputNames;
 class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    
+
     #[Required]
     public function autowireAbstractCustomPostUpdateUserMetaValueMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,

@@ -26,7 +26,7 @@ use PoP\Translation\TranslationAPIInterface;
 class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     protected MixedScalarTypeResolver $mixedScalarTypeResolver;
-    
+
     #[Required]
     public function autowireFunctionGlobalObjectTypeFieldResolver(
         MixedScalarTypeResolver $mixedScalarTypeResolver,

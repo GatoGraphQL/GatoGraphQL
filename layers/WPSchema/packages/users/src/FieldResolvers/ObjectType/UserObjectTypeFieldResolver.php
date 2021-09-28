@@ -30,7 +30,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     protected DateFormatterInterface $dateFormatter;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    
+
     #[Required]
     public function autowireUserObjectTypeFieldResolver(
         DateFormatterInterface $dateFormatter,

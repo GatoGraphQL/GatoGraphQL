@@ -15,7 +15,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     protected InstanceManagerInterface $instanceManager;
     protected ModuleRegistryInterface $moduleRegistry;
     protected TranslationAPIInterface $translationAPI;
-    
+
     #[Required]
     public function autowireAbstractModuleResolver(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TranslationAPIInterface $translationAPI)
     {

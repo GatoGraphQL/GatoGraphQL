@@ -13,7 +13,7 @@ abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterfa
 {
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
-    
+
     #[Required]
     public function autowireAbstractCheckpointProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI)
     {

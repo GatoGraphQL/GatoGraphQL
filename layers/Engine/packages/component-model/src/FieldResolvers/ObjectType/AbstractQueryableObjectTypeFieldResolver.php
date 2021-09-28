@@ -25,8 +25,9 @@ use PoP\Translation\TranslationAPIInterface;
 abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements QueryableObjectTypeFieldSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
+
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    
+
     #[Required]
     public function autowireAbstractQueryableObjectTypeFieldResolver(
         ModuleProcessorManagerInterface $moduleProcessorManager,

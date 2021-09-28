@@ -25,9 +25,10 @@ use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateObjectTypeFieldResolv
 class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
     use UserStateObjectTypeFieldResolverTrait;
+
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected UpdatePostMutationResolver $updatePostMutationResolver;
-    
+
     #[Required]
     public function autowirePostObjectTypeFieldResolver(
         PostObjectTypeResolver $postObjectTypeResolver,

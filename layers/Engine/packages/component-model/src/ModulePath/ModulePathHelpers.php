@@ -11,7 +11,7 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 class ModulePathHelpers implements ModulePathHelpersInterface
 {
     protected ModulePathManagerInterface $modulePathManager;
-    
+
     #[Required]
     public function autowireModulePathHelpers(ModulePathManagerInterface $modulePathManager)
     {

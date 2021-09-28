@@ -18,7 +18,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
     protected array $objectTypeResolverMandatoryFields;
     protected InstanceManagerInterface $instanceManager;
     protected RootObjectTypeResolver $rootObjectTypeResolver;
-    
+
     #[Required]
     public function autowireMandatoryDirectivesForFieldsRootTypeEntryDuplicator(
         InstanceManagerInterface $instanceManager,

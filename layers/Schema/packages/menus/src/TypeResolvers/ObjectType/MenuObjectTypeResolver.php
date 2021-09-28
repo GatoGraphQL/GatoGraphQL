@@ -26,7 +26,7 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected MenuTypeDataLoader $menuTypeDataLoader;
     protected MenuTypeAPIInterface $menuTypeAPI;
-    
+
     #[Required]
     public function autowireMenuObjectTypeResolver(
         MenuTypeDataLoader $menuTypeDataLoader,

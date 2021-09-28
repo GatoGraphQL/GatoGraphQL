@@ -14,7 +14,7 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
 {
     protected EndpointHelpers $endpointHelpers;
     protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator;
-    
+
     #[Required]
     public function autowireEditingPersistedQueryEndpointSchemaConfiguratorExecuter(
         EndpointHelpers $endpointHelpers,

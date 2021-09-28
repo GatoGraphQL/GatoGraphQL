@@ -14,7 +14,7 @@ use PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks\FilterInputHo
 abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 {
     protected UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet;
-    
+
     #[Required]
     public function autowireAbstractRemoveAuthorFilterInputHookSet(
         UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet,

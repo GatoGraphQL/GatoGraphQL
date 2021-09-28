@@ -32,7 +32,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
     protected DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver;
-    
+
     #[Required]
     public function autowireDirectiveObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,

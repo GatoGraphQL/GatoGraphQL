@@ -14,8 +14,9 @@ use PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorators\Abst
 class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends AbstractMandatoryDirectivesForFieldsRelationalTypeResolverDecorator
 {
     use ConfigurableCacheControlRelationalTypeResolverDecoratorTrait;
+
     protected CacheControlManagerInterface $cacheControlManager;
-    
+
     #[Required]
     public function autowireConfigurableCacheControlForFieldsRelationalTypeResolverDecorator(
         CacheControlManagerInterface $cacheControlManager,

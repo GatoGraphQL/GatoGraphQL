@@ -19,7 +19,7 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
 {
     protected CustomEndpointVoyagerClient $customEndpointVoyagerClient;
     protected VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter;
-    
+
     #[Required]
     public function autowireVoyagerClientEndpointExecuter(
         CustomEndpointVoyagerClient $customEndpointVoyagerClient,

@@ -17,7 +17,7 @@ use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
-    
+
     #[Required]
     public function autowireAddCommentToCustomPostMutationResolverBridge(
         AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,

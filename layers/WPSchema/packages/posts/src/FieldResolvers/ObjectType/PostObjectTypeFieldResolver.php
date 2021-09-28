@@ -27,7 +27,7 @@ use WP_Post;
 class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    
+
     #[Required]
     public function autowirePostObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,

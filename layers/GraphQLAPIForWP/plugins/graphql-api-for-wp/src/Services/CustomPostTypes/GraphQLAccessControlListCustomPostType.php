@@ -19,7 +19,7 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
 {
     protected AccessControlBlock $accessControlBlock;
     protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry;
-    
+
     #[Required]
     public function autowireGraphQLAccessControlListCustomPostType(
         AccessControlBlock $accessControlBlock,

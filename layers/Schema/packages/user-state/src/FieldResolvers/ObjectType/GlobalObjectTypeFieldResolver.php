@@ -25,7 +25,7 @@ use PoP\Translation\TranslationAPIInterface;
 class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    
+
     #[Required]
     public function autowireGlobalObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,

@@ -17,7 +17,7 @@ use PoPSitesWassup\NotificationMutations\MutationResolvers\MarkAllAsReadNotifica
 class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver;
-    
+
     #[Required]
     public function autowireMarkAllAsReadNotificationMutationResolverBridge(
         MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver,

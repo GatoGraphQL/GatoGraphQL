@@ -16,7 +16,7 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     protected ShareByEmailMutationResolver $shareByEmailMutationResolver;
-    
+
     #[Required]
     public function autowireShareByEmailMutationResolverBridge(
         ShareByEmailMutationResolver $shareByEmailMutationResolver,

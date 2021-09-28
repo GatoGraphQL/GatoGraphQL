@@ -25,7 +25,7 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected MediaTypeAPIInterface $mediaTypeAPI;
     protected MediaTypeDataLoader $mediaTypeDataLoader;
-    
+
     #[Required]
     public function autowireMediaObjectTypeResolver(
         MediaTypeAPIInterface $mediaTypeAPI,

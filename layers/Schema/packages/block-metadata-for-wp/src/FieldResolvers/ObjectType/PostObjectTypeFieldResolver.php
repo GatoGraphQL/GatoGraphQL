@@ -27,7 +27,7 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
-    
+
     #[Required]
     public function autowirePostObjectTypeFieldResolver(
         ObjectScalarTypeResolver $objectScalarTypeResolver,

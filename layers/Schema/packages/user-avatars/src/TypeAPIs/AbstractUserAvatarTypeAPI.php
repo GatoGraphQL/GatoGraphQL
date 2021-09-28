@@ -10,7 +10,7 @@ use PoP\Hooks\HooksAPIInterface;
 abstract class AbstractUserAvatarTypeAPI implements UserAvatarTypeAPIInterface
 {
     protected HooksAPIInterface $hooksAPI;
-    
+
     #[Required]
     public function autowireAbstractUserAvatarTypeAPI(HooksAPIInterface $hooksAPI)
     {

@@ -21,8 +21,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements EndpointEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
+
     protected CustomEndpointBlockCategory $customEndpointBlockCategory;
-    
+
     #[Required]
     public function autowireCustomEndpointOptionsBlock(
         CustomEndpointBlockCategory $customEndpointBlockCategory,

@@ -33,7 +33,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
     protected SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver;
     protected RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver;
-    
+
     #[Required]
     public function autowireCustomPostObjectTypeFieldResolver(
         MediaObjectTypeResolver $mediaTypeResolver,

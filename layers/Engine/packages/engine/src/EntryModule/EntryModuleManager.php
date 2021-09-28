@@ -12,7 +12,7 @@ use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 class EntryModuleManager implements EntryModuleManagerInterface
 {
     protected RouteModuleProcessorManagerInterface $routeModuleProcessorManager;
-    
+
     #[Required]
     public function autowireEntryModuleManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager)
     {

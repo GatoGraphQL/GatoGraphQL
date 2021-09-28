@@ -34,10 +34,11 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+
     protected UserTypeAPIInterface $userTypeAPI;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected UserObjectTypeResolver $userObjectTypeResolver;
-    
+
     #[Required]
     public function autowireAbstractUserObjectTypeFieldResolver(
         UserTypeAPIInterface $userTypeAPI,

@@ -13,7 +13,7 @@ use DateTime;
 class TypeCastingExecuter implements TypeCastingExecuterInterface
 {
     private TranslationAPIInterface $translationAPI;
-    
+
     #[Required]
     public function autowireTypeCastingExecuter(TranslationAPIInterface $translationAPI)
     {

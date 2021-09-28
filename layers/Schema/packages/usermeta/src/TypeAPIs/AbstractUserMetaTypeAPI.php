@@ -13,7 +13,7 @@ use PoPSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
 abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
 {
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
-    
+
     #[Required]
     public function autowireAbstractUserMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
     {

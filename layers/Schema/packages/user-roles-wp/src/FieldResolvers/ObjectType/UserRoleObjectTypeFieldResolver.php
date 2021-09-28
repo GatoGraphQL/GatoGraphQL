@@ -25,7 +25,7 @@ use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    
+
     #[Required]
     public function autowireUserRoleObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,

@@ -15,7 +15,7 @@ use PoP\LooseContracts\NameResolverInterface;
 class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
-    
+
     #[Required]
     public function autowireSchemaDefinitionReferenceTypeDataLoader(
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,

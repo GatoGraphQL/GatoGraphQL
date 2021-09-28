@@ -19,7 +19,7 @@ use PoP\Translation\TranslationAPIInterface;
 class SetupCortexHookSet extends AbstractHookSet
 {
     protected RoutingManagerInterface $routingManager;
-    
+
     #[Required]
     public function autowireSetupCortexHookSet(
         RoutingManagerInterface $routingManager,

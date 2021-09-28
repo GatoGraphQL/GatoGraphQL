@@ -14,7 +14,7 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDa
 class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected MutationRoot $mutationRoot;
-    
+
     #[Required]
     public function autowireMutationRootTypeDataLoader(
         MutationRoot $mutationRoot,

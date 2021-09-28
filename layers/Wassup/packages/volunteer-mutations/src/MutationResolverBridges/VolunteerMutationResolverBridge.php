@@ -16,7 +16,7 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     protected VolunteerMutationResolver $volunteerMutationResolver;
-    
+
     #[Required]
     public function autowireVolunteerMutationResolverBridge(
         VolunteerMutationResolver $volunteerMutationResolver,

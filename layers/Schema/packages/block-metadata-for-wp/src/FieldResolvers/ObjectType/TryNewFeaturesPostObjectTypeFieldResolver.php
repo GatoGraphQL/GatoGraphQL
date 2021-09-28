@@ -24,7 +24,7 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    
+
     #[Required]
     public function autowireTryNewFeaturesPostObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,

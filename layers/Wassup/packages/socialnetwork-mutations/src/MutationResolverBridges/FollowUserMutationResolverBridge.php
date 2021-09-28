@@ -16,7 +16,7 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\FollowUserMutationRe
 class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMutationResolverBridge
 {
     protected FollowUserMutationResolver $followUserMutationResolver;
-    
+
     #[Required]
     public function autowireFollowUserMutationResolverBridge(
         FollowUserMutationResolver $followUserMutationResolver,

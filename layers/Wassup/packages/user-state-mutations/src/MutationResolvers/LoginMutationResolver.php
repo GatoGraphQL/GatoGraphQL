@@ -14,7 +14,7 @@ use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver as Upst
 class LoginMutationResolver extends UpstreamLoginMutationResolver
 {
     protected UserTypeAPIInterface $userTypeAPI;
-    
+
     #[Required]
     public function autowireUserStateMutationsLoginMutationResolver(
         UserTypeAPIInterface $userTypeAPI,

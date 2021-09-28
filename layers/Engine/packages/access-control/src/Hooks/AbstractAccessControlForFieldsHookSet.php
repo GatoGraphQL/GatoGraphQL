@@ -19,7 +19,7 @@ use PoP\Translation\TranslationAPIInterface;
 abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHookSet
 {
     protected AccessControlManagerInterface $accessControlManager;
-    
+
     #[Required]
     public function autowireAbstractAccessControlForFieldsHookSet(
         AccessControlManagerInterface $accessControlManager

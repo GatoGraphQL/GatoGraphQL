@@ -15,7 +15,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
 {
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
-    
+
     #[Required]
     public function autowireAbstractClientEndpointExecuter(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,

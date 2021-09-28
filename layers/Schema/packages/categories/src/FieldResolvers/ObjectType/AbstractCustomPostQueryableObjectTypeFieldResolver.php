@@ -33,9 +33,10 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements CategoryAPIRequestedContractInterface
 {
     use WithLimitFieldArgResolverTrait;
+
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
-    
+
     #[Required]
     public function autowireAbstractCustomPostQueryableObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,

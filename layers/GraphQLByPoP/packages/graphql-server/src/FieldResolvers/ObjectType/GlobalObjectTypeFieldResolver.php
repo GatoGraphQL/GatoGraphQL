@@ -23,7 +23,7 @@ use PoP\Translation\TranslationAPIInterface;
 class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    
+
     #[Required]
     public function autowireGlobalObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,

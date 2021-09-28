@@ -11,7 +11,7 @@ use GraphQLByPoP\GraphQLClientsForWP\ConditionalOnContext\UseGraphiQLExplorer\Ov
 class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
 {
     protected EndpointHelpers $endpointHelpers;
-    
+
     #[Required]
     public function autowireAdminGraphiQLWithExplorerClient(EndpointHelpers $endpointHelpers)
     {

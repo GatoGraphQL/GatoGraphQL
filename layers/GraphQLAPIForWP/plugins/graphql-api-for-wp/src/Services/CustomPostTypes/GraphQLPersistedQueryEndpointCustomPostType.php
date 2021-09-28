@@ -27,11 +27,12 @@ use PoP\Hooks\HooksAPIInterface;
 class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
+
     protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry;
     protected PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface;
     protected PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface;
     protected PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock;
-    
+
     #[Required]
     public function autowireGraphQLPersistedQueryEndpointCustomPostType(
         PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,

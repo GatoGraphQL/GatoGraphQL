@@ -28,7 +28,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    
+
     #[Required]
     public function autowireAbstractCategoryObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,

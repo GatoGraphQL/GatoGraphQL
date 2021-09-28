@@ -17,7 +17,7 @@ use PoPSitesWassup\UserStateMutations\MutationResolvers\ResetLostPasswordMutatio
 class ResetLostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     protected ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver;
-    
+
     #[Required]
     public function autowireResetLostPasswordMutationResolverBridge(
         ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver,

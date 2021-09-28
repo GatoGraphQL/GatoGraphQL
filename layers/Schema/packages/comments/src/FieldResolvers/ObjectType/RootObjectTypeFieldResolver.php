@@ -39,10 +39,11 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+
     protected CommentTypeAPIInterface $commentTypeAPI;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
-    
+
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,

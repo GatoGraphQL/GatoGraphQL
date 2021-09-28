@@ -24,7 +24,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected CustomPostMetaTypeAPIInterface $customPostMetaAPI;
     protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
-    
+
     #[Required]
     public function autowireCustomPostObjectTypeFieldResolver(
         CustomPostMetaTypeAPIInterface $customPostMetaAPI,

@@ -21,9 +21,10 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
+
     protected ModuleRegistryInterface $moduleRegistry;
     protected ModulesMenuPage $modulesMenuPage;
-    
+
     #[Required]
     public function autowireModuleDocumentationMenuPage(
         ModuleRegistryInterface $moduleRegistry,

@@ -19,8 +19,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
+
     protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
-    
+
     #[Required]
     public function autowirePersistedQueryEndpointComponentEditorScript(
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,

@@ -14,7 +14,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
-    
+
     #[Required]
     public function autowireViewCustomEndpointSourceEndpointExecuter(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,

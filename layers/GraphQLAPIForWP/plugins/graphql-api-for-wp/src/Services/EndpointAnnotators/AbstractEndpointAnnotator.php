@@ -14,7 +14,7 @@ abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
 {
     protected InstanceManagerInterface $instanceManager;
     protected ModuleRegistryInterface $moduleRegistry;
-    
+
     #[Required]
     public function autowireAbstractEndpointAnnotator(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry)
     {

@@ -10,7 +10,7 @@ use PoP\Hooks\HooksAPIInterface;
 abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
 {
     protected HooksAPIInterface $hooksAPI;
-    
+
     #[Required]
     public function autowireAbstractUserRoleTypeAPI(HooksAPIInterface $hooksAPI)
     {

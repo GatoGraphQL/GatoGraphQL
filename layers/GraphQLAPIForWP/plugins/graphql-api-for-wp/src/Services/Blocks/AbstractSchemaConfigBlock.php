@@ -16,7 +16,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 abstract class AbstractSchemaConfigBlock extends AbstractBlock implements SchemaConfigEditorBlockServiceTagInterface
 {
     protected SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory;
-    
+
     #[Required]
     public function autowireAbstractSchemaConfigBlock(
         SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,

@@ -12,7 +12,7 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
     protected HooksAPIInterface $hooksAPI;
     protected CMSHelperServiceInterface $cmsHelperService;
-    
+
     #[Required]
     public function autowireAbstractCustomPostTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService)
     {

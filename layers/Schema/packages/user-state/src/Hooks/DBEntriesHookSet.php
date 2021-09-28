@@ -14,7 +14,7 @@ use PoPSchema\UserState\FieldResolvers\ObjectType\GlobalObjectTypeFieldResolver;
 class DBEntriesHookSet extends AbstractHookSet
 {
     protected GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver;
-    
+
     #[Required]
     public function autowireDBEntriesHookSet(
         GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver

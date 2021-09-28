@@ -38,10 +38,11 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 {
     use UserStateObjectTypeFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;
+
     protected CommentTypeAPIInterface $commentTypeAPI;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
-    
+
     #[Required]
     public function autowireUserStateRootObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,

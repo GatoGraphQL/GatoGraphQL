@@ -13,8 +13,9 @@ use PoP\AccessControl\RelationalTypeResolverDecorators\ConfigurableAccessControl
 abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaRelationalTypeResolverDecorator extends AbstractPrivateSchemaRelationalTypeResolverDecorator
 {
     use ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait;
+
     protected AccessControlManagerInterface $accessControlManager;
-    
+
     #[Required]
     public function autowireAbstractConfigurableAccessControlForFieldsInPrivateSchemaRelationalTypeResolverDecorator(
         AccessControlManagerInterface $accessControlManager,

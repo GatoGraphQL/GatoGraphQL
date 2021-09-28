@@ -35,7 +35,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected IDScalarTypeResolver $idScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
-    
+
     #[Required]
     public function autowireMenuItemObjectTypeFieldResolver(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,

@@ -10,7 +10,7 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiatedService
 {
     protected LooseContractManagerInterface $looseContractManager;
-    
+
     #[Required]
     public function autowireAbstractLooseContractSet(LooseContractManagerInterface $looseContractManager)
     {

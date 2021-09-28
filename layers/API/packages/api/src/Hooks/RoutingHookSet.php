@@ -19,7 +19,7 @@ class RoutingHookSet extends AbstractHookSet
 {
     protected CMSServiceInterface $cmsService;
     protected RequestHelperServiceInterface $requestHelperService;
-    
+
     #[Required]
     public function autowireRoutingHookSet(
         CMSServiceInterface $cmsService,

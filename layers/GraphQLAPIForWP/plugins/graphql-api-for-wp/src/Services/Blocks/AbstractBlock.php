@@ -28,12 +28,13 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
 {
     use HasDocumentationScriptTrait;
+
     protected InstanceManagerInterface $instanceManager;
     protected ModuleRegistryInterface $moduleRegistry;
     protected UserAuthorizationInterface $userAuthorization;
     protected GeneralUtils $generalUtils;
     protected EditorHelpers $editorHelpers;
-    
+
     #[Required]
     public function autowireAbstractBlock(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers)
     {

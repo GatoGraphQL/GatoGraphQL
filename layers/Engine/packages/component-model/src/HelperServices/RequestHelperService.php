@@ -15,7 +15,7 @@ use PoP\Hooks\HooksAPIInterface;
 class RequestHelperService implements RequestHelperServiceInterface
 {
     protected HooksAPIInterface $hooksAPI;
-    
+
     #[Required]
     public function autowireRequestHelperService(HooksAPIInterface $hooksAPI)
     {

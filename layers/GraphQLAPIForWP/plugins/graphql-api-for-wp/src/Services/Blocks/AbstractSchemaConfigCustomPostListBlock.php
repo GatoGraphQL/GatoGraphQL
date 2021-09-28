@@ -19,7 +19,7 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
 {
     protected BlockRenderingHelpers $blockRenderingHelpers;
     protected CPTUtils $cptUtils;
-    
+
     #[Required]
     public function autowireAbstractSchemaConfigCustomPostListBlock(
         BlockRenderingHelpers $blockRenderingHelpers,

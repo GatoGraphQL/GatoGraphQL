@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 class PluginMenu extends AbstractMenu
 {
     protected UserAuthorizationInterface $userAuthorization;
-    
+
     #[Required]
     public function autowirePluginMenu(
         UserAuthorizationInterface $userAuthorization

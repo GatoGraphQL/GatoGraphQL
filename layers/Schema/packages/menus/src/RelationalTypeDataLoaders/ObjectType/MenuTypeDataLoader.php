@@ -14,7 +14,7 @@ use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected MenuTypeAPIInterface $menuTypeAPI;
-    
+
     #[Required]
     public function autowireMenuTypeDataLoader(
         MenuTypeAPIInterface $menuTypeAPI,
