@@ -24,13 +24,11 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     
     #[\Symfony\Contracts\Service\Attribute\Required]
     public function autowireAdminEndpointResolver(
-        EndpointHelpers $endpointHelpers,
         UserAuthorizationInterface $userAuthorization,
         QueryRetrieverInterface $queryRetrieverInterface,
     ) {
         $this->userAuthorization = $userAuthorization;
         $this->queryRetrieverInterface = $queryRetrieverInterface;
-        parent::__construct($endpointHelpers);
     }
 
     /**

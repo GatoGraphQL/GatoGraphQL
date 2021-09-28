@@ -20,7 +20,6 @@ class FileDefinitionPersistence extends AbstractDefinitionPersistence
     ) {
         $this->fileStore = $fileStore;
         $this->file = $file;
-        parent::__construct();
     }
 
     protected function getPersistedData(): array
