@@ -13,14 +13,14 @@ class GraphQLQueryPostTypeHelpers
 {
     protected PersistedQueryEndpointGraphiQLBlockAccessor $persistedQueryEndpointGraphiQLBlockAccessor;
     protected PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor;
-    
+
     #[Required]
     public function autowireGraphQLQueryPostTypeHelpers(PersistedQueryEndpointGraphiQLBlockAccessor $persistedQueryEndpointGraphiQLBlockAccessor, PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor)
     {
         $this->persistedQueryEndpointGraphiQLBlockAccessor = $persistedQueryEndpointGraphiQLBlockAccessor;
         $this->persistedQueryEndpointAPIHierarchyBlockAccessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
     }
-    
+
     /**
      * A GraphQL Query Custom Post Type is hierarchical: each query post can have a parent,
      * enabling to fetch attributes from the parent post

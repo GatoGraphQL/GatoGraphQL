@@ -68,7 +68,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
     public const HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-generic-custompost-types';
-    
+
     protected ?CommentObjectTypeResolver $commentTypeResolver;
     protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver;
     protected ?GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver;

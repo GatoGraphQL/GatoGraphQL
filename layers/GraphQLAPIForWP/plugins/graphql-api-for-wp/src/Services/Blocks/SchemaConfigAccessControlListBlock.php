@@ -24,7 +24,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS = 'accessControlLists';
-    
+
     protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
 
     #[Required]

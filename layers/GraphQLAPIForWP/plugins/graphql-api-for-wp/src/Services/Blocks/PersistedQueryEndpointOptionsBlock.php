@@ -23,7 +23,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS = 'acceptVariablesAsURLParams';
-    
+
     protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
 
     #[Required]

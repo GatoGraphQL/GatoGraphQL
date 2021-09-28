@@ -30,7 +30,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT = 0;
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE = -1;
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT = -2;
-    
+
     protected BlockRenderingHelpers $blockRenderingHelpers;
     protected CPTUtils $cptUtils;
     protected EndpointBlockCategory $endpointBlockCategory;

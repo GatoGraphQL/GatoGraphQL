@@ -17,7 +17,7 @@ class ModelInstance implements ModelInstanceInterface
     public const HOOK_COMPONENTS_RESULT = __CLASS__ . ':components:result';
     public const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':componentsFromVars:postOrGetChange';
     public const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':componentsFromVars:result';
-    
+
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
     protected ApplicationInfoInterface $applicationInfo;

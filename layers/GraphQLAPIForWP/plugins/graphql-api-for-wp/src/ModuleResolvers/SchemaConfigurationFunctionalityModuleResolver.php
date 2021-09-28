@@ -28,7 +28,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
     public const PUBLIC_PRIVATE_SCHEMA = Plugin::NAMESPACE . '\public-private-schema';
     public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
-    
+
     protected ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
 
     /**
