@@ -9,28 +9,18 @@ namespace PoPSchema\Menus\ObjectModels;
  */
 class MenuItem
 {
-    public string | int $id;
-    public string | int $objectID;
-    public string | int | null $parentID;
-    public string $label;
-    public string $title;
-    public string $url;
-    public string $description;
-    public array $classes;
-    public string $target;
-    public string $linkRelationship;
-    public function __construct(string | int $id, string | int $objectID, string | int | null $parentID, string $label, string $title, string $url, string $description, array $classes, string $target, string $linkRelationship)
-    {
-        $this->id = $id;
-        $this->objectID = $objectID;
-        $this->parentID = $parentID;
-        $this->label = $label;
-        $this->title = $title;
-        $this->url = $url;
-        $this->description = $description;
+    public function __construct(
+        public string | int $id,
+        public string | int $objectID,
+        public string | int | null $parentID,
+        public string $label,
+        public string $title,
+        public string $url,
+        public string $description,
         /** @var string[] */
-        $this->classes = $classes;
-        $this->target = $target;
-        $this->linkRelationship = $linkRelationship;
+        public array $classes,
+        public string $target,
+        public string $linkRelationship,
+    ) {
     }
 }
