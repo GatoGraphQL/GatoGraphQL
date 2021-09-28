@@ -14,12 +14,11 @@ class Cache implements CacheInterface
 {
     use ReplaceCurrentExecutionDataWithPlaceholdersTrait;
 
-    protected CacheItemPoolInterface $cacheItemPool;
     protected ModelInstanceInterface $modelInstance;
 
-    public function __construct(CacheItemPoolInterface $cacheItemPool)
-    {
-        $this->cacheItemPool = $cacheItemPool;
+    public function __construct(
+        protected CacheItemPoolInterface $cacheItemPool,
+    ) {
     }
 
     #[Required]
