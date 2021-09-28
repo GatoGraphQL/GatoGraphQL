@@ -9,9 +9,9 @@ use PoP\Application\Constants\Actions;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\ConfigurationComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
 
-abstract class AbstractModuleProcessor extends \PoP\ConfigurationComponentModel\ModuleProcessors\AbstractModuleProcessor implements ModuleProcessorInterface
+abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor implements ModuleProcessorInterface
 {
     use AddAPIQueryToSourcesModuleProcessorTrait;
 

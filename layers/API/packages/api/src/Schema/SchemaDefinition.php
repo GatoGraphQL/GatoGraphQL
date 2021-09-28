@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
-class SchemaDefinition extends \PoP\ComponentModel\Schema\SchemaDefinition
+use PoP\ComponentModel\Schema\SchemaDefinition as UpstreamSchemaDefinition;
+
+class SchemaDefinition extends UpstreamSchemaDefinition
 {
     const ARGNAME_PERSISTED_FRAGMENTS = 'persistedFragments';
     const ARGNAME_PERSISTED_QUERIES = 'persistedQueries';

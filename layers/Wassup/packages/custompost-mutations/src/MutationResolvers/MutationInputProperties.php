@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
-class MutationInputProperties extends \PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties
+use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties as UpstreamMutationInputProperties;
+
+class MutationInputProperties extends UpstreamMutationInputProperties
 {
     public const REFERENCES = 'references';
     public const TOPICS = 'topics';

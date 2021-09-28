@@ -10,10 +10,10 @@ use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler as UpstreamListQueryInputOutputHandler;
 
-class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler
+class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 {
     protected CMSServiceInterface $cmsService;
     

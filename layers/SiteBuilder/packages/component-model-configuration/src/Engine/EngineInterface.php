@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
-interface EngineInterface extends \PoP\ComponentModel\Engine\EngineInterface
+use PoP\ComponentModel\Engine\EngineInterface as UpstreamEngineInterface;
+
+interface EngineInterface extends UpstreamEngineInterface
 {
     public function getModuleSettings(array $module, $model_props, array &$props);
     public function maybeRedirectAndExit(): void;

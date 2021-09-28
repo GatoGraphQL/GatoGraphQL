@@ -27,8 +27,9 @@ use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
 use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 
-class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implements FieldQueryInterpreterInterface
+class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
     // Cache the output from functions
     /**

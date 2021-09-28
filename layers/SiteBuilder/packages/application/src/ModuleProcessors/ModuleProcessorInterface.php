@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Application\ModuleProcessors;
 
-interface ModuleProcessorInterface extends \PoP\ConfigurationComponentModel\ModuleProcessors\ModuleProcessorInterface
+use PoP\ConfigurationComponentModel\ModuleProcessors\ModuleProcessorInterface as UpstreamModuleProcessorInterface;
+
+interface ModuleProcessorInterface extends UpstreamModuleProcessorInterface
 {
     public function getDataloadMultidomainSources(array $module, array &$props): array;
     public function getDataloadMultidomainQuerySources(array $module, array &$props): array;

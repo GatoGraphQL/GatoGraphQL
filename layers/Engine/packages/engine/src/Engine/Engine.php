@@ -24,14 +24,15 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\LooseContractManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\Engine\Engine as UpstreamEngine;
 
-class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterface
+class Engine extends UpstreamEngine implements EngineInterface
 {
     protected LooseContractManagerInterface $looseContractManager;
     protected CacheControlEngineInterface $cacheControlEngine;
     
     #[\Symfony\Contracts\Service\Attribute\Required]
-    public function autowireEngine(
+    public function autowireEngineEngine(
         LooseContractManagerInterface $looseContractManager,
         CacheControlEngineInterface $cacheControlEngine
     ) {

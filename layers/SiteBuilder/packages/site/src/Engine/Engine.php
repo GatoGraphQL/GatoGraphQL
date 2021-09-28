@@ -23,13 +23,14 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\LooseContractManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\Application\Engine\Engine as UpstreamEngine;
 
-class Engine extends \PoP\Application\Engine\Engine
+class Engine extends UpstreamEngine
 {
     protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
     
     #[\Symfony\Contracts\Service\Attribute\Required]
-    public function autowireEngine(
+    public function autowireSiteEngine(
         ApplicationStateHelperServiceInterface $applicationStateHelperService
     ) {
         $this->applicationStateHelperService = $applicationStateHelperService;
