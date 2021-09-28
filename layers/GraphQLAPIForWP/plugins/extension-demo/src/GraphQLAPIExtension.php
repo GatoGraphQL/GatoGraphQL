@@ -21,7 +21,7 @@ class GraphQLAPIExtension extends AbstractExtension
     public function getComponentClassesToInitialize(): array
     {
         return [
-            Component::class,
+            \GraphQLAPI\ExtensionDemo\Component::class,
         ];
     }
 }
