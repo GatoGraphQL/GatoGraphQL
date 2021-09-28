@@ -23,6 +23,7 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeR
 
 class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -31,8 +32,9 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected URLScalarTypeResolver $urlScalarTypeResolver,
+        URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

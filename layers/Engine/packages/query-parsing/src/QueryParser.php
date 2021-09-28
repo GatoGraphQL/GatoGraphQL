@@ -9,8 +9,10 @@ use PoP\Translation\TranslationAPIInterface;
 
 class QueryParser implements QueryParserInterface
 {
-    public function __construct(protected TranslationAPIInterface $translationAPI)
+    protected TranslationAPIInterface $translationAPI;
+    public function __construct(TranslationAPIInterface $translationAPI)
     {
+        $this->translationAPI = $translationAPI;
     }
 
     /**

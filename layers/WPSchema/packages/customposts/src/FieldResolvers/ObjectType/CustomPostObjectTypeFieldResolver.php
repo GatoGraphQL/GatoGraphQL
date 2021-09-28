@@ -25,6 +25,7 @@ use WP_Post;
 
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -36,8 +37,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

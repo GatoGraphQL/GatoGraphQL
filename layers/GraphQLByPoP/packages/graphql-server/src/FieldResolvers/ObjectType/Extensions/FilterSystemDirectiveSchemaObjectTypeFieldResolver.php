@@ -27,6 +27,8 @@ use PoP\Translation\TranslationAPIInterface;
 
 class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTypeFieldResolver
 {
+    protected DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver;
+    protected DirectiveRegistryInterface $directiveRegistry;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -39,9 +41,11 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         EngineInterface $engine,
         TypeObjectTypeResolver $typeObjectTypeResolver,
         DirectiveObjectTypeResolver $directiveObjectTypeResolver,
-        protected DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
-        protected DirectiveRegistryInterface $directiveRegistry,
+        DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
+        DirectiveRegistryInterface $directiveRegistry,
     ) {
+        $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
+        $this->directiveRegistry = $directiveRegistry;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

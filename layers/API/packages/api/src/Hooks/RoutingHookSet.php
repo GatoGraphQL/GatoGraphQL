@@ -16,13 +16,17 @@ use PoP\Translation\TranslationAPIInterface;
 
 class RoutingHookSet extends AbstractHookSet
 {
+    protected CMSServiceInterface $cmsService;
+    protected RequestHelperServiceInterface $requestHelperService;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected CMSServiceInterface $cmsService,
-        protected RequestHelperServiceInterface $requestHelperService,
+        CMSServiceInterface $cmsService,
+        RequestHelperServiceInterface $requestHelperService,
     ) {
+        $this->cmsService = $cmsService;
+        $this->requestHelperService = $requestHelperService;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

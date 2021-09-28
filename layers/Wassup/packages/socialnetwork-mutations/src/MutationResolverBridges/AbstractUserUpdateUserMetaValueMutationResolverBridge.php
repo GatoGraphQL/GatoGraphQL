@@ -13,13 +13,15 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 abstract class AbstractUserUpdateUserMetaValueMutationResolverBridge extends AbstractUpdateUserMetaValueMutationResolverBridge
 {
+    protected UserTypeAPIInterface $userTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UserTypeAPIInterface $userTypeAPI,
+        UserTypeAPIInterface $userTypeAPI,
     ) {
+        $this->userTypeAPI = $userTypeAPI;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

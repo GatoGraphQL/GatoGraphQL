@@ -24,6 +24,7 @@ use PoPSchema\EventTags\Facades\EventTagTypeAPIFacade;
 
 class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -32,8 +33,9 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

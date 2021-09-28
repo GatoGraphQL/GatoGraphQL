@@ -26,6 +26,8 @@ use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS = 'dataload-relationalfields-comments';
+    protected CommentObjectTypeResolver $commentObjectTypeResolver;
+    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -40,9 +42,11 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected CommentObjectTypeResolver $commentObjectTypeResolver,
-        protected ListQueryInputOutputHandler $listQueryInputOutputHandler,
+        CommentObjectTypeResolver $commentObjectTypeResolver,
+        ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -21,6 +21,8 @@ use PoPSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 
 class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI;
+    protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -31,9 +33,11 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI,
-        protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
+        TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI,
+        WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {
+        $this->taxonomyMetaAPI = $taxonomyMetaAPI;
+        $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

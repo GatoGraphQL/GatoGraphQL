@@ -23,6 +23,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 {
     public const VALIDATECATEGORIESTYPE_ATLEASTONE = 1;
     public const VALIDATECATEGORIESTYPE_EXACTLYONE = 2;
+    protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -32,8 +33,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         UserRoleTypeAPIInterface $userRoleTypeAPI,
         CustomPostTypeAPIInterface $customPostTypeAPI,
         CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
-        protected PostCategoryTypeAPIInterface $postCategoryTypeAPI,
+        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
+        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

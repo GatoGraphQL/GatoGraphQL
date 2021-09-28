@@ -26,6 +26,10 @@ use PoP\Hooks\HooksAPIInterface;
 class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
+    protected EndpointBlockRegistryInterface $endpointBlockRegistry;
+    protected CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface;
+    protected CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface;
+    protected CustomEndpointOptionsBlock $customEndpointOptionsBlock;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -34,11 +38,15 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         CPTUtils $cptUtils,
         HooksAPIInterface $hooksAPI,
         BlockHelpers $blockHelpers,
-        protected EndpointBlockRegistryInterface $endpointBlockRegistry,
-        protected CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
-        protected CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface,
-        protected CustomEndpointOptionsBlock $customEndpointOptionsBlock,
+        EndpointBlockRegistryInterface $endpointBlockRegistry,
+        CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
+        CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface,
+        CustomEndpointOptionsBlock $customEndpointOptionsBlock,
     ) {
+        $this->endpointBlockRegistry = $endpointBlockRegistry;
+        $this->customEndpointExecuterRegistryInterface = $customEndpointExecuterRegistryInterface;
+        $this->customEndpointAnnotatorRegistryInterface = $customEndpointAnnotatorRegistryInterface;
+        $this->customEndpointOptionsBlock = $customEndpointOptionsBlock;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

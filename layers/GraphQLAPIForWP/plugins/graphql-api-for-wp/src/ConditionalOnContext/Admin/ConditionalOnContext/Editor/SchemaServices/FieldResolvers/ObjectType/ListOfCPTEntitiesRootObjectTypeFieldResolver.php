@@ -26,6 +26,9 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
  */
 class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEntitiesRootObjectTypeFieldResolver
 {
+    protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
+    protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType;
+    protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -39,10 +42,13 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
         ModuleProcessorManagerInterface $moduleProcessorManager,
         CustomPostObjectTypeResolver $customPostObjectTypeResolver,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
-        protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
-        protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
+        GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
+        GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
+        GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ) {
+        $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
+        $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
+        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

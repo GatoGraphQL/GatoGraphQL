@@ -22,6 +22,8 @@ use PoPSchema\Users\RelationalTypeDataLoaders\ObjectType\UserTypeDataLoader;
 
 class UserObjectTypeResolver extends AbstractObjectTypeResolver
 {
+    protected UserTypeAPIInterface $userTypeAPI;
+    protected UserTypeDataLoader $userTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,9 +36,11 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected UserTypeAPIInterface $userTypeAPI,
-        protected UserTypeDataLoader $userTypeDataLoader,
+        UserTypeAPIInterface $userTypeAPI,
+        UserTypeDataLoader $userTypeDataLoader,
     ) {
+        $this->userTypeAPI = $userTypeAPI;
+        $this->userTypeDataLoader = $userTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

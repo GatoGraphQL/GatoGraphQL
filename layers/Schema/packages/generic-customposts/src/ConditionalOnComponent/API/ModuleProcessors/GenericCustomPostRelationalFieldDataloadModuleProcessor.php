@@ -32,6 +32,8 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
     public const MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT = 'dataload-relationalfields-genericcustompostcount';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST = 'dataload-relationalfields-admingenericcustompostlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT = 'dataload-relationalfields-admingenericcustompostcount';
+    protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver;
+    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -46,9 +48,11 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
-        protected ListQueryInputOutputHandler $listQueryInputOutputHandler,
+        GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
+        ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
+        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
+        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

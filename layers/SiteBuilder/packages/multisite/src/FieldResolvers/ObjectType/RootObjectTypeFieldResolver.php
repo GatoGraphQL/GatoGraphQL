@@ -25,6 +25,8 @@ use PoP\Translation\TranslationAPIInterface;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected SiteObjectTypeResolver $siteObjectTypeResolver;
+    protected Site $site;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,9 +37,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected SiteObjectTypeResolver $siteObjectTypeResolver,
-        protected Site $site,
+        SiteObjectTypeResolver $siteObjectTypeResolver,
+        Site $site,
     ) {
+        $this->siteObjectTypeResolver = $siteObjectTypeResolver;
+        $this->site = $site;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

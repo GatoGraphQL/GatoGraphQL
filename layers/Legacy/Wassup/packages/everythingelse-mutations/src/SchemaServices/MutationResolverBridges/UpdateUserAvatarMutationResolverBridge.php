@@ -15,13 +15,15 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Upda
 
 class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    protected UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver,
+        UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver,
     ) {
+        $this->updateUserAvatarMutationResolver = $updateUserAvatarMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

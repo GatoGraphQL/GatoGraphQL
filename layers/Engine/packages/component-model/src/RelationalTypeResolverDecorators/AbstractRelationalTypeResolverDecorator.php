@@ -14,11 +14,13 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 abstract class AbstractRelationalTypeResolverDecorator implements RelationalTypeResolverDecoratorInterface
 {
     use AttachableExtensionTrait;
+    protected InstanceManagerInterface $instanceManager;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
 
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-    ) {
+    public function __construct(InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter)
+    {
+        $this->instanceManager = $instanceManager;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
     }
 
     final public function getClassesToAttachTo(): array

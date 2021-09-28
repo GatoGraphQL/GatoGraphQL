@@ -28,6 +28,7 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeR
  */
 class CustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
+    protected CustomPostTypeDataLoader $customPostTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -41,8 +42,9 @@ class CustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected CustomPostTypeDataLoader $customPostTypeDataLoader,
+        CustomPostTypeDataLoader $customPostTypeDataLoader,
     ) {
+        $this->customPostTypeDataLoader = $customPostTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

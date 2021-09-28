@@ -11,11 +11,14 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 abstract class AbstractSchemaConfigurationExecuter implements SchemaConfigurationExecuterInterface
 {
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected BlockHelpers $blockHelpers,
-    ) {
+    protected InstanceManagerInterface $instanceManager;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected BlockHelpers $blockHelpers;
+    public function __construct(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers)
+    {
+        $this->instanceManager = $instanceManager;
+        $this->moduleRegistry = $moduleRegistry;
+        $this->blockHelpers = $blockHelpers;
     }
 
     /**

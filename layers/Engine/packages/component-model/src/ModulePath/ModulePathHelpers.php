@@ -9,8 +9,10 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 
 class ModulePathHelpers implements ModulePathHelpersInterface
 {
-    public function __construct(protected ModulePathManagerInterface $modulePathManager)
+    protected ModulePathManagerInterface $modulePathManager;
+    public function __construct(ModulePathManagerInterface $modulePathManager)
     {
+        $this->modulePathManager = $modulePathManager;
     }
 
     public function getStringifiedModulePropagationCurrentPath(array $module)

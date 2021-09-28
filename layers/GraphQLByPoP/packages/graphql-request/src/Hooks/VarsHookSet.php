@@ -26,16 +26,26 @@ use PoP\Translation\TranslationAPIInterface;
 
 class VarsHookSet extends AbstractHookSet
 {
+    protected QueryRetrieverInterface $queryRetrieverInterface;
+    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
+    protected GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected GraphQLQueryConvertorInterface $graphQLQueryConvertor;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected QueryRetrieverInterface $queryRetrieverInterface,
-        protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
-        protected GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected GraphQLQueryConvertorInterface $graphQLQueryConvertor,
+        QueryRetrieverInterface $queryRetrieverInterface,
+        GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
+        GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        GraphQLQueryConvertorInterface $graphQLQueryConvertor,
     ) {
+        $this->queryRetrieverInterface = $queryRetrieverInterface;
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+        $this->graphQLPersistedQueryManager = $graphQLPersistedQueryManager;
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->graphQLQueryConvertor = $graphQLQueryConvertor;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

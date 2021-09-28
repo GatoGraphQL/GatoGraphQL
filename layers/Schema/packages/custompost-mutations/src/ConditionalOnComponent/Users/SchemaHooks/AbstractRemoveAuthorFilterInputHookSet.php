@@ -12,12 +12,14 @@ use PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks\FilterInputHo
 
 abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 {
+    protected UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet,
+        UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet,
     ) {
+        $this->userCustomPostFilterInputHookSet = $userCustomPostFilterInputHookSet;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

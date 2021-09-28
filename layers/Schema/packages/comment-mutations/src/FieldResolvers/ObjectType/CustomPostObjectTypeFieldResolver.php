@@ -25,6 +25,8 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeR
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected CommentObjectTypeResolver $commentObjectTypeResolver;
+    protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,9 +37,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected CommentObjectTypeResolver $commentObjectTypeResolver,
-        protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
+        CommentObjectTypeResolver $commentObjectTypeResolver,
+        AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

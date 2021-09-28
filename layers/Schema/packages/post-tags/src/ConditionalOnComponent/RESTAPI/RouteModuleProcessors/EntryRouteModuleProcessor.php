@@ -21,12 +21,14 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
+    protected PostTagTypeAPIInterface $postTagTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         RESTDataStructureFormatter $restDataStructureFormatter,
         FieldQueryConvertorInterface $fieldQueryConvertor,
-        protected PostTagTypeAPIInterface $postTagTypeAPI,
+        PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
+        $this->postTagTypeAPI = $postTagTypeAPI;
         parent::__construct(
             $hooksAPI,
             $restDataStructureFormatter,

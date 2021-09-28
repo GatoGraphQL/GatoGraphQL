@@ -24,6 +24,7 @@ use PoP\Translation\TranslationAPIInterface;
 class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_ROOT = 'dataload-relationalfields-root';
+    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -38,8 +39,9 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
+        $this->schemaDefinitionService = $schemaDefinitionService;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

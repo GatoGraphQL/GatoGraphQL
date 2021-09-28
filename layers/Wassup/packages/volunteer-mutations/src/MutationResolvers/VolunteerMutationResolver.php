@@ -12,11 +12,13 @@ use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 
 class VolunteerMutationResolver extends AbstractMutationResolver
 {
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
+        $this->customPostTypeAPI = $customPostTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

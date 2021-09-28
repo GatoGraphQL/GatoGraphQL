@@ -16,13 +16,17 @@ class ModelInstance implements ModelInstanceInterface
     public const HOOK_COMPONENTS_RESULT = __CLASS__ . ':components:result';
     public const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':componentsFromVars:postOrGetChange';
     public const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':componentsFromVars:result';
+    protected TranslationAPIInterface $translationAPI;
+    protected HooksAPIInterface $hooksAPI;
+    protected ApplicationInfoInterface $applicationInfo;
+    protected DefinitionManagerInterface $definitionManager;
 
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI,
-        protected ApplicationInfoInterface $applicationInfo,
-        protected DefinitionManagerInterface $definitionManager,
-    ) {
+    public function __construct(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->hooksAPI = $hooksAPI;
+        $this->applicationInfo = $applicationInfo;
+        $this->definitionManager = $definitionManager;
     }
 
     public function getModelInstanceId(): string

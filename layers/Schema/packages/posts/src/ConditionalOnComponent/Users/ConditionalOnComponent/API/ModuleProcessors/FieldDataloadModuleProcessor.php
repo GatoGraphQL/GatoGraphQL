@@ -27,6 +27,8 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST = 'dataload-relationalfields-authorpostlist';
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -41,9 +43,11 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected ListQueryInputOutputHandler $listQueryInputOutputHandler,
+        PostObjectTypeResolver $postObjectTypeResolver,
+        ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

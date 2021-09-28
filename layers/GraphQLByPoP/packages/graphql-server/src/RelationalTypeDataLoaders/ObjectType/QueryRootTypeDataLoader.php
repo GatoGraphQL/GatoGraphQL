@@ -12,12 +12,14 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDa
 
 class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
+    protected QueryRoot $queryRoot;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected QueryRoot $queryRoot,
+        QueryRoot $queryRoot,
     ) {
+        $this->queryRoot = $queryRoot;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

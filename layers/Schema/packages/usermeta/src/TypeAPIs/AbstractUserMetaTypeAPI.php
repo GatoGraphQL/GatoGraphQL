@@ -11,9 +11,10 @@ use PoPSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
 
 abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
 {
-    public function __construct(
-        protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
-    ) {
+    protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
+    public function __construct(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    {
+        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }
 
     final public function getUserMeta(string | int $userID, string $key, bool $single = false): mixed

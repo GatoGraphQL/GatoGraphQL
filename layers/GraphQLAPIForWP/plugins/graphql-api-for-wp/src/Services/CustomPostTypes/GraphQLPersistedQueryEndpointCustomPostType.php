@@ -26,6 +26,10 @@ use PoP\Hooks\HooksAPIInterface;
 class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
+    protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry;
+    protected PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface;
+    protected PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface;
+    protected PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -34,11 +38,15 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         CPTUtils $cptUtils,
         HooksAPIInterface $hooksAPI,
         BlockHelpers $blockHelpers,
-        protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
-        protected PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface,
-        protected PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface,
-        protected PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock,
+        PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
+        PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface,
+        PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface,
+        PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock,
     ) {
+        $this->persistedQueryEndpointBlockRegistry = $persistedQueryEndpointBlockRegistry;
+        $this->persistedQueryEndpointExecuterRegistryInterface = $persistedQueryEndpointExecuterRegistryInterface;
+        $this->persistedQueryEndpointAnnotatorRegistryInterface = $persistedQueryEndpointAnnotatorRegistryInterface;
+        $this->persistedQueryEndpointOptionsBlock = $persistedQueryEndpointOptionsBlock;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

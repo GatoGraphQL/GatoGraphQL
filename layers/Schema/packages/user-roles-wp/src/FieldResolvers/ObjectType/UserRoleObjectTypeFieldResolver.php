@@ -23,6 +23,7 @@ use PoPSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 
 class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTypeFieldResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -33,8 +34,9 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

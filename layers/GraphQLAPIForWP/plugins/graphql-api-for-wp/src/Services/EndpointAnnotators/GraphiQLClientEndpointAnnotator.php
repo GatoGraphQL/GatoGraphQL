@@ -16,13 +16,15 @@ use WP_Post;
 
 class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface
 {
+    protected EndpointGraphiQLBlock $endpointGraphiQLBlock;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         BlockHelpers $blockHelpers,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        protected EndpointGraphiQLBlock $endpointGraphiQLBlock,
+        EndpointGraphiQLBlock $endpointGraphiQLBlock,
     ) {
+        $this->endpointGraphiQLBlock = $endpointGraphiQLBlock;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

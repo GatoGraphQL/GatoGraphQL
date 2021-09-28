@@ -16,13 +16,15 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Edit
 
 class EditMembershipMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    protected EditMembershipMutationResolver $editMembershipMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected EditMembershipMutationResolver $editMembershipMutationResolver,
+        EditMembershipMutationResolver $editMembershipMutationResolver,
     ) {
+        $this->editMembershipMutationResolver = $editMembershipMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

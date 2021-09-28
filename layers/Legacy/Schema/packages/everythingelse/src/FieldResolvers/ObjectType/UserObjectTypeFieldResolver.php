@@ -21,6 +21,7 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected LocationObjectTypeResolver $locationObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -29,8 +30,9 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected LocationObjectTypeResolver $locationObjectTypeResolver,
+        LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {
+        $this->locationObjectTypeResolver = $locationObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

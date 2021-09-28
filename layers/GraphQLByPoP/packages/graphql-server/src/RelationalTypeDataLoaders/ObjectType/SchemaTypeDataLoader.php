@@ -17,14 +17,18 @@ use PoP\LooseContracts\NameResolverInterface;
 class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     use UseObjectDictionaryTypeDataLoaderTrait;
+    protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
+    protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
 
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected SchemaObjectTypeResolver $schemaObjectTypeResolver,
-        protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
+        SchemaObjectTypeResolver $schemaObjectTypeResolver,
+        SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ) {
+        $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
+        $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

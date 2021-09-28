@@ -17,12 +17,14 @@ use PoP\Translation\TranslationAPIInterface;
 
 class VarsHookSet extends AbstractHookSet
 {
+    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
+        GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
     ) {
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

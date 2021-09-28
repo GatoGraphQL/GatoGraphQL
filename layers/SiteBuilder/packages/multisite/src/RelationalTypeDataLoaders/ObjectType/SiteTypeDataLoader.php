@@ -13,12 +13,14 @@ use PoP\Multisite\ObjectModels\Site;
 
 class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {
+    protected Site $site;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected Site $site,
+        Site $site,
     ) {
+        $this->site = $site;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

@@ -18,13 +18,19 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
     protected UserSettingsManagerInterface $userSettingsManager;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected SingleEndpointSchemaConfigurator $endpointSchemaConfigurator;
+    protected GraphQLEndpointHandler $graphQLEndpointHandler;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected SingleEndpointSchemaConfigurator $endpointSchemaConfigurator,
-        protected GraphQLEndpointHandler $graphQLEndpointHandler,
+        ModuleRegistryInterface $moduleRegistry,
+        SingleEndpointSchemaConfigurator $endpointSchemaConfigurator,
+        GraphQLEndpointHandler $graphQLEndpointHandler,
     ) {
+        $this->moduleRegistry = $moduleRegistry;
+        $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
+        $this->graphQLEndpointHandler = $graphQLEndpointHandler;
         parent::__construct(
             $instanceManager,
         );

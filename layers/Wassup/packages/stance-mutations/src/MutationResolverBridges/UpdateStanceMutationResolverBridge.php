@@ -13,13 +13,15 @@ use PoPSitesWassup\StanceMutations\MutationResolvers\UpdateStanceMutationResolve
 
 class UpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
+    protected UpdateStanceMutationResolver $updateStanceMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UpdateStanceMutationResolver $updateStanceMutationResolver,
+        UpdateStanceMutationResolver $updateStanceMutationResolver,
     ) {
+        $this->updateStanceMutationResolver = $updateStanceMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

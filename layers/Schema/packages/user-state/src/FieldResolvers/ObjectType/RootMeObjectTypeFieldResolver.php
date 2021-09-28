@@ -22,6 +22,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldResolver
 {
+    protected UserObjectTypeResolver $userObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -32,8 +33,9 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected UserObjectTypeResolver $userObjectTypeResolver,
+        UserObjectTypeResolver $userObjectTypeResolver,
     ) {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -15,13 +15,15 @@ use PoPSitesWassup\UserStateMutations\MutationResolvers\ResetLostPasswordMutatio
 
 class ResetLostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    protected ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver,
+        ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver,
     ) {
+        $this->resetLostPasswordMutationResolver = $resetLostPasswordMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

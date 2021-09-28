@@ -11,8 +11,10 @@ use WP_Error;
 
 class ErrorManager extends AbstractErrorManager
 {
-    public function __construct(protected TranslationAPIInterface $translationAPI)
+    protected TranslationAPIInterface $translationAPI;
+    public function __construct(TranslationAPIInterface $translationAPI)
     {
+        $this->translationAPI = $translationAPI;
     }
 
     public function convertFromCMSToPoPError(object $cmsError): Error

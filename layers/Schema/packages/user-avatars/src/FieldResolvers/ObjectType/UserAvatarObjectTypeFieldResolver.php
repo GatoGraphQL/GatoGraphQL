@@ -25,6 +25,8 @@ use PoPSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
 
 class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,9 +37,11 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
     ) {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

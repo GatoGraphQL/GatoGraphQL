@@ -17,12 +17,14 @@ use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHookSet
 {
+    protected AccessControlManagerInterface $accessControlManager;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected AccessControlManagerInterface $accessControlManager
+        AccessControlManagerInterface $accessControlManager
     ) {
+        $this->accessControlManager = $accessControlManager;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

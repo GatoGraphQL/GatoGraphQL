@@ -43,14 +43,24 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * @var AbstractDynamicType[]
      */
     protected array $dynamicTypes = [];
+    protected TranslationAPIInterface $translationAPI;
+    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
+    protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
+    protected SchemaDefinitionRegistryInterface $schemaDefinitionRegistry;
+    protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
 
     public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
-        protected SchemaDefinitionRegistryInterface $schemaDefinitionRegistry,
-        protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
+        TranslationAPIInterface $translationAPI,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
+        SchemaDefinitionRegistryInterface $schemaDefinitionRegistry,
+        GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ) {
+        $this->translationAPI = $translationAPI;
+        $this->schemaDefinitionService = $schemaDefinitionService;
+        $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
+        $this->schemaDefinitionRegistry = $schemaDefinitionRegistry;
+        $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
         $this->persistentCache = PersistentCacheFacade::getInstance();
     }
 

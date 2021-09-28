@@ -24,6 +24,9 @@ use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeF
 
 abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements CategoryAPIRequestedContractInterface
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,10 +37,13 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -21,6 +21,7 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 
 abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -29,8 +30,9 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected URLScalarTypeResolver $urlScalarTypeResolver,
+        URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

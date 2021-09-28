@@ -19,6 +19,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 
 class StanceObjectTypeResolver extends AbstractObjectTypeResolver
 {
+    protected StanceTypeDataLoader $stanceTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -28,8 +29,9 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
-        protected StanceTypeDataLoader $stanceTypeDataLoader,
+        StanceTypeDataLoader $stanceTypeDataLoader,
     ) {
+        $this->stanceTypeDataLoader = $stanceTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -35,6 +35,13 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected FieldObjectTypeResolver $fieldObjectTypeResolver;
+    protected TypeObjectTypeResolver $typeObjectTypeResolver;
+    protected EnumValueObjectTypeResolver $enumValueObjectTypeResolver;
+    protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
+    protected TypeKindEnumTypeResolver $typeKindEnumTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -45,14 +52,21 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
-        protected FieldObjectTypeResolver $fieldObjectTypeResolver,
-        protected TypeObjectTypeResolver $typeObjectTypeResolver,
-        protected EnumValueObjectTypeResolver $enumValueObjectTypeResolver,
-        protected InputValueObjectTypeResolver $inputValueObjectTypeResolver,
-        protected TypeKindEnumTypeResolver $typeKindEnumTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        FieldObjectTypeResolver $fieldObjectTypeResolver,
+        TypeObjectTypeResolver $typeObjectTypeResolver,
+        EnumValueObjectTypeResolver $enumValueObjectTypeResolver,
+        InputValueObjectTypeResolver $inputValueObjectTypeResolver,
+        TypeKindEnumTypeResolver $typeKindEnumTypeResolver,
     ) {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+        $this->enumValueObjectTypeResolver = $enumValueObjectTypeResolver;
+        $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
+        $this->typeKindEnumTypeResolver = $typeKindEnumTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

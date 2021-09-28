@@ -14,12 +14,14 @@ use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 class LogoutMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
+    protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
+        UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
     ) {
+        $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

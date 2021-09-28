@@ -11,11 +11,15 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
 {
+    protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator;
+    protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator,
-        protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
+        PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator,
+        GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
     ) {
+        $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
+        $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
         parent::__construct(
             $instanceManager,
         );

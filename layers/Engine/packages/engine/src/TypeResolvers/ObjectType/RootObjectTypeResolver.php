@@ -28,6 +28,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
     use ReservedNameTypeResolverTrait;
 
     public const HOOK_DESCRIPTION = __CLASS__ . ':description';
+    protected RootTypeDataLoader $rootTypeDataLoader;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -41,8 +42,9 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected RootTypeDataLoader $rootTypeDataLoader,
+        RootTypeDataLoader $rootTypeDataLoader,
     ) {
+        $this->rootTypeDataLoader = $rootTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

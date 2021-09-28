@@ -9,10 +9,12 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 
 abstract class AbstractDataStructureFormatter implements DataStructureFormatterInterface
 {
-    public function __construct(
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-    ) {
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    public function __construct(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter)
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
     }
 
     public function getFormattedData($data)

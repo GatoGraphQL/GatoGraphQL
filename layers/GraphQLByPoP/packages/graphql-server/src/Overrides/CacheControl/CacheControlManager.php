@@ -10,10 +10,11 @@ use PoP\CacheControl\Managers\CacheControlManager as UpstreamCacheControlManager
 class CacheControlManager extends UpstreamCacheControlManager
 {
     protected ?array $overriddenFieldEntries = null;
+    protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
 
-    public function __construct(
-        protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator,
-    ) {
+    public function __construct(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator)
+    {
+        $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator = $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
     }
 
     public function addEntriesForFields(array $fieldEntries): void

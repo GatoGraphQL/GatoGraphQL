@@ -20,17 +20,25 @@ use PoP\Hooks\HooksAPIInterface;
 
 class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGraphQLQueryConfigurator
 {
+    protected AccessControlBlock $accessControlBlock;
+    protected BlockHelpers $blockHelpers;
+    protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry;
+    protected AccessControlManagerInterface $accessControlManager;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         TypeRegistryInterface $typeRegistry,
         DirectiveRegistryInterface $directiveRegistry,
-        protected AccessControlBlock $accessControlBlock,
-        protected BlockHelpers $blockHelpers,
-        protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
-        protected AccessControlManagerInterface $accessControlManager,
+        AccessControlBlock $accessControlBlock,
+        BlockHelpers $blockHelpers,
+        AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
+        AccessControlManagerInterface $accessControlManager,
     ) {
+        $this->accessControlBlock = $accessControlBlock;
+        $this->blockHelpers = $blockHelpers;
+        $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;
+        $this->accessControlManager = $accessControlManager;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

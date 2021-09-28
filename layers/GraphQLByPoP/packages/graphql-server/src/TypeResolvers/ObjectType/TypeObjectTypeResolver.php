@@ -22,6 +22,7 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractIntrospectionObj
 
 class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
+    protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,8 +35,9 @@ class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
+        SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ) {
+        $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

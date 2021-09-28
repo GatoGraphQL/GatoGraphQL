@@ -26,6 +26,8 @@ use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected CommentObjectTypeResolver $commentObjectTypeResolver;
+    protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -37,9 +39,11 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CommentObjectTypeResolver $commentObjectTypeResolver,
-        protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
+        CommentObjectTypeResolver $commentObjectTypeResolver,
+        AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

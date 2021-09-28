@@ -13,13 +13,15 @@ use PoPSitesWassup\NotificationMutations\MutationResolvers\MarkAsUnreadNotificat
 
 class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge
 {
+    protected MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver,
+        MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver,
     ) {
+        $this->markAsUnreadNotificationMutationResolver = $markAsUnreadNotificationMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

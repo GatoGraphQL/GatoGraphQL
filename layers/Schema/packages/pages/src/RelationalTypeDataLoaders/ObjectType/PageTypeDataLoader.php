@@ -14,14 +14,16 @@ use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 
 class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
+    protected PageTypeAPIInterface $pageTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
         ModuleProcessorManagerInterface $moduleProcessorManager,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected PageTypeAPIInterface $pageTypeAPI,
+        PageTypeAPIInterface $pageTypeAPI,
     ) {
+        $this->pageTypeAPI = $pageTypeAPI;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

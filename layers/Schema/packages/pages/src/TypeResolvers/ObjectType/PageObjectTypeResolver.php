@@ -23,6 +23,8 @@ use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 
 class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
+    protected PageTypeDataLoader $pageTypeDataLoader;
+    protected PageTypeAPIInterface $pageTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -36,9 +38,11 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected PageTypeDataLoader $pageTypeDataLoader,
-        protected PageTypeAPIInterface $pageTypeAPI,
+        PageTypeDataLoader $pageTypeDataLoader,
+        PageTypeAPIInterface $pageTypeAPI,
     ) {
+        $this->pageTypeDataLoader = $pageTypeDataLoader;
+        $this->pageTypeAPI = $pageTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

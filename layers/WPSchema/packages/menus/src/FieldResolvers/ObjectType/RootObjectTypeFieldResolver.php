@@ -23,6 +23,7 @@ use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected MenuObjectTypeResolver $menuObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,8 +35,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected MenuObjectTypeResolver $menuObjectTypeResolver,
+        MenuObjectTypeResolver $menuObjectTypeResolver,
     ) {
+        $this->menuObjectTypeResolver = $menuObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

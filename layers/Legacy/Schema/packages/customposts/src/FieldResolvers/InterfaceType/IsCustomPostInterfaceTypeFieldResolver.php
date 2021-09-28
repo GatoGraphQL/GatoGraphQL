@@ -22,6 +22,8 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 
 class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldResolver
 {
+    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -33,9 +35,11 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         URLScalarTypeResolver $urlScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
-        protected DateScalarTypeResolver $dateScalarTypeResolver,
-        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
+        DateScalarTypeResolver $dateScalarTypeResolver,
+        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

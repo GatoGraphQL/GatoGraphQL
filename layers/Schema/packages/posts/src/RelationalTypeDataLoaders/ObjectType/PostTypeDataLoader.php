@@ -14,14 +14,16 @@ use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
 class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
+    protected PostTypeAPIInterface $postTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
         ModuleProcessorManagerInterface $moduleProcessorManager,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected PostTypeAPIInterface $postTypeAPI,
+        PostTypeAPIInterface $postTypeAPI,
     ) {
+        $this->postTypeAPI = $postTypeAPI;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

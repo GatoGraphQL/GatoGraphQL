@@ -15,13 +15,15 @@ use PoPSitesWassup\NotificationMutations\MutationResolvers\MarkAllAsReadNotifica
 
 class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    protected MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver,
+        MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver,
     ) {
+        $this->markAllAsReadNotificationMutationResolver = $markAllAsReadNotificationMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

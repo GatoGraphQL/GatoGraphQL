@@ -18,14 +18,16 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class EndpointComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
+    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

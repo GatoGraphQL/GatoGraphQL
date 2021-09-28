@@ -22,6 +22,7 @@ use PoPSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostTypeDataLoader;
 
 class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
+    protected PostTypeDataLoader $postTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,8 +36,9 @@ class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected PostTypeDataLoader $postTypeDataLoader,
+        PostTypeDataLoader $postTypeDataLoader,
     ) {
+        $this->postTypeDataLoader = $postTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

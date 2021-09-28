@@ -33,6 +33,10 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected CacheInterface $persistentCache;
+    protected SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver;
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
+    protected PersistedQueryManagerInterface $queryCatalogueManager;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -44,11 +48,15 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
-        protected PersistedFragmentManagerInterface $fragmentCatalogueManager,
-        protected PersistedQueryManagerInterface $queryCatalogueManager,
+        SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        PersistedFragmentManagerInterface $fragmentCatalogueManager,
+        PersistedQueryManagerInterface $queryCatalogueManager,
     ) {
+        $this->schemaOutputShapeEnumTypeResolver = $schemaOutputShapeEnumTypeResolver;
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->fragmentCatalogueManager = $fragmentCatalogueManager;
+        $this->queryCatalogueManager = $queryCatalogueManager;
         $this->persistentCache = PersistentCacheFacade::getInstance();
         parent::__construct(
             $translationAPI,

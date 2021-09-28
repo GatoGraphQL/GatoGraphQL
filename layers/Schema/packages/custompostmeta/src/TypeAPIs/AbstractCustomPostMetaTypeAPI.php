@@ -11,9 +11,10 @@ use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {
-    public function __construct(
-        protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
-    ) {
+    protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
+    public function __construct(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    {
+        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }
 
     final public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed

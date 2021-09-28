@@ -22,6 +22,7 @@ use PoPSchema\UserState\FieldResolvers\ObjectType\AbstractGlobalUserStateObjectT
 
 class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObjectTypeFieldResolver
 {
+    protected IDScalarTypeResolver $idScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -32,8 +33,9 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected IDScalarTypeResolver $idScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
     ) {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

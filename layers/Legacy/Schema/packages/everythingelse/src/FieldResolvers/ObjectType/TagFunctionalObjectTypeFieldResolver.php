@@ -22,6 +22,7 @@ use PoPSchema\EverythingElse\Misc\TagHelpers;
 
 class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -30,8 +31,9 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

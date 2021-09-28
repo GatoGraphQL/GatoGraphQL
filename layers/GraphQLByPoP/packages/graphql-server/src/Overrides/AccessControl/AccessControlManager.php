@@ -13,10 +13,11 @@ class AccessControlManager extends UpstreamAccessControlManager
      * @var array<string, array>
      */
     protected array $overriddenFieldEntries = [];
+    protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
 
-    public function __construct(
-        protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator,
-    ) {
+    public function __construct(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator)
+    {
+        $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator = $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
     }
 
     public function addEntriesForFields(string $group, array $fieldEntries): void

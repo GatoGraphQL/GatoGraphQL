@@ -13,12 +13,14 @@ use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationR
 class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
+    protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
+        CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ) {
+        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

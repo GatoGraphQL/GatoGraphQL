@@ -11,11 +11,13 @@ use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 
 class Cache extends \PoP\ComponentModel\Cache\Cache
 {
+    protected HooksAPIInterface $hooksAPI;
     public function __construct(
         CacheItemPoolInterface $cacheItemPool,
-        protected HooksAPIInterface $hooksAPI,
+        HooksAPIInterface $hooksAPI,
         ModelInstanceInterface $modelInstance
     ) {
+        $this->hooksAPI = $hooksAPI;
         parent::__construct($cacheItemPool, $modelInstance);
 
         // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files

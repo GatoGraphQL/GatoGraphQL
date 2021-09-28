@@ -19,6 +19,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
 {
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
+    protected CustomEndpointBlockCategory $customEndpointBlockCategory;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -26,8 +27,9 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected CustomEndpointBlockCategory $customEndpointBlockCategory,
+        CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
+        $this->customEndpointBlockCategory = $customEndpointBlockCategory;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

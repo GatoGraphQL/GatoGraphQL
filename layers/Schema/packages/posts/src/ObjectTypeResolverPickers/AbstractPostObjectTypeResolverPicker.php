@@ -11,10 +11,12 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 abstract class AbstractPostObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    public function __construct(
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected PostTypeAPIInterface $postTypeAPI,
-    ) {
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected PostTypeAPIInterface $postTypeAPI;
+    public function __construct(PostObjectTypeResolver $postObjectTypeResolver, PostTypeAPIInterface $postTypeAPI)
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->postTypeAPI = $postTypeAPI;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

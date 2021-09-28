@@ -12,12 +12,14 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 
 abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator
 {
+    protected DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         AccessControlManagerInterface $accessControlManager,
-        protected DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver,
+        DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver,
     ) {
+        $this->disableAccessForDirectivesDirectiveResolver = $disableAccessForDirectivesDirectiveResolver;
         parent::__construct(
             $instanceManager,
             $fieldQueryInterpreter,

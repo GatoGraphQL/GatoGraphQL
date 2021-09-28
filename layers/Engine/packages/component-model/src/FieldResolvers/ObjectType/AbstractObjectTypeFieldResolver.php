@@ -54,18 +54,30 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * @var array<string, ObjectTypeFieldSchemaDefinitionResolverInterface>
      */
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected NameResolverInterface $nameResolver;
+    protected CMSServiceInterface $cmsService;
+    protected SemverHelperServiceInterface $semverHelperService;
+    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
+    protected EngineInterface $engine;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected NameResolverInterface $nameResolver,
-        protected CMSServiceInterface $cmsService,
-        protected SemverHelperServiceInterface $semverHelperService,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected EngineInterface $engine,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
     ) {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->nameResolver = $nameResolver;
+        $this->cmsService = $cmsService;
+        $this->semverHelperService = $semverHelperService;
+        $this->schemaDefinitionService = $schemaDefinitionService;
+        $this->engine = $engine;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

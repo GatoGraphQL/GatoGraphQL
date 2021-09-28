@@ -19,15 +19,21 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
+    protected PostTypeAPIInterface $postTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
-        protected PostTypeAPIInterface $postTypeAPI,
+        PostObjectTypeResolver $postObjectTypeResolver,
+        PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
+        PostTypeAPIInterface $postTypeAPI,
     ) {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+        $this->postTypeAPI = $postTypeAPI;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

@@ -14,12 +14,16 @@ use WP_Post;
 
 class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
+    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
+    protected QueryRetrieverInterface $queryRetrieverInterface;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
-        protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        protected QueryRetrieverInterface $queryRetrieverInterface,
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+        QueryRetrieverInterface $queryRetrieverInterface,
     ) {
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+        $this->queryRetrieverInterface = $queryRetrieverInterface;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

@@ -36,6 +36,8 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
  */
 class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResolver
 {
+    protected UserCommentTypeAPIInterface $userCommentTypeAPI;
+    protected UserTypeAPIInterface $userTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -58,9 +60,11 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         CommentObjectTypeResolver $commentObjectTypeResolver,
         CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
         DateFormatterInterface $dateFormatter,
-        protected UserCommentTypeAPIInterface $userCommentTypeAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
+        UserCommentTypeAPIInterface $userCommentTypeAPI,
+        UserTypeAPIInterface $userTypeAPI,
     ) {
+        $this->userCommentTypeAPI = $userCommentTypeAPI;
+        $this->userTypeAPI = $userTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

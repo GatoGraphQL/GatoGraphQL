@@ -19,13 +19,17 @@ use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPo
 
 class CustomPostMutationResolverHookSet extends AbstractHookSet
 {
+    protected MediaObjectTypeResolver $mediaTypeResolver;
+    protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected MediaObjectTypeResolver $mediaTypeResolver,
-        protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
+        MediaObjectTypeResolver $mediaTypeResolver,
+        CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ) {
+        $this->mediaTypeResolver = $mediaTypeResolver;
+        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

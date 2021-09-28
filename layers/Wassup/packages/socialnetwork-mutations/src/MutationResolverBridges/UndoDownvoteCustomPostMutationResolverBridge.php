@@ -15,14 +15,16 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UndoDownvoteCustomPo
 
 class UndoDownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
+    protected UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver,
+        UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver,
     ) {
+        $this->undoDownvoteCustomPostMutationResolver = $undoDownvoteCustomPostMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

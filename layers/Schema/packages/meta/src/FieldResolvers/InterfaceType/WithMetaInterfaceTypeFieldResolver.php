@@ -21,6 +21,7 @@ use PoPSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
 
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
+    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -30,8 +31,9 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
+        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
     ) {
+        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

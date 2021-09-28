@@ -41,6 +41,9 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver;
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -53,10 +56,13 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
+        $this->customPostTypeAPI = $customPostTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -14,12 +14,16 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
 {
     protected ?string $restFieldsQuery = null;
     protected ?array $restFields = null;
+    protected RESTDataStructureFormatter $restDataStructureFormatter;
+    protected FieldQueryConvertorInterface $fieldQueryConvertor;
 
     public function __construct(
         HooksAPIInterface $hooksAPI,
-        protected RESTDataStructureFormatter $restDataStructureFormatter,
-        protected FieldQueryConvertorInterface $fieldQueryConvertor
+        RESTDataStructureFormatter $restDataStructureFormatter,
+        FieldQueryConvertorInterface $fieldQueryConvertor
     ) {
+        $this->restDataStructureFormatter = $restDataStructureFormatter;
+        $this->fieldQueryConvertor = $fieldQueryConvertor;
         parent::__construct($hooksAPI);
     }
 

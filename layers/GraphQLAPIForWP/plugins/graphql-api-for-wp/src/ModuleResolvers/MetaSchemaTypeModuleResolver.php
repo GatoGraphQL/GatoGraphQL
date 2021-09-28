@@ -33,6 +33,11 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     public const SCHEMA_USER_META = Plugin::NAMESPACE . '\schema-user-meta';
     public const SCHEMA_COMMENT_META = Plugin::NAMESPACE . '\schema-comment-meta';
     public const SCHEMA_TAXONOMY_META = Plugin::NAMESPACE . '\schema-taxonomy-meta';
+    protected ?CommentObjectTypeResolver $commentTypeResolver;
+    protected ?PostTagObjectTypeResolver $postTagTypeResolver;
+    protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver;
+    protected ?PostObjectTypeResolver $postTypeResolver;
+    protected ?UserObjectTypeResolver $userTypeResolver;
 
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered
@@ -46,12 +51,17 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         TranslationAPIInterface $translationAPI,
-        protected ?CommentObjectTypeResolver $commentTypeResolver,
-        protected ?PostTagObjectTypeResolver $postTagTypeResolver,
-        protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,
-        protected ?PostObjectTypeResolver $postTypeResolver,
-        protected ?UserObjectTypeResolver $userTypeResolver
+        ?CommentObjectTypeResolver $commentTypeResolver,
+        ?PostTagObjectTypeResolver $postTagTypeResolver,
+        ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,
+        ?PostObjectTypeResolver $postTypeResolver,
+        ?UserObjectTypeResolver $userTypeResolver
     ) {
+        $this->commentTypeResolver = $commentTypeResolver;
+        $this->postTagTypeResolver = $postTagTypeResolver;
+        $this->postCategoryTypeResolver = $postCategoryTypeResolver;
+        $this->postTypeResolver = $postTypeResolver;
+        $this->userTypeResolver = $userTypeResolver;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

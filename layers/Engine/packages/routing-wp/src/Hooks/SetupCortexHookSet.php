@@ -17,12 +17,14 @@ use PoP\Translation\TranslationAPIInterface;
 
 class SetupCortexHookSet extends AbstractHookSet
 {
+    protected RoutingManagerInterface $routingManager;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected RoutingManagerInterface $routingManager,
+        RoutingManagerInterface $routingManager,
     ) {
+        $this->routingManager = $routingManager;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

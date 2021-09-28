@@ -11,11 +11,14 @@ use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected TranslationAPIInterface $translationAPI,
-    ) {
+    protected InstanceManagerInterface $instanceManager;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected TranslationAPIInterface $translationAPI;
+    public function __construct(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TranslationAPIInterface $translationAPI)
+    {
+        $this->instanceManager = $instanceManager;
+        $this->moduleRegistry = $moduleRegistry;
+        $this->translationAPI = $translationAPI;
     }
 
     /**

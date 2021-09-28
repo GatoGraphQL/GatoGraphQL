@@ -15,13 +15,17 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 
 class VarsHookSet extends AbstractHookSet
 {
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
+        ModuleRegistryInterface $moduleRegistry,
+        GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
     ) {
+        $this->moduleRegistry = $moduleRegistry;
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

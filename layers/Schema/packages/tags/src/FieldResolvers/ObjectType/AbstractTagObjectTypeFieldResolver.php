@@ -24,6 +24,9 @@ use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractInterface;
 
 abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements TagAPIRequestedContractInterface
 {
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,10 +37,13 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -12,12 +12,14 @@ use PoP\Engine\ObjectModels\Root;
 
 class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
+    protected Root $root;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected Root $root,
+        Root $root,
     ) {
+        $this->root = $root;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

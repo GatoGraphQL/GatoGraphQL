@@ -27,6 +27,8 @@ use WP_User;
 
 class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected DateFormatterInterface $dateFormatter;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -38,9 +40,11 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected DateFormatterInterface $dateFormatter,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
+        DateFormatterInterface $dateFormatter,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
+        $this->dateFormatter = $dateFormatter;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

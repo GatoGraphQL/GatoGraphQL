@@ -18,13 +18,15 @@ use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
 class QueryHookSet extends AbstractHookSet
 {
     public const NON_EXISTING_ID = "non-existing";
+    protected CustomPostTypeRegistryInterface $customPostTypeRegistry;
 
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected CustomPostTypeRegistryInterface $customPostTypeRegistry
+        CustomPostTypeRegistryInterface $customPostTypeRegistry
     ) {
+        $this->customPostTypeRegistry = $customPostTypeRegistry;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

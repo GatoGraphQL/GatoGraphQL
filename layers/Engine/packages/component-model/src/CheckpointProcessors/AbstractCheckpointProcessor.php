@@ -10,10 +10,12 @@ use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterface
 {
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI
-    ) {
+    protected TranslationAPIInterface $translationAPI;
+    protected HooksAPIInterface $hooksAPI;
+    public function __construct(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->hooksAPI = $hooksAPI;
     }
 
     /**

@@ -39,6 +39,12 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected ?array $safeVars = null;
 
     public const HOOK_SAFEVARS = __CLASS__ . ':safeVars';
+    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ErrorProviderInterface $errorProvider;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -50,13 +56,19 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected MixedScalarTypeResolver $mixedScalarTypeResolver,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected ErrorProviderInterface $errorProvider,
+        MixedScalarTypeResolver $mixedScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        ErrorProviderInterface $errorProvider,
     ) {
+        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->errorProvider = $errorProvider;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

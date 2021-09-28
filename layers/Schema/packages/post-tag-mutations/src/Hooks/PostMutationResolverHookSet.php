@@ -17,15 +17,21 @@ use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected PostTypeAPIInterface $postTypeAPI;
+    protected PostTagTypeMutationAPIInterface $postTagTypeMutationAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected PostTypeAPIInterface $postTypeAPI,
-        protected PostTagTypeMutationAPIInterface $postTagTypeMutationAPI,
+        PostObjectTypeResolver $postObjectTypeResolver,
+        PostTypeAPIInterface $postTypeAPI,
+        PostTagTypeMutationAPIInterface $postTagTypeMutationAPI,
     ) {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->postTypeAPI = $postTypeAPI;
+        $this->postTagTypeMutationAPI = $postTagTypeMutationAPI;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

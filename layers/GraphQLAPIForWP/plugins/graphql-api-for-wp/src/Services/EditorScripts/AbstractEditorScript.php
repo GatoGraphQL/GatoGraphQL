@@ -20,13 +20,15 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 abstract class AbstractEditorScript extends AbstractScript
 {
     use HasDocumentationScriptTrait;
+    protected EditorHelpers $editorHelpers;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         GeneralUtils $generalUtils,
-        protected EditorHelpers $editorHelpers,
+        EditorHelpers $editorHelpers,
     ) {
+        $this->editorHelpers = $editorHelpers;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

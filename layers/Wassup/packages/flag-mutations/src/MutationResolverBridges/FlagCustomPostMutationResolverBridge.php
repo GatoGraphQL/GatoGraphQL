@@ -14,13 +14,15 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 
 class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
+    protected FlagCustomPostMutationResolver $flagCustomPostMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected FlagCustomPostMutationResolver $flagCustomPostMutationResolver,
+        FlagCustomPostMutationResolver $flagCustomPostMutationResolver,
     ) {
+        $this->flagCustomPostMutationResolver = $flagCustomPostMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

@@ -26,6 +26,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT = 'dataload-relationalfields-queryroot';
     public const MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT = 'dataload-relationalfields-mutationroot';
+    protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -40,8 +41,9 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
+        GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ) {
+        $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

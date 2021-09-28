@@ -25,6 +25,9 @@ use PoP\Translation\TranslationAPIInterface;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
+    protected FloatScalarTypeResolver $floatScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,10 +38,13 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected FloatScalarTypeResolver $floatScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected MixedScalarTypeResolver $mixedScalarTypeResolver,
+        FloatScalarTypeResolver $floatScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        MixedScalarTypeResolver $mixedScalarTypeResolver,
     ) {
+        $this->floatScalarTypeResolver = $floatScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

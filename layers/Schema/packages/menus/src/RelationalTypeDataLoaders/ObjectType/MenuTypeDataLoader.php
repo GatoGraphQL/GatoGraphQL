@@ -12,12 +12,14 @@ use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 
 class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
 {
+    protected MenuTypeAPIInterface $menuTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected MenuTypeAPIInterface $menuTypeAPI,
+        MenuTypeAPIInterface $menuTypeAPI,
     ) {
+        $this->menuTypeAPI = $menuTypeAPI;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

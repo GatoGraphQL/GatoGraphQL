@@ -30,6 +30,12 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 
 class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected MediaTypeAPIInterface $mediaTypeAPI;
+    protected DateFormatterInterface $dateFormatter;
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected DateScalarTypeResolver $dateScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -41,13 +47,19 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected MediaTypeAPIInterface $mediaTypeAPI,
-        protected DateFormatterInterface $dateFormatter,
-        protected URLScalarTypeResolver $urlScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected DateScalarTypeResolver $dateScalarTypeResolver,
+        MediaTypeAPIInterface $mediaTypeAPI,
+        DateFormatterInterface $dateFormatter,
+        URLScalarTypeResolver $urlScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        DateScalarTypeResolver $dateScalarTypeResolver,
     ) {
+        $this->mediaTypeAPI = $mediaTypeAPI;
+        $this->dateFormatter = $dateFormatter;
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

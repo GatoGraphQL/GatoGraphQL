@@ -11,8 +11,10 @@ use PoP\Translation\TranslationAPIInterface;
 
 class ErrorProvider implements ErrorProviderInterface
 {
-    public function __construct(protected TranslationAPIInterface $translationAPI)
+    protected TranslationAPIInterface $translationAPI;
+    public function __construct(TranslationAPIInterface $translationAPI)
     {
+        $this->translationAPI = $translationAPI;
     }
 
     /**

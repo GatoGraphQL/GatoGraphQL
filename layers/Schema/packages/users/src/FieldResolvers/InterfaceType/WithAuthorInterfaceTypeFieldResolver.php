@@ -20,6 +20,7 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
+    protected UserObjectTypeResolver $userObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -29,8 +30,9 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected UserObjectTypeResolver $userObjectTypeResolver,
+        UserObjectTypeResolver $userObjectTypeResolver,
     ) {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -20,6 +20,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements EndpointEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
+    protected CustomEndpointBlockCategory $customEndpointBlockCategory;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -27,8 +28,9 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected CustomEndpointBlockCategory $customEndpointBlockCategory,
+        CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
+        $this->customEndpointBlockCategory = $customEndpointBlockCategory;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

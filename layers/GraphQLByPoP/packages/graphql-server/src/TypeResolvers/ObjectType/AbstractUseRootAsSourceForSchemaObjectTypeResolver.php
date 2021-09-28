@@ -25,6 +25,7 @@ use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends AbstractObjectTypeResolver implements UseRootAsSourceForSchemaObjectTypeResolverInterface
 {
+    protected RootObjectTypeResolver $rootObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -37,8 +38,9 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected RootObjectTypeResolver $rootObjectTypeResolver,
+        RootObjectTypeResolver $rootObjectTypeResolver,
     ) {
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

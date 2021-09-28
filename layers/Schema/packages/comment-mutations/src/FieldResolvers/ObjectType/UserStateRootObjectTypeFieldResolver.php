@@ -37,6 +37,9 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 {
     use UserStateObjectTypeFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected CommentObjectTypeResolver $commentObjectTypeResolver;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -49,10 +52,13 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected CommentObjectTypeResolver $commentObjectTypeResolver,
+        CommentTypeAPIInterface $commentTypeAPI,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        CommentObjectTypeResolver $commentObjectTypeResolver,
     ) {
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -8,9 +8,10 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 
 class CMSHelperService implements CMSHelperServiceInterface
 {
-    public function __construct(
-        protected CMSServiceInterface $cmsService
-    ) {
+    protected CMSServiceInterface $cmsService;
+    public function __construct(CMSServiceInterface $cmsService)
+    {
+        $this->cmsService = $cmsService;
     }
 
     public function getLocalURLPath(string $url): string | false

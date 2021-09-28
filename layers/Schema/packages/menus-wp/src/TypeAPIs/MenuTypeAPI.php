@@ -15,10 +15,11 @@ use WP_Term;
 class MenuTypeAPI implements MenuTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
+    protected HooksAPIInterface $hooksAPI;
 
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-    ) {
+    public function __construct(HooksAPIInterface $hooksAPI)
+    {
+        $this->hooksAPI = $hooksAPI;
     }
 
     public function getMenu(string | int $menuID): ?object

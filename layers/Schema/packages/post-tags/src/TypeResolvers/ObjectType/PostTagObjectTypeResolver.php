@@ -23,6 +23,7 @@ use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
 class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 {
     use PostTagAPISatisfiedContractTrait;
+    protected PostTagTypeDataLoader $postTagTypeDataLoader;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -36,8 +37,9 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected PostTagTypeDataLoader $postTagTypeDataLoader,
+        PostTagTypeDataLoader $postTagTypeDataLoader,
     ) {
+        $this->postTagTypeDataLoader = $postTagTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

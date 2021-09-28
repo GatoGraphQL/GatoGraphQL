@@ -23,6 +23,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS = 'accessControlLists';
+    protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -33,8 +34,9 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
         SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,
-        protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
+        GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
     ) {
+        $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

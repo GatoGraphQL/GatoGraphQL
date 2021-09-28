@@ -21,12 +21,14 @@ use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterf
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
+        $this->customPostTypeAPI = $customPostTypeAPI;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

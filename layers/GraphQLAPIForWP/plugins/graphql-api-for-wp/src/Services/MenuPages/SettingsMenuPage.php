@@ -26,13 +26,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     public const SETTINGS_FIELD = 'graphql-api-settings';
 
     protected UserSettingsManagerInterface $userSettingsManager;
+    protected ModuleRegistryInterface $moduleRegistry;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,
-        protected ModuleRegistryInterface $moduleRegistry,
+        ModuleRegistryInterface $moduleRegistry,
     ) {
+        $this->moduleRegistry = $moduleRegistry;
         parent::__construct(
             $instanceManager,
             $menuPageHelper,

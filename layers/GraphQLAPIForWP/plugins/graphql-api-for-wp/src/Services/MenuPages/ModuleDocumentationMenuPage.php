@@ -20,14 +20,18 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected ModulesMenuPage $modulesMenuPage;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected ModulesMenuPage $modulesMenuPage,
+        ModuleRegistryInterface $moduleRegistry,
+        ModulesMenuPage $modulesMenuPage,
     ) {
+        $this->moduleRegistry = $moduleRegistry;
+        $this->modulesMenuPage = $modulesMenuPage;
         parent::__construct(
             $instanceManager,
             $menuPageHelper,

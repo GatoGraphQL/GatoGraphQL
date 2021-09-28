@@ -24,6 +24,7 @@ use PoP\Translation\TranslationAPIInterface;
 
 class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
+    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,8 +35,9 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected MixedScalarTypeResolver $mixedScalarTypeResolver,
+        MixedScalarTypeResolver $mixedScalarTypeResolver,
     ) {
+        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

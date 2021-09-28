@@ -14,12 +14,14 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 
 abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
+    protected ModuleProcessorManagerInterface $moduleProcessorManager;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected ModuleProcessorManagerInterface $moduleProcessorManager,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
     ) {
+        $this->moduleProcessorManager = $moduleProcessorManager;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

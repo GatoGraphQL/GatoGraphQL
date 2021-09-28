@@ -9,10 +9,12 @@ use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractMutationResolver implements MutationResolverInterface
 {
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI
-    ) {
+    protected TranslationAPIInterface $translationAPI;
+    protected HooksAPIInterface $hooksAPI;
+    public function __construct(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->hooksAPI = $hooksAPI;
     }
 
     public function validateErrors(array $form_data): ?array

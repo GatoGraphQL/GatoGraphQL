@@ -16,13 +16,18 @@ use PoP\Hooks\HooksAPIInterface;
  */
 abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInterface
 {
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-        protected InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected TypeRegistryInterface $typeRegistry,
-        protected DirectiveRegistryInterface $directiveRegistry,
-    ) {
+    protected HooksAPIInterface $hooksAPI;
+    protected InstanceManagerInterface $instanceManager;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected TypeRegistryInterface $typeRegistry;
+    protected DirectiveRegistryInterface $directiveRegistry;
+    public function __construct(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry)
+    {
+        $this->hooksAPI = $hooksAPI;
+        $this->instanceManager = $instanceManager;
+        $this->moduleRegistry = $moduleRegistry;
+        $this->typeRegistry = $typeRegistry;
+        $this->directiveRegistry = $directiveRegistry;
     }
 
     /**

@@ -27,6 +27,8 @@ use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST = 'dataload-relationalfields-authorcustompostlist';
+    protected CustomPostObjectTypeResolver $customPostObjectTypeResolver;
+    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -41,9 +43,11 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected CustomPostObjectTypeResolver $customPostObjectTypeResolver,
-        protected ListQueryInputOutputHandler $listQueryInputOutputHandler,
+        CustomPostObjectTypeResolver $customPostObjectTypeResolver,
+        ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
+        $this->customPostObjectTypeResolver = $customPostObjectTypeResolver;
+        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

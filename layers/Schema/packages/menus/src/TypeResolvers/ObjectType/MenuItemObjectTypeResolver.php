@@ -22,6 +22,7 @@ use PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuItemTypeDataLoader;
 
 class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 {
+    protected MenuItemTypeDataLoader $menuItemTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,8 +35,9 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected MenuItemTypeDataLoader $menuItemTypeDataLoader,
+        MenuItemTypeDataLoader $menuItemTypeDataLoader,
     ) {
+        $this->menuItemTypeDataLoader = $menuItemTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

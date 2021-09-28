@@ -22,14 +22,20 @@ use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationR
 class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected CommentTypeMutationAPIInterface $commentTypeMutationAPI;
+    protected UserTypeAPIInterface $userTypeAPI;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected CommentTypeMutationAPIInterface $commentTypeMutationAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
+        CommentTypeAPIInterface $commentTypeAPI,
+        CommentTypeMutationAPIInterface $commentTypeMutationAPI,
+        UserTypeAPIInterface $userTypeAPI,
     ) {
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->commentTypeMutationAPI = $commentTypeMutationAPI;
+        $this->userTypeAPI = $userTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

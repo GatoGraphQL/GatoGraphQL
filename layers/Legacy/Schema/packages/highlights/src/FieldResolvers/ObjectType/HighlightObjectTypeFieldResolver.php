@@ -27,6 +27,8 @@ use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 
 class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,9 +37,11 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected URLScalarTypeResolver $urlScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

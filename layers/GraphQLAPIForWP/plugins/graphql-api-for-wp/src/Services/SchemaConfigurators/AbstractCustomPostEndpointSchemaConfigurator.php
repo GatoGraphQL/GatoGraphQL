@@ -19,13 +19,15 @@ use WP_Post;
 abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
 {
     protected UserSettingsManagerInterface $userSettingsManager;
+    protected EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         BlockHelpers $blockHelpers,
-        protected EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
+        EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
     ) {
+        $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

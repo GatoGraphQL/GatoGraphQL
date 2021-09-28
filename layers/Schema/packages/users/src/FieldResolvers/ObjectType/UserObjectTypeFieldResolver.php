@@ -27,6 +27,11 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected UserTypeAPIInterface $userTypeAPI;
+    protected EmailScalarTypeResolver $emailScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -37,12 +42,17 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected UserTypeAPIInterface $userTypeAPI,
-        protected EmailScalarTypeResolver $emailScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected URLScalarTypeResolver $urlScalarTypeResolver,
-        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
+        UserTypeAPIInterface $userTypeAPI,
+        EmailScalarTypeResolver $emailScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        URLScalarTypeResolver $urlScalarTypeResolver,
+        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
+        $this->userTypeAPI = $userTypeAPI;
+        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -17,12 +17,14 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
  */
 class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 {
+    protected AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,
-        protected AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient,
+        AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient,
     ) {
+        $this->adminGraphiQLWithExplorerClient = $adminGraphiQLWithExplorerClient;
         parent::__construct(
             $instanceManager,
             $menuPageHelper,

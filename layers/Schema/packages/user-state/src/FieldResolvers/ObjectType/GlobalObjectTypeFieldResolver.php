@@ -23,6 +23,7 @@ use PoP\Translation\TranslationAPIInterface;
 
 class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -33,8 +34,9 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

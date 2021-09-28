@@ -16,12 +16,16 @@ use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class LoginMutationResolver extends AbstractMutationResolver
 {
+    protected UserTypeAPIInterface $userTypeAPI;
+    protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
-        protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
+        UserTypeAPIInterface $userTypeAPI,
+        UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
     ) {
+        $this->userTypeAPI = $userTypeAPI;
+        $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

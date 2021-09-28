@@ -12,11 +12,14 @@ use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractFieldResolver implements FieldResolverInterface
 {
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI,
-        protected InstanceManagerInterface $instanceManager,
-    ) {
+    protected TranslationAPIInterface $translationAPI;
+    protected HooksAPIInterface $hooksAPI;
+    protected InstanceManagerInterface $instanceManager;
+    public function __construct(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->hooksAPI = $hooksAPI;
+        $this->instanceManager = $instanceManager;
     }
 
     public function getAdminFieldNames(): array

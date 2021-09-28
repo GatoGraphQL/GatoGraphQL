@@ -10,10 +10,12 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
 {
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-        protected CMSHelperServiceInterface $cmsHelperService,
-    ) {
+    protected HooksAPIInterface $hooksAPI;
+    protected CMSHelperServiceInterface $cmsHelperService;
+    public function __construct(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService)
+    {
+        $this->hooksAPI = $hooksAPI;
+        $this->cmsHelperService = $cmsHelperService;
     }
 
     public function getUserURLPath(string | int | object $userObjectOrID): ?string

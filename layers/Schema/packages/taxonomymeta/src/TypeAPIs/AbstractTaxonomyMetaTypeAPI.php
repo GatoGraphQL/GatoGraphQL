@@ -10,9 +10,10 @@ use PoPSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 
 abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
 {
-    public function __construct(
-        protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
-    ) {
+    protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
+    public function __construct(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    {
+        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }
 
     final public function getTaxonomyTermMeta(string | int $termID, string $key, bool $single = false): mixed

@@ -15,13 +15,15 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
+    protected AboutMenuPage $aboutMenuPage;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,
-        protected AboutMenuPage $aboutMenuPage,
+        AboutMenuPage $aboutMenuPage,
     ) {
+        $this->aboutMenuPage = $aboutMenuPage;
         parent::__construct(
             $instanceManager,
             $menuPageHelper,

@@ -13,12 +13,14 @@ use PoP\Translation\TranslationAPIInterface;
 
 class TemplateHookSet extends AbstractHookSet
 {
+    protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected ApplicationStateHelperServiceInterface $applicationStateHelperService,
+        ApplicationStateHelperServiceInterface $applicationStateHelperService,
     ) {
+        $this->applicationStateHelperService = $applicationStateHelperService;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

@@ -64,6 +64,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @var array<string, array<string, DirectiveResolverInterface>>
      */
     private array $directiveResolverInstanceCache = [];
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected ErrorProviderInterface $errorProvider;
+    protected DataloadingEngineInterface $dataloadingEngine;
+    protected DirectivePipelineServiceInterface $directivePipelineService;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -72,12 +77,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         AttachableExtensionManagerInterface $attachableExtensionManager,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected ErrorProviderInterface $errorProvider,
-        protected DataloadingEngineInterface $dataloadingEngine,
-        protected DirectivePipelineServiceInterface $directivePipelineService,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        ErrorProviderInterface $errorProvider,
+        DataloadingEngineInterface $dataloadingEngine,
+        DirectivePipelineServiceInterface $directivePipelineService,
     ) {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->errorProvider = $errorProvider;
+        $this->dataloadingEngine = $dataloadingEngine;
+        $this->directivePipelineService = $directivePipelineService;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

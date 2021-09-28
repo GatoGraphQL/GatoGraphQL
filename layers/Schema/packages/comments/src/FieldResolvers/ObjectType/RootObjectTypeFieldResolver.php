@@ -38,6 +38,9 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected CommentObjectTypeResolver $commentObjectTypeResolver;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -50,10 +53,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected CommentObjectTypeResolver $commentObjectTypeResolver,
+        CommentTypeAPIInterface $commentTypeAPI,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        CommentObjectTypeResolver $commentObjectTypeResolver,
     ) {
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

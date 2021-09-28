@@ -33,6 +33,9 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+    protected UserTypeAPIInterface $userTypeAPI;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected UserObjectTypeResolver $userObjectTypeResolver;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -45,10 +48,13 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected UserTypeAPIInterface $userTypeAPI,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected UserObjectTypeResolver $userObjectTypeResolver,
+        UserTypeAPIInterface $userTypeAPI,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        UserObjectTypeResolver $userObjectTypeResolver,
     ) {
+        $this->userTypeAPI = $userTypeAPI;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

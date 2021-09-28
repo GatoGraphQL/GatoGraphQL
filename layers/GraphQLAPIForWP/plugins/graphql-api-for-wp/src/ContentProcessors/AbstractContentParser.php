@@ -18,17 +18,21 @@ abstract class AbstractContentParser implements ContentParserInterface
 
     protected string $baseDir = '';
     protected string $baseURL = '';
+    protected RequestHelperServiceInterface $requestHelperService;
+    protected LocaleHelper $localeHelper;
 
     /**
      * @param string|null $baseDir Where to look for the documentation
      * @param string|null $baseURL URL for the documentation
      */
     public function __construct(
-        protected RequestHelperServiceInterface $requestHelperService,
-        protected LocaleHelper $localeHelper,
+        RequestHelperServiceInterface $requestHelperService,
+        LocaleHelper $localeHelper,
         ?string $baseDir = null,
         ?string $baseURL = null,
     ) {
+        $this->requestHelperService = $requestHelperService;
+        $this->localeHelper = $localeHelper;
         $this->setBaseDir($baseDir);
         $this->setBaseURL($baseURL);
     }

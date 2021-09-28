@@ -12,12 +12,14 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDa
 
 class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
+    protected MutationRoot $mutationRoot;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected MutationRoot $mutationRoot,
+        MutationRoot $mutationRoot,
     ) {
+        $this->mutationRoot = $mutationRoot;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

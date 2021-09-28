@@ -24,6 +24,7 @@ use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use RolesObjectTypeFieldResolverTrait;
+    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -35,8 +36,9 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected UserRoleTypeAPIInterface $userRoleTypeAPI,
+        UserRoleTypeAPIInterface $userRoleTypeAPI,
     ) {
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

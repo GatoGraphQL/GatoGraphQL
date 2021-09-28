@@ -29,6 +29,10 @@ use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected MediaObjectTypeResolver $mediaTypeResolver;
+    protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
+    protected SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver;
+    protected RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -40,11 +44,15 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected MediaObjectTypeResolver $mediaTypeResolver,
-        protected CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        protected SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver,
-        protected RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver,
+        MediaObjectTypeResolver $mediaTypeResolver,
+        CustomPostUnionTypeResolver $customPostUnionTypeResolver,
+        SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver,
+        RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver,
     ) {
+        $this->mediaTypeResolver = $mediaTypeResolver;
+        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
+        $this->setFeaturedImageOnCustomPostMutationResolver = $setFeaturedImageOnCustomPostMutationResolver;
+        $this->removeFeaturedImageOnCustomPostMutationResolver = $removeFeaturedImageOnCustomPostMutationResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

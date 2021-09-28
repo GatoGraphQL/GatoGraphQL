@@ -22,6 +22,7 @@ use PoPSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType\UserAvatarTypeDat
 
 class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {
+    protected UserAvatarTypeDataLoader $userAvatarTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,8 +35,9 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
+        UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
     ) {
+        $this->userAvatarTypeDataLoader = $userAvatarTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -16,14 +16,18 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
 {
+    protected AccessControlBlock $accessControlBlock;
+    protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         CPTUtils $cptUtils,
-        protected AccessControlBlock $accessControlBlock,
-        protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
+        AccessControlBlock $accessControlBlock,
+        AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
     ) {
+        $this->accessControlBlock = $accessControlBlock;
+        $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

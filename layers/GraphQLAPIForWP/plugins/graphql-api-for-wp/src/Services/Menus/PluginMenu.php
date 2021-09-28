@@ -12,10 +12,12 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
  */
 class PluginMenu extends AbstractMenu
 {
+    protected UserAuthorizationInterface $userAuthorization;
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        protected UserAuthorizationInterface $userAuthorization
+        UserAuthorizationInterface $userAuthorization
     ) {
+        $this->userAuthorization = $userAuthorization;
         parent::__construct(
             $instanceManager,
         );

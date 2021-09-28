@@ -34,6 +34,9 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected PageObjectTypeResolver $pageObjectTypeResolver;
+    protected PageTypeAPIInterface $pageTypeAPI;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -46,10 +49,13 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected PageObjectTypeResolver $pageObjectTypeResolver,
-        protected PageTypeAPIInterface $pageTypeAPI,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        PageObjectTypeResolver $pageObjectTypeResolver,
+        PageTypeAPIInterface $pageTypeAPI,
     ) {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
+        $this->pageTypeAPI = $pageTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

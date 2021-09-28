@@ -11,9 +11,10 @@ use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 
 abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    public function __construct(
-        protected HighlightObjectTypeResolver $highlightObjectTypeResolver,
-    ) {        
+    protected HighlightObjectTypeResolver $highlightObjectTypeResolver;
+    public function __construct(HighlightObjectTypeResolver $highlightObjectTypeResolver)
+    {
+        $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;
     }
     
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

@@ -22,13 +22,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * set this var to `true` to stop loading it and show an error message.
      */
     protected ?Exception $inititalizationException = null;
+    protected AbstractMainPluginConfiguration $pluginConfiguration;
 
     public function __construct(
         string $pluginFile, /** The main plugin file */
         string $pluginVersion,
         ?string $pluginName = null,
-        protected AbstractMainPluginConfiguration $pluginConfiguration,
+        AbstractMainPluginConfiguration $pluginConfiguration,
     ) {
+        $this->pluginConfiguration = $pluginConfiguration;
         parent::__construct(
             $pluginFile,
             $pluginVersion,

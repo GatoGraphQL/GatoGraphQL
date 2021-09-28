@@ -36,6 +36,9 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+    protected MediaTypeAPIInterface $mediaTypeAPI;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected MediaObjectTypeResolver $mediaObjectTypeResolver;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -48,10 +51,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected MediaTypeAPIInterface $mediaTypeAPI,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected MediaObjectTypeResolver $mediaObjectTypeResolver,
+        MediaTypeAPIInterface $mediaTypeAPI,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        MediaObjectTypeResolver $mediaObjectTypeResolver,
     ) {
+        $this->mediaTypeAPI = $mediaTypeAPI;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

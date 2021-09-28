@@ -15,10 +15,12 @@ use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
  */
 class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected ErrorHelperInterface $errorHelper,
-    ) {
+    protected TranslationAPIInterface $translationAPI;
+    protected ErrorHelperInterface $errorHelper;
+    public function __construct(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->errorHelper = $errorHelper;
     }
 
     /**

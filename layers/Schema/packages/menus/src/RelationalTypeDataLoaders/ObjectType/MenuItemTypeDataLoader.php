@@ -12,12 +12,14 @@ use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 
 class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
 {
+    protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
+        MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
     ) {
+        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

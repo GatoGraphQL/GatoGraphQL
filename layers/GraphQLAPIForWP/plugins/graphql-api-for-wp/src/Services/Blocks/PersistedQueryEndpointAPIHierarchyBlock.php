@@ -25,6 +25,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
     use OptionsBlockTrait;
 
     public const ATTRIBUTE_NAME_INHERIT_QUERY = 'inheritQuery';
+    protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -32,8 +33,9 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
+        PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {
+        $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

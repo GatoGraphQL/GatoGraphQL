@@ -15,10 +15,11 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
      * Can't use autowiring or it produces a circular reference exception
      */
     protected ?AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver = null;
+    protected InstanceManagerInterface $instanceManager;
 
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-    ) {
+    public function __construct(InstanceManagerInterface $instanceManager)
+    {
+        $this->instanceManager = $instanceManager;
     }
 
     public function getTypeSchemaKey(TypeResolverInterface $typeResolver): string

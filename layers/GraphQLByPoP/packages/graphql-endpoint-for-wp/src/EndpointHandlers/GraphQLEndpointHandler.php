@@ -13,9 +13,10 @@ use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
 {
-    public function __construct(
-        protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
-    ) {
+    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
+    public function __construct(GraphQLDataStructureFormatter $graphQLDataStructureFormatter)
+    {
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
     }
     /**
      * Initialize the endpoints

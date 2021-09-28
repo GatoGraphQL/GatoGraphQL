@@ -17,12 +17,16 @@ use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtil
 
 class LostPasswordMutationResolver extends AbstractMutationResolver
 {
+    protected UserTypeAPIInterface $userTypeAPI;
+    protected CMSServiceInterface $cmsService;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
-        protected CMSServiceInterface $cmsService,
+        UserTypeAPIInterface $userTypeAPI,
+        CMSServiceInterface $cmsService,
     ) {
+        $this->userTypeAPI = $userTypeAPI;
+        $this->cmsService = $cmsService;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

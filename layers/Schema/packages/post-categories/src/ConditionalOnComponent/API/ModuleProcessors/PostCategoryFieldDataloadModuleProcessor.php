@@ -23,6 +23,7 @@ use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeReso
 
 class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {
+    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -37,8 +38,9 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
-        protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
+        PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ) {
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

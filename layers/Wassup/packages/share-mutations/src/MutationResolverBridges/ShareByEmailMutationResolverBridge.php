@@ -14,13 +14,15 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 
 class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
+    protected ShareByEmailMutationResolver $shareByEmailMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected ShareByEmailMutationResolver $shareByEmailMutationResolver,
+        ShareByEmailMutationResolver $shareByEmailMutationResolver,
     ) {
+        $this->shareByEmailMutationResolver = $shareByEmailMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

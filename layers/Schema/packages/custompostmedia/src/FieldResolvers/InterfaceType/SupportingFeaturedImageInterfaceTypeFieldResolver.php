@@ -23,6 +23,9 @@ use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 
 class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected MediaObjectTypeResolver $mediaObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -32,10 +35,13 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected IDScalarTypeResolver $idScalarTypeResolver,
-        protected MediaObjectTypeResolver $mediaObjectTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
+        MediaObjectTypeResolver $mediaObjectTypeResolver,
     ) {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

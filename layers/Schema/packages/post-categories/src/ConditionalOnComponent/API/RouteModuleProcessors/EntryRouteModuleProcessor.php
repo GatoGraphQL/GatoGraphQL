@@ -18,10 +18,12 @@ use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
+    protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
-        protected PostCategoryTypeAPIInterface $postCategoryTypeAPI,
+        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
+        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
         parent::__construct(
             $hooksAPI,
         );

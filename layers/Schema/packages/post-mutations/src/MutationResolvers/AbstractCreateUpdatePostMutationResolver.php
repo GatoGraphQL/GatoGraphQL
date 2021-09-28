@@ -16,6 +16,7 @@ use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 
 abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
+    protected PostTypeAPIInterface $postTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -24,8 +25,9 @@ abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUp
         UserRoleTypeAPIInterface $userRoleTypeAPI,
         CustomPostTypeAPIInterface $customPostTypeAPI,
         CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
-        protected PostTypeAPIInterface $postTypeAPI,
+        PostTypeAPIInterface $postTypeAPI,
     ) {
+        $this->postTypeAPI = $postTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

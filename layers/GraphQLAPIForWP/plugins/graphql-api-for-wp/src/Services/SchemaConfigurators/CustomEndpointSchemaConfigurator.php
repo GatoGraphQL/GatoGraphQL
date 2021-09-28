@@ -14,13 +14,15 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaConfigurator
 {
+    protected EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         BlockHelpers $blockHelpers,
         EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
-        protected EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
+        EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
     ) {
+        $this->endpointSchemaConfigurationExecuterRegistry = $endpointSchemaConfigurationExecuterRegistry;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

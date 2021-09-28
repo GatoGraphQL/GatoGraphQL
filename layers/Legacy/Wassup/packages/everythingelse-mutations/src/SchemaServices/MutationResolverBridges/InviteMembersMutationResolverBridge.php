@@ -13,13 +13,15 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Invi
 
 class InviteMembersMutationResolverBridge extends AbstractEmailInviteMutationResolverBridge
 {
+    protected InviteMembersMutationResolver $inviteMembersMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected InviteMembersMutationResolver $inviteMembersMutationResolver,
+        InviteMembersMutationResolver $inviteMembersMutationResolver,
     ) {
+        $this->inviteMembersMutationResolver = $inviteMembersMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

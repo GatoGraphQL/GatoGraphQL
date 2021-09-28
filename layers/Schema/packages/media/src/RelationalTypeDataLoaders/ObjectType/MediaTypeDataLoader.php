@@ -15,13 +15,15 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    protected MediaTypeAPIInterface $mediaTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected MediaTypeAPIInterface $mediaTypeAPI,
+        MediaTypeAPIInterface $mediaTypeAPI,
     ) {
+        $this->mediaTypeAPI = $mediaTypeAPI;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

@@ -15,12 +15,16 @@ use WP_Post;
 
 abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator implements ClientEndpointAnnotatorInterface
 {
+    protected BlockHelpers $blockHelpers;
+    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
-        protected BlockHelpers $blockHelpers,
-        protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+        BlockHelpers $blockHelpers,
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
+        $this->blockHelpers = $blockHelpers;
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

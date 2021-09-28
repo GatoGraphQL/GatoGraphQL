@@ -15,13 +15,15 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 
 class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    protected SettingsMutationResolver $settingsMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected SettingsMutationResolver $settingsMutationResolver,
+        SettingsMutationResolver $settingsMutationResolver,
     ) {
+        $this->settingsMutationResolver = $settingsMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

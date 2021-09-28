@@ -15,13 +15,15 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\File
 
 class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    protected FileUploadPictureMutationResolver $fileUploadPictureMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected FileUploadPictureMutationResolver $fileUploadPictureMutationResolver,
+        FileUploadPictureMutationResolver $fileUploadPictureMutationResolver,
     ) {
+        $this->fileUploadPictureMutationResolver = $fileUploadPictureMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

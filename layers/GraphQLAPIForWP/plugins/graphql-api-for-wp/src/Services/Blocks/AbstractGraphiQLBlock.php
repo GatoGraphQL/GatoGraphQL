@@ -24,6 +24,8 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     public const ATTRIBUTE_NAME_QUERY = 'query';
     public const ATTRIBUTE_NAME_VARIABLES = 'variables';
+    protected EndpointHelpers $endpointHelpers;
+    protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -31,9 +33,11 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected EndpointHelpers $endpointHelpers,
-        protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
+        EndpointHelpers $endpointHelpers,
+        PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {
+        $this->endpointHelpers = $endpointHelpers;
+        $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

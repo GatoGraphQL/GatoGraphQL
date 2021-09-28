@@ -14,13 +14,15 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 
 class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
+    protected SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver,
+        SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver,
     ) {
+        $this->saveDefinitionFileMutationResolver = $saveDefinitionFileMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

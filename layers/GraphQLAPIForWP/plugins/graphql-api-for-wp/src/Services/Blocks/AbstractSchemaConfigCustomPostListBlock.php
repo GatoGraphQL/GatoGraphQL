@@ -16,6 +16,8 @@ use WP_Post;
 
 abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaConfigBlock
 {
+    protected BlockRenderingHelpers $blockRenderingHelpers;
+    protected CPTUtils $cptUtils;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
@@ -23,9 +25,11 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
         SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
-        protected BlockRenderingHelpers $blockRenderingHelpers,
-        protected CPTUtils $cptUtils,
+        BlockRenderingHelpers $blockRenderingHelpers,
+        CPTUtils $cptUtils,
     ) {
+        $this->blockRenderingHelpers = $blockRenderingHelpers;
+        $this->cptUtils = $cptUtils;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

@@ -22,6 +22,8 @@ use PoPSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoade
 
 class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 {
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected CommentTypeDataLoader $commentTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,9 +36,11 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected CommentTypeDataLoader $commentTypeDataLoader,
+        CommentTypeAPIInterface $commentTypeAPI,
+        CommentTypeDataLoader $commentTypeDataLoader,
     ) {
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->commentTypeDataLoader = $commentTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

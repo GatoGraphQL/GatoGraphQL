@@ -13,12 +13,14 @@ use PoP\LooseContracts\NameResolverInterface;
 
 class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoader
 {
+    protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
+        SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ) {
+        $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

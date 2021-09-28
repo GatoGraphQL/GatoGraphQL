@@ -31,17 +31,27 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      * @var InterfaceTypeResolverInterface[]|null
      */
     protected ?array $partiallyImplementedInterfaceTypeResolvers = null;
+    protected NameResolverInterface $nameResolver;
+    protected CMSServiceInterface $cmsService;
+    protected SchemaNamespacingServiceInterface $schemaNamespacingService;
+    protected TypeRegistryInterface $typeRegistry;
+    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
-        protected NameResolverInterface $nameResolver,
-        protected CMSServiceInterface $cmsService,
-        protected SchemaNamespacingServiceInterface $schemaNamespacingService,
-        protected TypeRegistryInterface $typeRegistry,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
+        TypeRegistryInterface $typeRegistry,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
+        $this->nameResolver = $nameResolver;
+        $this->cmsService = $cmsService;
+        $this->schemaNamespacingService = $schemaNamespacingService;
+        $this->typeRegistry = $typeRegistry;
+        $this->schemaDefinitionService = $schemaDefinitionService;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

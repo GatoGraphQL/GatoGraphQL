@@ -8,9 +8,10 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 
 abstract class AbstractModuleFilter implements ModuleFilterInterface
 {
-    public function __construct(
-        protected ModuleProcessorManagerInterface $moduleProcessorManager,
-    ) {
+    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    public function __construct(ModuleProcessorManagerInterface $moduleProcessorManager)
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
     }
 
     public function excludeModule(array $module, array &$props): bool

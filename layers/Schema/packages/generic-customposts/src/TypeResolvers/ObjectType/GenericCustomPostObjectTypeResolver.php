@@ -22,6 +22,7 @@ use PoPSchema\GenericCustomPosts\RelationalTypeDataLoaders\ObjectType\GenericCus
 
 class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
+    protected GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,8 +36,9 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader,
+        GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader,
     ) {
+        $this->genericCustomPostTypeDataLoader = $genericCustomPostTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

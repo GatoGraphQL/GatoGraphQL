@@ -8,9 +8,10 @@ use PoP\Hooks\HooksAPIInterface;
 
 abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
 {
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI
-    ) {
+    protected HooksAPIInterface $hooksAPI;
+    public function __construct(HooksAPIInterface $hooksAPI)
+    {
+        $this->hooksAPI = $hooksAPI;
     }
 
     public function getTheUserRole(string | int | object $userObjectOrID): ?string

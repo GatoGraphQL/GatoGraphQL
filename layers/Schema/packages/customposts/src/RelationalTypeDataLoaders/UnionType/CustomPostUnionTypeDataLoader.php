@@ -13,12 +13,14 @@ use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 
 class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
+    protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected CustomPostUnionTypeResolver $customPostUnionTypeResolver,
+        CustomPostUnionTypeResolver $customPostUnionTypeResolver,
     ) {
+        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

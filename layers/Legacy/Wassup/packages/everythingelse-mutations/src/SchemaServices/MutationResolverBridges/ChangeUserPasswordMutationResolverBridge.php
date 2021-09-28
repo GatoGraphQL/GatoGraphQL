@@ -15,13 +15,15 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Chan
 
 class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    protected ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver,
+        ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver,
     ) {
+        $this->changeUserPasswordMutationResolver = $changeUserPasswordMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

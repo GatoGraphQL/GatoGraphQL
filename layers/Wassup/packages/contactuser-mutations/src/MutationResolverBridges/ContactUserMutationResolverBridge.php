@@ -14,13 +14,15 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 
 class ContactUserMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
+    protected ContactUserMutationResolver $contactUserMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected ContactUserMutationResolver $contactUserMutationResolver,
+        ContactUserMutationResolver $contactUserMutationResolver,
     ) {
+        $this->contactUserMutationResolver = $contactUserMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

@@ -28,6 +28,9 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected HighlightObjectTypeResolver $highlightObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -36,10 +39,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected HighlightObjectTypeResolver $highlightObjectTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        HighlightObjectTypeResolver $highlightObjectTypeResolver,
     ) {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

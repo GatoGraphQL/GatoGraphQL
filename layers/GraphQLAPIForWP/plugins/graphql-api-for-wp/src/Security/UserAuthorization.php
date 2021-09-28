@@ -13,9 +13,10 @@ use InvalidArgumentException;
  */
 class UserAuthorization implements UserAuthorizationInterface
 {
-    public function __construct(
-        protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry
-    ) {
+    protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry;
+    public function __construct(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry)
+    {
+        $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;
     }
     /**
      * The capability needed to access the schema editor (i.e. access clients GraphiQL/Voyager

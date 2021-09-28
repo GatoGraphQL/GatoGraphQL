@@ -14,13 +14,15 @@ use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterSubscriptionM
 
 class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
+    protected NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver,
+        NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver,
     ) {
+        $this->newsletterSubscriptionMutationResolver = $newsletterSubscriptionMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

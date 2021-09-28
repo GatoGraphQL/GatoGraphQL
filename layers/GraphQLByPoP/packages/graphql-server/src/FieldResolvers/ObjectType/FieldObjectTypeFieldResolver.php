@@ -27,6 +27,11 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
+    protected TypeObjectTypeResolver $typeObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -37,12 +42,17 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
-        protected InputValueObjectTypeResolver $inputValueObjectTypeResolver,
-        protected TypeObjectTypeResolver $typeObjectTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        InputValueObjectTypeResolver $inputValueObjectTypeResolver,
+        TypeObjectTypeResolver $typeObjectTypeResolver,
     ) {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

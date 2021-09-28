@@ -46,6 +46,17 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected EmailScalarTypeResolver $emailScalarTypeResolver;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected CommentObjectTypeResolver $commentObjectTypeResolver;
+    protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver;
+    protected DateFormatterInterface $dateFormatter;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -58,18 +69,29 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected URLScalarTypeResolver $urlScalarTypeResolver,
-        protected EmailScalarTypeResolver $emailScalarTypeResolver,
-        protected IDScalarTypeResolver $idScalarTypeResolver,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected DateScalarTypeResolver $dateScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected CommentObjectTypeResolver $commentObjectTypeResolver,
-        protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
-        protected DateFormatterInterface $dateFormatter,
+        CommentTypeAPIInterface $commentTypeAPI,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        URLScalarTypeResolver $urlScalarTypeResolver,
+        EmailScalarTypeResolver $emailScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        DateScalarTypeResolver $dateScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        CommentObjectTypeResolver $commentObjectTypeResolver,
+        CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
+        DateFormatterInterface $dateFormatter,
     ) {
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
+        $this->dateFormatter = $dateFormatter;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

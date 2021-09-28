@@ -29,6 +29,9 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT = 0;
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE = -1;
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT = -2;
+    protected BlockRenderingHelpers $blockRenderingHelpers;
+    protected CPTUtils $cptUtils;
+    protected EndpointBlockCategory $endpointBlockCategory;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -36,10 +39,13 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected BlockRenderingHelpers $blockRenderingHelpers,
-        protected CPTUtils $cptUtils,
-        protected EndpointBlockCategory $endpointBlockCategory,
+        BlockRenderingHelpers $blockRenderingHelpers,
+        CPTUtils $cptUtils,
+        EndpointBlockCategory $endpointBlockCategory,
     ) {
+        $this->blockRenderingHelpers = $blockRenderingHelpers;
+        $this->cptUtils = $cptUtils;
+        $this->endpointBlockCategory = $endpointBlockCategory;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

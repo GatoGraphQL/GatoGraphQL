@@ -23,6 +23,10 @@ use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeF
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected DateFormatterInterface $dateFormatter;
+    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
+    protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -33,11 +37,15 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected DateFormatterInterface $dateFormatter,
-        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-        protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
+        DateFormatterInterface $dateFormatter,
+        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
+        IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver,
     ) {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+        $this->dateFormatter = $dateFormatter;
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+        $this->isCustomPostInterfaceTypeFieldResolver = $isCustomPostInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

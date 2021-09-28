@@ -16,13 +16,15 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Upda
 
 class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    protected UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver,
+        UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver,
     ) {
+        $this->updateMyCommunitiesMutationResolver = $updateMyCommunitiesMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

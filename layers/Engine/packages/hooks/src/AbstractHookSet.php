@@ -11,11 +11,14 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractHookSet extends AbstractAutomaticallyInstantiatedService
 {
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-        protected TranslationAPIInterface $translationAPI,
-        protected InstanceManagerInterface $instanceManager,
-    ) {
+    protected HooksAPIInterface $hooksAPI;
+    protected TranslationAPIInterface $translationAPI;
+    protected InstanceManagerInterface $instanceManager;
+    public function __construct(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager)
+    {
+        $this->hooksAPI = $hooksAPI;
+        $this->translationAPI = $translationAPI;
+        $this->instanceManager = $instanceManager;
     }
 
     final public function initialize(): void

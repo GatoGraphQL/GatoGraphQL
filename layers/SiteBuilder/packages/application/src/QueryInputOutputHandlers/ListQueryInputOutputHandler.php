@@ -15,9 +15,10 @@ use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler
 {
-    public function __construct(
-        protected CMSServiceInterface $cmsService,
-    ) {
+    protected CMSServiceInterface $cmsService;
+    public function __construct(CMSServiceInterface $cmsService)
+    {
+        $this->cmsService = $cmsService;
     }
 
     protected function getLimit()

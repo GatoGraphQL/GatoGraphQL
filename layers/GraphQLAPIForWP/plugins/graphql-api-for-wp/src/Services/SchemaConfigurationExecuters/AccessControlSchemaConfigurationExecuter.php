@@ -13,12 +13,14 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
+    protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         BlockHelpers $blockHelpers,
-        protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
+        AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
     ) {
+        $this->accessControlGraphQLQueryConfigurator = $accessControlGraphQLQueryConfigurator;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

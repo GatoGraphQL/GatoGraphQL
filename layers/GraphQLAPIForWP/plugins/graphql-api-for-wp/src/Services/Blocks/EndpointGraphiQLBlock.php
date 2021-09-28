@@ -19,6 +19,7 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
 {
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
+    protected CustomEndpointBlockCategory $customEndpointBlockCategory;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -26,8 +27,9 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected CustomEndpointBlockCategory $customEndpointBlockCategory,
+        CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
+        $this->customEndpointBlockCategory = $customEndpointBlockCategory;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

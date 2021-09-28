@@ -30,6 +30,8 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     use QueriedDBObjectModuleProcessorTrait;
 
     public const MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST = 'dataload-relationalfields-tagpostlist';
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -44,9 +46,11 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected ListQueryInputOutputHandler $listQueryInputOutputHandler,
+        PostObjectTypeResolver $postObjectTypeResolver,
+        ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

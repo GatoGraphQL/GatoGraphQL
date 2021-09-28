@@ -11,11 +11,13 @@ use PoP\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
+    protected EngineInterface $engine;
     public function __construct(
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected EngineInterface $engine,
+        EngineInterface $engine,
     ) {
+        $this->engine = $engine;
         parent::__construct(
             $feedbackMessageStore,
             $fieldQueryInterpreter,

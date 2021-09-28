@@ -18,12 +18,16 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     use EndpointResolverTrait {
         EndpointResolverTrait::executeGraphQLQuery as upstreamExecuteGraphQLQuery;
     }
+    protected UserAuthorizationInterface $userAuthorization;
+    protected QueryRetrieverInterface $queryRetrieverInterface;
 
     public function __construct(
         EndpointHelpers $endpointHelpers,
-        protected UserAuthorizationInterface $userAuthorization,
-        protected QueryRetrieverInterface $queryRetrieverInterface,
+        UserAuthorizationInterface $userAuthorization,
+        QueryRetrieverInterface $queryRetrieverInterface,
     ) {
+        $this->userAuthorization = $userAuthorization;
+        $this->queryRetrieverInterface = $queryRetrieverInterface;
         parent::__construct($endpointHelpers);
     }
 

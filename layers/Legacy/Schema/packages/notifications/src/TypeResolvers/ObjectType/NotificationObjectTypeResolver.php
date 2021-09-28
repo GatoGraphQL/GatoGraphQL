@@ -18,6 +18,7 @@ use PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType\NotificationTyp
 
 class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 {
+    protected NotificationTypeDataLoader $notificationTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -27,8 +28,9 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
-        protected NotificationTypeDataLoader $notificationTypeDataLoader,
+        NotificationTypeDataLoader $notificationTypeDataLoader,
     ) {
+        $this->notificationTypeDataLoader = $notificationTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

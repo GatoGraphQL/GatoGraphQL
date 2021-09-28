@@ -20,6 +20,7 @@ use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 
 abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeResolver implements CustomPostObjectTypeResolverInterface
 {
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -32,8 +33,9 @@ abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeRe
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
+        $this->customPostTypeAPI = $customPostTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

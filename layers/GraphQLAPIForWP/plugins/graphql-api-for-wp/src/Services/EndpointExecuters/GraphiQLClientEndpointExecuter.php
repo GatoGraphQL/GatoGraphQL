@@ -16,13 +16,17 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
+    protected CustomEndpointGraphiQLClient $customEndpointGraphiQLClient;
+    protected GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        protected CustomEndpointGraphiQLClient $customEndpointGraphiQLClient,
-        protected GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator,
+        CustomEndpointGraphiQLClient $customEndpointGraphiQLClient,
+        GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator,
     ) {
+        $this->customEndpointGraphiQLClient = $customEndpointGraphiQLClient;
+        $this->graphiQLClientEndpointAnnotator = $graphiQLClientEndpointAnnotator;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

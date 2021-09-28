@@ -27,6 +27,8 @@ use PoP\Translation\TranslationAPIInterface;
 
 class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterface
 {
+    protected LooseContractManagerInterface $looseContractManager;
+    protected CacheControlEngineInterface $cacheControlEngine;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -43,10 +45,12 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
         DataloadHelperServiceInterface $dataloadHelperService,
         EntryModuleManagerInterface $entryModuleManager,
         RequestHelperServiceInterface $requestHelperService,
-        protected LooseContractManagerInterface $looseContractManager,
-        protected CacheControlEngineInterface $cacheControlEngine,
+        LooseContractManagerInterface $looseContractManager,
+        CacheControlEngineInterface $cacheControlEngine,
         ?CacheInterface $persistentCache = null
     ) {
+        $this->looseContractManager = $looseContractManager;
+        $this->cacheControlEngine = $cacheControlEngine;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

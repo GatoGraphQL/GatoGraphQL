@@ -32,6 +32,7 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
     use FormMultipleInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
+    protected FormInputHelperServiceInterface $formInputHelperService;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -46,8 +47,9 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected FormInputHelperServiceInterface $formInputHelperService,
+        FormInputHelperServiceInterface $formInputHelperService,
     ) {
+        $this->formInputHelperService = $formInputHelperService;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

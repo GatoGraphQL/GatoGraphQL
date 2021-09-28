@@ -16,12 +16,16 @@ use PoP\Translation\TranslationAPIInterface;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
 {
-    public function __construct(
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected TranslationAPIInterface $translationAPI,
-        protected ModuleProcessorManagerInterface $moduleProcessorManager,
-    ) {
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected TranslationAPIInterface $translationAPI;
+    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    public function __construct(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, TranslationAPIInterface $translationAPI, ModuleProcessorManagerInterface $moduleProcessorManager)
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->translationAPI = $translationAPI;
+        $this->moduleProcessorManager = $moduleProcessorManager;
     }
 
     /**

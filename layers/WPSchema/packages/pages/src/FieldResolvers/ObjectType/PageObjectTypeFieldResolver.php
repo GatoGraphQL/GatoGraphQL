@@ -25,6 +25,7 @@ use WP_Post;
 
 class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected IntScalarTypeResolver $intScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -36,8 +37,9 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
     ) {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

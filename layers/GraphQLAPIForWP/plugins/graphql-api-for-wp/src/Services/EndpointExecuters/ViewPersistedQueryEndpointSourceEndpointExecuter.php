@@ -17,15 +17,25 @@ use WP_Post;
 
 class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourceEndpointExecuter implements PersistedQueryEndpointExecuterServiceTagInterface
 {
+    protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
+    protected UserAuthorizationInterface $userAuthorization;
+    protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers;
+    protected PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor;
+    protected PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
-        protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
-        protected UserAuthorizationInterface $userAuthorization,
-        protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
-        protected PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor,
-        protected PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock,
+        GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
+        UserAuthorizationInterface $userAuthorization,
+        GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
+        PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor,
+        PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock,
     ) {
+        $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
+        $this->userAuthorization = $userAuthorization;
+        $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
+        $this->persistedQueryEndpointAPIHierarchyBlockAccessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
+        $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

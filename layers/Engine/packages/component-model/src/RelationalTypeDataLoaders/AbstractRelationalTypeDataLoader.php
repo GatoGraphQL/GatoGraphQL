@@ -10,10 +10,13 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoaderInterface
 {
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-        protected InstanceManagerInterface $instanceManager,
-        protected NameResolverInterface $nameResolver,
-    ) {
+    protected HooksAPIInterface $hooksAPI;
+    protected InstanceManagerInterface $instanceManager;
+    protected NameResolverInterface $nameResolver;
+    public function __construct(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, NameResolverInterface $nameResolver)
+    {
+        $this->hooksAPI = $hooksAPI;
+        $this->instanceManager = $instanceManager;
+        $this->nameResolver = $nameResolver;
     }
 }

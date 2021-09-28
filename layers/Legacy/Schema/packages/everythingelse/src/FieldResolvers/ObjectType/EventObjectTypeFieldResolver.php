@@ -25,6 +25,9 @@ use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 
 class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected LocationObjectTypeResolver $locationObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -33,10 +36,13 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
-        protected LocationObjectTypeResolver $locationObjectTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->locationObjectTypeResolver = $locationObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

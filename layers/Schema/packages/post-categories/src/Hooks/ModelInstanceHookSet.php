@@ -17,14 +17,18 @@ use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 class ModelInstanceHookSet extends AbstractHookSet
 {
     public const HOOK_VARY_MODEL_INSTANCE_BY_CATEGORY = __CLASS__ . ':vary-model-instance-by-category';
+    protected PostTypeAPIInterface $postTypeAPI;
+    protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected PostTypeAPIInterface $postTypeAPI,
-        protected PostCategoryTypeAPIInterface $postCategoryTypeAPI,
+        PostTypeAPIInterface $postTypeAPI,
+        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
+        $this->postTypeAPI = $postTypeAPI;
+        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

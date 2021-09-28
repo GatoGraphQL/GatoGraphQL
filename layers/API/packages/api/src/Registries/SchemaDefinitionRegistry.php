@@ -22,15 +22,27 @@ use PoP\Translation\TranslationAPIInterface;
 class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
 {
     protected CacheInterface $persistentCache;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected TranslationAPIInterface $translationAPI;
+    protected InstanceManagerInterface $instanceManager;
+    protected RootObjectTypeResolver $rootTypeResolver;
+    protected Root $root;
 
     public function __construct(
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected TranslationAPIInterface $translationAPI,
-        protected InstanceManagerInterface $instanceManager,
-        protected RootObjectTypeResolver $rootTypeResolver,
-        protected Root $root,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        RootObjectTypeResolver $rootTypeResolver,
+        Root $root,
     ) {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->translationAPI = $translationAPI;
+        $this->instanceManager = $instanceManager;
+        $this->rootTypeResolver = $rootTypeResolver;
+        $this->root = $root;
         $this->persistentCache = PersistentCacheFacade::getInstance();
     }
 

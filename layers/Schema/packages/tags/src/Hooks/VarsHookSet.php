@@ -13,12 +13,14 @@ use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 
 class VarsHookSet extends AbstractHookSet
 {
+    protected TaxonomyTypeAPIInterface $taxonomyTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected TaxonomyTypeAPIInterface $taxonomyTypeAPI,
+        TaxonomyTypeAPIInterface $taxonomyTypeAPI,
     ) {
+        $this->taxonomyTypeAPI = $taxonomyTypeAPI;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

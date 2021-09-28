@@ -11,11 +11,13 @@ use PoPSchema\Posts\Constants\InputNames;
 
 class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
+        $this->customPostTypeAPI = $customPostTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

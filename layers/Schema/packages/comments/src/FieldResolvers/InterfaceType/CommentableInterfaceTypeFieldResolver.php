@@ -29,6 +29,9 @@ use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected CommentObjectTypeResolver $commentObjectTypeResolver;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -39,10 +42,13 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected CommentObjectTypeResolver $commentObjectTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        CommentObjectTypeResolver $commentObjectTypeResolver,
     ) {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

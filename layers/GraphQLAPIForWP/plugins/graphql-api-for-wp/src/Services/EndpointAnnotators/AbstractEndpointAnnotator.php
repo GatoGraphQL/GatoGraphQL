@@ -11,10 +11,12 @@ use WP_Post;
 
 abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
 {
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry,
-    ) {
+    protected InstanceManagerInterface $instanceManager;
+    protected ModuleRegistryInterface $moduleRegistry;
+    public function __construct(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry)
+    {
+        $this->instanceManager = $instanceManager;
+        $this->moduleRegistry = $moduleRegistry;
     }
 
     /**

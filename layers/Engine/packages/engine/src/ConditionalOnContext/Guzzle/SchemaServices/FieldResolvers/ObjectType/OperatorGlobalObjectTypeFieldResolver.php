@@ -23,6 +23,7 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -33,8 +34,9 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
     ) {
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

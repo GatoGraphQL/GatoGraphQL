@@ -27,16 +27,26 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     public const HOOK_EXECUTE_CREATE = __CLASS__ . ':execute-create';
     public const HOOK_EXECUTE_UPDATE = __CLASS__ . ':execute-update';
     public const HOOK_VALIDATE_CONTENT = __CLASS__ . ':validate-content';
+    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
+    protected NameResolverInterface $nameResolver;
+    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        protected NameResolverInterface $nameResolver,
-        protected UserRoleTypeAPIInterface $userRoleTypeAPI,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
+        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
+        NameResolverInterface $nameResolver,
+        UserRoleTypeAPIInterface $userRoleTypeAPI,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
+        CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
     ) {
+        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        $this->nameResolver = $nameResolver;
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
+        $this->customPostTypeAPI = $customPostTypeAPI;
+        $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

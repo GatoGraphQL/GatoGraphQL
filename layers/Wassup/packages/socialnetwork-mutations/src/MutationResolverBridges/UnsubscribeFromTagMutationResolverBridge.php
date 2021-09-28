@@ -16,14 +16,18 @@ use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 
 class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMetaValueMutationResolverBridge
 {
+    protected UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver;
+    protected PostTagTypeAPIInterface $postTagTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver,
-        protected PostTagTypeAPIInterface $postTagTypeAPI,
+        UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver,
+        PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
+        $this->unsubscribeFromTagMutationResolver = $unsubscribeFromTagMutationResolver;
+        $this->postTagTypeAPI = $postTagTypeAPI;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

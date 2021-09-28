@@ -15,13 +15,15 @@ use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 
 class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
+        AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {
+        $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

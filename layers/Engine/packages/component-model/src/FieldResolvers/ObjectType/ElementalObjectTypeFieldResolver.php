@@ -22,6 +22,7 @@ use PoP\Translation\TranslationAPIInterface;
 
 class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -32,8 +33,9 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
+        ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
     ) {
+        $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

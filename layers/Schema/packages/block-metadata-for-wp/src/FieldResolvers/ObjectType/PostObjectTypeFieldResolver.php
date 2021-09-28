@@ -25,6 +25,7 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,8 +36,9 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
     ) {
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

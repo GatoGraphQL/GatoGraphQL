@@ -15,14 +15,16 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UnrecommendCustomPos
 
 class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
+    protected UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver,
+        UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver,
     ) {
+        $this->unrecommendCustomPostMutationResolver = $unrecommendCustomPostMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

@@ -24,6 +24,8 @@ use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateObjectTypeFieldResolv
 class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
     use UserStateObjectTypeFieldResolverTrait;
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected UpdatePostMutationResolver $updatePostMutationResolver;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -35,9 +37,11 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected UpdatePostMutationResolver $updatePostMutationResolver,
+        PostObjectTypeResolver $postObjectTypeResolver,
+        UpdatePostMutationResolver $updatePostMutationResolver,
     ) {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->updatePostMutationResolver = $updatePostMutationResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

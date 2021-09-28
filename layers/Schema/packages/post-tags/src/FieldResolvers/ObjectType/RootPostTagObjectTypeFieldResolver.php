@@ -37,6 +37,10 @@ use PoPSchema\Tags\ComponentConfiguration;
 class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected PostTagObjectTypeResolver $postTagObjectTypeResolver;
+    protected PostTagTypeAPIInterface $postTagTypeAPI;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -49,11 +53,15 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected PostTagObjectTypeResolver $postTagObjectTypeResolver,
-        protected PostTagTypeAPIInterface $postTagTypeAPI,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        PostTagObjectTypeResolver $postTagObjectTypeResolver,
+        PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+        $this->postTagTypeAPI = $postTagTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

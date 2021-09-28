@@ -14,14 +14,16 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\FollowUserMutationRe
 
 class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMutationResolverBridge
 {
+    protected FollowUserMutationResolver $followUserMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
         UserTypeAPIInterface $userTypeAPI,
-        protected FollowUserMutationResolver $followUserMutationResolver,
+        FollowUserMutationResolver $followUserMutationResolver,
     ) {
+        $this->followUserMutationResolver = $followUserMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

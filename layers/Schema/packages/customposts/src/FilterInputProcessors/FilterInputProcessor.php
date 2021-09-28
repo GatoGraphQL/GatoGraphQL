@@ -18,11 +18,13 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public const FILTERINPUT_CUSTOMPOSTTYPES = 'filterinput-customposttypes';
     public const FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
+    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
+        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
     ) {
+        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
         parent::__construct(
             $instanceManager,
         );

@@ -10,9 +10,10 @@ use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 
 class EntryModuleManager implements EntryModuleManagerInterface
 {
-    public function __construct(
-        protected RouteModuleProcessorManagerInterface $routeModuleProcessorManager,
-    ) {
+    protected RouteModuleProcessorManagerInterface $routeModuleProcessorManager;
+    public function __construct(RouteModuleProcessorManagerInterface $routeModuleProcessorManager)
+    {
+        $this->routeModuleProcessorManager = $routeModuleProcessorManager;
     }
 
     public function getEntryModule(): ?array

@@ -11,11 +11,15 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
+    protected EndpointHelpers $endpointHelpers;
+    protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator;
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        protected EndpointHelpers $endpointHelpers,
-        protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator
+        EndpointHelpers $endpointHelpers,
+        PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator
     ) {
+        $this->endpointHelpers = $endpointHelpers;
+        $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
         parent::__construct(
             $instanceManager,
         );

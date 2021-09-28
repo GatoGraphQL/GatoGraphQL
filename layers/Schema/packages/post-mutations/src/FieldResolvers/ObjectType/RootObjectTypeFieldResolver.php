@@ -26,6 +26,9 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected CreatePostMutationResolver $createPostMutationResolver;
+    protected UpdatePostMutationResolver $updatePostMutationResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -36,10 +39,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected CreatePostMutationResolver $createPostMutationResolver,
-        protected UpdatePostMutationResolver $updatePostMutationResolver,
+        PostObjectTypeResolver $postObjectTypeResolver,
+        CreatePostMutationResolver $createPostMutationResolver,
+        UpdatePostMutationResolver $updatePostMutationResolver,
     ) {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->createPostMutationResolver = $createPostMutationResolver;
+        $this->updatePostMutationResolver = $updatePostMutationResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

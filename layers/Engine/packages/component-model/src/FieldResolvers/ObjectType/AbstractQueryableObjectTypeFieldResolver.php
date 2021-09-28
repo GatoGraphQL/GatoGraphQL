@@ -24,6 +24,7 @@ use PoP\Translation\TranslationAPIInterface;
 abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements QueryableObjectTypeFieldSchemaDefinitionResolverInterface
 {
     use QueryableFieldResolverTrait;
+    protected ModuleProcessorManagerInterface $moduleProcessorManager;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -35,8 +36,9 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected ModuleProcessorManagerInterface $moduleProcessorManager,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
     ) {
+        $this->moduleProcessorManager = $moduleProcessorManager;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

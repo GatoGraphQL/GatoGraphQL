@@ -12,11 +12,13 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
+    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
-        protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

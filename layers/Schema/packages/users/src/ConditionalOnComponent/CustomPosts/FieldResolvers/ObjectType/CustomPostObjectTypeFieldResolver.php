@@ -22,6 +22,8 @@ use PoPSchema\Users\FieldResolvers\InterfaceType\WithAuthorInterfaceTypeFieldRes
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected CustomPostUserTypeAPIInterface $customPostUserTypeAPI;
+    protected WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -32,9 +34,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected CustomPostUserTypeAPIInterface $customPostUserTypeAPI,
-        protected WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver,
+        CustomPostUserTypeAPIInterface $customPostUserTypeAPI,
+        WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver,
     ) {
+        $this->customPostUserTypeAPI = $customPostUserTypeAPI;
+        $this->withAuthorInterfaceTypeFieldResolver = $withAuthorInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

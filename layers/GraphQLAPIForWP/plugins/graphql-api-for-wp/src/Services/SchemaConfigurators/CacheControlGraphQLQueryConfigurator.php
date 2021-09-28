@@ -19,16 +19,22 @@ use PoP\Hooks\HooksAPIInterface;
 
 class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
 {
+    protected CacheControlBlock $cacheControlBlock;
+    protected BlockHelpers $blockHelpers;
+    protected CacheControlManagerInterface $cacheControlManager;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         TypeRegistryInterface $typeRegistry,
         DirectiveRegistryInterface $directiveRegistry,
-        protected CacheControlBlock $cacheControlBlock,
-        protected BlockHelpers $blockHelpers,
-        protected CacheControlManagerInterface $cacheControlManager,
+        CacheControlBlock $cacheControlBlock,
+        BlockHelpers $blockHelpers,
+        CacheControlManagerInterface $cacheControlManager,
     ) {
+        $this->cacheControlBlock = $cacheControlBlock;
+        $this->blockHelpers = $blockHelpers;
+        $this->cacheControlManager = $cacheControlManager;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

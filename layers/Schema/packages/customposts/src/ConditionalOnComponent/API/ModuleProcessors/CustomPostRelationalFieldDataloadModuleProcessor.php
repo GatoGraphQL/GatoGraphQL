@@ -37,6 +37,8 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
     public const MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT = 'dataload-relationalfields-custompostcount';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST = 'dataload-relationalfields-admincustompostlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT = 'dataload-relationalfields-admincustompostcount';
+    protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
+    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -51,9 +53,11 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        protected ListQueryInputOutputHandler $listQueryInputOutputHandler,
+        CustomPostUnionTypeResolver $customPostUnionTypeResolver,
+        ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
+        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
+        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

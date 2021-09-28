@@ -19,13 +19,21 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
+    protected MenuPageHelper $menuPageHelper;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected UserAuthorizationInterface $userAuthorization;
+    protected SettingsMenuPage $settingsMenuPage;
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        protected MenuPageHelper $menuPageHelper,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected UserAuthorizationInterface $userAuthorization,
-        protected SettingsMenuPage $settingsMenuPage,
+        MenuPageHelper $menuPageHelper,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        SettingsMenuPage $settingsMenuPage,
     ) {
+        $this->menuPageHelper = $menuPageHelper;
+        $this->moduleRegistry = $moduleRegistry;
+        $this->userAuthorization = $userAuthorization;
+        $this->settingsMenuPage = $settingsMenuPage;
         parent::__construct(
             $instanceManager,
         );

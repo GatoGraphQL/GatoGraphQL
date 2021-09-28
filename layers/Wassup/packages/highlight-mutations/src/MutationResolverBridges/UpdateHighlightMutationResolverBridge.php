@@ -13,13 +13,15 @@ use PoPSitesWassup\HighlightMutations\MutationResolvers\UpdateHighlightMutationR
 
 class UpdateHighlightMutationResolverBridge extends AbstractCreateUpdateHighlightMutationResolverBridge
 {
+    protected UpdateHighlightMutationResolver $updateHighlightMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UpdateHighlightMutationResolver $updateHighlightMutationResolver,
+        UpdateHighlightMutationResolver $updateHighlightMutationResolver,
     ) {
+        $this->updateHighlightMutationResolver = $updateHighlightMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

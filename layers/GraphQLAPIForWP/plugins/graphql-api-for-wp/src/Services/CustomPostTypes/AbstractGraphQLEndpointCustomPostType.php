@@ -19,14 +19,18 @@ use WP_Post;
 
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType implements GraphQLEndpointCustomPostTypeInterface
 {
+    protected HooksAPIInterface $hooksAPI;
+    protected BlockHelpers $blockHelpers;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         CPTUtils $cptUtils,
-        protected HooksAPIInterface $hooksAPI,
-        protected BlockHelpers $blockHelpers,
+        HooksAPIInterface $hooksAPI,
+        BlockHelpers $blockHelpers,
     ) {
+        $this->hooksAPI = $hooksAPI;
+        $this->blockHelpers = $blockHelpers;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

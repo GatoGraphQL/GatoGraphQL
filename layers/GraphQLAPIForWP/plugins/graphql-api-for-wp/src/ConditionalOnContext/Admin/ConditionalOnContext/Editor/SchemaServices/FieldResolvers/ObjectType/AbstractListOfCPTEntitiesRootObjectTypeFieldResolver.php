@@ -32,6 +32,8 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
  */
 abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected CustomPostObjectTypeResolver $customPostObjectTypeResolver;
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -43,9 +45,11 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CustomPostObjectTypeResolver $customPostObjectTypeResolver,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+        CustomPostObjectTypeResolver $customPostObjectTypeResolver,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
+        $this->customPostObjectTypeResolver = $customPostObjectTypeResolver;
+        $this->customPostTypeAPI = $customPostTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

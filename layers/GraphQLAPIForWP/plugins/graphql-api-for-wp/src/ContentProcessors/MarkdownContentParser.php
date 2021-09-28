@@ -10,13 +10,15 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {
+    protected MarkdownConvertorInterface $markdownConvertorInterface;
     public function __construct(
         RequestHelperServiceInterface $requestHelperService,
         LocaleHelper $localeHelper,
-        protected MarkdownConvertorInterface $markdownConvertorInterface,
+        MarkdownConvertorInterface $markdownConvertorInterface,
         ?string $baseDir = null,
         ?string $baseURL = null,
     ) {
+        $this->markdownConvertorInterface = $markdownConvertorInterface;
         parent::__construct(
             $requestHelperService,
             $localeHelper,

@@ -16,13 +16,17 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
+    protected CustomEndpointVoyagerClient $customEndpointVoyagerClient;
+    protected VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        protected CustomEndpointVoyagerClient $customEndpointVoyagerClient,
-        protected VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter,
+        CustomEndpointVoyagerClient $customEndpointVoyagerClient,
+        VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter,
     ) {
+        $this->customEndpointVoyagerClient = $customEndpointVoyagerClient;
+        $this->voyagerClientEndpointExecuter = $voyagerClientEndpointExecuter;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

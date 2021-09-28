@@ -27,6 +27,10 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
+    protected DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -37,11 +41,15 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected InputValueObjectTypeResolver $inputValueObjectTypeResolver,
-        protected DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        InputValueObjectTypeResolver $inputValueObjectTypeResolver,
+        DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver,
     ) {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
+        $this->directiveLocationEnumTypeResolver = $directiveLocationEnumTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

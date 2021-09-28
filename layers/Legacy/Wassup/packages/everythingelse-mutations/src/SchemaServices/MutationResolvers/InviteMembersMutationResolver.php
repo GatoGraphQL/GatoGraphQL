@@ -13,11 +13,13 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
 {
+    protected UserTypeAPIInterface $userTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
+        UserTypeAPIInterface $userTypeAPI,
     ) {
+        $this->userTypeAPI = $userTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -10,11 +10,13 @@ use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 
 abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
+    protected PostTagTypeAPIInterface $postTagTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected PostTagTypeAPIInterface $postTagTypeAPI,
+        PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
+        $this->postTagTypeAPI = $postTagTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -33,6 +33,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
      * @var string[]
      */
     protected array $objectTypeResolverMandatoryFields;
+    protected MutationRootTypeDataLoader $mutationRootTypeDataLoader;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -48,8 +49,9 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         DirectivePipelineServiceInterface $directivePipelineService,
         TypeResolverHelperInterface $typeResolverHelper,
         RootObjectTypeResolver $rootObjectTypeResolver,
-        protected MutationRootTypeDataLoader $mutationRootTypeDataLoader,
+        MutationRootTypeDataLoader $mutationRootTypeDataLoader,
     ) {
+        $this->mutationRootTypeDataLoader = $mutationRootTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -23,8 +23,10 @@ class ModulePaths extends AbstractModuleFilter
      * @var array<string, array>
      */
     protected array $backlog_unsettled_paths = [];
-    public function __construct(protected ModulePathManagerInterface $modulePathManager)
+    protected ModulePathManagerInterface $modulePathManager;
+    public function __construct(ModulePathManagerInterface $modulePathManager)
     {
+        $this->modulePathManager = $modulePathManager;
     }
 
     protected function init(): void

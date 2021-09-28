@@ -15,12 +15,14 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
 {
+    protected AccessControlManagerInterface $accessControlManager;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected AccessControlManagerInterface $accessControlManager
+        AccessControlManagerInterface $accessControlManager
     ) {
+        $this->accessControlManager = $accessControlManager;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

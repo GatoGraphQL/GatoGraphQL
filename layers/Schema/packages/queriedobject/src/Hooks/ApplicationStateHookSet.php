@@ -13,12 +13,14 @@ use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {
+    protected CMSRoutingStateServiceInterface $cmsRoutingStateService;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected CMSRoutingStateServiceInterface $cmsRoutingStateService,
+        CMSRoutingStateServiceInterface $cmsRoutingStateService,
     ) {
+        $this->cmsRoutingStateService = $cmsRoutingStateService;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

@@ -14,13 +14,15 @@ use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterUnsubscriptio
 
 class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
+    protected NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver,
+        NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver,
     ) {
+        $this->newsletterUnsubscriptionMutationResolver = $newsletterUnsubscriptionMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

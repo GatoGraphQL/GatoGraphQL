@@ -25,6 +25,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected TypeObjectTypeResolver $typeObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,9 +37,11 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected TypeObjectTypeResolver $typeObjectTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        TypeObjectTypeResolver $typeObjectTypeResolver,
     ) {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

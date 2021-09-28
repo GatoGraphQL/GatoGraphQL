@@ -29,6 +29,9 @@ use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModulePro
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected MediaTypeAPIInterface $mediaTypeAPI;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected MediaObjectTypeResolver $mediaObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -40,10 +43,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected MediaTypeAPIInterface $mediaTypeAPI,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected MediaObjectTypeResolver $mediaObjectTypeResolver,
+        MediaTypeAPIInterface $mediaTypeAPI,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        MediaObjectTypeResolver $mediaObjectTypeResolver,
     ) {
+        $this->mediaTypeAPI = $mediaTypeAPI;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

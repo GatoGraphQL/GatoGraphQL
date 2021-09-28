@@ -10,13 +10,15 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\NonDocumentableTypeTrait;
 class ScalarType extends AbstractType
 {
     use NonDocumentableTypeTrait;
+    protected string $name;
 
     public function __construct(
         array &$fullSchemaDefinition,
         array $schemaDefinitionPath,
-        protected string $name,
+        string $name,
         array $customDefinition = []
     ) {
+        $this->name = $name;
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath, $customDefinition);
     }
 

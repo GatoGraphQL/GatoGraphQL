@@ -23,6 +23,8 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected UserMediaTypeAPIInterface $userMediaTypeAPI;
+    protected UserObjectTypeResolver $userObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -33,9 +35,11 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected UserMediaTypeAPIInterface $userMediaTypeAPI,
-        protected UserObjectTypeResolver $userObjectTypeResolver,
+        UserMediaTypeAPIInterface $userMediaTypeAPI,
+        UserObjectTypeResolver $userObjectTypeResolver,
     ) {
+        $this->userMediaTypeAPI = $userMediaTypeAPI;
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

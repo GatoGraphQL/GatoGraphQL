@@ -40,14 +40,19 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
      * @var array<string, mixed>
      */
     private ?array $fragmentsFromRequestCache = null;
+    protected TranslationAPIInterface $translationAPI;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected QueryParserInterface $queryParser;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected PersistedFragmentManagerInterface $persistedFragmentManager;
 
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected QueryParserInterface $queryParser,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected PersistedFragmentManagerInterface $persistedFragmentManager,
-    ) {
+    public function __construct(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->queryParser = $queryParser;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->persistedFragmentManager = $persistedFragmentManager;
     }
 
     public function convertAPIQuery(string $operationDotNotation, ?array $fragments = null): FieldQuerySet

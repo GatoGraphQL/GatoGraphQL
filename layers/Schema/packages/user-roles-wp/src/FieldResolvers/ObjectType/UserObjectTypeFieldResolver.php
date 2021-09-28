@@ -25,6 +25,8 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,9 +37,11 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected UserRoleTypeAPIInterface $userRoleTypeAPI,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        UserRoleTypeAPIInterface $userRoleTypeAPI,
     ) {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

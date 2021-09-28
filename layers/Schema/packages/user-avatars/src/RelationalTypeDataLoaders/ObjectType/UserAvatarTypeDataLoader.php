@@ -12,12 +12,14 @@ use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 
 class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
 {
+    protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
-        protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
+        UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
     ) {
+        $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

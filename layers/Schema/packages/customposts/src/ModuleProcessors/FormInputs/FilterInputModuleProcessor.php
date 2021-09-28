@@ -36,6 +36,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public const MODULE_FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
+    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -50,8 +51,9 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
+        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
     ) {
+        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

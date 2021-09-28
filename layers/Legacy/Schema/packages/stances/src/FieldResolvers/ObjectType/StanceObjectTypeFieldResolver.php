@@ -31,6 +31,10 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -39,11 +43,15 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected IDScalarTypeResolver $idScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

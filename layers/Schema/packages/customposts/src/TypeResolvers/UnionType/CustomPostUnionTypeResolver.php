@@ -26,6 +26,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
      * Can't inject in constructor because of a circular reference
      */
     protected ?CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader = null;
+    protected InterfaceTypeResolverInterface $interfaceTypeResolver;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -39,8 +40,9 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected InterfaceTypeResolverInterface $interfaceTypeResolver,
+        InterfaceTypeResolverInterface $interfaceTypeResolver,
     ) {
+        $this->interfaceTypeResolver = $interfaceTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

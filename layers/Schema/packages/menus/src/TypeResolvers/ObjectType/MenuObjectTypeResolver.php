@@ -23,6 +23,8 @@ use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 
 class MenuObjectTypeResolver extends AbstractObjectTypeResolver
 {
+    protected MenuTypeDataLoader $menuTypeDataLoader;
+    protected MenuTypeAPIInterface $menuTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,9 +37,11 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected MenuTypeDataLoader $menuTypeDataLoader,
-        protected MenuTypeAPIInterface $menuTypeAPI,
+        MenuTypeDataLoader $menuTypeDataLoader,
+        MenuTypeAPIInterface $menuTypeAPI,
     ) {
+        $this->menuTypeDataLoader = $menuTypeDataLoader;
+        $this->menuTypeAPI = $menuTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

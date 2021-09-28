@@ -11,10 +11,12 @@ use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 
 abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    public function __construct(
-        protected PageObjectTypeResolver $pageObjectTypeResolver,
-        protected PageTypeAPIInterface $pageTypeAPI,
-    ) {
+    protected PageObjectTypeResolver $pageObjectTypeResolver;
+    protected PageTypeAPIInterface $pageTypeAPI;
+    public function __construct(PageObjectTypeResolver $pageObjectTypeResolver, PageTypeAPIInterface $pageTypeAPI)
+    {
+        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
+        $this->pageTypeAPI = $pageTypeAPI;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

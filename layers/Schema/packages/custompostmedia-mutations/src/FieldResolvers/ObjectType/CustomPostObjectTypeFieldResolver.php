@@ -28,6 +28,10 @@ use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected MediaObjectTypeResolver $mediaTypeResolver;
+    protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
+    protected SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver;
+    protected RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -38,11 +42,15 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected MediaObjectTypeResolver $mediaTypeResolver,
-        protected CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        protected SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver,
-        protected RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver,
+        MediaObjectTypeResolver $mediaTypeResolver,
+        CustomPostUnionTypeResolver $customPostUnionTypeResolver,
+        SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver,
+        RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver,
     ) {
+        $this->mediaTypeResolver = $mediaTypeResolver;
+        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
+        $this->setFeaturedImageOnCustomPostMutationResolver = $setFeaturedImageOnCustomPostMutationResolver;
+        $this->removeFeaturedImageOnCustomPostMutationResolver = $removeFeaturedImageOnCustomPostMutationResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

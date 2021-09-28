@@ -9,8 +9,10 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiatedService
 {
-    public function __construct(protected EndpointHelpers $endpointHelpers)
+    protected EndpointHelpers $endpointHelpers;
+    public function __construct(EndpointHelpers $endpointHelpers)
     {
+        $this->endpointHelpers = $endpointHelpers;
     }
 
     /**

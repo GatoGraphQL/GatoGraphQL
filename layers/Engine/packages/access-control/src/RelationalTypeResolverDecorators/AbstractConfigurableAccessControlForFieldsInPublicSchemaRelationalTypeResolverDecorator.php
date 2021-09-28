@@ -12,12 +12,14 @@ use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractPublicSchemaRelat
 abstract class AbstractConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
 {
     use ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait;
+    protected AccessControlManagerInterface $accessControlManager;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected AccessControlManagerInterface $accessControlManager,
+        AccessControlManagerInterface $accessControlManager,
     ) {
+        $this->accessControlManager = $accessControlManager;
         parent::__construct(
             $instanceManager,
             $fieldQueryInterpreter,

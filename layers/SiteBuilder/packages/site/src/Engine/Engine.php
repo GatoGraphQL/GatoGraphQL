@@ -26,6 +26,7 @@ use PoP\Translation\TranslationAPIInterface;
 
 class Engine extends \PoP\Application\Engine\Engine
 {
+    protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -44,9 +45,10 @@ class Engine extends \PoP\Application\Engine\Engine
         RequestHelperServiceInterface $requestHelperService,
         LooseContractManagerInterface $looseContractManager,
         CacheControlEngineInterface $cacheControlEngine,
-        protected ApplicationStateHelperServiceInterface $applicationStateHelperService,
+        ApplicationStateHelperServiceInterface $applicationStateHelperService,
         ?CacheInterface $persistentCache = null
     ) {
+        $this->applicationStateHelperService = $applicationStateHelperService;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

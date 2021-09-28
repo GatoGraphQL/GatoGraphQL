@@ -15,12 +15,14 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class HeadModuleHookSet extends AbstractHookSet
 {
+    protected HeadModule $headModule;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected HeadModule $headModule
+        HeadModule $headModule
     ) {
+        $this->headModule = $headModule;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

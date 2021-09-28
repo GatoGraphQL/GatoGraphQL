@@ -27,10 +27,12 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     ];
 
     protected array $popToCMSCommentStatusConversion;
+    protected HooksAPIInterface $hooksAPI;
 
     public function __construct(
-        protected HooksAPIInterface $hooksAPI,
+        HooksAPIInterface $hooksAPI,
     ) {
+        $this->hooksAPI = $hooksAPI;
         $this->popToCMSCommentStatusConversion = array_flip($this->cmsToPoPCommentStatusConversion);
     }
 

@@ -14,12 +14,16 @@ use PoP\Translation\TranslationAPIInterface;
 
 class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {
+    protected CMSServiceInterface $cmsService;
+    protected ApplicationInfoInterface $applicationInfo;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected CMSServiceInterface $cmsService,
-        protected ApplicationInfoInterface $applicationInfo,
+        CMSServiceInterface $cmsService,
+        ApplicationInfoInterface $applicationInfo,
     ) {
+        $this->cmsService = $cmsService;
+        $this->applicationInfo = $applicationInfo;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

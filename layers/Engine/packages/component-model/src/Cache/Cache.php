@@ -12,11 +12,13 @@ use Psr\Cache\CacheItemPoolInterface;
 class Cache implements CacheInterface
 {
     use ReplaceCurrentExecutionDataWithPlaceholdersTrait;
+    protected CacheItemPoolInterface $cacheItemPool;
+    protected ModelInstanceInterface $modelInstance;
 
-    public function __construct(
-        protected CacheItemPoolInterface $cacheItemPool,
-        protected ModelInstanceInterface $modelInstance
-    ) {
+    public function __construct(CacheItemPoolInterface $cacheItemPool, ModelInstanceInterface $modelInstance)
+    {
+        $this->cacheItemPool = $cacheItemPool;
+        $this->modelInstance = $modelInstance;
     }
 
     protected function getKey(string $id, string $type)

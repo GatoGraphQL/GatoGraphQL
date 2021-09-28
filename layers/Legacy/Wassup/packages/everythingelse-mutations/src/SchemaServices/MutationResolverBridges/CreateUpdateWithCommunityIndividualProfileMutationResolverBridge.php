@@ -15,6 +15,7 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Crea
 
 class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends CreateUpdateIndividualProfileMutationResolverBridge
 {
+    protected CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
@@ -22,8 +23,9 @@ class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends C
         MutationResolutionManagerInterface $mutationResolutionManager,
         CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
         CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver,
-        protected CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver,
+        CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver,
     ) {
+        $this->createUpdateWithCommunityIndividualProfileMutationResolver = $createUpdateWithCommunityIndividualProfileMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

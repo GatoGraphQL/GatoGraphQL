@@ -14,13 +14,15 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 
 class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
+    protected InstallSystemMutationResolver $installSystemMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected InstallSystemMutationResolver $installSystemMutationResolver,
+        InstallSystemMutationResolver $installSystemMutationResolver,
     ) {
+        $this->installSystemMutationResolver = $installSystemMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

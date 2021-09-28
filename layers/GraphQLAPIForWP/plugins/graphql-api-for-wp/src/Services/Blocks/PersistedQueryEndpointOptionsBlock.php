@@ -22,6 +22,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS = 'acceptVariablesAsURLParams';
+    protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -29,8 +30,9 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
+        PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {
+        $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

@@ -16,13 +16,15 @@ use WP_Post;
 
 class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface
 {
+    protected EndpointVoyagerBlock $endpointVoyagerBlock;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         BlockHelpers $blockHelpers,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        protected EndpointVoyagerBlock $endpointVoyagerBlock,
+        EndpointVoyagerBlock $endpointVoyagerBlock,
     ) {
+        $this->endpointVoyagerBlock = $endpointVoyagerBlock;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

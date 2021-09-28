@@ -19,6 +19,7 @@ use PoPSchema\Highlights\RelationalTypeDataLoaders\ObjectType\HighlightTypeDataL
 
 class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 {
+    protected HighlightTypeDataLoader $highlightTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -28,8 +29,9 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
-        protected HighlightTypeDataLoader $highlightTypeDataLoader,
+        HighlightTypeDataLoader $highlightTypeDataLoader,
     ) {
+        $this->highlightTypeDataLoader = $highlightTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

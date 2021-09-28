@@ -17,12 +17,16 @@ use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeIn
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-        protected TranslationAPIInterface $translationAPI,
-        protected InstanceManagerInterface $instanceManager,
-        protected MutationResolutionManagerInterface $mutationResolutionManager,
-    ) {
+    protected HooksAPIInterface $hooksAPI;
+    protected TranslationAPIInterface $translationAPI;
+    protected InstanceManagerInterface $instanceManager;
+    protected MutationResolutionManagerInterface $mutationResolutionManager;
+    public function __construct(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager, MutationResolutionManagerInterface $mutationResolutionManager)
+    {
+        $this->hooksAPI = $hooksAPI;
+        $this->translationAPI = $translationAPI;
+        $this->instanceManager = $instanceManager;
+        $this->mutationResolutionManager = $mutationResolutionManager;
     }
 
     public function getSuccessString(string | int $result_id): ?string

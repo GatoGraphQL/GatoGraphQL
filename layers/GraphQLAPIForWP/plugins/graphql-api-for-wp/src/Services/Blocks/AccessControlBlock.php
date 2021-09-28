@@ -24,6 +24,7 @@ class AccessControlBlock extends AbstractControlBlock
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_SCHEMA_MODE = 'schemaMode';
+    protected AccessControlBlockCategory $accessControlBlockCategory;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -31,8 +32,9 @@ class AccessControlBlock extends AbstractControlBlock
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected AccessControlBlockCategory $accessControlBlockCategory,
+        AccessControlBlockCategory $accessControlBlockCategory,
     ) {
+        $this->accessControlBlockCategory = $accessControlBlockCategory;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

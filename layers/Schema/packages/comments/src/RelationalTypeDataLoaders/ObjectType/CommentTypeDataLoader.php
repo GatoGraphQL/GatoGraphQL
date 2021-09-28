@@ -17,13 +17,15 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    protected CommentTypeAPIInterface $commentTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CommentTypeAPIInterface $commentTypeAPI,
+        CommentTypeAPIInterface $commentTypeAPI,
     ) {
+        $this->commentTypeAPI = $commentTypeAPI;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

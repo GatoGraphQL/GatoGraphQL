@@ -27,6 +27,9 @@ use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected UserObjectTypeResolver $userObjectTypeResolver;
+    protected LoginMutationResolver $loginMutationResolver;
+    protected LogoutMutationResolver $logoutMutationResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -38,10 +41,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected UserObjectTypeResolver $userObjectTypeResolver,
-        protected LoginMutationResolver $loginMutationResolver,
-        protected LogoutMutationResolver $logoutMutationResolver,
+        UserObjectTypeResolver $userObjectTypeResolver,
+        LoginMutationResolver $loginMutationResolver,
+        LogoutMutationResolver $logoutMutationResolver,
     ) {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+        $this->loginMutationResolver = $loginMutationResolver;
+        $this->logoutMutationResolver = $logoutMutationResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

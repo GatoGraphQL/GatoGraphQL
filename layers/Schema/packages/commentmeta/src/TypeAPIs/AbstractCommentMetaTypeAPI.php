@@ -10,9 +10,10 @@ use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
 {
-    public function __construct(
-        protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
-    ) {
+    protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
+    public function __construct(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    {
+        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }
 
     final public function getCommentMeta(string | int $commentID, string $key, bool $single = false): mixed

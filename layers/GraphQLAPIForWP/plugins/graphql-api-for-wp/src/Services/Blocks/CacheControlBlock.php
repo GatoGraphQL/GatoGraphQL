@@ -22,6 +22,7 @@ class CacheControlBlock extends AbstractControlBlock
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_CACHE_CONTROL_MAX_AGE = 'cacheControlMaxAge';
+    protected CacheControlBlockCategory $cacheControlBlockCategory;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -29,8 +30,9 @@ class CacheControlBlock extends AbstractControlBlock
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected CacheControlBlockCategory $cacheControlBlockCategory,
+        CacheControlBlockCategory $cacheControlBlockCategory,
     ) {
+        $this->cacheControlBlockCategory = $cacheControlBlockCategory;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

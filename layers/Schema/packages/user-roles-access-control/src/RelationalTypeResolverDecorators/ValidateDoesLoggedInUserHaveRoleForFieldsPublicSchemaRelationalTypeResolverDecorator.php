@@ -17,13 +17,17 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
 {
     use ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait;
     use ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait;
+    protected AccessControlManagerInterface $accessControlManager;
+    protected ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected AccessControlManagerInterface $accessControlManager,
-        protected ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver,
+        AccessControlManagerInterface $accessControlManager,
+        ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver,
     ) {
+        $this->accessControlManager = $accessControlManager;
+        $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
         parent::__construct(
             $instanceManager,
             $fieldQueryInterpreter,

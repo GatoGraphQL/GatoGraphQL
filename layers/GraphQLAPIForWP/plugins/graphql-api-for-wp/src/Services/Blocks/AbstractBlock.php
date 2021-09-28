@@ -27,14 +27,19 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
 {
     use HasDocumentationScriptTrait;
+    protected InstanceManagerInterface $instanceManager;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected UserAuthorizationInterface $userAuthorization;
+    protected GeneralUtils $generalUtils;
+    protected EditorHelpers $editorHelpers;
 
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected UserAuthorizationInterface $userAuthorization,
-        protected GeneralUtils $generalUtils,
-        protected EditorHelpers $editorHelpers,
-    ) {
+    public function __construct(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers)
+    {
+        $this->instanceManager = $instanceManager;
+        $this->moduleRegistry = $moduleRegistry;
+        $this->userAuthorization = $userAuthorization;
+        $this->generalUtils = $generalUtils;
+        $this->editorHelpers = $editorHelpers;
     }
 
     /**

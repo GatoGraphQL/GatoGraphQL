@@ -13,12 +13,14 @@ use PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorators\Abst
 class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends AbstractMandatoryDirectivesForFieldsRelationalTypeResolverDecorator
 {
     use ConfigurableCacheControlRelationalTypeResolverDecoratorTrait;
+    protected CacheControlManagerInterface $cacheControlManager;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected CacheControlManagerInterface $cacheControlManager,
+        CacheControlManagerInterface $cacheControlManager,
     ) {
+        $this->cacheControlManager = $cacheControlManager;
         parent::__construct(
             $instanceManager,
             $fieldQueryInterpreter,

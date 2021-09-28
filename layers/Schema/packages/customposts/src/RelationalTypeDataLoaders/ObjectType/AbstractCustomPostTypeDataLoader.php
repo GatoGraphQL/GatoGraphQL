@@ -16,13 +16,15 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
+        $this->customPostTypeAPI = $customPostTypeAPI;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

@@ -28,6 +28,12 @@ use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemObjectTypeResolver;
 
 class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
+    protected CMSHelperServiceInterface $cmsHelperService;
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -38,13 +44,19 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
-        protected CMSHelperServiceInterface $cmsHelperService,
-        protected URLScalarTypeResolver $urlScalarTypeResolver,
-        protected IDScalarTypeResolver $idScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
+        MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
+        CMSHelperServiceInterface $cmsHelperService,
+        URLScalarTypeResolver $urlScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
     ) {
+        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
+        $this->cmsHelperService = $cmsHelperService;
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

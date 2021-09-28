@@ -28,6 +28,10 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
+    protected MenuTypeAPIInterface $menuTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -38,11 +42,15 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
-        protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
-        protected MenuTypeAPIInterface $menuTypeAPI,
+        MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
+        MenuTypeAPIInterface $menuTypeAPI,
     ) {
+        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
+        $this->menuTypeAPI = $menuTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

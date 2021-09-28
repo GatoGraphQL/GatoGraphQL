@@ -33,6 +33,11 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -41,12 +46,17 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected IDScalarTypeResolver $idScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected URLScalarTypeResolver $urlScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -13,12 +13,14 @@ use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class MainContentModuleHookSet extends AbstractHookSet
 {
+    protected MainContentModule $mainContentModule;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected MainContentModule $mainContentModule
+        MainContentModule $mainContentModule
     ) {
+        $this->mainContentModule = $mainContentModule;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

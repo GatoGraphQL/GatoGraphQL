@@ -11,9 +11,10 @@ use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 abstract class AbstractStanceObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    public function __construct(
-        protected StanceObjectTypeResolver $stanceObjectTypeResolver,
-    ) {        
+    protected StanceObjectTypeResolver $stanceObjectTypeResolver;
+    public function __construct(StanceObjectTypeResolver $stanceObjectTypeResolver)
+    {
+        $this->stanceObjectTypeResolver = $stanceObjectTypeResolver;
     }
     
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

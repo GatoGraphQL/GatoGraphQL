@@ -14,13 +14,15 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 
 class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
+    protected GenerateThemeMutationResolver $generateThemeMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected GenerateThemeMutationResolver $generateThemeMutationResolver,
+        GenerateThemeMutationResolver $generateThemeMutationResolver,
     ) {
+        $this->generateThemeMutationResolver = $generateThemeMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

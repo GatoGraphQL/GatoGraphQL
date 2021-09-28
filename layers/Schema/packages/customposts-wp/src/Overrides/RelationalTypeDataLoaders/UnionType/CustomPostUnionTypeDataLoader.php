@@ -22,14 +22,18 @@ use PoPSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostObjectTypeResolv
  */
 class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoader
 {
+    protected CustomPostTypeDataLoader $customPostTypeDataLoader;
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        protected CustomPostTypeDataLoader $customPostTypeDataLoader,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+        CustomPostTypeDataLoader $customPostTypeDataLoader,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
+        $this->customPostTypeDataLoader = $customPostTypeDataLoader;
+        $this->customPostTypeAPI = $customPostTypeAPI;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

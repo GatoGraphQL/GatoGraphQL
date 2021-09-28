@@ -16,12 +16,14 @@ use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 
 class ModulePathsHookSet extends AbstractHookSet
 {
+    protected ModulePaths $modulePaths;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected ModulePaths $modulePaths
+        ModulePaths $modulePaths
     ) {
+        $this->modulePaths = $modulePaths;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

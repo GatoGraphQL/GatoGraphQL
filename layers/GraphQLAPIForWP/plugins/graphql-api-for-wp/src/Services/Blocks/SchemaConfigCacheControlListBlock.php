@@ -23,6 +23,7 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_CACHE_CONTROL_LISTS = 'cacheControlLists';
+    protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -33,8 +34,9 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
         SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,
-        protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
+        GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
     ) {
+        $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

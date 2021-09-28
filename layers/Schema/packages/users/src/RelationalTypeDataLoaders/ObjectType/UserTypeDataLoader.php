@@ -15,13 +15,15 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    protected UserTypeAPIInterface $userTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         NameResolverInterface $nameResolver,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected UserTypeAPIInterface $userTypeAPI,
+        UserTypeAPIInterface $userTypeAPI,
     ) {
+        $this->userTypeAPI = $userTypeAPI;
         parent::__construct(
             $hooksAPI,
             $instanceManager,

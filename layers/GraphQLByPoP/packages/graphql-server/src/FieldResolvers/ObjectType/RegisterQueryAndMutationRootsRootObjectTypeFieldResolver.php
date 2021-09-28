@@ -29,6 +29,8 @@ use PoP\API\ComponentConfiguration as APIComponentConfiguration;
  */
 class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
+    protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -39,9 +41,11 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
-        protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
+        QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
+        MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
     ) {
+        $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
+        $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

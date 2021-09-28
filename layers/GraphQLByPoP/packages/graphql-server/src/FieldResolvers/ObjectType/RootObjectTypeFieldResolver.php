@@ -27,6 +27,9 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
+    protected TypeObjectTypeResolver $typeObjectTypeResolver;
+    protected SchemaTypeDataLoader $schemaTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -37,10 +40,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected SchemaObjectTypeResolver $schemaObjectTypeResolver,
-        protected TypeObjectTypeResolver $typeObjectTypeResolver,
-        protected SchemaTypeDataLoader $schemaTypeDataLoader,
+        SchemaObjectTypeResolver $schemaObjectTypeResolver,
+        TypeObjectTypeResolver $typeObjectTypeResolver,
+        SchemaTypeDataLoader $schemaTypeDataLoader,
     ) {
+        $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+        $this->schemaTypeDataLoader = $schemaTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

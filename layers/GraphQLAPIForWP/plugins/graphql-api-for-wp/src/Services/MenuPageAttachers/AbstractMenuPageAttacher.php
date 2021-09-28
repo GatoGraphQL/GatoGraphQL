@@ -13,9 +13,10 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
  */
 abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiatedService
 {
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-    ) {
+    protected InstanceManagerInterface $instanceManager;
+    public function __construct(InstanceManagerInterface $instanceManager)
+    {
+        $this->instanceManager = $instanceManager;
     }
 
     abstract public function getMenuClass(): string;

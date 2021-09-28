@@ -8,9 +8,10 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 abstract class AbstractFilterInputProcessor implements FilterInputProcessorInterface
 {
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-    ) {
+    protected InstanceManagerInterface $instanceManager;
+    public function __construct(InstanceManagerInterface $instanceManager)
+    {
+        $this->instanceManager = $instanceManager;
     }
 
     public function getFilterInputsToProcess(): array

@@ -24,6 +24,8 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,9 +37,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver,
+        CommentTypeAPIInterface $commentTypeAPI,
+        CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver,
     ) {
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->commentableInterfaceTypeFieldResolver = $commentableInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -38,6 +38,9 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 {
     use UserStateObjectTypeFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected PostTypeAPIInterface $postTypeAPI;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -50,10 +53,13 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected PostTypeAPIInterface $postTypeAPI,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        PostObjectTypeResolver $postObjectTypeResolver,
+        PostTypeAPIInterface $postTypeAPI,
     ) {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->postTypeAPI = $postTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

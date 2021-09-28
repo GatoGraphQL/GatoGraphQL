@@ -21,6 +21,8 @@ use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolv
 
 class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected CommentMetaTypeAPIInterface $commentMetaAPI;
+    protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -31,9 +33,11 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected CommentMetaTypeAPIInterface $commentMetaAPI,
-        protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
+        CommentMetaTypeAPIInterface $commentMetaAPI,
+        WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {
+        $this->commentMetaAPI = $commentMetaAPI;
+        $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

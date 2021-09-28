@@ -12,12 +12,14 @@ use PoPSchema\UserState\FieldResolvers\ObjectType\GlobalObjectTypeFieldResolver;
 
 class DBEntriesHookSet extends AbstractHookSet
 {
+    protected GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver
+        GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver
     ) {
+        $this->globalObjectTypeFieldResolver = $globalObjectTypeFieldResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

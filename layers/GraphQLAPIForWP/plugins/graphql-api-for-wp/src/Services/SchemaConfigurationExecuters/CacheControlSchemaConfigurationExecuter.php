@@ -16,12 +16,14 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
  */
 class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface
 {
+    protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         BlockHelpers $blockHelpers,
-        protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
+        CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
     ) {
+        $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

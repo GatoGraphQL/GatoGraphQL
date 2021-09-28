@@ -29,6 +29,7 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     public const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY = 'dataload-relationalfields-category';
     public const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST = 'dataload-relationalfields-categorylist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT = 'dataload-relationalfields-categorycount';
+    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -43,8 +44,9 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected ListQueryInputOutputHandler $listQueryInputOutputHandler,
+        ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
+        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

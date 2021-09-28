@@ -27,6 +27,9 @@ use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected StanceObjectTypeResolver $stanceObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,10 +38,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected StanceObjectTypeResolver $stanceObjectTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        StanceObjectTypeResolver $stanceObjectTypeResolver,
     ) {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->stanceObjectTypeResolver = $stanceObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

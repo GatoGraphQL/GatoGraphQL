@@ -21,6 +21,8 @@ use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolv
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected CustomPostMetaTypeAPIInterface $customPostMetaAPI;
+    protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -31,9 +33,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected CustomPostMetaTypeAPIInterface $customPostMetaAPI,
-        protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
+        CustomPostMetaTypeAPIInterface $customPostMetaAPI,
+        WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {
+        $this->customPostMetaAPI = $customPostMetaAPI;
+        $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

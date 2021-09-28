@@ -24,6 +24,9 @@ use WP_Post;
 
 class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected CMSHelperServiceInterface $cmsHelperService;
+    protected DateFormatterInterface $dateFormatter;
+    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -35,10 +38,13 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CMSHelperServiceInterface $cmsHelperService,
-        protected DateFormatterInterface $dateFormatter,
-        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
+        CMSHelperServiceInterface $cmsHelperService,
+        DateFormatterInterface $dateFormatter,
+        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
+        $this->cmsHelperService = $cmsHelperService;
+        $this->dateFormatter = $dateFormatter;
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

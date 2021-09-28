@@ -92,14 +92,18 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      * @var array<string,array<string,string>>
      */
     private array $fieldsByTypeAndFieldOutputKey = [];
+    protected TypeCastingExecuterInterface $typeCastingExecuter;
+    protected InstanceManagerInterface $instanceManager;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
         UpstreamFeedbackMessageStoreInterface $feedbackMessageStore,
-        protected TypeCastingExecuterInterface $typeCastingExecuter,
-        protected InstanceManagerInterface $instanceManager,
+        TypeCastingExecuterInterface $typeCastingExecuter,
+        InstanceManagerInterface $instanceManager,
         QueryParserInterface $queryParser,
     ) {
+        $this->typeCastingExecuter = $typeCastingExecuter;
+        $this->instanceManager = $instanceManager;
         parent::__construct($translationAPI, $feedbackMessageStore, $queryParser);
     }
 

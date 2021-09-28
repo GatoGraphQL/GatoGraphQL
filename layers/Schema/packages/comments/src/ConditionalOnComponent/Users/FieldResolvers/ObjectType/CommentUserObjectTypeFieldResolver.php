@@ -22,6 +22,8 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected UserObjectTypeResolver $userObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -32,9 +34,11 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected UserObjectTypeResolver $userObjectTypeResolver,
+        CommentTypeAPIInterface $commentTypeAPI,
+        UserObjectTypeResolver $userObjectTypeResolver,
     ) {
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

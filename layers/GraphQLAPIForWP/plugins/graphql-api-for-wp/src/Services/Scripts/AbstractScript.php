@@ -19,11 +19,14 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
  */
 abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 {
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected GeneralUtils $generalUtils,
-    ) {
+    protected InstanceManagerInterface $instanceManager;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected GeneralUtils $generalUtils;
+    public function __construct(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils)
+    {
+        $this->instanceManager = $instanceManager;
+        $this->moduleRegistry = $moduleRegistry;
+        $this->generalUtils = $generalUtils;
     }
 
     /**

@@ -15,13 +15,15 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 
 class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    protected LoginMutationResolver $loginMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected LoginMutationResolver $loginMutationResolver,
+        LoginMutationResolver $loginMutationResolver,
     ) {
+        $this->loginMutationResolver = $loginMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

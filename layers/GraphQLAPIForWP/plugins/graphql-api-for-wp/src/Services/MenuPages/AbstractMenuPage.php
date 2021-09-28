@@ -17,12 +17,15 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
     protected ?string $hookName = null;
+    protected InstanceManagerInterface $instanceManager;
+    protected MenuPageHelper $menuPageHelper;
+    protected EndpointHelpers $endpointHelpers;
 
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-        protected MenuPageHelper $menuPageHelper,
-        protected EndpointHelpers $endpointHelpers
-    ) {
+    public function __construct(InstanceManagerInterface $instanceManager, MenuPageHelper $menuPageHelper, EndpointHelpers $endpointHelpers)
+    {
+        $this->instanceManager = $instanceManager;
+        $this->menuPageHelper = $menuPageHelper;
+        $this->endpointHelpers = $endpointHelpers;
     }
 
     public function setHookName(string $hookName): void

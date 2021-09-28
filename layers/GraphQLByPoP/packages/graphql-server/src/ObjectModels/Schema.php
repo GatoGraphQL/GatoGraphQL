@@ -31,11 +31,13 @@ class Schema
     protected ?AbstractType $queryType = null;
     protected ?AbstractType $mutationType = null;
     protected ?AbstractType $subscriptionType = null;
+    protected string $id;
 
     public function __construct(
         array $fullSchemaDefinition,
-        protected string $id
+        string $id
     ) {
+        $this->id = $id;
         // Initialize the global elements before anything, since they will
         // be references from the ObjectType: Fields/Connections/Directives
         // 1. Initialize all the Scalar types

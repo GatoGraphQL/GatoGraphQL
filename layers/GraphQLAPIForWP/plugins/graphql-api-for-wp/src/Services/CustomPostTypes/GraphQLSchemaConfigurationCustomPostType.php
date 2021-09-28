@@ -16,14 +16,16 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
+    protected SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         CPTUtils $cptUtils,
-        protected SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry
+        SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry
     ) {
+        $this->schemaConfigBlockRegistry = $schemaConfigBlockRegistry;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

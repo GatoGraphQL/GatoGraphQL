@@ -17,12 +17,14 @@ use PoPSchema\Users\Routing\RouteNatures;
 
 class VarsHookSet extends AbstractHookSet
 {
+    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected UserRoleTypeAPIInterface $userRoleTypeAPI,
+        UserRoleTypeAPIInterface $userRoleTypeAPI,
     ) {
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

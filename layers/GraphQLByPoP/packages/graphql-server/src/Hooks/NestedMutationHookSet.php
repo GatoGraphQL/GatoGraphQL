@@ -19,12 +19,14 @@ use PoP\Translation\TranslationAPIInterface;
 
 class NestedMutationHookSet extends AbstractHookSet
 {
+    protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
+        GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ) {
+        $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

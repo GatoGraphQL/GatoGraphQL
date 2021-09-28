@@ -23,6 +23,7 @@ use PoPSchema\Categories\TypeResolvers\ObjectType\AbstractCategoryObjectTypeReso
 class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 {
     use PostCategoryAPISatisfiedContractTrait;
+    protected PostCategoryTypeDataLoader $postCategoryTypeDataLoader;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -36,8 +37,9 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected PostCategoryTypeDataLoader $postCategoryTypeDataLoader,
+        PostCategoryTypeDataLoader $postCategoryTypeDataLoader,
     ) {
+        $this->postCategoryTypeDataLoader = $postCategoryTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

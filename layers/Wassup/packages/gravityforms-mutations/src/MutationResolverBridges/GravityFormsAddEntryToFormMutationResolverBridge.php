@@ -19,15 +19,19 @@ use PoPSitesWassup\GravityFormsMutations\MutationResolvers\GravityFormsAddEntryT
 class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     public const HOOK_FORM_FIELDNAMES = __CLASS__ . ':form-fieldnames';
+    protected UserTypeAPIInterface $userTypeAPI;
+    protected GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver;
 
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UserTypeAPIInterface $userTypeAPI,
-        protected GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver,
+        UserTypeAPIInterface $userTypeAPI,
+        GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver,
     ) {
+        $this->userTypeAPI = $userTypeAPI;
+        $this->gravityFormsAddEntryToFormMutationResolver = $gravityFormsAddEntryToFormMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

@@ -15,14 +15,16 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UpvoteCustomPostMuta
 
 class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
+    protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
+        UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
     ) {
+        $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

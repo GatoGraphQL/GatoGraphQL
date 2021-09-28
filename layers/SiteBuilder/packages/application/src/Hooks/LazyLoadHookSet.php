@@ -20,13 +20,17 @@ use PoP\Translation\TranslationAPIInterface;
 
 class LazyLoadHookSet extends AbstractHookSet
 {
+    protected RequestHelperServiceInterface $requestHelperService;
+    protected Lazy $lazy;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        protected RequestHelperServiceInterface $requestHelperService,
-        protected Lazy $lazy,
+        RequestHelperServiceInterface $requestHelperService,
+        Lazy $lazy,
     ) {
+        $this->requestHelperService = $requestHelperService;
+        $this->lazy = $lazy;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

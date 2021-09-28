@@ -40,6 +40,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS = 'filterinput-exclude-custompost-ids';
     public const MODULE_FILTERINPUT_COMMENT_TYPES = 'filterinput-comment-types';
     public const MODULE_FILTERINPUT_COMMENT_STATUS = 'filterinput-comment-status';
+    protected CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver;
+    protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -54,9 +56,11 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver,
-        protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
+        CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver,
+        CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
     ) {
+        $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
+        $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

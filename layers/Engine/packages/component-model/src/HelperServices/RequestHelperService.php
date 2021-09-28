@@ -13,9 +13,10 @@ use PoP\Hooks\HooksAPIInterface;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-    ) {
+    protected HooksAPIInterface $hooksAPI;
+    public function __construct(HooksAPIInterface $hooksAPI)
+    {
+        $this->hooksAPI = $hooksAPI;
     }
 
     public function getCurrentURL(): string

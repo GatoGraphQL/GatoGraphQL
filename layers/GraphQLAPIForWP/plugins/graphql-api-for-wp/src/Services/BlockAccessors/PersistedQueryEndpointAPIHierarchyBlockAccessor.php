@@ -11,10 +11,12 @@ use WP_Post;
 
 class PersistedQueryEndpointAPIHierarchyBlockAccessor
 {
-    public function __construct(
-        protected BlockHelpers $blockHelpers,
-        protected PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock,
-    ) {
+    protected BlockHelpers $blockHelpers;
+    protected PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock;
+    public function __construct(BlockHelpers $blockHelpers, PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock)
+    {
+        $this->blockHelpers = $blockHelpers;
+        $this->persistedQueryEndpointAPIHierarchyBlock = $persistedQueryEndpointAPIHierarchyBlock;
     }
 
     /**

@@ -24,6 +24,8 @@ use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
+    protected SettingsTypeAPIInterface $settingsTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,9 +36,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
-        protected SettingsTypeAPIInterface $settingsTypeAPI,
+        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
+        SettingsTypeAPIInterface $settingsTypeAPI,
     ) {
+        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
+        $this->settingsTypeAPI = $settingsTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

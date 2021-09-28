@@ -33,6 +33,14 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected IPScalarTypeResolver $ipScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected UserObjectTypeResolver $userObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -41,15 +49,23 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected DateScalarTypeResolver $dateScalarTypeResolver,
-        protected IDScalarTypeResolver $idScalarTypeResolver,
-        protected IPScalarTypeResolver $ipScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected URLScalarTypeResolver $urlScalarTypeResolver,
-        protected UserObjectTypeResolver $userObjectTypeResolver,
+        CommentTypeAPIInterface $commentTypeAPI,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        DateScalarTypeResolver $dateScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
+        IPScalarTypeResolver $ipScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        URLScalarTypeResolver $urlScalarTypeResolver,
+        UserObjectTypeResolver $userObjectTypeResolver,
     ) {
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->ipScalarTypeResolver = $ipScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

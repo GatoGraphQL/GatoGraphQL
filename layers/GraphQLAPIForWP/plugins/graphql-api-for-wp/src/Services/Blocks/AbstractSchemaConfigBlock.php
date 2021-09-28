@@ -14,14 +14,16 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 abstract class AbstractSchemaConfigBlock extends AbstractBlock implements SchemaConfigEditorBlockServiceTagInterface
 {
+    protected SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory;
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
+        SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
     ) {
+        $this->schemaConfigurationBlockCategory = $schemaConfigurationBlockCategory;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

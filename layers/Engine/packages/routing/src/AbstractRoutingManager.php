@@ -14,10 +14,11 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
      * @var string[]|null
      */
     private ?array $routes = null;
+    protected HooksAPIInterface $hooksAPI;
 
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-    ) {
+    public function __construct(HooksAPIInterface $hooksAPI)
+    {
+        $this->hooksAPI = $hooksAPI;
     }
 
     /**

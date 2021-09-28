@@ -11,10 +11,12 @@ use WP_Post;
 
 class PersistedQueryEndpointGraphiQLBlockAccessor
 {
-    public function __construct(
-        protected BlockHelpers $blockHelpers,
-        protected PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock,
-    ) {
+    protected BlockHelpers $blockHelpers;
+    protected PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock;
+    public function __construct(BlockHelpers $blockHelpers, PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock)
+    {
+        $this->blockHelpers = $blockHelpers;
+        $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
     }
 
     /**

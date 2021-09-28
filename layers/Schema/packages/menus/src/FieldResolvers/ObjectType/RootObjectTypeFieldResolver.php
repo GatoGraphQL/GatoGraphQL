@@ -30,6 +30,9 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected MenuObjectTypeResolver $menuObjectTypeResolver;
+    protected MenuTypeAPIInterface $menuTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -41,10 +44,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected MenuObjectTypeResolver $menuObjectTypeResolver,
-        protected MenuTypeAPIInterface $menuTypeAPI,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        MenuObjectTypeResolver $menuObjectTypeResolver,
+        MenuTypeAPIInterface $menuTypeAPI,
     ) {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->menuObjectTypeResolver = $menuObjectTypeResolver;
+        $this->menuTypeAPI = $menuTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

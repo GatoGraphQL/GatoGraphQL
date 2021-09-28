@@ -13,14 +13,24 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
+    protected MenuPageHelper $menuPageHelper;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected UserAuthorizationInterface $userAuthorization;
+    protected GraphiQLMenuPage $graphiQLMenuPage;
+    protected GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage;
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        protected MenuPageHelper $menuPageHelper,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected UserAuthorizationInterface $userAuthorization,
-        protected GraphiQLMenuPage $graphiQLMenuPage,
-        protected GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage,
+        MenuPageHelper $menuPageHelper,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        GraphiQLMenuPage $graphiQLMenuPage,
+        GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage,
     ) {
+        $this->menuPageHelper = $menuPageHelper;
+        $this->moduleRegistry = $moduleRegistry;
+        $this->userAuthorization = $userAuthorization;
+        $this->graphiQLMenuPage = $graphiQLMenuPage;
+        $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
         parent::__construct(
             $instanceManager,
         );

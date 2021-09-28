@@ -14,12 +14,14 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UpvoteCustomPostMuta
 
 class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver
 {
+    protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
+        UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
     ) {
+        $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

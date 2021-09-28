@@ -6,8 +6,10 @@ namespace PoP\Engine\ErrorHandling;
 
 class ErrorHelper implements ErrorHelperInterface
 {
-    public function __construct(protected ErrorManagerInterface $errorManager)
+    protected ErrorManagerInterface $errorManager;
+    public function __construct(ErrorManagerInterface $errorManager)
     {
+        $this->errorManager = $errorManager;
     }
 
     public function returnResultOrConvertError(mixed $result): mixed

@@ -22,6 +22,8 @@ use PoPSchema\Media\RelationalTypeDataLoaders\ObjectType\MediaTypeDataLoader;
 
 class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 {
+    protected MediaTypeAPIInterface $mediaTypeAPI;
+    protected MediaTypeDataLoader $mediaTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,9 +36,11 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected MediaTypeAPIInterface $mediaTypeAPI,
-        protected MediaTypeDataLoader $mediaTypeDataLoader,
+        MediaTypeAPIInterface $mediaTypeAPI,
+        MediaTypeDataLoader $mediaTypeDataLoader,
     ) {
+        $this->mediaTypeAPI = $mediaTypeAPI;
+        $this->mediaTypeDataLoader = $mediaTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

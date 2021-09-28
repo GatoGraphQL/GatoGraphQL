@@ -24,6 +24,8 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected LocationObjectTypeResolver $locationObjectTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -32,9 +34,11 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SemverHelperServiceInterface $semverHelperService,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected LocationObjectTypeResolver $locationObjectTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->locationObjectTypeResolver = $locationObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -20,6 +20,7 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
 {
     public const ATTRIBUTE_NAME_ACCESS_CONTROL_GROUP = 'accessControlGroup';
     public const ATTRIBUTE_NAME_VALUE = 'value';
+    protected AccessControlBlockCategory $accessControlBlockCategory;
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -27,8 +28,9 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
         UserAuthorizationInterface $userAuthorization,
         GeneralUtils $generalUtils,
         EditorHelpers $editorHelpers,
-        protected AccessControlBlockCategory $accessControlBlockCategory,
+        AccessControlBlockCategory $accessControlBlockCategory,
     ) {
+        $this->accessControlBlockCategory = $accessControlBlockCategory;
         parent::__construct(
             $instanceManager,
             $moduleRegistry,

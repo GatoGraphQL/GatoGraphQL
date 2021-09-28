@@ -25,6 +25,8 @@ use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObjectTypeResolver
 {
     use ReservedNameTypeResolverTrait;
+    protected RootObjectTypeResolver $rootObjectTypeResolver;
+    protected QueryRootTypeDataLoader $queryRootTypeDataLoader;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -38,9 +40,11 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected RootObjectTypeResolver $rootObjectTypeResolver,
-        protected QueryRootTypeDataLoader $queryRootTypeDataLoader,
+        RootObjectTypeResolver $rootObjectTypeResolver,
+        QueryRootTypeDataLoader $queryRootTypeDataLoader,
     ) {
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+        $this->queryRootTypeDataLoader = $queryRootTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

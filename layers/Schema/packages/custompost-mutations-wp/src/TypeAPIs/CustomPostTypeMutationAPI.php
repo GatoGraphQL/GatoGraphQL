@@ -15,10 +15,12 @@ use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
  */
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected ErrorHelperInterface $errorHelper,
-    ) {
+    protected TranslationAPIInterface $translationAPI;
+    protected ErrorHelperInterface $errorHelper;
+    public function __construct(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->errorHelper = $errorHelper;
     }
 
     protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array &$query): void

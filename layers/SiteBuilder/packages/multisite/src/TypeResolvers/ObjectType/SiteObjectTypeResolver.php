@@ -22,6 +22,7 @@ use PoP\Multisite\RelationalTypeDataLoaders\ObjectType\SiteTypeDataLoader;
 
 class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {
+    protected SiteTypeDataLoader $siteTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -34,8 +35,9 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected SiteTypeDataLoader $siteTypeDataLoader,
+        SiteTypeDataLoader $siteTypeDataLoader,
     ) {
+        $this->siteTypeDataLoader = $siteTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

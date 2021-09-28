@@ -13,13 +13,15 @@ use PoPSitesWassup\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 
 class UpdatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationResolverBridge
 {
+    protected UpdatePostMutationResolver $updatePostMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UpdatePostMutationResolver $updatePostMutationResolver,
+        UpdatePostMutationResolver $updatePostMutationResolver,
     ) {
+        $this->updatePostMutationResolver = $updatePostMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

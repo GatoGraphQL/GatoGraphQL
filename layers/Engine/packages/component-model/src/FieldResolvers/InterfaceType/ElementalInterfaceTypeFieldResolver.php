@@ -20,6 +20,7 @@ use PoP\Translation\TranslationAPIInterface;
 
 class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
+    protected IDScalarTypeResolver $idScalarTypeResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -29,8 +30,9 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected IDScalarTypeResolver $idScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
     ) {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

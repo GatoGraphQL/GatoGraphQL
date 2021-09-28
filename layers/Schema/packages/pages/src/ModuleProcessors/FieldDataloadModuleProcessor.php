@@ -26,6 +26,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     use QueriedDBObjectModuleProcessorTrait;
 
     public const MODULE_DATALOAD_RELATIONALFIELDS_PAGE = 'dataload-relationalfields-page';
+    protected PageObjectTypeResolver $pageObjectTypeResolver;
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
@@ -40,8 +41,9 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         DataloadHelperServiceInterface $dataloadHelperService,
         RequestHelperServiceInterface $requestHelperService,
         ModulePaths $modulePaths,
-        protected PageObjectTypeResolver $pageObjectTypeResolver,
+        PageObjectTypeResolver $pageObjectTypeResolver,
     ) {
+        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -21,6 +21,8 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    protected UserMetaTypeAPIInterface $userMetaAPI;
+    protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -31,9 +33,11 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
-        protected UserMetaTypeAPIInterface $userMetaAPI,
-        protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
+        UserMetaTypeAPIInterface $userMetaAPI,
+        WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {
+        $this->userMetaAPI = $userMetaAPI;
+        $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

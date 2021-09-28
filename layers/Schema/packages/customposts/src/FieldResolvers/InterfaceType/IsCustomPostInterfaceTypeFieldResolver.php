@@ -30,6 +30,12 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 
 class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
 {
+    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
+    protected CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -39,13 +45,19 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        protected CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected DateScalarTypeResolver $dateScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
+        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
+        CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        DateScalarTypeResolver $dateScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ) {
+        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        $this->customPostContentFormatEnumTypeResolver = $customPostContentFormatEnumTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

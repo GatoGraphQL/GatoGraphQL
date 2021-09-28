@@ -21,6 +21,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 
 class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 {
+    protected UserRoleTypeDataLoader $userRoleTypeDataLoader;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -33,8 +34,9 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
         ErrorProviderInterface $errorProvider,
         DataloadingEngineInterface $dataloadingEngine,
         DirectivePipelineServiceInterface $directivePipelineService,
-        protected UserRoleTypeDataLoader $userRoleTypeDataLoader,
+        UserRoleTypeDataLoader $userRoleTypeDataLoader,
     ) {
+        $this->userRoleTypeDataLoader = $userRoleTypeDataLoader;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

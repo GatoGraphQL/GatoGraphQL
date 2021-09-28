@@ -17,6 +17,7 @@ use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCus
 
 abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
+    protected PostTypeAPIInterface $postTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -26,8 +27,9 @@ abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUp
         CustomPostTypeAPIInterface $customPostTypeAPI,
         CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
-        protected PostTypeAPIInterface $postTypeAPI,
+        PostTypeAPIInterface $postTypeAPI,
     ) {
+        $this->postTypeAPI = $postTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

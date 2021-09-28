@@ -55,12 +55,15 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 
     public const ALIAS_POSITION_KEY = 'pos';
     public const ALIAS_LENGTH_KEY = 'length';
+    protected TranslationAPIInterface $translationAPI;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected QueryParserInterface $queryParser;
 
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected QueryParserInterface $queryParser
-    ) {
+    public function __construct(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->queryParser = $queryParser;
     }
 
     public function getFieldName(string $field): string

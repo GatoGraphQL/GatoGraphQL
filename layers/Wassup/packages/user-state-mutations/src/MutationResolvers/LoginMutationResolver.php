@@ -12,11 +12,13 @@ use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver as Upst
 
 class LoginMutationResolver extends UpstreamLoginMutationResolver
 {
+    protected UserTypeAPIInterface $userTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
+        UserTypeAPIInterface $userTypeAPI,
     ) {
+        $this->userTypeAPI = $userTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

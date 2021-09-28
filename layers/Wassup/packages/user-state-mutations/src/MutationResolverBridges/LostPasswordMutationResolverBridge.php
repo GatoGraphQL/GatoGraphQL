@@ -17,13 +17,15 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 
 class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
+    protected LostPasswordMutationResolver $lostPasswordMutationResolver;
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
-        protected LostPasswordMutationResolver $lostPasswordMutationResolver,
+        LostPasswordMutationResolver $lostPasswordMutationResolver,
     ) {
+        $this->lostPasswordMutationResolver = $lostPasswordMutationResolver;
         parent::__construct(
             $hooksAPI,
             $translationAPI,

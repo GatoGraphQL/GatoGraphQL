@@ -18,11 +18,13 @@ use WP_Taxonomy;
 abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
+    protected HooksAPIInterface $hooksAPI;
+    protected CMSHelperServiceInterface $cmsHelperService;
 
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-        protected CMSHelperServiceInterface $cmsHelperService,
-    ) {
+    public function __construct(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService)
+    {
+        $this->hooksAPI = $hooksAPI;
+        $this->cmsHelperService = $cmsHelperService;
     }
 
     abstract protected function getTagTaxonomyName(): string;

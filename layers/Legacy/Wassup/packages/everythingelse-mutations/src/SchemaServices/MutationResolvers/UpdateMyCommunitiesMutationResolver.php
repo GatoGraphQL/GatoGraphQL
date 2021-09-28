@@ -12,11 +12,13 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 {
+    protected UserTypeAPIInterface $userTypeAPI;
     public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
+        UserTypeAPIInterface $userTypeAPI,
     ) {
+        $this->userTypeAPI = $userTypeAPI;
         parent::__construct(
             $translationAPI,
             $hooksAPI,

@@ -10,10 +10,14 @@ use PoP\Definitions\AbstractDefinitionPersistence;
 
 class FileDefinitionPersistence extends AbstractDefinitionPersistence
 {
+    protected FileStoreInterface $fileStore;
+    protected AbstractFile $file;
     public function __construct(
-        protected FileStoreInterface $fileStore,
-        protected AbstractFile $file
+        FileStoreInterface $fileStore,
+        AbstractFile $file
     ) {
+        $this->fileStore = $fileStore;
+        $this->file = $file;
         parent::__construct();
     }
 
