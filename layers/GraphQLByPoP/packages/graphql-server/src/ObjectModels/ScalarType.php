@@ -10,17 +10,13 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\NonDocumentableTypeTrait;
 class ScalarType extends AbstractType
 {
     use NonDocumentableTypeTrait;
-    protected string $name;
 
-    
-    #[\Symfony\Contracts\Service\Attribute\Required]
-    public function autowireScalarType(
+    public function __construct(
         array &$fullSchemaDefinition,
         array $schemaDefinitionPath,
-        string $name,
+        protected string $name,
         array $customDefinition = []
     ) {
-        $this->name = $name;
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath, $customDefinition);
     }
 
