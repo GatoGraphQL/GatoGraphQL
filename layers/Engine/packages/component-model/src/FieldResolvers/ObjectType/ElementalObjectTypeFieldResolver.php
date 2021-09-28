@@ -27,7 +27,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
     ) {
         $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

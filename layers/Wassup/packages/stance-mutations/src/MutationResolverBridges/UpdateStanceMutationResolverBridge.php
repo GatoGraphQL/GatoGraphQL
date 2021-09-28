@@ -18,7 +18,7 @@ class UpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutat
         UpdateStanceMutationResolver $updateStanceMutationResolver,
     ) {
         $this->updateStanceMutationResolver = $updateStanceMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

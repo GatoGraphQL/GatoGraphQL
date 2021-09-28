@@ -17,7 +17,7 @@ class RootTypeDataLoader extends AbstractObjectTypeDataLoader
         Root $root,
     ) {
         $this->root = $root;
-        }
+    }
 
     public function getObjects(array $ids): array
     {

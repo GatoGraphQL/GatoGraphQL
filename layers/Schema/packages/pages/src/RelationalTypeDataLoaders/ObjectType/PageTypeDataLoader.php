@@ -19,7 +19,7 @@ class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
         PageTypeAPIInterface $pageTypeAPI,
     ) {
         $this->pageTypeAPI = $pageTypeAPI;
-        }
+    }
 
     public function executeQuery($query, array $options = []): array
     {

@@ -21,7 +21,7 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
         AboutMenuPage $aboutMenuPage,
     ) {
         $this->aboutMenuPage = $aboutMenuPage;
-        }
+    }
 
     public function getMenuPageSlug(): string
     {

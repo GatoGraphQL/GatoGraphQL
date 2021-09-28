@@ -34,7 +34,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         RootTypeDataLoader $rootTypeDataLoader,
     ) {
         $this->rootTypeDataLoader = $rootTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

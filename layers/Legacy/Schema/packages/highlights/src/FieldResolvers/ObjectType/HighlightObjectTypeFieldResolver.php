@@ -35,7 +35,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

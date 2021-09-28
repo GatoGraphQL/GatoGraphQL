@@ -33,7 +33,7 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

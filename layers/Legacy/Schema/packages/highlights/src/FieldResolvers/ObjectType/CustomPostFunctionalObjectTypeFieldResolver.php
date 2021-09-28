@@ -28,7 +28,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

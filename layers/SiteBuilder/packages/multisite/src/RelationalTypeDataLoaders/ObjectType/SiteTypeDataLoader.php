@@ -18,7 +18,7 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
         Site $site,
     ) {
         $this->site = $site;
-        }
+    }
 
     public function getObjects(array $ids): array
     {

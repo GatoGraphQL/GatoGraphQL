@@ -26,7 +26,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-        }
+    }
 
     protected function getInitialRESTFields(): string
     {

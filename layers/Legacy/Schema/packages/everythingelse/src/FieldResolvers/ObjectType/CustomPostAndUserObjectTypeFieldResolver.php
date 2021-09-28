@@ -32,7 +32,7 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     ) {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -21,7 +21,7 @@ class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator im
         EndpointGraphiQLBlock $endpointGraphiQLBlock,
     ) {
         $this->endpointGraphiQLBlock = $endpointGraphiQLBlock;
-        }
+    }
 
     public function getEnablingModule(): ?string
     {

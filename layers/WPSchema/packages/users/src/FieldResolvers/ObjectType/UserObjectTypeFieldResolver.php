@@ -35,7 +35,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ) {
         $this->dateFormatter = $dateFormatter;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

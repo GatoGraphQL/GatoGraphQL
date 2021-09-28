@@ -25,7 +25,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     ) {
         $this->userTypeAPI = $userTypeAPI;
         $this->cmsService = $cmsService;
-        }
+    }
 
     public function retrievePasswordMessage($key, $user_login, $user_id)
     {

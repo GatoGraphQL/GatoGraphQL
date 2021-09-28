@@ -30,7 +30,7 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
     ) {
         $this->mediaTypeAPI = $mediaTypeAPI;
         $this->mediaTypeDataLoader = $mediaTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

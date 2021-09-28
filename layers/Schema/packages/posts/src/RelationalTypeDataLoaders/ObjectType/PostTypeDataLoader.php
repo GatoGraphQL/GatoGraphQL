@@ -19,7 +19,7 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
         PostTypeAPIInterface $postTypeAPI,
     ) {
         $this->postTypeAPI = $postTypeAPI;
-        }
+    }
 
     public function executeQuery($query, array $options = []): array
     {

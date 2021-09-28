@@ -19,7 +19,7 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
         UnfollowUserMutationResolver $unfollowUserMutationResolver,
     ) {
         $this->unfollowUserMutationResolver = $unfollowUserMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

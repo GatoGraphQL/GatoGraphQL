@@ -33,7 +33,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     ) {
         $this->endpointHelpers = $endpointHelpers;
         $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
-        }
+    }
 
     protected function getBlockName(): string
     {

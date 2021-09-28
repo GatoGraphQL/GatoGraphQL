@@ -33,7 +33,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $this->moduleRegistry = $moduleRegistry;
         $this->userAuthorization = $userAuthorization;
         $this->settingsMenuPage = $settingsMenuPage;
-        }
+    }
 
     /**
      * After adding the menus for the CPTs

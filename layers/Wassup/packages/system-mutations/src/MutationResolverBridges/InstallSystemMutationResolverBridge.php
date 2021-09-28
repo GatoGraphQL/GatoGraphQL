@@ -19,7 +19,7 @@ class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutatio
         InstallSystemMutationResolver $installSystemMutationResolver,
     ) {
         $this->installSystemMutationResolver = $installSystemMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

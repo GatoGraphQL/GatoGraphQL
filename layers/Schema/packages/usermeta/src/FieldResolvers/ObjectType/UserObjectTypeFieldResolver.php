@@ -29,7 +29,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->userMetaAPI = $userMetaAPI;
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

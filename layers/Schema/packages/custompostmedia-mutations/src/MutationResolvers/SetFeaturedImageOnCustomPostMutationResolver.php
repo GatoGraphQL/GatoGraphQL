@@ -19,7 +19,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ) {
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
-        }
+    }
 
     public function executeMutation(array $form_data): mixed
     {

@@ -20,7 +20,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
         AccessControlManagerInterface $accessControlManager
     ) {
         $this->accessControlManager = $accessControlManager;
-        }
+    }
 
     public function cmsBoot(): void
     {

@@ -18,7 +18,7 @@ abstract class AbstractCustomPostUpdateUserMetaValueMutationResolverBridge exten
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;
-        }
+    }
 
     protected function getRequestKey()
     {

@@ -27,7 +27,7 @@ class DirectiveObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
         SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ) {
         $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

@@ -26,7 +26,7 @@ abstract class AbstractEditorScript extends AbstractScript
         EditorHelpers $editorHelpers,
     ) {
         $this->editorHelpers = $editorHelpers;
-        }
+    }
 
     /**
      * Pass localized data to the block

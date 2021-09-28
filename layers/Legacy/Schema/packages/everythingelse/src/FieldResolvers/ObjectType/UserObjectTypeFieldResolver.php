@@ -26,7 +26,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

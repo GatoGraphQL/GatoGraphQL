@@ -28,7 +28,7 @@ class LazyLoadHookSet extends AbstractHookSet
     ) {
         $this->requestHelperService = $requestHelperService;
         $this->lazy = $lazy;
-        }
+    }
 
     protected function init(): void
     {

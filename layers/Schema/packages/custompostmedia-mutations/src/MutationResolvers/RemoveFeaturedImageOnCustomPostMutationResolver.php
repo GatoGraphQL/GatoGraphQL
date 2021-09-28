@@ -19,7 +19,7 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ) {
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
-        }
+    }
 
     public function executeMutation(array $form_data): mixed
     {

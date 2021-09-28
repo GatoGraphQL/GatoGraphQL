@@ -35,7 +35,7 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
     ) {
         $this->commentObjectTypeResolver = $commentObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

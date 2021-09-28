@@ -48,7 +48,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->idScalarTypeResolver = $idScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

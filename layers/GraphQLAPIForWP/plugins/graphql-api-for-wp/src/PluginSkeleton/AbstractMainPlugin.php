@@ -28,7 +28,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         AbstractMainPluginConfiguration $pluginConfiguration,
     ) {
         $this->pluginConfiguration = $pluginConfiguration;
-        }
+    }
 
     /**
      * Configure the plugin.

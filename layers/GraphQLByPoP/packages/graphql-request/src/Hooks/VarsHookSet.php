@@ -43,7 +43,7 @@ class VarsHookSet extends AbstractHookSet
         $this->graphQLPersistedQueryManager = $graphQLPersistedQueryManager;
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->graphQLQueryConvertor = $graphQLQueryConvertor;
-        }
+    }
 
     protected function init(): void
     {

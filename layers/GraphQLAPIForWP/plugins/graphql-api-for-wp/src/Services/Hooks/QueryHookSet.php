@@ -24,7 +24,7 @@ class QueryHookSet extends AbstractHookSet
         CustomPostTypeRegistryInterface $customPostTypeRegistry
     ) {
         $this->customPostTypeRegistry = $customPostTypeRegistry;
-        }
+    }
 
     protected function init(): void
     {

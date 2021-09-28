@@ -35,7 +35,7 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ) {
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

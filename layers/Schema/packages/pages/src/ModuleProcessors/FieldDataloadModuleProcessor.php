@@ -32,7 +32,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         PageObjectTypeResolver $pageObjectTypeResolver,
     ) {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

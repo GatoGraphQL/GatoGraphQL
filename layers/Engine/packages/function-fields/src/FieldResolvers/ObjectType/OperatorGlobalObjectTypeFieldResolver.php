@@ -36,7 +36,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         $this->floatScalarTypeResolver = $floatScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

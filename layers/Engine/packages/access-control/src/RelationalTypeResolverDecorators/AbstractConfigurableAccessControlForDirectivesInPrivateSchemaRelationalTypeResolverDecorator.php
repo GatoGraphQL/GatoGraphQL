@@ -17,5 +17,5 @@ abstract class AbstractConfigurableAccessControlForDirectivesInPrivateSchemaRela
         AccessControlManagerInterface $accessControlManager,
     ) {
         $this->accessControlManager = $accessControlManager;
-        }
+    }
 }

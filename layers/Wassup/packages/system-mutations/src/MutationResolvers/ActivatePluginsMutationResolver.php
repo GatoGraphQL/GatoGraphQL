@@ -22,7 +22,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     ) {
         $this->cmsService = $cmsService;
         $this->applicationInfo = $applicationInfo;
-        }
+    }
 
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code
     private function runActivatePlugin($plugin)

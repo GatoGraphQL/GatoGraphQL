@@ -23,7 +23,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-        }
+    }
 
     /**
      * @return array<string, array<array>>

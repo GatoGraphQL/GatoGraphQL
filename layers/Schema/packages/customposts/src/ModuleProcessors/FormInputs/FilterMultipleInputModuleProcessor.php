@@ -38,7 +38,7 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
         FormInputHelperServiceInterface $formInputHelperService,
     ) {
         $this->formInputHelperService = $formInputHelperService;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

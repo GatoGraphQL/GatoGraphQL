@@ -18,7 +18,7 @@ class SingleEndpointSchemaConfigurator extends AbstractSchemaConfigurationEndpoi
         EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
     ) {
         $this->endpointSchemaConfigurationExecuterRegistry = $endpointSchemaConfigurationExecuterRegistry;
-        }
+    }
 
     /**
      * Only enable the service, if the corresponding module is also enabled

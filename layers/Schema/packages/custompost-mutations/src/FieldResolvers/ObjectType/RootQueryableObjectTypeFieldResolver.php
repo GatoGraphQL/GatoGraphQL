@@ -48,7 +48,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     ) {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->postTypeAPI = $postTypeAPI;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

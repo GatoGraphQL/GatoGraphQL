@@ -46,7 +46,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
     ) {
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

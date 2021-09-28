@@ -18,7 +18,7 @@ class CreatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkM
         CreatePostLinkMutationResolver $createPostLinkMutationResolver,
     ) {
         $this->createPostLinkMutationResolver = $createPostLinkMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

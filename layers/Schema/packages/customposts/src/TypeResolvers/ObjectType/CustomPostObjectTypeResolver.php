@@ -33,7 +33,7 @@ class CustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
         CustomPostTypeDataLoader $customPostTypeDataLoader,
     ) {
         $this->customPostTypeDataLoader = $customPostTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

@@ -34,7 +34,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
         $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
         $this->persistedQueryEndpointAPIHierarchyBlockAccessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
         $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
-        }
+    }
 
     public function getEnablingModule(): ?string
     {

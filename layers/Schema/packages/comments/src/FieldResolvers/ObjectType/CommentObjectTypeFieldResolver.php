@@ -82,7 +82,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         $this->commentObjectTypeResolver = $commentObjectTypeResolver;
         $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
         $this->dateFormatter = $dateFormatter;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

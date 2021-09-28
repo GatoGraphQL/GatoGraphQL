@@ -19,7 +19,7 @@ class ConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator exten
         CacheControlManagerInterface $cacheControlManager,
     ) {
         $this->cacheControlManager = $cacheControlManager;
-        }
+    }
 
     protected function getConfigurationEntries(): array
     {

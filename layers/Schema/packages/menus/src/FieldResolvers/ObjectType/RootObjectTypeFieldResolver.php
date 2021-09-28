@@ -41,7 +41,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->menuObjectTypeResolver = $menuObjectTypeResolver;
         $this->menuTypeAPI = $menuTypeAPI;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

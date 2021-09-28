@@ -17,7 +17,7 @@ class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
     ) {
         $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
-        }
+    }
 
     public function getObjects(array $ids): array
     {

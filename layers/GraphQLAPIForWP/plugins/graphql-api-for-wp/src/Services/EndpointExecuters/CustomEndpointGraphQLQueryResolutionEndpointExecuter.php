@@ -22,7 +22,7 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
     ) {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
         $this->queryRetrieverInterface = $queryRetrieverInterface;
-        }
+    }
 
     public function getEnablingModule(): ?string
     {

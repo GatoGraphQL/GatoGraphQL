@@ -20,7 +20,7 @@ class HeadModuleHookSet extends AbstractHookSet
         HeadModule $headModule
     ) {
         $this->headModule = $headModule;
-        }
+    }
 
     protected function init(): void
     {

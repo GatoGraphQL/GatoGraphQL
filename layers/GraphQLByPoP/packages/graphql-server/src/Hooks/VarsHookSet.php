@@ -22,7 +22,7 @@ class VarsHookSet extends AbstractHookSet
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
     ) {
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
-        }
+    }
 
     protected function init(): void
     {

@@ -21,7 +21,7 @@ class VarsHookSet extends AbstractHookSet
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;
-        }
+    }
 
     protected function init(): void
     {

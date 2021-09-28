@@ -45,7 +45,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         $this->userTypeAPI = $userTypeAPI;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->userObjectTypeResolver = $userObjectTypeResolver;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

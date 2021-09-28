@@ -18,7 +18,7 @@ class MainContentModuleHookSet extends AbstractHookSet
         MainContentModule $mainContentModule
     ) {
         $this->mainContentModule = $mainContentModule;
-        }
+    }
 
     protected function init(): void
     {

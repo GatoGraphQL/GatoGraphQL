@@ -20,7 +20,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
         FileUploadPictureMutationResolver $fileUploadPictureMutationResolver,
     ) {
         $this->fileUploadPictureMutationResolver = $fileUploadPictureMutationResolver;
-        }
+    }
     
     public function getMutationResolver(): MutationResolverInterface
     {

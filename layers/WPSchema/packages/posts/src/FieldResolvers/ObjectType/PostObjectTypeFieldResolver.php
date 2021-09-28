@@ -30,7 +30,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

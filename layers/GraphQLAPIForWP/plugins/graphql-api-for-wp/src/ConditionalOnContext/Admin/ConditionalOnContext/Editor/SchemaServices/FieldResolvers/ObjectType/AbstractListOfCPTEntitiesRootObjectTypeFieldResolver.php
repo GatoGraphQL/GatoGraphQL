@@ -40,7 +40,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     ) {
         $this->customPostObjectTypeResolver = $customPostObjectTypeResolver;
         $this->customPostTypeAPI = $customPostTypeAPI;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

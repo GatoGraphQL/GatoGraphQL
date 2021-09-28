@@ -20,7 +20,7 @@ class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMuta
         AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {
         $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

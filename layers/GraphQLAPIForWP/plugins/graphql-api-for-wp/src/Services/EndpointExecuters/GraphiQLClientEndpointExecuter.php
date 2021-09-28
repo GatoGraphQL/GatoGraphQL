@@ -24,7 +24,7 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter impl
     ) {
         $this->customEndpointGraphiQLClient = $customEndpointGraphiQLClient;
         $this->graphiQLClientEndpointAnnotator = $graphiQLClientEndpointAnnotator;
-        }
+    }
 
     public function getEnablingModule(): ?string
     {

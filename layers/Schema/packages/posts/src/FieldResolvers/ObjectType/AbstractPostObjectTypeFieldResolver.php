@@ -46,7 +46,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->postTypeAPI = $postTypeAPI;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

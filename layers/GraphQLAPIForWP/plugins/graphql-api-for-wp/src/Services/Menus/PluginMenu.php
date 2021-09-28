@@ -17,7 +17,7 @@ class PluginMenu extends AbstractMenu
         UserAuthorizationInterface $userAuthorization
     ) {
         $this->userAuthorization = $userAuthorization;
-        }
+    }
 
     public function getName(): string
     {

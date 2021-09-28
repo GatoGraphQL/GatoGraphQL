@@ -19,7 +19,7 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
         CacheControlBlock $cacheControlBlock,
     ) {
         $this->cacheControlBlock = $cacheControlBlock;
-        }
+    }
 
     /**
      * Custom Post Type name

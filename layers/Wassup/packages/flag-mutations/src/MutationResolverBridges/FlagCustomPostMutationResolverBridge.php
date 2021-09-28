@@ -19,7 +19,7 @@ class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutation
         FlagCustomPostMutationResolver $flagCustomPostMutationResolver,
     ) {
         $this->flagCustomPostMutationResolver = $flagCustomPostMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

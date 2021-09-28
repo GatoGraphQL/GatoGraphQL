@@ -33,7 +33,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

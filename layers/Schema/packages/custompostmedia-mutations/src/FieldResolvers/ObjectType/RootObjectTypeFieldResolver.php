@@ -43,7 +43,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
         $this->setFeaturedImageOnCustomPostMutationResolver = $setFeaturedImageOnCustomPostMutationResolver;
         $this->removeFeaturedImageOnCustomPostMutationResolver = $removeFeaturedImageOnCustomPostMutationResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

@@ -31,7 +31,7 @@ class Engine extends \PoP\Application\Engine\Engine
         ApplicationStateHelperServiceInterface $applicationStateHelperService
     ) {
         $this->applicationStateHelperService = $applicationStateHelperService;
-        }
+    }
 
     public function outputResponse(): void
     {

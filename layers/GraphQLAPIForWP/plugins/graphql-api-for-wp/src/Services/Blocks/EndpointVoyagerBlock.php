@@ -25,7 +25,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
         CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
         $this->customEndpointBlockCategory = $customEndpointBlockCategory;
-        }
+    }
 
     protected function getBlockName(): string
     {

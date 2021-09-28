@@ -49,7 +49,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         $this->schemaNamespacingService = $schemaNamespacingService;
         $this->typeRegistry = $typeRegistry;
         $this->schemaDefinitionService = $schemaDefinitionService;
-        }
+    }
 
     /**
      * The InterfaceTypes the InterfaceTypeFieldResolver adds fields to

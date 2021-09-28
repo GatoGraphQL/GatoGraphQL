@@ -29,7 +29,7 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
         PostTagTypeDataLoader $postTagTypeDataLoader,
     ) {
         $this->postTagTypeDataLoader = $postTagTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

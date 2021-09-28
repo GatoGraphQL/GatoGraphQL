@@ -20,7 +20,7 @@ class LogoutMutationResolver extends AbstractMutationResolver
         UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
     ) {
         $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
-        }
+    }
 
     public function validateErrors(array $form_data): ?array
     {

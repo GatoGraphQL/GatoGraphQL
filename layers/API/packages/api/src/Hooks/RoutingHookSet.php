@@ -24,7 +24,7 @@ class RoutingHookSet extends AbstractHookSet
     ) {
         $this->cmsService = $cmsService;
         $this->requestHelperService = $requestHelperService;
-        }
+    }
 
     protected function init(): void
     {

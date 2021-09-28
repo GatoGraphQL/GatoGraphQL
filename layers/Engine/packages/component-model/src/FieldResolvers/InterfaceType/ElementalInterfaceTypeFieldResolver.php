@@ -25,7 +25,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         IDScalarTypeResolver $idScalarTypeResolver,
     ) {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
-        }
+    }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

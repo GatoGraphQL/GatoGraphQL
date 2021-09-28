@@ -29,7 +29,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
         $this->supportingFeaturedImageInterfaceTypeFieldResolver = $supportingFeaturedImageInterfaceTypeFieldResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

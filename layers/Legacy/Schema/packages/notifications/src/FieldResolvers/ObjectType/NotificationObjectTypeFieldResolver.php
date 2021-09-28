@@ -59,7 +59,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
         $this->userObjectTypeResolver = $userObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

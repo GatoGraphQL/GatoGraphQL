@@ -19,7 +19,7 @@ class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponent
         NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver,
     ) {
         $this->newsletterSubscriptionMutationResolver = $newsletterSubscriptionMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

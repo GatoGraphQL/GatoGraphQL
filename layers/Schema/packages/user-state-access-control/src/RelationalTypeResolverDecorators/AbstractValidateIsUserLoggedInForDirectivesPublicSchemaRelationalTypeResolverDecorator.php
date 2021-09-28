@@ -18,7 +18,7 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
         ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver,
     ) {
         $this->validateIsUserLoggedInForDirectivesDirectiveResolver = $validateIsUserLoggedInForDirectivesDirectiveResolver;
-        }
+    }
 
     /**
      * Verify that the user is logged in before checking the roles/capabilities

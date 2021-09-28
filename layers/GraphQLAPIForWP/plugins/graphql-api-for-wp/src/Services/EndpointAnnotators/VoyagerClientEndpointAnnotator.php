@@ -21,7 +21,7 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
         EndpointVoyagerBlock $endpointVoyagerBlock,
     ) {
         $this->endpointVoyagerBlock = $endpointVoyagerBlock;
-        }
+    }
 
     public function getEnablingModule(): ?string
     {

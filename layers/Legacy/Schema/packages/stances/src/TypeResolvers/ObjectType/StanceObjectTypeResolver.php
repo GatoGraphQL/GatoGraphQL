@@ -24,7 +24,7 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
         StanceTypeDataLoader $stanceTypeDataLoader,
     ) {
         $this->stanceTypeDataLoader = $stanceTypeDataLoader;
-        }
+    }
     
     public function getTypeName(): string
     {

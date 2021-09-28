@@ -29,7 +29,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
     ) {
         $this->moduleRegistry = $moduleRegistry;
         $this->modulesMenuPage = $modulesMenuPage;
-        }
+    }
 
     public function getMenuPageSlug(): string
     {

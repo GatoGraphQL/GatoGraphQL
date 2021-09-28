@@ -30,7 +30,7 @@ class AccessControlBlock extends AbstractControlBlock
         AccessControlBlockCategory $accessControlBlockCategory,
     ) {
         $this->accessControlBlockCategory = $accessControlBlockCategory;
-        }
+    }
 
     protected function getBlockName(): string
     {

@@ -24,7 +24,7 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
     ) {
         $this->customEndpointVoyagerClient = $customEndpointVoyagerClient;
         $this->voyagerClientEndpointExecuter = $voyagerClientEndpointExecuter;
-        }
+    }
 
     public function getEnablingModule(): ?string
     {

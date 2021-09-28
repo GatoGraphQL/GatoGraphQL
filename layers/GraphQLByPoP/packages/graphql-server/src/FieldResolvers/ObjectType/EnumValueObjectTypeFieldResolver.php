@@ -33,7 +33,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

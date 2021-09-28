@@ -24,7 +24,7 @@ class NestedMutationHookSet extends AbstractHookSet
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ) {
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
-        }
+    }
 
     protected function init(): void
     {

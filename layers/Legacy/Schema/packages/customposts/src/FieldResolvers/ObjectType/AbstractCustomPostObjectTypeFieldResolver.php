@@ -27,7 +27,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver,
     ) {
         $this->isCustomPostInterfaceTypeFieldResolver = $isCustomPostInterfaceTypeFieldResolver;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

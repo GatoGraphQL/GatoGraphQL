@@ -44,7 +44,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

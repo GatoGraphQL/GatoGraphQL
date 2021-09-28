@@ -29,7 +29,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
         PostCategoryTypeDataLoader $postCategoryTypeDataLoader,
     ) {
         $this->postCategoryTypeDataLoader = $postCategoryTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

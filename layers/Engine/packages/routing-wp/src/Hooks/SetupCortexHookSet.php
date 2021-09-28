@@ -22,7 +22,7 @@ class SetupCortexHookSet extends AbstractHookSet
         RoutingManagerInterface $routingManager,
     ) {
         $this->routingManager = $routingManager;
-        }
+    }
 
     protected function init(): void
     {

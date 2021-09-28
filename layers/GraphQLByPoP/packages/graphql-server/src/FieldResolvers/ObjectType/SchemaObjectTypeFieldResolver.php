@@ -33,7 +33,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         $this->directiveObjectTypeResolver = $directiveObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

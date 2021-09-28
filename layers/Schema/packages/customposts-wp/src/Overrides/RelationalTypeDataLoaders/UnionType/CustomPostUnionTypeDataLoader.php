@@ -30,7 +30,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
     ) {
         $this->customPostTypeDataLoader = $customPostTypeDataLoader;
         $this->customPostTypeAPI = $customPostTypeAPI;
-        }
+    }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {

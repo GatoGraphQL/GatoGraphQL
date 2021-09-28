@@ -22,7 +22,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
         AccessControlManagerInterface $accessControlManager
     ) {
         $this->accessControlManager = $accessControlManager;
-        }
+    }
 
     /**
      * Indicate if this hook is enabled

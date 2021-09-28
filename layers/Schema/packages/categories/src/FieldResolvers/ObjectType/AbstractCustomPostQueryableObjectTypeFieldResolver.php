@@ -41,7 +41,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

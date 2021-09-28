@@ -28,7 +28,7 @@ class CacheControlBlock extends AbstractControlBlock
         CacheControlBlockCategory $cacheControlBlockCategory,
     ) {
         $this->cacheControlBlockCategory = $cacheControlBlockCategory;
-        }
+    }
 
     protected function getBlockName(): string
     {

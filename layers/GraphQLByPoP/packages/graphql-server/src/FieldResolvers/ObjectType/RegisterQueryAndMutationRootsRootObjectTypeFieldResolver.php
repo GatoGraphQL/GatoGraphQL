@@ -37,7 +37,7 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     ) {
         $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
         $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

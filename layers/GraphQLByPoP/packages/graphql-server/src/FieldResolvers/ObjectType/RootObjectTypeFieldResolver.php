@@ -38,7 +38,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         $this->schemaTypeDataLoader = $schemaTypeDataLoader;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

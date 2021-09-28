@@ -50,7 +50,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         $this->dateScalarTypeResolver = $dateScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-        }
+    }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

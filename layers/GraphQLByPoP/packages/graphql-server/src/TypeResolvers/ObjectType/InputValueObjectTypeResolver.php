@@ -27,7 +27,7 @@ class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolv
         SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ) {
         $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

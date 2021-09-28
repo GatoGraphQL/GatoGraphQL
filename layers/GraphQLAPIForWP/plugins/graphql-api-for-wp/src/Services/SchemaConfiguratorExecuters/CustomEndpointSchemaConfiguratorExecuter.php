@@ -19,7 +19,7 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
     ) {
         $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-        }
+    }
 
     protected function getCustomPostType(): string
     {

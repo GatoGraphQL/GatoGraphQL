@@ -26,7 +26,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
     ) {
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
-        }
+    }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

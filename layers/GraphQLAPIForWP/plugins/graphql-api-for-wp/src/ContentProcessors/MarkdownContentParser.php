@@ -15,7 +15,7 @@ class MarkdownContentParser extends AbstractContentParser implements MarkdownCon
         MarkdownConvertorInterface $markdownConvertorInterface,
     ) {
         $this->markdownConvertorInterface = $markdownConvertorInterface;
-        }
+    }
 
     /**
      * Parse the file's Markdown into HTML Content

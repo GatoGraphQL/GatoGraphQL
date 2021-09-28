@@ -27,7 +27,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
         SiteTypeDataLoader $siteTypeDataLoader,
     ) {
         $this->siteTypeDataLoader = $siteTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

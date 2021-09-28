@@ -22,7 +22,7 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         CommentTypeAPIInterface $commentTypeAPI,
     ) {
         $this->commentTypeAPI = $commentTypeAPI;
-        }
+    }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {

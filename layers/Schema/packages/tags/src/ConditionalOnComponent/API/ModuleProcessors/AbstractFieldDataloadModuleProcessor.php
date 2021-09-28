@@ -40,7 +40,7 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     ) {
         $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

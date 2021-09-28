@@ -18,7 +18,7 @@ class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadO
         MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver,
     ) {
         $this->markAsUnreadNotificationMutationResolver = $markAsUnreadNotificationMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

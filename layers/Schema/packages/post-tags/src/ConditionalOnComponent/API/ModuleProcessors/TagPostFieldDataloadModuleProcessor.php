@@ -39,7 +39,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     ) {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

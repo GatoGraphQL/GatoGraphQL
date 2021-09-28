@@ -31,7 +31,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->userMediaTypeAPI = $userMediaTypeAPI;
         $this->userObjectTypeResolver = $userObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

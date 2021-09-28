@@ -44,7 +44,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

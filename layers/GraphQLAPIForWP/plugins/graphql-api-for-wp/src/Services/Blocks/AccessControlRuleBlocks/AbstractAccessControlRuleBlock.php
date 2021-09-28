@@ -26,7 +26,7 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
         AccessControlBlockCategory $accessControlBlockCategory,
     ) {
         $this->accessControlBlockCategory = $accessControlBlockCategory;
-        }
+    }
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {

@@ -39,7 +39,7 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
     ) {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

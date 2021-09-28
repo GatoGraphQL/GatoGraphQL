@@ -24,7 +24,7 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
         HighlightTypeDataLoader $highlightTypeDataLoader,
     ) {
         $this->highlightTypeDataLoader = $highlightTypeDataLoader;
-        }
+    }
     
     public function getTypeName(): string
     {

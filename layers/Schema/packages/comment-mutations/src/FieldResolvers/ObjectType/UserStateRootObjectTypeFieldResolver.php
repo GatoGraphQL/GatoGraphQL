@@ -49,7 +49,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         $this->commentTypeAPI = $commentTypeAPI;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->commentObjectTypeResolver = $commentObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

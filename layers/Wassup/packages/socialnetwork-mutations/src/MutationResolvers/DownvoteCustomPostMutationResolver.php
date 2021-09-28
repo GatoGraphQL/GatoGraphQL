@@ -19,7 +19,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
         UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
     ) {
         $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;
-        }
+    }
 
     public function validateErrors(array $form_data): ?array
     {

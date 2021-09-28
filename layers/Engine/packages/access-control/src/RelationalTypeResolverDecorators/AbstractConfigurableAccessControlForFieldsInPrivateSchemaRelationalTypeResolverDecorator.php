@@ -18,5 +18,5 @@ abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaRelation
         AccessControlManagerInterface $accessControlManager,
     ) {
         $this->accessControlManager = $accessControlManager;
-        }
+    }
 }

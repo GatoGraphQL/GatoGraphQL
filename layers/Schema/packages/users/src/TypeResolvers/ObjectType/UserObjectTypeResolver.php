@@ -30,7 +30,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     ) {
         $this->userTypeAPI = $userTypeAPI;
         $this->userTypeDataLoader = $userTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

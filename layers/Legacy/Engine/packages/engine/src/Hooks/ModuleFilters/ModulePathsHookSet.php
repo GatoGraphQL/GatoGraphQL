@@ -21,7 +21,7 @@ class ModulePathsHookSet extends AbstractHookSet
         ModulePaths $modulePaths
     ) {
         $this->modulePaths = $modulePaths;
-        }
+    }
 
     protected function init(): void
     {

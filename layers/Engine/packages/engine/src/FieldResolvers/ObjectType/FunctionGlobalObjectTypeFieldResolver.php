@@ -29,7 +29,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         MixedScalarTypeResolver $mixedScalarTypeResolver,
     ) {
         $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

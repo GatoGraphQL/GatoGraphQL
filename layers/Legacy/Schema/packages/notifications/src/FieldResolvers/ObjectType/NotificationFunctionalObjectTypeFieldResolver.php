@@ -26,7 +26,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
         StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

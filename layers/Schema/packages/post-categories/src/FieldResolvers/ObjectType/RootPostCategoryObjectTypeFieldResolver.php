@@ -52,7 +52,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

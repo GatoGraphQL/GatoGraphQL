@@ -42,7 +42,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
         $this->setFeaturedImageOnCustomPostMutationResolver = $setFeaturedImageOnCustomPostMutationResolver;
         $this->removeFeaturedImageOnCustomPostMutationResolver = $removeFeaturedImageOnCustomPostMutationResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

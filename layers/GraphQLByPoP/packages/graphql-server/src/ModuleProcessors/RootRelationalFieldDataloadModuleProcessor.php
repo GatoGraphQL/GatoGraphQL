@@ -32,7 +32,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ) {
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

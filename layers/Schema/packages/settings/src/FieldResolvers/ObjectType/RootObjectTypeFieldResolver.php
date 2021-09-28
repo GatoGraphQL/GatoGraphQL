@@ -32,7 +32,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
         $this->settingsTypeAPI = $settingsTypeAPI;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

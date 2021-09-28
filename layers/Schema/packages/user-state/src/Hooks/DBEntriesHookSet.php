@@ -17,7 +17,7 @@ class DBEntriesHookSet extends AbstractHookSet
         GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver
     ) {
         $this->globalObjectTypeFieldResolver = $globalObjectTypeFieldResolver;
-        }
+    }
 
     protected function init(): void
     {

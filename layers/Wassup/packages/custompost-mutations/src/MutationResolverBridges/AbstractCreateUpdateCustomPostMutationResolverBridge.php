@@ -27,7 +27,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;
-        }
+    }
 
     protected function modifyDataProperties(array &$data_properties, string | int $result_id): void
     {

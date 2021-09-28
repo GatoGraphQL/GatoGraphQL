@@ -42,7 +42,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     ) {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

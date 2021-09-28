@@ -26,7 +26,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;
-        }
+    }
 
     protected function init(): void
     {

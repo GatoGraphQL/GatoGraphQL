@@ -35,7 +35,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     ) {
         $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
         $this->directiveRegistry = $directiveRegistry;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

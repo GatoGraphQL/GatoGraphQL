@@ -25,7 +25,7 @@ abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeRe
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
         $this->customPostTypeAPI = $customPostTypeAPI;
-        }
+    }
 
     public function getSchemaTypeDescription(): ?string
     {

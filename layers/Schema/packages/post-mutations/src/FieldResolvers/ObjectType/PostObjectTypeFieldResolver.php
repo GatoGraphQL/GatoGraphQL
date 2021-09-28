@@ -33,7 +33,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     ) {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->updatePostMutationResolver = $updatePostMutationResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

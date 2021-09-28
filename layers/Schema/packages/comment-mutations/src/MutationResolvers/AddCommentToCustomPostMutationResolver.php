@@ -34,7 +34,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         $this->commentTypeAPI = $commentTypeAPI;
         $this->commentTypeMutationAPI = $commentTypeMutationAPI;
         $this->userTypeAPI = $userTypeAPI;
-        }
+    }
 
     public function validateErrors(array $form_data): ?array
     {

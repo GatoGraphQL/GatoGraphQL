@@ -34,7 +34,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
     ) {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         $this->queryRootTypeDataLoader = $queryRootTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

@@ -45,7 +45,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

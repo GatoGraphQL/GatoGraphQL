@@ -15,7 +15,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
         $this->postTagTypeAPI = $postTagTypeAPI;
-        }
+    }
 
     public function validateErrors(array $form_data): ?array
     {

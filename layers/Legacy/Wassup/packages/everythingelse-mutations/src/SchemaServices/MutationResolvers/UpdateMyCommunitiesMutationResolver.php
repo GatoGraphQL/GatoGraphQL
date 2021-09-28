@@ -17,7 +17,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;
-        }
+    }
     
     public function executeMutation(array $form_data): mixed
     {

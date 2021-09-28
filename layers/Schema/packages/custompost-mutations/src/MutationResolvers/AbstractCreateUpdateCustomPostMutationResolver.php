@@ -45,7 +45,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $this->userRoleTypeAPI = $userRoleTypeAPI;
         $this->customPostTypeAPI = $customPostTypeAPI;
         $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
-        }
+    }
 
     protected function validateCreateErrors(array $form_data): ?array
     {

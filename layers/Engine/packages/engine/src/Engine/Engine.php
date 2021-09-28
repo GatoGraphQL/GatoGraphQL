@@ -35,7 +35,7 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
     ) {
         $this->looseContractManager = $looseContractManager;
         $this->cacheControlEngine = $cacheControlEngine;
-        }
+    }
 
     public function generateData(): void
     {

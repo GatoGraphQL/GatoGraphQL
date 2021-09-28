@@ -30,7 +30,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ) {
         $this->moduleProcessorManager = $moduleProcessorManager;
-        }
+    }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {

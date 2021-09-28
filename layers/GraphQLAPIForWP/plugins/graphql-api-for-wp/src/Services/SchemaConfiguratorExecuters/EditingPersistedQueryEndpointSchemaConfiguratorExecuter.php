@@ -19,7 +19,7 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
     ) {
         $this->endpointHelpers = $endpointHelpers;
         $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
-        }
+    }
 
     /**
      * Initialize the configuration if editing a persisted query

@@ -27,7 +27,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
         $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
         $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
         $this->graphQLRequestVarsHooks = $graphQLRequestVarsHooks;
-        }
+    }
 
     public function getEnablingModule(): ?string
     {

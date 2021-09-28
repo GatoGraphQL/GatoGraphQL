@@ -18,7 +18,7 @@ class TemplateHookSet extends AbstractHookSet
         ApplicationStateHelperServiceInterface $applicationStateHelperService,
     ) {
         $this->applicationStateHelperService = $applicationStateHelperService;
-        }
+    }
 
     protected function init(): void
     {

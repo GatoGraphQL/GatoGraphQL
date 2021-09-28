@@ -27,7 +27,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
         IDScalarTypeResolver $idScalarTypeResolver,
     ) {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

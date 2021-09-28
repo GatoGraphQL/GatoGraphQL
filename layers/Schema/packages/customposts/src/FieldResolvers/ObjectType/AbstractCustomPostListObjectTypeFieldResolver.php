@@ -41,7 +41,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     ) {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->customPostTypeAPI = $customPostTypeAPI;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

@@ -49,7 +49,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     ) {
         $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
         $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

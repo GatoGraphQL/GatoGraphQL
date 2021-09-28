@@ -17,7 +17,7 @@ class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
         MenuTypeAPIInterface $menuTypeAPI,
     ) {
         $this->menuTypeAPI = $menuTypeAPI;
-        }
+    }
 
     public function getObjects(array $ids): array
     {

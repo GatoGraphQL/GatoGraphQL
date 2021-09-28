@@ -37,7 +37,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->userRoleTypeAPI = $userRoleTypeAPI;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

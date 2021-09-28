@@ -30,7 +30,7 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
     ) {
         $this->commentTypeAPI = $commentTypeAPI;
         $this->commentTypeDataLoader = $commentTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

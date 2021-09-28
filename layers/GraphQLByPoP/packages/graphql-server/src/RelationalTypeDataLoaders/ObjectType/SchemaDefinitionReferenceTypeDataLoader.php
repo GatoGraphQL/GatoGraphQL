@@ -18,7 +18,7 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ) {
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
-        }
+    }
 
     /**
      * @return AbstractSchemaDefinitionReferenceObject[]

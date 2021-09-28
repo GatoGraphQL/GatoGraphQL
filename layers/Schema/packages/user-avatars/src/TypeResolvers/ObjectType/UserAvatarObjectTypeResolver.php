@@ -27,7 +27,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
         UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
     ) {
         $this->userAvatarTypeDataLoader = $userAvatarTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

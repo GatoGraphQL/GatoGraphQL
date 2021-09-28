@@ -38,7 +38,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->stanceObjectTypeResolver = $stanceObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

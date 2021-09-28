@@ -33,7 +33,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->siteObjectTypeResolver = $siteObjectTypeResolver;
         $this->site = $site;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

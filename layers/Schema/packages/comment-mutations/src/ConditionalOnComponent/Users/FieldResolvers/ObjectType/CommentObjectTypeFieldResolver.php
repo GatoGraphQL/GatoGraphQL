@@ -44,7 +44,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     ) {
         $this->userCommentTypeAPI = $userCommentTypeAPI;
         $this->userTypeAPI = $userTypeAPI;
-        }
+    }
 
     /**
      * Execute before the upstream class

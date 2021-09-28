@@ -60,7 +60,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->errorProvider = $errorProvider;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

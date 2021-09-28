@@ -29,7 +29,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-        }
+    }
 
     protected function supportsTitle()
     {

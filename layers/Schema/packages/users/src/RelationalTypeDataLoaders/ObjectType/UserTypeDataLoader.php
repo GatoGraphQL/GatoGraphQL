@@ -20,7 +20,7 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;
-        }
+    }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {

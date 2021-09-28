@@ -28,7 +28,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         ObjectScalarTypeResolver $objectScalarTypeResolver,
     ) {
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

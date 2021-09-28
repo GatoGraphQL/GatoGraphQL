@@ -18,7 +18,7 @@ class ApplicationStateHookSet extends AbstractHookSet
         CMSRoutingStateServiceInterface $cmsRoutingStateService,
     ) {
         $this->cmsRoutingStateService = $cmsRoutingStateService;
-        }
+    }
 
     protected function init(): void
     {

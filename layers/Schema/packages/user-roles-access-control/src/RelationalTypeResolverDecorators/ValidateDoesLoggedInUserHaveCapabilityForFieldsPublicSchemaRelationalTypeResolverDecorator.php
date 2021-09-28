@@ -26,7 +26,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaRelationalTypeR
     ) {
         $this->accessControlManager = $accessControlManager;
         $this->validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver = $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
-        }
+    }
 
     protected function getConfigurationEntries(): array
     {

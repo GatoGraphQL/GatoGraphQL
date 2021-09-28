@@ -28,7 +28,7 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->postTypeAPI = $postTypeAPI;
         $this->postTagTypeMutationAPI = $postTagTypeMutationAPI;
-        }
+    }
 
     protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface
     {

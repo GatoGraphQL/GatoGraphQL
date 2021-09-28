@@ -27,7 +27,7 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
     ) {
         $this->mediaTypeResolver = $mediaTypeResolver;
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
-        }
+    }
 
     protected function init(): void
     {

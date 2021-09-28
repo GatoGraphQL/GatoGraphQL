@@ -37,7 +37,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->userAvatarTypeAPI = $userAvatarTypeAPI;
         $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
         $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

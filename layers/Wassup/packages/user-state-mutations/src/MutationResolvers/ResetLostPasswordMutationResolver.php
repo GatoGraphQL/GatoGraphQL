@@ -21,7 +21,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;
-        }
+    }
 
     public function getErrorType(): int
     {

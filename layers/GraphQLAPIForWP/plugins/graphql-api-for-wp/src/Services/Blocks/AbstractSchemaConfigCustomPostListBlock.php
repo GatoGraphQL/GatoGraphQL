@@ -24,7 +24,7 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
     ) {
         $this->blockRenderingHelpers = $blockRenderingHelpers;
         $this->cptUtils = $cptUtils;
-        }
+    }
 
     abstract protected function getAttributeName(): string;
 

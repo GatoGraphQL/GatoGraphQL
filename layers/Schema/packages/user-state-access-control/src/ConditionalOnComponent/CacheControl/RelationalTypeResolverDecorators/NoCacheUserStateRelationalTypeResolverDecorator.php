@@ -31,7 +31,7 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
         $this->validateIsUserLoggedInForDirectivesDirectiveResolver = $validateIsUserLoggedInForDirectivesDirectiveResolver;
         $this->validateIsUserNotLoggedInDirectiveResolver = $validateIsUserNotLoggedInDirectiveResolver;
         $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver = $validateIsUserNotLoggedInForDirectivesDirectiveResolver;
-        }
+    }
 
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {

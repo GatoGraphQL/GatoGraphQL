@@ -20,7 +20,7 @@ class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationRe
         UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver,
     ) {
         $this->updateUserAvatarMutationResolver = $updateUserAvatarMutationResolver;
-        }
+    }
     
     public function getMutationResolver(): MutationResolverInterface
     {

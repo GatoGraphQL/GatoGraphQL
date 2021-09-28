@@ -32,7 +32,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         InterfaceTypeResolverInterface $interfaceTypeResolver,
     ) {
         $this->interfaceTypeResolver = $interfaceTypeResolver;
-        }
+    }
 
     public function getTypeName(): string
     {

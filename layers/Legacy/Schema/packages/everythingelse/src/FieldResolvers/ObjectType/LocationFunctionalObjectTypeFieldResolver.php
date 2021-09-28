@@ -28,7 +28,7 @@ class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         URLScalarTypeResolver $urlScalarTypeResolver,
     ) {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

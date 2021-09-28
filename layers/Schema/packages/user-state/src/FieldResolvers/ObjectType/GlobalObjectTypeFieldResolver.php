@@ -28,7 +28,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

@@ -41,7 +41,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
     ) {
         $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-        }
+    }
 
     public function getModulesToProcess(): array
     {

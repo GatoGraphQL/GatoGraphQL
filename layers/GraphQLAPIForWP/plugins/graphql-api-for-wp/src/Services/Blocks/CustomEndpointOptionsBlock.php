@@ -26,7 +26,7 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
         CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
         $this->customEndpointBlockCategory = $customEndpointBlockCategory;
-        }
+    }
 
     protected function getBlockName(): string
     {

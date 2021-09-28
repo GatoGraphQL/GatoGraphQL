@@ -31,7 +31,7 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
     ) {
         $this->menuTypeDataLoader = $menuTypeDataLoader;
         $this->menuTypeAPI = $menuTypeAPI;
-        }
+    }
 
     public function getTypeName(): string
     {

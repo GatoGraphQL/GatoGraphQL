@@ -24,7 +24,7 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
     ) {
         $this->accessControlBlock = $accessControlBlock;
         $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;
-        }
+    }
 
     /**
      * Custom Post Type name

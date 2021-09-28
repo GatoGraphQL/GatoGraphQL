@@ -17,7 +17,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;
-        }
+    }
 
     public function validateErrors(array $form_data): ?array
     {

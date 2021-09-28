@@ -19,7 +19,7 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
         SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
     ) {
         $this->schemaConfigurationBlockCategory = $schemaConfigurationBlockCategory;
-        }
+    }
 
     protected function isDynamicBlock(): bool
     {

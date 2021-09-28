@@ -20,7 +20,7 @@ class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutatio
         UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver,
     ) {
         $this->updateMyPreferencesMutationResolver = $updateMyPreferencesMutationResolver;
-        }
+    }
     
     public function getMutationResolver(): MutationResolverInterface
     {

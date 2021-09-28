@@ -22,7 +22,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
         AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient,
     ) {
         $this->adminGraphiQLWithExplorerClient = $adminGraphiQLWithExplorerClient;
-        }
+    }
 
     protected function getGraphiQLWithExplorerClientHTML(): string
     {

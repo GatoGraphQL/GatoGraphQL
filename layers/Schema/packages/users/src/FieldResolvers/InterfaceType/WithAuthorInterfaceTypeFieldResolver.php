@@ -25,7 +25,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
         UserObjectTypeResolver $userObjectTypeResolver,
     ) {
         $this->userObjectTypeResolver = $userObjectTypeResolver;
-        }
+    }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

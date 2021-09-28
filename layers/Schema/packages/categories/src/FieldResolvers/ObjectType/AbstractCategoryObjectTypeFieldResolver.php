@@ -35,7 +35,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-        }
+    }
 
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {

@@ -22,7 +22,7 @@ abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUp
         PostTypeAPIInterface $postTypeAPI,
     ) {
         $this->postTypeAPI = $postTypeAPI;
-        }
+    }
 
     public function getCustomPostType(): string
     {

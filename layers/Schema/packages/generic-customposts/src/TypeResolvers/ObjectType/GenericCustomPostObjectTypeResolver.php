@@ -27,7 +27,7 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
         GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader,
     ) {
         $this->genericCustomPostTypeDataLoader = $genericCustomPostTypeDataLoader;
-        }
+    }
 
     public function getTypeName(): string
     {

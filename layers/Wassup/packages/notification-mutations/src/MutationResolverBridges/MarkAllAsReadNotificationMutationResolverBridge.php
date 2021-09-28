@@ -20,7 +20,7 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
         MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver,
     ) {
         $this->markAllAsReadNotificationMutationResolver = $markAllAsReadNotificationMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

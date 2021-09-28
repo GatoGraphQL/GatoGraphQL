@@ -19,7 +19,7 @@ class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResol
         VolunteerMutationResolver $volunteerMutationResolver,
     ) {
         $this->volunteerMutationResolver = $volunteerMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

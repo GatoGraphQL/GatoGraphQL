@@ -30,7 +30,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ) {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

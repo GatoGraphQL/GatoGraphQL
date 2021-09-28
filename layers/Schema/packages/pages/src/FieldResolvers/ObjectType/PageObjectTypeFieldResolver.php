@@ -46,7 +46,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
         $this->pageTypeAPI = $pageTypeAPI;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

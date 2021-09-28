@@ -29,7 +29,7 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

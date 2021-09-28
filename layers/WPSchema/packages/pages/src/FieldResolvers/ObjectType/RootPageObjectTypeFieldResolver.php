@@ -30,7 +30,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         PageObjectTypeResolver $pageObjectTypeResolver,
     ) {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

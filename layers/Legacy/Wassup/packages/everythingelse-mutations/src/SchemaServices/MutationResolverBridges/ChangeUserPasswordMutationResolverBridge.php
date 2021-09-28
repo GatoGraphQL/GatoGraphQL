@@ -20,7 +20,7 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
         ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver,
     ) {
         $this->changeUserPasswordMutationResolver = $changeUserPasswordMutationResolver;
-        }
+    }
     
     public function getMutationResolver(): MutationResolverInterface
     {

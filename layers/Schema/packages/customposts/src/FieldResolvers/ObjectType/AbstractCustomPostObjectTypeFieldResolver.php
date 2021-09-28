@@ -37,7 +37,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $this->dateFormatter = $dateFormatter;
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
         $this->isCustomPostInterfaceTypeFieldResolver = $isCustomPostInterfaceTypeFieldResolver;
-        }
+    }
 
     public function getFieldNamesToResolve(): array
     {

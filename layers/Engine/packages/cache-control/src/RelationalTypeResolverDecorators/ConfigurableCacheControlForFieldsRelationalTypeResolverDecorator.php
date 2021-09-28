@@ -19,7 +19,7 @@ class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends A
         CacheControlManagerInterface $cacheControlManager,
     ) {
         $this->cacheControlManager = $cacheControlManager;
-        }
+    }
 
     protected function getConfigurationEntries(): array
     {

@@ -38,7 +38,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $this->userObjectTypeResolver = $userObjectTypeResolver;
         $this->loginMutationResolver = $loginMutationResolver;
         $this->logoutMutationResolver = $logoutMutationResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

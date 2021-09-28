@@ -18,7 +18,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         UserTypeAPIInterface $userTypeAPI,
     ) {
         $this->userTypeAPI = $userTypeAPI;
-        }
+    }
     
     protected function getEmailContent($form_data)
     {

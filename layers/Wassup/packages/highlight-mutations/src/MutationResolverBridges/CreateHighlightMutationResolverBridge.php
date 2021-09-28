@@ -18,7 +18,7 @@ class CreateHighlightMutationResolverBridge extends AbstractCreateUpdateHighligh
         CreateHighlightMutationResolver $createHighlightMutationResolver,
     ) {
         $this->createHighlightMutationResolver = $createHighlightMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

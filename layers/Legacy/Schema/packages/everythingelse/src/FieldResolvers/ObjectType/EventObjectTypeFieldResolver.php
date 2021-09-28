@@ -36,7 +36,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

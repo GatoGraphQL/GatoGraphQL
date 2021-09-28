@@ -17,7 +17,7 @@ class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
         MutationRoot $mutationRoot,
     ) {
         $this->mutationRoot = $mutationRoot;
-        }
+    }
 
     public function getObjects(array $ids): array
     {

@@ -31,7 +31,7 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     ) {
         $this->pageTypeDataLoader = $pageTypeDataLoader;
         $this->pageTypeAPI = $pageTypeAPI;
-        }
+    }
 
     public function getTypeName(): string
     {

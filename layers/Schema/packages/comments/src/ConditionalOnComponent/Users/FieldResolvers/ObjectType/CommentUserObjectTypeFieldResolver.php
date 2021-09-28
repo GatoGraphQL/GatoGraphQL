@@ -30,7 +30,7 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ) {
         $this->commentTypeAPI = $commentTypeAPI;
         $this->userObjectTypeResolver = $userObjectTypeResolver;
-        }
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

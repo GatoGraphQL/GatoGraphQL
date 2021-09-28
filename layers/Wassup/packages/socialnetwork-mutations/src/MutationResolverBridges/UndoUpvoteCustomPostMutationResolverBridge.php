@@ -20,7 +20,7 @@ class UndoUpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdat
         UndoUpvoteCustomPostMutationResolver $undoUpvoteCustomPostMutationResolver,
     ) {
         $this->undoUpvoteCustomPostMutationResolver = $undoUpvoteCustomPostMutationResolver;
-        }
+    }
 
     public function getMutationResolver(): MutationResolverInterface
     {

@@ -22,7 +22,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
         $this->postTagTypeAPI = $postTagTypeAPI;
-        }
+    }
 
     /**
      * @return array<string, array<array>>

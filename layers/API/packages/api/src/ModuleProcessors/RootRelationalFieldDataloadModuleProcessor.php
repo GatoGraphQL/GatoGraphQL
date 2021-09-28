@@ -30,7 +30,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
         $this->schemaDefinitionService = $schemaDefinitionService;
-        }
+    }
 
     public function getModulesToProcess(): array
     {
