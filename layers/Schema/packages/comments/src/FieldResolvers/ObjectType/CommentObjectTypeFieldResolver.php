@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -47,41 +48,43 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
 {
     use WithLimitFieldArgResolverTrait;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected URLScalarTypeResolver $urlScalarTypeResolver,
-        protected EmailScalarTypeResolver $emailScalarTypeResolver,
-        protected IDScalarTypeResolver $idScalarTypeResolver,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected DateScalarTypeResolver $dateScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected CommentObjectTypeResolver $commentObjectTypeResolver,
-        protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
-        protected DateFormatterInterface $dateFormatter,
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected EmailScalarTypeResolver $emailScalarTypeResolver;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected CommentObjectTypeResolver $commentObjectTypeResolver;
+    protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver;
+    protected DateFormatterInterface $dateFormatter;
+
+    #[Required]
+    public function autowireCommentObjectTypeFieldResolver(
+        CommentTypeAPIInterface $commentTypeAPI,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        URLScalarTypeResolver $urlScalarTypeResolver,
+        EmailScalarTypeResolver $emailScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        DateScalarTypeResolver $dateScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        CommentObjectTypeResolver $commentObjectTypeResolver,
+        CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
+        DateFormatterInterface $dateFormatter,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
+        $this->dateFormatter = $dateFormatter;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

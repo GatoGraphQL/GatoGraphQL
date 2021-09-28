@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\ElementalInterfaceTypeFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -22,29 +23,13 @@ use PoP\Translation\TranslationAPIInterface;
 
 class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
+    protected ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver;
+
+    #[Required]
+    public function autowireElementalObjectTypeFieldResolver(
+        ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

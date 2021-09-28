@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\GenericCustomPosts\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -42,33 +43,19 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
 {
     use WithLimitFieldArgResolverTrait;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver;
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+
+    #[Required]
+    public function autowireRootGenericCustomPostObjectTypeFieldResolver(
+        IntScalarTypeResolver $intScalarTypeResolver,
+        GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
+        $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

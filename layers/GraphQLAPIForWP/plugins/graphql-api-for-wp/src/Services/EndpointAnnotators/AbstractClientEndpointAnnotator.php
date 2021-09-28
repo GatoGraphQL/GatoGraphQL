@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
@@ -15,16 +16,16 @@ use WP_Post;
 
 abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator implements ClientEndpointAnnotatorInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        protected BlockHelpers $blockHelpers,
-        protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+    protected BlockHelpers $blockHelpers;
+    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
+
+    #[Required]
+    public function autowireAbstractClientEndpointAnnotator(
+        BlockHelpers $blockHelpers,
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-        );
+        $this->blockHelpers = $blockHelpers;
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
     }
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface

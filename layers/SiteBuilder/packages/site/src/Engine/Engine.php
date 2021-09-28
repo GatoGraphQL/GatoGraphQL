@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Site\Engine;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
@@ -23,50 +24,17 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\LooseContractManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\Application\Engine\Engine as UpstreamEngine;
 
-class Engine extends \PoP\Application\Engine\Engine
+class Engine extends UpstreamEngine
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        DataStructureManagerInterface $dataStructureManager,
-        InstanceManagerInterface $instanceManager,
-        ModelInstanceInterface $modelInstance,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        ModulePathHelpersInterface $modulePathHelpers,
-        ModulePathManagerInterface $modulePathManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ModuleFilterManagerInterface $moduleFilterManager,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CheckpointProcessorManagerInterface $checkpointProcessorManager,
-        DataloadHelperServiceInterface $dataloadHelperService,
-        EntryModuleManagerInterface $entryModuleManager,
-        RequestHelperServiceInterface $requestHelperService,
-        LooseContractManagerInterface $looseContractManager,
-        CacheControlEngineInterface $cacheControlEngine,
-        protected ApplicationStateHelperServiceInterface $applicationStateHelperService,
-        ?CacheInterface $persistentCache = null
+    protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
+
+    #[Required]
+    public function autowireSiteEngine(
+        ApplicationStateHelperServiceInterface $applicationStateHelperService
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $dataStructureManager,
-            $instanceManager,
-            $modelInstance,
-            $feedbackMessageStore,
-            $modulePathHelpers,
-            $modulePathManager,
-            $fieldQueryInterpreter,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $checkpointProcessorManager,
-            $dataloadHelperService,
-            $entryModuleManager,
-            $requestHelperService,
-            $looseContractManager,
-            $cacheControlEngine,
-            $persistentCache,
-        );
+        $this->applicationStateHelperService = $applicationStateHelperService;
     }
 
     public function outputResponse(): void

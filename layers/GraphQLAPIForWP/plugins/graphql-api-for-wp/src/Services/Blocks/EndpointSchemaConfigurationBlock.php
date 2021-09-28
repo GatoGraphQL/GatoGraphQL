@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -30,23 +31,19 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE = -1;
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT = -2;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        protected BlockRenderingHelpers $blockRenderingHelpers,
-        protected CPTUtils $cptUtils,
-        protected EndpointBlockCategory $endpointBlockCategory,
+    protected BlockRenderingHelpers $blockRenderingHelpers;
+    protected CPTUtils $cptUtils;
+    protected EndpointBlockCategory $endpointBlockCategory;
+
+    #[Required]
+    public function autowireEndpointSchemaConfigurationBlock(
+        BlockRenderingHelpers $blockRenderingHelpers,
+        CPTUtils $cptUtils,
+        EndpointBlockCategory $endpointBlockCategory,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
+        $this->blockRenderingHelpers = $blockRenderingHelpers;
+        $this->cptUtils = $cptUtils;
+        $this->endpointBlockCategory = $endpointBlockCategory;
     }
 
     protected function getBlockName(): string

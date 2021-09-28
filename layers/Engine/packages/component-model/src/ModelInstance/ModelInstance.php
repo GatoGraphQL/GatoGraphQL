@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModelInstance;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
@@ -17,12 +18,18 @@ class ModelInstance implements ModelInstanceInterface
     public const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':componentsFromVars:postOrGetChange';
     public const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':componentsFromVars:result';
 
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI,
-        protected ApplicationInfoInterface $applicationInfo,
-        protected DefinitionManagerInterface $definitionManager,
-    ) {
+    protected TranslationAPIInterface $translationAPI;
+    protected HooksAPIInterface $hooksAPI;
+    protected ApplicationInfoInterface $applicationInfo;
+    protected DefinitionManagerInterface $definitionManager;
+
+    #[Required]
+    public function autowireModelInstance(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->hooksAPI = $hooksAPI;
+        $this->applicationInfo = $applicationInfo;
+        $this->definitionManager = $definitionManager;
     }
 
     public function getModelInstanceId(): string

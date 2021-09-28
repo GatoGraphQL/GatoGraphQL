@@ -10,22 +10,17 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\InviteUsersMutationResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected InviteUsersMutationResolver $inviteUsersMutationResolver,
+    protected InviteUsersMutationResolver $inviteUsersMutationResolver;
+    
+    #[Required]
+    public function autowireInviteUsersMutationResolverBridge(
+        InviteUsersMutationResolver $inviteUsersMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->inviteUsersMutationResolver = $inviteUsersMutationResolver;
     }
     
     public function getMutationResolver(): MutationResolverInterface

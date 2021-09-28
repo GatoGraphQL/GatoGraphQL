@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLQuery\Schema;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use GraphQLByPoP\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
 use GraphQLByPoP\GraphQLParser\Execution\Request;
@@ -31,12 +32,18 @@ use PoP\Translation\TranslationAPIInterface;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected IncludeDirectiveResolver $includeDirectiveResolver,
-    ) {
+    protected TranslationAPIInterface $translationAPI;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected IncludeDirectiveResolver $includeDirectiveResolver;
+
+    #[Required]
+    public function autowireGraphQLQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, IncludeDirectiveResolver $includeDirectiveResolver)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->includeDirectiveResolver = $includeDirectiveResolver;
     }
 
     /**

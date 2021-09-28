@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -27,31 +28,19 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected SchemaObjectTypeResolver $schemaObjectTypeResolver,
-        protected TypeObjectTypeResolver $typeObjectTypeResolver,
-        protected SchemaTypeDataLoader $schemaTypeDataLoader,
+    protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
+    protected TypeObjectTypeResolver $typeObjectTypeResolver;
+    protected SchemaTypeDataLoader $schemaTypeDataLoader;
+
+    #[Required]
+    public function autowireRootObjectTypeFieldResolver(
+        SchemaObjectTypeResolver $schemaObjectTypeResolver,
+        TypeObjectTypeResolver $typeObjectTypeResolver,
+        SchemaTypeDataLoader $schemaTypeDataLoader,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+        $this->schemaTypeDataLoader = $schemaTypeDataLoader;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

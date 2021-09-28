@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -24,26 +25,16 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected LocationObjectTypeResolver $locationObjectTypeResolver,
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected LocationObjectTypeResolver $locationObjectTypeResolver;
+    
+    #[Required]
+    public function autowireCustomPostAndUserObjectTypeFieldResolver(
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        LocationObjectTypeResolver $locationObjectTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-        );
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->locationObjectTypeResolver = $locationObjectTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

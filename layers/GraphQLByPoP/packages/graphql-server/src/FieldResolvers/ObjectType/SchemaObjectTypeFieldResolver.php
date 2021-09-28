@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -25,30 +26,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected TypeObjectTypeResolver $typeObjectTypeResolver,
-        protected DirectiveObjectTypeResolver $directiveObjectTypeResolver,
+    protected TypeObjectTypeResolver $typeObjectTypeResolver;
+    protected DirectiveObjectTypeResolver $directiveObjectTypeResolver;
+
+    #[Required]
+    public function autowireSchemaObjectTypeFieldResolver(
+        TypeObjectTypeResolver $typeObjectTypeResolver,
+        DirectiveObjectTypeResolver $directiveObjectTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+        $this->directiveObjectTypeResolver = $directiveObjectTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

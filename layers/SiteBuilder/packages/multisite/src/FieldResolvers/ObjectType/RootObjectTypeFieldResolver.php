@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -25,30 +26,16 @@ use PoP\Translation\TranslationAPIInterface;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected SiteObjectTypeResolver $siteObjectTypeResolver,
-        protected Site $site,
+    protected SiteObjectTypeResolver $siteObjectTypeResolver;
+    protected Site $site;
+
+    #[Required]
+    public function autowireRootObjectTypeFieldResolver(
+        SiteObjectTypeResolver $siteObjectTypeResolver,
+        Site $site,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->siteObjectTypeResolver = $siteObjectTypeResolver;
+        $this->site = $site;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

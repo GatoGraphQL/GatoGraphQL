@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomyMeta\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\TaxonomyMeta\ComponentConfiguration;
 use PoPSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 
 abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
 {
-    public function __construct(
-        protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
-    ) {
+    protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
+
+    #[Required]
+    public function autowireAbstractTaxonomyMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    {
+        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }
 
     final public function getTaxonomyTermMeta(string | int $termID, string $key, bool $single = false): mixed

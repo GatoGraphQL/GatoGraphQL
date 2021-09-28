@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -24,36 +25,13 @@ use PoP\Translation\TranslationAPIInterface;
 class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_ROOT = 'dataload-relationalfields-root';
+    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ModulePathHelpersInterface $modulePathHelpers,
-        ModuleFilterManagerInterface $moduleFilterManager,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CMSServiceInterface $cmsService,
-        NameResolverInterface $nameResolver,
-        DataloadHelperServiceInterface $dataloadHelperService,
-        RequestHelperServiceInterface $requestHelperService,
-        ModulePaths $modulePaths,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
+    #[Required]
+    public function autowireRootRelationalFieldDataloadModuleProcessor(
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $modulePathHelpers,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $cmsService,
-            $nameResolver,
-            $dataloadHelperService,
-            $requestHelperService,
-            $modulePaths,
-        );
+        $this->schemaDefinitionService = $schemaDefinitionService;
     }
 
     public function getModulesToProcess(): array

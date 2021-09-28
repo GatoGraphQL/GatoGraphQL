@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUserMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -14,19 +15,13 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 
 class ContactUserMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected ContactUserMutationResolver $contactUserMutationResolver,
+    protected ContactUserMutationResolver $contactUserMutationResolver;
+
+    #[Required]
+    public function autowireContactUserMutationResolverBridge(
+        ContactUserMutationResolver $contactUserMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->contactUserMutationResolver = $contactUserMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

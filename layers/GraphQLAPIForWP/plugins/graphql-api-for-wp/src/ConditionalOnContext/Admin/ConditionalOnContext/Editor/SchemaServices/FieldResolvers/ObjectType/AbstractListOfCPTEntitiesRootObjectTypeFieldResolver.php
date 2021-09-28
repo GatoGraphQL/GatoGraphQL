@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor\SchemaServices\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
@@ -32,32 +33,16 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
  */
 abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CustomPostObjectTypeResolver $customPostObjectTypeResolver,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    protected CustomPostObjectTypeResolver $customPostObjectTypeResolver;
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+
+    #[Required]
+    public function autowireAbstractListOfCPTEntitiesRootObjectTypeFieldResolver(
+        CustomPostObjectTypeResolver $customPostObjectTypeResolver,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
+        $this->customPostObjectTypeResolver = $customPostObjectTypeResolver;
+        $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

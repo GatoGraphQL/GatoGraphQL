@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
@@ -16,17 +17,13 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        MenuPageHelper $menuPageHelper,
-        EndpointHelpers $endpointHelpers,
-        protected AboutMenuPage $aboutMenuPage,
+    protected AboutMenuPage $aboutMenuPage;
+
+    #[Required]
+    public function autowireReleaseNotesAboutMenuPage(
+        AboutMenuPage $aboutMenuPage,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $menuPageHelper,
-            $endpointHelpers
-        );
+        $this->aboutMenuPage = $aboutMenuPage;
     }
 
     public function getMenuPageSlug(): string

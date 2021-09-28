@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\ModuleProcessors\FormInputs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -36,36 +37,13 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public const MODULE_FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
+    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ModulePathHelpersInterface $modulePathHelpers,
-        ModuleFilterManagerInterface $moduleFilterManager,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CMSServiceInterface $cmsService,
-        NameResolverInterface $nameResolver,
-        DataloadHelperServiceInterface $dataloadHelperService,
-        RequestHelperServiceInterface $requestHelperService,
-        ModulePaths $modulePaths,
-        protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
+    #[Required]
+    public function autowireFilterInputModuleProcessor(
+        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $modulePathHelpers,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $cmsService,
-            $nameResolver,
-            $dataloadHelperService,
-            $requestHelperService,
-            $modulePaths,
-        );
+        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
     }
 
     public function getModulesToProcess(): array

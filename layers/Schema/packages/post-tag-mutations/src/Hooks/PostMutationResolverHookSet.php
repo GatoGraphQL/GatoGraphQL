@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagMutations\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -17,21 +18,19 @@ use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected PostTypeAPIInterface $postTypeAPI,
-        protected PostTagTypeMutationAPIInterface $postTagTypeMutationAPI,
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected PostTypeAPIInterface $postTypeAPI;
+    protected PostTagTypeMutationAPIInterface $postTagTypeMutationAPI;
+
+    #[Required]
+    public function autowirePostMutationResolverHookSet(
+        PostObjectTypeResolver $postObjectTypeResolver,
+        PostTypeAPIInterface $postTypeAPI,
+        PostTagTypeMutationAPIInterface $postTagTypeMutationAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $customPostTypeAPI,
-        );
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->postTypeAPI = $postTypeAPI;
+        $this->postTagTypeMutationAPI = $postTagTypeMutationAPI;
     }
 
     protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface

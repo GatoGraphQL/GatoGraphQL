@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -14,19 +15,13 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        CPTUtils $cptUtils,
-        protected CacheControlBlock $cacheControlBlock,
+    protected CacheControlBlock $cacheControlBlock;
+
+    #[Required]
+    public function autowireGraphQLCacheControlListCustomPostType(
+        CacheControlBlock $cacheControlBlock,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $cptUtils,
-        );
+        $this->cacheControlBlock = $cacheControlBlock;
     }
 
     /**

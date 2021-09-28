@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Cache;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use DateInterval;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use Psr\Cache\CacheItemInterface;
@@ -13,10 +14,17 @@ class Cache implements CacheInterface
 {
     use ReplaceCurrentExecutionDataWithPlaceholdersTrait;
 
+    protected ModelInstanceInterface $modelInstance;
+
     public function __construct(
         protected CacheItemPoolInterface $cacheItemPool,
-        protected ModelInstanceInterface $modelInstance
     ) {
+    }
+
+    #[Required]
+    public function autowireCache(ModelInstanceInterface $modelInstance)
+    {
+        $this->modelInstance = $modelInstance;
     }
 
     protected function getKey(string $id, string $type)

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
@@ -21,17 +22,13 @@ abstract class AbstractEditorScript extends AbstractScript
 {
     use HasDocumentationScriptTrait;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        GeneralUtils $generalUtils,
-        protected EditorHelpers $editorHelpers,
+    protected EditorHelpers $editorHelpers;
+
+    #[Required]
+    public function autowireAbstractEditorScript(
+        EditorHelpers $editorHelpers,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $generalUtils,
-        );
+        $this->editorHelpers = $editorHelpers;
     }
 
     /**

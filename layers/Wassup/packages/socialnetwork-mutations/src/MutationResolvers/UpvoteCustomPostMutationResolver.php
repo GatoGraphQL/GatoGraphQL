@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -14,17 +15,13 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\DownvoteCustomPostMu
 
 class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomPostMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver,
+    protected DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver;
+
+    #[Required]
+    public function autowireUpvoteCustomPostMutationResolver(
+        DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $customPostTypeAPI,
-        );
+        $this->downvoteCustomPostMutationResolver = $downvoteCustomPostMutationResolver;
     }
 
     public function validateErrors(array $form_data): ?array

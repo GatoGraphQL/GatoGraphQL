@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -14,16 +15,16 @@ use PoP\Translation\TranslationAPIInterface;
 
 class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        protected CMSServiceInterface $cmsService,
-        protected ApplicationInfoInterface $applicationInfo,
+    protected CMSServiceInterface $cmsService;
+    protected ApplicationInfoInterface $applicationInfo;
+
+    #[Required]
+    public function autowireActivatePluginsMutationResolver(
+        CMSServiceInterface $cmsService,
+        ApplicationInfoInterface $applicationInfo,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
+        $this->cmsService = $cmsService;
+        $this->applicationInfo = $applicationInfo;
     }
 
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code

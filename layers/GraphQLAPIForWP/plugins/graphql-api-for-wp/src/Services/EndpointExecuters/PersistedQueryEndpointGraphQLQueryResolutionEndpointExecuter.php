@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
@@ -16,17 +17,19 @@ use WP_Post;
 
 class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter implements PersistedQueryEndpointExecuterServiceTagInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
-        protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
-        protected GraphQLRequestVarsHooks $graphQLRequestVarsHooks,
+    protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
+    protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers;
+    protected GraphQLRequestVarsHooks $graphQLRequestVarsHooks;
+
+    #[Required]
+    public function autowirePersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter(
+        GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
+        GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
+        GraphQLRequestVarsHooks $graphQLRequestVarsHooks,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-        );
+        $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
+        $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
+        $this->graphQLRequestVarsHooks = $graphQLRequestVarsHooks;
     }
 
     public function getEnablingModule(): ?string

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
@@ -17,17 +18,13 @@ use PoPSchema\Users\Routing\RouteNatures;
 
 class VarsHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected UserRoleTypeAPIInterface $userRoleTypeAPI,
+    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+
+    #[Required]
+    public function autowireVarsHookSet(
+        UserRoleTypeAPIInterface $userRoleTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
     }
 
     protected function init(): void

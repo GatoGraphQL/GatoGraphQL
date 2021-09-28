@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\ConditionalOnComponent\Users\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -23,30 +24,16 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected UserMediaTypeAPIInterface $userMediaTypeAPI,
-        protected UserObjectTypeResolver $userObjectTypeResolver,
+    protected UserMediaTypeAPIInterface $userMediaTypeAPI;
+    protected UserObjectTypeResolver $userObjectTypeResolver;
+
+    #[Required]
+    public function autowireMediaUserObjectTypeFieldResolver(
+        UserMediaTypeAPIInterface $userMediaTypeAPI,
+        UserObjectTypeResolver $userObjectTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->userMediaTypeAPI = $userMediaTypeAPI;
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

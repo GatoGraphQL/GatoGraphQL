@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CommentMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -15,19 +16,13 @@ use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 
 class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
+    protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
+
+    #[Required]
+    public function autowireAddCommentToCustomPostMutationResolverBridge(
+        AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

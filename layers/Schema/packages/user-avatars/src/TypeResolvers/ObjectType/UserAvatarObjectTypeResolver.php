@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -22,33 +23,13 @@ use PoPSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType\UserAvatarTypeDat
 
 class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
-        protected UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
+    protected UserAvatarTypeDataLoader $userAvatarTypeDataLoader;
+
+    #[Required]
+    public function autowireUserAvatarObjectTypeResolver(
+        UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
+        $this->userAvatarTypeDataLoader = $userAvatarTypeDataLoader;
     }
 
     public function getTypeName(): string

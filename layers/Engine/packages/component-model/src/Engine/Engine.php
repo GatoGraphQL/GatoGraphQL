@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
@@ -100,25 +101,58 @@ class Engine implements EngineInterface
      * @var array<string,array<string,mixed>>
      */
     protected array $relationalTypeResolverNameIDsDataFields = [];
+    protected TranslationAPIInterface $translationAPI;
+    protected HooksAPIInterface $hooksAPI;
+    protected DataStructureManagerInterface $dataStructureManager;
+    protected InstanceManagerInterface $instanceManager;
+    protected ModelInstanceInterface $modelInstance;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected ModulePathHelpersInterface $modulePathHelpers;
+    protected ModulePathManagerInterface $modulePathManager;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected ModuleFilterManagerInterface $moduleFilterManager;
+    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    protected CheckpointProcessorManagerInterface $checkpointProcessorManager;
+    protected DataloadHelperServiceInterface $dataloadHelperService;
+    protected EntryModuleManagerInterface $entryModuleManager;
+    protected RequestHelperServiceInterface $requestHelperService;
+    protected ?CacheInterface $persistentCache = null;
 
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI,
-        protected DataStructureManagerInterface $dataStructureManager,
-        protected InstanceManagerInterface $instanceManager,
-        protected ModelInstanceInterface $modelInstance,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected ModulePathHelpersInterface $modulePathHelpers,
-        protected ModulePathManagerInterface $modulePathManager,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected ModuleFilterManagerInterface $moduleFilterManager,
-        protected ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CheckpointProcessorManagerInterface $checkpointProcessorManager,
-        protected DataloadHelperServiceInterface $dataloadHelperService,
-        protected EntryModuleManagerInterface $entryModuleManager,
-        protected RequestHelperServiceInterface $requestHelperService,
-        protected ?CacheInterface $persistentCache = null
+    #[Required]
+    public function autowireEngine(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        DataStructureManagerInterface $dataStructureManager,
+        InstanceManagerInterface $instanceManager,
+        ModelInstanceInterface $modelInstance,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        ModulePathHelpersInterface $modulePathHelpers,
+        ModulePathManagerInterface $modulePathManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        ModuleFilterManagerInterface $moduleFilterManager,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
+        CheckpointProcessorManagerInterface $checkpointProcessorManager,
+        DataloadHelperServiceInterface $dataloadHelperService,
+        EntryModuleManagerInterface $entryModuleManager,
+        RequestHelperServiceInterface $requestHelperService,
+        ?CacheInterface $persistentCache = null
     ) {
+        $this->translationAPI = $translationAPI;
+        $this->hooksAPI = $hooksAPI;
+        $this->dataStructureManager = $dataStructureManager;
+        $this->instanceManager = $instanceManager;
+        $this->modelInstance = $modelInstance;
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->modulePathHelpers = $modulePathHelpers;
+        $this->modulePathManager = $modulePathManager;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->moduleFilterManager = $moduleFilterManager;
+        $this->moduleProcessorManager = $moduleProcessorManager;
+        $this->checkpointProcessorManager = $checkpointProcessorManager;
+        $this->dataloadHelperService = $dataloadHelperService;
+        $this->entryModuleManager = $entryModuleManager;
+        $this->requestHelperService = $requestHelperService;
+        $this->persistentCache = $persistentCache;
     }
 
     public function getOutputData(): array

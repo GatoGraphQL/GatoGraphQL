@@ -6,8 +6,9 @@ namespace PoP\ConfigurationComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
+use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
 
-abstract class AbstractModuleProcessor extends \PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor implements ModuleProcessorInterface
+abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor implements ModuleProcessorInterface
 {
     //-------------------------------------------------
     // New PUBLIC Functions: Model Static Settings

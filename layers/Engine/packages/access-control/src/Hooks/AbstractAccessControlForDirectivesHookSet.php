@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Engine\Hooks\AbstractCMSBootHookSet;
 use PoP\Translation\TranslationAPIInterface;
@@ -15,17 +16,13 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected AccessControlManagerInterface $accessControlManager
+    protected AccessControlManagerInterface $accessControlManager;
+
+    #[Required]
+    public function autowireAbstractAccessControlForDirectivesHookSet(
+        AccessControlManagerInterface $accessControlManager
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->accessControlManager = $accessControlManager;
     }
 
     public function cmsBoot(): void

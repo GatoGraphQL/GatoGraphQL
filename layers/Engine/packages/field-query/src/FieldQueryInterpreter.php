@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\QueryParsing\QueryParserInterface;
 
@@ -55,12 +56,16 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 
     public const ALIAS_POSITION_KEY = 'pos';
     public const ALIAS_LENGTH_KEY = 'length';
+    protected TranslationAPIInterface $translationAPI;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected QueryParserInterface $queryParser;
 
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected QueryParserInterface $queryParser
-    ) {
+    #[Required]
+    public function autowireFieldQueryInterpreter(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->queryParser = $queryParser;
     }
 
     public function getFieldName(string $field): string

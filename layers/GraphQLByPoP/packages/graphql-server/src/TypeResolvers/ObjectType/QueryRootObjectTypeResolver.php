@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -26,35 +27,16 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 {
     use ReservedNameTypeResolverTrait;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
-        protected RootObjectTypeResolver $rootObjectTypeResolver,
-        protected QueryRootTypeDataLoader $queryRootTypeDataLoader,
+    protected RootObjectTypeResolver $rootObjectTypeResolver;
+    protected QueryRootTypeDataLoader $queryRootTypeDataLoader;
+
+    #[Required]
+    public function autowireQueryRootObjectTypeResolver(
+        RootObjectTypeResolver $rootObjectTypeResolver,
+        QueryRootTypeDataLoader $queryRootTypeDataLoader,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-            $rootObjectTypeResolver,
-        );
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+        $this->queryRootTypeDataLoader = $queryRootTypeDataLoader;
     }
 
     public function getTypeName(): string

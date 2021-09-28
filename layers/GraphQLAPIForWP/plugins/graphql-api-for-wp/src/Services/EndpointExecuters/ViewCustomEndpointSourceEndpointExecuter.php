@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
@@ -12,15 +13,13 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
+
+    #[Required]
+    public function autowireViewCustomEndpointSourceEndpointExecuter(
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-        );
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
     }
 
     public function getEnablingModule(): ?string

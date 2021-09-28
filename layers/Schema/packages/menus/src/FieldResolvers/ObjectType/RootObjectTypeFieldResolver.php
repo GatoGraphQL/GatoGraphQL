@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -30,33 +31,19 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected MenuObjectTypeResolver $menuObjectTypeResolver,
-        protected MenuTypeAPIInterface $menuTypeAPI,
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected MenuObjectTypeResolver $menuObjectTypeResolver;
+    protected MenuTypeAPIInterface $menuTypeAPI;
+
+    #[Required]
+    public function autowireRootObjectTypeFieldResolver(
+        IntScalarTypeResolver $intScalarTypeResolver,
+        MenuObjectTypeResolver $menuObjectTypeResolver,
+        MenuTypeAPIInterface $menuTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->menuObjectTypeResolver = $menuObjectTypeResolver;
+        $this->menuTypeAPI = $menuTypeAPI;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

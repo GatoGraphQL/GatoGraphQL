@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Menus;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
@@ -12,9 +13,12 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
  */
 abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService
 {
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-    ) {
+    protected InstanceManagerInterface $instanceManager;
+
+    #[Required]
+    public function autowireAbstractMenu(InstanceManagerInterface $instanceManager)
+    {
+        $this->instanceManager = $instanceManager;
     }
 
     abstract public function getName(): string;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
@@ -27,8 +28,9 @@ use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
 use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 
-class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implements FieldQueryInterpreterInterface
+class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
     // Cache the output from functions
     /**
@@ -92,15 +94,16 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      * @var array<string,array<string,string>>
      */
     private array $fieldsByTypeAndFieldOutputKey = [];
+    protected TypeCastingExecuterInterface $typeCastingExecuter;
+    protected InstanceManagerInterface $instanceManager;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        UpstreamFeedbackMessageStoreInterface $feedbackMessageStore,
-        protected TypeCastingExecuterInterface $typeCastingExecuter,
-        protected InstanceManagerInterface $instanceManager,
-        QueryParserInterface $queryParser,
+    #[Required]
+    public function autowireComponentModelFieldQueryInterpreter(
+        TypeCastingExecuterInterface $typeCastingExecuter,
+        InstanceManagerInterface $instanceManager,
     ) {
-        parent::__construct($translationAPI, $feedbackMessageStore, $queryParser);
+        $this->typeCastingExecuter = $typeCastingExecuter;
+        $this->instanceManager = $instanceManager;
     }
 
     /**

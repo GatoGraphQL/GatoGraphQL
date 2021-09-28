@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
@@ -32,36 +33,13 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     use FormMultipleInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_DATES = 'filterinput-dates';
+    protected FormInputHelperServiceInterface $formInputHelperService;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ModulePathHelpersInterface $modulePathHelpers,
-        ModuleFilterManagerInterface $moduleFilterManager,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CMSServiceInterface $cmsService,
-        NameResolverInterface $nameResolver,
-        DataloadHelperServiceInterface $dataloadHelperService,
-        RequestHelperServiceInterface $requestHelperService,
-        ModulePaths $modulePaths,
-        protected FormInputHelperServiceInterface $formInputHelperService,
+    #[Required]
+    public function autowireCommonFilterMultipleInputModuleProcessor(
+        FormInputHelperServiceInterface $formInputHelperService,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $modulePathHelpers,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $cmsService,
-            $nameResolver,
-            $dataloadHelperService,
-            $requestHelperService,
-            $modulePaths,
-        );
+        $this->formInputHelperService = $formInputHelperService;
     }
 
     public function getModulesToProcess(): array

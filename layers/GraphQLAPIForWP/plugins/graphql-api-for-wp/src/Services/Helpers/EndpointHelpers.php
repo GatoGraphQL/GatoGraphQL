@@ -9,13 +9,20 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class EndpointHelpers
 {
-    public function __construct(
-        protected PluginMenu $pluginMenu,
-        protected ModuleRegistryInterface $moduleRegistry
+    protected PluginMenu $pluginMenu;
+    protected ModuleRegistryInterface $moduleRegistry;
+
+    #[Required]
+    public function autowireEndpointHelpers(
+        PluginMenu $pluginMenu,
+        ModuleRegistryInterface $moduleRegistry,
     ) {
+        $this->pluginMenu = $pluginMenu;
+        $this->moduleRegistry = $moduleRegistry;
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Root\Component\ApplicationEvents;
@@ -11,9 +12,12 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyInstantiatedService
 {
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-    ) {
+    protected InstanceManagerInterface $instanceManager;
+
+    #[Required]
+    public function autowireAbstractSchemaConfiguratorExecuter(InstanceManagerInterface $instanceManager)
+    {
+        $this->instanceManager = $instanceManager;
     }
 
     public function getInstantiationEvent(): string

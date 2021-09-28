@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP\ErrorHandling;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Engine\ErrorHandling\AbstractErrorManager;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Translation\TranslationAPIInterface;
@@ -11,8 +12,12 @@ use WP_Error;
 
 class ErrorManager extends AbstractErrorManager
 {
-    public function __construct(protected TranslationAPIInterface $translationAPI)
+    protected TranslationAPIInterface $translationAPI;
+
+    #[Required]
+    public function autowireErrorManager(TranslationAPIInterface $translationAPI)
     {
+        $this->translationAPI = $translationAPI;
     }
 
     public function convertFromCMSToPoPError(object $cmsError): Error

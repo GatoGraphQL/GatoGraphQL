@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ShareMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -14,19 +15,13 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 
 class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected ShareByEmailMutationResolver $shareByEmailMutationResolver,
+    protected ShareByEmailMutationResolver $shareByEmailMutationResolver;
+
+    #[Required]
+    public function autowireShareByEmailMutationResolverBridge(
+        ShareByEmailMutationResolver $shareByEmailMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->shareByEmailMutationResolver = $shareByEmailMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

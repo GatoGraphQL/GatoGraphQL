@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\RoutingWP\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Brain\Cortex\Route\QueryRoute;
 use Brain\Cortex\Route\RouteCollectionInterface;
 use Brain\Cortex\Route\RouteInterface;
@@ -17,17 +18,13 @@ use PoP\Translation\TranslationAPIInterface;
 
 class SetupCortexHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected RoutingManagerInterface $routingManager,
+    protected RoutingManagerInterface $routingManager;
+
+    #[Required]
+    public function autowireSetupCortexHookSet(
+        RoutingManagerInterface $routingManager,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->routingManager = $routingManager;
     }
 
     protected function init(): void

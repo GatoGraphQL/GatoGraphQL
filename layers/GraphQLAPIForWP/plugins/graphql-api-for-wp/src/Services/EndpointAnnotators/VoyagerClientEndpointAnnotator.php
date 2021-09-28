@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -16,19 +17,13 @@ use WP_Post;
 
 class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        BlockHelpers $blockHelpers,
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        protected EndpointVoyagerBlock $endpointVoyagerBlock,
+    protected EndpointVoyagerBlock $endpointVoyagerBlock;
+
+    #[Required]
+    public function autowireVoyagerClientEndpointAnnotator(
+        EndpointVoyagerBlock $endpointVoyagerBlock,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $blockHelpers,
-            $graphQLCustomEndpointCustomPostType
-        );
+        $this->endpointVoyagerBlock = $endpointVoyagerBlock;
     }
 
     public function getEnablingModule(): ?string

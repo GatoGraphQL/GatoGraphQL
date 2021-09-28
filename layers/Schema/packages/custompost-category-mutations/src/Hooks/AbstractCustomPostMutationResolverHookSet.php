@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostCategoryMutations\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -21,17 +22,13 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverI
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+
+    #[Required]
+    public function autowireAbstractCustomPostMutationResolverHookSet(
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
     protected function init(): void

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
@@ -23,21 +24,13 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
 
     public const ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS = 'acceptVariablesAsURLParams';
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
+    protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
+
+    #[Required]
+    public function autowirePersistedQueryEndpointOptionsBlock(
+        PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
+        $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
     }
 
     protected function getBlockName(): string

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeResolvers\UnionType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -26,34 +27,13 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
      * Can't inject in constructor because of a circular reference
      */
     protected ?CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader = null;
+    protected InterfaceTypeResolverInterface $interfaceTypeResolver;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
-        protected InterfaceTypeResolverInterface $interfaceTypeResolver,
+    #[Required]
+    public function autowireCustomPostUnionTypeResolver(
+        InterfaceTypeResolverInterface $interfaceTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
+        $this->interfaceTypeResolver = $interfaceTypeResolver;
     }
 
     public function getTypeName(): string

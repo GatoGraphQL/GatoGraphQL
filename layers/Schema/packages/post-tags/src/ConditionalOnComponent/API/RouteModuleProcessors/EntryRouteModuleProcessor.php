@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\ConditionalOnComponent\API\RouteModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
@@ -17,13 +18,13 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        protected PostTagTypeAPIInterface $postTagTypeAPI,
+    protected PostTagTypeAPIInterface $postTagTypeAPI;
+
+    #[Required]
+    public function autowireEntryRouteModuleProcessor(
+        PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-        );
+        $this->postTagTypeAPI = $postTagTypeAPI;
     }
 
     /**

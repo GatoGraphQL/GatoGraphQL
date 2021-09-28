@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\ConditionalOnComponent\Users\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -36,54 +37,16 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
  */
 class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CommentTypeAPIInterface $commentTypeAPI,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-        EmailScalarTypeResolver $emailScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        DateScalarTypeResolver $dateScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        CommentObjectTypeResolver $commentObjectTypeResolver,
-        CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
-        DateFormatterInterface $dateFormatter,
-        protected UserCommentTypeAPIInterface $userCommentTypeAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
+    protected UserCommentTypeAPIInterface $userCommentTypeAPI;
+    protected UserTypeAPIInterface $userTypeAPI;
+
+    #[Required]
+    public function autowireCommentMutationsCommentObjectTypeFieldResolver(
+        UserCommentTypeAPIInterface $userCommentTypeAPI,
+        UserTypeAPIInterface $userTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-            $commentTypeAPI,
-            $stringScalarTypeResolver,
-            $urlScalarTypeResolver,
-            $emailScalarTypeResolver,
-            $idScalarTypeResolver,
-            $booleanScalarTypeResolver,
-            $dateScalarTypeResolver,
-            $intScalarTypeResolver,
-            $commentObjectTypeResolver,
-            $commentStatusEnumTypeResolver,
-            $dateFormatter,
-        );
+        $this->userCommentTypeAPI = $userCommentTypeAPI;
+        $this->userTypeAPI = $userTypeAPI;
     }
 
     /**

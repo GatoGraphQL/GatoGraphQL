@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\SchemaObjectTypeFieldResolver;
@@ -27,34 +28,16 @@ use PoP\Translation\TranslationAPIInterface;
 
 class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        TypeObjectTypeResolver $typeObjectTypeResolver,
-        DirectiveObjectTypeResolver $directiveObjectTypeResolver,
-        protected DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
-        protected DirectiveRegistryInterface $directiveRegistry,
+    protected DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver;
+    protected DirectiveRegistryInterface $directiveRegistry;
+
+    #[Required]
+    public function autowireFilterSystemDirectiveSchemaObjectTypeFieldResolver(
+        DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
+        DirectiveRegistryInterface $directiveRegistry,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $typeObjectTypeResolver,
-            $directiveObjectTypeResolver,
-        );
+        $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
+        $this->directiveRegistry = $directiveRegistry;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

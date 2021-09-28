@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
@@ -26,18 +27,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     public const SETTINGS_FIELD = 'graphql-api-settings';
 
     protected UserSettingsManagerInterface $userSettingsManager;
+    protected ModuleRegistryInterface $moduleRegistry;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        MenuPageHelper $menuPageHelper,
-        EndpointHelpers $endpointHelpers,
-        protected ModuleRegistryInterface $moduleRegistry,
+    #[Required]
+    public function autowireSettingsMenuPage(
+        ModuleRegistryInterface $moduleRegistry,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $menuPageHelper,
-            $endpointHelpers
-        );
+        $this->moduleRegistry = $moduleRegistry;
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 

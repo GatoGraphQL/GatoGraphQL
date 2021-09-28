@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Application\ModuleProcessors;
 
-class DataloadingConstants extends \PoP\ComponentModel\ModuleProcessors\DataloadingConstants
+use PoP\ComponentModel\ModuleProcessors\DataloadingConstants as UpstreamDataloadingConstants;
+
+class DataloadingConstants extends UpstreamDataloadingConstants
 {
     const LAZYLOAD = 'lazy-load';
     const EXTERNALLOAD = 'external-load';

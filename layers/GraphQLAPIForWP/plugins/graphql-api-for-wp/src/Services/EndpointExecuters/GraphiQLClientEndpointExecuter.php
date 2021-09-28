@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -16,18 +17,16 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        protected CustomEndpointGraphiQLClient $customEndpointGraphiQLClient,
-        protected GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator,
+    protected CustomEndpointGraphiQLClient $customEndpointGraphiQLClient;
+    protected GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator;
+
+    #[Required]
+    public function autowireGraphiQLClientEndpointExecuter(
+        CustomEndpointGraphiQLClient $customEndpointGraphiQLClient,
+        GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $graphQLCustomEndpointCustomPostType,
-        );
+        $this->customEndpointGraphiQLClient = $customEndpointGraphiQLClient;
+        $this->graphiQLClientEndpointAnnotator = $graphiQLClientEndpointAnnotator;
     }
 
     public function getEnablingModule(): ?string

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -13,17 +14,13 @@ use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class MainContentModuleHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected MainContentModule $mainContentModule
+    protected MainContentModule $mainContentModule;
+    
+    #[Required]
+    public function autowireMainContentModuleHookSet(
+        MainContentModule $mainContentModule
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->mainContentModule = $mainContentModule;
     }
 
     protected function init(): void

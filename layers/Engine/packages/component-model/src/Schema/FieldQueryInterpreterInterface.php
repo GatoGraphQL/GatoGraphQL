@@ -7,8 +7,9 @@ namespace PoP\ComponentModel\Schema;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\FieldQuery\FieldQueryInterpreterInterface as UpstreamFieldQueryInterpreterInterface;
 
-interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInterpreterInterface
+interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterInterface
 {
     /**
      * If two different fields for the same type have the same fieldOutputKey, then

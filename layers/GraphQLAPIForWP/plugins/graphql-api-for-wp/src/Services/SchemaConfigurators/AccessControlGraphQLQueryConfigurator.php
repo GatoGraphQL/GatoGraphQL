@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -20,24 +21,22 @@ use PoP\Hooks\HooksAPIInterface;
 
 class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGraphQLQueryConfigurator
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        TypeRegistryInterface $typeRegistry,
-        DirectiveRegistryInterface $directiveRegistry,
-        protected AccessControlBlock $accessControlBlock,
-        protected BlockHelpers $blockHelpers,
-        protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
-        protected AccessControlManagerInterface $accessControlManager,
+    protected AccessControlBlock $accessControlBlock;
+    protected BlockHelpers $blockHelpers;
+    protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry;
+    protected AccessControlManagerInterface $accessControlManager;
+
+    #[Required]
+    public function autowireAccessControlGraphQLQueryConfigurator(
+        AccessControlBlock $accessControlBlock,
+        BlockHelpers $blockHelpers,
+        AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
+        AccessControlManagerInterface $accessControlManager,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $moduleRegistry,
-            $typeRegistry,
-            $directiveRegistry,
-        );
+        $this->accessControlBlock = $accessControlBlock;
+        $this->blockHelpers = $blockHelpers;
+        $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;
+        $this->accessControlManager = $accessControlManager;
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -19,27 +20,13 @@ use PoPSchema\Highlights\RelationalTypeDataLoaders\ObjectType\HighlightTypeDataL
 
 class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        protected HighlightTypeDataLoader $highlightTypeDataLoader,
+    protected HighlightTypeDataLoader $highlightTypeDataLoader;
+    
+    #[Required]
+    public function autowireHighlightObjectTypeResolver(
+        HighlightTypeDataLoader $highlightTypeDataLoader,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-        );
+        $this->highlightTypeDataLoader = $highlightTypeDataLoader;
     }
     
     public function getTypeName(): string

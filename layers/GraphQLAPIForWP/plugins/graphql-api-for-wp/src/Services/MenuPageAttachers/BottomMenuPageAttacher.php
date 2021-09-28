@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -19,16 +20,22 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        protected MenuPageHelper $menuPageHelper,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected UserAuthorizationInterface $userAuthorization,
-        protected SettingsMenuPage $settingsMenuPage,
+    protected MenuPageHelper $menuPageHelper;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected UserAuthorizationInterface $userAuthorization;
+    protected SettingsMenuPage $settingsMenuPage;
+
+    #[Required]
+    public function autowireBottomMenuPageAttacher(
+        MenuPageHelper $menuPageHelper,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        SettingsMenuPage $settingsMenuPage,
     ) {
-        parent::__construct(
-            $instanceManager,
-        );
+        $this->menuPageHelper = $menuPageHelper;
+        $this->moduleRegistry = $moduleRegistry;
+        $this->userAuthorization = $userAuthorization;
+        $this->settingsMenuPage = $settingsMenuPage;
     }
 
     /**

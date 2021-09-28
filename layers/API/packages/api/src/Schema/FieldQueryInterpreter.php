@@ -6,8 +6,9 @@ namespace PoP\API\Schema;
 
 use PoP\FieldQuery\QueryUtils;
 use PoP\FieldQuery\QuerySyntax;
+use PoP\ComponentModel\Schema\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 
-class FieldQueryInterpreter extends \PoP\ComponentModel\Schema\FieldQueryInterpreter implements FieldQueryInterpreterInterface
+class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
     // Cache the output from functions
     /**

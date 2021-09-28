@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -16,20 +17,16 @@ use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 
 class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMetaValueMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver,
-        protected PostTagTypeAPIInterface $postTagTypeAPI,
+    protected UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver;
+    protected PostTagTypeAPIInterface $postTagTypeAPI;
+
+    #[Required]
+    public function autowireUnsubscribeFromTagMutationResolverBridge(
+        UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver,
+        PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->unsubscribeFromTagMutationResolver = $unsubscribeFromTagMutationResolver;
+        $this->postTagTypeAPI = $postTagTypeAPI;
     }
 
     public function getMutationResolver(): MutationResolverInterface

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -24,27 +25,13 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
 
     public const ATTRIBUTE_NAME_CACHE_CONTROL_LISTS = 'cacheControlLists';
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
-        BlockRenderingHelpers $blockRenderingHelpers,
-        CPTUtils $cptUtils,
-        protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
+    protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType;
+
+    #[Required]
+    public function autowireSchemaConfigCacheControlListBlock(
+        GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-            $schemaConfigurationBlockCategory,
-            $blockRenderingHelpers,
-            $cptUtils,
-        );
+        $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
     }
 
     protected function getBlockName(): string

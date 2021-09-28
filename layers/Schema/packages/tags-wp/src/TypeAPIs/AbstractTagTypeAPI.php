@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\TagsWP\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -18,11 +19,14 @@ use WP_Taxonomy;
 abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
+    protected HooksAPIInterface $hooksAPI;
+    protected CMSHelperServiceInterface $cmsHelperService;
 
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-        protected CMSHelperServiceInterface $cmsHelperService,
-    ) {
+    #[Required]
+    public function autowireAbstractTagTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService)
+    {
+        $this->hooksAPI = $hooksAPI;
+        $this->cmsHelperService = $cmsHelperService;
     }
 
     abstract protected function getTagTaxonomyName(): string;

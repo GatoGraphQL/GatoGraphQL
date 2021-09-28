@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
@@ -28,6 +29,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public const PUBLIC_PRIVATE_SCHEMA = Plugin::NAMESPACE . '\public-private-schema';
     public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
 
+    protected ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
+
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered
      * in the SystemContainer, where there are no typeResolvers so it will be null,
@@ -36,17 +39,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        TranslationAPIInterface $translationAPI,
-        protected ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
+    #[Required]
+    public function autowireSchemaConfigurationFunctionalityModuleResolver(
+        ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $translationAPI,
-        );
+        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
     }
 
     /**

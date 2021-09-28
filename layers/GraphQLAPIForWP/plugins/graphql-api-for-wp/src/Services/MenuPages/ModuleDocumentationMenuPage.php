@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -21,18 +22,16 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        MenuPageHelper $menuPageHelper,
-        EndpointHelpers $endpointHelpers,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected ModulesMenuPage $modulesMenuPage,
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected ModulesMenuPage $modulesMenuPage;
+
+    #[Required]
+    public function autowireModuleDocumentationMenuPage(
+        ModuleRegistryInterface $moduleRegistry,
+        ModulesMenuPage $modulesMenuPage,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $menuPageHelper,
-            $endpointHelpers
-        );
+        $this->moduleRegistry = $moduleRegistry;
+        $this->modulesMenuPage = $modulesMenuPage;
     }
 
     public function getMenuPageSlug(): string

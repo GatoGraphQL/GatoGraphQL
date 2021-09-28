@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -16,15 +17,6 @@ use PoP\Hooks\HooksAPIInterface;
  */
 abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInterface
 {
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-        protected InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected TypeRegistryInterface $typeRegistry,
-        protected DirectiveRegistryInterface $directiveRegistry,
-    ) {
-    }
-
     /**
      * Keep a map of all namespaced type names to their resolver classes
      * @var array<string, array>|null
@@ -40,6 +32,22 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      * @var array<string, array>|null
      */
     protected ?array $directiveNameClasses = null;
+
+    protected HooksAPIInterface $hooksAPI;
+    protected InstanceManagerInterface $instanceManager;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected TypeRegistryInterface $typeRegistry;
+    protected DirectiveRegistryInterface $directiveRegistry;
+
+    #[Required]
+    public function autowireAbstractGraphQLQueryConfigurator(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry)
+    {
+        $this->hooksAPI = $hooksAPI;
+        $this->instanceManager = $instanceManager;
+        $this->moduleRegistry = $moduleRegistry;
+        $this->typeRegistry = $typeRegistry;
+        $this->directiveRegistry = $directiveRegistry;
+    }
 
     /**
      * Lazy load and return the `$namespacedObjectTypeNameResolverClasses` array

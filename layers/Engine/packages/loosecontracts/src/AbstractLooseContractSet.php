@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\LooseContracts;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiatedService
 {
-    public function __construct(protected LooseContractManagerInterface $looseContractManager)
+    protected LooseContractManagerInterface $looseContractManager;
+
+    #[Required]
+    public function autowireAbstractLooseContractSet(LooseContractManagerInterface $looseContractManager)
     {
+        $this->looseContractManager = $looseContractManager;
     }
 
     final public function initialize(): void

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -28,32 +29,22 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
-        protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
-        protected MenuTypeAPIInterface $menuTypeAPI,
+    protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
+    protected MenuTypeAPIInterface $menuTypeAPI;
+
+    #[Required]
+    public function autowireMenuObjectTypeFieldResolver(
+        MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
+        MenuTypeAPIInterface $menuTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
+        $this->menuTypeAPI = $menuTypeAPI;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

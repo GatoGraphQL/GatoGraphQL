@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
@@ -13,15 +14,13 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
+
+    #[Required]
+    public function autowireAbstractClientEndpointExecuter(
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-        );
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
     }
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface

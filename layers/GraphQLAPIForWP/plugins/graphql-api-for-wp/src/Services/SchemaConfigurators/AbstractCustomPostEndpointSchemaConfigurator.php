@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -19,18 +20,13 @@ use WP_Post;
 abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
 {
     protected UserSettingsManagerInterface $userSettingsManager;
+    protected EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        BlockHelpers $blockHelpers,
-        protected EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
+    #[Required]
+    public function autowireAbstractCustomPostEndpointSchemaConfigurator(
+        EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $blockHelpers,
-        );
+        $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
@@ -16,17 +17,13 @@ use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 
 class VarsHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+
+    #[Required]
+    public function autowireVarsHookSet(
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
     protected function init(): void

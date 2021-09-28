@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
@@ -33,32 +34,34 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected DateScalarTypeResolver $dateScalarTypeResolver,
-        protected IDScalarTypeResolver $idScalarTypeResolver,
-        protected IPScalarTypeResolver $ipScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected URLScalarTypeResolver $urlScalarTypeResolver,
-        protected UserObjectTypeResolver $userObjectTypeResolver,
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected IPScalarTypeResolver $ipScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected UserObjectTypeResolver $userObjectTypeResolver;
+    
+    #[Required]
+    public function autowireNotificationObjectTypeFieldResolver(
+        CommentTypeAPIInterface $commentTypeAPI,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        DateScalarTypeResolver $dateScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
+        IPScalarTypeResolver $ipScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        URLScalarTypeResolver $urlScalarTypeResolver,
+        UserObjectTypeResolver $userObjectTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-        );
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->ipScalarTypeResolver = $ipScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

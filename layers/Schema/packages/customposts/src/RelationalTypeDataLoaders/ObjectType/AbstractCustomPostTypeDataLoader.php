@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -16,19 +17,13 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+
+    #[Required]
+    public function autowireAbstractCustomPostTypeDataLoader(
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $moduleProcessorManager,
-        );
+        $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array

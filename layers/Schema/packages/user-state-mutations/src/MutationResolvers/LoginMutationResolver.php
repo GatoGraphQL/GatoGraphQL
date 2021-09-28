@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -16,16 +17,16 @@ use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class LoginMutationResolver extends AbstractMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
-        protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
+    protected UserTypeAPIInterface $userTypeAPI;
+    protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
+
+    #[Required]
+    public function autowireLoginMutationResolver(
+        UserTypeAPIInterface $userTypeAPI,
+        UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
+        $this->userTypeAPI = $userTypeAPI;
+        $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
     }
 
     public function validateErrors(array $form_data): ?array

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeResolverDecorators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -15,10 +16,14 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
 {
     use AttachableExtensionTrait;
 
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-    ) {
+    protected InstanceManagerInterface $instanceManager;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+
+    #[Required]
+    public function autowireAbstractRelationalTypeResolverDecorator(InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter)
+    {
+        $this->instanceManager = $instanceManager;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
     }
 
     final public function getClassesToAttachTo(): array

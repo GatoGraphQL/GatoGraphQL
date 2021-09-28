@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -16,25 +17,13 @@ use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 
 abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        NameResolverInterface $nameResolver,
-        UserRoleTypeAPIInterface $userRoleTypeAPI,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
-        protected PostTypeAPIInterface $postTypeAPI,
+    protected PostTypeAPIInterface $postTypeAPI;
+
+    #[Required]
+    public function autowireAbstractCreateUpdatePostMutationResolver(
+        PostTypeAPIInterface $postTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $customPostStatusEnumTypeResolver,
-            $nameResolver,
-            $userRoleTypeAPI,
-            $customPostTypeAPI,
-            $customPostTypeMutationAPI,
-        );
+        $this->postTypeAPI = $postTypeAPI;
     }
 
     public function getCustomPostType(): string

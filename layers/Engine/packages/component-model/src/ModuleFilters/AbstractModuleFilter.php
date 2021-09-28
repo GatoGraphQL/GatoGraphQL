@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFilters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 
 abstract class AbstractModuleFilter implements ModuleFilterInterface
 {
-    public function __construct(
-        protected ModuleProcessorManagerInterface $moduleProcessorManager,
-    ) {
+    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+
+    #[Required]
+    public function autowireAbstractModuleFilter(ModuleProcessorManagerInterface $moduleProcessorManager)
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
     }
 
     public function excludeModule(array $module, array &$props): bool

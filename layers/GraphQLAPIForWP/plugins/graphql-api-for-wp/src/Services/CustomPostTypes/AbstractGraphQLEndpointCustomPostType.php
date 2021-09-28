@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
@@ -19,20 +20,16 @@ use WP_Post;
 
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType implements GraphQLEndpointCustomPostTypeInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        CPTUtils $cptUtils,
-        protected HooksAPIInterface $hooksAPI,
-        protected BlockHelpers $blockHelpers,
+    protected HooksAPIInterface $hooksAPI;
+    protected BlockHelpers $blockHelpers;
+
+    #[Required]
+    public function autowireAbstractGraphQLEndpointCustomPostType(
+        HooksAPIInterface $hooksAPI,
+        BlockHelpers $blockHelpers,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $cptUtils,
-        );
+        $this->hooksAPI = $hooksAPI;
+        $this->blockHelpers = $blockHelpers;
     }
 
     /**

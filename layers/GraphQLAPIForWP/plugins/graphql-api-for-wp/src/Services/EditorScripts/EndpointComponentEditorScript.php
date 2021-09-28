@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
@@ -19,19 +20,13 @@ class EndpointComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
+
+    #[Required]
+    public function autowireEndpointComponentEditorScript(
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $generalUtils,
-            $editorHelpers,
-        );
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
     }
 
     /**

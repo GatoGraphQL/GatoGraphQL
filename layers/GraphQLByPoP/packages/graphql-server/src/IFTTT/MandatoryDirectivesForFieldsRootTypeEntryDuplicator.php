@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\IFTTT;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
@@ -15,12 +16,17 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 {
     /** @var string[] */
     protected array $objectTypeResolverMandatoryFields;
+    protected InstanceManagerInterface $instanceManager;
+    protected RootObjectTypeResolver $rootObjectTypeResolver;
 
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-        protected RootObjectTypeResolver $rootObjectTypeResolver,
+    #[Required]
+    public function autowireMandatoryDirectivesForFieldsRootTypeEntryDuplicator(
+        InstanceManagerInterface $instanceManager,
+        RootObjectTypeResolver $rootObjectTypeResolver,
         TypeResolverHelperInterface $typeResolverHelper
     ) {
+        $this->instanceManager = $instanceManager;
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         /** Fields "id", "self" and "__typename" belong to both QueryRoot and MutationRoot */
         $this->objectTypeResolverMandatoryFields = $typeResolverHelper->getObjectTypeResolverMandatoryFields();
     }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\ModuleProcessors;
 
-interface ModuleProcessorInterface extends \PoP\ComponentModel\ModuleProcessors\ModuleProcessorInterface
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorInterface as UpstreamModuleProcessorInterface;
+
+interface ModuleProcessorInterface extends UpstreamModuleProcessorInterface
 {
     public function getImmutableSettingsModuletree(array $module, array &$props): array;
     public function getImmutableSettings(array $module, array &$props): array;

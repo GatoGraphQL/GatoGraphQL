@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -27,27 +28,19 @@ use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected StanceObjectTypeResolver $stanceObjectTypeResolver,
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected StanceObjectTypeResolver $stanceObjectTypeResolver;
+    
+    #[Required]
+    public function autowireCustomPostObjectTypeFieldResolver(
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        StanceObjectTypeResolver $stanceObjectTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-        );
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->stanceObjectTypeResolver = $stanceObjectTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

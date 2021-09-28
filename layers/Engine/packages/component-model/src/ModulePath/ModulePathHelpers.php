@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModulePath;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Tokens\ModulePath;
 use PoP\ComponentModel\Modules\ModuleUtils;
 
 class ModulePathHelpers implements ModulePathHelpersInterface
 {
-    public function __construct(protected ModulePathManagerInterface $modulePathManager)
+    protected ModulePathManagerInterface $modulePathManager;
+
+    #[Required]
+    public function autowireModulePathHelpers(ModulePathManagerInterface $modulePathManager)
     {
+        $this->modulePathManager = $modulePathManager;
     }
 
     public function getStringifiedModulePropagationCurrentPath(array $module)

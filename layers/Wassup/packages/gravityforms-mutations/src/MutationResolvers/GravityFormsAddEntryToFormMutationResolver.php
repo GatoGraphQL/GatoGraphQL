@@ -10,16 +10,6 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class GravityFormsAddEntryToFormMutationResolver extends AbstractMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-    ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
-    }
-
     public function executeMutation(array $form_data): mixed
     {
         // $execution_response = do_shortcode('[gravityform id="'.$form_id.'" title="false" description="false" ajax="false"]');

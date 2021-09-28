@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -23,25 +24,13 @@ use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 
 class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    
+    #[Required]
+    public function autowireEventFunctionalObjectTypeFieldResolver(
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-        );
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock;
@@ -13,17 +14,13 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        BlockHelpers $blockHelpers,
-        protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
+    protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator;
+
+    #[Required]
+    public function autowireAccessControlSchemaConfigurationExecuter(
+        AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $blockHelpers,
-        );
+        $this->accessControlGraphQLQueryConfigurator = $accessControlGraphQLQueryConfigurator;
     }
 
     public function getEnablingModule(): ?string

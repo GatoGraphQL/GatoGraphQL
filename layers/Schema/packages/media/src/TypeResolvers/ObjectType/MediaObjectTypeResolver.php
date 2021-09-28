@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -22,34 +23,16 @@ use PoPSchema\Media\RelationalTypeDataLoaders\ObjectType\MediaTypeDataLoader;
 
 class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
-        protected MediaTypeAPIInterface $mediaTypeAPI,
-        protected MediaTypeDataLoader $mediaTypeDataLoader,
+    protected MediaTypeAPIInterface $mediaTypeAPI;
+    protected MediaTypeDataLoader $mediaTypeDataLoader;
+
+    #[Required]
+    public function autowireMediaObjectTypeResolver(
+        MediaTypeAPIInterface $mediaTypeAPI,
+        MediaTypeDataLoader $mediaTypeDataLoader,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
+        $this->mediaTypeAPI = $mediaTypeAPI;
+        $this->mediaTypeDataLoader = $mediaTypeDataLoader;
     }
 
     public function getTypeName(): string

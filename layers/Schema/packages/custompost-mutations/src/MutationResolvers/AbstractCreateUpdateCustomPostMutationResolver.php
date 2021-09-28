@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -27,20 +28,25 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     public const HOOK_EXECUTE_CREATE = __CLASS__ . ':execute-create';
     public const HOOK_EXECUTE_UPDATE = __CLASS__ . ':execute-update';
     public const HOOK_VALIDATE_CONTENT = __CLASS__ . ':validate-content';
+    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
+    protected NameResolverInterface $nameResolver;
+    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        protected NameResolverInterface $nameResolver,
-        protected UserRoleTypeAPIInterface $userRoleTypeAPI,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
+    #[Required]
+    public function autowireAbstractCreateUpdateCustomPostMutationResolver(
+        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
+        NameResolverInterface $nameResolver,
+        UserRoleTypeAPIInterface $userRoleTypeAPI,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
+        CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
+        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        $this->nameResolver = $nameResolver;
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
+        $this->customPostTypeAPI = $customPostTypeAPI;
+        $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
     }
 
     protected function validateCreateErrors(array $form_data): ?array

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\Overrides\RelationalTypeDataLoaders\UnionType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -22,20 +23,16 @@ use PoPSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostObjectTypeResolv
  */
 class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoader
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        protected CustomPostTypeDataLoader $customPostTypeDataLoader,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    protected CustomPostTypeDataLoader $customPostTypeDataLoader;
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+
+    #[Required]
+    public function autowireCustomPostsWPCustomPostUnionTypeDataLoader(
+        CustomPostTypeDataLoader $customPostTypeDataLoader,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $customPostUnionTypeResolver,
-        );
+        $this->customPostTypeDataLoader = $customPostTypeDataLoader;
+        $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array

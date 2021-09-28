@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -27,33 +28,19 @@ use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected UserObjectTypeResolver $userObjectTypeResolver,
-        protected LoginMutationResolver $loginMutationResolver,
-        protected LogoutMutationResolver $logoutMutationResolver,
+    protected UserObjectTypeResolver $userObjectTypeResolver;
+    protected LoginMutationResolver $loginMutationResolver;
+    protected LogoutMutationResolver $logoutMutationResolver;
+
+    #[Required]
+    public function autowireRootObjectTypeFieldResolver(
+        UserObjectTypeResolver $userObjectTypeResolver,
+        LoginMutationResolver $loginMutationResolver,
+        LogoutMutationResolver $logoutMutationResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+        $this->loginMutationResolver = $loginMutationResolver;
+        $this->logoutMutationResolver = $logoutMutationResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

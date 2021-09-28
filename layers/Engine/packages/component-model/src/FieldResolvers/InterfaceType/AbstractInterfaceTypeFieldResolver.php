@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -31,22 +32,25 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      * @var InterfaceTypeResolverInterface[]|null
      */
     protected ?array $partiallyImplementedInterfaceTypeResolvers = null;
+    protected NameResolverInterface $nameResolver;
+    protected CMSServiceInterface $cmsService;
+    protected SchemaNamespacingServiceInterface $schemaNamespacingService;
+    protected TypeRegistryInterface $typeRegistry;
+    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        protected NameResolverInterface $nameResolver,
-        protected CMSServiceInterface $cmsService,
-        protected SchemaNamespacingServiceInterface $schemaNamespacingService,
-        protected TypeRegistryInterface $typeRegistry,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
+    #[Required]
+    public function autowireAbstractInterfaceTypeFieldResolver(
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SchemaNamespacingServiceInterface $schemaNamespacingService,
+        TypeRegistryInterface $typeRegistry,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-        );
+        $this->nameResolver = $nameResolver;
+        $this->cmsService = $cmsService;
+        $this->schemaNamespacingService = $schemaNamespacingService;
+        $this->typeRegistry = $typeRegistry;
+        $this->schemaDefinitionService = $schemaDefinitionService;
     }
 
     /**

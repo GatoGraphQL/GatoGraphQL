@@ -8,9 +8,10 @@ use PoP\Hooks\HooksAPIInterface;
 
 abstract class AbstractRouteModuleProcessor
 {
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI
-    ) {
+    protected HooksAPIInterface $hooksAPI;
+    public function __construct(HooksAPIInterface $hooksAPI)
+    {
+        $this->hooksAPI = $hooksAPI;
     }
 
     /**

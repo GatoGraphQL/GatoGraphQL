@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -16,19 +17,13 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Upda
 
 class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver,
+    protected UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver;
+    
+    #[Required]
+    public function autowireUpdateMyCommunitiesMutationResolverBridge(
+        UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->updateMyCommunitiesMutationResolver = $updateMyCommunitiesMutationResolver;
     }
     
     public function getMutationResolver(): MutationResolverInterface

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\QueriedObject\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
@@ -13,17 +14,13 @@ use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected CMSRoutingStateServiceInterface $cmsRoutingStateService,
+    protected CMSRoutingStateServiceInterface $cmsRoutingStateService;
+
+    #[Required]
+    public function autowireApplicationStateHookSet(
+        CMSRoutingStateServiceInterface $cmsRoutingStateService,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->cmsRoutingStateService = $cmsRoutingStateService;
     }
 
     protected function init(): void

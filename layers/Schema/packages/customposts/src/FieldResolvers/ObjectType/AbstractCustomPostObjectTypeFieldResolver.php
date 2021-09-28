@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -23,32 +24,22 @@ use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeF
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected DateFormatterInterface $dateFormatter,
-        protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-        protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver,
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected DateFormatterInterface $dateFormatter;
+    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
+    protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver;
+
+    #[Required]
+    public function autowireAbstractCustomPostObjectTypeFieldResolver(
+        CustomPostTypeAPIInterface $customPostTypeAPI,
+        DateFormatterInterface $dateFormatter,
+        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
+        IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->customPostTypeAPI = $customPostTypeAPI;
+        $this->dateFormatter = $dateFormatter;
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+        $this->isCustomPostInterfaceTypeFieldResolver = $isCustomPostInterfaceTypeFieldResolver;
     }
 
     public function getFieldNamesToResolve(): array

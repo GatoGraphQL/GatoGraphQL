@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -22,34 +23,16 @@ use PoPSchema\Users\RelationalTypeDataLoaders\ObjectType\UserTypeDataLoader;
 
 class UserObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
-        protected UserTypeAPIInterface $userTypeAPI,
-        protected UserTypeDataLoader $userTypeDataLoader,
+    protected UserTypeAPIInterface $userTypeAPI;
+    protected UserTypeDataLoader $userTypeDataLoader;
+
+    #[Required]
+    public function autowireUserObjectTypeResolver(
+        UserTypeAPIInterface $userTypeAPI,
+        UserTypeDataLoader $userTypeDataLoader,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
+        $this->userTypeAPI = $userTypeAPI;
+        $this->userTypeDataLoader = $userTypeDataLoader;
     }
 
     public function getTypeName(): string

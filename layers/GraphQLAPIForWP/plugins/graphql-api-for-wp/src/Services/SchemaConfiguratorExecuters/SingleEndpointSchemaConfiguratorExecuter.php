@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -18,16 +19,19 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
     protected UserSettingsManagerInterface $userSettingsManager;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected SingleEndpointSchemaConfigurator $endpointSchemaConfigurator;
+    protected GraphQLEndpointHandler $graphQLEndpointHandler;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected SingleEndpointSchemaConfigurator $endpointSchemaConfigurator,
-        protected GraphQLEndpointHandler $graphQLEndpointHandler,
+    #[Required]
+    public function autowireSingleEndpointSchemaConfiguratorExecuter(
+        ModuleRegistryInterface $moduleRegistry,
+        SingleEndpointSchemaConfigurator $endpointSchemaConfigurator,
+        GraphQLEndpointHandler $graphQLEndpointHandler,
     ) {
-        parent::__construct(
-            $instanceManager,
-        );
+        $this->moduleRegistry = $moduleRegistry;
+        $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
+        $this->graphQLEndpointHandler = $graphQLEndpointHandler;
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 

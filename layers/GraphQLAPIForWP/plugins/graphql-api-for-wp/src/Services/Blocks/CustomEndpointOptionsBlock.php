@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
@@ -21,21 +22,13 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
 {
     use MainPluginBlockTrait;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        protected CustomEndpointBlockCategory $customEndpointBlockCategory,
+    protected CustomEndpointBlockCategory $customEndpointBlockCategory;
+
+    #[Required]
+    public function autowireCustomEndpointOptionsBlock(
+        CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
+        $this->customEndpointBlockCategory = $customEndpointBlockCategory;
     }
 
     protected function getBlockName(): string

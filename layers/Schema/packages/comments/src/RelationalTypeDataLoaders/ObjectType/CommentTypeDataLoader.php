@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
@@ -17,19 +18,13 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CommentTypeAPIInterface $commentTypeAPI,
+    protected CommentTypeAPIInterface $commentTypeAPI;
+
+    #[Required]
+    public function autowireCommentTypeDataLoader(
+        CommentTypeAPIInterface $commentTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $moduleProcessorManager,
-        );
+        $this->commentTypeAPI = $commentTypeAPI;
     }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array

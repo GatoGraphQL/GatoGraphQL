@@ -9,11 +9,14 @@ namespace GraphQLAPI\GraphQLAPI\GetterSetterObjects;
  */
 class ContainerCacheConfiguration
 {
-    public function __construct(
-        private bool $cacheContainerConfiguration,
-        private ?string $containerConfigurationCacheNamespace,
-        private ?string $containerConfigurationCacheDirectory,
-    ) {
+    private bool $cacheContainerConfiguration;
+    private ?string $containerConfigurationCacheNamespace;
+    private ?string $containerConfigurationCacheDirectory;
+    public function __construct(bool $cacheContainerConfiguration, ?string $containerConfigurationCacheNamespace, ?string $containerConfigurationCacheDirectory)
+    {
+        $this->cacheContainerConfiguration = $cacheContainerConfiguration;
+        $this->containerConfigurationCacheNamespace = $containerConfigurationCacheNamespace;
+        $this->containerConfigurationCacheDirectory = $containerConfigurationCacheDirectory;
     }
 
     public function cacheContainerConfiguration(): bool

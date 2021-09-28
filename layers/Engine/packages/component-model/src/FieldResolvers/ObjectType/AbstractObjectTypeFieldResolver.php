@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\CheckpointSets\CheckpointSets;
@@ -54,23 +55,28 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * @var array<string, ObjectTypeFieldSchemaDefinitionResolverInterface>
      */
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected NameResolverInterface $nameResolver;
+    protected CMSServiceInterface $cmsService;
+    protected SemverHelperServiceInterface $semverHelperService;
+    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
+    protected EngineInterface $engine;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected NameResolverInterface $nameResolver,
-        protected CMSServiceInterface $cmsService,
-        protected SemverHelperServiceInterface $semverHelperService,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected EngineInterface $engine,
+    #[Required]
+    public function autowireAbstractObjectTypeFieldResolver(
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        EngineInterface $engine,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-        );
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->nameResolver = $nameResolver;
+        $this->cmsService = $cmsService;
+        $this->semverHelperService = $semverHelperService;
+        $this->schemaDefinitionService = $schemaDefinitionService;
+        $this->engine = $engine;
     }
 
     final public function getClassesToAttachTo(): array

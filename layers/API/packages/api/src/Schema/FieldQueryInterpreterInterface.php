@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
-interface FieldQueryInterpreterInterface extends \PoP\ComponentModel\Schema\FieldQueryInterpreterInterface
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface as UpstreamFieldQueryInterpreterInterface;
+
+interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterInterface
 {
     public function extractFieldArgumentValues(string $field): array;
     public function extractDirectiveArgumentValues(string $field): array;

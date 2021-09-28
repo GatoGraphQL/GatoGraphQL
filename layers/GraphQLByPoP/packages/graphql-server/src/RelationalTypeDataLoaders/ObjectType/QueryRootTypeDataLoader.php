@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -12,17 +13,13 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDa
 
 class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        protected QueryRoot $queryRoot,
+    protected QueryRoot $queryRoot;
+
+    #[Required]
+    public function autowireQueryRootTypeDataLoader(
+        QueryRoot $queryRoot,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
+        $this->queryRoot = $queryRoot;
     }
 
     public function getObjects(array $ids): array

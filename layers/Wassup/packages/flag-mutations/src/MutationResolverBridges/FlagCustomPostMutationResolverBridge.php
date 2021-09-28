@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\FlagMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -14,19 +15,13 @@ use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMu
 
 class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected FlagCustomPostMutationResolver $flagCustomPostMutationResolver,
+    protected FlagCustomPostMutationResolver $flagCustomPostMutationResolver;
+
+    #[Required]
+    public function autowireFlagCustomPostMutationResolverBridge(
+        FlagCustomPostMutationResolver $flagCustomPostMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->flagCustomPostMutationResolver = $flagCustomPostMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

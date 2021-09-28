@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -16,18 +17,16 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        protected CustomEndpointVoyagerClient $customEndpointVoyagerClient,
-        protected VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter,
+    protected CustomEndpointVoyagerClient $customEndpointVoyagerClient;
+    protected VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter;
+
+    #[Required]
+    public function autowireVoyagerClientEndpointExecuter(
+        CustomEndpointVoyagerClient $customEndpointVoyagerClient,
+        VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $graphQLCustomEndpointCustomPostType,
-        );
+        $this->customEndpointVoyagerClient = $customEndpointVoyagerClient;
+        $this->voyagerClientEndpointExecuter = $voyagerClientEndpointExecuter;
     }
 
     public function getEnablingModule(): ?string

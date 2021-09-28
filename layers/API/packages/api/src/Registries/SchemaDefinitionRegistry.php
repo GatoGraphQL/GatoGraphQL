@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Registries;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Registries\SchemaDefinitionRegistryInterface;
@@ -22,15 +23,28 @@ use PoP\Translation\TranslationAPIInterface;
 class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
 {
     protected CacheInterface $persistentCache;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected TranslationAPIInterface $translationAPI;
+    protected InstanceManagerInterface $instanceManager;
+    protected RootObjectTypeResolver $rootTypeResolver;
+    protected Root $root;
 
-    public function __construct(
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected TranslationAPIInterface $translationAPI,
-        protected InstanceManagerInterface $instanceManager,
-        protected RootObjectTypeResolver $rootTypeResolver,
-        protected Root $root,
+    #[Required]
+    public function autowireSchemaDefinitionRegistry(
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        RootObjectTypeResolver $rootTypeResolver,
+        Root $root,
     ) {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->translationAPI = $translationAPI;
+        $this->instanceManager = $instanceManager;
+        $this->rootTypeResolver = $rootTypeResolver;
+        $this->root = $root;
         $this->persistentCache = PersistentCacheFacade::getInstance();
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutationsWP\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\ErrorHandling\ErrorHelperInterface;
@@ -15,10 +16,14 @@ use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
  */
 class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected ErrorHelperInterface $errorHelper,
-    ) {
+    protected TranslationAPIInterface $translationAPI;
+    protected ErrorHelperInterface $errorHelper;
+
+    #[Required]
+    public function autowireUserStateTypeMutationAPI(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->errorHelper = $errorHelper;
     }
 
     /**

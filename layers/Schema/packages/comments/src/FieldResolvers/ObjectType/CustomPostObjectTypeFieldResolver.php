@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -24,32 +25,16 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver,
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver;
+
+    #[Required]
+    public function autowireCustomPostObjectTypeFieldResolver(
+        CommentTypeAPIInterface $commentTypeAPI,
+        CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->commentableInterfaceTypeFieldResolver = $commentableInterfaceTypeFieldResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

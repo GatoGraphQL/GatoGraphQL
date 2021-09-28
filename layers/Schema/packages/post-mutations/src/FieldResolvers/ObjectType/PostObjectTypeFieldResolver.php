@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -25,30 +26,16 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
 {
     use UserStateObjectTypeFieldResolverTrait;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected UpdatePostMutationResolver $updatePostMutationResolver,
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected UpdatePostMutationResolver $updatePostMutationResolver;
+
+    #[Required]
+    public function autowirePostObjectTypeFieldResolver(
+        PostObjectTypeResolver $postObjectTypeResolver,
+        UpdatePostMutationResolver $updatePostMutationResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->updatePostMutationResolver = $updatePostMutationResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

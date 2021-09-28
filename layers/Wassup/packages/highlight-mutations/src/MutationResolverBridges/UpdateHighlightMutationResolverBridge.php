@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\HighlightMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -13,19 +14,13 @@ use PoPSitesWassup\HighlightMutations\MutationResolvers\UpdateHighlightMutationR
 
 class UpdateHighlightMutationResolverBridge extends AbstractCreateUpdateHighlightMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected UpdateHighlightMutationResolver $updateHighlightMutationResolver,
+    protected UpdateHighlightMutationResolver $updateHighlightMutationResolver;
+
+    #[Required]
+    public function autowireUpdateHighlightMutationResolverBridge(
+        UpdateHighlightMutationResolver $updateHighlightMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->updateHighlightMutationResolver = $updateHighlightMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

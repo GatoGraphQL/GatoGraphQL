@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -23,17 +24,19 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected CommentTypeMutationAPIInterface $commentTypeMutationAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected CommentTypeMutationAPIInterface $commentTypeMutationAPI;
+    protected UserTypeAPIInterface $userTypeAPI;
+
+    #[Required]
+    public function autowireAddCommentToCustomPostMutationResolver(
+        CommentTypeAPIInterface $commentTypeAPI,
+        CommentTypeMutationAPIInterface $commentTypeMutationAPI,
+        UserTypeAPIInterface $userTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->commentTypeMutationAPI = $commentTypeMutationAPI;
+        $this->userTypeAPI = $userTypeAPI;
     }
 
     public function validateErrors(array $form_data): ?array

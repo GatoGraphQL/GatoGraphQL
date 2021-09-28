@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -15,21 +16,13 @@ use PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutatio
 
 class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver,
+    protected CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver;
+
+    #[Required]
+    public function autowireCreateOrUpdateStanceMutationResolverBridge(
+        CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-            $customPostTypeAPI,
-        );
+        $this->createOrUpdateStanceMutationResolver = $createOrUpdateStanceMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

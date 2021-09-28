@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -23,26 +24,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 {
     public const VALIDATECATEGORIESTYPE_ATLEASTONE = 1;
     public const VALIDATECATEGORIESTYPE_EXACTLYONE = 2;
+    protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        NameResolverInterface $nameResolver,
-        UserRoleTypeAPIInterface $userRoleTypeAPI,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
-        protected PostCategoryTypeAPIInterface $postCategoryTypeAPI,
+    #[Required]
+    public function autowireCustomPostMutationsAbstractCreateUpdateCustomPostMutationResolver(
+        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $customPostStatusEnumTypeResolver,
-            $nameResolver,
-            $userRoleTypeAPI,
-            $customPostTypeAPI,
-            $customPostTypeMutationAPI,
-        );
+        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
     }
 
     protected function supportsTitle()

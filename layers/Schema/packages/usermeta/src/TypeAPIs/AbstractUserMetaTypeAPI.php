@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\SchemaCommons\Facades\Services\AllowOrDenySettingsServiceFacade;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\UserMeta\ComponentConfiguration;
@@ -11,9 +12,12 @@ use PoPSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
 
 abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
 {
-    public function __construct(
-        protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
-    ) {
+    protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
+
+    #[Required]
+    public function autowireAbstractUserMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    {
+        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }
 
     final public function getUserMeta(string | int $userID, string $key, bool $single = false): mixed

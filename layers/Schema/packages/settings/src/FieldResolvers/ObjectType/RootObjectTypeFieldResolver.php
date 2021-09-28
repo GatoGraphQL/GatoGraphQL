@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -24,30 +25,16 @@ use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
-        protected SettingsTypeAPIInterface $settingsTypeAPI,
+    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
+    protected SettingsTypeAPIInterface $settingsTypeAPI;
+
+    #[Required]
+    public function autowireRootObjectTypeFieldResolver(
+        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
+        SettingsTypeAPIInterface $settingsTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
+        $this->settingsTypeAPI = $settingsTypeAPI;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\ConditionalOnComponent\API\RouteModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
@@ -18,13 +19,13 @@ use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        protected PostCategoryTypeAPIInterface $postCategoryTypeAPI,
+    protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
+
+    #[Required]
+    public function autowireEntryRouteModuleProcessor(
+        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-        );
+        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
     }
 
     /**

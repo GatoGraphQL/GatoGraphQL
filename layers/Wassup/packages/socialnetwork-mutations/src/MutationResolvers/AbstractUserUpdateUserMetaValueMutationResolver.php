@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Users\Constants\InputNames;
@@ -11,15 +12,13 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
+    protected UserTypeAPIInterface $userTypeAPI;
+
+    #[Required]
+    public function autowireAbstractUserUpdateUserMetaValueMutationResolver(
+        UserTypeAPIInterface $userTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
+        $this->userTypeAPI = $userTypeAPI;
     }
 
     public function validateErrors(array $form_data): ?array

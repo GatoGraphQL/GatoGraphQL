@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
@@ -13,17 +14,25 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        protected MenuPageHelper $menuPageHelper,
-        protected ModuleRegistryInterface $moduleRegistry,
-        protected UserAuthorizationInterface $userAuthorization,
-        protected GraphiQLMenuPage $graphiQLMenuPage,
-        protected GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage,
+    protected MenuPageHelper $menuPageHelper;
+    protected ModuleRegistryInterface $moduleRegistry;
+    protected UserAuthorizationInterface $userAuthorization;
+    protected GraphiQLMenuPage $graphiQLMenuPage;
+    protected GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage;
+
+    #[Required]
+    public function autowireTopMenuPageAttacher(
+        MenuPageHelper $menuPageHelper,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        GraphiQLMenuPage $graphiQLMenuPage,
+        GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage,
     ) {
-        parent::__construct(
-            $instanceManager,
-        );
+        $this->menuPageHelper = $menuPageHelper;
+        $this->moduleRegistry = $moduleRegistry;
+        $this->userAuthorization = $userAuthorization;
+        $this->graphiQLMenuPage = $graphiQLMenuPage;
+        $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
     }
 
     /**

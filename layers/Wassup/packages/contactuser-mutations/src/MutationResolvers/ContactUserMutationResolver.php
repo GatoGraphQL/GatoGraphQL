@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUserMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Hooks\HooksAPIInterface;
@@ -12,15 +13,13 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class ContactUserMutationResolver extends AbstractMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
+    protected UserTypeAPIInterface $userTypeAPI;
+
+    #[Required]
+    public function autowireContactUserMutationResolver(
+        UserTypeAPIInterface $userTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
+        $this->userTypeAPI = $userTypeAPI;
     }
 
     public function validateErrors(array $form_data): ?array

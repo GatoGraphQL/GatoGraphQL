@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\Hooks\HooksAPIInterface;
@@ -12,17 +13,13 @@ use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 
 class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
+    protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
+
+    #[Required]
+    public function autowireMenuItemTypeDataLoader(
+        MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
+        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
     }
 
     public function getObjects(array $ids): array

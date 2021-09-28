@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
@@ -14,16 +15,16 @@ use WP_Post;
 
 class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        protected QueryRetrieverInterface $queryRetrieverInterface,
+    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
+    protected QueryRetrieverInterface $queryRetrieverInterface;
+
+    #[Required]
+    public function autowireCustomEndpointGraphQLQueryResolutionEndpointExecuter(
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+        QueryRetrieverInterface $queryRetrieverInterface,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-        );
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+        $this->queryRetrieverInterface = $queryRetrieverInterface;
     }
 
     public function getEnablingModule(): ?string

@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\CommentMeta\ComponentConfiguration;
 use PoPSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
 {
-    public function __construct(
-        protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService,
-    ) {
+    protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
+
+    #[Required]
+    public function autowireAbstractCommentMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    {
+        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }
 
     final public function getCommentMeta(string | int $commentID, string $key, bool $single = false): mixed

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Engine\ModuleFilters\HeadModule;
@@ -15,17 +16,13 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class HeadModuleHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected HeadModule $headModule
+    protected HeadModule $headModule;
+    
+    #[Required]
+    public function autowireHeadModuleHookSet(
+        HeadModule $headModule
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->headModule = $headModule;
     }
 
     protected function init(): void

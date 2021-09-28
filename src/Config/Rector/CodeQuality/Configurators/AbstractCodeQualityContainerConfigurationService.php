@@ -12,7 +12,7 @@ use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 abstract class AbstractCodeQualityContainerConfigurationService extends AbstractContainerConfigurationService
 {
     public function configureContainer(): void
-    {        
+    {
         $services = $this->containerConfigurator->services();
         $services->set(RemoveUselessParamTagRector::class);
         $services->set(RemoveUselessReturnTagRector::class);

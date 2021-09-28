@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -16,19 +17,13 @@ use WP_Post;
 
 class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        BlockHelpers $blockHelpers,
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        protected EndpointGraphiQLBlock $endpointGraphiQLBlock,
+    protected EndpointGraphiQLBlock $endpointGraphiQLBlock;
+
+    #[Required]
+    public function autowireGraphiQLClientEndpointAnnotator(
+        EndpointGraphiQLBlock $endpointGraphiQLBlock,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $blockHelpers,
-            $graphQLCustomEndpointCustomPostType
-        );
+        $this->endpointGraphiQLBlock = $endpointGraphiQLBlock;
     }
 
     public function getEnablingModule(): ?string

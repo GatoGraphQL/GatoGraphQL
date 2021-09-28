@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
@@ -15,19 +16,13 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected MediaTypeAPIInterface $mediaTypeAPI,
+    protected MediaTypeAPIInterface $mediaTypeAPI;
+
+    #[Required]
+    public function autowireMediaTypeDataLoader(
+        MediaTypeAPIInterface $mediaTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $moduleProcessorManager,
-        );
+        $this->mediaTypeAPI = $mediaTypeAPI;
     }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array

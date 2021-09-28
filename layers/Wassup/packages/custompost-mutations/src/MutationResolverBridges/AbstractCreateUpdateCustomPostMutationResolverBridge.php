@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
@@ -21,20 +22,13 @@ use PoPSitesWassup\CustomPostMutations\MutationResolvers\MutationInputProperties
 abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends AbstractCRUDComponentMutationResolverBridge
 {
     public const HOOK_FORM_DATA_CREATE_OR_UPDATE = __CLASS__ . ':form-data-create-or-update';
+    protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected CustomPostTypeAPIInterface $customPostTypeAPI,
+    #[Required]
+    public function autowireAbstractCreateUpdateCustomPostMutationResolverBridge(
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
     protected function modifyDataProperties(array &$data_properties, string | int $result_id): void

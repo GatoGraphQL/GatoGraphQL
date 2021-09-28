@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutationsWP\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Engine\ErrorHandling\ErrorHelperInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -15,10 +16,14 @@ use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
  */
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected ErrorHelperInterface $errorHelper,
-    ) {
+    protected TranslationAPIInterface $translationAPI;
+    protected ErrorHelperInterface $errorHelper;
+
+    #[Required]
+    public function autowireCustomPostTypeMutationAPI(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->errorHelper = $errorHelper;
     }
 
     protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array &$query): void

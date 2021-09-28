@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -22,30 +23,16 @@ use PoPSchema\Users\FieldResolvers\InterfaceType\WithAuthorInterfaceTypeFieldRes
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected CustomPostUserTypeAPIInterface $customPostUserTypeAPI,
-        protected WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver,
+    protected CustomPostUserTypeAPIInterface $customPostUserTypeAPI;
+    protected WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver;
+
+    #[Required]
+    public function autowireCustomPostObjectTypeFieldResolver(
+        CustomPostUserTypeAPIInterface $customPostUserTypeAPI,
+        WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->customPostUserTypeAPI = $customPostUserTypeAPI;
+        $this->withAuthorInterfaceTypeFieldResolver = $withAuthorInterfaceTypeFieldResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

@@ -8,10 +8,11 @@
 
 namespace GraphQLByPoP\GraphQLParser\Exception\Parser;
 
+use Exception;
 use GraphQLByPoP\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 
-abstract class AbstractParserError extends \Exception implements LocationableExceptionInterface
+abstract class AbstractParserError extends Exception implements LocationableExceptionInterface
 {
 
     /** @var Location */

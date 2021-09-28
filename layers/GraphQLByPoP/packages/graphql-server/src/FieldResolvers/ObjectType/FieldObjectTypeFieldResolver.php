@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -27,33 +28,25 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
-        protected InputValueObjectTypeResolver $inputValueObjectTypeResolver,
-        protected TypeObjectTypeResolver $typeObjectTypeResolver,
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
+    protected TypeObjectTypeResolver $typeObjectTypeResolver;
+
+    #[Required]
+    public function autowireFieldObjectTypeFieldResolver(
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        InputValueObjectTypeResolver $inputValueObjectTypeResolver,
+        TypeObjectTypeResolver $typeObjectTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

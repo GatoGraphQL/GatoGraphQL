@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\UserMeta\Utils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Hooks\HooksAPIInterface;
@@ -12,15 +13,13 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
+    protected UserTypeAPIInterface $userTypeAPI;
+    
+    #[Required]
+    public function autowireUpdateMyCommunitiesMutationResolver(
+        UserTypeAPIInterface $userTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
+        $this->userTypeAPI = $userTypeAPI;
     }
     
     public function executeMutation(array $form_data): mixed

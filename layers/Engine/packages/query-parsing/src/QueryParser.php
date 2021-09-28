@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace PoP\QueryParsing;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\Translation\TranslationAPIInterface;
 
 class QueryParser implements QueryParserInterface
 {
-    public function __construct(protected TranslationAPIInterface $translationAPI)
+    protected TranslationAPIInterface $translationAPI;
+
+    #[Required]
+    public function autowireQueryParser(TranslationAPIInterface $translationAPI)
     {
+        $this->translationAPI = $translationAPI;
     }
 
     /**

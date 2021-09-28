@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\Hooks\HooksAPIInterface;
@@ -12,17 +13,13 @@ use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 
 class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
+    protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
+
+    #[Required]
+    public function autowireUserAvatarTypeDataLoader(
+        UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
+        $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
     }
 
     public function getObjects(array $ids): array

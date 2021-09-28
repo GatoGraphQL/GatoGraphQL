@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
@@ -25,22 +26,16 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     public const ATTRIBUTE_NAME_QUERY = 'query';
     public const ATTRIBUTE_NAME_VARIABLES = 'variables';
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        protected EndpointHelpers $endpointHelpers,
-        protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
+    protected EndpointHelpers $endpointHelpers;
+    protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
+
+    #[Required]
+    public function autowireAbstractGraphiQLBlock(
+        EndpointHelpers $endpointHelpers,
+        PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
+        $this->endpointHelpers = $endpointHelpers;
+        $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
     }
 
     protected function getBlockName(): string

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -26,31 +27,19 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected UserAvatarTypeAPIInterface $userAvatarTypeAPI,
-        protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
-        protected UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,
+    protected UserAvatarTypeAPIInterface $userAvatarTypeAPI;
+    protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
+    protected UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver;
+
+    #[Required]
+    public function autowireUserObjectTypeFieldResolver(
+        UserAvatarTypeAPIInterface $userAvatarTypeAPI,
+        UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
+        UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->userAvatarTypeAPI = $userAvatarTypeAPI;
+        $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
+        $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

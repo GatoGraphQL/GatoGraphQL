@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
@@ -27,26 +28,22 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
 {
     use WithBlockRegistryCustomPostTypeTrait;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        CPTUtils $cptUtils,
-        HooksAPIInterface $hooksAPI,
-        BlockHelpers $blockHelpers,
-        protected EndpointBlockRegistryInterface $endpointBlockRegistry,
-        protected CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
-        protected CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface,
-        protected CustomEndpointOptionsBlock $customEndpointOptionsBlock,
+    protected EndpointBlockRegistryInterface $endpointBlockRegistry;
+    protected CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface;
+    protected CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface;
+    protected CustomEndpointOptionsBlock $customEndpointOptionsBlock;
+
+    #[Required]
+    public function autowireGraphQLCustomEndpointCustomPostType(
+        EndpointBlockRegistryInterface $endpointBlockRegistry,
+        CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
+        CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface,
+        CustomEndpointOptionsBlock $customEndpointOptionsBlock,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $cptUtils,
-            $hooksAPI,
-            $blockHelpers,
-        );
+        $this->endpointBlockRegistry = $endpointBlockRegistry;
+        $this->customEndpointExecuterRegistryInterface = $customEndpointExecuterRegistryInterface;
+        $this->customEndpointAnnotatorRegistryInterface = $customEndpointAnnotatorRegistryInterface;
+        $this->customEndpointOptionsBlock = $customEndpointOptionsBlock;
     }
 
     /**

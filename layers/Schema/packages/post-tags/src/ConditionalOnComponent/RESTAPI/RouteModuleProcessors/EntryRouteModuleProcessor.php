@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\API\Schema\FieldQueryConvertorInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -21,17 +22,13 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        RESTDataStructureFormatter $restDataStructureFormatter,
-        FieldQueryConvertorInterface $fieldQueryConvertor,
-        protected PostTagTypeAPIInterface $postTagTypeAPI,
+    protected PostTagTypeAPIInterface $postTagTypeAPI;
+
+    #[Required]
+    public function autowireEntryRouteModuleProcessor(
+        PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $restDataStructureFormatter,
-            $fieldQueryConvertor,
-        );
+        $this->postTagTypeAPI = $postTagTypeAPI;
     }
 
     protected function getInitialRESTFields(): string

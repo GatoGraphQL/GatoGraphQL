@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
@@ -14,21 +15,13 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 abstract class AbstractSchemaConfigBlock extends AbstractBlock implements SchemaConfigEditorBlockServiceTagInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        protected SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
+    protected SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory;
+
+    #[Required]
+    public function autowireAbstractSchemaConfigBlock(
+        SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
+        $this->schemaConfigurationBlockCategory = $schemaConfigurationBlockCategory;
     }
 
     protected function isDynamicBlock(): bool

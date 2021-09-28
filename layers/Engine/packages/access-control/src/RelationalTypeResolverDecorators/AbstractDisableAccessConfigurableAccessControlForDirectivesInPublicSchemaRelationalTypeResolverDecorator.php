@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\RelationalTypeResolverDecorators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\AccessControl\DirectiveResolvers\DisableAccessForDirectivesDirectiveResolver;
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
@@ -12,17 +13,13 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 
 abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        AccessControlManagerInterface $accessControlManager,
-        protected DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver,
+    protected DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver;
+
+    #[Required]
+    public function autowireAbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator(
+        DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $accessControlManager,
-        );
+        $this->disableAccessForDirectivesDirectiveResolver = $disableAccessForDirectivesDirectiveResolver;
     }
 
     protected function getMandatoryDirectives(mixed $entryValue = null): array

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-interface FeedbackMessageStoreInterface extends \PoP\FieldQuery\FeedbackMessageStoreInterface
+use PoP\FieldQuery\FeedbackMessageStoreInterface as UpstreamFeedbackMessageStoreInterface;
+
+interface FeedbackMessageStoreInterface extends UpstreamFeedbackMessageStoreInterface
 {
     public function addObjectWarnings(array $objectWarnings);
     public function addObjectDeprecations(array $objectDeprecations);

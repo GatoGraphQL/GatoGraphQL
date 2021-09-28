@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomyMeta\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -21,30 +22,16 @@ use PoPSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 
 class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI,
-        protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
+    protected TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI;
+    protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
+
+    #[Required]
+    public function autowireTaxonomyObjectTypeFieldResolver(
+        TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI,
+        WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->taxonomyMetaAPI = $taxonomyMetaAPI;
+        $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

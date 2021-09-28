@@ -11,16 +11,6 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-    ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
-    }
-
     public function validateErrors(array $form_data): ?array
     {
         $errors = [];

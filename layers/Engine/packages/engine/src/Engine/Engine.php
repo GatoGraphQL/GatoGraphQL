@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Engine;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
@@ -24,47 +25,20 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\LooseContractManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\Engine\Engine as UpstreamEngine;
 
-class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterface
+class Engine extends UpstreamEngine implements EngineInterface
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        DataStructureManagerInterface $dataStructureManager,
-        InstanceManagerInterface $instanceManager,
-        ModelInstanceInterface $modelInstance,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        ModulePathHelpersInterface $modulePathHelpers,
-        ModulePathManagerInterface $modulePathManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ModuleFilterManagerInterface $moduleFilterManager,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CheckpointProcessorManagerInterface $checkpointProcessorManager,
-        DataloadHelperServiceInterface $dataloadHelperService,
-        EntryModuleManagerInterface $entryModuleManager,
-        RequestHelperServiceInterface $requestHelperService,
-        protected LooseContractManagerInterface $looseContractManager,
-        protected CacheControlEngineInterface $cacheControlEngine,
-        ?CacheInterface $persistentCache = null
+    protected LooseContractManagerInterface $looseContractManager;
+    protected CacheControlEngineInterface $cacheControlEngine;
+
+    #[Required]
+    public function autowireEngineEngine(
+        LooseContractManagerInterface $looseContractManager,
+        CacheControlEngineInterface $cacheControlEngine
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $dataStructureManager,
-            $instanceManager,
-            $modelInstance,
-            $feedbackMessageStore,
-            $modulePathHelpers,
-            $modulePathManager,
-            $fieldQueryInterpreter,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $checkpointProcessorManager,
-            $dataloadHelperService,
-            $entryModuleManager,
-            $requestHelperService,
-            $persistentCache,
-        );
+        $this->looseContractManager = $looseContractManager;
+        $this->cacheControlEngine = $cacheControlEngine;
     }
 
     public function generateData(): void

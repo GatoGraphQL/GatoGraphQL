@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -18,27 +19,13 @@ use PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType\NotificationTyp
 
 class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        protected NotificationTypeDataLoader $notificationTypeDataLoader,
+    protected NotificationTypeDataLoader $notificationTypeDataLoader;
+    
+    #[Required]
+    public function autowireNotificationObjectTypeResolver(
+        NotificationTypeDataLoader $notificationTypeDataLoader,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-        );
+        $this->notificationTypeDataLoader = $notificationTypeDataLoader;
     }
     
     public function getTypeName(): string

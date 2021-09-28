@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\HelperServices;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
@@ -16,12 +17,18 @@ use PoP\Translation\TranslationAPIInterface;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
 {
-    public function __construct(
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected TranslationAPIInterface $translationAPI,
-        protected ModuleProcessorManagerInterface $moduleProcessorManager,
-    ) {
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected TranslationAPIInterface $translationAPI;
+    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+
+    #[Required]
+    public function autowireDataloadHelperService(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, TranslationAPIInterface $translationAPI, ModuleProcessorManagerInterface $moduleProcessorManager)
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->translationAPI = $translationAPI;
+        $this->moduleProcessorManager = $moduleProcessorManager;
     }
 
     /**

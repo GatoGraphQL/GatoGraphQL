@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\HelperServices;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
@@ -13,9 +14,12 @@ use PoP\Hooks\HooksAPIInterface;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-    ) {
+    protected HooksAPIInterface $hooksAPI;
+
+    #[Required]
+    public function autowireRequestHelperService(HooksAPIInterface $hooksAPI)
+    {
+        $this->hooksAPI = $hooksAPI;
     }
 
     public function getCurrentURL(): string

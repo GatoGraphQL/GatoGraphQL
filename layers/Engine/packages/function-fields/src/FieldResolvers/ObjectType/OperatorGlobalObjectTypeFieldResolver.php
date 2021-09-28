@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FunctionFields\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
@@ -25,31 +26,19 @@ use PoP\Translation\TranslationAPIInterface;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected FloatScalarTypeResolver $floatScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected MixedScalarTypeResolver $mixedScalarTypeResolver,
+    protected FloatScalarTypeResolver $floatScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
+
+    #[Required]
+    public function autowireOperatorGlobalObjectTypeFieldResolver(
+        FloatScalarTypeResolver $floatScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        MixedScalarTypeResolver $mixedScalarTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->floatScalarTypeResolver = $floatScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
     }
 
     public function getFieldNamesToResolve(): array

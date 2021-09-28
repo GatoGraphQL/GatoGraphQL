@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -35,33 +36,19 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
 {
     use WithLimitFieldArgResolverTrait;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected PostTypeAPIInterface $postTypeAPI,
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected PostTypeAPIInterface $postTypeAPI;
+
+    #[Required]
+    public function autowireAbstractPostObjectTypeFieldResolver(
+        IntScalarTypeResolver $intScalarTypeResolver,
+        PostObjectTypeResolver $postObjectTypeResolver,
+        PostTypeAPIInterface $postTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->postTypeAPI = $postTypeAPI;
     }
 
     public function getFieldNamesToResolve(): array

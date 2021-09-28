@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
@@ -18,18 +19,16 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     use UseObjectDictionaryTypeDataLoaderTrait;
 
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        protected SchemaObjectTypeResolver $schemaObjectTypeResolver,
-        protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
+    protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
+    protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
+
+    #[Required]
+    public function autowireSchemaTypeDataLoader(
+        SchemaObjectTypeResolver $schemaObjectTypeResolver,
+        SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
+        $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
+        $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

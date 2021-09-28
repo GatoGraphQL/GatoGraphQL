@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\ObjectTypeResolverPickers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
@@ -11,10 +12,14 @@ use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 
 abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    public function __construct(
-        protected PageObjectTypeResolver $pageObjectTypeResolver,
-        protected PageTypeAPIInterface $pageTypeAPI,
-    ) {
+    protected PageObjectTypeResolver $pageObjectTypeResolver;
+    protected PageTypeAPIInterface $pageTypeAPI;
+
+    #[Required]
+    public function autowireAbstractPageObjectTypeResolverPicker(PageObjectTypeResolver $pageObjectTypeResolver, PageTypeAPIInterface $pageTypeAPI)
+    {
+        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
+        $this->pageTypeAPI = $pageTypeAPI;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

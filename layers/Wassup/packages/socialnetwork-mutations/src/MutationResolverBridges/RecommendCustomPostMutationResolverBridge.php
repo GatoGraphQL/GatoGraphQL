@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -15,21 +16,13 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\RecommendCustomPostM
 
 class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver,
+    protected RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver;
+
+    #[Required]
+    public function autowireRecommendCustomPostMutationResolverBridge(
+        RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-            $customPostTypeAPI,
-        );
+        $this->recommendCustomPostMutationResolver = $recommendCustomPostMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

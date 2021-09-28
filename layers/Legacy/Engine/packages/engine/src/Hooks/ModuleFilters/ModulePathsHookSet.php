@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -16,17 +17,13 @@ use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 
 class ModulePathsHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected ModulePaths $modulePaths
+    protected ModulePaths $modulePaths;
+    
+    #[Required]
+    public function autowireModulePathsHookSet(
+        ModulePaths $modulePaths
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->modulePaths = $modulePaths;
     }
 
     protected function init(): void

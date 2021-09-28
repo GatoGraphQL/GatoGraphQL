@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFilters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathUtils;
 
@@ -23,8 +24,12 @@ class ModulePaths extends AbstractModuleFilter
      * @var array<string, array>
      */
     protected array $backlog_unsettled_paths = [];
-    public function __construct(protected ModulePathManagerInterface $modulePathManager)
+    protected ModulePathManagerInterface $modulePathManager;
+
+    #[Required]
+    public function autowireModulePaths(ModulePathManagerInterface $modulePathManager)
     {
+        $this->modulePathManager = $modulePathManager;
     }
 
     protected function init(): void

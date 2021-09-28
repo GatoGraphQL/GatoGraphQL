@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -20,21 +21,13 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        protected CustomEndpointBlockCategory $customEndpointBlockCategory,
+    protected CustomEndpointBlockCategory $customEndpointBlockCategory;
+
+    #[Required]
+    public function autowireEndpointVoyagerBlock(
+        CustomEndpointBlockCategory $customEndpointBlockCategory,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
+        $this->customEndpointBlockCategory = $customEndpointBlockCategory;
     }
 
     protected function getBlockName(): string

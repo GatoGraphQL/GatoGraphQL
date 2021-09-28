@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
@@ -26,21 +27,25 @@ use PoP\Translation\TranslationAPIInterface;
 
 class VarsHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected QueryRetrieverInterface $queryRetrieverInterface,
-        protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
-        protected GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected GraphQLQueryConvertorInterface $graphQLQueryConvertor,
+    protected QueryRetrieverInterface $queryRetrieverInterface;
+    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
+    protected GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected GraphQLQueryConvertorInterface $graphQLQueryConvertor;
+
+    #[Required]
+    public function autowireVarsHookSet(
+        QueryRetrieverInterface $queryRetrieverInterface,
+        GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
+        GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        GraphQLQueryConvertorInterface $graphQLQueryConvertor,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->queryRetrieverInterface = $queryRetrieverInterface;
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+        $this->graphQLPersistedQueryManager = $graphQLPersistedQueryManager;
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->graphQLQueryConvertor = $graphQLQueryConvertor;
     }
 
     protected function init(): void

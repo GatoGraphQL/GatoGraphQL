@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ErrorHandling;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorCodes;
 use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
@@ -11,8 +12,12 @@ use PoP\Translation\TranslationAPIInterface;
 
 class ErrorProvider implements ErrorProviderInterface
 {
-    public function __construct(protected TranslationAPIInterface $translationAPI)
+    protected TranslationAPIInterface $translationAPI;
+
+    #[Required]
+    public function autowireErrorProvider(TranslationAPIInterface $translationAPI)
     {
+        $this->translationAPI = $translationAPI;
     }
 
     /**

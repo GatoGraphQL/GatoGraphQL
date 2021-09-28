@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostLinkMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -13,19 +14,13 @@ use PoPSitesWassup\PostLinkMutations\MutationResolvers\CreatePostLinkMutationRes
 
 class CreatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected CreatePostLinkMutationResolver $createPostLinkMutationResolver,
+    protected CreatePostLinkMutationResolver $createPostLinkMutationResolver;
+
+    #[Required]
+    public function autowireCreatePostLinkMutationResolverBridge(
+        CreatePostLinkMutationResolver $createPostLinkMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->createPostLinkMutationResolver = $createPostLinkMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

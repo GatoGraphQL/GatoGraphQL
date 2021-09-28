@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -35,33 +36,19 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     use WithLimitFieldArgResolverTrait;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected PageObjectTypeResolver $pageObjectTypeResolver,
-        protected PageTypeAPIInterface $pageTypeAPI,
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected PageObjectTypeResolver $pageObjectTypeResolver;
+    protected PageTypeAPIInterface $pageTypeAPI;
+
+    #[Required]
+    public function autowirePageObjectTypeFieldResolver(
+        IntScalarTypeResolver $intScalarTypeResolver,
+        PageObjectTypeResolver $pageObjectTypeResolver,
+        PageTypeAPIInterface $pageTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
+        $this->pageTypeAPI = $pageTypeAPI;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

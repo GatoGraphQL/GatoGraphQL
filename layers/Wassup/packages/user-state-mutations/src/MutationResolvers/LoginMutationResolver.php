@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\UserAccount\FunctionAPIFactory;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -12,15 +13,13 @@ use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver as Upst
 
 class LoginMutationResolver extends UpstreamLoginMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
+    protected UserTypeAPIInterface $userTypeAPI;
+
+    #[Required]
+    public function autowireUserStateMutationsLoginMutationResolver(
+        UserTypeAPIInterface $userTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
+        $this->userTypeAPI = $userTypeAPI;
     }
 
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string

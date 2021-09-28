@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -26,21 +27,13 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
 
     public const ATTRIBUTE_NAME_INHERIT_QUERY = 'inheritQuery';
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
+    protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
+
+    #[Required]
+    public function autowirePersistedQueryEndpointAPIHierarchyBlock(
+        PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-        );
+        $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
     }
 
     protected function getBlockName(): string

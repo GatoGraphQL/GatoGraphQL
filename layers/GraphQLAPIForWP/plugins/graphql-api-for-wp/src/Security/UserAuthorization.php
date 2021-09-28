@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Security;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
 use InvalidArgumentException;
@@ -13,9 +14,12 @@ use InvalidArgumentException;
  */
 class UserAuthorization implements UserAuthorizationInterface
 {
-    public function __construct(
-        protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry
-    ) {
+    protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry;
+
+    #[Required]
+    public function autowireUserAuthorization(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry)
+    {
+        $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;
     }
     /**
      * The capability needed to access the schema editor (i.e. access clients GraphiQL/Voyager

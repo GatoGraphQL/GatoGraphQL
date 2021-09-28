@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Registries;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
@@ -43,14 +44,25 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * @var AbstractDynamicType[]
      */
     protected array $dynamicTypes = [];
+    protected TranslationAPIInterface $translationAPI;
+    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
+    protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
+    protected SchemaDefinitionRegistryInterface $schemaDefinitionRegistry;
+    protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
 
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
-        protected SchemaDefinitionRegistryInterface $schemaDefinitionRegistry,
-        protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
+    #[Required]
+    public function autowireSchemaDefinitionReferenceRegistry(
+        TranslationAPIInterface $translationAPI,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+        QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
+        SchemaDefinitionRegistryInterface $schemaDefinitionRegistry,
+        GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ) {
+        $this->translationAPI = $translationAPI;
+        $this->schemaDefinitionService = $schemaDefinitionService;
+        $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
+        $this->schemaDefinitionRegistry = $schemaDefinitionRegistry;
+        $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
         $this->persistentCache = PersistentCacheFacade::getInstance();
     }
 

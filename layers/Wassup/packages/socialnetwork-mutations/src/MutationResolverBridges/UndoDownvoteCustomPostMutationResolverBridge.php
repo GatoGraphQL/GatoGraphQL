@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -15,21 +16,13 @@ use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UndoDownvoteCustomPo
 
 class UndoDownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver,
+    protected UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver;
+
+    #[Required]
+    public function autowireUndoDownvoteCustomPostMutationResolverBridge(
+        UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-            $customPostTypeAPI,
-        );
+        $this->undoDownvoteCustomPostMutationResolver = $undoDownvoteCustomPostMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

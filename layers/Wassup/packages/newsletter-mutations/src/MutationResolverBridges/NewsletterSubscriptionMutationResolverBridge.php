@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -14,19 +15,13 @@ use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterSubscriptionM
 
 class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver,
+    protected NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver;
+
+    #[Required]
+    public function autowireNewsletterSubscriptionMutationResolverBridge(
+        NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->newsletterSubscriptionMutationResolver = $newsletterSubscriptionMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

@@ -13,26 +13,18 @@ use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateIndividualProfileMutationResolver;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateProfileMutationResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
 {
     use CreateUpdateProfileMutationResolverBridgeTrait;
-
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
-        protected CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver,
+    protected CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver;
+    
+    #[Required]
+    public function autowireCreateUpdateIndividualProfileMutationResolverBridge(
+        CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-            $createUpdateProfileMutationResolver
-        );
+        $this->createUpdateIndividualProfileMutationResolver = $createUpdateIndividualProfileMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

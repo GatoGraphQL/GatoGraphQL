@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\RelationalTypeResolverDecorators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\CacheControl\Managers\CacheControlManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -14,15 +15,13 @@ class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends A
 {
     use ConfigurableCacheControlRelationalTypeResolverDecoratorTrait;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected CacheControlManagerInterface $cacheControlManager,
+    protected CacheControlManagerInterface $cacheControlManager;
+
+    #[Required]
+    public function autowireConfigurableCacheControlForFieldsRelationalTypeResolverDecorator(
+        CacheControlManagerInterface $cacheControlManager,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $fieldQueryInterpreter,
-        );
+        $this->cacheControlManager = $cacheControlManager;
     }
 
     protected function getConfigurationEntries(): array

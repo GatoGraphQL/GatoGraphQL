@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -23,37 +24,13 @@ use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeReso
 
 class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ModulePathHelpersInterface $modulePathHelpers,
-        ModuleFilterManagerInterface $moduleFilterManager,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CMSServiceInterface $cmsService,
-        NameResolverInterface $nameResolver,
-        DataloadHelperServiceInterface $dataloadHelperService,
-        RequestHelperServiceInterface $requestHelperService,
-        ModulePaths $modulePaths,
-        ListQueryInputOutputHandler $listQueryInputOutputHandler,
-        protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
+    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
+
+    #[Required]
+    public function autowirePostCategoryFieldDataloadModuleProcessor(
+        PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $modulePathHelpers,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $cmsService,
-            $nameResolver,
-            $dataloadHelperService,
-            $requestHelperService,
-            $modulePaths,
-            $listQueryInputOutputHandler,
-        );
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
     }
 
     public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface

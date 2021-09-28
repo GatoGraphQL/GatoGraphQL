@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -17,19 +18,13 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        CPTUtils $cptUtils,
-        protected SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry
+    protected SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry;
+
+    #[Required]
+    public function autowireGraphQLSchemaConfigurationCustomPostType(
+        SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $cptUtils,
-        );
+        $this->schemaConfigBlockRegistry = $schemaConfigBlockRegistry;
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
@@ -15,10 +16,12 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
      * Can't use autowiring or it produces a circular reference exception
      */
     protected ?AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver = null;
+    protected InstanceManagerInterface $instanceManager;
 
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-    ) {
+    #[Required]
+    public function autowireSchemaDefinitionService(InstanceManagerInterface $instanceManager)
+    {
+        $this->instanceManager = $instanceManager;
     }
 
     public function getTypeSchemaKey(TypeResolverInterface $typeResolver): string

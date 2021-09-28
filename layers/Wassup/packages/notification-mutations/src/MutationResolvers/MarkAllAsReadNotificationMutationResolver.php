@@ -10,16 +10,6 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class MarkAllAsReadNotificationMutationResolver extends AbstractMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-    ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
-    }
-
     protected function additionals($form_data)
     {
         $this->hooksAPI->doAction('GD_NotificationMarkAllAsRead:additionals', $form_data);

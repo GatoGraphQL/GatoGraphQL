@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\MenuPageInterface;
@@ -17,12 +18,16 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
     protected ?string $hookName = null;
+    protected InstanceManagerInterface $instanceManager;
+    protected MenuPageHelper $menuPageHelper;
+    protected EndpointHelpers $endpointHelpers;
 
-    public function __construct(
-        protected InstanceManagerInterface $instanceManager,
-        protected MenuPageHelper $menuPageHelper,
-        protected EndpointHelpers $endpointHelpers
-    ) {
+    #[Required]
+    public function autowireAbstractMenuPage(InstanceManagerInterface $instanceManager, MenuPageHelper $menuPageHelper, EndpointHelpers $endpointHelpers)
+    {
+        $this->instanceManager = $instanceManager;
+        $this->menuPageHelper = $menuPageHelper;
+        $this->endpointHelpers = $endpointHelpers;
     }
 
     public function setHookName(string $hookName): void

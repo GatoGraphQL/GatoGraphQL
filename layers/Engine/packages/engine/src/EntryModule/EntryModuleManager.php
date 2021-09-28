@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\Engine\EntryModule;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ModuleRouting\ModuleRoutingGroups;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 
 class EntryModuleManager implements EntryModuleManagerInterface
 {
-    public function __construct(
-        protected RouteModuleProcessorManagerInterface $routeModuleProcessorManager,
-    ) {
+    protected RouteModuleProcessorManagerInterface $routeModuleProcessorManager;
+
+    #[Required]
+    public function autowireEntryModuleManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager)
+    {
+        $this->routeModuleProcessorManager = $routeModuleProcessorManager;
     }
 
     public function getEntryModule(): ?array

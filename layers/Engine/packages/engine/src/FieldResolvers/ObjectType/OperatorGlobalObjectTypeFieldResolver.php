@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use ArgumentCountError;
 use Exception;
 use PoP\ComponentModel\Engine\EngineInterface;
@@ -33,41 +34,34 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
+    public const HOOK_SAFEVARS = __CLASS__ . ':safeVars';
+
     /**
      * @var array<string, mixed>
      */
     protected ?array $safeVars = null;
+    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ErrorProviderInterface $errorProvider;
 
-    public const HOOK_SAFEVARS = __CLASS__ . ':safeVars';
-
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected MixedScalarTypeResolver $mixedScalarTypeResolver,
-        protected BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected ErrorProviderInterface $errorProvider,
+    #[Required]
+    public function autowireOperatorGlobalObjectTypeFieldResolver(
+        MixedScalarTypeResolver $mixedScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        ErrorProviderInterface $errorProvider,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->errorProvider = $errorProvider;
     }
 
     public function getFieldNamesToResolve(): array

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFiltering;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
@@ -33,11 +34,14 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
 
     // When targeting modules in pop-engine.php (eg: when doing ->get_dbobjectids()) those modules are already and always included, so no need to check for their ancestors or anything
     protected bool $neverExclude = false;
+    protected ModulePathManagerInterface $modulePathManager;
+    protected ModulePathHelpersInterface $modulePathHelpers;
 
-    public function __construct(
-        protected ModulePathManagerInterface $modulePathManager,
-        protected ModulePathHelpersInterface $modulePathHelpers
-    ) {
+    #[Required]
+    public function autowireModuleFilterManager(ModulePathManagerInterface $modulePathManager, ModulePathHelpersInterface $modulePathHelpers)
+    {
+        $this->modulePathManager = $modulePathManager;
+        $this->modulePathHelpers = $modulePathHelpers;
     }
 
     public function addModuleFilter(ModuleFilterInterface $moduleFilter): void

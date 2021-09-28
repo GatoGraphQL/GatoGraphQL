@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -15,19 +16,13 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected UserTypeAPIInterface $userTypeAPI,
+    protected UserTypeAPIInterface $userTypeAPI;
+
+    #[Required]
+    public function autowireUserTypeDataLoader(
+        UserTypeAPIInterface $userTypeAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-            $moduleProcessorManager,
-        );
+        $this->userTypeAPI = $userTypeAPI;
     }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array

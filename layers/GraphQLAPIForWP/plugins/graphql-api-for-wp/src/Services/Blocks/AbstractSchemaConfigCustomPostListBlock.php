@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
@@ -16,24 +17,16 @@ use WP_Post;
 
 abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaConfigBlock
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
-        protected BlockRenderingHelpers $blockRenderingHelpers,
-        protected CPTUtils $cptUtils,
+    protected BlockRenderingHelpers $blockRenderingHelpers;
+    protected CPTUtils $cptUtils;
+
+    #[Required]
+    public function autowireAbstractSchemaConfigCustomPostListBlock(
+        BlockRenderingHelpers $blockRenderingHelpers,
+        CPTUtils $cptUtils,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-            $schemaConfigurationBlockCategory,
-        );
+        $this->blockRenderingHelpers = $blockRenderingHelpers;
+        $this->cptUtils = $cptUtils;
     }
 
     abstract protected function getAttributeName(): string;

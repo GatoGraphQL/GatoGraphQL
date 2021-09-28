@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -19,18 +20,16 @@ use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPo
 
 class CustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected MediaObjectTypeResolver $mediaTypeResolver,
-        protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
+    protected MediaObjectTypeResolver $mediaTypeResolver;
+    protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
+
+    #[Required]
+    public function autowireCustomPostMutationResolverHookSet(
+        MediaObjectTypeResolver $mediaTypeResolver,
+        CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->mediaTypeResolver = $mediaTypeResolver;
+        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
     }
 
     protected function init(): void

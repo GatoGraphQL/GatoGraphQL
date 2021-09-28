@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
@@ -22,34 +23,16 @@ use PoPSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoade
 
 class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
-        protected CommentTypeAPIInterface $commentTypeAPI,
-        protected CommentTypeDataLoader $commentTypeDataLoader,
+    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected CommentTypeDataLoader $commentTypeDataLoader;
+
+    #[Required]
+    public function autowireCommentObjectTypeResolver(
+        CommentTypeAPIInterface $commentTypeAPI,
+        CommentTypeDataLoader $commentTypeDataLoader,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-        );
+        $this->commentTypeAPI = $commentTypeAPI;
+        $this->commentTypeDataLoader = $commentTypeDataLoader;
     }
 
     public function getTypeName(): string

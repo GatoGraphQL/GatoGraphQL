@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 
 abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        protected PostTagTypeAPIInterface $postTagTypeAPI,
+    protected PostTagTypeAPIInterface $postTagTypeAPI;
+
+    #[Required]
+    public function autowireAbstractSubscribeToOrUnsubscribeFromTagMutationResolver(
+        PostTagTypeAPIInterface $postTagTypeAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
+        $this->postTagTypeAPI = $postTagTypeAPI;
     }
 
     public function validateErrors(array $form_data): ?array

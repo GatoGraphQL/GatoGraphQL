@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\FieldQuery\QueryUtils;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\API\Schema\FieldQuerySet;
@@ -40,14 +41,20 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
      * @var array<string, mixed>
      */
     private ?array $fragmentsFromRequestCache = null;
+    protected TranslationAPIInterface $translationAPI;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected QueryParserInterface $queryParser;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected PersistedFragmentManagerInterface $persistedFragmentManager;
 
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected QueryParserInterface $queryParser,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected PersistedFragmentManagerInterface $persistedFragmentManager,
-    ) {
+    #[Required]
+    public function autowireFieldQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->queryParser = $queryParser;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->persistedFragmentManager = $persistedFragmentManager;
     }
 
     public function convertAPIQuery(string $operationDotNotation, ?array $fragments = null): FieldQuerySet

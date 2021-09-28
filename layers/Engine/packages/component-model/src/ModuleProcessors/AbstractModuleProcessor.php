@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
@@ -36,26 +37,39 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
     public const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
     public const HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetmoduleDataProperties';
-
     protected const MODULECOMPONENT_SUBMODULES = 'submodules';
     protected const MODULECOMPONENT_DOMAINSWITCHINGSUBMODULES = 'domain-switching-submodules';
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES = 'conditional-on-data-field-submodules';
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDDOMAINSWITCHINGSUBMODULES = 'conditional-on-data-field-domain-switching-submodules';
 
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI,
-        protected InstanceManagerInterface $instanceManager,
-        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected ModulePathHelpersInterface $modulePathHelpers,
-        protected ModuleFilterManagerInterface $moduleFilterManager,
-        protected ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected CMSServiceInterface $cmsService,
-        protected NameResolverInterface $nameResolver,
-        protected DataloadHelperServiceInterface $dataloadHelperService,
-        protected RequestHelperServiceInterface $requestHelperService,
-        protected ModulePaths $modulePaths,
-    ) {
+    protected TranslationAPIInterface $translationAPI;
+    protected HooksAPIInterface $hooksAPI;
+    protected InstanceManagerInterface $instanceManager;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected ModulePathHelpersInterface $modulePathHelpers;
+    protected ModuleFilterManagerInterface $moduleFilterManager;
+    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    protected CMSServiceInterface $cmsService;
+    protected NameResolverInterface $nameResolver;
+    protected DataloadHelperServiceInterface $dataloadHelperService;
+    protected RequestHelperServiceInterface $requestHelperService;
+    protected ModulePaths $modulePaths;
+
+    #[Required]
+    public function autowireAbstractModuleProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->hooksAPI = $hooksAPI;
+        $this->instanceManager = $instanceManager;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->modulePathHelpers = $modulePathHelpers;
+        $this->moduleFilterManager = $moduleFilterManager;
+        $this->moduleProcessorManager = $moduleProcessorManager;
+        $this->cmsService = $cmsService;
+        $this->nameResolver = $nameResolver;
+        $this->dataloadHelperService = $dataloadHelperService;
+        $this->requestHelperService = $requestHelperService;
+        $this->modulePaths = $modulePaths;
     }
 
     public function getSubmodules(array $module): array

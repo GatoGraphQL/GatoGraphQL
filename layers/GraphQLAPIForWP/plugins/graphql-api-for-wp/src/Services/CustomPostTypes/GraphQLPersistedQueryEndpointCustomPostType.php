@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
@@ -27,26 +28,22 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
 {
     use WithBlockRegistryCustomPostTypeTrait;
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        CPTUtils $cptUtils,
-        HooksAPIInterface $hooksAPI,
-        BlockHelpers $blockHelpers,
-        protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
-        protected PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface,
-        protected PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface,
-        protected PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock,
+    protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry;
+    protected PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface;
+    protected PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface;
+    protected PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock;
+
+    #[Required]
+    public function autowireGraphQLPersistedQueryEndpointCustomPostType(
+        PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
+        PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface,
+        PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface,
+        PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $cptUtils,
-            $hooksAPI,
-            $blockHelpers,
-        );
+        $this->persistedQueryEndpointBlockRegistry = $persistedQueryEndpointBlockRegistry;
+        $this->persistedQueryEndpointExecuterRegistryInterface = $persistedQueryEndpointExecuterRegistryInterface;
+        $this->persistedQueryEndpointAnnotatorRegistryInterface = $persistedQueryEndpointAnnotatorRegistryInterface;
+        $this->persistedQueryEndpointOptionsBlock = $persistedQueryEndpointOptionsBlock;
     }
 
     /**

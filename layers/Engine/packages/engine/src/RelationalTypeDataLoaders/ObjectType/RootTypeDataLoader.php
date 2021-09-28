@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\RelationalTypeDataLoaders\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -12,17 +13,13 @@ use PoP\Engine\ObjectModels\Root;
 
 class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        NameResolverInterface $nameResolver,
-        protected Root $root,
+    protected Root $root;
+
+    #[Required]
+    public function autowireRootTypeDataLoader(
+        Root $root,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $nameResolver,
-        );
+        $this->root = $root;
     }
 
     public function getObjects(array $ids): array

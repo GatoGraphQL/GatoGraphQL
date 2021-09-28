@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ModuleProcessors\FormInputs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -40,37 +41,16 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS = 'filterinput-exclude-custompost-ids';
     public const MODULE_FILTERINPUT_COMMENT_TYPES = 'filterinput-comment-types';
     public const MODULE_FILTERINPUT_COMMENT_STATUS = 'filterinput-comment-status';
+    protected CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver;
+    protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ModulePathHelpersInterface $modulePathHelpers,
-        ModuleFilterManagerInterface $moduleFilterManager,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CMSServiceInterface $cmsService,
-        NameResolverInterface $nameResolver,
-        DataloadHelperServiceInterface $dataloadHelperService,
-        RequestHelperServiceInterface $requestHelperService,
-        ModulePaths $modulePaths,
-        protected CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver,
-        protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
+    #[Required]
+    public function autowireFilterInputModuleProcessor(
+        CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver,
+        CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $modulePathHelpers,
-            $moduleFilterManager,
-            $moduleProcessorManager,
-            $cmsService,
-            $nameResolver,
-            $dataloadHelperService,
-            $requestHelperService,
-            $modulePaths,
-        );
+        $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
+        $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
     }
 
     public function getModulesToProcess(): array

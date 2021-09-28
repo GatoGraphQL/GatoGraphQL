@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\PluginConstants;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
@@ -18,19 +19,28 @@ abstract class AbstractContentParser implements ContentParserInterface
 
     protected string $baseDir = '';
     protected string $baseURL = '';
+    protected RequestHelperServiceInterface $requestHelperService;
+    protected LocaleHelper $localeHelper;
 
     /**
      * @param string|null $baseDir Where to look for the documentation
      * @param string|null $baseURL URL for the documentation
      */
     public function __construct(
-        protected RequestHelperServiceInterface $requestHelperService,
-        protected LocaleHelper $localeHelper,
         ?string $baseDir = null,
         ?string $baseURL = null,
     ) {
         $this->setBaseDir($baseDir);
         $this->setBaseURL($baseURL);
+    }
+
+    #[Required]
+    public function autowireAbstractContentParser(
+        RequestHelperServiceInterface $requestHelperService,
+        LocaleHelper $localeHelper,
+    ) {
+        $this->requestHelperService = $requestHelperService;
+        $this->localeHelper = $localeHelper;
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Menus;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 
@@ -12,13 +13,13 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
  */
 class PluginMenu extends AbstractMenu
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        protected UserAuthorizationInterface $userAuthorization
+    protected UserAuthorizationInterface $userAuthorization;
+
+    #[Required]
+    public function autowirePluginMenu(
+        UserAuthorizationInterface $userAuthorization
     ) {
-        parent::__construct(
-            $instanceManager,
-        );
+        $this->userAuthorization = $userAuthorization;
     }
 
     public function getName(): string

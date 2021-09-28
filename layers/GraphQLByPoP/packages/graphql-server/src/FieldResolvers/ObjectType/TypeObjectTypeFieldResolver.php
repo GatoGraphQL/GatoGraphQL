@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -35,35 +36,31 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected StringScalarTypeResolver $stringScalarTypeResolver,
-        protected ObjectScalarTypeResolver $objectScalarTypeResolver,
-        protected FieldObjectTypeResolver $fieldObjectTypeResolver,
-        protected TypeObjectTypeResolver $typeObjectTypeResolver,
-        protected EnumValueObjectTypeResolver $enumValueObjectTypeResolver,
-        protected InputValueObjectTypeResolver $inputValueObjectTypeResolver,
-        protected TypeKindEnumTypeResolver $typeKindEnumTypeResolver,
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected FieldObjectTypeResolver $fieldObjectTypeResolver;
+    protected TypeObjectTypeResolver $typeObjectTypeResolver;
+    protected EnumValueObjectTypeResolver $enumValueObjectTypeResolver;
+    protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
+    protected TypeKindEnumTypeResolver $typeKindEnumTypeResolver;
+
+    #[Required]
+    public function autowireTypeObjectTypeFieldResolver(
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        FieldObjectTypeResolver $fieldObjectTypeResolver,
+        TypeObjectTypeResolver $typeObjectTypeResolver,
+        EnumValueObjectTypeResolver $enumValueObjectTypeResolver,
+        InputValueObjectTypeResolver $inputValueObjectTypeResolver,
+        TypeKindEnumTypeResolver $typeKindEnumTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+        $this->enumValueObjectTypeResolver = $enumValueObjectTypeResolver;
+        $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
+        $this->typeKindEnumTypeResolver = $typeKindEnumTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

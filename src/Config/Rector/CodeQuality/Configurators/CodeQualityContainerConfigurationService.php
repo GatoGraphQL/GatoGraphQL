@@ -24,7 +24,6 @@ class CodeQualityContainerConfigurationService extends AbstractCodeQualityContai
             $this->rootDirectory . '/layers/GraphQLAPIForWP/plugins/*/src/*',
             $this->rootDirectory . '/layers/GraphQLAPIForWP/packages/*/src/*',
             $this->rootDirectory . '/layers/Engine/packages/*/src/*',
-            
         ];
     }
 }

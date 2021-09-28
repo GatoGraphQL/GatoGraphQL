@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\ConditionalOnComponent\Users\SchemaHooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
@@ -12,17 +13,13 @@ use PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks\FilterInputHo
 
 abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet,
+    protected UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet;
+
+    #[Required]
+    public function autowireAbstractRemoveAuthorFilterInputHookSet(
+        UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->userCustomPostFilterInputHookSet = $userCustomPostFilterInputHookSet;
     }
 
     protected function init(): void

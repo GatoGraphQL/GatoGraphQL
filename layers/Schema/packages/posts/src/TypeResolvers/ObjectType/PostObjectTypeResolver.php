@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\TypeResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
@@ -22,35 +23,13 @@ use PoPSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostTypeDataLoader;
 
 class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        protected PostTypeDataLoader $postTypeDataLoader,
+    protected PostTypeDataLoader $postTypeDataLoader;
+
+    #[Required]
+    public function autowirePostObjectTypeResolver(
+        PostTypeDataLoader $postTypeDataLoader,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $schemaNamespacingService,
-            $schemaDefinitionService,
-            $attachableExtensionManager,
-            $feedbackMessageStore,
-            $fieldQueryInterpreter,
-            $errorProvider,
-            $dataloadingEngine,
-            $directivePipelineService,
-            $customPostTypeAPI,
-        );
+        $this->postTypeDataLoader = $postTypeDataLoader;
     }
 
     public function getTypeName(): string

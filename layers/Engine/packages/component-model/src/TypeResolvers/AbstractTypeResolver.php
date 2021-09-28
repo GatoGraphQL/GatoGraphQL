@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -19,15 +20,22 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      * @var array<string, array>
      */
     protected ?array $schemaDefinition = null;
+    protected TranslationAPIInterface $translationAPI;
+    protected HooksAPIInterface $hooksAPI;
+    protected InstanceManagerInterface $instanceManager;
+    protected SchemaNamespacingServiceInterface $schemaNamespacingService;
+    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
+    protected AttachableExtensionManagerInterface $attachableExtensionManager;
 
-    public function __construct(
-        protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI,
-        protected InstanceManagerInterface $instanceManager,
-        protected SchemaNamespacingServiceInterface $schemaNamespacingService,
-        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
-        protected AttachableExtensionManagerInterface $attachableExtensionManager,
-    ) {
+    #[Required]
+    public function autowireAbstractTypeResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager)
+    {
+        $this->translationAPI = $translationAPI;
+        $this->hooksAPI = $hooksAPI;
+        $this->instanceManager = $instanceManager;
+        $this->schemaNamespacingService = $schemaNamespacingService;
+        $this->schemaDefinitionService = $schemaDefinitionService;
+        $this->attachableExtensionManager = $attachableExtensionManager;
     }
 
     public function getNamespace(): string

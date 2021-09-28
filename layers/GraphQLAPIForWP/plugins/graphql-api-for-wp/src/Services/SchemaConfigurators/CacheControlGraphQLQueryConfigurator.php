@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
@@ -19,23 +20,19 @@ use PoP\Hooks\HooksAPIInterface;
 
 class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        TypeRegistryInterface $typeRegistry,
-        DirectiveRegistryInterface $directiveRegistry,
-        protected CacheControlBlock $cacheControlBlock,
-        protected BlockHelpers $blockHelpers,
-        protected CacheControlManagerInterface $cacheControlManager,
+    protected CacheControlBlock $cacheControlBlock;
+    protected BlockHelpers $blockHelpers;
+    protected CacheControlManagerInterface $cacheControlManager;
+
+    #[Required]
+    public function autowireCacheControlGraphQLQueryConfigurator(
+        CacheControlBlock $cacheControlBlock,
+        BlockHelpers $blockHelpers,
+        CacheControlManagerInterface $cacheControlManager,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $instanceManager,
-            $moduleRegistry,
-            $typeRegistry,
-            $directiveRegistry,
-        );
+        $this->cacheControlBlock = $cacheControlBlock;
+        $this->blockHelpers = $blockHelpers;
+        $this->cacheControlManager = $cacheControlManager;
     }
 
     public function isServiceEnabled(): bool

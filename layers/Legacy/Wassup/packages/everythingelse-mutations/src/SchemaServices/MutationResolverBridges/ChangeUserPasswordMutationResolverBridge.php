@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -15,19 +16,13 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\Chan
 
 class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver,
+    protected ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver;
+    
+    #[Required]
+    public function autowireChangeUserPasswordMutationResolverBridge(
+        ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->changeUserPasswordMutationResolver = $changeUserPasswordMutationResolver;
     }
     
     public function getMutationResolver(): MutationResolverInterface

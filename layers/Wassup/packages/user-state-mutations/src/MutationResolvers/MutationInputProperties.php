@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
-class MutationInputProperties extends \PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties
+use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties as UpstreamMutationInputProperties;
+
+class MutationInputProperties extends UpstreamMutationInputProperties
 {
     public const USER_LOGIN = 'userLogin';
     public const CODE = 'code';

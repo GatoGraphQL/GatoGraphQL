@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -14,19 +15,13 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 
 class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected BuildSystemMutationResolver $buildSystemMutationResolver,
+    protected BuildSystemMutationResolver $buildSystemMutationResolver;
+
+    #[Required]
+    public function autowireBuildSystemMutationResolverBridge(
+        BuildSystemMutationResolver $buildSystemMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->buildSystemMutationResolver = $buildSystemMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

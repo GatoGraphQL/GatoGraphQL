@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Application\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Application\Constants\Actions;
 use PoP\Application\ModuleFilters\Lazy;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
@@ -20,18 +21,16 @@ use PoP\Translation\TranslationAPIInterface;
 
 class LazyLoadHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected RequestHelperServiceInterface $requestHelperService,
-        protected Lazy $lazy,
+    protected RequestHelperServiceInterface $requestHelperService;
+    protected Lazy $lazy;
+
+    #[Required]
+    public function autowireLazyLoadHookSet(
+        RequestHelperServiceInterface $requestHelperService,
+        Lazy $lazy,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->requestHelperService = $requestHelperService;
+        $this->lazy = $lazy;
     }
 
     protected function init(): void

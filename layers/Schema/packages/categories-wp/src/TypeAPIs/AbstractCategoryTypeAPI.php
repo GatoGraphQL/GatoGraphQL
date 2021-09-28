@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
@@ -22,12 +23,16 @@ use WP_Term;
 abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
+    protected HooksAPIInterface $hooksAPI;
+    protected CMSHelperServiceInterface $cmsHelperService;
+    protected CMSServiceInterface $cmsService;
 
-    public function __construct(
-        protected HooksAPIInterface $hooksAPI,
-        protected CMSHelperServiceInterface $cmsHelperService,
-        protected CMSServiceInterface $cmsService,
-    ) {
+    #[Required]
+    public function autowireAbstractCategoryTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService, CMSServiceInterface $cmsService)
+    {
+        $this->hooksAPI = $hooksAPI;
+        $this->cmsHelperService = $cmsHelperService;
+        $this->cmsService = $cmsService;
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -14,15 +15,13 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
+    protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
+
+    #[Required]
+    public function autowireRemoveFeaturedImageOnCustomPostMutationResolver(
+        CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
+        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
     }
 
     public function executeMutation(array $form_data): mixed

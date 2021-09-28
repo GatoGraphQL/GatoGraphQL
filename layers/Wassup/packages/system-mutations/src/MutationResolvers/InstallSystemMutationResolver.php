@@ -11,16 +11,6 @@ use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 
 class InstallSystemMutationResolver extends AbstractMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-    ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
-    }
-
     public function executeMutation(array $form_data): mixed
     {
         // Save the new version on the DB

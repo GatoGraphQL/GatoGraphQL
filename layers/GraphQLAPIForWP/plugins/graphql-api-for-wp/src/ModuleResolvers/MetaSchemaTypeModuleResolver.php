@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver as GraphQLAPISchemaTypeModuleResolver;
@@ -34,6 +35,12 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     public const SCHEMA_COMMENT_META = Plugin::NAMESPACE . '\schema-comment-meta';
     public const SCHEMA_TAXONOMY_META = Plugin::NAMESPACE . '\schema-taxonomy-meta';
 
+    protected ?CommentObjectTypeResolver $commentTypeResolver;
+    protected ?PostTagObjectTypeResolver $postTagTypeResolver;
+    protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver;
+    protected ?PostObjectTypeResolver $postTypeResolver;
+    protected ?UserObjectTypeResolver $userTypeResolver;
+
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered
      * in the SystemContainer, where there are no typeResolvers so it will be null,
@@ -42,21 +49,19 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        TranslationAPIInterface $translationAPI,
-        protected ?CommentObjectTypeResolver $commentTypeResolver,
-        protected ?PostTagObjectTypeResolver $postTagTypeResolver,
-        protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,
-        protected ?PostObjectTypeResolver $postTypeResolver,
-        protected ?UserObjectTypeResolver $userTypeResolver
+    #[Required]
+    public function autowireMetaSchemaTypeModuleResolver(
+        ?CommentObjectTypeResolver $commentTypeResolver,
+        ?PostTagObjectTypeResolver $postTagTypeResolver,
+        ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,
+        ?PostObjectTypeResolver $postTypeResolver,
+        ?UserObjectTypeResolver $userTypeResolver
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $translationAPI,
-        );
+        $this->commentTypeResolver = $commentTypeResolver;
+        $this->postTagTypeResolver = $postTagTypeResolver;
+        $this->postCategoryTypeResolver = $postCategoryTypeResolver;
+        $this->postTypeResolver = $postTypeResolver;
+        $this->userTypeResolver = $userTypeResolver;
     }
 
     /**

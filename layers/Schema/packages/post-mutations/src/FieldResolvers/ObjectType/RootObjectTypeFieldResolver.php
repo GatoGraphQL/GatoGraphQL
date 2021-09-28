@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -26,31 +27,19 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        protected PostObjectTypeResolver $postObjectTypeResolver,
-        protected CreatePostMutationResolver $createPostMutationResolver,
-        protected UpdatePostMutationResolver $updatePostMutationResolver,
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected CreatePostMutationResolver $createPostMutationResolver;
+    protected UpdatePostMutationResolver $updatePostMutationResolver;
+
+    #[Required]
+    public function autowireRootObjectTypeFieldResolver(
+        PostObjectTypeResolver $postObjectTypeResolver,
+        CreatePostMutationResolver $createPostMutationResolver,
+        UpdatePostMutationResolver $updatePostMutationResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-        );
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->createPostMutationResolver = $createPostMutationResolver;
+        $this->updatePostMutationResolver = $updatePostMutationResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

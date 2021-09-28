@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\FieldResolvers\ObjectType;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -37,33 +38,19 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     use WithLimitFieldArgResolverTrait;
 
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        protected MediaTypeAPIInterface $mediaTypeAPI,
-        protected IntScalarTypeResolver $intScalarTypeResolver,
-        protected MediaObjectTypeResolver $mediaObjectTypeResolver,
+    protected MediaTypeAPIInterface $mediaTypeAPI;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected MediaObjectTypeResolver $mediaObjectTypeResolver;
+
+    #[Required]
+    public function autowireRootObjectTypeFieldResolver(
+        MediaTypeAPIInterface $mediaTypeAPI,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        MediaObjectTypeResolver $mediaObjectTypeResolver,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-            $schemaDefinitionService,
-            $engine,
-            $moduleProcessorManager,
-        );
+        $this->mediaTypeAPI = $mediaTypeAPI;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

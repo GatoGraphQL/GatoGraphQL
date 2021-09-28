@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -17,16 +18,16 @@ use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtil
 
 class LostPasswordMutationResolver extends AbstractMutationResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        protected UserTypeAPIInterface $userTypeAPI,
-        protected CMSServiceInterface $cmsService,
+    protected UserTypeAPIInterface $userTypeAPI;
+    protected CMSServiceInterface $cmsService;
+
+    #[Required]
+    public function autowireLostPasswordMutationResolver(
+        UserTypeAPIInterface $userTypeAPI,
+        CMSServiceInterface $cmsService,
     ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-        );
+        $this->userTypeAPI = $userTypeAPI;
+        $this->cmsService = $cmsService;
     }
 
     public function retrievePasswordMessage($key, $user_login, $user_id)

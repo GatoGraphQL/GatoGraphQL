@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolverBridges;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -14,19 +15,13 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemCompone
 
 class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        MutationResolutionManagerInterface $mutationResolutionManager,
-        protected SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver,
+    protected SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver;
+
+    #[Required]
+    public function autowireSaveDefinitionFileMutationResolverBridge(
+        SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver,
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-            $mutationResolutionManager,
-        );
+        $this->saveDefinitionFileMutationResolver = $saveDefinitionFileMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

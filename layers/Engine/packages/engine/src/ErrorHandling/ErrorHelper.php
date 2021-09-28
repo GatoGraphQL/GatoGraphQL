@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\Engine\ErrorHandling;
 
+use Symfony\Contracts\Service\Attribute\Required;
+
 class ErrorHelper implements ErrorHelperInterface
 {
-    public function __construct(protected ErrorManagerInterface $errorManager)
+    protected ErrorManagerInterface $errorManager;
+
+    #[Required]
+    public function autowireErrorHelper(ErrorManagerInterface $errorManager)
     {
+        $this->errorManager = $errorManager;
     }
 
     public function returnResultOrConvertError(mixed $result): mixed

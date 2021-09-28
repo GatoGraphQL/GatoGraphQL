@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\ObjectTypeResolverPickers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
@@ -11,9 +12,12 @@ use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 abstract class AbstractStanceObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    public function __construct(
-        protected StanceObjectTypeResolver $stanceObjectTypeResolver,
-    ) {        
+    protected StanceObjectTypeResolver $stanceObjectTypeResolver;
+    
+    #[Required]
+    public function autowireAbstractStanceObjectTypeResolverPicker(StanceObjectTypeResolver $stanceObjectTypeResolver)
+    {
+        $this->stanceObjectTypeResolver = $stanceObjectTypeResolver;
     }
     
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

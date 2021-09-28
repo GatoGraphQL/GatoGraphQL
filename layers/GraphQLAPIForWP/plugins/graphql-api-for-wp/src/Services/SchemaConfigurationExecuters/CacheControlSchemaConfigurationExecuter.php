@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCacheControlListBlock;
@@ -16,17 +17,13 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
  */
 class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        BlockHelpers $blockHelpers,
-        protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
+    protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator;
+
+    #[Required]
+    public function autowireCacheControlSchemaConfigurationExecuter(
+        CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $blockHelpers,
-        );
+        $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;
     }
 
     /**

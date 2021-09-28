@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
@@ -68,6 +69,20 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
     public const HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-generic-custompost-types';
 
+    protected ?CommentObjectTypeResolver $commentTypeResolver;
+    protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver;
+    protected ?GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver;
+    protected ?MediaObjectTypeResolver $mediaTypeResolver;
+    protected ?PageObjectTypeResolver $pageTypeResolver;
+    protected ?PostTagObjectTypeResolver $postTagTypeResolver;
+    protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver;
+    protected ?MenuObjectTypeResolver $menuTypeResolver;
+    protected ?PostObjectTypeResolver $postTypeResolver;
+    protected ?UserRoleObjectTypeResolver $userRoleTypeResolver;
+    protected ?UserAvatarObjectTypeResolver $userAvatarTypeResolver;
+    protected ?UserObjectTypeResolver $userTypeResolver;
+    protected ?CustomPostTypeRegistryInterface $customPostTypeRegistry;
+
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered
      * in the SystemContainer, where there are no typeResolvers so it will be null,
@@ -76,29 +91,35 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        TranslationAPIInterface $translationAPI,
-        protected ?CommentObjectTypeResolver $commentTypeResolver,
-        protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        protected ?GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver,
-        protected ?MediaObjectTypeResolver $mediaTypeResolver,
-        protected ?PageObjectTypeResolver $pageTypeResolver,
-        protected ?PostTagObjectTypeResolver $postTagTypeResolver,
-        protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,
-        protected ?MenuObjectTypeResolver $menuTypeResolver,
-        protected ?PostObjectTypeResolver $postTypeResolver,
-        protected ?UserRoleObjectTypeResolver $userRoleTypeResolver,
-        protected ?UserAvatarObjectTypeResolver $userAvatarTypeResolver,
-        protected ?UserObjectTypeResolver $userTypeResolver,
-        protected ?CustomPostTypeRegistryInterface $customPostTypeRegistry
+    #[Required]
+    public function autowireSchemaTypeModuleResolver(
+        ?CommentObjectTypeResolver $commentTypeResolver,
+        ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
+        ?GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver,
+        ?MediaObjectTypeResolver $mediaTypeResolver,
+        ?PageObjectTypeResolver $pageTypeResolver,
+        ?PostTagObjectTypeResolver $postTagTypeResolver,
+        ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,
+        ?MenuObjectTypeResolver $menuTypeResolver,
+        ?PostObjectTypeResolver $postTypeResolver,
+        ?UserRoleObjectTypeResolver $userRoleTypeResolver,
+        ?UserAvatarObjectTypeResolver $userAvatarTypeResolver,
+        ?UserObjectTypeResolver $userTypeResolver,
+        ?CustomPostTypeRegistryInterface $customPostTypeRegistry
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $translationAPI,
-        );
+        $this->commentTypeResolver = $commentTypeResolver;
+        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
+        $this->genericCustomPostTypeResolver = $genericCustomPostTypeResolver;
+        $this->mediaTypeResolver = $mediaTypeResolver;
+        $this->pageTypeResolver = $pageTypeResolver;
+        $this->postTagTypeResolver = $postTagTypeResolver;
+        $this->postCategoryTypeResolver = $postCategoryTypeResolver;
+        $this->menuTypeResolver = $menuTypeResolver;
+        $this->postTypeResolver = $postTypeResolver;
+        $this->userRoleTypeResolver = $userRoleTypeResolver;
+        $this->userAvatarTypeResolver = $userAvatarTypeResolver;
+        $this->userTypeResolver = $userTypeResolver;
+        $this->customPostTypeRegistry = $customPostTypeRegistry;
     }
 
     /**

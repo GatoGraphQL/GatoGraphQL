@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\Hooks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -12,17 +13,13 @@ use PoPSchema\UserState\FieldResolvers\ObjectType\GlobalObjectTypeFieldResolver;
 
 class DBEntriesHookSet extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        InstanceManagerInterface $instanceManager,
-        protected GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver
+    protected GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver;
+
+    #[Required]
+    public function autowireDBEntriesHookSet(
+        GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver
     ) {
-        parent::__construct(
-            $hooksAPI,
-            $translationAPI,
-            $instanceManager,
-        );
+        $this->globalObjectTypeFieldResolver = $globalObjectTypeFieldResolver;
     }
 
     protected function init(): void

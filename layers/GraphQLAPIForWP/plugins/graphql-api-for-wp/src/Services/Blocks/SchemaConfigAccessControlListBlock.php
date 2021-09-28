@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -24,27 +25,13 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
 
     public const ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS = 'accessControlLists';
 
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GeneralUtils $generalUtils,
-        EditorHelpers $editorHelpers,
-        SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
-        BlockRenderingHelpers $blockRenderingHelpers,
-        CPTUtils $cptUtils,
-        protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
+    protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
+
+    #[Required]
+    public function autowireSchemaConfigAccessControlListBlock(
+        GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
     ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $userAuthorization,
-            $generalUtils,
-            $editorHelpers,
-            $schemaConfigurationBlockCategory,
-            $blockRenderingHelpers,
-            $cptUtils,
-        );
+        $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
     }
 
     protected function getBlockName(): string
