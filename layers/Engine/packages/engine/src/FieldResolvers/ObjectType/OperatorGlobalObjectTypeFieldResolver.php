@@ -34,12 +34,12 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
+    public const HOOK_SAFEVARS = __CLASS__ . ':safeVars';
+
     /**
      * @var array<string, mixed>
      */
     protected ?array $safeVars = null;
-
-    public const HOOK_SAFEVARS = __CLASS__ . ':safeVars';
     protected MixedScalarTypeResolver $mixedScalarTypeResolver;
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;

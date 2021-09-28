@@ -34,6 +34,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     public const SCHEMA_USER_META = Plugin::NAMESPACE . '\schema-user-meta';
     public const SCHEMA_COMMENT_META = Plugin::NAMESPACE . '\schema-comment-meta';
     public const SCHEMA_TAXONOMY_META = Plugin::NAMESPACE . '\schema-taxonomy-meta';
+    
     protected ?CommentObjectTypeResolver $commentTypeResolver;
     protected ?PostTagObjectTypeResolver $postTagTypeResolver;
     protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver;
