@@ -8,13 +8,17 @@ use PoP\ComponentModel\Schema\SchemaDefinitionService as ComponentModelSchemaDef
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionService extends ComponentModelSchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
-    /**
-     * Can't use autowiring or it produces a circular reference exception
-     */
-    protected ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    protected RootObjectTypeResolver $rootObjectTypeResolver;
+
+    #[Required]
+    public function autowireEngineSchemaDefinitionService(RootObjectTypeResolver $rootObjectTypeResolver)
+    {
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+    }
 
     public function getTypeResolverTypeSchemaKey(RelationalTypeResolverInterface $relationalTypeResolver): string
     {
@@ -29,9 +33,6 @@ class SchemaDefinitionService extends ComponentModelSchemaDefinitionService impl
 
     public function getRootTypeResolver(): ObjectTypeResolverInterface
     {
-        if ($this->rootObjectTypeResolver === null) {
-            $this->rootObjectTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
-        }
         return $this->rootObjectTypeResolver;
     }
 }

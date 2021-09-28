@@ -23,17 +23,16 @@ use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTyp
 
 class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 {
-    /**
-     * Can't inject in constructor because of a circular reference
-     */
-    protected ?CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader = null;
+    protected CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader;
     protected InterfaceTypeResolverInterface $interfaceTypeResolver;
 
     #[Required]
     public function autowireCustomPostUnionTypeResolver(
         InterfaceTypeResolverInterface $interfaceTypeResolver,
+        CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader,
     ) {
         $this->interfaceTypeResolver = $interfaceTypeResolver;
+        $this->customPostUnionTypeDataLoader = $customPostUnionTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -48,9 +47,6 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        if ($this->customPostUnionTypeDataLoader === null) {
-            $this->customPostUnionTypeDataLoader = $this->instanceManager->getInstance(CustomPostUnionTypeDataLoader::class);
-        }
         return $this->customPostUnionTypeDataLoader;
     }
 
