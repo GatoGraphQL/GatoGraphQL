@@ -729,6 +729,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
             $validation = $this->engine->validateCheckpoints($checkpoints);
             if (GeneralUtils::isError($validation)) {
+                /** @var Error */
                 $error = $validation;
                 $errorMessage = $error->getMessageOrCode();
                 // Allow to customize the error message for the failing entity

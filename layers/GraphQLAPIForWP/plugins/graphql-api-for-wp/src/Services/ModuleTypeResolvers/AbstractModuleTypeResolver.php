@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers;
 
-
 abstract class AbstractModuleTypeResolver implements ModuleTypeResolverInterface
 {
     /**

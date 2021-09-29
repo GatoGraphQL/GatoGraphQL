@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-
 abstract class AbstractNestableType extends AbstractType
 {
     public function __construct(

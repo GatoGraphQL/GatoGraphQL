@@ -8,7 +8,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser;
 
-
 class TokenizerTestingParser extends Parser
 {
     public function initTokenizerForTesting($source)

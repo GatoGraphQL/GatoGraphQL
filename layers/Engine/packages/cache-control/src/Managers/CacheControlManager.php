@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\Managers;
 
-
 class CacheControlManager implements CacheControlManagerInterface
 {
     /**

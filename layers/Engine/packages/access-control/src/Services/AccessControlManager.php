@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Services;
 
-
 class AccessControlManager implements AccessControlManagerInterface
 {
     /**
