@@ -8,4 +8,8 @@ use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
 
 interface BlockInterface extends AutomaticallyInstantiatedServiceInterface
 {
+    /**
+     * The block full name: namespace/blockName
+     */
+    public function getBlockFullName(): string;
 }
