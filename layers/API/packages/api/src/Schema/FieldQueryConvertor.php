@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
-use function count;
 use PoP\API\ComponentConfiguration;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
@@ -17,10 +16,11 @@ use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
 use PoP\FieldQuery\QueryUtils;
 use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
+use function count;
 use function strlen;
 use function substr;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldQueryConvertor implements FieldQueryConvertorInterface
 {

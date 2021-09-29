@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostsWP\TypeAPIs;
 
-use function get_post;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
-
 use WP_Post;
+
+use function get_post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

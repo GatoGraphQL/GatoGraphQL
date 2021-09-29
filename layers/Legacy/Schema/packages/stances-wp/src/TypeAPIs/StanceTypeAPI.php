@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\StancesWP\TypeAPIs;
 
-use function get_post;
 use PoPSchema\Stances\TypeAPIs\StanceTypeAPIInterface;
-
 use WP_Post;
+
+use function get_post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
