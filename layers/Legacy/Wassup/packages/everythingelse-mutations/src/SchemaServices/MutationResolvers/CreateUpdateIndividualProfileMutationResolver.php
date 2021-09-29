@@ -17,7 +17,7 @@ class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileM
 
         return $user_data;
     }
-    protected function createupdateuser($user_id, $form_data)
+    protected function createupdateuser($user_id, $form_data): void
     {
         parent::createupdateuser($user_id, $form_data);
 

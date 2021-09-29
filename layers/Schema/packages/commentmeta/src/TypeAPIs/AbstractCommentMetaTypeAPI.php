@@ -14,7 +14,7 @@ abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
 
     #[Required]
-    public function autowireAbstractCommentMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    public function autowireAbstractCommentMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }

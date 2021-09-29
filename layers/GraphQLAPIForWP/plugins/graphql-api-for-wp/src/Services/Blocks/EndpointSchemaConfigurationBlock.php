@@ -40,7 +40,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,
         EndpointBlockCategory $endpointBlockCategory,
-    ) {
+    ): void {
         $this->blockRenderingHelpers = $blockRenderingHelpers;
         $this->cptUtils = $cptUtils;
         $this->endpointBlockCategory = $endpointBlockCategory;

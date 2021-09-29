@@ -24,7 +24,7 @@ class RoutingHookSet extends AbstractHookSet
     public function autowireRoutingHookSet(
         CMSServiceInterface $cmsService,
         RequestHelperServiceInterface $requestHelperService,
-    ) {
+    ): void {
         $this->cmsService = $cmsService;
         $this->requestHelperService = $requestHelperService;
     }

@@ -22,7 +22,7 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
     #[Required]
     public function autowireCacheControlSchemaConfigurationExecuter(
         CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
-    ) {
+    ): void {
         $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;
     }
 

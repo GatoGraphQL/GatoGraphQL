@@ -45,7 +45,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         SchemaNamespacingServiceInterface $schemaNamespacingService,
         TypeRegistryInterface $typeRegistry,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-    ) {
+    ): void {
         $this->nameResolver = $nameResolver;
         $this->cmsService = $cmsService;
         $this->schemaNamespacingService = $schemaNamespacingService;

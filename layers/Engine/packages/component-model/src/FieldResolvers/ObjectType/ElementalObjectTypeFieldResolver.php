@@ -28,7 +28,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     #[Required]
     public function autowireElementalObjectTypeFieldResolver(
         ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
-    ) {
+    ): void {
         $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;
     }
 

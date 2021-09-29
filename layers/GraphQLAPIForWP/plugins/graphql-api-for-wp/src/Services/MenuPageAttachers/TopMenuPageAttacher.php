@@ -27,7 +27,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         UserAuthorizationInterface $userAuthorization,
         GraphiQLMenuPage $graphiQLMenuPage,
         GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage,
-    ) {
+    ): void {
         $this->menuPageHelper = $menuPageHelper;
         $this->moduleRegistry = $moduleRegistry;
         $this->userAuthorization = $userAuthorization;

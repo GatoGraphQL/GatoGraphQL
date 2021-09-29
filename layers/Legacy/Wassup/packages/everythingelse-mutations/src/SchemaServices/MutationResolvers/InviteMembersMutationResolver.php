@@ -19,7 +19,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
     #[Required]
     public function autowireInviteMembersMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
-    ) {
+    ): void {
         $this->userTypeAPI = $userTypeAPI;
     }
     

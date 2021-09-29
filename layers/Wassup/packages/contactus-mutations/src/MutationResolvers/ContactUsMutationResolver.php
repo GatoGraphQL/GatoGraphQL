@@ -32,7 +32,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals($form_data)
+    protected function additionals($form_data): void
     {
         $this->hooksAPI->doAction('pop_contactus', $form_data);
     }

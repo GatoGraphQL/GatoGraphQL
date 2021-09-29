@@ -13,7 +13,7 @@ abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiate
     protected EndpointHelpers $endpointHelpers;
 
     #[Required]
-    public function autowireAbstractEndpointResolver(EndpointHelpers $endpointHelpers)
+    public function autowireAbstractEndpointResolver(EndpointHelpers $endpointHelpers): void
     {
         $this->endpointHelpers = $endpointHelpers;
     }

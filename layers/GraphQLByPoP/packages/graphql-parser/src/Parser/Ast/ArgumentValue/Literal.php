@@ -35,7 +35,7 @@ class Literal extends AbstractAst implements ValueInterface
     /**
      * @param string $value
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->value = $value;
     }

@@ -18,7 +18,7 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
     #[Required]
     public function autowireAbstractRemoveAuthorFilterInputHookSet(
         UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet,
-    ) {
+    ): void {
         $this->userCustomPostFilterInputHookSet = $userCustomPostFilterInputHookSet;
     }
 

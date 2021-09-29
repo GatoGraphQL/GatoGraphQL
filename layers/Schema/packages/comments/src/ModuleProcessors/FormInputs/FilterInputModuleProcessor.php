@@ -48,7 +48,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function autowireFilterInputModuleProcessor(
         CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver,
         CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
-    ) {
+    ): void {
         $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
         $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
     }

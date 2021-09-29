@@ -30,7 +30,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     public function autowireUserObjectTypeResolver(
         UserTypeAPIInterface $userTypeAPI,
         UserTypeDataLoader $userTypeDataLoader,
-    ) {
+    ): void {
         $this->userTypeAPI = $userTypeAPI;
         $this->userTypeDataLoader = $userTypeDataLoader;
     }

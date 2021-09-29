@@ -30,7 +30,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     public function autowireIsCustomPostInterfaceTypeFieldResolver(
         DateScalarTypeResolver $dateScalarTypeResolver,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ) {
+    ): void {
         $this->dateScalarTypeResolver = $dateScalarTypeResolver;
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
     }

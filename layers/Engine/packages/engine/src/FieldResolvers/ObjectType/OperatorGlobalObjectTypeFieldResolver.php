@@ -55,7 +55,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         IntScalarTypeResolver $intScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         ErrorProviderInterface $errorProvider,
-    ) {
+    ): void {
         $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;

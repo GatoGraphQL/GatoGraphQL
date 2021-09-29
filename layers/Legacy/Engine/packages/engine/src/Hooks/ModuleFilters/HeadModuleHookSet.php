@@ -21,7 +21,7 @@ class HeadModuleHookSet extends AbstractHookSet
     #[Required]
     public function autowireHeadModuleHookSet(
         HeadModule $headModule
-    ) {
+    ): void {
         $this->headModule = $headModule;
     }
 

@@ -13,7 +13,7 @@ class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
     protected EndpointHelpers $endpointHelpers;
 
     #[Required]
-    public function autowireAdminGraphiQLWithExplorerClient(EndpointHelpers $endpointHelpers)
+    public function autowireAdminGraphiQLWithExplorerClient(EndpointHelpers $endpointHelpers): void
     {
         $this->endpointHelpers = $endpointHelpers;
     }

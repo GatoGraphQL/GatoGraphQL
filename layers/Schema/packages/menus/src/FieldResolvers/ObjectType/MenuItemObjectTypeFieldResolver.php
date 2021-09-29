@@ -44,7 +44,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         IDScalarTypeResolver $idScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
-    ) {
+    ): void {
         $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
         $this->cmsHelperService = $cmsHelperService;
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;

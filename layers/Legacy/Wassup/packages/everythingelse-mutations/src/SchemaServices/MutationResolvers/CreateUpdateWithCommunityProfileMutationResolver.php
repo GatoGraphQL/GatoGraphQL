@@ -7,12 +7,12 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 use PoPSchema\UserMeta\Utils;
 class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfileMutationResolver
 {
-    protected function additionalsCreate($user_id, $form_data)
+    protected function additionalsCreate($user_id, $form_data): void
     {
         parent::additionalsCreate($user_id, $form_data);
         $this->usercommunitiesAdditionalsCreate($user_id, $form_data);
     }
-    protected function usercommunitiesAdditionalsCreate($user_id, $form_data)
+    protected function usercommunitiesAdditionalsCreate($user_id, $form_data): void
     {
         $this->hooksAPI->doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $form_data);
     }
@@ -23,7 +23,7 @@ class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfi
         $this->usercommunitiesCreateuser($user_id, $form_data);
         return $user_id;
     }
-    protected function usercommunitiesCreateuser($user_id, $form_data)
+    protected function usercommunitiesCreateuser($user_id, $form_data): void
     {
         $communities = $form_data['communities'];
         Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);

@@ -35,7 +35,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         DateFormatterInterface $dateFormatter,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
         IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver,
-    ) {
+    ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;
         $this->dateFormatter = $dateFormatter;
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;

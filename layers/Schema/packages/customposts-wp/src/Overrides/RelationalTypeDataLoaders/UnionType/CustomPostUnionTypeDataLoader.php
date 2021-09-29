@@ -30,7 +30,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
     public function autowireCustomPostsWPCustomPostUnionTypeDataLoader(
         CustomPostTypeDataLoader $customPostTypeDataLoader,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-    ) {
+    ): void {
         $this->customPostTypeDataLoader = $customPostTypeDataLoader;
         $this->customPostTypeAPI = $customPostTypeAPI;
     }

@@ -28,7 +28,7 @@ class CacheControlBlock extends AbstractControlBlock
     #[Required]
     public function autowireCacheControlBlock(
         CacheControlBlockCategory $cacheControlBlockCategory,
-    ) {
+    ): void {
         $this->cacheControlBlockCategory = $cacheControlBlockCategory;
     }
 

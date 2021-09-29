@@ -29,7 +29,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
     public function autowireModuleDocumentationMenuPage(
         ModuleRegistryInterface $moduleRegistry,
         ModulesMenuPage $modulesMenuPage,
-    ) {
+    ): void {
         $this->moduleRegistry = $moduleRegistry;
         $this->modulesMenuPage = $modulesMenuPage;
     }

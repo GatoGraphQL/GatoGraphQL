@@ -18,7 +18,7 @@ class DBEntriesHookSet extends AbstractHookSet
     #[Required]
     public function autowireDBEntriesHookSet(
         GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver
-    ) {
+    ): void {
         $this->globalObjectTypeFieldResolver = $globalObjectTypeFieldResolver;
     }
 

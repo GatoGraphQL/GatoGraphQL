@@ -27,7 +27,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     #[Required]
     public function autowireAbstractCustomPostMutationResolverHookSet(
         CustomPostTypeAPIInterface $customPostTypeAPI,
-    ) {
+    ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
 

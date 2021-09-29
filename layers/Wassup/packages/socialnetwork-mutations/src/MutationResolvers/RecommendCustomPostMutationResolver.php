@@ -32,7 +32,7 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
     /**
      * Function to override
      */
-    protected function additionals($target_id, $form_data)
+    protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
         $this->hooksAPI->doAction('gd_recommendpost', $target_id, $form_data);

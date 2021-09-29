@@ -24,7 +24,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         InstanceManagerInterface $instanceManager,
         RootObjectTypeResolver $rootObjectTypeResolver,
         TypeResolverHelperInterface $typeResolverHelper
-    ) {
+    ): void {
         $this->instanceManager = $instanceManager;
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         /** Fields "id", "self" and "__typename" belong to both QueryRoot and MutationRoot */

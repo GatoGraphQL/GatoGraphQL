@@ -20,7 +20,7 @@ class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
     #[Required]
     public function autowirePageTypeDataLoader(
         PageTypeAPIInterface $pageTypeAPI,
-    ) {
+    ): void {
         $this->pageTypeAPI = $pageTypeAPI;
     }
 

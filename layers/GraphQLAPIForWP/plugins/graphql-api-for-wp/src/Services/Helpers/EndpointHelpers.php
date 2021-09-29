@@ -20,7 +20,7 @@ class EndpointHelpers
     public function autowireEndpointHelpers(
         PluginMenu $pluginMenu,
         ModuleRegistryInterface $moduleRegistry,
-    ) {
+    ): void {
         $this->pluginMenu = $pluginMenu;
         $this->moduleRegistry = $moduleRegistry;
     }

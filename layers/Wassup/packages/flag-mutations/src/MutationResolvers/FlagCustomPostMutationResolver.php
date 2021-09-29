@@ -18,7 +18,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
     #[Required]
     public function autowireFlagCustomPostMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
-    ) {
+    ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
@@ -54,7 +54,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals($form_data)
+    protected function additionals($form_data): void
     {
         $this->hooksAPI->doAction('pop_flag', $form_data);
     }

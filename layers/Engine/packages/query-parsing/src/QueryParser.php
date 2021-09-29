@@ -13,7 +13,7 @@ class QueryParser implements QueryParserInterface
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    public function autowireQueryParser(TranslationAPIInterface $translationAPI)
+    public function autowireQueryParser(TranslationAPIInterface $translationAPI): void
     {
         $this->translationAPI = $translationAPI;
     }

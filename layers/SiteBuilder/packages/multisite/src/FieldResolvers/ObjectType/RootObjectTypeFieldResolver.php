@@ -33,7 +33,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireRootObjectTypeFieldResolver(
         SiteObjectTypeResolver $siteObjectTypeResolver,
         Site $site,
-    ) {
+    ): void {
         $this->siteObjectTypeResolver = $siteObjectTypeResolver;
         $this->site = $site;
     }

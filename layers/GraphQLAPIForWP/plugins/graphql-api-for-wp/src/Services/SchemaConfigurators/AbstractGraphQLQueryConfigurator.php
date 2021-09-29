@@ -40,7 +40,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     protected DirectiveRegistryInterface $directiveRegistry;
 
     #[Required]
-    public function autowireAbstractGraphQLQueryConfigurator(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry)
+    public function autowireAbstractGraphQLQueryConfigurator(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry): void
     {
         $this->hooksAPI = $hooksAPI;
         $this->instanceManager = $instanceManager;

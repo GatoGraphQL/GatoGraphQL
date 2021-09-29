@@ -36,7 +36,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         PostObjectTypeResolver $postObjectTypeResolver,
         CreatePostMutationResolver $createPostMutationResolver,
         UpdatePostMutationResolver $updatePostMutationResolver,
-    ) {
+    ): void {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->createPostMutationResolver = $createPostMutationResolver;
         $this->updatePostMutationResolver = $updatePostMutationResolver;

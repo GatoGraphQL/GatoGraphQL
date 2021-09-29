@@ -28,7 +28,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     protected AttachableExtensionManagerInterface $attachableExtensionManager;
 
     #[Required]
-    public function autowireAbstractTypeResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager)
+    public function autowireAbstractTypeResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
@@ -81,7 +81,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return $this->schemaDefinition;
     }
 
-    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])
+    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): void
     {
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
         $typeName = $this->getMaybeNamespacedTypeName();

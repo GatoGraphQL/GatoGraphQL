@@ -30,7 +30,7 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
     #[Required]
     public function autowireNamespacedTypeObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
-    ) {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 

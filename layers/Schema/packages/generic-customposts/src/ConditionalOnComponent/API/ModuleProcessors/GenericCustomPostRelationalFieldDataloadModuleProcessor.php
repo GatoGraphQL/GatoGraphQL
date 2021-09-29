@@ -40,7 +40,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
     public function autowireGenericCustomPostRelationalFieldDataloadModuleProcessor(
         GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ) {
+    ): void {
         $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
     }

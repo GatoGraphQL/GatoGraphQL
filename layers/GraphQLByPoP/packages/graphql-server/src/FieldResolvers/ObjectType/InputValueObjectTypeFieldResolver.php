@@ -33,7 +33,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireInputValueObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,
-    ) {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
     }

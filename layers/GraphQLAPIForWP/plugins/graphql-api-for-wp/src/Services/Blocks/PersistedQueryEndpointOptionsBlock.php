@@ -29,7 +29,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
     #[Required]
     public function autowirePersistedQueryEndpointOptionsBlock(
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
-    ) {
+    ): void {
         $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
     }
 

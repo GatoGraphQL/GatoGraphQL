@@ -18,7 +18,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     #[Required]
     public function autowireVolunteerMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
-    ) {
+    ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
@@ -54,7 +54,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals($form_data)
+    protected function additionals($form_data): void
     {
         $this->hooksAPI->doAction('pop_volunteer', $form_data);
     }

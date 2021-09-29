@@ -16,7 +16,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    public function autowireSchemaDefinitionService(InstanceManagerInterface $instanceManager, AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver)
+    public function autowireSchemaDefinitionService(InstanceManagerInterface $instanceManager, AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver): void
     {
         $this->instanceManager = $instanceManager;
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;

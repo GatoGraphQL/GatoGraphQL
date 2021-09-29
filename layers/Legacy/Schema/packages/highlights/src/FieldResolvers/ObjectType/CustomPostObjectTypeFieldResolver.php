@@ -38,7 +38,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
         HighlightObjectTypeResolver $highlightObjectTypeResolver,
-    ) {
+    ): void {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;

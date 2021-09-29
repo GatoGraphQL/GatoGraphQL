@@ -31,7 +31,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     #[Required]
     public function autowireRootRolesObjectTypeFieldResolver(
         UserRoleTypeAPIInterface $userRoleTypeAPI,
-    ) {
+    ): void {
         $this->userRoleTypeAPI = $userRoleTypeAPI;
     }
 

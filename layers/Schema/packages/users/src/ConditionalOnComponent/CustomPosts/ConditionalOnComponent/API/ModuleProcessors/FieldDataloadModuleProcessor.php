@@ -35,7 +35,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     public function autowireFieldDataloadModuleProcessor(
         CustomPostObjectTypeResolver $customPostObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ) {
+    ): void {
         $this->customPostObjectTypeResolver = $customPostObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
     }

@@ -38,7 +38,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     protected IncludeDirectiveResolver $includeDirectiveResolver;
 
     #[Required]
-    public function autowireGraphQLQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, IncludeDirectiveResolver $includeDirectiveResolver)
+    public function autowireGraphQLQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, IncludeDirectiveResolver $includeDirectiveResolver): void
     {
         $this->translationAPI = $translationAPI;
         $this->feedbackMessageStore = $feedbackMessageStore;

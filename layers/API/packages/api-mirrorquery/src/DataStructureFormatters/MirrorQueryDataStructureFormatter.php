@@ -117,7 +117,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         }
     }
 
-    protected function addDBObjectData(&$dbObjectRet, $propertyFields, $nestedFields, &$databases, &$unionDBKeyIDs, $objectID, $objectKeyPath, &$dbKeyPaths, $concatenateField)
+    protected function addDBObjectData(&$dbObjectRet, $propertyFields, $nestedFields, &$databases, &$unionDBKeyIDs, $objectID, $objectKeyPath, &$dbKeyPaths, $concatenateField): void
     {
         // If there are no property fields and no nestedFields, then do nothing.
         // Otherwise, it could throw an error on `extractDBObjectTypeAndID`

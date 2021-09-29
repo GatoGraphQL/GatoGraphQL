@@ -24,7 +24,7 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
     public function autowireVoyagerClientEndpointExecuter(
         CustomEndpointVoyagerClient $customEndpointVoyagerClient,
         VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter,
-    ) {
+    ): void {
         $this->customEndpointVoyagerClient = $customEndpointVoyagerClient;
         $this->voyagerClientEndpointExecuter = $voyagerClientEndpointExecuter;
     }

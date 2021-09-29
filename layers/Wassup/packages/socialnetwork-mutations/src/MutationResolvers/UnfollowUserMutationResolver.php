@@ -32,7 +32,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
     /**
      * Function to override
      */
-    protected function additionals($target_id, $form_data)
+    protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
         $this->hooksAPI->doAction('gd_unfollowuser', $target_id, $form_data);

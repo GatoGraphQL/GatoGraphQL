@@ -32,7 +32,7 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     public function autowireCustomPostAndUserObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         LocationObjectTypeResolver $locationObjectTypeResolver,
-    ) {
+    ): void {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
     }

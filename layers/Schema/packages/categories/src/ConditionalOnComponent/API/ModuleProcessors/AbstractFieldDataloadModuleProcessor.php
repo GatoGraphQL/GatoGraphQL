@@ -35,7 +35,7 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     #[Required]
     public function autowireAbstractFieldDataloadModuleProcessor(
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ) {
+    ): void {
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
     }
 

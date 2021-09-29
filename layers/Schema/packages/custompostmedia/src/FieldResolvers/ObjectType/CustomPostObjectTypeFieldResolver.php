@@ -29,7 +29,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireCustomPostObjectTypeFieldResolver(
         CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI,
         SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver,
-    ) {
+    ): void {
         $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
         $this->supportingFeaturedImageInterfaceTypeFieldResolver = $supportingFeaturedImageInterfaceTypeFieldResolver;
     }

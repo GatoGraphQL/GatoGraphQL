@@ -26,7 +26,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
     #[Required]
     public function autowireEndpointVoyagerBlock(
         CustomEndpointBlockCategory $customEndpointBlockCategory,
-    ) {
+    ): void {
         $this->customEndpointBlockCategory = $customEndpointBlockCategory;
     }
 

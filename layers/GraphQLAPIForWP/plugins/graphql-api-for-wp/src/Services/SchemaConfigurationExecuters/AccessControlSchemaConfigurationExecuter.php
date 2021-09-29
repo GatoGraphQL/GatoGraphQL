@@ -19,7 +19,7 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
     #[Required]
     public function autowireAccessControlSchemaConfigurationExecuter(
         AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
-    ) {
+    ): void {
         $this->accessControlGraphQLQueryConfigurator = $accessControlGraphQLQueryConfigurator;
     }
 

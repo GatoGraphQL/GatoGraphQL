@@ -28,7 +28,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
     #[Required]
     public function autowireGlobalUserStateObjectTypeFieldResolver(
         IDScalarTypeResolver $idScalarTypeResolver,
-    ) {
+    ): void {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
 

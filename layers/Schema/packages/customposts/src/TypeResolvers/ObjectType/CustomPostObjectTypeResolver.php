@@ -34,7 +34,7 @@ class CustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     #[Required]
     public function autowireCustomPostObjectTypeResolver(
         CustomPostTypeDataLoader $customPostTypeDataLoader,
-    ) {
+    ): void {
         $this->customPostTypeDataLoader = $customPostTypeDataLoader;
     }
 

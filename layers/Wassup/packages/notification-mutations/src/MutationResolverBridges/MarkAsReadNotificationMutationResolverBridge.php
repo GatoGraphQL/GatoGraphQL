@@ -19,7 +19,7 @@ class MarkAsReadNotificationMutationResolverBridge extends AbstractMarkAsReadOrU
     #[Required]
     public function autowireMarkAsReadNotificationMutationResolverBridge(
         MarkAsReadNotificationMutationResolver $markAsReadNotificationMutationResolver,
-    ) {
+    ): void {
         $this->markAsReadNotificationMutationResolver = $markAsReadNotificationMutationResolver;
     }
 

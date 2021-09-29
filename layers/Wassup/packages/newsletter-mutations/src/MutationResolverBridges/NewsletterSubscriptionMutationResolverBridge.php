@@ -20,7 +20,7 @@ class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponent
     #[Required]
     public function autowireNewsletterSubscriptionMutationResolverBridge(
         NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver,
-    ) {
+    ): void {
         $this->newsletterSubscriptionMutationResolver = $newsletterSubscriptionMutationResolver;
     }
 

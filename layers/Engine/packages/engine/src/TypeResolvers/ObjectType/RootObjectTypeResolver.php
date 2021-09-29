@@ -34,7 +34,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
     #[Required]
     public function autowireRootObjectTypeResolver(
         RootTypeDataLoader $rootTypeDataLoader,
-    ) {
+    ): void {
         $this->rootTypeDataLoader = $rootTypeDataLoader;
     }
 
@@ -63,7 +63,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->rootTypeDataLoader;
     }
 
-    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])
+    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): void
     {
         parent::addSchemaDefinition($stackMessages, $generalMessages, $options);
 

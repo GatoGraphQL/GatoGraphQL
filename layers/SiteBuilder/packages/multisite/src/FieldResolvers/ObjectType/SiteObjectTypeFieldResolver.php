@@ -30,7 +30,7 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     #[Required]
     public function autowireSiteObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
-    ) {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 

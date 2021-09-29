@@ -14,7 +14,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     protected HooksAPIInterface $hooksAPI;
 
     #[Required]
-    public function autowireAbstractMutationResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI)
+    public function autowireAbstractMutationResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI): void
     {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;

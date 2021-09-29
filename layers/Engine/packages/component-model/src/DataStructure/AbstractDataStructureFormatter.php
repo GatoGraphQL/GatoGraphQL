@@ -14,7 +14,7 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
 
     #[Required]
-    public function autowireAbstractDataStructureFormatter(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter)
+    public function autowireAbstractDataStructureFormatter(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
@@ -25,13 +25,13 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
         return $data;
     }
 
-    public function outputResponse(&$data, array $headers = [])
+    public function outputResponse(&$data, array $headers = []): void
     {
         $this->sendHeaders($headers);
         $this->printData($data);
     }
 
-    protected function sendHeaders(array $headers = [])
+    protected function sendHeaders(array $headers = []): void
     {
         // Add the content type header
         if ($contentType = $this->getContentType()) {

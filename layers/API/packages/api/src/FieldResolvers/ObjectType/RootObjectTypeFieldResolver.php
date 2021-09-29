@@ -45,7 +45,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         PersistedFragmentManagerInterface $fragmentCatalogueManager,
         PersistedQueryManagerInterface $queryCatalogueManager,
-    ) {
+    ): void {
         $this->schemaOutputShapeEnumTypeResolver = $schemaOutputShapeEnumTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->fragmentCatalogueManager = $fragmentCatalogueManager;

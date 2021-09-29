@@ -39,7 +39,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         InputValueObjectTypeResolver $inputValueObjectTypeResolver,
         DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver,
-    ) {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;

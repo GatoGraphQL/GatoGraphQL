@@ -30,7 +30,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
     public function autowireCustomPostUnionTypeResolver(
         InterfaceTypeResolverInterface $interfaceTypeResolver,
         CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader,
-    ) {
+    ): void {
         $this->interfaceTypeResolver = $interfaceTypeResolver;
         $this->customPostUnionTypeDataLoader = $customPostUnionTypeDataLoader;
     }

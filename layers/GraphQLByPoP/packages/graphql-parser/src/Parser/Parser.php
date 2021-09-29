@@ -90,7 +90,7 @@ class Parser extends Tokenizer
         return $this->data;
     }
 
-    private function init($source = null)
+    private function init($source = null): void
     {
         $this->initTokenizer($source);
 
@@ -182,7 +182,7 @@ class Parser extends Tokenizer
         return $fields;
     }
 
-    protected function parseVariables()
+    protected function parseVariables(): void
     {
         $this->eat(Token::TYPE_LPAREN);
 

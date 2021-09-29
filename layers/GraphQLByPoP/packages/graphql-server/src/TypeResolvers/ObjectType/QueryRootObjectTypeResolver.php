@@ -34,7 +34,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
     public function autowireQueryRootObjectTypeResolver(
         RootObjectTypeResolver $rootObjectTypeResolver,
         QueryRootTypeDataLoader $queryRootTypeDataLoader,
-    ) {
+    ): void {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         $this->queryRootTypeDataLoader = $queryRootTypeDataLoader;
     }

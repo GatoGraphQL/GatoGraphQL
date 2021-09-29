@@ -15,7 +15,7 @@ class ErrorManager extends AbstractErrorManager
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    public function autowireErrorManager(TranslationAPIInterface $translationAPI)
+    public function autowireErrorManager(TranslationAPIInterface $translationAPI): void
     {
         $this->translationAPI = $translationAPI;
     }

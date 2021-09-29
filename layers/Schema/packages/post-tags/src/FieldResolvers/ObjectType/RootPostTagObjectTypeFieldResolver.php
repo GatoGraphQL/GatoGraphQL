@@ -50,7 +50,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
         StringScalarTypeResolver $stringScalarTypeResolver,
         PostTagObjectTypeResolver $postTagObjectTypeResolver,
         PostTagTypeAPIInterface $postTagTypeAPI,
-    ) {
+    ): void {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;

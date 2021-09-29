@@ -41,7 +41,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         StringScalarTypeResolver $stringScalarTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ) {
+    ): void {
         $this->userTypeAPI = $userTypeAPI;
         $this->emailScalarTypeResolver = $emailScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

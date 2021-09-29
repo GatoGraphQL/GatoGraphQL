@@ -56,7 +56,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
         ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,
         ?PostObjectTypeResolver $postTypeResolver,
         ?UserObjectTypeResolver $userTypeResolver
-    ) {
+    ): void {
         $this->commentTypeResolver = $commentTypeResolver;
         $this->postTagTypeResolver = $postTagTypeResolver;
         $this->postCategoryTypeResolver = $postCategoryTypeResolver;

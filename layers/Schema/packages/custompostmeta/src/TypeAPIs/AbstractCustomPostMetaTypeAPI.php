@@ -15,7 +15,7 @@ abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInt
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
 
     #[Required]
-    public function autowireAbstractCustomPostMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    public function autowireAbstractCustomPostMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }

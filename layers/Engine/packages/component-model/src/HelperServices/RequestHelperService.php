@@ -17,7 +17,7 @@ class RequestHelperService implements RequestHelperServiceInterface
     protected HooksAPIInterface $hooksAPI;
 
     #[Required]
-    public function autowireRequestHelperService(HooksAPIInterface $hooksAPI)
+    public function autowireRequestHelperService(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
     }

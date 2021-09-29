@@ -50,7 +50,7 @@ class Fragment extends AbstractAst
     /**
      * @param boolean $used
      */
-    public function setUsed($used)
+    public function setUsed($used): void
     {
         $this->used = $used;
     }
@@ -66,7 +66,7 @@ class Fragment extends AbstractAst
     /**
      * @param mixed $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -82,7 +82,7 @@ class Fragment extends AbstractAst
     /**
      * @param mixed $model
      */
-    public function setModel($model)
+    public function setModel($model): void
     {
         $this->model = $model;
     }
@@ -98,7 +98,7 @@ class Fragment extends AbstractAst
     /**
      * @param Field[]|Query[] $fields
      */
-    public function setFields($fields)
+    public function setFields($fields): void
     {
         $this->fields = $fields;
     }

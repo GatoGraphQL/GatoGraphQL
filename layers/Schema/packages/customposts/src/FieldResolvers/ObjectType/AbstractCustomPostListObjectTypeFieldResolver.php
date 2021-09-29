@@ -41,7 +41,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     public function autowireAbstractCustomPostListObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         CustomPostTypeAPIInterface $customPostTypeAPI,
-    ) {
+    ): void {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->customPostTypeAPI = $customPostTypeAPI;
     }

@@ -27,7 +27,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     public function autowireGravityFormsAddEntryToFormMutationResolverBridge(
         UserTypeAPIInterface $userTypeAPI,
         GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver,
-    ) {
+    ): void {
         $this->userTypeAPI = $userTypeAPI;
         $this->gravityFormsAddEntryToFormMutationResolver = $gravityFormsAddEntryToFormMutationResolver;
         // Execute before $hooksAPI->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);
@@ -123,7 +123,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         return $form_data;
     }
 
-    public function setup()
+    public function setup(): void
     {
         // Since GF 1.9.44, they setup field $_POST[ 'is_submit_' . $form['id'] ] )
         // (in file plugins/gravityforms/form_display.php function validate)
@@ -143,7 +143,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         );
     }
 
-    public function maybeFillFields()
+    public function maybeFillFields(): void
     {
         // Pre-populate values when the user is logged in
         // These are needed since implementing PoP where the user is always logged in, so we can't print the name/email
@@ -172,7 +172,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         }
     }
 
-    public function renameFields()
+    public function renameFields(): void
     {
         // We need to populate the $_POST using the input names needed by Gravity Forms
         if ($form_id = $_POST["gform_submit"] ?? null) {
@@ -186,7 +186,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         }
     }
 
-    public function maybeValidateCaptcha()
+    public function maybeValidateCaptcha(): void
     {
         // This is a workaround to validate the form which takes place in advance based on if the captcha is present or not
         // this is done now because GF sends the email at the beginning, this can't be postponed

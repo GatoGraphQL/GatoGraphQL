@@ -33,7 +33,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireMenuObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
-    ) {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
     }

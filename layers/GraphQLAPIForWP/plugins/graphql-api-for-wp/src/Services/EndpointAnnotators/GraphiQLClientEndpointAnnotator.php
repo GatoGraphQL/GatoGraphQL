@@ -22,7 +22,7 @@ class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator im
     #[Required]
     public function autowireGraphiQLClientEndpointAnnotator(
         EndpointGraphiQLBlock $endpointGraphiQLBlock,
-    ) {
+    ): void {
         $this->endpointGraphiQLBlock = $endpointGraphiQLBlock;
     }
 

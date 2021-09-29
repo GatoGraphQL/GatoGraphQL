@@ -29,7 +29,7 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireTaxonomyObjectTypeFieldResolver(
         TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
-    ) {
+    ): void {
         $this->taxonomyMetaAPI = $taxonomyMetaAPI;
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
     }

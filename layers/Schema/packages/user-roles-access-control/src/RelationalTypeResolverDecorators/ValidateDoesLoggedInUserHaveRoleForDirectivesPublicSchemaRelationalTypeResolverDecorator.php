@@ -22,7 +22,7 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaRelationalTypeRes
     #[Required]
     public function autowireValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaRelationalTypeResolverDecorator(
         ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver,
-    ) {
+    ): void {
         $this->validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
     }
 

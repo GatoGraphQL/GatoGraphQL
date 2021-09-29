@@ -25,7 +25,7 @@ class ModelInstanceHookSet extends AbstractHookSet
     public function autowireModelInstanceHookSet(
         PostTypeAPIInterface $postTypeAPI,
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
-    ) {
+    ): void {
         $this->postTypeAPI = $postTypeAPI;
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
     }

@@ -23,7 +23,7 @@ class GlobalValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDec
     public function autowireGlobalValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDecorator(
         ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver,
         ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver,
-    ) {
+    ): void {
         $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
         $this->validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver = $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
     }

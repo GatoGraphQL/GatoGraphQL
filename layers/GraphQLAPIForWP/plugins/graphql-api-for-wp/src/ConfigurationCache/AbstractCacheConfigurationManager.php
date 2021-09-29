@@ -24,7 +24,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     #[Required]
     public function autowireAbstractCacheConfigurationManager(
         EndpointHelpers $endpointHelpers,
-    ) {
+    ): void {
         $this->endpointHelpers = $endpointHelpers;
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }

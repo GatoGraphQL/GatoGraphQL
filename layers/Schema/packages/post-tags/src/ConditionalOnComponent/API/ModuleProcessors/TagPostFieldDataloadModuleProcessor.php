@@ -38,7 +38,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     public function autowireTagPostFieldDataloadModuleProcessor(
         PostObjectTypeResolver $postObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ) {
+    ): void {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
     }

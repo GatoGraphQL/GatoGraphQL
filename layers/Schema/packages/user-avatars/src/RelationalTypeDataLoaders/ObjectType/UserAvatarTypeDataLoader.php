@@ -18,7 +18,7 @@ class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
     #[Required]
     public function autowireUserAvatarTypeDataLoader(
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
-    ) {
+    ): void {
         $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
     }
 

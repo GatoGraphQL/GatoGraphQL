@@ -38,7 +38,7 @@ abstract class AbstractContentParser implements ContentParserInterface
     public function autowireAbstractContentParser(
         RequestHelperServiceInterface $requestHelperService,
         LocaleHelper $localeHelper,
-    ) {
+    ): void {
         $this->requestHelperService = $requestHelperService;
         $this->localeHelper = $localeHelper;
     }

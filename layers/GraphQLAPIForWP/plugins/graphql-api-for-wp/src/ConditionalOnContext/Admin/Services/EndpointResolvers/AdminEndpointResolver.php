@@ -27,7 +27,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     public function autowireAdminEndpointResolver(
         UserAuthorizationInterface $userAuthorization,
         QueryRetrieverInterface $queryRetrieverInterface,
-    ) {
+    ): void {
         $this->userAuthorization = $userAuthorization;
         $this->queryRetrieverInterface = $queryRetrieverInterface;
     }
@@ -91,7 +91,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
      */
     protected function printGlobalVariables(): void
     {
-        \add_action('admin_print_scripts', function () {
+        \add_action('admin_print_scripts', function (): void {
             // Make sure the user has access to the editor
             if ($this->userAuthorization->canAccessSchemaEditor()) {
                 $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
@@ -137,7 +137,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
          */
         \add_action(
             'init',
-            function () {
+            function (): void {
                 // Make sure the user has access to the editor
                 if ($this->userAuthorization->canAccessSchemaEditor()) {
                     $this->upstreamExecuteGraphQLQuery();
@@ -156,7 +156,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     {
         \add_action(
             'admin_init',
-            function () {
+            function (): void {
                 // Make sure the user has access to the editor
                 if ($this->userAuthorization->canAccessSchemaEditor()) {
                     include TemplateHelpers::getTemplateFile();

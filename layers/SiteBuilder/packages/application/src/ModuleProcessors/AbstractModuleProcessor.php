@@ -52,7 +52,7 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
         return $ret;
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $module, array &$props)
+    protected function addHeaddatasetmoduleDataProperties(&$ret, array $module, array &$props): void
     {
         parent::addHeaddatasetmoduleDataProperties($ret, $module, $props);
 

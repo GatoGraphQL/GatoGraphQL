@@ -18,7 +18,7 @@ class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    public function autowireCommentTypeMutationAPI(TranslationAPIInterface $translationAPI)
+    public function autowireCommentTypeMutationAPI(TranslationAPIInterface $translationAPI): void
     {
         $this->translationAPI = $translationAPI;
     }

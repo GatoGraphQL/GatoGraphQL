@@ -27,7 +27,7 @@ class ModuleListTableAction extends AbstractListTableAction
     protected UserSettingsManagerInterface $userSettingsManager;
 
     #[Required]
-    public function autowireModuleListTableAction()
+    public function autowireModuleListTableAction(): void
     {
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
@@ -37,7 +37,7 @@ class ModuleListTableAction extends AbstractListTableAction
      */
     public function initialize(): void
     {
-        \add_action('admin_notices', function () {
+        \add_action('admin_notices', function (): void {
             $this->maybeAddAdminNotice();
         });
     }
@@ -167,7 +167,7 @@ class ModuleListTableAction extends AbstractListTableAction
         // But do it at the end! Once the new configuration has been applied
         \add_action(
             'init',
-            function () {
+            function (): void {
                 \flush_rewrite_rules();
 
                 // Update the timestamp

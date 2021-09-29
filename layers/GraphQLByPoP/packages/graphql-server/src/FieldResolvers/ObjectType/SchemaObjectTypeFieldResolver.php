@@ -33,7 +33,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireSchemaObjectTypeFieldResolver(
         TypeObjectTypeResolver $typeObjectTypeResolver,
         DirectiveObjectTypeResolver $directiveObjectTypeResolver,
-    ) {
+    ): void {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         $this->directiveObjectTypeResolver = $directiveObjectTypeResolver;
     }

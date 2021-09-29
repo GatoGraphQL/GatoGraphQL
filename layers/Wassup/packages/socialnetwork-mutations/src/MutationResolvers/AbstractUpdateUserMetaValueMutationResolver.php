@@ -20,7 +20,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         return $errors;
     }
 
-    protected function additionals($target_id, $form_data)
+    protected function additionals($target_id, $form_data): void
     {
         $this->hooksAPI->doAction('gd_updateusermetavalue', $target_id, $form_data);
     }

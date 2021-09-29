@@ -36,7 +36,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
     protected EditorHelpers $editorHelpers;
 
     #[Required]
-    public function autowireAbstractBlock(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers)
+    public function autowireAbstractBlock(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers): void
     {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
@@ -350,7 +350,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
          * which calls ComponentModelComponentConfiguration::namespaceTypesAndInterfaces(),
          * which is initialized during "wp"
          */
-        \add_action('wp_print_scripts', function () use ($scriptRegistrationName) {
+        \add_action('wp_print_scripts', function () use ($scriptRegistrationName): void {
             if ($localizedData = $this->getLocalizedData()) {
                 \wp_localize_script(
                     $scriptRegistrationName,

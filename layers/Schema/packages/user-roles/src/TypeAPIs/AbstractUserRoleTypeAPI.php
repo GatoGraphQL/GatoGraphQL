@@ -12,7 +12,7 @@ abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
     protected HooksAPIInterface $hooksAPI;
 
     #[Required]
-    public function autowireAbstractUserRoleTypeAPI(HooksAPIInterface $hooksAPI)
+    public function autowireAbstractUserRoleTypeAPI(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
     }

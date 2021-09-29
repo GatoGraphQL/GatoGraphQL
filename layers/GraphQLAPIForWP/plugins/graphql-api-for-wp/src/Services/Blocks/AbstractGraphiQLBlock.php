@@ -33,7 +33,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     public function autowireAbstractGraphiQLBlock(
         EndpointHelpers $endpointHelpers,
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
-    ) {
+    ): void {
         $this->endpointHelpers = $endpointHelpers;
         $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
     }

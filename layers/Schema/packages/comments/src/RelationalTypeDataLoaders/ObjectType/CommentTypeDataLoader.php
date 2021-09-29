@@ -23,7 +23,7 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
     #[Required]
     public function autowireCommentTypeDataLoader(
         CommentTypeAPIInterface $commentTypeAPI,
-    ) {
+    ): void {
         $this->commentTypeAPI = $commentTypeAPI;
     }
 

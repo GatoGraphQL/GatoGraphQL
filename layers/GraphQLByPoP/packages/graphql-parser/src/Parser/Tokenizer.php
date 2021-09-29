@@ -20,7 +20,7 @@ class Tokenizer
     /** @var  Token */
     protected $lookAhead;
 
-    protected function initTokenizer($source)
+    protected function initTokenizer($source): void
     {
         $this->source    = $source;
         $this->lookAhead = $this->next();
@@ -36,7 +36,7 @@ class Tokenizer
         return $this->scan();
     }
 
-    protected function skipWhitespace()
+    protected function skipWhitespace(): void
     {
         while ($this->pos < strlen($this->source)) {
             $ch = $this->source[$this->pos];
@@ -262,7 +262,7 @@ class Tokenizer
         return new Token(Token::TYPE_NUMBER, $this->getLine(), $this->getColumn(), $value);
     }
 
-    protected function skipInteger()
+    protected function skipInteger(): void
     {
         while ($this->pos < strlen($this->source)) {
             $ch = $this->source[$this->pos];

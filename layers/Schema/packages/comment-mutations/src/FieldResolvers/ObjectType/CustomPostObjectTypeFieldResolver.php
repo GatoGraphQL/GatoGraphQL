@@ -33,7 +33,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireCustomPostObjectTypeFieldResolver(
         CommentObjectTypeResolver $commentObjectTypeResolver,
         AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
-    ) {
+    ): void {
         $this->commentObjectTypeResolver = $commentObjectTypeResolver;
         $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
     }

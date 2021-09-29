@@ -14,7 +14,7 @@ abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterfa
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
 
     #[Required]
-    public function autowireAbstractTaxonomyMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService)
+    public function autowireAbstractTaxonomyMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }

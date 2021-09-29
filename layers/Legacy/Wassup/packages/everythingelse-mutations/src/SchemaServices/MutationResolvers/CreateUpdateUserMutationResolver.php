@@ -137,7 +137,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $cmseditusersapi->updateUser($user_data);
     }
 
-    protected function createupdateuser($user_id, $form_data)
+    protected function createupdateuser($user_id, $form_data): void
     {
     }
 
@@ -191,15 +191,15 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $this->create($form_data);
     }
 
-    protected function additionals($user_id, $form_data)
+    protected function additionals($user_id, $form_data): void
     {
         $this->hooksAPI->doAction('gd_createupdate_user:additionals', $user_id, $form_data);
     }
-    protected function additionalsUpdate($user_id, $form_data)
+    protected function additionalsUpdate($user_id, $form_data): void
     {
         $this->hooksAPI->doAction('gd_createupdate_user:additionalsUpdate', $user_id, $form_data);
     }
-    protected function additionalsCreate($user_id, $form_data)
+    protected function additionalsCreate($user_id, $form_data): void
     {
         $this->hooksAPI->doAction('gd_createupdate_user:additionalsCreate', $user_id, $form_data);
     }

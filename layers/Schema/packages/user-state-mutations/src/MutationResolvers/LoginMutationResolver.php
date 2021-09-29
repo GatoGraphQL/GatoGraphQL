@@ -24,7 +24,7 @@ class LoginMutationResolver extends AbstractMutationResolver
     public function autowireLoginMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
         UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
-    ) {
+    ): void {
         $this->userTypeAPI = $userTypeAPI;
         $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
     }

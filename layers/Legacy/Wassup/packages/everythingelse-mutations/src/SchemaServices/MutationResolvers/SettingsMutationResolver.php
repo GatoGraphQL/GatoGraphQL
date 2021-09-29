@@ -16,7 +16,7 @@ class SettingsMutationResolver extends AbstractMutationResolver
     public array $fieldoperators = [];
 
     // These values must be injected from outside
-    public function add($field, $operator)
+    public function add($field, $operator): void
     {
         // each operator must be of class GD_Settings_UrlOperator
         $this->fieldoperators[] = [

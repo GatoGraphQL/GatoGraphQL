@@ -16,7 +16,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
     #[Required]
     public function autowireAbstractSubscribeToOrUnsubscribeFromTagMutationResolver(
         PostTagTypeAPIInterface $postTagTypeAPI,
-    ) {
+    ): void {
         $this->postTagTypeAPI = $postTagTypeAPI;
     }
 
@@ -35,7 +35,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         return $errors;
     }
 
-    protected function additionals($target_id, $form_data)
+    protected function additionals($target_id, $form_data): void
     {
         $this->hooksAPI->doAction('gd_subscritetounsubscribefrom_tag', $target_id, $form_data);
         parent::additionals($target_id, $form_data);

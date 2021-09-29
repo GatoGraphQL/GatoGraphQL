@@ -15,7 +15,7 @@ abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectT
     protected HighlightObjectTypeResolver $highlightObjectTypeResolver;
     
     #[Required]
-    public function autowireAbstractHighlightObjectTypeResolverPicker(HighlightObjectTypeResolver $highlightObjectTypeResolver)
+    public function autowireAbstractHighlightObjectTypeResolverPicker(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
     {
         $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;
     }

@@ -23,7 +23,7 @@ class VarsHookSet extends AbstractHookSet
     #[Required]
     public function autowireVarsHookSet(
         UserRoleTypeAPIInterface $userRoleTypeAPI,
-    ) {
+    ): void {
         $this->userRoleTypeAPI = $userRoleTypeAPI;
     }
 

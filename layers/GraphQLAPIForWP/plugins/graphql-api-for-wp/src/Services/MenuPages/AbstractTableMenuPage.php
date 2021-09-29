@@ -121,7 +121,7 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
          */
         \add_action(
             'admin_menu',
-            function () {
+            function (): void {
                 /**
                  * Attach to the hook corresponding to this page
                  */

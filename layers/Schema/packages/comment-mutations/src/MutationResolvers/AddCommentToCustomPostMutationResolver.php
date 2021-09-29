@@ -33,7 +33,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         CommentTypeAPIInterface $commentTypeAPI,
         CommentTypeMutationAPIInterface $commentTypeMutationAPI,
         UserTypeAPIInterface $userTypeAPI,
-    ) {
+    ): void {
         $this->commentTypeAPI = $commentTypeAPI;
         $this->commentTypeMutationAPI = $commentTypeMutationAPI;
         $this->userTypeAPI = $userTypeAPI;

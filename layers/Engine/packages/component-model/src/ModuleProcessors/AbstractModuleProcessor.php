@@ -56,7 +56,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected ModulePaths $modulePaths;
 
     #[Required]
-    public function autowireAbstractModuleProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths)
+    public function autowireAbstractModuleProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths): void
     {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
@@ -817,7 +817,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return $ret;
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $module, array &$props)
+    protected function addHeaddatasetmoduleDataProperties(&$ret, array $module, array &$props): void
     {
         /**
          * Allow to add more stuff
@@ -1073,7 +1073,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         );
     }
 
-    protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $module, array &$props)
+    protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $module, array &$props): void
     {
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
@@ -1162,7 +1162,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $this->moduleFilterManager->restoreFromPropagation($module, $props);
     }
 
-    protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $module, array &$props)
+    protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $module, array &$props): void
     {
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 

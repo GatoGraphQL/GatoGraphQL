@@ -73,7 +73,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         CommentObjectTypeResolver $commentObjectTypeResolver,
         CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
         DateFormatterInterface $dateFormatter,
-    ) {
+    ): void {
         $this->commentTypeAPI = $commentTypeAPI;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;

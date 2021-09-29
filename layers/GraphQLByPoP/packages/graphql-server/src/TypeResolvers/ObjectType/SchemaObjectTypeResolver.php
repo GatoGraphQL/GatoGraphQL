@@ -15,7 +15,7 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
     protected SchemaTypeDataLoader $schemaTypeDataLoader;
 
     #[Required]
-    public function autowireSchemaObjectTypeResolver(SchemaTypeDataLoader $schemaTypeDataLoader)
+    public function autowireSchemaObjectTypeResolver(SchemaTypeDataLoader $schemaTypeDataLoader): void
     {
         $this->schemaTypeDataLoader = $schemaTypeDataLoader;
     }

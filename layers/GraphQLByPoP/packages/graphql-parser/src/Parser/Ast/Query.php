@@ -67,7 +67,7 @@ class Query extends AbstractAst implements FieldInterface
     /**
      * @param Field[]|Query[] $fields
      */
-    public function setFields($fields)
+    public function setFields($fields): void
     {
         /**
          * we cannot store fields by name because of TypedFragments

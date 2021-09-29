@@ -80,7 +80,7 @@ class Variable extends AbstractAst implements ValueInterface
     /**
      * @param mixed $value
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->value = $value;
     }
@@ -96,7 +96,7 @@ class Variable extends AbstractAst implements ValueInterface
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -112,7 +112,7 @@ class Variable extends AbstractAst implements ValueInterface
     /**
      * @param string $type
      */
-    public function setTypeName($type)
+    public function setTypeName($type): void
     {
         $this->type = $type;
     }
@@ -128,7 +128,7 @@ class Variable extends AbstractAst implements ValueInterface
     /**
      * @param boolean $isArray
      */
-    public function setIsArray($isArray)
+    public function setIsArray($isArray): void
     {
         $this->isArray = $isArray;
     }
@@ -144,7 +144,7 @@ class Variable extends AbstractAst implements ValueInterface
     /**
      * @param boolean $nullable
      */
-    public function setNullable($nullable)
+    public function setNullable($nullable): void
     {
         $this->nullable = $nullable;
     }
@@ -168,7 +168,7 @@ class Variable extends AbstractAst implements ValueInterface
     /**
      * @param mixed $defaultValue
      */
-    public function setDefaultValue($defaultValue)
+    public function setDefaultValue($defaultValue): void
     {
         $this->hasDefaultValue = true;
 
@@ -206,7 +206,7 @@ class Variable extends AbstractAst implements ValueInterface
     /**
      * @param bool $arrayElementNullable
      */
-    public function setArrayElementNullable($arrayElementNullable)
+    public function setArrayElementNullable($arrayElementNullable): void
     {
         $this->arrayElementNullable = $arrayElementNullable;
     }

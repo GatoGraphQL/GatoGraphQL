@@ -26,7 +26,7 @@ class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     #[Required]
     public function autowireCommentsCustomPostObjectTypeFieldResolver(
         URLScalarTypeResolver $urlScalarTypeResolver,
-    ) {
+    ): void {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
     }
 

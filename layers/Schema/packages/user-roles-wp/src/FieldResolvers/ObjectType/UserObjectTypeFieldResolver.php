@@ -33,7 +33,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireUserObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         UserRoleTypeAPIInterface $userRoleTypeAPI,
-    ) {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->userRoleTypeAPI = $userRoleTypeAPI;
     }

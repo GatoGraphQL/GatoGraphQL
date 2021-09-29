@@ -48,7 +48,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     protected PersistedFragmentManagerInterface $persistedFragmentManager;
 
     #[Required]
-    public function autowireFieldQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager)
+    public function autowireFieldQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager): void
     {
         $this->translationAPI = $translationAPI;
         $this->feedbackMessageStore = $feedbackMessageStore;

@@ -27,7 +27,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
     #[Required]
     public function autowireNotificationFunctionalObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
-    ) {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 

@@ -26,7 +26,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
         GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
         GraphQLRequestVarsHooks $graphQLRequestVarsHooks,
-    ) {
+    ): void {
         $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
         $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
         $this->graphQLRequestVarsHooks = $graphQLRequestVarsHooks;

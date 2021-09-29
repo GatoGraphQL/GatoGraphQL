@@ -32,7 +32,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function autowireCoreGlobalObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ) {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }

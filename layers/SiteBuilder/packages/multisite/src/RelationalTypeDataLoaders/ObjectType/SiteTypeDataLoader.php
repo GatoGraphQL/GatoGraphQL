@@ -19,7 +19,7 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
     #[Required]
     public function autowireSiteTypeDataLoader(
         Site $site,
-    ) {
+    ): void {
         $this->site = $site;
     }
 

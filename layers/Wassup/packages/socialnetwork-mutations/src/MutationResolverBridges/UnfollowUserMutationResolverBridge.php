@@ -20,7 +20,7 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
     #[Required]
     public function autowireUnfollowUserMutationResolverBridge(
         UnfollowUserMutationResolver $unfollowUserMutationResolver,
-    ) {
+    ): void {
         $this->unfollowUserMutationResolver = $unfollowUserMutationResolver;
     }
 

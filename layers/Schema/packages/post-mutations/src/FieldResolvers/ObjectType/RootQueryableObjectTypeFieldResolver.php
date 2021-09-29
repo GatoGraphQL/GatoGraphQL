@@ -49,7 +49,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         IntScalarTypeResolver $intScalarTypeResolver,
         PostObjectTypeResolver $postObjectTypeResolver,
         PostTypeAPIInterface $postTypeAPI,
-    ) {
+    ): void {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->postTypeAPI = $postTypeAPI;

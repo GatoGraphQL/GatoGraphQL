@@ -12,7 +12,7 @@ abstract class AbstractModuleFilter implements ModuleFilterInterface
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
 
     #[Required]
-    public function autowireAbstractModuleFilter(ModuleProcessorManagerInterface $moduleProcessorManager)
+    public function autowireAbstractModuleFilter(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->moduleProcessorManager = $moduleProcessorManager;
     }

@@ -6,7 +6,7 @@ namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
 abstract class AbstractFollowOrUnfollowUserMutationResolver extends AbstractUserUpdateUserMetaValueMutationResolver
 {
-    protected function additionals($target_id, $form_data)
+    protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
         $this->hooksAPI->doAction('gd_followunfollow_user', $target_id, $form_data);

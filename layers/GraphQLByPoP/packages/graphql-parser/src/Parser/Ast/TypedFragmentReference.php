@@ -46,7 +46,7 @@ class TypedFragmentReference extends AbstractAst implements FragmentInterface
     /**
      * @param Field[]|Query[] $fields
      */
-    public function setFields($fields)
+    public function setFields($fields): void
     {
         $this->fields = $fields;
     }
@@ -62,7 +62,7 @@ class TypedFragmentReference extends AbstractAst implements FragmentInterface
     /**
      * @param string $typeName
      */
-    public function setTypeName($typeName)
+    public function setTypeName($typeName): void
     {
         $this->typeName = $typeName;
     }

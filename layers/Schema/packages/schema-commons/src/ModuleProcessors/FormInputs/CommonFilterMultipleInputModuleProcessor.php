@@ -38,7 +38,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     #[Required]
     public function autowireCommonFilterMultipleInputModuleProcessor(
         FormInputHelperServiceInterface $formInputHelperService,
-    ) {
+    ): void {
         $this->formInputHelperService = $formInputHelperService;
     }
 

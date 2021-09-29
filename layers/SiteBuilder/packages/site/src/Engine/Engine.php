@@ -33,7 +33,7 @@ class Engine extends UpstreamEngine
     #[Required]
     public function autowireSiteEngine(
         ApplicationStateHelperServiceInterface $applicationStateHelperService
-    ) {
+    ): void {
         $this->applicationStateHelperService = $applicationStateHelperService;
     }
 

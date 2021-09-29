@@ -29,7 +29,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function autowireCommentObjectTypeFieldResolver(
         CommentMetaTypeAPIInterface $commentMetaAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
-    ) {
+    ): void {
         $this->commentMetaAPI = $commentMetaAPI;
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
     }

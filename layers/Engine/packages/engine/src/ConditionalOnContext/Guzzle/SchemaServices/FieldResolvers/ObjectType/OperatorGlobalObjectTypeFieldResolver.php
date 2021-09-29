@@ -29,7 +29,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     #[Required]
     public function autowireOperatorGlobalObjectTypeFieldResolver(
         ObjectScalarTypeResolver $objectScalarTypeResolver,
-    ) {
+    ): void {
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
     }
 

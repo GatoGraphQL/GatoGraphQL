@@ -30,7 +30,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     #[Required]
     public function autowireFunctionGlobalObjectTypeFieldResolver(
         MixedScalarTypeResolver $mixedScalarTypeResolver,
-    ) {
+    ): void {
         $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
     }
 

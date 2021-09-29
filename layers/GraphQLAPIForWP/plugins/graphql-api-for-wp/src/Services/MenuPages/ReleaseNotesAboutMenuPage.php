@@ -22,7 +22,7 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
     #[Required]
     public function autowireReleaseNotesAboutMenuPage(
         AboutMenuPage $aboutMenuPage,
-    ) {
+    ): void {
         $this->aboutMenuPage = $aboutMenuPage;
     }
 

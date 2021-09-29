@@ -21,7 +21,7 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
     #[Required]
     public function autowireChangeUserPasswordMutationResolverBridge(
         ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver,
-    ) {
+    ): void {
         $this->changeUserPasswordMutationResolver = $changeUserPasswordMutationResolver;
     }
     

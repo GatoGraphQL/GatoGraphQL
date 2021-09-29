@@ -21,7 +21,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
     #[Required]
     public function autowireFileUploadPictureMutationResolverBridge(
         FileUploadPictureMutationResolver $fileUploadPictureMutationResolver,
-    ) {
+    ): void {
         $this->fileUploadPictureMutationResolver = $fileUploadPictureMutationResolver;
     }
     

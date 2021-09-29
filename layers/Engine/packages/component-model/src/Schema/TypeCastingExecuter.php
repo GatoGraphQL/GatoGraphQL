@@ -15,7 +15,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
     private TranslationAPIInterface $translationAPI;
 
     #[Required]
-    public function autowireTypeCastingExecuter(TranslationAPIInterface $translationAPI)
+    public function autowireTypeCastingExecuter(TranslationAPIInterface $translationAPI): void
     {
         $this->translationAPI = $translationAPI;
     }

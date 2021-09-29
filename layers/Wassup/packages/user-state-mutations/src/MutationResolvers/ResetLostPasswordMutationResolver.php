@@ -22,7 +22,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
     #[Required]
     public function autowireResetLostPasswordMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
-    ) {
+    ): void {
         $this->userTypeAPI = $userTypeAPI;
     }
 

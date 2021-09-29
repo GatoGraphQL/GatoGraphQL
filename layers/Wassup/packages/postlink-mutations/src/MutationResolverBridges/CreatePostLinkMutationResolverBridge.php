@@ -19,7 +19,7 @@ class CreatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkM
     #[Required]
     public function autowireCreatePostLinkMutationResolverBridge(
         CreatePostLinkMutationResolver $createPostLinkMutationResolver,
-    ) {
+    ): void {
         $this->createPostLinkMutationResolver = $createPostLinkMutationResolver;
     }
 

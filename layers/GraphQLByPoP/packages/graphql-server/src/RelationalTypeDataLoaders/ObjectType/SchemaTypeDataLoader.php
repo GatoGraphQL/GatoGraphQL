@@ -26,7 +26,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     public function autowireSchemaTypeDataLoader(
         SchemaObjectTypeResolver $schemaObjectTypeResolver,
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
-    ) {
+    ): void {
         $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
     }

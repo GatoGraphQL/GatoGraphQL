@@ -38,7 +38,7 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
     public function autowireCategoryPostFieldDataloadModuleProcessor(
         PostObjectTypeResolver $postObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ) {
+    ): void {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
     }

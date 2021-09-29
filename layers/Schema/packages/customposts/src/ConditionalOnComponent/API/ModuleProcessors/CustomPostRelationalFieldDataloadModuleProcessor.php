@@ -45,7 +45,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
     public function autowireCustomPostRelationalFieldDataloadModuleProcessor(
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ) {
+    ): void {
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
     }

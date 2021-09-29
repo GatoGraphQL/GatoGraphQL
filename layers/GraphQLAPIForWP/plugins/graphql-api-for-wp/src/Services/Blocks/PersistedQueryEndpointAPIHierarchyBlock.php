@@ -32,7 +32,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
     #[Required]
     public function autowirePersistedQueryEndpointAPIHierarchyBlock(
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
-    ) {
+    ): void {
         $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
     }
 

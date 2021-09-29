@@ -34,7 +34,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         CMSHelperServiceInterface $cmsHelperService,
         DateFormatterInterface $dateFormatter,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ) {
+    ): void {
         $this->cmsHelperService = $cmsHelperService;
         $this->dateFormatter = $dateFormatter;
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;

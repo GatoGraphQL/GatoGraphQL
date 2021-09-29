@@ -20,7 +20,7 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
     #[Required]
     public function autowireAbstractSchemaConfigBlock(
         SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
-    ) {
+    ): void {
         $this->schemaConfigurationBlockCategory = $schemaConfigurationBlockCategory;
     }
 

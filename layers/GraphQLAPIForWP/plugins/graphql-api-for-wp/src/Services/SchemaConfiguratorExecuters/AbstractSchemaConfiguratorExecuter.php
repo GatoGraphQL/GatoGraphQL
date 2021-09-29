@@ -15,7 +15,7 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    public function autowireAbstractSchemaConfiguratorExecuter(InstanceManagerInterface $instanceManager)
+    public function autowireAbstractSchemaConfiguratorExecuter(InstanceManagerInterface $instanceManager): void
     {
         $this->instanceManager = $instanceManager;
     }
