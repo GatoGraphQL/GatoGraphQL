@@ -11,17 +11,21 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GuzzleHelpers\GuzzleHelpers;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected URLScalarTypeResolver $urlScalarTypeResolver;
 
     #[Required]
     public function autowireOperatorGlobalObjectTypeFieldResolver(
         ObjectScalarTypeResolver $objectScalarTypeResolver,
+        URLScalarTypeResolver $urlScalarTypeResolver,
     ): void {
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
     }
 
     public function getFieldNamesToResolve(): array
