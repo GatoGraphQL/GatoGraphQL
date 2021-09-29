@@ -6,7 +6,7 @@ namespace PoP\API\Registries;
 
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
-use PoP\ComponentModel\Cache\CacheInterface;
+use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -21,7 +21,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
 {
-    protected CacheInterface $persistentCache;
+    protected PersistentCacheInterface $persistentCache;
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected TranslationAPIInterface $translationAPI;
