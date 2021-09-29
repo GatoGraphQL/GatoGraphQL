@@ -17,9 +17,9 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
         // Check if the list of scripts has been cached in pop-cache/ first
         // If so, just return it from there directly
         global $pop_resourceloader_generatedfilesmanager, $pop_resourceloaderprocessor_manager;
+        $cachemanager = null;
         if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
             $cachemanager = PersistentCacheFacade::getInstance();
-            $useCache = !is_null($cachemanager);
         }
 
         if (!$model_instance_id) {

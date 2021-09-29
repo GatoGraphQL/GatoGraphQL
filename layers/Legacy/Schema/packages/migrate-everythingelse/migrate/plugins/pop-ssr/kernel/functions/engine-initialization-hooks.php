@@ -138,9 +138,9 @@ class PoP_SSR_EngineInitialization_Hooks
 
         // Get the static data properties
         // First check if there's a cache stored
+        $cachemanager = null;
         if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
             $cachemanager = PersistentCacheFacade::getInstance();
-            $useCache = !is_null($cachemanager);
         }
         $dynamic_data_properties = null;
         if ($useCache) {
