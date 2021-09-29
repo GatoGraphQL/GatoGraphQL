@@ -34,10 +34,10 @@ class PoP_EventsCreation_DataLoad_FunctionalObjectTypeFieldResolver extends Abst
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
 			'addEventURL' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

@@ -55,12 +55,12 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'url' => $this->translationAPI->__('Media element URL', 'pop-media'),
             'urlPath' => $this->translationAPI->__('Media element URL path', 'pop-media'),
             'slug' => $this->translationAPI->__('Media element slug', 'pop-media'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

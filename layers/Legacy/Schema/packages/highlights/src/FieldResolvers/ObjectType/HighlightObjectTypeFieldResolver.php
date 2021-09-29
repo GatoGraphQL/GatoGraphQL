@@ -76,15 +76,15 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'title' => $this->translationAPI->__('', ''),
             'excerpt' => $this->translationAPI->__('', ''),
             'content' => $this->translationAPI->__('', ''),
             'highlightedpost' => $this->translationAPI->__('', ''),
             'highlightedPostURL' => $this->translationAPI->__('', ''),
             'highlightedpost' => $this->translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

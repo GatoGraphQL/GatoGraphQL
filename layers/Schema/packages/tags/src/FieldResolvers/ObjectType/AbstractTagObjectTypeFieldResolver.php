@@ -73,15 +73,15 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'url' => $this->translationAPI->__('Tag URL', 'pop-tags'),
             'urlPath' => $this->translationAPI->__('Tag URL path', 'pop-tags'),
             'name' => $this->translationAPI->__('Tag', 'pop-tags'),
             'slug' => $this->translationAPI->__('Tag slug', 'pop-tags'),
             'description' => $this->translationAPI->__('Tag description', 'pop-tags'),
             'count' => $this->translationAPI->__('Number of custom posts containing this tag', 'pop-tags'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

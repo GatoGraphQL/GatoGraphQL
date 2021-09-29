@@ -55,14 +55,14 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
 			'contactPerson' => $translationAPI->__('', ''),
             'contactNumber' => $translationAPI->__('', ''),
             'organizationtypes' => $translationAPI->__('', ''),
             'organizationcategories' => $translationAPI->__('', ''),
             'hasOrganizationDetails' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

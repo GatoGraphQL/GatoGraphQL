@@ -33,10 +33,10 @@ class PoP_LocationPostsCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPosts
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
 			'addLocationPostURL' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

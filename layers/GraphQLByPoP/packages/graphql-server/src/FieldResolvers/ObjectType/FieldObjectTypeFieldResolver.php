@@ -91,7 +91,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'name' => $this->translationAPI->__('Field\'s name', 'graphql-server'),
             'description' => $this->translationAPI->__('Field\'s description', 'graphql-server'),
             'args' => $this->translationAPI->__('Field arguments', 'graphql-server'),
@@ -99,8 +99,8 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'isDeprecated' => $this->translationAPI->__('Is the field deprecated?', 'graphql-server'),
             'deprecationReason' => $this->translationAPI->__('Why was the field deprecated?', 'graphql-server'),
             'extensions' => $this->translationAPI->__('Custom metadata added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

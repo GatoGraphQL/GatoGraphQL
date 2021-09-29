@@ -46,11 +46,11 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
             'link' => $translationAPI->__('', ''),
             'hasLink' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

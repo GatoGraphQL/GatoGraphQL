@@ -23,12 +23,12 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'tags' => $this->translationAPI->__('Tags added to this post', 'pop-post-tags'),
             'tagCount' => $this->translationAPI->__('Number of tags added to this post', 'pop-post-tags'),
             'tagNames' => $this->translationAPI->__('Names of the tags added to this post', 'pop-post-tags'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array

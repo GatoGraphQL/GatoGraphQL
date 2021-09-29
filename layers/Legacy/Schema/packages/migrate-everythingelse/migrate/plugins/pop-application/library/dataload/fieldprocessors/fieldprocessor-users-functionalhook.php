@@ -47,13 +47,13 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
 			'multilayoutKeys' => $translationAPI->__('', ''),
             'mentionQueryby' => $translationAPI->__('', ''),
             'descriptionFormatted' => $translationAPI->__('', ''),
             'excerpt' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

@@ -106,7 +106,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'concat' => $this->translationAPI->__('Concatenate two or more strings', 'function-fields'),
             'divide' => $this->translationAPI->__('Divide a number by another number', 'function-fields'),
             'arrayRandom' => $this->translationAPI->__('Randomly select one element from the provided ones', 'function-fields'),
@@ -122,8 +122,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'upperCase' => $this->translationAPI->__('Transform a string to upper case', 'function-fields'),
             'lowerCase' => $this->translationAPI->__('Transform a string to lower case', 'function-fields'),
             'titleCase' => $this->translationAPI->__('Transform a string to title case', 'function-fields'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array

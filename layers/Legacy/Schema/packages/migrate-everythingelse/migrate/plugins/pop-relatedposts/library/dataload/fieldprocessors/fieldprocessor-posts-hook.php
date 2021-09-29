@@ -62,14 +62,14 @@ class PoP_RelatedPosts_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
             'references' => $translationAPI->__('', ''),
             'hasReferences' => $translationAPI->__('', ''),
             'referencedby' => $translationAPI->__('', ''),
             'hasReferencedBy' => $translationAPI->__('', ''),
             'referencedByCount' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

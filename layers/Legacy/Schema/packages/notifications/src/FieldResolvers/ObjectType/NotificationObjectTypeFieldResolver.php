@@ -160,7 +160,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'action' => $this->translationAPI->__('', ''),
             'objectType' => $this->translationAPI->__('', ''),
             'objectSubtype' => $this->translationAPI->__('', ''),
@@ -188,8 +188,8 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
             'isCommentNotification' => $this->translationAPI->__('', ''),
             'isTaxonomyNotification' => $this->translationAPI->__('', ''),
             'isAction' => $this->translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array

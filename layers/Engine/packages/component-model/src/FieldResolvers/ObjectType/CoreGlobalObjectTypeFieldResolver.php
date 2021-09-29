@@ -65,14 +65,14 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'typeName' => $this->translationAPI->__('The object\'s type', 'pop-component-model'),
             'namespace' => $this->translationAPI->__('The object\'s namespace', 'pop-component-model'),
             'qualifiedTypeName' => $this->translationAPI->__('The object\'s namespace + type', 'pop-component-model'),
             'isType' => $this->translationAPI->__('Indicate if the object is of a given type', 'pop-component-model'),
             'implements' => $this->translationAPI->__('Indicate if the object implements a given interface', 'pop-component-model'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array

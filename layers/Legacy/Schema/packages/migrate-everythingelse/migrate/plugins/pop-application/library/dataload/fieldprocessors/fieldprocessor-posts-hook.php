@@ -85,7 +85,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
 			'favicon' => $translationAPI->__('', ''),
             'thumb' => $translationAPI->__('', ''),
             'thumbFullSrc' => $translationAPI->__('', ''),
@@ -96,8 +96,8 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
             'hasAppliesto' => $translationAPI->__('', ''),
             'hasUserpostactivity' => $translationAPI->__('', ''),
             'userPostActivityCount' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array

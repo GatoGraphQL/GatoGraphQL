@@ -59,7 +59,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
             'excerpt' => $translationAPI->__('', ''),
             'content' => $translationAPI->__('', ''),
             'linkcontent' => $translationAPI->__('', ''),
@@ -68,8 +68,8 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
             'linkcategories' => $translationAPI->__('', ''),
             'linkCategoriesByName' => $translationAPI->__('', ''),
             'hasLinkCategories' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     // @todo: Migrate to returning an EnumTypeResolverClass in getFieldTypeResolver, then delete this function

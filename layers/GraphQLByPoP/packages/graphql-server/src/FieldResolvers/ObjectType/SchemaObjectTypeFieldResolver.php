@@ -63,15 +63,15 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'queryType' => $this->translationAPI->__('The type, accessible from the root, that resolves queries', 'graphql-server'),
             'mutationType' => $this->translationAPI->__('The type, accessible from the root, that resolves mutations', 'graphql-server'),
             'subscriptionType' => $this->translationAPI->__('The type, accessible from the root, that resolves subscriptions', 'graphql-server'),
             'types' => $this->translationAPI->__('All types registered in the data graph', 'graphql-server'),
             'directives' => $this->translationAPI->__('All directives registered in the data graph', 'graphql-server'),
             'type' => $this->translationAPI->__('Obtain a specific type from the schema', 'graphql-server'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array

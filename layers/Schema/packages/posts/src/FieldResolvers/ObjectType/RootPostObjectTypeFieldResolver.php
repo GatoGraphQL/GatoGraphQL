@@ -47,13 +47,13 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'post' => $this->translationAPI->__('Post with a specific ID', 'posts'),
             'postBySlug' => $this->translationAPI->__('Post with a specific slug', 'posts'),
             'postForAdmin' => $this->translationAPI->__('[Unrestricted] Post with a specific ID', 'posts'),
             'postBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Post with a specific slug', 'posts'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array

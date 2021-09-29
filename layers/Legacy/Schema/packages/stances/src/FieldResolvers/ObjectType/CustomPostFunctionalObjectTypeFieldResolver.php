@@ -103,7 +103,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'addStanceURL' => $this->translationAPI->__('', ''),
             'loggedInUserStances' => $this->translationAPI->__('', ''),
             'hasLoggedInUserStances' => $this->translationAPI->__('', ''),
@@ -115,8 +115,8 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
             'stancesLazy' => $this->translationAPI->__('', ''),
             'stanceName' => $this->translationAPI->__('', ''),
             'catName' => $this->translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

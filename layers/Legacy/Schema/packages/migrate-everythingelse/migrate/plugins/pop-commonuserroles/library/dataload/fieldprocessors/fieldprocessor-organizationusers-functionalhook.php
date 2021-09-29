@@ -47,11 +47,11 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalOrganizationUsers
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
 			'organizationTypesByName' => $translationAPI->__('', ''),
             'organizationCategoriesByName' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

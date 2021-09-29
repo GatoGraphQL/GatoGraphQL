@@ -93,7 +93,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'categories' => $this->translationAPI->__('', ''),
             'catSlugs' => $this->translationAPI->__('', ''),
             'stance' => $this->translationAPI->__('', ''),
@@ -102,8 +102,8 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'content' => $this->translationAPI->__('', ''),
             'stancetarget' => $this->translationAPI->__('', ''),
             'hasStanceTarget' => $this->translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

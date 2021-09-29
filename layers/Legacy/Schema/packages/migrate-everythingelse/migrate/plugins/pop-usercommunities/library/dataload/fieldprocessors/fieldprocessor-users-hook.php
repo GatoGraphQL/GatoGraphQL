@@ -67,7 +67,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
             'memberstatus' => $translationAPI->__('', ''),
             'memberprivileges' => $translationAPI->__('', ''),
             'membertags' => $translationAPI->__('', ''),
@@ -75,8 +75,8 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
             'communities' => $translationAPI->__('', ''),
             'activeCommunities' => $translationAPI->__('', ''),
             'hasActiveCommunities' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

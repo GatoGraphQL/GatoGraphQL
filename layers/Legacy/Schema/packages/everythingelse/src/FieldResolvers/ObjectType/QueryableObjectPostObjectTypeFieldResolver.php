@@ -47,10 +47,10 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'endpoint' => $this->translationAPI->__('Endpoint to fetch the object\'s data', 'queriedobject'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

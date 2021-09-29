@@ -78,7 +78,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'url' => $this->translationAPI->__('Category URL', 'pop-categories'),
             'urlPath' => $this->translationAPI->__('Category URL path', 'pop-categories'),
             'slug' => $this->translationAPI->__('Category slug', 'pop-categories'),
@@ -86,8 +86,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             'description' => $this->translationAPI->__('Category description', 'pop-categories'),
             'parentCategory' => $this->translationAPI->__('Parent category (if this category is a child of another one)', 'pop-categories'),
             'count' => $this->translationAPI->__('Number of custom posts containing this category', 'pop-categories'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

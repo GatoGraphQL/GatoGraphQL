@@ -104,7 +104,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'src' => $this->translationAPI->__('Media element URL source', 'pop-media'),
             'srcSet' => $this->translationAPI->__('Media element URL srcset', 'pop-media'),
             'width' => $this->translationAPI->__('Media element\'s width', 'pop-media'),
@@ -117,8 +117,8 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'date' => $this->translationAPI->__('Media element\'s published date', 'pop-media'),
             'modified' => $this->translationAPI->__('Media element\'s modified date', 'pop-media'),
             'mimeType' => $this->translationAPI->__('Media element\'s mime type', 'pop-media'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array

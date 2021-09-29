@@ -49,7 +49,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
 			'recommendPostURL' => $translationAPI->__('', ''),
             'unrecommendPostURL' => $translationAPI->__('', ''),
             'recommendPostCountPlus1' => $translationAPI->__('', ''),
@@ -59,8 +59,8 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
             'downvotePostURL' => $translationAPI->__('', ''),
             'undoDownvotePostURL' => $translationAPI->__('', ''),
             'downvotePostCountPlus1' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

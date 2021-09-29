@@ -36,12 +36,12 @@ class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends A
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
             'icon' => $translationAPI->__('', ''),
             'url' => $translationAPI->__('', ''),
             'message' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

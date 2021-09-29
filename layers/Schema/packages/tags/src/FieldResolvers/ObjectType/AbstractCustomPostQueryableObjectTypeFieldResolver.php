@@ -72,12 +72,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'tags' => $this->translationAPI->__('Tags added to this custom post', 'pop-tags'),
             'tagCount' => $this->translationAPI->__('Number of tags added to this custom post', 'pop-tags'),
             'tagNames' => $this->translationAPI->__('Names of the tags added to this custom post', 'pop-tags'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array

@@ -83,12 +83,12 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'myPosts' => $this->translationAPI->__('Posts by the logged-in user', 'post-mutations'),
             'myPostCount' => $this->translationAPI->__('Number of posts by the logged-in user', 'post-mutations'),
             'myPost' => $this->translationAPI->__('Post with a specific ID', 'post-mutations'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array

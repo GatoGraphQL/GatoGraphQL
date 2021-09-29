@@ -63,7 +63,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
             'shortDescription' => $translationAPI->__('', ''),
             'title' => $translationAPI->__('', ''),
             'displayEmail' => $translationAPI->__('', ''),
@@ -75,8 +75,8 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
             'youtube' => $translationAPI->__('', ''),
             'instagram' => $translationAPI->__('', ''),
             'isProfile' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

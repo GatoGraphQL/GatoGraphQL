@@ -86,7 +86,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'locations' => $this->translationAPI->__('Event\'s locations', 'events'),
             'categories' => $this->translationAPI->__('Event\'s categories', 'events'),
             'dates' => $this->translationAPI->__('Event\'s dates', 'events'),
@@ -94,8 +94,8 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'startDateReadable' => $this->translationAPI->__('Event\'s start date in human-readable format', 'events'),
             'daterange' => $this->translationAPI->__('Event\'s date range', 'events'),
             'daterangetime' => $this->translationAPI->__('Event\'s date range and time', 'events'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

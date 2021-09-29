@@ -75,7 +75,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'page' => $this->translationAPI->__('Page with a specific ID', 'pages'),
             'pageBySlug' => $this->translationAPI->__('Page with a specific slug', 'pages'),
             'pages' => $this->translationAPI->__('Pages', 'pages'),
@@ -84,8 +84,8 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
             'pageBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Page with a specific slug', 'pages'),
             'pagesForAdmin' => $this->translationAPI->__('[Unrestricted] Pages', 'pages'),
             'pageCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of pages', 'pages'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

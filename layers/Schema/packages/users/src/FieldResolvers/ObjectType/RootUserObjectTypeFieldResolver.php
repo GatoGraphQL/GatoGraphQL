@@ -45,13 +45,13 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'user' => $this->translationAPI->__('User with a specific ID', 'pop-users'),
             'userByUsername' => $this->translationAPI->__('User with a specific username', 'pop-users'),
             'userByEmail' => $this->translationAPI->__('User with a specific email', 'pop-users'),
             'users' => $this->translationAPI->__('Users in the current site', 'pop-users'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array

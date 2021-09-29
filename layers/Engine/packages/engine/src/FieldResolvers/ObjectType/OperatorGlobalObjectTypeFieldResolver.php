@@ -113,7 +113,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'if' => $this->translationAPI->__('If a boolean property is true, execute a field, else, execute another field', 'component-model'),
             'not' => $this->translationAPI->__('Return the opposite value of a boolean property', 'component-model'),
             'and' => $this->translationAPI->__('Return an `AND` operation among several boolean properties', 'component-model'),
@@ -127,8 +127,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'time' => $this->translationAPI->__('Return the time now (https://php.net/manual/en/function.time.php)', 'component-model'),
             'echo' => $this->translationAPI->__('Repeat back the input, whatever it is', 'function-fields'),
             'sprintf' => $this->translationAPI->__('Replace placeholders inside a string with provided values', 'function-fields'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array

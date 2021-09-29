@@ -44,12 +44,12 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
             'shortDescriptionFormatted' => $translationAPI->__('', ''),
             'contactSmall' => $translationAPI->__('', ''),
             'userPreferences' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

@@ -98,15 +98,15 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'roles' => $this->translationAPI->__('User roles', 'user-roles'),
             'capabilities' => $this->translationAPI->__('User capabilities', 'user-roles'),
             'hasRole' => $this->translationAPI->__('Does the user have a specific role?', 'user-roles'),
             'hasAnyRole' => $this->translationAPI->__('Does the user have any role from a provided list?', 'user-roles'),
             'hasCapability' => $this->translationAPI->__('Does the user have a specific capability?', 'user-roles'),
             'hasAnyCapability' => $this->translationAPI->__('Does the user have any capability from a provided list?', 'user-roles'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
