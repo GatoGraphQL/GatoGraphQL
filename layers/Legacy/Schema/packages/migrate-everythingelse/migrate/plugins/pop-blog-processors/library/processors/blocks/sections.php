@@ -134,7 +134,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
@@ -188,8 +188,8 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_USERS_SCROLL_LIST => UsersComponentConfiguration::getUsersRoute(),
             self::MODULE_BLOCK_USERS_SCROLL_NAVIGATOR => UsersComponentConfiguration::getUsersRoute(),
             self::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL => UsersComponentConfiguration::getUsersRoute(),
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodule(array $module)

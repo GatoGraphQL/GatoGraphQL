@@ -36,12 +36,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
             self::MODULE_BLOCK_USERS_HORIZONTALSCROLLMAP => UsersComponentConfiguration::getUsersRoute(),
             self::MODULE_BLOCK_USERS_SCROLLMAP => UsersComponentConfiguration::getUsersRoute(),
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodule(array $module)

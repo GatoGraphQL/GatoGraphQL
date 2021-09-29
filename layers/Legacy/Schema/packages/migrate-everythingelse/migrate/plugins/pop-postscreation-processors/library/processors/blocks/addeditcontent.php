@@ -15,11 +15,11 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_POST_CREATE => POP_POSTSCREATION_ROUTE_ADDPOST,
             self::MODULE_BLOCK_POST_UPDATE => POP_POSTSCREATION_ROUTE_EDITPOST,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodules(array $module): array

@@ -22,13 +22,13 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_LOGOUT => POP_USERLOGIN_ROUTE_LOGOUT,
             self::MODULE_BLOCK_LOSTPWD => POP_USERLOGIN_ROUTE_LOSTPWD,
             self::MODULE_BLOCK_LOSTPWDRESET => POP_USERLOGIN_ROUTE_LOSTPWDRESET,
             self::MODULE_BLOCK_LOGIN => POP_USERLOGIN_ROUTE_LOGIN,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getSubmenuSubmodule(array $module)

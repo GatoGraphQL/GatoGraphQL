@@ -19,12 +19,12 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_INVITENEWUSERS => POP_USERPLATFORM_ROUTE_INVITENEWUSERS,
             self::MODULE_BLOCK_MYPREFERENCES => POP_USERPLATFORM_ROUTE_MYPREFERENCES,
             self::MODULE_BLOCK_USER_CHANGEPASSWORD => POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function showDisabledLayerIfCheckpointFailed(array $module, array &$props)

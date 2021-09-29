@@ -19,12 +19,12 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
             self::MODULE_BLOCKCODE_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
             self::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION => POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getTitle(array $module, array &$props)

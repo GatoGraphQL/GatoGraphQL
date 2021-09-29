@@ -13,10 +13,10 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_CODE_EXTERNAL => POP_MULTIDOMAIN_ROUTE_EXTERNAL,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getJsmethods(array $module, array &$props)

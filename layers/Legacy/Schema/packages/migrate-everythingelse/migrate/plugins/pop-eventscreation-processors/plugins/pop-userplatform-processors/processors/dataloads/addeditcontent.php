@@ -22,11 +22,11 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_EVENT_CREATE => POP_EVENTSCREATION_ROUTE_ADDEVENT,
             self::MODULE_DATALOAD_EVENT_UPDATE => POP_EVENTSCREATION_ROUTE_EDITEVENT,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getRelevantRouteCheckpointTarget(array $module, array &$props): string

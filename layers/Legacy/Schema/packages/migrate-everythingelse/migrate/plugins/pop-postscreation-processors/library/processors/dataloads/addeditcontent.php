@@ -18,11 +18,11 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_POST_CREATE => POP_POSTSCREATION_ROUTE_ADDPOST,
             self::MODULE_DATALOAD_POST_UPDATE => POP_POSTSCREATION_ROUTE_EDITPOST,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getRelevantRouteCheckpointTarget(array $module, array &$props): string

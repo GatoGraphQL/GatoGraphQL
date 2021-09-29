@@ -21,11 +21,11 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_ADDCOMMENT => POP_ADDCOMMENTS_ROUTE_ADDCOMMENT,
             self::MODULE_DATALOAD_COMMENTS_SCROLL => POP_BLOG_ROUTE_COMMENTS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getRelevantRouteCheckpointTarget(array $module, array &$props): string

@@ -13,10 +13,10 @@ class PoP_ContentCreation_Module_Processor_Blocks extends PoP_Module_Processor_F
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_FLAG => POP_CONTENTCREATION_ROUTE_FLAG,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodules(array $module): array

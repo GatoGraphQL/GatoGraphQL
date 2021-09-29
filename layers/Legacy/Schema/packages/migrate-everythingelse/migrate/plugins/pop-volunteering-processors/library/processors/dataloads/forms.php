@@ -19,10 +19,10 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_VOLUNTEER => POP_VOLUNTEERING_ROUTE_VOLUNTEER,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
