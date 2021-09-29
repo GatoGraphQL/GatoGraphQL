@@ -4,7 +4,7 @@ services:
         autowire: true
         autoconfigure: true
 
-    persistent_cache:
+    PoP\ComponentModel\Cache\PersistentCacheInterface:
         class: \PoP\Engine\Cache\Cache
         arguments:
             $cacheItemPool: '@persistent_cache_item_pool'
