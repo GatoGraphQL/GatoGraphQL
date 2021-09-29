@@ -20,7 +20,7 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
     {
         ?>
         <div
-            class="<?php echo implode(' ', $this->getDivClasses()) ?>"
+            class="<?php echo implode(' ', $this->getDivClassNames()) ?>"
         >
             <?php echo $this->getContentToPrint() ?>
         </div>
@@ -32,7 +32,7 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
      *
      * @return string[]
      */
-    protected function getDivClasses(): array
+    protected function getDivClassNames(): array
     {
         $classes = [];
         if ($this->openInModalWindow()) {
