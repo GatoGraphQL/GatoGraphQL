@@ -67,10 +67,10 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'hasFeaturedImage' => $this->translationAPI->__('Does the custom post have a featured image?', 'custompostmedia'),
             'featuredImage' => $this->translationAPI->__('Featured image from the custom post', 'custompostmedia'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
+            default => parent::getSchemaFieldDescription($fieldName),
+        };
     }
 }

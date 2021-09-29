@@ -78,10 +78,10 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'metaValue' => $this->translationAPI->__('Single meta value', 'custompostmeta'),
             'metaValues' => $this->translationAPI->__('List of meta values', 'custompostmeta'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
+            default => parent::getSchemaFieldDescription($fieldName),
+        };
     }
 }

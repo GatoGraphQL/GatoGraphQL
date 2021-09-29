@@ -65,10 +65,10 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'datetime' => $this->translationAPI->__('Custom post published date and time', 'customposts'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
+            default => parent::getSchemaFieldDescription($fieldName),
+        };
     }
     public function getSchemaFieldArgs(string $fieldName): array
     {
