@@ -92,6 +92,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     }
 
     /**
+     * Invoked when creating the non-shared directive instance
+     * to resolve a field in the pipeline
+     */
+    final public function setDirective(string $directive): void
+    {
+        $this->directive = $directive;
+    }
+
+    /**
      * Obtain services directly from the container, instead of using autowiring
      */
     protected function initializeServices(): void
