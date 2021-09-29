@@ -7,7 +7,6 @@ namespace PoP\Engine\DirectiveResolvers;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Facades\DirectivePipeline\DirectivePipelineServiceFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -17,6 +16,7 @@ use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -27,10 +27,11 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
 
     protected DirectivePipelineServiceInterface $directivePipelineService;
 
-    protected function initializeServices(): void
-    {
-        parent::initializeServices();
-        $this->directivePipelineService = DirectivePipelineServiceFacade::getInstance();
+    #[Required]
+    public function autowireAbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver(
+        DirectivePipelineServiceInterface $directivePipelineService,
+    ): void {
+        $this->directivePipelineService = $directivePipelineService;
     }
 
     public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array

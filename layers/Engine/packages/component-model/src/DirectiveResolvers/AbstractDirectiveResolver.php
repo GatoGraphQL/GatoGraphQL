@@ -33,6 +33,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface
 {
@@ -69,39 +70,42 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     protected array $schemaDefinitionForDirectiveCache = [];
 
     /**
-     * The directiveResolvers are NOT instantiated through the service container!
+     * The directiveResolvers are instantiated through the service container,
+     * but NOT for the directivePipeline, since there each directiveResolver
+     * will require the actual $directive to process.
      *
-     * Instead, the directive will be instantiated in AbstractRelationalTypeResolver:
-     *   new $directiveResolverClass($fieldDirective)
-     *
-     * Whenever having depended-upon services, these can be obtained like this (or via a Facade):
-     *   $instanceManager->getInstance(...)
-     *
-     * DirectiveResolvers must still be added to schema-services.yml, though.
-     * This is because they need to be registered, so that all directives
-     * can be displayed in the GraphQL API's Access Control Lists
+     * By default, the directive is directly the directive name.
+     * This is what is used when instantiating the directive through the container.
      */
-    final public function __construct(?string $directive = null)
+    public function __construct()
     {
-        // If the directive is not provided, then it directly the directive name
-        // This allows to instantiate the directive through the DependencyInjection component
-        $this->directive = $directive ?? $this->getDirectiveName();
-
-        // Obtain services directly from the container, instead of using autowiring
-        $this->initializeServices();
+        $this->directive = $this->getDirectiveName();
     }
 
     /**
-     * Obtain services directly from the container, instead of using autowiring
+     * Invoked when creating the non-shared directive instance
+     * to resolve a field in the pipeline
      */
-    protected function initializeServices(): void
+    final public function setDirective(string $directive): void
     {
-        $this->translationAPI = TranslationAPIFacade::getInstance();
-        $this->hooksAPI = HooksAPIFacade::getInstance();
-        $this->instanceManager = InstanceManagerFacade::getInstance();
-        $this->fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $this->feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-        $this->semverHelperService = SemverHelperServiceFacade::getInstance();
+        $this->directive = $directive;
+    }
+
+    #[Required]
+    public function autowireAbstractDirectiveResolver(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        SemverHelperServiceInterface $semverHelperService,
+    ): void {
+        $this->translationAPI = $translationAPI;
+        $this->hooksAPI = $hooksAPI;
+        $this->instanceManager = $instanceManager;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->semverHelperService = $semverHelperService;
     }
 
     final public function getClassesToAttachTo(): array

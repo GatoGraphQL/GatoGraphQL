@@ -543,7 +543,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $directiveResolverClass = get_class($directiveResolver);
                 // Get the instance from the cache if it exists, or create it if not
                 if (!isset($this->directiveResolverInstanceCache[$directiveResolverClass][$fieldDirective])) {
-                    $this->directiveResolverInstanceCache[$directiveResolverClass][$fieldDirective] = new $directiveResolverClass($fieldDirective);
+                    /**
+                     * The instance from the container is shared. We need a non-shared instance
+                     * to set the unique $fieldDirective. So clone the service.
+                     */
+                    $fieldDirectiveResolver = clone $directiveResolver;
+                    $fieldDirectiveResolver->setDirective($fieldDirective);
+                    $this->directiveResolverInstanceCache[$directiveResolverClass][$fieldDirective] = $fieldDirectiveResolver;
                 }
                 $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$fieldDirective];
                 // Check if this instance can process the directive
