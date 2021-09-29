@@ -10,6 +10,7 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\MenuPageInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModuleDocumentationMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
@@ -23,6 +24,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected ModuleRegistryInterface $moduleRegistry;
     protected UserAuthorizationInterface $userAuthorization;
     protected SettingsMenuPage $settingsMenuPage;
+    protected ModuleDocumentationMenuPage $moduleDocumentationMenuPage;
+    protected ModulesMenuPage $modulesMenuPage;
 
     #[Required]
     public function autowireBottomMenuPageAttacher(
@@ -30,11 +33,15 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         SettingsMenuPage $settingsMenuPage,
+        ModuleDocumentationMenuPage $moduleDocumentationMenuPage,
+        ModulesMenuPage $modulesMenuPage,
     ): void {
         $this->menuPageHelper = $menuPageHelper;
         $this->moduleRegistry = $moduleRegistry;
         $this->userAuthorization = $userAuthorization;
         $this->settingsMenuPage = $settingsMenuPage;
+        $this->moduleDocumentationMenuPage = $moduleDocumentationMenuPage;
+        $this->modulesMenuPage = $modulesMenuPage;
     }
 
     /**
@@ -47,11 +54,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
     public function addMenuPages(): void
     {
-        $menuPageClass = $this->getModuleMenuPageClass();
-        /**
-         * @var AbstractMenuPage
-         */
-        $modulesMenuPage = $this->instanceManager->getInstance($menuPageClass);
+        $modulesMenuPage = $this->getModuleMenuPage();
         /**
          * @var callable
          */
@@ -132,12 +135,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
      * Either the Modules menu page, or the Module Documentation menu page,
      * based on parameter ?tab="docs" or not
      */
-    protected function getModuleMenuPageClass(): string
+    protected function getModuleMenuPage(): MenuPageInterface
     {
         return
             $this->menuPageHelper->isDocumentationScreen() ?
-                ModuleDocumentationMenuPage::class
-                : ModulesMenuPage::class;
+                $this->moduleDocumentationMenuPage
+                : $this->modulesMenuPage;
     }
 
     /**
