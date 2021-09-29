@@ -9,6 +9,8 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 trait FieldOrDirectiveResolverTrait
@@ -503,5 +505,47 @@ trait FieldOrDirectiveResolverTrait
                 $deprecationItemDescription
             );
         }
+    }
+
+    final public function getFieldOrDirectiveArgSchemaDefinition(
+        string $argName,
+        ConcreteTypeResolverInterface $argConcreateTypeResolver,
+        ?string $argDescription,
+        mixed $argDefaultValue,
+        ?int $argTypeModifiers,
+    ): array {
+        $schemaDirectiveArg = [
+            SchemaDefinition::ARGNAME_NAME => $argName,
+            SchemaDefinition::ARGNAME_TYPE => $argConcreateTypeResolver->getTypeOutputName(),
+        ];
+        if ($argDescription !== null) {
+            $schemaDirectiveArg[SchemaDefinition::ARGNAME_DESCRIPTION] = $argDescription;
+        }
+        if ($argDefaultValue !== null) {
+            $schemaDirectiveArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $argDefaultValue;
+        }
+        if ($argTypeModifiers !== null) {
+            if ($argTypeModifiers & SchemaTypeModifiers::MANDATORY) {
+                $schemaDirectiveArg[SchemaDefinition::ARGNAME_MANDATORY] = true;
+            }
+            // If setting the "array of arrays" flag, there's no need to set the "array" flag
+            $isArrayOfArrays = $argTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+            if (
+                $argTypeModifiers & SchemaTypeModifiers::IS_ARRAY
+                || $isArrayOfArrays
+            ) {
+                $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
+                if ($argTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
+                    $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
+                }
+                if ($isArrayOfArrays) {
+                    $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
+                    if ($argTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
+                        $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
+                    }
+                }
+            }
+        }
+        return $schemaDirectiveArg;
     }
 }

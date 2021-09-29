@@ -23,7 +23,6 @@ use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTr
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
@@ -665,39 +664,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     {
         $schemaDirectiveArgs = [];
         foreach ($this->getSchemaDirectiveArgNameResolvers($relationalTypeResolver) as $directiveArgName => $directiveArgConcreteTypeResolver) {
-            $schemaDirectiveArg = [
-                SchemaDefinition::ARGNAME_NAME => $directiveArgName,
-                SchemaDefinition::ARGNAME_TYPE => $directiveArgConcreteTypeResolver->getTypeOutputName(),
-            ];
-            if ($schemaDirectiveArgDescription = $this->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName)) {
-                $schemaDirectiveArg[SchemaDefinition::ARGNAME_DESCRIPTION] = $schemaDirectiveArgDescription;
-            }
-            if ($schemaDirectiveArgDefaultValue = $this->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName)) {
-                $schemaDirectiveArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $schemaDirectiveArgDefaultValue;
-            }
-            if ($schemaDirectiveArgTypeModifiers = $this->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName)) {
-                if ($schemaDirectiveArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
-                    $schemaDirectiveArg[SchemaDefinition::ARGNAME_MANDATORY] = true;
-                }
-                // If setting the "array of arrays" flag, there's no need to set the "array" flag
-                $isArrayOfArrays = $schemaDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-                if (
-                    $schemaDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY
-                    || $isArrayOfArrays
-                ) {
-                    $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
-                    if ($schemaDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
-                        $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
-                    }
-                    if ($isArrayOfArrays) {
-                        $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
-                        if ($schemaDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
-                            $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
-                        }
-                    }
-                }
-            }
-            $schemaDirectiveArgs[] = $schemaDirectiveArg;
+            $schemaDirectiveArgs[] = $this->getFieldOrDirectiveArgSchemaDefinition(
+                $directiveArgName,
+                $directiveArgConcreteTypeResolver,
+                $this->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+                $this->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
+                $this->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName)
+            );
         }
         return $schemaDirectiveArgs;
     }
