@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Registries;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use PoP\Root\Services\ServiceInterface;
 
-class AbstractBlockRegistry implements BlockRegistryInterface
+abstract class AbstractBlockRegistry implements BlockRegistryInterface
 {
     /**
      * @var AbstractBlock[]
