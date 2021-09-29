@@ -133,6 +133,35 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             default => parent::getSchemaFieldDescription($fieldName),
         };
     }
+    
+    public function getSchemaFieldArgNameResolvers(string $fieldName): array
+    {
+        return match ($fieldName) {
+            default => parent::getSchemaFieldArgNameResolvers($fieldName),
+        };
+    }
+    
+    public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
+    {
+        return match ($fieldName) {
+            default => parent::getSchemaFieldArgDescription($fieldName, $fieldArgName),
+        };
+    }
+    
+    public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
+    {
+        return match ($fieldName) {
+            default => parent::getSchemaFieldArgDefaultValue($fieldName, $fieldArgName),
+        };
+    }
+    
+    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): ?int
+    {
+        return match ($fieldName) {
+            default => parent::getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName),
+        };
+    }
+
     public function getSchemaFieldArgs(string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
