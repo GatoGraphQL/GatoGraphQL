@@ -19,8 +19,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
     #[Required]
     public function autowireDuplicatePropertyDirectiveResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void
-    {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     

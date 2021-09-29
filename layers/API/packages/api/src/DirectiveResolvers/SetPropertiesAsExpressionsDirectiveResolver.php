@@ -19,8 +19,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
     #[Required]
     public function autowireSetPropertiesAsExpressionsDirectiveResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void
-    {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     

@@ -22,8 +22,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
     #[Required]
     public function autowireCopyRelationalResultsDirectiveResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void
-    {
+    ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     
