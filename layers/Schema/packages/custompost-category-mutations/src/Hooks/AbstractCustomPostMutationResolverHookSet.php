@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPostCategoryMutations\Hooks;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
@@ -20,12 +21,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
     public function autowireAbstractCustomPostMutationResolverHookSet(
         CustomPostTypeAPIInterface $customPostTypeAPI,
+        IDScalarTypeResolver $idScalarTypeResolver,
     ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
 
     protected function init(): void

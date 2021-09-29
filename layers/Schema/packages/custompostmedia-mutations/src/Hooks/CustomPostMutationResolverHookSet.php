@@ -6,6 +6,7 @@ namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
@@ -18,14 +19,17 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
 {
     protected MediaObjectTypeResolver $mediaTypeResolver;
     protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
     public function autowireCustomPostMutationResolverHookSet(
         MediaObjectTypeResolver $mediaTypeResolver,
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
+        IDScalarTypeResolver $idScalarTypeResolver,
     ): void {
         $this->mediaTypeResolver = $mediaTypeResolver;
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
 
     protected function init(): void

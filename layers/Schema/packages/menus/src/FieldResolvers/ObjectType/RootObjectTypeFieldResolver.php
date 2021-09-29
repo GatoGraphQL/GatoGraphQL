@@ -10,6 +10,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\Menus\ModuleProcessors\MenuFilterInputContainerModuleProcessor;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
@@ -21,16 +22,19 @@ use Symfony\Contracts\Service\Attribute\Required;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
     protected MenuObjectTypeResolver $menuObjectTypeResolver;
     protected MenuTypeAPIInterface $menuTypeAPI;
 
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
         MenuObjectTypeResolver $menuObjectTypeResolver,
         MenuTypeAPIInterface $menuTypeAPI,
     ): void {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
         $this->menuObjectTypeResolver = $menuObjectTypeResolver;
         $this->menuTypeAPI = $menuTypeAPI;
     }
