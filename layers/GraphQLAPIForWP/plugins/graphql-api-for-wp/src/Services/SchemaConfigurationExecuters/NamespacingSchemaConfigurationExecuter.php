@@ -19,7 +19,7 @@ class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
     public function autowireNamespacingSchemaConfigurationExecuter(
         SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock,
     ): void {
-        $this->schemaConfigNamespacingBlock = $schemaConfigMutationSchemeBlock;
+        $this->schemaConfigNamespacingBlock = $schemaConfigNamespacingBlock;
     }
 
     public function getEnablingModule(): ?string
