@@ -151,17 +151,25 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['mutationRoot']);
         }
 
-        // Remove the introspection fields that must not be added to the schema
-        // [GraphQL spec] Field "__typename" from all types:
-        // "This field is implicit and does not appear in the fields list in any defined type."
-        // @see http://spec.graphql.org/draft/#sel-FAJVHCBvBBhC4iC
+        /**
+         * Remove the introspection fields that must not be added to the schema:
+         * [GraphQL spec] Field "__typename" from all types.
+         * > This field is implicit and does not appear in the fields list in any defined type.
+         * @see http://spec.graphql.org/draft/#sel-FAJVHCBvBBhC4iC
+         */
         unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_FIELDS]['__typename']);
 
-        // [GraphQL spec] Fields "__schema" and "__type" from the query type:
-        // "These fields are implicit and do not appear in the fields list in the root type of the query operation."
-        // @see http://spec.graphql.org/draft/#sel-FAJXHABcBlB6rF
-        // But allow to enable "__schema" to disable introspection via ACL
+        /**
+         * These fields can be exposed in the schema when configuring ACL,
+         * as to remove user access to "__schema" to disable introspection
+         */
         if (!$exposeSchemaIntrospectionFieldInSchema) {
+            /**
+             * Remove the introspection fields that must not be added to the schema:
+             * [GraphQL spec] Fields "__schema" and "__type" from the query type.
+             * > These fields are implicit and do not appear in the fields list in the root type of the query operation.
+             * @see http://spec.graphql.org/draft/#sel-FAJXHABcBlB6rF
+             */
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
             if ($queryRootTypeSchemaKey !== null) {
