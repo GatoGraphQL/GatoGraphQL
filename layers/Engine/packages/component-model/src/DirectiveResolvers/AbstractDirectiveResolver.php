@@ -73,7 +73,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * The directiveResolvers are instantiated through the service container,
      * but NOT for the directivePipeline, since there each directiveResolver
      * will require the actual $directive to process.
-     * 
+     *
      * By default, the directive is directly the directive name.
      * This is what is used when instantiating the directive through the container.
      */
@@ -99,8 +99,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         SemverHelperServiceInterface $semverHelperService,
-    ): void
-    {
+    ): void {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
         $this->instanceManager = $instanceManager;
