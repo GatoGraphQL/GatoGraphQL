@@ -9,17 +9,21 @@ use PoP\CacheControl\Schema\SchemaDefinition;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
     protected CacheControlEngineInterface $cacheControlEngine;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
 
     #[Required]
     public function autowireAbstractCacheControlDirectiveResolver(
         CacheControlEngineInterface $cacheControlEngine,
+        IntScalarTypeResolver $intScalarTypeResolver,
     ): void {
         $this->cacheControlEngine = $cacheControlEngine;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
 
     public function getDirectiveName(): string

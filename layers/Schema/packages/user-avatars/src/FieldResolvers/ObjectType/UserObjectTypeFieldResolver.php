@@ -8,6 +8,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\UserAvatars\ComponentConfiguration;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
@@ -21,16 +22,19 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected UserAvatarTypeAPIInterface $userAvatarTypeAPI;
     protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
     protected UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
 
     #[Required]
     public function autowireUserObjectTypeFieldResolver(
         UserAvatarTypeAPIInterface $userAvatarTypeAPI,
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
         UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
     ): void {
         $this->userAvatarTypeAPI = $userAvatarTypeAPI;
         $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
         $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

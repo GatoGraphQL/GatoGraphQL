@@ -2,11 +2,22 @@
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+
+    #[Required]
+    public function autowirePoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users(
+        IntScalarTypeResolver $intScalarTypeResolver,
+    ): void {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
