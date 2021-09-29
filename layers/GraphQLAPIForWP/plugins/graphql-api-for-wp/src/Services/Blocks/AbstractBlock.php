@@ -24,7 +24,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  * (this package provides the scaffolding for a single-block plugin,
  * so the plugin .php file is ignored registering a single block is ignored, and everything else is used)
  */
-abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
+abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService implements BlockInterface
 {
     use HasDocumentationScriptTrait;
 

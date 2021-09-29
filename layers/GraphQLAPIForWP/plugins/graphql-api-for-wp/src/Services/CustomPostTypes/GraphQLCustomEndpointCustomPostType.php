@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Registries\CustomEndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CustomEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -159,7 +159,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         return __('View endpoint', 'graphql-api');
     }
 
-    public function getEndpointOptionsBlock(): AbstractBlock
+    public function getEndpointOptionsBlock(): BlockInterface
     {
         return $this->customEndpointOptionsBlock;
     }

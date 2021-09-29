@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointExecuterRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -177,7 +177,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         return true;
     }
 
-    public function getEndpointOptionsBlock(): AbstractBlock
+    public function getEndpointOptionsBlock(): BlockInterface
     {
         return $this->persistedQueryEndpointOptionsBlock;
     }

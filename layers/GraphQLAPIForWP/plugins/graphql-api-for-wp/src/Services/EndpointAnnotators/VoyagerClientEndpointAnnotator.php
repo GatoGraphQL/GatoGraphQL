@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock;
 use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
@@ -54,7 +54,7 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
         }
     }
 
-    protected function getBlock(): AbstractBlock
+    protected function getBlock(): BlockInterface
     {
         return $this->endpointVoyagerBlock;
     }

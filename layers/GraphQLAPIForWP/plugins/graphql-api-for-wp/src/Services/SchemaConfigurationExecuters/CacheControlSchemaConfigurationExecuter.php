@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCacheControlListBlock;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\CacheControlGraphQLQueryConfigurator;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -15,12 +16,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface
 {
     protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator;
+    protected SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock;
 
     #[Required]
     public function autowireCacheControlSchemaConfigurationExecuter(
-        CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
+        CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator,
+        SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock,
     ): void {
         $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;
+        $this->schemaConfigCacheControlListBlock = $schemaConfigCacheControlListBlock;
     }
 
     /**
@@ -52,8 +56,8 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
         }
     }
 
-    protected function getBlockClass(): string
+    protected function getBlock(): BlockInterface
     {
-        return SchemaConfigCacheControlListBlock::class;
+        return $this->schemaConfigCacheControlListBlock;
     }
 }

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use WP_Post;
 
 interface GraphQLEndpointCustomPostTypeInterface extends CustomPostTypeInterface
 {
-    public function getEndpointOptionsBlock(): AbstractBlock;
+    public function getEndpointOptionsBlock(): BlockInterface;
 
     /**
      * Read the options block and check the value of attribute "isEndpointEnabled"
