@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
@@ -12,9 +13,19 @@ use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
+    protected SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock;
+
+    #[Required]
+    public function autowireMutationSchemeSchemaConfigurationExecuter(
+        SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock,
+    ): void {
+        $this->schemaConfigMutationSchemeBlock = $schemaConfigMutationSchemeBlock;
+    }
+
     public function getEnablingModule(): ?string
     {
         return SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS;
@@ -62,8 +73,8 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
         }
     }
 
-    protected function getBlockClass(): string
+    protected function getBlock(): BlockInterface
     {
-        return SchemaConfigMutationSchemeBlock::class;
+        return $this->schemaConfigMutationSchemeBlock;
     }
 }

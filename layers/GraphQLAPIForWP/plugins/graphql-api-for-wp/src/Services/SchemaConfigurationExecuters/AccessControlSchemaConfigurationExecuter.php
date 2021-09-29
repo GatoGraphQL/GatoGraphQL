@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -12,12 +13,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator;
+    protected SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock;
 
     #[Required]
     public function autowireAccessControlSchemaConfigurationExecuter(
         AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
+        SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock,
     ): void {
         $this->accessControlGraphQLQueryConfigurator = $accessControlGraphQLQueryConfigurator;
+        $this->schemaConfigAccessControlListBlock = $schemaConfigAccessControlListBlock;
     }
 
     public function getEnablingModule(): ?string
@@ -37,8 +41,8 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
         }
     }
 
-    protected function getBlockClass(): string
+    protected function getBlock(): BlockInterface
     {
-        return SchemaConfigAccessControlListBlock::class;
+        return $this->schemaConfigAccessControlListBlock;
     }
 }

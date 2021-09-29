@@ -5,14 +5,25 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaModeBlock;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
+    protected SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock;
+
+    #[Required]
+    public function autowireDefaultSchemaModeSchemaConfigurationExecuter(
+        SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock,
+    ): void {
+        $this->schemaConfigSchemaModeBlock = $schemaConfigSchemaModeBlock;
+    }
+
     public function getEnablingModule(): ?string
     {
         return SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA;
@@ -50,8 +61,8 @@ class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigu
         }
     }
 
-    protected function getBlockClass(): string
+    protected function getBlock(): BlockInterface
     {
-        return SchemaConfigSchemaModeBlock::class;
+        return $this->schemaConfigSchemaModeBlock;
     }
 }
