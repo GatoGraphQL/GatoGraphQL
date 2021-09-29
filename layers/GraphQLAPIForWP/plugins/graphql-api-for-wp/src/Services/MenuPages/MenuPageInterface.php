@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
+
 /**
  * Menu Page
  */
@@ -14,4 +16,5 @@ interface MenuPageInterface
      */
     public function print(): void;
     public function getScreenID(): string;
+    public function getMenu(): MenuInterface;
 }

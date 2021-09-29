@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -38,8 +37,6 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     {
         return $this->hookName;
     }
-
-    abstract public function getMenu(): MenuInterface;
 
     /**
      * Initialize menu page. Function to override
