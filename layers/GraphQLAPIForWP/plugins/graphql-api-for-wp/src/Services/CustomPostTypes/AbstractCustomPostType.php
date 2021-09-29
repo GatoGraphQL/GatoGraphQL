@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
-use GraphQLAPI\GraphQLAPI\Services\Menus\AbstractMenu;
+use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -448,10 +448,10 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         return PluginMenu::class;
     }
 
-    protected function getMenu(): AbstractMenu
+    protected function getMenu(): MenuInterface
     {
         $menuClass = $this->getMenuClass();
-        /** @var AbstractMenu */
+        /** @var MenuInterface */
         return $this->instanceManager->getInstance($menuClass);
     }
 
