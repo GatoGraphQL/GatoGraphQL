@@ -14,12 +14,12 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-
     /**
      * "Functions" are global fields, defined in all TypeResolvers.
      * Use RootObjectTypeResolver instead of $relationalTypeResolver
@@ -27,12 +27,15 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      * but `extractFieldArguments` expects an ObjectTypeResolver
      */
     protected RootObjectTypeResolver $rootTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireApplyFunctionDirectiveResolver(
         RootObjectTypeResolver $rootTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->rootTypeResolver = $rootTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     public function getDirectiveName(): string

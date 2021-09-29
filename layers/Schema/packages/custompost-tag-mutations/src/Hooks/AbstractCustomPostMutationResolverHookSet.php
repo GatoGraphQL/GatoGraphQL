@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPostTagMutations\Hooks;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
@@ -19,12 +20,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireAbstractCustomPostMutationResolverHookSet(
         CustomPostTypeAPIInterface $customPostTypeAPI,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     protected function init(): void

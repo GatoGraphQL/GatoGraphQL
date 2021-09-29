@@ -15,6 +15,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -22,16 +23,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
     protected SchemaTypeDataLoader $schemaTypeDataLoader;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         SchemaObjectTypeResolver $schemaObjectTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,
         SchemaTypeDataLoader $schemaTypeDataLoader,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         $this->schemaTypeDataLoader = $schemaTypeDataLoader;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

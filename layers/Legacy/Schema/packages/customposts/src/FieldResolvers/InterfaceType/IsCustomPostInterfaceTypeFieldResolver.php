@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPosts\FieldResolvers\InterfaceType;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -14,14 +15,17 @@ use Symfony\Contracts\Service\Attribute\Required;
 class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldResolver
 {
     protected DateScalarTypeResolver $dateScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     
     #[Required]
     public function autowireIsCustomPostInterfaceTypeFieldResolver(
         DateScalarTypeResolver $dateScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
     ): void {
         $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
     }
 

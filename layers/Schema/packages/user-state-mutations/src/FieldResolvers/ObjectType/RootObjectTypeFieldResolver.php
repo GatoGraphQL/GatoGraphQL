@@ -10,6 +10,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LogoutMutationResolver;
@@ -21,16 +22,19 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected UserObjectTypeResolver $userObjectTypeResolver;
     protected LoginMutationResolver $loginMutationResolver;
     protected LogoutMutationResolver $logoutMutationResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         UserObjectTypeResolver $userObjectTypeResolver,
         LoginMutationResolver $loginMutationResolver,
         LogoutMutationResolver $logoutMutationResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->userObjectTypeResolver = $userObjectTypeResolver;
         $this->loginMutationResolver = $loginMutationResolver;
         $this->logoutMutationResolver = $logoutMutationResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

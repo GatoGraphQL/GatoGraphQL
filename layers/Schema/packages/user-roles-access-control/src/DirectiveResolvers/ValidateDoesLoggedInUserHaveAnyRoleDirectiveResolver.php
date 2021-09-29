@@ -8,18 +8,22 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveReso
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
     protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(
         UserRoleTypeAPIInterface $userRoleTypeAPI,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->userRoleTypeAPI = $userRoleTypeAPI;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     public function getDirectiveName(): string

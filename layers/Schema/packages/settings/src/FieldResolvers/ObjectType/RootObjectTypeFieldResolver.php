@@ -10,20 +10,24 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected SettingsTypeAPIInterface $settingsTypeAPI;
 
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
         SettingsTypeAPIInterface $settingsTypeAPI,
     ): void {
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->settingsTypeAPI = $settingsTypeAPI;
     }
 
