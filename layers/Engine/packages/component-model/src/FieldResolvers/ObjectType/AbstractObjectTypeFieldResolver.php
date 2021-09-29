@@ -197,6 +197,26 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
+    
+    /**
+     * @return array<string, ConcreteTypeResolverInterface>
+     */
+    protected function getSchemaFieldArgNameResolvers(string $fieldName): array {
+        return [];
+    }
+    
+    protected function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string {
+        return null;
+    }
+    
+    protected function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed {
+        return null;
+    }
+    
+    protected function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): ?int {
+        return null;
+    }
+
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
