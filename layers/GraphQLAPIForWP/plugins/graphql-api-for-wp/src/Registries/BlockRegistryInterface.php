@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 
 interface BlockRegistryInterface
 {
-    public function addBlock(AbstractBlock $block): void;
+    public function addBlock(BlockInterface $block): void;
     /**
-     * @return AbstractBlock[]
+     * @return BlockInterface[]
      */
     public function getBlocks(): array;
     /**
-     * @return AbstractBlock[]
+     * @return BlockInterface[]
      */
     public function getEnabledBlocks(): array;
 }
