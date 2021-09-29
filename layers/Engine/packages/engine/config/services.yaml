@@ -9,7 +9,7 @@ services:
         arguments:
             $cacheItemPool: '@persistent_cache_item_pool'
 
-    transient_cache:
+    PoP\ComponentModel\Cache\TransientCacheInterface:
         class: \PoP\Engine\Cache\Cache
         arguments:
             $cacheItemPool: '@transient_cache_item_pool'
