@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
@@ -56,7 +56,7 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
         return $optionsBlockDataItem['attrs'][$attribute] ?? $default;
     }
 
-    abstract protected function getBlock(): AbstractBlock;
+    abstract protected function getBlock(): BlockInterface;
 
     protected function getIsEnabledAttributeName(): string
     {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -30,7 +30,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     protected function getSchemaConfigBlockDataItem(int $schemaConfigurationID): ?array
     {
         /**
-         * @var AbstractBlock
+         * @var BlockInterface
          */
         $block = $this->instanceManager->getInstance($this->getBlockClass());
         return $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(

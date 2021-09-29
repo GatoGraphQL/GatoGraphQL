@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 
 class BlockHelpers
 {
@@ -57,7 +57,7 @@ class BlockHelpers
      */
     public function getBlocksOfTypeFromCustomPost(
         \WP_Post|int $configurationPostOrID,
-        AbstractBlock $block
+        BlockInterface $block
     ): array {
         $blocks = $this->getBlocksFromCustomPost($configurationPostOrID);
 
@@ -77,7 +77,7 @@ class BlockHelpers
      */
     public function getSingleBlockOfTypeFromCustomPost(
         \WP_Post|int $configurationPostOrID,
-        AbstractBlock $block
+        BlockInterface $block
     ): ?array {
         $blocks = $this->getBlocksOfTypeFromCustomPost($configurationPostOrID, $block);
         if (count($blocks) != 1) {
