@@ -40,7 +40,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'menuByLocation' => $this->translationAPI->__('Get a menu by its location', 'menus'),
             'menuBySlug' => $this->translationAPI->__('Get a menu by its slug', 'menus'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),

@@ -42,7 +42,7 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
      */
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'name' => $this->stringScalarTypeResolver,
             'capabilities' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -65,7 +65,7 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
      */
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'name' => $this->translationAPI->__('The role name', 'user-roles-wp'),
             'capabilities' => $this->translationAPI->__('Capabilities granted by the role', 'user-roles-wp'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),

@@ -91,7 +91,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'name' => $this->translationAPI->__('Field\'s name', 'graphql-server'),
             'description' => $this->translationAPI->__('Field\'s description', 'graphql-server'),
             'args' => $this->translationAPI->__('Field arguments', 'graphql-server'),

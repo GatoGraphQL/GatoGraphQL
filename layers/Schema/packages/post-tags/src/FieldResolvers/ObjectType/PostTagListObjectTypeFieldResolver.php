@@ -19,7 +19,7 @@ class PostTagListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldReso
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'posts' => $this->translationAPI->__('Posts which contain this tag', 'pop-taxonomies'),
             'postCount' => $this->translationAPI->__('Number of posts which contain this tag', 'pop-taxonomies'),
             'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts which contain this tag', 'pop-taxonomies'),

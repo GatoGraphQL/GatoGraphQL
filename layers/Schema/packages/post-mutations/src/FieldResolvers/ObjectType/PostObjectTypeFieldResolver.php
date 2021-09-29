@@ -38,7 +38,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'update' => $this->translationAPI->__('Update the post', 'post-mutations'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

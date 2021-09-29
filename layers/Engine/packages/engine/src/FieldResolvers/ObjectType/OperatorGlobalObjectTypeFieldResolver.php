@@ -76,7 +76,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'if' => $this->mixedScalarTypeResolver,
             'not' => $this->booleanScalarTypeResolver,
             'and' => $this->booleanScalarTypeResolver,
@@ -113,7 +113,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'if' => $this->translationAPI->__('If a boolean property is true, execute a field, else, execute another field', 'component-model'),
             'not' => $this->translationAPI->__('Return the opposite value of a boolean property', 'component-model'),
             'and' => $this->translationAPI->__('Return an `AND` operation among several boolean properties', 'component-model'),

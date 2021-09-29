@@ -55,7 +55,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'createPost' => $this->translationAPI->__('Create a post', 'post-mutations'),
             'updatePost' => $this->translationAPI->__('Update a post', 'post-mutations'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),

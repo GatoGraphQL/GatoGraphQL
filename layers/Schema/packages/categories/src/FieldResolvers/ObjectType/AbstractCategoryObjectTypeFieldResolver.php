@@ -57,7 +57,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             case 'parentCategory':
                 return $this->getCategoryTypeResolver();
         }
-        return match($fieldName) {
+        return match ($fieldName) {
             'name' => $this->stringScalarTypeResolver,
             'description' => $this->stringScalarTypeResolver,
             'count' => $this->intScalarTypeResolver,
@@ -78,7 +78,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'url' => $this->translationAPI->__('Category URL', 'pop-categories'),
             'urlPath' => $this->translationAPI->__('Category URL path', 'pop-categories'),
             'slug' => $this->translationAPI->__('Category slug', 'pop-categories'),

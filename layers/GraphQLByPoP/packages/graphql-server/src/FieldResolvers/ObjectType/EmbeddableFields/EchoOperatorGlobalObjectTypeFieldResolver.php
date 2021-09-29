@@ -52,7 +52,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
      */
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'echoStr' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -87,7 +87,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
      */
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'echoStr' => $this->translationAPI->__('Repeat back the input string', 'graphql-api'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

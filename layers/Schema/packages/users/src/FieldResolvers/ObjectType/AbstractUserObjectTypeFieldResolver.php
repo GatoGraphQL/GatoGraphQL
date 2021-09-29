@@ -64,7 +64,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
             case 'usersForAdmin':
                 return $this->userObjectTypeResolver;
         }
-        return match($fieldName) {
+        return match ($fieldName) {
             'userCount' => $this->intScalarTypeResolver,
             'userCountForAdmin' => $this->intScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -86,7 +86,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'users' => $this->translationAPI->__('Users', 'pop-users'),
             'userCount' => $this->translationAPI->__('Number of users', 'pop-users'),
             'usersForAdmin' => $this->translationAPI->__('[Unrestricted] Users', 'pop-users'),

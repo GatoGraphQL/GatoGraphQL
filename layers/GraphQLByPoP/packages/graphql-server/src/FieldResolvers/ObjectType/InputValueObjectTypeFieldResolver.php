@@ -70,7 +70,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'name' => $this->translationAPI->__('Input value\'s name as defined by the GraphQL spec', 'graphql-server'),
             'description' => $this->translationAPI->__('Input value\'s description', 'graphql-server'),
             'type' => $this->translationAPI->__('Type of the input value', 'graphql-server'),

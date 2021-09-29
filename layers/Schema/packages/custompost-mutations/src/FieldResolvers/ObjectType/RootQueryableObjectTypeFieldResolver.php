@@ -58,7 +58,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'myCustomPosts' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'myCustomPost' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'myCustomPostCount' => $this->intScalarTypeResolver,
@@ -77,7 +77,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'myCustomPosts' => $this->translationAPI->__('Custom posts by the logged-in user', 'custompost-mutations'),
             'myCustomPostCount' => $this->translationAPI->__('Number of custom posts by the logged-in user', 'custompost-mutations'),
             'myCustomPost' => $this->translationAPI->__('Custom post with a specific ID', 'custompost-mutations'),

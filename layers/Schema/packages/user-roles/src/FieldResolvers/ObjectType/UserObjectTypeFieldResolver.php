@@ -65,7 +65,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'roles' => $this->stringScalarTypeResolver,
             'capabilities' => $this->stringScalarTypeResolver,
             'hasRole' => $this->booleanScalarTypeResolver,
@@ -98,7 +98,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'roles' => $this->translationAPI->__('User roles', 'user-roles'),
             'capabilities' => $this->translationAPI->__('User capabilities', 'user-roles'),
             'hasRole' => $this->translationAPI->__('Does the user have a specific role?', 'user-roles'),

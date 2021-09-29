@@ -67,7 +67,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'parentPage' => $this->translationAPI->__('Parent page', 'pages'),
             'childPages' => $this->translationAPI->__('Child pages', 'pages'),
             'childPageCount' => $this->translationAPI->__('Number of child pages', 'pages'),
@@ -85,7 +85,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'childPagesForAdmin':
                 return $this->pageObjectTypeResolver;
         }
-        return match($fieldName) {
+        return match ($fieldName) {
             'childPageCount' => $this->intScalarTypeResolver,
             'childPageCountForAdmin' => $this->intScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),

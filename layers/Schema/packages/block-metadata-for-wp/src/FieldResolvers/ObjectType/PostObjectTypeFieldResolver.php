@@ -42,7 +42,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'blockMetadata' => $this->objectScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -59,7 +59,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'blockMetadata' => $this->translationAPI->__('Metadata for all blocks contained in the post, split on a block by block basis', 'pop-block-metadata'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

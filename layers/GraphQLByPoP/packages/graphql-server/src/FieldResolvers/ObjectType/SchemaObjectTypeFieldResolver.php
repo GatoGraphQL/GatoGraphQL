@@ -63,7 +63,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'queryType' => $this->translationAPI->__('The type, accessible from the root, that resolves queries', 'graphql-server'),
             'mutationType' => $this->translationAPI->__('The type, accessible from the root, that resolves mutations', 'graphql-server'),
             'subscriptionType' => $this->translationAPI->__('The type, accessible from the root, that resolves subscriptions', 'graphql-server'),

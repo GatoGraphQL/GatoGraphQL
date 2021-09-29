@@ -56,7 +56,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'customPosts' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'customPostsForAdmin' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'customPostCount' => $this->intScalarTypeResolver,
@@ -81,7 +81,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'customPosts' => $this->translationAPI->__('Custom posts', 'pop-posts'),
             'customPostCount' => $this->translationAPI->__('Number of custom posts', 'pop-posts'),
             'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts', 'pop-posts'),

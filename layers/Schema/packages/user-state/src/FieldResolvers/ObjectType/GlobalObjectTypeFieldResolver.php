@@ -32,7 +32,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'isUserLoggedIn' => $this->booleanScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -51,7 +51,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'isUserLoggedIn' => $this->translationAPI->__('Is the user logged-in?', 'user-state'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

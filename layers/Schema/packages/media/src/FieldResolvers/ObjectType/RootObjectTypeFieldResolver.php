@@ -60,7 +60,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'mediaItem' => $this->translationAPI->__('Get a media item', 'media'),
             'mediaItems' => $this->translationAPI->__('Get the media items', 'media'),
             'mediaItemCount' => $this->translationAPI->__('Number of media items', 'media'),
@@ -75,7 +75,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'mediaItem':
                 return $this->mediaObjectTypeResolver;
         }
-        return match($fieldName) {
+        return match ($fieldName) {
             'mediaItemCount' => $this->intScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

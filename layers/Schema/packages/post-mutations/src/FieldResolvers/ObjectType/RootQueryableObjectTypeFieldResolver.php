@@ -66,7 +66,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             case 'myPost':
                 return $this->postObjectTypeResolver;
         }
-        return match($fieldName) {
+        return match ($fieldName) {
             'myPostCount' => $this->intScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -83,7 +83,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'myPosts' => $this->translationAPI->__('Posts by the logged-in user', 'post-mutations'),
             'myPostCount' => $this->translationAPI->__('Number of posts by the logged-in user', 'post-mutations'),
             'myPost' => $this->translationAPI->__('Post with a specific ID', 'post-mutations'),

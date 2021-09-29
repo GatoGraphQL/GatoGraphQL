@@ -12,7 +12,7 @@ abstract class AbstractCustomPostListCategoryObjectTypeFieldResolver extends Abs
 {
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'customPosts' => $this->translationAPI->__('Custom posts which contain this category', 'pop-categories'),
             'customPostCount' => $this->translationAPI->__('Number of custom posts which contain this category', 'pop-categories'),
             'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts which contain this category', 'pop-categories'),

@@ -75,7 +75,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'page' => $this->translationAPI->__('Page with a specific ID', 'pages'),
             'pageBySlug' => $this->translationAPI->__('Page with a specific slug', 'pages'),
             'pages' => $this->translationAPI->__('Pages', 'pages'),
@@ -99,7 +99,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
             case 'pagesForAdmin':
                 return $this->pageObjectTypeResolver;
         }
-        return match($fieldName) {
+        return match ($fieldName) {
             'pageCount' => $this->intScalarTypeResolver,
             'pageCountForAdmin' => $this->intScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),

@@ -118,7 +118,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'url' => $this->translationAPI->__('Custom post URL', 'customposts'),
             'urlPath' => $this->translationAPI->__('Custom post URL path', 'customposts'),
             'slug' => $this->translationAPI->__('Custom post slug', 'customposts'),

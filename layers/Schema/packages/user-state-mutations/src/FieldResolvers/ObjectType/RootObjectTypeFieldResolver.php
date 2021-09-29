@@ -50,7 +50,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'loginUser' => $this->translationAPI->__('Log the user in', 'user-state-mutations'),
             'logoutUser' => $this->translationAPI->__('Log the user out', 'user-state-mutations'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),

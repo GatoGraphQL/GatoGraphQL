@@ -44,7 +44,7 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'content' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -61,7 +61,7 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'content' => $this->translationAPI->__('Post\'s content, formatted with its block metadata', 'pop-block-metadata'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

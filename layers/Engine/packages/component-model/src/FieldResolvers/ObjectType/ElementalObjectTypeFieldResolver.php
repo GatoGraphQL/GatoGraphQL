@@ -55,7 +55,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'self' => $this->translationAPI->__('The same object', 'pop-component-model'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

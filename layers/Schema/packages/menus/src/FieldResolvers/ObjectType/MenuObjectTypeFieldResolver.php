@@ -54,7 +54,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'items' => $this->menuItemObjectTypeResolver,
             'itemDataEntries' => $this->objectScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -88,7 +88,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'items' => $this->translationAPI->__('The menu items', 'menus'),
             'itemDataEntries' => $this->translationAPI->__('The data for the menu items', 'menus'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),

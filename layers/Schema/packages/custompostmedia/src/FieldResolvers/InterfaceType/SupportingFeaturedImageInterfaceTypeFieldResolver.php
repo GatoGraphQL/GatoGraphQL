@@ -47,7 +47,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'featuredImage' => $this->mediaObjectTypeResolver,
             'hasFeaturedImage' => $this->booleanScalarTypeResolver,
             default => parent::getFieldTypeResolver($fieldName),
@@ -67,7 +67,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'hasFeaturedImage' => $this->translationAPI->__('Does the custom post have a featured image?', 'custompostmedia'),
             'featuredImage' => $this->translationAPI->__('Featured image from the custom post', 'custompostmedia'),
             default => parent::getSchemaFieldDescription($fieldName),

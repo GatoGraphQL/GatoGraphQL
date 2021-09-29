@@ -40,7 +40,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'typeName' => $this->stringScalarTypeResolver,
             'namespace' => $this->stringScalarTypeResolver,
             'qualifiedTypeName' => $this->stringScalarTypeResolver,
@@ -65,7 +65,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'typeName' => $this->translationAPI->__('The object\'s type', 'pop-component-model'),
             'namespace' => $this->translationAPI->__('The object\'s namespace', 'pop-component-model'),
             'qualifiedTypeName' => $this->translationAPI->__('The object\'s namespace + type', 'pop-component-model'),

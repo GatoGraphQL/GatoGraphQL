@@ -82,7 +82,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'name' => $this->translationAPI->__('Directive\'s name', 'graphql-server'),
             'description' => $this->translationAPI->__('Directive\'s description', 'graphql-server'),
             'args' => $this->translationAPI->__('Directive\'s arguments', 'graphql-server'),

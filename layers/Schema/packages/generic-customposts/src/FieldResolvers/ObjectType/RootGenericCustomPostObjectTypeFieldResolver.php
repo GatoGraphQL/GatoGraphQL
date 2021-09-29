@@ -69,7 +69,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'genericCustomPost' => $this->translationAPI->__('Custom post with a specific ID', 'generic-customposts'),
             'genericCustomPostBySlug' => $this->translationAPI->__('Custom post with a specific slug', 'generic-customposts'),
             'genericCustomPosts' => $this->translationAPI->__('Custom posts', 'generic-customposts'),
@@ -93,7 +93,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             case 'genericCustomPostsForAdmin':
                 return $this->genericCustomPostObjectTypeResolver;
         }
-        return match($fieldName) {
+        return match ($fieldName) {
             'genericCustomPostCount' => $this->intScalarTypeResolver,
             'genericCustomPostCountForAdmin' => $this->intScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),

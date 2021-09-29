@@ -47,7 +47,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'name' => $this->stringScalarTypeResolver,
             'description' => $this->stringScalarTypeResolver,
             'isDeprecated' => $this->booleanScalarTypeResolver,
@@ -70,7 +70,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'name' => $this->translationAPI->__('Enum value\'s name as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACvBBCyBH6rd)', 'graphql-server'),
             'description' => $this->translationAPI->__('Enum value\'s description as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACyBIC1BHnjL)', 'graphql-server'),
             'isDeprecated' => $this->translationAPI->__('Is the enum value deprecated?', 'graphql-server'),

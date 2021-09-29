@@ -19,7 +19,7 @@ class PostCategoryListObjectTypeFieldResolver extends AbstractPostObjectTypeFiel
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'posts' => $this->translationAPI->__('Posts which contain this category', 'post-categories'),
             'postCount' => $this->translationAPI->__('Number of posts which contain this category', 'post-categories'),
             'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts which contain this category', 'post-categories'),

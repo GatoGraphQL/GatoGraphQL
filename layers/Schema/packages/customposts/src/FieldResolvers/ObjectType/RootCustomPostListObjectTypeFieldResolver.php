@@ -52,7 +52,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'customPost' => $this->translationAPI->__('Custom post with a specific ID', 'customposts'),
             'customPostBySlug' => $this->translationAPI->__('Custom post with a specific slug', 'customposts'),
             'customPostForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific ID', 'customposts'),

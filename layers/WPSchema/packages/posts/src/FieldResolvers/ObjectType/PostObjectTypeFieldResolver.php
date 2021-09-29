@@ -40,7 +40,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'postFormat' => $this->translationAPI->__('Retrieve the format slug for a post', 'posts'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -48,7 +48,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'postFormat' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

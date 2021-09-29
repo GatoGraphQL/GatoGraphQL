@@ -52,7 +52,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'name' => $this->stringScalarTypeResolver,
             'description' => $this->stringScalarTypeResolver,
             'count' => $this->intScalarTypeResolver,
@@ -73,7 +73,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'url' => $this->translationAPI->__('Tag URL', 'pop-tags'),
             'urlPath' => $this->translationAPI->__('Tag URL path', 'pop-tags'),
             'name' => $this->translationAPI->__('Tag', 'pop-tags'),

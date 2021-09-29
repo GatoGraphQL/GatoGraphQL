@@ -31,7 +31,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             '__typename' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -50,7 +50,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             '__typename' => $this->translationAPI->__('The object\'s type', 'graphql-server'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

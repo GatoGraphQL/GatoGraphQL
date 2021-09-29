@@ -30,7 +30,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'loggedInUserID' => $this->idScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -38,7 +38,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'loggedInUserID' => $this->translationAPI->__('The logged-in user\'s ID', 'user-state'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

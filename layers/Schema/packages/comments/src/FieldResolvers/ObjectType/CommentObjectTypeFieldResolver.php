@@ -158,7 +158,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'content' => $this->translationAPI->__('Comment\'s content', 'pop-comments'),
             'authorName' => $this->translationAPI->__('Comment author\'s name', 'pop-comments'),
             'authorURL' => $this->translationAPI->__('Comment author\'s URL', 'pop-comments'),

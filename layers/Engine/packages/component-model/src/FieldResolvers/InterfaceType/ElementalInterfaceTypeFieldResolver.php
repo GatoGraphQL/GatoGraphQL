@@ -54,7 +54,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'id' => $this->translationAPI->__('The object\'s unique identifier for its type', 'component-model'),
             default => parent::getSchemaFieldDescription($fieldName),
         };

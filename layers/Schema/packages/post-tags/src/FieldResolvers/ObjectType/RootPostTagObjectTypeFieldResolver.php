@@ -71,7 +71,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
             case 'postTags':
                 return $this->postTagObjectTypeResolver;
         }
-        return match($fieldName) {
+        return match ($fieldName) {
             'postTagCount' => $this->intScalarTypeResolver,
             'postTagNames' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -93,7 +93,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'postTag' => $this->translationAPI->__('Post tag with a specific ID', 'pop-post-tags'),
             'postTagBySlug' => $this->translationAPI->__('Post tag with a specific slug', 'pop-post-tags'),
             'postTags' => $this->translationAPI->__('Post tags', 'pop-post-tags'),

@@ -12,7 +12,7 @@ abstract class AbstractCustomPostListTagObjectTypeFieldResolver extends Abstract
 {
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'customPosts' => $this->translationAPI->__('Custom posts which contain this tag', 'pop-tags'),
             'customPostCount' => $this->translationAPI->__('Number of custom posts which contain this tag', 'pop-tags'),
             'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts which contain this tag', 'pop-tags'),

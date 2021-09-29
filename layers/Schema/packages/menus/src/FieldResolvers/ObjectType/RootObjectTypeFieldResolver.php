@@ -53,7 +53,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'menu' => $this->translationAPI->__('Get a menu', 'menus'),
             'menus' => $this->translationAPI->__('Get all menus', 'menus'),
             'menuCount' => $this->translationAPI->__('Count the number of menus', 'menus'),
@@ -63,7 +63,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'menu' => $this->menuObjectTypeResolver,
             'menus' => $this->menuObjectTypeResolver,
             'menuCount' => $this->intScalarTypeResolver,

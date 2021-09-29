@@ -19,7 +19,7 @@ class PostUserObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'posts' => $this->translationAPI->__('Posts by the user', 'users'),
             'postCount' => $this->translationAPI->__('Number of posts by the user', 'users'),
             'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts by the user', 'users'),

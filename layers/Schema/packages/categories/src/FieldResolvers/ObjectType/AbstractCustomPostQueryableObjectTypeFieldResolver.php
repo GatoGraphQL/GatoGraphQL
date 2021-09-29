@@ -51,7 +51,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             case 'categories':
                 return $this->getCategoryTypeResolver();
         }
-        return match($fieldName) {
+        return match ($fieldName) {
             'categoryCount' => $this->intScalarTypeResolver,
             'categoryNames' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -73,7 +73,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'categories' => $this->translationAPI->__('Categories added to this custom post', 'pop-categories'),
             'categoryCount' => $this->translationAPI->__('Number of categories added to this custom post', 'pop-categories'),
             'categoryNames' => $this->translationAPI->__('Names of the categories added to this custom post', 'pop-categories'),

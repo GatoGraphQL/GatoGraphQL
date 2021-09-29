@@ -39,7 +39,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'metaValue' => $this->anyScalarScalarTypeResolver,
             'metaValues' => $this->anyScalarScalarTypeResolver,
             default => parent::getFieldTypeResolver($fieldName),
@@ -78,7 +78,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'metaValue' => $this->translationAPI->__('Single meta value', 'custompostmeta'),
             'metaValues' => $this->translationAPI->__('List of meta values', 'custompostmeta'),
             default => parent::getSchemaFieldDescription($fieldName),

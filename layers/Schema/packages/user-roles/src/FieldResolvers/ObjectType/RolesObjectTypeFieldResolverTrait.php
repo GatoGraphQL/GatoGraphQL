@@ -30,7 +30,7 @@ trait RolesObjectTypeFieldResolverTrait
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-        return match($fieldName) {
+        return match ($fieldName) {
             'roles' => $stringScalarTypeResolver,
             'capabilities' => $stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -40,7 +40,7 @@ trait RolesObjectTypeFieldResolverTrait
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match($fieldName) {
+        return match ($fieldName) {
             'roles' => $translationAPI->__('All user roles', 'user-roles'),
             'capabilities' => $translationAPI->__('All user capabilities', 'user-roles'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),

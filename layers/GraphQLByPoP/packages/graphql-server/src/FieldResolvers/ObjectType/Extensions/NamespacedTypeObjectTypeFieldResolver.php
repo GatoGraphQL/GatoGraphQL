@@ -57,7 +57,7 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'name' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -76,7 +76,7 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'name' => $this->translationAPI->__('Type\'s name as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACvBBCyBH6rd), indicating if the type must be namespaced or not', 'graphql-server'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

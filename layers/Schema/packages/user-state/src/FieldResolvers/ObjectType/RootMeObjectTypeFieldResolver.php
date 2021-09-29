@@ -38,7 +38,7 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'me' => $this->translationAPI->__('The logged-in user', 'user-state'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

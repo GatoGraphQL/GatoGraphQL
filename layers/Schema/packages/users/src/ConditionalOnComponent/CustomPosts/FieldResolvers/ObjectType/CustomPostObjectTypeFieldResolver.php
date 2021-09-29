@@ -48,7 +48,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'author' => $this->translationAPI->__('The post\'s author', ''),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

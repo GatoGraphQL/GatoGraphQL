@@ -72,7 +72,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'username' => $this->stringScalarTypeResolver,
             'name' => $this->stringScalarTypeResolver,
             'displayName' => $this->stringScalarTypeResolver,
@@ -99,7 +99,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'url' => $this->translationAPI->__('URL of the user\'s profile in the website', 'pop-users'),
             'urlPath' => $this->translationAPI->__('URL path of the user\'s profile in the website', 'pop-users'),
             'slug' => $this->translationAPI->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),

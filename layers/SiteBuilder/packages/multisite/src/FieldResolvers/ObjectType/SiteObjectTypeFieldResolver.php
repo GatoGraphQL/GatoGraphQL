@@ -41,7 +41,7 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'domain' => $this->stringScalarTypeResolver,
             'host' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -62,7 +62,7 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'domain' => $this->translationAPI->__('The site\'s domain', ''),
             'host' => $this->translationAPI->__('The site\'s host', ''),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),

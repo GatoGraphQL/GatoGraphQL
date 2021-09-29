@@ -50,7 +50,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             case 'tags':
                 return $this->getTagTypeResolver();
         }
-        return match($fieldName) {
+        return match ($fieldName) {
             'tagCount' => $this->intScalarTypeResolver,
             'tagNames' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -72,7 +72,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'tags' => $this->translationAPI->__('Tags added to this custom post', 'pop-tags'),
             'tagCount' => $this->translationAPI->__('Number of tags added to this custom post', 'pop-tags'),
             'tagNames' => $this->translationAPI->__('Names of the tags added to this custom post', 'pop-tags'),

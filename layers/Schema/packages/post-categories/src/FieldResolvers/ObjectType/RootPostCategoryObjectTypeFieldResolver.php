@@ -71,7 +71,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             case 'postCategories':
                 return $this->postCategoryObjectTypeResolver;
         }
-        return match($fieldName) {
+        return match ($fieldName) {
             'postCategoryCount' => $this->intScalarTypeResolver,
             'postCategoryNames' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -93,7 +93,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'postCategory' => $this->translationAPI->__('Post category with a specific ID', 'post-categories'),
             'postCategoryBySlug' => $this->translationAPI->__('Post category with a specific slug', 'post-categories'),
             'postCategories' => $this->translationAPI->__('Post categories', 'post-categories'),

@@ -72,7 +72,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'src' => $this->urlScalarTypeResolver,
             'srcSet' => $this->stringScalarTypeResolver,
             'width' => $this->intScalarTypeResolver,
@@ -104,7 +104,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'src' => $this->translationAPI->__('Media element URL source', 'pop-media'),
             'srcSet' => $this->translationAPI->__('Media element URL srcset', 'pop-media'),
             'width' => $this->translationAPI->__('Media element\'s width', 'pop-media'),

@@ -40,7 +40,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'isSticky' => $this->translationAPI->__('Determines whether a custom post is sticky', 'customposts'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -48,7 +48,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'isSticky' => $this->booleanScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

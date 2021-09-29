@@ -49,7 +49,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'avatar' => $this->translationAPI->__('User avatar', 'user-avatars'),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };

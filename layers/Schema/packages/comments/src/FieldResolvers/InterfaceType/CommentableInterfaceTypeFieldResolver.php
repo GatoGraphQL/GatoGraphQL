@@ -59,7 +59,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'comments' => $this->commentObjectTypeResolver,
             'commentsForAdmin' => $this->commentObjectTypeResolver,
             'areCommentsOpen' => $this->booleanScalarTypeResolver,
@@ -88,7 +88,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'areCommentsOpen' => $this->translationAPI->__('Are comments open to be added to the custom post', 'pop-comments'),
             'hasComments' => $this->translationAPI->__('Does the custom post have comments?', 'pop-comments'),
             'commentCount' => $this->translationAPI->__('Number of comments added to the custom post', 'pop-comments'),

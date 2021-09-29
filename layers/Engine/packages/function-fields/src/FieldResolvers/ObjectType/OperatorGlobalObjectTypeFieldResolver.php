@@ -106,7 +106,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'concat' => $this->translationAPI->__('Concatenate two or more strings', 'function-fields'),
             'divide' => $this->translationAPI->__('Divide a number by another number', 'function-fields'),
             'arrayRandom' => $this->translationAPI->__('Randomly select one element from the provided ones', 'function-fields'),

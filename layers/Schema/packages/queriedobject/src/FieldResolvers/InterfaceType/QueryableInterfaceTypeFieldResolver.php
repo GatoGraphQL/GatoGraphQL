@@ -44,7 +44,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'url' => $this->urlScalarTypeResolver,
             'urlPath' => $this->stringScalarTypeResolver,
             'slug' => $this->stringScalarTypeResolver,
@@ -66,7 +66,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'url' => $this->translationAPI->__('URL to query the object', 'queriedobject'),
             'urlPath' => $this->translationAPI->__('URL path to query the object', 'queriedobject'),
             'slug' => $this->translationAPI->__('URL\'s slug', 'queriedobject'),

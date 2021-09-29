@@ -33,7 +33,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'getSelfProp' => $this->mixedScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -41,7 +41,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'getSelfProp' => sprintf(
                 $this->translationAPI->__('Get a property from the current object, as stored under expression `%s`', 'pop-component-model'),
                 QueryHelpers::getExpressionQuery(Expressions::NAME_SELF)

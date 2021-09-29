@@ -38,7 +38,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             $this->getSetTagsFieldName() => sprintf(
                 $this->translationAPI->__('Set tags on a %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
