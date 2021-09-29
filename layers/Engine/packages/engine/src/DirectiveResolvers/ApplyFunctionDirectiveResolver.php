@@ -15,6 +15,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -27,10 +28,11 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      */
     protected RootObjectTypeResolver $rootTypeResolver;
 
-    protected function initializeServices(): void
-    {
-        parent::initializeServices();
-        $this->rootTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+    #[Required]
+    public function autowireApplyFunctionDirectiveResolver(
+        RootObjectTypeResolver $rootTypeResolver,
+    ): void {
+        $this->rootTypeResolver = $rootTypeResolver;
     }
 
     public function getDirectiveName(): string

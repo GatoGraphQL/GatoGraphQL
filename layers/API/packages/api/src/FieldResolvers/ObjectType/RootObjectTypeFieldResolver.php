@@ -10,8 +10,7 @@ use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\TypeResolvers\EnumType\SchemaFieldShapeEnumTypeResolver;
-use PoP\ComponentModel\Cache\CacheInterface;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -24,7 +23,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CacheInterface $persistentCache;
+    protected PersistentCacheInterface $persistentCache;
     protected SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver;
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
@@ -36,12 +35,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         PersistedFragmentManagerInterface $fragmentCatalogueManager,
         PersistedQueryManagerInterface $queryCatalogueManager,
+        PersistentCacheInterface $persistentCache,
     ): void {
         $this->schemaOutputShapeEnumTypeResolver = $schemaOutputShapeEnumTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->fragmentCatalogueManager = $fragmentCatalogueManager;
         $this->queryCatalogueManager = $queryCatalogueManager;
-        $this->persistentCache = PersistentCacheFacade::getInstance();
+        $this->persistentCache = $persistentCache;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

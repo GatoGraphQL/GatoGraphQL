@@ -138,9 +138,9 @@ class PoP_SSR_EngineInitialization_Hooks
 
         // Get the static data properties
         // First check if there's a cache stored
+        $cachemanager = null;
         if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
             $cachemanager = PersistentCacheFacade::getInstance();
-            $useCache = !is_null($cachemanager);
         }
         $dynamic_data_properties = null;
         if ($useCache) {
@@ -181,7 +181,7 @@ class PoP_SSR_EngineInitialization_Hooks
         $data['dbData'] = $dynamicdatabases;
     }
 
-    protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, RelationalTypeResolverInterface $subcomponentTypeResolver, array $data_properties)
+    protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, RelationalTypeResolverInterface $relationalTypeResolver, array $data_properties)
     {
         if ($data_properties['data-fields'] ?? null) {
             $instanceManager = InstanceManagerFacade::getInstance();
