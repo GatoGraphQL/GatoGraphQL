@@ -238,6 +238,43 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     final public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
+        $schemaFieldArgs = [];
+        foreach ($this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName) as $fieldArgName => $fieldArgConcreteTypeResolver) {
+            $schemaFieldArg = [
+                SchemaDefinition::ARGNAME_NAME => $fieldArgName,
+                SchemaDefinition::ARGNAME_TYPE => $fieldArgConcreteTypeResolver->getTypeOutputName(),
+            ];
+            if ($schemaFieldArgDescription = $this->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName)) {
+                $schemaFieldArg[SchemaDefinition::ARGNAME_DESCRIPTION] = $schemaFieldArgDescription;
+            }
+            if ($schemaFieldArgDefaultValue = $this->getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName)) {
+                $schemaFieldArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $schemaFieldArgDefaultValue;
+            }
+            if ($schemaFieldArgTypeModifiers = $this->getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName)) {
+                if ($schemaFieldArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
+                    $schemaFieldArg[SchemaDefinition::ARGNAME_MANDATORY] = true;
+                }
+                // If setting the "array of arrays" flag, there's no need to set the "array" flag
+                $isArrayOfArrays = $schemaFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+                if (
+                    $schemaFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY
+                    || $isArrayOfArrays
+                ) {
+                    $schemaFieldArg[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
+                    if ($schemaFieldArgTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
+                        $schemaFieldArg[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
+                    }
+                    if ($isArrayOfArrays) {
+                        $schemaFieldArg[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
+                        if ($schemaFieldArgTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
+                            $schemaFieldArg[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
+                        }
+                    }
+                }
+            }
+            $schemaFieldArgs[] = $schemaFieldArg;
+        }
+        return $schemaFieldArgs;
     }
 
     public function getSchemaFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string
