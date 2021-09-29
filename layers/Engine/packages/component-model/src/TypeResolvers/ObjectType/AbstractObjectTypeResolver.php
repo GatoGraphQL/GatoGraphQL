@@ -546,7 +546,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $schemaObjectTypeFieldResolvers;
     }
 
-    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])
+    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): void
     {
         parent::addSchemaDefinition($stackMessages, $generalMessages, $options);
 
