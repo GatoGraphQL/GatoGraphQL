@@ -12,20 +12,24 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     protected MixedScalarTypeResolver $mixedScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
 
     #[Required]
     public function autowireFunctionGlobalObjectTypeFieldResolver(
         MixedScalarTypeResolver $mixedScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
+        ObjectScalarTypeResolver $objectScalarTypeResolver,
     ): void {
         $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
     }
 
     public function getFieldNamesToResolve(): array
