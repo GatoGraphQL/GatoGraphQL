@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
-use PoP\CacheControl\Facades\CacheControlEngineFacade;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\CacheControl\Schema\SchemaDefinition;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
     protected CacheControlEngineInterface $cacheControlEngine;
 
-    protected function initializeServices(): void
-    {
-        parent::initializeServices();
-        $this->cacheControlEngine = CacheControlEngineFacade::getInstance();
+    #[Required]
+    public function autowireAbstractCacheControlDirectiveResolver(
+        CacheControlEngineInterface $cacheControlEngine,
+    ): void {
+        $this->cacheControlEngine = $cacheControlEngine;
     }
 
     public function getDirectiveName(): string
