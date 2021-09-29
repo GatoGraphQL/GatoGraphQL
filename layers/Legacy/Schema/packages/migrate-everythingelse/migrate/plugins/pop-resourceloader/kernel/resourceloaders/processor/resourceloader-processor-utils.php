@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
+use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -230,7 +230,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // bundle(group)s, which are calculated all at the beginning, and created all later together; if we don't
         // keep the $model_instance_id, we don't know what non-critical resources belong to which generation process
         if ($noncritical_resources) {
-            $memorymanager = MemoryManagerFacade::getInstance();
+            $memorymanager = TransientCacheManagerFacade::getInstance();
             $memorymanager->storeComponentModelCache($model_instance_id, POP_MEMORYTYPE_NONCRITICALRESOURCES, $noncritical_resources);
         }
 
@@ -719,7 +719,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // We also need to get the dynamic-templates and save it on the vars cache.
         // It will be needed from there when doing `function isDefer(array $resource, $model_instance_id)`
         if ($dynamic_template_resources = $entry_processorresourcedecorator->getDynamicTemplateResourcesMergedmoduletree($entryModule, $entry_model_props)) {
-            $memorymanager = MemoryManagerFacade::getInstance();
+            $memorymanager = TransientCacheManagerFacade::getInstance();
             $memorymanager->storeComponentModelCache($model_instance_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, $dynamic_template_resources);
         }
 

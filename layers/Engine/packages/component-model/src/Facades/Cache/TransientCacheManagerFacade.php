@@ -8,7 +8,7 @@ use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\ComponentModel\Cache\TransientCacheInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
-class MemoryManagerFacade
+class TransientCacheManagerFacade
 {
     public static function getInstance(): CacheInterface
     {

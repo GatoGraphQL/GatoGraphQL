@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
+use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
@@ -280,7 +280,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
         // Check if the list of scripts has been cached in pop-cache/ first
         // If so, just return it from there directly
         global $pop_resourceloader_generatedfilesmanager, $pop_resourceloaderprocessor_manager;
-        $memorymanager = MemoryManagerFacade::getInstance();
+        $memorymanager = TransientCacheManagerFacade::getInstance();
 
         if (!$model_instance_id) {
             $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
@@ -405,7 +405,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
         if (PoP_WebPlatform_ServerUtils::useProgressiveBooting()) {
 
             // If these resources have been marked as 'noncritical', then defer loading them
-            $memorymanager = MemoryManagerFacade::getInstance();
+            $memorymanager = TransientCacheManagerFacade::getInstance();
             if ($noncritical_resources = $memorymanager->getComponentModelCache($model_instance_id, POP_MEMORYTYPE_NONCRITICALRESOURCES)) {
 
                 $defer_resources = array_values(
