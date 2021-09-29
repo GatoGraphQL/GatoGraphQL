@@ -465,7 +465,7 @@ class ModuleListTable extends AbstractItemListTable
      * @return void
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    public function single_row($item): void
+    public function single_row($item)
     {
         /**
          * Cast object so PHPStan doesn't throw error
@@ -495,7 +495,7 @@ class ModuleListTable extends AbstractItemListTable
      * @return void
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    public function prepare_items(): void
+    public function prepare_items()
     {
         $this->_column_headers = $this->get_column_info();
 
