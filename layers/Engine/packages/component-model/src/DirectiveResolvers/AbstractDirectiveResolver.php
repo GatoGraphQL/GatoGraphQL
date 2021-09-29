@@ -69,23 +69,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     protected array $schemaDefinitionForDirectiveCache = [];
 
     /**
-     * The directiveResolvers are NOT instantiated through the service container!
-     *
-     * Instead, the directive will be instantiated in AbstractRelationalTypeResolver:
-     *   new $directiveResolverClass($fieldDirective)
-     *
-     * Whenever having depended-upon services, these can be obtained like this (or via a Facade):
-     *   $instanceManager->getInstance(...)
-     *
-     * DirectiveResolvers must still be added to schema-services.yml, though.
-     * This is because they need to be registered, so that all directives
-     * can be displayed in the GraphQL API's Access Control Lists
+     * The directiveResolvers are instantiated through the service container,
+     * but NOT for the directivePipeline, since there each directiveResolver
+     * will require the actual $directive to process.
      */
-    final public function __construct(?string $directive = null)
+    final public function __construct()
     {
-        // If the directive is not provided, then it directly the directive name
-        // This allows to instantiate the directive through the DependencyInjection component
-        $this->directive = $directive ?? $this->getDirectiveName();
+        // By default, the directive is directly the directive name
+        // This is what is used when instantiating the directive through the DependencyInjection component
+        $this->directive = $this->getDirectiveName();
 
         // Obtain services directly from the container, instead of using autowiring
         $this->initializeServices();
