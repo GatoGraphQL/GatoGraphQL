@@ -19,7 +19,10 @@ interface SchemaDirectiveResolverInterface
     /**
      * Schema Directive Arguments
      */
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array;
+    public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array;
+    public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
+    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed;
+    public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int;
     /**
      * Expressions set by the directive
      */
