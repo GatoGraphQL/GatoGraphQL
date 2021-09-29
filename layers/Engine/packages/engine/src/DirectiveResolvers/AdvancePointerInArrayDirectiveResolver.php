@@ -11,15 +11,18 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Misc\OperatorHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
-    protected function initializeServices(): void
+    #[Required]
+    public function autowireAdvancePointerInArrayDirectiveResolver(
+        StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void
     {
-        parent::initializeServices();
-        $this->stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     
     public function getDirectiveName(): string

@@ -10,15 +10,18 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
-    protected function initializeServices(): void
+    #[Required]
+    public function autowireSetPropertiesAsExpressionsDirectiveResolver(
+        StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void
     {
-        parent::initializeServices();
-        $this->stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     
     public function getDirectiveName(): string

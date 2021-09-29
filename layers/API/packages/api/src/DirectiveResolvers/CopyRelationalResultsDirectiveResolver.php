@@ -13,15 +13,18 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
-    protected function initializeServices(): void
+    #[Required]
+    public function autowireCopyRelationalResultsDirectiveResolver(
+        StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void
     {
-        parent::initializeServices();
-        $this->stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array
