@@ -201,12 +201,54 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        return $aliasedObjectTypeFieldResolver->getSchemaFieldArgs(
+        return $aliasedObjectTypeFieldResolver->getSchemaFieldArgNameResolvers(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getSchemaFieldArgDescription(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName),
+            $fieldArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getSchemaFieldArgDefaultValue(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName),
+            $fieldArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getSchemaFieldArgTypeModifiers(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName),
+            $fieldArgName
         );
     }
 
