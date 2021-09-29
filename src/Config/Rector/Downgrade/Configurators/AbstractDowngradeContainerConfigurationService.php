@@ -4,18 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
-use PHPStan\Type\NullType;
-use PHPStan\Type\StringType;
-use PoP\PoP\Extensions\Rector\Set\ValueObject\CustomDowngradeSetList;
-use PoP\PoP\Extensions\Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationInTraitRector;
+use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
-use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
-use Symfony\Component\Cache\Traits\AbstractAdapterTrait;
-use Symfony\Contracts\Cache\CacheTrait;
-use Symfony\Contracts\Service\ServiceLocatorTrait;
-use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 abstract class AbstractDowngradeContainerConfigurationService extends AbstractContainerConfigurationService
 {
