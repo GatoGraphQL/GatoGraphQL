@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
+use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class PoP_TemplateResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
@@ -52,7 +52,7 @@ abstract class PoP_TemplateResourceLoaderProcessor extends PoP_JSResourceLoaderP
 
 			// Instead of checking from the current dynamic-templates, get the value from the resource-cache,
 			// so that it also works for when generating the bundle(group) files during the /generate-theme/ process
-			$memorymanager = MemoryManagerFacade::getInstance();
+			$memorymanager = TransientCacheManagerFacade::getInstance();
 			if ($dynamic_template_resources = $memorymanager->getComponentModelCache($model_instance_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES)) {
 
 				// Comment Leo 20/11/2017: taking a very aggressive approach: make all templates be deferred,

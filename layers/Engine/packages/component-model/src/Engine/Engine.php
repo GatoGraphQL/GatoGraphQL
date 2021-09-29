@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Engine;
 
 use Exception;
-use PoP\ComponentModel\Cache\CacheInterface;
+use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ComponentInfo;
@@ -116,7 +116,7 @@ class Engine implements EngineInterface
     protected DataloadHelperServiceInterface $dataloadHelperService;
     protected EntryModuleManagerInterface $entryModuleManager;
     protected RequestHelperServiceInterface $requestHelperService;
-    protected ?CacheInterface $persistentCache = null;
+    protected PersistentCacheInterface $persistentCache;
 
     #[Required]
     public function autowireEngine(
@@ -135,7 +135,7 @@ class Engine implements EngineInterface
         DataloadHelperServiceInterface $dataloadHelperService,
         EntryModuleManagerInterface $entryModuleManager,
         RequestHelperServiceInterface $requestHelperService,
-        ?CacheInterface $persistentCache = null
+        PersistentCacheInterface $persistentCache,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;

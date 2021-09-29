@@ -4,15 +4,15 @@ services:
         autowire: true
         autoconfigure: true
 
-    persistent_cache:
+    PoP\ComponentModel\Cache\PersistentCacheInterface:
         class: \PoP\Engine\Cache\Cache
         arguments:
             $cacheItemPool: '@persistent_cache_item_pool'
 
-    memory_cache:
+    PoP\ComponentModel\Cache\TransientCacheInterface:
         class: \PoP\Engine\Cache\Cache
         arguments:
-            $cacheItemPool: '@memory_cache_item_pool'
+            $cacheItemPool: '@transient_cache_item_pool'
 
     PoP\Engine\ObjectModels\Root:
         class: \PoP\Engine\ObjectModels\Root

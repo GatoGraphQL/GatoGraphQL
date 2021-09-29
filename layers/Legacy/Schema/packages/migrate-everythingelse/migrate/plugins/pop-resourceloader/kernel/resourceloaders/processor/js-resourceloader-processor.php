@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
+use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 
 class PoP_JSResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 
@@ -73,7 +73,7 @@ class PoP_JSResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 		// If these resources have been marked as 'noncritical', then defer loading them
 		if (PoP_WebPlatform_ServerUtils::useProgressiveBooting()) {
 
-			$memorymanager = MemoryManagerFacade::getInstance();
+			$memorymanager = TransientCacheManagerFacade::getInstance();
 			if ($noncritical_resources = $memorymanager->getComponentModelCache($model_instance_id, POP_MEMORYTYPE_NONCRITICALRESOURCES)) {
 
 				return in_array($resource, $noncritical_resources);

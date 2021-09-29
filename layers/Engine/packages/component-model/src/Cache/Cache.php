@@ -10,7 +10,7 @@ use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class Cache implements CacheInterface
+class Cache implements PersistentCacheInterface, TransientCacheInterface, CacheInterface
 {
     use ReplaceCurrentExecutionDataWithPlaceholdersTrait;
 
