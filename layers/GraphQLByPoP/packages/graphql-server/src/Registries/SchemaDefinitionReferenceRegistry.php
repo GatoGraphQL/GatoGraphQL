@@ -161,13 +161,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // "These fields are implicit and do not appear in the fields list in the root type of the query operation."
         // @see http://spec.graphql.org/draft/#sel-FAJXHABcBlB6rF
         // But allow to enable "__schema" to disable introspection via ACL
-        unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
         if (!$exposeSchemaIntrospectionFieldInSchema) {
+            unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
             unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
-        }
-        if ($queryRootTypeSchemaKey !== null) {
-            unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
-            if (!$exposeSchemaIntrospectionFieldInSchema) {
+            if ($queryRootTypeSchemaKey !== null) {
+                unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__type']);
                 unset($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$queryRootTypeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS]['__schema']);
             }
         }

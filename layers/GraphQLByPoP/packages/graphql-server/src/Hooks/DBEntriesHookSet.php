@@ -23,6 +23,7 @@ class DBEntriesHookSet extends AbstractHookSet
     {
         $metaFields[] = '__schema';
         $metaFields[] = '__typename';
+        $metaFields[] = '__type';
         return $metaFields;
     }
 }
