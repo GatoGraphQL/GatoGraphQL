@@ -39,14 +39,7 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
         return $this->hookName;
     }
 
-    abstract public function getMenuClass(): string;
-
-    protected function getMenu(): MenuInterface
-    {
-        $menuClass = $this->getMenuClass();
-        /** @var MenuInterface */
-        return $this->instanceManager->getInstance($menuClass);
-    }
+    abstract public function getMenu(): MenuInterface;
 
     /**
      * Initialize menu page. Function to override

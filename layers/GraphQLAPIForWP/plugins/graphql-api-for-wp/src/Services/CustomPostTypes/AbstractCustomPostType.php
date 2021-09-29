@@ -27,6 +27,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     protected ModuleRegistryInterface $moduleRegistry;
     protected UserAuthorizationInterface $userAuthorization;
     protected CPTUtils $cptUtils;
+    protected PluginMenu $pluginMenu;
 
     #[Required]
     public function autowireAbstractCustomPostType(
@@ -34,11 +35,13 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         CPTUtils $cptUtils,
+        PluginMenu $pluginMenu,
     ): void {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
         $this->userAuthorization = $userAuthorization;
         $this->cptUtils = $cptUtils;
+        $this->pluginMenu = $pluginMenu;
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
     /**
@@ -443,16 +446,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         return $postTypeArgs;
     }
 
-    public function getMenuClass(): string
+    public function getMenu(): MenuInterface
     {
-        return PluginMenu::class;
-    }
-
-    protected function getMenu(): MenuInterface
-    {
-        $menuClass = $this->getMenuClass();
-        /** @var MenuInterface */
-        return $this->instanceManager->getInstance($menuClass);
+        return $this->pluginMenu;
     }
 
     /**

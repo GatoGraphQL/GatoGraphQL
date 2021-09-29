@@ -22,14 +22,7 @@ abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiate
         $this->instanceManager = $instanceManager;
     }
 
-    abstract public function getMenuClass(): string;
-
-    protected function getMenu(): MenuInterface
-    {
-        $menuClass = $this->getMenuClass();
-        /** @var MenuInterface */
-        return $this->instanceManager->getInstance($menuClass);
-    }
+    abstract public function getMenu(): MenuInterface;
 
     protected function getMenuName(): string
     {
