@@ -116,7 +116,7 @@ class Engine implements EngineInterface
     protected DataloadHelperServiceInterface $dataloadHelperService;
     protected EntryModuleManagerInterface $entryModuleManager;
     protected RequestHelperServiceInterface $requestHelperService;
-    protected ?PersistentCacheInterface $persistentCache = null;
+    protected PersistentCacheInterface $persistentCache;
 
     #[Required]
     public function autowireEngine(
@@ -135,7 +135,7 @@ class Engine implements EngineInterface
         DataloadHelperServiceInterface $dataloadHelperService,
         EntryModuleManagerInterface $entryModuleManager,
         RequestHelperServiceInterface $requestHelperService,
-        ?PersistentCacheInterface $persistentCache = null
+        PersistentCacheInterface $persistentCache,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;

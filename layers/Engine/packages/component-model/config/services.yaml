@@ -29,6 +29,11 @@ services:
     PoP\ComponentModel\Engine\DataloadingEngineInterface:
         class: \PoP\ComponentModel\Engine\DataloadingEngine
 
+    PoP\ComponentModel\Cache\PersistentCacheInterface:
+        class: \PoP\ComponentModel\Cache\Cache
+        arguments:
+            $cacheItemPool: '@persistent_cache_item_pool'
+
     PoP\ComponentModel\Cache\TransientCacheInterface:
         class: \PoP\ComponentModel\Cache\Cache
         arguments:
