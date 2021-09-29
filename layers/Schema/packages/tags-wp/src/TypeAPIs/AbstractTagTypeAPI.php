@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\TagsWP\TypeAPIs;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Taxonomy;
 
 /**

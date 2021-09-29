@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ModuleProcessors;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {

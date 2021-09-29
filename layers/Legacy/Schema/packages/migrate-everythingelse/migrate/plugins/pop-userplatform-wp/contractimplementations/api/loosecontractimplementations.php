@@ -1,9 +1,9 @@
 <?php
 namespace PoP\Engine\WP;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
+use PoP\LooseContracts\Facades\LooseContractManagerFacade;
+use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class PoP_UserPlatformWP_LooseContractImplementations extends AbstractLooseContractResolutionSet
 {

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Overrides\CacheControl;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface;
 use PoP\CacheControl\Managers\CacheControlManager as UpstreamCacheControlManager;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CacheControlManager extends UpstreamCacheControlManager
 {

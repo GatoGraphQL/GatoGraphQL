@@ -1,6 +1,6 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Modules\ModuleUtils;
 
 trait FormComponentModuleDelegatorTrait
 {

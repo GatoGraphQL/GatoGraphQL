@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\RelationalTypeResolverDecorators;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDirectivesForFieldsTrait;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorators\ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTrait;
 
 trait ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait

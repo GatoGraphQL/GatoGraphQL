@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP\ErrorHandling;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Engine\ErrorHandling\AbstractErrorManager;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\Engine\ErrorHandling\AbstractErrorManager;
 use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Error;
 
 class ErrorManager extends AbstractErrorManager

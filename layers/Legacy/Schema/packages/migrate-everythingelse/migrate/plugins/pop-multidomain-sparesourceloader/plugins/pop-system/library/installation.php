@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\FileStore\Facades\FileRendererFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_MultiDomainSPAResourceLoader_Installation
 {

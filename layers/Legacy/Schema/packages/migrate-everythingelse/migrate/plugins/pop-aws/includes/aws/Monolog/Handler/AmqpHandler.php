@@ -11,11 +11,11 @@
 
 namespace Monolog\Handler;
 
-use Monolog\Logger;
-use Monolog\Formatter\JsonFormatter;
-use PhpAmqpLib\Message\AMQPMessage;
-use PhpAmqpLib\Channel\AMQPChannel;
 use AMQPExchange;
+use Monolog\Formatter\JsonFormatter;
+use Monolog\Logger;
+use PhpAmqpLib\Channel\AMQPChannel;
+use PhpAmqpLib\Message\AMQPMessage;
 
 class AmqpHandler extends AbstractProcessingHandler
 {

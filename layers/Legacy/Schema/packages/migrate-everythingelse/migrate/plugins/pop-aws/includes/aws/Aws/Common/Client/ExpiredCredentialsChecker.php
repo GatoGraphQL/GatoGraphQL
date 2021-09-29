@@ -21,8 +21,8 @@ use Aws\Common\Exception\Parser\ExceptionParserInterface;
 use Guzzle\Http\Exception\HttpException;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
-use Guzzle\Plugin\Backoff\BackoffStrategyInterface;
 use Guzzle\Plugin\Backoff\AbstractBackoffStrategy;
+use Guzzle\Plugin\Backoff\BackoffStrategyInterface;
 
 /**
  * Backoff logic that handles retrying requests when credentials expire

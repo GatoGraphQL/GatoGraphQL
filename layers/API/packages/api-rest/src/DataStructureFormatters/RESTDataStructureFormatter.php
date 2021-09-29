@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\RESTAPI\DataStructureFormatters;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
+use PoP\ComponentModel\Engine\EngineInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {

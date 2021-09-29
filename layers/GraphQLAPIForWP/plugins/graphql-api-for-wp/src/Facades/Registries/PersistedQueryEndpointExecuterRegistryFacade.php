@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
-use PoP\Root\Container\ContainerBuilderFactory;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointExecuterRegistryInterface;
+use PoP\Root\Container\ContainerBuilderFactory;
 
 class PersistedQueryEndpointExecuterRegistryFacade
 {

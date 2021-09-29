@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
 {

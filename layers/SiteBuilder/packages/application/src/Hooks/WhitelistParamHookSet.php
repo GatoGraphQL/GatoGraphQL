@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\Application\Hooks;
 
 use PoP\Application\Constants\Response;
-use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModuleProcessors\Constants;
+use PoP\Hooks\AbstractHookSet;
 
 class WhitelistParamHookSet extends AbstractHookSet
 {

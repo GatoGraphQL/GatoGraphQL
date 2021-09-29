@@ -6,8 +6,8 @@ namespace PoP\AccessControl\RelationalTypeResolverDecorators;
 
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\AccessControl\Schema\SchemaModes;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\AbstractRelationalTypeResolverDecorator;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class AbstractPrivateSchemaRelationalTypeResolverDecorator extends AbstractRelationalTypeResolverDecorator
 {

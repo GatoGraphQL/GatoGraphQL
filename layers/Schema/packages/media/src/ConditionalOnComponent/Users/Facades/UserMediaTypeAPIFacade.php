@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\ConditionalOnComponent\Users\Facades;
 
-use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\UserMediaTypeAPIInterface;
 
 class UserMediaTypeAPIFacade
 {

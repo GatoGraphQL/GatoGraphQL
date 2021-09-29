@@ -1,10 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {

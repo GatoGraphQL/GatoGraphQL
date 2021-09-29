@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\API\Engine;
 
-use PoP\API\Constants\Actions;
-use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\API\Component as APIComponent;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\API\Constants\Actions;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\ComponentModel\Constants\DataOutputModes;
+use PoP\ComponentModel\State\ApplicationState;
 
 trait RemoveEntryModuleFromOutputEngineTrait
 {

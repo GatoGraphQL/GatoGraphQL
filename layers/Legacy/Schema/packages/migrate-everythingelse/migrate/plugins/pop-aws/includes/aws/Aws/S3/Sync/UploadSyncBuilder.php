@@ -16,11 +16,11 @@
 
 namespace Aws\S3\Sync;
 
-use FilesystemIterator as FI;
 use Aws\Common\Model\MultipartUpload\AbstractTransfer;
 use Aws\S3\Model\Acp;
-use Guzzle\Common\HasDispatcherInterface;
+use FilesystemIterator as FI;
 use Guzzle\Common\Event;
+use Guzzle\Common\HasDispatcherInterface;
 use Guzzle\Service\Command\CommandInterface;
 
 class UploadSyncBuilder extends AbstractSyncBuilder

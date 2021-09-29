@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\Hooks;
 
-use PoPSchema\Pages\Constants\ModelInstanceComponentTypes;
-use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\AbstractHookSet;
+use PoPSchema\Pages\Constants\ModelInstanceComponentTypes;
 use PoPSchema\Pages\Routing\RouteNatures;
 
 class VarsHookSet extends AbstractHookSet

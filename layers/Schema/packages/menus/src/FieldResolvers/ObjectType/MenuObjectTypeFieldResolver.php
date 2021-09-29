@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -16,6 +15,7 @@ use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemObjectTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

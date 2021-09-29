@@ -1,12 +1,12 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Engine\Route\RouteUtils;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
-use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 HooksAPIFacade::getInstance()->addFilter('mce_external_plugins', 'gdMentionsExternalPlugins');
 function gdMentionsExternalPlugins($plugins)

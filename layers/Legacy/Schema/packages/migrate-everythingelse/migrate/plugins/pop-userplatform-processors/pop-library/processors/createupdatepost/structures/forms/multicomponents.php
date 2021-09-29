@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {

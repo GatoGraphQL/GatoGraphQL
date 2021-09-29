@@ -13,8 +13,8 @@ namespace Monolog;
 
 use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\StreamHandler;
-use Psr\Log\LoggerInterface;
 use Psr\Log\InvalidArgumentException;
+use Psr\Log\LoggerInterface;
 
 /**
  * Monolog log channel

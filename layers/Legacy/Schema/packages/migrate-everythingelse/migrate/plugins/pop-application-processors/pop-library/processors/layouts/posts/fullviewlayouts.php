@@ -1,7 +1,7 @@
 <?php
+use PoP\Application\Constants\Actions;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Application\Constants\Actions;
 
 class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
 {

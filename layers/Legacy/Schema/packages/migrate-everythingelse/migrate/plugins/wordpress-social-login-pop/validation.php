@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('WSLPOP_WSL_MIN_VERSION', '2.3.0');
 define('WSLPOP_POP_CMSWP_MIN_VERSION', 0.1);

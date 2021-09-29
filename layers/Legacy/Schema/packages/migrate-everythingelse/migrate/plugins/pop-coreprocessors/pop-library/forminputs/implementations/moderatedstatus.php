@@ -1,7 +1,7 @@
 <?php
+use PoP\Engine\FormInputs\MultipleSelectFormInput;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
-use PoP\Engine\FormInputs\MultipleSelectFormInput;
 
 class GD_FormInput_ModeratedStatus extends MultipleSelectFormInput
 {

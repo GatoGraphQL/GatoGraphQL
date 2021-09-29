@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\ConditionalOnComponent\Users\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface as UserCommentTypeAPIInterface;
 use PoPSchema\Comments\FieldResolvers\ObjectType\CommentObjectTypeFieldResolver as UpstreamCommentObjectTypeFieldResolver;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Override fields from the upstream class, getting the data from the user

@@ -1,10 +1,10 @@
 <?php
 define('POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER', 'hook-dataloadingsbase-filteringbyshowfilter');
 
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
 {

@@ -1,7 +1,7 @@
 <?php
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {

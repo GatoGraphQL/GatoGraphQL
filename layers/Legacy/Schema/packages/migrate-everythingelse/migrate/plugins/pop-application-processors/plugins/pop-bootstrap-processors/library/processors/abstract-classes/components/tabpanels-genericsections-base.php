@@ -1,8 +1,8 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends PoP_Module_Processor_FormatActiveTabPanelComponentsBase
 {

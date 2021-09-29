@@ -4,11 +4,11 @@ namespace Guzzle\Http\Curl;
 
 use Guzzle\Common\AbstractHasDispatcher;
 use Guzzle\Common\Event;
-use Guzzle\Http\Exception\MultiTransferException;
 use Guzzle\Http\Exception\CurlException;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use Guzzle\Http\Exception\MultiTransferException;
 use Guzzle\Http\Exception\RequestException;
+use Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use Guzzle\Http\Message\RequestInterface;
 
 /**
  * Send {@see RequestInterface} objects in parallel using curl_multi

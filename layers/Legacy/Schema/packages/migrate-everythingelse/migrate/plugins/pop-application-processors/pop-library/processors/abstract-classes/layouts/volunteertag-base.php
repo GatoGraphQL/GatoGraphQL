@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_VolunteerTagLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {

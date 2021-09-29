@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
@@ -12,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Settings menu page

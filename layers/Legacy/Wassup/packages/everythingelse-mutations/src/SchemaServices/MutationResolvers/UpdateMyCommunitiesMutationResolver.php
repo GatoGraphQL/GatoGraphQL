@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoPSchema\UserMeta\Utils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoPSchema\UserMeta\Utils;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 {

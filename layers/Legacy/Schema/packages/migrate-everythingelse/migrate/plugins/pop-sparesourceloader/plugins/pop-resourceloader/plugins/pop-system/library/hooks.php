@@ -1,7 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\FileStore\Facades\FileRendererFacade;
 use PoP\FileStore\Facades\FileStoreFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPWebPlatform_SPAResourceLoader_InstallationHooks
 {

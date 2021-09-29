@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointResolvers;
 
+use GraphQLByPoP\GraphQLRequest\Facades\Execution\QueryRetrieverFacade;
+use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet;
+use PoP\API\Response\Schemes as APISchemes;
+use PoP\API\Schema\QueryInputs;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoP\Routing\RouteNatures;
 use WP_Post;
 use WP_Query;
-use PoP\Routing\RouteNatures;
-use PoP\API\Schema\QueryInputs;
-use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLByPoP\GraphQLRequest\Facades\Execution\QueryRetrieverFacade;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
-use PoP\API\Response\Schemes as APISchemes;
 
 trait EndpointResolverTrait
 {

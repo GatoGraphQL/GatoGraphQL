@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\Users\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Users\ComponentConfiguration;

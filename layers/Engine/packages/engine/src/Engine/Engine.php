@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Engine;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
-use PoP\LooseContracts\LooseContractManagerInterface;
 use PoP\ComponentModel\Engine\Engine as UpstreamEngine;
+use PoP\LooseContracts\LooseContractManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {

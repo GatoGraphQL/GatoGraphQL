@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostCategoryMutations\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -16,6 +15,7 @@ use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPo
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {

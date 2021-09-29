@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\IPScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\IPScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

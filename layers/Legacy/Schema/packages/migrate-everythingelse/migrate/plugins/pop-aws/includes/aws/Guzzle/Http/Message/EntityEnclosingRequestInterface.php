@@ -2,8 +2,8 @@
 
 namespace Guzzle\Http\Message;
 
-use Guzzle\Http\Exception\RequestException;
 use Guzzle\Http\EntityBodyInterface;
+use Guzzle\Http\Exception\RequestException;
 use Guzzle\Http\QueryString;
 
 /**

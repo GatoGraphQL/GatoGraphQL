@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\SiteBuilderAPI\Hooks;
 
+use PoP\API\Response\Schemes as APISchemes;
+use PoP\ComponentModel\StratumManagerFactory;
 use PoP\ConfigurationComponentModel\Constants\Stratum;
 use PoP\Hooks\AbstractHookSet;
-use PoP\ComponentModel\StratumManagerFactory;
-use PoP\API\Response\Schemes as APISchemes;
 
 class VarsHookSet extends AbstractHookSet
 {

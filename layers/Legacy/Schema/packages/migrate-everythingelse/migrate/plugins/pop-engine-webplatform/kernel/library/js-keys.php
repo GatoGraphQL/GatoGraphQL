@@ -1,7 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 $compact = \PoP\ComponentModel\Environment::compactResponseJsonKeys();
 define('GD_JS_MODULE', $compact ? 'm' : 'module');

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\CMS;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CMSHelperService implements CMSHelperServiceInterface
 {

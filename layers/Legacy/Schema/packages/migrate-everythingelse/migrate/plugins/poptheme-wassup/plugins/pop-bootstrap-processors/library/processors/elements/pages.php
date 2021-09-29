@@ -1,7 +1,7 @@
 <?php
-use PoP\SPA\Modules\PageInterface;
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\SPA\Modules\PageInterface;
 
 class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_MultiplePageBase implements PageInterface
 {

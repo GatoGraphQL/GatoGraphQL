@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor\SchemaServices\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -15,6 +14,7 @@ use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * ObjectTypeFieldResolver for the Custom Post Types from this plugin

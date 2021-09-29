@@ -3,9 +3,9 @@
 namespace Guzzle\Service\Command\LocationVisitor\Request;
 
 use Guzzle\Http\EntityBody;
+use Guzzle\Http\EntityBodyInterface;
 use Guzzle\Http\Message\EntityEnclosingRequestInterface;
 use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\EntityBodyInterface;
 use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\Description\Parameter;
 

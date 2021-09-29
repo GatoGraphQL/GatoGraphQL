@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\ConditionalOnComponent\Users\SchemaHooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks\FilterInputHookSet as UserCustomPostFilterInputHookSet;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 {

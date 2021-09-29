@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace EverythingElse\PoPSchema\TaxonomiesWP\TypeAPIs;
 
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

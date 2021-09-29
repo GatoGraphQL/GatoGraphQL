@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta\TypeAPIs;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\CommentMeta\ComponentConfiguration;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
 {

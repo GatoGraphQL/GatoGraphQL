@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\Menus\AbstractMenu;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Menu page

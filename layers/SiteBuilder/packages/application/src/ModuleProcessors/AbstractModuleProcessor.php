@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\Application\ModuleProcessors;
 
-use PoP\SiteBuilderAPI\ModuleProcessors\AddAPIQueryToSourcesModuleProcessorTrait;
 use PoP\Application\Constants\Actions;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ConfigurationComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
+use PoP\SiteBuilderAPI\ModuleProcessors\AddAPIQueryToSourcesModuleProcessorTrait;
 
 abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor implements ModuleProcessorInterface
 {

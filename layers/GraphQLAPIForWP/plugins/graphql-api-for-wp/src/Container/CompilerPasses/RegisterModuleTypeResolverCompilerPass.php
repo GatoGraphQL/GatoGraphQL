@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolverInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolverInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
 class RegisterModuleTypeResolverCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass

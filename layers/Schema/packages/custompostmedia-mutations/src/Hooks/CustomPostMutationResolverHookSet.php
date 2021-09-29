@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
+use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
+use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostMutationResolverHookSet extends AbstractHookSet
 {

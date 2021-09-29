@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -15,6 +14,7 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LogoutMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {

@@ -1,7 +1,7 @@
 <?php
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 function gdUserAttributes()

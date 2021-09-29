@@ -1,8 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_PostCategoryLayouts_LayoutDataloadHooks
 {

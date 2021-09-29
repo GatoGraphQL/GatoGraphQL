@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('GFPOPWEBPLATFORM_POP_APPLICATIONWEBPLATFORM_MIN_VERSION', 0.1);
 define('GFPOPWEBPLATFORM_GFPOP_MIN_VERSION', 0.1);

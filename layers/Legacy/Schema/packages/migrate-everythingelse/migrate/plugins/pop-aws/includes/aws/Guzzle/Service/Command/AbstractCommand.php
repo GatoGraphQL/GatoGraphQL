@@ -4,14 +4,14 @@ namespace Guzzle\Service\Command;
 
 use Guzzle\Common\Collection;
 use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Curl\CurlHandle;
+use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Service\Client;
 use Guzzle\Service\ClientInterface;
 use Guzzle\Service\Description\Operation;
 use Guzzle\Service\Description\OperationInterface;
-use Guzzle\Service\Description\ValidatorInterface;
 use Guzzle\Service\Description\SchemaValidator;
+use Guzzle\Service\Description\ValidatorInterface;
 use Guzzle\Service\Exception\CommandException;
 use Guzzle\Service\Exception\ValidationException;
 

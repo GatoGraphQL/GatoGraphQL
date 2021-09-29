@@ -1,6 +1,6 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\DataloadModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\DataloadingModuleInterface;
+use PoP\ComponentModel\ModuleProcessors\DataloadModuleProcessorTrait;
 
 abstract class PoP_Engine_Module_Processor_DataloadsBase extends PoPEngine_QueryDataModuleProcessorBase implements DataloadingModuleInterface
 {

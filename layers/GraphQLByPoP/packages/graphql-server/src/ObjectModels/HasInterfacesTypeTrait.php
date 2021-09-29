@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use Exception;
-use PoP\API\Schema\SchemaDefinition;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
+use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use PoP\API\Schema\SchemaDefinition;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 trait HasInterfacesTypeTrait
 {

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\SiteBuilderAPI\ModuleProcessors;
 
-use PoP\ComponentModel\Constants\DataOutputItems;
-use PoP\FieldQuery\QuerySyntax;
 use PoP\API\Schema\QueryInputs;
+use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\FieldQuery\QuerySyntax;
 use PoP\SiteBuilderAPI\Helpers\APIUtils;
 
 trait AddAPIQueryToSourcesModuleProcessorTrait

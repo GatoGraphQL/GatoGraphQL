@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {

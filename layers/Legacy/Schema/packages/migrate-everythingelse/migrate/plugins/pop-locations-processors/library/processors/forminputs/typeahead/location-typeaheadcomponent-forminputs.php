@@ -1,6 +1,6 @@
 <?php
-use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
+use PoP\Engine\Route\RouteUtils;
 
 class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Module_Processor_LocationTypeaheadComponentFormInputsBase
 {

@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class PoP_TemplateResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 

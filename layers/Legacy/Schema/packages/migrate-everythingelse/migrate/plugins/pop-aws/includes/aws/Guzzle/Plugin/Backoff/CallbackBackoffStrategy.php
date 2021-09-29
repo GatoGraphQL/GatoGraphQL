@@ -3,9 +3,9 @@
 namespace Guzzle\Plugin\Backoff;
 
 use Guzzle\Common\Exception\InvalidArgumentException;
+use Guzzle\Http\Exception\HttpException;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
-use Guzzle\Http\Exception\HttpException;
 
 /**
  * Strategy that will invoke a closure to determine whether or not to retry with a delay

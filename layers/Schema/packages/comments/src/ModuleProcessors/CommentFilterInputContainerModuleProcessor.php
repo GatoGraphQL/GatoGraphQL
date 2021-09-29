@@ -6,10 +6,10 @@ namespace PoPSchema\Comments\ModuleProcessors;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoPSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
-use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
 
 class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {

@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\State;
 
-use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Constants\Outputs;
-use PoP\ComponentModel\Constants\DataSourceSelectors;
-use PoP\ComponentModel\Constants\DataOutputModes;
+use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
-use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\Constants\DataOutputItems;
+use PoP\ComponentModel\Constants\DataOutputModes;
+use PoP\ComponentModel\Constants\DataSourceSelectors;
+use PoP\ComponentModel\Constants\Outputs;
+use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Targets;
 use PoP\ComponentModel\Constants\Values;
-use PoP\Routing\RouteNatures;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Definitions\Configuration\Request as DefinitionsRequest;
-use PoP\ComponentModel\Configuration\Request;
-use PoP\Routing\Facades\RoutingManagerFacade;
-use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
-use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Environment as Environment;
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
+use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
+use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\Tokens\Param;
+use PoP\Definitions\Configuration\Request as DefinitionsRequest;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Routing\Facades\RoutingManagerFacade;
+use PoP\Routing\RouteNatures;
 
 class ApplicationState
 {

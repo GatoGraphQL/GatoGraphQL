@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_VolunteeringProcessors_FilterUtils
 {

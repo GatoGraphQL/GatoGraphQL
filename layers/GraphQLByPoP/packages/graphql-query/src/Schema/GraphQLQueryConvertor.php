@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLQuery\Schema;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use GraphQLByPoP\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
 use GraphQLByPoP\GraphQLParser\Execution\Request;
@@ -28,6 +27,7 @@ use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {

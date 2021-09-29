@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostMutations\MutationResolvers;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {

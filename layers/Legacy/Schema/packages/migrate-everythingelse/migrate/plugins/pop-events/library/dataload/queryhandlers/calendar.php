@@ -1,8 +1,8 @@
 <?php
 
-use PoP\ComponentModel\QueryInputOutputHandlers\AbstractQueryInputOutputHandler;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\QueryInputOutputHandlers\AbstractQueryInputOutputHandler;
 
 class GD_DataLoad_QueryInputOutputHandler_Calendar extends AbstractQueryInputOutputHandler
 {

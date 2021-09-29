@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\TypeResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
 use PoPSchema\Stances\RelationalTypeDataLoaders\ObjectType\StanceTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class StanceObjectTypeResolver extends AbstractObjectTypeResolver
 {

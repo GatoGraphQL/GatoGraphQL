@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\ConditionalOnComponent\API\RouteModuleProcessors;
 
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
-use PoPSchema\Pages\Routing\RouteNatures;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoPSchema\Pages\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Pages\Routing\RouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {

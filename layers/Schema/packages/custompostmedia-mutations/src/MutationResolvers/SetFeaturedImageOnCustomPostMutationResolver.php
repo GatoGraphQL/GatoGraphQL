@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\MutationResolvers;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
 {

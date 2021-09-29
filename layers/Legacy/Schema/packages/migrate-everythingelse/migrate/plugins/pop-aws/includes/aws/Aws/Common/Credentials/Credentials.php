@@ -20,10 +20,10 @@ use Aws\Common\Enum\ClientOptions as Options;
 use Aws\Common\Exception\InvalidArgumentException;
 use Aws\Common\Exception\RequiredExtensionNotLoadedException;
 use Aws\Common\Exception\RuntimeException;
-use Guzzle\Common\FromConfigInterface;
 use Guzzle\Cache\CacheAdapterInterface;
 use Guzzle\Cache\DoctrineCacheAdapter;
 use Guzzle\Common\Collection;
+use Guzzle\Common\FromConfigInterface;
 
 /**
  * Basic implementation of the AWSCredentials interface that allows callers to

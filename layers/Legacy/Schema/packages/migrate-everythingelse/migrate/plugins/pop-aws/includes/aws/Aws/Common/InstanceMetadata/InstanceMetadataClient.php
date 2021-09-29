@@ -16,10 +16,10 @@
 
 namespace Aws\Common\InstanceMetadata;
 
+use Aws\Common\Client\AbstractClient;
+use Aws\Common\Credentials\Credentials;
 use Aws\Common\Enum\ClientOptions as Options;
 use Aws\Common\Exception\InstanceProfileCredentialsException;
-use Aws\Common\Credentials\Credentials;
-use Aws\Common\Client\AbstractClient;
 use Guzzle\Common\Collection;
 use Guzzle\Http\Message\RequestFactory;
 

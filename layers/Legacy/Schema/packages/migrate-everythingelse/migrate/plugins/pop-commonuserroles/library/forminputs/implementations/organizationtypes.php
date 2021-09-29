@@ -1,7 +1,7 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\FormInputs\MultipleSelectFormInput;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class GD_FormInput_OrganizationTypes extends MultipleSelectFormInput
 {

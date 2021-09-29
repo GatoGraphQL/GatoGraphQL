@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaConfigBlock

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\RelationalTypeDataLoaders\ObjectType\RootTypeDataLoader;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeResolver extends AbstractObjectTypeResolver
 {

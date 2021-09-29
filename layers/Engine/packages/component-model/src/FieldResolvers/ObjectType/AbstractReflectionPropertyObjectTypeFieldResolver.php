@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use ReflectionClass;
 use ReflectionProperty;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

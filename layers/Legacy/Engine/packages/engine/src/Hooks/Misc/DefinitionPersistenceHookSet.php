@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\Misc;
 
+use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\Engine\Environment;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Definitions\Facades\DefinitionManagerFacade;
 
 class DefinitionPersistenceHookSet extends AbstractHookSet
 {

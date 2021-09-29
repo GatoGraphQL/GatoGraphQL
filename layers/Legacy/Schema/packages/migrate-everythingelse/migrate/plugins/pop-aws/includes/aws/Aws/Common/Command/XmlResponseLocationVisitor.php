@@ -2,10 +2,10 @@
 
 namespace Aws\Common\Command;
 
-use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Http\Message\Response;
-use Guzzle\Service\Description\Parameter;
+use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\Command\LocationVisitor\Response\XmlVisitor;
+use Guzzle\Service\Description\Parameter;
 
 /**
  * Class used for custom AWS XML response parsing of query services

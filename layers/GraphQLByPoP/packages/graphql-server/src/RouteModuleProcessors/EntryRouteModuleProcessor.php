@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\RouteModuleProcessors;
 
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
-use PoP\Routing\RouteNatures;
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use GraphQLByPoP\GraphQLServer\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\Routing\RouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {

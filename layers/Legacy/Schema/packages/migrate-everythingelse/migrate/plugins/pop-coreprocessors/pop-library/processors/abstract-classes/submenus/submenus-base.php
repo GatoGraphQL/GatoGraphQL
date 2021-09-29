@@ -1,6 +1,6 @@
 <?php
-use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Route\RouteUtils;
 
 abstract class PoP_Module_Processor_SubMenusBase extends PoPEngine_QueryDataModuleProcessorBase
 {

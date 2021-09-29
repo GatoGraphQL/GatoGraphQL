@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\Facades;
 
-use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 
 class CommentTypeMutationAPIFacade
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FilterInputProcessors;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractFilterInputProcessor implements FilterInputProcessorInterface
 {

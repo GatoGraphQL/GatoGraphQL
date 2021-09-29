@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface

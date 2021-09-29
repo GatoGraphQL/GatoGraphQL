@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Application\ModuleFilters;
 
-use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
 use PoP\Application\ModuleProcessors\ModuleProcessorInterface;
+use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
 
 class Lazy extends AbstractModuleFilter
 {

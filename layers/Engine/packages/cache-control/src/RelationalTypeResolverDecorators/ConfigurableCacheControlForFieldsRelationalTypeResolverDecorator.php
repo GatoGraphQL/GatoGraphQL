@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\RelationalTypeResolverDecorators;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\CacheControl\Managers\CacheControlManagerInterface;
 use PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorators\AbstractMandatoryDirectivesForFieldsRelationalTypeResolverDecorator;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends AbstractMandatoryDirectivesForFieldsRelationalTypeResolverDecorator
 {

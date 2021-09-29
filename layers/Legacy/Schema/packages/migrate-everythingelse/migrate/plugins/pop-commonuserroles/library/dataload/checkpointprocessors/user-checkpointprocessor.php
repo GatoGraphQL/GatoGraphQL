@@ -1,8 +1,8 @@
 <?php
 
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {

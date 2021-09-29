@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
@@ -12,6 +11,7 @@ use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Hooks\AbstractCMSBootHookSet;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHookSet
 {

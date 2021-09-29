@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
-use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeKinds;
+use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
 class TypeKindEnumTypeResolver extends AbstractEnumTypeResolver
 {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\ConditionalOnComponent\API\ModuleProcessors;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoPSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {

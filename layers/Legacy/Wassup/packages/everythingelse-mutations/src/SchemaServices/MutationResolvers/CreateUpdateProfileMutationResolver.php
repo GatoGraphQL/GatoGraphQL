@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoPSchema\UserMeta\Utils;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoPSchema\UserMeta\Utils;
 
 class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolver
 {

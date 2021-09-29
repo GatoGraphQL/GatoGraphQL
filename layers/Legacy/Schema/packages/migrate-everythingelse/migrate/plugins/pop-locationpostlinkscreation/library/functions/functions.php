@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'popLocationpostlinkscreationCreateupdateutilsEditUrl', 100, 2);

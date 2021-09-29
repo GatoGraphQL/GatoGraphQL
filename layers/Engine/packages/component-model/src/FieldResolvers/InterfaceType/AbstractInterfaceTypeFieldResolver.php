@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
@@ -17,6 +16,7 @@ use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver implements InterfaceTypeFieldResolverInterface, InterfaceTypeFieldSchemaDefinitionResolverInterface
 {

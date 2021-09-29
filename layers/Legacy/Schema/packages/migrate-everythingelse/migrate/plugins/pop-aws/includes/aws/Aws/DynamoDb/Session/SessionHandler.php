@@ -18,10 +18,10 @@ namespace Aws\DynamoDb\Session;
 
 use Aws\Common\Enum\UaString as Ua;
 use Aws\DynamoDb\DynamoDbClient;
-use Aws\DynamoDb\Session\LockingStrategy\LockingStrategyInterface;
-use Aws\DynamoDb\Session\LockingStrategy\LockingStrategyFactory;
-use Aws\DynamoDb\Model\BatchRequest\WriteRequestBatch;
 use Aws\DynamoDb\Model\BatchRequest\DeleteRequest;
+use Aws\DynamoDb\Model\BatchRequest\WriteRequestBatch;
+use Aws\DynamoDb\Session\LockingStrategy\LockingStrategyFactory;
+use Aws\DynamoDb\Session\LockingStrategy\LockingStrategyInterface;
 
 /**
  * Provides an interface for using Amazon DynamoDB as a session store by hooking into PHP's session handler hooks. Once

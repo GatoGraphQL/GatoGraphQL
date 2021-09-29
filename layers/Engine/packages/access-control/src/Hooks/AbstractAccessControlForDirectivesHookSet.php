@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Engine\Hooks\AbstractCMSBootHookSet;
-use PoP\ComponentModel\TypeResolvers\HookHelpers;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\TypeResolvers\HookHelpers;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\Hooks\AbstractCMSBootHookSet;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
 {

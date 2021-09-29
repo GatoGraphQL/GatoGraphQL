@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategoryMutations\Facades;
 
-use PoPSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
 
 class PostCategoryTypeMutationAPIFacade
 {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl\ConditionalOnComponent\CacheControl\RelationalTypeResolverDecorators;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\CacheControl\Helpers\CacheControlHelper;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\AbstractRelationalTypeResolverDecorator;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
@@ -13,6 +12,7 @@ use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInDi
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInDirectiveResolver;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInForDirectivesDirectiveResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelationalTypeResolverDecorator
 {

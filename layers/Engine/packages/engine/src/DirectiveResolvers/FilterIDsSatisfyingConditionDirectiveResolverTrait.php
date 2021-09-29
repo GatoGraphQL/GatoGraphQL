@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait FilterIDsSatisfyingConditionDirectiveResolverTrait
 {

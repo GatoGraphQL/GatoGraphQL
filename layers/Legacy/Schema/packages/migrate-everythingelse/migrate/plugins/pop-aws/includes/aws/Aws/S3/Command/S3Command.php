@@ -16,9 +16,9 @@
 
 namespace Aws\S3\Command;
 
+use Guzzle\Common\Event;
 use Guzzle\Service\Command\OperationCommand;
 use Guzzle\Service\Resource\Model;
-use Guzzle\Common\Event;
 
 /**
  * Adds functionality to Amazon S3 commands:

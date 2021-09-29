@@ -2,21 +2,21 @@
 
 namespace Guzzle\Http;
 
-use Guzzle\Common\Collection;
 use Guzzle\Common\AbstractHasDispatcher;
+use Guzzle\Common\Collection;
 use Guzzle\Common\Exception\ExceptionCollection;
 use Guzzle\Common\Exception\InvalidArgumentException;
 use Guzzle\Common\Exception\RuntimeException;
 use Guzzle\Common\Version;
-use Guzzle\Parser\ParserRegistry;
-use Guzzle\Parser\UriTemplate\UriTemplateInterface;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\RequestFactory;
-use Guzzle\Http\Message\RequestFactoryInterface;
+use Guzzle\Http\Curl\CurlHandle;
 use Guzzle\Http\Curl\CurlMultiInterface;
 use Guzzle\Http\Curl\CurlMultiProxy;
-use Guzzle\Http\Curl\CurlHandle;
 use Guzzle\Http\Curl\CurlVersion;
+use Guzzle\Http\Message\RequestFactory;
+use Guzzle\Http\Message\RequestFactoryInterface;
+use Guzzle\Http\Message\RequestInterface;
+use Guzzle\Parser\ParserRegistry;
+use Guzzle\Parser\UriTemplate\UriTemplateInterface;
 
 /**
  * HTTP client

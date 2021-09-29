@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\FormInputs\FormInput;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
+use PoP\ComponentModel\Modules\ModuleUtils;
 
 trait FormInputModuleProcessorTrait
 {

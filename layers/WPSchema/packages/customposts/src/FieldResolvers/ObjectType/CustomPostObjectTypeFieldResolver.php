@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver

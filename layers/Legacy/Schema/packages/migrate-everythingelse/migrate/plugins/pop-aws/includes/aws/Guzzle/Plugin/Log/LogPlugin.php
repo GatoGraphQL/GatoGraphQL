@@ -3,11 +3,11 @@
 namespace Guzzle\Plugin\Log;
 
 use Guzzle\Common\Event;
-use Guzzle\Log\LogAdapterInterface;
-use Guzzle\Log\MessageFormatter;
-use Guzzle\Log\ClosureLogAdapter;
 use Guzzle\Http\EntityBody;
 use Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use Guzzle\Log\ClosureLogAdapter;
+use Guzzle\Log\LogAdapterInterface;
+use Guzzle\Log\MessageFormatter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\LooseContracts\Facades\NameResolverFacade;
 
 abstract class GD_EM_Module_Processor_ScrollMapBlocksBase extends PoP_Module_Processor_SectionBlocksBase
 {

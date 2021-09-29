@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use ArgumentCountError;
 use Exception;
 use PoP\ComponentModel\ErrorHandling\Error;
@@ -22,6 +21,7 @@ use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {

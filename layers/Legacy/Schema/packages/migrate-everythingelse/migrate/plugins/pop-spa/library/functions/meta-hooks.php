@@ -1,9 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
-use PoP\Definitions\Configuration\Request;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Definitions\Configuration\Request;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_SPA_RequestMeta_Hooks
 {

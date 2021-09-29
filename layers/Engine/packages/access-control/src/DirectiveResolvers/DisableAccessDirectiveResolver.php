@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\DirectiveResolvers;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {

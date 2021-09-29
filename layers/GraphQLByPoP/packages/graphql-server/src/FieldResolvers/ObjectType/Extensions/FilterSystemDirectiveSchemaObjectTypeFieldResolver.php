@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\SchemaObjectTypeFieldResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
@@ -14,6 +13,7 @@ use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTypeFieldResolver
 {

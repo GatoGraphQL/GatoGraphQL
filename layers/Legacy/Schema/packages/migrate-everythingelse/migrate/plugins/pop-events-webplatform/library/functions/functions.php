@@ -1,8 +1,8 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Events\Constants\Scopes;
+use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels', 'gdEmCustomMultilayoutLabels');
 function gdEmCustomMultilayoutLabels($labels)

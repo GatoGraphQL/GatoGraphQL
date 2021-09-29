@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class SchemaHelpers
 {

@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class PoP_UserPlatform_EmailSenderUtils
 {

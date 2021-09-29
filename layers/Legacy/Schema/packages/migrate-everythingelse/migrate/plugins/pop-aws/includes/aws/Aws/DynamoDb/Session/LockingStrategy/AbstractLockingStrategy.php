@@ -17,9 +17,9 @@
 namespace Aws\DynamoDb\Session\LockingStrategy;
 
 use Aws\Common\Enum\UaString as Ua;
-use Aws\DynamoDb\Session\SessionHandlerConfig;
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\Exception\DynamoDbException;
+use Aws\DynamoDb\Session\SessionHandlerConfig;
 
 /**
  * Base class for session locking strategies. Includes write and delete logic

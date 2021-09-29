@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Users\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -13,6 +12,7 @@ use PoP\Engine\Formatters\DateFormatterInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_User;
 
 class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver

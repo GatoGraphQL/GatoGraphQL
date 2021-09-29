@@ -1,11 +1,11 @@
 <?php
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Routing\RouteNatures;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Routing\RouteNatures;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 define ('POP_RESOURCELOADERIDENTIFIER_FORMAT', 'f:');
 define ('POP_RESOURCELOADERIDENTIFIER_ROUTE', 't:');

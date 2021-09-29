@@ -1,6 +1,6 @@
 <?php
-use PoP\FileStore\Facades\FileRendererFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\FileStore\Facades\FileRendererFacade;
 
 function getGooglemapsUrl($add_version = false)
 {

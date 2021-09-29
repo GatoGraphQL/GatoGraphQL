@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
 {

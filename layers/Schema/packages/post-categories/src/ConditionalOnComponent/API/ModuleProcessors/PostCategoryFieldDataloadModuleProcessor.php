@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Categories\ConditionalOnComponent\API\ModuleProcessors\AbstractFieldDataloadModuleProcessor;
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {

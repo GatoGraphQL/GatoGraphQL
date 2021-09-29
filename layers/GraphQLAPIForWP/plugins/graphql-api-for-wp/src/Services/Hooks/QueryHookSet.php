@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
+use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
-use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryHookSet extends AbstractHookSet
 {

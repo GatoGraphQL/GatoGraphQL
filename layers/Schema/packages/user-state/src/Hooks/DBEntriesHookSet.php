@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\UserState\FieldResolvers\ObjectType\GlobalObjectTypeFieldResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class DBEntriesHookSet extends AbstractHookSet
 {

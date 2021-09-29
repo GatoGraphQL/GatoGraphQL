@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoPSchema\UserMeta\Utils;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\UserMeta\Utils;
 
 class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFromTagMutationResolver
 {

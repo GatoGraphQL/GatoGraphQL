@@ -2,9 +2,9 @@
 
 namespace Guzzle\Plugin\Backoff;
 
+use Guzzle\Http\Exception\HttpException;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
-use Guzzle\Http\Exception\HttpException;
 
 /**
  * Implements an exponential backoff retry strategy.

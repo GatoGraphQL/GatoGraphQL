@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\FormInputs\MultipleSelectFormInput;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_FormInput_AppliesTo extends MultipleSelectFormInput
 {

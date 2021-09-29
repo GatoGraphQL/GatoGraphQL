@@ -2,8 +2,8 @@
 
 namespace Guzzle\Service\Resource;
 
-use Guzzle\Inflection\InflectorInterface;
 use Guzzle\Inflection\Inflector;
+use Guzzle\Inflection\InflectorInterface;
 use Guzzle\Service\Command\CommandInterface;
 
 /**

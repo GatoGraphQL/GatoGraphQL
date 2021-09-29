@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Component\ApplicationEvents;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
+use PoP\Root\Component\ApplicationEvents;
 use PoP\Root\Container\ContainerBuilderFactory;
-use PoP\Root\Container\SystemContainerBuilderFactory;
+use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ServiceInstantiatorInterface;
 use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCompilerPass;
+use PoP\Root\Container\SystemContainerBuilderFactory;
 
 /**
  * Initialize component

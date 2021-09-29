@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolver
 {

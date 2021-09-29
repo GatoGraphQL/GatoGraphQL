@@ -1,7 +1,7 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {

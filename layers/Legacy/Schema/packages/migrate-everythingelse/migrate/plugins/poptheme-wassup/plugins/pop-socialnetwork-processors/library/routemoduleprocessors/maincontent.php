@@ -2,8 +2,8 @@
 
 use PoP\Routing\RouteNatures;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {

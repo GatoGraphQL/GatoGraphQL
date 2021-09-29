@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 {

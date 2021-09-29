@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Facades\Cache;
 
-use Psr\Cache\CacheItemPoolInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use Psr\Cache\CacheItemPoolInterface;
 
 class MemoryManagerItemPoolFacade
 {

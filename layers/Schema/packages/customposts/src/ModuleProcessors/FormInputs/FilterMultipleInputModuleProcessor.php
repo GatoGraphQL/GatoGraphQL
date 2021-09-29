@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\ModuleProcessors\FormInputs;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
@@ -13,6 +12,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {

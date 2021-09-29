@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\HelperServices;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\Definitions\Configuration\Request;
 use PoP\Hooks\HooksAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {

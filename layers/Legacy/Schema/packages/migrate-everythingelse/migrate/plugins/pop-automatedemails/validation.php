@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('POPAE_POP_EMAILSENDER_MIN_VERSION', 0.1);
 define('POPAE_POP_SSR_MIN_VERSION', 0.1);

@@ -1,6 +1,6 @@
 <?php
-use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
+use PoP\Engine\Route\RouteUtils;
 
 // Add static suggestions: Search Content and Search Users
 class GD_StaticSearchUtils

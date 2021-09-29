@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Translation\TranslationAPIInterface;
 use PoP\QueryParsing\QueryParserInterface;
+use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {

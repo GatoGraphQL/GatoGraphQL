@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\Users\Constants\InputNames;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractUserUpdateUserMetaValueMutationResolverBridge extends AbstractUpdateUserMetaValueMutationResolverBridge
 {

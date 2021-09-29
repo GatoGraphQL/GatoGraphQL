@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 use PoPSitesWassup\SystemMutations\MutationResolverBridges\BuildSystemMutationResolverBridge;
-use PoPSitesWassup\SystemMutations\MutationResolverBridges\InstallSystemMutationResolverBridge;
 use PoPSitesWassup\SystemMutations\MutationResolverBridges\GenerateSystemMutationResolverBridge;
+use PoPSitesWassup\SystemMutations\MutationResolverBridges\InstallSystemMutationResolverBridge;
 
 class PoP_System_Module_Processor_SystemActions extends AbstractDataloadModuleProcessor
 {

@@ -1,11 +1,11 @@
 <?php
 
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Routing\Routes as RoutingRoutes;
 use PoP\Routing\RouteNatures;
+use PoP\Routing\Routes as RoutingRoutes;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {

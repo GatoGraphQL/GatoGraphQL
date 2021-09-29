@@ -1,6 +1,6 @@
 <?php
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
+use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
 class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryInputOutputHandler
 {

@@ -11,8 +11,8 @@
 
 namespace Monolog\Handler;
 
-use Monolog\Logger;
 use Monolog\Handler\SyslogUdp\UdpSocket;
+use Monolog\Logger;
 
 /**
  * A Handler for logging to a remote syslogd server.

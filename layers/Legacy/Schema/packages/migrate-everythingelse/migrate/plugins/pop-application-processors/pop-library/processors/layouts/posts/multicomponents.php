@@ -1,7 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Application\Constants\Actions;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor_MultiplesBase
 {

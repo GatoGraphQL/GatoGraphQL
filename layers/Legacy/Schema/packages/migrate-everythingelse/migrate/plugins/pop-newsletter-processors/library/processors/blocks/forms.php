@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBlocksBase
 {

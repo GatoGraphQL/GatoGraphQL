@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoP\Engine\DirectiveResolvers;
 
 use Exception;
-use PoP\Engine\Misc\OperatorHelpers;
+use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\Misc\OperatorHelpers;
 
 class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {

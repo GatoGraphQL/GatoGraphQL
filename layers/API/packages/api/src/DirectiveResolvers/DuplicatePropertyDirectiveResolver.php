@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\API\DirectiveResolvers;
 
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
 {

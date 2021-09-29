@@ -22,8 +22,8 @@ use Aws\DynamoDb\Exception\UnprocessedWriteRequestsException;
 use Guzzle\Batch\AbstractBatchDecorator;
 use Guzzle\Batch\BatchBuilder;
 use Guzzle\Batch\BatchSizeDivisor;
-use Guzzle\Batch\FlushingBatch;
 use Guzzle\Batch\Exception\BatchTransferException;
+use Guzzle\Batch\FlushingBatch;
 use Guzzle\Service\Command\AbstractCommand;
 
 /**

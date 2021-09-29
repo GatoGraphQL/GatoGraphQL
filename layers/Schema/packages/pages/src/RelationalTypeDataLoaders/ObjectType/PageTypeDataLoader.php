@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\RelationalTypeDataLoaders\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostTypeDataLoader;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {

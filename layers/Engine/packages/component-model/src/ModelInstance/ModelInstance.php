@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModelInstance;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\DefinitionManagerInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ModelInstance implements ModelInstanceInterface
 {

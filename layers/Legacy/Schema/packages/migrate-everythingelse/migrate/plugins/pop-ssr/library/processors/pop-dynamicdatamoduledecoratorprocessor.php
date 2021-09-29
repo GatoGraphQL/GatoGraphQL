@@ -1,8 +1,8 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
+use PoP\ComponentModel\Modules\ModuleUtils;
 
 class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorProcessor
 {

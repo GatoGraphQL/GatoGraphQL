@@ -2,8 +2,8 @@
 
 namespace Guzzle\Http\Curl;
 
-use Guzzle\Common\HasDispatcherInterface;
 use Guzzle\Common\Exception\ExceptionCollection;
+use Guzzle\Common\HasDispatcherInterface;
 use Guzzle\Http\Message\RequestInterface;
 
 /**

@@ -1,10 +1,10 @@
 <?php
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources_ProcessorBase
 {

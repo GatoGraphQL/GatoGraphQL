@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\RelationalTypeDataLoaders\ObjectType;
 
-use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractInterface;
 
 abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableDataLoader implements TagAPIRequestedContractInterface
 {

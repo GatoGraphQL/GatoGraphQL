@@ -16,8 +16,8 @@
 
 namespace Aws\Common\Command;
 
-use Guzzle\Service\Command\OperationCommand;
 use Guzzle\Http\Curl\CurlHandle;
+use Guzzle\Service\Command\OperationCommand;
 
 /**
  * Adds AWS JSON body functionality to dynamically generated HTTP requests

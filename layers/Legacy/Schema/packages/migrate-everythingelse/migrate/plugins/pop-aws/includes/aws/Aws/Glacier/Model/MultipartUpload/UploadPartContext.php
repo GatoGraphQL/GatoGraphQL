@@ -16,9 +16,9 @@
 
 namespace Aws\Glacier\Model\MultipartUpload;
 
+use Aws\Common\Exception\LogicException;
 use Aws\Common\Hash\ChunkHash;
 use Aws\Common\Hash\TreeHash;
-use Aws\Common\Exception\LogicException;
 
 /**
  * An object that encapsulates the data for a Glacier upload operation

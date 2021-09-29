@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories;
 
-use PoP\Root\Component\AbstractComponent;
-use PoP\RESTAPI\Component as RESTAPIComponent;
 use PoP\API\Component as APIComponent;
+use PoP\RESTAPI\Component as RESTAPIComponent;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component

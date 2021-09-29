@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades;
 
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\Users\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterface;
 
 class CustomPostUserTypeAPIFacade
 {

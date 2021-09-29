@@ -4,9 +4,9 @@ namespace Guzzle\Plugin\ErrorResponse;
 
 use Guzzle\Common\Event;
 use Guzzle\Http\Message\RequestInterface;
+use Guzzle\Plugin\ErrorResponse\Exception\ErrorResponseException;
 use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\Description\Operation;
-use Guzzle\Plugin\ErrorResponse\Exception\ErrorResponseException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

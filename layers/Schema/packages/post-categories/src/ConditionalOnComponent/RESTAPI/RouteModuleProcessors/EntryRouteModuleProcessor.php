@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
@@ -15,6 +14,7 @@ use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\Categor
 use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {

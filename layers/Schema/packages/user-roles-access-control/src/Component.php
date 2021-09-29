@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\UserRolesAccessControl;
 
 use PoP\AccessControl\Component as AccessControlComponent;
+use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\CacheControl\Component as CacheControlComponent;
 
 /**
  * Initialize component

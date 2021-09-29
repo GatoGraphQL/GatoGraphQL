@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataLoading;
-use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
+use PoP\ComponentModel\Settings\SettingsManagerFactory;
 
 abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor implements ModuleProcessorInterface
 {

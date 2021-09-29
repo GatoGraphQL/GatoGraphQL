@@ -1,6 +1,6 @@
 <?php
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
 abstract class PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase extends PoP_Module_Processor_FeedbackMessageInnersBase
 {

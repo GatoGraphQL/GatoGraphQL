@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {

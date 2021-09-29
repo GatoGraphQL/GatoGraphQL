@@ -2,8 +2,8 @@
 
 namespace Guzzle\Service\Command\Factory;
 
-use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\ClientInterface;
+use Guzzle\Service\Command\CommandInterface;
 
 /**
  * Composite factory used by a client object to create command objects utilizing multiple factories

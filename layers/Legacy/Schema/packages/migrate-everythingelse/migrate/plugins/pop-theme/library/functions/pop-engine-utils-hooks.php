@@ -1,8 +1,8 @@
 <?php
 namespace PoP\Theme;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Theme_UtilsHooks
 {

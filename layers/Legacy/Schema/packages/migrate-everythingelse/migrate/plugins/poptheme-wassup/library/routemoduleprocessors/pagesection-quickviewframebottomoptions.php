@@ -1,7 +1,7 @@
 <?php
 
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 
 class PoP_Module_QuickviewFrameBottomOptionsPageSectionRouteModuleProcessor extends PoP_Module_QuickviewFrameTopOptionsPageSectionRouteModuleProcessorBase
 {

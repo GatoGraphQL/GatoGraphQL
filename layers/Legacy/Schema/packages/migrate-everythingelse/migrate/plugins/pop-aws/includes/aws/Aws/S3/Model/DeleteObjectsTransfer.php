@@ -17,10 +17,10 @@
 namespace Aws\S3\Model;
 
 use Aws\Common\Client\AwsClientInterface;
-use Aws\Common\Exception\OverflowException;
 use Aws\Common\Enum\UaString as Ua;
-use Aws\S3\Exception\InvalidArgumentException;
+use Aws\Common\Exception\OverflowException;
 use Aws\S3\Exception\DeleteMultipleObjectsException;
+use Aws\S3\Exception\InvalidArgumentException;
 use Guzzle\Batch\BatchTransferInterface;
 use Guzzle\Service\Command\CommandInterface;
 

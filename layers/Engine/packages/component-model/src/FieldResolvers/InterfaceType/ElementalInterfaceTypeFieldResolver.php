@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\ElementalInterfaceTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {

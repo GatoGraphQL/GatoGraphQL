@@ -2,8 +2,8 @@
 define('GD_CONSTANT_FULLVIEW_TITLEPOSITION_TOP', 'top');
 define('GD_CONSTANT_FULLVIEW_TITLEPOSITION_BODY', 'body');
 
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Processor_FullObjectLayoutsBase
 {

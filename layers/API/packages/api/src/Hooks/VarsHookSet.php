@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\API\Hooks;
 
-use PoP\ComponentModel\Constants\Outputs;
+use PoP\API\ComponentConfiguration;
+use PoP\API\Constants\Actions;
+use PoP\API\PersistedQueries\PersistedQueryUtils;
+use PoP\API\Response\Schemes as APISchemes;
+use PoP\API\Schema\QueryInputs;
+use PoP\API\State\ApplicationStateUtils;
+use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
-use PoP\ComponentModel\Constants\DatabasesOutputModes;
-use PoP\API\Constants\Actions;
-use PoP\API\ComponentConfiguration;
-use PoP\API\Schema\QueryInputs;
-use PoP\Hooks\AbstractHookSet;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\API\PersistedQueries\PersistedQueryUtils;
-use PoP\API\State\ApplicationStateUtils;
+use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\API\Response\Schemes as APISchemes;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\AbstractHookSet;
 
 class VarsHookSet extends AbstractHookSet
 {

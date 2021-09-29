@@ -11,11 +11,11 @@
 
 namespace Monolog\Handler;
 
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\ElasticaFormatter;
-use Monolog\Logger;
 use Elastica\Client;
 use Elastica\Exception\ExceptionInterface;
+use Monolog\Formatter\ElasticaFormatter;
+use Monolog\Formatter\FormatterInterface;
+use Monolog\Logger;
 
 /**
  * Elastic Search handler

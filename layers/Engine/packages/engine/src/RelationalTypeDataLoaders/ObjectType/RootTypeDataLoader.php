@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Engine\RelationalTypeDataLoaders\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\Engine\ObjectModels\Root;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {

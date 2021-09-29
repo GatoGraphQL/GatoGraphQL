@@ -3,8 +3,8 @@
 namespace Aws\MachineLearning;
 
 use Guzzle\Common\Event;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Guzzle\Service\Command\AbstractCommand;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Listener used to change the endpoint to the Predict Endpoint

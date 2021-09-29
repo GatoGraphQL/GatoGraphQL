@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeResolverDecorators;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRelationalTypeResolverDecorator implements RelationalTypeResolverDecoratorInterface
 {

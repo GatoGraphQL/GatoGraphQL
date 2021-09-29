@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 

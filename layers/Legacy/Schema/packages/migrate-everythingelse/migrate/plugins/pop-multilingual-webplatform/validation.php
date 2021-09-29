@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('QTXPOPFE_POP_MULTILINGUAL_MIN_VERSION', 0.1);
 define('QTXPOPFE_POP_APPLICATIONWEBPLATFORM_MIN_VERSION', 0.1);

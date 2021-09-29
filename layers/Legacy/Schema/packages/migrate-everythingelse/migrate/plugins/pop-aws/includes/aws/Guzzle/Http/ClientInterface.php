@@ -2,9 +2,9 @@
 
 namespace Guzzle\Http;
 
-use Guzzle\Common\HasDispatcherInterface;
 use Guzzle\Common\Collection;
 use Guzzle\Common\Exception\InvalidArgumentException;
+use Guzzle\Common\HasDispatcherInterface;
 use Guzzle\Http\Message\EntityEnclosingRequestInterface;
 use Guzzle\Http\Message\RequestInterface;
 

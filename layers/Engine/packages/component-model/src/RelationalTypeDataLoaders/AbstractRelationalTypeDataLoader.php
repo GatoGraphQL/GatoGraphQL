@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders;
 
-use Symfony\Contracts\Service\Attribute\Required;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoaderInterface
 {

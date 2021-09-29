@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta\TypeAPIs;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\UserMeta\ComponentConfiguration;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
 {

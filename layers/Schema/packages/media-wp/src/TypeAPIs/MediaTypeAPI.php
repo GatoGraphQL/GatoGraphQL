@@ -7,9 +7,9 @@ namespace PoPSchema\MediaWP\TypeAPIs;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use WP_Post;
-
 use function wp_get_attachment_image_src;
+
+use WP_Post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

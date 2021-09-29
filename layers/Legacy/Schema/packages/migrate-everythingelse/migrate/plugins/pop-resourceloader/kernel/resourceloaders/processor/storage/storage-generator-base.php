@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class PoP_Engine_ResourceLoaderFileObjectBase  extends \PoP\FileStore\File\AbstractFile {
 

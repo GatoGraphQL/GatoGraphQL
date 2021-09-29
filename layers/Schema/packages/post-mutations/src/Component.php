@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations;
 
-use PoP\Root\Component\AbstractComponent;
 use PoP\API\Component as APIComponent;
+use PoP\Root\Component\AbstractComponent;
 use PoPSchema\Users\Component as UsersComponent;
 
 /**

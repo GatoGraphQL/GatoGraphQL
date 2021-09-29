@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\LooseContracts;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiatedService
 {

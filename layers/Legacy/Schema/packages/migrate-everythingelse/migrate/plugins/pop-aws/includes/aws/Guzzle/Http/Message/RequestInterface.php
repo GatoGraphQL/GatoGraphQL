@@ -4,11 +4,11 @@ namespace Guzzle\Http\Message;
 
 use Guzzle\Common\Collection;
 use Guzzle\Common\HasDispatcherInterface;
-use Guzzle\Http\Exception\RequestException;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Http\Url;
+use Guzzle\Http\Exception\RequestException;
 use Guzzle\Http\QueryString;
+use Guzzle\Http\Url;
 
 /**
  * Generic HTTP request interface

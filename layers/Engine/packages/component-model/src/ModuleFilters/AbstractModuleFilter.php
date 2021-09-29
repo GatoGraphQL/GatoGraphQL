@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFilters;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractModuleFilter implements ModuleFilterInterface
 {

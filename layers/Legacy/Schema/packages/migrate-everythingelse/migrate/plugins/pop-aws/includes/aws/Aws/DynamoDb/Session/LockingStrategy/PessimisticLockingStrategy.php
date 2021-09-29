@@ -18,9 +18,9 @@ namespace Aws\DynamoDb\Session\LockingStrategy;
 
 use Aws\Common\Enum\UaString as Ua;
 use Aws\DynamoDb\DynamoDbClient;
-use Aws\DynamoDb\Session\SessionHandlerConfig;
-use Aws\DynamoDb\Exception\DynamoDbException;
 use Aws\DynamoDb\Exception\ConditionalCheckFailedException;
+use Aws\DynamoDb\Exception\DynamoDbException;
+use Aws\DynamoDb\Session\SessionHandlerConfig;
 
 /**
  * This locking strategy uses pessimistic locking (similar to how the native

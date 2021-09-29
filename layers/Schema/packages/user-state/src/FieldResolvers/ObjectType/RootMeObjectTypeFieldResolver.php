@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldResolver
 {

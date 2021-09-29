@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Hooks\AbstractHookSet;
 use PoP\Engine\ModuleFilters\MainContentModule;
+use PoP\Hooks\AbstractHookSet;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class MainContentModuleHookSet extends AbstractHookSet
 {

@@ -39,12 +39,16 @@ use PoPSchema\Categories\ComponentConfiguration as CategoriesComponentConfigurat
 use PoPSchema\Categories\Environment as CategoriesEnvironment;
 use PoPSchema\CommentMeta\ComponentConfiguration as CommentMetaComponentConfiguration;
 use PoPSchema\CommentMeta\Environment as CommentMetaEnvironment;
+use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
+use PoPSchema\Comments\Environment as CommentsEnvironment;
 use PoPSchema\CustomPostMeta\ComponentConfiguration as CustomPostMetaComponentConfiguration;
 use PoPSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
 use PoPSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
 use PoPSchema\CustomPosts\Environment as CustomPostsEnvironment;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration as GenericCustomPostsComponentConfiguration;
 use PoPSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
+use PoPSchema\Media\ComponentConfiguration as MediaComponentConfiguration;
+use PoPSchema\Media\Environment as MediaEnvironment;
 use PoPSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
 use PoPSchema\Pages\Environment as PagesEnvironment;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
@@ -56,16 +60,12 @@ use PoPSchema\Tags\ComponentConfiguration as TagsComponentConfiguration;
 use PoPSchema\Tags\Environment as TagsEnvironment;
 use PoPSchema\TaxonomyMeta\ComponentConfiguration as TaxonomyMetaComponentConfiguration;
 use PoPSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
+use PoPSchema\UserAvatars\ComponentConfiguration as UserAvatarsComponentConfiguration;
+use PoPSchema\UserAvatars\Environment as UserAvatarsEnvironment;
 use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
 use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Users\Environment as UsersEnvironment;
-use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
-use PoPSchema\Comments\Environment as CommentsEnvironment;
-use PoPSchema\Media\ComponentConfiguration as MediaComponentConfiguration;
-use PoPSchema\Media\Environment as MediaEnvironment;
-use PoPSchema\UserAvatars\ComponentConfiguration as UserAvatarsComponentConfiguration;
-use PoPSchema\UserAvatars\Environment as UserAvatarsEnvironment;
 
 /**
  * Sets the configuration in all the PoP components from the main plugin.

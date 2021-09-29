@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Cache;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use DateInterval;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class Cache implements CacheInterface
 {

@@ -16,8 +16,8 @@
 
 namespace Aws\DynamoDb\Session;
 
-use Aws\DynamoDb\DynamoDbClient;
 use Aws\Common\Exception\InvalidArgumentException;
+use Aws\DynamoDb\DynamoDbClient;
 
 /**
  * A simple object containing config values for the session handler

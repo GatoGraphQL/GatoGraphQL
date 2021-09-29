@@ -1,6 +1,6 @@
 <?php
-use PoP\Resources\DefinitionGroups;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Resources\DefinitionGroups;
 
 trait PoP_DynamicResourceLoaderProcessorTrait {
 

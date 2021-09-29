@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
+use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

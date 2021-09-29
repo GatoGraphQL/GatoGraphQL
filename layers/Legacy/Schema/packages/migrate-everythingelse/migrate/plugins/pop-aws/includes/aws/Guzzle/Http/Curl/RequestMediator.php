@@ -2,8 +2,8 @@
 
 namespace Guzzle\Http\Curl;
 
-use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\EntityBody;
+use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
 
 /**

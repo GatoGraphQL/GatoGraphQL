@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\API\ConditionalOnComponent\AccessControl\Hooks;
 
-use PoP\API\Environment;
-use PoP\API\ComponentConfiguration;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
-use PoP\Hooks\AbstractHookSet;
+use PoP\API\ComponentConfiguration;
+use PoP\API\Environment;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use PoP\Hooks\AbstractHookSet;
 
 class ComponentConfigurationHookSet extends AbstractHookSet
 {

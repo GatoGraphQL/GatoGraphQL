@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {

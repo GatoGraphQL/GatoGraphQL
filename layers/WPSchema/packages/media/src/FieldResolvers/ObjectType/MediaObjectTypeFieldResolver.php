@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Media\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\Formatters\DateFormatterInterface;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver

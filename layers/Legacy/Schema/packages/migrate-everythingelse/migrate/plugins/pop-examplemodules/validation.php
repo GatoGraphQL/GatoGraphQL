@@ -1,7 +1,7 @@
 <?php
 namespace PoP\ExampleModules;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('POP_EXAMPLEMODULES_POP_ENGINE_MIN_VERSION', 0.1);
 

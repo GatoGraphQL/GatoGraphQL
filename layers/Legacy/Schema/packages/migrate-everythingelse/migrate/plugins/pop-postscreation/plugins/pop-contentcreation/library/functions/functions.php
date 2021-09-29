@@ -1,8 +1,8 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'popPostscreationCreateupdateutilsEditUrl', 0, 2);
 function popPostscreationCreateupdateutilsEditUrl($url, $post_id)

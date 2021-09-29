@@ -3,11 +3,11 @@
 namespace Guzzle\Service\Command;
 
 use Guzzle\Http\Message\Response;
-use Guzzle\Service\Command\LocationVisitor\VisitorFlyweight;
 use Guzzle\Service\Command\LocationVisitor\Response\ResponseVisitorInterface;
-use Guzzle\Service\Description\Parameter;
-use Guzzle\Service\Description\OperationInterface;
+use Guzzle\Service\Command\LocationVisitor\VisitorFlyweight;
 use Guzzle\Service\Description\Operation;
+use Guzzle\Service\Description\OperationInterface;
+use Guzzle\Service\Description\Parameter;
 use Guzzle\Service\Exception\ResponseClassException;
 use Guzzle\Service\Resource\Model;
 

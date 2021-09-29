@@ -1,6 +1,6 @@
 <?php
-use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
+use PoP\Routing\DefinitionGroups;
 $definitionManager = DefinitionManagerFacade::getInstance();
 
 if (!defined('POP_ROUTE_DESCRIPTION')) {

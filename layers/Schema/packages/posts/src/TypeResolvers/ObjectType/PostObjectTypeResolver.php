@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\TypeResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostTypeDataLoader;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {

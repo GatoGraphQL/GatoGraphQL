@@ -19,8 +19,8 @@ namespace Aws\Common\Waiter;
 use Aws\Common\Exception\InvalidArgumentException;
 use Aws\Common\Exception\RuntimeException;
 use Aws\Common\Exception\ServiceResponseException;
-use Guzzle\Service\Resource\Model;
 use Guzzle\Service\Exception\ValidationException;
+use Guzzle\Service\Resource\Model;
 
 /**
  * Resource waiter driven by configuration options

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use PoP\API\Schema\SchemaDefinition;
-use PoP\ComponentModel\State\ApplicationState;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use PoP\Engine\Facades\Schema\SchemaDefinitionServiceFacade;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
-use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
+use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use PoP\API\Schema\SchemaDefinition;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Facades\Schema\SchemaDefinitionServiceFacade;
 
 class Schema
 {

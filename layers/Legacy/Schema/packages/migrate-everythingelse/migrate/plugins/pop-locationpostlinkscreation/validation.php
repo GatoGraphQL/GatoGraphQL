@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('POP_LOCATIONPOSTLINKSCREATION_POP_LOCATIONPOSTLINKS_MIN_VERSION', 0.1);
 define('POP_LOCATIONPOSTLINKSCREATION_POP_LOCATIONPOSTSCREATION_MIN_VERSION', 0.1);

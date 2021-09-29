@@ -1,7 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ModuleManager_UserMetaUtils
 {

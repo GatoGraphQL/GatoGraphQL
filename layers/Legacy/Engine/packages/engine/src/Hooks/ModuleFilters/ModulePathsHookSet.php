@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Hooks\AbstractHookSet;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
+use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathUtils;
-use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\AbstractHookSet;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ModulePathsHookSet extends AbstractHookSet
 {

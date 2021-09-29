@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointResolvers;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use PoP\EngineWP\Templates\TemplateHelpers;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class AdminEndpointResolver extends AbstractEndpointResolver

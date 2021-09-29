@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\API\ModuleProcessors;
 
-use PoP\FieldQuery\QueryHelpers;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\FieldQuery\QueryHelpers;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {

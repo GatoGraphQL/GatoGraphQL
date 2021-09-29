@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('route:icon', 'popcoreRouteIcon', 10, 3);
 function popcoreRouteIcon($icon, $route, $html = true)

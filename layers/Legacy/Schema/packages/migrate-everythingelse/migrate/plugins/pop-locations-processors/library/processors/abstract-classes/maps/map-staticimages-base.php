@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryDataModuleProcessorBase
 {

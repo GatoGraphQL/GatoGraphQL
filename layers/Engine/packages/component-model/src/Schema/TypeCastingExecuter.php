@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\Translation\TranslationAPIInterface;
 use CastToType;
 use DateTime;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class TypeCastingExecuter implements TypeCastingExecuterInterface
 {

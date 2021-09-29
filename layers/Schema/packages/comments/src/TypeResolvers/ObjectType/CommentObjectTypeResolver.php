@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\TypeResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoader;
+use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 {

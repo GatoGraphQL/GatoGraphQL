@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\DefinitionPersistence;
 
+use PoP\Definitions\AbstractDefinitionPersistence;
 use PoP\FileStore\File\AbstractFile;
 use PoP\FileStore\Store\FileStoreInterface;
-use PoP\Definitions\AbstractDefinitionPersistence;
 
 class FileDefinitionPersistence extends AbstractDefinitionPersistence
 {

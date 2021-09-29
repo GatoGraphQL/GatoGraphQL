@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('POP_BOOTSTRAPCOLLECTIONPROCESSORS_POP_BOOTSTRAPPROCESSORS_MIN_VERSION', 0.1);
 

@@ -1,9 +1,9 @@
 <?php
 
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {

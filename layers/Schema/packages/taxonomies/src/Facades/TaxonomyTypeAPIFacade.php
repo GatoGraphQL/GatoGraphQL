@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Taxonomies\Facades;
 
-use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 
 class TaxonomyTypeAPIFacade
 {

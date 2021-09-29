@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\VolunteerMutations\MutationResolvers;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class VolunteerMutationResolver extends AbstractMutationResolver
 {

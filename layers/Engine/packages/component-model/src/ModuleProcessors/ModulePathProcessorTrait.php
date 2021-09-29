@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\ComponentInfo;
 
 trait ModulePathProcessorTrait
 {

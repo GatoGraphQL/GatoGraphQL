@@ -2,9 +2,9 @@
 
 namespace Guzzle\Plugin\Backoff;
 
+use Guzzle\Http\Exception\HttpException;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
-use Guzzle\Http\Exception\HttpException;
 
 /**
  * Strategy used to retry HTTP requests when the response's reason phrase matches one of the registered phrases.

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\Engine\Route\RouteUtils;
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoPSitesWassup\UserStateMutations\MutationResolvers\MutationInputProperties;
-use PoPSitesWassup\UserStateMutations\MutationResolvers\LostPasswordMutationResolver;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\Engine\Route\RouteUtils;
+use PoPSitesWassup\UserStateMutations\MutationResolvers\LostPasswordMutationResolver;
+use PoPSitesWassup\UserStateMutations\MutationResolvers\MutationInputProperties;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

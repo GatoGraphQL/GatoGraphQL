@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Application\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Application\Constants\Actions;
 use PoP\Application\ModuleFilters\Lazy;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
@@ -15,6 +14,7 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\Hooks\AbstractHookSet;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class LazyLoadHookSet extends AbstractHookSet
 {

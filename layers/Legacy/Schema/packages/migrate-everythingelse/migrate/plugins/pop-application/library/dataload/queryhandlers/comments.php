@@ -1,8 +1,8 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutputHandler
 {

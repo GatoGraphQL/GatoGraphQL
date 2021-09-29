@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\TranslationWP;
 
-use PoP\Translation\TranslationAPIInterface;
-
 use function __;
+
+use PoP\Translation\TranslationAPIInterface;
 
 class TranslationAPI implements TranslationAPIInterface
 {

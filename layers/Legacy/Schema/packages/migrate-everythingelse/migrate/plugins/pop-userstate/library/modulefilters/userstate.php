@@ -2,8 +2,8 @@
 
 define('POP_MODULEFILTER_USERSTATE', 'userstate');
 
-use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
 
 class PoP_ModuleFilter_UserState extends AbstractModuleFilter
 {

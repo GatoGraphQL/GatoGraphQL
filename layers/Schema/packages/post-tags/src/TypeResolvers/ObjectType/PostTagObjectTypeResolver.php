@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\TypeResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
 use PoPSchema\PostTags\RelationalTypeDataLoaders\ObjectType\PostTagTypeDataLoader;
 use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 {

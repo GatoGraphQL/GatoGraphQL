@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputProcessor
 {

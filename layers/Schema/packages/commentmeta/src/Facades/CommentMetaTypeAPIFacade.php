@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta\Facades;
 
-use PoPSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
 
 class CommentMetaTypeAPIFacade
 {

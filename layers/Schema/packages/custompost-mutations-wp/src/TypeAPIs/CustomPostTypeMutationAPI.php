@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutationsWP\TypeAPIs;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Engine\ErrorHandling\ErrorHelperInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

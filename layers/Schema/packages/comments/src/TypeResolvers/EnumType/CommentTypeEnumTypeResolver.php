@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\TypeResolvers\EnumType;
 
-use PoPSchema\Comments\Constants\CommentTypes;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
+use PoPSchema\Comments\Constants\CommentTypes;
 
 class CommentTypeEnumTypeResolver extends AbstractEnumTypeResolver
 {

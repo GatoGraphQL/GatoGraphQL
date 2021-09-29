@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\ObjectTypeResolverPickers;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
 use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {

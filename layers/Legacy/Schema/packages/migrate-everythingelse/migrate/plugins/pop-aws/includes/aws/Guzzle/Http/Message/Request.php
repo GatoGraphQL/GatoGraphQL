@@ -2,21 +2,21 @@
 
 namespace Guzzle\Http\Message;
 
-use Guzzle\Common\Version;
-use Guzzle\Common\Event;
 use Guzzle\Common\Collection;
-use Guzzle\Common\Exception\RuntimeException;
+use Guzzle\Common\Event;
 use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\Exception\RequestException;
-use Guzzle\Http\Exception\BadResponseException;
+use Guzzle\Common\Exception\RuntimeException;
+use Guzzle\Common\Version;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\EntityBody;
 use Guzzle\Http\EntityBodyInterface;
+use Guzzle\Http\Exception\BadResponseException;
+use Guzzle\Http\Exception\RequestException;
 use Guzzle\Http\Message\Header\HeaderInterface;
 use Guzzle\Http\Url;
 use Guzzle\Parser\ParserRegistry;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

@@ -2,16 +2,16 @@
 
 namespace Guzzle\Plugin\Cache;
 
+use Doctrine\Common\Cache\ArrayCache;
 use Guzzle\Cache\CacheAdapterFactory;
 use Guzzle\Cache\CacheAdapterInterface;
+use Guzzle\Cache\DoctrineCacheAdapter;
 use Guzzle\Common\Event;
 use Guzzle\Common\Exception\InvalidArgumentException;
 use Guzzle\Common\Version;
+use Guzzle\Http\Exception\CurlException;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
-use Guzzle\Cache\DoctrineCacheAdapter;
-use Guzzle\Http\Exception\CurlException;
-use Doctrine\Common\Cache\ArrayCache;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

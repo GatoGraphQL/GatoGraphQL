@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
-use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-
-use function substr;
 use function explode;
+use PoP\ComponentModel\ComponentConfiguration;
+
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use function substr;
 
 class UnionTypeHelpers
 {

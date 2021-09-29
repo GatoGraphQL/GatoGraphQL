@@ -1,6 +1,6 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\State\ApplicationState;
 
 trait FormatActiveTrait

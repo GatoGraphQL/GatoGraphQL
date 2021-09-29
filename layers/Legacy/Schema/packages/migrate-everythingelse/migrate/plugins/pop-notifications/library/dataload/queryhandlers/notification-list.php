@@ -1,8 +1,8 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_DataLoad_QueryInputOutputHandler_NotificationList extends ListQueryInputOutputHandler
 {

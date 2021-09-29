@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_OffcanvasBase extends PoPEngine_QueryDataModuleProcessorBase
 {

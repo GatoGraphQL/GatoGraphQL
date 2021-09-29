@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -14,6 +13,7 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterfa
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SingleEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers\GraphQLEndpointHandler;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {

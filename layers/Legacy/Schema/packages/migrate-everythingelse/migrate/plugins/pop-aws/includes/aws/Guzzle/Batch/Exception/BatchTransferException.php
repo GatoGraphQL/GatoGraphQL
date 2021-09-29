@@ -2,9 +2,9 @@
 
 namespace Guzzle\Batch\Exception;
 
-use Guzzle\Common\Exception\GuzzleException;
-use Guzzle\Batch\BatchTransferInterface as TransferStrategy;
 use Guzzle\Batch\BatchDivisorInterface as DivisorStrategy;
+use Guzzle\Batch\BatchTransferInterface as TransferStrategy;
+use Guzzle\Common\Exception\GuzzleException;
 
 /**
  * Exception thrown during a batch transfer

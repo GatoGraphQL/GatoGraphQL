@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
-use PoP\Engine\FunctionAPIFactory;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
+use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
-use PoP\ComponentModel\Constants\Response;
+use PoP\Engine\FunctionAPIFactory;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {

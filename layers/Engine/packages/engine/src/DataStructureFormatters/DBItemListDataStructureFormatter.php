@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DataStructureFormatters;
 
-use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
+use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\DataStructure\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\State\ApplicationState;
 

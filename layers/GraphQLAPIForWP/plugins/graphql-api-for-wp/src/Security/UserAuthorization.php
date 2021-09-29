@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Security;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
 use InvalidArgumentException;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * UserAuthorization

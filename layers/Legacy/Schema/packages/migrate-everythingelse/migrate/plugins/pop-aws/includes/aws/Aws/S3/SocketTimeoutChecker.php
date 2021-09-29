@@ -19,8 +19,8 @@ namespace Aws\S3;
 use Guzzle\Http\Exception\HttpException;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
-use Guzzle\Plugin\Backoff\BackoffStrategyInterface;
 use Guzzle\Plugin\Backoff\AbstractBackoffStrategy;
+use Guzzle\Plugin\Backoff\BackoffStrategyInterface;
 
 /**
  * Custom S3 exponential backoff checking use to retry 400 responses containing the following reason phrase:

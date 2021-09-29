@@ -1,9 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly

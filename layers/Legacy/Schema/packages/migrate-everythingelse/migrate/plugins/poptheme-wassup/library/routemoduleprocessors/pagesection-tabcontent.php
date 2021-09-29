@@ -1,10 +1,10 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoP_Module_TabContentPageSectionRouteModuleProcessor extends PoP_Module_TabContentPageSectionRouteModuleProcessorBase
 {

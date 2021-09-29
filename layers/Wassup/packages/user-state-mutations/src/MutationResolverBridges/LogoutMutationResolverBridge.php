@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 
-use Symfony\Contracts\Service\Attribute\Required;
+use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\LogoutMutationResolver;
-use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

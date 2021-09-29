@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
-use PoP\FieldQuery\QueryUtils;
-use PoP\FieldQuery\QuerySyntax;
 use PoP\ComponentModel\Schema\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
+use PoP\FieldQuery\QuerySyntax;
+use PoP\FieldQuery\QueryUtils;
 
 class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
 {

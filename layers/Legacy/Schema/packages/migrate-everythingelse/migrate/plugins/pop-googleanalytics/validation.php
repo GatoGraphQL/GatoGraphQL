@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('POPGA_POP_APPLICATIONWP_MIN_VERSION', 0.1);
 define('POPGA_POP_APPLICATIONWEBPLATFORM_MIN_VERSION', 0.1);
