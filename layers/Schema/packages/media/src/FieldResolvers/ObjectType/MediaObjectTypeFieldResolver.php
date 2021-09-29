@@ -72,7 +72,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'src' => $this->urlScalarTypeResolver,
             'srcSet' => $this->stringScalarTypeResolver,
             'width' => $this->intScalarTypeResolver,
@@ -85,8 +85,8 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'date' => $this->dateScalarTypeResolver,
             'modified' => $this->dateScalarTypeResolver,
             'mimeType' => $this->stringScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

@@ -66,10 +66,10 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             case 'myPost':
                 return $this->postObjectTypeResolver;
         }
-        $types = [
+        return match($fieldName) {
             'myPostCount' => $this->intScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

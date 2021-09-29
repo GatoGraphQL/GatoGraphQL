@@ -65,15 +65,15 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'roles' => $this->stringScalarTypeResolver,
             'capabilities' => $this->stringScalarTypeResolver,
             'hasRole' => $this->booleanScalarTypeResolver,
             'hasAnyRole' => $this->booleanScalarTypeResolver,
             'hasCapability' => $this->booleanScalarTypeResolver,
             'hasAnyCapability' => $this->booleanScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

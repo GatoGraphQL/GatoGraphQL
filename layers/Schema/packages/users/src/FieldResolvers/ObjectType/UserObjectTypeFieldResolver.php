@@ -72,7 +72,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'username' => $this->stringScalarTypeResolver,
             'name' => $this->stringScalarTypeResolver,
             'displayName' => $this->stringScalarTypeResolver,
@@ -81,8 +81,8 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'email' => $this->emailScalarTypeResolver,
             'description' => $this->stringScalarTypeResolver,
             'websiteURL' => $this->urlScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

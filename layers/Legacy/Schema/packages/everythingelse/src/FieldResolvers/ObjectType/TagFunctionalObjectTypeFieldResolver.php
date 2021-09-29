@@ -43,13 +43,13 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'symbol' => $this->stringScalarTypeResolver,
             'symbolnamedescription' => $this->stringScalarTypeResolver,
             'namedescription' => $this->stringScalarTypeResolver,
             'symbolname' => $this->stringScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

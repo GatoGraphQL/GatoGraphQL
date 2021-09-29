@@ -51,11 +51,11 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             case 'categories':
                 return $this->getCategoryTypeResolver();
         }
-        $types = [
+        return match($fieldName) {
             'categoryCount' => $this->intScalarTypeResolver,
             'categoryNames' => $this->stringScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

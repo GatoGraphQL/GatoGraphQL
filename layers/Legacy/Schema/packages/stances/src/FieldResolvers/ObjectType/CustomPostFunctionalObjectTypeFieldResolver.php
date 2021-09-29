@@ -73,7 +73,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'addStanceURL' => $this->urlScalarTypeResolver,
             'loggedInUserStances' => $this->intScalarTypeResolver,
             'hasLoggedInUserStances' => $this->booleanScalarTypeResolver,
@@ -85,8 +85,8 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
             'stancesLazy' => $this->idScalarTypeResolver,
             'stanceName' => $this->stringScalarTypeResolver,
             'catName' => $this->stringScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

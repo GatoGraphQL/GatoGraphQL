@@ -71,7 +71,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'children' => $this->menuItemObjectTypeResolver,
             'localURLPath' => $this->stringScalarTypeResolver,
             'label' => $this->stringScalarTypeResolver,
@@ -83,8 +83,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'objectID' => $this->idScalarTypeResolver,
             'parentID' => $this->idScalarTypeResolver,
             'linkRelationship' => $this->stringScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

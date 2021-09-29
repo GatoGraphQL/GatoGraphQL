@@ -36,12 +36,12 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
             case 'recommendedby':
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
-        $types = [
+        return match($fieldName) {
             'recommendPostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'upvotePostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
             'downvotePostCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

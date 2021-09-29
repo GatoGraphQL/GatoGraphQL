@@ -30,10 +30,10 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
             case 'members':
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
-        $types = [
+        return match($fieldName) {
             'hasMembers' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

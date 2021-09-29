@@ -50,11 +50,11 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             case 'tags':
                 return $this->getTagTypeResolver();
         }
-        $types = [
+        return match($fieldName) {
             'tagCount' => $this->intScalarTypeResolver,
             'tagNames' => $this->stringScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

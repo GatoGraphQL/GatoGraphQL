@@ -57,12 +57,12 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             case 'parentCategory':
                 return $this->getCategoryTypeResolver();
         }
-        $types = [
+        return match($fieldName) {
             'name' => $this->stringScalarTypeResolver,
             'description' => $this->stringScalarTypeResolver,
             'count' => $this->intScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

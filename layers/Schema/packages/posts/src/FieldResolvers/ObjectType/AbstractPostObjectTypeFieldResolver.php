@@ -64,11 +64,11 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
             case 'postsForAdmin':
                 return $this->postObjectTypeResolver;
         }
-        $types = [
+        return match($fieldName) {
             'postCount' => $this->intScalarTypeResolver,
             'postCountForAdmin' => $this->intScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

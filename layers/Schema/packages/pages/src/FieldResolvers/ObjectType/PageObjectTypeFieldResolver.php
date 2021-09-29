@@ -85,11 +85,11 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'childPagesForAdmin':
                 return $this->pageObjectTypeResolver;
         }
-        $types = [
+        return match($fieldName) {
             'childPageCount' => $this->intScalarTypeResolver,
             'childPageCountForAdmin' => $this->intScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

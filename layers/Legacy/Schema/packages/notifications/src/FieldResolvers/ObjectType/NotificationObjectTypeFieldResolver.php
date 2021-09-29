@@ -99,7 +99,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'user' => $this->userObjectTypeResolver,
             'action' => $this->stringScalarTypeResolver,
             'objectType' => $this->stringScalarTypeResolver,
@@ -127,8 +127,8 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
             'isCommentNotification' => $this->booleanScalarTypeResolver,
             'isTaxonomyNotification' => $this->booleanScalarTypeResolver,
             'isAction' => $this->booleanScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

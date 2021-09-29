@@ -64,11 +64,11 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
             case 'usersForAdmin':
                 return $this->userObjectTypeResolver;
         }
-        $types = [
+        return match($fieldName) {
             'userCount' => $this->intScalarTypeResolver,
             'userCountForAdmin' => $this->intScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

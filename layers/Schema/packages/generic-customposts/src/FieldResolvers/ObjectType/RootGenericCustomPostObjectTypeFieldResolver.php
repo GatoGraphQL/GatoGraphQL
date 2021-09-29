@@ -93,11 +93,11 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             case 'genericCustomPostsForAdmin':
                 return $this->genericCustomPostObjectTypeResolver;
         }
-        $types = [
+        return match($fieldName) {
             'genericCustomPostCount' => $this->intScalarTypeResolver,
             'genericCustomPostCountForAdmin' => $this->intScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

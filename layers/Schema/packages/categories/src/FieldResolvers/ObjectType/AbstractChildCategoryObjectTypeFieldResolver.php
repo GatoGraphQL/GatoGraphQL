@@ -51,11 +51,11 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
             case 'childCategory':
                 return $this->getCategoryTypeResolver();
         }
-        $types = [
+        return match($fieldName) {
             'childCategoryCount' => $this->intScalarTypeResolver,
             'childCategoryNames' => $this->stringScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
