@@ -13,6 +13,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\FloatScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\FunctionFields\TypeResolvers\ScalarType\ArrayKeyScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
@@ -20,16 +21,19 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected FloatScalarTypeResolver $floatScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected MixedScalarTypeResolver $mixedScalarTypeResolver;
+    protected ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver;
 
     #[Required]
     public function autowireOperatorGlobalObjectTypeFieldResolver(
         FloatScalarTypeResolver $floatScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         MixedScalarTypeResolver $mixedScalarTypeResolver,
+        ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver,
     ): void {
         $this->floatScalarTypeResolver = $floatScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
+        $this->arrayKeyScalarTypeResolver = $arrayKeyScalarTypeResolver;
     }
 
     public function getFieldNamesToResolve(): array
