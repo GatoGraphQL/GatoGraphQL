@@ -12,9 +12,18 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+
+    protected function initializeServices(): void
+    {
+        parent::initializeServices();
+        $this->stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [

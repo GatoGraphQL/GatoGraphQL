@@ -10,9 +10,18 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Misc\OperatorHelpers;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+
+    protected function initializeServices(): void
+    {
+        parent::initializeServices();
+        $this->stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    
     public function getDirectiveName(): string
     {
         return 'advancePointerInArray';

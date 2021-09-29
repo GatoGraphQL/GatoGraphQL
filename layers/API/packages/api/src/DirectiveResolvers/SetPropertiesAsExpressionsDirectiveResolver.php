@@ -9,9 +9,18 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+
+    protected function initializeServices(): void
+    {
+        parent::initializeServices();
+        $this->stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    
     public function getDirectiveName(): string
     {
         return 'setPropertiesAsExpressions';

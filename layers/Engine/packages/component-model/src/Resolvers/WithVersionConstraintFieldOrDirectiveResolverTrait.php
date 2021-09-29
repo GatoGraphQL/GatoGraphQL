@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
@@ -13,6 +14,8 @@ trait WithVersionConstraintFieldOrDirectiveResolverTrait
     protected function getVersionConstraintSchemaFieldOrDirectiveArg(): array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        $stringScalarTypeResolver = $instanceManager->getInstance(StringScalarTypeResolver::class);
         return [
             SchemaDefinition::ARGNAME_NAME => SchemaDefinition::ARGNAME_VERSION_CONSTRAINT,
             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
