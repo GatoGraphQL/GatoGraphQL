@@ -33,6 +33,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface
 {
@@ -78,9 +79,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         // By default, the directive is directly the directive name
         // This is what is used when instantiating the directive through the DependencyInjection component
         $this->directive = $this->getDirectiveName();
-
-        // Obtain services directly from the container, instead of using autowiring
-        $this->initializeServices();
     }
 
     /**
@@ -92,17 +90,22 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $this->directive = $directive;
     }
 
-    /**
-     * Obtain services directly from the container, instead of using autowiring
-     */
-    protected function initializeServices(): void
+    #[Required]
+    public function autowireAbstractDirectiveResolver(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        SemverHelperServiceInterface $semverHelperService,
+    ): void
     {
-        $this->translationAPI = TranslationAPIFacade::getInstance();
-        $this->hooksAPI = HooksAPIFacade::getInstance();
-        $this->instanceManager = InstanceManagerFacade::getInstance();
-        $this->fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $this->feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-        $this->semverHelperService = SemverHelperServiceFacade::getInstance();
+        $this->translationAPI = $translationAPI;
+        $this->hooksAPI = $hooksAPI;
+        $this->instanceManager = $instanceManager;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        $this->feedbackMessageStore = $feedbackMessageStore;
+        $this->semverHelperService = $semverHelperService;
     }
 
     final public function getClassesToAttachTo(): array
