@@ -16,7 +16,6 @@
 
 namespace Aws\Sns\MessageValidator\Exception;
 
-use Aws\Sns\MessageValidator\Exception\SnsMessageValidatorException;
 
 /**
  * Indicates that the signature for SNS message was invalid.

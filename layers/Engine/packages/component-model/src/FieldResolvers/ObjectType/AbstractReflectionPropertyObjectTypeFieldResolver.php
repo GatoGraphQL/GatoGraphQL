@@ -8,7 +8,6 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use ReflectionClass;
 use ReflectionProperty;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 
 abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

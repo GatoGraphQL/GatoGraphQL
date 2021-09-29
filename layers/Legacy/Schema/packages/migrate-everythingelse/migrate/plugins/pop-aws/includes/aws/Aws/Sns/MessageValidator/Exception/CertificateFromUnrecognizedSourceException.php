@@ -16,7 +16,6 @@
 
 namespace Aws\Sns\MessageValidator\Exception;
 
-use Aws\Sns\MessageValidator\Exception\SnsMessageValidatorException;
 
 /**
  * Indicates that certificate was from an unrecognized source.

@@ -6,7 +6,6 @@ namespace PoPSchema\PostTags\ConditionalOnComponent\API\RouteModuleProcessors;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\Hooks\HooksAPIInterface;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;

@@ -3,7 +3,6 @@
 namespace GraphQLByPoP\GraphQLParser\Parser;
 
 use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
-use GraphQLByPoP\GraphQLParser\Parser\Location;
 use PHPUnit\Framework\TestCase;
 
 class VariableTest extends TestCase

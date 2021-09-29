@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
 
 define('GD_CONSTANT_REPLICATETYPE_MULTIPLE', 'multiple');

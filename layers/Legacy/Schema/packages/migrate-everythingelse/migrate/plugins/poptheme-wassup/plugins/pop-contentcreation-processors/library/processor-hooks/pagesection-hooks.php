@@ -1,5 +1,4 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPTheme_Wassup_ContentCreation_PageSectionHooks

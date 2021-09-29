@@ -6,17 +6,13 @@ namespace PoPSchema\PostTags\ConditionalOnComponent\RESTAPI\RouteModuleProcessor
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\API\Schema\FieldQueryConvertorInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostTags\ComponentConfiguration;
 use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
 use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 

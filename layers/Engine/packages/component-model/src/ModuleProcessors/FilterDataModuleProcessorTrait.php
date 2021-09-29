@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\ModuleProcessors;
 use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 
 trait FilterDataModuleProcessorTrait
 {

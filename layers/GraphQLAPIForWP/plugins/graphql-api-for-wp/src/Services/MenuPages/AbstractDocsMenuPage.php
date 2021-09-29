@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentRetrieverTrait;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractPluginMenuPage;
 
 /**
  * Docs menu page

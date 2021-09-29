@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Cache;
 
-use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use PoP\Root\Environment;
 
 /**

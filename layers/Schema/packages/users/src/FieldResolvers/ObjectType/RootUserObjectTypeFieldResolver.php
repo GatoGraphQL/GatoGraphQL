@@ -10,7 +10,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
-use PoPSchema\Users\FieldResolvers\ObjectType\AbstractUserObjectTypeFieldResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolver

@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_UserState_EngineHooks

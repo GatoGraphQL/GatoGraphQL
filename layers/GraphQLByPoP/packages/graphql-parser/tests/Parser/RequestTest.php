@@ -11,7 +11,6 @@ namespace GraphQLByPoP\GraphQLParser\Parser;
 
 use GraphQLByPoP\GraphQLParser\Execution\Request;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Fragment;
-use GraphQLByPoP\GraphQLParser\Parser\Location;
 use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase

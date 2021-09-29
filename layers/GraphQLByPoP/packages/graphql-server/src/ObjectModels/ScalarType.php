@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractType;
-use GraphQLByPoP\GraphQLServer\ObjectModels\NonDocumentableTypeTrait;
-
 class ScalarType extends AbstractType
 {
     use NonDocumentableTypeTrait;

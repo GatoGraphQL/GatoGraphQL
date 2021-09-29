@@ -6,13 +6,10 @@ namespace PoP\Engine\Hooks\ModuleFilters;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathUtils;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 
 class ModulePathsHookSet extends AbstractHookSet

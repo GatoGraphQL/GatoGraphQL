@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\API\Schema\SchemaDefinition;
-use GraphQLByPoP\GraphQLServer\ObjectModels\ResolveTypeSchemaDefinitionReferenceTrait;
 
 trait HasPossibleTypesTypeTrait
 {

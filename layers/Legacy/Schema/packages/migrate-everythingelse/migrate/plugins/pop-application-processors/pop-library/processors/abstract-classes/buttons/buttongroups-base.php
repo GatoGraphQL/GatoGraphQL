@@ -2,7 +2,6 @@
 
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
 
 abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Processor_ButtonGroupsBase
 {

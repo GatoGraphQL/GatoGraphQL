@@ -16,7 +16,6 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {

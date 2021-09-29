@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Definitions;
 
-use PoP\Definitions\Environment;
-
 abstract class AbstractDefinitionPersistence implements DefinitionPersistenceInterface
 {
     /**

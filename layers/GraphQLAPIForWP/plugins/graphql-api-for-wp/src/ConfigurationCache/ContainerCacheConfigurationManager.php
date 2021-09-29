@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-
 class ContainerCacheConfigurationManager extends AbstractCacheConfigurationManager
 {
     /**

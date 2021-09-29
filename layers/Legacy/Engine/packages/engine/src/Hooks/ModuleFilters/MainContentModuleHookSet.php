@@ -6,10 +6,7 @@ namespace PoP\Engine\Hooks\ModuleFilters;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoP\Engine\ModuleFilters\MainContentModule;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class MainContentModuleHookSet extends AbstractHookSet

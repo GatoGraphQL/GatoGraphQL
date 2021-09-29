@@ -7,7 +7,6 @@ namespace PoPSchema\Users\TypeAPIs;
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
 {

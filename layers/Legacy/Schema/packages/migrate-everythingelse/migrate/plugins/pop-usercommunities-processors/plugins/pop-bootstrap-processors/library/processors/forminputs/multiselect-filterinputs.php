@@ -6,9 +6,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
-use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
-use PoPSchema\EverythingElse\Enums\MemberTagEnum;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberPrivilegeEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberStatusEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberTagEnumTypeResolver;

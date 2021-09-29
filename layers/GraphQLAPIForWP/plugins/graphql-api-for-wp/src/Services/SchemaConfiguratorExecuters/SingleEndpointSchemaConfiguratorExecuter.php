@@ -14,7 +14,6 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterfa
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SingleEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers\GraphQLEndpointHandler;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {

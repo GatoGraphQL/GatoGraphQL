@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\UsersWP\TypeAPIs;
 
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\TypeAPIs\AbstractUserTypeAPI;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_User;

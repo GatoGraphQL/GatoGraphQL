@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 class PoP_CSSConverter_ConversionFile extends \PoP\FileStore\File\AbstractFile
 {
     public function getDir(): string

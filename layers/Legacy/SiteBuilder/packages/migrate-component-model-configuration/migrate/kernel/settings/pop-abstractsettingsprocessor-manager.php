@@ -2,7 +2,6 @@
 namespace PoP\ComponentModel\Settings;
 
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
 
 abstract class AbstractSettingsProcessorManager
 {

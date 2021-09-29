@@ -16,7 +16,6 @@
 
 namespace Aws\Sns\MessageValidator\Exception;
 
-use Aws\Sns\MessageValidator\Exception\SnsMessageValidatorException;
 
 /**
  * Indicates that the public key can't be extracted from the the certificate.

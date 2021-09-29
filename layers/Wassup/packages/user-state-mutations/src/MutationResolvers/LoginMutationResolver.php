@@ -6,8 +6,6 @@ namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\UserAccount\FunctionAPIFactory;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver as UpstreamLoginMutationResolver;
 

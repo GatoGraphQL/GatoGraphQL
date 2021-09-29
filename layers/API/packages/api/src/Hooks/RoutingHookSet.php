@@ -8,12 +8,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 
 class RoutingHookSet extends AbstractHookSet
 {

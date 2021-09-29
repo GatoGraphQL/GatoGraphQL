@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
-use GraphQLAPI\GraphQLAPI\ContentProcessors\ContentParserInterface;
-
 interface MarkdownContentParserInterface extends ContentParserInterface
 {
     /**

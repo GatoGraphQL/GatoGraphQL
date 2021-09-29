@@ -6,12 +6,9 @@ namespace PoPSchema\CustomPosts\FilterInputProcessors;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
-use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {

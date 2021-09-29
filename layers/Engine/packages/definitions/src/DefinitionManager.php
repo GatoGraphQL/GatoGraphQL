@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Definitions;
 
 use PoP\Definitions\Configuration\Request;
-use PoP\Definitions\Environment;
 
 class DefinitionManager implements DefinitionManagerInterface
 {

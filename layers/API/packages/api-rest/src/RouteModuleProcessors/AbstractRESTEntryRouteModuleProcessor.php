@@ -7,7 +7,6 @@ namespace PoP\RESTAPI\RouteModuleProcessors;
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\RESTAPI\Helpers\HookHelpers;
 use PoP\API\Schema\FieldQueryConvertorInterface;
-use PoP\Hooks\HooksAPIInterface;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 

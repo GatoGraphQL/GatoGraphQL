@@ -6,12 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
 {

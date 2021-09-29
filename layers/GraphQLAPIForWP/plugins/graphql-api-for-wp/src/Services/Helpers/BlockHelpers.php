@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
-use WP_Post;
 
 class BlockHelpers
 {

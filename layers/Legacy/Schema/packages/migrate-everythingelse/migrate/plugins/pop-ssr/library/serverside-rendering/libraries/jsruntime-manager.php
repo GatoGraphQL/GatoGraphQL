@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 class PoP_ServerSide_JSRuntimeManager
 {
     

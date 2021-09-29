@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;

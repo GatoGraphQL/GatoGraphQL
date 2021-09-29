@@ -6,11 +6,8 @@ namespace PoP\EngineWP\Hooks;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\EngineWP\Templates\TemplateHelpers;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 
 class TemplateHookSet extends AbstractHookSet
 {

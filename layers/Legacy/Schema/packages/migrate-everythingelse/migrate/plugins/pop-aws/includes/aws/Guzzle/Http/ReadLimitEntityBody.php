@@ -2,7 +2,6 @@
 
 namespace Guzzle\Http;
 
-use Guzzle\Stream\StreamInterface;
 
 /**
  * EntityBody decorator used to return only a subset of an entity body

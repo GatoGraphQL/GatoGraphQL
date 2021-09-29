@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('POP_STRATUM_WEB', 'web');
 

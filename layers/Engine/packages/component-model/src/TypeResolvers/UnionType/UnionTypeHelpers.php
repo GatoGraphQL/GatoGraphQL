@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 use function substr;
 use function explode;

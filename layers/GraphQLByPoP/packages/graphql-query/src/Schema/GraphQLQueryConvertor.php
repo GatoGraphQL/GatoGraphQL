@@ -21,7 +21,6 @@ use GraphQLByPoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
 use GraphQLByPoP\GraphQLParser\Parser\Parser;
 use GraphQLByPoP\GraphQLParser\Validator\RequestValidator\RequestValidator;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
-use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use InvalidArgumentException;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;

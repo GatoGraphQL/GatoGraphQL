@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\AttachableExtensions;
 
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
-
 class AttachableExtensionManager implements AttachableExtensionManagerInterface
 {
     /**

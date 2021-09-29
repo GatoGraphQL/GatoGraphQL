@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Create an alias of a fieldName (or fieldNames), to use when:

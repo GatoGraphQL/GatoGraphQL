@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\TypeKinds;
-use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractNestableType;
-
 class NonNullType extends AbstractNestableType
 {
     use NonDocumentableTypeTrait;

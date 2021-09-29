@@ -8,23 +8,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
-use PoP\ComponentModel\Cache\CacheInterface;
-use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
-use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
-use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
-use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
-use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
-use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\LooseContractManagerInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Engine\Engine as UpstreamEngine;
 
 class Engine extends UpstreamEngine implements EngineInterface

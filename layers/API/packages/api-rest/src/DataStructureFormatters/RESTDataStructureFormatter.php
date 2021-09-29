@@ -6,8 +6,6 @@ namespace PoP\RESTAPI\DataStructureFormatters;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Engine\EngineInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter

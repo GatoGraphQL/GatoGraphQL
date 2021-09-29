@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class SchemaHelpers
 {

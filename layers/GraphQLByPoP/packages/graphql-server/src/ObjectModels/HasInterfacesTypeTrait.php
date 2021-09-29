@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use Exception;
 use PoP\API\Schema\SchemaDefinition;
-use GraphQLByPoP\GraphQLServer\ObjectModels\InterfaceType;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;

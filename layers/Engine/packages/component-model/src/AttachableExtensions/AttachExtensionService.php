@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\AttachableExtensions;
 
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\Root\Services\ServiceInterface;
 
 class AttachExtensionService implements AttachExtensionServiceInterface

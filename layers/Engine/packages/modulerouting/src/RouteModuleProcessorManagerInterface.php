@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ModuleRouting;
 
-use PoP\ModuleRouting\AbstractRouteModuleProcessor;
-
 interface RouteModuleProcessorManagerInterface
 {
     public function addRouteModuleProcessor(AbstractRouteModuleProcessor $processor): void;

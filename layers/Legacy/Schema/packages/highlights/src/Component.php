@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights;
 
-use PoPSchema\Highlights\Environment;
 use PoP\Root\Component\AbstractComponent;
 
 /**

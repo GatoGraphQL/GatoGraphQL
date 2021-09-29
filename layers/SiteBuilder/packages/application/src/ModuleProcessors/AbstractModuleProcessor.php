@@ -6,7 +6,6 @@ namespace PoP\Application\ModuleProcessors;
 
 use PoP\SiteBuilderAPI\ModuleProcessors\AddAPIQueryToSourcesModuleProcessorTrait;
 use PoP\Application\Constants\Actions;
-use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ConfigurationComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;

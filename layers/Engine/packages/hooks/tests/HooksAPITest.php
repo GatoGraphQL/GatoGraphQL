@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Hooks;
 
 use PHPUnit\Framework\TestCase;
-use PoP\Hooks\HooksAPIInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Hooks\Services\HooksAPI;
 use PoP\Root\Container\ContainerBuilderFactory;

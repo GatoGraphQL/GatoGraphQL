@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
