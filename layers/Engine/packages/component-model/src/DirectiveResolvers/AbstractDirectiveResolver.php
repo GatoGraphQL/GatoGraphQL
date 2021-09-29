@@ -73,7 +73,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * but NOT for the directivePipeline, since there each directiveResolver
      * will require the actual $directive to process.
      */
-    final public function __construct()
+    public function __construct()
     {
         // By default, the directive is directly the directive name
         // This is what is used when instantiating the directive through the DependencyInjection component
