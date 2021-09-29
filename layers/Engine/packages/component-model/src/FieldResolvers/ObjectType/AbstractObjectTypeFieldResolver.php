@@ -544,9 +544,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             SchemaDefinition::ARGNAME_NAME => $fieldName,
         ];
 
-        // If we found a resolver for this fieldName, get all its properties from it
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
-        $fieldTypeResolver = $schemaDefinitionResolver->getFieldTypeResolver($objectTypeResolver, $fieldName);
+        $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
         if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
@@ -561,7 +559,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         // Use bitwise operators to extract the applied modifiers
         // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
-        $schemaTypeModifiers = $schemaDefinitionResolver->getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
+        $schemaTypeModifiers = $this->getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
         if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
             $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
         }
@@ -582,30 +580,22 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 }
             }
         }
-        if ($description = $schemaDefinitionResolver->getSchemaFieldDescription($objectTypeResolver, $fieldName)) {
+        if ($description = $this->getSchemaFieldDescription($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
         }
-        if ($deprecationDescription = $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs)) {
+        if ($deprecationDescription = $this->getSchemaFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs)) {
             $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
             $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
         }
-        if ($args = $schemaDefinitionResolver->getSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+        if ($args = $this->getSchemaFieldArgs($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaFieldArgs(
                 $objectTypeResolver,
                 $fieldName,
                 $args
             );
         }
-        $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
+        $this->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
 
-        /**
-         * Please notice: the version always comes from the fieldResolver, and not from the schemaDefinitionResolver
-         * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
-         * If the interface changes, the implementer will need to change, so the version will be upgraded
-         * But it could also be that the contract doesn't change, but the implementation changes
-         * In particular, Interfaces are schemaDefinitionResolver, but they must not indicate the version...
-         * it's really not their responsibility
-         */
         if (Environment::enableSemanticVersionConstraints()) {
             if ($version = $this->getSchemaFieldVersion($objectTypeResolver, $fieldName)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
@@ -668,6 +658,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return true;
     }
 
+    /**
+     * Please notice: the version always comes from the fieldResolver, and not from the schemaDefinitionResolver
+     * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
+     * If the interface changes, the implementer will need to change, so the version will be upgraded
+     * But it could also be that the contract doesn't change, but the implementation changes
+     * In particular, Interfaces are schemaDefinitionResolver, but they must not indicate the version...
+     * it's really not their responsibility
+     */
     public function getSchemaFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return null;
